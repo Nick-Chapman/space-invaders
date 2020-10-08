@@ -3,23 +3,29 @@ module Cpu (Cpu,Reg(..),init,get,set) where
 
 import Prelude hiding (init)
 
-data Reg = PCL | PCH
+data Reg = PCH | PCL | SPH | SPL
   deriving Show
 
 data Cpu b = Cpu
-  { pcl :: b
-  , pch :: b
+  { pch :: b
+  , pcl :: b
+  , sph :: b
+  , spl :: b
   } deriving Show
 
 init :: b -> Cpu b
-init b = Cpu { pcl = b, pch = b }
+init b = Cpu { pch = b, pcl = b, sph = b, spl = b }
 
 get :: Cpu b -> Reg -> b
-get Cpu{pcl,pch} = \case
-  PCL -> pcl
+get Cpu{pch,pcl,sph,spl} = \case
   PCH -> pch
+  PCL -> pcl
+  SPH -> sph
+  SPL -> spl
 
 set :: Cpu b -> Reg -> b -> Cpu b
 set cpu r x = case r of
-  PCL -> cpu { pcl = x }
   PCH -> cpu { pch = x}
+  PCL -> cpu { pcl = x }
+  SPH -> cpu { sph = x}
+  SPL -> cpu { spl = x }

@@ -52,6 +52,12 @@ library:
   source-dirs: src
 
 executables:
-  main.exe:
-    main:                app/main.hs
+  invaders:
+    main:                app/invaders.hs
+    dependencies:        space-invaders
+  play1:
+    main:                app/play1.hs
+    dependencies:        space-invaders
+  play2:
+    main:                app/play2.hs
     dependencies:        space-invaders

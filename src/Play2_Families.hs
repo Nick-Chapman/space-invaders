@@ -1,7 +1,14 @@
 
-module Fam where
+module Play2_Families(main) where
 
 import Control.Monad (ap,liftM)
+
+main :: IO ()
+main = do
+  putStrLn "*play2-families*"
+  let _ = emulate theEffect
+  let _ = compile theEffect
+  return ()
 
 executeIncOp :: Eff p Int
 executeIncOp = do
@@ -51,7 +58,7 @@ instance Functor (Eff p) where fmap = liftM
 instance Applicative (Eff p) where pure = return; (<*>) = ap
 instance Monad (Eff p) where return = Ret; (>>=) = Bind
 
-data Reg = R1 | R2
+data Reg = R1 -- | R2
 
 ----------------------------------------------------------------------
 -- emulation
@@ -138,7 +145,7 @@ stateC0 = StateC { cpu = cpu0 E_Undefined, cc = () }
 
 data Stat
   = S_Halt
-  | S_AssignThen Reg Exp Stat
+  -- | S_AssignThen Reg Exp Stat
   | S_Message String Stat
   | S_Tick Int Stat
   | S_IfCyclesIsMult Int Stat Stat

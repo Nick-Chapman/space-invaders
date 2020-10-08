@@ -12,12 +12,14 @@ extra-source-files:
 dependencies:
 - array
 - base >= 4.7 && < 5
+- bytestring
 - containers
 - ansi-terminal
 - haskeline
 - mtl
 - time
 - transformers
+- word8
 
 default-extensions:
 - BangPatterns
@@ -33,11 +35,7 @@ default-extensions:
 - RankNTypes
 - ScopedTypeVariables
 - TypeApplications
-
 - TypeFamilies
-#- DatatypeContexts
-#- UndecidableInstances
-#- AllowAmbiguousTypes
 
 
 ghc-options:
@@ -54,10 +52,4 @@ library:
 executables:
   invaders:
     main:                app/invaders.hs
-    dependencies:        space-invaders
-  play1:
-    main:                app/play1.hs
-    dependencies:        space-invaders
-  play2:
-    main:                app/play2.hs
     dependencies:        space-invaders

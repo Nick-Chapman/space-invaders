@@ -5,19 +5,22 @@ import Prelude hiding (init,read)
 
 import Addr (Addr)
 import Byte (Byte(..))
+import Ram8k (Ram)
 import Rom2k (Rom,size)
 import qualified Addr (toUnsigned)
 import qualified Rom2k (read)
+import qualified Ram8k (init,write)
 
 data Mem = Mem
   { e :: Rom
   , f :: Rom
   , g :: Rom
   , h :: Rom
+  , ram :: Ram
   }
 
 init :: (Rom,Rom,Rom,Rom) -> Mem
-init (e,f,g,h) = Mem {e,f,g,h}
+init (e,f,g,h) = Mem {e,f,g,h, ram = Ram8k.init}
 
 read :: Mem -> Addr -> Byte
 read Mem{e,f,g,h} a = if
@@ -34,4 +37,11 @@ read Mem{e,f,g,h} a = if
     k8 = Rom2k.size * 4
 
 write :: Mem -> Addr -> Byte -> Mem
-write = undefined
+write mem@Mem{ram} a b = if
+  | i < k8 -> error $ "Mem.write: " <> show a <> " -- cant write to rom"
+  | i < k16 -> mem { ram = Ram8k.write ram (i - k8) b }
+  | otherwise -> error $ "Mem.write: " <> show a
+  where
+    i = Addr.toUnsigned a
+    k8 = Rom2k.size * 4
+    k16 = Rom2k.size * 8

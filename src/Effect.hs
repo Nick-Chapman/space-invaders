@@ -14,9 +14,10 @@ data Eff p a where
   GetReg :: Reg -> Eff p (Byte p)
   SetReg :: Reg -> Byte p -> Eff p ()
   ReadMem :: Addr p -> Eff p (Byte p)
+  WriteMem :: Addr p -> Byte p -> Eff p ()
   SplitAddr :: Addr p -> Eff p (HiLo (Byte p))
   MakeAddr :: HiLo (Byte p) -> Eff p (Addr p)
-  IncAddr :: Addr p -> Eff p (Addr p)
+  OffsetAddr :: Int -> Addr p -> Eff p (Addr p)
   Trace :: Show a => a -> Eff p ()
 
 instance Functor (Eff p) where fmap = liftM

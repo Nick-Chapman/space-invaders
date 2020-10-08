@@ -7,14 +7,15 @@ main :: IO ()
 main = do
   putStrLn "*space-invaders*"
   let rom = Rom [ Byte 0, Byte 1, Byte 2, Byte 3, Byte 2
---                , Byte 4
+                , Byte 4
                 ]
+
+  putStrLn "emulate..."
+  let _ = emulate rom
+
   putStrLn "compile..."
   let prog = compile rom
   print prog
-  putStrLn "emulate..."
-  emulate rom
-
 
 data Op
   = NOP
@@ -23,22 +24,22 @@ data Op
   | INC_A
   | RESET
 
-execute :: Ops b -> Op -> Eff b (Flow (Addr b))
+execute :: Ops b -> Op -> Eff b (Cycles, Flow (Addr b))
 execute Ops{litA,incB} = \case
-  NOP -> return (Next 1)
+  NOP -> return (Cycles 1, Next 1)
   MES -> do
     Message "hey"
-    return (Next 1)
+    return (Cycles 1, Next 1)
   OUTPUT_A -> do
     a <- GetReg ACC
     OutputData a
-    return (Next 1)
+    return (Cycles 1, Next 1)
   INC_A -> do
     a <- GetReg ACC
     SetReg ACC (incB a)
-    return (Next 1)
+    return (Cycles 1, Next 1)
   RESET ->
-    return (Jump (litA startAddr))
+    return (Cycles 1, Jump (litA startAddr))
 
 
 decode :: Byte -> Op
@@ -66,9 +67,24 @@ setPC Addr{lo,hi} = do
   SetReg PCL lo
   SetReg PCH hi
 
+
+checkInterupt :: Cycles -> Eff v ()
+checkInterupt cycles = do
+  CC n1 <- GetCC
+  let i1 = n1 `div` period
+  Tick cycles
+  CC n2 <- GetCC
+  let i2 = n2 `div` period
+  case i2 > i1 of
+    True -> Message $ "interrupt." <> show i2
+    False -> return ()
+  where
+    period = 7
+
 decodeExec :: Ops b -> Addr Byte -> Byte -> Eff b (Addr b)
 decodeExec ops@Ops{litA} addr byte = do
-  flow <- execute ops (decode byte)
+  (cycles,flow) <- execute ops (decode byte)
+  checkInterupt cycles
   case flow of
     Jump addr' -> return addr'
     Next i -> return (litA (bumpAddr i addr))
@@ -83,6 +99,8 @@ data Eff b a where
   ReadMem :: Addr b -> Eff b b
   Message :: String -> Eff b ()
   OutputData :: b -> Eff b ()
+  GetCC :: Eff b CycleCount
+  Tick :: Cycles -> Eff b ()
 
 instance Functor (Eff b) where fmap = liftM
 instance Applicative (Eff b) where pure = return; (<*>) = ap
@@ -116,7 +134,7 @@ emulate rom = run (state0 rom) theSemantics $ \_ a -> return a
             loop
 
     run :: Machine Byte -> Eff Byte a -> (Machine Byte -> a -> IO ()) -> IO ()
-    run s@Machine{cpu,mem} eff k = case eff of
+    run s@Machine{cpu,mem,cc} eff k = case eff of
       Ret x -> k s x
       Bind eff f -> run s eff $ \s a -> run s (f a) k
       GetReg r -> k s (getReg cpu r)
@@ -128,14 +146,16 @@ emulate rom = run (state0 rom) theSemantics $ \_ a -> return a
       OutputData b -> do
         put s $ "OutputData: " <> show b
         k s ()
+      GetCC -> k s cc
+      Tick cycles -> k s { cc = tick cc cycles } ()
 
 
     put :: Machine Byte -> String -> IO ()
-    put Machine{cpu} str =
-      putStrLn $ "[" <> show cpu <> "] : " <> str
+    put Machine{cc,cpu} str =
+      putStrLn $ "[" <> show (cc,cpu)  <> "] : " <> str
 
 state0 :: Rom -> Machine Byte
-state0 rom = Machine { cpu = cpu0, mem = mem0 rom }
+state0 rom = Machine { cpu = cpu0, mem = mem0 rom, cc = cc0 }
 
 mem0 :: Rom -> Mem Byte
 mem0 rom = Mem { rom, ram = ram0 byte0 }
@@ -169,6 +189,8 @@ compile rom = Prog [(Lab a, semAt a) | a <- romAddrs rom ]
       ReadMem a -> k (E_ReadMem a)
       Message str -> S_Message str $ k ()
       OutputData b -> S_OutputData b $ k ()
+      GetCC{} -> undefined
+      Tick{} -> undefined
 
 
 
@@ -240,10 +262,12 @@ prettyExp = \case
 ----------------------------------------------------------------------
 -- byte-polymorphic types and ops
 
-data Machine b = Machine { cpu :: Cpu b, mem :: Mem b }
+
+data Machine b = Machine { cpu :: Cpu b, mem :: Mem b, cc :: CycleCount }
 data Cpu b = Cpu { acc :: b, pcl :: b, pch :: b } deriving Show
 data Mem b = Mem { rom :: Rom, ram :: Ram b }
 data Ram b = Ram
+
 
 ram0 :: b -> Ram b
 ram0 = undefined Ram
@@ -275,6 +299,19 @@ data Addr b = Addr { lo :: b, hi :: b }
 
 instance Show b => Show (Addr b) where show Addr {lo,hi} = show hi <> "." <> show lo
 
+
+----------------------------------------------------------------------
+
+newtype Cycles = Cycles Int
+
+newtype CycleCount = CC Int
+  deriving Show
+
+cc0 :: CycleCount
+cc0 = CC 0
+
+tick :: CycleCount -> Cycles -> CycleCount
+tick (CC n1) (Cycles n2) = CC (n1+n2)
 
 ----------------------------------------------------------------------
 -- Byte-fixed types and op

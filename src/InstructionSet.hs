@@ -1,6 +1,13 @@
 
-module InstructionSet (Op(..),Op0(..),Op1(..),Op2(..),Instruction(..),decode) where
+module InstructionSet (
+  Op(..),Op0(..),Op1(..),Op2(..),
+  Instruction(..),
+  decode,
+  prettyDecodeTable
+  ) where
 
+import Data.List (sort)
+import Data.List.Extra (groupSort)
 import Data.Map (Map)
 import Data.Word8 (Word8)
 import Addr (Addr)
@@ -9,21 +16,22 @@ import Cpu (RegPair(..))
 import qualified Data.Map.Strict as Map
 
 data Op = Op0 Op0 | Op1 Op1 | Op2 Op2
+  deriving (Eq,Ord)
 
 data Op0
   = NOP
   | LDAX_D
-  deriving (Show,Enum,Bounded)
+  deriving (Eq,Ord,Show,Enum,Bounded)
 
 data Op1
   = MVI_B
-  deriving (Show,Enum,Bounded)
+  deriving (Eq,Ord,Show,Enum,Bounded)
 
 data Op2
   = JP
   | CALL
   | LXI RegPair
-  deriving Show
+  deriving (Eq,Ord,Show)
 
 allOps :: [Op]
 allOps = map Op0 all ++ map Op1 all ++ map Op2 allOp2
@@ -96,10 +104,20 @@ encodeRegPair = \case
 -- | define decode as the inverse of encoding
 decode :: Addr -> Byte -> Op
 decode at byte =
-  case Map.lookup byte m of
+  case Map.lookup byte decodeTable of
     Just op -> op
     Nothing ->
       error $ "decode(at: " <> show at <> ") : " <> show byte
+
+decodeTable :: Map Byte Op
+decodeTable = Map.fromList ys
   where
-    -- TODO: check/abort if encodings are not unique
-    m :: Map Byte Op = Map.fromList [ (encode op, op) | op <- allOps ]
+    xs = [ (encode op, op) | op <- allOps ]
+    ys = [ (k,expectUnique k vs) | (k,vs) <- groupSort xs ]
+    expectUnique k = \case
+      [v] -> v
+      vs -> error $ "bad decoding: " <> show k <> " --> " <> show vs
+
+prettyDecodeTable :: [String]
+prettyDecodeTable =
+  [ show k <> " --> " <> show v | (k,v) <- sort (Map.toList decodeTable) ]

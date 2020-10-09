@@ -8,7 +8,7 @@ data Reg = PCH | PCL | SPH | SPL | A | B | D | E | H | L
   deriving Show
 
 data RegPair = SP | DE | HL
-  deriving (Show,Enum,Bounded)
+  deriving (Eq,Ord,Show,Enum,Bounded)
 
 expandRegPair :: RegPair -> HiLo Reg
 expandRegPair = \case

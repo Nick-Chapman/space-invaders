@@ -4,6 +4,7 @@ module SpaceInvaders(main) where
 import Emulate (emulate)
 import qualified Mem (init)
 import qualified Rom2k (load)
+import InstructionSet (prettyDecodeTable)
 
 -- | Entry point to the Space Invaders emulation
 main :: IO ()
@@ -14,6 +15,8 @@ main = do
   f <- Rom2k.load "roms/invaders.f"
   g <- Rom2k.load "roms/invaders.g"
   h <- Rom2k.load "roms/invaders.h"
+
+  putStrLn (unlines prettyDecodeTable)
 
   let mem = Mem.init (e,f,g,h)
   emulate mem

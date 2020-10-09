@@ -15,6 +15,7 @@ dependencies:
 - bytestring
 - containers
 - ansi-terminal
+- extra
 - haskeline
 - mtl
 - time

@@ -21,6 +21,7 @@ fetchDecodeExec = do
     execute instruction >>= \case
       Next -> return ()
       Jump a -> setPC a
+    Advance 1 -- TODO: correct numbers
     return instruction
 
 fetch :: Eff p (Byte p) -- fetch byte at PC, and increment PC

@@ -10,7 +10,6 @@ import Data.List (sort)
 import Data.List.Extra (groupSort)
 import Data.Map (Map)
 import Data.Word8 (Word8)
-import Addr (Addr)
 import Byte (Byte(..))
 import Cpu (RegPair(..))
 import qualified Data.Map.Strict as Map
@@ -115,12 +114,8 @@ encodeRegPair = \case
   SP -> 3
 
 -- | define decode as the inverse of encoding
-decode :: Addr -> Byte -> Op
-decode at byte =
-  case Map.lookup byte decodeTable of
-    Just op -> op
-    Nothing ->
-      error $ "decode(at: " <> show at <> ") : " <> show byte
+decode :: Byte -> Maybe Op
+decode byte = Map.lookup byte decodeTable
 
 decodeTable :: Map Byte Op
 decodeTable = Map.fromList ys

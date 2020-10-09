@@ -18,6 +18,7 @@ data Op2
   = JP
   | LXI_SP
   | LXI_DE
+  | LXI_HL
   | CALL
   deriving Show
 
@@ -43,5 +44,6 @@ decode at = \case
   0x11 -> Op2 LXI_DE
   0x06 -> Op1 MVI_B
   0xCD -> Op2 CALL
+  0x21 -> Op2 LXI_HL
   byte ->
     error $ "decode(at: " <> show at <> ") : " <> show byte

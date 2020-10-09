@@ -72,6 +72,10 @@ execute2 op2 (lo,hi) = case op2 of
     SetReg RegD hi
     SetReg RegE lo
     return Next
+  LXI_HL -> do
+    SetReg RegH hi
+    SetReg RegL lo
+    return Next
   CALL -> do
     GetReg PCH >>= pushStack
     GetReg PCL >>= pushStack

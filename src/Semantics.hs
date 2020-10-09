@@ -63,6 +63,11 @@ execute0 = \case
     b <- ReadMem a
     SetReg A b
     return Next
+  INX_H -> do
+    a <- getHL
+    a' <- OffsetAddr 1 a
+    setHL a'
+    return Next
 
 execute1 :: Op1 -> Byte p -> Eff p (Flow p)
 execute1 op1 b1 = case op1 of
@@ -127,3 +132,9 @@ getHL = do
   hi <- GetReg H
   lo <- GetReg L
   MakeAddr $ HiLo{hi,lo}
+
+setHL :: Addr p -> Eff p ()
+setHL a = do
+  HiLo{hi,lo} <- SplitAddr a
+  SetReg L lo
+  SetReg H hi

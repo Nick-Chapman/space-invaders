@@ -55,10 +55,10 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ -> return
       Decode (pc,b) -> k s (decode pc b)
       InstructionCycle eff -> do
         let pc = programCounter s
-        --putStrLn (ljust 45 "" ++ show cpu)
+        putStrLn (ljust 45 "" ++ show cpu)
         run s eff $ \s instruction -> do
-          putStrLn (ljust 45 (prettyStep pc instruction) ++ show cpu)
-          --putStrLn (prettyStep pc instruction)
+          --putStrLn (ljust 45 (prettyStep pc instruction) ++ show cpu)
+          putStrLn (prettyStep pc instruction)
           k s ()
 
 prettyStep :: Addr -> Instruction Byte -> String

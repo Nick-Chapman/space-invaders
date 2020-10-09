@@ -84,9 +84,9 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ -> return
 
       InstructionCycle eff -> do
         let pcBefore = programCounter s
-        --putStrLn (ljust 55 (show ticks) ++ show cpu)
+        --putStrLn (ljust 40 (show ticks) ++ show cpu)
         run s eff $ \s@State{cpu} instruction -> do
-          putStrLn (ljust 55 (prettyStep ticks pcBefore instruction) ++ show cpu)
+          putStrLn (ljust 40 (prettyStep ticks pcBefore instruction) ++ show cpu)
           --putStrLn (prettyStep ticks pc instruction)
           k s ()
 

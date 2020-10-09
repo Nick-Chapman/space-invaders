@@ -76,6 +76,11 @@ execute0 = \case
     SetFlagZ v'
     -- TODO: set more flags
     return Next
+  RET -> do
+    lo <- popStack
+    hi <- popStack
+    dest <- MakeAddr $ HiLo{hi,lo}
+    return (Jump dest)
 
 
 execute1 :: Op1 -> Byte p -> Eff p (Flow p)
@@ -112,6 +117,13 @@ pushStack b = do
   sp1 <- OffsetAddr (-1) sp0
   setRegPair SP sp1
   WriteMem sp1 b
+
+popStack :: Eff p (Byte p)
+popStack = do
+  sp0 <- getRegPair SP
+  sp1 <- OffsetAddr 1 sp0
+  setRegPair SP sp1
+  ReadMem sp0
 
 getPC :: Eff p (Addr p)
 getPC = do

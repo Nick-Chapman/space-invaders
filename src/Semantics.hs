@@ -72,7 +72,8 @@ execute0 = \case
     v <- GetReg B
     v' <- Decrement v -- TODO: this is modulus; is that correct?
     SetReg B v'
-    -- TODO: set flags
+    SetFlagZ v'
+    -- TODO: set more flags
     return Next
 
 
@@ -87,6 +88,12 @@ execute2 op2 (lo,hi) = case op2 of
   JP -> do
     dest <- MakeAddr $ HiLo{hi,lo}
     return (Jump dest)
+  JNZ -> do
+    TestFlagZ >>= \case
+      True -> return Next
+      False -> do
+        dest <- MakeAddr $ HiLo{hi,lo}
+        return (Jump dest)
   LXI rp -> do
     let HiLo{hi=rh, lo=rl} = expandRegPair rp
     SetReg rh hi

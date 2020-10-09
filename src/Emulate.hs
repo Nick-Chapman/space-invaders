@@ -11,8 +11,8 @@ import InstructionSet (Instruction,decode)
 import Mem (Mem)
 import Phase (Phase)
 import qualified Addr (fromHiLo,toHiLo,bump)
-import qualified Byte (decrement)
-import qualified Cpu (init,get,set)
+import qualified Byte (decrement,isZero)
+import qualified Cpu (init,get,set,getFlagZ,setFlagZ)
 import qualified Mem (read,write)
 import qualified Phase (Byte,Addr)
 
@@ -55,6 +55,14 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ -> return
       OffsetAddr n a -> k s (Addr.bump a n)
       Decode (pc,b) -> k s (decode pc b)
       Decrement b -> k s (Byte.decrement b)
+
+      SetFlagZ b -> k s { cpu = Cpu.setFlagZ cpu b } ()
+      TestFlagZ -> do
+        let z = Cpu.getFlagZ cpu
+        let pred = Byte.isZero z
+        --putStrLn $ "- TestFlagZ (" <> show z <> ") -> " <> show pred
+        k s pred
+
       InstructionCycle eff -> do
         let pc = programCounter s
         putStrLn (ljust 45 "" ++ show cpu)

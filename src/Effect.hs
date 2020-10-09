@@ -21,6 +21,8 @@ data Eff p a where
   OffsetAddr :: Int -> Addr p -> Eff p (Addr p)
   Decode :: (Addr p, Byte p) -> Eff p Op
   Decrement :: Byte p -> Eff p (Byte p)
+  SetFlagZ :: Byte p -> Eff p ()
+  TestFlagZ :: Eff p Bool
   InstructionCycle :: Eff p (Instruction (Byte p)) -> Eff p ()
 
 instance Functor (Eff p) where fmap = liftM

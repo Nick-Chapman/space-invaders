@@ -32,6 +32,7 @@ data Op1
 
 data Op2
   = JP
+  | JNZ
   | CALL
   | LXI RegPair
   deriving (Eq,Ord,Show)
@@ -40,7 +41,7 @@ allOps :: [Op]
 allOps = map Op0 allOp0 ++ map Op1 all ++ map Op2 allOp2
   where
     allOp0 = [NOP,LDAX_D,MVI_M_A,DEC_B] ++ map INX all
-    allOp2 = [JP,CALL] ++ map LXI all
+    allOp2 = [JP,JNZ,CALL] ++ map LXI all
     all :: (Enum a, Bounded a) => [a]
     all = [minBound..maxBound]
 
@@ -65,10 +66,11 @@ prettyInstruction = \case
   Ins0 NOP _ -> "NOP"
   Ins0 MVI_M_A _ -> tag "LD" "(HL),A"
   Ins0 (INX rp) _ -> tag "INC" (show rp)
-  Ins0 DEC_B _ -> "DEC_B"
+  Ins0 DEC_B _ -> tag "DEC" "B"
   Ins0 LDAX_D _ -> tag "LD" "A,(DE)"
   Ins1 MVI_B _ b1 -> tag "LD" ("B" <> "," <> show b1)
   Ins2 JP _ b1 b2 -> tag "JP" (show b2 <> show b1)
+  Ins2 JNZ _ b1 b2 -> tag "JNZ" (show b2 <> show b1)
   Ins2 CALL _ b1 b2 -> tag "CALL" (show b2 <> show b1)
   Ins2 (LXI rp) _ b1 b2 -> tag "LD" (show rp <> "," <> show b2 <> show b1)
   where
@@ -102,6 +104,7 @@ encode = \case
   Op0 DEC_B -> 0x05
   Op1 MVI_B -> 0x06
   Op2 JP -> 0xC3
+  Op2 JNZ -> 0xC2
   Op2 CALL -> 0xCD
   Op2 (LXI rp) -> Byte (16 * encodeRegPair rp + 0x1)
 

@@ -1,5 +1,11 @@
 
-module Cpu (Cpu,Reg(..),RegPair(..),expandRegPair,init,get,set) where
+module Cpu (
+  Cpu,Reg(..),RegPair(..),
+  expandRegPair,
+  init,
+  get,set,
+  getFlagZ,setFlagZ,
+  ) where
 
 import Prelude hiding (init)
 import HiLo (HiLo(..))
@@ -27,6 +33,7 @@ data Cpu b = Cpu
   , regE :: b
   , regH :: b
   , regL :: b
+  , flagZ :: b -- The byte which should be tested against zero
   }
 
 instance Show b => Show (Cpu b) where
@@ -45,7 +52,16 @@ instance Show b => Show (Cpu b) where
 
 init :: b -> Cpu b
 init b = Cpu { pch = b, pcl = b, sph = b, spl = b
-             , regA = b, regB = b, regD = b, regE = b, regH = b, regL = b }
+             , regA = b, regB = b, regD = b, regE = b, regH = b, regL = b
+             , flagZ = b
+             }
+
+getFlagZ :: Cpu b -> b
+getFlagZ Cpu{flagZ} = flagZ
+
+setFlagZ :: Cpu b -> b -> Cpu b
+setFlagZ cpu b = cpu { flagZ = b }
+
 
 get :: Cpu b -> Reg -> b
 get Cpu{pch,pcl,sph,spl,regA,regB,regD,regE,regH,regL} = \case

@@ -53,6 +53,11 @@ execute0 :: Op0 -> Eff p (Flow p)
 execute0 = \case
   NOP -> do
     return Next
+  LDAX_D -> do
+    a <- getDE
+    b <- ReadMem a
+    SetReg RegA b
+    return Next
 
 execute1 :: Op1 -> Byte p -> Eff p (Flow p)
 execute1 op1 b1 = case op1 of
@@ -98,14 +103,14 @@ setStackPointer HiLo{hi,lo} = do
 
 getStackPointer :: Eff p (HiLo (Byte p))
 getStackPointer = do
-  lo <- GetReg SPL
   hi <- GetReg SPH
+  lo <- GetReg SPL
   return HiLo{hi,lo}
 
 getPC :: Eff p (Addr p)
 getPC = do
-  lo <- GetReg PCL
   hi <- GetReg PCH
+  lo <- GetReg PCL
   MakeAddr $ HiLo{hi,lo}
 
 setPC :: Addr p -> Eff p ()
@@ -113,3 +118,9 @@ setPC a = do
   HiLo{hi,lo} <- SplitAddr a
   SetReg PCL lo
   SetReg PCH hi
+
+getDE :: Eff p (Addr p)
+getDE = do
+  hi <- GetReg RegD
+  lo <- GetReg RegL
+  MakeAddr $ HiLo{hi,lo}

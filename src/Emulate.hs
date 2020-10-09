@@ -42,7 +42,10 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ -> return
       Bind eff f -> run s eff $ \s a -> run s (f a) k
       GetReg r -> k s (Cpu.get cpu r)
       SetReg r b -> k s { cpu = Cpu.set cpu r b} ()
-      ReadMem a -> k s (Mem.read mem a)
+      ReadMem a -> do
+        let b = Mem.read mem a
+        --putStrLn $ "ReadMem(" <> show a <> ") --> " <> show b
+        k s b
       WriteMem a b -> k s { mem = Mem.write mem a b } ()
       SplitAddr a -> k s (Addr.toHiLo a)
       MakeAddr hilo -> k s (Addr.fromHiLo hilo)

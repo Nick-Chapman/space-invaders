@@ -12,6 +12,7 @@ data Op = Op0 Op0 | Op1 Op1 | Op2 Op2
 
 data Op0
   = NOP
+  | LDAX_D
   deriving (Show,Enum,Bounded)
 
 data Op1
@@ -49,6 +50,7 @@ instance Show b => Show (Instruction b) where
 encode :: Op -> Byte -- TODO derive decode by reversing encode
 encode = \case
   Op0 NOP -> 0x00
+  Op0 LDAX_D -> 0x1A
   Op1 MVI_B -> 0x06
   Op2 JP -> 0xC3
   Op2 CALL -> 0xCD

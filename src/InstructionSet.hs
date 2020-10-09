@@ -21,6 +21,7 @@ data Op = Op0 Op0 | Op1 Op1 | Op2 Op2
 data Op0
   = NOP
   | LDAX_D
+  | MVI_M_A
   deriving (Eq,Ord,Show,Enum,Bounded)
 
 data Op1
@@ -59,6 +60,7 @@ instance Show b => Show (Instruction b) where
 prettyInstruction :: Show b => Instruction b -> String
 prettyInstruction = \case
   Ins0 NOP _ -> "NOP"
+  Ins0 MVI_M_A _ -> tag "LD" "(HL),A"
   Ins0 LDAX_D _ -> tag "LD" "A,(DE)"
   Ins1 MVI_B _ b1 -> tag "LD" ("B" <> "," <> show b1)
   Ins2 JP _ b1 b2 -> tag "JP" (show b2 <> show b1)
@@ -89,6 +91,7 @@ justOp = \case
 encode :: Op -> Byte -- TODO derive decode by reversing encode
 encode = \case
   Op0 NOP -> 0x00
+  Op0 MVI_M_A -> 0x77 -- TODO: gen
   Op0 LDAX_D -> 0x1A
   Op1 MVI_B -> 0x06
   Op2 JP -> 0xC3

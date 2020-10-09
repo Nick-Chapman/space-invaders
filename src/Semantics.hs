@@ -58,6 +58,11 @@ execute0 = \case
     b <- ReadMem a
     SetReg A b
     return Next
+  MVI_M_A -> do
+    a <- getHL
+    b <- ReadMem a
+    SetReg A b
+    return Next
 
 execute1 :: Op1 -> Byte p -> Eff p (Flow p)
 execute1 op1 b1 = case op1 of
@@ -115,4 +120,10 @@ getDE :: Eff p (Addr p)
 getDE = do
   hi <- GetReg D
   lo <- GetReg E
+  MakeAddr $ HiLo{hi,lo}
+
+getHL :: Eff p (Addr p)
+getHL = do
+  hi <- GetReg H
+  lo <- GetReg L
   MakeAddr $ HiLo{hi,lo}

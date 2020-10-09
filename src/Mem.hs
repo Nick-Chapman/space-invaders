@@ -9,7 +9,7 @@ import Ram8k (Ram)
 import Rom2k (Rom,size)
 import qualified Addr (toUnsigned)
 import qualified Rom2k (read)
-import qualified Ram8k (init,write)
+import qualified Ram8k (init,read,write)
 
 data Mem = Mem
   { e :: Rom
@@ -23,11 +23,12 @@ init :: (Rom,Rom,Rom,Rom) -> Mem
 init (e,f,g,h) = Mem {e,f,g,h, ram = Ram8k.init}
 
 read :: Mem -> Addr -> Byte
-read Mem{e,f,g,h} a = if
+read Mem{e,f,g,h,ram} a = if
   | i < k2 -> Rom2k.read h i
   | i < k4 -> Rom2k.read g (i - k2)
   | i < k6 -> Rom2k.read f (i - k4)
   | i < k8 -> Rom2k.read e (i - k6)
+  | i < k16 -> Ram8k.read ram (i - k8)
   | otherwise -> error $ "Mem.read: " <> show a
   where
     i = Addr.toUnsigned a
@@ -35,6 +36,7 @@ read Mem{e,f,g,h} a = if
     k4 = Rom2k.size * 2
     k6 = Rom2k.size * 3
     k8 = Rom2k.size * 4
+    k16 = Rom2k.size * 8
 
 write :: Mem -> Addr -> Byte -> Mem
 write mem@Mem{ram} a b = if

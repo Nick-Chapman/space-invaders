@@ -20,7 +20,7 @@ import qualified Phase (Byte,Addr,Ticks)
 -- | Ticks of the 2 MHz clock
 newtype Ticks = Ticks { unTicks :: Int } deriving (Num)
 
-instance Show Ticks where show = printf "[%05d]" . unTicks
+instance Show Ticks where show = printf "[%06d]" . unTicks
 
 
 data EmuTime -- At Emulation type we have concrete Bytes

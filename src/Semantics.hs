@@ -88,8 +88,8 @@ execute0 = \case
 
 execute1 :: Op1 -> Byte p -> Eff p (Flow p)
 execute1 op1 b1 = case op1 of
-  MVI_B -> do
-    SetReg B b1
+  MVI dest -> do
+    SetReg dest b1
     return (Next 7)
   MVI_M -> do
     a <- getRegPair HL

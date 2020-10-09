@@ -28,10 +28,10 @@ data Op0
   deriving (Eq,Ord,Show)
 
 data Op1
-  = MVI_B
+  = CPI
   | MVI_M
-  | CPI
-  deriving (Eq,Ord,Show,Enum,Bounded)
+  | MVI Reg
+  deriving (Eq,Ord,Show)
 
 data Op2
   = JP
@@ -41,14 +41,15 @@ data Op2
   deriving (Eq,Ord,Show)
 
 allOps :: [Op]
-allOps = map Op0 allOp0 ++ map Op1 all ++ map Op2 allOp2
+allOps = map Op0 allOp0 ++ map Op1 allOp1 ++ map Op2 allOp2
   where
     allOp0 = [NOP,LDAX_D,MOV_M_A,DEC_B,RET] ++ map INX all
              ++ [ MOV dest src | dest <- regs7, src <- regs7 ]
-             where regs7 = [A,B,C,D,E,H,L]
+    allOp1 = [CPI,MVI_M] ++ map MVI regs7
     allOp2 = [JP,JNZ,CALL] ++ map LXI all
     all :: (Enum a, Bounded a) => [a]
     all = [minBound..maxBound]
+    regs7 = [A,B,C,D,E,H,L]
 
 data Instruction b -- op+args
   = Ins0 Op0 b
@@ -75,7 +76,7 @@ prettyInstruction = \case
   Ins0 DEC_B _ -> tag "DEC" "B"
   Ins0 RET _ -> "RET"
   Ins0 LDAX_D _ -> tag "LD" "A,(DE)"
-  Ins1 MVI_B _ b1 -> tag "LD" ("B" <> "," <> show b1)
+  Ins1 (MVI dest) _ b1 -> tag "LD" (show dest <> "," <> show b1)
   Ins1 MVI_M _ b1 -> tag "LD" ("(HL)" <> "," <> show b1)
   Ins1 CPI _ b1 -> tag "CP" (show b1)
   Ins2 JP _ b1 b2 -> tag "JP" (show b2 <> show b1)
@@ -113,7 +114,7 @@ encode = \case
   Op0 LDAX_D -> 0x1A
   Op0 DEC_B -> 0x05
   Op0 RET -> 0xC9
-  Op1 MVI_B -> 0x06
+  Op1 (MVI dest) -> Byte (8 * encodeReg7 dest + 0x06)
   Op1 MVI_M -> 0x36
   Op1 CPI -> 0xFE
   Op2 JP -> 0xC3

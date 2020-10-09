@@ -17,7 +17,7 @@ fetchDecodeExec = do
     pc <- getPC
     byte <- fetch
     op <- Decode (pc, byte) -- Pass pc to decode for improved error messages
-    instruction <- fetchImmediates op
+    instruction <- fetchImmediates byte op
     execute instruction >>= \case
       Next -> return ()
       Jump a -> setPC a
@@ -30,24 +30,24 @@ fetch = do
   OffsetAddr 1 pc >>= setPC
   return byte
 
-fetchImmediates :: Op -> Eff p (Instruction (Byte p))
-fetchImmediates = \case
-  Op0 op0 -> return (Ins0 op0)
+fetchImmediates :: Byte p -> Op -> Eff p (Instruction (Byte p))
+fetchImmediates b0 = \case
+  Op0 op0 -> return (Ins0 op0 b0)
   Op1 op1 -> do
     b1 <- fetch
-    return (Ins1 op1 b1)
+    return (Ins1 op1 b0 b1)
   Op2 op2 -> do
     b1 <- fetch
     b2 <- fetch
-    return (Ins2 op2 b1 b2)
+    return (Ins2 op2 b0 b1 b2)
 
 data Flow p = Next | Jump (Addr p)
 
 execute :: Instruction (Byte p) -> Eff p (Flow p)
 execute = \case
-  Ins0 op0 -> execute0 op0
-  Ins1 op1 b1 -> execute1 op1 b1
-  Ins2 op2 b1 b2 -> execute2 op2 (b1,b2)
+  Ins0 op0 _ -> execute0 op0
+  Ins1 op1 _ b1 -> execute1 op1 b1
+  Ins2 op2 _ b1 b2 -> execute2 op2 (b1,b2)
 
 execute0 :: Op0 -> Eff p (Flow p)
 execute0 = \case

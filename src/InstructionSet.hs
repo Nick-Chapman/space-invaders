@@ -8,7 +8,6 @@ import Byte (Byte(..))
 import qualified Data.Map.Strict as Map
 
 data Op = Op0 Op0 | Op1 Op1 | Op2 Op2
-  deriving Show
 
 data Op0
   = NOP
@@ -37,15 +36,50 @@ allOps = map Op0 all ++ map Op1 all ++ map Op2 allOp2
     all = [minBound..maxBound]
 
 data Instruction b -- op+args
-  = Ins0 Op0
-  | Ins1 Op1 b
-  | Ins2 Op2 b b
+  = Ins0 Op0 b
+  | Ins1 Op1 b b
+  | Ins2 Op2 b b b
 
 instance Show b => Show (Instruction b) where
+  show i =
+    ljust 10 (unwords (map show bytes))
+    <> ljust 10 (brace (show (justOp i)))
+    <> prettyInstruction i
+    where
+      bytes = case i of
+        Ins0 _ b0 -> [b0]
+        Ins1 _ b0 b1 -> [b0,b1]
+        Ins2 _ b0 b1 b2 -> [b0,b1,b2]
+
+prettyInstruction :: Show b => Instruction b -> String
+prettyInstruction = \case
+  Ins0 NOP _ -> "NOP"
+  Ins0 LDAX_D _ -> tag "LD" "A,(DE)"
+  Ins1 MVI_B _ b1 -> tag "LD" ("B" <> "," <> show b1)
+  Ins2 JP _ b1 b2 -> tag "JP" (show b2 <> show b1)
+  Ins2 CALL _ b1 b2 -> tag "CALL" (show b2 <> show b1)
+  Ins2 (LXI rp) _ b1 b2 -> tag "LD" (show rp <> "," <> show b2 <> show b1)
+  where
+    tag s more = ljust 6 s <> more
+
+brace :: String -> String
+brace s = "(" <> s <> ")"
+
+ljust :: Int -> String -> String
+ljust n s = s <> take (max 0 (n - length s)) (repeat ' ')
+
+instance Show Op where
   show = \case
-    Ins0 op0 -> show op0
-    Ins1 op1 b1 -> unwords [show op1, show b1]
-    Ins2 op2 b1 b2 -> unwords [show op2, show b1, show b2]
+    Op0 x -> show x
+    Op1 x -> show x
+    Op2 x -> show x
+
+
+justOp :: Instruction b  -> Op
+justOp = \case
+  Ins0 op0 _ -> Op0 op0
+  Ins1 op1 _ _ -> Op1 op1
+  Ins2 op2 _ _ _ -> Op2 op2
 
 encode :: Op -> Byte -- TODO derive decode by reversing encode
 encode = \case

@@ -3,7 +3,7 @@
 
 module Semantics (setPC,fetchDecodeExec) where
 
-import Cpu (Reg(..),expandRegPair)
+import Cpu (Reg(..),RegPair(..),expandRegPair)
 import Effect (Eff(..))
 import HiLo (HiLo(..))
 import InstructionSet (Op(..),Instruction(..),Op0(..),Op1(..),Op2(..))
@@ -54,19 +54,19 @@ execute0 = \case
   NOP -> do
     return Next
   LDAX_D -> do
-    a <- getDE
+    a <- getRegPair DE
     b <- ReadMem a
     SetReg A b
     return Next
   MVI_M_A -> do
-    a <- getHL
+    a <- getRegPair HL
     b <- ReadMem a
     SetReg A b
     return Next
-  INX_H -> do
-    a <- getHL
+  INX rp -> do
+    a <- getRegPair rp
     a' <- OffsetAddr 1 a
-    setHL a'
+    setRegPair rp a'
     return Next
 
 execute1 :: Op1 -> Byte p -> Eff p (Flow p)
@@ -93,21 +93,10 @@ execute2 op2 (lo,hi) = case op2 of
 
 pushStack :: Byte p -> Eff p ()
 pushStack b = do
-  sp0 <- getStackPointer >>= MakeAddr
+  sp0 <- getRegPair SP
   sp1 <- OffsetAddr (-1) sp0
-  SplitAddr sp1 >>= setStackPointer
+  setRegPair SP sp1
   WriteMem sp1 b
-
-setStackPointer :: HiLo (Byte p) -> Eff p ()
-setStackPointer HiLo{hi,lo} = do
-  SetReg SPL lo
-  SetReg SPH hi
-
-getStackPointer :: Eff p (HiLo (Byte p))
-getStackPointer = do
-  hi <- GetReg SPH
-  lo <- GetReg SPL
-  return HiLo{hi,lo}
 
 getPC :: Eff p (Addr p)
 getPC = do
@@ -121,20 +110,16 @@ setPC a = do
   SetReg PCL lo
   SetReg PCH hi
 
-getDE :: Eff p (Addr p)
-getDE = do
-  hi <- GetReg D
-  lo <- GetReg E
+getRegPair :: RegPair -> Eff p (Addr p)
+getRegPair rp = do
+  let HiLo{hi=rh, lo=rl} = expandRegPair rp
+  hi <- GetReg rh
+  lo <- GetReg rl
   MakeAddr $ HiLo{hi,lo}
 
-getHL :: Eff p (Addr p)
-getHL = do
-  hi <- GetReg H
-  lo <- GetReg L
-  MakeAddr $ HiLo{hi,lo}
-
-setHL :: Addr p -> Eff p ()
-setHL a = do
+setRegPair :: RegPair -> Addr p -> Eff p ()
+setRegPair rp a = do
+  let HiLo{hi=rh, lo=rl} = expandRegPair rp
   HiLo{hi,lo} <- SplitAddr a
-  SetReg L lo
-  SetReg H hi
+  SetReg rh hi
+  SetReg rl lo

@@ -11,7 +11,7 @@ import Data.List.Extra (groupSort)
 import Data.Map (Map)
 import Data.Word8 (Word8)
 import Byte (Byte(..))
-import Cpu (RegPair(..))
+import Cpu (Reg(..),RegPair(..))
 import qualified Data.Map.Strict as Map
 
 data Op = Op0 Op0 | Op1 Op1 | Op2 Op2
@@ -20,11 +20,11 @@ data Op = Op0 Op0 | Op1 Op1 | Op2 Op2
 data Op0
   = NOP
   | LDAX_D
-  | MOV_M_A
-  | MOV_A_H
-  | INX RegPair
   | DEC_B
   | RET
+  | MOV_M_A
+  | MOV Reg Reg
+  | INX RegPair
   deriving (Eq,Ord,Show)
 
 data Op1
@@ -42,7 +42,9 @@ data Op2
 allOps :: [Op]
 allOps = map Op0 allOp0 ++ map Op1 all ++ map Op2 allOp2
   where
-    allOp0 = [NOP,LDAX_D,MOV_M_A,MOV_A_H,DEC_B,RET] ++ map INX all
+    allOp0 = [NOP,LDAX_D,MOV_M_A,DEC_B,RET] ++ map INX all
+             ++ [ MOV dest src | dest <- regs7, src <- regs7 ]
+             where regs7 = [A,B,C,D,E,H,L]
     allOp2 = [JP,JNZ,CALL] ++ map LXI all
     all :: (Enum a, Bounded a) => [a]
     all = [minBound..maxBound]
@@ -67,7 +69,7 @@ prettyInstruction :: Show b => Instruction b -> String
 prettyInstruction = \case
   Ins0 NOP _ -> "NOP"
   Ins0 MOV_M_A _ -> tag "LD" "(HL),A"
-  Ins0 MOV_A_H _ -> tag "LD" "A,H"
+  Ins0 (MOV dest src) _ -> tag "LD" (show dest <> "," <> show src)
   Ins0 (INX rp) _ -> tag "INC" (show rp)
   Ins0 DEC_B _ -> tag "DEC" "B"
   Ins0 RET _ -> "RET"
@@ -104,7 +106,7 @@ encode :: Op -> Byte
 encode = \case
   Op0 NOP -> 0x00
   Op0 MOV_M_A -> 0x77 -- TODO: gen
-  Op0 MOV_A_H -> 0x7C -- TODO: gen
+  Op0 (MOV dest src) -> Byte (64 + 8 * encodeReg7 dest + encodeReg7 src)
   Op0 (INX rp) -> Byte (16 * encodeRegPair rp + 0x3)
   Op0 LDAX_D -> 0x1A
   Op0 DEC_B -> 0x05
@@ -115,6 +117,18 @@ encode = \case
   Op2 JNZ -> 0xC2
   Op2 CALL -> 0xCD
   Op2 (LXI rp) -> Byte (16 * encodeRegPair rp + 0x1)
+
+encodeReg7 :: Reg -> Word8
+encodeReg7 = \case
+  B -> 0
+  C -> 1
+  D -> 2
+  E -> 3
+  H -> 4
+  L -> 5
+--M -> 6
+  A -> 7
+  reg -> error $ "encodeReg7: " <> show reg
 
 encodeRegPair :: RegPair -> Word8
 encodeRegPair = \case

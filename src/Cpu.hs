@@ -10,8 +10,8 @@ module Cpu (
 import Prelude hiding (init)
 import HiLo (HiLo(..))
 
-data Reg = PCH | PCL | SPH | SPL | A | B | D | E | H | L
-  deriving Show
+data Reg = PCH | PCL | SPH | SPL | A | B | C | D | E | H | L
+  deriving (Eq,Ord,Show)
 
 data RegPair = SP | DE | HL
   deriving (Eq,Ord,Show,Enum,Bounded)
@@ -29,6 +29,7 @@ data Cpu b = Cpu
   , spl :: b
   , regA :: b
   , regB :: b
+  , regC :: b
   , regD :: b
   , regE :: b
   , regH :: b
@@ -37,12 +38,13 @@ data Cpu b = Cpu
   }
 
 instance Show b => Show (Cpu b) where
-  show Cpu{pch,pcl,sph,spl,regA,regB,regD,regE,regH,regL} = unwords
+  show Cpu{pch,pcl,sph,spl,regA,regB,regC,regD,regE,regH,regL} = unwords
     [ name <> ":" <> v
     | (name,v) <-
       [ ("PC",show pch <> show pcl)
       , ("A", show regA)
       , ("B", show regB)
+      , ("C", show regC)
       , ("D", show regD)
       , ("E", show regE)
       , ("HL", show regH <> show regL)
@@ -52,7 +54,7 @@ instance Show b => Show (Cpu b) where
 
 init :: b -> Cpu b
 init b = Cpu { pch = b, pcl = b, sph = b, spl = b
-             , regA = b, regB = b, regD = b, regE = b, regH = b, regL = b
+             , regA = b, regB = b, regC = b, regD = b, regE = b, regH = b, regL = b
              , flagZ = b
              }
 
@@ -64,13 +66,14 @@ setFlagZ cpu b = cpu { flagZ = b }
 
 
 get :: Cpu b -> Reg -> b
-get Cpu{pch,pcl,sph,spl,regA,regB,regD,regE,regH,regL} = \case
+get Cpu{pch,pcl,sph,spl,regA,regB,regC,regD,regE,regH,regL} = \case
   PCH -> pch
   PCL -> pcl
   SPH -> sph
   SPL -> spl
   A -> regA
   B -> regB
+  C -> regC
   D -> regD
   E -> regE
   H -> regH
@@ -84,6 +87,7 @@ set cpu r x = case r of
   SPL -> cpu { spl = x }
   A -> cpu { regA = x }
   B -> cpu { regB = x }
+  C -> cpu { regC = x }
   D -> cpu { regD = x }
   E -> cpu { regE = x }
   H -> cpu { regH = x }

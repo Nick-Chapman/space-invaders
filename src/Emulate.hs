@@ -12,7 +12,6 @@ import Mem (Mem)
 import Phase (Phase)
 import Text.Printf (printf)
 import qualified Addr (fromHiLo,toHiLo,bump)
-import qualified Byte (decrement,isZero)
 import qualified Cpu (init,get,set,getFlagZ,setFlagZ)
 import qualified Mem (read,write)
 import qualified Phase (Byte,Addr,Ticks)
@@ -70,12 +69,14 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ -> return
             putStrLn (show ticks <> " " <> show pc <> " : " <> show byte)
             error $ "Decode: " <> show byte
 
-      Decrement b -> k s (Byte.decrement b)
+      -- Byte ops
+      Decrement b -> k s (b - 1)
+      Subtract b1 b2 -> k s (b1 - b2)
 
       SetFlagZ b -> k s { cpu = Cpu.setFlagZ cpu b } ()
       TestFlagZ -> do
         let z = Cpu.getFlagZ cpu
-        let pred = Byte.isZero z
+        let pred = (z == 0)
         --putStrLn $ "- TestFlagZ (" <> show z <> ") -> " <> show pred
         k s pred
 

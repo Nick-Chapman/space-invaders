@@ -21,6 +21,7 @@ data Eff p a where
   OffsetAddr :: Int -> Addr p -> Eff p (Addr p)
   Decode :: (Addr p, Byte p) -> Eff p Op
   Decrement :: Byte p -> Eff p (Byte p)
+  Subtract :: Byte p -> Byte p -> Eff p (Byte p)
   SetFlagZ :: Byte p -> Eff p ()
   TestFlagZ :: Eff p Bool
   Advance :: Int -> Eff p ()

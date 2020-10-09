@@ -95,6 +95,12 @@ execute1 op1 b1 = case op1 of
     a <- getRegPair HL
     WriteMem a b1
     return (Next 10)
+  CPI -> do
+    b <- GetReg A
+    v <- Subtract b b1
+    SetFlagZ v
+    -- TODO: set all flags
+    return (Next 7)
 
 execute2 :: Op2 -> (Byte p, Byte p) -> Eff p (Flow p)
 execute2 op2 (lo,hi) = case op2 of

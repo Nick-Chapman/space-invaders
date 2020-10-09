@@ -14,7 +14,19 @@ data Cpu b = Cpu
   , regB :: b
   , regD :: b
   , regE :: b
-  } deriving Show
+  }
+
+instance Show b => Show (Cpu b) where
+  show Cpu{pch,pcl,sph,spl,regB,regD,regE} = unwords
+    [ name <> ":" <> v
+    | (name,v) <-
+      [ ("PC",show pch <> show pcl)
+      , ("B", show regB)
+      , ("D", show regD)
+      , ("E", show regE)
+      , ("SP", show sph <> show spl)
+      ]
+    ]
 
 init :: b -> Cpu b
 init b = Cpu { pch = b, pcl = b, sph = b, spl = b, regB = b, regD = b, regE = b }

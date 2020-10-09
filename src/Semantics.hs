@@ -68,6 +68,13 @@ execute0 = \case
     a' <- OffsetAddr 1 a
     setRegPair rp a'
     return Next
+  DEC_B -> do
+    v <- GetReg B
+    v' <- Decrement v -- TODO: this is modulus; is that correct?
+    SetReg B v'
+    -- TODO: set flags
+    return Next
+
 
 execute1 :: Op1 -> Byte p -> Eff p (Flow p)
 execute1 op1 b1 = case op1 of

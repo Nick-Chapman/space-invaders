@@ -2,7 +2,8 @@
 module Byte(
   Byte(..),
   toUnsigned,
-  ofUnsigned
+  ofUnsigned,
+  decrement,
   ) where
 
 import Data.Word8 (Word8)
@@ -18,3 +19,6 @@ toUnsigned = fromIntegral . unByte
 
 ofUnsigned :: Int -> Byte
 ofUnsigned = Byte . fromIntegral
+
+decrement :: Byte -> Byte
+decrement b = b - 1 -- this does modulus 256.

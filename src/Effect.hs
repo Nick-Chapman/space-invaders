@@ -20,6 +20,7 @@ data Eff p a where
   MakeAddr :: HiLo (Byte p) -> Eff p (Addr p)
   OffsetAddr :: Int -> Addr p -> Eff p (Addr p)
   Decode :: (Addr p, Byte p) -> Eff p Op
+  Decrement :: Byte p -> Eff p (Byte p)
   InstructionCycle :: Eff p (Instruction (Byte p)) -> Eff p ()
 
 instance Functor (Eff p) where fmap = liftM

@@ -1,10 +1,11 @@
 
-module InstructionSet (Op(..),Op0(..),Op1(..),Op2(..),RP(..),Instruction(..),decode) where
+module InstructionSet (Op(..),Op0(..),Op1(..),Op2(..),Instruction(..),decode) where
 
 import Data.Map (Map)
 import Data.Word8 (Word8)
 import Addr (Addr)
 import Byte (Byte(..))
+import Cpu (RegPair(..))
 import qualified Data.Map.Strict as Map
 
 data Op = Op0 Op0 | Op1 Op1 | Op2 Op2
@@ -21,12 +22,8 @@ data Op1
 data Op2
   = JP
   | CALL
-  | LXI RP
+  | LXI RegPair
   deriving Show
-
--- | Register pair descriptor
-data RP = SP | DE | HL
-  deriving (Show,Enum,Bounded)
 
 allOps :: [Op]
 allOps = map Op0 all ++ map Op1 all ++ map Op2 allOp2
@@ -88,10 +85,10 @@ encode = \case
   Op1 MVI_B -> 0x06
   Op2 JP -> 0xC3
   Op2 CALL -> 0xCD
-  Op2 (LXI rp) -> Byte (16 * encodeRP rp + 0x1)
+  Op2 (LXI rp) -> Byte (16 * encodeRegPair rp + 0x1)
 
-encodeRP :: RP -> Word8
-encodeRP = \case
+encodeRegPair :: RegPair -> Word8
+encodeRegPair = \case
   DE -> 1
   HL -> 2
   SP -> 3

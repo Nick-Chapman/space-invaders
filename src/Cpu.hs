@@ -1,10 +1,20 @@
 
-module Cpu (Cpu,Reg(..),init,get,set) where
+module Cpu (Cpu,Reg(..),RegPair(..),expandRegPair,init,get,set) where
 
 import Prelude hiding (init)
+import HiLo (HiLo(..))
 
-data Reg = PCH | PCL | SPH | SPL | RegA | RegB | RegD | RegE | RegH | RegL
+data Reg = PCH | PCL | SPH | SPL | A | B | D | E | H | L
   deriving Show
+
+data RegPair = SP | DE | HL
+  deriving (Show,Enum,Bounded)
+
+expandRegPair :: RegPair -> HiLo Reg
+expandRegPair = \case
+  DE -> HiLo {hi = D, lo = E}
+  HL -> HiLo {hi = H, lo = L}
+  SP -> HiLo {hi = SPH, lo = SPL}
 
 data Cpu b = Cpu
   { pch :: b
@@ -43,12 +53,12 @@ get Cpu{pch,pcl,sph,spl,regA,regB,regD,regE,regH,regL} = \case
   PCL -> pcl
   SPH -> sph
   SPL -> spl
-  RegA -> regA
-  RegB -> regB
-  RegD -> regD
-  RegE -> regE
-  RegH -> regH
-  RegL -> regL
+  A -> regA
+  B -> regB
+  D -> regD
+  E -> regE
+  H -> regH
+  L -> regL
 
 set :: Cpu b -> Reg -> b -> Cpu b
 set cpu r x = case r of
@@ -56,9 +66,9 @@ set cpu r x = case r of
   PCL -> cpu { pcl = x }
   SPH -> cpu { sph = x}
   SPL -> cpu { spl = x }
-  RegA -> cpu { regA = x }
-  RegB -> cpu { regB = x }
-  RegD -> cpu { regD = x }
-  RegE -> cpu { regE = x }
-  RegH -> cpu { regH = x }
-  RegL -> cpu { regL = x }
+  A -> cpu { regA = x }
+  B -> cpu { regB = x }
+  D -> cpu { regD = x }
+  E -> cpu { regE = x }
+  H -> cpu { regH = x }
+  L -> cpu { regL = x }

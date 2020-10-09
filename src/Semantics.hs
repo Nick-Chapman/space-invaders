@@ -3,10 +3,10 @@
 
 module Semantics (setPC,fetchDecodeExec) where
 
-import Cpu (Reg(..))
+import Cpu (Reg(..),expandRegPair)
 import Effect (Eff(..))
 import HiLo (HiLo(..))
-import InstructionSet (Op(..),Instruction(..),Op0(..),Op1(..),Op2(..),RP(..))
+import InstructionSet (Op(..),Instruction(..),Op0(..),Op1(..),Op2(..))
 import Phase (Addr,Byte)
 
 -- | Semantics are defined to be Phase generic
@@ -56,13 +56,13 @@ execute0 = \case
   LDAX_D -> do
     a <- getDE
     b <- ReadMem a
-    SetReg RegA b
+    SetReg A b
     return Next
 
 execute1 :: Op1 -> Byte p -> Eff p (Flow p)
 execute1 op1 b1 = case op1 of
   MVI_B -> do
-    SetReg RegB b1
+    SetReg B b1
     return Next
 
 execute2 :: Op2 -> (Byte p, Byte p) -> Eff p (Flow p)
@@ -71,7 +71,7 @@ execute2 op2 (lo,hi) = case op2 of
     dest <- MakeAddr $ HiLo{hi,lo}
     return (Jump dest)
   LXI rp -> do
-    let HiLo{hi=rh, lo=rl} = evalRP rp
+    let HiLo{hi=rh, lo=rl} = expandRegPair rp
     SetReg rh hi
     SetReg rl lo
     return Next
@@ -80,14 +80,6 @@ execute2 op2 (lo,hi) = case op2 of
     GetReg PCL >>= pushStack
     dest <- MakeAddr $ HiLo{hi,lo}
     return (Jump dest)
-
-
--- | evalate a reg-pair descriptor to the pair of registers denoted
-evalRP :: RP -> HiLo Reg
-evalRP = \case
-  DE -> HiLo {hi = RegD, lo = RegE}
-  HL -> HiLo {hi = RegH, lo = RegL}
-  SP -> HiLo {hi = SPH, lo = SPL}
 
 pushStack :: Byte p -> Eff p ()
 pushStack b = do
@@ -121,6 +113,6 @@ setPC a = do
 
 getDE :: Eff p (Addr p)
 getDE = do
-  hi <- GetReg RegD
-  lo <- GetReg RegL
+  hi <- GetReg D
+  lo <- GetReg E
   MakeAddr $ HiLo{hi,lo}

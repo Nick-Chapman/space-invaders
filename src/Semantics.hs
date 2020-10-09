@@ -19,9 +19,8 @@ fetchDecodeExec = do
     op <- Decode (pc, byte) -- Pass pc to decode for improved error messages
     instruction <- fetchImmediates byte op
     execute instruction >>= \case
-      Next -> return ()
-      Jump a -> setPC a
-    Advance 1 -- TODO: correct numbers
+      Next n -> Advance n
+      Jump n a -> do Advance n;  setPC a
     return instruction
 
 fetch :: Eff p (Byte p) -- fetch byte at PC, and increment PC
@@ -42,7 +41,7 @@ fetchImmediates b0 = \case
     b2 <- fetch
     return (Ins2 op2 b0 b1 b2)
 
-data Flow p = Next | Jump (Addr p)
+data Flow p = Next Int | Jump Int (Addr p)
 
 execute :: Instruction (Byte p) -> Eff p (Flow p)
 execute = \case
@@ -53,63 +52,63 @@ execute = \case
 execute0 :: Op0 -> Eff p (Flow p)
 execute0 = \case
   NOP -> do
-    return Next
+    return (Next 4)
   LDAX_D -> do
     a <- getRegPair DE
     b <- ReadMem a
     SetReg A b
-    return Next
+    return (Next 7)
   MVI_M_A -> do
     a <- getRegPair HL
     b <- ReadMem a
     SetReg A b
-    return Next
+    return (Next 7)
   INX rp -> do
     a <- getRegPair rp
     a' <- OffsetAddr 1 a
     setRegPair rp a'
-    return Next
+    return (Next 5)
   DEC_B -> do
     v <- GetReg B
     v' <- Decrement v -- TODO: this is modulus; is that correct?
     SetReg B v'
     SetFlagZ v'
     -- TODO: set more flags
-    return Next
+    return (Next 5)
   RET -> do
     lo <- popStack
     hi <- popStack
     dest <- MakeAddr $ HiLo{hi,lo}
-    return (Jump dest)
+    return (Jump 10 dest)
 
 
 execute1 :: Op1 -> Byte p -> Eff p (Flow p)
 execute1 op1 b1 = case op1 of
   MVI_B -> do
     SetReg B b1
-    return Next
+    return (Next 7)
 
 execute2 :: Op2 -> (Byte p, Byte p) -> Eff p (Flow p)
 execute2 op2 (lo,hi) = case op2 of
   JP -> do
     dest <- MakeAddr $ HiLo{hi,lo}
-    return (Jump dest)
+    return (Jump 10 dest)
   JNZ -> do
     TestFlagZ >>= \case
-      True -> return Next
+      True -> return (Next 10)
       False -> do
         dest <- MakeAddr $ HiLo{hi,lo}
-        return (Jump dest)
+        return (Jump 10 dest)
   LXI rp -> do
     let HiLo{hi=rh, lo=rl} = expandRegPair rp
     SetReg rh hi
     SetReg rl lo
-    return Next
+    return (Next 10)
   CALL -> do
     GetReg PCH >>= pushStack
     GetReg PCL >>= pushStack
     dest <- MakeAddr $ HiLo{hi,lo}
-    return (Jump dest)
+    return (Jump 17 dest)
 
 pushStack :: Byte p -> Eff p ()
 pushStack b = do

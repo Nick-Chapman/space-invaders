@@ -87,6 +87,10 @@ execute1 op1 b1 = case op1 of
   MVI_B -> do
     SetReg B b1
     return (Next 7)
+  MVI_M -> do
+    a <- getRegPair HL
+    WriteMem a b1
+    return (Next 10)
 
 execute2 :: Op2 -> (Byte p, Byte p) -> Eff p (Flow p)
 execute2 op2 (lo,hi) = case op2 of

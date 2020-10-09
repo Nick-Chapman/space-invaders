@@ -28,6 +28,7 @@ data Op0
 
 data Op1
   = MVI_B
+  | MVI_M
   deriving (Eq,Ord,Show,Enum,Bounded)
 
 data Op2
@@ -70,6 +71,7 @@ prettyInstruction = \case
   Ins0 RET _ -> "RET"
   Ins0 LDAX_D _ -> tag "LD" "A,(DE)"
   Ins1 MVI_B _ b1 -> tag "LD" ("B" <> "," <> show b1)
+  Ins1 MVI_M _ b1 -> tag "LD" ("(HL)" <> "," <> show b1)
   Ins2 JP _ b1 b2 -> tag "JP" (show b2 <> show b1)
   Ins2 JNZ _ b1 b2 -> tag "JNZ" (show b2 <> show b1)
   Ins2 CALL _ b1 b2 -> tag "CALL" (show b2 <> show b1)
@@ -105,6 +107,7 @@ encode = \case
   Op0 DEC_B -> 0x05
   Op0 RET -> 0xC9
   Op1 MVI_B -> 0x06
+  Op1 MVI_M -> 0x36
   Op2 JP -> 0xC3
   Op2 JNZ -> 0xC2
   Op2 CALL -> 0xCD

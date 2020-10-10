@@ -86,6 +86,16 @@ execute0 = \case
     setRegPair HL w
     -- TODO: set carry flag
     return (Next 11)
+  XCHG -> do
+    d <- GetReg D
+    e <- GetReg E
+    h <- GetReg H
+    l <- GetReg L
+    SetReg D h
+    SetReg E l
+    SetReg H d
+    SetReg L e
+    return (Next 5)
   DEC_B -> do
     v <- GetReg B
     v' <- Decrement v -- TODO: this is modulus; is that correct?

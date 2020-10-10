@@ -13,14 +13,16 @@ import HiLo (HiLo(..))
 data Reg = PCH | PCL | SPH | SPL | A | B | C | D | E | H | L
   deriving (Eq,Ord,Show)
 
-data RegPair = SP | DE | HL
-  deriving (Eq,Ord,Show,Enum,Bounded)
+data RegPair = BC | DE | HL | SP | PSW
+  deriving (Eq,Ord,Show)
 
 expandRegPair :: RegPair -> HiLo Reg
 expandRegPair = \case
+  BC -> HiLo {hi = B, lo = C}
   DE -> HiLo {hi = D, lo = E}
   HL -> HiLo {hi = H, lo = L}
   SP -> HiLo {hi = SPH, lo = SPL}
+  PSW -> undefined
 
 data Cpu b = Cpu
   { pch :: b

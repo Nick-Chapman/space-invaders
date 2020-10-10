@@ -25,6 +25,7 @@ data Op0
   | MOV_M_A
   | MOV Reg Reg
   | INX RegPair
+  | PUSH RegPair
   deriving (Eq,Ord,Show)
 
 data Op1
@@ -43,13 +44,13 @@ data Op2
 allOps :: [Op]
 allOps = map Op0 allOp0 ++ map Op1 allOp1 ++ map Op2 allOp2
   where
-    allOp0 = [NOP,LDAX_D,MOV_M_A,DEC_B,RET] ++ map INX all
+    allOp0 = [NOP,LDAX_D,MOV_M_A,DEC_B,RET] ++ map INX rps1 ++ map PUSH rps2
              ++ [ MOV dest src | dest <- regs7, src <- regs7 ]
     allOp1 = [CPI,MVI_M] ++ map MVI regs7
-    allOp2 = [JP,JNZ,CALL] ++ map LXI all
-    all :: (Enum a, Bounded a) => [a]
-    all = [minBound..maxBound]
+    allOp2 = [JP,JNZ,CALL] ++ map LXI rps1
     regs7 = [A,B,C,D,E,H,L]
+    rps1 = [BC,DE,HL,SP]
+    rps2 = [BC,DE,HL,PSW]
 
 data Instruction b -- op+args
   = Ins0 Op0 b
@@ -73,6 +74,7 @@ prettyInstruction = \case
   Ins0 MOV_M_A _ -> tag "LD" "(HL),A"
   Ins0 (MOV dest src) _ -> tag "LD" (show dest <> "," <> show src)
   Ins0 (INX rp) _ -> tag "INC" (show rp)
+  Ins0 (PUSH rp) _ -> tag "PUSH" (show rp)
   Ins0 DEC_B _ -> tag "DEC" "B"
   Ins0 RET _ -> "RET"
   Ins0 LDAX_D _ -> tag "LD" "A,(DE)"
@@ -111,6 +113,7 @@ encode = \case
   Op0 MOV_M_A -> 0x77 -- TODO: gen
   Op0 (MOV dest src) -> Byte (64 + 8 * encodeReg7 dest + encodeReg7 src)
   Op0 (INX rp) -> Byte (16 * encodeRegPair rp + 0x3)
+  Op0 (PUSH rp) -> Byte (16 * encodeRegPair rp + 0xC5)
   Op0 LDAX_D -> 0x1A
   Op0 DEC_B -> 0x05
   Op0 RET -> 0xC9
@@ -136,9 +139,12 @@ encodeReg7 = \case
 
 encodeRegPair :: RegPair -> Word8
 encodeRegPair = \case
+  BC -> 0
   DE -> 1
   HL -> 2
+  -- SP & PSW share same encoding
   SP -> 3
+  PSW -> 3 -- for PUSH/POP
 
 -- | define decode as the inverse of encoding
 decode :: Byte -> Maybe Op

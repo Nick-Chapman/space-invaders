@@ -72,6 +72,13 @@ execute0 = \case
     a' <- OffsetAddr 1 a
     setRegPair rp a'
     return (Next 5)
+  PUSH rp -> do
+    let HiLo{hi=rh, lo=rl} = expandRegPair rp
+    hi <- GetReg rh
+    lo <- GetReg rl
+    pushStack hi
+    pushStack lo
+    return (Next 11)
   DEC_B -> do
     v <- GetReg B
     v' <- Decrement v -- TODO: this is modulus; is that correct?

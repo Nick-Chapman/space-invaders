@@ -11,7 +11,7 @@ import InstructionSet (Instruction,decode)
 import Mem (Mem)
 import Phase (Phase)
 import Text.Printf (printf)
-import qualified Addr (fromHiLo,toHiLo,bump)
+import qualified Addr (fromHiLo,toHiLo,bump,add)
 import qualified Cpu (init,get,set,getFlagZ,setFlagZ)
 import qualified Mem (read,write)
 import qualified Phase (Byte,Addr,Ticks)
@@ -72,6 +72,9 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ -> return
       -- Byte ops
       Decrement b -> k s (b - 1)
       Subtract b1 b2 -> k s (b1 - b2)
+
+      -- Word (Address) ops
+      Add16 a1 a2 -> k s (Addr.add a1 a2) -- TODO: dont loose carry
 
       SetFlagZ b -> k s { cpu = Cpu.setFlagZ cpu b } ()
       TestFlagZ -> do

@@ -1,7 +1,8 @@
 
 module Addr(
   Addr (..),
-  toUnsigned, bump, fromHiLo, toHiLo
+  toUnsigned, bump, fromHiLo, toHiLo,
+  add,
   ) where
 
 import Byte(Byte(..))
@@ -29,3 +30,6 @@ toHiLo a = HiLo{hi,lo} where
     lo = Byte.ofUnsigned (n `mod` 256)
     hi = Byte.ofUnsigned ( n `div` 256)
     n = fromIntegral $ unAddr a
+
+add :: Addr -> Addr -> Addr
+add a1 a2 = a1 + a2

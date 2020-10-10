@@ -79,6 +79,13 @@ execute0 = \case
     pushStack hi
     pushStack lo
     return (Next 11)
+  DAD rp -> do
+    w1 <- getRegPair rp
+    w2 <- getRegPair HL
+    w <- Add16 w1 w2
+    setRegPair HL w
+    -- TODO: set carry flag
+    return (Next 11)
   DEC_B -> do
     v <- GetReg B
     v' <- Decrement v -- TODO: this is modulus; is that correct?

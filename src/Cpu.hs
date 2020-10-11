@@ -22,7 +22,7 @@ expandRegPair = \case
   DE -> HiLo {hi = D, lo = E}
   HL -> HiLo {hi = H, lo = L}
   SP -> HiLo {hi = SPH, lo = SPL}
-  PSW -> undefined
+  PSW -> HiLo {hi = A, lo = FLAGS}
 
 data Cpu b = Cpu
   { pch :: b

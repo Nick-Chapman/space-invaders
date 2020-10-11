@@ -17,7 +17,7 @@ import Text.Printf (printf)
 import qualified Addr (fromHiLo,toHiLo,bump,add)
 import qualified Cpu (init,get,set,getFlagZ,setFlagZ)
 import qualified Mem (read,write)
-import qualified Phase (Byte,Addr,Ticks)
+import qualified Phase (Byte,Addr,Ticks,Bit)
 
 
 -- | Ticks of the 2 MHz clock
@@ -32,6 +32,7 @@ instance Phase EmuTime where
   type Byte EmuTime = Byte
   type Addr EmuTime = Addr
   type Ticks EmuTime = Ticks
+  type Bit EmuTime = Bool
 
 startAddr :: Addr
 startAddr = Addr.fromHiLo $ HiLo { hi = Byte 0, lo = Byte 0 }
@@ -87,6 +88,21 @@ emulate traceOn mem0 = run (state0 mem0) theSemantics $ \_ -> return
         k s pred
 
       --Now{} -> k s ticks
+
+      GetFlagCY -> do
+        let flags = Cpu.get cpu FLAGS
+        let bit = flags `testBit` 0 -- TODO: make enum for flags->bit-pos mapping
+        k s bit
+
+      SetFlagCY bit -> do
+        let flags = Cpu.get cpu FLAGS
+        let flags' =  (if bit then setBit else clearBit) flags 0
+        k s { cpu = Cpu.set cpu FLAGS flags' } ()
+
+      RotateRight (bit,byte) -> do
+        let bit' = byte `testBit` 0
+        let byte' = (if bit then 128 else 0) + shiftR byte 1
+        k s (byte',bit')
 
       Out port byte -> do
         let _ = putStrLn $ show ("OUT",port,byte)

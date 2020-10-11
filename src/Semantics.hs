@@ -112,6 +112,14 @@ execute0 = \case
     SetReg H d
     SetReg L e
     return (Next 5)
+  RRC -> do
+    byte <- GetReg A
+    bool <- GetFlagCY
+    (byte',bool') <- RotateRight (bool,byte)
+    SetReg A byte'
+    SetFlagCY bool'
+    --here
+    return (Next 4)
   DCR reg -> do
     v <- GetReg reg
     v' <- Decrement v -- TODO: this is modulus; is that correct?

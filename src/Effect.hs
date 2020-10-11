@@ -4,7 +4,7 @@ module Effect (Eff(..)) where
 import Control.Monad (ap,liftM)
 import Cpu (Reg(..))
 import HiLo (HiLo(..))
-import Phase (Byte,Addr) --,Ticks)
+import Phase (Byte,Addr,Bit) --,Ticks)
 import InstructionSet (Op,Instruction)
 
 -- | The Effect type, constructed when executing instructions
@@ -25,6 +25,11 @@ data Eff p a where
   Add16 :: Addr p -> Addr p -> Eff p (Addr p)
   SetFlagZ :: Byte p -> Eff p ()
   TestFlagZ :: Eff p Bool
+
+  GetFlagCY :: Eff p (Bit p)
+  SetFlagCY :: Bit p-> Eff p ()
+  RotateRight :: (Bit p,Byte p) -> Eff p (Byte p,Bit p)
+
   -- Advance :: Int -> Eff p ()
   -- Now :: Eff p (Ticks p)
   Out :: Byte p -> Byte p -> Eff p ()

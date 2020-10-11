@@ -10,7 +10,7 @@ module Cpu (
 import Prelude hiding (init)
 import HiLo (HiLo(..))
 
-data Reg = PCH | PCL | SPH | SPL | A | B | C | D | E | H | L
+data Reg = PCH | PCL | SPH | SPL | A | B | C | D | E | H | L | FLAGS
   deriving (Eq,Ord,Show)
 
 data RegPair = BC | DE | HL | SP | PSW
@@ -37,10 +37,11 @@ data Cpu b = Cpu
   , regH :: b
   , regL :: b
   , flagZ :: b -- The byte which should be tested against zero
+  , regFlags :: b
   }
 
 instance Show b => Show (Cpu b) where
-  show Cpu{pch,pcl,sph,spl,regA,regB,regC,regD,regE,regH,regL} = unwords
+  show Cpu{pch,pcl,sph,spl,regA,regB,regC,regD,regE,regH,regL,regFlags} = unwords
     [ name <> ":" <> v
     | (name,v) <-
       [ ("PC",show pch <> show pcl)
@@ -51,6 +52,7 @@ instance Show b => Show (Cpu b) where
       , ("E", show regE)
       , ("HL", show regH <> show regL)
       , ("SP", show sph <> show spl)
+      , ("FLAGS", show regFlags)
       ]
     ]
 
@@ -58,6 +60,7 @@ init :: b -> Cpu b
 init b = Cpu { pch = b, pcl = b, sph = b, spl = b
              , regA = b, regB = b, regC = b, regD = b, regE = b, regH = b, regL = b
              , flagZ = b
+             , regFlags = b
              }
 
 getFlagZ :: Cpu b -> b
@@ -68,7 +71,7 @@ setFlagZ cpu b = cpu { flagZ = b }
 
 
 get :: Cpu b -> Reg -> b
-get Cpu{pch,pcl,sph,spl,regA,regB,regC,regD,regE,regH,regL} = \case
+get Cpu{pch,pcl,sph,spl,regA,regB,regC,regD,regE,regH,regL,regFlags} = \case
   PCH -> pch
   PCL -> pcl
   SPH -> sph
@@ -80,6 +83,7 @@ get Cpu{pch,pcl,sph,spl,regA,regB,regC,regD,regE,regH,regL} = \case
   E -> regE
   H -> regH
   L -> regL
+  FLAGS -> regFlags
 
 set :: Cpu b -> Reg -> b -> Cpu b
 set cpu r x = case r of
@@ -94,3 +98,4 @@ set cpu r x = case r of
   E -> cpu { regE = x }
   H -> cpu { regH = x }
   L -> cpu { regL = x }
+  FLAGS -> cpu { regFlags = x }

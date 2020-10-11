@@ -75,7 +75,8 @@ emulate traceOn mem0 = run (state0 mem0) theSemantics $ \_ -> return
 
       -- Byte ops
       Decrement b -> k s (b - 1)
-      Subtract b1 b2 -> k s (b1 - b2)
+      AddB b1 b2 -> k s (b1 + b2)
+      SubtractB b1 b2 -> k s (b1 - b2)
       AndB b1 b2 -> k s (b1 .&. b2)
 
       -- Word (Address) ops

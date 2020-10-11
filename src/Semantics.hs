@@ -145,7 +145,7 @@ execute1 op1 b1 = case op1 of
     return (Next 10)
   CPI -> do
     b <- GetReg A
-    v <- Subtract b b1
+    v <- SubtractB b b1
     SetFlagZ v
     -- TODO: set all flags
     return (Next 7)
@@ -156,6 +156,12 @@ execute1 op1 b1 = case op1 of
   ANI -> do
     value <- GetReg A
     value' <- AndB b1 value
+    SetReg A value'
+    -- TODO: set all flags
+    return (Next 7)
+  ADI -> do
+    value <- GetReg A
+    value' <- AddB b1 value
     SetReg A value'
     -- TODO: set all flags
     return (Next 7)

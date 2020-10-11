@@ -38,6 +38,7 @@ data Op1
   = CPI
   | OUT
   | ANI
+  | ADI
   | MVI_M
   | MVI Reg
   deriving (Eq,Ord,Show)
@@ -59,7 +60,7 @@ allOps = map Op0 allOp0 ++ map Op1 allOp1 ++ map Op2 allOp2
              ++ map MOV_rM regs7
              ++ map INX rps1 ++ map DAD rps1 ++ map PUSH rps2 ++ map POP rps2
              ++ [ MOV dest src | dest <- regs7, src <- regs7 ]
-    allOp1 = [CPI,OUT,ANI,MVI_M] ++ map MVI regs7
+    allOp1 = [CPI,OUT,ANI,ADI,MVI_M] ++ map MVI regs7
     allOp2 = [JP,JNZ,CALL] ++ map LXI rps1
     regs7 = [A,B,C,D,E,H,L]
     rps1 = [BC,DE,HL,SP]
@@ -101,6 +102,7 @@ prettyInstruction = \case
   Ins1 CPI _ b1 -> tag "CP" (show b1)
   Ins1 OUT _ b1 -> tag "OUT" (show b1)
   Ins1 ANI _ b1 -> tag "AND" (show b1)
+  Ins1 ADI _ b1 -> tag "ADD" (show b1)
   Ins2 JP _ b1 b2 -> tag "JP" (show b2 <> show b1)
   Ins2 JNZ _ b1 b2 -> tag "JNZ" (show b2 <> show b1)
   Ins2 CALL _ b1 b2 -> tag "CALL" (show b2 <> show b1)
@@ -147,6 +149,7 @@ encode = \case
   Op1 CPI -> 0xFE
   Op1 OUT -> 0xD3
   Op1 ANI -> 0xE6
+  Op1 ADI -> 0xC6
   Op2 JP -> 0xC3
   Op2 JNZ -> 0xC2
   Op2 CALL -> 0xCD

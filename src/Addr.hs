@@ -11,7 +11,7 @@ import HiLo (HiLo(..))
 import Text.Printf (printf)
 import qualified Byte
 
-newtype Addr = Addr { unAddr :: Word16 } deriving (Eq,Ord,Num)
+newtype Addr = Addr { unAddr :: Word16 } deriving (Eq,Ord,Num,Enum)
 
 instance Show Addr where show = printf "%04X" . unAddr
 

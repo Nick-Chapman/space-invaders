@@ -5,11 +5,12 @@ module Byte(
   ofUnsigned,
   ) where
 
+import Data.Bits (Bits)
 import Data.Word8 (Word8)
 import Text.Printf (printf)
 
 newtype Byte = Byte { unByte :: Word8 }
-  deriving (Eq,Ord,Num)
+  deriving (Eq,Ord,Num,Bits)
 
 instance Show Byte where show = printf "%02X" . unByte
 

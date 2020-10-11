@@ -2,8 +2,9 @@
 module Emulate (emulate) where
 
 import Control.Monad (when)
+import Data.Bits
 
-import Addr (Addr)
+import Addr (Addr(..))
 import Byte (Byte(..))
 import Cpu (Cpu,Reg(..))
 import Effect (Eff(..))
@@ -88,7 +89,7 @@ emulate traceOn mem0 = run (state0 mem0) theSemantics $ \_ -> return
       --Now{} -> k s ticks
 
       Out port byte -> do
-        putStrLn $ show ("OUT",port,byte)
+        let _ = putStrLn $ show ("OUT",port,byte)
         k s ()
 
       InstructionCycle eff -> do
@@ -155,13 +156,13 @@ printWhenNewFrame s0 s1 = do
       [ prettyTicks s1
       , printf "FRAME{%d}" f1
       , printf "#onPixels = %d" (length pixs)
-      , printf "(cycles-late=%d)" _nCyclesLate
-      , printf "(frame-skipped=%d)" _nFramesSkipped
-       --, show (f0,f1)
-       --, show (ticks0,ticks1)
+      --, printf "(cycles-late=%d)" _nCyclesLate
+      --, printf "(frame-skipped=%d)" _nFramesSkipped
+      --, show (f0,f1)
+      --, show (ticks0,ticks1)
       ]
-    where cyclesPerFrame = 1000
-    --where cyclesPerFrame = 33333
+    --where cyclesPerFrame = 1000
+    where cyclesPerFrame = 33333
 
 
 prettyStep :: State -> Instruction Byte -> String
@@ -174,12 +175,18 @@ prettyTicks State{ticks,icount} =
   unwords [ printf "(%5d)" icount, show ticks ]
 
 
-data OnPixel = OnPixel -- { x :: Int, y :: Int }
+data OnPixel = OnPixel { x :: Int, y :: Int }
 
 data Display = Display { onPixels :: [OnPixel] }
 
 getDisplayFromMem :: Mem -> Display
-getDisplayFromMem _ =
-  Display { onPixels = [OnPixel,OnPixel] }
-
-
+getDisplayFromMem mem = do
+  Display
+    [ OnPixel {x, y}
+    | x :: Int <- [0..223]
+    , yByte <- [0..31]
+    , let byte = Mem.read mem (Addr (fromIntegral (0x2400 + x * 32 + yByte)))
+    , yBit <- [0..7]
+    , byte `testBit` yBit
+    , let y  = 8 * yByte + yBit
+    ]

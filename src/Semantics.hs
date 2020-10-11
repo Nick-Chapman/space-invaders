@@ -107,10 +107,10 @@ execute0 = \case
     SetReg H d
     SetReg L e
     return (Next 5)
-  DEC_B -> do
-    v <- GetReg B
+  DCR reg -> do
+    v <- GetReg reg
     v' <- Decrement v -- TODO: this is modulus; is that correct?
-    SetReg B v'
+    SetReg reg v'
     SetFlagZ v'
     -- TODO: set more flags
     return (Next 5)

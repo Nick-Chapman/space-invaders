@@ -1,6 +1,8 @@
 
 module Emulate (emulate) where
 
+import Control.Monad (when)
+
 import Addr (Addr)
 import Byte (Byte(..))
 import Cpu (Cpu,Reg(..))
@@ -20,7 +22,7 @@ import qualified Phase (Byte,Addr,Ticks)
 -- | Ticks of the 2 MHz clock
 newtype Ticks = Ticks { unTicks :: Int } deriving (Num)
 
-instance Show Ticks where show = printf "[%06d]" . unTicks
+instance Show Ticks where show = printf "[%6d]" . unTicks
 
 
 data EmuTime -- At Emulation type we have concrete Bytes
@@ -87,24 +89,45 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ -> return
       Now{} -> k s ticks
 
       InstructionCycle eff -> do
-        let pcBefore = programCounter s
-        --putStrLn (ljust 50 (show ticks) ++ show cpu)
-        run s eff $ \s@State{cpu} instruction -> do
-          putStrLn (ljust 50 (prettyStep ticks pcBefore instruction) ++ show cpu)
-          --putStrLn (prettyStep ticks pc instruction)
-          k s ()
+        when splitTrace $
+          putStrLn (ljust cpuCol (show ticks) ++ show cpu)
+        run s eff $ \sAfter@State{cpu=cpuAfter} instruction -> do
+          if splitTrace
+            then putStrLn (prettyStep s instruction)
+            else putStrLn (ljust cpuCol (prettyStep s instruction) ++ show cpuAfter)
+          k sAfter { iCount = iCount s + 1 } ()
+            where
+              splitTrace = False
+              cpuCol = 60
 
-prettyStep :: Ticks -> Addr -> Instruction Byte -> String
-prettyStep ticks pc instruction =
-  show ticks <> " " <> show pc <> " : " <> show instruction
+prettyStep :: State -> Instruction Byte -> String
+prettyStep s@State{ticks,iCount} instruction = do
+  let pc = programCounter s
+  unwords
+    [ printf "(%5d)" iCount
+    , show ticks
+    , show pc
+    , ":"
+    , show instruction
+    ]
 
 ljust :: Int -> String -> String
 ljust n s = s <> take (max 0 (n - length s)) (repeat ' ')
 
-data State = State { ticks :: Ticks, cpu :: Cpu Byte, mem :: Mem }
+data State = State
+  { ticks :: Ticks
+  , iCount :: Int
+  , cpu :: Cpu Byte
+  , mem :: Mem
+  }
 
 state0 :: Mem -> State
-state0 mem = State { ticks = 0, cpu = Cpu.init (Byte 0), mem }
+state0 mem = State
+  { ticks = 0
+  , iCount = 0
+  , cpu = Cpu.init (Byte 0)
+  , mem
+  }
 
 programCounter :: State -> Addr
 programCounter State{cpu} = do

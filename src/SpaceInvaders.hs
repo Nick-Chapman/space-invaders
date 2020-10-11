@@ -16,7 +16,7 @@ main = do
   g <- Rom2k.load "roms/invaders.g"
   h <- Rom2k.load "roms/invaders.h"
 
-  putStrLn (unlines prettyDecodeTable)
+  let _ = putStrLn (unlines prettyDecodeTable)
 
   let mem = Mem.init (e,f,g,h)
   emulate mem

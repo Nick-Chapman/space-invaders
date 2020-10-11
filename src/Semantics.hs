@@ -187,6 +187,11 @@ execute2 op2 (lo,hi) = case op2 of
     GetReg PCL >>= pushStack
     dest <- MakeAddr $ HiLo{hi,lo}
     return (Jump 17 dest)
+  LDA -> do
+    a <- MakeAddr $ HiLo{hi,lo}
+    b <- ReadMem a
+    SetReg A b
+    return (Next 13)
 
 pushStack :: Byte p -> Eff p ()
 pushStack b = do

@@ -26,6 +26,7 @@ data Op0
   | MOV Reg Reg
   | INX RegPair
   | PUSH RegPair
+  | POP RegPair
   | DAD RegPair
   | XCHG
   deriving (Eq,Ord,Show)
@@ -46,7 +47,7 @@ data Op2
 allOps :: [Op]
 allOps = map Op0 allOp0 ++ map Op1 allOp1 ++ map Op2 allOp2
   where
-    allOp0 = [NOP,LDAX_D,MOV_M_A,DEC_B,RET,XCHG] ++ map INX rps1 ++ map DAD rps1 ++ map PUSH rps2
+    allOp0 = [NOP,LDAX_D,MOV_M_A,DEC_B,RET,XCHG] ++ map INX rps1 ++ map DAD rps1 ++ map PUSH rps2 ++ map POP rps2
              ++ [ MOV dest src | dest <- regs7, src <- regs7 ]
     allOp1 = [CPI,MVI_M] ++ map MVI regs7
     allOp2 = [JP,JNZ,CALL] ++ map LXI rps1
@@ -77,6 +78,7 @@ prettyInstruction = \case
   Ins0 (MOV dest src) _ -> tag "LD" (show dest <> "," <> show src)
   Ins0 (INX rp) _ -> tag "INC" (show rp)
   Ins0 (PUSH rp) _ -> tag "PUSH" (show rp)
+  Ins0 (POP rp) _ -> tag "POP" (show rp)
   Ins0 (DAD rp) _ -> tag "ADD" ("HL," <> show rp)
   Ins0 XCHG _ -> tag "EX" "DE,HL"
   Ins0 DEC_B _ -> tag "DEC" "B"
@@ -118,6 +120,7 @@ encode = \case
   Op0 (MOV dest src) -> Byte (64 + 8 * encodeReg7 dest + encodeReg7 src)
   Op0 (INX rp) -> Byte (16 * encodeRegPair rp + 0x3)
   Op0 (PUSH rp) -> Byte (16 * encodeRegPair rp + 0xC5)
+  Op0 (POP rp) -> Byte (16 * encodeRegPair rp + 0xC1)
   Op0 (DAD rp) -> Byte (16 * encodeRegPair rp + 0x9)
   Op0 XCHG -> 0xEB
   Op0 LDAX_D -> 0x1A

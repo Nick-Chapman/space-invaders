@@ -83,6 +83,13 @@ execute0 = \case
     pushStack hi
     pushStack lo
     return (Next 11)
+  POP rp -> do
+    let HiLo{hi=rh, lo=rl} = expandRegPair rp
+    lo <- popStack
+    hi <- popStack
+    SetReg rh hi
+    SetReg rl lo
+    return (Next 10)
   DAD rp -> do
     w1 <- getRegPair rp
     w2 <- getRegPair HL

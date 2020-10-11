@@ -87,6 +87,10 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ -> return
 
       --Now{} -> k s ticks
 
+      Out port byte -> do
+        putStrLn $ show ("OUT",port,byte)
+        k s ()
+
       InstructionCycle eff -> do
         let s0 = s
 

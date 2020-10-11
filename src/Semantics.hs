@@ -136,6 +136,10 @@ execute1 op1 b1 = case op1 of
     SetFlagZ v
     -- TODO: set all flags
     return (Next 7)
+  OUT -> do
+    value <- GetReg A
+    Out b1 value
+    return (Next 10)
 
 execute2 :: Op2 -> (Byte p, Byte p) -> Eff p (Flow p)
 execute2 op2 (lo,hi) = case op2 of

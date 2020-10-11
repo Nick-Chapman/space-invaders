@@ -27,6 +27,7 @@ data Eff p a where
   TestFlagZ :: Eff p Bool
   -- Advance :: Int -> Eff p ()
   -- Now :: Eff p (Ticks p)
+  Out :: Byte p -> Byte p -> Eff p ()
   InstructionCycle :: Eff p (Instruction (Byte p), Int) -> Eff p ()
 
 instance Functor (Eff p) where fmap = liftM

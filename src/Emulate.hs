@@ -44,8 +44,8 @@ theSemantics = do
         fetchDecodeExec
         loop
 
-emulate :: Mem -> IO ()
-emulate mem0 = run (state0 mem0) theSemantics $ \_ -> return
+emulate :: Bool -> Mem -> IO ()
+emulate traceOn mem0 = run (state0 mem0) theSemantics $ \_ -> return
   where
     run :: State -> Eff EmuTime a -> (State -> a -> IO ()) -> IO ()
     run s@State{cpu,mem} eff k = case eff of
@@ -111,7 +111,6 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ -> return
             where
               splitTrace = False
               cpuCol = 60
-              traceOn = True
 
 ljust :: Int -> String -> String
 ljust n s = s <> take (max 0 (n - length s)) (repeat ' ')

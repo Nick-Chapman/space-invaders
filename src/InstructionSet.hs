@@ -3,9 +3,10 @@ module InstructionSet (
   Op(..),Op0(..),Op1(..),Op2(..),
   Instruction(..),
   decode,
-  prettyDecodeTable
+  printDecodeTable
   ) where
 
+import Text.Printf (printf)
 import Data.List (sort)
 import Data.List.Extra (groupSort)
 import Data.Map (Map)
@@ -179,6 +180,10 @@ decodeTable = Map.fromList ys
       [v] -> v
       vs -> error $ "bad decoding: " <> show k <> " --> " <> show vs
 
-prettyDecodeTable :: [String]
-prettyDecodeTable =
-  [ show k <> " --> " <> show v | (k,v) <- sort (Map.toList decodeTable) ]
+printDecodeTable :: IO ()
+printDecodeTable = do
+  putStrLn $ unlines [ show k <> " --> " <> show v | (k,v) <- ps ]
+  putStrLn (printf "implemented: %d, unimplemented %d" n (256-n))
+  where
+    ps = sort (Map.toList decodeTable)
+    n = length ps

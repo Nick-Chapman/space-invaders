@@ -24,7 +24,7 @@ data Op0
   | DCR Reg
   | RET
   | MOV_M_A
-  | MOV_E_M
+  | MOV_rM Reg
   | MOV Reg Reg
   | INX RegPair
   | PUSH RegPair
@@ -52,9 +52,9 @@ allOps = map Op0 allOp0 ++ map Op1 allOp1 ++ map Op2 allOp2
   where
     allOp0 = [NOP,LDAX_D
              ,MOV_M_A
-             ,MOV_E_M
              ,RET,XCHG]
              ++ map DCR regs7
+             ++ map MOV_rM regs7
              ++ map INX rps1 ++ map DAD rps1 ++ map PUSH rps2 ++ map POP rps2
              ++ [ MOV dest src | dest <- regs7, src <- regs7 ]
     allOp1 = [CPI,OUT,MVI_M] ++ map MVI regs7
@@ -83,7 +83,7 @@ prettyInstruction :: Show b => Instruction b -> String
 prettyInstruction = \case
   Ins0 NOP _ -> "NOP"
   Ins0 MOV_M_A _ -> tag "LD" "(HL),A"
-  Ins0 MOV_E_M _ -> tag "LD" "E,(HL)"
+  Ins0 (MOV_rM reg) _ -> tag "LD" (show reg <> ",(HL)")
   Ins0 (MOV dest src) _ -> tag "LD" (show dest <> "," <> show src)
   Ins0 (INX rp) _ -> tag "INC" (show rp)
   Ins0 (PUSH rp) _ -> tag "PUSH" (show rp)
@@ -127,8 +127,8 @@ encode :: Op -> Byte
 encode = \case
   Op0 NOP -> 0x00
   Op0 MOV_M_A -> 0x77 -- TODO: gen
-  Op0 MOV_E_M -> 0x5E -- TODO: gen
-  Op0 (MOV dest src) -> Byte (64 + 8 * encodeReg7 dest + encodeReg7 src)
+  Op0 (MOV_rM reg) -> Byte (8 * encodeReg7 reg + 0x46)
+  Op0 (MOV dest src) -> Byte (0x40 + 8 * encodeReg7 dest + encodeReg7 src)
   Op0 (INX rp) -> Byte (16 * encodeRegPair rp + 0x3)
   Op0 (PUSH rp) -> Byte (16 * encodeRegPair rp + 0xC5)
   Op0 (POP rp) -> Byte (16 * encodeRegPair rp + 0xC1)

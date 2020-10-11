@@ -67,9 +67,9 @@ execute0 = \case
     b <- ReadMem a
     SetReg A b
     return (Next 7)
-  MOV_E_M -> do
+  MOV_rM reg -> do
     a <- getRegPair HL
-    b <- GetReg E
+    b <- GetReg reg
     WriteMem a b
     return (Next 7)
   MOV dest src -> do

@@ -19,9 +19,13 @@ fetchDecodeExec = do
     op <- Decode (pc, byte) -- Pass pc to decode for improved error messages
     instruction <- fetchImmediates byte op
     execute instruction >>= \case
-      Next n -> Advance n
-      Jump n a -> do Advance n;  setPC a
-    return instruction
+      Next n -> do
+        --Advance n
+        return (instruction,n)
+      Jump n a -> do
+        --Advance n;
+        setPC a
+        return (instruction,n)
 
 fetch :: Eff p (Byte p) -- fetch byte at PC, and increment PC
 fetch = do

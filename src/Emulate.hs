@@ -48,7 +48,7 @@ emulate :: Mem -> IO ()
 emulate mem0 = run (state0 mem0) theSemantics $ \_ -> return
   where
     run :: State -> Eff EmuTime a -> (State -> a -> IO ()) -> IO ()
-    run s@State{ticks,cpu,mem} eff k = case eff of
+    run s@State{cpu,mem} eff k = case eff of
       Ret x -> k s x
       Bind eff f -> run s eff $ \s a -> run s (f a) k
       GetReg r -> k s (Cpu.get cpu r)
@@ -68,7 +68,7 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ -> return
         case decode byte of
           Just op -> k s op
           Nothing -> do
-            putStrLn (show ticks <> " " <> show pc <> " : " <> show byte)
+            putStrLn (show (ticks s) <> " " <> show pc <> " : " <> show byte)
             error $ "Decode: " <> show byte
 
       -- Byte ops
@@ -85,38 +85,37 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ -> return
         --putStrLn $ "- TestFlagZ (" <> show z <> ") -> " <> show pred
         k s pred
 
-      Advance n -> k s { ticks = ticks + fromIntegral n } ()
-      Now{} -> k s ticks
+      --Now{} -> k s ticks
 
       InstructionCycle eff -> do
-        when splitTrace $
-          putStrLn (ljust cpuCol (show ticks) ++ show cpu)
-        run s eff $ \sAfter@State{cpu=cpuAfter} instruction -> do
-          if splitTrace
-            then putStrLn (prettyStep s instruction)
-            else putStrLn (ljust cpuCol (prettyStep s instruction) ++ show cpuAfter)
-          k sAfter { iCount = iCount s + 1 } ()
+        let s0 = s
+
+        when (traceOn && splitTrace) $
+          putStrLn (ljust cpuCol (prettyTicks s) ++ show cpu)
+
+        run s eff $ \s@State{icount,ticks,cpu} (instruction,n) -> do
+          let s1 = s { icount = icount + 1, ticks = ticks + fromIntegral n }
+
+          when traceOn $
+            if splitTrace
+            then putStrLn (prettyStep s0 instruction)
+            else putStrLn (ljust cpuCol (prettyStep s0 instruction) ++ show cpu)
+
+          printWhenNewFrame s0 s1
+          k s1 ()
+
             where
               splitTrace = False
               cpuCol = 60
-
-prettyStep :: State -> Instruction Byte -> String
-prettyStep s@State{ticks,iCount} instruction = do
-  let pc = programCounter s
-  unwords
-    [ printf "(%5d)" iCount
-    , show ticks
-    , show pc
-    , ":"
-    , show instruction
-    ]
+              traceOn = True
 
 ljust :: Int -> String -> String
 ljust n s = s <> take (max 0 (n - length s)) (repeat ' ')
 
 data State = State
-  { ticks :: Ticks
-  , iCount :: Int
+  { ticks :: Ticks -- cycle count
+  , icount :: Int -- instruction count
+  , fcount :: Int -- frame count
   , cpu :: Cpu Byte
   , mem :: Mem
   }
@@ -124,7 +123,8 @@ data State = State
 state0 :: Mem -> State
 state0 mem = State
   { ticks = 0
-  , iCount = 0
+  , icount = 0
+  , fcount = 0
   , cpu = Cpu.init (Byte 0)
   , mem
   }
@@ -134,3 +134,49 @@ programCounter State{cpu} = do
   let lo = Cpu.get cpu PCL
   let hi = Cpu.get cpu PCH
   Addr.fromHiLo HiLo{hi,lo}
+
+
+printWhenNewFrame :: State -> State -> IO ()
+printWhenNewFrame s0 s1 = do
+  let State{ticks=ticks0} = s0
+  let State{ticks=ticks1} = s1
+  let f0 = unTicks ticks0 `div` cyclesPerFrame
+  let f1 = unTicks ticks1 `div` cyclesPerFrame
+  let yes = f1 > f0
+  when yes $ do
+    let State{mem} = s1
+    let pixs = onPixels (getDisplayFromMem mem)
+    let _nCyclesLate = unTicks ticks1 `mod` cyclesPerFrame
+    let _nFramesSkipped = f1 - f0 - 1
+    putStrLn $ unwords
+      [ prettyTicks s1
+      , printf "FRAME{%d}" f1
+      , printf "#onPixels = %d" (length pixs)
+      , printf "(cycles-late=%d)" _nCyclesLate
+      , printf "(frame-skipped=%d)" _nFramesSkipped
+       --, show (f0,f1)
+       --, show (ticks0,ticks1)
+      ]
+    where cyclesPerFrame = 1000
+    --where cyclesPerFrame = 33333
+
+
+prettyStep :: State -> Instruction Byte -> String
+prettyStep s instruction = do
+  let pc = programCounter s
+  unwords [ prettyTicks s, show pc, ":", show instruction]
+
+prettyTicks :: State -> String
+prettyTicks State{ticks,icount} =
+  unwords [ printf "(%5d)" icount, show ticks ]
+
+
+data OnPixel = OnPixel -- { x :: Int, y :: Int }
+
+data Display = Display { onPixels :: [OnPixel] }
+
+getDisplayFromMem :: Mem -> Display
+getDisplayFromMem _ =
+  Display { onPixels = [OnPixel,OnPixel] }
+
+

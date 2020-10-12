@@ -22,6 +22,7 @@ data Op0
   = NOP
   | RET
   | RRC
+  | EI
   | XCHG
   | LDAX_D
   | MOV_M_A
@@ -58,7 +59,7 @@ allOps = map Op0 allOp0 ++ map Op1 allOp1 ++ map Op2 allOp2
   where
     allOp0 = [NOP,LDAX_D
              ,MOV_M_A
-             ,RET,XCHG,RRC]
+             ,RET,RRC,EI,XCHG]
              ++ map MOV_rM regs7
              ++ map DCR regs7
              ++ map XRA regs7
@@ -91,6 +92,7 @@ prettyInstruction = \case
   Ins0 NOP _ -> "NOP"
   Ins0 RET _ -> "RET"
   Ins0 RRC _ -> "RRCA"
+  Ins0 EI _ -> "EI"
   Ins0 XCHG _ -> tag "EX" "DE,HL"
   Ins0 LDAX_D _ -> tag "LD" "A,(DE)"
   Ins0 MOV_M_A _ -> tag "LD" "(HL),A"
@@ -140,6 +142,7 @@ encode = \case
   Op0 NOP -> 0x00
   Op0 RET -> 0xC9
   Op0 RRC -> 0x0F
+  Op0 EI -> 0xFB
   Op0 XCHG -> 0xEB
   Op0 LDAX_D -> 0x1A
   Op0 MOV_M_A -> 0x77 -- TODO: gen

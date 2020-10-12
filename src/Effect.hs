@@ -38,6 +38,7 @@ data Eff p a where
   -- Advance :: Int -> Eff p ()
   -- Now :: Eff p (Ticks p)
   Out :: Byte p -> Byte p -> Eff p ()
+  EnableInterrupts :: Eff p ()
   InstructionCycle :: Eff p (Instruction (Byte p), Int) -> Eff p ()
 
 instance Functor (Eff p) where fmap = liftM

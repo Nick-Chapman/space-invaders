@@ -57,6 +57,31 @@ execute0 :: Op0 -> Eff p (Flow p)
 execute0 = \case
   NOP -> do
     return (Next 4)
+  RET -> do
+    lo <- popStack
+    hi <- popStack
+    dest <- MakeAddr $ HiLo{hi,lo}
+    return (Jump 10 dest)
+  RRC -> do
+    byte <- GetReg A
+    bool <- GetFlagCY
+    (byte',bool') <- RotateRight (bool,byte)
+    SetReg A byte'
+    SetFlagCY bool'
+    return (Next 4)
+  EI -> do
+    EnableInterrupts
+    return (Next 4)
+  XCHG -> do
+    d <- GetReg D
+    e <- GetReg E
+    h <- GetReg H
+    l <- GetReg L
+    SetReg D h
+    SetReg E l
+    SetReg H d
+    SetReg L e
+    return (Next 5)
   LDAX_D -> do
     a <- getRegPair DE
     b <- ReadMem a
@@ -102,24 +127,6 @@ execute0 = \case
     setRegPair HL w
     -- TODO: set carry flag
     return (Next 11)
-  XCHG -> do
-    d <- GetReg D
-    e <- GetReg E
-    h <- GetReg H
-    l <- GetReg L
-    SetReg D h
-    SetReg E l
-    SetReg H d
-    SetReg L e
-    return (Next 5)
-  RRC -> do
-    byte <- GetReg A
-    bool <- GetFlagCY
-    (byte',bool') <- RotateRight (bool,byte)
-    SetReg A byte'
-    SetFlagCY bool'
-    --here
-    return (Next 4)
   DCR reg -> do
     v <- GetReg reg
     v' <- Decrement v -- TODO: this is modulus; is that correct?
@@ -135,11 +142,6 @@ execute0 = \case
     SetFlagZ v'
     -- TODO: set more flags
     return (Next 4)
-  RET -> do
-    lo <- popStack
-    hi <- popStack
-    dest <- MakeAddr $ HiLo{hi,lo}
-    return (Jump 10 dest)
 
 
 execute1 :: Op1 -> Byte p -> Eff p (Flow p)

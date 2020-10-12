@@ -111,6 +111,10 @@ emulate traceOn mem0 = run (state0 mem0) theSemantics $ \_ -> return
         let _ = putStrLn $ show ("OUT",port,byte)
         k s ()
 
+      EnableInterrupts -> do
+        -- TODO: add bit in cpu to record enabled/disabled status
+        k s ()
+
       InstructionCycle eff -> do
         let s0 = s
 
@@ -120,7 +124,7 @@ emulate traceOn mem0 = run (state0 mem0) theSemantics $ \_ -> return
         run s eff $ \s@State{icount,ticks,cpu} (instruction,n) -> do
           let s1 = s { icount = icount + 1, ticks = ticks + fromIntegral n }
 
-          --when (icount > 42045) $ error "STOP"
+          when (icount > 42050) $ error "STOP"
 
           when traceOn $
             if splitTrace

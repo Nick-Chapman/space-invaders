@@ -25,6 +25,7 @@ data Eff p a where
   AddB :: Byte p -> Byte p -> Eff p (Byte p)
   SubtractB :: Byte p -> Byte p -> Eff p (Byte p)
   AndB :: Byte p -> Byte p -> Eff p (Byte p)
+  XorB :: Byte p -> Byte p -> Eff p (Byte p)
   Add16 :: Addr p -> Addr p -> Eff p (Addr p)
 
   SetFlagZ :: Byte p -> Eff p ()

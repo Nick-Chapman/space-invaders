@@ -127,6 +127,14 @@ execute0 = \case
     SetFlagZ v'
     -- TODO: set more flags
     return (Next 5)
+  XRA reg -> do
+    v1 <- GetReg reg
+    v2 <- GetReg A
+    v' <- XorB v1 v2
+    SetReg reg v'
+    SetFlagZ v'
+    -- TODO: set more flags
+    return (Next 4)
   RET -> do
     lo <- popStack
     hi <- popStack

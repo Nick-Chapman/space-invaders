@@ -78,6 +78,7 @@ emulate traceOn mem0 = run (state0 mem0) theSemantics $ \_ -> return
       AddB b1 b2 -> k s (b1 + b2)
       SubtractB b1 b2 -> k s (b1 - b2)
       AndB b1 b2 -> k s (b1 .&. b2)
+      XorB b1 b2 -> k s (b1 `xor` b2)
 
       -- Word (Address) ops
       Add16 a1 a2 -> k s (Addr.add a1 a2) -- TODO: dont loose carry
@@ -119,7 +120,7 @@ emulate traceOn mem0 = run (state0 mem0) theSemantics $ \_ -> return
         run s eff $ \s@State{icount,ticks,cpu} (instruction,n) -> do
           let s1 = s { icount = icount + 1, ticks = ticks + fromIntegral n }
 
-          when (icount > 42035) $ error "STOP"
+          --when (icount > 42045) $ error "STOP"
 
           when traceOn $
             if splitTrace

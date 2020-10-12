@@ -70,7 +70,7 @@ emulate traceOn mem0 = run (state0 mem0) theSemantics $ \_ -> return
         case decode byte of
           Just op -> k s op
           Nothing -> do
-            putStrLn (show (ticks s) <> " " <> show pc <> " : " <> show byte)
+            putStrLn (prettyTicks s <> " " <> show pc <> " : " <> show byte)
             error $ "Decode: " <> show byte
 
       -- Byte ops
@@ -119,7 +119,7 @@ emulate traceOn mem0 = run (state0 mem0) theSemantics $ \_ -> return
         run s eff $ \s@State{icount,ticks,cpu} (instruction,n) -> do
           let s1 = s { icount = icount + 1, ticks = ticks + fromIntegral n }
 
-          --when (icount > 40025) $ error "STOP"
+          when (icount > 42035) $ error "STOP"
 
           when traceOn $
             if splitTrace

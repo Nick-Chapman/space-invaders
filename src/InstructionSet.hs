@@ -48,6 +48,7 @@ data Op2
   | JNZ
   | CALL
   | LDA
+  | STA
   | LXI RegPair
   deriving (Eq,Ord,Show)
 
@@ -62,7 +63,7 @@ allOps = map Op0 allOp0 ++ map Op1 allOp1 ++ map Op2 allOp2
              ++ map INX rps1 ++ map DAD rps1 ++ map PUSH rps2 ++ map POP rps2
              ++ [ MOV dest src | dest <- regs7, src <- regs7 ]
     allOp1 = [CPI,OUT,ANI,ADI,MVI_M] ++ map MVI regs7
-    allOp2 = [JP,JNZ,CALL,LDA] ++ map LXI rps1
+    allOp2 = [JP,JNZ,CALL,LDA,STA] ++ map LXI rps1
     regs7 = [A,B,C,D,E,H,L]
     rps1 = [BC,DE,HL,SP]
     rps2 = [BC,DE,HL,PSW]
@@ -107,7 +108,8 @@ prettyInstruction = \case
   Ins2 JP _ b1 b2 -> tag "JP" (show b2 <> show b1)
   Ins2 JNZ _ b1 b2 -> tag "JNZ" (show b2 <> show b1)
   Ins2 CALL _ b1 b2 -> tag "CALL" (show b2 <> show b1)
-  Ins2 LDA _ b1 b2 -> tag "LDA" ("("<> show b2 <> show b1 <> ")")
+  Ins2 LDA _ b1 b2 -> tag "LD" ("A,("<> show b2 <> show b1 <> ")")
+  Ins2 STA _ b1 b2 -> tag "LD" ("("<> show b2 <> show b1 <> "),A")
   Ins2 (LXI rp) _ b1 b2 -> tag "LD" (show rp <> "," <> show b2 <> show b1)
   where
     tag s more = ljust 5 s <> more
@@ -156,6 +158,7 @@ encode = \case
   Op2 JNZ -> 0xC2
   Op2 CALL -> 0xCD
   Op2 LDA -> 0x3A
+  Op2 STA -> 0x32
   Op2 (LXI rp) -> Byte (16 * encodeRegPair rp + 0x1)
 
 encodeReg7 :: Reg -> Word8

@@ -120,7 +120,7 @@ emulate traceOn mem0 = run (state0 mem0) theSemantics $ \_ -> return
         run s eff $ \s@State{icount,ticks,cpu} (instruction,n) -> do
           let s1 = s { icount = icount + 1, ticks = ticks + fromIntegral n }
 
-          when (icount > 42050) $ error "STOP"
+          when (icount > 42055) $ error "STOP"
 
           when traceOn $
             if splitTrace

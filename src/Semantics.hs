@@ -144,6 +144,15 @@ execute0 = \case
     SetFlag Z z
     -- TODO: set more flags
     return (Next 4)
+  ANA reg -> do
+    v1 <- GetReg reg
+    v2 <- GetReg A
+    v' <- AndB v1 v2
+    SetReg reg v'
+    z <- IsZero v'
+    SetFlag Z z
+    -- TODO: set more flags
+    return (Next 4)
 
 execute1 :: Op1 -> Byte p -> Eff p (Flow p)
 execute1 op1 b1 = case op1 of

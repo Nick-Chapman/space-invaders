@@ -9,6 +9,7 @@ module Cpu (
 
 import Prelude hiding (init)
 import HiLo (HiLo(..))
+import Phase (Byte)
 
 data Reg = PCH | PCL | SPH | SPL | A | B | C | D | E | H | L | FLAGS
   deriving (Eq,Ord,Show)
@@ -24,23 +25,23 @@ expandRegPair = \case
   SP -> HiLo {hi = SPH, lo = SPL}
   PSW -> HiLo {hi = A, lo = FLAGS}
 
-data Cpu b = Cpu
-  { pch :: b
-  , pcl :: b
-  , sph :: b
-  , spl :: b
-  , regA :: b
-  , regB :: b
-  , regC :: b
-  , regD :: b
-  , regE :: b
-  , regH :: b
-  , regL :: b
-  , flagZ :: b -- The byte which should be tested against zero
-  , regFlags :: b
+data Cpu p = Cpu
+  { pch :: Byte p
+  , pcl :: Byte p
+  , sph :: Byte p
+  , spl :: Byte p
+  , regA :: Byte p
+  , regB :: Byte p
+  , regC :: Byte p
+  , regD :: Byte p
+  , regE :: Byte p
+  , regH :: Byte p
+  , regL :: Byte p
+  , flagZ :: Byte p -- The byte which should be tested against zero
+  , regFlags :: Byte p
   }
 
-instance Show b => Show (Cpu b) where
+instance Show (Byte p) => Show (Cpu p) where
   show Cpu{pch,pcl,sph,spl,regA,regB,regC,regD,regE,regH,regL,regFlags} = unwords
     [ name <> ":" <> v
     | (name,v) <-
@@ -56,21 +57,21 @@ instance Show b => Show (Cpu b) where
       ]
     ]
 
-init :: b -> Cpu b
+init :: Byte p -> Cpu p
 init b = Cpu { pch = b, pcl = b, sph = b, spl = b
              , regA = b, regB = b, regC = b, regD = b, regE = b, regH = b, regL = b
              , flagZ = b
              , regFlags = b
              }
 
-getFlagZ :: Cpu b -> b
+getFlagZ :: Cpu p -> Byte p
 getFlagZ Cpu{flagZ} = flagZ
 
-setFlagZ :: Cpu b -> b -> Cpu b
+setFlagZ :: Cpu p -> Byte p -> Cpu p
 setFlagZ cpu b = cpu { flagZ = b }
 
 
-get :: Cpu b -> Reg -> b
+get :: Cpu p -> Reg -> Byte p
 get Cpu{pch,pcl,sph,spl,regA,regB,regC,regD,regE,regH,regL,regFlags} = \case
   PCH -> pch
   PCL -> pcl
@@ -85,7 +86,7 @@ get Cpu{pch,pcl,sph,spl,regA,regB,regC,regD,regE,regH,regL,regFlags} = \case
   L -> regL
   FLAGS -> regFlags
 
-set :: Cpu b -> Reg -> b -> Cpu b
+set :: Cpu p -> Reg -> Byte p -> Cpu p
 set cpu r x = case r of
   PCH -> cpu { pch = x}
   PCL -> cpu { pcl = x }

@@ -145,7 +145,7 @@ data State = State
   { ticks :: Ticks -- cycle count
   , icount :: Int -- instruction count
   , fcount :: Int -- frame count
-  , cpu :: Cpu Byte
+  , cpu :: Cpu EmuTime
   , mem :: Mem
   }
 

@@ -37,7 +37,8 @@ default-extensions:
 - ScopedTypeVariables
 - TypeApplications
 - TypeFamilies
-
+- FlexibleContexts
+- UndecidableInstances
 
 ghc-options:
 - -Werror

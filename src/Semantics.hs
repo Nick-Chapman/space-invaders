@@ -149,6 +149,15 @@ execute0 = \case
     SetFlag Z z
     -- TODO: set more flags
     return (Next 5)
+  DCR_M -> do
+    a <- getRegPair HL
+    v <- ReadMem a
+    v' <- Decrement v
+    WriteMem a v'
+    z <- IsZero v'
+    SetFlag Z z
+    -- TODO: set more flags
+    return (Next 10)
   XRA reg -> do
     v1 <- GetReg reg
     v2 <- GetReg A

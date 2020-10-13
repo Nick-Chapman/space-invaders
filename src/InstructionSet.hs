@@ -28,6 +28,7 @@ data Op0
   | MOV_M_A
   | MOV_rM Reg
   | DCR Reg
+  | DCR_M
   | XRA Reg
   | ANA Reg
   | MOV Reg Reg
@@ -61,7 +62,7 @@ allOps = map Op0 allOp0 ++ map Op1 allOp1 ++ map Op2 allOp2
   where
     allOp0 = [NOP,LDAX_D
              ,MOV_M_A
-             ,RET,RRC,EI,XCHG]
+             ,RET,RRC,EI,XCHG,DCR_M]
              ++ map MOV_rM regs7
              ++ map DCR regs7
              ++ map XRA regs7
@@ -102,6 +103,7 @@ prettyInstruction = \case
   Ins0 MOV_M_A _ -> tag "LD" "(HL),A"
   Ins0 (MOV_rM reg) _ -> tag "LD" (show reg <> ",(HL)")
   Ins0 (DCR reg) _ -> tag "DEC" (show reg)
+  Ins0 DCR_M _ -> tag "DEC" "(HL)"
   Ins0 (XRA reg) _ -> tag "XOR" (show reg)
   Ins0 (ANA reg) _ -> tag "AND" (show reg)
   Ins0 (MOV dest src) _ -> tag "LD" (show dest <> "," <> show src)
@@ -154,6 +156,7 @@ encode = \case
   Op0 MOV_M_A -> 0x77 -- TODO: gen
   Op0 (MOV_rM reg) -> Byte (8 * encodeReg7 reg + 0x46)
   Op0 (DCR reg) -> Byte (8 * encodeReg7 reg + 0x05)
+  Op0 DCR_M -> 0x35
   Op0 (XRA reg) -> Byte (encodeReg7 reg + 0xA8)
   Op0 (ANA reg) -> Byte (encodeReg7 reg + 0xA0)
   Op0 (MOV dest src) -> Byte (0x40 + 8 * encodeReg7 dest + encodeReg7 src)

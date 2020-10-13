@@ -34,7 +34,8 @@ data Cpu p = Cpu
   }
 
 instance (Show (Bit p), Show (Byte p)) => Show (Cpu p) where
-  show cpu@Cpu{pch,pcl,sph,spl,regA,regB,regC,regD,regE,regH,regL} = unwords
+  show Cpu{pch,pcl,sph,spl,regA,regB,regC,regD,regE,regH,regL
+          ,flagZ,flagCY} = unwords
     [ name <> ":" <> v
     | (name,v) <-
       [ ("PC",show pch <> show pcl)
@@ -45,12 +46,10 @@ instance (Show (Bit p), Show (Byte p)) => Show (Cpu p) where
       , ("E", show regE)
       , ("HL", show regH <> show regL)
       , ("SP", show sph <> show spl)
-      , ("FLAGS", seeFlags cpu)
+      , ("Z", show flagZ)
+      , ("CY", show flagCY)
       ]
     ]
-
-seeFlags :: Show (Bit p) => Cpu p -> String
-seeFlags Cpu{flagCY} = "0" <> show flagCY -- TODO: show all flags
 
 
 init :: Byte p -> Bit p -> Cpu p

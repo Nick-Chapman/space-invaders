@@ -3,7 +3,7 @@
 
 module Semantics (setPC,fetchDecodeExec) where
 
-import Cpu (Reg(..),RegPair(..),expandRegPair)
+import Cpu (Reg(..),RegPair(..),Flag(..))
 import Effect (Eff(..))
 import HiLo (HiLo(..))
 import InstructionSet (Op(..),Instruction(..),Op0(..),Op1(..),Op2(..))
@@ -64,10 +64,10 @@ execute0 = \case
     return (Jump 10 dest)
   RRC -> do
     byte <- GetReg A
-    bool <- GetFlagCY
+    bool <- GetFlag CY
     (byte',bool') <- RotateRight (bool,byte)
+    SetFlag CY bool'
     SetReg A byte'
-    SetFlagCY bool'
     return (Next 4)
   EI -> do
     EnableInterrupts
@@ -107,18 +107,18 @@ execute0 = \case
     setRegPair rp a'
     return (Next 5)
   PUSH rp -> do
-    let HiLo{hi=rh, lo=rl} = expandRegPair rp
-    hi <- GetReg rh
-    lo <- GetReg rl
+    let HiLo{hi=rh, lo=rl} = expandRegPairX rp
+    hi <- getRegX rh
+    lo <- getRegX rl
     pushStack hi
     pushStack lo
     return (Next 11)
   POP rp -> do
-    let HiLo{hi=rh, lo=rl} = expandRegPair rp
     lo <- popStack
     hi <- popStack
-    SetReg rh hi
-    SetReg rl lo
+    let HiLo{hi=rh, lo=rl} = expandRegPairX rp
+    setRegX rh hi
+    setRegX rl lo
     return (Next 10)
   DAD rp -> do
     w1 <- getRegPair rp
@@ -131,7 +131,8 @@ execute0 = \case
     v <- GetReg reg
     v' <- Decrement v -- TODO: this is modulus; is that correct?
     SetReg reg v'
-    SetFlagZ v'
+    z <- IsZero v'
+    SetFlag Z z
     -- TODO: set more flags
     return (Next 5)
   XRA reg -> do
@@ -139,10 +140,10 @@ execute0 = \case
     v2 <- GetReg A
     v' <- XorB v1 v2
     SetReg reg v'
-    SetFlagZ v'
+    z <- IsZero v'
+    SetFlag Z z
     -- TODO: set more flags
     return (Next 4)
-
 
 execute1 :: Op1 -> Byte p -> Eff p (Flow p)
 execute1 op1 b1 = case op1 of
@@ -156,7 +157,8 @@ execute1 op1 b1 = case op1 of
   CPI -> do
     b <- GetReg A
     v <- SubtractB b b1
-    SetFlagZ v
+    z <- IsZero v
+    SetFlag Z z
     -- TODO: set all flags
     return (Next 7)
   OUT -> do
@@ -176,13 +178,16 @@ execute1 op1 b1 = case op1 of
     -- TODO: set all flags
     return (Next 7)
 
+testFlagZ :: Eff p Bool
+testFlagZ = GetFlag Z >>= TestBit
+
 execute2 :: Op2 -> (Byte p, Byte p) -> Eff p (Flow p)
 execute2 op2 (lo,hi) = case op2 of
   JP -> do
     dest <- MakeAddr $ HiLo{hi,lo}
     return (Jump 10 dest)
   JNZ -> do
-    TestFlagZ >>= \case
+    testFlagZ >>= \case
       True -> return (Next 10)
       False -> do
         dest <- MakeAddr $ HiLo{hi,lo}
@@ -247,3 +252,38 @@ setRegPair rp a = do
   HiLo{hi,lo} <- SplitAddr a
   SetReg rh hi
   SetReg rl lo
+
+expandRegPair :: RegPair -> HiLo Reg
+expandRegPair = \case
+  BC -> HiLo {hi = B, lo = C}
+  DE -> HiLo {hi = D, lo = E}
+  HL -> HiLo {hi = H, lo = L}
+  SP -> HiLo {hi = SPH, lo = SPL}
+  PSW -> undefined
+
+data RegX = NormalReg Reg | FlagsReg
+
+expandRegPairX :: RegPair -> HiLo RegX -- for push/pop
+expandRegPairX = \case
+  BC -> HiLo {hi = r B, lo = r C}
+  DE -> HiLo {hi = r D, lo = r E}
+  HL -> HiLo {hi = r H, lo = r L}
+  SP -> undefined -- HiLo {hi = r SPH, lo = r SPL}
+  PSW -> HiLo {hi = r A, lo = FlagsReg}
+  where r = NormalReg
+
+setRegX :: RegX -> Byte p -> Eff p ()
+setRegX r v = case r of
+  NormalReg reg -> SetReg reg v
+  FlagsReg -> do
+    -- Also do the rest of the flags we care about -- Z
+    cy <- SelectBit0 v
+    SetFlag CY cy
+
+getRegX :: RegX -> Eff p (Byte p)
+getRegX r = case r of
+  NormalReg reg -> GetReg reg
+  FlagsReg -> do
+    -- Also do the rest of the flags we care about -- Z
+    cy <- GetFlag CY
+    ByteFromBit0 cy

@@ -1,29 +1,21 @@
 
 module Cpu (
-  Cpu,Reg(..),RegPair(..),
-  expandRegPair,
+  Cpu,Reg(..),RegPair(..),Flag(..),
   init,
   get,set,
-  getFlagZ,setFlagZ,
+  getFlag,setFlag,
   ) where
 
 import Prelude hiding (init)
-import HiLo (HiLo(..))
-import Phase (Byte)
+import Phase (Byte,Bit)
 
-data Reg = PCH | PCL | SPH | SPL | A | B | C | D | E | H | L | FLAGS
+data Reg = PCH | PCL | SPH | SPL | A | B | C | D | E | H | L
   deriving (Eq,Ord,Show)
 
 data RegPair = BC | DE | HL | SP | PSW
   deriving (Eq,Ord,Show)
 
-expandRegPair :: RegPair -> HiLo Reg
-expandRegPair = \case
-  BC -> HiLo {hi = B, lo = C}
-  DE -> HiLo {hi = D, lo = E}
-  HL -> HiLo {hi = H, lo = L}
-  SP -> HiLo {hi = SPH, lo = SPL}
-  PSW -> HiLo {hi = A, lo = FLAGS}
+data Flag = Z | CY
 
 data Cpu p = Cpu
   { pch :: Byte p
@@ -37,12 +29,12 @@ data Cpu p = Cpu
   , regE :: Byte p
   , regH :: Byte p
   , regL :: Byte p
-  , flagZ :: Byte p -- The byte which should be tested against zero
-  , regFlags :: Byte p
+  , flagZ :: Bit p
+  , flagCY :: Bit p
   }
 
-instance Show (Byte p) => Show (Cpu p) where
-  show Cpu{pch,pcl,sph,spl,regA,regB,regC,regD,regE,regH,regL,regFlags} = unwords
+instance (Show (Bit p), Show (Byte p)) => Show (Cpu p) where
+  show cpu@Cpu{pch,pcl,sph,spl,regA,regB,regC,regD,regE,regH,regL} = unwords
     [ name <> ":" <> v
     | (name,v) <-
       [ ("PC",show pch <> show pcl)
@@ -53,26 +45,35 @@ instance Show (Byte p) => Show (Cpu p) where
       , ("E", show regE)
       , ("HL", show regH <> show regL)
       , ("SP", show sph <> show spl)
-      , ("FLAGS", show regFlags)
+      , ("FLAGS", seeFlags cpu)
       ]
     ]
 
-init :: Byte p -> Cpu p
-init b = Cpu { pch = b, pcl = b, sph = b, spl = b
-             , regA = b, regB = b, regC = b, regD = b, regE = b, regH = b, regL = b
-             , flagZ = b
-             , regFlags = b
-             }
+seeFlags :: Show (Bit p) => Cpu p -> String
+seeFlags Cpu{flagCY} = "0" <> show flagCY -- TODO: show all flags
 
-getFlagZ :: Cpu p -> Byte p
-getFlagZ Cpu{flagZ} = flagZ
 
-setFlagZ :: Cpu p -> Byte p -> Cpu p
-setFlagZ cpu b = cpu { flagZ = b }
+init :: Byte p -> Bit p -> Cpu p
+init b bit0 =
+  Cpu { pch = b, pcl = b, sph = b, spl = b
+      , regA = b, regB = b, regC = b, regD = b, regE = b, regH = b, regL = b
+      , flagZ = bit0, flagCY = bit0
+      }
+
+
+getFlag :: Cpu p -> Flag -> Bit p
+getFlag Cpu{flagZ,flagCY} = \case
+  Z -> flagZ
+  CY -> flagCY
+
+setFlag :: Cpu p -> Flag -> Bit p -> Cpu p
+setFlag cpu flag x = case flag of
+  Z -> cpu { flagZ = x }
+  CY -> cpu { flagCY = x }
 
 
 get :: Cpu p -> Reg -> Byte p
-get Cpu{pch,pcl,sph,spl,regA,regB,regC,regD,regE,regH,regL,regFlags} = \case
+get Cpu{pch,pcl,sph,spl,regA,regB,regC,regD,regE,regH,regL} = \case
   PCH -> pch
   PCL -> pcl
   SPH -> sph
@@ -84,7 +85,6 @@ get Cpu{pch,pcl,sph,spl,regA,regB,regC,regD,regE,regH,regL,regFlags} = \case
   E -> regE
   H -> regH
   L -> regL
-  FLAGS -> regFlags
 
 set :: Cpu p -> Reg -> Byte p -> Cpu p
 set cpu r x = case r of
@@ -99,4 +99,3 @@ set cpu r x = case r of
   E -> cpu { regE = x }
   H -> cpu { regH = x }
   L -> cpu { regL = x }
-  FLAGS -> cpu { regFlags = x }

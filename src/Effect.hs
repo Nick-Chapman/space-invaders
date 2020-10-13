@@ -2,7 +2,7 @@
 module Effect (Eff(..)) where
 
 import Control.Monad (ap,liftM)
-import Cpu (Reg(..))
+import Cpu (Reg,Flag)
 import HiLo (HiLo(..))
 import Phase (Byte,Addr,Bit) --,Ticks)
 import InstructionSet (Op,Instruction)
@@ -28,11 +28,15 @@ data Eff p a where
   XorB :: Byte p -> Byte p -> Eff p (Byte p)
   Add16 :: Addr p -> Addr p -> Eff p (Addr p)
 
-  SetFlagZ :: Byte p -> Eff p ()
-  TestFlagZ :: Eff p Bool
+  -- TODO: gen, at least to bit 0 and bit 7
+  SelectBit0 :: Byte p -> Eff p (Bit p)
+  ByteFromBit0 :: Bit p -> Eff p (Byte p)
 
-  GetFlagCY :: Eff p (Bit p)
-  SetFlagCY :: Bit p-> Eff p ()
+  GetFlag :: Flag -> Eff p (Bit p)
+  SetFlag :: Flag -> Bit p -> Eff p ()
+  IsZero :: Byte p -> Eff p (Bit p)
+  TestBit :: Bit p -> Eff p Bool
+
   RotateRight :: (Bit p,Byte p) -> Eff p (Byte p,Bit p)
 
   -- Advance :: Int -> Eff p ()

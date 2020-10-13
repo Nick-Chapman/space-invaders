@@ -15,7 +15,7 @@ import Mem (Mem)
 import Phase (Phase)
 import Text.Printf (printf)
 import qualified Addr (fromHiLo,toHiLo,bump,add)
-import qualified Cpu (init,get,set,getFlagZ,setFlagZ)
+import qualified Cpu (init,get,set,getFlag,setFlag)
 import qualified Mem (read,write)
 import qualified Phase (Byte,Addr,Ticks,Bit)
 
@@ -32,7 +32,13 @@ instance Phase EmuTime where
   type Byte EmuTime = Byte
   type Addr EmuTime = Addr
   type Ticks EmuTime = Ticks
-  type Bit EmuTime = Bool
+  type Bit EmuTime = Bit
+
+
+newtype Bit = Bit Bool
+
+instance Show Bit where show (Bit b) = if b then "1" else "0"
+
 
 startAddr :: Addr
 startAddr = Addr.fromHiLo $ HiLo { hi = Byte 0, lo = Byte 0 }
@@ -83,29 +89,17 @@ emulate traceOn mem0 = run (state0 mem0) theSemantics $ \_ -> return
       -- Word (Address) ops
       Add16 a1 a2 -> k s (Addr.add a1 a2) -- TODO: dont loose carry
 
-      SetFlagZ b -> k s { cpu = Cpu.setFlagZ cpu b } ()
-      TestFlagZ -> do
-        let z = Cpu.getFlagZ cpu
-        let pred = (z == 0)
-        --putStrLn $ "- TestFlagZ (" <> show z <> ") -> " <> show pred
-        k s pred
+      SelectBit0 byte -> k s (Bit (byte `testBit` 0))
+      ByteFromBit0 (Bit b) -> k s (if b then 1 else 0)
+      GetFlag flag -> k s (Cpu.getFlag cpu flag)
+      SetFlag flag bit -> k s { cpu = Cpu.setFlag cpu flag bit} ()
+      IsZero byte -> k s (Bit (byte == 0))
+      TestBit (Bit bool) -> k s bool
 
-      --Now{} -> k s ticks
-
-      GetFlagCY -> do
-        let flags = Cpu.get cpu FLAGS
-        let bit = flags `testBit` 0 -- TODO: make enum for flags->bit-pos mapping
-        k s bit
-
-      SetFlagCY bit -> do
-        let flags = Cpu.get cpu FLAGS
-        let flags' =  (if bit then setBit else clearBit) flags 0
-        k s { cpu = Cpu.set cpu FLAGS flags' } ()
-
-      RotateRight (bit,byte) -> do
+      RotateRight (Bit bit,byte) -> do
         let bit' = byte `testBit` 0
         let byte' = (if bit then 128 else 0) + shiftR byte 1
-        k s (byte',bit')
+        k s (byte',Bit bit')
 
       Out port byte -> do
         let _ = putStrLn $ show ("OUT",port,byte)
@@ -114,6 +108,8 @@ emulate traceOn mem0 = run (state0 mem0) theSemantics $ \_ -> return
       EnableInterrupts -> do
         -- TODO: add bit in cpu to record enabled/disabled status
         k s ()
+
+      --Now{} -> k s ticks
 
       InstructionCycle eff -> do
         let s0 = s
@@ -154,7 +150,7 @@ state0 mem = State
   { ticks = 0
   , icount = 0
   , fcount = 0
-  , cpu = Cpu.init (Byte 0)
+  , cpu = Cpu.init (Byte 0) (Bit False)
   , mem
   }
 

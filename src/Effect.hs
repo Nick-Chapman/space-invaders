@@ -41,6 +41,7 @@ data Eff p a where
   RotateRight :: (Bit p,Byte p) -> Eff p (Byte p,Bit p)
 
   Out :: Byte p -> Byte p -> Eff p ()
+  In :: Byte p -> Eff p (Byte p)
 
   EnableInterrupts :: Eff p ()
   DisableInterrupts :: Eff p ()

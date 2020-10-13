@@ -204,6 +204,10 @@ execute1 op1 b1 = case op1 of
     value <- GetReg A
     Out b1 value
     return (Next 10)
+  IN -> do
+    value <- In b1
+    SetReg A value
+    return (Next 10)
   ANI -> do
     value <- GetReg A
     value' <- AndB b1 value

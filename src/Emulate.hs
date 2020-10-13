@@ -106,6 +106,11 @@ emulate traceOn mem0 = run (state0 mem0) theSemantics $ \_ -> return
         let _ = putStrLn $ show ("OUT",port,byte)
         k s ()
 
+      In port -> do
+        let byte = 0x0
+        let _ = putStrLn $ show ("IN",port,byte)
+        k s byte
+
       EnableInterrupts -> k s { interrupts_enabled = True } ()
       DisableInterrupts -> k s { interrupts_enabled = False } ()
       AreInterruptsEnabled -> k s (interrupts_enabled s)

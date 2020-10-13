@@ -25,6 +25,7 @@ data Op0
   | RNZ
   | RRC
   | EI
+  | STC
   | XCHG
   | LDAX_B
   | LDAX_D
@@ -68,7 +69,7 @@ allOps = map Op0 allOp0 ++ map Op1 allOp1 ++ map Op2 allOp2
   where
     allOp0 = [NOP,LDAX_B,LDAX_D
              ,MOV_M_A
-             ,RET,RZ,RNZ,RRC,EI,XCHG,DCR_M]
+             ,RET,RZ,RNZ,RRC,EI,STC,XCHG,DCR_M]
              ++ map MOV_rM regs7
              ++ map DCR regs7
              ++ map XRA regs7
@@ -106,6 +107,7 @@ prettyInstruction = \case
   Ins0 RNZ _ -> tag "RET" "NZ"
   Ins0 RRC _ -> "RRCA"
   Ins0 EI _ -> "EI"
+  Ins0 STC _ -> "SCF"
   Ins0 XCHG _ -> tag "EX" "DE,HL"
   Ins0 LDAX_B _ -> tag "LD" "A,(BC)"
   Ins0 LDAX_D _ -> tag "LD" "A,(DE)"
@@ -165,6 +167,7 @@ encode = \case
   Op0 RNZ -> 0xC0
   Op0 RRC -> 0x0F
   Op0 EI -> 0xFB
+  Op0 STC -> 0x37
   Op0 XCHG -> 0xEB
   Op0 LDAX_B -> 0x0A
   Op0 LDAX_D -> 0x1A

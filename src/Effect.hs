@@ -37,6 +37,7 @@ data Eff p a where
   SetFlag :: Flag -> Bit p -> Eff p ()
   IsZero :: Byte p -> Eff p (Bit p)
   TestBit :: Bit p -> Eff p Bool
+  MakeBit :: Bool -> Eff p (Bit p)
 
   RotateRight :: (Bit p,Byte p) -> Eff p (Byte p,Bit p)
 

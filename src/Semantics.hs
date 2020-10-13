@@ -102,6 +102,10 @@ execute0 = \case
   EI -> do
     EnableInterrupts
     return (Next 4)
+  STC -> do
+    bit <- MakeBit True
+    SetFlag CY bit
+    return (Next 4)
   XCHG -> do
     d <- GetReg D
     e <- GetReg E

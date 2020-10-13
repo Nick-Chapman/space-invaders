@@ -96,6 +96,7 @@ emulate traceOn mem0 = run (state0 mem0) theSemantics $ \_ -> return
       SetFlag flag bit -> k s { cpu = Cpu.setFlag cpu flag bit} ()
       IsZero byte -> k s (Bit (byte == 0))
       TestBit (Bit bool) -> k s bool
+      MakeBit (bool) -> k s (Bit bool)
 
       RotateRight (Bit bit,byte) -> do
         let bit' = byte `testBit` 0

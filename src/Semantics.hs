@@ -158,39 +158,31 @@ execute0 = \case
     -- TODO: set carry flag
     return (Next 11)
   DCR reg -> do
-    v <- GetReg reg
-    v' <- Decrement v -- TODO: this is modulus; is that correct?
-    SetReg reg v'
-    z <- IsZero v'
-    SetFlag Z z
-    -- TODO: set more flags
+    v0 <- GetReg reg
+    v <- Decrement v0
+    SetReg reg v
+    setFlagsFrom v
     return (Next 5)
   DCR_M -> do
     a <- getRegPair HL
-    v <- ReadMem a
-    v' <- Decrement v
-    WriteMem a v'
-    z <- IsZero v'
-    SetFlag Z z
-    -- TODO: set more flags
+    v0 <- ReadMem a
+    v <- Decrement v0
+    WriteMem a v
+    setFlagsFrom v
     return (Next 10)
   XRA reg -> do
     v1 <- GetReg reg
     v2 <- GetReg A
-    v' <- XorB v1 v2
-    SetReg reg v'
-    z <- IsZero v'
-    SetFlag Z z
-    -- TODO: set more flags
+    v <- XorB v1 v2
+    SetReg reg v
+    setFlagsFrom v
     return (Next 4)
   ANA reg -> do
     v1 <- GetReg reg
     v2 <- GetReg A
-    v' <- AndB v1 v2
-    SetReg reg v'
-    z <- IsZero v'
-    SetFlag Z z
-    -- TODO: set more flags
+    v <- AndB v1 v2
+    SetReg reg v
+    setFlagsFrom v
     return (Next 4)
   RST w -> do
     GetReg PCH >>= pushStack
@@ -212,9 +204,7 @@ execute1 op1 b1 = case op1 of
   CPI -> do
     b <- GetReg A
     v <- SubtractB b b1
-    z <- IsZero v
-    SetFlag Z z
-    -- TODO: set all flags
+    setFlagsFrom v
     return (Next 7)
   OUT -> do
     value <- GetReg A
@@ -225,10 +215,10 @@ execute1 op1 b1 = case op1 of
     SetReg A value
     return (Next 10)
   ANI -> do
-    value <- GetReg A
-    value' <- AndB b1 value
-    SetReg A value'
-    -- TODO: set all flags
+    v0 <- GetReg A
+    v <- AndB b1 v0
+    SetReg A v
+    setFlagsFrom v
     return (Next 7)
   ADI -> do
     value <- GetReg A
@@ -236,6 +226,13 @@ execute1 op1 b1 = case op1 of
     SetReg A value'
     -- TODO: set all flags
     return (Next 7)
+
+
+setFlagsFrom :: Byte p -> Eff p ()
+setFlagsFrom value = do
+  z <- IsZero value
+  SetFlag Z z
+  -- TODO: set more flags
 
 testFlagZ :: Eff p Bool
 testFlagZ = GetFlag Z >>= TestBit

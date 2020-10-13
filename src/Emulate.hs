@@ -21,7 +21,7 @@ import qualified Phase (Byte,Addr,Ticks,Bit)
 
 
 -- | Ticks of the 2 MHz clock
-newtype Ticks = Ticks { unTicks :: Int } deriving (Num)
+newtype Ticks = Ticks { unTicks :: Int } deriving (Eq,Ord,Num)
 
 instance Show Ticks where show = printf "[%6d]" . unTicks
 
@@ -79,6 +79,7 @@ emulate traceOn mem0 = run (state0 mem0) theSemantics $ \_ -> return
             putStrLn (prettyTicks s <> " " <> show pc <> " : " <> show byte)
             error $ "Decode: " <> show byte
 
+      MakeByte w -> k s (Byte w)
       -- Byte ops
       Decrement b -> k s (b - 1)
       AddB b1 b2 -> k s (b1 + b2)
@@ -105,11 +106,13 @@ emulate traceOn mem0 = run (state0 mem0) theSemantics $ \_ -> return
         let _ = putStrLn $ show ("OUT",port,byte)
         k s ()
 
-      EnableInterrupts -> do
-        -- TODO: add bit in cpu to record enabled/disabled status
-        k s ()
-
-      --Now{} -> k s ticks
+      EnableInterrupts -> k s { interrupts_enabled = True } ()
+      DisableInterrupts -> k s { interrupts_enabled = False } ()
+      AreInterruptsEnabled -> k s (interrupts_enabled s)
+      TimeToWakeup -> case timeToWakeup s of
+        Nothing -> k s False
+        Just s -> k s True
+      GetInterruptInstruction -> k s (interruptInstruction s)
 
       InstructionCycle eff -> do
         let s0 = s
@@ -120,7 +123,7 @@ emulate traceOn mem0 = run (state0 mem0) theSemantics $ \_ -> return
         run s eff $ \s@State{icount,ticks,cpu} (instruction,n) -> do
           let s1 = s { icount = icount + 1, ticks = ticks + fromIntegral n }
 
-          when (icount > 42055) $ error "STOP"
+          when (icount > 50000) $ error "STOP"
 
           when traceOn $
             if splitTrace
@@ -134,6 +137,7 @@ emulate traceOn mem0 = run (state0 mem0) theSemantics $ \_ -> return
               splitTrace = False
               cpuCol = 60
 
+
 ljust :: Int -> String -> String
 ljust n s = s <> take (max 0 (n - length s)) (repeat ' ')
 
@@ -143,6 +147,8 @@ data State = State
   , fcount :: Int -- frame count
   , cpu :: Cpu EmuTime
   , mem :: Mem
+  , interrupts_enabled :: Bool
+  , nextWakeup :: Ticks
   }
 
 state0 :: Mem -> State
@@ -152,7 +158,28 @@ state0 mem = State
   , fcount = 0
   , cpu = Cpu.init (Byte 0) (Bit False)
   , mem
+  , interrupts_enabled = False
+  , nextWakeup = halfFrameTicks
   }
+
+
+halfFrameTicks :: Ticks
+halfFrameTicks = Ticks (2000000 `div` 120)
+
+interruptInstruction :: State -> Byte
+interruptInstruction State{ticks} = do
+  let mid = (unTicks ticks `mod` unTicks halfFrameTicks) `mod` 2 == 1
+  if mid then 0xCF else 0xD7
+
+timeToWakeup :: State -> Maybe State
+timeToWakeup s@State{ticks,nextWakeup} = do
+  if ticks < nextWakeup
+    then Nothing
+    else do
+    Just s { nextWakeup =
+             Ticks ((unTicks ticks `div` unTicks halfFrameTicks) + 1) * halfFrameTicks
+           }
+
 
 programCounter :: State -> Addr
 programCounter State{cpu} = do

@@ -15,7 +15,7 @@ fetchDecodeExec :: Eff p ()
 fetchDecodeExec = do
   InstructionCycle $ do
     pc <- getPC
-    byte <- fetch
+    byte <- fetchOrHandleInterrupt
     op <- Decode (pc, byte) -- Pass pc to decode for improved error messages
     instruction <- fetchImmediates byte op
     execute instruction >>= \case
@@ -26,6 +26,20 @@ fetchDecodeExec = do
         --Advance n;
         setPC a
         return (instruction,n)
+
+fetchOrHandleInterrupt :: Eff p (Byte p)
+fetchOrHandleInterrupt = do
+  processInterrupt >>= \case
+    False -> fetch
+    True -> do
+      DisableInterrupts
+      GetInterruptInstruction
+
+processInterrupt :: Eff p Bool
+processInterrupt = do
+  isTime <- TimeToWakeup
+  enabled <- AreInterruptsEnabled
+  return (isTime && enabled)
 
 fetch :: Eff p (Byte p) -- fetch byte at PC, and increment PC
 fetch = do
@@ -153,6 +167,13 @@ execute0 = \case
     SetFlag Z z
     -- TODO: set more flags
     return (Next 4)
+  RST w -> do
+    GetReg PCH >>= pushStack
+    GetReg PCL >>= pushStack
+    hi <- MakeByte 0
+    lo <- MakeByte (8*w)
+    dest <- MakeAddr $ HiLo{hi,lo}
+    return (Jump 4 dest)
 
 execute1 :: Op1 -> Byte p -> Eff p (Flow p)
 execute1 op1 b1 = case op1 of

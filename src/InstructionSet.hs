@@ -35,6 +35,7 @@ data Op0
   | PUSH RegPair
   | POP RegPair
   | DAD RegPair
+  | RST Word8 --(0..7)
   deriving (Eq,Ord,Show)
 
 data Op1
@@ -66,6 +67,7 @@ allOps = map Op0 allOp0 ++ map Op1 allOp1 ++ map Op2 allOp2
              ++ map XRA regs7
              ++ map ANA regs7
              ++ map INX rps1 ++ map DAD rps1 ++ map PUSH rps2 ++ map POP rps2
+             ++ map RST [0..7]
              ++ [ MOV dest src | dest <- regs7, src <- regs7 ]
     allOp1 = [CPI,OUT,ANI,ADI,MVI_M] ++ map MVI regs7
     allOp2 = [JP,JNZ,CALL,LDA,STA] ++ map LXI rps1
@@ -107,6 +109,7 @@ prettyInstruction = \case
   Ins0 (PUSH rp) _ -> tag "PUSH" (show rp)
   Ins0 (POP rp) _ -> tag "POP" (show rp)
   Ins0 (DAD rp) _ -> tag "ADD" ("HL," <> show rp)
+  Ins0 (RST n) _ -> tag "RST" (show n)
   Ins1 (MVI dest) _ b1 -> tag "LD" (show dest <> "," <> show b1)
   Ins1 MVI_M _ b1 -> tag "LD" ("(HL)" <> "," <> show b1)
   Ins1 CPI _ b1 -> tag "CP" (show b1)
@@ -158,6 +161,7 @@ encode = \case
   Op0 (PUSH rp) -> Byte (16 * encodeRegPair rp + 0xC5)
   Op0 (POP rp) -> Byte (16 * encodeRegPair rp + 0xC1)
   Op0 (DAD rp) -> Byte (16 * encodeRegPair rp + 0x9)
+  Op0 (RST n) -> Byte (8 * fromIntegral n + 0xC7)
   Op1 (MVI dest) -> Byte (8 * encodeReg7 dest + 0x06)
   Op1 MVI_M -> 0x36
   Op1 CPI -> 0xFE

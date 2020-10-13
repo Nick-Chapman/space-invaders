@@ -3,8 +3,9 @@ module Effect (Eff(..)) where
 
 import Control.Monad (ap,liftM)
 import Cpu (Reg,Flag)
+import Data.Word8 (Word8)
 import HiLo (HiLo(..))
-import Phase (Byte,Addr,Bit) --,Ticks)
+import Phase (Byte,Addr,Bit)
 import InstructionSet (Op,Instruction)
 
 -- | The Effect type, constructed when executing instructions
@@ -22,6 +23,7 @@ data Eff p a where
   Decode :: (Addr p, Byte p) -> Eff p Op
   Decrement :: Byte p -> Eff p (Byte p)
 
+  MakeByte :: Word8 -> Eff p (Byte p)
   AddB :: Byte p -> Byte p -> Eff p (Byte p)
   SubtractB :: Byte p -> Byte p -> Eff p (Byte p)
   AndB :: Byte p -> Byte p -> Eff p (Byte p)
@@ -38,10 +40,14 @@ data Eff p a where
 
   RotateRight :: (Bit p,Byte p) -> Eff p (Byte p,Bit p)
 
-  -- Advance :: Int -> Eff p ()
-  -- Now :: Eff p (Ticks p)
   Out :: Byte p -> Byte p -> Eff p ()
+
   EnableInterrupts :: Eff p ()
+  DisableInterrupts :: Eff p ()
+  AreInterruptsEnabled :: Eff p Bool
+  TimeToWakeup :: Eff p Bool
+  GetInterruptInstruction :: Eff p (Byte p)
+
   InstructionCycle :: Eff p (Instruction (Byte p), Int) -> Eff p ()
 
 instance Functor (Eff p) where fmap = liftM

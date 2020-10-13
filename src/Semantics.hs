@@ -277,7 +277,8 @@ setRegX r v = case r of
   NormalReg reg -> SetReg reg v
   FlagsReg -> do
     -- Also do the rest of the flags we care about -- Z
-    cy <- SelectBit0 v
+    (z,cy) <- SelectBit70 v
+    SetFlag Z z
     SetFlag CY cy
 
 getRegX :: RegX -> Eff p (Byte p)
@@ -285,5 +286,6 @@ getRegX r = case r of
   NormalReg reg -> GetReg reg
   FlagsReg -> do
     -- Also do the rest of the flags we care about -- Z
+    z <- GetFlag Z
     cy <- GetFlag CY
-    ByteFromBit0 cy
+    ByteFromBit70 (z,cy)

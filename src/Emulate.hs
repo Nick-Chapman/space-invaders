@@ -89,8 +89,8 @@ emulate traceOn mem0 = run (state0 mem0) theSemantics $ \_ -> return
       -- Word (Address) ops
       Add16 a1 a2 -> k s (Addr.add a1 a2) -- TODO: dont loose carry
 
-      SelectBit0 byte -> k s (Bit (byte `testBit` 0))
-      ByteFromBit0 (Bit b) -> k s (if b then 1 else 0)
+      SelectBit70 byte -> k s (Bit (byte `testBit` 7), Bit (byte `testBit` 0))
+      ByteFromBit70 (Bit z, Bit cy) -> k s ((if z then 128 else 0) + (if cy then 1 else 0))
       GetFlag flag -> k s (Cpu.getFlag cpu flag)
       SetFlag flag bit -> k s { cpu = Cpu.setFlag cpu flag bit} ()
       IsZero byte -> k s (Bit (byte == 0))

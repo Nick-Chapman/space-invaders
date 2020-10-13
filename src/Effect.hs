@@ -28,9 +28,8 @@ data Eff p a where
   XorB :: Byte p -> Byte p -> Eff p (Byte p)
   Add16 :: Addr p -> Addr p -> Eff p (Addr p)
 
-  -- TODO: gen, at least to bit 0 and bit 7
-  SelectBit0 :: Byte p -> Eff p (Bit p)
-  ByteFromBit0 :: Bit p -> Eff p (Byte p)
+  SelectBit70 :: Byte p -> Eff p (Bit p, Bit p)
+  ByteFromBit70 :: (Bit p, Bit p) -> Eff p (Byte p)
 
   GetFlag :: Flag -> Eff p (Bit p)
   SetFlag :: Flag -> Bit p -> Eff p ()

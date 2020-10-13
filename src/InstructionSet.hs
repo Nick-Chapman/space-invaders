@@ -126,7 +126,7 @@ prettyInstruction = \case
   Ins1 ANI _ b1 -> tag "AND" (show b1)
   Ins1 ADI _ b1 -> tag "ADD" (show b1)
   Ins2 JP _ b1 b2 -> tag "JP" (show b2 <> show b1)
-  Ins2 JNZ _ b1 b2 -> tag "JNZ" (show b2 <> show b1)
+  Ins2 JNZ _ b1 b2 -> tag "JP" ("NZ," <> show b2 <> show b1)
   Ins2 JC _ b1 b2 -> tag "JP" ("C," <> show b2 <> show b1)
   Ins2 CALL _ b1 b2 -> tag "CALL" (show b2 <> show b1)
   Ins2 LDA _ b1 b2 -> tag "LD" ("A,("<> show b2 <> show b1 <> ")")

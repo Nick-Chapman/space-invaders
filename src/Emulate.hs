@@ -128,9 +128,9 @@ emulate traceOn mem0 = run (state0 mem0) theSemantics $ \_ -> return
         run s eff $ \s@State{icount,ticks,cpu} (instruction,n) -> do
           let s1 = s { icount = icount + 1, ticks = ticks + fromIntegral n }
 
-          when (icount > 50000) $ error "STOP"
 
-          when traceOn $
+          when traceOn $ do
+            when (icount > 50000) $ error "STOP"
             if splitTrace
             then putStrLn (prettyStep s0 instruction)
             else putStrLn (ljust cpuCol (prettyStep s0 instruction) ++ show cpu)

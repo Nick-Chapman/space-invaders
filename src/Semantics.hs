@@ -112,6 +112,11 @@ execute0 = \case
     SetReg H d
     SetReg L e
     return (Next 5)
+  LDAX_B -> do
+    a <- getRegPair BC
+    b <- ReadMem a
+    SetReg A b
+    return (Next 7)
   LDAX_D -> do
     a <- getRegPair DE
     b <- ReadMem a

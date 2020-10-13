@@ -237,6 +237,9 @@ setFlagsFrom value = do
 testFlagZ :: Eff p Bool
 testFlagZ = GetFlag Z >>= TestBit
 
+testFlagCY :: Eff p Bool
+testFlagCY = GetFlag CY >>= TestBit
+
 execute2 :: Op2 -> (Byte p, Byte p) -> Eff p (Flow p)
 execute2 op2 (lo,hi) = case op2 of
   JP -> do
@@ -246,6 +249,12 @@ execute2 op2 (lo,hi) = case op2 of
     testFlagZ >>= \case
       True -> return (Next 10)
       False -> do
+        dest <- MakeAddr $ HiLo{hi,lo}
+        return (Jump 10 dest)
+  JC -> do
+    testFlagCY >>= \case
+      False -> return (Next 10)
+      True -> do
         dest <- MakeAddr $ HiLo{hi,lo}
         return (Jump 10 dest)
   LXI rp -> do

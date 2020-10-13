@@ -54,6 +54,7 @@ data Op1
 data Op2
   = JP
   | JNZ
+  | JC
   | CALL
   | LDA
   | STA
@@ -74,7 +75,7 @@ allOps = map Op0 allOp0 ++ map Op1 allOp1 ++ map Op2 allOp2
              ++ map RST [0..7]
              ++ [ MOV dest src | dest <- regs7, src <- regs7 ]
     allOp1 = [CPI,OUT,IN,ANI,ADI,MVI_M] ++ map MVI regs7
-    allOp2 = [JP,JNZ,CALL,LDA,STA] ++ map LXI rps1
+    allOp2 = [JP,JNZ,JC,CALL,LDA,STA] ++ map LXI rps1
     regs7 = [A,B,C,D,E,H,L]
     rps1 = [BC,DE,HL,SP]
     rps2 = [BC,DE,HL,PSW]
@@ -126,6 +127,7 @@ prettyInstruction = \case
   Ins1 ADI _ b1 -> tag "ADD" (show b1)
   Ins2 JP _ b1 b2 -> tag "JP" (show b2 <> show b1)
   Ins2 JNZ _ b1 b2 -> tag "JNZ" (show b2 <> show b1)
+  Ins2 JC _ b1 b2 -> tag "JP" ("C," <> show b2 <> show b1)
   Ins2 CALL _ b1 b2 -> tag "CALL" (show b2 <> show b1)
   Ins2 LDA _ b1 b2 -> tag "LD" ("A,("<> show b2 <> show b1 <> ")")
   Ins2 STA _ b1 b2 -> tag "LD" ("("<> show b2 <> show b1 <> "),A")
@@ -182,6 +184,7 @@ encode = \case
   Op1 ADI -> 0xC6
   Op2 JP -> 0xC3
   Op2 JNZ -> 0xC2
+  Op2 JC -> 0xDA
   Op2 CALL -> 0xCD
   Op2 LDA -> 0x3A
   Op2 STA -> 0x32

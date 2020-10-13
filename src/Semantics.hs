@@ -76,6 +76,22 @@ execute0 = \case
     hi <- popStack
     dest <- MakeAddr $ HiLo{hi,lo}
     return (Jump 10 dest)
+  RZ -> do
+    testFlagZ >>= \case
+      False -> return (Next 5)
+      True -> do
+        lo <- popStack
+        hi <- popStack
+        dest <- MakeAddr $ HiLo{hi,lo}
+        return (Jump 11 dest)
+  RNZ -> do
+    testFlagZ >>= \case
+      True -> return (Next 5)
+      False -> do
+        lo <- popStack
+        hi <- popStack
+        dest <- MakeAddr $ HiLo{hi,lo}
+        return (Jump 11 dest)
   RRC -> do
     byte <- GetReg A
     bool <- GetFlag CY

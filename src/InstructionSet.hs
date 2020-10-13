@@ -21,6 +21,8 @@ data Op = Op0 Op0 | Op1 Op1 | Op2 Op2
 data Op0
   = NOP
   | RET
+  | RZ
+  | RNZ
   | RRC
   | EI
   | XCHG
@@ -63,7 +65,7 @@ allOps = map Op0 allOp0 ++ map Op1 allOp1 ++ map Op2 allOp2
   where
     allOp0 = [NOP,LDAX_D
              ,MOV_M_A
-             ,RET,RRC,EI,XCHG,DCR_M]
+             ,RET,RZ,RNZ,RRC,EI,XCHG,DCR_M]
              ++ map MOV_rM regs7
              ++ map DCR regs7
              ++ map XRA regs7
@@ -97,6 +99,8 @@ prettyInstruction :: Show b => Instruction b -> String
 prettyInstruction = \case
   Ins0 NOP _ -> "NOP"
   Ins0 RET _ -> "RET"
+  Ins0 RZ _ -> tag "RET" "Z"
+  Ins0 RNZ _ -> tag "RET" "NZ"
   Ins0 RRC _ -> "RRCA"
   Ins0 EI _ -> "EI"
   Ins0 XCHG _ -> tag "EX" "DE,HL"
@@ -151,6 +155,8 @@ encode :: Op -> Byte
 encode = \case
   Op0 NOP -> 0x00
   Op0 RET -> 0xC9
+  Op0 RZ -> 0xC8
+  Op0 RNZ -> 0xC0
   Op0 RRC -> 0x0F
   Op0 EI -> 0xFB
   Op0 XCHG -> 0xEB

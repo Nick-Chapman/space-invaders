@@ -84,6 +84,14 @@ execute0 = \case
         hi <- popStack
         dest <- MakeAddr $ HiLo{hi,lo}
         return (Jump 11 dest)
+  RC -> do
+    testFlagCY >>= \case
+      False -> return (Next 5)
+      True -> do
+        lo <- popStack
+        hi <- popStack
+        dest <- MakeAddr $ HiLo{hi,lo}
+        return (Jump 11 dest)
   RNZ -> do
     testFlagZ >>= \case
       True -> return (Next 5)

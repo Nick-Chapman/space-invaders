@@ -32,7 +32,7 @@ traceEmulate traceOn mem = emulate mem >>= loop
         printWhenNewFrame pre post
         when (traceOn && icount > 50000) $ error "STOP"
         continue >>= loop
-          where cpuCol = 60
+          where cpuCol = 60 --0
 
 ljust :: Int -> String -> String
 ljust n s = s <> take (max 0 (n - length s)) (repeat ' ')
@@ -47,10 +47,12 @@ prettyStep :: EmuState -> Instruction Byte -> String
 prettyStep s instruction = do
   let pc = programCounter s
   unwords [ prettyTicks s, show pc, ":", show instruction]
+  --unwords [ prettyTicks s, show pc, "-- "]
 
 prettyTicks :: EmuState -> String
 prettyTicks EmuState{ticks,icount} =
   unwords [ printf "(%5d)" icount, show ticks ]
+  --unwords [ printf "(%5d)" icount ]
 
 printWhenNewFrame :: EmuState -> EmuState -> IO ()
 printWhenNewFrame s0 s1 = do

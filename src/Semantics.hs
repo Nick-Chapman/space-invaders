@@ -133,13 +133,13 @@ execute0 = \case
     return (Next 7)
   MOV_M_A -> do
     a <- getRegPair HL
-    b <- ReadMem a
-    SetReg A b
+    b <- GetReg A
+    WriteMem a b
     return (Next 7)
   MOV_rM reg -> do
     a <- getRegPair HL
-    b <- GetReg reg
-    WriteMem a b
+    b <- ReadMem a
+    SetReg reg b
     return (Next 7)
   MOV dest src -> do
     b <- GetReg src
@@ -217,7 +217,11 @@ execute1 op1 b1 = case op1 of
     return (Next 10)
   CPI -> do
     b <- GetReg A
-    v <- SubtractB b b1
+    cin <- MakeBit True
+    b1comp <- Complement b1
+    (v,cout) <- AddWithCarry cin b b1comp
+    cout' <- Flip cout
+    SetFlag CY cout'
     setFlagsFrom v
     return (Next 7)
   OUT -> do
@@ -235,10 +239,12 @@ execute1 op1 b1 = case op1 of
     setFlagsFrom v
     return (Next 7)
   ADI -> do
-    value <- GetReg A
-    value' <- AddB b1 value
-    SetReg A value'
-    -- TODO: set all flags
+    v0 <- GetReg A
+    cin <- MakeBit False
+    (v,cout) <- AddWithCarry cin b1 v0
+    SetFlag CY cout
+    SetReg A v
+    setFlagsFrom v
     return (Next 7)
 
 

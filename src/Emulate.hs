@@ -6,7 +6,7 @@ module Emulate (
 import Data.Bits
 
 import Addr (Addr(..))
-import Byte (Byte(..))
+import Byte (Byte(..),adc)
 import Cpu (Cpu)
 import Effect (Eff(..))
 import Semantics (fetchDecodeExec)
@@ -103,18 +103,25 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ () -> error "unexpected emula
           Nothing -> return (CrashDecode byte)
 
       MakeByte w -> k s (Byte w)
-      -- Byte ops
       Decrement b -> k s (b - 1)
-      AddB b1 b2 -> k s (b1 + b2)
-      SubtractB b1 b2 -> k s (b1 - b2)
+
+      AddWithCarry (Bit cin) v1 v2 -> do
+        let (v,cout) = Byte.adc cin v1 v2
+        k s (v, Bit cout)
+
+      Complement b -> k s (complement b)
+      Flip (Bit bool) -> k s (Bit (not bool))
+
       AndB b1 b2 -> k s (b1 .&. b2)
       XorB b1 b2 -> k s (b1 `xor` b2)
 
       -- Word (Address) ops
       Add16 a1 a2 -> k s (Addr.add a1 a2) -- TODO: dont loose carry
 
+      -- TODO: Z should be in position 6, not 7 !
       SelectBit70 byte -> k s (Bit (byte `testBit` 7), Bit (byte `testBit` 0))
       ByteFromBit70 (Bit z, Bit cy) -> k s ((if z then 128 else 0) + (if cy then 1 else 0))
+
       GetFlag flag -> k s (Cpu.getFlag cpu flag)
       SetFlag flag bit -> k s { cpu = Cpu.setFlag cpu flag bit} ()
       IsZero byte -> k s (Bit (byte == 0))

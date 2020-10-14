@@ -3,6 +3,7 @@ module Byte(
   Byte(..),
   toUnsigned,
   ofUnsigned,
+  adc, -- add with carry
   ) where
 
 import Data.Bits (Bits)
@@ -19,3 +20,8 @@ toUnsigned = fromIntegral . unByte
 
 ofUnsigned :: Int -> Byte
 ofUnsigned = Byte . fromIntegral
+
+adc :: Bool -> Byte -> Byte -> (Byte,Bool)
+adc cin x y = (Byte $ fromIntegral res,cout) where
+    res = toUnsigned x + toUnsigned y + (if cin then 1 else 0)
+    cout = res >= 256

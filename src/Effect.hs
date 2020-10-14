@@ -24,8 +24,10 @@ data Eff p a where
   Decrement :: Byte p -> Eff p (Byte p)
 
   MakeByte :: Word8 -> Eff p (Byte p)
-  AddB :: Byte p -> Byte p -> Eff p (Byte p)
-  SubtractB :: Byte p -> Byte p -> Eff p (Byte p)
+  AddWithCarry :: Bit p -> Byte p -> Byte p -> Eff p (Byte p, Bit p)
+  Complement :: Byte p -> Eff p (Byte p)
+  Flip :: Bit p -> Eff p (Bit p)
+
   AndB :: Byte p -> Byte p -> Eff p (Byte p)
   XorB :: Byte p -> Byte p -> Eff p (Byte p)
   Add16 :: Addr p -> Addr p -> Eff p (Addr p)

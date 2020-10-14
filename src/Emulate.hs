@@ -1,12 +1,13 @@
 
-module Emulate (emulate) where
+module Emulate (
+  emulate, Emulation(..), EmuState(..), Ticks(..),
+  ) where
 
-import Control.Monad (when)
 import Data.Bits
 
 import Addr (Addr(..))
 import Byte (Byte(..))
-import Cpu (Cpu,Reg(..))
+import Cpu (Cpu)
 import Effect (Eff(..))
 import Semantics (setPC,fetchDecodeExec)
 import HiLo (HiLo(..))
@@ -40,23 +41,53 @@ newtype Bit = Bit Bool
 instance Show Bit where show (Bit b) = if b then "1" else "0"
 
 
+data Emulation
+  = CrashDecode Byte
+  | EmuStep
+    { pre :: EmuState
+    , instruction :: Instruction Byte
+    , post :: EmuState
+    , continue :: IO Emulation
+    }
+
+data EmuState = EmuState
+  { ticks :: Ticks -- cycle count
+  , icount :: Int -- instruction count
+  , fcount :: Int -- frame count
+  , cpu :: Cpu EmuTime
+  , mem :: Mem
+  , interrupts_enabled :: Bool
+  , nextWakeup :: Ticks
+  }
+
+state0 :: Mem -> EmuState
+state0 mem = EmuState
+  { ticks = 0
+  , icount = 0
+  , fcount = 0
+  , cpu = Cpu.init (Byte 0) (Bit False)
+  , mem
+  , interrupts_enabled = False
+  , nextWakeup = halfFrameTicks
+  }
+
 startAddr :: Addr
 startAddr = Addr.fromHiLo $ HiLo { hi = Byte 0, lo = Byte 0 }
 
 theSemantics :: Eff EmuTime ()
 theSemantics = do
-  setPC startAddr
+  setPC startAddr -- TODO: unnecessary to setPC ?
   loop
     where
       loop = do
         fetchDecodeExec
         loop
 
-emulate :: Bool -> Mem -> IO ()
-emulate traceOn mem0 = run (state0 mem0) theSemantics $ \_ -> return
+emulate :: Mem -> IO Emulation
+emulate mem0 = run (state0 mem0) theSemantics $ \_ () -> error "unexpected emulation end"
   where
-    run :: State -> Eff EmuTime a -> (State -> a -> IO ()) -> IO ()
-    run s@State{cpu,mem} eff k = case eff of
+    run :: EmuState -> Eff EmuTime a -> (EmuState -> a -> IO Emulation) -> IO Emulation
+    run s@EmuState{cpu,mem} eff k = case eff of
       Ret x -> k s x
       Bind eff f -> run s eff $ \s a -> run s (f a) k
       GetReg r -> k s (Cpu.get cpu r)
@@ -73,12 +104,9 @@ emulate traceOn mem0 = run (state0 mem0) theSemantics $ \_ -> return
       OffsetAddr n a -> k s (Addr.bump a n)
 
       Decode byte -> do
-        let pc = programCounter s
         case decode byte of
           Just op -> k s op
-          Nothing -> do
-            putStrLn (prettyTicks s <> " " <> show pc <> " : " <> show byte)
-            error $ "Decode: " <> show byte
+          Nothing -> return (CrashDecode byte)
 
       MakeByte w -> k s (Byte w)
       -- Byte ops
@@ -139,126 +167,31 @@ emulate traceOn mem0 = run (state0 mem0) theSemantics $ \_ -> return
       GetInterruptInstruction -> k s (interruptInstruction s)
 
       InstructionCycle eff -> do
-        let s0 = s
-
-        when (traceOn && splitTrace) $
-          putStrLn (ljust cpuCol (prettyTicks s) ++ show cpu)
-
-        run s eff $ \s@State{icount,ticks,cpu} (instruction,n) -> do
-          let s1 = s { icount = icount + 1, ticks = ticks + fromIntegral n }
-
-
-          when traceOn $ do
-            when (icount > 50000) $ error "STOP"
-            if splitTrace
-            then putStrLn (prettyStep s0 instruction)
-            else putStrLn (ljust cpuCol (prettyStep s0 instruction) ++ show cpu)
-
-          printWhenNewFrame s0 s1
-          k s1 ()
-
-            where
-              splitTrace = False
-              cpuCol = 60
+        let pre = s
+        run s eff $ \s (instruction,n) -> do
+          let post = advance (Ticks n) s
+          let continue = k post ()
+          let step = EmuStep { pre, instruction, post, continue }
+          return step
 
 
-ljust :: Int -> String -> String
-ljust n s = s <> take (max 0 (n - length s)) (repeat ' ')
-
-data State = State
-  { ticks :: Ticks -- cycle count
-  , icount :: Int -- instruction count
-  , fcount :: Int -- frame count
-  , cpu :: Cpu EmuTime
-  , mem :: Mem
-  , interrupts_enabled :: Bool
-  , nextWakeup :: Ticks
-  }
-
-state0 :: Mem -> State
-state0 mem = State
-  { ticks = 0
-  , icount = 0
-  , fcount = 0
-  , cpu = Cpu.init (Byte 0) (Bit False)
-  , mem
-  , interrupts_enabled = False
-  , nextWakeup = halfFrameTicks
-  }
-
+advance :: Ticks -> EmuState -> EmuState
+advance n s@EmuState{icount,ticks} =
+  s { icount = icount + 1, ticks = ticks + n }
 
 halfFrameTicks :: Ticks
 halfFrameTicks = Ticks (2000000 `div` 120)
 
-interruptInstruction :: State -> Byte
-interruptInstruction State{ticks} = do
+interruptInstruction :: EmuState -> Byte
+interruptInstruction EmuState{ticks} = do
   let mid = (unTicks ticks `mod` unTicks halfFrameTicks) `mod` 2 == 1
   if mid then 0xCF else 0xD7
 
-timeToWakeup :: State -> Maybe State
-timeToWakeup s@State{ticks,nextWakeup} = do
+timeToWakeup :: EmuState -> Maybe EmuState
+timeToWakeup s@EmuState{ticks,nextWakeup} = do
   if ticks < nextWakeup
     then Nothing
     else do
     Just s { nextWakeup =
              Ticks ((unTicks ticks `div` unTicks halfFrameTicks) + 1) * halfFrameTicks
            }
-
-
-programCounter :: State -> Addr
-programCounter State{cpu} = do
-  let lo = Cpu.get cpu PCL
-  let hi = Cpu.get cpu PCH
-  Addr.fromHiLo HiLo{hi,lo}
-
-
-printWhenNewFrame :: State -> State -> IO ()
-printWhenNewFrame s0 s1 = do
-  let State{ticks=ticks0} = s0
-  let State{ticks=ticks1} = s1
-  let f0 = unTicks ticks0 `div` cyclesPerFrame
-  let f1 = unTicks ticks1 `div` cyclesPerFrame
-  let yes = f1 > f0
-  when yes $ do
-    let State{mem} = s1
-    let pixs = onPixels (getDisplayFromMem mem)
-    let _nCyclesLate = unTicks ticks1 `mod` cyclesPerFrame
-    let _nFramesSkipped = f1 - f0 - 1
-    putStrLn $ unwords
-      [ prettyTicks s1
-      , printf "FRAME{%d}" f1
-      , printf "#onPixels = %d" (length pixs)
-      --, printf "(cycles-late=%d)" _nCyclesLate
-      --, printf "(frame-skipped=%d)" _nFramesSkipped
-      --, show (f0,f1)
-      --, show (ticks0,ticks1)
-      ]
-    --where cyclesPerFrame = 1000
-    where cyclesPerFrame = 33333
-
-
-prettyStep :: State -> Instruction Byte -> String
-prettyStep s instruction = do
-  let pc = programCounter s
-  unwords [ prettyTicks s, show pc, ":", show instruction]
-
-prettyTicks :: State -> String
-prettyTicks State{ticks,icount} =
-  unwords [ printf "(%5d)" icount, show ticks ]
-
-
-data OnPixel = OnPixel { x :: Int, y :: Int }
-
-data Display = Display { onPixels :: [OnPixel] }
-
-getDisplayFromMem :: Mem -> Display
-getDisplayFromMem mem = do
-  Display
-    [ OnPixel {x, y}
-    | x :: Int <- [0..223]
-    , yByte <- [0..31]
-    , let byte = Mem.read mem (Addr (fromIntegral (0x2400 + x * 32 + yByte)))
-    , yBit <- [0..7]
-    , byte `testBit` yBit
-    , let y  = 8 * yByte + yBit
-    ]

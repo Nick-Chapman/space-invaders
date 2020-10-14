@@ -1,9 +1,9 @@
 
 module SpaceInvaders(main) where
 
-import Emulate (emulate)
 import InstructionSet (printDecodeTable)
 import System.Environment (getArgs)
+import TraceEmu (traceEmulate)
 import qualified Mem (init)
 import qualified Rom2k (load)
 
@@ -23,11 +23,10 @@ main = do
   case mode of
     ModeShowDecodeTable ->
       printDecodeTable
-    ModeTrace ->
-      emulate True mem
+    ModeTrace -> do
+      traceEmulate True mem
     ModeNoTrace ->
-      emulate False mem
-
+      traceEmulate False mem
 
 
 data Mode = ModeShowDecodeTable | ModeTrace | ModeNoTrace

@@ -104,12 +104,29 @@ emulate traceOn mem0 = run (state0 mem0) theSemantics $ \_ -> return
         k s (byte',Bit bit')
 
       Out port byte -> do
-        let _ = putStrLn $ show ("OUT",port,byte)
+        case port of
+          2 -> do
+            error $ show ("OUT-2",byte) -- TODO: shift register result offset (bits 0,1,2)
+          3 -> do
+            --print ("OUT-3",byte) -- sound related
+            return ()
+          4 -> do
+            error $ show ("OUT-4",byte) -- TODO: fill shift register
+          5 -> do
+            --print ("OUT-5",byte) -- sound related
+            return ()
+          6 -> do
+            return ()
+          _ -> do
+            error $ show ("OUT",port,byte)
         k s ()
 
       In port -> do
-        let byte = 0x0
-        let _ = putStrLn $ show ("IN",port,byte)
+        let byte = case port of
+              1 -> 0 -- 1 is recomended in emulator101 for attract mode only
+              2 -> 0
+              _ -> error $ show ("IN",port,byte)
+        --putStrLn $ show ("IN",port,byte)
         k s byte
 
       EnableInterrupts -> k s { interrupts_enabled = True } ()

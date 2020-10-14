@@ -14,16 +14,13 @@ import Phase (Addr,Byte)
 fetchDecodeExec :: Eff p ()
 fetchDecodeExec = do
   InstructionCycle $ do
-    pc <- getPC
     byte <- fetchOrHandleInterrupt
-    op <- Decode (pc, byte) -- Pass pc to decode for improved error messages
+    op <- Decode byte
     instruction <- fetchImmediates byte op
     execute instruction >>= \case
       Next n -> do
-        --Advance n
         return (instruction,n)
       Jump n a -> do
-        --Advance n;
         setPC a
         return (instruction,n)
 

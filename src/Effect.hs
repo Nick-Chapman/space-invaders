@@ -20,7 +20,7 @@ data Eff p a where
   SplitAddr :: Addr p -> Eff p (HiLo (Byte p))
   MakeAddr :: HiLo (Byte p) -> Eff p (Addr p)
   OffsetAddr :: Int -> Addr p -> Eff p (Addr p)
-  Decode :: (Addr p, Byte p) -> Eff p Op
+  Decode :: Byte p -> Eff p Op
   Decrement :: Byte p -> Eff p (Byte p)
 
   MakeByte :: Word8 -> Eff p (Byte p)

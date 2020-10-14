@@ -72,7 +72,8 @@ emulate traceOn mem0 = run (state0 mem0) theSemantics $ \_ -> return
       MakeAddr hilo -> k s (Addr.fromHiLo hilo)
       OffsetAddr n a -> k s (Addr.bump a n)
 
-      Decode (pc,byte) -> do
+      Decode byte -> do
+        let pc = programCounter s
         case decode byte of
           Just op -> k s op
           Nothing -> do

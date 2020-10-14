@@ -9,8 +9,7 @@ import Addr (Addr(..))
 import Byte (Byte(..))
 import Cpu (Cpu)
 import Effect (Eff(..))
-import Semantics (setPC,fetchDecodeExec)
-import HiLo (HiLo(..))
+import Semantics (fetchDecodeExec)
 import InstructionSet (Instruction,decode)
 import Mem (Mem)
 import Phase (Phase)
@@ -71,17 +70,12 @@ state0 mem = EmuState
   , nextWakeup = halfFrameTicks
   }
 
-startAddr :: Addr
-startAddr = Addr.fromHiLo $ HiLo { hi = Byte 0, lo = Byte 0 }
-
-theSemantics :: Eff EmuTime ()
-theSemantics = do
-  setPC startAddr -- TODO: unnecessary to setPC ?
-  loop
-    where
-      loop = do
-        fetchDecodeExec
-        loop
+theSemantics :: Eff p ()
+theSemantics = loop
+  where
+    loop = do
+      fetchDecodeExec
+      loop
 
 emulate :: Mem -> IO Emulation
 emulate mem0 = run (state0 mem0) theSemantics $ \_ () -> error "unexpected emulation end"

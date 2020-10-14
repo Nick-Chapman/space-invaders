@@ -1,7 +1,7 @@
 
 -- | This defines the execution semantics (Effects) of the 8080 instructions
 
-module Semantics (setPC,fetchDecodeExec) where
+module Semantics (fetchDecodeExec) where
 
 import Cpu (Reg(..),RegPair(..),Flag(..))
 import Effect (Eff(..))

@@ -20,7 +20,9 @@ traceEmulate traceOn mem = emulate mem >>= loop
   where
     loop :: Emulation -> IO ()
     loop = \case
-      CrashDecode byte -> error $ "CrashDecode: " <> show byte
+      CrashDecode s byte -> do
+        let pc = programCounter s
+        error $ "CrashDecode, pc = " <> show pc <> " : " <> show byte
       EmuStep
         { pre
         , instruction

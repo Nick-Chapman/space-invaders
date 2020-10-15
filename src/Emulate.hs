@@ -41,7 +41,7 @@ instance Show Bit where show (Bit b) = if b then "1" else "0"
 
 
 data Emulation
-  = CrashDecode Byte
+  = CrashDecode EmuState Byte
   | EmuStep
     { pre :: EmuState
     , instruction :: Instruction Byte
@@ -100,7 +100,7 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ () -> error "unexpected emula
       Decode byte -> do
         case decode byte of
           Just op -> k s op
-          Nothing -> return (CrashDecode byte)
+          Nothing -> return (CrashDecode s byte)
 
       MakeByte w -> k s (Byte w)
       Decrement b -> k s (b - 1)

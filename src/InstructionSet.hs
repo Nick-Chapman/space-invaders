@@ -50,6 +50,7 @@ data Op1
   | OUT
   | IN
   | ANI
+  | ORI
   | ADI
   | MVI RegSpec
   deriving (Eq,Ord)
@@ -85,7 +86,7 @@ allOps = map Op0 allOp0 ++ map Op1 allOp1 ++ map Op2 allOp2
              ++ map INX rps1 ++ map DAD rps1 ++ map PUSH rps2 ++ map POP rps2
              ++ map RST [0..7]
              ++ [ MOV {dest,src} | dest <- regs7spec, src <- regs7spec, not (dest==M && src==M) ]
-    allOp1 = [CPI,OUT,IN,ANI,ADI] ++ map MVI regs7spec
+    allOp1 = [CPI,OUT,IN,ANI,ORI,ADI] ++ map MVI regs7spec
     allOp2 = [JP,JNZ,JNC,JZ,JC,CALL,CNZ,LDA,STA,LHLD] ++ map LXI rps1
     regs7spec = [A,B,C,D,E,H,L,M]
     rps1 = [BC,DE,HL,SP]
@@ -128,6 +129,7 @@ cycles jumpTaken = \case
   Op1 OUT -> 10
   Op1 IN -> 10
   Op1 ANI -> 7
+  Op1 ORI -> 7
   Op1 ADI -> 7
   Op2 JP -> 10
   Op2 JNZ -> 10
@@ -190,6 +192,7 @@ prettyInstruction = \case
   Ins1 OUT b1 -> tag "OUT" (show b1)
   Ins1 IN b1 -> tag "IN" (show b1)
   Ins1 ANI b1 -> tag "AND" (show b1)
+  Ins1 ORI b1 -> tag "OR" (show b1)
   Ins1 ADI b1 -> tag "ADD" (show b1)
   Ins2 JP b1 b2 -> tag "JP" (show b2 <> show b1)
   Ins2 JNZ b1 b2 -> tag "JP" ("NZ," <> show b2 <> show b1)
@@ -249,6 +252,7 @@ encode = \case
   Op1 OUT -> 0xD3
   Op1 IN -> 0xDB
   Op1 ANI -> 0xE6
+  Op1 ORI -> 0xF6
   Op1 ADI -> 0xC6
   Op2 JP -> 0xC3
   Op2 JNZ -> 0xC2

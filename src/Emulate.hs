@@ -154,7 +154,7 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ () -> error "unexpected emula
             --print ("OUT-3",byte) -- sound related
             return ()
           4 -> do
-            error $ show ("OUT-4",byte) -- TODO: fill shift register
+            print ("OUT-4",byte) -- TODO: fill shift register
           5 -> do
             --print ("OUT-5",byte) -- sound related
             return ()

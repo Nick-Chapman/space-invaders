@@ -266,6 +266,12 @@ execute1 op1 b1 = case op1 of
     SetReg A v
     setFlagsFrom v
     return Next
+  ORI -> do
+    v0 <- GetReg A
+    v <- OrB b1 v0
+    SetReg A v
+    setFlagsFrom v
+    return Next
   ADI -> do
     v0 <- GetReg A
     cin <- MakeBit False

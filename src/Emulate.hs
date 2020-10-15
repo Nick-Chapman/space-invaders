@@ -168,7 +168,8 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ () -> error "unexpected emula
         let byte = case port of
               1 -> 0 -- 1 is recomended in emulator101 for attract mode only
               2 -> 0
-              _ -> error $ show ("IN",port,byte)
+              3 -> 0 -- TODO: shift register result here
+              _ -> error $ show ("IN",port)
         --putStrLn $ show ("IN",port,byte)
         k s byte
 

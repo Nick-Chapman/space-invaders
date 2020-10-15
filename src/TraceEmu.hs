@@ -30,15 +30,13 @@ traceEmulate traceOn mem = emulate mem >>= loop
         , post = post@EmuState{cpu,icount}
         , continue
         } -> do
-        let poi = Nothing
+        let poi = Nothing --Just 1752259
         let debug = case poi of Just poi -> (icount >= poi - 5); Nothing -> False
         when (traceOn || debug) $
           putStrLn (ljust 50 (prettyStep pre instruction) ++ show cpu) -- TODO: make it 60 (update expected)
         printWhenNewFrame pre post
         when (traceOn && icount > 50000) $ error "STOP"
-        case poi of
-          Just poi -> when (icount > poi + 5) $ error "STOP2"
-          Nothing -> return ()
+        -- case poi of Just poi -> when (icount > poi + 5) $ error "STOP2"; Nothing -> return ()
         continue >>= loop
 
 ljust :: Int -> String -> String

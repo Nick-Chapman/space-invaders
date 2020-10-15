@@ -21,12 +21,13 @@
 
 ### Step 1. Emulation (WIP)
 
-- complete required instruction decoding and semantics
-- condition flags (think we only need Z and Carry)
-- interrupt handling
+- complete required instruction decoding and semantics; it never stops...
+- condition flags (think we only need Z and Carry) --DONE
+- interrupt handling --DONE
 - IO-subsystem, including external shift register
-- visualization
+- refactoring, data Cond = N | NZ | C | NC | ... for JP,CALL,RET
 - speed measurements
+- visualization
 
 ### Step 2. Compilation to standalone executable
 

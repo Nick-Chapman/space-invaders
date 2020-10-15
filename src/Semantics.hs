@@ -141,7 +141,7 @@ execute0 = \case
     b <- ReadMem a
     SetReg reg b
     return (Next 7)
-  MOV dest src -> do
+  MOV {dest,src} -> do
     b <- GetReg src
     SetReg dest b
     return (Next 7)

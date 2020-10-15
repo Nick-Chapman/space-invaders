@@ -2,6 +2,7 @@
 module InstructionSet (
   Op(..),Op0(..),Op1(..),Op2(..), RegPairSpec(..), RegSpec(..),
   Instruction(..),
+  cycles,
   decode,
   printDecodeTable,
   prettyInstructionBytes,
@@ -16,7 +17,7 @@ import Byte (Byte(..))
 import qualified Data.Map.Strict as Map
 
 data Op = Op0 Op0 | Op1 Op1 | Op2 Op2
-  deriving (Eq,Ord)
+  deriving (Eq,Ord,Show)
 
 data Op0
   = NOP
@@ -44,7 +45,7 @@ data Op0
   | POP RegPairSpec
   | DAD RegPairSpec
   | RST Word8 --(0..7)
-  deriving (Eq,Ord)
+  deriving (Eq,Ord,Show)
 
 data Op1
   = CPI
@@ -54,7 +55,7 @@ data Op1
   | ADI
   | MVI_M
   | MVI RegSpec
-  deriving (Eq,Ord)
+  deriving (Eq,Ord,Show)
 
 data Op2
   = JP
@@ -66,7 +67,7 @@ data Op2
   | LDA
   | STA
   | LXI RegPairSpec
-  deriving (Eq,Ord)
+  deriving (Eq,Ord,Show)
 
 data RegSpec = A | B | C | D | E | H | L -- | M -- TODO
   deriving (Eq,Ord,Show)
@@ -93,6 +94,52 @@ allOps = map Op0 allOp0 ++ map Op1 allOp1 ++ map Op2 allOp2
     regs7spec = [A,B,C,D,E,H,L]
     rps1 = [BC,DE,HL,SP]
     rps2 = [BC,DE,HL,PSW]
+
+
+cycles :: Bool -> Op -> Int
+cycles jumpTaken = \case
+  Op0 NOP -> 4
+  Op0 RET -> 10
+  Op0 RZ -> if jumpTaken then 11 else 5
+  Op0 RC -> if jumpTaken then 11 else 5
+  Op0 RNZ -> if jumpTaken then 11 else 5
+  Op0 RRC -> 4
+  Op0 EI -> 4
+  Op0 STC -> 4
+  Op0 XCHG -> 5
+  Op0 LDAX_B -> 7
+  Op0 LDAX_D -> 7
+  Op0 MOV_M_A -> 7
+  Op0 MOV_rM{} -> 7
+  Op0 DCR{} -> 5
+  Op0 DCR_M -> 10
+  Op0 XRA{} -> 4
+  Op0 ANA{} -> 4
+  Op0 ORA{} -> 4
+  Op0 ORA_M -> 7
+  Op0 MOV{} -> 7
+  Op0 INX{} -> 5
+  Op0 PUSH{} -> 11
+  Op0 POP{} -> 10
+  Op0 DAD{} -> 11
+  Op0 RST{} -> 4
+  Op1 MVI{} -> 7
+  Op1 MVI_M -> 10
+  Op1 CPI -> 7
+  Op1 OUT -> 10
+  Op1 IN -> 10
+  Op1 ANI -> 7
+  Op1 ADI -> 7
+  Op2 JP -> 10
+  Op2 JNZ -> 10
+  Op2 JNC -> 10
+  Op2 JZ -> 10
+  Op2 JC -> 10
+  Op2 CALL -> 17
+  Op2 LDA -> 13
+  Op2 STA -> 13
+  Op2 LXI{} -> 10
+
 
 data Instruction b -- op+args
   = Ins0 Op0

@@ -6,7 +6,7 @@ module Semantics (fetchDecodeExec) where
 import Cpu (Flag(..),Reg(..))
 import Effect (Eff(..))
 import HiLo (HiLo(..))
-import InstructionSet (Op(..),Instruction(..),Op0(..),Op1(..),Op2(..),RegPairSpec(..))
+import InstructionSet (Op(..),Instruction(..),Op0(..),Op1(..),Op2(..),RegPairSpec(..),cycles)
 import qualified InstructionSet as Instr (RegSpec(..))
 import Phase (Addr,Byte)
 
@@ -19,9 +19,11 @@ fetchDecodeExec = do
     op <- Decode byte
     instruction <- fetchImmediates op
     execute instruction >>= \case
-      Next n -> do
+      Next -> do
+        let n = cycles False op
         return (instruction,n)
-      Jump n a -> do
+      Jump a -> do
+        let n = cycles True op
         setPC a
         return (instruction,n)
 
@@ -57,7 +59,7 @@ fetchImmediates = \case
     b2 <- fetch
     return (Ins2 op2 b1 b2)
 
-data Flow p = Next Int | Jump Int (Addr p)
+data Flow p = Next | Jump (Addr p)
 
 execute :: Instruction (Byte p) -> Eff p (Flow p)
 execute = \case
@@ -68,50 +70,50 @@ execute = \case
 execute0 :: Op0 -> Eff p (Flow p)
 execute0 = \case
   NOP -> do
-    return (Next 4)
+    return Next
   RET -> do
     lo <- popStack
     hi <- popStack
     dest <- MakeAddr $ HiLo{hi,lo}
-    return (Jump 10 dest)
+    return (Jump dest)
   RZ -> do
     testFlagZ >>= \case
-      False -> return (Next 5)
+      False -> return Next
       True -> do
         lo <- popStack
         hi <- popStack
         dest <- MakeAddr $ HiLo{hi,lo}
-        return (Jump 11 dest)
+        return (Jump dest)
   RC -> do
     testFlagCY >>= \case
-      False -> return (Next 5)
+      False -> return Next
       True -> do
         lo <- popStack
         hi <- popStack
         dest <- MakeAddr $ HiLo{hi,lo}
-        return (Jump 11 dest)
+        return (Jump dest)
   RNZ -> do
     testFlagZ >>= \case
-      True -> return (Next 5)
+      True -> return Next
       False -> do
         lo <- popStack
         hi <- popStack
         dest <- MakeAddr $ HiLo{hi,lo}
-        return (Jump 11 dest)
+        return (Jump dest)
   RRC -> do
     byte <- GetReg A
     bool <- GetFlag CY
     (byte',bool') <- RotateRight (bool,byte)
     SetFlag CY bool'
     SetReg A byte'
-    return (Next 4)
+    return Next
   EI -> do
     EnableInterrupts
-    return (Next 4)
+    return Next
   STC -> do
     bit <- MakeBit True
     SetFlag CY bit
-    return (Next 4)
+    return Next
   XCHG -> do
     d <- GetReg D
     e <- GetReg E
@@ -121,91 +123,91 @@ execute0 = \case
     SetReg E l
     SetReg H d
     SetReg L e
-    return (Next 5)
+    return Next
   LDAX_B -> do
     a <- getRegPair BC
     b <- ReadMem a
     SetReg A b
-    return (Next 7)
+    return Next
   LDAX_D -> do
     a <- getRegPair DE
     b <- ReadMem a
     SetReg A b
-    return (Next 7)
+    return Next
   MOV_M_A -> do
     a <- getRegPair HL
     b <- GetReg A
     WriteMem a b
-    return (Next 7)
+    return Next
   MOV_rM {dest} -> do
     a <- getRegPair HL
     b <- ReadMem a
     save dest b
-    return (Next 7)
+    return Next
   MOV {dest,src} -> do
     b <- load src
     save dest b
-    return (Next 7)
+    return Next
   INX rp -> do
     a <- getRegPair rp
     a' <- OffsetAddr 1 a
     setRegPair rp a'
-    return (Next 5)
+    return Next
   PUSH rp -> do
     let HiLo{hi=rh, lo=rl} = expandRegPairX rp
     hi <- getRegX rh
     lo <- getRegX rl
     pushStack hi
     pushStack lo
-    return (Next 11)
+    return Next
   POP rp -> do
     lo <- popStack
     hi <- popStack
     let HiLo{hi=rh, lo=rl} = expandRegPairX rp
     setRegX rh hi
     setRegX rl lo
-    return (Next 10)
+    return Next
   DAD rp -> do
     w1 <- getRegPair rp
     w2 <- getRegPair HL
     w <- Add16 w1 w2
     setRegPair HL w
     -- TODO: set carry flag
-    return (Next 11)
+    return Next
   DCR reg -> do
     v0 <- load reg
     v <- Decrement v0
     save reg v
     setFlagsFrom v
-    return (Next 5)
+    return Next
   DCR_M -> do
     a <- getRegPair HL
     v0 <- ReadMem a
     v <- Decrement v0
     WriteMem a v
     setFlagsFrom v
-    return (Next 10)
+    return Next
   XRA reg -> do
     v1 <- load reg
     v2 <- GetReg A
     v <- XorB v1 v2
     save reg v -- TODO: bug, should set A
     setFlagsFrom v
-    return (Next 4)
+    return Next
   ANA reg -> do
     v1 <- load reg
     v2 <- GetReg A
     v <- AndB v1 v2
     save reg v -- TODO: bug, should set A
     setFlagsFrom v
-    return (Next 4)
+    return Next
   ORA reg -> do
     v1 <- load reg
     v2 <- GetReg A
     v <- OrB v1 v2
     SetReg A v
     setFlagsFrom v
-    return (Next 4)
+    return Next
   ORA_M -> do
     a <- getRegPair HL
     v1 <- ReadMem a
@@ -213,14 +215,14 @@ execute0 = \case
     v <- OrB v1 v2
     SetReg A v
     setFlagsFrom v
-    return (Next 7)
+    return Next
   RST w -> do
     GetReg PCH >>= pushStack
     GetReg PCL >>= pushStack
     hi <- MakeByte 0
     lo <- MakeByte (8*w)
     dest <- MakeAddr $ HiLo{hi,lo}
-    return (Jump 4 dest)
+    return (Jump dest)
 
 
 locate :: Instr.RegSpec -> Reg
@@ -244,11 +246,11 @@ execute1 :: Op1 -> Byte p -> Eff p (Flow p)
 execute1 op1 b1 = case op1 of
   MVI dest -> do
     save dest b1
-    return (Next 7)
+    return Next
   MVI_M -> do
     a <- getRegPair HL
     WriteMem a b1
-    return (Next 10)
+    return Next
   CPI -> do
     b <- GetReg A
     cin <- MakeBit True
@@ -257,21 +259,21 @@ execute1 op1 b1 = case op1 of
     cout' <- Flip cout
     SetFlag CY cout'
     setFlagsFrom v
-    return (Next 7)
+    return Next
   OUT -> do
     value <- GetReg A
     Out b1 value
-    return (Next 10)
+    return Next
   IN -> do
     value <- In b1
     SetReg A value
-    return (Next 10)
+    return Next
   ANI -> do
     v0 <- GetReg A
     v <- AndB b1 v0
     SetReg A v
     setFlagsFrom v
-    return (Next 7)
+    return Next
   ADI -> do
     v0 <- GetReg A
     cin <- MakeBit False
@@ -279,7 +281,7 @@ execute1 op1 b1 = case op1 of
     SetFlag CY cout
     SetReg A v
     setFlagsFrom v
-    return (Next 7)
+    return Next
 
 
 setFlagsFrom :: Byte p -> Eff p ()
@@ -298,51 +300,51 @@ execute2 :: Op2 -> (Byte p, Byte p) -> Eff p (Flow p)
 execute2 op2 (lo,hi) = case op2 of
   JP -> do
     dest <- MakeAddr $ HiLo{hi,lo}
-    return (Jump 10 dest)
+    return (Jump dest)
   JNZ -> do
     testFlagZ >>= \case
-      True -> return (Next 10)
+      True -> return Next
       False -> do
         dest <- MakeAddr $ HiLo{hi,lo}
-        return (Jump 10 dest)
+        return (Jump dest)
   JNC -> do
     testFlagCY >>= \case
-      True -> return (Next 10)
+      True -> return Next
       False -> do
         dest <- MakeAddr $ HiLo{hi,lo}
-        return (Jump 10 dest)
+        return (Jump dest)
   JZ -> do
     testFlagZ >>= \case
-      False -> return (Next 10)
+      False -> return Next
       True -> do
         dest <- MakeAddr $ HiLo{hi,lo}
-        return (Jump 10 dest)
+        return (Jump dest)
   JC -> do
     testFlagCY >>= \case
-      False -> return (Next 10)
+      False -> return Next
       True -> do
         dest <- MakeAddr $ HiLo{hi,lo}
-        return (Jump 10 dest)
+        return (Jump dest)
   LXI rp -> do
     let HiLo{hi=rh, lo=rl} = expandRegPair rp
     SetReg rh hi
     SetReg rl lo
-    return (Next 10)
+    return Next
   CALL -> do
     GetReg PCH >>= pushStack
     GetReg PCL >>= pushStack
     dest <- MakeAddr $ HiLo{hi,lo}
-    return (Jump 17 dest)
+    return (Jump dest)
   LDA -> do
     a <- MakeAddr $ HiLo{hi,lo}
     b <- ReadMem a
     SetReg A b
-    return (Next 13)
+    return Next
   STA -> do
     a <- MakeAddr $ HiLo{hi,lo}
     b  <- GetReg A
     WriteMem a b
-    return (Next 13)
+    return Next
 
 pushStack :: Byte p -> Eff p ()
 pushStack b = do

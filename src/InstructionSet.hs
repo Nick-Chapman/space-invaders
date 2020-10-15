@@ -70,7 +70,7 @@ data Op2
   | LXI RegPairSpec
   deriving (Eq,Ord)
 
-data Condition = Z | NZ | CY | NCY
+data Condition = Z | NZ | CY | NCY | PO | PE | P | MI
   deriving (Eq,Ord,Show)
 
 data RegSpec = A | B | C | D | E | H | L | M
@@ -102,7 +102,7 @@ allOps = map Op0 allOp0 ++ map Op1 allOp1 ++ map Op2 allOp2
     regs7spec = [A,B,C,D,E,H,L,M]
     rps1 = [BC,DE,HL,SP]
     rps2 = [BC,DE,HL,PSW]
-    conds= [Z,NZ,CY,NCY]
+    conds= [Z,NZ,CY,NCY,PO,PE,P,MI]
 
 
 cycles :: Bool -> Op -> Int
@@ -288,7 +288,10 @@ encodeCondition = \case
   Z -> 1
   NCY -> 2
   CY -> 3
-  -- PO, PE, P, N
+  PO -> 4
+  PE -> 5
+  P -> 6
+  MI -> 7
 
 encodeRegSpec :: RegSpec -> Word8
 encodeRegSpec = \case
@@ -300,7 +303,6 @@ encodeRegSpec = \case
   L -> 5
   M -> 6
   A -> 7
-
 
 encodeRegPairSpec :: RegPairSpec -> Word8
 encodeRegPairSpec = \case

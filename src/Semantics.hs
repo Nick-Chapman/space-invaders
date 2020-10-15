@@ -227,6 +227,10 @@ executeCond = \case
   Z -> GetFlag FlagZ
   NCY -> GetFlag FlagCY >>= Flip
   CY -> GetFlag FlagCY
+  PO -> undefined
+  PE -> undefined
+  P  -> error "executeCond, P,  need FlagS"
+  MI -> error "executeCond, MI, need FlagS"
 
 load :: Instr.RegSpec -> Eff p (Byte p)
 load = \case

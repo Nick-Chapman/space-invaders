@@ -307,8 +307,18 @@ execute1 op1 b1 = case op1 of
   ADI -> do
     v0 <- GetReg A
     cin <- MakeBit False
-    (v,cout) <- AddWithCarry cin b1 v0
+    (v,cout) <- AddWithCarry cin v0 b1
     SetFlag CY cout
+    SetReg A v
+    setFlagsFrom v
+    return Next
+  SUI -> do
+    v0 <- GetReg A
+    cin <- MakeBit True
+    b1comp <- Complement b1
+    (v,cout) <- AddWithCarry cin v0 b1comp
+    cout' <- Flip cout
+    SetFlag CY cout'
     SetReg A v
     setFlagsFrom v
     return Next

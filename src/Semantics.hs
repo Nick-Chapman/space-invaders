@@ -338,6 +338,14 @@ execute2 op2 (lo,hi) = case op2 of
     b  <- GetReg A
     WriteMem a b
     return Next
+  LHLD -> do
+    a <- MakeAddr $ HiLo{hi,lo}
+    b <- ReadMem a
+    SetReg L b
+    a' <- OffsetAddr 1 a
+    b' <- ReadMem a'
+    SetReg H b'
+    return Next
 
 pushStack :: Byte p -> Eff p ()
 pushStack b = do

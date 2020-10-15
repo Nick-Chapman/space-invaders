@@ -63,6 +63,7 @@ data Op2
   | CNZ
   | LDA
   | STA
+  | LHLD
   | LXI RegPairSpec
   deriving (Eq,Ord)
 
@@ -84,7 +85,7 @@ allOps = map Op0 allOp0 ++ map Op1 allOp1 ++ map Op2 allOp2
              ++ map RST [0..7]
              ++ [ MOV {dest,src} | dest <- regs7spec, src <- regs7spec, not (dest==M && src==M) ]
     allOp1 = [CPI,OUT,IN,ANI,ADI] ++ map MVI regs7spec
-    allOp2 = [JP,JNZ,JNC,JZ,JC,CALL,CNZ,LDA,STA] ++ map LXI rps1
+    allOp2 = [JP,JNZ,JNC,JZ,JC,CALL,CNZ,LDA,STA,LHLD] ++ map LXI rps1
     regs7spec = [A,B,C,D,E,H,L,M]
     rps1 = [BC,DE,HL,SP]
     rps2 = [BC,DE,HL,PSW]
@@ -135,6 +136,7 @@ cycles jumpTaken = \case
   Op2 CNZ -> if jumpTaken then 17 else 11
   Op2 LDA -> 13
   Op2 STA -> 13
+  Op2 LHLD -> 16
   Op2 LXI{} -> 10
 
 
@@ -195,6 +197,7 @@ prettyInstruction = \case
   Ins2 CNZ b1 b2 -> tag "CALL" ("NZ," <> show b2 <> show b1)
   Ins2 LDA b1 b2 -> tag "LD" ("A,("<> show b2 <> show b1 <> ")")
   Ins2 STA b1 b2 -> tag "LD" ("("<> show b2 <> show b1 <> "),A")
+  Ins2 LHLD b1 b2 -> tag "LD" ("HL," <> show b2 <> show b1)
   Ins2 (LXI rp) b1 b2 -> tag "LD" (show rp <> "," <> show b2 <> show b1)
   where
     tag s more = ljust 5 s <> more
@@ -252,6 +255,7 @@ encode = \case
   Op2 CNZ -> 0xC4
   Op2 LDA -> 0x3A
   Op2 STA -> 0x32
+  Op2 LHLD -> 0x2A
   Op2 (LXI rp) -> Byte (16 * encodeRegPairSpec rp + 0x1)
 
 encodeRegSpec :: RegSpec -> Word8

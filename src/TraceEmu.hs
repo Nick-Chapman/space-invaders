@@ -22,18 +22,21 @@ traceEmulate traceOn mem = emulate mem >>= loop
     loop = \case
       CrashDecode s byte -> do
         let pc = programCounter s - 1
-        error $ "CrashDecode, pc = " <> show pc <> " : " <> show byte
+        let EmuState{icount} = s
+        error $ "CrashDecode, icount = " <> show icount <> ", pc = " <> show pc <> " : " <> show byte
       EmuStep
         { pre
         , instruction
         , post = post@EmuState{cpu,icount}
         , continue
         } -> do
-        let debug = False --(icount >= 1752250)
+        --let poi = 1752278
+        let debug = False -- (icount >= poi - 5)
         when (traceOn || debug) $
-          putStrLn (ljust 50 (prettyStep pre instruction) ++ show cpu)
+          putStrLn (ljust 50 (prettyStep pre instruction) ++ show cpu) -- TODO: make it 60 (update expected)
         printWhenNewFrame pre post
         when (traceOn && icount > 50000) $ error "STOP"
+        --when (icount > poi + 5) $ error "STOP2"
         continue >>= loop
 
 ljust :: Int -> String -> String

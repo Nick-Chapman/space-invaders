@@ -3,10 +3,10 @@
 
 module Semantics (fetchDecodeExec) where
 
-import Cpu (Reg(..),RegPair(..),Flag(..))
+import Cpu (Reg(..),Flag(..))
 import Effect (Eff(..))
 import HiLo (HiLo(..))
-import InstructionSet (Op(..),Instruction(..),Op0(..),Op1(..),Op2(..))
+import InstructionSet (Op(..),Instruction(..),Op0(..),Op1(..),Op2(..),RegPairSpec(..))
 import Phase (Addr,Byte)
 
 -- | Semantics are defined to be Phase generic
@@ -351,21 +351,21 @@ setPC a = do
   SetReg PCL lo
   SetReg PCH hi
 
-getRegPair :: RegPair -> Eff p (Addr p)
+getRegPair :: RegPairSpec -> Eff p (Addr p)
 getRegPair rp = do
   let HiLo{hi=rh, lo=rl} = expandRegPair rp
   hi <- GetReg rh
   lo <- GetReg rl
   MakeAddr $ HiLo{hi,lo}
 
-setRegPair :: RegPair -> Addr p -> Eff p ()
+setRegPair :: RegPairSpec -> Addr p -> Eff p ()
 setRegPair rp a = do
   let HiLo{hi=rh, lo=rl} = expandRegPair rp
   HiLo{hi,lo} <- SplitAddr a
   SetReg rh hi
   SetReg rl lo
 
-expandRegPair :: RegPair -> HiLo Reg
+expandRegPair :: RegPairSpec -> HiLo Reg
 expandRegPair = \case
   BC -> HiLo {hi = B, lo = C}
   DE -> HiLo {hi = D, lo = E}
@@ -375,7 +375,7 @@ expandRegPair = \case
 
 data RegX = NormalReg Reg | FlagsReg
 
-expandRegPairX :: RegPair -> HiLo RegX -- for push/pop
+expandRegPairX :: RegPairSpec -> HiLo RegX -- for push/pop
 expandRegPairX = \case
   BC -> HiLo {hi = r B, lo = r C}
   DE -> HiLo {hi = r D, lo = r E}

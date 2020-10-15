@@ -1,6 +1,6 @@
 
 module InstructionSet (
-  Op(..),Op0(..),Op1(..),Op2(..),
+  Op(..),Op0(..),Op1(..),Op2(..), RegPairSpec(..),
   Instruction(..),
   decode,
   printDecodeTable,
@@ -13,7 +13,7 @@ import Data.List.Extra (groupSort)
 import Data.Map (Map)
 import Data.Word8 (Word8)
 import Byte (Byte(..))
-import Cpu (Reg(..),RegPair(..))
+import Cpu (Reg(..))
 import qualified Data.Map.Strict as Map
 
 data Op = Op0 Op0 | Op1 Op1 | Op2 Op2
@@ -40,10 +40,10 @@ data Op0
   | ORA Reg
   | ORA_M
   | MOV { dest :: Reg, src :: Reg }
-  | INX RegPair
-  | PUSH RegPair
-  | POP RegPair
-  | DAD RegPair
+  | INX RegPairSpec
+  | PUSH RegPairSpec
+  | POP RegPairSpec
+  | DAD RegPairSpec
   | RST Word8 --(0..7)
   deriving (Eq,Ord)
 
@@ -66,9 +66,11 @@ data Op2
   | CALL
   | LDA
   | STA
-  | LXI RegPair
+  | LXI RegPairSpec
   deriving (Eq,Ord)
 
+data RegPairSpec = BC | DE | HL | SP | PSW
+  deriving (Eq,Ord,Show)
 
 allOps :: [Op]
 allOps = map Op0 allOp0 ++ map Op1 allOp1 ++ map Op2 allOp2
@@ -185,10 +187,10 @@ encode = \case
   Op0 (ORA reg) -> Byte (encodeReg7 reg + 0xB0)
   Op0 ORA_M -> 0xB6
   Op0 MOV {dest,src} -> Byte (0x40 + 8 * encodeReg7 dest + encodeReg7 src)
-  Op0 (INX rp) -> Byte (16 * encodeRegPair rp + 0x3)
-  Op0 (PUSH rp) -> Byte (16 * encodeRegPair rp + 0xC5)
-  Op0 (POP rp) -> Byte (16 * encodeRegPair rp + 0xC1)
-  Op0 (DAD rp) -> Byte (16 * encodeRegPair rp + 0x9)
+  Op0 (INX rp) -> Byte (16 * encodeRegPairSpec rp + 0x3)
+  Op0 (PUSH rp) -> Byte (16 * encodeRegPairSpec rp + 0xC5)
+  Op0 (POP rp) -> Byte (16 * encodeRegPairSpec rp + 0xC1)
+  Op0 (DAD rp) -> Byte (16 * encodeRegPairSpec rp + 0x9)
   Op0 (RST n) -> Byte (8 * fromIntegral n + 0xC7)
   Op1 (MVI dest) -> Byte (8 * encodeReg7 dest + 0x06)
   Op1 MVI_M -> 0x36
@@ -205,7 +207,7 @@ encode = \case
   Op2 CALL -> 0xCD
   Op2 LDA -> 0x3A
   Op2 STA -> 0x32
-  Op2 (LXI rp) -> Byte (16 * encodeRegPair rp + 0x1)
+  Op2 (LXI rp) -> Byte (16 * encodeRegPairSpec rp + 0x1)
 
 encodeReg7 :: Reg -> Word8
 encodeReg7 = \case
@@ -219,8 +221,8 @@ encodeReg7 = \case
   A -> 7
   reg -> error $ "encodeReg7: " <> show reg
 
-encodeRegPair :: RegPair -> Word8
-encodeRegPair = \case
+encodeRegPairSpec :: RegPairSpec -> Word8
+encodeRegPairSpec = \case
   BC -> 0
   DE -> 1
   HL -> 2

@@ -1,6 +1,6 @@
 
 module Cpu (
-  Cpu,Reg(..),RegPair(..),Flag(..),
+  Cpu,Reg(..),Flag(..),
   init,
   get,set,
   getFlag,setFlag,
@@ -10,9 +10,6 @@ import Prelude hiding (init)
 import Phase (Byte,Bit)
 
 data Reg = PCH | PCL | SPH | SPL | A | B | C | D | E | H | L
-  deriving (Eq,Ord,Show)
-
-data RegPair = BC | DE | HL | SP | PSW
   deriving (Eq,Ord,Show)
 
 data Flag = Z | CY

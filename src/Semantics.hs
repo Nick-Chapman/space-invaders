@@ -155,6 +155,11 @@ execute0 = \case
     a' <- OffsetAddr 1 a
     setRegPair rp a'
     return Next
+  DCX rp -> do
+    a <- getRegPair rp
+    a' <- OffsetAddr (-1) a
+    setRegPair rp a'
+    return Next
   PUSH rp -> do
     let HiLo{hi=rh, lo=rl} = expandRegPairX rp
     hi <- getRegX rh

@@ -40,6 +40,7 @@ data Op0
   | ORA RegSpec
   | MOV { dest :: RegSpec, src :: RegSpec }
   | INX RegPairSpec
+  | DCX RegPairSpec
   | PUSH RegPairSpec
   | POP RegPairSpec
   | DAD RegPairSpec
@@ -85,7 +86,11 @@ allOps = map Op0 allOp0 ++ map Op1 allOp1 ++ map Op2 allOp2
              ++ map XRA regs7spec
              ++ map ANA regs7spec
              ++ map ORA regs7spec
-             ++ map INX rps1 ++ map DAD rps1 ++ map PUSH rps2 ++ map POP rps2
+             ++ map INX rps1
+             ++ map DCX rps1
+             ++ map DAD rps1
+             ++ map PUSH rps2
+             ++ map POP rps2
              ++ map RST [0..7]
              ++ [ MOV {dest,src} | dest <- regs7spec, src <- regs7spec, not (dest==M && src==M) ]
     allOp1 = [CPI,OUT,IN,ANI,ORI,ADI] ++ map MVI regs7spec
@@ -123,6 +128,7 @@ cycles jumpTaken = \case
   Op0 MOV {dest=M} -> 7
   Op0 MOV{} -> 7 -- TODO: wrong? should be 5
   Op0 INX{} -> 5
+  Op0 DCX{} -> 5
   Op0 PUSH{} -> 11
   Op0 POP{} -> 10
   Op0 DAD{} -> 11
@@ -188,6 +194,7 @@ prettyInstruction = \case
   Ins0 (ORA reg) -> tag "OR" (prettyReg reg)
   Ins0 MOV {dest,src} -> tag "LD" (prettyReg dest <> "," <> prettyReg src)
   Ins0 (INX rp) -> tag "INC" (show rp)
+  Ins0 (DCX rp) -> tag "DEC" (show rp)
   Ins0 (PUSH rp) -> tag "PUSH" (show rp)
   Ins0 (POP rp) -> tag "POP" (show rp)
   Ins0 (DAD rp) -> tag "ADD" ("HL," <> show rp)
@@ -249,6 +256,7 @@ encode = \case
   Op0 (ORA reg) -> Byte (encodeRegSpec reg + 0xB0)
   Op0 MOV {dest,src} -> Byte (0x40 + 8 * encodeRegSpec dest + encodeRegSpec src)
   Op0 (INX rp) -> Byte (16 * encodeRegPairSpec rp + 0x3)
+  Op0 (DCX rp) -> Byte (16 * encodeRegPairSpec rp + 0xB)
   Op0 (PUSH rp) -> Byte (16 * encodeRegPairSpec rp + 0xC5)
   Op0 (POP rp) -> Byte (16 * encodeRegPairSpec rp + 0xC1)
   Op0 (DAD rp) -> Byte (16 * encodeRegPairSpec rp + 0x9)

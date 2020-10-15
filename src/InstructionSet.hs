@@ -89,64 +89,66 @@ allOps = map Op0 allOp0 ++ map Op1 allOp1 ++ map Op2 allOp2
     rps2 = [BC,DE,HL,PSW]
 
 data Instruction b -- op+args
-  = Ins0 Op0 b
-  | Ins1 Op1 b b
-  | Ins2 Op2 b b b
+  = Ins0 Op0
+  | Ins1 Op1 b
+  | Ins2 Op2 b b
 
 instance Show b => Show (Instruction b) where
   show i =
-    ljust 10 (unwords (map show bytes))
-    <> ljust 11 (brace (show (justOp i)))
+    ljust 10 (unwords bytes)
+    <> ljust 11 (brace (show op))
     <> prettyInstruction i
     where
+      b0 = encode op
+      op = justOp i
       bytes = case i of
-        Ins0 _ b0 -> [b0]
-        Ins1 _ b0 b1 -> [b0,b1]
-        Ins2 _ b0 b1 b2 -> [b0,b1,b2]
+        Ins0 _ -> [show b0]
+        Ins1 _ b1 -> [show b0,show b1]
+        Ins2 _ b1 b2 -> [show b0,show b1,show b2]
 
 prettyInstruction :: Show b => Instruction b -> String
 prettyInstruction = \case
-  Ins0 NOP _ -> "NOP"
-  Ins0 RET _ -> "RET"
-  Ins0 RZ _ -> tag "RET" "Z"
-  Ins0 RC _ -> tag "RET" "C"
-  Ins0 RNZ _ -> tag "RET" "NZ"
-  Ins0 RRC _ -> "RRCA"
-  Ins0 EI _ -> "EI"
-  Ins0 STC _ -> "SCF"
-  Ins0 XCHG _ -> tag "EX" "DE,HL"
-  Ins0 LDAX_B _ -> tag "LD" "A,(BC)"
-  Ins0 LDAX_D _ -> tag "LD" "A,(DE)"
-  Ins0 MOV_M_A _ -> tag "LD" "(HL),A"
-  Ins0 (MOV_rM reg) _ -> tag "LD" (show reg <> ",(HL)")
-  Ins0 (DCR reg) _ -> tag "DEC" (show reg)
-  Ins0 DCR_M _ -> tag "DEC" "(HL)"
-  Ins0 (XRA reg) _ -> tag "XOR" (show reg)
-  Ins0 (ANA reg) _ -> tag "AND" (show reg)
-  Ins0 (ORA reg) _ -> tag "OR" (show reg)
-  Ins0 ORA_M _ -> tag "OR" "M"
-  Ins0 (MOV dest src) _ -> tag "LD" (show dest <> "," <> show src)
-  Ins0 (INX rp) _ -> tag "INC" (show rp)
-  Ins0 (PUSH rp) _ -> tag "PUSH" (show rp)
-  Ins0 (POP rp) _ -> tag "POP" (show rp)
-  Ins0 (DAD rp) _ -> tag "ADD" ("HL," <> show rp)
-  Ins0 (RST n) _ -> tag "RST" (show n)
-  Ins1 (MVI dest) _ b1 -> tag "LD" (show dest <> "," <> show b1)
-  Ins1 MVI_M _ b1 -> tag "LD" ("(HL)" <> "," <> show b1)
-  Ins1 CPI _ b1 -> tag "CP" (show b1)
-  Ins1 OUT _ b1 -> tag "OUT" (show b1)
-  Ins1 IN _ b1 -> tag "IN" (show b1)
-  Ins1 ANI _ b1 -> tag "AND" (show b1)
-  Ins1 ADI _ b1 -> tag "ADD" (show b1)
-  Ins2 JP _ b1 b2 -> tag "JP" (show b2 <> show b1)
-  Ins2 JNZ _ b1 b2 -> tag "JP" ("NZ," <> show b2 <> show b1)
-  Ins2 JNC _ b1 b2 -> tag "JP" ("NC," <> show b2 <> show b1)
-  Ins2 JZ _ b1 b2 -> tag "JP" ("Z," <> show b2 <> show b1)
-  Ins2 JC _ b1 b2 -> tag "JP" ("C," <> show b2 <> show b1)
-  Ins2 CALL _ b1 b2 -> tag "CALL" (show b2 <> show b1)
-  Ins2 LDA _ b1 b2 -> tag "LD" ("A,("<> show b2 <> show b1 <> ")")
-  Ins2 STA _ b1 b2 -> tag "LD" ("("<> show b2 <> show b1 <> "),A")
-  Ins2 (LXI rp) _ b1 b2 -> tag "LD" (show rp <> "," <> show b2 <> show b1)
+  Ins0 NOP -> "NOP"
+  Ins0 RET -> "RET"
+  Ins0 RZ -> tag "RET" "Z"
+  Ins0 RC -> tag "RET" "C"
+  Ins0 RNZ -> tag "RET" "NZ"
+  Ins0 RRC -> "RRCA"
+  Ins0 EI -> "EI"
+  Ins0 STC -> "SCF"
+  Ins0 XCHG -> tag "EX" "DE,HL"
+  Ins0 LDAX_B -> tag "LD" "A,(BC)"
+  Ins0 LDAX_D -> tag "LD" "A,(DE)"
+  Ins0 MOV_M_A -> tag "LD" "(HL),A"
+  Ins0 (MOV_rM reg) -> tag "LD" (show reg <> ",(HL)")
+  Ins0 (DCR reg) -> tag "DEC" (show reg)
+  Ins0 DCR_M -> tag "DEC" "(HL)"
+  Ins0 (XRA reg) -> tag "XOR" (show reg)
+  Ins0 (ANA reg) -> tag "AND" (show reg)
+  Ins0 (ORA reg) -> tag "OR" (show reg)
+  Ins0 ORA_M -> tag "OR" "M"
+  Ins0 (MOV dest src) -> tag "LD" (show dest <> "," <> show src)
+  Ins0 (INX rp) -> tag "INC" (show rp)
+  Ins0 (PUSH rp) -> tag "PUSH" (show rp)
+  Ins0 (POP rp) -> tag "POP" (show rp)
+  Ins0 (DAD rp) -> tag "ADD" ("HL," <> show rp)
+  Ins0 (RST n) -> tag "RST" (show n)
+  Ins1 (MVI dest) b1 -> tag "LD" (show dest <> "," <> show b1)
+  Ins1 MVI_M b1 -> tag "LD" ("(HL)" <> "," <> show b1)
+  Ins1 CPI b1 -> tag "CP" (show b1)
+  Ins1 OUT b1 -> tag "OUT" (show b1)
+  Ins1 IN b1 -> tag "IN" (show b1)
+  Ins1 ANI b1 -> tag "AND" (show b1)
+  Ins1 ADI b1 -> tag "ADD" (show b1)
+  Ins2 JP b1 b2 -> tag "JP" (show b2 <> show b1)
+  Ins2 JNZ b1 b2 -> tag "JP" ("NZ," <> show b2 <> show b1)
+  Ins2 JNC b1 b2 -> tag "JP" ("NC," <> show b2 <> show b1)
+  Ins2 JZ b1 b2 -> tag "JP" ("Z," <> show b2 <> show b1)
+  Ins2 JC b1 b2 -> tag "JP" ("C," <> show b2 <> show b1)
+  Ins2 CALL b1 b2 -> tag "CALL" (show b2 <> show b1)
+  Ins2 LDA b1 b2 -> tag "LD" ("A,("<> show b2 <> show b1 <> ")")
+  Ins2 STA b1 b2 -> tag "LD" ("("<> show b2 <> show b1 <> "),A")
+  Ins2 (LXI rp) b1 b2 -> tag "LD" (show rp <> "," <> show b2 <> show b1)
   where
     tag s more = ljust 5 s <> more
 
@@ -162,11 +164,11 @@ instance Show Op where
     Op1 x -> show x
     Op2 x -> show x
 
-justOp :: Instruction b  -> Op
+justOp :: Instruction b -> Op
 justOp = \case
-  Ins0 op0 _ -> Op0 op0
-  Ins1 op1 _ _ -> Op1 op1
-  Ins2 op2 _ _ _ -> Op2 op2
+  Ins0 op0 -> Op0 op0
+  Ins1 op1 _ -> Op1 op1
+  Ins2 op2 _ _ -> Op2 op2
 
 encode :: Op -> Byte
 encode = \case

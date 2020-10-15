@@ -188,16 +188,31 @@ execute0 = \case
     v1 <- GetReg reg
     v2 <- GetReg A
     v <- XorB v1 v2
-    SetReg reg v
+    SetReg reg v -- TODO: bug, should set A
     setFlagsFrom v
     return (Next 4)
   ANA reg -> do
     v1 <- GetReg reg
     v2 <- GetReg A
     v <- AndB v1 v2
-    SetReg reg v
+    SetReg reg v -- TODO: bug, should set A
     setFlagsFrom v
     return (Next 4)
+  ORA reg -> do
+    v1 <- GetReg reg
+    v2 <- GetReg A
+    v <- OrB v1 v2
+    SetReg A v
+    setFlagsFrom v
+    return (Next 4)
+  ORA_M -> do
+    a <- getRegPair HL
+    v1 <- ReadMem a
+    v2 <- GetReg A
+    v <- OrB v1 v2
+    SetReg A v
+    setFlagsFrom v
+    return (Next 7)
   RST w -> do
     GetReg PCH >>= pushStack
     GetReg PCL >>= pushStack

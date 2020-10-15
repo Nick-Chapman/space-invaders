@@ -36,6 +36,8 @@ data Op0
   | DCR_M
   | XRA Reg
   | ANA Reg
+  | ORA Reg
+  | ORA_M
   | MOV Reg Reg
   | INX RegPair
   | PUSH RegPair
@@ -71,11 +73,12 @@ allOps = map Op0 allOp0 ++ map Op1 allOp1 ++ map Op2 allOp2
   where
     allOp0 = [NOP,LDAX_B,LDAX_D
              ,MOV_M_A
-             ,RET,RZ,RC,RNZ,RRC,EI,STC,XCHG,DCR_M]
+             ,RET,RZ,RC,RNZ,RRC,EI,STC,XCHG,DCR_M,ORA_M]
              ++ map MOV_rM regs7
              ++ map DCR regs7
              ++ map XRA regs7
              ++ map ANA regs7
+             ++ map ORA regs7
              ++ map INX rps1 ++ map DAD rps1 ++ map PUSH rps2 ++ map POP rps2
              ++ map RST [0..7]
              ++ [ MOV dest src | dest <- regs7, src <- regs7 ]
@@ -120,6 +123,8 @@ prettyInstruction = \case
   Ins0 DCR_M _ -> tag "DEC" "(HL)"
   Ins0 (XRA reg) _ -> tag "XOR" (show reg)
   Ins0 (ANA reg) _ -> tag "AND" (show reg)
+  Ins0 (ORA reg) _ -> tag "OR" (show reg)
+  Ins0 ORA_M _ -> tag "OR" "M"
   Ins0 (MOV dest src) _ -> tag "LD" (show dest <> "," <> show src)
   Ins0 (INX rp) _ -> tag "INC" (show rp)
   Ins0 (PUSH rp) _ -> tag "PUSH" (show rp)
@@ -182,6 +187,8 @@ encode = \case
   Op0 DCR_M -> 0x35
   Op0 (XRA reg) -> Byte (encodeReg7 reg + 0xA8)
   Op0 (ANA reg) -> Byte (encodeReg7 reg + 0xA0)
+  Op0 (ORA reg) -> Byte (encodeReg7 reg + 0xB0)
+  Op0 ORA_M -> 0xB6
   Op0 (MOV dest src) -> Byte (0x40 + 8 * encodeReg7 dest + encodeReg7 src)
   Op0 (INX rp) -> Byte (16 * encodeRegPair rp + 0x3)
   Op0 (PUSH rp) -> Byte (16 * encodeRegPair rp + 0xC5)

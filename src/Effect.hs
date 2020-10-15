@@ -29,6 +29,7 @@ data Eff p a where
   Flip :: Bit p -> Eff p (Bit p)
 
   AndB :: Byte p -> Byte p -> Eff p (Byte p)
+  OrB :: Byte p -> Byte p -> Eff p (Byte p)
   XorB :: Byte p -> Byte p -> Eff p (Byte p)
   Add16 :: Addr p -> Addr p -> Eff p (Addr p)
 

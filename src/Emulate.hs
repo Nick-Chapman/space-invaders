@@ -113,6 +113,7 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ () -> error "unexpected emula
       Flip (Bit bool) -> k s (Bit (not bool))
 
       AndB b1 b2 -> k s (b1 .&. b2)
+      OrB b1 b2 -> k s (b1 .|. b2)
       XorB b1 b2 -> k s (b1 `xor` b2)
 
       -- Word (Address) ops

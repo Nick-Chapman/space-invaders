@@ -107,6 +107,13 @@ execute0 = \case
     SetFlag CY bool'
     SetReg A byte'
     return Next
+  RLC -> do
+    byte <- GetReg A
+    bool <- GetFlag CY
+    (byte',bool') <- RotateLeft (bool,byte)
+    SetFlag CY bool'
+    SetReg A byte'
+    return Next
   EI -> do
     EnableInterrupts
     return Next

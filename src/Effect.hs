@@ -43,6 +43,7 @@ data Eff p a where
   MakeBit :: Bool -> Eff p (Bit p)
 
   RotateRight :: (Bit p,Byte p) -> Eff p (Byte p,Bit p)
+  RotateLeft :: (Bit p,Byte p) -> Eff p (Byte p,Bit p)
 
   Out :: Byte p -> Byte p -> Eff p ()
   In :: Byte p -> Eff p (Byte p)

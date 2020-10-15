@@ -21,7 +21,7 @@ traceEmulate traceOn mem = emulate mem >>= loop
     loop :: Emulation -> IO ()
     loop = \case
       CrashDecode s byte -> do
-        let pc = programCounter s
+        let pc = programCounter s - 1
         error $ "CrashDecode, pc = " <> show pc <> " : " <> show byte
       EmuStep
         { pre
@@ -29,7 +29,8 @@ traceEmulate traceOn mem = emulate mem >>= loop
         , post = post@EmuState{cpu,icount}
         , continue
         } -> do
-        when traceOn $
+        let debug = False --(icount >= 1752250)
+        when (traceOn || debug) $
           putStrLn (ljust 50 (prettyStep pre instruction) ++ show cpu)
         printWhenNewFrame pre post
         when (traceOn && icount > 50000) $ error "STOP"

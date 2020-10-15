@@ -25,6 +25,7 @@ data Op0
   | RZ
   | RC
   | RNZ
+  | RNC
   | RRC
   | RLC
   | RAR
@@ -82,7 +83,7 @@ data RegPairSpec = BC | DE | HL | SP | PSW
 allOps :: [Op]
 allOps = map Op0 allOp0 ++ map Op1 allOp1 ++ map Op2 allOp2
   where
-    allOp0 = [NOP,LDAX_B,LDAX_D,RET,RZ,RC,RNZ,RRC,RLC,RAR,EI,STC,XCHG,XTHL,PCHL]
+    allOp0 = [NOP,LDAX_B,LDAX_D,RET,RZ,RC,RNZ,RNC,RRC,RLC,RAR,EI,STC,XCHG,XTHL,PCHL]
              ++ map INR regs7spec
              ++ map DCR regs7spec
              ++ map XRA regs7spec
@@ -109,6 +110,7 @@ cycles jumpTaken = \case
   Op0 RZ -> if jumpTaken then 11 else 5
   Op0 RC -> if jumpTaken then 11 else 5
   Op0 RNZ -> if jumpTaken then 11 else 5
+  Op0 RNC -> if jumpTaken then 11 else 5
   Op0 RRC -> 4
   Op0 RLC -> 4
   Op0 RAR -> 4
@@ -183,6 +185,7 @@ prettyInstruction = \case
   Ins0 RZ -> tag "RET" "Z"
   Ins0 RC -> tag "RET" "C"
   Ins0 RNZ -> tag "RET" "NZ"
+  Ins0 RNC -> tag "RET" "NC"
   Ins0 RRC -> tag "RRCA" ""
   Ins0 RLC -> tag "RLCA" ""
   Ins0 RAR -> "RAR"
@@ -247,6 +250,7 @@ encode = \case
   Op0 RZ -> 0xC8
   Op0 RC -> 0xD8
   Op0 RNZ -> 0xC0
+  Op0 RNC -> 0xD0
   Op0 RRC -> 0x0F
   Op0 RLC -> 0x07
   Op0 RAR -> 0x1F

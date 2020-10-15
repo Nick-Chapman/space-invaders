@@ -100,6 +100,14 @@ execute0 = \case
         hi <- popStack
         dest <- MakeAddr $ HiLo{hi,lo}
         return (Jump dest)
+  RNC -> do
+    testFlagCY >>= \case
+      True -> return Next
+      False -> do
+        lo <- popStack
+        hi <- popStack
+        dest <- MakeAddr $ HiLo{hi,lo}
+        return (Jump dest)
   RRC -> do
     byte <- GetReg A
     (byte',bool') <- RotateRight byte

@@ -129,22 +129,25 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ () -> error "unexpected emula
       TestBit (Bit bool) -> k s bool
       MakeBit (bool) -> k s (Bit bool)
 
-      RotateRightThroughCarry (Bit bit,byte) -> do -- RAR
-        let bit' = byte `testBit` 0
-        let byte' = (if bit then 128 else 0) + shiftR byte 1
-        k s (byte',Bit bit')
+      RotateRightThroughCarry (Bit cin,before) -> do -- RAR
+        let cout = before `testBit` 0
+        let after = (if cin then 128 else 0) + shiftR before 1
+        k s (after,Bit cout)
 
-      RotateLeftThroughCarry (Bit bit,byte) -> do  -- RAL
-        let bit' = byte `testBit` 7
-        let byte' = (if bit then 1 else 0) + shiftL byte 1
-        k s (byte',Bit bit')
+      RotateLeftThroughCarry (Bit cin,before) -> do  -- RAL
+        let cout = before `testBit` 7
+        let after = shiftL before 1 + (if cin then 1 else 0)
+        k s (after,Bit cout)
 
-      RotateRight{} -> -- RRC
-        undefined
+      RotateRight before -> do -- RRC
+        let bit = before `testBit` 0
+        let after = (if bit then 128 else 0) + shiftR before 1
+        k s (after,Bit bit)
 
-      RotateLeft{} -> -- RLC
-        undefined
-
+      RotateLeft before -> do -- RLC
+        let bit = before `testBit` 7
+        let after = shiftL before 1 + (if bit then 1 else 0)
+        k s (after,Bit bit)
 
       Out port byte -> do
         case port of

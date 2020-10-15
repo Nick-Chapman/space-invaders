@@ -102,22 +102,20 @@ execute0 = \case
         return (Jump dest)
   RRC -> do
     byte <- GetReg A
-    bool <- GetFlag CY
-    (byte',bool') <- RotateRightThroughCarry (bool,byte) -- TODO: bug, should not be through carry
+    (byte',bool') <- RotateRight byte
     SetFlag CY bool'
     SetReg A byte'
     return Next
   RLC -> do
     byte <- GetReg A
-    bool <- GetFlag CY
-    (byte',bool') <- RotateLeftThroughCarry (bool,byte) -- TODO: bug, should not be through carry
+    (byte',bool') <- RotateLeft byte
     SetFlag CY bool'
     SetReg A byte'
     return Next
   RAR -> do
     byte <- GetReg A
     bool <- GetFlag CY
-    (byte',bool') <- RotateRightThroughCarry (bool,byte) -- correct!
+    (byte',bool') <- RotateRightThroughCarry (bool,byte)
     SetFlag CY bool'
     SetReg A byte'
     return Next

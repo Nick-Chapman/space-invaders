@@ -10,7 +10,7 @@ import Byte (Byte)
 import Cpu (Reg(PCL,PCH))
 import Emulate (emulate,Emulation(..),EmuState(..),Ticks(..))
 import HiLo (HiLo(..))
-import InstructionSet (Instruction)
+import InstructionSet (Instruction,prettyInstructionBytes)
 import Mem (Mem,read)
 import qualified Addr (fromHiLo)
 import qualified Cpu
@@ -45,9 +45,15 @@ programCounter EmuState{cpu} = do
   Addr.fromHiLo HiLo{hi,lo}
 
 prettyStep :: EmuState -> Instruction Byte -> String
-prettyStep s instruction = do
+prettyStep s i = do
   let pc = programCounter s
-  unwords [ prettyTicks s, show pc, ":", show instruction]
+  unwords
+    [ prettyTicks s
+    , show pc
+    , ":"
+    , ljust 10 (prettyInstructionBytes i)
+    , show i
+    ]
   --unwords [ prettyTicks s, show pc, "-- "]
 
 prettyTicks :: EmuState -> String

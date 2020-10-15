@@ -3,7 +3,8 @@ module InstructionSet (
   Op(..),Op0(..),Op1(..),Op2(..),
   Instruction(..),
   decode,
-  printDecodeTable
+  printDecodeTable,
+  prettyInstructionBytes,
   ) where
 
 import Text.Printf (printf)
@@ -44,7 +45,7 @@ data Op0
   | POP RegPair
   | DAD RegPair
   | RST Word8 --(0..7)
-  deriving (Eq,Ord,Show)
+  deriving (Eq,Ord)
 
 data Op1
   = CPI
@@ -54,7 +55,7 @@ data Op1
   | ADI
   | MVI_M
   | MVI Reg
-  deriving (Eq,Ord,Show)
+  deriving (Eq,Ord)
 
 data Op2
   = JP
@@ -66,7 +67,8 @@ data Op2
   | LDA
   | STA
   | LXI RegPair
-  deriving (Eq,Ord,Show)
+  deriving (Eq,Ord)
+
 
 allOps :: [Op]
 allOps = map Op0 allOp0 ++ map Op1 allOp1 ++ map Op2 allOp2
@@ -94,16 +96,17 @@ data Instruction b -- op+args
   | Ins2 Op2 b b
 
 instance Show b => Show (Instruction b) where
-  show i =
-    ljust 11 (unwords bytes)
-    <> prettyInstruction i
-    where
-      b0 = encode op
-      op = justOp i
-      bytes = case i of
-        Ins0 _ -> [show b0]
-        Ins1 _ b1 -> [show b0,show b1]
-        Ins2 _ b1 b2 -> [show b0,show b1,show b2]
+  show i = prettyInstruction i
+
+prettyInstructionBytes :: Show b => Instruction b -> String
+prettyInstructionBytes i = unwords bytes
+  where
+    b0 = encode op
+    op = justOp i
+    bytes = case i of
+      Ins0 _ -> [show b0]
+      Ins1 _ b1 -> [show b0,show b1]
+      Ins2 _ b1 b2 -> [show b0,show b1,show b2]
 
 prettyInstruction :: Show b => Instruction b -> String
 prettyInstruction = \case
@@ -153,12 +156,6 @@ prettyInstruction = \case
 
 ljust :: Int -> String -> String
 ljust n s = s <> take (max 0 (n - length s)) (repeat ' ')
-
-instance Show Op where
-  show = \case
-    Op0 x -> show x
-    Op1 x -> show x
-    Op2 x -> show x
 
 justOp :: Instruction b -> Op
 justOp = \case
@@ -241,13 +238,29 @@ decodeTable = Map.fromList ys
     xs = [ (encode op, op) | op <- allOps ]
     ys = [ (k,expectUnique k vs) | (k,vs) <- groupSort xs ]
     expectUnique k = \case
-      [v] -> v
-      vs -> error $ "bad decoding: " <> show k <> " --> " <> show vs
+      [op] -> op
+      ops -> error $
+        unlines $
+        ("bad decoding: " <> show k)
+          : [ "--> " <> show (docInstructionForOp op) | op <- ops ]
 
 printDecodeTable :: IO ()
 printDecodeTable = do
-  putStrLn $ unlines [ show k <> " --> " <> show v | (k,v) <- ps ]
+  putStrLn $ unlines [ show k <> " --> " <> show (docInstructionForOp v) | (k,v) <- ps ]
   putStrLn (printf "implemented: %d, unimplemented %d" n (256-n))
   where
     ps = sort (Map.toList decodeTable)
     n = length ps
+
+docInstructionForOp :: Op -> Instruction ImmSpec
+docInstructionForOp = \case
+  Op0 op0 -> Ins0 op0
+  Op1 op1 -> Ins1 op1 B1
+  Op2 op2 -> Ins2 op2 B1 B2
+
+data ImmSpec = B1 | B2
+
+instance Show ImmSpec where
+  show = \case
+    B1 -> "b1"
+    B2 -> "b2"

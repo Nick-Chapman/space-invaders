@@ -17,7 +17,7 @@ import Byte (Byte(..))
 import qualified Data.Map.Strict as Map
 
 data Op = Op0 Op0 | Op1 Op1 | Op2 Op2
-  deriving (Eq,Ord,Show)
+  deriving (Eq,Ord)
 
 data Op0
   = NOP
@@ -31,21 +31,17 @@ data Op0
   | XCHG
   | LDAX_B
   | LDAX_D
-  | MOV_M_A
-  | MOV_rM { dest :: RegSpec }
   | DCR RegSpec
-  | DCR_M
   | XRA RegSpec
   | ANA RegSpec
   | ORA RegSpec
-  | ORA_M
   | MOV { dest :: RegSpec, src :: RegSpec }
   | INX RegPairSpec
   | PUSH RegPairSpec
   | POP RegPairSpec
   | DAD RegPairSpec
   | RST Word8 --(0..7)
-  deriving (Eq,Ord,Show)
+  deriving (Eq,Ord)
 
 data Op1
   = CPI
@@ -53,9 +49,8 @@ data Op1
   | IN
   | ANI
   | ADI
-  | MVI_M
   | MVI RegSpec
-  deriving (Eq,Ord,Show)
+  deriving (Eq,Ord)
 
 data Op2
   = JP
@@ -67,9 +62,9 @@ data Op2
   | LDA
   | STA
   | LXI RegPairSpec
-  deriving (Eq,Ord,Show)
+  deriving (Eq,Ord)
 
-data RegSpec = A | B | C | D | E | H | L -- | M -- TODO
+data RegSpec = A | B | C | D | E | H | L | M
   deriving (Eq,Ord,Show)
 
 data RegPairSpec = BC | DE | HL | SP | PSW
@@ -78,20 +73,17 @@ data RegPairSpec = BC | DE | HL | SP | PSW
 allOps :: [Op]
 allOps = map Op0 allOp0 ++ map Op1 allOp1 ++ map Op2 allOp2
   where
-    allOp0 = [NOP,LDAX_B,LDAX_D
-             ,MOV_M_A
-             ,RET,RZ,RC,RNZ,RRC,EI,STC,XCHG,DCR_M,ORA_M]
-             ++ map MOV_rM regs7spec
+    allOp0 = [NOP,LDAX_B,LDAX_D ,RET,RZ,RC,RNZ,RRC,EI,STC,XCHG]
              ++ map DCR regs7spec
              ++ map XRA regs7spec
              ++ map ANA regs7spec
              ++ map ORA regs7spec
              ++ map INX rps1 ++ map DAD rps1 ++ map PUSH rps2 ++ map POP rps2
              ++ map RST [0..7]
-             ++ [ MOV {dest,src} | dest <- regs7spec, src <- regs7spec ]
-    allOp1 = [CPI,OUT,IN,ANI,ADI,MVI_M] ++ map MVI regs7spec
+             ++ [ MOV {dest,src} | dest <- regs7spec, src <- regs7spec, not (dest==M && src==M) ]
+    allOp1 = [CPI,OUT,IN,ANI,ADI] ++ map MVI regs7spec
     allOp2 = [JP,JNZ,JNC,JZ,JC,CALL,LDA,STA] ++ map LXI rps1
-    regs7spec = [A,B,C,D,E,H,L]
+    regs7spec = [A,B,C,D,E,H,L,M]
     rps1 = [BC,DE,HL,SP]
     rps2 = [BC,DE,HL,PSW]
 
@@ -109,22 +101,23 @@ cycles jumpTaken = \case
   Op0 XCHG -> 5
   Op0 LDAX_B -> 7
   Op0 LDAX_D -> 7
-  Op0 MOV_M_A -> 7
-  Op0 MOV_rM{} -> 7
+  Op0 (DCR M) -> 10
   Op0 DCR{} -> 5
-  Op0 DCR_M -> 10
   Op0 XRA{} -> 4
   Op0 ANA{} -> 4
+  Op0 (ORA M) -> 7
   Op0 ORA{} -> 4
-  Op0 ORA_M -> 7
-  Op0 MOV{} -> 7
+  Op0 MOV {dest=M,src=M} -> error "illegal instruction: MOV M,M"
+  Op0 MOV {src=M} -> 7
+  Op0 MOV {dest=M} -> 7
+  Op0 MOV{} -> 7 -- TODO: wrong? should be 5
   Op0 INX{} -> 5
   Op0 PUSH{} -> 11
   Op0 POP{} -> 10
   Op0 DAD{} -> 11
   Op0 RST{} -> 4
+  Op1 (MVI M) -> 10
   Op1 MVI{} -> 7
-  Op1 MVI_M -> 10
   Op1 CPI -> 7
   Op1 OUT -> 10
   Op1 IN -> 10
@@ -172,22 +165,17 @@ prettyInstruction = \case
   Ins0 XCHG -> tag "EX" "DE,HL"
   Ins0 LDAX_B -> tag "LD" "A,(BC)"
   Ins0 LDAX_D -> tag "LD" "A,(DE)"
-  Ins0 MOV_M_A -> tag "LD" "(HL),A"
-  Ins0 (MOV_rM reg) -> tag "LD" (show reg <> ",(HL)")
-  Ins0 (DCR reg) -> tag "DEC" (show reg)
-  Ins0 DCR_M -> tag "DEC" "(HL)"
-  Ins0 (XRA reg) -> tag "XOR" (show reg)
-  Ins0 (ANA reg) -> tag "AND" (show reg)
-  Ins0 (ORA reg) -> tag "OR" (show reg)
-  Ins0 ORA_M -> tag "OR" "M"
-  Ins0 MOV {dest,src} -> tag "LD" (show dest <> "," <> show src)
+  Ins0 (DCR reg) -> tag "DEC" (prettyReg reg)
+  Ins0 (XRA reg) -> tag "XOR" (prettyReg reg)
+  Ins0 (ANA reg) -> tag "AND" (prettyReg reg)
+  Ins0 (ORA reg) -> tag "OR" (prettyReg reg)
+  Ins0 MOV {dest,src} -> tag "LD" (prettyReg dest <> "," <> prettyReg src)
   Ins0 (INX rp) -> tag "INC" (show rp)
   Ins0 (PUSH rp) -> tag "PUSH" (show rp)
   Ins0 (POP rp) -> tag "POP" (show rp)
   Ins0 (DAD rp) -> tag "ADD" ("HL," <> show rp)
   Ins0 (RST n) -> tag "RST" (show n)
-  Ins1 (MVI dest) b1 -> tag "LD" (show dest <> "," <> show b1)
-  Ins1 MVI_M b1 -> tag "LD" ("(HL)" <> "," <> show b1)
+  Ins1 (MVI dest) b1 -> tag "LD" (prettyReg dest <> "," <> show b1)
   Ins1 CPI b1 -> tag "CP" (show b1)
   Ins1 OUT b1 -> tag "OUT" (show b1)
   Ins1 IN b1 -> tag "IN" (show b1)
@@ -204,6 +192,11 @@ prettyInstruction = \case
   Ins2 (LXI rp) b1 b2 -> tag "LD" (show rp <> "," <> show b2 <> show b1)
   where
     tag s more = ljust 5 s <> more
+
+prettyReg :: RegSpec -> String
+prettyReg = \case
+  M -> "(HL)"
+  reg -> show reg
 
 ljust :: Int -> String -> String
 ljust n s = s <> take (max 0 (n - length s)) (repeat ' ')
@@ -227,14 +220,10 @@ encode = \case
   Op0 XCHG -> 0xEB
   Op0 LDAX_B -> 0x0A
   Op0 LDAX_D -> 0x1A
-  Op0 MOV_M_A -> 0x77 -- TODO: gen
-  Op0 MOV_rM {dest} -> Byte (8 * encodeRegSpec dest + 0x46)
   Op0 (DCR reg) -> Byte (8 * encodeRegSpec reg + 0x05)
-  Op0 DCR_M -> 0x35
   Op0 (XRA reg) -> Byte (encodeRegSpec reg + 0xA8)
   Op0 (ANA reg) -> Byte (encodeRegSpec reg + 0xA0)
   Op0 (ORA reg) -> Byte (encodeRegSpec reg + 0xB0)
-  Op0 ORA_M -> 0xB6
   Op0 MOV {dest,src} -> Byte (0x40 + 8 * encodeRegSpec dest + encodeRegSpec src)
   Op0 (INX rp) -> Byte (16 * encodeRegPairSpec rp + 0x3)
   Op0 (PUSH rp) -> Byte (16 * encodeRegPairSpec rp + 0xC5)
@@ -242,7 +231,6 @@ encode = \case
   Op0 (DAD rp) -> Byte (16 * encodeRegPairSpec rp + 0x9)
   Op0 (RST n) -> Byte (8 * fromIntegral n + 0xC7)
   Op1 (MVI dest) -> Byte (8 * encodeRegSpec dest + 0x06)
-  Op1 MVI_M -> 0x36
   Op1 CPI -> 0xFE
   Op1 OUT -> 0xD3
   Op1 IN -> 0xDB
@@ -266,7 +254,7 @@ encodeRegSpec = \case
   E -> 3
   H -> 4
   L -> 5
---M -> 6
+  M -> 6
   A -> 7
 
 

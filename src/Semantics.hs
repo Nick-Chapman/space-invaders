@@ -134,16 +134,6 @@ execute0 = \case
     b <- ReadMem a
     SetReg A b
     return Next
-  MOV_M_A -> do
-    a <- getRegPair HL
-    b <- GetReg A
-    WriteMem a b
-    return Next
-  MOV_rM {dest} -> do
-    a <- getRegPair HL
-    b <- ReadMem a
-    save dest b
-    return Next
   MOV {dest,src} -> do
     b <- load src
     save dest b
@@ -180,13 +170,6 @@ execute0 = \case
     save reg v
     setFlagsFrom v
     return Next
-  DCR_M -> do
-    a <- getRegPair HL
-    v0 <- ReadMem a
-    v <- Decrement v0
-    WriteMem a v
-    setFlagsFrom v
-    return Next
   XRA reg -> do
     v1 <- load reg
     v2 <- GetReg A
@@ -208,14 +191,6 @@ execute0 = \case
     SetReg A v
     setFlagsFrom v
     return Next
-  ORA_M -> do
-    a <- getRegPair HL
-    v1 <- ReadMem a
-    v2 <- GetReg A
-    v <- OrB v1 v2
-    SetReg A v
-    setFlagsFrom v
-    return Next
   RST w -> do
     GetReg PCH >>= pushStack
     GetReg PCL >>= pushStack
@@ -225,31 +200,34 @@ execute0 = \case
     return (Jump dest)
 
 
-locate :: Instr.RegSpec -> Reg
-locate = \case
-  Instr.A -> A
-  Instr.B -> B
-  Instr.C -> C
-  Instr.D -> D
-  Instr.E -> E
-  Instr.H -> H
-  Instr.L -> L
-
 load :: Instr.RegSpec -> Eff p (Byte p)
-load r = GetReg (locate r)
+load = \case
+  Instr.A -> GetReg A
+  Instr.B -> GetReg B
+  Instr.C -> GetReg C
+  Instr.D -> GetReg D
+  Instr.E -> GetReg E
+  Instr.H -> GetReg H
+  Instr.L -> GetReg L
+  Instr.M -> getRegPair HL >>= ReadMem
+
 
 save :: Instr.RegSpec -> Byte p -> Eff p ()
-save r v = SetReg (locate r) v
+save = \case
+  Instr.A -> SetReg A
+  Instr.B -> SetReg B
+  Instr.C -> SetReg C
+  Instr.D -> SetReg D
+  Instr.E -> SetReg E
+  Instr.H -> SetReg H
+  Instr.L -> SetReg L
+  Instr.M -> \b -> do a <- getRegPair HL; WriteMem a b
 
 
 execute1 :: Op1 -> Byte p -> Eff p (Flow p)
 execute1 op1 b1 = case op1 of
   MVI dest -> do
     save dest b1
-    return Next
-  MVI_M -> do
-    a <- getRegPair HL
-    WriteMem a b1
     return Next
   CPI -> do
     b <- GetReg A

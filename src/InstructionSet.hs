@@ -1,6 +1,6 @@
 
 module InstructionSet (
-  Op(..),Op0(..),Op1(..),Op2(..), RegPairSpec(..), RegSpec(..),
+  Op(..),Op0(..),Op1(..),Op2(..), RegPairSpec(..), RegSpec(..), Condition(..),
   Instruction(..),
   cycles,
   decode,
@@ -22,10 +22,7 @@ data Op = Op0 Op0 | Op1 Op1 | Op2 Op2
 data Op0
   = NOP
   | RET
-  | RZ
-  | RC
-  | RNZ
-  | RNC
+  | RCond Condition
   | RRC
   | RLC
   | RAR
@@ -63,17 +60,17 @@ data Op1
 
 data Op2
   = JP
-  | JNZ
-  | JNC
-  | JZ
-  | JC
+  | JCond Condition
   | CALL
-  | CNZ
+  | CCond Condition
   | LDA
   | STA
   | LHLD
   | LXI RegPairSpec
   deriving (Eq,Ord)
+
+data Condition = Z | NZ | CY | NCY
+  deriving (Eq,Ord,Show)
 
 data RegSpec = A | B | C | D | E | H | L | M
   deriving (Eq,Ord,Show)
@@ -84,7 +81,9 @@ data RegPairSpec = BC | DE | HL | SP | PSW
 allOps :: [Op]
 allOps = map Op0 allOp0 ++ map Op1 allOp1 ++ map Op2 allOp2
   where
-    allOp0 = [NOP,LDAX_B,LDAX_D,RET,RZ,RC,RNZ,RNC,RRC,RLC,RAR,EI,STC,XCHG,XTHL,PCHL]
+    allOp0 = [NOP,LDAX_B,LDAX_D,RET
+             ,RRC,RLC,RAR,EI,STC,XCHG,XTHL,PCHL]
+             ++ map RCond conds
              ++ map INR regs7spec
              ++ map DCR regs7spec
              ++ map XRA regs7spec
@@ -98,20 +97,18 @@ allOps = map Op0 allOp0 ++ map Op1 allOp1 ++ map Op2 allOp2
              ++ map RST [0..7]
              ++ [ MOV {dest,src} | dest <- regs7spec, src <- regs7spec, not (dest==M && src==M) ]
     allOp1 = [CPI,OUT,IN,ANI,ORI,ADI,SUI] ++ map MVI regs7spec
-    allOp2 = [JP,JNZ,JNC,JZ,JC,CALL,CNZ,LDA,STA,LHLD] ++ map LXI rps1
+    allOp2 = [JP,CALL,LDA,STA,LHLD] ++ map LXI rps1 ++ map CCond conds ++ map JCond conds
     regs7spec = [A,B,C,D,E,H,L,M]
     rps1 = [BC,DE,HL,SP]
     rps2 = [BC,DE,HL,PSW]
+    conds= [Z,NZ,CY,NCY]
 
 
 cycles :: Bool -> Op -> Int
 cycles jumpTaken = \case
   Op0 NOP -> 4
   Op0 RET -> 10
-  Op0 RZ -> if jumpTaken then 11 else 5
-  Op0 RC -> if jumpTaken then 11 else 5
-  Op0 RNZ -> if jumpTaken then 11 else 5
-  Op0 RNC -> if jumpTaken then 11 else 5
+  Op0 RCond{} -> if jumpTaken then 11 else 5
   Op0 RRC -> 4
   Op0 RLC -> 4
   Op0 RAR -> 4
@@ -150,12 +147,9 @@ cycles jumpTaken = \case
   Op1 ADI -> 7
   Op1 SUI -> 7
   Op2 JP -> 10
-  Op2 JNZ -> 10
-  Op2 JNC -> 10
-  Op2 JZ -> 10
-  Op2 JC -> 10
+  Op2 JCond{} -> 10
   Op2 CALL -> 17
-  Op2 CNZ -> if jumpTaken then 17 else 11
+  Op2 CCond{} -> if jumpTaken then 17 else 11
   Op2 LDA -> 13
   Op2 STA -> 13
   Op2 LHLD -> 16
@@ -183,11 +177,8 @@ prettyInstructionBytes i = unwords bytes
 prettyInstruction :: Show b => Instruction b -> String
 prettyInstruction = \case
   Ins0 NOP -> "NOP"
+  Ins0 (RCond cond) -> tag "RET" (show cond)
   Ins0 RET -> "RET"
-  Ins0 RZ -> tag "RET" "Z"
-  Ins0 RC -> tag "RET" "C"
-  Ins0 RNZ -> tag "RET" "NZ"
-  Ins0 RNC -> tag "RET" "NC"
   Ins0 RRC -> tag "RRCA" ""
   Ins0 RLC -> tag "RLCA" ""
   Ins0 RAR -> "RAR"
@@ -219,12 +210,9 @@ prettyInstruction = \case
   Ins1 ADI b1 -> tag "ADD" (show b1)
   Ins1 SUI b1 -> tag "SUB" (show b1)
   Ins2 JP b1 b2 -> tag "JP" (show b2 <> show b1)
-  Ins2 JNZ b1 b2 -> tag "JP" ("NZ," <> show b2 <> show b1)
-  Ins2 JNC b1 b2 -> tag "JP" ("NC," <> show b2 <> show b1)
-  Ins2 JZ b1 b2 -> tag "JP" ("Z," <> show b2 <> show b1)
-  Ins2 JC b1 b2 -> tag "JP" ("C," <> show b2 <> show b1)
+  Ins2 (JCond cond) b1 b2 -> tag "JP" (show cond <> "," <> show b2 <> show b1)
   Ins2 CALL b1 b2 -> tag "CALL" (show b2 <> show b1)
-  Ins2 CNZ b1 b2 -> tag "CALL" ("NZ," <> show b2 <> show b1)
+  Ins2 (CCond cond) b1 b2 -> tag "CALL" (show cond <> "," <> show b2 <> show b1)
   Ins2 LDA b1 b2 -> tag "LD" ("A,("<> show b2 <> show b1 <> ")")
   Ins2 STA b1 b2 -> tag "LD" ("("<> show b2 <> show b1 <> "),A")
   Ins2 LHLD b1 b2 -> tag "LD" ("HL," <> show b2 <> show b1)
@@ -250,10 +238,7 @@ encode :: Op -> Byte
 encode = \case
   Op0 NOP -> 0x00
   Op0 RET -> 0xC9
-  Op0 RZ -> 0xC8
-  Op0 RC -> 0xD8
-  Op0 RNZ -> 0xC0
-  Op0 RNC -> 0xD0
+  Op0 (RCond cond) -> Byte (8 * encodeCondition cond + 0xC0)
   Op0 RRC -> 0x0F
   Op0 RLC -> 0x07
   Op0 RAR -> 0x1F
@@ -285,16 +270,21 @@ encode = \case
   Op1 ADI -> 0xC6
   Op1 SUI -> 0xD6
   Op2 JP -> 0xC3
-  Op2 JNZ -> 0xC2
-  Op2 JNC -> 0xD2
-  Op2 JZ -> 0xCA
-  Op2 JC -> 0xDA
+  Op2 (JCond cond) -> Byte (8 * encodeCondition cond + 0xC2)
   Op2 CALL -> 0xCD
-  Op2 CNZ -> 0xC4
+  Op2 (CCond cond) -> Byte (8 * encodeCondition cond + 0xC4)
   Op2 LDA -> 0x3A
   Op2 STA -> 0x32
   Op2 LHLD -> 0x2A
   Op2 (LXI rp) -> Byte (16 * encodeRegPairSpec rp + 0x1)
+
+encodeCondition :: Condition -> Word8
+encodeCondition = \case
+  NZ -> 0
+  Z -> 1
+  NCY -> 2
+  CY -> 3
+  -- PO, PE, P, N
 
 encodeRegSpec :: RegSpec -> Word8
 encodeRegSpec = \case

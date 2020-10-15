@@ -6,9 +6,9 @@ module Semantics (fetchDecodeExec) where
 import Cpu (Flag(..),Reg(..))
 import Effect (Eff(..))
 import HiLo (HiLo(..))
-import InstructionSet (Op(..),Instruction(..),Op0(..),Op1(..),Op2(..),RegPairSpec(..),cycles)
+import InstructionSet (Op(..),Instruction(..),Op0(..),Op1(..),Op2(..),RegPairSpec(..),Condition(..),cycles)
 import qualified InstructionSet as Instr (RegSpec(..))
-import Phase (Addr,Byte)
+import Phase (Addr,Byte,Bit)
 
 -- | Semantics are defined to be Phase generic
 
@@ -76,34 +76,10 @@ execute0 = \case
     hi <- popStack
     dest <- MakeAddr $ HiLo{hi,lo}
     return (Jump dest)
-  RZ -> do
-    testFlagZ >>= \case
+  RCond cond -> do
+    executeCond cond >>= TestBit >>= \case
       False -> return Next
       True -> do
-        lo <- popStack
-        hi <- popStack
-        dest <- MakeAddr $ HiLo{hi,lo}
-        return (Jump dest)
-  RC -> do
-    testFlagCY >>= \case
-      False -> return Next
-      True -> do
-        lo <- popStack
-        hi <- popStack
-        dest <- MakeAddr $ HiLo{hi,lo}
-        return (Jump dest)
-  RNZ -> do
-    testFlagZ >>= \case
-      True -> return Next
-      False -> do
-        lo <- popStack
-        hi <- popStack
-        dest <- MakeAddr $ HiLo{hi,lo}
-        return (Jump dest)
-  RNC -> do
-    testFlagCY >>= \case
-      True -> return Next
-      False -> do
         lo <- popStack
         hi <- popStack
         dest <- MakeAddr $ HiLo{hi,lo}
@@ -245,6 +221,12 @@ execute0 = \case
     dest <- MakeAddr $ HiLo{hi,lo}
     return (Jump dest)
 
+executeCond :: Condition -> Eff p (Bit p)
+executeCond = \case
+  NZ -> GetFlag FlagZ >>= Flip
+  Z -> GetFlag FlagZ
+  NCY -> GetFlag FlagCY >>= Flip
+  CY -> GetFlag FlagCY
 
 load :: Instr.RegSpec -> Eff p (Byte p)
 load = \case
@@ -330,37 +312,13 @@ setFlagsFrom value = do
   SetFlag FlagZ z
   -- TODO: set more flags
 
-testFlagZ :: Eff p Bool
-testFlagZ = GetFlag FlagZ >>= TestBit
-
-testFlagCY :: Eff p Bool
-testFlagCY = GetFlag FlagCY >>= TestBit
-
 execute2 :: Op2 -> (Byte p, Byte p) -> Eff p (Flow p)
 execute2 op2 (lo,hi) = case op2 of
   JP -> do
     dest <- MakeAddr $ HiLo{hi,lo}
     return (Jump dest)
-  JNZ -> do
-    testFlagZ >>= \case
-      True -> return Next
-      False -> do
-        dest <- MakeAddr $ HiLo{hi,lo}
-        return (Jump dest)
-  JNC -> do
-    testFlagCY >>= \case
-      True -> return Next
-      False -> do
-        dest <- MakeAddr $ HiLo{hi,lo}
-        return (Jump dest)
-  JZ -> do
-    testFlagZ >>= \case
-      False -> return Next
-      True -> do
-        dest <- MakeAddr $ HiLo{hi,lo}
-        return (Jump dest)
-  JC -> do
-    testFlagCY >>= \case
+  JCond cond -> do
+    executeCond cond >>= TestBit >>= \case
       False -> return Next
       True -> do
         dest <- MakeAddr $ HiLo{hi,lo}
@@ -375,10 +333,10 @@ execute2 op2 (lo,hi) = case op2 of
     GetReg PCL >>= pushStack
     dest <- MakeAddr $ HiLo{hi,lo}
     return (Jump dest)
-  CNZ -> do
-    testFlagZ >>= \case
-      True -> return Next
-      False -> do
+  CCond cond -> do
+    executeCond cond >>= TestBit >>= \case
+      False -> return Next
+      True -> do
         GetReg PCH >>= pushStack
         GetReg PCL >>= pushStack
         dest <- MakeAddr $ HiLo{hi,lo}

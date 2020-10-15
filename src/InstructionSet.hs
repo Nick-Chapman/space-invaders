@@ -1,6 +1,6 @@
 
 module InstructionSet (
-  Op(..),Op0(..),Op1(..),Op2(..), RegPairSpec(..),
+  Op(..),Op0(..),Op1(..),Op2(..), RegPairSpec(..), RegSpec(..),
   Instruction(..),
   decode,
   printDecodeTable,
@@ -13,7 +13,6 @@ import Data.List.Extra (groupSort)
 import Data.Map (Map)
 import Data.Word8 (Word8)
 import Byte (Byte(..))
-import Cpu (Reg(..))
 import qualified Data.Map.Strict as Map
 
 data Op = Op0 Op0 | Op1 Op1 | Op2 Op2
@@ -32,14 +31,14 @@ data Op0
   | LDAX_B
   | LDAX_D
   | MOV_M_A
-  | MOV_rM Reg
-  | DCR Reg
+  | MOV_rM { dest :: RegSpec }
+  | DCR RegSpec
   | DCR_M
-  | XRA Reg
-  | ANA Reg
-  | ORA Reg
+  | XRA RegSpec
+  | ANA RegSpec
+  | ORA RegSpec
   | ORA_M
-  | MOV { dest :: Reg, src :: Reg }
+  | MOV { dest :: RegSpec, src :: RegSpec }
   | INX RegPairSpec
   | PUSH RegPairSpec
   | POP RegPairSpec
@@ -54,7 +53,7 @@ data Op1
   | ANI
   | ADI
   | MVI_M
-  | MVI Reg
+  | MVI RegSpec
   deriving (Eq,Ord)
 
 data Op2
@@ -69,6 +68,9 @@ data Op2
   | LXI RegPairSpec
   deriving (Eq,Ord)
 
+data RegSpec = A | B | C | D | E | H | L -- | M -- TODO
+  deriving (Eq,Ord,Show)
+
 data RegPairSpec = BC | DE | HL | SP | PSW
   deriving (Eq,Ord,Show)
 
@@ -78,17 +80,17 @@ allOps = map Op0 allOp0 ++ map Op1 allOp1 ++ map Op2 allOp2
     allOp0 = [NOP,LDAX_B,LDAX_D
              ,MOV_M_A
              ,RET,RZ,RC,RNZ,RRC,EI,STC,XCHG,DCR_M,ORA_M]
-             ++ map MOV_rM regs7
-             ++ map DCR regs7
-             ++ map XRA regs7
-             ++ map ANA regs7
-             ++ map ORA regs7
+             ++ map MOV_rM regs7spec
+             ++ map DCR regs7spec
+             ++ map XRA regs7spec
+             ++ map ANA regs7spec
+             ++ map ORA regs7spec
              ++ map INX rps1 ++ map DAD rps1 ++ map PUSH rps2 ++ map POP rps2
              ++ map RST [0..7]
-             ++ [ MOV {dest,src} | dest <- regs7, src <- regs7 ]
-    allOp1 = [CPI,OUT,IN,ANI,ADI,MVI_M] ++ map MVI regs7
+             ++ [ MOV {dest,src} | dest <- regs7spec, src <- regs7spec ]
+    allOp1 = [CPI,OUT,IN,ANI,ADI,MVI_M] ++ map MVI regs7spec
     allOp2 = [JP,JNZ,JNC,JZ,JC,CALL,LDA,STA] ++ map LXI rps1
-    regs7 = [A,B,C,D,E,H,L]
+    regs7spec = [A,B,C,D,E,H,L]
     rps1 = [BC,DE,HL,SP]
     rps2 = [BC,DE,HL,PSW]
 
@@ -179,20 +181,20 @@ encode = \case
   Op0 LDAX_B -> 0x0A
   Op0 LDAX_D -> 0x1A
   Op0 MOV_M_A -> 0x77 -- TODO: gen
-  Op0 (MOV_rM reg) -> Byte (8 * encodeReg7 reg + 0x46)
-  Op0 (DCR reg) -> Byte (8 * encodeReg7 reg + 0x05)
+  Op0 MOV_rM {dest} -> Byte (8 * encodeRegSpec dest + 0x46)
+  Op0 (DCR reg) -> Byte (8 * encodeRegSpec reg + 0x05)
   Op0 DCR_M -> 0x35
-  Op0 (XRA reg) -> Byte (encodeReg7 reg + 0xA8)
-  Op0 (ANA reg) -> Byte (encodeReg7 reg + 0xA0)
-  Op0 (ORA reg) -> Byte (encodeReg7 reg + 0xB0)
+  Op0 (XRA reg) -> Byte (encodeRegSpec reg + 0xA8)
+  Op0 (ANA reg) -> Byte (encodeRegSpec reg + 0xA0)
+  Op0 (ORA reg) -> Byte (encodeRegSpec reg + 0xB0)
   Op0 ORA_M -> 0xB6
-  Op0 MOV {dest,src} -> Byte (0x40 + 8 * encodeReg7 dest + encodeReg7 src)
+  Op0 MOV {dest,src} -> Byte (0x40 + 8 * encodeRegSpec dest + encodeRegSpec src)
   Op0 (INX rp) -> Byte (16 * encodeRegPairSpec rp + 0x3)
   Op0 (PUSH rp) -> Byte (16 * encodeRegPairSpec rp + 0xC5)
   Op0 (POP rp) -> Byte (16 * encodeRegPairSpec rp + 0xC1)
   Op0 (DAD rp) -> Byte (16 * encodeRegPairSpec rp + 0x9)
   Op0 (RST n) -> Byte (8 * fromIntegral n + 0xC7)
-  Op1 (MVI dest) -> Byte (8 * encodeReg7 dest + 0x06)
+  Op1 (MVI dest) -> Byte (8 * encodeRegSpec dest + 0x06)
   Op1 MVI_M -> 0x36
   Op1 CPI -> 0xFE
   Op1 OUT -> 0xD3
@@ -209,8 +211,8 @@ encode = \case
   Op2 STA -> 0x32
   Op2 (LXI rp) -> Byte (16 * encodeRegPairSpec rp + 0x1)
 
-encodeReg7 :: Reg -> Word8
-encodeReg7 = \case
+encodeRegSpec :: RegSpec -> Word8
+encodeRegSpec = \case
   B -> 0
   C -> 1
   D -> 2
@@ -219,7 +221,7 @@ encodeReg7 = \case
   L -> 5
 --M -> 6
   A -> 7
-  reg -> error $ "encodeReg7: " <> show reg
+
 
 encodeRegPairSpec :: RegPairSpec -> Word8
 encodeRegPairSpec = \case

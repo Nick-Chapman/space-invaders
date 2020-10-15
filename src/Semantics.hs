@@ -3,10 +3,11 @@
 
 module Semantics (fetchDecodeExec) where
 
-import Cpu (Reg(..),Flag(..))
+import Cpu (Flag(..),Reg(..))
 import Effect (Eff(..))
 import HiLo (HiLo(..))
 import InstructionSet (Op(..),Instruction(..),Op0(..),Op1(..),Op2(..),RegPairSpec(..))
+import qualified InstructionSet as Instr (RegSpec(..))
 import Phase (Addr,Byte)
 
 -- | Semantics are defined to be Phase generic
@@ -136,14 +137,14 @@ execute0 = \case
     b <- GetReg A
     WriteMem a b
     return (Next 7)
-  MOV_rM reg -> do
+  MOV_rM {dest} -> do
     a <- getRegPair HL
     b <- ReadMem a
-    SetReg reg b
+    save dest b
     return (Next 7)
   MOV {dest,src} -> do
-    b <- GetReg src
-    SetReg dest b
+    b <- load src
+    save dest b
     return (Next 7)
   INX rp -> do
     a <- getRegPair rp
@@ -172,9 +173,9 @@ execute0 = \case
     -- TODO: set carry flag
     return (Next 11)
   DCR reg -> do
-    v0 <- GetReg reg
+    v0 <- load reg
     v <- Decrement v0
-    SetReg reg v
+    save reg v
     setFlagsFrom v
     return (Next 5)
   DCR_M -> do
@@ -185,21 +186,21 @@ execute0 = \case
     setFlagsFrom v
     return (Next 10)
   XRA reg -> do
-    v1 <- GetReg reg
+    v1 <- load reg
     v2 <- GetReg A
     v <- XorB v1 v2
-    SetReg reg v -- TODO: bug, should set A
+    save reg v -- TODO: bug, should set A
     setFlagsFrom v
     return (Next 4)
   ANA reg -> do
-    v1 <- GetReg reg
+    v1 <- load reg
     v2 <- GetReg A
     v <- AndB v1 v2
-    SetReg reg v -- TODO: bug, should set A
+    save reg v -- TODO: bug, should set A
     setFlagsFrom v
     return (Next 4)
   ORA reg -> do
-    v1 <- GetReg reg
+    v1 <- load reg
     v2 <- GetReg A
     v <- OrB v1 v2
     SetReg A v
@@ -221,10 +222,28 @@ execute0 = \case
     dest <- MakeAddr $ HiLo{hi,lo}
     return (Jump 4 dest)
 
+
+locate :: Instr.RegSpec -> Reg
+locate = \case
+  Instr.A -> A
+  Instr.B -> B
+  Instr.C -> C
+  Instr.D -> D
+  Instr.E -> E
+  Instr.H -> H
+  Instr.L -> L
+
+load :: Instr.RegSpec -> Eff p (Byte p)
+load r = GetReg (locate r)
+
+save :: Instr.RegSpec -> Byte p -> Eff p ()
+save r v = SetReg (locate r) v
+
+
 execute1 :: Op1 -> Byte p -> Eff p (Flow p)
 execute1 op1 b1 = case op1 of
   MVI dest -> do
-    SetReg dest b1
+    save dest b1
     return (Next 7)
   MVI_M -> do
     a <- getRegPair HL

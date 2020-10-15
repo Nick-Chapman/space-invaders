@@ -271,6 +271,12 @@ execute2 op2 (lo,hi) = case op2 of
       False -> do
         dest <- MakeAddr $ HiLo{hi,lo}
         return (Jump 10 dest)
+  JNC -> do
+    testFlagCY >>= \case
+      True -> return (Next 10)
+      False -> do
+        dest <- MakeAddr $ HiLo{hi,lo}
+        return (Jump 10 dest)
   JZ -> do
     testFlagZ >>= \case
       False -> return (Next 10)

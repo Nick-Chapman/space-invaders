@@ -42,8 +42,11 @@ data Eff p a where
   TestBit :: Bit p -> Eff p Bool
   MakeBit :: Bool -> Eff p (Bit p)
 
-  RotateRight :: (Bit p,Byte p) -> Eff p (Byte p,Bit p)
-  RotateLeft :: (Bit p,Byte p) -> Eff p (Byte p,Bit p)
+  RotateRightThroughCarry :: (Bit p,Byte p) -> Eff p (Byte p,Bit p)
+  RotateLeftThroughCarry :: (Bit p,Byte p) -> Eff p (Byte p,Bit p)
+
+  RotateRight :: Byte p -> Eff p (Byte p,Bit p)
+  RotateLeft :: Byte p -> Eff p (Byte p,Bit p)
 
   Out :: Byte p -> Byte p -> Eff p ()
   In :: Byte p -> Eff p (Byte p)

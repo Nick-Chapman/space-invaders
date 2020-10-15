@@ -103,14 +103,21 @@ execute0 = \case
   RRC -> do
     byte <- GetReg A
     bool <- GetFlag CY
-    (byte',bool') <- RotateRight (bool,byte)
+    (byte',bool') <- RotateRightThroughCarry (bool,byte) -- TODO: bug, should not be through carry
     SetFlag CY bool'
     SetReg A byte'
     return Next
   RLC -> do
     byte <- GetReg A
     bool <- GetFlag CY
-    (byte',bool') <- RotateLeft (bool,byte)
+    (byte',bool') <- RotateLeftThroughCarry (bool,byte) -- TODO: bug, should not be through carry
+    SetFlag CY bool'
+    SetReg A byte'
+    return Next
+  RAR -> do
+    byte <- GetReg A
+    bool <- GetFlag CY
+    (byte',bool') <- RotateRightThroughCarry (bool,byte) -- correct!
     SetFlag CY bool'
     SetReg A byte'
     return Next

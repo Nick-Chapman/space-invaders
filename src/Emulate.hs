@@ -129,20 +129,27 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ () -> error "unexpected emula
       TestBit (Bit bool) -> k s bool
       MakeBit (bool) -> k s (Bit bool)
 
-      RotateRight (Bit bit,byte) -> do -- TODO: not correct for RRC
+      RotateRightThroughCarry (Bit bit,byte) -> do -- RAR
         let bit' = byte `testBit` 0
         let byte' = (if bit then 128 else 0) + shiftR byte 1
         k s (byte',Bit bit')
 
-      RotateLeft (Bit bit,byte) -> do  -- TODO: not correct for RLC
+      RotateLeftThroughCarry (Bit bit,byte) -> do  -- RAL
         let bit' = byte `testBit` 7
         let byte' = (if bit then 1 else 0) + shiftL byte 1
         k s (byte',Bit bit')
 
+      RotateRight{} -> -- RRC
+        undefined
+
+      RotateLeft{} -> -- RLC
+        undefined
+
+
       Out port byte -> do
         case port of
           2 -> do
-            error $ show ("OUT-2",byte) -- TODO: shift register result offset (bits 0,1,2)
+            print ("OUT-2",byte) -- TODO: shift register result offset (bits 0,1,2)
           3 -> do
             --print ("OUT-3",byte) -- sound related
             return ()

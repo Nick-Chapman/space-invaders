@@ -148,6 +148,9 @@ execute0 = \case
     SetReg L stack0
     SetReg H stack1
     return Next
+  PCHL -> do
+    dest <- getRegPair HL
+    return (Jump dest)
   LDAX_B -> do
     a <- getRegPair BC
     b <- ReadMem a

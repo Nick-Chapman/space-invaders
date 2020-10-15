@@ -320,6 +320,14 @@ execute2 op2 (lo,hi) = case op2 of
     GetReg PCL >>= pushStack
     dest <- MakeAddr $ HiLo{hi,lo}
     return (Jump dest)
+  CNZ -> do
+    testFlagZ >>= \case
+      True -> return Next
+      False -> do
+        GetReg PCH >>= pushStack
+        GetReg PCL >>= pushStack
+        dest <- MakeAddr $ HiLo{hi,lo}
+        return (Jump dest)
   LDA -> do
     a <- MakeAddr $ HiLo{hi,lo}
     b <- ReadMem a

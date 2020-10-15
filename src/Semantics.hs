@@ -111,20 +111,20 @@ execute0 = \case
   RRC -> do
     byte <- GetReg A
     (byte',bool') <- RotateRight byte
-    SetFlag CY bool'
+    SetFlag FlagCY bool'
     SetReg A byte'
     return Next
   RLC -> do
     byte <- GetReg A
     (byte',bool') <- RotateLeft byte
-    SetFlag CY bool'
+    SetFlag FlagCY bool'
     SetReg A byte'
     return Next
   RAR -> do
     byte <- GetReg A
-    bool <- GetFlag CY
+    bool <- GetFlag FlagCY
     (byte',bool') <- RotateRightThroughCarry (bool,byte)
-    SetFlag CY bool'
+    SetFlag FlagCY bool'
     SetReg A byte'
     return Next
   EI -> do
@@ -132,7 +132,7 @@ execute0 = \case
     return Next
   STC -> do
     bit <- MakeBit True
-    SetFlag CY bit
+    SetFlag FlagCY bit
     return Next
   XCHG -> do
     d <- GetReg D
@@ -281,7 +281,7 @@ execute1 op1 b1 = case op1 of
     b1comp <- Complement b1
     (v,cout) <- AddWithCarry cin b b1comp
     cout' <- Flip cout
-    SetFlag CY cout'
+    SetFlag FlagCY cout'
     setFlagsFrom v
     return Next
   OUT -> do
@@ -308,7 +308,7 @@ execute1 op1 b1 = case op1 of
     v0 <- GetReg A
     cin <- MakeBit False
     (v,cout) <- AddWithCarry cin v0 b1
-    SetFlag CY cout
+    SetFlag FlagCY cout
     SetReg A v
     setFlagsFrom v
     return Next
@@ -318,7 +318,7 @@ execute1 op1 b1 = case op1 of
     b1comp <- Complement b1
     (v,cout) <- AddWithCarry cin v0 b1comp
     cout' <- Flip cout
-    SetFlag CY cout'
+    SetFlag FlagCY cout'
     SetReg A v
     setFlagsFrom v
     return Next
@@ -327,14 +327,14 @@ execute1 op1 b1 = case op1 of
 setFlagsFrom :: Byte p -> Eff p ()
 setFlagsFrom value = do
   z <- IsZero value
-  SetFlag Z z
+  SetFlag FlagZ z
   -- TODO: set more flags
 
 testFlagZ :: Eff p Bool
-testFlagZ = GetFlag Z >>= TestBit
+testFlagZ = GetFlag FlagZ >>= TestBit
 
 testFlagCY :: Eff p Bool
-testFlagCY = GetFlag CY >>= TestBit
+testFlagCY = GetFlag FlagCY >>= TestBit
 
 execute2 :: Op2 -> (Byte p, Byte p) -> Eff p (Flow p)
 execute2 op2 (lo,hi) = case op2 of
@@ -467,14 +467,14 @@ setRegX r v = case r of
   FlagsReg -> do
     -- Also do the rest of the flags we care about -- Z
     (z,cy) <- SelectBit70 v
-    SetFlag Z z
-    SetFlag CY cy
+    SetFlag FlagZ z
+    SetFlag FlagCY cy
 
 getRegX :: RegX -> Eff p (Byte p)
 getRegX r = case r of
   NormalReg reg -> GetReg reg
   FlagsReg -> do
     -- Also do the rest of the flags we care about -- Z
-    z <- GetFlag Z
-    cy <- GetFlag CY
+    z <- GetFlag FlagZ
+    cy <- GetFlag FlagCY
     ByteFromBit70 (z,cy)

@@ -12,7 +12,7 @@ import Phase (Byte,Bit)
 data Reg = PCH | PCL | SPH | SPL | A | B | C | D | E | H | L
   deriving (Eq,Ord,Show)
 
-data Flag = Z | CY
+data Flag = FlagZ | FlagCY
 
 data Cpu p = Cpu
   { pch :: Byte p
@@ -59,13 +59,13 @@ init b bit0 =
 
 getFlag :: Cpu p -> Flag -> Bit p
 getFlag Cpu{flagZ,flagCY} = \case
-  Z -> flagZ
-  CY -> flagCY
+  FlagZ -> flagZ
+  FlagCY -> flagCY
 
 setFlag :: Cpu p -> Flag -> Bit p -> Cpu p
 setFlag cpu flag x = case flag of
-  Z -> cpu { flagZ = x }
-  CY -> cpu { flagCY = x }
+  FlagZ -> cpu { flagZ = x }
+  FlagCY -> cpu { flagCY = x }
 
 
 get :: Cpu p -> Reg -> Byte p

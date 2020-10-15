@@ -176,6 +176,12 @@ execute0 = \case
     setRegPair HL w
     -- TODO: set carry flag
     return Next
+  INR reg -> do
+    v0 <- load reg
+    v <- Increment v0
+    save reg v
+    setFlagsFrom v
+    return Next
   DCR reg -> do
     v0 <- load reg
     v <- Decrement v0

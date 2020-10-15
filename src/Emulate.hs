@@ -103,6 +103,7 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ () -> error "unexpected emula
           Nothing -> return (CrashDecode s byte)
 
       MakeByte w -> k s (Byte w)
+      Increment b -> k s (b + 1)
       Decrement b -> k s (b - 1)
 
       AddWithCarry (Bit cin) v1 v2 -> do

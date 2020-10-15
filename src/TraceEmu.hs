@@ -30,11 +30,10 @@ traceEmulate traceOn mem = emulate mem >>= loop
         , continue
         } -> do
         when traceOn $
-          putStrLn (ljust cpuCol (prettyStep pre instruction) ++ show cpu)
+          putStrLn (ljust 50 (prettyStep pre instruction) ++ show cpu)
         printWhenNewFrame pre post
         when (traceOn && icount > 50000) $ error "STOP"
         continue >>= loop
-          where cpuCol = 60 --0
 
 ljust :: Int -> String -> String
 ljust n s = s <> take (max 0 (n - length s)) (repeat ' ')

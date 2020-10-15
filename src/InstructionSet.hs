@@ -95,8 +95,7 @@ data Instruction b -- op+args
 
 instance Show b => Show (Instruction b) where
   show i =
-    ljust 10 (unwords bytes)
-    <> ljust 11 (brace (show op))
+    ljust 11 (unwords bytes)
     <> prettyInstruction i
     where
       b0 = encode op
@@ -151,9 +150,6 @@ prettyInstruction = \case
   Ins2 (LXI rp) b1 b2 -> tag "LD" (show rp <> "," <> show b2 <> show b1)
   where
     tag s more = ljust 5 s <> more
-
-brace :: String -> String
-brace s = "(" <> s <> ")"
 
 ljust :: Int -> String -> String
 ljust n s = s <> take (max 0 (n - length s)) (repeat ' ')

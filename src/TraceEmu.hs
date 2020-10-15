@@ -30,7 +30,7 @@ traceEmulate traceOn mem = emulate mem >>= loop
         , post = post@EmuState{cpu,icount}
         , continue
         } -> do
-        let poi = Just 1763139
+        let poi = Nothing --Just 1763139
         let debug = case poi of Just poi -> (icount >= poi - 5); Nothing -> False
         when (traceOn || debug) $
           putStrLn (ljust 60 (prettyStep pre instruction) ++ show cpu)

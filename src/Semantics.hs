@@ -227,10 +227,10 @@ executeCond = \case
   Z -> GetFlag FlagZ
   NCY -> GetFlag FlagCY >>= Flip
   CY -> GetFlag FlagCY
-  PO -> undefined
-  PE -> undefined
-  P  -> error "executeCond, P,  need FlagS"
-  MI -> error "executeCond, MI, need FlagS"
+  PO -> error "executeCond, PO, need parity flag"
+  PE -> error "executeCond, PE, need parity flag"
+  P -> GetFlag FlagS >>= Flip
+  MI -> GetFlag FlagS
 
 load :: Instr.RegSpec -> Eff p (Byte p)
 load = \case
@@ -312,9 +312,10 @@ execute1 op1 b1 = case op1 of
 
 setFlagsFrom :: Byte p -> Eff p ()
 setFlagsFrom value = do
+  s <- IsSigned value
   z <- IsZero value
+  SetFlag FlagS s
   SetFlag FlagZ z
-  -- TODO: set more flags
 
 execute2 :: Op2 -> (Byte p, Byte p) -> Eff p (Flow p)
 execute2 op2 (lo,hi) = case op2 of
@@ -435,7 +436,7 @@ setRegX :: RegX -> Byte p -> Eff p ()
 setRegX r v = case r of
   NormalReg reg -> SetReg reg v
   FlagsReg -> do
-    -- Also do the rest of the flags we care about -- Z
+    -- TODO: s
     (z,cy) <- SelectBit70 v
     SetFlag FlagZ z
     SetFlag FlagCY cy
@@ -444,7 +445,7 @@ getRegX :: RegX -> Eff p (Byte p)
 getRegX r = case r of
   NormalReg reg -> GetReg reg
   FlagsReg -> do
-    -- Also do the rest of the flags we care about -- Z
+    -- TODO: s
     z <- GetFlag FlagZ
     cy <- GetFlag FlagCY
     ByteFromBit70 (z,cy)

@@ -39,6 +39,7 @@ data Eff p a where
 
   GetFlag :: Flag -> Eff p (Bit p)
   SetFlag :: Flag -> Bit p -> Eff p ()
+  IsSigned :: Byte p -> Eff p (Bit p)
   IsZero :: Byte p -> Eff p (Bit p)
   TestBit :: Bit p -> Eff p Bool
   MakeBit :: Bool -> Eff p (Bit p)

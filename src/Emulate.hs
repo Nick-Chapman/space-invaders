@@ -126,6 +126,7 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ () -> error "unexpected emula
 
       GetFlag flag -> k s (Cpu.getFlag cpu flag)
       SetFlag flag bit -> k s { cpu = Cpu.setFlag cpu flag bit} ()
+      IsSigned byte -> k s (Bit (byte `testBit` 7))
       IsZero byte -> k s (Bit (byte == 0))
       TestBit (Bit bool) -> k s bool
       MakeBit (bool) -> k s (Bit bool)

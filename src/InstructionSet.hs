@@ -31,6 +31,7 @@ data Op0
   | EI
   | STC
   | XCHG
+  | XTHL
   | LDAX_B
   | LDAX_D
   | INR RegSpec
@@ -80,7 +81,7 @@ data RegPairSpec = BC | DE | HL | SP | PSW
 allOps :: [Op]
 allOps = map Op0 allOp0 ++ map Op1 allOp1 ++ map Op2 allOp2
   where
-    allOp0 = [NOP,LDAX_B,LDAX_D ,RET,RZ,RC,RNZ,RRC,RLC,RAR,EI,STC,XCHG]
+    allOp0 = [NOP,LDAX_B,LDAX_D,RET,RZ,RC,RNZ,RRC,RLC,RAR,EI,STC,XCHG,XTHL]
              ++ map INR regs7spec
              ++ map DCR regs7spec
              ++ map XRA regs7spec
@@ -113,6 +114,7 @@ cycles jumpTaken = \case
   Op0 EI -> 4
   Op0 STC -> 4
   Op0 XCHG -> 5
+  Op0 XTHL -> 18
   Op0 LDAX_B -> 7
   Op0 LDAX_D -> 7
   Op0 (DCR M) -> 10
@@ -185,6 +187,7 @@ prettyInstruction = \case
   Ins0 EI -> "EI"
   Ins0 STC -> "SCF"
   Ins0 XCHG -> tag "EX" "DE,HL"
+  Ins0 XTHL -> tag "EX" "(SP),HL"
   Ins0 LDAX_B -> tag "LD" "A,(BC)"
   Ins0 LDAX_D -> tag "LD" "A,(DE)"
   Ins0 (INR reg) -> tag "INC" (prettyReg reg)
@@ -247,6 +250,7 @@ encode = \case
   Op0 EI -> 0xFB
   Op0 STC -> 0x37
   Op0 XCHG -> 0xEB
+  Op0 XTHL -> 0xE3
   Op0 LDAX_B -> 0x0A
   Op0 LDAX_D -> 0x1A
   Op0 (DCR reg) -> Byte (8 * encodeRegSpec reg + 0x05)

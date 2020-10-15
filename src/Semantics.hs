@@ -136,6 +136,18 @@ execute0 = \case
     SetReg H d
     SetReg L e
     return Next
+  XTHL -> do
+    sp0 <- getRegPair SP
+    sp1 <- OffsetAddr 1 sp0
+    stack0 <- ReadMem sp0
+    stack1 <- ReadMem sp1
+    l <- GetReg L
+    h <- GetReg H
+    WriteMem sp0 l
+    WriteMem sp1 h
+    SetReg L stack0
+    SetReg H stack1
+    return Next
   LDAX_B -> do
     a <- getRegPair BC
     b <- ReadMem a

@@ -154,12 +154,14 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ () -> error "unexpected emula
       Out port byte -> do
         case port of
           2 -> do
-            print ("OUT-2",byte) -- TODO: shift register result offset (bits 0,1,2)
+            --print ("OUT-2",byte) -- TODO: shift register result offset (bits 0,1,2)
+            return ()
           3 -> do
             --print ("OUT-3",byte) -- sound related
             return ()
           4 -> do
-            print ("OUT-4",byte) -- TODO: fill shift register
+            -- print ("OUT-4",byte) -- TODO: fill shift register
+            return ()
           5 -> do
             --print ("OUT-5",byte) -- sound related
             return ()

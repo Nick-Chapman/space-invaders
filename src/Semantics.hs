@@ -308,6 +308,17 @@ execute1 op1 b1 = case op1 of
     SetReg A v
     setFlagsFrom v
     return Next
+  SBI -> do -- TODO: share code with SUI...
+    v0 <- GetReg A
+    cin <- GetFlag FlagCY -- only change here
+    cin' <- Flip cin -- and here (is flip correct?)
+    b1comp <- Complement b1
+    (v,cout) <- AddWithCarry cin' v0 b1comp
+    cout' <- Flip cout
+    SetFlag FlagCY cout'
+    SetReg A v
+    setFlagsFrom v
+    return Next
 
 
 setFlagsFrom :: Byte p -> Eff p ()

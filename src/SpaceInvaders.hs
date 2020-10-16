@@ -4,6 +4,7 @@ module SpaceInvaders(main) where
 import InstructionSet (printDecodeTable)
 import System.Environment (getArgs)
 import TraceEmu (traceEmulate)
+import qualified TraceEmu
 import qualified Mem (init)
 import qualified Rom2k (load)
 
@@ -19,28 +20,37 @@ main = do
 
   let mem = Mem.init (e,f,g,h)
   args <- getArgs
-  let Conf{mode} = parse args conf0
+  let Conf{mode,traceConf} = parse args conf0
   case mode of
     ModeShowDecodeTable ->
       printDecodeTable
     ModeTrace -> do
-      traceEmulate True mem
-    ModeNoTrace ->
-      traceEmulate False mem
+      traceEmulate traceConf mem
 
+data Mode = ModeShowDecodeTable | ModeTrace
 
-data Mode = ModeShowDecodeTable | ModeTrace | ModeNoTrace
-
-data Conf = Conf { mode :: Mode }
+data Conf = Conf
+  { mode :: Mode
+  , traceConf :: TraceEmu.Conf
+  }
 
 conf0 :: Conf
-conf0 = Conf { mode = ModeTrace }
+conf0 = Conf { mode = ModeTrace , traceConf = traceConf0 }
+
+traceConf0 :: TraceEmu.Conf
+traceConf0 = TraceEmu.Conf { onAfter = Nothing, stopAfter = Nothing }
+
+traceConfTest1 :: TraceEmu.Conf
+traceConfTest1 = TraceEmu.Conf { onAfter = Just 0, stopAfter = Just 50000 }
+
+traceConfPOI :: Int -> TraceEmu.Conf
+traceConfPOI i = TraceEmu.Conf { onAfter = Just (i-5), stopAfter = Just (i+5) }
 
 parse :: [String] -> Conf -> Conf
 parse args conf = case args of
   [] -> conf
-  "table":args -> parse args $ Conf { mode = ModeShowDecodeTable }
-  "trace":args -> parse args $ Conf { mode = ModeTrace }
-  "notrace":args -> parse args $ Conf { mode = ModeNoTrace }
-
-  args -> error $ "parseArgs: " <> show args
+  "decode":args -> parse args $ conf { mode = ModeShowDecodeTable }
+  "test1":args -> parse args $ conf { traceConf = traceConfTest1 }
+  "-poi":i:args -> parse args $ conf { traceConf = traceConfPOI (read i) }
+  args ->
+    error $ "parseArgs: " <> show args

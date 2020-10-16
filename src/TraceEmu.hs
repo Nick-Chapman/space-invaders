@@ -1,5 +1,5 @@
 
-module TraceEmu (traceEmulate) where
+module TraceEmu (Conf(..),traceEmulate) where
 
 import Control.Monad (when)
 import Data.Bits (testBit)
@@ -15,8 +15,10 @@ import Mem (Mem,read)
 import qualified Addr (fromHiLo)
 import qualified Cpu
 
-traceEmulate :: Bool -> Mem -> IO ()
-traceEmulate traceOn mem = emulate mem >>= loop
+data Conf = Conf { onAfter :: Maybe Int, stopAfter :: Maybe Int }
+
+traceEmulate :: Conf -> Mem -> IO ()
+traceEmulate Conf{onAfter,stopAfter} mem = emulate mem >>= loop
   where
     loop :: Emulation -> IO ()
     loop = \case
@@ -30,14 +32,15 @@ traceEmulate traceOn mem = emulate mem >>= loop
         , post = post@EmuState{cpu,icount}
         , continue
         } -> do
-        let poi = Nothing --Just 1763139
-        let debug = case poi of Just poi -> (icount >= poi - 5); Nothing -> False
-        when (traceOn || debug) $
+        when isOn $
           putStrLn (ljust 60 (prettyStep pre instruction) ++ show cpu)
         printWhenNewFrame pre post
-        when (traceOn && icount > 50000) $ error "STOP"
-        case poi of Just poi -> when (icount > poi + 5) $ error "STOP2"; Nothing -> return ()
+        when isStop $ error "STOP"
         continue >>= loop
+          where
+            isOn = case onAfter of Just i -> (icount > i); Nothing -> False
+            isStop = case stopAfter of Just i -> (icount > i); Nothing -> False
+
 
 ljust :: Int -> String -> String
 ljust n s = s <> take (max 0 (n - length s)) (repeat ' ')

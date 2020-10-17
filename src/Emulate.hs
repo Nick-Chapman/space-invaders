@@ -41,7 +41,7 @@ instance Show Bit where show (Bit b) = if b then "1" else "0"
 
 
 data Emulation
-  = CrashDecode EmuState Byte
+  = Crash EmuState String
   | EmuStep
     { pre :: EmuState
     , instruction :: Instruction Byte
@@ -100,7 +100,7 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ () -> error "unexpected emula
       Decode byte -> do
         case decode byte of
           Just op -> k s op
-          Nothing -> return (CrashDecode s byte)
+          Nothing -> return (Crash s ("decode: " <> show byte))
 
       MakeByte w -> k s (Byte w)
       Increment b -> k s (b + 1)
@@ -187,6 +187,8 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ () -> error "unexpected emula
         Nothing -> k s False
         Just s -> k s True
       GetInterruptInstruction -> k s (interruptInstruction s)
+
+      Unimplemented message -> return (Crash s ("unimplemented: " <> message))
 
       InstructionCycle eff -> do
         let pre = s

@@ -22,10 +22,10 @@ traceEmulate Conf{onAfter,stopAfter} mem = emulate mem >>= loop
   where
     loop :: Emulation -> IO ()
     loop = \case
-      CrashDecode s byte -> do
-        let pc = programCounter s - 1
-        let EmuState{icount} = s
-        error $ "CrashDecode, icount = " <> show icount <> ", pc = " <> show pc <> " : " <> show byte
+      Crash state message -> do
+        let pc = programCounter state - 1
+        let EmuState{icount} = state
+        error $ "Crash, icount = " <> show icount <> ", pc = " <> show pc <> ", " <> message
       EmuStep
         { pre
         , instruction

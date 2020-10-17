@@ -135,6 +135,9 @@ execute0 = \case
   PCHL -> do
     dest <- getRegPair HL
     return (Jump dest)
+  CMA -> do
+    Unimplemented "CMA"
+    return Next
   LDAX_B -> do
     a <- getRegPair BC
     b <- ReadMem a

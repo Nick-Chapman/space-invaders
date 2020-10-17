@@ -59,6 +59,8 @@ data Eff p a where
   TimeToWakeup :: Eff p Bool
   GetInterruptInstruction :: Eff p (Byte p)
 
+  Unimplemented :: String -> Eff p ()
+
   InstructionCycle :: Eff p (Instruction (Byte p), Int) -> Eff p ()
 
 instance Functor (Eff p) where fmap = liftM

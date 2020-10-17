@@ -476,8 +476,8 @@ setRegX :: RegX -> Byte p -> Eff p ()
 setRegX r v = case r of
   NormalReg reg -> SetReg reg v
   FlagsReg -> do
-    -- TODO: s
-    (z,cy) <- SelectZC v
+    (s,z,cy) <- SelectSZC v
+    SetFlag FlagS s
     SetFlag FlagZ z
     SetFlag FlagCY cy
 
@@ -485,7 +485,7 @@ getRegX :: RegX -> Eff p (Byte p)
 getRegX r = case r of
   NormalReg reg -> GetReg reg
   FlagsReg -> do
-    -- TODO: s
+    s <- GetFlag FlagS
     z <- GetFlag FlagZ
     cy <- GetFlag FlagCY
-    ByteFromZC (z,cy)
+    ByteFromSZC (s,z,cy)

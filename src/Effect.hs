@@ -34,8 +34,8 @@ data Eff p a where
   XorB :: Byte p -> Byte p -> Eff p (Byte p)
   Add16 :: Addr p -> Addr p -> Eff p (Addr p)
 
-  SelectZC :: Byte p -> Eff p (Bit p, Bit p)
-  ByteFromZC :: (Bit p, Bit p) -> Eff p (Byte p)
+  SelectSZC :: Byte p -> Eff p (Bit p, Bit p, Bit p)
+  ByteFromSZC :: (Bit p, Bit p, Bit p) -> Eff p (Byte p)
 
   GetFlag :: Flag -> Eff p (Bit p)
   SetFlag :: Flag -> Bit p -> Eff p ()

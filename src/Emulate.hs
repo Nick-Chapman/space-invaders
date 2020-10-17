@@ -125,8 +125,17 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ () -> error "unexpected emula
       -- Word (Address) ops
       Add16 a1 a2 -> k s (Addr.add a1 a2) -- TODO: dont loose carry
 
-      SelectZC byte -> k s (Bit (byte `testBit` 6), Bit (byte `testBit` 0))
-      ByteFromZC (Bit z, Bit cy) -> k s ((if z then 64 else 0) + (if cy then 1 else 0))
+      SelectSZC byte -> do
+        let bs = Bit (byte `testBit` 7)
+        let bz = Bit (byte `testBit` 6)
+        let bc = Bit (byte `testBit` 0)
+        k s (bs, bz, bc)
+
+      ByteFromSZC (Bit bs, Bit bz, Bit bc) -> do
+        let v1 = if bs then 128 else 0
+        let v2 = if bz then 64 else 0
+        let v3 = if bc then 1 else 0
+        k s (v1+v2+v3)
 
       GetFlag flag -> k s (Cpu.getFlag cpu flag)
       SetFlag flag bit -> k s { cpu = Cpu.setFlag cpu flag bit} ()

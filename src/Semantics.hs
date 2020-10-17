@@ -136,7 +136,9 @@ execute0 = \case
     dest <- getRegPair HL
     return (Jump dest)
   CMA -> do
-    Unimplemented "CMA"
+    v0 <- GetReg A
+    v <- Complement v0
+    SetReg A v
     return Next
   LDAX_B -> do
     a <- getRegPair BC

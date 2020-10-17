@@ -477,7 +477,7 @@ setRegX r v = case r of
   NormalReg reg -> SetReg reg v
   FlagsReg -> do
     -- TODO: s
-    (z,cy) <- SelectBit70 v
+    (z,cy) <- SelectZC v
     SetFlag FlagZ z
     SetFlag FlagCY cy
 
@@ -488,4 +488,4 @@ getRegX r = case r of
     -- TODO: s
     z <- GetFlag FlagZ
     cy <- GetFlag FlagCY
-    ByteFromBit70 (z,cy)
+    ByteFromZC (z,cy)

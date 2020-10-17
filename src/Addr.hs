@@ -2,7 +2,7 @@
 module Addr(
   Addr (..),
   toUnsigned, bump, fromHiLo, toHiLo,
-  add,
+  addCarryOut,
   ) where
 
 import Byte(Byte(..))
@@ -31,5 +31,8 @@ toHiLo a = HiLo{hi,lo} where
     hi = Byte.ofUnsigned ( n `div` 256)
     n = fromIntegral $ unAddr a
 
-add :: Addr -> Addr -> Addr
-add a1 a2 = a1 + a2
+addCarryOut :: Addr -> Addr -> (Addr, Bool)
+addCarryOut a1 a2 = do
+  let i :: Int = Addr.toUnsigned a1 + Addr.toUnsigned a2
+  let cout = (i > 0xFFFF)
+  (Addr (fromIntegral i), cout)

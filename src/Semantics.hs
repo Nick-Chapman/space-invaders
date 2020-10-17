@@ -182,9 +182,9 @@ execute0 = \case
   DAD rp -> do
     w1 <- getRegPair rp
     w2 <- getRegPair HL
-    w <- Add16 w1 w2
+    (w,cout) <- Add16 w1 w2
     setRegPair HL w
-    -- TODO: set carry flag
+    SetFlag FlagCY cout
     return Next
   INR reg -> do
     v0 <- load reg

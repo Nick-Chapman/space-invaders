@@ -6,7 +6,7 @@ module Emulate (
 
 import Data.Bits
 
-import Addr (Addr(..))
+import Addr (Addr(..),addCarryOut)
 import Byte (Byte(..),adc)
 import Cpu (Cpu,Reg(PCL,PCH))
 import Effect (Eff(..))
@@ -16,7 +16,7 @@ import InstructionSet (Instruction,decode)
 import Mem (Mem)
 import Phase (Phase)
 import Text.Printf (printf)
-import qualified Addr (fromHiLo,toHiLo,bump,add)
+import qualified Addr (fromHiLo,toHiLo,bump)
 import qualified Cpu (init,get,set,getFlag,setFlag)
 import qualified Mem (read,write)
 import qualified Phase (Byte,Addr,Ticks,Bit)
@@ -122,8 +122,9 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ () -> error "unexpected emula
       OrB b1 b2 -> k s (b1 .|. b2)
       XorB b1 b2 -> k s (b1 `xor` b2)
 
-      -- Word (Address) ops
-      Add16 a1 a2 -> k s (Addr.add a1 a2) -- TODO: dont loose carry
+      Add16 w1 w2 -> do
+        let (w, cout) = Addr.addCarryOut w1 w2
+        k s (w, Bit cout)
 
       SelectSZC byte -> do
         let bs = Bit (byte `testBit` 7)

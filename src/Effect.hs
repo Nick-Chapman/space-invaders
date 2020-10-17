@@ -32,7 +32,7 @@ data Eff p a where
   AndB :: Byte p -> Byte p -> Eff p (Byte p)
   OrB :: Byte p -> Byte p -> Eff p (Byte p)
   XorB :: Byte p -> Byte p -> Eff p (Byte p)
-  Add16 :: Addr p -> Addr p -> Eff p (Addr p)
+  Add16 :: Addr p -> Addr p -> Eff p (Addr p, Bit p)
 
   SelectSZC :: Byte p -> Eff p (Bit p, Bit p, Bit p)
   ByteFromSZC :: (Bit p, Bit p, Bit p) -> Eff p (Byte p)

@@ -211,14 +211,14 @@ execute0 = \case
     v1 <- load reg
     v2 <- GetReg A
     v <- XorB v1 v2
-    save reg v -- TODO: bug, should set A
+    SetReg A v
     setFlagsFrom v
     return Next
   ANA reg -> do
     v1 <- load reg
     v2 <- GetReg A
     v <- AndB v1 v2
-    save reg v -- TODO: bug, should set A
+    SetReg A v
     setFlagsFrom v
     return Next
   ORA reg -> do

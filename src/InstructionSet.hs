@@ -40,6 +40,7 @@ data Op0
   | XRA RegSpec
   | ANA RegSpec
   | ORA RegSpec
+  | CMP RegSpec
   | MOV { dest :: RegSpec, src :: RegSpec }
   | INX RegPairSpec
   | DCX RegPairSpec
@@ -94,6 +95,7 @@ allOps = map Op0 allOp0 ++ map Op1 allOp1 ++ map Op2 allOp2
              ++ map XRA regs7spec
              ++ map ANA regs7spec
              ++ map ORA regs7spec
+             ++ map CMP regs7spec
              ++ map INX rps1
              ++ map DCX rps1
              ++ map DAD rps1
@@ -136,6 +138,8 @@ cycles jumpTaken = \case
   Op0 ANA{} -> 4
   Op0 (ORA M) -> 7
   Op0 ORA{} -> 4
+  Op0 (CMP M) -> 7
+  Op0 CMP{} -> 4
   Op0 MOV {dest=M,src=M} -> error "illegal instruction: MOV M,M"
   Op0 MOV {src=M} -> 7
   Op0 MOV {dest=M} -> 7
@@ -207,6 +211,7 @@ prettyInstruction = \case
   Ins0 (XRA reg) -> tag "XOR" (prettyReg reg)
   Ins0 (ANA reg) -> tag "AND" (prettyReg reg)
   Ins0 (ORA reg) -> tag "OR" (prettyReg reg)
+  Ins0 (CMP reg) -> tag "CP" (prettyReg reg)
   Ins0 MOV {dest,src} -> tag "LD" (prettyReg dest <> "," <> prettyReg src)
   Ins0 (INX rp) -> tag "INC" (show rp)
   Ins0 (DCX rp) -> tag "DEC" (show rp)
@@ -271,6 +276,7 @@ encode = \case
   Op0 (XRA reg) -> Byte (encodeRegSpec reg + 0xA8)
   Op0 (ANA reg) -> Byte (encodeRegSpec reg + 0xA0)
   Op0 (ORA reg) -> Byte (encodeRegSpec reg + 0xB0)
+  Op0 (CMP reg) -> Byte (encodeRegSpec reg + 0xB8)
   Op0 MOV {dest,src} -> Byte (0x40 + 8 * encodeRegSpec dest + encodeRegSpec src)
   Op0 (INX rp) -> Byte (16 * encodeRegPairSpec rp + 0x3)
   Op0 (DCX rp) -> Byte (16 * encodeRegPairSpec rp + 0xB)

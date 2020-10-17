@@ -3,6 +3,7 @@
 
 module Semantics (fetchDecodeExec) where
 
+import Prelude hiding (subtract)
 import Cpu (Flag(..),Reg(..))
 import Effect (Eff(..))
 import HiLo (HiLo(..))
@@ -227,6 +228,13 @@ execute0 = \case
     SetReg A v
     setFlagsFrom v
     return Next
+  CMP reg -> do
+    v1 <- GetReg A
+    v2 <- load reg
+    (v,borrow) <- subtract v1 v2
+    setFlagsFrom v
+    SetFlag FlagCY borrow
+    return Next
   RST w -> do
     GetReg PCH >>= pushStack
     GetReg PCL >>= pushStack
@@ -277,12 +285,9 @@ execute1 op1 b1 = case op1 of
     return Next
   CPI -> do
     b <- GetReg A
-    cin <- MakeBit True
-    b1comp <- Complement b1
-    (v,cout) <- AddWithCarry cin b b1comp
-    cout' <- Flip cout
-    SetFlag FlagCY cout'
+    (v,borrow) <- subtract b b1
     setFlagsFrom v
+    SetFlag FlagCY borrow
     return Next
   OUT -> do
     value <- GetReg A
@@ -397,6 +402,16 @@ execute2 op2 (lo,hi) = case op2 of
     b' <- GetReg H
     WriteMem a' b'
     return Next
+
+
+subtract :: Byte p -> Byte p -> Eff p (Byte p, Bit p)
+subtract v1 v2 = do
+  cin <- MakeBit True
+  v2comp <- Complement v2
+  (v,cout) <- AddWithCarry cin v1 v2comp
+  borrow <- Flip cout
+  return (v, borrow)
+
 
 pushStack :: Byte p -> Eff p ()
 pushStack b = do

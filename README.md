@@ -21,13 +21,26 @@
 
 ### Step 1. Emulation (WIP)
 
-- complete required instruction decoding and semantics; it never stops...
-- condition flags (think we only need Z and Carry) --DONE
-- interrupt handling --DONE
+- refactor code in `Semantics.hs` to capture moew sharing
+- fix bugs in instruction execution
 - IO-subsystem, including external shift register
-- refactoring, data Cond = N | NZ | C | NC | ... for JP,CALL,RET
 - speed measurements
-- visualization
+- visualization (`Gloss`)
+
+
+### Status of emulation
+
+Currently we crash with an out of bounds memory write, 49 (simulated) seconds into the emulation.
+(Happily, we reach this point in just 37 seconds!)
+
+`stack run`
+
+    invaders: *crash*
+    11626907  [98547531] 15DF : Mem.write: 4017
+
+
+To see more: `stack run -- -poi 11626907`
+
 
 ### Step 2. Compilation to standalone executable
 

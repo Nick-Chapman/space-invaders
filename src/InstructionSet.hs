@@ -35,6 +35,7 @@ data Op0
   | LDAX_D
   | INR RegSpec
   | DCR RegSpec
+  | ADD RegSpec
   | XRA RegSpec
   | ANA RegSpec
   | ORA RegSpec
@@ -88,6 +89,7 @@ allOps = map Op0 allOp0 ++ map Op1 allOp1 ++ map Op2 allOp2
              ++ map RCond conds
              ++ map INR regs7spec
              ++ map DCR regs7spec
+             ++ map ADD regs7spec
              ++ map XRA regs7spec
              ++ map ANA regs7spec
              ++ map ORA regs7spec
@@ -125,6 +127,9 @@ cycles jumpTaken = \case
   Op0 DCR{} -> 5
   Op0 (INR M) -> 10
   Op0 INR{} -> 5
+  Op0 (ADD M) -> 7
+  Op0 ADD{} -> 4
+  -- need special case for all "M" instructions
   Op0 XRA{} -> 4
   Op0 ANA{} -> 4
   Op0 (ORA M) -> 7
@@ -195,6 +200,7 @@ prettyInstruction = \case
   Ins0 LDAX_D -> tag "LD" "A,(DE)"
   Ins0 (INR reg) -> tag "INC" (prettyReg reg)
   Ins0 (DCR reg) -> tag "DEC" (prettyReg reg)
+  Ins0 (ADD reg) -> tag "ADD" (prettyReg reg)
   Ins0 (XRA reg) -> tag "XOR" (prettyReg reg)
   Ins0 (ANA reg) -> tag "AND" (prettyReg reg)
   Ins0 (ORA reg) -> tag "OR" (prettyReg reg)
@@ -257,6 +263,7 @@ encode = \case
   Op0 LDAX_D -> 0x1A
   Op0 (DCR reg) -> Byte (8 * encodeRegSpec reg + 0x05)
   Op0 (INR reg) -> Byte (8 * encodeRegSpec reg + 0x04)
+  Op0 (ADD reg) -> Byte (encodeRegSpec reg + 0x80)
   Op0 (XRA reg) -> Byte (encodeRegSpec reg + 0xA8)
   Op0 (ANA reg) -> Byte (encodeRegSpec reg + 0xA0)
   Op0 (ORA reg) -> Byte (encodeRegSpec reg + 0xB0)

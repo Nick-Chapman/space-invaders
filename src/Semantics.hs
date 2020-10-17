@@ -192,6 +192,15 @@ execute0 = \case
     save reg v
     setFlagsFrom v
     return Next
+  ADD reg -> do
+    v1 <- load reg
+    v2 <- GetReg A
+    cin <- MakeBit False
+    (v,cout) <- AddWithCarry cin v1 v2
+    SetReg A v
+    SetFlag FlagCY cout
+    setFlagsFrom v
+    return Next
   XRA reg -> do
     v1 <- load reg
     v2 <- GetReg A

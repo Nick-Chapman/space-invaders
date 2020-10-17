@@ -34,7 +34,7 @@ traceEmulate Conf{onAfter,stopAfter} mem = emulate mem >>= loop
         } -> do
         when isOn $
           putStrLn (ljust 60 (prettyStep pre instruction) ++ show cpu)
-        printWhenNewFrame pre post
+        printWhenNewSecond pre post
         when isStop $ error "STOP"
         continue >>= loop
           where
@@ -69,8 +69,27 @@ prettyTicks :: EmuState -> String
 prettyTicks EmuState{ticks,icount} =
   unwords [ printf "%8d" icount, rjust 11 (show ticks) ]
 
-printWhenNewFrame :: EmuState -> EmuState -> IO ()
-printWhenNewFrame s0 s1 = do
+printWhenNewSecond :: EmuState -> EmuState -> IO ()
+printWhenNewSecond s0 s1 = do
+  let EmuState{ticks=ticks0} = s0
+  let EmuState{ticks=ticks1} = s1
+  let f0 = unTicks ticks0 `div` period
+  let f1 = unTicks ticks1 `div` period
+  let yes = f1 > f0
+  when yes $ do
+    let EmuState{mem} = s1
+    let pixs = onPixels (getDisplayFromMem mem)
+    putStrLn $ unwords
+      [ prettyTicks s1
+      , printf "SECOND{%d}" f1
+      , printf "#onPixels = %d" (length pixs)
+      ]
+    where
+      period = 2000000
+
+
+_printWhenNewFrame :: EmuState -> EmuState -> IO ()
+_printWhenNewFrame s0 s1 = do
   let EmuState{ticks=ticks0} = s0
   let EmuState{ticks=ticks1} = s1
   let f0 = unTicks ticks0 `div` cyclesPerFrame
@@ -90,8 +109,8 @@ printWhenNewFrame s0 s1 = do
       --, show (f0,f1)
       --, show (ticks0,ticks1)
       ]
-    --where cyclesPerFrame = 1000
-    where cyclesPerFrame = 33333
+    where
+      cyclesPerFrame = 33333
 
 data OnPixel = OnPixel { x :: Int, y :: Int }
 

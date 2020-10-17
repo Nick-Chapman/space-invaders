@@ -22,8 +22,8 @@ data Mem = Mem
 init :: (Rom,Rom,Rom,Rom) -> Mem
 init (e,f,g,h) = Mem {e,f,g,h, ram = Ram8k.init}
 
-read :: Mem -> Addr -> Byte
-read Mem{e,f,g,h,ram} a = if
+read :: (forall a. String -> a) -> Mem -> Addr -> Byte
+read error Mem{e,f,g,h,ram} a = if
   | i < k2 -> Rom2k.read h i
   | i < k4 -> Rom2k.read g (i - k2)
   | i < k6 -> Rom2k.read f (i - k4)
@@ -38,8 +38,8 @@ read Mem{e,f,g,h,ram} a = if
     k8 = Rom2k.size * 4
     k16 = Rom2k.size * 8
 
-write :: Mem -> Addr -> Byte -> Mem
-write mem@Mem{ram} a b = if
+write :: (forall a. String -> a) -> Mem -> Addr -> Byte -> Mem
+write error mem@Mem{ram} a b = if
   | i < k8 -> error $ "Mem.write: " <> show a <> " -- cant write to rom"
   | i < k16 -> mem { ram = Ram8k.write ram (i - k8) b }
   | otherwise -> error $ "Mem.write: " <> show a

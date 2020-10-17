@@ -7,13 +7,9 @@ import Text.Printf (printf)
 
 import Addr (Addr(..))
 import Byte (Byte)
-import Cpu (Reg(PCL,PCH))
-import Emulate (emulate,Emulation(..),EmuState(..),Ticks(..))
-import HiLo (HiLo(..))
+import Emulate (Emulation(..),EmuState(..),Ticks(..),emulate,prettyPrefix)
 import InstructionSet (Instruction,prettyInstructionBytes)
 import Mem (Mem,read)
-import qualified Addr (fromHiLo)
-import qualified Cpu
 
 data Conf = Conf { onAfter :: Maybe Int, stopAfter :: Maybe Int }
 
@@ -22,10 +18,6 @@ traceEmulate Conf{onAfter,stopAfter} mem = emulate mem >>= loop
   where
     loop :: Emulation -> IO ()
     loop = \case
-      Crash state message -> do
-        let pc = programCounter state - 1
-        let EmuState{icount} = state
-        error $ "Crash, icount = " <> show icount <> ", pc = " <> show pc <> ", " <> message
       EmuStep
         { pre
         , instruction
@@ -45,29 +37,10 @@ traceEmulate Conf{onAfter,stopAfter} mem = emulate mem >>= loop
 ljust :: Int -> String -> String
 ljust n s = s <> take (max 0 (n - length s)) (repeat ' ')
 
-rjust :: Int -> String -> String
-rjust n s = take (max 0 (n - length s)) (repeat ' ') <> s
-
-programCounter :: EmuState -> Addr
-programCounter EmuState{cpu} = do
-  let lo = Cpu.get cpu PCL
-  let hi = Cpu.get cpu PCH
-  Addr.fromHiLo HiLo{hi,lo}
-
 prettyStep :: EmuState -> Instruction Byte -> String
-prettyStep s i = do
-  let pc = programCounter s
-  unwords
-    [ prettyTicks s
-    , show pc
-    , ":"
-    , ljust 10 (prettyInstructionBytes i)
-    , show i
-    ]
-
-prettyTicks :: EmuState -> String
-prettyTicks EmuState{ticks,icount} =
-  unwords [ printf "%8d" icount, rjust 11 (show ticks) ]
+prettyStep s i =
+  prettyPrefix s $
+  unwords [ ljust 10 (prettyInstructionBytes i), show i ]
 
 printWhenNewSecond :: EmuState -> EmuState -> IO ()
 printWhenNewSecond s0 s1 = do
@@ -79,9 +52,8 @@ printWhenNewSecond s0 s1 = do
   when yes $ do
     let EmuState{mem} = s1
     let pixs = onPixels (getDisplayFromMem mem)
-    putStrLn $ unwords
-      [ prettyTicks s1
-      , printf "SECOND{%d}" f1
+    putStrLn $ prettyPrefix s1 $ unwords
+      [ printf "SECOND{%d}" f1
       , printf "#onPixels = %d" (length pixs)
       ]
     where
@@ -100,9 +72,8 @@ _printWhenNewFrame s0 s1 = do
     let pixs = onPixels (getDisplayFromMem mem)
     let _nCyclesLate = unTicks ticks1 `mod` cyclesPerFrame
     let _nFramesSkipped = f1 - f0 - 1
-    putStrLn $ unwords
-      [ prettyTicks s1
-      , printf "FRAME{%d}" f1
+    putStrLn $ prettyPrefix s1 $ unwords
+      [ printf "FRAME{%d}" f1
       , printf "#onPixels = %d" (length pixs)
       --, printf "(cycles-late=%d)" _nCyclesLate
       --, printf "(frame-skipped=%d)" _nFramesSkipped
@@ -122,7 +93,7 @@ getDisplayFromMem mem = do
     [ OnPixel {x, y}
     | x :: Int <- [0..223]
     , yByte <- [0..31]
-    , let byte = Mem.read mem (Addr (fromIntegral (0x2400 + x * 32 + yByte)))
+    , let byte = Mem.read error mem (Addr (fromIntegral (0x2400 + x * 32 + yByte)))
     , yBit <- [0..7]
     , byte `testBit` yBit
     , let y  = 8 * yByte + yBit

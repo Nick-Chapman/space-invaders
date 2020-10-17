@@ -1,15 +1,17 @@
 
 module Emulate (
   emulate, Emulation(..), EmuState(..), Ticks(..),
+  prettyPrefix,
   ) where
 
 import Data.Bits
 
 import Addr (Addr(..))
 import Byte (Byte(..),adc)
-import Cpu (Cpu)
+import Cpu (Cpu,Reg(PCL,PCH))
 import Effect (Eff(..))
 import Semantics (fetchDecodeExec)
+import HiLo (HiLo(..))
 import InstructionSet (Instruction,decode)
 import Mem (Mem)
 import Phase (Phase)
@@ -41,8 +43,7 @@ instance Show Bit where show (Bit b) = if b then "1" else "0"
 
 
 data Emulation
-  = Crash EmuState String
-  | EmuStep
+  = EmuStep
     { pre :: EmuState
     , instruction :: Instruction Byte
     , post :: EmuState
@@ -80,6 +81,10 @@ theSemantics = loop
 emulate :: Mem -> IO Emulation
 emulate mem0 = run (state0 mem0) theSemantics $ \_ () -> error "unexpected emulation end"
   where
+
+    crash :: EmuState-> String -> a
+    crash s message = do error ("*crash*\n" <> prettyPrefix s message)
+
     run :: EmuState -> Eff EmuTime a -> (EmuState -> a -> IO Emulation) -> IO Emulation
     run s@EmuState{cpu,mem} eff k = case eff of
       Ret x -> k s x
@@ -87,12 +92,12 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ () -> error "unexpected emula
       GetReg r -> k s (Cpu.get cpu r)
       SetReg r b -> k s { cpu = Cpu.set cpu r b} ()
       ReadMem a -> do
-        let b = Mem.read mem a
+        let b = Mem.read (crash s) mem a
         --putStrLn $ "- ReadMem (" <> show a <> ") --> " <> show b
         k s b
       WriteMem a b -> do
         --putStrLn $ "- WriteMem (" <> show a <> ") = " <> show b
-        k s { mem = Mem.write mem a b } ()
+        k s { mem = Mem.write (crash s) mem a b } ()
       SplitAddr a -> k s (Addr.toHiLo a)
       MakeAddr hilo -> k s (Addr.fromHiLo hilo)
       OffsetAddr n a -> k s (Addr.bump a n)
@@ -100,7 +105,7 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ () -> error "unexpected emula
       Decode byte -> do
         case decode byte of
           Just op -> k s op
-          Nothing -> return (Crash s ("decode: " <> show byte))
+          Nothing -> crash s (show byte <> " -- decode failed")
 
       MakeByte w -> k s (Byte w)
       Increment b -> k s (b + 1)
@@ -168,7 +173,7 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ () -> error "unexpected emula
           6 -> do
             return ()
           _ -> do
-            error $ show ("OUT",port,byte)
+            crash s $ show ("OUT",port,byte)
         k s ()
 
       In port -> do
@@ -176,7 +181,7 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ () -> error "unexpected emula
               1 -> 0 -- 1 is recomended in emulator101 for attract mode only
               2 -> 0
               3 -> 0 -- TODO: shift register result here
-              _ -> error $ show ("IN",port)
+              _ -> crash s $ show ("IN",port)
         --putStrLn $ show ("IN",port,byte)
         k s byte
 
@@ -188,7 +193,7 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ () -> error "unexpected emula
         Just s -> k s True
       GetInterruptInstruction -> k s (interruptInstruction s)
 
-      Unimplemented message -> return (Crash s ("unimplemented: " <> message))
+      Unimplemented message -> crash s $ "unimplemented: " <> message
 
       InstructionCycle eff -> do
         let pre = s
@@ -197,6 +202,25 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ () -> error "unexpected emula
           let continue = k post ()
           let step = EmuStep { pre, instruction, post, continue }
           return step
+
+
+prettyTicks :: EmuState -> String
+prettyTicks EmuState{ticks,icount} =
+  unwords [ printf "%8d" icount, rjust 11 (show ticks) ]
+
+rjust :: Int -> String -> String
+rjust n s = take (max 0 (n - length s)) (repeat ' ') <> s
+
+programCounter :: EmuState -> Addr
+programCounter EmuState{cpu} = do
+  let lo = Cpu.get cpu PCL
+  let hi = Cpu.get cpu PCH
+  Addr.fromHiLo HiLo{hi,lo}
+
+prettyPrefix :: EmuState -> String -> String
+prettyPrefix s message = do
+  let pc = programCounter s
+  unwords [ prettyTicks s , show pc , ":", message ]
 
 
 advance :: Ticks -> EmuState -> EmuState

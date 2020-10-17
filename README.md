@@ -19,7 +19,7 @@
 
 
 
-### Step 1. Emulation
+### Step 1. Emulation (WIP)
 
 Currently we crash with an out of bounds memory write, 48 (simulated) seconds into the emulation.
 (Happily, we reach this point in just 37 seconds!)
@@ -41,6 +41,4 @@ Next:
 - visualization (`Gloss`)
 
 
-### Step 2. Retarget to standalone executable
-
-TBD
+### Step 2. Retarget to standalone executable (Future Plan)

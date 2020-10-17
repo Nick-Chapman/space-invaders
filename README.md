@@ -19,16 +19,7 @@
 
 
 
-### Step 1. Emulation (WIP)
-
-- refactor code in `Semantics.hs` to capture moew sharing
-- fix bugs in instruction execution
-- IO-subsystem, including external shift register
-- speed measurements
-- visualization (`Gloss`)
-
-
-### Status of emulation
+### Step 1. Emulation
 
 Currently we crash with an out of bounds memory write, 49 (simulated) seconds into the emulation.
 (Happily, we reach this point in just 37 seconds!)
@@ -38,10 +29,17 @@ Currently we crash with an out of bounds memory write, 49 (simulated) seconds in
     invaders: *crash*
     11626907  [98547531] 15DF : Mem.write: 4017
 
-
 To see more: `stack run -- -poi 11626907`
 
+Next:
 
-### Step 2. Compilation to standalone executable
+- refactor code in `Semantics.hs` to capture more sharing
+- fix bugs in instruction execution
+- IO-subsystem, including external shift register
+- speed measurements
+- visualization (`Gloss`)
 
-- The goal!
+
+### Step 2. Retarget to standalone executable
+
+TBD

@@ -127,31 +127,24 @@ cycles jumpTaken = \case
   Op0 CMA -> 4
   Op0 LDAX_B -> 7
   Op0 LDAX_D -> 7
-  Op0 (DCR M) -> 10
-  Op0 DCR{} -> 5
-  Op0 (INR M) -> 10
-  Op0 INR{} -> 5
-  Op0 (ADD M) -> 7
-  Op0 ADD{} -> 4
-  -- need special case for all "M" instructions
-  Op0 XRA{} -> 4
-  Op0 ANA{} -> 4
-  Op0 (ORA M) -> 7
-  Op0 ORA{} -> 4
-  Op0 (CMP M) -> 7
-  Op0 CMP{} -> 4
+  Op0 (DCR r) -> mcost r 5 10
+  Op0 (INR r) -> mcost r 5 10
+  Op0 (ADD r) -> mcost r 4 7
+  Op0 (XRA r) -> mcost r 4 7
+  Op0 (ANA r) -> mcost r 4 7
+  Op0 (ORA r) -> mcost r 4 7
+  Op0 (CMP r) -> mcost r 4 7
   Op0 MOV {dest=M,src=M} -> error "illegal instruction: MOV M,M"
   Op0 MOV {src=M} -> 7
   Op0 MOV {dest=M} -> 7
-  Op0 MOV{} -> 7 -- TODO: wrong? should be 5
+  Op0 MOV{} -> 5
   Op0 INX{} -> 5
   Op0 DCX{} -> 5
   Op0 PUSH{} -> 11
   Op0 POP{} -> 10
   Op0 DAD{} -> 11
   Op0 RST{} -> 4
-  Op1 (MVI M) -> 10
-  Op1 MVI{} -> 7
+  Op1 (MVI r) -> mcost r 7 10
   Op1 CPI -> 7
   Op1 OUT -> 10
   Op1 IN -> 10
@@ -170,6 +163,8 @@ cycles jumpTaken = \case
   Op2 SHLD -> 16
   Op2 LXI{} -> 10
 
+mcost :: RegSpec -> Int -> Int -> Int
+mcost x a b = case x of M -> b; _ -> a
 
 data Instruction b -- op+args
   = Ins0 Op0

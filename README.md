@@ -21,15 +21,16 @@
 
 ### Step 1. Emulation
 
-Currently we crash with an out of bounds memory write, 49 (simulated) seconds into the emulation.
+Currently we crash with an out of bounds memory write, 48 (simulated) seconds into the emulation.
 (Happily, we reach this point in just 37 seconds!)
 
 `stack run`
 
     invaders: *crash*
-    11626907  [98547531] 15DF : Mem.write: 4017
+    11427701  [96764229] 15DF : Mem.write: 4017
 
-To see more: `stack run -- -poi 11626907`
+
+To see more: `stack run -- -poi 11427701`
 
 Next:
 

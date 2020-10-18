@@ -27,6 +27,7 @@ data Op0
   | RLC
   | RAR
   | EI
+  | DAA
   | STC
   | XCHG
   | XTHL
@@ -88,7 +89,7 @@ allOps :: [Op]
 allOps = map Op0 allOp0 ++ map Op1 allOp1 ++ map Op2 allOp2
   where
     allOp0 = [NOP,LDAX_B,LDAX_D,RET
-             ,RRC,RLC,RAR,EI,STC,XCHG,XTHL,PCHL,CMA]
+             ,RRC,RLC,RAR,EI,DAA,STC,XCHG,XTHL,PCHL,CMA]
              ++ map RCond conds
              ++ map INR regs7spec
              ++ map DCR regs7spec
@@ -122,6 +123,7 @@ cycles jumpTaken = \case
   Op0 RLC -> 4
   Op0 RAR -> 4
   Op0 EI -> 4
+  Op0 DAA -> 4
   Op0 STC -> 4
   Op0 XCHG -> 5
   Op0 XTHL -> 18
@@ -196,6 +198,7 @@ prettyInstruction = \case
   Ins0 RLC -> tag "RLCA" ""
   Ins0 RAR -> "RAR"
   Ins0 EI -> "EI"
+  Ins0 DAA -> "DAA"
   Ins0 STC -> "SCF"
   Ins0 XCHG -> tag "EX" "DE,HL"
   Ins0 XTHL -> tag "EX" "(SP),HL"
@@ -262,6 +265,7 @@ encode = \case
   Op0 RLC -> 0x07
   Op0 RAR -> 0x1F
   Op0 EI -> 0xFB
+  Op0 DAA -> 0x27
   Op0 STC -> 0x37
   Op0 XCHG -> 0xEB
   Op0 XTHL -> 0xE3

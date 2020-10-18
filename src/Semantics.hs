@@ -109,6 +109,9 @@ execute0 = \case
   EI -> do
     EnableInterrupts
     return Next
+  DAA -> do
+    -- TODO: ignored
+    return Next
   STC -> do
     bit <- MakeBit True
     SetFlag FlagCY bit

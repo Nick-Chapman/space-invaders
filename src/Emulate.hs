@@ -7,8 +7,8 @@ module Emulate (
 import Data.Bits
 import Text.Printf (printf)
 
-import Buttons (buttons0)
 import Addr (Addr(..),addCarryOut)
+import Buttons (Buttons,buttons0)
 import Byte (Byte(..),adc)
 import Cpu (Cpu,Reg(PCL,PCH))
 import Effect (Eff(..))
@@ -48,7 +48,7 @@ data Emulation
     { pre :: EmuState
     , instruction :: Instruction Byte
     , post :: EmuState
-    , continue :: IO Emulation
+    , continue :: Buttons -> IO Emulation
     }
 
 data EmuState = EmuState
@@ -60,6 +60,7 @@ data EmuState = EmuState
   , interrupts_enabled :: Bool
   , nextWakeup :: Ticks
   , shifter :: Shifter
+  , but :: Buttons
   }
 
 state0 :: Mem -> EmuState
@@ -72,6 +73,7 @@ state0 mem = EmuState
   , interrupts_enabled = False
   , nextWakeup = halfFrameTicks
   , shifter = shifter0
+  , but = buttons0
   }
 
 instance Show EmuState where
@@ -94,7 +96,7 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ () -> error "unexpected emula
     crash s message = do error ("*crash*\n" <> prettyPrefix s message)
 
     run :: EmuState -> Eff EmuTime a -> (EmuState -> a -> IO Emulation) -> IO Emulation
-    run s@EmuState{cpu,mem} eff k = case eff of
+    run s@EmuState{but,cpu,mem} eff k = case eff of
       Ret x -> k s x
       Bind eff f -> run s eff $ \s a -> run s (f a) k
       GetReg r -> k s (Cpu.get cpu r)
@@ -187,12 +189,12 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ () -> error "unexpected emula
         let pre = s
         run s eff $ \s (instruction,n) -> do
           let post = advance (Ticks n) s
-          let continue = k post ()
+          let continue but = k post { but } ()
           let step = EmuStep { pre, instruction, post, continue }
           return step
 
       GetButtons -> do
-        k s buttons0 -- TODO: track buttons in the state, updating each frame at least
+        k s but
 
       DispatchByte (Byte word) ->
         k s word

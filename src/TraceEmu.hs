@@ -6,6 +6,7 @@ import Data.Bits (testBit)
 import Text.Printf (printf)
 
 import Addr (Addr(..))
+import Buttons (buttons0)
 import Byte (Byte)
 import Emulate (Emulation(..),EmuState(..),Ticks(..),emulate,prettyPrefix)
 import InstructionSet (Instruction,prettyInstructionBytes)
@@ -28,7 +29,7 @@ traceEmulate Conf{onAfter,stopAfter} mem = emulate mem >>= loop
           putStrLn (ljust 60 (prettyStep pre instruction) ++ show post)
         printWhenNewSecond pre post
         when isStop $ error "STOP"
-        continue >>= loop
+        continue buttons0 >>= loop
           where
             isOn = case onAfter of Just i -> (icount > i); Nothing -> False
             isStop = case stopAfter of Just i -> (icount > i); Nothing -> False

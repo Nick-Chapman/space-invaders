@@ -16,6 +16,7 @@ dependencies:
 - containers
 - ansi-terminal
 - extra
+- gloss
 - haskeline
 - mtl
 - time

@@ -227,6 +227,7 @@ execute0 = \case
     v <- XorB v1 v2
     SetReg A v
     setFlagsFrom v
+    resetCarry
     return Next
   ANA reg -> do
     v1 <- load reg
@@ -234,6 +235,7 @@ execute0 = \case
     v <- AndB v1 v2
     SetReg A v
     setFlagsFrom v
+    resetCarry
     return Next
   ORA reg -> do
     v1 <- load reg
@@ -241,6 +243,7 @@ execute0 = \case
     v <- OrB v1 v2
     SetReg A v
     setFlagsFrom v
+    resetCarry
     return Next
   CMP reg -> do
     v1 <- GetReg A
@@ -256,6 +259,13 @@ execute0 = \case
     lo <- MakeByte (8*w)
     dest <- MakeAddr $ HiLo{hi,lo}
     return (Jump dest)
+
+
+resetCarry :: Eff p ()
+resetCarry = do
+  c <- MakeBit False
+  SetFlag FlagCY c
+
 
 executeCond :: Condition -> Eff p (Bit p)
 executeCond = \case
@@ -318,12 +328,14 @@ execute1 op1 b1 = case op1 of
     v <- AndB b1 v0
     SetReg A v
     setFlagsFrom v
+    resetCarry
     return Next
   ORI -> do
     v0 <- GetReg A
     v <- OrB b1 v0
     SetReg A v
     setFlagsFrom v
+    resetCarry
     return Next
   ADI -> do
     v0 <- GetReg A

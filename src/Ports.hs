@@ -14,7 +14,7 @@ inputPort = \case
   n -> Unimplemented ("IN:" <> show n)
 
 inputPort1 :: Buttons -> Eff p (Byte p)
-inputPort1 Buttons{coin,p2start,p1start,p1shoot,p1left,p2right} =
+inputPort1 Buttons{coin,p2start,p1start,p1shoot,p1left,p1right} =
   makeByte
   ( not coin
   , p2start
@@ -22,7 +22,7 @@ inputPort1 Buttons{coin,p2start,p1start,p1shoot,p1left,p2right} =
   , False
   , p1shoot
   , p1left
-  , p2right
+  , p1right
   , False
   )
 

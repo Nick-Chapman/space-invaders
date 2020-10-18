@@ -209,6 +209,15 @@ execute0 = \case
     SetFlag FlagCY cout
     setFlagsFrom v
     return Next
+  SUB reg -> do
+    v1 <- load reg
+    v2 <- GetReg A
+    cin <- MakeBit False
+    (v,cout) <- subWithCarry cin v1 v2
+    SetReg A v
+    SetFlag FlagCY cout
+    setFlagsFrom v
+    return Next
   XRA reg -> do
     v1 <- load reg
     v2 <- GetReg A
@@ -411,6 +420,10 @@ execute2 op2 (lo,hi) = case op2 of
 subtract :: Byte p -> Byte p -> Eff p (Byte p, Bit p)
 subtract v1 v2 = do
   cin <- MakeBit True
+  subWithCarry cin v1 v2
+
+subWithCarry :: Bit p -> Byte p -> Byte p -> Eff p (Byte p, Bit p)
+subWithCarry cin v1 v2 = do
   v2comp <- Complement v2
   (v,cout) <- AddWithCarry cin v1 v2comp
   borrow <- Flip cout

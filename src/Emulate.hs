@@ -75,10 +75,8 @@ state0 mem = EmuState
   }
 
 instance Show EmuState where
-  show EmuState{cpu,shifter=_} =
-    unwords [ show cpu
-            -- , show shifter -- TODO: add, then update trace
-            ]
+  show EmuState{cpu,shifter} =
+    unwords [ show cpu, show shifter ]
 
 
 theSemantics :: Eff p ()

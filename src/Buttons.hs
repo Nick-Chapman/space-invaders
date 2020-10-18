@@ -22,7 +22,7 @@ data Buttons = Buttons
 
 buttons0 :: Buttons
 buttons0 = Buttons
-  { coin = True -- False -- TODO: change to False, and update expected state
+  { coin = False
   , p2start = False
   , p1start = False
   , p1shoot = False

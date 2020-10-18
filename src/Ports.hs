@@ -1,5 +1,5 @@
 
-module Ports (inputPort) where
+module Ports (inputPort,outputPort) where
 
 import Buttons (Buttons(..),Lives(..),Bonus(..))
 import Effect (Eff(..))
@@ -10,7 +10,7 @@ inputPort :: Word8 -> Eff p (Byte p)
 inputPort = \case
   1 -> GetButtons >>= inputPort1
   2 -> GetButtons >>= inputPort2
-  3 -> GetShiftRegisterResult
+  3 -> GetShiftRegisterAtOffset
   n -> Unimplemented ("IN:" <> show n)
 
 inputPort1 :: Buttons -> Eff p (Byte p)
@@ -57,3 +57,13 @@ makeByte (a,b,c,d,e,f,g,h) = MakeByte $ sum
   , mk h 128
   ]
   where mk x v = if x then v else 0
+
+
+outputPort :: Word8 -> Byte p -> Eff p ()
+outputPort port byte = case port of
+  2 -> SetShiftRegisterOffset byte
+  3 -> Sound
+  4 -> FillShiftRegister byte
+  5 -> Sound
+  6 -> return () -- ignore watchdog
+  n -> Unimplemented ("OUT:" <> show n)

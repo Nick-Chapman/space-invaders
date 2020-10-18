@@ -52,8 +52,6 @@ data Eff p a where
   RotateRight :: Byte p -> Eff p (Byte p,Bit p)
   RotateLeft :: Byte p -> Eff p (Byte p,Bit p)
 
-  Out :: Byte p -> Byte p -> Eff p ()
-
   EnableInterrupts :: Eff p ()
   DisableInterrupts :: Eff p ()
   AreInterruptsEnabled :: Eff p Bool
@@ -65,8 +63,13 @@ data Eff p a where
   InstructionCycle :: Eff p (Instruction (Byte p), Int) -> Eff p ()
 
   GetButtons :: Eff p Buttons
-  GetShiftRegisterResult :: Eff p (Byte p)
   DispatchByte :: Byte p -> Eff p Word8
+
+  Sound :: Eff p ()
+
+  FillShiftRegister :: Byte p -> Eff p ()
+  SetShiftRegisterOffset :: Byte p -> Eff p ()
+  GetShiftRegisterAtOffset :: Eff p (Byte p)
 
 instance Functor (Eff p) where fmap = liftM
 instance Applicative (Eff p) where pure = return; (<*>) = ap

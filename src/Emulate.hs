@@ -59,6 +59,7 @@ data EmuState = EmuState
   , mem :: Mem
   , interrupts_enabled :: Bool
   , nextWakeup :: Ticks
+  , shifter :: Shifter
   }
 
 state0 :: Mem -> EmuState
@@ -70,7 +71,15 @@ state0 mem = EmuState
   , mem
   , interrupts_enabled = False
   , nextWakeup = halfFrameTicks
+  , shifter = shifter0
   }
+
+instance Show EmuState where
+  show EmuState{cpu,shifter=_} =
+    unwords [ show cpu
+            -- , show shifter -- TODO: add, then update trace
+            ]
+
 
 theSemantics :: Eff p ()
 theSemantics = loop
@@ -166,26 +175,6 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ () -> error "unexpected emula
         let after = shiftL before 1 + (if bit then 1 else 0)
         k s (after,Bit bit)
 
-      Out port byte -> do
-        case port of
-          2 -> do
-            --print ("OUT-2",byte) -- TODO: shift register result offset (bits 0,1,2)
-            return ()
-          3 -> do
-            --print ("OUT-3",byte) -- sound related
-            return ()
-          4 -> do
-            -- print ("OUT-4",byte) -- TODO: fill shift register
-            return ()
-          5 -> do
-            --print ("OUT-5",byte) -- sound related
-            return ()
-          6 -> do
-            return ()
-          _ -> do
-            crash s $ show ("OUT",port,byte)
-        k s ()
-
       EnableInterrupts -> k s { interrupts_enabled = True } ()
       DisableInterrupts -> k s { interrupts_enabled = False } ()
       AreInterruptsEnabled -> k s (interrupts_enabled s)
@@ -207,12 +196,25 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ () -> error "unexpected emula
       GetButtons -> do
         k s buttons0 -- TODO: track buttons in the state, updating each frame at least
 
-      GetShiftRegisterResult -> do
-        let res = Byte 0 -- TODO: track shift register
-        k s res
-
       DispatchByte (Byte word) ->
         k s word
+
+      Sound -> do
+        --putStrLn "*sound*"
+        k s ()
+
+      FillShiftRegister byte -> do
+        k s { shifter = fillShiftRegister (shifter s) byte } ()
+
+      SetShiftRegisterOffset byte -> do
+        --putStrLn $ prettyPrefix s ("SetShiftRegisterOffset -> " <> show byte)
+        k s { shifter = setShiftRegisterOffset (shifter s) byte } ()
+
+      GetShiftRegisterAtOffset -> do
+        let res = getShiftRegisterAtOffset (shifter s)
+        --let res = Byte 0
+        --putStrLn $ prettyPrefix s ("GetShiftRegisterAtOffset -> " <> show res)
+        k s res
 
 
 prettyTicks :: EmuState -> String
@@ -254,3 +256,32 @@ timeToWakeup s@EmuState{ticks,nextWakeup} = do
     Just s { nextWakeup =
              Ticks ((unTicks ticks `div` unTicks halfFrameTicks) + 1) * halfFrameTicks
            }
+
+data Shifter = Shifter
+  { offset :: Byte
+  , hi :: Byte
+  , lo :: Byte
+  }
+
+instance Show Shifter where
+  show Shifter{offset,hi,lo} =
+    "shifter(" <> show offset <> "," <> show hi <> show lo <> ")"
+
+shifter0 :: Shifter
+shifter0 = Shifter
+  { offset = Byte 0
+  , hi = Byte 0
+  , lo = Byte 0
+  }
+
+fillShiftRegister :: Shifter -> Byte -> Shifter
+fillShiftRegister shifter@Shifter{hi} byte = shifter { hi = byte, lo = hi }
+
+setShiftRegisterOffset :: Shifter -> Byte -> Shifter
+setShiftRegisterOffset shifter byte = shifter { offset = byte}
+
+getShiftRegisterAtOffset :: Shifter -> Byte
+getShiftRegisterAtOffset Shifter{offset,lo,hi} = do
+  let off :: Int = fromIntegral (unByte offset)
+  if (off < 0 || off > 7) then error $ "off=" <> show off else
+    shiftL hi off .|. shiftR lo (8-off)

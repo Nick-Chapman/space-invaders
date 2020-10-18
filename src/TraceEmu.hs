@@ -21,11 +21,11 @@ traceEmulate Conf{onAfter,stopAfter} mem = emulate mem >>= loop
       EmuStep
         { pre
         , instruction
-        , post = post@EmuState{cpu,icount}
+        , post = post@EmuState{cpu=_,icount}
         , continue
         } -> do
         when isOn $
-          putStrLn (ljust 60 (prettyStep pre instruction) ++ show cpu)
+          putStrLn (ljust 60 (prettyStep pre instruction) ++ show post)
         printWhenNewSecond pre post
         when isStop $ error "STOP"
         continue >>= loop

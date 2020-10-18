@@ -10,7 +10,7 @@ import Effect (Eff(..))
 import HiLo (HiLo(..))
 import InstructionSet (Op(..),Instruction(..),Op0(..),Op1(..),Op2(..),RegPairSpec(..),Condition(..),cycles)
 import Phase (Addr,Byte,Bit)
-import Ports (inputPort)
+import qualified Ports (inputPort,outputPort)
 import qualified InstructionSet as Instr (RegSpec(..))
 
 -- | Semantics are defined to be Phase generic
@@ -292,11 +292,13 @@ execute1 op1 b1 = case op1 of
     SetFlag FlagCY borrow
     return Next
   OUT -> do
+    port <- DispatchByte b1
     value <- GetReg A
-    Out b1 value
+    Ports.outputPort port value
     return Next
   IN -> do
-    value <- DispatchByte b1 >>= inputPort
+    port <- DispatchByte b1
+    value <- Ports.inputPort port
     SetReg A value
     return Next
   ANI -> do

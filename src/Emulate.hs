@@ -5,7 +5,9 @@ module Emulate (
   ) where
 
 import Data.Bits
+import Text.Printf (printf)
 
+import Buttons (buttons0)
 import Addr (Addr(..),addCarryOut)
 import Byte (Byte(..),adc)
 import Cpu (Cpu,Reg(PCL,PCH))
@@ -15,7 +17,6 @@ import HiLo (HiLo(..))
 import InstructionSet (Instruction,decode)
 import Mem (Mem)
 import Phase (Phase)
-import Text.Printf (printf)
 import qualified Addr (fromHiLo,toHiLo,bump)
 import qualified Cpu (init,get,set,getFlag,setFlag)
 import qualified Mem (read,write)
@@ -185,15 +186,6 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ () -> error "unexpected emula
             crash s $ show ("OUT",port,byte)
         k s ()
 
-      In port -> do
-        let byte = case port of
-              1 -> 0 -- 1 is recomended in emulator101 for attract mode only
-              2 -> 0
-              3 -> 0 -- TODO: shift register result here
-              _ -> crash s $ show ("IN",port)
-        --putStrLn $ show ("IN",port,byte)
-        k s byte
-
       EnableInterrupts -> k s { interrupts_enabled = True } ()
       DisableInterrupts -> k s { interrupts_enabled = False } ()
       AreInterruptsEnabled -> k s (interrupts_enabled s)
@@ -211,6 +203,16 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ () -> error "unexpected emula
           let continue = k post ()
           let step = EmuStep { pre, instruction, post, continue }
           return step
+
+      GetButtons -> do
+        k s buttons0 -- TODO: track buttons in the state, updating each frame at least
+
+      GetShiftRegisterResult -> do
+        let res = Byte 0 -- TODO: track shift register
+        k s res
+
+      DispatchByte (Byte word) ->
+        k s word
 
 
 prettyTicks :: EmuState -> String

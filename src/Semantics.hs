@@ -4,12 +4,14 @@
 module Semantics (fetchDecodeExec) where
 
 import Prelude hiding (subtract)
+
 import Cpu (Flag(..),Reg(..))
 import Effect (Eff(..))
 import HiLo (HiLo(..))
 import InstructionSet (Op(..),Instruction(..),Op0(..),Op1(..),Op2(..),RegPairSpec(..),Condition(..),cycles)
-import qualified InstructionSet as Instr (RegSpec(..))
 import Phase (Addr,Byte,Bit)
+import Ports (inputPort)
+import qualified InstructionSet as Instr (RegSpec(..))
 
 -- | Semantics are defined to be Phase generic
 
@@ -294,7 +296,7 @@ execute1 op1 b1 = case op1 of
     Out b1 value
     return Next
   IN -> do
-    value <- In b1
+    value <- DispatchByte b1 >>= inputPort
     SetReg A value
     return Next
   ANI -> do

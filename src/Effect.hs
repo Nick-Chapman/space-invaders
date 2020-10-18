@@ -2,11 +2,13 @@
 module Effect (Eff(..)) where
 
 import Control.Monad (ap,liftM)
-import Cpu (Reg,Flag)
 import Data.Word8 (Word8)
+
+import Buttons (Buttons)
+import Cpu (Reg,Flag)
 import HiLo (HiLo(..))
-import Phase (Byte,Addr,Bit)
 import InstructionSet (Op,Instruction)
+import Phase (Byte,Addr,Bit)
 
 -- | The Effect type, constructed when executing instructions
 
@@ -51,7 +53,6 @@ data Eff p a where
   RotateLeft :: Byte p -> Eff p (Byte p,Bit p)
 
   Out :: Byte p -> Byte p -> Eff p ()
-  In :: Byte p -> Eff p (Byte p)
 
   EnableInterrupts :: Eff p ()
   DisableInterrupts :: Eff p ()
@@ -59,9 +60,13 @@ data Eff p a where
   TimeToWakeup :: Eff p Bool
   GetInterruptInstruction :: Eff p (Byte p)
 
-  Unimplemented :: String -> Eff p ()
+  Unimplemented :: String -> Eff p a
 
   InstructionCycle :: Eff p (Instruction (Byte p), Int) -> Eff p ()
+
+  GetButtons :: Eff p Buttons
+  GetShiftRegisterResult :: Eff p (Byte p)
+  DispatchByte :: Byte p -> Eff p Word8
 
 instance Functor (Eff p) where fmap = liftM
 instance Applicative (Eff p) where pure = return; (<*>) = ap

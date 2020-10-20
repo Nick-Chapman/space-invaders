@@ -1,5 +1,5 @@
 
-module TraceEmu (Conf(..),traceEmulate,Period(..)) where
+module TraceEmu (TraceConf(..),traceEmulate,Period(..)) where
 
 import Control.Monad (when)
 import Data.Bits (testBit)
@@ -12,14 +12,16 @@ import Emulate (Emulation(..),EmuState(..),Ticks(..),emulate,prettyPrefix)
 import InstructionSet (Instruction,prettyInstructionBytes)
 import Mem (Mem,read)
 
-data Conf = Conf
+data TraceConf = TraceConf
   { traceOnAfter :: Maybe Int
   , stopAfter :: Maybe Int
   , period :: Period
+  , traceNearPing :: Bool
   }
 
-traceEmulate :: Conf -> Mem -> IO ()
-traceEmulate Conf{traceOnAfter,stopAfter,period} mem = emulate mem >>= loop 1 firstPing
+traceEmulate :: TraceConf -> Mem -> IO ()
+traceEmulate TraceConf{traceOnAfter,stopAfter,period,traceNearPing} mem =
+  emulate mem >>= loop 1 firstPing
   where
     firstPing = cycles
     cycles = Ticks (cyclesInPeriod period)
@@ -38,7 +40,9 @@ traceEmulate Conf{traceOnAfter,stopAfter,period} mem = emulate mem >>= loop 1 fi
 
             let ping = (ticks >= nextPing)
 
-            when traceIsOn $
+            let nearPing = ((ticks+50 >= nextPing) || (ticks-50 <= nextPing-cycles))
+
+            when (traceIsOn || (traceNearPing && nearPing)) $
               putStrLn (ljust 60 (prettyStep pre instruction) ++ show post)
 
             s' <- continue buttons0

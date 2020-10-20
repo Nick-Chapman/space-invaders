@@ -3,8 +3,7 @@ module SpaceInvaders(main) where
 
 import InstructionSet (printDecodeTable)
 import System.Environment (getArgs)
-import TraceEmu (traceEmulate,Period(Second,HalfFrame))
-import qualified TraceEmu
+import TraceEmu (traceEmulate,Period(Second,HalfFrame),TraceConf(..))
 import qualified Gloss (run)
 import qualified Mem (init)
 import qualified Rom2k (load)
@@ -34,36 +33,36 @@ data Mode = ModeShowDecodeTable | ModeTrace | ModeGloss
 
 data Conf = Conf
   { mode :: Mode
-  , traceConf :: TraceEmu.Conf
+  , traceConf :: TraceConf
   , fps :: Int
   }
 
 conf0 :: Conf
 conf0 = Conf { mode = ModeTrace , traceConf = traceConf0, fps = 30 } -- half speed default
 
-traceConf0 :: TraceEmu.Conf
-traceConf0 = TraceEmu.Conf
+traceConf0 :: TraceConf
+traceConf0 = TraceConf
   { traceOnAfter = Nothing -- dont trace instruction
   , stopAfter = Nothing
   , period = Second
+  , traceNearPing = False
   }
 
-traceConfTest1 :: TraceEmu.Conf
-traceConfTest1 = TraceEmu.Conf
+traceConfTest1 :: TraceConf
+traceConfTest1 = traceConf0
   { traceOnAfter = Just 0 -- trace every instruction from the start
   , stopAfter = Just 50000 --50k instructions
-  , period = Second
   }
 
-traceConfTest2 :: TraceEmu.Conf
-traceConfTest2 = TraceEmu.Conf
+traceConfTest2 :: TraceConf
+traceConfTest2 = traceConf0
   { traceOnAfter = Nothing -- dont trace every instruction
   , stopAfter = Just 1000000 -- 1mil instructions
   , period = HalfFrame
   }
 
-traceConfPOI :: Int -> TraceEmu.Conf
-traceConfPOI i = TraceEmu.Conf
+traceConfPOI :: Int -> TraceConf
+traceConfPOI i = traceConf0
   { traceOnAfter = Just (i-5) -- trace instruction from just before the POI...
   , stopAfter = Just (i+5) -- until just after
   , period = HalfFrame
@@ -78,5 +77,7 @@ parse args conf = case args of
   "test2":args -> parse args $ conf { traceConf = traceConfTest2 }
   "-poi":i:args -> parse args $ conf { traceConf = traceConfPOI (read i) }
   "-fps":i:args -> parse args $ conf { fps = read i }
+  "-frame":args -> parse args $ conf { traceConf = (traceConf conf) { period = HalfFrame } }
+  "-trace-near-ping":args -> parse args $ conf { traceConf = (traceConf conf) { traceNearPing = True } }
   args ->
     error $ "parseArgs: " <> show args

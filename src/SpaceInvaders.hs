@@ -3,7 +3,7 @@ module SpaceInvaders(main) where
 
 import InstructionSet (printDecodeTable)
 import System.Environment (getArgs)
-import TraceEmu (traceEmulate)
+import TraceEmu (traceEmulate,Period(Second,HalfFrame))
 import qualified TraceEmu
 import qualified Gloss (run)
 import qualified Mem (init)
@@ -42,13 +42,32 @@ conf0 :: Conf
 conf0 = Conf { mode = ModeTrace , traceConf = traceConf0, fps = 30 } -- half speed default
 
 traceConf0 :: TraceEmu.Conf
-traceConf0 = TraceEmu.Conf { onAfter = Nothing, stopAfter = Nothing }
+traceConf0 = TraceEmu.Conf
+  { traceOnAfter = Nothing -- dont trace instruction
+  , stopAfter = Nothing
+  , period = Second
+  }
 
 traceConfTest1 :: TraceEmu.Conf
-traceConfTest1 = TraceEmu.Conf { onAfter = Just 0, stopAfter = Just 50000 }
+traceConfTest1 = TraceEmu.Conf
+  { traceOnAfter = Just 0 -- trace every instruction from the start
+  , stopAfter = Just 50000 --50k instructions
+  , period = Second
+  }
+
+traceConfTest2 :: TraceEmu.Conf
+traceConfTest2 = TraceEmu.Conf
+  { traceOnAfter = Nothing -- dont trace every instruction
+  , stopAfter = Just 1000000 -- 1mil instructions
+  , period = HalfFrame
+  }
 
 traceConfPOI :: Int -> TraceEmu.Conf
-traceConfPOI i = TraceEmu.Conf { onAfter = Just (i-5), stopAfter = Just (i+5) }
+traceConfPOI i = TraceEmu.Conf
+  { traceOnAfter = Just (i-5) -- trace instruction from just before the POI...
+  , stopAfter = Just (i+5) -- until just after
+  , period = HalfFrame
+  }
 
 parse :: [String] -> Conf -> Conf
 parse args conf = case args of
@@ -56,6 +75,7 @@ parse args conf = case args of
   "gloss":args -> parse args $ conf { mode = ModeGloss }
   "decode":args -> parse args $ conf { mode = ModeShowDecodeTable }
   "test1":args -> parse args $ conf { traceConf = traceConfTest1 }
+  "test2":args -> parse args $ conf { traceConf = traceConfTest2 }
   "-poi":i:args -> parse args $ conf { traceConf = traceConfPOI (read i) }
   "-fps":i:args -> parse args $ conf { fps = read i }
   args ->

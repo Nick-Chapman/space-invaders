@@ -1,5 +1,5 @@
 
-module TraceEmu (Conf(..),traceEmulate) where
+module TraceEmu (Conf(..),traceEmulate,Period(..)) where
 
 import Control.Monad (when)
 import Data.Bits (testBit)
@@ -12,10 +12,14 @@ import Emulate (Emulation(..),EmuState(..),Ticks(..),emulate,prettyPrefix)
 import InstructionSet (Instruction,prettyInstructionBytes)
 import Mem (Mem,read)
 
-data Conf = Conf { onAfter :: Maybe Int, stopAfter :: Maybe Int }
+data Conf = Conf
+  { traceOnAfter :: Maybe Int
+  , stopAfter :: Maybe Int
+  , period :: Period
+  }
 
 traceEmulate :: Conf -> Mem -> IO ()
-traceEmulate Conf{onAfter,stopAfter} mem = emulate mem >>= loop
+traceEmulate Conf{traceOnAfter,stopAfter,period} mem = emulate mem >>= loop
   where
     loop :: Emulation -> IO ()
     loop = \case
@@ -25,13 +29,20 @@ traceEmulate Conf{onAfter,stopAfter} mem = emulate mem >>= loop
         , post = post@EmuState{cpu=_,icount}
         , continue
         } -> do
-        when isOn $
+
+        when traceIsOn $
           putStrLn (ljust 60 (prettyStep pre instruction) ++ show post)
-        printWhenNewSecond pre post
-        when isStop $ error "STOP"
-        continue buttons0 >>= loop
+
+        case reachNewPeriod period pre post of
+          Nothing -> return ()
+          Just f1 -> printPeriodPixels period f1 post
+
+        case isStop of
+          True -> putStrLn "STOP"
+          False -> continue buttons0 >>= loop
+
           where
-            isOn = case onAfter of Just i -> (icount > i); Nothing -> False
+            traceIsOn = case traceOnAfter of Just i -> (icount > i); Nothing -> False
             isStop = case stopAfter of Just i -> (icount > i); Nothing -> False
 
 
@@ -43,46 +54,35 @@ prettyStep s i =
   prettyPrefix s $
   unwords [ ljust 10 (prettyInstructionBytes i), show i ]
 
-printWhenNewSecond :: EmuState -> EmuState -> IO ()
-printWhenNewSecond s0 s1 = do
-  let EmuState{ticks=ticks0} = s0
-  let EmuState{ticks=ticks1} = s1
-  let f0 = unTicks ticks0 `div` period
-  let f1 = unTicks ticks1 `div` period
-  let yes = f1 > f0
-  when yes $ do
-    let EmuState{mem} = s1
-    let pixs = onPixels (getDisplayFromMem mem)
-    putStrLn $ prettyPrefix s1 $ unwords
-      [ printf "SECOND{%d}" f1
-      , printf "#onPixels = %d" (length pixs)
-      ]
-    where
-      period = 2000000
+
+data Period = Second | HalfFrame deriving Show
+
+cyclesInPeriod :: Period -> Int
+cyclesInPeriod = \case
+  Second -> twoMill
+  HalfFrame -> twoMill `div` 120
+  where twoMill = 2_000_000
 
 
-_printWhenNewFrame :: EmuState -> EmuState -> IO ()
-_printWhenNewFrame s0 s1 = do
+reachNewPeriod :: Period -> EmuState -> EmuState -> Maybe Int
+reachNewPeriod period s0 s1 = do
   let EmuState{ticks=ticks0} = s0
   let EmuState{ticks=ticks1} = s1
-  let f0 = unTicks ticks0 `div` cyclesPerFrame
-  let f1 = unTicks ticks1 `div` cyclesPerFrame
+  let cycles = cyclesInPeriod period
+  let f0 = unTicks ticks0 `div` cycles
+  let f1 = unTicks ticks1 `div` cycles
   let yes = f1 > f0
-  when yes $ do
-    let EmuState{mem} = s1
-    let pixs = onPixels (getDisplayFromMem mem)
-    let _nCyclesLate = unTicks ticks1 `mod` cyclesPerFrame
-    let _nFramesSkipped = f1 - f0 - 1
-    putStrLn $ prettyPrefix s1 $ unwords
-      [ printf "FRAME{%d}" f1
-      , printf "#onPixels = %d" (length pixs)
-      --, printf "(cycles-late=%d)" _nCyclesLate
-      --, printf "(frame-skipped=%d)" _nFramesSkipped
-      --, show (f0,f1)
-      --, show (ticks0,ticks1)
-      ]
-    where
-      cyclesPerFrame = 33333
+  if yes then Just f1 else Nothing
+
+
+printPeriodPixels :: Period -> Int -> EmuState -> IO ()
+printPeriodPixels period count s = do
+  let EmuState{mem} = s
+  let pixs = onPixels (getDisplayFromMem mem)
+  putStrLn $ prettyPrefix s $ unwords
+    [ printf "%s{%d}" (show period) count
+    , printf "#onPixels = %d" (length pixs)
+    ]
 
 data OnPixel = OnPixel { x :: Int, y :: Int }
 

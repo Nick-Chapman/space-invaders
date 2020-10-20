@@ -19,31 +19,39 @@ data Conf = Conf
   }
 
 traceEmulate :: Conf -> Mem -> IO ()
-traceEmulate Conf{traceOnAfter,stopAfter,period} mem = emulate mem >>= loop
+traceEmulate Conf{traceOnAfter,stopAfter,period} mem = emulate mem >>= loop 1 firstPing
   where
-    loop :: Emulation -> IO ()
-    loop = \case
+    firstPing = cycles
+    cycles = Ticks (cyclesInPeriod period)
+
+    loop :: Int -> Ticks -> Emulation -> IO ()
+    loop periodCount nextPing = \case
       EmuStep
         { pre
         , instruction
-        , post = post@EmuState{cpu=_,icount}
+        , post = post@EmuState{cpu=_,icount,ticks}
         , continue
         } -> do
-
-        when traceIsOn $
-          putStrLn (ljust 60 (prettyStep pre instruction) ++ show post)
-
-        case reachNewPeriod period pre post of
-          Nothing -> return ()
-          Just f1 -> printPeriodPixels period f1 post
-
         case isStop of
           True -> putStrLn "STOP"
-          False -> continue buttons0 >>= loop
+          False -> do
+
+            let ping = (ticks >= nextPing)
+
+            when traceIsOn $
+              putStrLn (ljust 60 (prettyStep pre instruction) ++ show post)
+
+            s' <- continue buttons0
+
+            case ping of
+              False ->  loop periodCount nextPing s'
+              True -> do
+                printPeriodPixels period periodCount post
+                loop (periodCount + 1) (nextPing + cycles) s'
 
           where
             traceIsOn = case traceOnAfter of Just i -> (icount > i); Nothing -> False
-            isStop = case stopAfter of Just i -> (icount > i); Nothing -> False
+            isStop = case stopAfter of Just i -> (icount > i+1); Nothing -> False
 
 
 ljust :: Int -> String -> String
@@ -62,17 +70,6 @@ cyclesInPeriod = \case
   Second -> twoMill
   HalfFrame -> twoMill `div` 120
   where twoMill = 2_000_000
-
-
-reachNewPeriod :: Period -> EmuState -> EmuState -> Maybe Int
-reachNewPeriod period s0 s1 = do
-  let EmuState{ticks=ticks0} = s0
-  let EmuState{ticks=ticks1} = s1
-  let cycles = cyclesInPeriod period
-  let f0 = unTicks ticks0 `div` cycles
-  let f1 = unTicks ticks1 `div` cycles
-  let yes = f1 > f0
-  if yes then Just f1 else Nothing
 
 
 printPeriodPixels :: Period -> Int -> EmuState -> IO ()

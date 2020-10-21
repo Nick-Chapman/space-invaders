@@ -1,14 +1,16 @@
 
 module Emulate (
-  emulate, Emulation(..), EmuState(..), Ticks(..),
+  Ticks(..),
   prettyPrefix,
+  EmuState(..), state0,
+  EmuStep(..), emulate,
   ) where
 
 import Data.Bits
 import Text.Printf (printf)
 
 import Addr (Addr(..),addCarryOut)
-import Buttons (Buttons,buttons0)
+import Buttons (Buttons)
 import Byte (Byte(..),adc)
 import Cpu (Cpu,Reg(PCL,PCH))
 import Effect (Eff(..))
@@ -43,14 +45,6 @@ newtype Bit = Bit Bool
 instance Show Bit where show (Bit b) = if b then "1" else "0"
 
 
-data Emulation
-  = EmuStep
-    { pre :: EmuState
-    , instruction :: Instruction Byte
-    , post :: EmuState
-    , continue :: Buttons -> IO Emulation
-    }
-
 data EmuState = EmuState
   { ticks :: Ticks -- cycle count
   , icount :: Int -- instruction count
@@ -60,7 +54,6 @@ data EmuState = EmuState
   , interrupts_enabled :: Bool
   , nextWakeup :: Ticks
   , shifter :: Shifter
-  , but :: Buttons
   }
 
 state0 :: Mem -> EmuState
@@ -73,7 +66,6 @@ state0 mem = EmuState
   , interrupts_enabled = False
   , nextWakeup = halfFrameTicks
   , shifter = shifter0
-  , but = buttons0
   }
 
 instance Show EmuState where
@@ -81,22 +73,22 @@ instance Show EmuState where
     unwords [ show cpu, show shifter ]
 
 
-theSemantics :: Eff p ()
-theSemantics = loop
-  where
-    loop = do
-      fetchDecodeExec
-      loop
+data EmuStep = EmuStep
+    { instruction :: Instruction Byte
+    , post :: EmuState
+    }
 
-emulate :: Mem -> IO Emulation
-emulate mem0 = run (state0 mem0) theSemantics $ \_ () -> error "unexpected emulation end"
+emulate :: Buttons -> EmuState -> IO EmuStep
+emulate buttons s0 =
+  run s0 fetchDecodeExec $ \s (instruction,n) -> do
+  return $ EmuStep { instruction, post = advance (Ticks n) s }
   where
 
     crash :: EmuState-> String -> a
     crash s message = do error ("*crash*\n" <> prettyPrefix s message)
 
-    run :: EmuState -> Eff EmuTime a -> (EmuState -> a -> IO Emulation) -> IO Emulation
-    run s@EmuState{but,cpu,mem} eff k = case eff of
+    run :: EmuState -> Eff EmuTime a -> (EmuState -> a -> IO EmuStep) -> IO EmuStep
+    run s@EmuState{cpu,mem} eff k = case eff of
       Ret x -> k s x
       Bind eff f -> run s eff $ \s a -> run s (f a) k
       GetReg r -> k s (Cpu.get cpu r)
@@ -185,16 +177,8 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ () -> error "unexpected emula
 
       Unimplemented message -> crash s $ "unimplemented: " <> message
 
-      InstructionCycle eff -> do
-        let pre = s
-        run s eff $ \s (instruction,n) -> do
-          let post = advance (Ticks n) s
-          let continue but = k post { but } ()
-          let step = EmuStep { pre, instruction, post, continue }
-          return step
-
       GetButtons -> do
-        k s but
+        k s buttons
 
       DispatchByte (Byte word) ->
         k s word
@@ -215,7 +199,6 @@ emulate mem0 = run (state0 mem0) theSemantics $ \_ () -> error "unexpected emula
         --let res = Byte 0
         --putStrLn $ prettyPrefix s ("GetShiftRegisterAtOffset -> " <> show res)
         k s res
-
 
 prettyTicks :: EmuState -> String
 prettyTicks EmuState{ticks,icount} =

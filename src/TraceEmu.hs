@@ -8,7 +8,7 @@ import Text.Printf (printf)
 import Addr (Addr(..))
 import Buttons (buttons0)
 import Byte (Byte)
-import Emulate (Emulation(..),EmuState(..),Ticks(..),emulate,prettyPrefix)
+import Emulate (EmuState(..),state0,Ticks(..),prettyPrefix,emulate,EmuStep(..))
 import InstructionSet (Instruction,prettyInstructionBytes)
 import Mem (Mem,read)
 
@@ -20,42 +20,36 @@ data TraceConf = TraceConf
   }
 
 traceEmulate :: TraceConf -> Mem -> IO ()
-traceEmulate TraceConf{traceOnAfter,stopAfter,period,traceNearPing} mem =
-  emulate mem >>= loop 1 firstPing
+traceEmulate TraceConf{traceOnAfter,stopAfter,period,traceNearPing} mem = do
+  loop 1 firstPing (state0 mem)
   where
     firstPing = cycles
     cycles = Ticks (cyclesInPeriod period)
 
-    loop :: Int -> Ticks -> Emulation -> IO ()
-    loop periodCount nextPing = \case
-      EmuStep
-        { pre
-        , instruction
-        , post = post@EmuState{cpu=_,icount,ticks}
-        , continue
-        } -> do
-        case isStop of
-          True -> putStrLn "STOP"
-          False -> do
+    loop :: Int -> Ticks -> EmuState -> IO ()
+    loop periodCount nextPing pre = do
 
-            let ping = (ticks >= nextPing)
+      EmuStep{instruction,post} <- emulate buttons0 pre
+      let EmuState{icount,ticks} = post
 
-            let nearPing = ((ticks+50 >= nextPing) || (ticks-50 <= nextPing-cycles))
+      let traceIsOn = case traceOnAfter of Just i -> (icount > i); Nothing -> False
+      let isStop = case stopAfter of Just i -> (icount > i+1); Nothing -> False
 
-            when (traceIsOn || (traceNearPing && nearPing)) $
-              putStrLn (ljust 60 (prettyStep pre instruction) ++ show post)
+      case isStop of
+        True -> putStrLn "STOP"
+        False -> do
 
-            s' <- continue buttons0
+          let ping = (ticks >= nextPing)
+          let nearPing = ((ticks+50 >= nextPing) || (ticks-50 <= nextPing-cycles))
 
-            case ping of
-              False ->  loop periodCount nextPing s'
-              True -> do
-                printPeriodPixels period periodCount post
-                loop (periodCount + 1) (nextPing + cycles) s'
+          when (traceIsOn || (traceNearPing && nearPing)) $
+            putStrLn (ljust 60 (prettyStep pre instruction) ++ show post)
 
-          where
-            traceIsOn = case traceOnAfter of Just i -> (icount > i); Nothing -> False
-            isStop = case stopAfter of Just i -> (icount > i+1); Nothing -> False
+          case ping of
+            False ->  loop periodCount nextPing post
+            True -> do
+              printPeriodPixels period periodCount post
+              loop (periodCount + 1) (nextPing + cycles) post
 
 
 ljust :: Int -> String -> String

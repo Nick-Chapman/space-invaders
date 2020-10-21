@@ -7,7 +7,7 @@ import Data.Word8 (Word8)
 import Buttons (Buttons)
 import Cpu (Reg,Flag)
 import HiLo (HiLo(..))
-import InstructionSet (Op,Instruction)
+import InstructionSet (Op)
 import Phase (Byte,Addr,Bit)
 
 -- | The Effect type, constructed when executing instructions
@@ -59,8 +59,6 @@ data Eff p a where
   GetInterruptInstruction :: Eff p (Byte p)
 
   Unimplemented :: String -> Eff p a
-
-  InstructionCycle :: Eff p (Instruction (Byte p), Int) -> Eff p ()
 
   GetButtons :: Eff p Buttons
   DispatchByte :: Byte p -> Eff p Word8

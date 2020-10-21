@@ -9,21 +9,27 @@ import qualified Graphics.Gloss.Interface.IO.Game as Gloss (playIO,greyN,Display
 
 import Addr (Addr(..))
 import Buttons (Buttons(..),buttons0)
-import Emulate (Emulation(..),emulate,EmuState(..),Ticks(..))
+import Emulate (EmuStep(..),emulate,EmuState(..),state0,Ticks(..))
 import Mem (Mem,read)
 
 data World = World
-  { emulation :: Emulation
+  { frameCount :: Int
   , buttons :: Buttons
-  , frameCount :: Int
   , disp :: Disp
+  , state :: EmuState
+  }
+
+world0 :: Mem -> World
+world0 mem = World
+  { frameCount = 0
+  , buttons = buttons0
+  , disp = getDisplayFromMem mem
+  , state = state0 mem
   }
 
 run :: Int -> Mem -> IO ()
-run fps mem0 = do
-  emulation <- Emulate.emulate mem0
-  let EmuStep{post=EmuState{mem}} = emulation
-  let model = World {emulation, buttons = buttons0, frameCount = 0, disp = getDisplayFromMem mem}
+run fps mem = do
+  let model = world0 mem
   let bgColour = if True then black else Gloss.greyN 0.3
   Gloss.playIO dis bgColour fps model
       (\  m -> do pic <- pictureWorld m; return $ doPosition pic)
@@ -45,26 +51,23 @@ run fps mem0 = do
       float = fromIntegral
 
 updateWorld :: World -> IO World
-updateWorld World{buttons,emulation=e0,frameCount} = do
+updateWorld World{buttons,frameCount,state=state0} = do
   putStr "."; flush
-  loop e0
+  loop state0
   where
-    loop :: Emulation -> IO World
-    loop = \case
-      EmuStep {pre,post,continue} -> do
-        case reachFrame pre post of
-          False -> do
-            emulation <- continue buttons
-            loop emulation
-          True -> do
-            emulation <- continue buttons
-            let EmuStep{post=EmuState{mem}} = emulation
-            return $ World
-              { buttons
-              , emulation
-              , frameCount = frameCount + 1
-              , disp = getDisplayFromMem mem
-              }
+    loop :: EmuState -> IO World
+    loop pre = do
+      EmuStep{post} <- emulate buttons pre
+      case reachFrame pre post of
+        False -> loop post
+        True -> do
+          let EmuState{mem} = post
+          return $ World
+            { frameCount = frameCount + 1
+            , buttons
+            , disp = getDisplayFromMem mem
+            , state = post
+            }
 
 data Disp = Disp { onPixels :: [OnPixel] }
 

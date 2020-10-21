@@ -15,9 +15,8 @@ import qualified InstructionSet as Instr (RegSpec(..))
 
 -- | Semantics are defined to be Phase generic
 
-fetchDecodeExec :: Eff p ()
+fetchDecodeExec :: Eff p (Instruction (Byte p), Int)
 fetchDecodeExec = do
-  InstructionCycle $ do
     byte <- fetchOrHandleInterrupt
     op <- Decode byte
     instruction <- fetchImmediates op

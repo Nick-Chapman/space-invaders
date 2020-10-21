@@ -17,7 +17,7 @@ data World = World
   , buttons :: Buttons
   , disp :: Disp
   , state :: EmuState
-  }
+  } deriving Show
 
 world0 :: Mem -> World
 world0 mem = World
@@ -53,7 +53,10 @@ run fps mem = do
 updateWorld :: World -> IO World
 updateWorld World{buttons,frameCount,state=state0} = do
   putStr "."; flush
-  loop state0
+  w <- loop state0
+  --let size = length (show w)
+  --putStr (show size <> "]"); flush
+  return w
   where
     loop :: EmuState -> IO World
     loop pre = do
@@ -69,9 +72,9 @@ updateWorld World{buttons,frameCount,state=state0} = do
             , state = post
             }
 
-data Disp = Disp { onPixels :: [OnPixel] }
+data Disp = Disp { onPixels :: [OnPixel] } deriving Show
 
-data OnPixel = OnPixel { x :: Int, y :: Int }
+data OnPixel = OnPixel { x :: Int, y :: Int } deriving Show
 
 getDisplayFromMem :: Mem -> Disp
 getDisplayFromMem mem = do

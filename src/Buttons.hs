@@ -1,8 +1,8 @@
 
 module Buttons where
 
-data Lives = Lives3 | Lives4 | Lives5 | Lives6
-data Bonus = BonusAt1000 | BonusAt1500
+data Lives = Lives3 | Lives4 | Lives5 | Lives6 deriving Show
+data Bonus = BonusAt1000 | BonusAt1500 deriving Show
 
 data Buttons = Buttons
   { coin :: Bool
@@ -18,7 +18,7 @@ data Buttons = Buttons
   , p2left :: Bool
   , p2right :: Bool
   , coinInfoOff :: Bool
-  }
+  } deriving Show
 
 buttons0 :: Buttons
 buttons0 = Buttons

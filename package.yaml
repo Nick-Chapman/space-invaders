@@ -19,6 +19,9 @@ dependencies:
 - gloss
 - haskeline
 - mtl
+- sdl2
+- sdl2-ttf
+- text
 - time
 - transformers
 - word8

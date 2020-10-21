@@ -7,6 +7,7 @@ import TraceEmu (traceEmulate,Period(Second,HalfFrame),TraceConf(..))
 import qualified Gloss (run)
 import qualified Mem (init)
 import qualified Rom2k (load)
+import qualified GraphicsSDL (main)
 
 -- | Entry point to the Space Invaders emulation
 main :: IO ()
@@ -28,8 +29,10 @@ main = do
       traceEmulate traceConf mem
     ModeGloss -> do
       Gloss.run fps mem
+    ModeSDL -> do
+      GraphicsSDL.main mem
 
-data Mode = ModeShowDecodeTable | ModeTrace | ModeGloss
+data Mode = ModeShowDecodeTable | ModeTrace | ModeGloss | ModeSDL
 
 data Conf = Conf
   { mode :: Mode
@@ -71,6 +74,7 @@ traceConfPOI i = traceConf0
 parse :: [String] -> Conf -> Conf
 parse args conf = case args of
   [] -> conf
+  "sdl":args -> parse args $ conf { mode = ModeSDL }
   "gloss":args -> parse args $ conf { mode = ModeGloss }
   "decode":args -> parse args $ conf { mode = ModeShowDecodeTable }
   "test1":args -> parse args $ conf { traceConf = traceConfTest1 }

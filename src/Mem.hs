@@ -42,10 +42,10 @@ write :: (forall a. String -> a) -> Mem -> Addr -> Byte -> Mem
 write error mem@Mem{ram} a b = if
   | i < k8 -> error $ "Mem.write: " <> show a <> " -- cant write to rom"
   | i < k16 -> mem { ram = Ram8k.write ram (i - k8) b }
-  -- | i < k24 -> mem { ram = Ram8k.write ram (i - k16) b } -- one mirror needed?
+  | i < k24 -> mem { ram = Ram8k.write ram (i - k16) b } -- one mirror needed?
   | otherwise -> error $ "Mem.write: " <> show a
   where
     i = Addr.toUnsigned a
     k8 = Rom2k.size * 4
     k16 = Rom2k.size * 8
-    --k24 = Rom2k.size * 12
+    k24 = Rom2k.size * 12

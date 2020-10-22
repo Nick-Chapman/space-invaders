@@ -2,7 +2,7 @@
 module Emulate (
   Ticks(..),
   prettyPrefix,
-  EmuState(..), state0,
+  EmuState(..), initState,
   EmuStep(..), emulate,
   ) where
 
@@ -56,8 +56,8 @@ data EmuState = EmuState
   , shifter :: Shifter
   }
 
-state0 :: Mem -> EmuState
-state0 mem = EmuState
+initState :: Mem -> EmuState
+initState mem = EmuState
   { ticks = 0
   , icount = 0
   , fcount = 0

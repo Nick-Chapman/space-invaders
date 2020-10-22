@@ -8,7 +8,7 @@ import Text.Printf (printf)
 import Addr (Addr(..))
 import Buttons (buttons0)
 import Byte (Byte)
-import Emulate (EmuState(..),state0,Ticks(..),prettyPrefix,emulate,EmuStep(..))
+import Emulate (EmuState(..),initState,Ticks(..),prettyPrefix,emulate,EmuStep(..))
 import InstructionSet (Instruction,prettyInstructionBytes)
 import Mem (Mem,read)
 
@@ -21,7 +21,7 @@ data TraceConf = TraceConf
 
 traceEmulate :: TraceConf -> Mem -> IO ()
 traceEmulate TraceConf{traceOnAfter,stopAfter,period,traceNearPing} mem = do
-  loop 1 firstPing (state0 mem)
+  loop 1 firstPing (initState mem)
   where
     firstPing = cycles
     cycles = Ticks (cyclesInPeriod period)

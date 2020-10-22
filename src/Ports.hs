@@ -1,7 +1,8 @@
 
 module Ports (inputPort,outputPort) where
 
-import Buttons (Buttons(..),Lives(..),Bonus(..))
+import Buttons (Buttons,But(..))
+import qualified Buttons (get)
 import Effect (Eff(..))
 import Phase (Byte)
 import Data.Word8 (Word8)
@@ -14,36 +15,30 @@ inputPort = \case
   n -> Unimplemented ("IN:" <> show n)
 
 inputPort1 :: Buttons -> Eff p (Byte p)
-inputPort1 Buttons{coin,p2start,p1start,p1shoot,p1left,p1right} =
+inputPort1 b =
   makeByte
-  ( not coin
-  , p2start
-  , p1start
+  ( not (get CoinEntry)
+  , get P2start
+  , get P1start
   , False
-  , p1shoot
-  , p1left
-  , p1right
+  , get P1shoot
+  , get P1left
+  , get P1right
   , False
-  )
+  ) where get but = Buttons.get but b
 
 inputPort2 :: Buttons -> Eff p (Byte p)
-inputPort2 Buttons{lives,tilt,bonus,p2shoot,p2left,p2right,coinInfoOff} =
+inputPort2 b =
   makeByte
-  ( livesLow
-  , livesHigh
-  , tilt
-  , case bonus of BonusAt1000 -> True; BonusAt1500 -> False
-  , p2shoot
-  , p2left
-  , p2right
-  , coinInfoOff
-  )
-  where
-    (livesHigh,livesLow) = case lives of
-      Lives3 -> (False,False)
-      Lives4 -> (False,True)
-      Lives5 -> (True,False)
-      Lives6 -> (True,True)
+  ( get Dip3_livesLow
+  , get Dip5_livesHigh
+  , get Tilt
+  , get Dip6_extraShipEarly
+  , get P2shoot
+  , get P2left
+  , get P2right
+  , get Dip7_coinInfoOff
+  ) where get but = Buttons.get but b
 
 makeByte :: (Bool,Bool,Bool,Bool,Bool,Bool,Bool,Bool) -> Eff p (Byte p)
 makeByte (a,b,c,d,e,f,g,h) = MakeByte $ sum

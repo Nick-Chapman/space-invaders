@@ -8,8 +8,9 @@ import System.IO (hFlush,stdout)
 import qualified Graphics.Gloss.Interface.IO.Game as Gloss (playIO,greyN,Display(InWindow),Event,Picture)
 
 import Addr (Addr(..))
-import Buttons (Buttons(..),buttons0)
-import Emulate (EmuStep(..),emulate,EmuState(..),state0,Ticks(..))
+import Buttons (Buttons,buttons0,But(..))
+import qualified Buttons (set)
+import Emulate (EmuStep(..),emulate,EmuState(..),initState,Ticks(..))
 import Mem (Mem,read)
 
 data World = World
@@ -24,7 +25,7 @@ world0 mem = World
   { frameCount = 0
   , buttons = buttons0
   , disp = getDisplayFromMem mem
-  , state = state0 mem
+  , state = initState mem
   }
 
 run :: Int -> Mem -> IO ()
@@ -103,17 +104,15 @@ handleEventWorld event world@World{buttons} = do
   putStr "E"; flush
   return $ case event of
     EventKey (Char 'q') Down _ _ -> error "quit"
-    EventKey (SpecialKey KeyDelete) Down _ _ -> world { buttons = buttons { coin = True } }
-    EventKey (SpecialKey KeyDelete) Up _ _ -> world { buttons = buttons { coin = False } }
-    EventKey (SpecialKey KeyTab) Down _ _ -> world { buttons = buttons { p1start = True } }
-    EventKey (SpecialKey KeyTab) Up _ _ -> world { buttons = buttons { p1start = False } }
-    EventKey (Char 'z') Down _ _ -> world { buttons = buttons { p1left = True } }
-    EventKey (Char 'z') Up _ _ -> world { buttons = buttons { p1left = False } }
-    EventKey (Char 'x') Down _ _ -> world { buttons = buttons { p1right = True } }
-    EventKey (Char 'x') Up _ _ -> world { buttons = buttons { p1right = False } }
-    EventKey (SpecialKey KeyEnter) Down _ _ -> world { buttons = buttons { p1shoot = True } }
-    EventKey (SpecialKey KeyEnter) Up _ _ -> world { buttons = buttons { p1shoot = False } }
+    EventKey (SpecialKey KeyInsert) m _ _ -> update CoinEntry m
+    EventKey (SpecialKey KeyTab) m _ _ -> update P1start m
+    EventKey (Char 'z') m _ _ -> update P1left m
+    EventKey (Char 'x') m _ _ -> update P1right m
+    EventKey (SpecialKey KeyEnter) m _ _ -> update P1shoot m
     _ -> world
+    where
+      update but motion = world { buttons = Buttons.set v but buttons }
+        where v = case motion of Down -> True; Up -> False
 
 pictureWorld :: World -> IO Gloss.Picture
 pictureWorld World {frameCount,disp=disp@Disp{onPixels=_}} = do

@@ -1,6 +1,51 @@
 # space-invaders
 
 
+### Step 1. Emulation
+
+
+Build/run emulation with SDL visualization:
+
+- `stack run`
+- Works fairly well; apart from not being quite complete & having some bugs!
+- `[insert]` coin; then start playing with `F1`
+- `z` left; `x` right; `[enter]` shoots
+- Game can be paused: `[delete]`
+- Dip-switches can be toggled: `F3`, `F5`, `F6`, `F7`
+- TILT can be activated with `[tab]`
+- Full keyboard-mapping show in panel next to the running game.
+
+
+Status:
+
+- 8080 emulation basically complete
+- Headless emulation: `stack run trace`
+- Regression tests: `./test.sh`
+- View decode table `stack run decode`
+- Emulation with Gloss visualization: `stack run gloss` (mem leak; slows over time)
+
+Next:
+
+- Speed measurements (no graphics)
+- `SDL`: report fps; introduce fps limiter
+- Refactor code in `Semantics.hs` to capture more sharing
+- Implement missing/required op-codes, ie `8A` (when alien is shot!)
+- `DAA` (_decimal adjust accumulator_) so credits are calculated correctly
+- Bug? - we never die in demo mode
+- Bug? - pixel gaps appear in line at bottom of screen (or is this expected?)
+
+
+Debugging:
+
+- Spot bugs while refactoring `Semantics.hs` (the dream!)
+- Get trace from another emulator: tricky; will need interrupts to align precisely
+- Setup testing using `cpudiag.asm`, (A) just by itself (B) trace vs another emulator
+- Calculate/print static semantics from each opcode, and inspect
+
+
+### Step 2. Retarget to standalone executable (Future Plan)
+
+
 ### Resource for Space Invaders and 8080
 - [wikipedia](https://en.wikipedia.org/wiki/Space_Invaders)
 - [computerarcheology](https://www.computerarcheology.com/Arcade/SpaceInvaders)
@@ -17,28 +62,3 @@
 - [Systems User's Manual](http://www.nj7p.info/Manuals/PDFs/Intel/9800153B.pdf)
 - [Assembly Language Programming Manual](http://www.classiccmp.org/dunfield/r/8080asm.pdf)
 
-
-
-### Step 1. Emulation (WIP)
-
-Currently we crash with an out of bounds memory write, 48 (simulated) seconds into the emulation.
-(Happily, we reach this point in just 37 seconds!)
-
-`stack run`
-
-    invaders: *crash*
-    11427701  [96764229] 15DF : Mem.write: 4017
-
-
-To see more: `stack run -- -poi 11427701`
-
-Next:
-
-- refactor code in `Semantics.hs` to capture more sharing
-- fix bugs in instruction execution
-- IO-subsystem, including external shift register
-- speed measurements
-- visualization (`Gloss`)
-
-
-### Step 2. Retarget to standalone executable (Future Plan)

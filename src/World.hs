@@ -13,6 +13,8 @@ import Buttons (Buttons,buttons0,But(..))
 import Data.Bits (testBit)
 import Emulate (EmuStep(..),emulate,EmuState(..),Ticks(..))
 import Mem (Mem,read)
+import System.Clock (TimeSpec(..),getTime,Clock(Monotonic))
+import Text.Printf (printf)
 import qualified Buttons (get,press,release,toggle)
 import qualified Emulate (initState)
 
@@ -64,17 +66,22 @@ data World = World
   , paused :: Bool
   , showControls :: Bool
   , frameCount :: Int
-  -- stuff for fps etc
+  , time :: TimeSpec
+  , fps :: Fps
   }
 
-initWorld :: Mem -> World
-initWorld mem = World
-  { state = Emulate.initState mem
-  , buttons = buttons0
-  , paused = False
-  , showControls = True
-  , frameCount = 0
-  }
+initWorld :: Mem -> IO World
+initWorld mem = do
+  time <- getTime Monotonic
+  return $ World
+    { state = Emulate.initState mem
+    , buttons = buttons0
+    , paused = False
+    , showControls = True
+    , frameCount = 0
+    , time
+    , fps = Fps 0
+    }
 
 updateKey :: Key -> KeyMotion -> World -> Maybe World
 updateKey key motion w@World{showControls,buttons,paused} =
@@ -90,7 +97,8 @@ updateKey key motion w@World{showControls,buttons,paused} =
     drive = \case Down -> Buttons.press; Up -> Buttons.release
 
 stepFrame :: World -> IO World
-stepFrame world@World{state=state0,buttons,paused,frameCount} = do
+stepFrame world@World{state=state0,buttons,paused,frameCount
+                     ,time=last,fps=fpsLast} = do
   if paused then return world else do
     loop state0
   where
@@ -100,9 +108,14 @@ stepFrame world@World{state=state0,buttons,paused,frameCount} = do
       case reachFrame pre post of
         False -> loop post
         True -> do
+          now <- getTime Monotonic
+          let fpsNow = makeFps last now
+          let fps = smoothFps fpsLast fpsNow
           return $ world
             { frameCount = frameCount + 1
             , state = post
+            , time = now
+            , fps
             }
 
 reachFrame :: EmuState -> EmuState -> Bool -- TODO: there a better way than this!
@@ -121,7 +134,7 @@ data Picture
   | Pixel { x :: Int, y :: Int }
 
 pictureWorld :: World -> Picture
-pictureWorld w@World{state=EmuState{mem},showControls,frameCount} =
+pictureWorld w@World{state=EmuState{mem},showControls,frameCount,fps} =
   Pictures
   [ pictureVideoMem mem
   , if showControls then controls else Pictures []
@@ -130,6 +143,7 @@ pictureWorld w@World{state=EmuState{mem},showControls,frameCount} =
     controls = Pictures
       [ pictureButtons w
       , Text { lineNo = 1, string = "frame : " <> show frameCount, emphasized = False }
+      , Text { lineNo = 2, string = "fps : " <> show fps, emphasized = False }
       ]
 
 pictureVideoMem :: Mem -> Picture
@@ -147,7 +161,7 @@ pictureVideoMem mem = do
 pictureButtons :: World -> Picture
 pictureButtons World{buttons,paused} =
   Pictures [ Text { lineNo, string = describeKeyAndMapping key, emphasized }
-           | (lineNo,key) <- zip [3..] keys
+           | (lineNo,key) <- zip [4..] keys
            , let emphasized = do
                    let action = keyMapping (key,Down)
                    case action of
@@ -189,3 +203,20 @@ instance Show KeyAction where
     ToggleControlDisplay -> "SHOW-KEYS"
     Drive but _ -> show but
     Toggle but -> show but
+
+
+newtype Fps = Fps Double
+
+instance Show Fps where show (Fps f) = printf "%.00g" f
+
+makeFps :: TimeSpec -> TimeSpec -> Fps
+makeFps last now = do
+  let TimeSpec{sec,nsec} = now - last
+  let duration = gig * sec + nsec
+  Fps (fromIntegral gig / fromIntegral duration)
+    where gig = 1_000_000_000
+
+smoothFps :: Fps -> Fps -> Fps
+smoothFps (Fps last) (Fps now) = Fps $ last * decay + now * (1 - decay)
+    where
+      decay = 0.95

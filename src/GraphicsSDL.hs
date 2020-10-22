@@ -47,10 +47,11 @@ main mem = do
         Just world -> do
           drawEverything assets world
           world <- World.stepFrame world
-          SDL.delay 5
+          --SDL.delay 5 -- TODO: compute this to attempt to limit the fps to 60
           loop world
 
-  loop (World.initWorld mem)
+  world <- World.initWorld mem
+  loop world
 
   SDL.destroyRenderer renderer
   SDL.destroyWindow win

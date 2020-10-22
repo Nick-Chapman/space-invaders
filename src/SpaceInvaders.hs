@@ -78,8 +78,8 @@ parse args conf = case args of
   "gloss":args -> parse args $ conf { mode = ModeGloss }
   "decode":args -> parse args $ conf { mode = ModeShowDecodeTable }
   "trace":args -> parse args $ conf { mode = ModeTrace }
-  "test1":args -> parse args $ conf { traceConf = traceConfTest1 }
-  "test2":args -> parse args $ conf { traceConf = traceConfTest2 }
+  "test1":args -> parse args $ conf { mode = ModeTrace, traceConf = traceConfTest1 }
+  "test2":args -> parse args $ conf {mode = ModeTrace, traceConf = traceConfTest2 }
   "-poi":i:args -> parse args $ conf { traceConf = traceConfPOI (read i) }
   "-fps":i:args -> parse args $ conf { fps = read i }
   "-frame":args -> parse args $ conf { traceConf = (traceConf conf) { period = HalfFrame } }

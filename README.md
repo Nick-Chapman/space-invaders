@@ -35,6 +35,11 @@ Next:
 - Bug? - pixel gaps appear in line at bottom of screen (or is this expected?)
 
 
+Crashes:
+
+- `2603064  [21010975] 09A2 : 8A -- decode failed`
+- `32801062 [277978420] 143C : Mem.write: 001C -- cant write to rom`
+
 Debugging:
 
 - Spot bugs while refactoring `Semantics.hs` (the dream!)

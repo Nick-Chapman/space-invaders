@@ -37,7 +37,7 @@ Next:
 
 Crashes:
 
-- `2603064  [21010975] 09A2 : 8A -- decode failed`
+- `2603064  [21010975] 09A1 : 8A -- decode failed`
 - `32801062 [277978420] 143C : Mem.write: 001C -- cant write to rom`
 
 Debugging:

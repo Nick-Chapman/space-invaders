@@ -84,8 +84,8 @@ emulate buttons s0 =
   return $ EmuStep { instruction, post = advance (Ticks n) s }
   where
 
-    crash :: EmuState-> String -> a
-    crash s message = do error ("*crash*\n" <> prettyPrefix s message)
+    crash :: String -> a
+    crash message = do error ("*crash*\n" <> prettyPrefix s0 message)
 
     run :: EmuState -> Eff EmuTime a -> (EmuState -> a -> IO EmuStep) -> IO EmuStep
     run s@EmuState{cpu,mem} eff k = case eff of
@@ -94,12 +94,12 @@ emulate buttons s0 =
       GetReg r -> k s (Cpu.get cpu r)
       SetReg r b -> k s { cpu = Cpu.set cpu r b} ()
       ReadMem a -> do
-        let b = Mem.read (crash s) mem a
+        let b = Mem.read crash mem a
         --putStrLn $ "- ReadMem (" <> show a <> ") --> " <> show b
         k s b
       WriteMem a b -> do
         --putStrLn $ "- WriteMem (" <> show a <> ") = " <> show b
-        k s { mem = Mem.write (crash s) mem a b } ()
+        k s { mem = Mem.write crash mem a b } ()
       SplitAddr a -> k s (Addr.toHiLo a)
       MakeAddr hilo -> k s (Addr.fromHiLo hilo)
       OffsetAddr n a -> k s (Addr.bump a n)
@@ -107,7 +107,7 @@ emulate buttons s0 =
       Decode byte -> do
         case decode byte of
           Just op -> k s op
-          Nothing -> crash s (show byte <> " -- decode failed")
+          Nothing -> crash (show byte <> " -- decode failed")
 
       MakeByte w -> k s (Byte w)
       Increment b -> k s (b + 1)
@@ -175,7 +175,7 @@ emulate buttons s0 =
         Just s -> k s True
       GetInterruptInstruction -> k s (interruptInstruction s)
 
-      Unimplemented message -> crash s $ "unimplemented: " <> message
+      Unimplemented message -> crash $ "unimplemented: " <> message
 
       GetButtons -> do
         k s buttons

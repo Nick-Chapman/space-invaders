@@ -14,16 +14,11 @@ dependencies:
 - base >= 4.7 && < 5
 - bytestring
 - containers
-- ansi-terminal
 - extra
 - gloss
-- haskeline
-- mtl
 - sdl2
 - sdl2-ttf
 - text
-- time
-- transformers
 - word8
 
 default-extensions:

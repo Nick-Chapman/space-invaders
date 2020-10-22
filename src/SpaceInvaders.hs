@@ -41,7 +41,7 @@ data Conf = Conf
   }
 
 conf0 :: Conf
-conf0 = Conf { mode = ModeTrace , traceConf = traceConf0, fps = 30 } -- half speed default
+conf0 = Conf { mode = ModeSDL , traceConf = traceConf0, fps = 30 } -- half speed default
 
 traceConf0 :: TraceConf
 traceConf0 = TraceConf
@@ -77,6 +77,7 @@ parse args conf = case args of
   "sdl":args -> parse args $ conf { mode = ModeSDL }
   "gloss":args -> parse args $ conf { mode = ModeGloss }
   "decode":args -> parse args $ conf { mode = ModeShowDecodeTable }
+  "trace":args -> parse args $ conf { mode = ModeTrace }
   "test1":args -> parse args $ conf { traceConf = traceConfTest1 }
   "test2":args -> parse args $ conf { traceConf = traceConfTest2 }
   "-poi":i:args -> parse args $ conf { traceConf = traceConfPOI (read i) }

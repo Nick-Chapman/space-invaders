@@ -211,6 +211,15 @@ execute0 = \case
     SetFlag FlagCY cout
     setFlagsFrom v
     return Next
+  ADC reg -> do
+    v1 <- load reg
+    v2 <- GetReg A
+    cin <- GetFlag FlagCY
+    (v,cout) <- AddWithCarry cin v1 v2
+    SetReg A v
+    SetFlag FlagCY cout
+    setFlagsFrom v
+    return Next
   SUB reg -> do
     v1 <- load reg
     v2 <- GetReg A

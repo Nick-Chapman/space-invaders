@@ -29,15 +29,14 @@ Next:
 - Speed measurements (no graphics)
 - `SDL`: report fps; introduce fps limiter
 - Refactor code in `Semantics.hs` to capture more sharing
-- Implement missing/required op-codes, ie `8A` (when alien is shot!)
+- Implement further missing/required op-codes; implement all op-codes
 - `DAA` (_decimal adjust accumulator_) so credits are calculated correctly
-- Bug? - we never die in demo mode
+- Bug? - player doesn't die when shot: (attract mode or game play)
 - Bug? - pixel gaps appear in line at bottom of screen (or is this expected?)
 
 
 Crashes:
 
-- `2603064  [21010975] 09A1 : 8A -- decode failed`
 - `32801062 [277978420] 143C : Mem.write: 001C -- cant write to rom`
 
 Debugging:

@@ -97,26 +97,16 @@ updateKey key motion w@World{showControls,buttons,paused} =
     drive = \case Down -> Buttons.press; Up -> Buttons.release
 
 stepFrame :: World -> IO World
-stepFrame world@World{state=state0,buttons,paused,frameCount
-                     ,time=last,fps=fpsLast} = do
-  if paused then return world else do
-    loop state0
+stepFrame world@World{state=state0,buttons,paused,frameCount} = do
+  (if paused then return world else loop state0)
+    >>= measureFps
   where
     loop :: EmuState -> IO World
     loop pre = do
       EmuStep{post} <- emulate buttons pre
       case reachFrame pre post of
         False -> loop post
-        True -> do
-          now <- getTime Monotonic
-          let fpsNow = makeFps last now
-          let fps = smoothFps fpsLast fpsNow
-          return $ world
-            { frameCount = frameCount + 1
-            , state = post
-            , time = now
-            , fps
-            }
+        True -> return $ world { frameCount = frameCount + 1 , state = post }
 
 reachFrame :: EmuState -> EmuState -> Bool -- TODO: there a better way than this!
 reachFrame s0 s1 = do
@@ -209,6 +199,13 @@ newtype Fps = Fps Double
 
 instance Show Fps where show (Fps f) = printf "%.00g" f
 
+measureFps :: World -> IO World
+measureFps world@World{time=last, fps=fpsLast} = do
+  now <- getTime Monotonic
+  let fpsNow = makeFps last now
+  let fpsNowSmoothed = smoothFps fpsLast fpsNow
+  return $ world { time = now, fps = fpsNowSmoothed }
+
 makeFps :: TimeSpec -> TimeSpec -> Fps
 makeFps last now = do
   let TimeSpec{sec,nsec} = now - last
@@ -219,4 +216,4 @@ makeFps last now = do
 smoothFps :: Fps -> Fps -> Fps
 smoothFps (Fps last) (Fps now) = Fps $ last * decay + now * (1 - decay)
     where
-      decay = 0.95
+      decay = 0.9

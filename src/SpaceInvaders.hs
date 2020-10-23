@@ -37,11 +37,11 @@ data Mode = ModeShowDecodeTable | ModeTrace | ModeGloss | ModeSDL
 data Conf = Conf
   { mode :: Mode
   , traceConf :: TraceConf
-  , fps :: Int
+  , fps :: Maybe Int
   }
 
 conf0 :: Conf
-conf0 = Conf { mode = ModeSDL , traceConf = traceConf0, fps = 30 } -- half speed default
+conf0 = Conf { mode = ModeSDL , traceConf = traceConf0, fps = Nothing } -- half speed default
 
 traceConf0 :: TraceConf
 traceConf0 = TraceConf
@@ -81,7 +81,7 @@ parse args conf = case args of
   "test1":args -> parse args $ conf { mode = ModeTrace, traceConf = traceConfTest1 }
   "test2":args -> parse args $ conf {mode = ModeTrace, traceConf = traceConfTest2 }
   "-poi":i:args -> parse args $ conf { traceConf = traceConfPOI (read i) }
-  "-fps":i:args -> parse args $ conf { fps = read i }
+  "-fps":i:args -> parse args $ conf { fps = Just (read i) }
   "-frame":args -> parse args $ conf { traceConf = (traceConf conf) { period = HalfFrame } }
   "-trace-near-ping":args -> parse args $ conf { traceConf = (traceConf conf) { traceNearPing = True } }
   args ->

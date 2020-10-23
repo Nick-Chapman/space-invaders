@@ -2,6 +2,7 @@
 module Gloss where
 
 import Data.Bits (testBit)
+import Data.Maybe (fromMaybe)
 import Graphics.Gloss (scale,translate,Picture(Text),Point,pictures,color,white,red,polygon,black)
 import Graphics.Gloss.Interface.IO.Game (Event(..),Key(..),SpecialKey(..),KeyState(..))
 import System.IO (hFlush,stdout)
@@ -28,11 +29,11 @@ world0 mem = World
   , state = initState mem
   }
 
-run :: Int -> Mem -> IO ()
+run :: Maybe Int -> Mem -> IO ()
 run fps mem = do
   let model = world0 mem
   let bgColour = if True then black else Gloss.greyN 0.3
-  Gloss.playIO dis bgColour fps model
+  Gloss.playIO dis bgColour (fromMaybe 30 fps) model
       (\  m -> do pic <- pictureWorld m; return $ doPosition pic)
       (\e m -> handleEventWorld e m)
       (\_ m -> updateWorld m)

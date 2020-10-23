@@ -1,6 +1,7 @@
 
 module GraphicsSDL (main) where
 
+import Control.Concurrent (threadDelay)
 import Data.List.Extra (groupSort)
 import Data.Map (Map)
 import Foreign.C.Types (CInt)
@@ -16,9 +17,9 @@ import qualified SDL.Font as Font (initialize,load,solid,size)
 import qualified World (initWorld,updateKey,stepFrame,pictureWorld)
 
 
-main :: Mem -> IO ()
-main mem = do
-  let sf = 3 -- scale factor
+main :: Maybe Int -> Mem -> IO ()
+main fpsLimitM mem = do
+  let sf = 4 -- scale factor
   let! _ = keyMapTable
   SDL.initializeAll
   Font.initialize
@@ -40,6 +41,7 @@ main mem = do
   let
     loop :: World -> IO ()
     loop world = do
+      before <- SDL.ticks
       --putStr "."; _flush
       events <- SDL.pollEvents
       case processEvents world events of
@@ -47,8 +49,19 @@ main mem = do
         Just world -> do
           drawEverything assets world
           world <- World.stepFrame world
-          --SDL.delay 5 -- TODO: compute this to attempt to limit the fps to 60
+          maybeDelay
           loop world
+            where
+              maybeDelay = do
+                after <- SDL.ticks
+                case fpsLimitM of
+                  Nothing -> return ()
+                  Just fpsLimit -> do
+                    let durationMs = fromIntegral (1000*(after-before))
+                    let goalMs = 1000000 `div` fpsLimit
+                    if (goalMs > durationMs)
+                      then threadDelay (goalMs - durationMs)
+                      else return ()
 
   world <- World.initWorld mem
   loop world

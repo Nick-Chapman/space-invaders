@@ -30,7 +30,7 @@ main = do
     ModeGloss -> do
       Gloss.run fps mem
     ModeSDL -> do
-      GraphicsSDL.main mem
+      GraphicsSDL.main fps mem
 
 data Mode = ModeShowDecodeTable | ModeTrace | ModeGloss | ModeSDL
 

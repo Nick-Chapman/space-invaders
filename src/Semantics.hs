@@ -169,6 +169,8 @@ execute0 = \case
     v <- Complement v0
     SetReg A v
     return Next
+  STAX rp -> do
+    Unimplemented ("STAX" <> show rp)
   LDAX rp -> do
     a <- getRegPair rp
     b <- ReadMem a

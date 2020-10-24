@@ -24,7 +24,7 @@ data Op = Op0 Op0 | Op1 Op1 | Op2 Op2
 data Op0
   = NOP
   | NOPx Word8 -- (1..7)
---  | STAX B/D
+  | STAX RegPairSpec
   | INX RegPairSpec
   | INR RegSpec
   | DCR RegSpec
@@ -107,10 +107,10 @@ allOps = map Op0 all0 ++ map Op1 all1 ++ map Op2 all2
   where
     all0 =
       [NOP,RLC,RAL,DAA,STC,RRC,RAR,CMA,CMC,XTHL,DI,RET,RETx,PCHL,SPHL,XCHG,EI]
+      ++ [ op p | op <- [STAX,LDAX], p <- [BC,DE] ]
       ++ [ op r | op <- [INR,DCR,ADD,ADC,SUB,SBB,ANA,XRA,ORA,CMP], r <- regs ]
       ++ [ op p | op <- [INX,DAD,DCX], p <- rps1 ]
       ++ [ op p | op <- [POP,PUSH], p <- rps2 ]
-      ++ [ LDAX p | p <- [BC,DE] ]
       ++ [ MOV {dest,src} | dest <- regs, src <- regs, not (dest==M && src==M) ]
       ++ [ RCond c | c <- conds ]
       ++ [ RST n | n <- [0..7] ]
@@ -134,7 +134,7 @@ cycles jumpTaken = \case
   Op0 NOP -> 4
   Op0 NOPx{} -> 4
   Op2 LXI{} -> 10
-  -- STAX
+  Op0 STAX{} -> 7
   Op2 SHLD -> 16
   Op2 STA -> 13
   Op0 INX{} -> 5
@@ -223,6 +223,7 @@ prettyInstruction = \case
   Ins2 (LXI rp) b1 b2 -> tag "LD" (show rp <> "," <> show b2 <> show b1)
   Ins2 SHLD b1 b2 -> tag "LD" ("(" <> show b2 <> show b1 <> "),HL")
   Ins2 STA b1 b2 -> tag "LD" ("("<> show b2 <> show b1 <> "),A")
+  Ins0 (STAX rp) -> tag "LD" "(" <> show rp <> "),A"
   Ins0 (INX rp) -> tag "INC" (show rp)
   Ins0 (INR reg) -> tag "INC" (prettyReg reg)
   Ins0 (DCR reg) -> tag "DEC" (prettyReg reg)
@@ -301,6 +302,7 @@ encode = \case
   Op2 (LXI rp) -> Byte (16 * encodeRegPairSpec rp + 0x1)
   Op2 SHLD -> 0x22
   Op2 STA -> 0x32
+  Op0 (STAX rp) -> Byte (16 * encodeRegPairSpec rp + 0x2)
   Op0 (INX rp) -> Byte (16 * encodeRegPairSpec rp + 0x3)
   Op0 (INR reg) -> Byte (8 * encodeRegSpec reg + 0x04)
   Op0 (DCR reg) -> Byte (8 * encodeRegSpec reg + 0x05)

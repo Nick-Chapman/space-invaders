@@ -16,68 +16,81 @@ import Data.Word8 (Word8)
 import Byte (Byte(..))
 import qualified Data.Map.Strict as Map
 
+-- | Op-codes. Stratified by the number of following immediate bytes
 data Op = Op0 Op0 | Op1 Op1 | Op2 Op2
-  deriving (Eq,Ord)
+  deriving (Eq,Ord,Show)
 
+-- | Ops which take zero immediate bytes. Listed in encoding order
 data Op0
   = NOP
-  | RET
-  | RCond Condition
-  | RRC
-  | RLC
-  | RAR
-  | EI
-  | DAA
-  | STC
-  | XCHG
-  | XTHL
-  | PCHL
-  | CMA -- Complement accumulator
-  | LDAX_B
-  | LDAX_D
+--  | STAX
+  | INX RegPairSpec
   | INR RegSpec
   | DCR RegSpec
+  | RLC
+--  | RAL
+  | DAA
+  | STC
+  | DAD RegPairSpec
+  | LDAX_B -- TODO: abstract B/D
+  | LDAX_D
+  | DCX RegPairSpec
+  | RRC
+  | RAR
+  | CMA
+--  | CMC
+  | MOV { dest :: RegSpec, src :: RegSpec }
+--  | HLT
   | ADD RegSpec
   | ADC RegSpec
   | SUB RegSpec
-  | XRA RegSpec
+--  | SBB RegSpec
   | ANA RegSpec
+  | XRA RegSpec
   | ORA RegSpec
   | CMP RegSpec
-  | MOV { dest :: RegSpec, src :: RegSpec }
-  | INX RegPairSpec
-  | DCX RegPairSpec
-  | PUSH RegPairSpec
+  | RCond Condition
   | POP RegPairSpec
-  | DAD RegPairSpec
+  | XTHL
+--  | DI
+  | PUSH RegPairSpec
   | RST Word8 --(0..7)
-  deriving (Eq,Ord)
+  | RET
+  | PCHL
+---  | SPHL
+  | XCHG
+  | EI
+  deriving (Eq,Ord,Show)
 
+-- | Ops which take one immediate byte.
 data Op1
-  = CPI
+  = MVI RegSpec
   | OUT
-  | IN
-  | ANI
-  | ORI
   | ADI
   | SUI -- subtract
+  | ANI
+  | ORI
+  | IN
+--  | ACI
   | SBI -- subtract with borrow
-  | MVI RegSpec
-  deriving (Eq,Ord)
+--  | XRI
+  | CPI
+  deriving (Eq,Ord,Show)
 
+-- | Ops which take two immediate bytes.
 data Op2
-  = JP
-  | JCond Condition
-  | CALL
-  | CCond Condition
-  | LDA
+  = LXI RegPairSpec
+  | SHLD
   | STA
   | LHLD
-  | SHLD
-  | LXI RegPairSpec
-  deriving (Eq,Ord)
+  | LDA
+  | JCond Condition
+  | JMP
+  | CCond Condition
+  | CALL
+  deriving (Eq,Ord,Show)
 
-data Condition = Z | NZ | CY | NCY | PO | PE | P | MI
+data Condition = NZ | NC | PO | P | Z | CY | PE | MI
   deriving (Eq,Ord,Show)
 
 data RegSpec = A | B | C | D | E | H | L | M
@@ -87,89 +100,91 @@ data RegPairSpec = BC | DE | HL | SP | PSW
   deriving (Eq,Ord,Show)
 
 allOps :: [Op]
-allOps = map Op0 allOp0 ++ map Op1 allOp1 ++ map Op2 allOp2
+allOps = map Op0 all0 ++ map Op1 all1 ++ map Op2 all2
   where
-    allOp0 = [NOP,LDAX_B,LDAX_D,RET
-             ,RRC,RLC,RAR,EI,DAA,STC,XCHG,XTHL,PCHL,CMA]
-             ++ map RCond conds
-             ++ map INR regs7spec
-             ++ map DCR regs7spec
-             ++ map ADD regs7spec
-             ++ map ADC regs7spec
-             ++ map SUB regs7spec
-             ++ map XRA regs7spec
-             ++ map ANA regs7spec
-             ++ map ORA regs7spec
-             ++ map CMP regs7spec
-             ++ map INX rps1
-             ++ map DCX rps1
-             ++ map DAD rps1
-             ++ map PUSH rps2
-             ++ map POP rps2
-             ++ map RST [0..7]
-             ++ [ MOV {dest,src} | dest <- regs7spec, src <- regs7spec, not (dest==M && src==M) ]
-    allOp1 = [CPI,OUT,IN,ANI,ORI,ADI,SUI,SBI] ++ map MVI regs7spec
-    allOp2 = [JP,CALL,LDA,STA,LHLD,SHLD] ++ map LXI rps1 ++ map CCond conds ++ map JCond conds
-    regs7spec = [A,B,C,D,E,H,L,M]
+    all0 =
+      [NOP,RLC,DAA,STC,LDAX_B,LDAX_D,RRC,RAR,CMA,XTHL,RET,PCHL,XCHG,EI]
+      ++ [ op r | op <- [INR,DCR,ADD,ADC,SUB,ANA,XRA,ORA,CMP], r <- regs ]
+      ++ [ op p | op <- [INX,DAD,DCX], p <- rps1 ]
+      ++ [ op p | op <- [POP,PUSH], p <- rps2 ]
+      ++ [ MOV {dest,src} | dest <- regs, src <- regs, not (dest==M && src==M) ]
+      ++ [ RCond c | c <- conds ]
+      ++ [ RST n | n <- [0..7] ]
+    all1 =
+      [ADI,SUI,ANI,ORI,SBI,CPI,OUT,IN] ++ [ MVI r | r <- regs ]
+    all2 =
+      [SHLD,STA,LHLD,LDA,JMP,CALL]
+      ++ [ LXI r | r <- rps1]
+      ++ [ op c | op <- [CCond,JCond], c <- conds]
+
+    regs = [A,B,C,D,E,H,L,M]
     rps1 = [BC,DE,HL,SP]
     rps2 = [BC,DE,HL,PSW]
-    conds= [Z,NZ,CY,NCY,PO,PE,P,MI]
+    conds= [Z,NZ,CY,NC,PO,PE,P,MI]
 
 
 cycles :: Bool -> Op -> Int
 cycles jumpTaken = \case
   Op0 NOP -> 4
-  Op0 RET -> 10
-  Op0 RCond{} -> if jumpTaken then 11 else 5
-  Op0 RRC -> 4
+  Op2 LXI{} -> 10
+  -- STAX
+  Op2 SHLD -> 16
+  Op2 STA -> 13
+  Op0 INX{} -> 5
+  Op0 (INR r) -> mcost r 5 10
+  Op0 (DCR r) -> mcost r 5 10
+  Op1 (MVI r) -> mcost r 7 10
   Op0 RLC -> 4
-  Op0 RAR -> 4
-  Op0 EI -> 4
+  -- RAL
   Op0 DAA -> 4
   Op0 STC -> 4
-  Op0 XCHG -> 5
-  Op0 XTHL -> 18
-  Op0 PCHL -> 5
-  Op0 CMA -> 4
+  Op0 DAD{} -> 11
   Op0 LDAX_B -> 7
   Op0 LDAX_D -> 7
-  Op0 (DCR r) -> mcost r 5 10
-  Op0 (INR r) -> mcost r 5 10
-  Op0 (ADD r) -> mcost r 4 7
-  Op0 (ADC r) -> mcost r 4 7
-  Op0 (SUB r) -> mcost r 4 7
-  Op0 (XRA r) -> mcost r 4 7
-  Op0 (ANA r) -> mcost r 4 7
-  Op0 (ORA r) -> mcost r 4 7
-  Op0 (CMP r) -> mcost r 4 7
+  Op2 LHLD -> 16
+  Op2 LDA -> 13
+  Op0 DCX{} -> 5
+  Op0 RRC -> 4
+  Op0 RAR -> 4
+  Op0 CMA -> 4
+  -- CMC
   Op0 MOV {dest=M,src=M} -> error "illegal instruction: MOV M,M"
   Op0 MOV {src=M} -> 7
   Op0 MOV {dest=M} -> 7
   Op0 MOV{} -> 5
-  Op0 INX{} -> 5
-  Op0 DCX{} -> 5
-  Op0 PUSH{} -> 11
+  Op0 (ADD r) -> mcost r 4 7
+  Op0 (ADC r) -> mcost r 4 7
+  Op0 (SUB r) -> mcost r 4 7
+  --SBB
+  Op0 (ANA r) -> mcost r 4 7
+  Op0 (XRA r) -> mcost r 4 7
+  Op0 (ORA r) -> mcost r 4 7
+  Op0 (CMP r) -> mcost r 4 7
+  Op0 RCond{} -> if jumpTaken then 11 else 5
   Op0 POP{} -> 10
-  Op0 DAD{} -> 11
-  Op0 RST{} -> 4
-  Op1 (MVI r) -> mcost r 7 10
-  Op1 CPI -> 7
+  Op2 JCond{} -> 10
+  Op2 JMP -> 10
   Op1 OUT -> 10
-  Op1 IN -> 10
-  Op1 ANI -> 7
-  Op1 ORI -> 7
+  Op0 XTHL -> 18
+  -- DI
+  Op2 CCond{} -> if jumpTaken then 17 else 11
+  Op0 PUSH{} -> 11
   Op1 ADI -> 7
   Op1 SUI -> 7
-  Op1 SBI -> 7
-  Op2 JP -> 10
-  Op2 JCond{} -> 10
+  Op1 ANI -> 7
+  Op1 ORI -> 7
+  Op0 RST{} -> 4
+  Op0 RET -> 10
+  Op0 PCHL -> 5
+  -- SPHL
+  Op1 IN -> 10
+  Op0 XCHG -> 5
+  Op0 EI -> 4
   Op2 CALL -> 17
-  Op2 CCond{} -> if jumpTaken then 17 else 11
-  Op2 LDA -> 13
-  Op2 STA -> 13
-  Op2 LHLD -> 16
-  Op2 SHLD -> 16
-  Op2 LXI{} -> 10
+  -- ACI
+  Op1 SBI -> 7
+  -- XRI
+  Op1 CPI -> 7
 
 mcost :: RegSpec -> Int -> Int -> Int
 mcost x a b = case x of M -> b; _ -> a
@@ -195,54 +210,54 @@ prettyInstructionBytes i = unwords bytes
 prettyInstruction :: Show b => Instruction b -> String
 prettyInstruction = \case
   Ins0 NOP -> "NOP"
-  Ins0 (RCond cond) -> tag "RET" (show cond)
-  Ins0 RET -> "RET"
-  Ins0 RRC -> tag "RRCA" ""
-  Ins0 RLC -> tag "RLCA" ""
-  Ins0 RAR -> "RAR"
-  Ins0 EI -> "EI"
-  Ins0 DAA -> "DAA"
-  Ins0 STC -> "SCF"
-  Ins0 XCHG -> tag "EX" "DE,HL"
-  Ins0 XTHL -> tag "EX" "(SP),HL"
-  Ins0 PCHL -> tag "JP" "(HL)"
-  Ins0 CMA -> "CPL"
-  Ins0 LDAX_B -> tag "LD" "A,(BC)"
-  Ins0 LDAX_D -> tag "LD" "A,(DE)"
+  Ins2 (LXI rp) b1 b2 -> tag "LD" (show rp <> "," <> show b2 <> show b1)
+  Ins2 SHLD b1 b2 -> tag "LD" ("(" <> show b2 <> show b1 <> "),HL")
+  Ins2 STA b1 b2 -> tag "LD" ("("<> show b2 <> show b1 <> "),A")
+  Ins0 (INX rp) -> tag "INC" (show rp)
   Ins0 (INR reg) -> tag "INC" (prettyReg reg)
   Ins0 (DCR reg) -> tag "DEC" (prettyReg reg)
+  Ins1 (MVI dest) b1 -> tag "LD" (prettyReg dest <> "," <> show b1)
+  Ins0 RLC -> tag "RLCA" ""
+  Ins0 DAA -> "DAA"
+  Ins0 STC -> "SCF"
+  Ins0 (DAD rp) -> tag "ADD" ("HL," <> show rp)
+  Ins0 LDAX_B -> tag "LD" "A,(BC)"
+  Ins0 LDAX_D -> tag "LD" "A,(DE)"
+  Ins2 LHLD b1 b2 -> tag "LD" ("HL,(" <> show b2 <> show b1 <> ")")
+  Ins2 LDA b1 b2 -> tag "LD" ("A,("<> show b2 <> show b1 <> ")")
+  Ins0 (DCX rp) -> tag "DEC" (show rp)
+  Ins0 RRC -> tag "RRCA" ""
+  Ins0 RAR -> "RAR"
+  Ins0 CMA -> "CPL"
+  Ins0 MOV {dest,src} -> tag "LD" (prettyReg dest <> "," <> prettyReg src)
   Ins0 (ADD reg) -> tag "ADD" (prettyReg reg)
   Ins0 (ADC reg) -> tag "ADC" (prettyReg reg)
   Ins0 (SUB reg) -> tag "SUB" (prettyReg reg)
-  Ins0 (XRA reg) -> tag "XOR" (prettyReg reg)
   Ins0 (ANA reg) -> tag "AND" (prettyReg reg)
+  Ins0 (XRA reg) -> tag "XOR" (prettyReg reg)
   Ins0 (ORA reg) -> tag "OR" (prettyReg reg)
   Ins0 (CMP reg) -> tag "CP" (prettyReg reg)
-  Ins0 MOV {dest,src} -> tag "LD" (prettyReg dest <> "," <> prettyReg src)
-  Ins0 (INX rp) -> tag "INC" (show rp)
-  Ins0 (DCX rp) -> tag "DEC" (show rp)
-  Ins0 (PUSH rp) -> tag "PUSH" (show rp)
+  Ins0 (RCond cond) -> tag "RET" (show cond)
   Ins0 (POP rp) -> tag "POP" (show rp)
-  Ins0 (DAD rp) -> tag "ADD" ("HL," <> show rp)
-  Ins0 (RST n) -> tag "RST" (show n)
-  Ins1 (MVI dest) b1 -> tag "LD" (prettyReg dest <> "," <> show b1)
-  Ins1 CPI b1 -> tag "CP" (show b1)
+  Ins2 (JCond cond) b1 b2 -> tag "JP" (show cond <> "," <> show b2 <> show b1)
+  Ins2 JMP b1 b2 -> tag "JP" (show b2 <> show b1)
   Ins1 OUT b1 -> tag "OUT" (show b1)
-  Ins1 IN b1 -> tag "IN" (show b1)
-  Ins1 ANI b1 -> tag "AND" (show b1)
-  Ins1 ORI b1 -> tag "OR" (show b1)
+  Ins0 XTHL -> tag "EX" "(SP),HL"
+  Ins2 (CCond cond) b1 b2 -> tag "CALL" (show cond <> "," <> show b2 <> show b1)
+  Ins0 (PUSH rp) -> tag "PUSH" (show rp)
   Ins1 ADI b1 -> tag "ADD" (show b1)
   Ins1 SUI b1 -> tag "SUB" (show b1)
-  Ins1 SBI b1 -> tag "SBC" (show b1)
-  Ins2 JP b1 b2 -> tag "JP" (show b2 <> show b1)
-  Ins2 (JCond cond) b1 b2 -> tag "JP" (show cond <> "," <> show b2 <> show b1)
+  Ins1 ANI b1 -> tag "AND" (show b1)
+  Ins1 ORI b1 -> tag "OR" (show b1)
+  Ins0 (RST n) -> tag "RST" (show n)
+  Ins0 RET -> "RET"
+  Ins0 PCHL -> tag "JP" "(HL)"
+  Ins1 IN b1 -> tag "IN" (show b1)
+  Ins0 XCHG -> tag "EX" "DE,HL"
+  Ins0 EI -> "EI"
   Ins2 CALL b1 b2 -> tag "CALL" (show b2 <> show b1)
-  Ins2 (CCond cond) b1 b2 -> tag "CALL" (show cond <> "," <> show b2 <> show b1)
-  Ins2 LDA b1 b2 -> tag "LD" ("A,("<> show b2 <> show b1 <> ")")
-  Ins2 STA b1 b2 -> tag "LD" ("("<> show b2 <> show b1 <> "),A")
-  Ins2 LHLD b1 b2 -> tag "LD" ("HL,(" <> show b2 <> show b1 <> ")")
-  Ins2 SHLD b1 b2 -> tag "LD" ("(" <> show b2 <> show b1 <> "),HL")
-  Ins2 (LXI rp) b1 b2 -> tag "LD" (show rp <> "," <> show b2 <> show b1)
+  Ins1 SBI b1 -> tag "SBC" (show b1)
+  Ins1 CPI b1 -> tag "CP" (show b1)
   where
     tag s more = ljust 5 s <> more
 
@@ -263,60 +278,60 @@ justOp = \case
 encode :: Op -> Byte
 encode = \case
   Op0 NOP -> 0x00
-  Op0 RET -> 0xC9
-  Op0 (RCond cond) -> Byte (8 * encodeCondition cond + 0xC0)
-  Op0 RRC -> 0x0F
+  Op2 (LXI rp) -> Byte (16 * encodeRegPairSpec rp + 0x1)
+  Op2 SHLD -> 0x22
+  Op2 STA -> 0x32
+  Op0 (INX rp) -> Byte (16 * encodeRegPairSpec rp + 0x3)
+  Op0 (INR reg) -> Byte (8 * encodeRegSpec reg + 0x04)
+  Op0 (DCR reg) -> Byte (8 * encodeRegSpec reg + 0x05)
+  Op1 (MVI dest) -> Byte (8 * encodeRegSpec dest + 0x06)
   Op0 RLC -> 0x07
-  Op0 RAR -> 0x1F
-  Op0 EI -> 0xFB
   Op0 DAA -> 0x27
   Op0 STC -> 0x37
-  Op0 XCHG -> 0xEB
-  Op0 XTHL -> 0xE3
-  Op0 PCHL -> 0xE9
-  Op0 CMA -> 0x2F
+  Op0 (DAD rp) -> Byte (16 * encodeRegPairSpec rp + 0x9)
   Op0 LDAX_B -> 0x0A
   Op0 LDAX_D -> 0x1A
-  Op0 (DCR reg) -> Byte (8 * encodeRegSpec reg + 0x05)
-  Op0 (INR reg) -> Byte (8 * encodeRegSpec reg + 0x04)
+  Op2 LHLD -> 0x2A
+  Op2 LDA -> 0x3A
+  Op0 (DCX rp) -> Byte (16 * encodeRegPairSpec rp + 0xB)
+  Op0 RRC -> 0x0F
+  Op0 RAR -> 0x1F
+  Op0 CMA -> 0x2F
+  Op0 MOV {dest,src} -> Byte (0x40 + 8 * encodeRegSpec dest + encodeRegSpec src)
   Op0 (ADD reg) -> Byte (encodeRegSpec reg + 0x80)
   Op0 (ADC reg) -> Byte (encodeRegSpec reg + 0x88)
   Op0 (SUB reg) -> Byte (encodeRegSpec reg + 0x90)
-  Op0 (XRA reg) -> Byte (encodeRegSpec reg + 0xA8)
   Op0 (ANA reg) -> Byte (encodeRegSpec reg + 0xA0)
+  Op0 (XRA reg) -> Byte (encodeRegSpec reg + 0xA8)
   Op0 (ORA reg) -> Byte (encodeRegSpec reg + 0xB0)
   Op0 (CMP reg) -> Byte (encodeRegSpec reg + 0xB8)
-  Op0 MOV {dest,src} -> Byte (0x40 + 8 * encodeRegSpec dest + encodeRegSpec src)
-  Op0 (INX rp) -> Byte (16 * encodeRegPairSpec rp + 0x3)
-  Op0 (DCX rp) -> Byte (16 * encodeRegPairSpec rp + 0xB)
-  Op0 (PUSH rp) -> Byte (16 * encodeRegPairSpec rp + 0xC5)
+  Op0 (RCond cond) -> Byte (8 * encodeCondition cond + 0xC0)
   Op0 (POP rp) -> Byte (16 * encodeRegPairSpec rp + 0xC1)
-  Op0 (DAD rp) -> Byte (16 * encodeRegPairSpec rp + 0x9)
-  Op0 (RST n) -> Byte (8 * fromIntegral n + 0xC7)
-  Op1 (MVI dest) -> Byte (8 * encodeRegSpec dest + 0x06)
-  Op1 CPI -> 0xFE
+  Op2 (JCond cond) -> Byte (8 * encodeCondition cond + 0xC2)
+  Op2 JMP -> 0xC3
   Op1 OUT -> 0xD3
-  Op1 IN -> 0xDB
-  Op1 ANI -> 0xE6
-  Op1 ORI -> 0xF6
+  Op0 XTHL -> 0xE3
+  Op2 (CCond cond) -> Byte (8 * encodeCondition cond + 0xC4)
+  Op0 (PUSH rp) -> Byte (16 * encodeRegPairSpec rp + 0xC5)
   Op1 ADI -> 0xC6
   Op1 SUI -> 0xD6
-  Op1 SBI -> 0xDE
-  Op2 JP -> 0xC3
-  Op2 (JCond cond) -> Byte (8 * encodeCondition cond + 0xC2)
+  Op1 ANI -> 0xE6
+  Op1 ORI -> 0xF6
+  Op0 (RST n) -> Byte (8 * fromIntegral n + 0xC7)
+  Op0 RET -> 0xC9
+  Op0 PCHL -> 0xE9
+  Op1 IN -> 0xDB
+  Op0 XCHG -> 0xEB
+  Op0 EI -> 0xFB
   Op2 CALL -> 0xCD
-  Op2 (CCond cond) -> Byte (8 * encodeCondition cond + 0xC4)
-  Op2 LDA -> 0x3A
-  Op2 STA -> 0x32
-  Op2 LHLD -> 0x2A
-  Op2 SHLD -> 0x22
-  Op2 (LXI rp) -> Byte (16 * encodeRegPairSpec rp + 0x1)
+  Op1 SBI -> 0xDE
+  Op1 CPI -> 0xFE
 
 encodeCondition :: Condition -> Word8
 encodeCondition = \case
   NZ -> 0
   Z -> 1
-  NCY -> 2
+  NC -> 2
   CY -> 3
   PO -> 4
   PE -> 5
@@ -357,7 +372,7 @@ decodeTable = Map.fromList ys
       ops -> error $
         unlines $
         ("bad decoding: " <> show k)
-          : [ "--> " <> show (docInstructionForOp op) | op <- ops ]
+          : [ "--> " <> show (docInstructionForOp op) <> " [" <> show op <> "]" | op <- ops ]
 
 printDecodeTable :: IO ()
 printDecodeTable = do

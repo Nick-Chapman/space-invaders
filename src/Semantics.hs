@@ -279,7 +279,7 @@ executeCond :: Condition -> Eff p (Bit p)
 executeCond = \case
   NZ -> GetFlag FlagZ >>= Flip
   Z -> GetFlag FlagZ
-  NCY -> GetFlag FlagCY >>= Flip
+  NC -> GetFlag FlagCY >>= Flip
   CY -> GetFlag FlagCY
   PO -> error "executeCond, PO, need parity flag"
   PE -> error "executeCond, PE, need parity flag"
@@ -385,7 +385,7 @@ setFlagsFrom value = do
 
 execute2 :: Op2 -> (Byte p, Byte p) -> Eff p (Flow p)
 execute2 op2 (lo,hi) = case op2 of
-  JP -> do
+  JMP -> do
     dest <- MakeAddr $ HiLo{hi,lo}
     return (Jump dest)
   JCond cond -> do

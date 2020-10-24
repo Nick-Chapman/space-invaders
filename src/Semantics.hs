@@ -91,7 +91,8 @@ execute0 = \case
     v0 <- load reg
     cin <- MakeBit True
     zero <- MakeByte 0
-    (v,_) <- AddWithCarry cin v0 zero
+    (v,aux,_) <- AddWithCarry cin v0 zero
+    SetFlag FlagA aux
     saveAndSetFlagsFrom reg v
     return Next
   DCR reg -> do
@@ -414,7 +415,8 @@ execute2 op2 a = case op2 of
 addToAccWithCarry :: Bit p -> Byte p -> Eff p (Flow p)
 addToAccWithCarry cin v1 = do
   v2 <- GetReg A
-  (v,cout) <- AddWithCarry cin v1 v2
+  (v,aux,cout) <- AddWithCarry cin v1 v2
+  SetFlag FlagA aux
   SetFlag FlagCY cout
   saveAndSetFlagsFrom Instr.A v
   return Next
@@ -438,7 +440,8 @@ subWithCarry :: Bit p -> Byte p -> Byte p -> Eff p (Byte p, Bit p)
 subWithCarry cin v1 v2 = do
   cin' <- Flip cin
   v2comp <- Complement v2
-  (v,cout) <- AddWithCarry cin' v1 v2comp
+  (v,aux,cout) <- AddWithCarry cin' v1 v2comp
+  SetFlag FlagA aux
   borrow <- Flip cout
   return (v, borrow)
 
@@ -516,9 +519,10 @@ expandRegPair = \case
 setRegOrFlags :: Reg -> Byte p -> Eff p ()
 setRegOrFlags r v = case r of
   Flags -> do
-    (s,z,cy) <- SelectSZC v
+    (s,z,a,cy) <- SelectSZAC v
     SetFlag FlagS s
     SetFlag FlagZ z
+    SetFlag FlagA a
     SetFlag FlagCY cy
   reg ->
     SetReg reg v
@@ -528,7 +532,8 @@ getRegOrFlags = \case
   Flags -> do
     s <- GetFlag FlagS
     z <- GetFlag FlagZ
+    a <- GetFlag FlagA
     cy <- GetFlag FlagCY
-    ByteFromSZC (s,z,cy)
+    ByteFromSZAC (s,z,a,cy)
   reg ->
     GetReg reg

@@ -11,7 +11,7 @@ import Text.Printf (printf)
 
 import Addr (Addr(..),addCarryOut)
 import Buttons (Buttons)
-import Byte (Byte(..),adc)
+import Byte (Byte(..),addWithCarry,addForAuxCarry)
 import Cpu (Cpu,Reg(PCL,PCH))
 import Effect (Eff(..))
 import Semantics (fetchDecodeExec)
@@ -112,8 +112,9 @@ emulate buttons s0 =
       MakeByte w -> k s (Byte w)
 
       AddWithCarry (Bit cin) v1 v2 -> do
-        let (v,cout) = Byte.adc cin v1 v2
-        k s (v, Bit cout)
+        let (v,cout) = Byte.addWithCarry cin v1 v2
+        let aux = Byte.addForAuxCarry cin v1 v2
+        k s (v, Bit aux, Bit cout)
 
       Complement b -> k s (complement b)
       Flip (Bit bool) -> k s (Bit (not bool))
@@ -126,17 +127,19 @@ emulate buttons s0 =
         let (w, cout) = Addr.addCarryOut w1 w2
         k s (w, Bit cout)
 
-      SelectSZC byte -> do
+      SelectSZAC byte -> do
         let bs = Bit (byte `testBit` 7)
         let bz = Bit (byte `testBit` 6)
+        let ba = Bit (byte `testBit` 4)
         let bc = Bit (byte `testBit` 0)
-        k s (bs, bz, bc)
+        k s (bs, bz, ba, bc)
 
-      ByteFromSZC (Bit bs, Bit bz, Bit bc) -> do
+      ByteFromSZAC (Bit bs, Bit bz, Bit ba, Bit bc) -> do
         let v1 = if bs then 128 else 0
         let v2 = if bz then 64 else 0
-        let v3 = if bc then 1 else 0
-        k s (v1+v2+v3)
+        let v3 = if ba then 16 else 0
+        let v4 = if bc then 1 else 0
+        k s (v1+v2+v3+v4)
 
       GetFlag flag -> k s (Cpu.getFlag cpu flag)
       SetFlag flag bit -> k s { cpu = Cpu.setFlag cpu flag bit} ()

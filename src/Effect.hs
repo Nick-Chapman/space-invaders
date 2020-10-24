@@ -25,7 +25,7 @@ data Eff p a where
   Decode :: Byte p -> Eff p Op
 
   MakeByte :: Word8 -> Eff p (Byte p)
-  AddWithCarry :: Bit p -> Byte p -> Byte p -> Eff p (Byte p, Bit p)
+  AddWithCarry :: Bit p -> Byte p -> Byte p -> Eff p (Byte p, Bit p, Bit p)
   Complement :: Byte p -> Eff p (Byte p)
   Flip :: Bit p -> Eff p (Bit p)
 
@@ -34,8 +34,8 @@ data Eff p a where
   XorB :: Byte p -> Byte p -> Eff p (Byte p)
   Add16 :: Addr p -> Addr p -> Eff p (Addr p, Bit p)
 
-  SelectSZC :: Byte p -> Eff p (Bit p, Bit p, Bit p)
-  ByteFromSZC :: (Bit p, Bit p, Bit p) -> Eff p (Byte p)
+  SelectSZAC :: Byte p -> Eff p (Bit p, Bit p, Bit p, Bit p)
+  ByteFromSZAC :: (Bit p, Bit p, Bit p, Bit p) -> Eff p (Byte p)
 
   GetFlag :: Flag -> Eff p (Bit p)
   SetFlag :: Flag -> Bit p -> Eff p ()

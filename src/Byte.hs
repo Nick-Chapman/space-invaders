@@ -3,10 +3,11 @@ module Byte(
   Byte(..),
   toUnsigned,
   ofUnsigned,
-  adc, -- add with carry
+  addWithCarry,
+  addForAuxCarry,
   ) where
 
-import Data.Bits (Bits)
+import Data.Bits (Bits, (.&.))
 import Data.Word8 (Word8)
 import Text.Printf (printf)
 
@@ -21,7 +22,12 @@ toUnsigned = fromIntegral . unByte
 ofUnsigned :: Int -> Byte
 ofUnsigned = Byte . fromIntegral
 
-adc :: Bool -> Byte -> Byte -> (Byte,Bool)
-adc cin x y = (Byte $ fromIntegral res,cout) where
-    res = toUnsigned x + toUnsigned y + (if cin then 1 else 0)
+addWithCarry :: Bool -> Byte -> Byte -> (Byte,Bool)
+addWithCarry cin x y = (ofUnsigned res, cout) where
+    res :: Int = toUnsigned x + toUnsigned y + (if cin then 1 else 0)
     cout = res >= 256
+
+addForAuxCarry :: Bool -> Byte -> Byte -> Bool
+addForAuxCarry cin x y = aux where
+    res = (x .&. 0xF) + (y .&. 0xF) + (if cin then 1 else 0)
+    aux = res >= 16

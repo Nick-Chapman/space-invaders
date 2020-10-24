@@ -94,6 +94,13 @@ execute0 = \case
     SetFlag FlagCY bool'
     SetReg A byte'
     return Next
+  RAL -> do
+    byte <- GetReg A
+    bool <- GetFlag FlagCY
+    (byte',bool') <- RotateLeftThroughCarry (bool,byte)
+    SetFlag FlagCY bool'
+    SetReg A byte'
+    return Next
   RLC -> do
     byte <- GetReg A
     (byte',bool') <- RotateLeft byte

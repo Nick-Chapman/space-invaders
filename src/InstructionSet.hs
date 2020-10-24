@@ -29,7 +29,7 @@ data Op0
   | INR RegSpec
   | DCR RegSpec
   | RLC
---  | RAL
+  | RAL
   | DAA
   | STC
   | DAD RegPairSpec
@@ -104,7 +104,7 @@ allOps :: [Op]
 allOps = map Op0 all0 ++ map Op1 all1 ++ map Op2 all2
   where
     all0 =
-      [NOP,RLC,DAA,STC,LDAX_B,LDAX_D,RRC,RAR,CMA,XTHL,RET,PCHL,XCHG,EI]
+      [NOP,RLC,RAL,DAA,STC,LDAX_B,LDAX_D,RRC,RAR,CMA,XTHL,RET,PCHL,XCHG,EI]
       ++ [ op r | op <- [INR,DCR,ADD,ADC,SUB,SBB,ANA,XRA,ORA,CMP], r <- regs ]
       ++ [ op p | op <- [INX,DAD,DCX], p <- rps1 ]
       ++ [ op p | op <- [POP,PUSH], p <- rps2 ]
@@ -138,7 +138,7 @@ cycles jumpTaken = \case
   Op0 (DCR r) -> mcost r 5 10
   Op1 (MVI r) -> mcost r 7 10
   Op0 RLC -> 4
-  -- RAL
+  Op0 RAL -> 4
   Op0 DAA -> 4
   Op0 STC -> 4
   Op0 DAD{} -> 11
@@ -222,6 +222,7 @@ prettyInstruction = \case
   Ins0 (DCR reg) -> tag "DEC" (prettyReg reg)
   Ins1 (MVI dest) b1 -> tag "LD" (prettyReg dest <> "," <> show b1)
   Ins0 RLC -> tag "RLCA" ""
+  Ins0 RAL -> tag "RAL" ""
   Ins0 DAA -> "DAA"
   Ins0 STC -> "SCF"
   Ins0 (DAD rp) -> tag "ADD" ("HL," <> show rp)
@@ -294,6 +295,7 @@ encode = \case
   Op0 (DCR reg) -> Byte (8 * encodeRegSpec reg + 0x05)
   Op1 (MVI dest) -> Byte (8 * encodeRegSpec dest + 0x06)
   Op0 RLC -> 0x07
+  Op0 RAL -> 0x17
   Op0 DAA -> 0x27
   Op0 STC -> 0x37
   Op0 (DAD rp) -> Byte (16 * encodeRegPairSpec rp + 0x9)
@@ -383,7 +385,7 @@ decodeTable = Map.fromList ys
       ops -> error $
         unlines $
         ("bad decoding: " <> show k)
-          : [ "--> " <> show (docInstructionForOp op) <> " [" <> show op <> "]" | op <- ops ]
+          : [ "--> " <> ljust 10 (show (docInstructionForOp op)) <> " [" <> show op <> "]" | op <- ops ]
 
 printDecodeTable :: IO ()
 printDecodeTable = do

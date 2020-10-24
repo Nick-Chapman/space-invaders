@@ -71,9 +71,9 @@ data Op1
   | ANI
   | ORI
   | IN
---  | ACI
+  | ACI
   | SBI -- subtract with borrow
---  | XRI
+  | XRI
   | CPI
   deriving (Eq,Ord,Show)
 
@@ -111,7 +111,7 @@ allOps = map Op0 all0 ++ map Op1 all1 ++ map Op2 all2
       ++ [ RCond c | c <- conds ]
       ++ [ RST n | n <- [0..7] ]
     all1 =
-      [ADI,SUI,ANI,ORI,SBI,CPI,OUT,IN] ++ [ MVI r | r <- regs ]
+      [ADI,SUI,ANI,ORI,ACI,SBI,XRI,CPI,OUT,IN] ++ [ MVI r | r <- regs ]
     all2 =
       [SHLD,STA,LHLD,LDA,JMP,CALL]
       ++ [ LXI r | r <- rps1]
@@ -181,9 +181,9 @@ cycles jumpTaken = \case
   Op0 XCHG -> 5
   Op0 EI -> 4
   Op2 CALL -> 17
-  -- ACI
+  Op1 ACI -> 7
   Op1 SBI -> 7
-  -- XRI
+  Op1 XRI -> 7
   Op1 CPI -> 7
 
 mcost :: RegSpec -> Int -> Int -> Int
@@ -257,7 +257,9 @@ prettyInstruction = \case
   Ins0 XCHG -> tag "EX" "DE,HL"
   Ins0 EI -> "EI"
   Ins2 CALL b1 b2 -> tag "CALL" (show b2 <> show b1)
+  Ins1 ACI b1 -> tag "ADC" (show b1)
   Ins1 SBI b1 -> tag "SBC" (show b1)
+  Ins1 XRI b1 -> tag "XOR" (show b1)
   Ins1 CPI b1 -> tag "CP" (show b1)
   where
     tag s more = ljust 5 s <> more
@@ -326,7 +328,9 @@ encode = \case
   Op0 XCHG -> 0xEB
   Op0 EI -> 0xFB
   Op2 CALL -> 0xCD
+  Op1 ACI -> 0xCE
   Op1 SBI -> 0xDE
+  Op1 XRI -> 0xEE
   Op1 CPI -> 0xFE
 
 encodeCondition :: Condition -> Word8

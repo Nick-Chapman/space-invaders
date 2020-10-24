@@ -372,6 +372,8 @@ execute1 op1 b1 = case op1 of
     SetReg A v
     setFlagsFrom v
     return Next
+  ACI -> do
+    Unimplemented "ACI"
   SBI -> do -- TODO: share code with SUI...
     v0 <- GetReg A
     cin <- GetFlag FlagCY -- only change here
@@ -383,6 +385,8 @@ execute1 op1 b1 = case op1 of
     SetReg A v
     setFlagsFrom v
     return Next
+  XRI -> do
+    Unimplemented "XRI"
 
 
 setFlagsFrom :: Byte p -> Eff p ()

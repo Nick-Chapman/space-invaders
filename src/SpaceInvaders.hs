@@ -60,7 +60,7 @@ traceConfTest1 = traceConf0
 traceConfTest2 :: TraceConf
 traceConfTest2 = traceConf0
   { traceOnAfter = Nothing -- dont trace every instruction
-  , stopAfter = Just 1000000 -- 1mil instructions
+  , stopAfter = Just 10000000 -- 10mil instructions, approx 2400 frames, or 40 emulated seconds
   , period = HalfFrame
   }
 

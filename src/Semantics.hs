@@ -78,7 +78,10 @@ execute0 = \case
   NOPx{} -> do
     return Next
   STAX rp -> do
-    Unimplemented ("STAX " <> show rp)
+    a <- getRegPair rp
+    b <- GetReg A
+    WriteMem a b
+    return Next
   INX rp -> do
     a <- getRegPair rp
     a' <- OffsetAddr 1 a

@@ -16,8 +16,7 @@ Build/run emulation with SDL visualization:
 
 Status:
 
-- 8080 emulation almost complete (`STAX`, `SPHL` and `HLT` unimplemented; `DAA` skipped)
-- Just discovered that `STAX` is needed (when 3rd live is lost) and so we crash
+- 8080 emulation almost complete (`SPHL` and `HLT` unimplemented; `DAA` skipped)
 - SDL emulation is quick enough -- *just* -- measured fps is reported
 - `stack run` runs as fast the machine allows; about 70 fps on my laptop
 - fps can be limited with a command line flag, i.e.  `stack run -- -fps 60`
@@ -33,7 +32,6 @@ Next:
 - Bug? - pixel gaps appear in line at bottom of screen (or is this expected?)
 
 Crashes:
-- `11497506  [91054119] 1690 : unimplemented: STAX DE`
 - `31091013 [267381888] 143B : Mem.write: 001C -- cant write to rom`
 
 Debugging:

@@ -44,7 +44,7 @@ data Op0
   | ADD RegSpec
   | ADC RegSpec
   | SUB RegSpec
---  | SBB RegSpec
+  | SBB RegSpec
   | ANA RegSpec
   | XRA RegSpec
   | ORA RegSpec
@@ -104,7 +104,7 @@ allOps = map Op0 all0 ++ map Op1 all1 ++ map Op2 all2
   where
     all0 =
       [NOP,RLC,DAA,STC,LDAX_B,LDAX_D,RRC,RAR,CMA,XTHL,RET,PCHL,XCHG,EI]
-      ++ [ op r | op <- [INR,DCR,ADD,ADC,SUB,ANA,XRA,ORA,CMP], r <- regs ]
+      ++ [ op r | op <- [INR,DCR,ADD,ADC,SUB,SBB,ANA,XRA,ORA,CMP], r <- regs ]
       ++ [ op p | op <- [INX,DAD,DCX], p <- rps1 ]
       ++ [ op p | op <- [POP,PUSH], p <- rps2 ]
       ++ [ MOV {dest,src} | dest <- regs, src <- regs, not (dest==M && src==M) ]
@@ -155,7 +155,7 @@ cycles jumpTaken = \case
   Op0 (ADD r) -> mcost r 4 7
   Op0 (ADC r) -> mcost r 4 7
   Op0 (SUB r) -> mcost r 4 7
-  --SBB
+  Op0 (SBB r) -> mcost r 4 7
   Op0 (ANA r) -> mcost r 4 7
   Op0 (XRA r) -> mcost r 4 7
   Op0 (ORA r) -> mcost r 4 7
@@ -233,6 +233,7 @@ prettyInstruction = \case
   Ins0 (ADD reg) -> tag "ADD" (prettyReg reg)
   Ins0 (ADC reg) -> tag "ADC" (prettyReg reg)
   Ins0 (SUB reg) -> tag "SUB" (prettyReg reg)
+  Ins0 (SBB reg) -> tag "SBC" (prettyReg reg)
   Ins0 (ANA reg) -> tag "AND" (prettyReg reg)
   Ins0 (XRA reg) -> tag "XOR" (prettyReg reg)
   Ins0 (ORA reg) -> tag "OR" (prettyReg reg)
@@ -301,6 +302,7 @@ encode = \case
   Op0 (ADD reg) -> Byte (encodeRegSpec reg + 0x80)
   Op0 (ADC reg) -> Byte (encodeRegSpec reg + 0x88)
   Op0 (SUB reg) -> Byte (encodeRegSpec reg + 0x90)
+  Op0 (SBB reg) -> Byte (encodeRegSpec reg + 0x98)
   Op0 (ANA reg) -> Byte (encodeRegSpec reg + 0xA0)
   Op0 (XRA reg) -> Byte (encodeRegSpec reg + 0xA8)
   Op0 (ORA reg) -> Byte (encodeRegSpec reg + 0xB0)

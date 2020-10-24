@@ -58,7 +58,7 @@ data Op0
   | RET
   | RETx
   | PCHL
----  | SPHL
+  | SPHL
   | XCHG
   | EI
   deriving (Eq,Ord,Show)
@@ -106,7 +106,7 @@ allOps :: [Op]
 allOps = map Op0 all0 ++ map Op1 all1 ++ map Op2 all2
   where
     all0 =
-      [NOP,RLC,RAL,DAA,STC,RRC,RAR,CMA,CMC,XTHL,DI,RET,RETx,PCHL,XCHG,EI]
+      [NOP,RLC,RAL,DAA,STC,RRC,RAR,CMA,CMC,XTHL,DI,RET,RETx,PCHL,SPHL,XCHG,EI]
       ++ [ op r | op <- [INR,DCR,ADD,ADC,SUB,SBB,ANA,XRA,ORA,CMP], r <- regs ]
       ++ [ op p | op <- [INX,DAD,DCX], p <- rps1 ]
       ++ [ op p | op <- [POP,PUSH], p <- rps2 ]
@@ -184,7 +184,7 @@ cycles jumpTaken = \case
   Op0 RET -> 10
   Op0 RETx -> 10
   Op0 PCHL -> 5
-  -- SPHL
+  Op0 SPHL -> 5
   Op1 IN -> 10
   Op0 XCHG -> 5
   Op0 EI -> 4
@@ -267,6 +267,7 @@ prettyInstruction = \case
   Ins0 RET -> "RET"
   Ins0 RETx -> "*RET"
   Ins0 PCHL -> tag "JP" "(HL)"
+  Ins0 SPHL -> tag "LD" "SP,HL"
   Ins1 IN b1 -> tag "IN" (show b1)
   Ins0 XCHG -> tag "EX" "DE,HL"
   Ins0 EI -> "EI"
@@ -344,6 +345,7 @@ encode = \case
   Op0 RET -> 0xC9
   Op0 RETx -> 0xD9
   Op0 PCHL -> 0xE9
+  Op0 SPHL -> 0xF9
   Op1 IN -> 0xDB
   Op0 XCHG -> 0xEB
   Op0 EI -> 0xFB

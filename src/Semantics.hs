@@ -162,6 +162,8 @@ execute0 = \case
   PCHL -> do
     dest <- getRegPair HL
     return (Jump dest)
+  SPHL -> do
+    Unimplemented "SPHL"
   CMA -> do
     v0 <- GetReg A
     v <- Complement v0

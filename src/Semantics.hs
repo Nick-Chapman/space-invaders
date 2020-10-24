@@ -129,6 +129,11 @@ execute0 = \case
     bit <- MakeBit True
     SetFlag FlagCY bit
     return Next
+  CMC -> do -- untested
+    bit <- GetFlag FlagCY
+    bit' <- Flip bit
+    SetFlag FlagCY bit'
+    return Next
   XCHG -> do
     d <- GetReg D
     e <- GetReg E

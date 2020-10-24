@@ -8,7 +8,7 @@ module Byte(
   decimalAdjust
   ) where
 
-import Data.Bits (Bits,(.&.),(.|.))
+import Data.Bits
 import Data.Word8 (Word8)
 import Text.Printf (printf)
 
@@ -42,10 +42,10 @@ decimalAdjust auxIn cin byteIn = do
   let loAdjust = if loNeedsAdjust then lo + 6 else lo
   let auxOut = loAdjust >= 16
 
-  let hi = (byteIn .&. 0xF0) + (if auxOut then 16 else 0)
-  let hiNeedsAdjust = hi > 0x90 || cin
-  let hiAdjust = if hiNeedsAdjust then hi + 0x60 else hi
-  let cout = hiAdjust >= 256
+  let hi = ((byteIn .&. 0xF0) `shiftR` 4) + (if auxOut then 1 else 0)
+  let hiNeedsAdjust = hi > 0x9 || cin
+  let hiAdjust = if hiNeedsAdjust then hi + 0x6 else hi
+  let cout = hiAdjust >= 16
 
-  let byteOut = hiAdjust .|. (loAdjust .&. 0xF)
+  let byteOut = (hiAdjust `shiftL` 4) .|. (loAdjust .&. 0xF)
   (byteOut,auxOut,cout)

@@ -9,7 +9,7 @@ module Cpu (
 import Prelude hiding (init)
 import Phase (Byte,Bit)
 
-data Reg = PCH | PCL | SPH | SPL | A | B | C | D | E | H | L
+data Reg = PCH | PCL | SPH | SPL | A | B | C | D | E | H | L | Flags
   deriving (Eq,Ord,Show)
 
 data Flag = FlagS | FlagZ | FlagCY
@@ -85,6 +85,7 @@ get Cpu{pch,pcl,sph,spl,regA,regB,regC,regD,regE,regH,regL} = \case
   E -> regE
   H -> regH
   L -> regL
+  Flags -> error "Cpu.get Flags"
 
 set :: Cpu p -> Reg -> Byte p -> Cpu p
 set cpu r x = case r of
@@ -99,3 +100,4 @@ set cpu r x = case r of
   E -> cpu { regE = x }
   H -> cpu { regH = x }
   L -> cpu { regL = x }
+  Flags -> error "Cpu.set Flags"

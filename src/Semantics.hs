@@ -238,9 +238,9 @@ execute0 = \case
   POP rp -> do
     lo <- popStack
     hi <- popStack
-    let HiLo{hi=rh, lo=rl} = expandRegPairX rp
-    setRegX rh hi
-    setRegX rl lo
+    let HiLo{hi=rh, lo=rl} = expandRegPair rp
+    setRegOrFlags rh hi
+    setRegOrFlags rl lo
     return Next
   XTHL -> do
     sp0 <- getRegPair SP
@@ -258,9 +258,9 @@ execute0 = \case
     DisableInterrupts
     return Next
   PUSH rp -> do
-    let HiLo{hi=rh, lo=rl} = expandRegPairX rp
-    hi <- getRegX rh
-    lo <- getRegX rl
+    let HiLo{hi=rh, lo=rl} = expandRegPair rp
+    hi <- getRegOrFlags rh
+    lo <- getRegOrFlags rl
     pushStack hi
     pushStack lo
     return Next
@@ -543,33 +543,24 @@ expandRegPair = \case
   DE -> HiLo {hi = D, lo = E}
   HL -> HiLo {hi = H, lo = L}
   SP -> HiLo {hi = SPH, lo = SPL}
-  PSW -> undefined
+  PSW -> HiLo {hi = A, lo = Flags}
 
-data RegX = NormalReg Reg | FlagsReg
-
-expandRegPairX :: RegPairSpec -> HiLo RegX -- for push/pop
-expandRegPairX = \case
-  BC -> HiLo {hi = r B, lo = r C}
-  DE -> HiLo {hi = r D, lo = r E}
-  HL -> HiLo {hi = r H, lo = r L}
-  SP -> undefined -- HiLo {hi = r SPH, lo = r SPL}
-  PSW -> HiLo {hi = r A, lo = FlagsReg}
-  where r = NormalReg
-
-setRegX :: RegX -> Byte p -> Eff p ()
-setRegX r v = case r of
-  NormalReg reg -> SetReg reg v
-  FlagsReg -> do
+setRegOrFlags :: Reg -> Byte p -> Eff p ()
+setRegOrFlags r v = case r of
+  Flags -> do
     (s,z,cy) <- SelectSZC v
     SetFlag FlagS s
     SetFlag FlagZ z
     SetFlag FlagCY cy
+  reg ->
+    SetReg reg v
 
-getRegX :: RegX -> Eff p (Byte p)
-getRegX r = case r of
-  NormalReg reg -> GetReg reg
-  FlagsReg -> do
+getRegOrFlags :: Reg -> Eff p (Byte p)
+getRegOrFlags = \case
+  Flags -> do
     s <- GetFlag FlagS
     z <- GetFlag FlagZ
     cy <- GetFlag FlagCY
     ByteFromSZC (s,z,cy)
+  reg ->
+    GetReg reg

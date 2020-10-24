@@ -23,6 +23,7 @@ data Op = Op0 Op0 | Op1 Op1 | Op2 Op2
 -- | Ops which take zero immediate bytes. Listed in encoding order
 data Op0
   = NOP
+  | NOPx Word8 -- (1..7)
 --  | STAX
   | INX RegPairSpec
   | INR RegSpec
@@ -110,6 +111,7 @@ allOps = map Op0 all0 ++ map Op1 all1 ++ map Op2 all2
       ++ [ MOV {dest,src} | dest <- regs, src <- regs, not (dest==M && src==M) ]
       ++ [ RCond c | c <- conds ]
       ++ [ RST n | n <- [0..7] ]
+      ++ [ NOPx n | n <- [1..7] ]
     all1 =
       [ADI,SUI,ANI,ORI,ACI,SBI,XRI,CPI,OUT,IN] ++ [ MVI r | r <- regs ]
     all2 =
@@ -126,6 +128,7 @@ allOps = map Op0 all0 ++ map Op1 all1 ++ map Op2 all2
 cycles :: Bool -> Op -> Int
 cycles jumpTaken = \case
   Op0 NOP -> 4
+  Op0 NOPx{} -> 4
   Op2 LXI{} -> 10
   -- STAX
   Op2 SHLD -> 16
@@ -210,6 +213,7 @@ prettyInstructionBytes i = unwords bytes
 prettyInstruction :: Show b => Instruction b -> String
 prettyInstruction = \case
   Ins0 NOP -> "NOP"
+  Ins0 NOPx{} -> "*NOP"
   Ins2 (LXI rp) b1 b2 -> tag "LD" (show rp <> "," <> show b2 <> show b1)
   Ins2 SHLD b1 b2 -> tag "LD" ("(" <> show b2 <> show b1 <> "),HL")
   Ins2 STA b1 b2 -> tag "LD" ("("<> show b2 <> show b1 <> "),A")
@@ -281,6 +285,7 @@ justOp = \case
 encode :: Op -> Byte
 encode = \case
   Op0 NOP -> 0x00
+  Op0 (NOPx n) -> Byte (8 * n)
   Op2 (LXI rp) -> Byte (16 * encodeRegPairSpec rp + 0x1)
   Op2 SHLD -> 0x22
   Op2 STA -> 0x32

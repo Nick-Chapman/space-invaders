@@ -73,6 +73,8 @@ execute0 :: Op0 -> Eff p (Flow p)
 execute0 = \case
   NOP -> do
     return Next
+  NOPx{} -> do
+    return Next
   RET -> do
     lo <- popStack
     hi <- popStack

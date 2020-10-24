@@ -170,13 +170,12 @@ execute0 = \case
     addToAccWithCarry cin v1
   SUB reg -> do
     v1 <- load reg
-    cin <- MakeBit True
+    cin <- MakeBit False
     subToAccWithCarry cin v1
   SBB reg -> do
     v1 <- load reg
     cin <- GetFlag FlagCY
-    cin' <- Flip cin
-    subToAccWithCarry cin' v1
+    subToAccWithCarry cin v1
   ANA reg -> do
     v1 <- load reg
     binop AndB v1
@@ -316,7 +315,7 @@ execute1 op1 b1 = case op1 of
     cin <- MakeBit False
     addToAccWithCarry cin b1
   SUI -> do
-    cin <- MakeBit True
+    cin <- MakeBit False
     subToAccWithCarry cin b1
   ANI ->
     binop AndB b1
@@ -332,8 +331,7 @@ execute1 op1 b1 = case op1 of
     addToAccWithCarry cin b1
   SBI -> do
     cin <- GetFlag FlagCY
-    cin' <- Flip cin
-    subToAccWithCarry cin' b1
+    subToAccWithCarry cin b1
   XRI -> do
     binop XorB b1
   CPI -> do
@@ -426,13 +424,14 @@ subToAccWithCarry cin v2 = do
 
 subtract :: Byte p -> Byte p -> Eff p (Byte p, Bit p)
 subtract v1 v2 = do
-  cin <- MakeBit True
+  cin <- MakeBit False
   subWithCarry cin v1 v2
 
 subWithCarry :: Bit p -> Byte p -> Byte p -> Eff p (Byte p, Bit p)
 subWithCarry cin v1 v2 = do
+  cin' <- Flip cin
   v2comp <- Complement v2
-  (v,cout) <- AddWithCarry cin v1 v2comp
+  (v,cout) <- AddWithCarry cin' v1 v2comp
   borrow <- Flip cout
   return (v, borrow)
 

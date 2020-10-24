@@ -80,6 +80,11 @@ execute0 = \case
     hi <- popStack
     dest <- MakeAddr $ HiLo{hi,lo}
     return (Jump dest)
+  RETx{} -> do
+    lo <- popStack
+    hi <- popStack
+    dest <- MakeAddr $ HiLo{hi,lo}
+    return (Jump dest)
   RCond cond -> do
     executeCond cond >>= TestBit >>= \case
       False -> return Next
@@ -410,6 +415,9 @@ execute2 op2 (lo,hi) = case op2 of
   JMP -> do
     dest <- MakeAddr $ HiLo{hi,lo}
     return (Jump dest)
+  JMPx -> do
+    dest <- MakeAddr $ HiLo{hi,lo}
+    return (Jump dest)
   JCond cond -> do
     executeCond cond >>= TestBit >>= \case
       False -> return Next
@@ -422,6 +430,11 @@ execute2 op2 (lo,hi) = case op2 of
     SetReg rl lo
     return Next
   CALL -> do
+    GetReg PCH >>= pushStack
+    GetReg PCL >>= pushStack
+    dest <- MakeAddr $ HiLo{hi,lo}
+    return (Jump dest)
+  CALLx{} -> do
     GetReg PCH >>= pushStack
     GetReg PCL >>= pushStack
     dest <- MakeAddr $ HiLo{hi,lo}

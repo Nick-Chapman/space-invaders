@@ -57,6 +57,7 @@ data Op0
   | PUSH RegPairSpec
   | RST Word8 --(0..7)
   | RET
+  | RETx
   | PCHL
 ---  | SPHL
   | XCHG
@@ -87,8 +88,10 @@ data Op2
   | LDA
   | JCond Condition
   | JMP
+  | JMPx
   | CCond Condition
   | CALL
+  | CALLx Word8 -- (0..3)
   deriving (Eq,Ord,Show)
 
 data Condition = NZ | NC | PO | P | Z | CY | PE | MI
@@ -104,7 +107,7 @@ allOps :: [Op]
 allOps = map Op0 all0 ++ map Op1 all1 ++ map Op2 all2
   where
     all0 =
-      [NOP,RLC,RAL,DAA,STC,LDAX_B,LDAX_D,RRC,RAR,CMA,XTHL,RET,PCHL,XCHG,EI]
+      [NOP,RLC,RAL,DAA,STC,LDAX_B,LDAX_D,RRC,RAR,CMA,XTHL,RET,RETx,PCHL,XCHG,EI]
       ++ [ op r | op <- [INR,DCR,ADD,ADC,SUB,SBB,ANA,XRA,ORA,CMP], r <- regs ]
       ++ [ op p | op <- [INX,DAD,DCX], p <- rps1 ]
       ++ [ op p | op <- [POP,PUSH], p <- rps2 ]
@@ -115,9 +118,10 @@ allOps = map Op0 all0 ++ map Op1 all1 ++ map Op2 all2
     all1 =
       [ADI,SUI,ANI,ORI,ACI,SBI,XRI,CPI,OUT,IN] ++ [ MVI r | r <- regs ]
     all2 =
-      [SHLD,STA,LHLD,LDA,JMP,CALL]
+      [SHLD,STA,LHLD,LDA,JMP,JMPx,CALL]
       ++ [ LXI r | r <- rps1]
       ++ [ op c | op <- [CCond,JCond], c <- conds]
+      ++ [ CALLx n | n <- [1..3] ]
 
     regs = [A,B,C,D,E,H,L,M]
     rps1 = [BC,DE,HL,SP]
@@ -167,6 +171,7 @@ cycles jumpTaken = \case
   Op0 POP{} -> 10
   Op2 JCond{} -> 10
   Op2 JMP -> 10
+  Op2 JMPx -> 10
   Op1 OUT -> 10
   Op0 XTHL -> 18
   -- DI
@@ -178,12 +183,14 @@ cycles jumpTaken = \case
   Op1 ORI -> 7
   Op0 RST{} -> 4
   Op0 RET -> 10
+  Op0 RETx -> 10
   Op0 PCHL -> 5
   -- SPHL
   Op1 IN -> 10
   Op0 XCHG -> 5
   Op0 EI -> 4
   Op2 CALL -> 17
+  Op2 CALLx{} -> 17
   Op1 ACI -> 7
   Op1 SBI -> 7
   Op1 XRI -> 7
@@ -247,6 +254,7 @@ prettyInstruction = \case
   Ins0 (POP rp) -> tag "POP" (show rp)
   Ins2 (JCond cond) b1 b2 -> tag "JP" (show cond <> "," <> show b2 <> show b1)
   Ins2 JMP b1 b2 -> tag "JP" (show b2 <> show b1)
+  Ins2 JMPx b1 b2 -> tag "*JP" (show b2 <> show b1)
   Ins1 OUT b1 -> tag "OUT" (show b1)
   Ins0 XTHL -> tag "EX" "(SP),HL"
   Ins2 (CCond cond) b1 b2 -> tag "CALL" (show cond <> "," <> show b2 <> show b1)
@@ -257,11 +265,13 @@ prettyInstruction = \case
   Ins1 ORI b1 -> tag "OR" (show b1)
   Ins0 (RST n) -> tag "RST" (show n)
   Ins0 RET -> "RET"
+  Ins0 RETx -> "*RET"
   Ins0 PCHL -> tag "JP" "(HL)"
   Ins1 IN b1 -> tag "IN" (show b1)
   Ins0 XCHG -> tag "EX" "DE,HL"
   Ins0 EI -> "EI"
   Ins2 CALL b1 b2 -> tag "CALL" (show b2 <> show b1)
+  Ins2 CALLx{} b1 b2 -> tag "*CALL" (show b2 <> show b1)
   Ins1 ACI b1 -> tag "ADC" (show b1)
   Ins1 SBI b1 -> tag "SBC" (show b1)
   Ins1 XRI b1 -> tag "XOR" (show b1)
@@ -320,6 +330,7 @@ encode = \case
   Op0 (POP rp) -> Byte (16 * encodeRegPairSpec rp + 0xC1)
   Op2 (JCond cond) -> Byte (8 * encodeCondition cond + 0xC2)
   Op2 JMP -> 0xC3
+  Op2 JMPx -> 0xCB
   Op1 OUT -> 0xD3
   Op0 XTHL -> 0xE3
   Op2 (CCond cond) -> Byte (8 * encodeCondition cond + 0xC4)
@@ -330,11 +341,13 @@ encode = \case
   Op1 ORI -> 0xF6
   Op0 (RST n) -> Byte (8 * fromIntegral n + 0xC7)
   Op0 RET -> 0xC9
+  Op0 RETx -> 0xD9
   Op0 PCHL -> 0xE9
   Op1 IN -> 0xDB
   Op0 XCHG -> 0xEB
   Op0 EI -> 0xFB
   Op2 CALL -> 0xCD
+  Op2 (CALLx n) -> Byte (16 * n + 0xCD)
   Op1 ACI -> 0xCE
   Op1 SBI -> 0xDE
   Op1 XRI -> 0xEE

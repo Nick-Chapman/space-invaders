@@ -67,7 +67,9 @@ execute :: Instruction (Byte p) -> Eff p (Flow p)
 execute = \case
   Ins0 op0 -> execute0 op0
   Ins1 op1 b1 -> execute1 op1 b1
-  Ins2 op2 b1 b2 -> execute2 op2 (b1,b2)
+  Ins2 op2 lo hi -> do
+    a <- MakeAddr $ HiLo{hi,lo}
+    execute2 op2 a
 
 execute0 :: Op0 -> Eff p (Flow p)
 execute0 = \case
@@ -85,14 +87,12 @@ execute0 = \case
   INR reg -> do
     v0 <- load reg
     v <- Increment v0
-    save reg v
-    setFlagsFrom v
+    saveAndSetFlagsFrom reg v
     return Next
   DCR reg -> do
     v0 <- load reg
     v <- Decrement v0
-    save reg v
-    setFlagsFrom v
+    saveAndSetFlagsFrom reg v
     return Next
   RLC -> do
     byte <- GetReg A
@@ -162,64 +162,29 @@ execute0 = \case
     Unimplemented "HLT"
   ADD reg -> do
     v1 <- load reg
-    v2 <- GetReg A
     cin <- MakeBit False
-    (v,cout) <- AddWithCarry cin v1 v2
-    SetReg A v
-    SetFlag FlagCY cout
-    setFlagsFrom v
-    return Next
+    addToAccWithCarry cin v1
   ADC reg -> do
     v1 <- load reg
-    v2 <- GetReg A
     cin <- GetFlag FlagCY
-    (v,cout) <- AddWithCarry cin v1 v2
-    SetReg A v
-    SetFlag FlagCY cout
-    setFlagsFrom v
-    return Next
+    addToAccWithCarry cin v1
   SUB reg -> do
     v1 <- load reg
-    v2 <- GetReg A
     cin <- MakeBit False
-    (v,cout) <- subWithCarry cin v1 v2
-    SetReg A v
-    SetFlag FlagCY cout
-    setFlagsFrom v
-    return Next
+    subToAccWithCarry cin v1
   SBB reg -> do
     v1 <- load reg
-    v2 <- GetReg A
     cin <- GetFlag FlagCY
-    (v,cout) <- subWithCarry cin v1 v2
-    SetReg A v
-    SetFlag FlagCY cout
-    setFlagsFrom v
-    return Next
+    subToAccWithCarry cin v1
   ANA reg -> do
     v1 <- load reg
-    v2 <- GetReg A
-    v <- AndB v1 v2
-    SetReg A v
-    setFlagsFrom v
-    resetCarry
-    return Next
+    binop AndB v1
   XRA reg -> do
     v1 <- load reg
-    v2 <- GetReg A
-    v <- XorB v1 v2
-    SetReg A v
-    setFlagsFrom v
-    resetCarry
-    return Next
+    binop XorB v1
   ORA reg -> do
     v1 <- load reg
-    v2 <- GetReg A
-    v <- OrB v1 v2
-    SetReg A v
-    setFlagsFrom v
-    resetCarry
-    return Next
+    binop OrB v1
   CMP reg -> do
     v1 <- GetReg A
     v2 <- load reg
@@ -301,12 +266,6 @@ execute0 = \case
     return Next
 
 
-resetCarry :: Eff p ()
-resetCarry = do
-  c <- MakeBit False
-  SetFlag FlagCY c
-
-
 executeCond :: Condition -> Eff p (Bit p)
 executeCond = \case
   NZ -> GetFlag FlagZ >>= Flip
@@ -353,57 +312,29 @@ execute1 op1 b1 = case op1 of
     Ports.outputPort port value
     return Next
   ADI -> do
-    v0 <- GetReg A
     cin <- MakeBit False
-    (v,cout) <- AddWithCarry cin v0 b1
-    SetFlag FlagCY cout
-    SetReg A v
-    setFlagsFrom v
-    return Next
+    addToAccWithCarry cin b1
   SUI -> do
-    v0 <- GetReg A
     cin <- MakeBit True
-    b1comp <- Complement b1
-    (v,cout) <- AddWithCarry cin v0 b1comp
-    cout' <- Flip cout
-    SetFlag FlagCY cout'
-    SetReg A v
-    setFlagsFrom v
-    return Next
-  ANI -> do
-    v0 <- GetReg A
-    v <- AndB b1 v0
-    SetReg A v
-    setFlagsFrom v
-    resetCarry
-    return Next
-  ORI -> do
-    v0 <- GetReg A
-    v <- OrB b1 v0
-    SetReg A v
-    setFlagsFrom v
-    resetCarry
-    return Next
+    subToAccWithCarry cin b1
+  ANI ->
+    binop AndB b1
+  ORI ->
+    binop OrB b1
   IN -> do
     port <- DispatchByte b1
     value <- Ports.inputPort port
     SetReg A value
     return Next
   ACI -> do
-    Unimplemented "ACI"
-  SBI -> do -- TODO: share code with SUI...
-    v0 <- GetReg A
-    cin <- GetFlag FlagCY -- only change here
-    cin' <- Flip cin -- and here (is flip correct?)
-    b1comp <- Complement b1
-    (v,cout) <- AddWithCarry cin' v0 b1comp
-    cout' <- Flip cout
-    SetFlag FlagCY cout'
-    SetReg A v
-    setFlagsFrom v
-    return Next
+    cin <- GetFlag FlagCY
+    addToAccWithCarry cin b1
+  SBI -> do
+    cin <- GetFlag FlagCY
+    cin' <- Flip cin
+    subToAccWithCarry cin' b1
   XRI -> do
-    Unimplemented "XRI"
+    binop XorB b1
   CPI -> do
     b <- GetReg A
     (v,borrow) <- subtract b b1
@@ -412,22 +343,29 @@ execute1 op1 b1 = case op1 of
     return Next
 
 
-setFlagsFrom :: Byte p -> Eff p ()
-setFlagsFrom value = do
-  s <- IsSigned value
-  z <- IsZero value
-  SetFlag FlagS s
-  SetFlag FlagZ z
+binop
+  :: (Byte p -> Byte p -> Eff p (Byte p))
+  -> Byte p
+  -> Eff p (Flow p)
+binop f b1 = do
+  v0 <- GetReg A
+  v <- f b1 v0
+  saveAndSetFlagsFrom Instr.A v
+  resetCarry
+  return Next
 
-execute2 :: Op2 -> (Byte p, Byte p) -> Eff p (Flow p)
-execute2 op2 (lo,hi) = case op2 of
+resetCarry :: Eff p ()
+resetCarry = do
+  c <- MakeBit False
+  SetFlag FlagCY c
+
+
+execute2 :: Op2 -> Addr p -> Eff p (Flow p)
+execute2 op2 a = case op2 of
   LXI rp -> do
-    let HiLo{hi=rh, lo=rl} = expandRegPair rp
-    SetReg rh hi
-    SetReg rl lo
+    setRegPair rp a
     return Next
   SHLD -> do
-    a <- MakeAddr $ HiLo{hi,lo}
     b <- GetReg L
     WriteMem a b
     a' <- OffsetAddr 1 a
@@ -435,12 +373,10 @@ execute2 op2 (lo,hi) = case op2 of
     WriteMem a' b'
     return Next
   STA -> do
-    a <- MakeAddr $ HiLo{hi,lo}
     b  <- GetReg A
     WriteMem a b
     return Next
   LHLD -> do
-    a <- MakeAddr $ HiLo{hi,lo}
     b <- ReadMem a
     SetReg L b
     a' <- OffsetAddr 1 a
@@ -448,40 +384,43 @@ execute2 op2 (lo,hi) = case op2 of
     SetReg H b'
     return Next
   LDA -> do
-    a <- MakeAddr $ HiLo{hi,lo}
     b <- ReadMem a
     SetReg A b
     return Next
   JCond cond -> do
     executeCond cond >>= TestBit >>= \case
       False -> return Next
-      True -> do
-        dest <- MakeAddr $ HiLo{hi,lo}
-        return (Jump dest)
+      True -> return (Jump a)
   JMP -> do
-    dest <- MakeAddr $ HiLo{hi,lo}
-    return (Jump dest)
+    return (Jump a)
   JMPx -> do
-    dest <- MakeAddr $ HiLo{hi,lo}
-    return (Jump dest)
+    return (Jump a)
   CCond cond -> do
     executeCond cond >>= TestBit >>= \case
       False -> return Next
-      True -> do
-        GetReg PCH >>= pushStack
-        GetReg PCL >>= pushStack
-        dest <- MakeAddr $ HiLo{hi,lo}
-        return (Jump dest)
-  CALL -> do
-    GetReg PCH >>= pushStack
-    GetReg PCL >>= pushStack
-    dest <- MakeAddr $ HiLo{hi,lo}
-    return (Jump dest)
-  CALLx{} -> do
-    GetReg PCH >>= pushStack
-    GetReg PCL >>= pushStack
-    dest <- MakeAddr $ HiLo{hi,lo}
-    return (Jump dest)
+      True -> call a
+  CALL ->
+    call a
+  CALLx{} ->
+    call a
+
+
+addToAccWithCarry :: Bit p -> Byte p -> Eff p (Flow p)
+addToAccWithCarry cin v1 = do
+  v2 <- GetReg A
+  (v,cout) <- AddWithCarry cin v1 v2
+  SetFlag FlagCY cout
+  saveAndSetFlagsFrom Instr.A v
+  return Next
+
+subToAccWithCarry :: Bit p -> Byte p -> Eff p (Flow p)
+subToAccWithCarry cin v2 = do
+  v1 <- GetReg A
+  (v,cout) <- subWithCarry cin v1 v2
+  SetFlag FlagCY cout
+  saveAndSetFlagsFrom Instr.A v
+  return Next
+
 
 
 subtract :: Byte p -> Byte p -> Eff p (Byte p, Bit p)
@@ -495,6 +434,28 @@ subWithCarry cin v1 v2 = do
   (v,cout) <- AddWithCarry cin v1 v2comp
   borrow <- Flip cout
   return (v, borrow)
+
+
+
+
+call :: Addr p -> Eff p (Flow p)
+call a = do
+  GetReg PCH >>= pushStack
+  GetReg PCL >>= pushStack
+  return (Jump a)
+
+
+saveAndSetFlagsFrom :: Instr.RegSpec -> Byte p -> Eff p ()
+saveAndSetFlagsFrom reg v = do
+  save reg v
+  setFlagsFrom v
+
+setFlagsFrom :: Byte p -> Eff p ()
+setFlagsFrom value = do
+  s <- IsSigned value
+  z <- IsZero value
+  SetFlag FlagS s
+  SetFlag FlagZ z
 
 
 pushStack :: Byte p -> Eff p ()

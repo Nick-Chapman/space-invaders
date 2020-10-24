@@ -34,6 +34,7 @@ Next:
 
 Crashes:
 - `11497506  [91054119] 1690 : unimplemented: STAX DE`
+- `31091013 [267381888] 143B : Mem.write: 001C -- cant write to rom`
 
 Debugging:
 

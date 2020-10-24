@@ -180,6 +180,8 @@ execute0 = \case
     b <- load src
     save dest b
     return Next
+  HLT -> do
+    Unimplemented "HLT"
   INX rp -> do
     a <- getRegPair rp
     a' <- OffsetAddr 1 a

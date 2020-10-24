@@ -40,7 +40,7 @@ data Op0
   | CMA
   | CMC
   | MOV { dest :: RegSpec, src :: RegSpec }
---  | HLT
+  | HLT
   | ADD RegSpec
   | ADC RegSpec
   | SUB RegSpec
@@ -106,7 +106,7 @@ allOps :: [Op]
 allOps = map Op0 all0 ++ map Op1 all1 ++ map Op2 all2
   where
     all0 =
-      [NOP,RLC,RAL,DAA,STC,RRC,RAR,CMA,CMC,XTHL,DI,RET,RETx,PCHL,SPHL,XCHG,EI]
+      [NOP,RLC,RAL,DAA,STC,RRC,RAR,CMA,CMC,HLT,XTHL,DI,RET,RETx,PCHL,SPHL,XCHG,EI]
       ++ [ op p | op <- [STAX,LDAX], p <- [BC,DE] ]
       ++ [ op r | op <- [INR,DCR,ADD,ADC,SUB,SBB,ANA,XRA,ORA,CMP], r <- regs ]
       ++ [ op p | op <- [INX,DAD,DCX], p <- rps1 ]
@@ -154,6 +154,7 @@ cycles jumpTaken = \case
   Op0 RAR -> 4
   Op0 CMA -> 4
   Op0 CMC -> 4
+  Op0 HLT -> 7
   Op0 MOV {dest=M,src=M} -> error "illegal instruction: MOV M,M"
   Op0 MOV {src=M} -> 7
   Op0 MOV {dest=M} -> 7
@@ -242,6 +243,7 @@ prettyInstruction = \case
   Ins0 CMA -> "CPL"
   Ins0 CMC -> "CPC"
   Ins0 MOV {dest,src} -> tag "LD" (prettyReg dest <> "," <> prettyReg src)
+  Ins0 HLT -> "HLT"
   Ins0 (ADD reg) -> tag "ADD" (prettyReg reg)
   Ins0 (ADC reg) -> tag "ADC" (prettyReg reg)
   Ins0 (SUB reg) -> tag "SUB" (prettyReg reg)
@@ -273,7 +275,7 @@ prettyInstruction = \case
   Ins0 XCHG -> tag "EX" "DE,HL"
   Ins0 EI -> "EI"
   Ins2 CALL b1 b2 -> tag "CALL" (show b2 <> show b1)
-  Ins2 CALLx{} b1 b2 -> tag "*CALL" (show b2 <> show b1)
+  Ins2 CALLx{} b1 b2 -> tag "*CAL" (show b2 <> show b1)
   Ins1 ACI b1 -> tag "ADC" (show b1)
   Ins1 SBI b1 -> tag "SBC" (show b1)
   Ins1 XRI b1 -> tag "XOR" (show b1)
@@ -321,6 +323,7 @@ encode = \case
   Op0 CMA -> 0x2F
   Op0 CMC -> 0x3F
   Op0 MOV {dest,src} -> Byte (0x40 + 8 * encodeRegSpec dest + encodeRegSpec src)
+  Op0 HLT -> 0x76
   Op0 (ADD reg) -> Byte (encodeRegSpec reg + 0x80)
   Op0 (ADC reg) -> Byte (encodeRegSpec reg + 0x88)
   Op0 (SUB reg) -> Byte (encodeRegSpec reg + 0x90)

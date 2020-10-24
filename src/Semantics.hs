@@ -89,12 +89,16 @@ execute0 = \case
     return Next
   INR reg -> do
     v0 <- load reg
-    v <- Increment v0
+    cin <- MakeBit True
+    zero <- MakeByte 0
+    (v,_) <- AddWithCarry cin v0 zero
     saveAndSetFlagsFrom reg v
     return Next
   DCR reg -> do
     v0 <- load reg
-    v <- Decrement v0
+    cin <- MakeBit True
+    zero <- MakeByte 0
+    (v,_) <- subWithCarry cin v0 zero
     saveAndSetFlagsFrom reg v
     return Next
   RLC -> do

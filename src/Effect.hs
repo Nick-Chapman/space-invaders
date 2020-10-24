@@ -23,8 +23,6 @@ data Eff p a where
   MakeAddr :: HiLo (Byte p) -> Eff p (Addr p)
   OffsetAddr :: Int -> Addr p -> Eff p (Addr p)
   Decode :: Byte p -> Eff p Op
-  Increment :: Byte p -> Eff p (Byte p)
-  Decrement :: Byte p -> Eff p (Byte p)
 
   MakeByte :: Word8 -> Eff p (Byte p)
   AddWithCarry :: Bit p -> Byte p -> Byte p -> Eff p (Byte p, Bit p)

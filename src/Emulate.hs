@@ -110,8 +110,6 @@ emulate buttons s0 =
           Nothing -> crash (show byte <> " -- decode failed")
 
       MakeByte w -> k s (Byte w)
-      Increment b -> k s (b + 1)
-      Decrement b -> k s (b - 1)
 
       AddWithCarry (Bit cin) v1 v2 -> do
         let (v,cout) = Byte.adc cin v1 v2

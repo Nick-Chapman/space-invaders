@@ -52,7 +52,7 @@ data Op0
   | RCond Condition
   | POP RegPairSpec
   | XTHL
---  | DI
+  | DI
   | PUSH RegPairSpec
   | RST Word8 --(0..7)
   | RET
@@ -106,7 +106,7 @@ allOps :: [Op]
 allOps = map Op0 all0 ++ map Op1 all1 ++ map Op2 all2
   where
     all0 =
-      [NOP,RLC,RAL,DAA,STC,RRC,RAR,CMA,CMC,XTHL,RET,RETx,PCHL,XCHG,EI]
+      [NOP,RLC,RAL,DAA,STC,RRC,RAR,CMA,CMC,XTHL,DI,RET,RETx,PCHL,XCHG,EI]
       ++ [ op r | op <- [INR,DCR,ADD,ADC,SUB,SBB,ANA,XRA,ORA,CMP], r <- regs ]
       ++ [ op p | op <- [INX,DAD,DCX], p <- rps1 ]
       ++ [ op p | op <- [POP,PUSH], p <- rps2 ]
@@ -173,7 +173,7 @@ cycles jumpTaken = \case
   Op2 JMPx -> 10
   Op1 OUT -> 10
   Op0 XTHL -> 18
-  -- DI
+  Op0 DI -> 4
   Op2 CCond{} -> if jumpTaken then 17 else 11
   Op0 PUSH{} -> 11
   Op1 ADI -> 7
@@ -256,6 +256,7 @@ prettyInstruction = \case
   Ins2 JMPx b1 b2 -> tag "*JP" (show b2 <> show b1)
   Ins1 OUT b1 -> tag "OUT" (show b1)
   Ins0 XTHL -> tag "EX" "(SP),HL"
+  Ins0 DI -> "DI"
   Ins2 (CCond cond) b1 b2 -> tag "CALL" (show cond <> "," <> show b2 <> show b1)
   Ins0 (PUSH rp) -> tag "PUSH" (show rp)
   Ins1 ADI b1 -> tag "ADD" (show b1)
@@ -332,6 +333,7 @@ encode = \case
   Op2 JMPx -> 0xCB
   Op1 OUT -> 0xD3
   Op0 XTHL -> 0xE3
+  Op0 DI -> 0xF3
   Op2 (CCond cond) -> Byte (8 * encodeCondition cond + 0xC4)
   Op0 (PUSH rp) -> Byte (16 * encodeRegPairSpec rp + 0xC5)
   Op1 ADI -> 0xC6
@@ -397,7 +399,7 @@ decodeTable = Map.fromList ys
       ops -> error $
         unlines $
         ("bad decoding: " <> show k)
-          : [ "--> " <> ljust 10 (show (docInstructionForOp op)) <> " [" <> show op <> "]" | op <- ops ]
+          : [ "--> " <> ljust 13 (show (docInstructionForOp op)) <> " [" <> show op <> "]" | op <- ops ]
 
 printDecodeTable :: IO ()
 printDecodeTable = do

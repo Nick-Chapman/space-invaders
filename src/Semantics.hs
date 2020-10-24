@@ -122,6 +122,9 @@ execute0 = \case
   EI -> do
     EnableInterrupts
     return Next
+  DI -> do
+    DisableInterrupts
+    return Next
   DAA -> do
     -- TODO: ignored
     return Next

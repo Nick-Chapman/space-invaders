@@ -75,143 +75,12 @@ execute0 = \case
     return Next
   NOPx{} -> do
     return Next
-  RET -> do
-    lo <- popStack
-    hi <- popStack
-    dest <- MakeAddr $ HiLo{hi,lo}
-    return (Jump dest)
-  RETx{} -> do
-    lo <- popStack
-    hi <- popStack
-    dest <- MakeAddr $ HiLo{hi,lo}
-    return (Jump dest)
-  RCond cond -> do
-    executeCond cond >>= TestBit >>= \case
-      False -> return Next
-      True -> do
-        lo <- popStack
-        hi <- popStack
-        dest <- MakeAddr $ HiLo{hi,lo}
-        return (Jump dest)
-  RRC -> do
-    byte <- GetReg A
-    (byte',bool') <- RotateRight byte
-    SetFlag FlagCY bool'
-    SetReg A byte'
-    return Next
-  RAL -> do
-    byte <- GetReg A
-    bool <- GetFlag FlagCY
-    (byte',bool') <- RotateLeftThroughCarry (bool,byte)
-    SetFlag FlagCY bool'
-    SetReg A byte'
-    return Next
-  RLC -> do
-    byte <- GetReg A
-    (byte',bool') <- RotateLeft byte
-    SetFlag FlagCY bool'
-    SetReg A byte'
-    return Next
-  RAR -> do
-    byte <- GetReg A
-    bool <- GetFlag FlagCY
-    (byte',bool') <- RotateRightThroughCarry (bool,byte)
-    SetFlag FlagCY bool'
-    SetReg A byte'
-    return Next
-  EI -> do
-    EnableInterrupts
-    return Next
-  DI -> do
-    DisableInterrupts
-    return Next
-  DAA -> do
-    -- TODO: ignored
-    return Next
-  STC -> do
-    bit <- MakeBit True
-    SetFlag FlagCY bit
-    return Next
-  CMC -> do -- untested
-    bit <- GetFlag FlagCY
-    bit' <- Flip bit
-    SetFlag FlagCY bit'
-    return Next
-  XCHG -> do
-    d <- GetReg D
-    e <- GetReg E
-    h <- GetReg H
-    l <- GetReg L
-    SetReg D h
-    SetReg E l
-    SetReg H d
-    SetReg L e
-    return Next
-  XTHL -> do
-    sp0 <- getRegPair SP
-    sp1 <- OffsetAddr 1 sp0
-    stack0 <- ReadMem sp0
-    stack1 <- ReadMem sp1
-    l <- GetReg L
-    h <- GetReg H
-    WriteMem sp0 l
-    WriteMem sp1 h
-    SetReg L stack0
-    SetReg H stack1
-    return Next
-  PCHL -> do
-    dest <- getRegPair HL
-    return (Jump dest)
-  SPHL -> do
-    Unimplemented "SPHL"
-  CMA -> do
-    v0 <- GetReg A
-    v <- Complement v0
-    SetReg A v
-    return Next
   STAX rp -> do
     Unimplemented ("STAX" <> show rp)
-  LDAX rp -> do
-    a <- getRegPair rp
-    b <- ReadMem a
-    SetReg A b
-    return Next
-  MOV {dest,src} -> do
-    b <- load src
-    save dest b
-    return Next
-  HLT -> do
-    Unimplemented "HLT"
   INX rp -> do
     a <- getRegPair rp
     a' <- OffsetAddr 1 a
     setRegPair rp a'
-    return Next
-  DCX rp -> do
-    a <- getRegPair rp
-    a' <- OffsetAddr (-1) a
-    setRegPair rp a'
-    return Next
-  PUSH rp -> do
-    let HiLo{hi=rh, lo=rl} = expandRegPairX rp
-    hi <- getRegX rh
-    lo <- getRegX rl
-    pushStack hi
-    pushStack lo
-    return Next
-  POP rp -> do
-    lo <- popStack
-    hi <- popStack
-    let HiLo{hi=rh, lo=rl} = expandRegPairX rp
-    setRegX rh hi
-    setRegX rl lo
-    return Next
-  DAD rp -> do
-    w1 <- getRegPair rp
-    w2 <- getRegPair HL
-    (w,cout) <- Add16 w1 w2
-    setRegPair HL w
-    SetFlag FlagCY cout
     return Next
   INR reg -> do
     v0 <- load reg
@@ -225,6 +94,72 @@ execute0 = \case
     save reg v
     setFlagsFrom v
     return Next
+  RLC -> do
+    byte <- GetReg A
+    (byte',bool') <- RotateLeft byte
+    SetFlag FlagCY bool'
+    SetReg A byte'
+    return Next
+  RAL -> do
+    byte <- GetReg A
+    bool <- GetFlag FlagCY
+    (byte',bool') <- RotateLeftThroughCarry (bool,byte)
+    SetFlag FlagCY bool'
+    SetReg A byte'
+    return Next
+  DAA -> do
+    -- TODO: ignored
+    return Next
+  STC -> do
+    bit <- MakeBit True
+    SetFlag FlagCY bit
+    return Next
+  DAD rp -> do
+    w1 <- getRegPair rp
+    w2 <- getRegPair HL
+    (w,cout) <- Add16 w1 w2
+    setRegPair HL w
+    SetFlag FlagCY cout
+    return Next
+  LDAX rp -> do
+    a <- getRegPair rp
+    b <- ReadMem a
+    SetReg A b
+    return Next
+  DCX rp -> do
+    a <- getRegPair rp
+    a' <- OffsetAddr (-1) a
+    setRegPair rp a'
+    return Next
+  RRC -> do
+    byte <- GetReg A
+    (byte',bool') <- RotateRight byte
+    SetFlag FlagCY bool'
+    SetReg A byte'
+    return Next
+  RAR -> do
+    byte <- GetReg A
+    bool <- GetFlag FlagCY
+    (byte',bool') <- RotateRightThroughCarry (bool,byte)
+    SetFlag FlagCY bool'
+    SetReg A byte'
+    return Next
+  CMA -> do
+    v0 <- GetReg A
+    v <- Complement v0
+    SetReg A v
+    return Next
+  CMC -> do -- untested
+    bit <- GetFlag FlagCY
+    bit' <- Flip bit
+    SetFlag FlagCY bit'
+    return Next
+  MOV {dest,src} -> do
+    b <- load src
+    save dest b
+    return Next
+  HLT -> do
+    Unimplemented "HLT"
   ADD reg -> do
     v1 <- load reg
     v2 <- GetReg A
@@ -261,18 +196,18 @@ execute0 = \case
     SetFlag FlagCY cout
     setFlagsFrom v
     return Next
-  XRA reg -> do
-    v1 <- load reg
-    v2 <- GetReg A
-    v <- XorB v1 v2
-    SetReg A v
-    setFlagsFrom v
-    resetCarry
-    return Next
   ANA reg -> do
     v1 <- load reg
     v2 <- GetReg A
     v <- AndB v1 v2
+    SetReg A v
+    setFlagsFrom v
+    resetCarry
+    return Next
+  XRA reg -> do
+    v1 <- load reg
+    v2 <- GetReg A
+    v <- XorB v1 v2
     SetReg A v
     setFlagsFrom v
     resetCarry
@@ -292,6 +227,43 @@ execute0 = \case
     setFlagsFrom v
     SetFlag FlagCY borrow
     return Next
+  RCond cond -> do
+    executeCond cond >>= TestBit >>= \case
+      False -> return Next
+      True -> do
+        lo <- popStack
+        hi <- popStack
+        dest <- MakeAddr $ HiLo{hi,lo}
+        return (Jump dest)
+  POP rp -> do
+    lo <- popStack
+    hi <- popStack
+    let HiLo{hi=rh, lo=rl} = expandRegPairX rp
+    setRegX rh hi
+    setRegX rl lo
+    return Next
+  XTHL -> do
+    sp0 <- getRegPair SP
+    sp1 <- OffsetAddr 1 sp0
+    stack0 <- ReadMem sp0
+    stack1 <- ReadMem sp1
+    l <- GetReg L
+    h <- GetReg H
+    WriteMem sp0 l
+    WriteMem sp1 h
+    SetReg L stack0
+    SetReg H stack1
+    return Next
+  DI -> do
+    DisableInterrupts
+    return Next
+  PUSH rp -> do
+    let HiLo{hi=rh, lo=rl} = expandRegPairX rp
+    hi <- getRegX rh
+    lo <- getRegX rl
+    pushStack hi
+    pushStack lo
+    return Next
   RST w -> do
     GetReg PCH >>= pushStack
     GetReg PCL >>= pushStack
@@ -299,6 +271,34 @@ execute0 = \case
     lo <- MakeByte (8*w)
     dest <- MakeAddr $ HiLo{hi,lo}
     return (Jump dest)
+  RET -> do
+    lo <- popStack
+    hi <- popStack
+    dest <- MakeAddr $ HiLo{hi,lo}
+    return (Jump dest)
+  RETx{} -> do
+    lo <- popStack
+    hi <- popStack
+    dest <- MakeAddr $ HiLo{hi,lo}
+    return (Jump dest)
+  PCHL -> do
+    dest <- getRegPair HL
+    return (Jump dest)
+  SPHL -> do
+    Unimplemented "SPHL"
+  XCHG -> do
+    d <- GetReg D
+    e <- GetReg E
+    h <- GetReg H
+    l <- GetReg L
+    SetReg D h
+    SetReg E l
+    SetReg H d
+    SetReg L e
+    return Next
+  EI -> do
+    EnableInterrupts
+    return Next
 
 
 resetCarry :: Eff p ()
@@ -347,35 +347,10 @@ execute1 op1 b1 = case op1 of
   MVI dest -> do
     save dest b1
     return Next
-  CPI -> do
-    b <- GetReg A
-    (v,borrow) <- subtract b b1
-    setFlagsFrom v
-    SetFlag FlagCY borrow
-    return Next
   OUT -> do
     port <- DispatchByte b1
     value <- GetReg A
     Ports.outputPort port value
-    return Next
-  IN -> do
-    port <- DispatchByte b1
-    value <- Ports.inputPort port
-    SetReg A value
-    return Next
-  ANI -> do
-    v0 <- GetReg A
-    v <- AndB b1 v0
-    SetReg A v
-    setFlagsFrom v
-    resetCarry
-    return Next
-  ORI -> do
-    v0 <- GetReg A
-    v <- OrB b1 v0
-    SetReg A v
-    setFlagsFrom v
-    resetCarry
     return Next
   ADI -> do
     v0 <- GetReg A
@@ -395,6 +370,25 @@ execute1 op1 b1 = case op1 of
     SetReg A v
     setFlagsFrom v
     return Next
+  ANI -> do
+    v0 <- GetReg A
+    v <- AndB b1 v0
+    SetReg A v
+    setFlagsFrom v
+    resetCarry
+    return Next
+  ORI -> do
+    v0 <- GetReg A
+    v <- OrB b1 v0
+    SetReg A v
+    setFlagsFrom v
+    resetCarry
+    return Next
+  IN -> do
+    port <- DispatchByte b1
+    value <- Ports.inputPort port
+    SetReg A value
+    return Next
   ACI -> do
     Unimplemented "ACI"
   SBI -> do -- TODO: share code with SUI...
@@ -410,6 +404,12 @@ execute1 op1 b1 = case op1 of
     return Next
   XRI -> do
     Unimplemented "XRI"
+  CPI -> do
+    b <- GetReg A
+    (v,borrow) <- subtract b b1
+    setFlagsFrom v
+    SetFlag FlagCY borrow
+    return Next
 
 
 setFlagsFrom :: Byte p -> Eff p ()
@@ -421,45 +421,18 @@ setFlagsFrom value = do
 
 execute2 :: Op2 -> (Byte p, Byte p) -> Eff p (Flow p)
 execute2 op2 (lo,hi) = case op2 of
-  JMP -> do
-    dest <- MakeAddr $ HiLo{hi,lo}
-    return (Jump dest)
-  JMPx -> do
-    dest <- MakeAddr $ HiLo{hi,lo}
-    return (Jump dest)
-  JCond cond -> do
-    executeCond cond >>= TestBit >>= \case
-      False -> return Next
-      True -> do
-        dest <- MakeAddr $ HiLo{hi,lo}
-        return (Jump dest)
   LXI rp -> do
     let HiLo{hi=rh, lo=rl} = expandRegPair rp
     SetReg rh hi
     SetReg rl lo
     return Next
-  CALL -> do
-    GetReg PCH >>= pushStack
-    GetReg PCL >>= pushStack
-    dest <- MakeAddr $ HiLo{hi,lo}
-    return (Jump dest)
-  CALLx{} -> do
-    GetReg PCH >>= pushStack
-    GetReg PCL >>= pushStack
-    dest <- MakeAddr $ HiLo{hi,lo}
-    return (Jump dest)
-  CCond cond -> do
-    executeCond cond >>= TestBit >>= \case
-      False -> return Next
-      True -> do
-        GetReg PCH >>= pushStack
-        GetReg PCL >>= pushStack
-        dest <- MakeAddr $ HiLo{hi,lo}
-        return (Jump dest)
-  LDA -> do
+  SHLD -> do
     a <- MakeAddr $ HiLo{hi,lo}
-    b <- ReadMem a
-    SetReg A b
+    b <- GetReg L
+    WriteMem a b
+    a' <- OffsetAddr 1 a
+    b' <- GetReg H
+    WriteMem a' b'
     return Next
   STA -> do
     a <- MakeAddr $ HiLo{hi,lo}
@@ -474,14 +447,41 @@ execute2 op2 (lo,hi) = case op2 of
     b' <- ReadMem a'
     SetReg H b'
     return Next
-  SHLD -> do
+  LDA -> do
     a <- MakeAddr $ HiLo{hi,lo}
-    b <- GetReg L
-    WriteMem a b
-    a' <- OffsetAddr 1 a
-    b' <- GetReg H
-    WriteMem a' b'
+    b <- ReadMem a
+    SetReg A b
     return Next
+  JCond cond -> do
+    executeCond cond >>= TestBit >>= \case
+      False -> return Next
+      True -> do
+        dest <- MakeAddr $ HiLo{hi,lo}
+        return (Jump dest)
+  JMP -> do
+    dest <- MakeAddr $ HiLo{hi,lo}
+    return (Jump dest)
+  JMPx -> do
+    dest <- MakeAddr $ HiLo{hi,lo}
+    return (Jump dest)
+  CCond cond -> do
+    executeCond cond >>= TestBit >>= \case
+      False -> return Next
+      True -> do
+        GetReg PCH >>= pushStack
+        GetReg PCL >>= pushStack
+        dest <- MakeAddr $ HiLo{hi,lo}
+        return (Jump dest)
+  CALL -> do
+    GetReg PCH >>= pushStack
+    GetReg PCL >>= pushStack
+    dest <- MakeAddr $ HiLo{hi,lo}
+    return (Jump dest)
+  CALLx{} -> do
+    GetReg PCH >>= pushStack
+    GetReg PCL >>= pushStack
+    dest <- MakeAddr $ HiLo{hi,lo}
+    return (Jump dest)
 
 
 subtract :: Byte p -> Byte p -> Eff p (Byte p, Bit p)

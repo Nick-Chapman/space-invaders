@@ -16,7 +16,7 @@ Build/run emulation with SDL visualization:
 
 Status:
 
-- 8080 emulation almost complete (`SPHL` and `HLT` unimplemented; `DAA` skipped)
+- 8080 emulation almost complete (`SPHL` and `HLT` unimplemented)
 - SDL emulation is quick enough -- *just* -- measured fps is reported
 - `stack run` runs as fast the machine allows; about 70 fps on my laptop
 - fps can be limited with a command line flag, i.e.  `stack run -- -fps 60`
@@ -24,11 +24,11 @@ Status:
 - Regression tests: `./test.sh` (45 secs)
 - View decode table `stack run decode`
 - Emulation with Gloss visualization: `stack run gloss` (mem leak; slows over time)
+- Implemented `DAA` (_decimal adjust accumulator_), so credits are calculated correctly
 
 Next:
 
 - Speed measurements (no graphics)
-- Implemented `DAA` (_decimal adjust accumulator_), so credits are calculated correctly
 - Bug? - pixel gaps appear in line at bottom of screen (or is this expected?)
 
 Crashes:

@@ -26,6 +26,9 @@ data Eff p a where
 
   MakeByte :: Word8 -> Eff p (Byte p)
   AddWithCarry :: Bit p -> Byte p -> Byte p -> Eff p (Byte p, Bit p, Bit p)
+
+  DecimalAdjust :: Bit p -> Bit p -> Byte p -> Eff p (Byte p, Bit p, Bit p)
+
   Complement :: Byte p -> Eff p (Byte p)
   Flip :: Bit p -> Eff p (Bit p)
 

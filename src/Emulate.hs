@@ -11,7 +11,7 @@ import Text.Printf (printf)
 
 import Addr (Addr(..),addCarryOut)
 import Buttons (Buttons)
-import Byte (Byte(..),addWithCarry,addForAuxCarry)
+import Byte (Byte(..),addWithCarry,addForAuxCarry,decimalAdjust)
 import Cpu (Cpu,Reg(PCL,PCH))
 import Effect (Eff(..))
 import Semantics (fetchDecodeExec)
@@ -115,6 +115,10 @@ emulate buttons s0 =
         let (v,cout) = Byte.addWithCarry cin v1 v2
         let aux = Byte.addForAuxCarry cin v1 v2
         k s (v, Bit aux, Bit cout)
+
+      DecimalAdjust (Bit auxIn) (Bit cin) byteIn -> do
+        let (byteOut,auxOut,cout) = Byte.decimalAdjust auxIn cin byteIn
+        k s (byteOut, Bit auxOut, Bit cout)
 
       Complement b -> k s (complement b)
       Flip (Bit bool) -> k s (Bit (not bool))

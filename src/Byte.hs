@@ -5,9 +5,10 @@ module Byte(
   ofUnsigned,
   addWithCarry,
   addForAuxCarry,
+  decimalAdjust
   ) where
 
-import Data.Bits (Bits, (.&.))
+import Data.Bits (Bits,(.&.),(.|.))
 import Data.Word8 (Word8)
 import Text.Printf (printf)
 
@@ -31,3 +32,20 @@ addForAuxCarry :: Bool -> Byte -> Byte -> Bool
 addForAuxCarry cin x y = aux where
     res = (x .&. 0xF) + (y .&. 0xF) + (if cin then 1 else 0)
     aux = res >= 16
+
+
+decimalAdjust :: Bool -> Bool -> Byte -> (Byte,Bool,Bool)
+decimalAdjust auxIn cin byteIn = do
+
+  let lo = byteIn .&. 0xF
+  let loNeedsAdjust = lo > 9 || auxIn
+  let loAdjust = if loNeedsAdjust then lo + 6 else lo
+  let auxOut = loAdjust >= 16
+
+  let hi = (byteIn .&. 0xF0) + (if auxOut then 16 else 0)
+  let hiNeedsAdjust = hi > 0x90 || cin
+  let hiAdjust = if hiNeedsAdjust then hi + 0x60 else hi
+  let cout = hiAdjust >= 256
+
+  let byteOut = hiAdjust .|. (loAdjust .&. 0xF)
+  (byteOut,auxOut,cout)

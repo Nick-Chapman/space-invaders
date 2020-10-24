@@ -116,7 +116,13 @@ execute0 = \case
     SetReg A byte'
     return Next
   DAA -> do
-    -- TODO: ignored
+    byteIn <- GetReg A
+    auxIn <- GetFlag FlagA
+    cin <- GetFlag FlagCY
+    (byteOut,auxOut,cout) <- DecimalAdjust auxIn cin byteIn
+    SetFlag FlagA auxOut
+    SetFlag FlagCY cout
+    SetReg A byteOut
     return Next
   STC -> do
     bit <- MakeBit True

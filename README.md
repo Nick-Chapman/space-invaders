@@ -7,7 +7,6 @@
 Build/run emulation with SDL visualization:
 
 - `stack run`
-- Works fairly well; apart from not being quite complete & having some bugs!
 - `[insert]` coin; then start playing with `F1`
 - `z` left; `x` right; `[enter]` shoots
 - Game can be paused: `[delete]`
@@ -15,33 +14,30 @@ Build/run emulation with SDL visualization:
 - TILT can be activated with `[tab]`
 - Full keyboard-mapping show in panel next to the running game.
 
-
 Status:
 
-- 8080 emulation basically complete
+- 8080 emulation almost complete (`STAX`, `SPHL` and `HLT` unimplemented; `DAA` skipped)
+- Just discovered that `STAX` is needed (when 3rd live is lost) and so we crash
+- SDL emulation is quick enough -- *just* -- measured fps is reported
+- `stack run` runs as fast the machine allows; about 70 fps on my laptop
+- fps can be limited with a command line flag, i.e.  `stack run -- -fps 60`
 - Headless emulation: `stack run trace`
-- Regression tests: `./test.sh`
+- Regression tests: `./test.sh` (45 secs)
 - View decode table `stack run decode`
 - Emulation with Gloss visualization: `stack run gloss` (mem leak; slows over time)
 
 Next:
 
 - Speed measurements (no graphics)
-- `SDL`: report fps; introduce fps limiter
-- Refactor code in `Semantics.hs` to capture more sharing
-- Implement further missing/required op-codes; implement all op-codes
-- `DAA` (_decimal adjust accumulator_) so credits are calculated correctly
-- Bug? - player doesn't die when shot: (attract mode or game play)
+- Implemented `DAA` (_decimal adjust accumulator_), so credits are calculated correctly
 - Bug? - pixel gaps appear in line at bottom of screen (or is this expected?)
 
-
 Crashes:
-
-- `32801062 [277978420] 143C : Mem.write: 001C -- cant write to rom`
+- `11497506  [91054119] 1690 : unimplemented: STAX DE`
 
 Debugging:
 
-- Spot bugs while refactoring `Semantics.hs` (the dream!)
+- Spot bugs while refactoring `Semantics.hs` (the dream) -- _it worked!_
 - Get trace from another emulator: tricky; will need interrupts to align precisely
 - Setup testing using `cpudiag.asm`, (A) just by itself (B) trace vs another emulator
 - Calculate/print static semantics from each opcode, and inspect

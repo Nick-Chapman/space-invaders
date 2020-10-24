@@ -170,12 +170,13 @@ execute0 = \case
     addToAccWithCarry cin v1
   SUB reg -> do
     v1 <- load reg
-    cin <- MakeBit False
+    cin <- MakeBit True
     subToAccWithCarry cin v1
   SBB reg -> do
     v1 <- load reg
     cin <- GetFlag FlagCY
-    subToAccWithCarry cin v1
+    cin' <- Flip cin
+    subToAccWithCarry cin' v1
   ANA reg -> do
     v1 <- load reg
     binop AndB v1

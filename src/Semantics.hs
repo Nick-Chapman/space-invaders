@@ -159,13 +159,8 @@ execute0 = \case
     v <- Complement v0
     SetReg A v
     return Next
-  LDAX_B -> do
-    a <- getRegPair BC
-    b <- ReadMem a
-    SetReg A b
-    return Next
-  LDAX_D -> do
-    a <- getRegPair DE
+  LDAX rp -> do
+    a <- getRegPair rp
     b <- ReadMem a
     SetReg A b
     return Next

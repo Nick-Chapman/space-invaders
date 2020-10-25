@@ -9,7 +9,7 @@ import Ram8k (Ram)
 import Rom2k (Rom,size)
 import qualified Addr (toUnsigned)
 import qualified Rom2k (read)
-import qualified Ram8k (init,read,write)
+import qualified Ram8k as Ram8k (init,read,write)
 
 data Mem = Mem
   { e :: Rom
@@ -19,15 +19,17 @@ data Mem = Mem
   , ram :: Ram
   }
 
-init :: (Rom,Rom,Rom,Rom) -> Mem
-init (e,f,g,h) = Mem {e,f,g,h, ram = Ram8k.init}
+init :: (Rom,Rom,Rom,Rom) -> IO Mem
+init (e,f,g,h) = do
+  ram <- Ram8k.init
+  return $ Mem {e,f,g,h,ram}
 
-read :: (forall a. String -> a) -> Mem -> Addr -> Byte
+read :: (forall a. String -> a) -> Mem -> Addr -> IO Byte
 read error Mem{e,f,g,h,ram} a = if
-  | i < k2 -> Rom2k.read h i
-  | i < k4 -> Rom2k.read g (i - k2)
-  | i < k6 -> Rom2k.read f (i - k4)
-  | i < k8 -> Rom2k.read e (i - k6)
+  | i < k2 -> return $ Rom2k.read h i
+  | i < k4 -> return $ Rom2k.read g (i - k2)
+  | i < k6 -> return $ Rom2k.read f (i - k4)
+  | i < k8 -> return $ Rom2k.read e (i - k6)
   | i < k16 -> Ram8k.read ram (i - k8)
   | otherwise -> error $ "Mem.read: " <> show a
   where
@@ -38,11 +40,11 @@ read error Mem{e,f,g,h,ram} a = if
     k8 = Rom2k.size * 4
     k16 = Rom2k.size * 8
 
-write :: (forall a. String -> a) -> Mem -> Addr -> Byte -> Mem
-write error mem@Mem{ram} a b = if
+write :: (forall a. String -> a) -> Mem -> Addr -> Byte -> IO ()
+write error Mem{ram} a b = if
   | i < k8 -> error $ "Mem.write: " <> show a <> " -- cant write to rom"
-  | i < k16 -> mem { ram = Ram8k.write ram (i - k8) b }
-  | i < k24 -> mem { ram = Ram8k.write ram (i - k16) b } -- one mirror needed?
+  | i < k16 -> Ram8k.write ram (i - k8) b
+  | i < k24 -> Ram8k.write ram (i - k16) b -- one mirror needed?
   | otherwise -> error $ "Mem.write: " <> show a
   where
     i = Addr.toUnsigned a

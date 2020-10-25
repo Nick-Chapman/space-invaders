@@ -1,30 +1,32 @@
 
-module Ram8k (Ram,init,read,write) where
+module Ram8k (Ram,init,read,write) where -- imperative
 
 import Prelude hiding (init,read)
 
+import Data.Array.IO (IOArray,newArray,readArray,writeArray)
+
 import Byte (Byte(..))
-import Data.Map (Map)
-import qualified Data.Map.Strict as Map
 
 type Addr = Int
 
-data Ram = Ram { m :: Map Int Byte }
+data Ram = Ram { arr :: IOArray Int Byte }
 
 size :: Int
 size = 8 * 1024
 
-init :: Ram
-init = Ram { m = Map.empty }
+init :: IO Ram
+init = do
+  arr <- newArray (0,size-1) 0
+  return $ Ram {arr}
 
-read :: Ram -> Addr -> Byte
-read Ram{m} a = if
-  | inRange a -> Map.findWithDefault (Byte 0) a m
+read :: Ram -> Addr -> IO Byte
+read Ram{arr} a = if
+  | inRange a -> readArray arr a
   | otherwise -> error $ "Ram8k.read: " <> show a
 
-write :: Ram -> Addr -> Byte -> Ram
-write Ram{m} a b = if
-  | inRange a -> Ram { m = Map.insert a b m }
+write :: Ram -> Addr -> Byte -> IO ()
+write Ram{arr} a b = if
+  | inRange a -> writeArray arr a b
   | otherwise -> error $ "Ram8k.write: " <> show a
 
 inRange :: Int -> Bool

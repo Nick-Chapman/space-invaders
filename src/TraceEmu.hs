@@ -1,7 +1,7 @@
 
 module TraceEmu (TraceConf(..),traceEmulate,Period(..)) where
 
-import Control.Monad (when)
+import Control.Monad (when,forM)
 import Data.Bits (testBit)
 import Text.Printf (printf)
 
@@ -71,26 +71,30 @@ cyclesInPeriod = \case
 
 
 printPeriodPixels :: Period -> Int -> EmuState -> IO ()
-printPeriodPixels period count s = do
-  let EmuState{mem} = s
-  let pixs = onPixels (getDisplayFromMem mem)
+printPeriodPixels period count s@EmuState{mem} = do
+  Display{onPixels} <- getDisplayFromMem mem
   putStrLn $ prettyPrefix s $ unwords
     [ printf "%s{%d}" (show period) count
-    , printf "#onPixels = %d" (length pixs)
+    , printf "#onPixels = %d" (length onPixels)
     ]
 
 data OnPixel = OnPixel { x :: Int, y :: Int }
 
 data Display = Display { onPixels :: [OnPixel] }
 
-getDisplayFromMem :: Mem -> Display
+getDisplayFromMem :: Mem -> IO Display
 getDisplayFromMem mem = do
-  Display
-    [ OnPixel {x, y}
-    | x :: Int <- [0..223]
-    , yByte <- [0..31]
-    , let byte = Mem.read error mem (Addr (fromIntegral (0x2400 + x * 32 + yByte)))
-    , yBit <- [0..7]
-    , byte `testBit` yBit
-    , let y  = 8 * yByte + yBit
-    ]
+  let trips =
+        [ (x,yByte,a)
+        | x :: Int <- [0..223]
+        , yByte :: Int <- [0..31]
+        , let a = Addr (fromIntegral (0x2400 + x * 32 + yByte))
+        ]
+  (Display . concat) <$> do
+    forM trips $ \(x,yByte,a) -> do
+      byte <- Mem.read error mem a
+      return [ OnPixel {x,y}
+             | yBit :: Int <- [0..7]
+             , byte `testBit` yBit
+             , let y = 8 * yByte + yBit
+             ]

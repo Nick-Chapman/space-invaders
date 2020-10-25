@@ -10,7 +10,6 @@ module World
 
 import Addr (Addr(..))
 import Buttons (Buttons,buttons0,But(..))
-import Control.Monad (forM)
 import Data.Bits (testBit)
 import Emulate (EmuStep(..),emulate,EmuState(..),Ticks(..))
 import Mem (Mem,read)
@@ -124,13 +123,12 @@ data Picture
   | Text { string :: String, lineNo :: Int, emphasized :: Bool }
   | Pixel { x :: Int, y :: Int }
 
-pictureWorld :: World -> IO Picture
-pictureWorld w@World{state=EmuState{mem},showControls,frameCount,fps} = do
-  screen <- pictureVideoMem mem
-  return $ Pictures
-    [ screen
-    , if showControls then controls else Pictures []
-    ]
+pictureWorld :: World -> Picture
+pictureWorld w@World{state=EmuState{mem},showControls,frameCount,fps} =
+  Pictures
+  [ pictureVideoMem mem
+  , if showControls then controls else Pictures []
+  ]
   where
     controls = Pictures
       [ pictureButtons w
@@ -138,22 +136,17 @@ pictureWorld w@World{state=EmuState{mem},showControls,frameCount,fps} = do
       , Text { lineNo = 2, string = "fps : " <> show fps, emphasized = False }
       ]
 
-pictureVideoMem :: Mem -> IO Picture
+pictureVideoMem :: Mem -> Picture
 pictureVideoMem mem = do
-  let trips =
-        [ (x,yByte,a)
-        | x :: Int <- [0..223]
-        , yByte :: Int <- [0..31]
-        , let a = Addr (fromIntegral (0x2400 + x * 32 + yByte))
-        ]
-  (Pictures . concat) <$> do
-    forM trips $ \(x,yByte,a) -> do
-      byte <- Mem.read error mem a
-      return [ Pixel {x = x,y = 256 - y} --FLIP HERE
-             | yBit :: Int <- [0..7]
-             , byte `testBit` yBit
-             , let y = 8 * yByte + yBit
-             ]
+  Pictures
+    [ Pixel {x = x, y = 256 - y} -- FLIP HERE
+    | x :: Int <- [0..223]
+    , yByte <- [0..31]
+    , let byte = Mem.read error mem (Addr (fromIntegral (0x2400 + x * 32 + yByte)))
+    , yBit <- [0..7]
+    , byte `testBit` yBit
+    , let y  = 8 * yByte + yBit
+    ]
 
 pictureButtons :: World -> Picture
 pictureButtons World{buttons,paused} =

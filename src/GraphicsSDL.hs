@@ -144,7 +144,7 @@ drawEverything assets@DrawAssets{renderer=r} world = do
   setColor r DarkGrey
   SDL.clear r
   setColor r White
-  World.pictureWorld world >>= renderPicture assets
+  renderPicture assets (World.pictureWorld world)
   SDL.present r
 
 renderPicture :: DrawAssets -> Picture  -> IO ()

@@ -1,7 +1,6 @@
 
 module Gloss where
 
-import Control.Monad (forM)
 import Data.Bits (testBit)
 import Data.Maybe (fromMaybe)
 import Graphics.Gloss (scale,translate,Picture(Text),Point,pictures,color,white,red,polygon,black)
@@ -22,19 +21,17 @@ data World = World
   , state :: EmuState
   } deriving Show
 
-world0 :: Mem -> IO World
-world0 mem = do
-  disp <- getDisplayFromMem mem
-  return $ World
-    { frameCount = 0
-    , buttons = buttons0
-    , disp
-    , state = initState mem
-    }
+world0 :: Mem -> World
+world0 mem = World
+  { frameCount = 0
+  , buttons = buttons0
+  , disp = getDisplayFromMem mem
+  , state = initState mem
+  }
 
 run :: Maybe Int -> Mem -> IO ()
 run fps mem = do
-  model <- world0 mem
+  let model = world0 mem
   let bgColour = if True then black else Gloss.greyN 0.3
   Gloss.playIO dis bgColour (fromMaybe 30 fps) model
       (\  m -> do pic <- pictureWorld m; return $ doPosition pic)
@@ -70,11 +67,10 @@ updateWorld World{buttons,frameCount,state=state0} = do
         False -> loop post
         True -> do
           let EmuState{mem} = post
-          disp <- getDisplayFromMem mem
           return $ World
             { frameCount = frameCount + 1
             , buttons
-            , disp
+            , disp = getDisplayFromMem mem
             , state = post
             }
 
@@ -82,23 +78,17 @@ data Disp = Disp { onPixels :: [OnPixel] } deriving Show
 
 data OnPixel = OnPixel { x :: Int, y :: Int } deriving Show
 
-
-getDisplayFromMem :: Mem -> IO Disp
+getDisplayFromMem :: Mem -> Disp
 getDisplayFromMem mem = do
-  let trips =
-        [ (x,yByte,a)
-        | x :: Int <- [0..223]
-        , yByte :: Int <- [0..31]
-        , let a = Addr (fromIntegral (0x2400 + x * 32 + yByte))
-        ]
-  (Disp . concat) <$> do
-    forM trips $ \(x,yByte,a) -> do
-      byte <- Mem.read error mem a
-      return [ OnPixel {x,y}
-             | yBit :: Int <- [0..7]
-             , byte `testBit` yBit
-             , let y = 8 * yByte + yBit
-             ]
+  Disp
+    [ OnPixel {x, y}
+    | x :: Int <- [0..223]
+    , yByte <- [0..31]
+    , let byte = Mem.read error mem (Addr (fromIntegral (0x2400 + x * 32 + yByte)))
+    , yBit <- [0..7]
+    , byte `testBit` yBit
+    , let y  = 8 * yByte + yBit
+    ]
 
 reachFrame :: EmuState -> EmuState -> Bool
 reachFrame s0 s1 = do

@@ -19,7 +19,7 @@ main = do
   g <- Rom2k.load "roms/invaders.g"
   h <- Rom2k.load "roms/invaders.h"
 
-  mem <- Mem.init (e,f,g,h)
+  let mem = Mem.init (e,f,g,h)
   args <- getArgs
   let Conf{mode,traceConf,fps} = parse args conf0
   case mode of

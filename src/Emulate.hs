@@ -94,13 +94,12 @@ emulate buttons s0 =
       GetReg r -> k s (Cpu.get cpu r)
       SetReg r b -> k s { cpu = Cpu.set cpu r b} ()
       ReadMem a -> do
-        b <- Mem.read crash mem a
+        let b = Mem.read crash mem a
         --putStrLn $ "- ReadMem (" <> show a <> ") --> " <> show b
         k s b
       WriteMem a b -> do
         --putStrLn $ "- WriteMem (" <> show a <> ") = " <> show b
-        Mem.write crash mem a b
-        k s { mem = mem } ()
+        k s { mem = Mem.write crash mem a b } ()
       SplitAddr a -> k s (Addr.toHiLo a)
       MakeAddr hilo -> k s (Addr.fromHiLo hilo)
       OffsetAddr n a -> k s (Addr.bump a n)

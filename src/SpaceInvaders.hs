@@ -4,7 +4,6 @@ module SpaceInvaders(main) where
 import InstructionSet (printDecodeTable)
 import System.Environment (getArgs)
 import TraceEmu (traceEmulate,Period(Second,HalfFrame),TraceConf(..))
-import qualified Gloss (run)
 import qualified Mem (init)
 import qualified Rom2k (load)
 import qualified GraphicsSDL (main)
@@ -27,12 +26,10 @@ main = do
       printDecodeTable
     ModeTrace -> do
       traceEmulate traceConf mem
-    ModeGloss -> do
-      Gloss.run fps mem
     ModeSDL -> do
       GraphicsSDL.main fps mem
 
-data Mode = ModeShowDecodeTable | ModeTrace | ModeGloss | ModeSDL
+data Mode = ModeShowDecodeTable | ModeTrace | ModeSDL
 
 data Conf = Conf
   { mode :: Mode
@@ -75,7 +72,6 @@ parse :: [String] -> Conf -> Conf
 parse args conf = case args of
   [] -> conf
   "sdl":args -> parse args $ conf { mode = ModeSDL }
-  "gloss":args -> parse args $ conf { mode = ModeGloss }
   "decode":args -> parse args $ conf { mode = ModeShowDecodeTable }
   "trace":args -> parse args $ conf { mode = ModeTrace }
   "test1":args -> parse args $ conf { mode = ModeTrace, traceConf = traceConfTest1 }

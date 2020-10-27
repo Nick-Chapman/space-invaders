@@ -16,7 +16,6 @@ dependencies:
 - clock
 - containers
 - extra
-- gloss
 - sdl2
 - sdl2-mixer
 - sdl2-ttf

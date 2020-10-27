@@ -23,7 +23,6 @@ Status:
 - Headless emulation: `stack run trace`
 - Regression tests: `./test.sh` (45 secs)
 - View decode table `stack run decode`
-- Emulation with Gloss visualization: `stack run gloss` (mem leak; slows over time)
 - Implemented `DAA` (_decimal adjust accumulator_), so credits are calculated correctly
 
 Next:

@@ -17,7 +17,6 @@ dependencies:
 - containers
 - extra
 - sdl2
-- sdl2-mixer
 - sdl2-ttf
 - text
 - word8

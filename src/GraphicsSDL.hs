@@ -2,23 +2,23 @@
 module GraphicsSDL (main) where
 
 import Control.Concurrent (threadDelay)
-import Control.Monad (when,forM,forM_)
+import Control.Monad --(when,forM,forM_)
 import Data.List.Extra (groupSort)
 import Data.Map (Map)
-import Data.Maybe (fromJust)
+--import Data.Maybe --(fromJust)
 import Foreign.C.Types (CInt)
 import Mem (Mem)
 import SDL (Renderer,Rectangle(..),V2(..),V4(..),Point(P),($=))
 import SDL.Font (Font,Color)
-import SDL.Mixer (Chunk)
-import Sounds (Sound(..),allSounds)
+--import SDL.Mixer (Chunk)
+--import Sounds --(Sound(..),allSounds)
 import System.IO (hFlush,stdout)
 import World (World,Key(..),KeyMotion(Down,Up),Picture(..))
 import qualified Data.Map.Strict as Map
 import qualified Data.Text as Text (pack)
 import qualified SDL
 import qualified SDL.Font as Font (initialize,load,solid,size)
-import qualified SDL.Mixer as Mixer (withAudio,defaultAudio,load,play)
+--import qualified SDL.Mixer as Mixer (withAudio,defaultAudio,load,play)
 import qualified World (initWorld,updateKey,stepFrame,pictureWorld,soundsToPlay)
 
 
@@ -29,7 +29,7 @@ main fpsLimitM mem = do
   SDL.initializeAll
   Font.initialize
 
-  Mixer.withAudio (Mixer.defaultAudio) 4096 $ do
+  --Mixer.withAudio (Mixer.defaultAudio) 4096 $ do
 
   let screenW = 224
   let screenH = 256
@@ -46,11 +46,11 @@ main fpsLimitM mem = do
   let _flush = hFlush stdout
   let assets = DrawAssets { renderer, font, sf }
 
-  soundMap :: Map Sound Chunk <- Map.fromList <$> do
+  {-soundMap :: Map Sound Chunk <- Map.fromList <$> do
     forM allSounds $ \sound -> do
       let file = "sounds/" <> show sound <> ".wav"
       chunk <- Mixer.load file
-      return (sound,chunk)
+      return (sound,chunk)-}
 
   let
     loop :: World -> IO ()
@@ -66,10 +66,10 @@ main fpsLimitM mem = do
           world <- World.stepFrame world
           let sounds = World.soundsToPlay world
           when (not (null sounds)) $ do
-            --print sounds
-            forM_ sounds $ \sound -> do
+            print sounds
+            {-forM_ sounds $ \sound -> do
               let chunk = fromJust $ Map.lookup sound soundMap
-              Mixer.play chunk
+              Mixer.play chunk-}
           maybeDelay
           loop world
 

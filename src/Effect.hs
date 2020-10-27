@@ -9,6 +9,7 @@ import Cpu (Reg,Flag)
 import HiLo (HiLo(..))
 import InstructionSet (Op)
 import Phase (Byte,Addr,Bit)
+import Sounds (Sound)
 
 -- | The Effect type, constructed when executing instructions
 
@@ -64,7 +65,10 @@ data Eff p a where
   GetButtons :: Eff p Buttons
   DispatchByte :: Byte p -> Eff p Word8
 
-  Sound :: Eff p ()
+  SoundOn :: Sound -> Eff p ()
+  SoundOff :: Sound -> Eff p ()
+
+  SplitByte :: Byte p -> Int -> Eff p (Bit p)
 
   FillShiftRegister :: Byte p -> Eff p ()
   SetShiftRegisterOffset :: Byte p -> Eff p ()

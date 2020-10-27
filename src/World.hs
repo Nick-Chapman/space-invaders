@@ -3,7 +3,7 @@
 -- | - Emulation state; Buttons state; Keyboard mapping; Picture generation (game itself + emulator controls)
 
 module World
-  ( World, initWorld, stepFrame
+  ( World, initWorld, stepFrame, soundsToPlay
   , Key(..), KeyMotion(..), updateKey
   , Picture(..), pictureWorld
   ) where
@@ -17,6 +17,7 @@ import System.Clock (TimeSpec(..),getTime,Clock(Monotonic))
 import Text.Printf (printf)
 import qualified Buttons (get,press,release,toggle)
 import qualified Emulate (initState)
+import Sounds (Sound(..), allSounds, isSoundPlaying)
 
 data Key
   = KeyInsert
@@ -68,6 +69,7 @@ data World = World
   , frameCount :: Int
   , time :: TimeSpec
   , fps :: Fps
+  , soundsToPlay :: [Sound]
   }
 
 initWorld :: Mem -> IO World
@@ -81,6 +83,7 @@ initWorld mem = do
     , frameCount = 0
     , time
     , fps = Fps 0
+    , soundsToPlay = []
     }
 
 updateKey :: Key -> KeyMotion -> World -> Maybe World
@@ -98,6 +101,7 @@ updateKey key motion w@World{showControls,buttons,paused} =
 
 stepFrame :: World -> IO World
 stepFrame world@World{state=state0,buttons,paused,frameCount} = do
+  --putStrLn $ "FRAME: " <> show frameCount
   (if paused then return world else loop state0)
     >>= measureFps
   where
@@ -106,7 +110,17 @@ stepFrame world@World{state=state0,buttons,paused,frameCount} = do
       EmuStep{post} <- emulate buttons pre
       case reachFrame pre post of
         False -> loop post
-        True -> return $ world { frameCount = frameCount + 1 , state = post }
+        True -> do
+          let soundsToPlay = soundsWhichSwitchOn state0 post
+          return $ world { frameCount = frameCount + 1 , state = post, soundsToPlay }
+
+soundsWhichSwitchOn :: EmuState -> EmuState -> [Sound]
+soundsWhichSwitchOn EmuState{playing=p0} EmuState{playing=p1} =
+  [ s
+  | s <- allSounds
+  , not (isSoundPlaying p0 s)
+  , isSoundPlaying p1 s
+  ]
 
 reachFrame :: EmuState -> EmuState -> Bool -- TODO: there a better way than this!
 reachFrame s0 s1 = do

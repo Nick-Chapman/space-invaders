@@ -23,6 +23,7 @@ import qualified Addr (fromHiLo,toHiLo,bump)
 import qualified Cpu (init,get,set,getFlag,setFlag)
 import qualified Mem (read,write)
 import qualified Phase (Byte,Addr,Ticks,Bit)
+import qualified Sounds (Playing,initPlaying,soundOn,soundOff)
 
 
 -- | Ticks of the 2 MHz clock
@@ -48,24 +49,24 @@ instance Show Bit where show (Bit b) = if b then "1" else "0"
 data EmuState = EmuState
   { ticks :: Ticks -- cycle count
   , icount :: Int -- instruction count
-  , fcount :: Int -- frame count
   , cpu :: Cpu EmuTime
   , mem :: Mem
   , interrupts_enabled :: Bool
   , nextWakeup :: Ticks
   , shifter :: Shifter
+  , playing :: Sounds.Playing
   }
 
 initState :: Mem -> EmuState
 initState mem = EmuState
   { ticks = 0
   , icount = 0
-  , fcount = 0
   , cpu = Cpu.init (Byte 0) (Bit False)
   , mem
   , interrupts_enabled = False
   , nextWakeup = halfFrameTicks
   , shifter = shifter0
+  , playing = Sounds.initPlaying
   }
 
 instance Show EmuState where
@@ -88,7 +89,7 @@ emulate buttons s0 =
     crash message = do error ("*crash*\n" <> prettyPrefix s0 message)
 
     run :: EmuState -> Eff EmuTime a -> (EmuState -> a -> IO EmuStep) -> IO EmuStep
-    run s@EmuState{cpu,mem} eff k = case eff of
+    run s@EmuState{cpu,mem,playing} eff k = case eff of
       Ret x -> k s x
       Bind eff f -> run s eff $ \s a -> run s (f a) k
       GetReg r -> k s (Cpu.get cpu r)
@@ -188,9 +189,13 @@ emulate buttons s0 =
       DispatchByte (Byte word) ->
         k s word
 
-      Sound -> do
-        --putStrLn "*sound*"
-        k s ()
+      SplitByte byte i -> k s (Bit (byte `testBit` i))
+
+      SoundOn sound -> do
+        k s { playing = Sounds.soundOn playing sound } ()
+
+      SoundOff sound -> do
+        k s { playing = Sounds.soundOff playing sound } ()
 
       FillShiftRegister byte -> do
         k s { shifter = fillShiftRegister (shifter s) byte } ()

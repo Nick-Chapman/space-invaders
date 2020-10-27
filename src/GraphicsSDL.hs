@@ -66,7 +66,7 @@ main fpsLimitM mem = do
           world <- World.stepFrame world
           let sounds = World.soundsToPlay world
           when (not (null sounds)) $ do
-            print sounds
+            --print sounds
             forM_ sounds $ \sound -> do
               let chunk = fromJust $ Map.lookup sound soundMap
               Mixer.play chunk

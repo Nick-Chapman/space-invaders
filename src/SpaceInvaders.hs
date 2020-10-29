@@ -7,6 +7,7 @@ import TraceEmu (traceEmulate,Period(Second,HalfFrame),TraceConf(..))
 import qualified Mem (init)
 import qualified Rom2k (load)
 import qualified GraphicsSDL (main)
+import qualified SpeedTest (main)
 
 -- | Entry point to the Space Invaders emulation
 main :: IO ()
@@ -28,8 +29,10 @@ main = do
       traceEmulate traceConf mem
     ModeSDL -> do
       GraphicsSDL.main fps mem
+    ModeSpeedTest -> do
+      SpeedTest.main mem
 
-data Mode = ModeShowDecodeTable | ModeTrace | ModeSDL
+data Mode = ModeShowDecodeTable | ModeTrace | ModeSDL | ModeSpeedTest
 
 data Conf = Conf
   { mode :: Mode
@@ -71,6 +74,7 @@ traceConfPOI i = traceConf0
 parse :: [String] -> Conf -> Conf
 parse args conf = case args of
   [] -> conf
+  "speed-test":args -> parse args $ conf { mode = ModeSpeedTest }
   "sdl":args -> parse args $ conf { mode = ModeSDL }
   "decode":args -> parse args $ conf { mode = ModeShowDecodeTable }
   "trace":args -> parse args $ conf { mode = ModeTrace }

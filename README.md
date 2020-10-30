@@ -16,7 +16,7 @@ Build/run emulation with SDL visualization:
 
 Status:
 
-- 8080 emulation almost complete (`SPHL` and `HLT` unimplemented)
+- 8080 emulation complete, except `HLT` unimplemented
 - SDL emulation is quick enough -- *just* -- measured fps is reported
 - `stack run` runs as fast the machine allows; about 70 fps on my laptop
 - fps can be limited with a command line flag, i.e.  `stack run -- -fps 60`
@@ -24,24 +24,16 @@ Status:
 - Regression tests: `./test.sh` (45 secs)
 - View decode table `stack run decode`
 - Implemented `DAA` (_decimal adjust accumulator_), so credits are calculated correctly
-
-Next:
-
-- Speed measurements (no graphics)
-- Bug? - pixel gaps appear in line at bottom of screen (or is this expected?)
-
-Crashes:
-- `31091013 [267381888] 143B : Mem.write: 001C -- cant write to rom`
-
-Debugging:
-
-- Spot bugs while refactoring `Semantics.hs` (the dream) -- _it worked!_
-- Get trace from another emulator: tricky; will need interrupts to align precisely
-- Setup testing using `cpudiag.asm`, (A) just by itself (B) trace vs another emulator
-- Calculate/print static semantics from each opcode, and inspect
+- Spot bugs while refactoring `Semantics.hs` -- _it worked!_
+- Speed measurements (no graphics) : `stack run speed-test`
+- `cpudiag` testing: (`TST8080.COM`) `stack run tst`
+- `143B : Mem.write: 001C -- cant write to rom` -- expected? so crash disabled
 
 
-### Step 2. Retarget to standalone executable (Future Plan)
+### Step 2. Retarget to standalone executable (Next steps)
+
+- Calculate/print static semantics from each opcode
+- reachability
 
 
 ### Resource for Space Invaders and 8080

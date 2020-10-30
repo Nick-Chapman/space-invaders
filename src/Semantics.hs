@@ -265,7 +265,9 @@ execute0 = \case
     dest <- getRegPair HL
     return (Jump dest)
   SPHL -> do
-    Unimplemented "SPHL"
+    word <- getRegPair HL
+    setRegPair SP word
+    return Next
   XCHG -> do
     d <- GetReg D
     e <- GetReg E

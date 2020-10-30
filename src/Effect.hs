@@ -38,13 +38,16 @@ data Eff p a where
   XorB :: Byte p -> Byte p -> Eff p (Byte p)
   Add16 :: Addr p -> Addr p -> Eff p (Addr p, Bit p)
 
-  SelectSZAC :: Byte p -> Eff p (Bit p, Bit p, Bit p, Bit p)
-  ByteFromSZAC :: (Bit p, Bit p, Bit p, Bit p) -> Eff p (Byte p)
+  SelectSZAPC :: Byte p -> Eff p (Bit p, Bit p, Bit p, Bit p, Bit p)
+  ByteFromSZAPC :: (Bit p, Bit p, Bit p, Bit p, Bit p) -> Eff p (Byte p)
 
   GetFlag :: Flag -> Eff p (Bit p)
   SetFlag :: Flag -> Bit p -> Eff p ()
+
   IsSigned :: Byte p -> Eff p (Bit p)
   IsZero :: Byte p -> Eff p (Bit p)
+  IsParity :: Byte p -> Eff p (Bit p)
+
   TestBit :: Bit p -> Eff p Bool
   MakeBit :: Bool -> Eff p (Bit p)
 

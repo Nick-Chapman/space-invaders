@@ -286,8 +286,8 @@ executeCond = \case
   Z -> GetFlag FlagZ
   NC -> GetFlag FlagCY >>= Flip
   CY -> GetFlag FlagCY
-  PO -> error "executeCond, PO, need parity flag"
-  PE -> error "executeCond, PE, need parity flag"
+  PO -> GetFlag FlagP >>= Flip
+  PE -> GetFlag FlagP
   P -> GetFlag FlagS >>= Flip
   MI -> GetFlag FlagS
 
@@ -470,8 +470,10 @@ setFlagsFrom :: Byte p -> Eff p ()
 setFlagsFrom value = do
   s <- IsSigned value
   z <- IsZero value
+  p <- IsParity value
   SetFlag FlagS s
   SetFlag FlagZ z
+  SetFlag FlagP p
 
 
 pushStack :: Byte p -> Eff p ()
@@ -525,10 +527,11 @@ expandRegPair = \case
 setRegOrFlags :: Reg -> Byte p -> Eff p ()
 setRegOrFlags r v = case r of
   Flags -> do
-    (s,z,a,cy) <- SelectSZAC v
+    (s,z,a,p,cy) <- SelectSZAPC v
     SetFlag FlagS s
     SetFlag FlagZ z
     SetFlag FlagA a
+    SetFlag FlagP p
     SetFlag FlagCY cy
   reg ->
     SetReg reg v
@@ -539,7 +542,8 @@ getRegOrFlags = \case
     s <- GetFlag FlagS
     z <- GetFlag FlagZ
     a <- GetFlag FlagA
+    p <- GetFlag FlagP
     cy <- GetFlag FlagCY
-    ByteFromSZAC (s,z,a,cy)
+    ByteFromSZAPC (s,z,a,p,cy)
   reg ->
     GetReg reg

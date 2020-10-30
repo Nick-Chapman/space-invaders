@@ -12,7 +12,7 @@ import Phase (Byte,Bit)
 data Reg = PCH | PCL | SPH | SPL | A | B | C | D | E | H | L | Flags
   deriving (Eq,Ord,Show)
 
-data Flag = FlagS | FlagZ | FlagCY | FlagA
+data Flag = FlagS | FlagZ | FlagA | FlagP | FlagCY
 
 data Cpu p = Cpu
   { pch :: Byte p
@@ -28,8 +28,9 @@ data Cpu p = Cpu
   , regL :: Byte p
   , flagS :: Bit p
   , flagZ :: Bit p
-  , flagCY :: Bit p
   , flagA :: Bit p
+  , flagP :: Bit p
+  , flagCY :: Bit p
   }
 
 instance (Show (Bit p), Show (Byte p)) => Show (Cpu p) where
@@ -57,23 +58,25 @@ init :: Byte p -> Bit p -> Cpu p
 init b bit0 =
   Cpu { pch = b, pcl = b, sph = b, spl = b
       , regA = b, regB = b, regC = b, regD = b, regE = b, regH = b, regL = b
-      , flagS = bit0, flagZ = bit0, flagCY = bit0, flagA = bit0
+      , flagS = bit0, flagZ = bit0, flagA = bit0, flagP = bit0, flagCY = bit0
       }
 
 
 getFlag :: Cpu p -> Flag -> Bit p
-getFlag Cpu{flagS,flagZ,flagCY,flagA} = \case
+getFlag Cpu{flagS,flagZ,flagA,flagP,flagCY} = \case
   FlagS -> flagS
   FlagZ -> flagZ
-  FlagCY -> flagCY
   FlagA -> flagA
+  FlagP -> flagP
+  FlagCY -> flagCY
 
 setFlag :: Cpu p -> Flag -> Bit p -> Cpu p
 setFlag cpu flag x = case flag of
   FlagS -> cpu { flagS = x }
   FlagZ -> cpu { flagZ = x }
-  FlagCY -> cpu { flagCY = x }
   FlagA -> cpu { flagA = x }
+  FlagP -> cpu { flagP = x }
+  FlagCY -> cpu { flagCY = x }
 
 
 get :: Cpu p -> Reg -> Byte p

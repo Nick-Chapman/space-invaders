@@ -3,5 +3,6 @@
 *~
 stack.yaml.lock
 .markdown-preview.html
-test1.trace
-test2.trace
+test1.out
+test2.out
+tst.out

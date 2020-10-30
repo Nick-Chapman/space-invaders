@@ -67,7 +67,7 @@ read1 error Mem1{e,f,g,h,ram} a = if
 
 write1 :: (forall a. String -> a) -> Mem1 -> Addr -> Byte -> Mem1
 write1 error mem@Mem1{ram} a b = if
-  | i < k8 -> error $ "Mem.write: " <> show a <> " -- cant write to rom"
+  | i < k8 -> mem --error $ "Mem.write: " <> show a <> " -- cant write to rom"
   | i < k16 -> mem { ram = Ram8k.write ram (i - k8) b }
   | i < k24 -> mem { ram = Ram8k.write ram (i - k16) b } -- one mirror needed?
   | otherwise -> error $ "Mem.write: " <> show a

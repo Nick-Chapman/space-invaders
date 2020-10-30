@@ -193,7 +193,7 @@ execute0 = \case
     subToAccWithCarry cin v1
   ANA reg -> do
     v1 <- load reg
-    binop AndB v1
+    andA v1
   XRA reg -> do
     v1 <- load reg
     binop XorB v1
@@ -333,7 +333,7 @@ execute1 op1 b1 = case op1 of
     cin <- MakeBit False
     subToAccWithCarry cin b1
   ANI ->
-    binop AndB b1
+    andA b1
   ORI ->
     binop OrB b1
   IN -> do
@@ -366,12 +366,31 @@ binop f b1 = do
   v <- f b1 v0
   saveAndSetFlagsFrom Instr.A v
   resetCarry
+  resetAux
+  return Next
+
+andA
+  :: Byte p
+  -> Eff p (Flow p)
+andA b1 = do
+  v0 <- GetReg A
+  v <- AndB b1 v0
+  saveAndSetFlagsFrom Instr.A v
+  resetCarry
+  w <- OrB b1 v0
+  aux <- SplitByte w 3
+  SetFlag FlagA aux
   return Next
 
 resetCarry :: Eff p ()
 resetCarry = do
   c <- MakeBit False
   SetFlag FlagCY c
+
+resetAux :: Eff p ()
+resetAux = do
+  a <- MakeBit False
+  SetFlag FlagA a
 
 
 execute2 :: Op2 -> Addr p -> Eff p (Flow p)

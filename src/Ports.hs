@@ -62,6 +62,8 @@ outputPort port byte = case port of
   4 -> FillShiftRegister byte
   5 -> soundFromPort port5 byte
   6 -> return () -- ignore watchdog
+  0 -> return () -- ignore for tst
+  1 -> return () -- ignore for tst
   n -> Unimplemented ("OUT:" <> show n)
 
 soundFromPort :: (Int -> Sound) -> Byte p -> Eff p ()

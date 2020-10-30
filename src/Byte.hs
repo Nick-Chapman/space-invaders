@@ -45,7 +45,7 @@ decimalAdjust auxIn cin byteIn = do
   let hi = ((byteIn .&. 0xF0) `shiftR` 4) + (if auxOut then 1 else 0)
   let hiNeedsAdjust = hi > 0x9 || cin
   let hiAdjust = if hiNeedsAdjust then hi + 0x6 else hi
-  let cout = hiAdjust >= 16
+  let cout = (hiAdjust >= 16) || cin
 
   let byteOut = (hiAdjust `shiftL` 4) .|. (loAdjust .&. 0xF)
   (byteOut,auxOut,cout)

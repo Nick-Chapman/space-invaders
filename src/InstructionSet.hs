@@ -145,7 +145,7 @@ cycles jumpTaken = \case
   Op0 RAL -> 4
   Op0 DAA -> 4
   Op0 STC -> 4
-  Op0 DAD{} -> 11
+  Op0 DAD{} -> 10 -- oops, I had a bug. I had 11
   Op0 LDAX{} -> 7
   Op2 LHLD -> 16
   Op2 LDA -> 13
@@ -187,7 +187,7 @@ cycles jumpTaken = \case
   Op0 PCHL -> 5
   Op0 SPHL -> 5
   Op1 IN -> 10
-  Op0 XCHG -> 5
+  Op0 XCHG -> 4 -- colourful reference table say 5, but is it wrong. The systems ref doc says 4.
   Op0 EI -> 4
   Op2 CALL -> 17
   Op2 CALLx{} -> 17

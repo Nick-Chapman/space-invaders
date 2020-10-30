@@ -1,6 +1,6 @@
 
 module Cpu (
-  Cpu,Reg(..),Flag(..),
+  Cpu(..),Reg(..),Flag(..),
   init,
   get,set,
   getFlag,setFlag,

@@ -4,6 +4,7 @@ module Emulate (
   prettyPrefix,
   EmuState(..), initState,
   EmuStep(..), emulate,
+  Bit(..),
   ) where
 
 import Data.Bits

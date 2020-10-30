@@ -123,6 +123,7 @@ execute0 = \case
     SetFlag FlagA auxOut
     SetFlag FlagCY cout
     SetReg A byteOut
+    setFlagsFrom byteOut
     return Next
   STC -> do
     bit <- MakeBit True

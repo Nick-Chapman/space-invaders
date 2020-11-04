@@ -201,7 +201,10 @@ execute0 = \case
     save dest b
     return Next
   HLT -> do
-    Unimplemented "HLT"
+    --Unimplemented "HLT"
+    pc <- getPC -- already advanced
+    pcBack <- OffsetAddr (-1) pc
+    return $ Jump pcBack
   ADD reg -> do
     v1 <- load reg
     cin <- MakeBit False

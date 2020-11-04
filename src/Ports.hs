@@ -14,7 +14,8 @@ inputPort = \case
   1 -> GetButtons >>= inputPort1
   2 -> GetButtons >>= inputPort2
   3 -> GetShiftRegisterAtOffset
-  n -> Unimplemented ("IN:" <> show n)
+--  n -> Unimplemented ("IN:" <> show n)
+  n -> UnknownInput n
 
 inputPort1 :: Buttons -> Eff p (Byte p)
 inputPort1 b =
@@ -64,7 +65,8 @@ outputPort port byte = case port of
   6 -> return () -- ignore watchdog
   0 -> return () -- ignore for tst
   1 -> return () -- ignore for tst
-  n -> Unimplemented ("OUT:" <> show n)
+--  n -> Unimplemented ("OUT:" <> show n)
+  n -> UnknownOutput n
 
 soundFromPort :: (Int -> Sound) -> Byte p -> Eff p ()
 soundFromPort soundOfPortBit byte = do

@@ -57,7 +57,8 @@ data Eff p a where
   TimeToWakeup :: Eff p Bool
   GetInterruptInstruction :: Eff p (Byte p)
 
-  Unimplemented :: String -> Eff p a
+  UnknownInput :: Word8 -> Eff p (Byte p)
+  UnknownOutput :: Word8 -> Eff p ()
 
   GetButtons :: Eff p Buttons
   DispatchByte :: Byte p -> Eff p Word8

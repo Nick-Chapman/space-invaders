@@ -106,10 +106,7 @@ emulate buttons s0 =
       MakeAddr hilo -> k s (Addr.fromHiLo hilo)
       OffsetAddr n a -> k s (Addr.bump a n)
 
-      Decode byte -> do
-        case decode byte of
-          Just op -> k s op
-          Nothing -> crash (show byte <> " -- decode failed")
+      Decode byte -> k s (decode byte)
 
       MakeByte w -> k s (Byte w)
 
@@ -162,7 +159,11 @@ emulate buttons s0 =
         Just s -> k s True
       GetInterruptInstruction -> k s (interruptInstruction s)
 
-      Unimplemented message -> crash $ "unimplemented: " <> message
+      UnknownInput n -> do
+        crash $ "unknown input: " ++ show n
+
+      UnknownOutput n -> do
+        crash $ "unknown input: " ++ show n
 
       GetButtons -> do
         k s buttons
@@ -183,13 +184,10 @@ emulate buttons s0 =
         k s { shifter = fillShiftRegister (shifter s) byte } ()
 
       SetShiftRegisterOffset byte -> do
-        --putStrLn $ prettyPrefix s ("SetShiftRegisterOffset -> " <> show byte)
         k s { shifter = setShiftRegisterOffset (shifter s) byte } ()
 
       GetShiftRegisterAtOffset -> do
         let res = getShiftRegisterAtOffset (shifter s)
-        --let res = Byte 0
-        --putStrLn $ prettyPrefix s ("GetShiftRegisterAtOffset -> " <> show res)
         k s res
 
 

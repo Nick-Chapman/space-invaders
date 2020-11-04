@@ -395,8 +395,11 @@ encodeRegPairSpec = \case
   PSW -> 3 -- for PUSH/POP
 
 -- | define decode as the inverse of encoding
-decode :: Byte -> Maybe Op
-decode byte = Map.lookup byte decodeTable
+decode :: Byte -> Op
+decode byte =
+  case Map.lookup byte decodeTable of
+    Nothing -> error $ "decode: " <> show byte
+    Just op -> op
 
 decodeTable :: Map Byte Op
 decodeTable = Map.fromList ys

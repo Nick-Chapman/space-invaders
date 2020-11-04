@@ -9,13 +9,16 @@ import Data.Set (Set)
 import qualified Data.Set as Set
 
 import Addr (Addr)
+import Buttons (buttons0)
 import Byte (Byte(..))
 import Cpu (Cpu(..),Reg(..),Flag(..))
+import Data.Word8 (Word8)
 import Effect (Eff)
 import HiLo (HiLo(..))
 import InstructionSet (Op0(..),Op1(..),Op(..),encode,decode)
 import Phase (Phase)
 import Rom2k (Rom)
+import Sounds (Sound)
 import qualified Addr as Addr (toHiLo,fromHiLo,toUnsigned,bump)
 import qualified Cpu (get,set,getFlag,setFlag)
 import qualified Effect as E (Eff(..))
@@ -30,12 +33,12 @@ ops = do
   roms <- loadRoms
   let skipOps = [Op0 DAA,
                  Op0 HLT, Op1 IN, Op1 OUT]
-  let ops =
-        [ op | b <- [0..0xFF], let (Just op) = decode b ]
+  let _ops =
+        [ op | b <- [0..0xFF], let op = decode b ]
         \\ skipOps
   let cpu = initCpu HiLo {hi = E8_Reg PCH, lo = E8_Reg PCL }
   let state = initState roms cpu
-  forM_ ops $ \op -> do
+  forM_ [Op0 NOP, Op0 HLT] $ \op -> do
     let semantics = Semantics.exploreDecodeExec (E8_Lit (InstructionSet.encode op))
     let program = runGen $
           compileThen semantics state (return . programFromState)
@@ -47,10 +50,8 @@ retarget :: IO ()
 retarget = do
   putStrLn "*static-retarget*"
   roms <- loadRoms
-  let as = [0, 0x1A32, 0x18DC
-           , 0x1A7F
-           ]
-  forM_ as $ \addr -> do
+  --let _as = [0, 0x1A32, 0x18DC , 0x1A7F]
+  forM_ [0..0x1FFF] $ \addr -> do
     let program = compileAt roms addr
     print $ vert [ lay (show addr ++ ":"), tab (layProgram program) ]
 
@@ -190,6 +191,9 @@ compileFrom :: Visited -> State -> CompileRes
 compileFrom = go
   where
 
+    inlineDirectJumps :: Bool
+    inlineDirectJumps = False
+
     theSemantics = Semantics.exploreFetchDecodeExec
 
     go :: Visited -> State -> CompileRes
@@ -199,21 +203,20 @@ compileFrom = go
         Nothing ->
           return (programFromState state)
         Just pc -> do
-          let isNew = pc `notElem` visited
-          if isNew
+          if pcInRom pc && pc `notElem` visited && inlineDirectJumps
           then
             S_AtRef pc <$> go (Set.insert pc visited) state
           else
             return (programFromState state)
 
 
+pcInRom :: Addr -> Bool
+pcInRom a = a < 0x2000
+
 compileThen :: Semantics -> State -> (State -> CompileRes) -> CompileRes
 compileThen semantics state k =
   run state semantics $ \state () -> k state
   where
-
-    crash :: String -> a
-    crash = error
 
     run :: State -> Eff CompTime a -> (State -> a -> CompileRes) -> CompileRes
     run s@State{cpu,roms} eff k = case eff of
@@ -256,14 +259,10 @@ compileThen semantics state k =
             after <- k s (E16_Var v)
             return $ S_Let16 v (E16_OffsetAdr n a) after
 
-      E.Decode b -> do
-        case b of
-          E8_Lit byte -> do
-            case InstructionSet.decode byte of
-              Nothing -> crash "decode failed, impossible?"
-              Just op -> k s op
-          e -> do
-            crash $ "decode, non literal: " <> show e
+      E.Decode e -> do
+        case e of
+          E8_Lit byte -> k s (decode byte)
+          _ -> error $ "decode, non literal: " <> show e
 
       E.MakeByte w8 -> k s (E8_Lit (Byte w8))
 
@@ -275,7 +274,11 @@ compileThen semantics state k =
         after <- k s (v, aux, cout)
         return $ S_Let16 tmp (E16_AddWithCarry cin v1 v2) after
 
-      E.DecimalAdjust{} -> do undefined
+      E.DecimalAdjust cin auxIn b -> do
+        let auxOut = E1_DAA_AdjustAux cin auxIn b
+        let cout = E1_DAA_AdjustCout cin auxIn b
+        let bOut = E8_DAA_AdjustByte cin auxIn b
+        k s (bOut,auxOut,cout)
 
       E.Complement e -> k s (E8_Complement e)
       E.Flip e -> k s (E1_Flip e)
@@ -335,9 +338,17 @@ compileThen semantics state k =
         e <- k s (E8_Lit 0xD7)
         return $ S_If E1_HalfFrame t e
 
-      E.Unimplemented s -> crash $ "unimplemented: " ++ s
+      E.UnknownInput port -> do
+        k s (E8_UnknownInput port)
 
-      E.GetButtons{} -> do undefined
+      E.UnknownOutput port -> do
+        after <- k s ()
+        return $ S_UnknownOutput port after
+
+      E.GetButtons{} -> do
+        -- Not right. Need a symbolic representation for the current button state.
+        k s buttons0
+
       E.DispatchByte e -> do
         case e of
           E8_Lit (Byte w8) -> k s w8
@@ -346,15 +357,26 @@ compileThen semantics state k =
       E.TestBit e i -> k s (E1_TestBit e i)
       E.UpdateBit e i p -> k s (E8_UpdateBit e i p)
 
-      E.SoundOn{} -> do undefined
-      E.SoundOff{} -> do undefined
+      E.SoundOn sound -> do
+        after <- k s ()
+        return $ S_SoundOn sound after
+
+      E.SoundOff sound -> do
+        after <- k s ()
+        return $ S_SoundOff sound after
+
+      -- TODO: handle shift register akin to cpu regs
 
       E.FillShiftRegister e -> do
         after <- k s ()
         return $ S_FillShiftRegister e after
 
-      E.SetShiftRegisterOffset{} -> do undefined
-      E.GetShiftRegisterAtOffset{} -> do undefined
+      E.SetShiftRegisterOffset e -> do
+        after <- k s ()
+        return $ S_SetShiftRegsterOffset e after
+
+      E.GetShiftRegisterAtOffset -> do
+        k s E8_GetShiftRegisterAtOffset
 
 
 share8 :: (Exp8 -> Gen Program) -> (Exp8 -> Gen Program)
@@ -397,7 +419,11 @@ data Program
   | S_Let8 AVar Exp8 Program
   | S_Let17 AVar Exp17 Program
   | S_FillShiftRegister Exp8 Program
+  | S_SetShiftRegsterOffset Exp8 Program
   | S_AtRef Addr Program
+  | S_UnknownOutput Word8 Program
+  | S_SoundOn Sound Program
+  | S_SoundOff Sound Program
 
 data Exp17
   = E17_Add Exp16 Exp16
@@ -417,7 +443,11 @@ data Exp1
   | E1_IsParity Exp8
   | E1_ComputeAux Exp1 Exp8 Exp8 -- TODO: temp. goal to kill this
   | E1_HiBitOf17 Exp17
+  | E1_DAA_AdjustAux Exp1 Exp1 Exp8
+  | E1_DAA_AdjustCout Exp1 Exp1 Exp8
   deriving (Eq)
+
+-- TODO: have Exp9, for result of 8-bit add-with-carry
 
 data Exp8
   = E8_Lit Byte
@@ -433,6 +463,9 @@ data Exp8
   | E8_OrB Exp8 Exp8
   | E8_XorB Exp8 Exp8
   | E8_Var AVar
+  | E8_DAA_AdjustByte Exp1 Exp1 Exp8
+  | E8_UnknownInput Word8
+  | E8_GetShiftRegisterAtOffset
   deriving (Eq)
 
 data Exp16
@@ -464,8 +497,6 @@ make_E8_Lo = \case
   E16_HiLo HiLo{lo} -> lo
   a -> E8_Lo a
 
-
-
 make_E16_HiLo :: HiLo Exp8 -> Exp16
 make_E16_HiLo = \case
   HiLo{hi=E8_Lit hi,lo = E8_Lit lo} -> do
@@ -483,7 +514,6 @@ instance Show AVar where show AVar{u} = "a" ++ show u
 
 
 instance Show Program where show = show . layProgram
-
 
 layProgram :: Program -> Lay
 layProgram = \case
@@ -521,11 +551,27 @@ layProgram = \case
          , layProgram next
          ]
   S_FillShiftRegister e next ->
-    vert [ lay ("fillShiftRegister" ++ parenthesize (show e) ++ ";")
+    vert [ lay ("fill_shift_register" ++ parenthesize (show e) ++ ";")
+         , layProgram next
+         ]
+  S_SetShiftRegsterOffset e next ->
+    vert [ lay ("set_shift_register_offset" ++ parenthesize (show e) ++ ";")
          , layProgram next
          ]
   S_AtRef pc next ->
     vert [ lay ("#" ++ show pc)
+         , layProgram next
+         ]
+  S_UnknownOutput port next ->
+    vert [ lay ("unknown_output" ++ parenthesize (show port) ++ ";")
+         , layProgram next
+         ]
+  S_SoundOn sound next ->
+    vert [ lay ("sound_on" ++ parenthesize (show sound) ++ ";")
+         , layProgram next
+         ]
+  S_SoundOff sound next ->
+    vert [ lay ("sound_off" ++ parenthesize (show sound) ++ ";")
          , layProgram next
          ]
 
@@ -543,7 +589,8 @@ instance Show Exp1 where
     E1_IsParity e -> "parity" ++ parenthesize (show e)
     E1_ComputeAux p e1 e2 -> "compute_aux" ++ show (p,e1,e2)
     E1_HiBitOf17 e -> show e ++ "[16]"
-
+    E1_DAA_AdjustAux cin auxIn b -> "daa_adjust_aux" ++ show (cin,auxIn,b)
+    E1_DAA_AdjustCout cin auxIn b -> "daa_adjust_cout" ++ show (cin,auxIn,b)
 
 instance Show Exp8 where
   show = \case
@@ -559,8 +606,10 @@ instance Show Exp8 where
     E8_AndB e1 e2 -> parenthesize (show e1 ++ " & " ++ show e2)
     E8_OrB e1 e2 -> parenthesize (show e1 ++ " | " ++ show e2)
     E8_XorB e1 e2 -> parenthesize (show e1 ++ " ^ " ++ show e2)
-    E8_Var v ->
-      show v
+    E8_Var v -> show v
+    E8_DAA_AdjustByte cin auxIn b -> "daa_adjust_byte" ++ show (cin,auxIn,b)
+    E8_UnknownInput port -> "unknown_input" ++ parenthesize (show port)
+    E8_GetShiftRegisterAtOffset -> "get_shift_register_at_offset()"
 
 instance Show Exp16 where
   show = \case
@@ -584,13 +633,9 @@ instance Show Exp17 where
     E17_Var var ->
       show var
 
-
 parenthesize :: String -> String
 parenthesize x = "(" ++ x ++ ")"
 
-
-
-----------------------------------------------------------------------
 
 data Lay = Lay { lines :: [String] }
 
@@ -604,5 +649,3 @@ vert = Lay . concat . map lines
 
 tab :: Lay -> Lay
 tab Lay{lines} = Lay $ [ "  " ++ line | line <- lines ]
-
-

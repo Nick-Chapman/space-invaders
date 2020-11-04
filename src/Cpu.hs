@@ -13,6 +13,7 @@ data Reg = PCH | PCL | SPH | SPL | A | B | C | D | E | H | L | Flags
   deriving (Eq,Ord,Show)
 
 data Flag = FlagS | FlagZ | FlagA | FlagP | FlagCY
+  deriving (Eq,Show)
 
 data Cpu p = Cpu
   { pch :: Byte p

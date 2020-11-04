@@ -69,9 +69,9 @@ outputPort port byte = case port of
 soundFromPort :: (Int -> Sound) -> Byte p -> Eff p ()
 soundFromPort soundOfPortBit byte = do
   forM_ [0..4] $ \i -> do -- only 5 of the 8 bits on each port relate to specific sounds
-    bit <- SplitByte byte i
+    bit <- TestBit byte i
     let sound = soundOfPortBit i
-    TestBit bit >>= \case
+    CaseBit bit >>= \case
       True -> SoundOn sound
       False -> SoundOff sound
 

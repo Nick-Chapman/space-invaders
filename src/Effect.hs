@@ -38,9 +38,6 @@ data Eff p a where
   XorB :: Byte p -> Byte p -> Eff p (Byte p)
   Add16 :: Addr p -> Addr p -> Eff p (Addr p, Bit p)
 
-  SelectSZAPC :: Byte p -> Eff p (Bit p, Bit p, Bit p, Bit p, Bit p)
-  ByteFromSZAPC :: (Bit p, Bit p, Bit p, Bit p, Bit p) -> Eff p (Byte p)
-
   GetFlag :: Flag -> Eff p (Bit p)
   SetFlag :: Flag -> Bit p -> Eff p ()
 
@@ -48,14 +45,11 @@ data Eff p a where
   IsZero :: Byte p -> Eff p (Bit p)
   IsParity :: Byte p -> Eff p (Bit p)
 
-  TestBit :: Bit p -> Eff p Bool
+  CaseBit :: Bit p -> Eff p Bool
   MakeBit :: Bool -> Eff p (Bit p)
 
-  RotateRightThroughCarry :: (Bit p,Byte p) -> Eff p (Byte p,Bit p)
-  RotateLeftThroughCarry :: (Bit p,Byte p) -> Eff p (Byte p,Bit p)
-
-  RotateRight :: Byte p -> Eff p (Byte p,Bit p)
-  RotateLeft :: Byte p -> Eff p (Byte p,Bit p)
+  RotateRight :: Byte p -> Eff p (Byte p)
+  RotateLeft :: Byte p -> Eff p (Byte p)
 
   EnableInterrupts :: Eff p ()
   DisableInterrupts :: Eff p ()
@@ -71,7 +65,8 @@ data Eff p a where
   SoundOn :: Sound -> Eff p ()
   SoundOff :: Sound -> Eff p ()
 
-  SplitByte :: Byte p -> Int -> Eff p (Bit p)
+  TestBit :: Byte p -> Int -> Eff p (Bit p)
+  UpdateBit :: Byte p -> Int -> Bit p -> Eff p (Byte p)
 
   FillShiftRegister :: Byte p -> Eff p ()
   SetShiftRegisterOffset :: Byte p -> Eff p ()

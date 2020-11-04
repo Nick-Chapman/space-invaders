@@ -30,10 +30,10 @@ Status:
 - `143B : Mem.write: 001C -- cant write to rom` -- expected? so crash disabled
 
 
-### Step 2. Retarget to standalone executable (Next steps)
+### Step 2. Retarget to standalone executable
 
-- Calculate/print static semantics from each opcode
-- reachability
+- `stack run ops` -- calculate/print semantics of each opcode
+- `stack run retarget` -- first steps...
 
 
 ### Resource for Space Invaders and 8080

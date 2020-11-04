@@ -118,6 +118,7 @@ emulate buttons s0 =
         let aux = Byte.addForAuxCarry cin v1 v2
         k s (v, Bit aux, Bit cout)
 
+      -- TODO: move the decimal-adjust implementation into Semantics
       DecimalAdjust (Bit auxIn) (Bit cin) byteIn -> do
         let (byteOut,auxOut,cout) = Byte.decimalAdjust auxIn cin byteIn
         k s (byteOut, Bit auxOut, Bit cout)
@@ -133,22 +134,6 @@ emulate buttons s0 =
         let (w, cout) = Addr.addCarryOut w1 w2
         k s (w, Bit cout)
 
-      SelectSZAPC byte -> do
-        let bs = Bit (byte `testBit` 7)
-        let bz = Bit (byte `testBit` 6)
-        let ba = Bit (byte `testBit` 4)
-        let bp = Bit (byte `testBit` 2)
-        let bc = Bit (byte `testBit` 0)
-        k s (bs, bz, ba, bp, bc)
-
-      ByteFromSZAPC (Bit bs, Bit bz, Bit ba, Bit bp, Bit bc) -> do
-        let v1 = if bs then 128 else 0
-        let v2 = if bz then 64 else 0
-        let v3 = if ba then 16 else 0
-        let v4 = if bp then 4 else 0
-        let v5 = if bc then 1 else 0
-        k s (v1+v2+v3+v4+v5)
-
       GetFlag flag -> k s (Cpu.getFlag cpu flag)
       SetFlag flag bit -> k s { cpu = Cpu.setFlag cpu flag bit} ()
 
@@ -156,28 +141,18 @@ emulate buttons s0 =
       IsZero byte -> k s (Bit (byte == 0))
       IsParity byte -> do k s (Bit (parity  byte))
 
-      TestBit (Bit bool) -> k s bool
+      CaseBit (Bit bool) -> k s bool
       MakeBit (bool) -> k s (Bit bool)
 
-      RotateRightThroughCarry (Bit cin,before) -> do -- RAR
-        let cout = before `testBit` 0
-        let after = (if cin then 128 else 0) + shiftR before 1
-        k s (after,Bit cout)
-
-      RotateLeftThroughCarry (Bit cin,before) -> do  -- RAL
-        let cout = before `testBit` 7
-        let after = shiftL before 1 + (if cin then 1 else 0)
-        k s (after,Bit cout)
-
-      RotateRight before -> do -- RRC
+      RotateRight before -> do
         let bit = before `testBit` 0
         let after = (if bit then 128 else 0) + shiftR before 1
-        k s (after,Bit bit)
+        k s after
 
-      RotateLeft before -> do -- RLC
+      RotateLeft before -> do
         let bit = before `testBit` 7
         let after = shiftL before 1 + (if bit then 1 else 0)
-        k s (after,Bit bit)
+        k s after
 
       EnableInterrupts -> k s { interrupts_enabled = True } ()
       DisableInterrupts -> k s { interrupts_enabled = False } ()
@@ -195,7 +170,8 @@ emulate buttons s0 =
       DispatchByte (Byte word) ->
         k s word
 
-      SplitByte byte i -> k s (Bit (byte `testBit` i))
+      TestBit byte i -> k s (Bit (byte `testBit` i))
+      UpdateBit byte i (Bit bool) -> k s ((if bool then setBit else clearBit) byte i)
 
       SoundOn sound -> do
         k s { playing = Sounds.soundOn playing sound } ()

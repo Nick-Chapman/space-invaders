@@ -1,7 +1,11 @@
 
 -- | This defines the execution semantics (Effects) of the 8080 instructions
 
-module Semantics (fetchDecodeExec) where
+module Semantics
+  ( fetchDecodeExec
+  , exploreDecodeExec
+  , exploreFetchDecodeExec
+  ) where
 
 import Prelude hiding (subtract)
 
@@ -12,6 +16,23 @@ import InstructionSet (Op(..),Instruction(..),Op0(..),Op1(..),Op2(..),RegPairSpe
 import Phase (Addr,Byte,Bit)
 import qualified Ports (inputPort,outputPort)
 import qualified InstructionSet as Instr (RegSpec(..))
+
+
+exploreFetchDecodeExec :: Eff p ()
+exploreFetchDecodeExec = do
+  byte <- fetch
+  exploreDecodeExec byte
+
+exploreDecodeExec :: Byte p -> Eff p ()
+exploreDecodeExec byte = do
+  op <- Decode byte
+  instruction <- fetchImmediates op
+  execute instruction >>= \case
+    Next ->
+      return ()
+    Jump a ->
+      setPC a
+
 
 -- | Semantics are defined to be Phase generic
 
@@ -104,16 +125,19 @@ execute0 = \case
     return Next
   RLC -> do
     byte <- GetReg A
-    (byte',bool') <- RotateLeft byte
-    SetFlag FlagCY bool'
-    SetReg A byte'
+    byte1 <- RotateLeft byte
+    cout <- TestBit byte 7
+    SetFlag FlagCY cout
+    SetReg A byte1
     return Next
   RAL -> do
     byte <- GetReg A
-    bool <- GetFlag FlagCY
-    (byte',bool') <- RotateLeftThroughCarry (bool,byte)
-    SetFlag FlagCY bool'
-    SetReg A byte'
+    cin <- GetFlag FlagCY
+    byte1 <- RotateLeft byte
+    byte2 <- UpdateBit byte1 0 cin
+    cout <- TestBit byte 7
+    SetFlag FlagCY cout
+    SetReg A byte2
     return Next
   DAA -> do
     byteIn <- GetReg A
@@ -148,16 +172,19 @@ execute0 = \case
     return Next
   RRC -> do
     byte <- GetReg A
-    (byte',bool') <- RotateRight byte
-    SetFlag FlagCY bool'
-    SetReg A byte'
+    byte1 <- RotateRight byte
+    cout <- TestBit byte 0
+    SetFlag FlagCY cout
+    SetReg A byte1
     return Next
   RAR -> do
     byte <- GetReg A
-    bool <- GetFlag FlagCY
-    (byte',bool') <- RotateRightThroughCarry (bool,byte)
-    SetFlag FlagCY bool'
-    SetReg A byte'
+    cin <- GetFlag FlagCY
+    byte1 <- RotateRight byte
+    byte2 <- UpdateBit byte1 7 cin
+    cout <- TestBit byte 0
+    SetFlag FlagCY cout
+    SetReg A byte2
     return Next
   CMA -> do
     v0 <- GetReg A
@@ -208,7 +235,7 @@ execute0 = \case
     SetFlag FlagCY borrow
     return Next
   RCond cond -> do
-    executeCond cond >>= TestBit >>= \case
+    executeCond cond >>= CaseBit >>= \case
       False -> return Next
       True -> do
         lo <- popStack
@@ -380,7 +407,7 @@ andA b1 = do
   saveAndSetFlagsFrom Instr.A v
   resetCarry
   w <- OrB b1 v0
-  aux <- SplitByte w 3
+  aux <- TestBit w 3
   SetFlag FlagA aux
   return Next
 
@@ -423,7 +450,7 @@ execute2 op2 a = case op2 of
     SetReg A b
     return Next
   JCond cond -> do
-    executeCond cond >>= TestBit >>= \case
+    executeCond cond >>= CaseBit >>= \case
       False -> return Next
       True -> return (Jump a)
   JMP -> do
@@ -431,7 +458,7 @@ execute2 op2 a = case op2 of
   JMPx -> do
     return (Jump a)
   CCond cond -> do
-    executeCond cond >>= TestBit >>= \case
+    executeCond cond >>= CaseBit >>= \case
       False -> return Next
       True -> call a
   CALL ->
@@ -549,23 +576,23 @@ expandRegPair = \case
 setRegOrFlags :: Reg -> Byte p -> Eff p ()
 setRegOrFlags r v = case r of
   Flags -> do
-    (s,z,a,p,cy) <- SelectSZAPC v
-    SetFlag FlagS s
-    SetFlag FlagZ z
-    SetFlag FlagA a
-    SetFlag FlagP p
-    SetFlag FlagCY cy
+    TestBit v 7 >>= SetFlag FlagS
+    TestBit v 6 >>= SetFlag FlagZ
+    TestBit v 4 >>= SetFlag FlagA
+    TestBit v 2 >>= SetFlag FlagP
+    TestBit v 0 >>= SetFlag FlagCY
   reg ->
     SetReg reg v
 
 getRegOrFlags :: Reg -> Eff p (Byte p)
 getRegOrFlags = \case
   Flags -> do
-    s <- GetFlag FlagS
-    z <- GetFlag FlagZ
-    a <- GetFlag FlagA
-    p <- GetFlag FlagP
-    cy <- GetFlag FlagCY
-    ByteFromSZAPC (s,z,a,p,cy)
+    x <- MakeByte 0x2
+    x <- GetFlag FlagS >>= UpdateBit x 7
+    x <- GetFlag FlagZ >>= UpdateBit x 6
+    x <- GetFlag FlagA >>= UpdateBit x 4
+    x <- GetFlag FlagP >>= UpdateBit x 2
+    x <- GetFlag FlagCY >>= UpdateBit x 0
+    return x
   reg ->
     GetReg reg

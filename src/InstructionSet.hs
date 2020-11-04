@@ -2,10 +2,12 @@
 module InstructionSet (
   Op(..),Op0(..),Op1(..),Op2(..), RegPairSpec(..), RegSpec(..), Condition(..),
   Instruction(..),
+  encode, allOps,
   cycles,
   decode,
   printDecodeTable,
   prettyInstructionBytes,
+  docInstructionForOp,
   ) where
 
 import Text.Printf (printf)

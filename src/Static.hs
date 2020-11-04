@@ -183,7 +183,7 @@ compileAt roms addr = do
           pch = E8_Lit hi
           pcl = E8_Lit lo
   let state = initState roms cpu
-  let visited :: Visited = Set.empty
+  let visited :: Visited = Set.insert addr Set.empty
   runGen $ compileFrom visited state
 
 compileFrom :: Visited -> State -> CompileRes

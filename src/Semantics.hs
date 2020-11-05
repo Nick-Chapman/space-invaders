@@ -112,7 +112,8 @@ execute0 = \case
     v0 <- load reg
     cin <- MakeBit True
     zero <- MakeByte 0
-    (v,aux,_) <- AddWithCarry cin v0 zero
+    (v,_coutIgnored) <- AddWithCarry cin v0 zero
+    aux <- addForAuxCarry cin v0 zero
     SetFlag FlagA aux
     saveAndSetFlagsFrom reg v
     return Next
@@ -473,11 +474,13 @@ execute2 op2 a = case op2 of
 addToAccWithCarry :: Bit p -> Byte p -> Eff p (Flow p)
 addToAccWithCarry cin v1 = do
   v2 <- GetReg A
-  (v,aux,cout) <- AddWithCarry cin v1 v2
+  (v,cout) <- AddWithCarry cin v1 v2
+  aux <- addForAuxCarry cin v1 v2
   SetFlag FlagA aux
   SetFlag FlagCY cout
   saveAndSetFlagsFrom Instr.A v
   return Next
+
 
 subToAccWithCarry :: Bit p -> Byte p -> Eff p (Flow p)
 subToAccWithCarry cin v2 = do
@@ -486,7 +489,6 @@ subToAccWithCarry cin v2 = do
   SetFlag FlagCY cout
   saveAndSetFlagsFrom Instr.A v
   return Next
-
 
 
 subtract :: Byte p -> Byte p -> Eff p (Byte p, Bit p)
@@ -498,12 +500,20 @@ subWithCarry :: Bit p -> Byte p -> Byte p -> Eff p (Byte p, Bit p)
 subWithCarry cin v1 v2 = do
   cin' <- Flip cin
   v2comp <- Complement v2
-  (v,aux,cout) <- AddWithCarry cin' v1 v2comp
+  (v,cout) <- AddWithCarry cin' v1 v2comp
+  aux <- addForAuxCarry cin' v1 v2comp
   SetFlag FlagA aux
   borrow <- Flip cout
   return (v, borrow)
 
 
+addForAuxCarry :: Bit p -> Byte p -> Byte p -> Eff p (Bit p)
+addForAuxCarry cin v1 v2 = do
+  mask <- MakeByte 0xF
+  v1masked <- AndB v1 mask
+  v2masked <- AndB v2 mask
+  (nibbleSum,_coutIgnored) <- AddWithCarry cin v1masked v2masked
+  TestBit nibbleSum 4
 
 
 call :: Addr p -> Eff p (Flow p)

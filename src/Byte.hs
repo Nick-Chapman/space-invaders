@@ -4,7 +4,6 @@ module Byte(
   toUnsigned,
   ofUnsigned,
   addWithCarry,
-  addForAuxCarry,
   decimalAdjust
   ) where
 
@@ -27,12 +26,6 @@ addWithCarry :: Bool -> Byte -> Byte -> (Byte,Bool)
 addWithCarry cin x y = (ofUnsigned res, cout) where
     res :: Int = toUnsigned x + toUnsigned y + (if cin then 1 else 0)
     cout = res >= 256
-
-addForAuxCarry :: Bool -> Byte -> Byte -> Bool
-addForAuxCarry cin x y = aux where
-    res = (x .&. 0xF) + (y .&. 0xF) + (if cin then 1 else 0)
-    aux = res >= 16
-
 
 decimalAdjust :: Bool -> Bool -> Byte -> (Byte,Bool,Bool)
 decimalAdjust auxIn cin byteIn = do

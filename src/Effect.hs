@@ -26,7 +26,7 @@ data Eff p a where
   Decode :: Byte p -> Eff p Op
 
   MakeByte :: Word8 -> Eff p (Byte p)
-  AddWithCarry :: Bit p -> Byte p -> Byte p -> Eff p (Byte p, Bit p, Bit p)
+  AddWithCarry :: Bit p -> Byte p -> Byte p -> Eff p (Byte p, Bit p)
 
   DecimalAdjust :: Bit p -> Bit p -> Byte p -> Eff p (Byte p, Bit p, Bit p)
 
@@ -63,8 +63,7 @@ data Eff p a where
   GetButtons :: Eff p Buttons
   DispatchByte :: Byte p -> Eff p Word8
 
-  SoundOn :: Sound -> Eff p ()
-  SoundOff :: Sound -> Eff p ()
+  SoundControl :: Sound -> Bit p -> Eff p ()
 
   TestBit :: Byte p -> Int -> Eff p (Bit p)
   UpdateBit :: Byte p -> Int -> Bit p -> Eff p (Byte p)

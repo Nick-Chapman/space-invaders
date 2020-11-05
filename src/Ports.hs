@@ -14,7 +14,6 @@ inputPort = \case
   1 -> GetButtons >>= inputPort1
   2 -> GetButtons >>= inputPort2
   3 -> GetShiftRegisterAtOffset
---  n -> Unimplemented ("IN:" <> show n)
   n -> UnknownInput n
 
 inputPort1 :: Buttons -> Eff p (Byte p)
@@ -65,7 +64,6 @@ outputPort port byte = case port of
   6 -> return () -- ignore watchdog
   0 -> return () -- ignore for tst
   1 -> return () -- ignore for tst
---  n -> Unimplemented ("OUT:" <> show n)
   n -> UnknownOutput n
 
 soundFromPort :: (Int -> Sound) -> Byte p -> Eff p ()
@@ -73,9 +71,7 @@ soundFromPort soundOfPortBit byte = do
   forM_ [0..4] $ \i -> do -- only 5 of the 8 bits on each port relate to specific sounds
     bit <- TestBit byte i
     let sound = soundOfPortBit i
-    CaseBit bit >>= \case
-      True -> SoundOn sound
-      False -> SoundOff sound
+    SoundControl sound bit
 
 port3 :: Int -> Sound
 port3 = \case

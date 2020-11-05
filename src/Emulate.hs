@@ -12,7 +12,7 @@ import Text.Printf (printf)
 
 import Addr (Addr(..),addCarryOut)
 import Buttons (Buttons)
-import Byte (Byte(..),addWithCarry,addForAuxCarry,decimalAdjust)
+import Byte (Byte(..),addWithCarry,decimalAdjust)
 import Cpu (Cpu,Reg(PCL,PCH))
 import Effect (Eff(..))
 import Semantics (fetchDecodeExec)
@@ -112,8 +112,7 @@ emulate buttons s0 =
 
       AddWithCarry (Bit cin) v1 v2 -> do
         let (v,cout) = Byte.addWithCarry cin v1 v2
-        let aux = Byte.addForAuxCarry cin v1 v2
-        k s (v, Bit aux, Bit cout)
+        k s (v, Bit cout)
 
       -- TODO: move the decimal-adjust implementation into Semantics
       DecimalAdjust (Bit auxIn) (Bit cin) byteIn -> do
@@ -174,11 +173,8 @@ emulate buttons s0 =
       TestBit byte i -> k s (Bit (byte `testBit` i))
       UpdateBit byte i (Bit bool) -> k s ((if bool then setBit else clearBit) byte i)
 
-      SoundOn sound -> do
-        k s { playing = Sounds.soundOn playing sound } ()
-
-      SoundOff sound -> do
-        k s { playing = Sounds.soundOff playing sound } ()
+      SoundControl sound (Bit bool) -> do
+        k s { playing = (if bool then Sounds.soundOn else Sounds.soundOff) playing sound } ()
 
       FillShiftRegister byte -> do
         k s { shifter = fillShiftRegister (shifter s) byte } ()

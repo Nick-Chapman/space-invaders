@@ -37,12 +37,12 @@ main = do
       SpeedTest.main mem
     ModeStaticOps -> do
       Static.ops
-    ModeStaticRetarget -> do
-      Static.retarget
+    ModeStaticRetarget{inline} -> do
+      Static.retarget inline
 
 data Mode = ModeShowDecodeTable | ModeTrace | ModeSDL | ModeSpeedTest | ModeTst
   | ModeStaticOps
-  | ModeStaticRetarget
+  | ModeStaticRetarget { inline :: Bool }
 
 data Conf = Conf
   { mode :: Mode
@@ -84,7 +84,8 @@ traceConfPOI i = traceConf0
 parse :: [String] -> Conf -> Conf
 parse args conf = case args of
   [] -> conf
-  "retarget":args -> parse args $ conf { mode = ModeStaticRetarget }
+  "retarget":args -> parse args $ conf { mode = ModeStaticRetarget False }
+  "retarget-inline":args -> parse args $ conf { mode = ModeStaticRetarget True }
   "ops":args -> parse args $ conf { mode = ModeStaticOps }
   "speed-test":args -> parse args $ conf { mode = ModeSpeedTest }
   "tst":args -> parse args $ conf { mode = ModeTst }

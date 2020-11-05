@@ -46,13 +46,17 @@ ops = do
                  , tab (layProgram program) ]
 
 
-retarget :: IO ()
-retarget = do
+retarget :: Bool -> IO ()
+retarget inline = do
   putStrLn "*static-retarget*"
   roms <- loadRoms
   --let _as = [0, 0x1A32, 0x18DC , 0x1A7F]
-  forM_ [0..0x1FFF] $ \addr -> do
-    let program = compileAt roms addr
+  let addrs =
+        if inline
+        then [0x20] -- explore inlining for some addresses
+        else [0..0x1FFF] -- no inlining.. lets see every rom address
+  forM_ addrs $ \addr -> do
+    let program = compileAt inline roms addr
     print $ vert [ lay (show addr ++ ":"), tab (layProgram program) ]
 
 
@@ -176,8 +180,8 @@ getPC cpu = E16_HiLo HiLo{hi,lo} where
 type Visited = Set Addr
 
 
-compileAt :: Roms -> Addr -> Program
-compileAt roms addr = do
+compileAt :: Bool -> Roms -> Addr -> Program
+compileAt inline roms addr = do
   let cpu = initCpu HiLo {hi = pch, lo = pcl }
         where
           HiLo{hi,lo} = Addr.toHiLo addr
@@ -185,14 +189,11 @@ compileAt roms addr = do
           pcl = E8_Lit lo
   let state = initState roms cpu
   let visited :: Visited = Set.insert addr Set.empty
-  runGen $ compileFrom visited state
+  runGen $ compileFrom inline visited state
 
-compileFrom :: Visited -> State -> CompileRes
-compileFrom = go
+compileFrom :: Bool -> Visited -> State -> CompileRes
+compileFrom inline = go
   where
-
-    inlineDirectJumps :: Bool
-    inlineDirectJumps = False
 
     theSemantics = Semantics.exploreFetchDecodeExec
 
@@ -203,7 +204,7 @@ compileFrom = go
         Nothing ->
           return (programFromState state)
         Just pc -> do
-          if pcInRom pc && pc `notElem` visited && inlineDirectJumps
+          if pcInRom pc && pc `notElem` visited && inline
           then
             S_AtRef pc <$> go (Set.insert pc visited) state
           else
@@ -270,8 +271,7 @@ compileThen semantics state k =
         tmp <- NewAVar
         let v = E8_Lo (E16_Var tmp)
         let cout = E1_TestBit (E8_Hi (E16_Var tmp)) 0
-        let aux = E1_ComputeAux cin v1 v2
-        after <- k s (v, aux, cout)
+        after <- k s (v, cout)
         return $ S_Let16 tmp (E16_AddWithCarry cin v1 v2) after
 
       E.DecimalAdjust cin auxIn b -> do
@@ -357,13 +357,9 @@ compileThen semantics state k =
       E.TestBit e i -> k s (E1_TestBit e i)
       E.UpdateBit e i p -> k s (E8_UpdateBit e i p)
 
-      E.SoundOn sound -> do
+      E.SoundControl sound p -> do
         after <- k s ()
-        return $ S_SoundOn sound after
-
-      E.SoundOff sound -> do
-        after <- k s ()
-        return $ S_SoundOff sound after
+        return $ S_SoundControl sound p after
 
       -- TODO: handle shift register akin to cpu regs
 
@@ -422,8 +418,7 @@ data Program
   | S_SetShiftRegsterOffset Exp8 Program
   | S_AtRef Addr Program
   | S_UnknownOutput Word8 Program
-  | S_SoundOn Sound Program
-  | S_SoundOff Sound Program
+  | S_SoundControl Sound Exp1 Program
 
 data Exp17
   = E17_Add Exp16 Exp16
@@ -441,7 +436,6 @@ data Exp1
   | E1_Flip Exp1
   | E1_IsZero Exp8
   | E1_IsParity Exp8
-  | E1_ComputeAux Exp1 Exp8 Exp8 -- TODO: temp. goal to kill this
   | E1_HiBitOf17 Exp17
   | E1_DAA_AdjustAux Exp1 Exp1 Exp8
   | E1_DAA_AdjustCout Exp1 Exp1 Exp8
@@ -566,12 +560,8 @@ layProgram = \case
     vert [ lay ("unknown_output" ++ parenthesize (show port) ++ ";")
          , layProgram next
          ]
-  S_SoundOn sound next ->
-    vert [ lay ("sound_on" ++ parenthesize (show sound) ++ ";")
-         , layProgram next
-         ]
-  S_SoundOff sound next ->
-    vert [ lay ("sound_off" ++ parenthesize (show sound) ++ ";")
+  S_SoundControl sound bool next ->
+    vert [ lay ("sound_control" ++ show (sound,bool) ++ ";")
          , layProgram next
          ]
 
@@ -587,7 +577,6 @@ instance Show Exp1 where
     E1_Flip p -> "!" ++ show p
     E1_IsZero e -> "is_zero" ++ parenthesize (show e)
     E1_IsParity e -> "parity" ++ parenthesize (show e)
-    E1_ComputeAux p e1 e2 -> "compute_aux" ++ show (p,e1,e2)
     E1_HiBitOf17 e -> show e ++ "[16]"
     E1_DAA_AdjustAux cin auxIn b -> "daa_adjust_aux" ++ show (cin,auxIn,b)
     E1_DAA_AdjustCout cin auxIn b -> "daa_adjust_cout" ++ show (cin,auxIn,b)

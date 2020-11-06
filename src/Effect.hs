@@ -28,8 +28,6 @@ data Eff p a where
   MakeByte :: Word8 -> Eff p (Byte p)
   AddWithCarry :: Bit p -> Byte p -> Byte p -> Eff p (Byte p, Bit p)
 
-  DecimalAdjust :: Bit p -> Bit p -> Byte p -> Eff p (Byte p, Bit p, Bit p)
-
   Complement :: Byte p -> Eff p (Byte p)
   Flip :: Bit p -> Eff p (Bit p)
 
@@ -48,8 +46,17 @@ data Eff p a where
   CaseBit :: Bit p -> Eff p Bool
   MakeBit :: Bool -> Eff p (Bit p)
 
+  -- TODO: deprecate use of rotate ops, and instead use shift
   RotateRight :: Byte p -> Eff p (Byte p)
   RotateLeft :: Byte p -> Eff p (Byte p)
+
+  ShiftRight :: Byte p -> Byte p -> Eff p (Byte p)
+  ShiftLeft :: Byte p -> Byte p -> Eff p (Byte p)
+
+  AndBit :: Bit p -> Bit p -> Eff p (Bit p)
+  OrBit :: Bit p -> Bit p -> Eff p (Bit p)
+
+  Ite :: Bit p -> Byte p -> Byte p -> Eff p (Byte p)
 
   EnableInterrupts :: Eff p ()
   DisableInterrupts :: Eff p ()

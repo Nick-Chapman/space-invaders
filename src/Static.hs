@@ -15,7 +15,7 @@ import Cpu (Cpu(..),Reg(..),Flag(..))
 import Data.Word8 (Word8)
 import Effect (Eff)
 import HiLo (HiLo(..))
-import InstructionSet (Op0(..),Op1(..),Op(..),encode,decode)
+import InstructionSet (Op1(..),Op(..),encode,decode)
 import Phase (Phase)
 import Rom2k (Rom)
 import Sounds (Sound)
@@ -31,14 +31,13 @@ ops :: IO ()
 ops = do
   putStrLn "*static-ops*"
   roms <- loadRoms
-  let skipOps = [Op0 DAA,
-                 Op0 HLT, Op1 IN, Op1 OUT]
-  let _ops =
+  let skipOps = [Op1 IN, Op1 OUT]
+  let ops =
         [ op | b <- [0..0xFF], let op = decode b ]
         \\ skipOps
   let cpu = initCpu HiLo {hi = E8_Reg PCH, lo = E8_Reg PCL }
   let state = initState roms cpu
-  forM_ [Op0 NOP, Op0 HLT] $ \op -> do
+  forM_ ops $ \op -> do
     let semantics = Semantics.exploreDecodeExec (E8_Lit (InstructionSet.encode op))
     let program = runGen $
           compileThen semantics state (return . programFromState)
@@ -274,12 +273,6 @@ compileThen semantics state k =
         after <- k s (v, cout)
         return $ S_Let16 tmp (E16_AddWithCarry cin v1 v2) after
 
-      E.DecimalAdjust cin auxIn b -> do
-        let auxOut = E1_DAA_AdjustAux cin auxIn b
-        let cout = E1_DAA_AdjustCout cin auxIn b
-        let bOut = E8_DAA_AdjustByte cin auxIn b
-        k s (bOut,auxOut,cout)
-
       E.Complement e -> k s (E8_Complement e)
       E.Flip e -> k s (E1_Flip e)
 
@@ -318,6 +311,14 @@ compileThen semantics state k =
 
       E.RotateRight e -> k s (E8_RotR e)
       E.RotateLeft e -> k s (E8_RotL e)
+
+      E.ShiftRight byte offset -> k s (E8_ShiftRight byte offset)
+      E.ShiftLeft byte offset -> k s (E8_ShiftLeft byte offset)
+      E.Ite i t e -> k s (E8_Ite i t e)
+
+      E.AndBit b1 b2 -> k s (E1_AndBit b1 b2)
+      E.OrBit b1 b2 -> k s (E1_OrBit b1 b2)
+
 
       E.EnableInterrupts -> k s { interruptsEnabled = E1_True } ()
       E.DisableInterrupts -> k s { interruptsEnabled = E1_False } ()
@@ -434,11 +435,11 @@ data Exp1
   | E1_Flag Flag
   | E1_TestBit Exp8 Int
   | E1_Flip Exp1
+  | E1_AndBit Exp1 Exp1
+  | E1_OrBit Exp1 Exp1
   | E1_IsZero Exp8
   | E1_IsParity Exp8
   | E1_HiBitOf17 Exp17
-  | E1_DAA_AdjustAux Exp1 Exp1 Exp8
-  | E1_DAA_AdjustCout Exp1 Exp1 Exp8
   deriving (Eq)
 
 -- TODO: have Exp9, for result of 8-bit add-with-carry
@@ -456,8 +457,10 @@ data Exp8
   | E8_AndB Exp8 Exp8
   | E8_OrB Exp8 Exp8
   | E8_XorB Exp8 Exp8
+  | E8_ShiftRight Exp8 Exp8
+  | E8_ShiftLeft Exp8 Exp8
+  | E8_Ite Exp1 Exp8 Exp8
   | E8_Var AVar
-  | E8_DAA_AdjustByte Exp1 Exp1 Exp8
   | E8_UnknownInput Word8
   | E8_GetShiftRegisterAtOffset
   deriving (Eq)
@@ -575,11 +578,11 @@ instance Show Exp1 where
     E1_Flag flag -> show flag
     E1_TestBit e i -> show e ++ "[" ++ show i ++ "]"
     E1_Flip p -> "!" ++ show p
+    E1_AndBit e1 e2 -> parenthesize (show e1 ++ " && " ++ show e2)
+    E1_OrBit e1 e2 -> parenthesize (show e1 ++ " || " ++ show e2)
     E1_IsZero e -> "is_zero" ++ parenthesize (show e)
     E1_IsParity e -> "parity" ++ parenthesize (show e)
     E1_HiBitOf17 e -> show e ++ "[16]"
-    E1_DAA_AdjustAux cin auxIn b -> "daa_adjust_aux" ++ show (cin,auxIn,b)
-    E1_DAA_AdjustCout cin auxIn b -> "daa_adjust_cout" ++ show (cin,auxIn,b)
 
 instance Show Exp8 where
   show = \case
@@ -595,8 +598,10 @@ instance Show Exp8 where
     E8_AndB e1 e2 -> parenthesize (show e1 ++ " & " ++ show e2)
     E8_OrB e1 e2 -> parenthesize (show e1 ++ " | " ++ show e2)
     E8_XorB e1 e2 -> parenthesize (show e1 ++ " ^ " ++ show e2)
+    E8_ShiftRight e1 e2 -> parenthesize (show e1 ++ " >> " ++ show e2)
+    E8_ShiftLeft e1 e2 -> parenthesize (show e1 ++ " << " ++ show e2)
+    E8_Ite i t e -> parenthesize (show i ++ " ? " ++ show t ++ " : " ++ show e)
     E8_Var v -> show v
-    E8_DAA_AdjustByte cin auxIn b -> "daa_adjust_byte" ++ show (cin,auxIn,b)
     E8_UnknownInput port -> "unknown_input" ++ parenthesize (show port)
     E8_GetShiftRegisterAtOffset -> "get_shift_register_at_offset()"
 

@@ -12,7 +12,7 @@ import Text.Printf (printf)
 
 import Addr (Addr(..),addCarryOut)
 import Buttons (Buttons)
-import Byte (Byte(..),addWithCarry,decimalAdjust)
+import Byte (Byte(..),addWithCarry)
 import Cpu (Cpu,Reg(PCL,PCH))
 import Effect (Eff(..))
 import Semantics (fetchDecodeExec)
@@ -21,6 +21,7 @@ import InstructionSet (Instruction,decode)
 import Mem (Mem)
 import Phase (Phase)
 import qualified Addr (fromHiLo,toHiLo,bump)
+import qualified Byte (toUnsigned)
 import qualified Cpu (init,get,set,getFlag,setFlag)
 import qualified Mem (read,write)
 import qualified Phase (Byte,Addr,Ticks,Bit)
@@ -114,11 +115,6 @@ emulate buttons s0 =
         let (v,cout) = Byte.addWithCarry cin v1 v2
         k s (v, Bit cout)
 
-      -- TODO: move the decimal-adjust implementation into Semantics
-      DecimalAdjust (Bit auxIn) (Bit cin) byteIn -> do
-        let (byteOut,auxOut,cout) = Byte.decimalAdjust auxIn cin byteIn
-        k s (byteOut, Bit auxOut, Bit cout)
-
       Complement b -> k s (complement b)
       Flip (Bit bool) -> k s (Bit (not bool))
 
@@ -149,6 +145,14 @@ emulate buttons s0 =
         let bit = before `testBit` 7
         let after = shiftL before 1 + (if bit then 1 else 0)
         k s after
+
+      ShiftRight byte offset -> k s (byte `shiftR` (Byte.toUnsigned offset))
+      ShiftLeft byte offset -> k s (byte `shiftL` (Byte.toUnsigned offset))
+
+      AndBit (Bit b1) (Bit b2) -> k s (Bit (b1 && b2))
+      OrBit (Bit b1) (Bit b2) -> k s (Bit (b1 || b2))
+
+      Ite (Bit i) t e -> k s (if i then t else e)
 
       EnableInterrupts -> k s { interrupts_enabled = True } ()
       DisableInterrupts -> k s { interrupts_enabled = False } ()

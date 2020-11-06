@@ -144,7 +144,7 @@ execute0 = \case
     byteIn <- GetReg A
     auxIn <- GetFlag FlagA
     cin <- GetFlag FlagCY
-    (byteOut,auxOut,cout) <- DecimalAdjust auxIn cin byteIn
+    (byteOut,auxOut,cout) <- decimalAdjust auxIn cin byteIn
     SetFlag FlagA auxOut
     SetFlag FlagCY cout
     SetReg A byteOut
@@ -312,6 +312,58 @@ execute0 = \case
   EI -> do
     EnableInterrupts
     return Next
+
+
+decimalAdjust :: Bit p -> Bit p -> Byte p-> Eff p (Byte p, Bit p, Bit p)
+decimalAdjust auxIn cin byteIn = do
+
+  mask <- MakeByte 0xF
+  lo <- AndB byteIn mask
+  loMoreThan9 <- nibbleAbove9 lo
+  loNeedsAdjust <- OrBit loMoreThan9 auxIn
+  loPlus6 <- add6 lo
+  loAdjust <- Ite loNeedsAdjust loPlus6 lo
+  auxOut <- TestBit loAdjust 4
+
+  four <- MakeByte 0x4
+  hi0 <- byteIn `ShiftRight` four
+  hi <- incrementMaybe auxOut hi0
+
+  hiMoreThan9 <- nibbleAbove9 hi
+  hiNeedsAdjust <- OrBit hiMoreThan9 cin
+  hiPlus6 <- add6 hi
+  hiAdjust <- Ite hiNeedsAdjust hiPlus6 hi
+
+  cout0 <- TestBit hiAdjust 4
+  cout <- OrBit cout0 cin
+
+  lo' <- AndB loAdjust mask
+  hi' <- hiAdjust `ShiftLeft` four
+  byteOut <- OrB hi' lo'
+
+  return (byteOut,auxOut,cout)
+
+
+nibbleAbove9 :: Byte p -> Eff p (Bit p)
+nibbleAbove9 n = do
+  n1 <- n `TestBit` 1 -- 2
+  n2 <- n `TestBit` 2 -- 4
+  n3 <- n `TestBit` 3 -- 8
+  n12 <- OrBit n1 n2
+  AndBit n12 n3
+
+incrementMaybe :: Bit p -> Byte p -> Eff p (Byte p)
+incrementMaybe cin v = do
+  zero <- MakeByte 0x0
+  (v',_) <- AddWithCarry cin v zero
+  return v'
+
+add6 :: Byte p -> Eff p (Byte p)
+add6 v = do
+  false <- MakeBit False
+  six <- MakeByte 0x6
+  (vPlus6,_) <- AddWithCarry false v six
+  return vPlus6
 
 
 executeCond :: Condition -> Eff p (Bit p)

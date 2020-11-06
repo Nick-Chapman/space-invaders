@@ -126,19 +126,22 @@ execute0 = \case
     return Next
   RLC -> do
     byte <- GetReg A
-    byte1 <- RotateLeft byte
-    cout <- TestBit byte 7
-    SetFlag FlagCY cout
-    SetReg A byte1
+    one <- MakeByte 1
+    shunted <- byte `TestBit` 7
+    shifted <- byte `ShiftLeft` one
+    rotated <- UpdateBit shifted 0 shunted
+    SetFlag FlagCY shunted
+    SetReg A rotated
     return Next
   RAL -> do
     byte <- GetReg A
+    one <- MakeByte 1
+    shunted <- byte `TestBit` 7
+    shifted <- byte `ShiftLeft` one
     cin <- GetFlag FlagCY
-    byte1 <- RotateLeft byte
-    byte2 <- UpdateBit byte1 0 cin
-    cout <- TestBit byte 7
-    SetFlag FlagCY cout
-    SetReg A byte2
+    rotated <- UpdateBit shifted 0 cin
+    SetFlag FlagCY shunted
+    SetReg A rotated
     return Next
   DAA -> do
     byteIn <- GetReg A
@@ -173,19 +176,22 @@ execute0 = \case
     return Next
   RRC -> do
     byte <- GetReg A
-    byte1 <- RotateRight byte
-    cout <- TestBit byte 0
-    SetFlag FlagCY cout
-    SetReg A byte1
+    one <- MakeByte 1
+    shunted <- byte `TestBit` 0
+    shifted <- byte `ShiftRight` one
+    rotated <- UpdateBit shifted 7 shunted
+    SetFlag FlagCY shunted
+    SetReg A rotated
     return Next
   RAR -> do
     byte <- GetReg A
+    one <- MakeByte 1
+    shunted <- byte `TestBit` 0
+    shifted <- byte `ShiftRight` one
     cin <- GetFlag FlagCY
-    byte1 <- RotateRight byte
-    byte2 <- UpdateBit byte1 7 cin
-    cout <- TestBit byte 0
-    SetFlag FlagCY cout
-    SetReg A byte2
+    rotated <- UpdateBit shifted 7 cin
+    SetFlag FlagCY shunted
+    SetReg A rotated
     return Next
   CMA -> do
     v0 <- GetReg A

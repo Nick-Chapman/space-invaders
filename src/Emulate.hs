@@ -136,16 +136,6 @@ emulate buttons s0 =
       CaseBit (Bit bool) -> k s bool
       MakeBit (bool) -> k s (Bit bool)
 
-      RotateRight before -> do
-        let bit = before `testBit` 0
-        let after = (if bit then 128 else 0) + shiftR before 1
-        k s after
-
-      RotateLeft before -> do
-        let bit = before `testBit` 7
-        let after = shiftL before 1 + (if bit then 1 else 0)
-        k s after
-
       ShiftRight byte offset -> k s (byte `shiftR` (Byte.toUnsigned offset))
       ShiftLeft byte offset -> k s (byte `shiftL` (Byte.toUnsigned offset))
 

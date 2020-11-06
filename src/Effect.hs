@@ -46,10 +46,6 @@ data Eff p a where
   CaseBit :: Bit p -> Eff p Bool
   MakeBit :: Bool -> Eff p (Bit p)
 
-  -- TODO: deprecate use of rotate ops, and instead use shift
-  RotateRight :: Byte p -> Eff p (Byte p)
-  RotateLeft :: Byte p -> Eff p (Byte p)
-
   ShiftRight :: Byte p -> Byte p -> Eff p (Byte p)
   ShiftLeft :: Byte p -> Byte p -> Eff p (Byte p)
 

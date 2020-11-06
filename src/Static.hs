@@ -309,9 +309,6 @@ compileThen semantics state k =
 
       E.MakeBit bool -> k s (if bool then E1_True else E1_False)
 
-      E.RotateRight e -> k s (E8_RotR e)
-      E.RotateLeft e -> k s (E8_RotL e)
-
       E.ShiftRight byte offset -> k s (E8_ShiftRight byte offset)
       E.ShiftLeft byte offset -> k s (E8_ShiftLeft byte offset)
       E.Ite i t e -> k s (E8_Ite i t e)
@@ -450,8 +447,6 @@ data Exp8
   | E8_Hi Exp16
   | E8_Lo Exp16
   | E8_ReadMem Exp16
-  | E8_RotL Exp8
-  | E8_RotR Exp8
   | E8_UpdateBit Exp8 Int Exp1
   | E8_Complement Exp8
   | E8_AndB Exp8 Exp8
@@ -591,8 +586,6 @@ instance Show Exp8 where
     E8_Hi a -> show a ++ "[15:8]"
     E8_Lo a -> show a ++ "[7:0]"
     E8_ReadMem a -> "M[" ++ show a ++ "]"
-    E8_RotL e -> "rotateL" ++ parenthesize (show e)
-    E8_RotR e -> "rotateR" ++ parenthesize (show e)
     E8_UpdateBit e i p -> "updateBit" ++ show (e,i,p)
     E8_Complement e -> "~" ++ show e
     E8_AndB e1 e2 -> parenthesize (show e1 ++ " & " ++ show e2)

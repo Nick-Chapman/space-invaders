@@ -4,7 +4,7 @@ module Effect (Eff(..)) where
 import Control.Monad (ap,liftM)
 import Data.Word8 (Word8)
 
-import Buttons (Buttons)
+import Buttons (But)
 import Cpu (Reg,Flag)
 import HiLo (HiLo(..))
 import InstructionSet (Op)
@@ -63,7 +63,7 @@ data Eff p a where
   UnknownInput :: Word8 -> Eff p (Byte p)
   UnknownOutput :: Word8 -> Eff p ()
 
-  GetButtons :: Eff p Buttons
+  GetButton :: But -> Eff p (Bit p)
   DispatchByte :: Byte p -> Eff p Word8
 
   SoundControl :: Sound -> Bit p -> Eff p ()

@@ -9,7 +9,7 @@ import Data.Set (Set)
 import qualified Data.Set as Set
 
 import Addr (Addr)
-import Buttons (buttons0)
+import Buttons (But)
 import Byte (Byte(..))
 import Cpu (Cpu(..),Reg(..),Flag(..))
 import Data.Word8 (Word8)
@@ -343,9 +343,8 @@ compileThen semantics state k =
         after <- k s ()
         return $ S_UnknownOutput port after
 
-      E.GetButtons{} -> do
-        -- Not right. Need a symbolic representation for the current button state.
-        k s buttons0
+      E.GetButton but -> do
+        k s (E1_Button but)
 
       E.DispatchByte e -> do
         case e of
@@ -437,6 +436,7 @@ data Exp1
   | E1_IsZero Exp8
   | E1_IsParity Exp8
   | E1_HiBitOf17 Exp17
+  | E1_Button But
   deriving (Eq)
 
 -- TODO: have Exp9, for result of 8-bit add-with-carry
@@ -578,6 +578,7 @@ instance Show Exp1 where
     E1_IsZero e -> "is_zero" ++ parenthesize (show e)
     E1_IsParity e -> "parity" ++ parenthesize (show e)
     E1_HiBitOf17 e -> show e ++ "[16]"
+    E1_Button but -> "is_pressed" ++ parenthesize (show but)
 
 instance Show Exp8 where
   show = \case

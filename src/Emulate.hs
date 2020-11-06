@@ -15,12 +15,13 @@ import Buttons (Buttons)
 import Byte (Byte(..),addWithCarry)
 import Cpu (Cpu,Reg(PCL,PCH))
 import Effect (Eff(..))
-import Semantics (fetchDecodeExec)
 import HiLo (HiLo(..))
 import InstructionSet (Instruction,decode)
 import Mem (Mem)
 import Phase (Phase)
+import Semantics (fetchDecodeExec)
 import qualified Addr (fromHiLo,toHiLo,bump)
+import qualified Buttons (get)
 import qualified Byte (toUnsigned)
 import qualified Cpu (init,get,set,getFlag,setFlag)
 import qualified Mem (read,write)
@@ -158,8 +159,8 @@ emulate buttons s0 =
       UnknownOutput n -> do
         crash $ "unknown input: " ++ show n
 
-      GetButtons -> do
-        k s buttons
+      GetButton but -> do
+        k s (Bit (Buttons.get but buttons))
 
       DispatchByte (Byte word) ->
         k s word

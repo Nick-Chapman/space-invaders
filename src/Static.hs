@@ -3,7 +3,7 @@ module Static (ops,retarget,reachDev) where
 
 import Prelude hiding (lines)
 
-import Control.Monad (ap,liftM,forM,forM_,when)
+import Control.Monad (ap,liftM,forM_,when)
 import Data.Set (Set, union)
 import qualified Data.Set as Set
 
@@ -31,6 +31,9 @@ import qualified Semantics (exploreDecodeExec,exploreFetchDecodeExec)
 
 (\\) :: Ord a => [a] -> [a] -> [a]
 (\\) xs ys = Set.toList $ Set.fromList xs `Set.difference` Set.fromList ys
+
+collate :: Ord a => [(a,b)] -> [(a,[b])]
+collate pairs = Map.toList $ Map.fromListWith (++) [ (a,[b]) | (a,b) <- pairs ]
 
 
 ops :: IO ()
@@ -61,7 +64,7 @@ retarget inline = do
         then [0x20] -- explore inlining for some addresses
         else [0..0x1FFF] -- no inlining.. lets see every rom address
   forM_ addrs $ \addr -> do
-    let program = compileAt inline roms addr
+    let program = compileAt (const inline) roms addr
     print $ vert [ lay (show addr ++ ":"), tab (layProgram program) ]
 
 
@@ -70,11 +73,11 @@ reachDev = do
   putStrLn "*static-reach*"
   roms <- loadRoms
 
-  programsForEveryAddress <-
-    forM [0..0x1FFF] $ \addr -> do
-      let inline = False
-      let program = compileAt inline roms addr
-      return (addr,program)
+  let
+    programsForEveryAddress =
+      [ (addr,program)
+      | addr <- [0..0x1FFF]
+      , let program = compileAt (\_ -> False) roms addr ]
 
   let !_ = show programsForEveryAddress -- crude forcing!
 
@@ -111,17 +114,50 @@ reachDev = do
         , 0x1834
         ]
 
-  let stepMap :: Map Addr [Addr]
-      stepMap = Map.fromList [ (a, oneStepReach p) | (a,p) <- programsForEveryAddress ]
-
   let step :: Addr -> [Addr]
       step a = Map.findWithDefault (error $ "step: " <> show a) a stepMap
+        where
+          stepMap :: Map Addr [Addr]
+          stepMap = Map.fromList [ (a, oneStepReach p) | (a,p) <- programsForEveryAddress ]
 
   reachSet <- searchReach step startAddress
 
   printReachInfo reachSet
-  printReachableProgram reachSet programsForEveryAddress
+  --printReachableProgram reachSet programsForEveryAddress
 
+  let
+    returnPoints =
+      [ r
+      | (a,p) <- programsForEveryAddress
+      , a `elem` reachSet
+      , r <- returnAddresses p
+      ]
+
+  let
+    joinPoints = [ b | (b,as) <- collate backward, length as > 1 ]
+      where backward = [ (b,a) | a <- Set.toList reachSet, b <- step a ]
+
+  print ("start",length startAddress,startAddress)
+  print ("return",length returnPoints, returnPoints)
+  print ("join",length joinPoints, joinPoints)
+
+  let labels = Set.fromList (startAddress ++ returnPoints ++ joinPoints)
+
+  let
+    inlinedPrograms =
+      [ (addr,program)
+      | addr <- Set.toList labels
+      , let program = compileAt (`notElem` labels) roms addr ]
+
+  printPrograms inlinedPrograms
+
+  return ()
+
+
+returnAddresses :: Program -> [Addr]
+returnAddresses = \case
+  S_MarkReturnAddress (E16_Lit a) _ -> [a]
+  p -> [ a | p' <- afterProgram p, a <- returnAddresses p' ]
 
 oneStepReach :: Program -> [Addr]
 oneStepReach = \case
@@ -169,18 +205,14 @@ printReachInfo reachSet = do
       ]
   putStrLn ""
 
-printReachableProgram :: Set Addr -> [(Addr,Program)] -> IO ()
-printReachableProgram reachSet programsForEveryAddress  = do
-  let reachablePrograms =
-        [ (a,p)
-        | (a,p) <- programsForEveryAddress
-        , a `elem` reachSet ]
+printPrograms :: [(Addr,Program)] -> IO ()
+printPrograms programs  = do
   print $ vert
     [ vert [lay (show a ++ ":")
            , tab (layProgram p)
            , lay ""
            ]
-    | (a,p) <- reachablePrograms ]
+    | (a,p) <- programs ]
 
 
 data Roms = Roms
@@ -303,7 +335,7 @@ getPC cpu = E16_HiLo HiLo{hi,lo} where
 type Visited = Set Addr
 
 
-compileAt :: Bool -> Roms -> Addr -> Program
+compileAt :: (Addr -> Bool) -> Roms -> Addr -> Program
 compileAt inline roms addr = do
   let cpu = initCpu HiLo {hi = pch, lo = pcl }
         where
@@ -314,12 +346,13 @@ compileAt inline roms addr = do
   let visited :: Visited = Set.insert addr Set.empty
   runGen $ compileFrom inline visited state
 
-compileFrom :: Bool -> Visited -> State -> CompileRes
+compileFrom :: (Addr -> Bool) -> Visited -> State -> CompileRes
 compileFrom inline = go
   where
 
     theSemantics = Semantics.exploreFetchDecodeExec
 
+    -- TODO: join-points means that tracking visited should no longer be necessary
     go :: Visited -> State -> CompileRes
     go visited state =
       compileThen theSemantics state $ \state@State{cpu} -> do
@@ -327,7 +360,7 @@ compileFrom inline = go
         Nothing ->
           return (programFromState state)
         Just pc -> do
-          if pcInRom pc && pc `notElem` visited && inline
+          if pcInRom pc && pc `notElem` visited && inline pc
           then
             S_AtRef pc <$> go (Set.insert pc visited) state
           else

@@ -37,6 +37,8 @@ data Eff p a where
   AreInterruptsEnabled :: Eff p Bool
   TimeToWakeup :: Eff p Bool
 
+  MarkReturnAddress :: Addr p -> Eff p ()
+
   GetInterruptInstruction :: Eff p (Byte p)
   Decode :: Byte p -> Eff p Op
 

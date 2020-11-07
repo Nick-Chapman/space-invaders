@@ -118,6 +118,8 @@ emulate buttons s0 =
       GetInterruptInstruction -> k s (interruptInstruction s)
       Decode byte -> k s (decode byte)
 
+      MarkReturnAddress {} -> k s ()
+
       MakeBit (bool) -> k s (Bit bool)
       Flip (Bit bool) -> k s (Bit (not bool))
       AndBit (Bit b1) (Bit b2) -> k s (Bit (b1 && b2))

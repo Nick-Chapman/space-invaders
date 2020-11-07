@@ -34,6 +34,7 @@ Status:
 
 - `stack run ops` -- calculate/print semantics of each opcode
 - `stack run retarget` -- first steps...
+- `stack run reach` -- calculate/print reachable program
 
 
 ### Resource for Space Invaders and 8080

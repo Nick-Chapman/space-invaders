@@ -576,8 +576,12 @@ addForAuxCarry cin v1 v2 = do
 
 call :: Addr p -> Eff p (Flow p)
 call a = do
-  GetReg PCH >>= pushStack
-  GetReg PCL >>= pushStack
+  hi <- GetReg PCH
+  lo <- GetReg PCL
+  pushStack hi
+  pushStack lo
+  returnAddr <- MakeAddr $ HiLo{hi,lo}
+  MarkReturnAddress returnAddr -- for reachabiity
   return (Jump a)
 
 

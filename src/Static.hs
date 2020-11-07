@@ -1,12 +1,14 @@
 
-module Static (ops,retarget) where
+module Static (ops,retarget,reachDev) where
 
 import Prelude hiding (lines)
 
-import Control.Monad (ap,liftM,forM_)
-import Data.List ((\\))
-import Data.Set (Set)
+import Control.Monad (ap,liftM,forM,forM_,when)
+import Data.Set (Set, union)
 import qualified Data.Set as Set
+
+import Data.Map (Map)
+import qualified Data.Map.Strict as Map
 
 import Addr (Addr)
 import Buttons (But)
@@ -25,6 +27,10 @@ import qualified Effect as E (Eff(..))
 import qualified Phase (Bit,Byte,Addr,Ticks)
 import qualified Rom2k (load,read,size)
 import qualified Semantics (exploreDecodeExec,exploreFetchDecodeExec)
+
+
+(\\) :: Ord a => [a] -> [a] -> [a]
+(\\) xs ys = Set.toList $ Set.fromList xs `Set.difference` Set.fromList ys
 
 
 ops :: IO ()
@@ -57,6 +63,124 @@ retarget inline = do
   forM_ addrs $ \addr -> do
     let program = compileAt inline roms addr
     print $ vert [ lay (show addr ++ ":"), tab (layProgram program) ]
+
+
+reachDev :: IO ()
+reachDev = do
+  putStrLn "*static-reach*"
+  roms <- loadRoms
+
+  programsForEveryAddress <-
+    forM [0..0x1FFF] $ \addr -> do
+      let inline = False
+      let program = compileAt inline roms addr
+      return (addr,program)
+
+  let !_ = show programsForEveryAddress -- crude forcing!
+
+  let startAddress =
+        [ 0x00
+        -- the interrupt addresss will be detected automatically when
+        -- we compiler a version of the semantics which has the
+        -- interrupt-logc made explicit.
+        , 0x08, 0x10
+        -- game object handlers, from annotated dissasembly, mem usage
+        -- any hope to detect this automatically?
+        , 0x028E -- obj0 (player) handler
+        , 0x03BB -- obj1 (shot) handler
+        , 0x0476 -- obj2 handler
+        , 0x04B6 -- obj3 handler
+        , 0x0682 -- obj4 handler
+
+        -- Inspecting holes w.r.t annotated dissasembly, leads to more candidate start points:
+
+        -- Address after indirect jump: "Run object's code (will return to next line)"
+        , 0x026F
+
+        -- And 3 more places:
+        -- An interesting question is: How do we reach these address dynmaically?
+        -- And it would be nice to check that we actually do!
+
+        -- "Game task 4 when splash screen alien is shooting extra "C" with a squiggly shot"
+        , 0x050E
+
+        -- "SndOffExtPly:"
+        , 0x17B4
+
+        -- call to "One second delay"
+        , 0x1834
+        ]
+
+  let stepMap :: Map Addr [Addr]
+      stepMap = Map.fromList [ (a, oneStepReach p) | (a,p) <- programsForEveryAddress ]
+
+  let step :: Addr -> [Addr]
+      step a = Map.findWithDefault (error $ "step: " <> show a) a stepMap
+
+  reachSet <- searchReach step startAddress
+
+  printReachInfo reachSet
+  printReachableProgram reachSet programsForEveryAddress
+
+
+oneStepReach :: Program -> [Addr]
+oneStepReach = \case
+  S_Jump (E16_Lit a) -> [a]
+  S_MarkReturnAddress (E16_Lit a) p -> a : oneStepReach p
+  p -> [ a | p' <- afterProgram p, a <- oneStepReach p' ]
+
+searchReach :: (Addr -> [Addr]) -> [Addr] -> IO (Set Addr)
+searchReach step initial = loop 0 Set.empty initial
+  where
+    loop :: Int -> Set Addr -> [Addr] -> IO (Set Addr)
+    loop n acc frontier = do
+      when False $ do -- debug print disabled
+        putStrLn $ unwords
+          ["search, step:", show n,
+          ", size(acc)=", show (Set.size acc),
+          ", length(frontier)=", show (length frontier) ]
+      -- Invariant: is the frontier in acc? NO
+      -- TODO: disable this inv checker when confidence with this code grows
+      when (not (all (`notElem` acc) frontier)) $ error "searchReach, inv failure"
+      if frontier == [] then return acc else do
+        let acc' = acc `union` Set.fromList frontier
+        let frontier' = [ a2 | a1 <- frontier, a2 <- step a1, a2 `notElem` acc' ]
+        loop (n+1) acc' frontier'
+
+printReachInfo :: Set Addr -> IO ()
+printReachInfo reachSet = do
+  putStrLn $ "# reachable addresses = " <> show (Set.size reachSet)
+  let xs = Set.toList reachSet
+  let ys = [ a | a0 <- xs, a <- [a0, a0+1, a0+2]]
+  let allRom = [0..0x1FFF]
+  let holes = allRom \\ ys
+  let startHoles = holes \\ [ a+1 | a <- holes ]
+  let endHoles = holes \\ [ a-1 | a <- holes ]
+  let holeSpans =
+        [ span
+        | span@(_start,_end) <- zip startHoles endHoles
+        -- , _end - _start > 2
+        ]
+  putStrLn "# holes..."
+  forM_ holeSpans $ \(start,end) -> do
+    putStrLn $ unwords
+      ["# --", show start, ":", show end
+      , ", size =", show (1 + Addr.toUnsigned (end - start))
+      ]
+  putStrLn ""
+
+printReachableProgram :: Set Addr -> [(Addr,Program)] -> IO ()
+printReachableProgram reachSet programsForEveryAddress  = do
+  let reachablePrograms =
+        [ (a,p)
+        | (a,p) <- programsForEveryAddress
+        , a `elem` reachSet ]
+  print $ vert
+    [ vert [lay (show a ++ ":")
+           , tab (layProgram p)
+           , lay ""
+           ]
+    | (a,p) <- reachablePrograms ]
 
 
 data Roms = Roms
@@ -371,6 +495,10 @@ compileThen semantics state k =
       E.GetShiftRegisterAtOffset -> do
         k s E8_GetShiftRegisterAtOffset
 
+      E.MarkReturnAddress a -> do
+        after <- k s ()
+        return $ S_MarkReturnAddress a after
+
 
 share8 :: (Exp8 -> Gen Program) -> (Exp8 -> Gen Program)
 share8 k exp = do
@@ -414,6 +542,7 @@ data Program
   | S_FillShiftRegister Exp8 Program
   | S_SetShiftRegsterOffset Exp8 Program
   | S_AtRef Addr Program
+  | S_MarkReturnAddress Exp16 Program
   | S_UnknownOutput Word8 Program
   | S_SoundControl Sound Exp1 Program
 
@@ -468,6 +597,25 @@ data Exp16
   | E16_DropHiBitOf17 Exp17
   | E16_Lit Addr
   deriving (Eq)
+
+
+afterProgram :: Program -> [Program]
+afterProgram = \case
+  S_Stop -> []
+  S_Jump{} -> []
+  S_If _ p1 p2 -> [p1,p2]
+  S_AssignReg _ _ p -> [p]
+  S_AssignFlag _ _ p -> [p]
+  S_MemWrite _ _ p -> [p]
+  S_Let16 _ _ p -> [p]
+  S_Let8 _ _ p -> [p]
+  S_Let17 _ _ p -> [p]
+  S_FillShiftRegister _ p  -> [p]
+  S_SetShiftRegsterOffset _ p -> [p]
+  S_UnknownOutput _ p -> [p]
+  S_SoundControl _ _ p -> [p]
+  S_MarkReturnAddress _ p -> [p]
+  S_AtRef{} -> error "after, AtRef, not expected for non-inlined program"
 
 
 getConcreteAddrMaybe :: Exp16 -> Maybe Addr
@@ -552,6 +700,10 @@ layProgram = \case
          ]
   S_AtRef pc next ->
     vert [ lay ("#" ++ show pc)
+         , layProgram next
+         ]
+  S_MarkReturnAddress a next ->
+    vert [ lay ("#return-to: " ++ show a)
          , layProgram next
          ]
   S_UnknownOutput port next ->

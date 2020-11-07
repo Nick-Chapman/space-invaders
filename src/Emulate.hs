@@ -95,55 +95,18 @@ emulate buttons s0 =
     run s@EmuState{cpu,mem,playing} eff k = case eff of
       Ret x -> k s x
       Bind eff f -> run s eff $ \s a -> run s (f a) k
+
       GetReg r -> k s (Cpu.get cpu r)
       SetReg r b -> k s { cpu = Cpu.set cpu r b} ()
-      ReadMem a -> do
-        let b = Mem.read crash mem a
-        --putStrLn $ "- ReadMem (" <> show a <> ") --> " <> show b
-        k s b
-      WriteMem a b -> do
-        --putStrLn $ "- WriteMem (" <> show a <> ") = " <> show b
-        k s { mem = Mem.write crash mem a b } ()
-      SplitAddr a -> k s (Addr.toHiLo a)
-      MakeAddr hilo -> k s (Addr.fromHiLo hilo)
-      OffsetAddr n a -> k s (Addr.bump a n)
-
-      Decode byte -> k s (decode byte)
-
-      MakeByte w -> k s (Byte w)
-
-      AddWithCarry (Bit cin) v1 v2 -> do
-        let (v,cout) = Byte.addWithCarry cin v1 v2
-        k s (v, Bit cout)
-
-      Complement b -> k s (complement b)
-      Flip (Bit bool) -> k s (Bit (not bool))
-
-      AndB b1 b2 -> k s (b1 .&. b2)
-      OrB b1 b2 -> k s (b1 .|. b2)
-      XorB b1 b2 -> k s (b1 `xor` b2)
-
-      Add16 w1 w2 -> do
-        let (w, cout) = Addr.addCarryOut w1 w2
-        k s (w, Bit cout)
-
       GetFlag flag -> k s (Cpu.getFlag cpu flag)
       SetFlag flag bit -> k s { cpu = Cpu.setFlag cpu flag bit} ()
 
-      IsSigned byte -> k s (Bit (byte `testBit` 7))
-      IsZero byte -> k s (Bit (byte == 0))
-      IsParity byte -> do k s (Bit (parity  byte))
+      ReadMem a -> k s (Mem.read crash mem a)
+      WriteMem a b -> k s { mem = Mem.write crash mem a b } ()
 
-      CaseBit (Bit bool) -> k s bool
-      MakeBit (bool) -> k s (Bit bool)
-
-      ShiftRight byte offset -> k s (byte `shiftR` (Byte.toUnsigned offset))
-      ShiftLeft byte offset -> k s (byte `shiftL` (Byte.toUnsigned offset))
-
-      AndBit (Bit b1) (Bit b2) -> k s (Bit (b1 && b2))
-      OrBit (Bit b1) (Bit b2) -> k s (Bit (b1 || b2))
-
-      Ite (Bit i) t e -> k s (if i then t else e)
+      FillShiftRegister byte -> k s { shifter = fillShiftRegister (shifter s) byte } ()
+      SetShiftRegisterOffset byte -> k s { shifter = setShiftRegisterOffset (shifter s) byte } ()
+      GetShiftRegisterAtOffset -> k s (getShiftRegisterAtOffset (shifter s))
 
       EnableInterrupts -> k s { interrupts_enabled = True } ()
       DisableInterrupts -> k s { interrupts_enabled = False } ()
@@ -151,35 +114,46 @@ emulate buttons s0 =
       TimeToWakeup -> case timeToWakeup s of
         Nothing -> k s False
         Just s -> k s True
+
       GetInterruptInstruction -> k s (interruptInstruction s)
+      Decode byte -> k s (decode byte)
 
-      UnknownInput n -> do
-        crash $ "unknown input: " ++ show n
+      MakeBit (bool) -> k s (Bit bool)
+      Flip (Bit bool) -> k s (Bit (not bool))
+      AndBit (Bit b1) (Bit b2) -> k s (Bit (b1 && b2))
+      OrBit (Bit b1) (Bit b2) -> k s (Bit (b1 || b2))
+      CaseBit (Bit bool) -> k s bool
 
-      UnknownOutput n -> do
-        crash $ "unknown input: " ++ show n
-
-      GetButton but -> do
-        k s (Bit (Buttons.get but buttons))
-
-      DispatchByte (Byte word) ->
-        k s word
-
+      MakeByte w -> k s (Byte w)
+      ShiftRight byte offset -> k s (byte `shiftR` (Byte.toUnsigned offset))
+      ShiftLeft byte offset -> k s (byte `shiftL` (Byte.toUnsigned offset))
+      Complement b -> k s (complement b)
+      AndB b1 b2 -> k s (b1 .&. b2)
+      OrB b1 b2 -> k s (b1 .|. b2)
+      XorB b1 b2 -> k s (b1 `xor` b2)
+      Ite (Bit i) t e -> k s (if i then t else e)
+      AddWithCarry (Bit cin) v1 v2 -> do
+        let (v,cout) = Byte.addWithCarry cin v1 v2
+        k s (v, Bit cout)
+      IsSigned byte -> k s (Bit (byte `testBit` 7))
+      IsZero byte -> k s (Bit (byte == 0))
+      IsParity byte -> do k s (Bit (parity  byte))
       TestBit byte i -> k s (Bit (byte `testBit` i))
       UpdateBit byte i (Bit bool) -> k s ((if bool then setBit else clearBit) byte i)
+      DispatchByte (Byte word) -> k s word
 
+      MakeAddr hilo -> k s (Addr.fromHiLo hilo)
+      SplitAddr a -> k s (Addr.toHiLo a)
+      OffsetAddr n a -> k s (Addr.bump a n)
+      Add16 w1 w2 -> do
+        let (w, cout) = Addr.addCarryOut w1 w2
+        k s (w, Bit cout)
+
+      UnknownInput n -> crash $ "unknown input: " ++ show n
+      UnknownOutput n -> crash $ "unknown input: " ++ show n
+      GetButton but -> k s (Bit (Buttons.get but buttons))
       SoundControl sound (Bit bool) -> do
         k s { playing = (if bool then Sounds.soundOn else Sounds.soundOff) playing sound } ()
-
-      FillShiftRegister byte -> do
-        k s { shifter = fillShiftRegister (shifter s) byte } ()
-
-      SetShiftRegisterOffset byte -> do
-        k s { shifter = setShiftRegisterOffset (shifter s) byte } ()
-
-      GetShiftRegisterAtOffset -> do
-        let res = getShiftRegisterAtOffset (shifter s)
-        k s res
 
 
 parity :: Byte -> Bool

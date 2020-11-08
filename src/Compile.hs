@@ -161,112 +161,33 @@ compileThen semantics state k =
 
     run :: State -> Eff CompTime a -> (State -> a -> CompileRes) -> CompileRes
     run s@State{cpu,roms} eff k = case eff of
+
       E.Ret x -> k s x
       E.Bind eff f -> run s eff $ \s a -> run s (f a) k
 
-      E.GetReg r -> do
-        k s (Cpu.get cpu r)
+      E.GetReg r -> k s (Cpu.get cpu r)
+      E.SetReg r b -> k s { cpu = Cpu.set cpu r b } ()
+      E.GetFlag flag -> k s (Cpu.getFlag cpu flag)
+      E.SetFlag flag v -> k s { cpu = Cpu.setFlag cpu flag v } ()
 
-      E.SetReg r b -> do
-        k s { cpu = Cpu.set cpu r b } ()
-
-      E.ReadMem a -> do
+      E.ReadMem a ->
         case tryRomLookupE16 roms a of
-          Just byte -> do
-            k s (E8_Lit byte)
-          Nothing -> do
-            k s (E8_ReadMem a)
+          Just byte -> k s (E8_Lit byte)
+          Nothing -> k s (E8_ReadMem a)
+      E.WriteMem a b -> S_MemWrite a b <$> k s ()
 
-      E.WriteMem a b -> do
-        after <- k s ()
-        return $ S_MemWrite a b after
+      -- TODO: handle shift register akin to cpu regs
+      E.FillShiftRegister e -> S_FillShiftRegister e <$> k s ()
+      E.SetShiftRegisterOffset e -> S_SetShiftRegsterOffset e <$> k s ()
+      E.GetShiftRegisterAtOffset -> k s E8_GetShiftRegisterAtOffset
 
-      E.SplitAddr a -> do
-        case a of
-          E16_HiLo hilo -> k s hilo
-          _ -> do
-            let hi = make_E8_Hi a
-            let lo = make_E8_Lo a
-            k s HiLo {hi,lo}
-
-      E.MakeAddr hilo -> do
-        k s (make_E16_HiLo hilo)
-
-      E.OffsetAddr n a ->
-        case a of
-          E16_Lit a -> k s (E16_Lit (Addr.bump a n))
-          _ -> do
-            v <- NewAVar
-            after <- k s (E16_Var v)
-            return $ S_Let16 v (E16_OffsetAdr n a) after
-
-      E.Decode e -> do
-        case e of
-          E8_Lit byte -> k s (decode byte)
-          _ -> error $ "Decode, non-literal: " <> show e
-
-      E.MakeByte w8 -> k s (E8_Lit (Byte w8))
-
-      E.AddWithCarry cin v1 v2 -> do
-        tmp <- NewAVar
-        let v = E8_Lo (E16_Var tmp)
-        let cout = E1_TestBit (E8_Hi (E16_Var tmp)) 0
-        after <- k s (v, cout)
-        return $ S_Let16 tmp (E16_AddWithCarry cin v1 v2) after
-
-      E.Complement e -> k s (E8_Complement e)
-      E.Flip e -> k s (E1_Flip e)
-
-      E.AndB e1 e2 -> do
-        share8 (k s) (E8_AndB e1 e2)
-
-      E.OrB e1 e2 -> do
-        share8 (k s) (E8_OrB e1 e2)
-
-      E.XorB e1 e2 -> do
-        share8 (k s) (E8_XorB e1 e2)
-
-      E.Add16 a1 a2 -> do
-        var <- NewAVar
-        let res = E16_DropHiBitOf17 (E17_Var var)
-        let cout = E1_HiBitOf17 (E17_Var var)
-        body <- k s (res,cout)
-        return $ S_Let17 var (E17_Add a1 a2) body
-
-      E.GetFlag flag -> do
-        k s (Cpu.getFlag cpu flag)
-
-      E.SetFlag flag v -> do
-        k s { cpu = Cpu.setFlag cpu flag v } ()
-
-      E.IsSigned e -> k s (E1_TestBit e 7)
-      E.IsZero e -> k s (E1_IsZero e)
-      E.IsParity e -> k s (E1_IsParity e)
-
-      E.CaseBit i -> do
-        t <- k s True
-        e <- k s False
-        return $ S_If i t e
-
-      E.MakeBit bool -> k s (if bool then E1_True else E1_False)
-
-      E.ShiftRight byte offset -> k s (E8_ShiftRight byte offset)
-      E.ShiftLeft byte offset -> k s (E8_ShiftLeft byte offset)
-      E.Ite i t e -> k s (E8_Ite i t e)
-
-      E.AndBit b1 b2 -> k s (E1_AndBit b1 b2)
-      E.OrBit b1 b2 -> k s (E1_OrBit b1 b2)
-
-
+      -- TODO: interrupts-enabled bit in state?
       E.EnableInterrupts -> k s { interruptsEnabled = E1_True } ()
       E.DisableInterrupts -> k s { interruptsEnabled = E1_False } ()
-
       E.AreInterruptsEnabled -> do
-        -- look in state??
         t <- k s True
         e <- k s False
         return $ S_If E1_InterruptsEnabled t e
-
       E.TimeToWakeup -> do
         t <- k s True
         e <- k s False
@@ -276,45 +197,69 @@ compileThen semantics state k =
         t <- k s (E8_Lit 0xCF)
         e <- k s (E8_Lit 0xD7)
         return $ S_If E1_HalfFrame t e
+      E.Decode e ->
+        case e of
+          E8_Lit byte -> k s (decode byte)
+          _ -> error $ "Decode, non-literal: " <> show e
+      E.MarkReturnAddress a -> S_MarkReturnAddress a <$> k s ()
 
-      E.UnknownInput port -> do
-        k s (E8_UnknownInput port)
+      E.MakeBit bool -> k s (if bool then E1_True else E1_False)
+      E.Flip e -> k s (E1_Flip e)
+      E.AndBit b1 b2 -> k s (E1_AndBit b1 b2)
+      E.OrBit b1 b2 -> k s (E1_OrBit b1 b2)
+      E.CaseBit i -> do
+        t <- k s True
+        e <- k s False
+        return $ S_If i t e
 
-      E.UnknownOutput port -> do
-        after <- k s ()
-        return $ S_UnknownOutput port after
-
-      E.GetButton but -> do
-        k s (E1_Button but)
-
-      E.CaseByte e -> do
+      E.MakeByte w8 -> k s (E8_Lit (Byte w8))
+      E.ShiftRight byte offset -> k s (E8_ShiftRight byte offset)
+      E.ShiftLeft byte offset -> k s (E8_ShiftLeft byte offset)
+      E.Complement e -> k s (E8_Complement e)
+      E.AndB e1 e2 -> share8 (k s) (E8_AndB e1 e2)
+      E.OrB e1 e2 -> share8 (k s) (E8_OrB e1 e2)
+      E.XorB e1 e2 -> share8 (k s) (E8_XorB e1 e2)
+      E.Ite i t e -> k s (E8_Ite i t e)
+      E.AddWithCarry cin v1 v2 -> do
+        tmp <- NewAVar
+        let v = E8_Lo (E16_Var tmp)
+        let cout = E1_TestBit (E8_Hi (E16_Var tmp)) 0
+        S_Let16 tmp (E16_AddWithCarry cin v1 v2) <$> k s (v,cout)
+      E.IsSigned e -> k s (E1_TestBit e 7)
+      E.IsZero e -> k s (E1_IsZero e)
+      E.IsParity e -> k s (E1_IsParity e)
+      E.TestBit e i -> k s (E1_TestBit e i)
+      E.UpdateBit e i p -> k s (E8_UpdateBit e i p)
+      E.CaseByte e ->
         case e of
           E8_Lit (Byte w8) -> k s w8
           _ -> error $ "CaseByte, non-literal " ++ show e
 
-      E.TestBit e i -> k s (E1_TestBit e i)
-      E.UpdateBit e i p -> k s (E8_UpdateBit e i p)
+      E.MakeAddr hilo -> k s (make_E16_HiLo hilo)
+      E.SplitAddr a ->
+        case a of
+          E16_HiLo hilo -> k s hilo
+          _ -> do
+            let hi = make_E8_Hi a
+            let lo = make_E8_Lo a
+            k s HiLo {hi,lo}
+      E.OffsetAddr n a ->
+        case a of
+          E16_Lit a -> k s (E16_Lit (Addr.bump a n))
+          _ -> do
+            v <- NewAVar
+            S_Let16 v (E16_OffsetAdr n a) <$> k s (E16_Var v)
+      E.Add16 a1 a2 -> do
+        var <- NewAVar
+        let res = E16_DropHiBitOf17 (E17_Var var)
+        let cout = E1_HiBitOf17 (E17_Var var)
+        body <- k s (res,cout)
+        return $ S_Let17 var (E17_Add a1 a2) body
 
-      E.SoundControl sound p -> do
-        after <- k s ()
-        return $ S_SoundControl sound p after
-
-      -- TODO: handle shift register akin to cpu regs
-
-      E.FillShiftRegister e -> do
-        after <- k s ()
-        return $ S_FillShiftRegister e after
-
-      E.SetShiftRegisterOffset e -> do
-        after <- k s ()
-        return $ S_SetShiftRegsterOffset e after
-
-      E.GetShiftRegisterAtOffset -> do
-        k s E8_GetShiftRegisterAtOffset
-
-      E.MarkReturnAddress a -> do
-        after <- k s ()
-        return $ S_MarkReturnAddress a after
+      E.UnknownInput port -> k s (E8_UnknownInput port)
+      E.UnknownOutput port -> S_UnknownOutput port <$> k s ()
+      E.GetButton but -> k s (E1_Button but)
+      E.SoundControl sound p -> S_SoundControl sound p <$> k s ()
 
 
 

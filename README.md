@@ -22,7 +22,6 @@ Status:
 - fps can be limited with a command line flag, i.e.  `stack run -- -fps 60`
 - Headless emulation: `stack run trace`
 - Regression tests: `./test.sh` (45 secs)
-- View decode table `stack run decode`
 - Implemented `DAA` (_decimal adjust accumulator_), so credits are calculated correctly
 - Spot bugs while refactoring `Semantics.hs` -- _it worked!_
 - Speed measurements (no graphics) : `stack run speed-test`
@@ -34,6 +33,7 @@ Status:
 
 `stack run static`
 
+    Writing file: gen/0-decode-table.out
     Writing file: gen/0-op-programs.out
     Writing file: gen/1-programs-for-every-address.out
     Writing file: gen/2-reachable-programs.out

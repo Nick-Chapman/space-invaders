@@ -7,6 +7,7 @@ import Control.Monad (forM_,when)
 import Data.List ((\\))
 import Data.Map (Map)
 import Data.Set (Set, union)
+import InstructionSet (theDecodeTable)
 import Residual (Program(..),Exp16(..),layOpPrograms,layPrograms)
 import qualified Addr as Addr (toUnsigned)
 import qualified Data.Map.Strict as Map
@@ -18,6 +19,8 @@ main :: IO ()
 main = do
   putStrLn "*static*"
   roms <- InvaderRoms.load
+
+  generateFile "0-decode-table" $ theDecodeTable
 
   generateFile "0-op-programs" $
     layOpPrograms (opPrograms roms)

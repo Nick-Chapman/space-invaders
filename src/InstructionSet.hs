@@ -2,12 +2,10 @@
 module InstructionSet (
   Op(..),Op0(..),Op1(..),Op2(..), RegPairSpec(..), RegSpec(..), Condition(..),
   Instruction(..),
-  encode, allOps,
   cycles,
-  decode,
-  printDecodeTable,
+  decode, encode,
   prettyInstructionBytes,
-  docInstructionForOp,
+  theDecodeTable
   ) where
 
 import Text.Printf (printf)
@@ -397,12 +395,15 @@ encodeRegPairSpec = \case
 -- | define decode as the inverse of encoding
 decode :: Byte -> Op
 decode byte =
-  case Map.lookup byte decodeTable of
+  case Map.lookup byte map of
     Nothing -> error $ "decode: " <> show byte
     Just op -> op
+  where (DecodeTable map) = theDecodeTable
 
-decodeTable :: Map Byte Op
-decodeTable = Map.fromList ys
+newtype DecodeTable = DecodeTable (Map Byte Op)
+
+theDecodeTable :: DecodeTable
+theDecodeTable = DecodeTable $ Map.fromList ys
   where
     xs = [ (encode op, op) | op <- allOps ]
     ys = [ (k,expectUnique k vs) | (k,vs) <- groupSort xs ]
@@ -413,13 +414,15 @@ decodeTable = Map.fromList ys
         ("bad decoding: " <> show k)
           : [ "--> " <> ljust 13 (show (docInstructionForOp op)) <> " [" <> show op <> "]" | op <- ops ]
 
-printDecodeTable :: IO ()
-printDecodeTable = do
-  putStrLn $ unlines [ show k <> " --> " <> show (docInstructionForOp v) | (k,v) <- ps ]
-  putStrLn (printf "implemented: %d, unimplemented %d" n (256-n))
-  where
-    ps = sort (Map.toList decodeTable)
-    n = length ps
+instance Show DecodeTable where
+  show (DecodeTable map) =
+    unlines
+    [ unlines [ show k <> " --> " <> show (docInstructionForOp v) | (k,v) <- ps ]
+    , printf "implemented: %d, unimplemented %d" n (256-n)
+    ]
+    where
+      ps = sort (Map.toList map)
+      n = length ps
 
 docInstructionForOp :: Op -> Instruction ImmSpec
 docInstructionForOp = \case

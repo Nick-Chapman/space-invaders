@@ -1,7 +1,6 @@
 
 module SpaceInvaders (main) where
 
-import InstructionSet (printDecodeTable)
 import System.Environment (getArgs)
 import TraceEmu (traceEmulate,Period(Second,HalfFrame),TraceConf(..))
 import qualified GraphicsSDL (main)
@@ -16,8 +15,6 @@ main = do
   args <- getArgs
   let Conf{mode,traceConf,fps} = parse args conf0
   case mode of
-    ModeShowDecodeTable ->
-      printDecodeTable
     ModeTrace -> do
       traceEmulate traceConf
     ModeSDL -> do
@@ -29,7 +26,7 @@ main = do
     ModeStatic -> do
       Static.main
 
-data Mode = ModeShowDecodeTable | ModeTrace | ModeSDL | ModeSpeedTest | ModeTst
+data Mode = ModeTrace | ModeSDL | ModeSpeedTest | ModeTst
   | ModeStatic
 
 data Conf = Conf
@@ -76,7 +73,6 @@ parse args conf = case args of
   "speed-test":args -> parse args $ conf { mode = ModeSpeedTest }
   "tst":args -> parse args $ conf { mode = ModeTst }
   "sdl":args -> parse args $ conf { mode = ModeSDL }
-  "decode":args -> parse args $ conf { mode = ModeShowDecodeTable }
   "trace":args -> parse args $ conf { mode = ModeTrace }
   "test1":args -> parse args $ conf { mode = ModeTrace, traceConf = traceConfTest1 }
   "test2":args -> parse args $ conf {mode = ModeTrace, traceConf = traceConfTest2 }

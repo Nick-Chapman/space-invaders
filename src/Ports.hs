@@ -7,12 +7,13 @@ import Effect (Eff(..))
 import Phase (Byte)
 import Data.Word8 (Word8)
 import Sounds (Sound(..))
+import qualified Shifter
 
 inputPort :: Word8 -> Eff p (Byte p)
 inputPort = \case
   1 -> inputPort1
   2 -> inputPort2
-  3 -> GetShiftRegisterAtOffset
+  3 -> getShifterAtOffset
   n -> UnknownInput n
 
 inputPort1 :: Eff p (Byte p)
@@ -41,9 +42,9 @@ inputPort2 = do
 
 outputPort :: Word8 -> Byte p -> Eff p ()
 outputPort port byte = case port of
-  2 -> SetShiftRegisterOffset byte
+  2 -> SetShifterReg Shifter.OFF byte
   3 -> soundFromPort port3 byte
-  4 -> FillShiftRegister byte
+  4 -> fillShifter byte
   5 -> soundFromPort port5 byte
   6 -> return () -- ignore watchdog
   0 -> return () -- ignore for tst
@@ -74,3 +75,24 @@ port5 = \case
   3 -> FleetMovement4
   4 -> UfoHit
   n -> error $ "unknown port5 sound bit: " <> show n
+
+
+fillShifter :: Byte p -> Eff p ()
+fillShifter newHi = do
+  GetShifterReg Shifter.HI >>= SetShifterReg Shifter.LO
+  SetShifterReg Shifter.HI newHi
+
+getShifterAtOffset :: Eff p (Byte p)
+getShifterAtOffset = do
+  hi <- GetShifterReg Shifter.HI
+  lo <- GetShifterReg Shifter.LO
+  off <- GetShifterReg Shifter.OFF
+  mask <- MakeByte 0x7
+  maskedOff1 <- off `AndB` mask
+  shiftedHi <- hi `ShiftLeft` maskedOff1
+  offBar <- Complement off
+  maskedOffBar <- offBar `AndB` mask
+  shiftedLo0 <- lo `ShiftRight` maskedOffBar
+  one <- MakeByte 0x1
+  shiftedLo <- shiftedLo0 `ShiftRight` one
+  shiftedHi `OrB` shiftedLo

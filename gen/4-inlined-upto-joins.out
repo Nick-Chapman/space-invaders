@@ -8164,75 +8164,83 @@
     M[a4] := L;
     #1407
     #1408
-    fill_shift_register(M[(D,E)]);
     #140A
+    let:8 a5 = (Shifter_OFF & 07) in
+    let:8 a6 = (~Shifter_OFF & 07) in
+    let:8 a7 = ((M[(D,E)] << a5) | ((Shifter_HI >> a6) >> 01)) in
     #140C
-    let:8 a5 = (M[(H,L)] | get_shift_register_at_offset()) in
+    let:8 a8 = (M[(H,L)] | a7) in
     #140D
-    M[(H,L)] := a5;
+    M[(H,L)] := a8;
     #140E
-    let:16 a6 = (1 + (H,L)) in
+    let:16 a9 = (1 + (H,L)) in
     #140F
-    let:16 a7 = (1 + (D,E)) in
+    let:16 a10 = (1 + (D,E)) in
     #1410
-    let:8 a8 = (a5 ^ a5) in
+    let:8 a11 = (a8 ^ a8) in
     #1411
-    fill_shift_register(a8);
     #1413
+    let:8 a12 = (Shifter_OFF & 07) in
+    let:8 a13 = (~Shifter_OFF & 07) in
+    let:8 a14 = ((a11 << a12) | ((M[(D,E)] >> a13) >> 01)) in
     #1415
-    let:8 a9 = (M[a6] | get_shift_register_at_offset()) in
+    let:8 a15 = (M[a9] | a14) in
     #1416
-    M[a6] := a9;
+    M[a9] := a15;
     #1417
-    let:16 a10 = (1 + a4) in
-    let:16 a11 = (1 + a10) in
+    let:16 a16 = (1 + a4) in
+    let:16 a17 = (1 + a16) in
     #1418
     #141B
-    let:17 a12 = add17(0020,(M[a10],M[a4])) in
+    let:17 a18 = add17(0020,(M[a16],M[a4])) in
     #141C
-    let:16 a13 = (1 + a11) in
-    let:16 a14 = (1 + a13) in
+    let:16 a19 = (1 + a17) in
+    let:16 a20 = (1 + a19) in
     #141D
-    let:16 a15 = addWithCarry(!true,M[a13],~00) in
-    let:8 a16 = (M[a13] & 0F) in
-    let:8 a17 = (~00 & 0F) in
-    let:16 a18 = addWithCarry(!true,a16,a17) in
+    let:16 a21 = addWithCarry(!true,M[a19],~00) in
+    let:8 a22 = (M[a19] & 0F) in
+    let:8 a23 = (~00 & 0F) in
+    let:16 a24 = addWithCarry(!true,a22,a23) in
     #141E
-    if (!is_zero(a15[7:0])) {
-      A := a9;
-      B := a15[7:0];
-      C := M[a11];
-      D := a7[15:8];
-      E := a7[7:0];
-      H := a12[15:0][15:8];
-      L := a12[15:0][7:0];
-      SPH := a14[15:8];
-      SPL := a14[7:0];
-      FlagS := a15[7:0][7];
-      FlagZ := is_zero(a15[7:0]);
-      FlagA := a18[7:0][4];
-      FlagP := parity(a15[7:0]);
-      FlagCY := a12[16];
+    if (!is_zero(a21[7:0])) {
+      A := a15;
+      B := a21[7:0];
+      C := M[a17];
+      D := a10[15:8];
+      E := a10[7:0];
+      H := a18[15:0][15:8];
+      L := a18[15:0][7:0];
+      SPH := a20[15:8];
+      SPL := a20[7:0];
+      FlagS := a21[7:0][7];
+      FlagZ := is_zero(a21[7:0]);
+      FlagA := a24[7:0][4];
+      FlagP := parity(a21[7:0]);
+      FlagCY := a18[16];
+      Shifter_HI := a11;
+      Shifter_LO := M[(D,E)];
       jump (1405);
     } else {
       #1421
-      let:16 a19 = (1 + a14) in
-      let:16 a20 = (1 + a19) in
-      A := a9;
-      B := a15[7:0];
-      C := M[a11];
-      D := a7[15:8];
-      E := a7[7:0];
-      H := a12[15:0][15:8];
-      L := a12[15:0][7:0];
-      SPH := a20[15:8];
-      SPL := a20[7:0];
-      FlagS := a15[7:0][7];
-      FlagZ := is_zero(a15[7:0]);
-      FlagA := a18[7:0][4];
-      FlagP := parity(a15[7:0]);
-      FlagCY := a12[16];
-      jump ((M[a19],M[a14]));
+      let:16 a25 = (1 + a20) in
+      let:16 a26 = (1 + a25) in
+      A := a15;
+      B := a21[7:0];
+      C := M[a17];
+      D := a10[15:8];
+      E := a10[7:0];
+      H := a18[15:0][15:8];
+      L := a18[15:0][7:0];
+      SPH := a26[15:8];
+      SPL := a26[7:0];
+      FlagS := a21[7:0][7];
+      FlagZ := is_zero(a21[7:0]);
+      FlagA := a24[7:0][4];
+      FlagP := parity(a21[7:0]);
+      FlagCY := a18[16];
+      Shifter_HI := a11;
+      Shifter_LO := M[(D,E)];
+      jump ((M[a25],M[a20]));
     }
 
 1424:
@@ -8399,79 +8407,87 @@
     M[a4] := L;
     #1457
     #1458
-    fill_shift_register(M[(D,E)]);
     #145A
+    let:8 a5 = (Shifter_OFF & 07) in
+    let:8 a6 = (~Shifter_OFF & 07) in
+    let:8 a7 = ((M[(D,E)] << a5) | ((Shifter_HI >> a6) >> 01)) in
     #145C
     #145D
-    let:8 a5 = (M[(H,L)] & ~get_shift_register_at_offset()) in
-    let:8 a6 = (M[(H,L)] | ~get_shift_register_at_offset()) in
+    let:8 a8 = (M[(H,L)] & ~a7) in
+    let:8 a9 = (M[(H,L)] | ~a7) in
     #145E
-    M[(H,L)] := a5;
+    M[(H,L)] := a8;
     #145F
-    let:16 a7 = (1 + (H,L)) in
+    let:16 a10 = (1 + (H,L)) in
     #1460
-    let:16 a8 = (1 + (D,E)) in
+    let:16 a11 = (1 + (D,E)) in
     #1461
-    let:8 a9 = (a5 ^ a5) in
+    let:8 a12 = (a8 ^ a8) in
     #1462
-    fill_shift_register(a9);
     #1464
+    let:8 a13 = (Shifter_OFF & 07) in
+    let:8 a14 = (~Shifter_OFF & 07) in
+    let:8 a15 = ((a12 << a13) | ((M[(D,E)] >> a14) >> 01)) in
     #1466
     #1467
-    let:8 a10 = (M[a7] & ~get_shift_register_at_offset()) in
-    let:8 a11 = (M[a7] | ~get_shift_register_at_offset()) in
+    let:8 a16 = (M[a10] & ~a15) in
+    let:8 a17 = (M[a10] | ~a15) in
     #1468
-    M[a7] := a10;
+    M[a10] := a16;
     #1469
-    let:16 a12 = (1 + a4) in
-    let:16 a13 = (1 + a12) in
+    let:16 a18 = (1 + a4) in
+    let:16 a19 = (1 + a18) in
     #146A
     #146D
-    let:17 a14 = add17(0020,(M[a12],M[a4])) in
+    let:17 a20 = add17(0020,(M[a18],M[a4])) in
     #146E
-    let:16 a15 = (1 + a13) in
-    let:16 a16 = (1 + a15) in
+    let:16 a21 = (1 + a19) in
+    let:16 a22 = (1 + a21) in
     #146F
-    let:16 a17 = addWithCarry(!true,M[a15],~00) in
-    let:8 a18 = (M[a15] & 0F) in
-    let:8 a19 = (~00 & 0F) in
-    let:16 a20 = addWithCarry(!true,a18,a19) in
+    let:16 a23 = addWithCarry(!true,M[a21],~00) in
+    let:8 a24 = (M[a21] & 0F) in
+    let:8 a25 = (~00 & 0F) in
+    let:16 a26 = addWithCarry(!true,a24,a25) in
     #1470
-    if (!is_zero(a17[7:0])) {
-      A := a10;
-      B := a17[7:0];
-      C := M[a13];
-      D := a8[15:8];
-      E := a8[7:0];
-      H := a14[15:0][15:8];
-      L := a14[15:0][7:0];
-      SPH := a16[15:8];
-      SPL := a16[7:0];
-      FlagS := a17[7:0][7];
-      FlagZ := is_zero(a17[7:0]);
-      FlagA := a20[7:0][4];
-      FlagP := parity(a17[7:0]);
-      FlagCY := a14[16];
+    if (!is_zero(a23[7:0])) {
+      A := a16;
+      B := a23[7:0];
+      C := M[a19];
+      D := a11[15:8];
+      E := a11[7:0];
+      H := a20[15:0][15:8];
+      L := a20[15:0][7:0];
+      SPH := a22[15:8];
+      SPL := a22[7:0];
+      FlagS := a23[7:0][7];
+      FlagZ := is_zero(a23[7:0]);
+      FlagA := a26[7:0][4];
+      FlagP := parity(a23[7:0]);
+      FlagCY := a20[16];
+      Shifter_HI := a12;
+      Shifter_LO := M[(D,E)];
       jump (1455);
     } else {
       #1473
-      let:16 a21 = (1 + a16) in
-      let:16 a22 = (1 + a21) in
-      A := a10;
-      B := a17[7:0];
-      C := M[a13];
-      D := a8[15:8];
-      E := a8[7:0];
-      H := a14[15:0][15:8];
-      L := a14[15:0][7:0];
-      SPH := a22[15:8];
-      SPL := a22[7:0];
-      FlagS := a17[7:0][7];
-      FlagZ := is_zero(a17[7:0]);
-      FlagA := a20[7:0][4];
-      FlagP := parity(a17[7:0]);
-      FlagCY := a14[16];
-      jump ((M[a21],M[a16]));
+      let:16 a27 = (1 + a22) in
+      let:16 a28 = (1 + a27) in
+      A := a16;
+      B := a23[7:0];
+      C := M[a19];
+      D := a11[15:8];
+      E := a11[7:0];
+      H := a20[15:0][15:8];
+      L := a20[15:0][7:0];
+      SPH := a28[15:8];
+      SPL := a28[7:0];
+      FlagS := a23[7:0][7];
+      FlagZ := is_zero(a23[7:0]);
+      FlagA := a26[7:0][4];
+      FlagP := parity(a23[7:0]);
+      FlagCY := a20[16];
+      Shifter_HI := a12;
+      Shifter_LO := M[(D,E)];
+      jump ((M[a27],M[a22]));
     }
 
 1474:
@@ -8480,7 +8496,6 @@
     let:8 a1 = (07 & L) in
     let:8 a2 = (07 | L) in
     #1477
-    set_shift_register_offset(a1);
     #1479
     A := a1;
     FlagS := a1[7];
@@ -8488,6 +8503,7 @@
     FlagA := a2[3];
     FlagP := parity(a1);
     FlagCY := false;
+    Shifter_OFF := a1;
     jump (1A47);
 
 147C:
@@ -8622,39 +8638,45 @@
     M[a4] := L;
     #149A
     #149B
-    fill_shift_register(M[(D,E)]);
     #149D
+    let:8 a5 = (Shifter_OFF & 07) in
+    let:8 a6 = (~Shifter_OFF & 07) in
+    let:8 a7 = ((M[(D,E)] << a5) | ((Shifter_HI >> a6) >> 01)) in
     #149F
-    let:16 a5 = (-1 + a4) in
-    M[a5] := get_shift_register_at_offset();
-    let:16 a6 = (-1 + a5) in
-    M[a6] := updateBit(updateBit(updateBit(updateBit(updateBit(02,7,FlagS),6,FlagZ),4,FlagA),2,FlagP),0,FlagCY);
+    let:16 a8 = (-1 + a4) in
+    M[a8] := a7;
+    let:16 a9 = (-1 + a8) in
+    M[a9] := updateBit(updateBit(updateBit(updateBit(updateBit(02,7,FlagS),6,FlagZ),4,FlagA),2,FlagP),0,FlagCY);
     #14A0
-    let:8 a7 = (M[(H,L)] & get_shift_register_at_offset()) in
-    let:8 a8 = (M[(H,L)] | get_shift_register_at_offset()) in
+    let:8 a10 = (M[(H,L)] & a7) in
+    let:8 a11 = (M[(H,L)] | a7) in
     #14A1
-    if (is_zero(a7)) {
-      A := a7;
-      SPH := a6[15:8];
-      SPL := a6[7:0];
-      FlagS := a7[7];
-      FlagZ := is_zero(a7);
-      FlagA := a8[3];
-      FlagP := parity(a7);
+    if (is_zero(a10)) {
+      A := a10;
+      SPH := a9[15:8];
+      SPL := a9[7:0];
+      FlagS := a10[7];
+      FlagZ := is_zero(a10);
+      FlagA := a11[3];
+      FlagP := parity(a10);
       FlagCY := false;
+      Shifter_HI := M[(D,E)];
+      Shifter_LO := Shifter_HI;
       jump (14A9);
     } else {
       #14A4
       #14A6
       M[2061] := 01;
       A := 01;
-      SPH := a6[15:8];
-      SPL := a6[7:0];
-      FlagS := a7[7];
-      FlagZ := is_zero(a7);
-      FlagA := a8[3];
-      FlagP := parity(a7);
+      SPH := a9[15:8];
+      SPL := a9[7:0];
+      FlagS := a10[7];
+      FlagZ := is_zero(a10);
+      FlagA := a11[3];
+      FlagP := parity(a10);
       FlagCY := false;
+      Shifter_HI := M[(D,E)];
+      Shifter_LO := Shifter_HI;
       jump (14A9);
     }
 
@@ -8673,30 +8695,34 @@
     #14AE
     let:8 a6 = (a3 ^ a3) in
     #14AF
-    fill_shift_register(a6);
     #14B1
+    let:8 a7 = (Shifter_OFF & 07) in
+    let:8 a8 = (~Shifter_OFF & 07) in
+    let:8 a9 = ((a6 << a7) | ((Shifter_HI >> a8) >> 01)) in
     #14B3
-    let:16 a7 = (-1 + a2) in
-    M[a7] := get_shift_register_at_offset();
-    let:16 a8 = (-1 + a7) in
-    M[a8] := updateBit(updateBit(updateBit(updateBit(updateBit(02,7,a6[7]),6,is_zero(a6)),4,false),2,parity(a6)),0,false);
+    let:16 a10 = (-1 + a2) in
+    M[a10] := a9;
+    let:16 a11 = (-1 + a10) in
+    M[a11] := updateBit(updateBit(updateBit(updateBit(updateBit(02,7,a6[7]),6,is_zero(a6)),4,false),2,parity(a6)),0,false);
     #14B4
-    let:8 a9 = (M[a4] & get_shift_register_at_offset()) in
-    let:8 a10 = (M[a4] | get_shift_register_at_offset()) in
+    let:8 a12 = (M[a4] & a9) in
+    let:8 a13 = (M[a4] | a9) in
     #14B5
-    if (is_zero(a9)) {
-      A := a9;
+    if (is_zero(a12)) {
+      A := a12;
       D := a5[15:8];
       E := a5[7:0];
       H := a4[15:8];
       L := a4[7:0];
-      SPH := a8[15:8];
-      SPL := a8[7:0];
-      FlagS := a9[7];
-      FlagZ := is_zero(a9);
-      FlagA := a10[3];
-      FlagP := parity(a9);
+      SPH := a11[15:8];
+      SPL := a11[7:0];
+      FlagS := a12[7];
+      FlagZ := is_zero(a12);
+      FlagA := a13[3];
+      FlagP := parity(a12);
       FlagCY := false;
+      Shifter_HI := a6;
+      Shifter_LO := Shifter_HI;
       jump (14BD);
     } else {
       #14B8
@@ -8707,13 +8733,15 @@
       E := a5[7:0];
       H := a4[15:8];
       L := a4[7:0];
-      SPH := a8[15:8];
-      SPL := a8[7:0];
-      FlagS := a9[7];
-      FlagZ := is_zero(a9);
-      FlagA := a10[3];
-      FlagP := parity(a9);
+      SPH := a11[15:8];
+      SPL := a11[7:0];
+      FlagS := a12[7];
+      FlagZ := is_zero(a12);
+      FlagA := a13[3];
+      FlagP := parity(a12);
       FlagCY := false;
+      Shifter_HI := a6;
+      Shifter_LO := Shifter_HI;
       jump (14BD);
     }
 
@@ -9583,74 +9611,82 @@
     M[a4] := L;
     #15D9
     #15DA
-    fill_shift_register(M[(D,E)]);
     #15DC
+    let:8 a5 = (Shifter_OFF & 07) in
+    let:8 a6 = (~Shifter_OFF & 07) in
+    let:8 a7 = ((M[(D,E)] << a5) | ((Shifter_HI >> a6) >> 01)) in
     #15DE
-    M[(H,L)] := get_shift_register_at_offset();
+    M[(H,L)] := a7;
     #15DF
-    let:16 a5 = (1 + (H,L)) in
+    let:16 a8 = (1 + (H,L)) in
     #15E0
-    let:16 a6 = (1 + (D,E)) in
+    let:16 a9 = (1 + (D,E)) in
     #15E1
-    let:8 a7 = (get_shift_register_at_offset() ^ get_shift_register_at_offset()) in
+    let:8 a10 = (a7 ^ a7) in
     #15E2
-    fill_shift_register(a7);
     #15E4
+    let:8 a11 = (Shifter_OFF & 07) in
+    let:8 a12 = (~Shifter_OFF & 07) in
+    let:8 a13 = ((a10 << a11) | ((M[(D,E)] >> a12) >> 01)) in
     #15E6
-    M[a5] := get_shift_register_at_offset();
+    M[a8] := a13;
     #15E7
-    let:16 a8 = (1 + a4) in
-    let:16 a9 = (1 + a8) in
+    let:16 a14 = (1 + a4) in
+    let:16 a15 = (1 + a14) in
     #15E8
     #15EB
-    let:17 a10 = add17(0020,(M[a8],M[a4])) in
+    let:17 a16 = add17(0020,(M[a14],M[a4])) in
     #15EC
-    let:16 a11 = (1 + a9) in
-    let:16 a12 = (1 + a11) in
+    let:16 a17 = (1 + a15) in
+    let:16 a18 = (1 + a17) in
     #15ED
-    let:16 a13 = addWithCarry(!true,M[a11],~00) in
-    let:8 a14 = (M[a11] & 0F) in
-    let:8 a15 = (~00 & 0F) in
-    let:16 a16 = addWithCarry(!true,a14,a15) in
+    let:16 a19 = addWithCarry(!true,M[a17],~00) in
+    let:8 a20 = (M[a17] & 0F) in
+    let:8 a21 = (~00 & 0F) in
+    let:16 a22 = addWithCarry(!true,a20,a21) in
     #15EE
-    if (!is_zero(a13[7:0])) {
-      A := get_shift_register_at_offset();
-      B := a13[7:0];
-      C := M[a9];
-      D := a6[15:8];
-      E := a6[7:0];
-      H := a10[15:0][15:8];
-      L := a10[15:0][7:0];
-      SPH := a12[15:8];
-      SPL := a12[7:0];
-      FlagS := a13[7:0][7];
-      FlagZ := is_zero(a13[7:0]);
-      FlagA := a16[7:0][4];
-      FlagP := parity(a13[7:0]);
-      FlagCY := a10[16];
+    if (!is_zero(a19[7:0])) {
+      A := a13;
+      B := a19[7:0];
+      C := M[a15];
+      D := a9[15:8];
+      E := a9[7:0];
+      H := a16[15:0][15:8];
+      L := a16[15:0][7:0];
+      SPH := a18[15:8];
+      SPL := a18[7:0];
+      FlagS := a19[7:0][7];
+      FlagZ := is_zero(a19[7:0]);
+      FlagA := a22[7:0][4];
+      FlagP := parity(a19[7:0]);
+      FlagCY := a16[16];
+      Shifter_HI := a10;
+      Shifter_LO := M[(D,E)];
       jump (15D7);
     } else {
       #15F1
-      let:16 a17 = (1 + a12) in
-      let:16 a18 = (1 + a17) in
+      let:16 a23 = (1 + a18) in
+      let:16 a24 = (1 + a23) in
       #15F2
-      let:16 a19 = (1 + a18) in
-      let:16 a20 = (1 + a19) in
-      A := get_shift_register_at_offset();
-      B := a13[7:0];
-      C := M[a9];
-      D := a6[15:8];
-      E := a6[7:0];
-      H := M[a17];
-      L := M[a12];
-      SPH := a20[15:8];
-      SPL := a20[7:0];
-      FlagS := a13[7:0][7];
-      FlagZ := is_zero(a13[7:0]);
-      FlagA := a16[7:0][4];
-      FlagP := parity(a13[7:0]);
-      FlagCY := a10[16];
-      jump ((M[a19],M[a18]));
+      let:16 a25 = (1 + a24) in
+      let:16 a26 = (1 + a25) in
+      A := a13;
+      B := a19[7:0];
+      C := M[a15];
+      D := a9[15:8];
+      E := a9[7:0];
+      H := M[a23];
+      L := M[a18];
+      SPH := a26[15:8];
+      SPL := a26[7:0];
+      FlagS := a19[7:0][7];
+      FlagZ := is_zero(a19[7:0]);
+      FlagA := a22[7:0][4];
+      FlagP := parity(a19[7:0]);
+      FlagCY := a16[16];
+      Shifter_HI := a10;
+      Shifter_LO := M[(D,E)];
+      jump ((M[a25],M[a24]));
     }
 
 15F6:

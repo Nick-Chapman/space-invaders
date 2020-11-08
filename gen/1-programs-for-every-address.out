@@ -31089,7 +31089,8 @@
 
 1408:
 
-    fill_shift_register(A);
+    Shifter_HI := A;
+    Shifter_LO := Shifter_HI;
     jump (140A);
 
 1409:
@@ -31107,7 +31108,10 @@
 
 140A:
 
-    A := get_shift_register_at_offset();
+    let:8 a1 = (Shifter_OFF & 07) in
+    let:8 a2 = (~Shifter_OFF & 07) in
+    let:8 a3 = ((Shifter_HI << a1) | ((Shifter_LO >> a2) >> 01)) in
+    A := a3;
     jump (140C);
 
 140B:
@@ -31160,7 +31164,8 @@
 
 1411:
 
-    fill_shift_register(A);
+    Shifter_HI := A;
+    Shifter_LO := Shifter_HI;
     jump (1413);
 
 1412:
@@ -31178,7 +31183,10 @@
 
 1413:
 
-    A := get_shift_register_at_offset();
+    let:8 a1 = (Shifter_OFF & 07) in
+    let:8 a2 = (~Shifter_OFF & 07) in
+    let:8 a3 = ((Shifter_HI << a1) | ((Shifter_LO >> a2) >> 01)) in
+    A := a3;
     jump (1415);
 
 1414:
@@ -31702,7 +31710,8 @@
 
 1458:
 
-    fill_shift_register(A);
+    Shifter_HI := A;
+    Shifter_LO := Shifter_HI;
     jump (145A);
 
 1459:
@@ -31720,7 +31729,10 @@
 
 145A:
 
-    A := get_shift_register_at_offset();
+    let:8 a1 = (Shifter_OFF & 07) in
+    let:8 a2 = (~Shifter_OFF & 07) in
+    let:8 a3 = ((Shifter_HI << a1) | ((Shifter_LO >> a2) >> 01)) in
+    A := a3;
     jump (145C);
 
 145B:
@@ -31779,7 +31791,8 @@
 
 1462:
 
-    fill_shift_register(A);
+    Shifter_HI := A;
+    Shifter_LO := Shifter_HI;
     jump (1464);
 
 1463:
@@ -31797,7 +31810,10 @@
 
 1464:
 
-    A := get_shift_register_at_offset();
+    let:8 a1 = (Shifter_OFF & 07) in
+    let:8 a2 = (~Shifter_OFF & 07) in
+    let:8 a3 = ((Shifter_HI << a1) | ((Shifter_LO >> a2) >> 01)) in
+    A := a3;
     jump (1466);
 
 1465:
@@ -31943,7 +31959,7 @@
 
 1477:
 
-    set_shift_register_offset(A);
+    Shifter_OFF := A;
     jump (1479);
 
 1478:
@@ -32218,7 +32234,8 @@
 
 149B:
 
-    fill_shift_register(A);
+    Shifter_HI := A;
+    Shifter_LO := Shifter_HI;
     jump (149D);
 
 149C:
@@ -32236,7 +32253,10 @@
 
 149D:
 
-    A := get_shift_register_at_offset();
+    let:8 a1 = (Shifter_OFF & 07) in
+    let:8 a2 = (~Shifter_OFF & 07) in
+    let:8 a3 = ((Shifter_HI << a1) | ((Shifter_LO >> a2) >> 01)) in
+    A := a3;
     jump (149F);
 
 149E:
@@ -32382,7 +32402,8 @@
 
 14AF:
 
-    fill_shift_register(A);
+    Shifter_HI := A;
+    Shifter_LO := Shifter_HI;
     jump (14B1);
 
 14B0:
@@ -32400,7 +32421,10 @@
 
 14B1:
 
-    A := get_shift_register_at_offset();
+    let:8 a1 = (Shifter_OFF & 07) in
+    let:8 a2 = (~Shifter_OFF & 07) in
+    let:8 a3 = ((Shifter_HI << a1) | ((Shifter_LO >> a2) >> 01)) in
+    A := a3;
     jump (14B3);
 
 14B2:
@@ -34865,7 +34889,8 @@
 
 15DA:
 
-    fill_shift_register(A);
+    Shifter_HI := A;
+    Shifter_LO := Shifter_HI;
     jump (15DC);
 
 15DB:
@@ -34883,7 +34908,10 @@
 
 15DC:
 
-    A := get_shift_register_at_offset();
+    let:8 a1 = (Shifter_OFF & 07) in
+    let:8 a2 = (~Shifter_OFF & 07) in
+    let:8 a3 = ((Shifter_HI << a1) | ((Shifter_LO >> a2) >> 01)) in
+    A := a3;
     jump (15DE);
 
 15DD:
@@ -34925,7 +34953,8 @@
 
 15E2:
 
-    fill_shift_register(A);
+    Shifter_HI := A;
+    Shifter_LO := Shifter_HI;
     jump (15E4);
 
 15E3:
@@ -34943,7 +34972,10 @@
 
 15E4:
 
-    A := get_shift_register_at_offset();
+    let:8 a1 = (Shifter_OFF & 07) in
+    let:8 a2 = (~Shifter_OFF & 07) in
+    let:8 a3 = ((Shifter_HI << a1) | ((Shifter_LO >> a2) >> 01)) in
+    A := a3;
     jump (15E6);
 
 15E5:

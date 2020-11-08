@@ -10,6 +10,7 @@ import HiLo (HiLo(..))
 import InstructionSet (Op)
 import Phase (Byte,Addr,Bit)
 import Sounds (Sound)
+import qualified Shifter
 
 -- | The Effect type, constructed when executing instructions
 
@@ -25,10 +26,8 @@ data Eff p a where
   ReadMem :: Addr p -> Eff p (Byte p)
   WriteMem :: Addr p -> Byte p -> Eff p ()
 
-  -- TODO: treat shift registers more directly (like cpu regs) & use shift ops directly
-  FillShiftRegister :: Byte p -> Eff p ()
-  SetShiftRegisterOffset :: Byte p -> Eff p ()
-  GetShiftRegisterAtOffset :: Eff p (Byte p)
+  GetShifterReg :: Shifter.Reg -> Eff p (Byte p)
+  SetShifterReg :: Shifter.Reg -> Byte p -> Eff p ()
 
   -- TODO: rethink the interrupt timing & triggering, plus add effects to Advance the cycle-count
   -- TODO: treatthe is_enabled like a cpu flag

@@ -20,12 +20,14 @@ import InstructionSet (Instruction,decode)
 import Mem (Mem)
 import Phase (Phase)
 import Semantics (fetchDecodeExec)
+import Shifter (Shifter)
 import qualified Addr (fromHiLo,toHiLo,bump)
 import qualified Buttons (get)
 import qualified Byte (toUnsigned)
 import qualified Cpu (init,get,set,getFlag,setFlag)
 import qualified Mem (read,write)
 import qualified Phase (Byte,Addr,Ticks,Bit)
+import qualified Shifter (init,get,set)
 import qualified Sounds (Playing,initPlaying,soundOn,soundOff)
 
 
@@ -56,7 +58,7 @@ data EmuState = EmuState
   , mem :: Mem
   , interrupts_enabled :: Bool
   , nextWakeup :: Ticks
-  , shifter :: Shifter
+  , shifter :: Shifter EmuTime
   , playing :: Sounds.Playing
   }
 
@@ -68,7 +70,7 @@ initState mem = EmuState
   , mem
   , interrupts_enabled = False
   , nextWakeup = halfFrameTicks
-  , shifter = shifter0
+  , shifter = Shifter.init (Byte 0)
   , playing = Sounds.initPlaying
   }
 
@@ -92,7 +94,7 @@ emulate buttons s0 =
     crash message = do error ("*crash*\n" <> prettyPrefix s0 message)
 
     run :: EmuState -> Eff EmuTime a -> (EmuState -> a -> IO EmuStep) -> IO EmuStep
-    run s@EmuState{cpu,mem,playing} eff k = case eff of
+    run s@EmuState{cpu,shifter,mem,playing} eff k = case eff of
       Ret x -> k s x
       Bind eff f -> run s eff $ \s a -> run s (f a) k
 
@@ -101,12 +103,11 @@ emulate buttons s0 =
       GetFlag flag -> k s (Cpu.getFlag cpu flag)
       SetFlag flag bit -> k s { cpu = Cpu.setFlag cpu flag bit} ()
 
+      GetShifterReg r -> k s (Shifter.get shifter r)
+      SetShifterReg r b -> k s { shifter = Shifter.set shifter r b} ()
+
       ReadMem a -> k s (Mem.read crash mem a)
       WriteMem a b -> k s { mem = Mem.write crash mem a b } ()
-
-      FillShiftRegister byte -> k s { shifter = fillShiftRegister (shifter s) byte } ()
-      SetShiftRegisterOffset byte -> k s { shifter = setShiftRegisterOffset (shifter s) byte } ()
-      GetShiftRegisterAtOffset -> k s (getShiftRegisterAtOffset (shifter s))
 
       EnableInterrupts -> k s { interrupts_enabled = True } ()
       DisableInterrupts -> k s { interrupts_enabled = False } ()
@@ -199,32 +200,3 @@ timeToWakeup s@EmuState{ticks,nextWakeup} = do
     Just s { nextWakeup =
              Ticks ((unTicks ticks `div` unTicks halfFrameTicks) + 1) * halfFrameTicks
            }
-
-data Shifter = Shifter
-  { offset :: Byte
-  , hi :: Byte
-  , lo :: Byte
-  }
-
-instance Show Shifter where
-  show Shifter{offset,hi,lo} =
-    "shifter(" <> show offset <> "," <> show hi <> show lo <> ")"
-
-shifter0 :: Shifter
-shifter0 = Shifter
-  { offset = Byte 0
-  , hi = Byte 0
-  , lo = Byte 0
-  }
-
-fillShiftRegister :: Shifter -> Byte -> Shifter
-fillShiftRegister shifter@Shifter{hi} byte = shifter { hi = byte, lo = hi }
-
-setShiftRegisterOffset :: Shifter -> Byte -> Shifter
-setShiftRegisterOffset shifter byte = shifter { offset = byte}
-
-getShiftRegisterAtOffset :: Shifter -> Byte
-getShiftRegisterAtOffset Shifter{offset,lo,hi} = do
-  let off :: Int = fromIntegral (unByte offset)
-  if (off < 0 || off > 7) then error $ "off=" <> show off else
-    shiftL hi off .|. shiftR lo (8-off)

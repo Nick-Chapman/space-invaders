@@ -17,12 +17,14 @@ import Data.Word8 (Word8)
 import HiLo (HiLo(..))
 import InstructionSet (Op,encode)
 import Sounds (Sound)
+import qualified Shifter
 
 data Program
   = S_Stop
   | S_Jump Exp16
   | S_If Exp1 Program Program
   | S_AssignReg Reg Exp8 Program
+  | S_AssignShifterReg Shifter.Reg Exp8 Program
   | S_AssignFlag Flag Exp1 Program
   | S_MemWrite Exp16 Exp8 Program
   | S_Let16 AVar Exp16 Program
@@ -62,6 +64,7 @@ data Exp1
 data Exp8
   = E8_Lit Byte
   | E8_Reg Reg
+  | E8_ShifterReg Shifter.Reg
   | E8_Hi Exp16
   | E8_Lo Exp16
   | E8_ReadMem Exp16
@@ -106,6 +109,10 @@ layProgram = \case
          , lay "}"
          ]
   S_AssignReg reg exp next ->
+    vert [ lay (show reg ++ " := " ++ show exp ++ ";")
+         , layProgram next
+         ]
+  S_AssignShifterReg reg exp next ->
     vert [ lay (show reg ++ " := " ++ show exp ++ ";")
          , layProgram next
          ]
@@ -175,6 +182,7 @@ instance Show Exp8 where
   show = \case
     E8_Lit x -> show x
     E8_Reg reg -> show reg
+    E8_ShifterReg reg -> show reg
     E8_Hi a -> show a ++ "[15:8]"
     E8_Lo a -> show a ++ "[7:0]"
     E8_ReadMem a -> "M[" ++ show a ++ "]"

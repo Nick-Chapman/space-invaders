@@ -192,6 +192,7 @@ afterProgram = \case
   S_Jump{} -> []
   S_If _ p1 p2 -> [p1,p2]
   S_AssignReg _ _ p -> [p]
+  S_AssignShifterReg _ _ p -> [p]
   S_AssignFlag _ _ p -> [p]
   S_MemWrite _ _ p -> [p]
   S_Let16 _ _ p -> [p]

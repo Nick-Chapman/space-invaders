@@ -12,6 +12,7 @@ import InstructionSet (Op(..),Op1(..),decode,encode)
 import InvaderRoms (Roms)
 import Phase (Phase)
 import Residual (Exp1(..),Exp8(..),Exp16(..),Exp17(..),Program(..),AVar(..))
+import Shifter (Shifter(..))
 import qualified Addr as Addr (toHiLo,fromHiLo,bump)
 import qualified Cpu (get,set,getFlag,setFlag)
 import qualified Data.Set as Set
@@ -19,6 +20,7 @@ import qualified Effect as E (Eff(..))
 import qualified InvaderRoms (lookup)
 import qualified Phase (Bit,Byte,Addr,Ticks)
 import qualified Semantics (exploreDecodeExec,exploreFetchDecodeExec)
+import qualified Shifter (Reg(..),get,set,allRegs)
 
 
 data CompTime
@@ -111,6 +113,7 @@ pcInRom a = a < 0x2000
 data State = State
   { interruptsEnabled :: Exp1
   , cpu :: Cpu CompTime
+  , shifter :: Shifter CompTime
   , roms :: Roms
   }
 
@@ -118,13 +121,21 @@ initState :: Roms -> Cpu CompTime -> State
 initState roms cpu = State
   { interruptsEnabled = E1_False
   , cpu
+  , shifter = initShifter
   , roms
   }
 
+initShifter :: Shifter CompTime
+initShifter = Shifter
+  { hi = E8_ShifterReg Shifter.HI
+  , lo = E8_ShifterReg Shifter.LO
+  , off = E8_ShifterReg Shifter.OFF
+  }
+
 programFromState :: State -> Program
-programFromState State{cpu} = do
+programFromState State{cpu,shifter} = do
   -- TODO: show interruptsEnabled... check with output of DI
-  sequence (regUpdates ++ flagUpdates) finish
+  sequence (regUpdates ++ flagUpdates ++ shifterUpdates) finish
     where
       regUpdates =
         [ S_AssignReg reg v
@@ -137,6 +148,12 @@ programFromState State{cpu} = do
         | flag <- allFlags
         , let v = Cpu.getFlag cpu flag
         , not (v == E1_Flag flag)
+        ]
+      shifterUpdates =
+        [ S_AssignShifterReg reg v
+        | reg <- Shifter.allRegs
+        , let v = Shifter.get shifter reg
+        , not (v == E8_ShifterReg reg)
         ]
 
       allRegs = [A,B,C,D,E,H,L
@@ -160,7 +177,7 @@ compileThen semantics state k =
   where
 
     run :: State -> Eff CompTime a -> (State -> a -> CompileRes) -> CompileRes
-    run s@State{cpu,roms} eff k = case eff of
+    run s@State{cpu,shifter,roms} eff k = case eff of
 
       E.Ret x -> k s x
       E.Bind eff f -> run s eff $ \s a -> run s (f a) k
@@ -176,10 +193,8 @@ compileThen semantics state k =
           Nothing -> k s (E8_ReadMem a)
       E.WriteMem a b -> S_MemWrite a b <$> k s ()
 
-      -- TODO: handle shift register akin to cpu regs
-      E.FillShiftRegister e -> S_FillShiftRegister e <$> k s ()
-      E.SetShiftRegisterOffset e -> S_SetShiftRegsterOffset e <$> k s ()
-      E.GetShiftRegisterAtOffset -> k s E8_GetShiftRegisterAtOffset
+      E.GetShifterReg r -> k s (Shifter.get shifter r)
+      E.SetShifterReg r b -> k s { shifter = Shifter.set shifter r b } ()
 
       -- TODO: interrupts-enabled bit in state?
       E.EnableInterrupts -> k s { interruptsEnabled = E1_True } ()

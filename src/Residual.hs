@@ -1,0 +1,243 @@
+
+module Residual
+  ( Program(..)
+  , Exp17(..)
+  , Exp16(..)
+  , Exp8(..)
+  , Exp1(..)
+  , AVar(..)
+  , Lay, layOpPrograms,layPrograms,
+  ) where
+
+import Addr (Addr)
+import Buttons (But)
+import Byte (Byte(..))
+import Cpu (Reg(..),Flag(..))
+import Data.Word8 (Word8)
+import HiLo (HiLo(..))
+import InstructionSet (Op,encode)
+import Sounds (Sound)
+
+data Program
+  = S_Stop
+  | S_Jump Exp16
+  | S_If Exp1 Program Program
+  | S_AssignReg Reg Exp8 Program
+  | S_AssignFlag Flag Exp1 Program
+  | S_MemWrite Exp16 Exp8 Program
+  | S_Let16 AVar Exp16 Program
+  | S_Let8 AVar Exp8 Program
+  | S_Let17 AVar Exp17 Program
+  | S_FillShiftRegister Exp8 Program
+  | S_SetShiftRegsterOffset Exp8 Program
+  | S_AtRef Addr Program
+  | S_MarkReturnAddress Exp16 Program
+  | S_UnknownOutput Word8 Program
+  | S_SoundControl Sound Exp1 Program
+
+data Exp17
+  = E17_Add Exp16 Exp16
+  | E17_Var AVar
+  deriving (Eq)
+
+data Exp1
+  = E1_False
+  | E1_True
+  | E1_InterruptsEnabled
+  | E1_TimeToWakeup
+  | E1_HalfFrame
+  | E1_Flag Flag
+  | E1_TestBit Exp8 Int
+  | E1_Flip Exp1
+  | E1_AndBit Exp1 Exp1
+  | E1_OrBit Exp1 Exp1
+  | E1_IsZero Exp8
+  | E1_IsParity Exp8
+  | E1_HiBitOf17 Exp17
+  | E1_Button But
+  deriving (Eq)
+
+-- TODO: have Exp9, for result of 8-bit add-with-carry
+
+data Exp8
+  = E8_Lit Byte
+  | E8_Reg Reg
+  | E8_Hi Exp16
+  | E8_Lo Exp16
+  | E8_ReadMem Exp16
+  | E8_UpdateBit Exp8 Int Exp1
+  | E8_Complement Exp8
+  | E8_AndB Exp8 Exp8
+  | E8_OrB Exp8 Exp8
+  | E8_XorB Exp8 Exp8
+  | E8_ShiftRight Exp8 Exp8
+  | E8_ShiftLeft Exp8 Exp8
+  | E8_Ite Exp1 Exp8 Exp8
+  | E8_Var AVar
+  | E8_UnknownInput Word8
+  | E8_GetShiftRegisterAtOffset
+  deriving (Eq)
+
+data Exp16
+  = E16_HiLo (HiLo Exp8)
+  | E16_OffsetAdr Int Exp16
+  | E16_Var AVar
+  | E16_AddWithCarry Exp1 Exp8 Exp8
+  | E16_DropHiBitOf17 Exp17
+  | E16_Lit Addr
+  deriving (Eq)
+
+newtype AVar = AVar { u :: Int } -- address (16bit) variable
+  deriving Eq
+
+instance Show AVar where show AVar{u} = "a" ++ show u
+
+instance Show Program where show = show . layProgram
+
+layProgram :: Program -> Lay
+layProgram = \case
+  S_Stop -> lay "stop;"
+  S_Jump a -> lay ("jump " ++ parenthesize (show a) ++ ";")
+  S_If e s1 s2 ->
+    vert [ lay ("if " ++ parenthesize (show e) ++ " {")
+         , tab (layProgram s1)
+         , lay "} else {"
+         , tab (layProgram s2)
+         , lay "}"
+         ]
+  S_AssignReg reg exp next ->
+    vert [ lay (show reg ++ " := " ++ show exp ++ ";")
+         , layProgram next
+         ]
+  S_AssignFlag flag exp1 next ->
+    vert [ lay (show flag ++ " := " ++ show exp1 ++ ";")
+         , layProgram next
+         ]
+  S_MemWrite lv rv next ->
+    vert [ lay ("M[" ++ show lv ++ "] := " ++ show rv ++ ";")
+         , layProgram next
+         ]
+  S_Let16 v e next ->
+    vert [ lay ("let:16 " ++ show v ++ " = " ++ show e ++ " in")
+         , layProgram next
+         ]
+  S_Let8 v e next ->
+    vert [ lay ("let:8 " ++ show v ++ " = " ++ show e ++ " in")
+         , layProgram next
+         ]
+  S_Let17 v e next ->
+    vert [ lay ("let:17 " ++ show v ++ " = " ++ show e ++ " in")
+         , layProgram next
+         ]
+  S_FillShiftRegister e next ->
+    vert [ lay ("fill_shift_register" ++ parenthesize (show e) ++ ";")
+         , layProgram next
+         ]
+  S_SetShiftRegsterOffset e next ->
+    vert [ lay ("set_shift_register_offset" ++ parenthesize (show e) ++ ";")
+         , layProgram next
+         ]
+  S_AtRef pc next ->
+    vert [ lay ("#" ++ show pc)
+         , layProgram next
+         ]
+  S_MarkReturnAddress a next ->
+    vert [ lay ("#return-to: " ++ show a)
+         , layProgram next
+         ]
+  S_UnknownOutput port next ->
+    vert [ lay ("unknown_output" ++ parenthesize (show port) ++ ";")
+         , layProgram next
+         ]
+  S_SoundControl sound bool next ->
+    vert [ lay ("sound_control" ++ show (sound,bool) ++ ";")
+         , layProgram next
+         ]
+
+instance Show Exp1 where
+  show = \case
+    E1_False -> "false"
+    E1_True -> "true"
+    E1_InterruptsEnabled -> "g_interrupts_enabled"
+    E1_TimeToWakeup -> "g_time_to_wakeup"
+    E1_HalfFrame -> "g_half_frame"
+    E1_Flag flag -> show flag
+    E1_TestBit e i -> show e ++ "[" ++ show i ++ "]"
+    E1_Flip p -> "!" ++ show p
+    E1_AndBit e1 e2 -> parenthesize (show e1 ++ " && " ++ show e2)
+    E1_OrBit e1 e2 -> parenthesize (show e1 ++ " || " ++ show e2)
+    E1_IsZero e -> "is_zero" ++ parenthesize (show e)
+    E1_IsParity e -> "parity" ++ parenthesize (show e)
+    E1_HiBitOf17 e -> show e ++ "[16]"
+    E1_Button but -> "is_pressed" ++ parenthesize (show but)
+
+instance Show Exp8 where
+  show = \case
+    E8_Lit x -> show x
+    E8_Reg reg -> show reg
+    E8_Hi a -> show a ++ "[15:8]"
+    E8_Lo a -> show a ++ "[7:0]"
+    E8_ReadMem a -> "M[" ++ show a ++ "]"
+    E8_UpdateBit e i p -> "updateBit" ++ show (e,i,p)
+    E8_Complement e -> "~" ++ show e
+    E8_AndB e1 e2 -> parenthesize (show e1 ++ " & " ++ show e2)
+    E8_OrB e1 e2 -> parenthesize (show e1 ++ " | " ++ show e2)
+    E8_XorB e1 e2 -> parenthesize (show e1 ++ " ^ " ++ show e2)
+    E8_ShiftRight e1 e2 -> parenthesize (show e1 ++ " >> " ++ show e2)
+    E8_ShiftLeft e1 e2 -> parenthesize (show e1 ++ " << " ++ show e2)
+    E8_Ite i t e -> parenthesize (show i ++ " ? " ++ show t ++ " : " ++ show e)
+    E8_Var v -> show v
+    E8_UnknownInput port -> "unknown_input" ++ parenthesize (show port)
+    E8_GetShiftRegisterAtOffset -> "get_shift_register_at_offset()"
+
+instance Show Exp16 where
+  show = \case
+    E16_HiLo HiLo{hi,lo} ->
+      parenthesize (show hi ++ "," ++ show lo)
+    E16_OffsetAdr n e ->
+      parenthesize (show n ++ " + " ++ show e)
+    E16_Var v ->
+      show v
+    E16_AddWithCarry cin e1 e2 ->
+      "addWithCarry" ++ show (cin,e1,e2)
+    E16_DropHiBitOf17 e ->
+      show e ++ "[15:0]"
+    E16_Lit x ->
+      show x
+
+instance Show Exp17 where
+  show = \case
+    E17_Add e1 e2 ->
+      "add17" ++ show (e1,e2)
+    E17_Var var ->
+      show var
+
+parenthesize :: String -> String
+parenthesize x = "(" ++ x ++ ")"
+
+
+data Lay = Lay { unLay :: [String] }
+
+instance Show Lay where show = Prelude.unlines . unLay
+
+lay :: String -> Lay
+lay s = Lay [s]
+
+vert :: [Lay] -> Lay
+vert = Lay . concat . map unLay
+
+tab :: Lay -> Lay
+tab (Lay lines) = Lay $ [ "  " ++ line | line <- lines ]
+
+
+layOpPrograms :: [(Op,Program)] -> Lay
+layOpPrograms =
+  layTagged (\op -> lay (show (encode op) ++ " --> " ++ show op)) (tab . layProgram)
+
+layPrograms :: [(Addr,Program)] -> Lay
+layPrograms =
+  layTagged (\addr -> lay (show addr ++ ":")) (tab . layProgram)
+
+
+layTagged :: (k -> Lay) -> (v -> Lay) -> [(k,v)] -> Lay
+layTagged layK layV kvs = vert [ vert [lay "", layK k, lay "" , tab (layV v)] | (k,v) <- kvs ]

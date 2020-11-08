@@ -6,7 +6,7 @@ import Buttons (buttons0)
 import Data.Bits (testBit)
 import Emulate (EmuState(..),EmuStep(..),Ticks(..),initState,emulate)
 import GHC.Int (Int64)
-import Mem (Mem,read)
+import Mem (Mem,initInvader,read)
 import System.Clock (TimeSpec(..),getTime,Clock(Monotonic))
 import Text.Printf (printf)
 
@@ -17,8 +17,9 @@ data State = State
   }
   deriving Show
 
-main :: Mem -> IO ()
-main mem = do
+main :: IO ()
+main = do
+  mem <- Mem.initInvader
   (es1,nanos1) <- measureOneEmulatedSecond (initState mem)
   loop State { emuSeconds = 1, durationNanos = nanos1, emuState = es1 }
   where

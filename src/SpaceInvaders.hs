@@ -1,40 +1,31 @@
 
-module SpaceInvaders(main) where
+module SpaceInvaders (main) where
 
 import InstructionSet (printDecodeTable)
 import System.Environment (getArgs)
 import TraceEmu (traceEmulate,Period(Second,HalfFrame),TraceConf(..))
-import qualified Mem (init)
-import qualified Rom2k (load)
 import qualified GraphicsSDL (main)
-import qualified Tst (main)
 import qualified SpeedTest (main)
 import qualified Static (main)
+import qualified Tst (main)
 
 -- | Entry point to the Space Invaders emulation
 main :: IO ()
 main = do
   putStrLn "*space-invaders*"
-
-  e <- Rom2k.load "roms/invaders.e"
-  f <- Rom2k.load "roms/invaders.f"
-  g <- Rom2k.load "roms/invaders.g"
-  h <- Rom2k.load "roms/invaders.h"
-
-  let mem = Mem.init (e,f,g,h)
   args <- getArgs
   let Conf{mode,traceConf,fps} = parse args conf0
   case mode of
     ModeShowDecodeTable ->
       printDecodeTable
     ModeTrace -> do
-      traceEmulate traceConf mem
+      traceEmulate traceConf
     ModeSDL -> do
-      GraphicsSDL.main fps mem
+      GraphicsSDL.main fps
     ModeTst -> do
       Tst.main
     ModeSpeedTest -> do
-      SpeedTest.main mem
+      SpeedTest.main
     ModeStatic -> do
       Static.main
 

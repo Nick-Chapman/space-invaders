@@ -7,23 +7,25 @@ import Data.List.Extra (groupSort)
 import Data.Map (Map)
 import Data.Maybe (fromJust)
 import Foreign.C.Types (CInt)
-import Mem (Mem)
 import SDL (Renderer,Rectangle(..),V2(..),V4(..),Point(P),($=))
 import SDL.Font (Font,Color)
 import SDL.Mixer (Chunk)
 import Sounds (Sound(..),allSounds)
 import System.IO (hFlush,stdout)
 import World (World,Key(..),KeyMotion(Down,Up),Picture(..))
-import qualified Data.Map.Strict as Map
+import qualified Data.Map.Strict as Map (fromList,lookup)
 import qualified Data.Text as Text (pack)
+import qualified Mem (initInvader)
 import qualified SDL
 import qualified SDL.Font as Font (initialize,load,solid,size)
 import qualified SDL.Mixer as Mixer (withAudio,defaultAudio,load,play)
 import qualified World (initWorld,updateKey,stepFrame,pictureWorld,soundsToPlay)
 
 
-main :: Maybe Int -> Mem -> IO ()
-main fpsLimitM mem = do
+main :: Maybe Int -> IO ()
+main fpsLimitM = do
+  mem <- Mem.initInvader
+
   let sf = 4 -- scale factor
   let! _ = keyMapTable
   SDL.initializeAll

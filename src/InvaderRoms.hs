@@ -1,5 +1,5 @@
 
-module InvaderRoms (Roms,load,lookup) where
+module InvaderRoms (Roms(..),load,lookup) where
 
 import Addr (Addr)
 import Byte (Byte)

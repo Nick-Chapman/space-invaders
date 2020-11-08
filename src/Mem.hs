@@ -1,19 +1,17 @@
 
-module Mem (Mem,Addr,init,initTst,read,write) where
+module Mem (Mem,Addr,initInvader,initTst,read,write) where
 
-import Prelude hiding (init,read)
+import Prelude hiding (read)
 
 import Addr (Addr(..))
 import Byte (Byte(..))
-import Ram8k (Ram)
-import Rom2k (Rom,size)
-import qualified Addr (toUnsigned)
-import qualified Rom2k (read)
-import qualified Ram8k (init,read,write)
-
 import Data.Map (Map)
-import qualified Data.Map.Strict as Map
-
+import InvaderRoms (Roms)
+import Ram8k (Ram)
+import qualified Addr (toUnsigned)
+import qualified Data.Map.Strict as Map (fromList,findWithDefault,insert)
+import qualified InvaderRoms (load,lookup)
+import qualified Ram8k (init,read,write)
 
 data Mem = Mem {
   m_read :: (forall a. String -> a) -> Addr -> Byte,
@@ -28,9 +26,10 @@ write e Mem{m_write} a b = m_write e a b
 
 type ERR = forall a. String -> a
 
-
-init :: (Rom,Rom,Rom,Rom) -> Mem
-init t = lift1 (init1 t)
+initInvader :: IO Mem
+initInvader = do
+  roms <- InvaderRoms.load
+  return $ lift1 (init1 roms)
 
 lift1 :: Mem1 -> Mem
 lift1 m1 = do
@@ -39,31 +38,24 @@ lift1 m1 = do
   Mem { m_read, m_write }
 
 data Mem1 = Mem1
-  { e :: Rom
-  , f :: Rom
-  , g :: Rom
-  , h :: Rom
+  { roms :: Roms
   , ram :: Ram
   }
 
-init1 :: (Rom,Rom,Rom,Rom) -> Mem1
-init1 (e,f,g,h) = Mem1 {e,f,g,h, ram = Ram8k.init}
+init1 :: Roms -> Mem1
+init1 roms = Mem1 {roms, ram = Ram8k.init}
 
 read1 :: (forall a. String -> a) -> Mem1 -> Addr -> Byte
-read1 error Mem1{e,f,g,h,ram} a = if
-  | i < k2 -> Rom2k.read h i
-  | i < k4 -> Rom2k.read g (i - k2)
-  | i < k6 -> Rom2k.read f (i - k4)
-  | i < k8 -> Rom2k.read e (i - k6)
-  | i < k16 -> Ram8k.read ram (i - k8)
-  | otherwise -> error $ "Mem.read: " <> show a
-  where
-    i = Addr.toUnsigned a
-    k2 = Rom2k.size
-    k4 = Rom2k.size * 2
-    k6 = Rom2k.size * 3
-    k8 = Rom2k.size * 4
-    k16 = Rom2k.size * 8
+read1 error Mem1{roms,ram} a = do
+  case InvaderRoms.lookup roms a of
+    Just b -> b
+    Nothing -> if
+      | i < k16 -> Ram8k.read ram (i - k8)
+      | otherwise -> error $ "Mem.read: " <> show a
+      where
+        i = Addr.toUnsigned a
+        k8 = 0x2000
+        k16 = k8 * 2
 
 write1 :: (forall a. String -> a) -> Mem1 -> Addr -> Byte -> Mem1
 write1 error mem@Mem1{ram} a b = if
@@ -73,10 +65,9 @@ write1 error mem@Mem1{ram} a b = if
   | otherwise -> error $ "Mem.write: " <> show a
   where
     i = Addr.toUnsigned a
-    k8 = Rom2k.size * 4
-    k16 = Rom2k.size * 8
-    k24 = Rom2k.size * 12
-
+    k8 = 0x2000
+    k16 = k8 * 2
+    k24 = k8 * 3
 
 
 initTst :: [Byte]-> Mem

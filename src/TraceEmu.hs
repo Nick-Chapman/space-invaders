@@ -1,16 +1,16 @@
 
 module TraceEmu (TraceConf(..),traceEmulate,Period(..)) where
 
-import Control.Monad (when)
-import Data.Bits (testBit)
-import Text.Printf (printf)
-
 import Addr (Addr(..))
 import Buttons (buttons0)
 import Byte (Byte)
+import Control.Monad (when)
+import Data.Bits (testBit)
 import Emulate (EmuState(..),initState,Ticks(..),prettyPrefix,emulate,EmuStep(..))
 import InstructionSet (Instruction,prettyInstructionBytes)
-import Mem (Mem,read)
+import Mem (Mem)
+import Text.Printf (printf)
+import qualified Mem (read,initInvader)
 
 data TraceConf = TraceConf
   { traceOnAfter :: Maybe Int
@@ -19,8 +19,9 @@ data TraceConf = TraceConf
   , traceNearPing :: Bool
   }
 
-traceEmulate :: TraceConf -> Mem -> IO ()
-traceEmulate TraceConf{traceOnAfter,stopAfter,period,traceNearPing} mem = do
+traceEmulate :: TraceConf -> IO ()
+traceEmulate TraceConf{traceOnAfter,stopAfter,period,traceNearPing} = do
+  mem <- Mem.initInvader
   loop 1 firstPing (initState mem)
   where
     firstPing = cycles

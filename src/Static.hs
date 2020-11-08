@@ -1,5 +1,5 @@
 
-module Static (ops,retarget,reachDev) where
+module Static (main) where
 
 import Prelude hiding (lines)
 
@@ -32,46 +32,24 @@ import qualified Semantics (exploreDecodeExec,exploreFetchDecodeExec)
 (\\) :: Ord a => [a] -> [a] -> [a]
 (\\) xs ys = Set.toList $ Set.fromList xs `Set.difference` Set.fromList ys
 
-collate :: Ord a => [(a,b)] -> [(a,[b])]
-collate pairs = Map.toList $ Map.fromListWith (++) [ (a,[b]) | (a,b) <- pairs ]
 
 
-ops :: IO ()
-ops = do
-  putStrLn "*static-ops*"
+generateFile :: Show a => String -> a -> IO ()
+generateFile tag a = do
+  let fp :: FilePath = "gen/" ++ tag ++ ".out"
+  -- TODO: ensure "gen" exists
+  putStrLn $ "Writing file: " <> fp
+  writeFile fp (show a)
+
+
+
+main :: IO ()
+main = do
+  putStrLn "*static*"
   roms <- loadRoms
-  let skipOps = [Op1 IN, Op1 OUT]
-  let ops =
-        [ op | b <- [0..0xFF], let op = decode b ]
-        \\ skipOps
-  let cpu = initCpu HiLo {hi = E8_Reg PCH, lo = E8_Reg PCL }
-  let state = initState roms cpu
-  forM_ ops $ \op -> do
-    let semantics = Semantics.exploreDecodeExec (E8_Lit (InstructionSet.encode op))
-    let program = runGen $
-          compileThen semantics state (return . programFromState)
-    print $ vert [ lay (show (encode op) ++ " --> " ++ show op), lay ""
-                 , tab (layProgram program) ]
 
-
-retarget :: Bool -> IO ()
-retarget inline = do
-  putStrLn "*static-retarget*"
-  roms <- loadRoms
-  --let _as = [0, 0x1A32, 0x18DC , 0x1A7F]
-  let addrs =
-        if inline
-        then [0x20] -- explore inlining for some addresses
-        else [0..0x1FFF] -- no inlining.. lets see every rom address
-  forM_ addrs $ \addr -> do
-    let program = compileAt (const inline) roms addr
-    print $ vert [ lay (show addr ++ ":"), tab (layProgram program) ]
-
-
-reachDev :: IO ()
-reachDev = do
-  putStrLn "*static-reach*"
-  roms <- loadRoms
+  generateFile "0-op-programs" $
+    layOpPrograms (opPrograms roms)
 
   let
     programsForEveryAddress =
@@ -79,40 +57,8 @@ reachDev = do
       | addr <- [0..0x1FFF]
       , let program = compileAt (\_ -> False) roms addr ]
 
-  let !_ = show programsForEveryAddress -- crude forcing!
-
-  let startAddress =
-        [ 0x00
-        -- the interrupt addresss will be detected automatically when
-        -- we compiler a version of the semantics which has the
-        -- interrupt-logc made explicit.
-        , 0x08, 0x10
-        -- game object handlers, from annotated dissasembly, mem usage
-        -- any hope to detect this automatically?
-        , 0x028E -- obj0 (player) handler
-        , 0x03BB -- obj1 (shot) handler
-        , 0x0476 -- obj2 handler
-        , 0x04B6 -- obj3 handler
-        , 0x0682 -- obj4 handler
-
-        -- Inspecting holes w.r.t annotated dissasembly, leads to more candidate start points:
-
-        -- Address after indirect jump: "Run object's code (will return to next line)"
-        , 0x026F
-
-        -- And 3 more places:
-        -- An interesting question is: How do we reach these address dynmaically?
-        -- And it would be nice to check that we actually do!
-
-        -- "Game task 4 when splash screen alien is shooting extra "C" with a squiggly shot"
-        , 0x050E
-
-        -- "SndOffExtPly:"
-        , 0x17B4
-
-        -- call to "One second delay"
-        , 0x1834
-        ]
+  generateFile "1-programs-for-every-address" $
+    layPrograms programsForEveryAddress
 
   let step :: Addr -> [Addr]
       step a = Map.findWithDefault (error $ "step: " <> show a) a stepMap
@@ -120,10 +66,13 @@ reachDev = do
           stepMap :: Map Addr [Addr]
           stepMap = Map.fromList [ (a, oneStepReach p) | (a,p) <- programsForEveryAddress ]
 
-  reachSet <- searchReach step startAddress
+  reachSet <- searchReach step startPoints
+  -- _printReachInfo reachSet
 
-  printReachInfo reachSet
-  --printReachableProgram reachSet programsForEveryAddress
+  let reachablePrograms = [ (a,p) | (a,p) <- programsForEveryAddress, a `elem` reachSet ]
+
+  generateFile "2-reachable-programs" $
+    layPrograms reachablePrograms
 
   let
     returnPoints =
@@ -134,25 +83,92 @@ reachDev = do
       ]
 
   let
-    joinPoints = [ b | (b,as) <- collate backward, length as > 1 ]
-      where backward = [ (b,a) | a <- Set.toList reachSet, b <- step a ]
-
-  print ("start",length startAddress,startAddress)
-  print ("return",length returnPoints, returnPoints)
-  print ("join",length joinPoints, joinPoints)
-
-  let labels = Set.fromList (startAddress ++ returnPoints ++ joinPoints)
-
-  let
-    inlinedPrograms =
+    inlinedDeep =
       [ (addr,program)
       | addr <- Set.toList labels
       , let program = compileAt (`notElem` labels) roms addr ]
+      where
+        labels = Set.fromList (startPoints ++ returnPoints)
 
-  printPrograms inlinedPrograms
+  generateFile "3-inlined-deep" $
+    layPrograms inlinedDeep
+
+  let
+    joinPoints = [ b | (b,as) <- collate backward, length as > 1 ]
+      where
+        backward = [ (b,a) | a <- Set.toList reachSet, b <- step a ]
+
+        collate :: Ord a => [(a,b)] -> [(a,[b])]
+        collate pairs = Map.toList $ Map.fromListWith (++) [ (a,[b]) | (a,b) <- pairs ]
+
+  --print ("#start",length startPoints)
+  --print ("#return",length returnPoints)
+  --print ("#join",length joinPoints)
+
+  let
+    inlinedSharingJoins =
+      [ (addr,program)
+      | addr <- Set.toList labels
+      , let program = compileAt (`notElem` labels) roms addr ]
+      where
+        labels = Set.fromList (startPoints ++ returnPoints ++ joinPoints)
+
+  generateFile "4-inlined-upto-joins" $
+    layPrograms inlinedSharingJoins
 
   return ()
 
+
+opPrograms :: Roms -> [(Op,Program)]
+opPrograms roms = do
+  let skipOps = [Op1 IN, Op1 OUT]
+  let ops = [ op | b <- [0..0xFF], let op = decode b, op `notElem` skipOps ]
+  let cpu = initCpu HiLo {hi = E8_Reg PCH, lo = E8_Reg PCL }
+  let state = initState roms cpu  -- TODO: shouldn't need roms here
+  [
+    (op,program)
+    | op <- ops
+    , let semantics = Semantics.exploreDecodeExec (E8_Lit (InstructionSet.encode op))
+    , let program = runGen $ compileThen semantics state (return . programFromState)
+    ]
+
+
+layOpPrograms :: [(Op,Program)] -> Lay
+layOpPrograms =
+  layTagged (\op -> lay (show (encode op) ++ " --> " ++ show op)) (tab . layProgram)
+
+layPrograms :: [(Addr,Program)] -> Lay
+layPrograms =
+  layTagged (\addr -> lay (show addr ++ ":")) (tab . layProgram)
+
+
+startPoints :: [Addr]
+startPoints =
+  [ 0x00
+  -- the interrupt addresss will be detected automatically when
+  -- we compiler a version of the semantics which has the
+  -- interrupt-logc made explicit.
+  , 0x08, 0x10
+  -- game object handlers, from annotated dissasembly, mem usage
+  -- any hope to detect this automatically?
+  , 0x028E -- obj0 (player) handler
+  , 0x03BB -- obj1 (shot) handler
+  , 0x0476 -- obj2 handler
+  , 0x04B6 -- obj3 handler
+  , 0x0682 -- obj4 handler
+  -- Inspecting holes w.r.t annotated dissasembly, leads to more candidate start points:
+  -- Address after indirect jump: "Run object's code (will return to next line)"
+  , 0x026F
+  -- And 3 more places:
+  -- An interesting question is: How do we reach these address dynmaically?
+  -- And it would be nice to check that we actually do!
+  -- "Game task 4 when splash screen alien is shooting extra "C" with a squiggly shot"
+  , 0x050E
+  -- "SndOffExtPly:"
+  , 0x17B4
+  -- call to "One second delay"
+  , 0x1834
+  ]
 
 returnAddresses :: Program -> [Addr]
 returnAddresses = \case
@@ -183,10 +199,13 @@ searchReach step initial = loop 0 Set.empty initial
         let frontier' = [ a2 | a1 <- frontier, a2 <- step a1, a2 `notElem` acc' ]
         loop (n+1) acc' frontier'
 
-printReachInfo :: Set Addr -> IO ()
-printReachInfo reachSet = do
+_printReachInfo :: Set Addr -> IO ()
+_printReachInfo reachSet = do
   putStrLn $ "# reachable addresses = " <> show (Set.size reachSet)
   let xs = Set.toList reachSet
+  -- This [0,1,2] is a bit of a hack.
+  -- To do it properly would take account of the op-size;
+  -- i.e. the number of following immediate bytes
   let ys = [ a | a0 <- xs, a <- [a0, a0+1, a0+2]]
   let allRom = [0..0x1FFF]
   let holes = allRom \\ ys
@@ -204,15 +223,6 @@ printReachInfo reachSet = do
       , ", size =", show (1 + Addr.toUnsigned (end - start))
       ]
   putStrLn ""
-
-printPrograms :: [(Addr,Program)] -> IO ()
-printPrograms programs  = do
-  print $ vert
-    [ vert [lay (show a ++ ":")
-           , tab (layProgram p)
-           , lay ""
-           ]
-    | (a,p) <- programs ]
 
 
 data Roms = Roms
@@ -822,3 +832,6 @@ vert = Lay . concat . map lines
 
 tab :: Lay -> Lay
 tab Lay{lines} = Lay $ [ "  " ++ line | line <- lines ]
+
+layTagged :: (k -> Lay) -> (v -> Lay) -> [(k,v)] -> Lay
+layTagged layK layV kvs = vert [ vert [lay "", layK k, lay "" , tab (layV v)] | (k,v) <- kvs ]

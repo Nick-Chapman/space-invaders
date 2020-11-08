@@ -9,7 +9,7 @@ import qualified Rom2k (load)
 import qualified GraphicsSDL (main)
 import qualified Tst (main)
 import qualified SpeedTest (main)
-import qualified Static (ops,retarget,reachDev)
+import qualified Static (main)
 
 -- | Entry point to the Space Invaders emulation
 main :: IO ()
@@ -35,17 +35,11 @@ main = do
       Tst.main
     ModeSpeedTest -> do
       SpeedTest.main mem
-    ModeStaticOps -> do
-      Static.ops
-    ModeStaticRetarget{inline} -> do
-      Static.retarget inline
-    ModeStaticReach -> do
-      Static.reachDev
+    ModeStatic -> do
+      Static.main
 
 data Mode = ModeShowDecodeTable | ModeTrace | ModeSDL | ModeSpeedTest | ModeTst
-  | ModeStaticOps
-  | ModeStaticRetarget { inline :: Bool }
-  | ModeStaticReach
+  | ModeStatic
 
 data Conf = Conf
   { mode :: Mode
@@ -87,10 +81,7 @@ traceConfPOI i = traceConf0
 parse :: [String] -> Conf -> Conf
 parse args conf = case args of
   [] -> conf
-  "reach":args -> parse args $ conf { mode = ModeStaticReach }
-  "retarget":args -> parse args $ conf { mode = ModeStaticRetarget False }
-  "retarget-inline":args -> parse args $ conf { mode = ModeStaticRetarget True }
-  "ops":args -> parse args $ conf { mode = ModeStaticOps }
+  "static":args -> parse args $ conf { mode = ModeStatic }
   "speed-test":args -> parse args $ conf { mode = ModeSpeedTest }
   "tst":args -> parse args $ conf { mode = ModeTst }
   "sdl":args -> parse args $ conf { mode = ModeSDL }

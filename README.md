@@ -32,9 +32,13 @@ Status:
 
 ### Step 2. Retarget to standalone executable
 
-- `stack run ops` -- calculate/print semantics of each opcode
-- `stack run retarget` -- first steps...
-- `stack run reach` -- calculate/print reachable program
+`stack run static`
+
+    Writing file: gen/0-op-programs.out
+    Writing file: gen/1-programs-for-every-address.out
+    Writing file: gen/2-reachable-programs.out
+    Writing file: gen/3-inlined-deep.out
+    Writing file: gen/4-inlined-upto-joins.out
 
 
 ### Resource for Space Invaders and 8080

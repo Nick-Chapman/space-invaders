@@ -117,7 +117,6 @@ emulate buttons s0 =
 
       GetInterruptInstruction -> k s (interruptInstruction s)
       Decode byte -> k s (decode byte)
-
       MarkReturnAddress {} -> k s ()
 
       MakeBit (bool) -> k s (Bit bool)
@@ -142,7 +141,7 @@ emulate buttons s0 =
       IsParity byte -> do k s (Bit (parity  byte))
       TestBit byte i -> k s (Bit (byte `testBit` i))
       UpdateBit byte i (Bit bool) -> k s ((if bool then setBit else clearBit) byte i)
-      DispatchByte (Byte word) -> k s word
+      CaseByte (Byte word) -> k s word
 
       MakeAddr hilo -> k s (Addr.fromHiLo hilo)
       SplitAddr a -> k s (Addr.toHiLo a)

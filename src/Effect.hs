@@ -37,16 +37,15 @@ data Eff p a where
   AreInterruptsEnabled :: Eff p Bool
   TimeToWakeup :: Eff p Bool
 
-  MarkReturnAddress :: Addr p -> Eff p ()
-
   GetInterruptInstruction :: Eff p (Byte p)
   Decode :: Byte p -> Eff p Op
+  MarkReturnAddress :: Addr p -> Eff p ()
 
   MakeBit :: Bool -> Eff p (Bit p)
   Flip :: Bit p -> Eff p (Bit p)
   AndBit :: Bit p -> Bit p -> Eff p (Bit p)
   OrBit :: Bit p -> Bit p -> Eff p (Bit p)
-  CaseBit :: Bit p -> Eff p Bool -- rename DispatchBit
+  CaseBit :: Bit p -> Eff p Bool
 
   MakeByte :: Word8 -> Eff p (Byte p)
   ShiftRight :: Byte p -> Byte p -> Eff p (Byte p)
@@ -62,7 +61,7 @@ data Eff p a where
   IsParity :: Byte p -> Eff p (Bit p)
   TestBit :: Byte p -> Int -> Eff p (Bit p)
   UpdateBit :: Byte p -> Int -> Bit p -> Eff p (Byte p)
-  DispatchByte :: Byte p -> Eff p Word8
+  CaseByte :: Byte p -> Eff p Word8
 
   MakeAddr :: HiLo (Byte p) -> Eff p (Addr p)
   SplitAddr :: Addr p -> Eff p (HiLo (Byte p))

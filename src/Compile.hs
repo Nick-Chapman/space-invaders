@@ -203,7 +203,7 @@ compileThen semantics state k =
       E.Decode e -> do
         case e of
           E8_Lit byte -> k s (decode byte)
-          _ -> error $ "decode, non literal: " <> show e
+          _ -> error $ "Decode, non-literal: " <> show e
 
       E.MakeByte w8 -> k s (E8_Lit (Byte w8))
 
@@ -287,10 +287,10 @@ compileThen semantics state k =
       E.GetButton but -> do
         k s (E1_Button but)
 
-      E.DispatchByte e -> do
+      E.CaseByte e -> do
         case e of
           E8_Lit (Byte w8) -> k s w8
-          _ -> error $ "dispatch-byte, " ++ show e
+          _ -> error $ "CaseByte, non-literal " ++ show e
 
       E.TestBit e i -> k s (E1_TestBit e i)
       E.UpdateBit e i p -> k s (E8_UpdateBit e i p)

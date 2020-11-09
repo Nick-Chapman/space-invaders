@@ -75,9 +75,9 @@ main = do
         collate :: Ord a => [(a,b)] -> [(a,[b])]
         collate pairs = Map.toList $ Map.fromListWith (++) [ (a,[b]) | (a,b) <- pairs ]
 
-  --print ("#start",length startPoints)
-  --print ("#return",length returnPoints)
-  --print ("#join",length joinPoints)
+  print ("#start",length startPoints)
+  print ("#return",length returnPoints)
+  print ("#join",length joinPoints)
 
   let
     inlinedSharingJoins =
@@ -131,10 +131,11 @@ startPoints =
 
 
 searchReach :: (Addr -> [Addr]) -> [Addr] -> IO (Set Addr)
-searchReach step initial = loop 0 Set.empty initial
+searchReach step initial = loop 0 Set.empty (Set.fromList initial)
   where
-    loop :: Int -> Set Addr -> [Addr] -> IO (Set Addr)
-    loop n acc frontier = do
+    loop :: Int -> Set Addr -> Set Addr -> IO (Set Addr)
+    loop n acc frontierSet = do
+      let frontier = Set.toList frontierSet
       when False $ do -- debug print disabled
         putStrLn $ unwords
           ["search, step:", show n,
@@ -145,7 +146,7 @@ searchReach step initial = loop 0 Set.empty initial
       when (not (all (`notElem` acc) frontier)) $ error "searchReach, inv failure"
       if frontier == [] then return acc else do
         let acc' = acc `union` Set.fromList frontier
-        let frontier' = [ a2 | a1 <- frontier, a2 <- step a1, a2 `notElem` acc' ]
+        let frontier' = Set.fromList [ a2 | a1 <- frontier, a2 <- step a1, a2 `notElem` acc' ]
         loop (n+1) acc' frontier'
 
 

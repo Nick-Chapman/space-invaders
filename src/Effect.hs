@@ -33,8 +33,8 @@ data Eff p a where
   -- TODO: treatthe is_enabled like a cpu flag
   EnableInterrupts :: Eff p ()
   DisableInterrupts :: Eff p ()
-  AreInterruptsEnabled :: Eff p Bool
-  TimeToWakeup :: Eff p Bool
+  AreInterruptsEnabled :: Eff p (Bit p)
+  TimeToWakeup :: Eff p (Bit p)
 
   GetInterruptInstruction :: Eff p (Byte p)
   Decode :: Byte p -> Eff p Op

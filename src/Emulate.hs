@@ -26,7 +26,7 @@ import qualified Buttons (get)
 import qualified Byte (toUnsigned)
 import qualified Cpu (init,get,set,getFlag,setFlag)
 import qualified Mem (read,write)
-import qualified Phase (Byte,Addr,Ticks,Bit)
+import qualified Phase (Byte,Addr,Bit) -- ,Ticks
 import qualified Shifter (init,get,set)
 import qualified Sounds (Playing,initPlaying,soundOn,soundOff)
 
@@ -42,7 +42,7 @@ data EmuTime -- At Emulation type we have concrete Bytes
 instance Phase EmuTime where
   type Byte EmuTime = Byte
   type Addr EmuTime = Addr
-  type Ticks EmuTime = Ticks
+  --type Ticks EmuTime = Ticks
   type Bit EmuTime = Bit
 
 
@@ -111,10 +111,10 @@ emulate buttons s0 =
 
       EnableInterrupts -> k s { interrupts_enabled = True } ()
       DisableInterrupts -> k s { interrupts_enabled = False } ()
-      AreInterruptsEnabled -> k s (interrupts_enabled s)
+      AreInterruptsEnabled -> k s (Bit (interrupts_enabled s))
       TimeToWakeup -> case timeToWakeup s of
-        Nothing -> k s False
-        Just s -> k s True
+        Nothing -> k s (Bit False)
+        Just s -> k s (Bit True)
 
       GetInterruptInstruction -> k s (interruptInstruction s)
       Decode byte -> k s (decode byte)

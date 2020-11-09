@@ -20,7 +20,7 @@ import qualified InstructionSet as Instr (RegSpec(..))
 
 exploreFetchDecodeExec :: Eff p ()
 exploreFetchDecodeExec = do
-  byte <- fetch
+  byte <- fetch --OrHandleInterrupt
   exploreDecodeExec byte
 
 exploreDecodeExec :: Byte p -> Eff p ()
@@ -52,17 +52,17 @@ fetchDecodeExec = do
 
 fetchOrHandleInterrupt :: Eff p (Byte p)
 fetchOrHandleInterrupt = do
-  processInterrupt >>= \case
+  processInterrupt >>= CaseBit >>= \case
     False -> fetch
     True -> do
       DisableInterrupts
       GetInterruptInstruction
 
-processInterrupt :: Eff p Bool
+processInterrupt :: Eff p (Bit p)
 processInterrupt = do
   isTime <- TimeToWakeup
   enabled <- AreInterruptsEnabled
-  return (isTime && enabled)
+  AndBit isTime enabled
 
 fetch :: Eff p (Byte p) -- fetch byte at PC, and increment PC
 fetch = do

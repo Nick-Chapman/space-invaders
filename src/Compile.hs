@@ -18,7 +18,7 @@ import qualified Cpu (get,set,getFlag,setFlag)
 import qualified Data.Set as Set
 import qualified Effect as E (Eff(..))
 import qualified InvaderRoms (lookup)
-import qualified Phase (Bit,Byte,Addr,Ticks)
+import qualified Phase (Bit,Byte,Addr) --,Ticks
 import qualified Semantics (exploreDecodeExec,exploreFetchDecodeExec)
 import qualified Shifter (Reg(..),get,set,allRegs)
 
@@ -29,9 +29,9 @@ instance Phase CompTime where
   type Bit CompTime = Exp1
   type Byte CompTime = Exp8
   type Addr CompTime = Exp16
-  type Ticks CompTime = ExpTicks
+--  type Ticks CompTime = ExpTicks
 
-data ExpTicks -- TODO
+--data ExpTicks -- TODO
 
 
 opPrograms :: Roms -> [(Op,Program)]
@@ -199,14 +199,8 @@ compileThen semantics state k =
       -- TODO: interrupts-enabled bit in state?
       E.EnableInterrupts -> k s { interruptsEnabled = E1_True } ()
       E.DisableInterrupts -> k s { interruptsEnabled = E1_False } ()
-      E.AreInterruptsEnabled -> do
-        t <- k s True
-        e <- k s False
-        return $ S_If E1_InterruptsEnabled t e
-      E.TimeToWakeup -> do
-        t <- k s True
-        e <- k s False
-        return $ S_If E1_TimeToWakeup t e
+      E.AreInterruptsEnabled -> k s E1_InterruptsEnabled
+      E.TimeToWakeup -> k s E1_TimeToWakeup
 
       E.GetInterruptInstruction -> do
         t <- k s (E8_Lit 0xCF)

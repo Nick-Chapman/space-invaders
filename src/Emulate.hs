@@ -26,7 +26,7 @@ import qualified Buttons (get)
 import qualified Byte (toUnsigned)
 import qualified Cpu (init,get,set,getFlag,setFlag)
 import qualified Mem (read,write)
-import qualified Phase (Byte,Addr,Bit) -- ,Ticks
+import qualified Phase (Byte,Addr,Bit)
 import qualified Shifter (init,get,set)
 import qualified Sounds (Playing,initPlaying,soundOn,soundOff)
 import qualified Semantics (fetchDecodeExec,Conf(..))
@@ -43,7 +43,6 @@ data EmuTime -- At Emulation type we have concrete Bytes
 instance Phase EmuTime where
   type Byte EmuTime = Byte
   type Addr EmuTime = Addr
-  --type Ticks EmuTime = Ticks
   type Bit EmuTime = Bit
 
 

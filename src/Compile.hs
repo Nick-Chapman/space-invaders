@@ -19,7 +19,7 @@ import qualified Cpu (get,set,getFlag,setFlag)
 import qualified Data.Set as Set
 import qualified Effect as E (Eff(..))
 import qualified InvaderRoms (lookup)
-import qualified Phase (Bit,Byte,Addr) --,Ticks
+import qualified Phase (Bit,Byte,Addr)
 import qualified Semantics (fetchDecodeExec,decodeExec,Conf(..))
 import qualified Shifter (Reg(..),get,set,allRegs)
 
@@ -30,9 +30,6 @@ instance Phase CompTime where
   type Bit CompTime = Exp1
   type Byte CompTime = Exp8
   type Addr CompTime = Exp16
---  type Ticks CompTime = ExpTicks
-
---data ExpTicks -- TODO
 
 
 opPrograms :: Roms -> [(Op,Program)]

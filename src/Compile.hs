@@ -203,6 +203,10 @@ compileThen semantics state k =
         t <- k s (E8_Lit 0xCF)
         e <- k s (E8_Lit 0xD7)
         return $ S_If E1_HalfFrame t e
+
+      {-E.GetInterruptInstruction -> do
+        k s (E8_Ite E1_HalfFrame (E8_Lit 0xCF) (E8_Lit 0xD7))-} -- causes non-literal decode
+
       E.Decode e ->
         case e of
           E8_Lit byte -> k s (decode byte)

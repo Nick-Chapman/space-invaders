@@ -18,37 +18,39 @@ import qualified Ports (inputPort,outputPort)
 import qualified InstructionSet as Instr (RegSpec(..))
 
 
+-- This is the entry point for: gen/{1,2...}
 exploreFetchDecodeExec :: Eff p ()
 exploreFetchDecodeExec = do
   byte <- fetch --OrHandleInterrupt
   exploreDecodeExec byte
 
+-- This is the entry point for: gen/0-op-programs.out
 exploreDecodeExec :: Byte p -> Eff p ()
 exploreDecodeExec byte = do
-  op <- Decode byte
-  instruction <- fetchImmediates op
-  execute instruction >>= \case
-    Next ->
-      return ()
-    Jump a ->
-      setPC a
-
+  (_,_) <- decodeExec_withInfo byte
+  return ()
 
 -- | Semantics are defined to be Phase generic
 
+-- This is the entry point for the emulator
 fetchDecodeExec :: Eff p (Instruction (Byte p), Int)
 fetchDecodeExec = do
-    byte <- fetchOrHandleInterrupt
-    op <- Decode byte
-    instruction <- fetchImmediates op
-    execute instruction >>= \case
-      Next -> do
-        let n = cycles False op
-        return (instruction,n)
-      Jump a -> do
-        let n = cycles True op
-        setPC a
-        return (instruction,n)
+  byte <- fetchOrHandleInterrupt
+  decodeExec_withInfo byte
+
+decodeExec_withInfo :: Byte p -> Eff p (Instruction (Byte p), Int)
+decodeExec_withInfo byte = do
+  op <- Decode byte
+  instruction <- fetchImmediates op
+  execute instruction >>= \case
+    Next -> do
+      let n = cycles False op
+      return (instruction,n)
+    Jump a -> do
+      let n = cycles True op
+      setPC a
+      return (instruction,n)
+
 
 fetchOrHandleInterrupt :: Eff p (Byte p)
 fetchOrHandleInterrupt = do

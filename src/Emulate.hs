@@ -120,6 +120,9 @@ emulate buttons s0 =
         Nothing -> k s (Bit False)
         Just s -> k s (Bit True)
 
+      MaskInterrupts{} -> k s ()
+      AreInterruptsMasked -> k s False
+
       GetInterruptInstruction -> k s (interruptInstruction s)
       Decode byte -> k s (decode byte)
       MarkReturnAddress {} -> k s ()

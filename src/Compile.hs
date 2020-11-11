@@ -8,10 +8,11 @@ import Cpu (Cpu(..),Reg(..),Flag(..))
 import Data.Set (Set)
 import Effect (Eff)
 import HiLo (HiLo(..))
-import InstructionSet (Op(..),Op1(..),decode,encode)
+import InstructionSet (Instruction,Op(..),Op1(..),decode,encode)
 import InvaderRoms (Roms)
 import Phase (Phase)
 import Residual (Exp1(..),Exp8(..),Exp16(..),Exp17(..),Program(..),AVar(..))
+import Semantics (InterruptHandling(..))
 import Shifter (Shifter(..))
 import qualified Addr as Addr (toHiLo,fromHiLo,bump)
 import qualified Cpu (get,set,getFlag,setFlag)
@@ -19,7 +20,7 @@ import qualified Data.Set as Set
 import qualified Effect as E (Eff(..))
 import qualified InvaderRoms (lookup)
 import qualified Phase (Bit,Byte,Addr) --,Ticks
-import qualified Semantics (exploreDecodeExec,exploreFetchDecodeExec)
+import qualified Semantics (fetchDecodeExec,decodeExec,Conf(..))
 import qualified Shifter (Reg(..),get,set,allRegs)
 
 
@@ -43,7 +44,7 @@ opPrograms roms = do
   [
     (op,program)
     | op <- ops
-    , let semantics = Semantics.exploreDecodeExec (E8_Lit (InstructionSet.encode op))
+    , let semantics = Semantics.decodeExec (E8_Lit (InstructionSet.encode op))
     , let program = runGen $ compileThen semantics state (return . programFromState)
     ]
 
@@ -78,12 +79,14 @@ type Visited = Set Addr
 
 type CompileRes = Gen Program
 
+semConf :: Semantics.Conf
+semConf = Semantics.Conf { interruptHandling = IgnoreInterrupts }
 
 compileFrom :: (Addr -> Bool) -> Visited -> State -> CompileRes
 compileFrom inline = go
   where
 
-    theSemantics = Semantics.exploreFetchDecodeExec
+    theSemantics = Semantics.fetchDecodeExec semConf
 
     -- Tracking visited (for loop breaking) is not needed when we compile w.r.t join-points
     go :: Visited -> State -> CompileRes
@@ -168,9 +171,9 @@ programFromState State{cpu,shifter} = do
 
 
 
-compileThen :: Eff CompTime () -> State -> (State -> CompileRes) -> CompileRes
+compileThen :: Eff CompTime (Instruction Exp8, Int) -> State -> (State -> CompileRes) -> CompileRes
 compileThen semantics state k =
-  run state semantics $ \state () -> k state
+  run state semantics $ \state (_i,_n) -> k state
   where
 
     run :: State -> Eff CompTime a -> (State -> a -> CompileRes) -> CompileRes

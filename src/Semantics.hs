@@ -2,9 +2,9 @@
 -- | This defines the execution semantics (Effects) of the 8080 instructions
 
 module Semantics
-  ( fetchDecodeExec
-  , exploreDecodeExec
-  , exploreFetchDecodeExec
+  ( Conf(..), InterruptHandling(..),
+    fetchDecodeExec
+  , decodeExec
   ) where
 
 import Prelude hiding (subtract)
@@ -18,28 +18,24 @@ import qualified Ports (inputPort,outputPort)
 import qualified InstructionSet as Instr (RegSpec(..))
 
 
--- This is the entry point for: gen/{1,2...}
-exploreFetchDecodeExec :: Eff p ()
-exploreFetchDecodeExec = do
-  byte <- fetch --OrHandleInterrupt
-  exploreDecodeExec byte
-
--- This is the entry point for: gen/0-op-programs.out
-exploreDecodeExec :: Byte p -> Eff p ()
-exploreDecodeExec byte = do
-  (_,_) <- decodeExec_withInfo byte
-  return ()
-
 -- | Semantics are defined to be Phase generic
 
--- This is the entry point for the emulator
-fetchDecodeExec :: Eff p (Instruction (Byte p), Int)
-fetchDecodeExec = do
-  byte <- fetchOrHandleInterrupt
-  decodeExec_withInfo byte
 
-decodeExec_withInfo :: Byte p -> Eff p (Instruction (Byte p), Int)
-decodeExec_withInfo byte = do
+data InterruptHandling
+  = IgnoreInterrupts
+  | BeforeEveryInstruction
+
+data Conf = Conf { interruptHandling :: InterruptHandling }
+
+fetchDecodeExec :: Conf -> Eff p (Instruction (Byte p), Int)
+fetchDecodeExec Conf{interruptHandling} = do
+  byte <- case interruptHandling of
+    IgnoreInterrupts -> fetch
+    BeforeEveryInstruction -> fetchOrHandleInterrupt
+  decodeExec byte
+
+decodeExec :: Byte p -> Eff p (Instruction (Byte p), Int)
+decodeExec byte = do
   op <- Decode byte
   instruction <- fetchImmediates op
   execute instruction >>= \case
@@ -50,7 +46,6 @@ decodeExec_withInfo byte = do
       let n = cycles True op
       setPC a
       return (instruction,n)
-
 
 fetchOrHandleInterrupt :: Eff p (Byte p)
 fetchOrHandleInterrupt = do

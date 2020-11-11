@@ -19,7 +19,7 @@ import HiLo (HiLo(..))
 import InstructionSet (Instruction,decode)
 import Mem (Mem)
 import Phase (Phase)
-import Semantics (fetchDecodeExec)
+import Semantics (InterruptHandling(..))
 import Shifter (Shifter)
 import qualified Addr (fromHiLo,toHiLo,bump)
 import qualified Buttons (get)
@@ -29,6 +29,7 @@ import qualified Mem (read,write)
 import qualified Phase (Byte,Addr,Bit) -- ,Ticks
 import qualified Shifter (init,get,set)
 import qualified Sounds (Playing,initPlaying,soundOn,soundOff)
+import qualified Semantics (fetchDecodeExec,Conf(..))
 
 
 -- | Ticks of the 2 MHz clock
@@ -84,9 +85,13 @@ data EmuStep = EmuStep
     , post :: EmuState
     }
 
+
+semConf :: Semantics.Conf
+semConf = Semantics.Conf { interruptHandling = BeforeEveryInstruction }
+
 emulate :: Buttons -> EmuState -> IO EmuStep
 emulate buttons s0 =
-  run s0 fetchDecodeExec $ \s (instruction,n) -> do
+  run s0 (Semantics.fetchDecodeExec semConf) $ \s (instruction,n) -> do
   return $ EmuStep { instruction, post = advance (Ticks n) s }
   where
 

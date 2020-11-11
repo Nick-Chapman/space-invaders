@@ -111,16 +111,14 @@ pcInRom a = a < 0x2000
 
 -- remove unchangeable part (roms etc) from the state
 data State = State
-  { interruptsEnabled :: Exp1
-  , cpu :: Cpu CompTime
+  { cpu :: Cpu CompTime
   , shifter :: Shifter CompTime
   , roms :: Roms
   }
 
 initState :: Roms -> Cpu CompTime -> State
 initState roms cpu = State
-  { interruptsEnabled = E1_False
-  , cpu
+  { cpu
   , shifter = initShifter
   , roms
   }
@@ -134,7 +132,6 @@ initShifter = Shifter
 
 programFromState :: State -> Program
 programFromState State{cpu,shifter} = do
-  -- TODO: show interruptsEnabled... check with output of DI
   sequence (regUpdates ++ flagUpdates ++ shifterUpdates) finish
     where
       regUpdates =
@@ -196,9 +193,9 @@ compileThen semantics state k =
       E.GetShifterReg r -> k s (Shifter.get shifter r)
       E.SetShifterReg r b -> k s { shifter = Shifter.set shifter r b } ()
 
-      -- TODO: interrupts-enabled bit in state?
-      E.EnableInterrupts -> k s { interruptsEnabled = E1_True } ()
-      E.DisableInterrupts -> k s { interruptsEnabled = E1_False } ()
+      E.EnableInterrupts -> S_EnableInterrupts <$> k s ()
+      E.DisableInterrupts -> S_DisableInterrupts <$> k s ()
+
       E.AreInterruptsEnabled -> k s E1_InterruptsEnabled
       E.TimeToWakeup -> k s E1_TimeToWakeup
 

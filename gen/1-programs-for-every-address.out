@@ -979,6 +979,7 @@
 
 0086:
 
+    enable_interrupts()
     jump (0087);
 
 0087:
@@ -1565,6 +1566,7 @@
 
 00DA:
 
+    enable_interrupts()
     jump (00DB);
 
 00DB:
@@ -1580,6 +1582,7 @@
 
 00DD:
 
+    enable_interrupts()
     jump (00DE);
 
 00DE:
@@ -5112,6 +5115,7 @@
 
 02D3:
 
+    enable_interrupts()
     jump (02D4);
 
 02D4:
@@ -13815,6 +13819,7 @@
 
 076D:
 
+    enable_interrupts()
     jump (076E);
 
 076E:
@@ -13899,6 +13904,7 @@
 
 0778:
 
+    disable_interrupts()
     jump (0779);
 
 0779:
@@ -13938,6 +13944,7 @@
 
 077D:
 
+    disable_interrupts()
     jump (077E);
 
 077E:
@@ -14057,6 +14064,7 @@
 
 078F:
 
+    disable_interrupts()
     jump (0790);
 
 0790:
@@ -15253,6 +15261,7 @@
 
 0826:
 
+    disable_interrupts()
     jump (0827);
 
 0827:
@@ -15673,6 +15682,7 @@
 
 085B:
 
+    disable_interrupts()
     jump (085C);
 
 085C:
@@ -16047,6 +16057,7 @@
 
 0896:
 
+    disable_interrupts()
     jump (0897);
 
 0897:
@@ -16615,6 +16626,7 @@
 
 08DF:
 
+    enable_interrupts()
     jump (08E0);
 
 08E0:
@@ -16835,6 +16847,7 @@
 
 08FC:
 
+    disable_interrupts()
     jump (08FD);
 
 08FD:
@@ -19745,6 +19758,7 @@
 
 0A73:
 
+    disable_interrupts()
     jump (0A74);
 
 0A74:
@@ -20646,6 +20660,7 @@
 
 0AF2:
 
+    enable_interrupts()
     jump (0AF3);
 
 0AF3:
@@ -22072,6 +22087,7 @@
 
 0B9C:
 
+    disable_interrupts()
     jump (0B9D);
 
 0B9D:
@@ -37014,6 +37030,7 @@
 
 16E9:
 
+    enable_interrupts()
     jump (16EA);
 
 16EA:
@@ -37303,6 +37320,7 @@
 
 170A:
 
+    enable_interrupts()
     jump (170B);
 
 170B:
@@ -39077,6 +39095,7 @@
 
 17EB:
 
+    enable_interrupts()
     jump (17EC);
 
 17EC:
@@ -39475,6 +39494,7 @@
 
 181E:
 
+    disable_interrupts()
     jump (181F);
 
 181F:
@@ -41337,6 +41357,7 @@
 
 1923:
 
+    disable_interrupts()
     jump (1924);
 
 1924:
@@ -41560,6 +41581,7 @@
 
 1945:
 
+    disable_interrupts()
     jump (1946);
 
 1946:
@@ -42158,6 +42180,7 @@
 
 1994:
 
+    disable_interrupts()
     jump (1995);
 
 1995:
@@ -42443,6 +42466,7 @@
 
 19BC:
 
+    disable_interrupts()
     jump (19BD);
 
 19BD:

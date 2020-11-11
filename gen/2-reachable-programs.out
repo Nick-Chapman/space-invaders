@@ -508,6 +508,7 @@
 
 0086:
 
+    enable_interrupts()
     jump (0087);
 
 0087:
@@ -2847,6 +2848,7 @@
 
 02D3:
 
+    enable_interrupts()
     jump (02D4);
 
 02D4:
@@ -7259,6 +7261,7 @@
 
 076D:
 
+    enable_interrupts()
     jump (076E);
 
 076E:
@@ -10631,6 +10634,7 @@
 
 0AF2:
 
+    enable_interrupts()
     jump (0AF3);
 
 0AF3:
@@ -14798,6 +14802,7 @@
 
 16E9:
 
+    enable_interrupts()
     jump (16EA);
 
 16EA:
@@ -15771,6 +15776,7 @@
 
 17EB:
 
+    enable_interrupts()
     jump (17EC);
 
 17EC:

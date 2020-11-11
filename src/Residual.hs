@@ -36,6 +36,8 @@ data Program
   | S_MarkReturnAddress Exp16 Program
   | S_UnknownOutput Word8 Program
   | S_SoundControl Sound Exp1 Program
+  | S_EnableInterrupts Program
+  | S_DisableInterrupts Program
 
 data Exp17
   = E17_Add Exp16 Exp16
@@ -158,6 +160,14 @@ layProgram = \case
          ]
   S_SoundControl sound bool next ->
     vert [ lay ("sound_control" ++ show (sound,bool) ++ ";")
+         , layProgram next
+         ]
+  S_EnableInterrupts next ->
+    vert [ lay "enable_interrupts()"
+         , layProgram next
+         ]
+  S_DisableInterrupts next ->
+    vert [ lay "disable_interrupts()"
          , layProgram next
          ]
 

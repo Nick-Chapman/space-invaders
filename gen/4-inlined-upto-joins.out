@@ -378,6 +378,7 @@
             M[2093] := 01;
             #076A
             #076D
+            enable_interrupts()
             #076E
             M[23FF] := 07;
             M[23FE] := 71;
@@ -752,6 +753,7 @@
     let:16 a7 = (1 + a6) in
     let:16 a8 = (1 + a7) in
     #0086
+    enable_interrupts()
     #0087
     let:16 a9 = (1 + a8) in
     let:16 a10 = (1 + a9) in
@@ -1124,6 +1126,7 @@
       #1976
       #16E6
       #16E9
+      enable_interrupts()
       #16EA
       let:8 a5 = (01 ^ 01) in
       #16EB
@@ -2110,6 +2113,7 @@
       } else {
         #02D0
         #02D3
+        enable_interrupts()
         #02D4
         M[23FF] := 02;
         M[23FE] := D7;
@@ -7345,6 +7349,7 @@
 
 0AF2:
 
+    enable_interrupts()
     #0AF3
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 0A;
@@ -10913,6 +10918,7 @@
 
 17EB:
 
+    enable_interrupts()
     #17EC
     #17EF
     #17F2

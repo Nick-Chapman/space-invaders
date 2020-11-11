@@ -2216,6 +2216,7 @@ F2 --> Op2 (JCond P)
 
 F3 --> Op0 DI
 
+    disable_interrupts()
     jump ((PCH,PCL));
 
 F4 --> Op2 (CCond P)
@@ -2297,6 +2298,7 @@ FA --> Op2 (JCond MI)
 
 FB --> Op0 EI
 
+    enable_interrupts()
     jump ((PCH,PCL));
 
 FC --> Op2 (CCond MI)

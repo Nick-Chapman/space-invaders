@@ -80,7 +80,6 @@ data Exp8
   | E8_Ite Exp1 Exp8 Exp8
   | E8_Var AVar
   | E8_UnknownInput Word8
-  | E8_GetShiftRegisterAtOffset
   deriving (Eq)
 
 data Exp16
@@ -206,7 +205,6 @@ instance Show Exp8 where
     E8_Ite i t e -> parenthesize (show i ++ " ? " ++ show t ++ " : " ++ show e)
     E8_Var v -> show v
     E8_UnknownInput port -> "unknown_input" ++ parenthesize (show port)
-    E8_GetShiftRegisterAtOffset -> "get_shift_register_at_offset()"
 
 instance Show Exp16 where
   show = \case

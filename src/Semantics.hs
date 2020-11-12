@@ -31,10 +31,7 @@ fetchDecodeExec :: Conf -> Eff p (Instruction (Byte p), Int)
 fetchDecodeExec Conf{interruptHandling} = do
   byte <- case interruptHandling of
     IgnoreInterrupts -> fetch
-    BeforeEveryInstruction -> do
-      AreInterruptsMasked >>= \case
-        True -> fetch
-        False -> fetchOrHandleInterrupt
+    BeforeEveryInstruction -> fetchOrHandleInterrupt
   decodeExec byte
 
 decodeExec :: Byte p -> Eff p (Instruction (Byte p), Int)
@@ -43,11 +40,9 @@ decodeExec byte = do
   instruction <- fetchImmediates op
   execute instruction >>= \case
     Next -> do
-      MaskInterrupts True
       let n = cycles False op
       return (instruction,n)
     Jump a -> do
-      MaskInterrupts False -- to allow handling after a jump
       let n = cycles True op
       setPC a
       return (instruction,n)

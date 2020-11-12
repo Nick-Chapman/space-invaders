@@ -69,6 +69,7 @@ initState mem = EmuState
   , cpu = Cpu.init (Byte 0) (Bit False)
   , mem
   , interrupts_enabled = False
+
   , nextWakeup = halfFrameTicks
   , shifter = Shifter.init (Byte 0)
   , playing = Sounds.initPlaying
@@ -119,9 +120,6 @@ emulate buttons s0 =
       TimeToWakeup -> case timeToWakeup s of
         Nothing -> k s (Bit False)
         Just s -> k s (Bit True)
-
-      MaskInterrupts{} -> k s ()
-      AreInterruptsMasked -> k s False
 
       GetInterruptInstruction -> k s (interruptInstruction s)
       Decode byte -> k s (decode byte)

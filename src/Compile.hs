@@ -77,7 +77,7 @@ type Visited = Set Addr
 type CompileRes = Gen Program
 
 semConf :: Semantics.Conf
-semConf = Semantics.Conf { interruptHandling = BeforeEveryInstruction }
+semConf = Semantics.Conf { interruptHandling = IgnoreInterrupts }
 
 compileFrom :: (Addr -> Bool) -> Visited -> State -> CompileRes
 compileFrom inline = go
@@ -114,7 +114,6 @@ data State = State
   { cpu :: Cpu CompTime
   , shifter :: Shifter CompTime
   , roms :: Roms
-  , interrupts_masked :: Bool
   }
 
 initState :: Roms -> Cpu CompTime -> State
@@ -122,7 +121,6 @@ initState roms cpu = State
   { cpu
   , shifter = initShifter
   , roms
-  , interrupts_masked = True
   }
 
 initShifter :: Shifter CompTime
@@ -201,10 +199,6 @@ compileThen semantics state k =
       E.AreInterruptsEnabled -> k s E1_InterruptsEnabled
 
       E.TimeToWakeup -> k s E1_TimeToWakeup
-
-      E.MaskInterrupts b -> k s { interrupts_masked = b } ()
-      E.AreInterruptsMasked -> k s (interrupts_masked s)
-
 
       E.GetInterruptInstruction -> do
         t <- k s (E8_Lit 0xCF)

@@ -192,7 +192,10 @@ advance n s@EmuState{icount,ticks} =
   s { icount = icount + 1, ticks = ticks + n }
 
 halfFrameTicks :: Ticks
-halfFrameTicks = Ticks (2000000 `div` 120)
+halfFrameTicks = Ticks (2000000 `div` 120) - n -- Experiment with reducing this value.
+  -- turns out that even a reduction of just 1000 cycles
+  -- will cause the game to hang after the "P" of "PLAY" is displayed
+  where n = 0 --1000
 
 interruptInstruction :: EmuState -> Byte
 interruptInstruction EmuState{ticks} = do

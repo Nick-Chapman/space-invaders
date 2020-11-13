@@ -10,16 +10,17 @@ import Emulate (Bit(..),EmuState(..),EmuStep(..),initState,emulate,Ticks(..),pre
 import InstructionSet (Instruction,prettyInstructionBytes)
 import Mem (Mem,initTst)
 import Prelude hiding (init)
+import System.IO (Handle,hPutStrLn)
 import qualified Data.ByteString as BS (readFile,unpack)
 
-main :: IO ()
-main = do
+main :: Handle -> IO ()
+main handle = do
   mem <- loadTestMem "roms/TST8080.COM"
   let state0 = initState mem
   let EmuState{cpu=cpu0} = state0
   let cpu1 = Cpu.set cpu0 PCH 0x1
   let state1 = state0 { cpu = cpu1 }
-  trace state1
+  trace handle state1
 
 loadTestMem :: FilePath -> IO Mem
 loadTestMem path = do
@@ -40,15 +41,15 @@ loadTestMem path = do
         , let y = if i==j then b else x
         ]
 
-trace :: EmuState -> IO ()
-trace = do
+trace :: Handle -> EmuState -> IO ()
+trace handle = do
   loop 0
   where
     loop :: Int -> EmuState -> IO ()
     loop i pre = do
       if (i>650) then return () else do
         EmuStep{instruction,post} <- emulate buttons0 pre
-        putStrLn (seeState pre ++ prettyStep pre instruction)
+        hPutStrLn handle (seeState pre ++ prettyStep pre instruction)
         loop (i+1) post
 
 

@@ -9,6 +9,7 @@ import Data.Bits (testBit)
 import Emulate (EmuState(..),initState,Ticks(..),prettyPrefix,emulate,EmuStep(..))
 import InstructionSet (Instruction,prettyInstructionBytes)
 import Mem (Mem)
+import System.IO (Handle,hPutStrLn)
 import Text.Printf (printf)
 import qualified Mem (read,initInvader)
 
@@ -19,8 +20,8 @@ data TraceConf = TraceConf
   , traceNearPing :: Bool
   }
 
-traceEmulate :: TraceConf -> IO ()
-traceEmulate TraceConf{traceOnAfter,stopAfter,period,traceNearPing} = do
+traceEmulate :: Handle -> TraceConf -> IO ()
+traceEmulate handle TraceConf{traceOnAfter,stopAfter,period,traceNearPing} = do
   mem <- Mem.initInvader
   loop 1 firstPing (initState mem)
   where
@@ -37,19 +38,19 @@ traceEmulate TraceConf{traceOnAfter,stopAfter,period,traceNearPing} = do
       let isStop = case stopAfter of Just i -> (icount > i+1); Nothing -> False
 
       case isStop of
-        True -> putStrLn "STOP"
+        True -> hPutStrLn handle "STOP"
         False -> do
 
           let ping = (ticks >= nextPing)
           let nearPing = ((ticks+50 >= nextPing) || (ticks-50 <= nextPing-cycles))
 
           when (traceIsOn || (traceNearPing && nearPing)) $
-            putStrLn (ljust 60 (prettyStep pre instruction) ++ show post)
+            hPutStrLn handle (ljust 60 (prettyStep pre instruction) ++ show post)
 
           case ping of
             False ->  loop periodCount nextPing post
             True -> do
-              printPeriodPixels period periodCount post
+              printPeriodPixels handle period periodCount post
               loop (periodCount + 1) (nextPing + cycles) post
 
 
@@ -71,11 +72,11 @@ cyclesInPeriod = \case
   where twoMill = 2_000_000
 
 
-printPeriodPixels :: Period -> Int -> EmuState -> IO ()
-printPeriodPixels period count s = do
+printPeriodPixels :: Handle -> Period -> Int -> EmuState -> IO ()
+printPeriodPixels handle period count s = do
   let EmuState{mem} = s
   let pixs = onPixels (getDisplayFromMem mem)
-  putStrLn $ prettyPrefix s $ unwords
+  hPutStrLn handle $ prettyPrefix s $ unwords
     [ printf "%s{%d}" (show period) count
     , printf "#onPixels = %d" (length pixs)
     ]

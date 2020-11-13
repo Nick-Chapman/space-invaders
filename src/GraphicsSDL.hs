@@ -1,5 +1,5 @@
 
-module GraphicsSDL (main) where
+module GraphicsSDL (Conf(..),main) where
 
 import Control.Concurrent (threadDelay)
 import Control.Monad (when,forM,forM_)
@@ -21,12 +21,18 @@ import qualified SDL.Font as Font (initialize,load,solid,size)
 import qualified SDL.Mixer as Mixer (withAudio,defaultAudio,load,play)
 import qualified World (initWorld,updateKey,stepFrame,pictureWorld,soundsToPlay)
 
+data Conf = Conf
+  { scaleFactor :: Int
+  , fpsLimit :: Maybe Int
+  , showControls :: Bool
+  }
 
-main :: Maybe Int -> IO ()
-main fpsLimitM = do
+main :: Conf -> IO ()
+main Conf{scaleFactor,fpsLimit,showControls} = do
   mem <- Mem.initInvader
 
-  let sf = 4 -- scale factor
+  let sf = fromIntegral scaleFactor
+
   let! _ = keyMapTable
   SDL.initializeAll
   Font.initialize
@@ -37,13 +43,13 @@ main fpsLimitM = do
   let screenH = 256
 
   let windowSize = V2 w h where
-        w = sf * screenW + 400
+        w = sf * (screenW + if showControls then 100 else 0)
         h = sf * screenH
 
   let winConfig = SDL.defaultWindow { SDL.windowInitialSize = windowSize }
   win <- SDL.createWindow (Text.pack "Space Invaders") $ winConfig
   renderer <- SDL.createRenderer win (-1) SDL.defaultRenderer
-  font <- Font.load "assets/Acorn Full Nostalgia.ttf" 20
+  font <- Font.load "assets/Acorn Full Nostalgia.ttf" (5 * scaleFactor)
 
   let _flush = hFlush stdout
   let assets = DrawAssets { renderer, font, sf }
@@ -78,7 +84,7 @@ main fpsLimitM = do
             where
               maybeDelay = do
                 after <- SDL.ticks
-                case fpsLimitM of
+                case fpsLimit of
                   Nothing -> return ()
                   Just fpsLimit -> do
                     let durationMs = fromIntegral (1000*(after-before))

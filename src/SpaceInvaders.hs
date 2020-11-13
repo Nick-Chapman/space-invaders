@@ -3,7 +3,7 @@ module SpaceInvaders (main) where
 
 import System.Environment (getArgs)
 import TraceEmu (traceEmulate,Period(Second,HalfFrame),TraceConf(..))
-import qualified GraphicsSDL (main)
+import qualified GraphicsSDL as SDL (main,Conf(..))
 import qualified SpeedTest (main)
 import qualified Static (main)
 import qualified Tst (main)
@@ -13,12 +13,12 @@ main :: IO ()
 main = do
   putStrLn "*space-invaders*"
   args <- getArgs
-  let Conf{mode,traceConf,fps} = parse args conf0
+  let Conf{mode,traceConf,fpsLimit,scaleFactor,showControls} = parse args conf0
   case mode of
     ModeTrace -> do
       traceEmulate traceConf
     ModeSDL -> do
-      GraphicsSDL.main fps
+      SDL.main $ SDL.Conf { scaleFactor, fpsLimit, showControls }
     ModeTst -> do
       Tst.main
     ModeSpeedTest -> do
@@ -32,11 +32,19 @@ data Mode = ModeTrace | ModeSDL | ModeSpeedTest | ModeTst
 data Conf = Conf
   { mode :: Mode
   , traceConf :: TraceConf
-  , fps :: Maybe Int
+  , fpsLimit :: Maybe Int
+  , scaleFactor :: Int
+  , showControls :: Bool
   }
 
 conf0 :: Conf
-conf0 = Conf { mode = ModeSDL , traceConf = traceConf0, fps = Nothing } -- half speed default
+conf0 = Conf
+  { mode = ModeSDL
+  , traceConf = traceConf0
+  , fpsLimit = Nothing
+  , scaleFactor = 3
+  , showControls = False
+  }
 
 traceConf0 :: TraceConf
 traceConf0 = TraceConf
@@ -77,7 +85,10 @@ parse args conf = case args of
   "test1":args -> parse args $ conf { mode = ModeTrace, traceConf = traceConfTest1 }
   "test2":args -> parse args $ conf {mode = ModeTrace, traceConf = traceConfTest2 }
   "-poi":i:args -> parse args $ conf { traceConf = traceConfPOI (read i) }
-  "-fps":i:args -> parse args $ conf { fps = Just (read i) }
+  "-controls":args -> parse args $ conf { showControls = True }
+  "-no-controls":args -> parse args $ conf { showControls = False }
+  "-sf":i:args -> parse args $ conf { scaleFactor = read i }
+  "-fps":i:args -> parse args $ conf { fpsLimit = Just (read i) }
   "-frame":args -> parse args $ conf { traceConf = (traceConf conf) { period = HalfFrame } }
   "-trace-near-ping":args -> parse args $ conf { traceConf = (traceConf conf) { traceNearPing = True } }
   args ->

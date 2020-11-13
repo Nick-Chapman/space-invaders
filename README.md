@@ -12,7 +12,8 @@ Build/run emulation with SDL visualization:
 - Game can be paused: `[delete]`
 - Dip-switches can be toggled: `F3`, `F5`, `F6`, `F7`
 - TILT can be activated with `[tab]`
-- Full keyboard-mapping show in panel next to the running game.
+- `stack run -- -controls` : Keyboard-mapping shown in panel next to the running game.
+- `stack run -- -sf 4` : Adjust scale factor. Sensible values: 1-4
 
 Status:
 

@@ -9,7 +9,7 @@ import Data.Set (Set)
 import Effect (Eff)
 import HiLo (HiLo(..))
 import InstructionSet (Instruction,Op(..),Op1(..),decode,encode)
-import InvaderRoms (Roms)
+import Rom (Rom)
 import Phase (Phase)
 import Residual (Exp1(..),Exp8(..),Exp16(..),Exp17(..),Program(..),AVar(..))
 import Semantics (InterruptHandling(..))
@@ -18,7 +18,7 @@ import qualified Addr as Addr (toHiLo,fromHiLo,bump)
 import qualified Cpu (get,set,getFlag,setFlag)
 import qualified Data.Set as Set
 import qualified Effect as E (Eff(..))
-import qualified InvaderRoms (lookup)
+import qualified Rom (lookup)
 import qualified Phase (Bit,Byte,Addr)
 import qualified Semantics (fetchDecodeExec,decodeExec,Conf(..))
 import qualified Shifter (Reg(..),get,set,allRegs)
@@ -32,12 +32,12 @@ instance Phase CompTime where
   type Addr CompTime = Exp16
 
 
-opPrograms :: Roms -> [(Op,Program)]
-opPrograms roms = do
+opPrograms :: Rom -> [(Op,Program)]
+opPrograms rom = do
   let skipOps = [Op1 IN, Op1 OUT]
   let ops = [ op | b <- [0..0xFF], let op = decode b, op `notElem` skipOps ]
   let cpu = initCpu HiLo {hi = E8_Reg PCH, lo = E8_Reg PCL }
-  let state = initState roms cpu  -- TODO: shouldn't need roms here
+  let state = initState rom cpu  -- TODO: shouldn't need rom here
   [
     (op,program)
     | op <- ops
@@ -46,14 +46,14 @@ opPrograms roms = do
     ]
 
 
-compileAt :: (Addr -> Bool) -> Roms -> Addr -> Program
-compileAt inline roms addr = do
+compileAt :: (Addr -> Bool) -> Rom -> Addr -> Program
+compileAt inline rom addr = do
   let cpu = initCpu HiLo {hi = pch, lo = pcl }
         where
           HiLo{hi,lo} = Addr.toHiLo addr
           pch = E8_Lit hi
           pcl = E8_Lit lo
-  let state = initState roms cpu
+  let state = initState rom cpu
   let visited :: Visited = Set.insert addr Set.empty
   runGen $ compileFrom inline visited state
 
@@ -109,18 +109,18 @@ pcInRom :: Addr -> Bool
 pcInRom a = a < 0x2000
 
 
--- remove unchangeable part (roms etc) from the state
+-- remove unchangeable part (rom etc) from the state
 data State = State
   { cpu :: Cpu CompTime
   , shifter :: Shifter CompTime
-  , roms :: Roms
+  , rom :: Rom
   }
 
-initState :: Roms -> Cpu CompTime -> State
-initState roms cpu = State
+initState :: Rom -> Cpu CompTime -> State
+initState rom cpu = State
   { cpu
   , shifter = initShifter
-  , roms
+  , rom
   }
 
 initShifter :: Shifter CompTime
@@ -174,7 +174,7 @@ compileThen semantics state k =
   where
 
     run :: State -> Eff CompTime a -> (State -> a -> CompileRes) -> CompileRes
-    run s@State{cpu,shifter,roms} eff k = case eff of
+    run s@State{cpu,shifter,rom} eff k = case eff of
 
       E.Ret x -> k s x
       E.Bind eff f -> run s eff $ \s a -> run s (f a) k
@@ -185,7 +185,7 @@ compileThen semantics state k =
       E.SetFlag flag v -> k s { cpu = Cpu.setFlag cpu flag v } ()
 
       E.ReadMem a ->
-        case tryRomLookupE16 roms a of
+        case tryRomLookupE16 rom a of
           Just byte -> k s (E8_Lit byte)
           Nothing -> k s (E8_ReadMem a)
       E.WriteMem a b -> S_MemWrite a b <$> k s ()
@@ -296,10 +296,10 @@ make_E16_HiLo = \case
   hilo@HiLo{} -> E16_HiLo hilo
 
 
-tryRomLookupE16 :: Roms -> Exp16 -> Maybe Byte
-tryRomLookupE16 roms exp16 = case getConcreteAddrMaybe exp16 of
+tryRomLookupE16 :: Rom -> Exp16 -> Maybe Byte
+tryRomLookupE16 rom exp16 = case getConcreteAddrMaybe exp16 of
   Nothing -> Nothing
-  Just a -> InvaderRoms.lookup roms a
+  Just a -> Rom.lookup rom a
 
 getConcreteAddrMaybe :: Exp16 -> Maybe Addr
 getConcreteAddrMaybe = \case

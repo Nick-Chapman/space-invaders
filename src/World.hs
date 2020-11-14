@@ -13,11 +13,11 @@ import Buttons (Buttons,buttons0,But(..))
 import Data.Bits (testBit)
 import Emulate (EmuStep(..),emulate,EmuState(..),Ticks(..))
 import Mem (Mem,read)
+import Sounds (Sound(..), allSounds, isSoundPlaying)
 import System.Clock (TimeSpec(..),getTime,Clock(Monotonic))
 import Text.Printf (printf)
 import qualified Buttons (get,press,release,toggle)
 import qualified Emulate (initState)
-import Sounds (Sound(..), allSounds, isSoundPlaying)
 
 data Key
   = KeyInsert
@@ -156,7 +156,7 @@ pictureVideoMem mem = do
     [ Pixel {x = x, y = 256 - y} -- FLIP HERE
     | x :: Int <- [0..223]
     , yByte <- [0..31]
-    , let byte = Mem.read error mem (Addr (fromIntegral (0x2400 + x * 32 + yByte)))
+    , let byte = Mem.read mem (Addr (fromIntegral (0x2400 + x * 32 + yByte)))
     , yBit <- [0..7]
     , byte `testBit` yBit
     , let y  = 8 * yByte + yBit

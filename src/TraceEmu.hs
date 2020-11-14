@@ -11,7 +11,8 @@ import InstructionSet (Instruction,prettyInstructionBytes)
 import Mem (Mem)
 import System.IO (Handle,hPutStrLn)
 import Text.Printf (printf)
-import qualified Mem (read,initInvader)
+import qualified Mem (read,init)
+import qualified Rom (loadInvaders)
 
 data TraceConf = TraceConf
   { traceOnAfter :: Maybe Int
@@ -22,7 +23,8 @@ data TraceConf = TraceConf
 
 traceEmulate :: Handle -> TraceConf -> IO ()
 traceEmulate handle TraceConf{traceOnAfter,stopAfter,period,traceNearPing} = do
-  mem <- Mem.initInvader
+  rom <- Rom.loadInvaders
+  let mem = Mem.init rom
   loop 1 firstPing (initState mem)
   where
     firstPing = cycles
@@ -91,7 +93,7 @@ getDisplayFromMem mem = do
     [ OnPixel {x, y}
     | x :: Int <- [0..223]
     , yByte <- [0..31]
-    , let byte = Mem.read error mem (Addr (fromIntegral (0x2400 + x * 32 + yByte)))
+    , let byte = Mem.read mem (Addr (fromIntegral (0x2400 + x * 32 + yByte)))
     , yBit <- [0..7]
     , byte `testBit` yBit
     , let y  = 8 * yByte + yBit

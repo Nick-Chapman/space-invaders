@@ -15,7 +15,8 @@ import System.IO (hFlush,stdout)
 import World (World,Key(..),KeyMotion(Down,Up),Picture(..))
 import qualified Data.Map.Strict as Map (fromList,lookup)
 import qualified Data.Text as Text (pack)
-import qualified Mem (initInvader)
+import qualified Mem (init)
+import qualified Rom (loadInvaders)
 import qualified SDL
 import qualified SDL.Font as Font (initialize,load,solid,size)
 import qualified SDL.Mixer as Mixer (withAudio,defaultAudio,load,play)
@@ -29,7 +30,9 @@ data Conf = Conf
 
 main :: Conf -> IO ()
 main Conf{scaleFactor,fpsLimit,showControls} = do
-  mem <- Mem.initInvader
+
+  roms <- Rom.loadInvaders
+  let mem = Mem.init roms
 
   let sf = fromIntegral scaleFactor
 

@@ -8,12 +8,12 @@ module InstructionSet (
   theDecodeTable
   ) where
 
-import Text.Printf (printf)
+import Byte (Byte(..))
 import Data.List (sort)
 import Data.List.Extra (groupSort)
 import Data.Map (Map)
 import Data.Word8 (Word8)
-import Byte (Byte(..))
+import Text.Printf (printf)
 import qualified Data.Map.Strict as Map
 
 -- | Op-codes. Stratified by the number of following immediate bytes

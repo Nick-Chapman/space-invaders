@@ -6,9 +6,11 @@ import Buttons (buttons0)
 import Data.Bits (testBit)
 import Emulate (EmuState(..),EmuStep(..),Ticks(..),initState,emulate)
 import GHC.Int (Int64)
-import Mem (Mem,initInvader,read)
+import Mem (Mem)
 import System.Clock (TimeSpec(..),getTime,Clock(Monotonic))
 import Text.Printf (printf)
+import qualified Mem (read,init)
+import qualified Rom (loadInvaders)
 
 data State = State
   { emuSeconds :: Int64
@@ -19,7 +21,8 @@ data State = State
 
 main :: IO ()
 main = do
-  mem <- Mem.initInvader
+  roms <- Rom.loadInvaders
+  let mem = Mem.init roms
   (es1,nanos1) <- measureOneEmulatedSecond (initState mem)
   loop State { emuSeconds = 1, durationNanos = nanos1, emuState = es1 }
   where
@@ -90,7 +93,7 @@ getDisplayFromMem mem = do
     [ OnPixel {x, y}
     | x :: Int <- [0..223]
     , yByte <- [0..31]
-    , let byte = Mem.read error mem (Addr (fromIntegral (0x2400 + x * 32 + yByte)))
+    , let byte = Mem.read mem (Addr (fromIntegral (0x2400 + x * 32 + yByte)))
     , yBit <- [0..7]
     , byte `testBit` yBit
     , let y  = 8 * yByte + yBit

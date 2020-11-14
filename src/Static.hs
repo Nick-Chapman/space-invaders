@@ -12,13 +12,13 @@ import Residual (Program(..),Exp16(..),layOpPrograms,layPrograms)
 import qualified Addr as Addr (toUnsigned)
 import qualified Data.Map.Strict as Map
 import qualified Data.Set as Set
-import qualified InvaderRoms (load)
+import qualified Rom (loadInvaders)
 
 
 main :: IO ()
 main = do
   putStrLn "*static*"
-  roms <- InvaderRoms.load
+  roms <- Rom.loadInvaders
 
   generateFile "0-decode-table" $ theDecodeTable
 

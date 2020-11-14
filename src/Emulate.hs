@@ -7,13 +7,11 @@ module Emulate (
   Bit(..),
   ) where
 
-import Data.Bits
-import Text.Printf (printf)
-
 import Addr (Addr(..),addCarryOut)
 import Buttons (Buttons)
 import Byte (Byte(..),addWithCarry)
 import Cpu (Cpu,Reg(PCL,PCH))
+import Data.Bits
 import Effect (Eff(..))
 import HiLo (HiLo(..))
 import InstructionSet (Instruction,decode)
@@ -21,15 +19,16 @@ import Mem (Mem)
 import Phase (Phase)
 import Semantics (InterruptHandling(..))
 import Shifter (Shifter)
+import Text.Printf (printf)
 import qualified Addr (fromHiLo,toHiLo,bump)
 import qualified Buttons (get)
 import qualified Byte (toUnsigned)
 import qualified Cpu (init,get,set,getFlag,setFlag)
 import qualified Mem (read,write)
 import qualified Phase (Byte,Addr,Bit)
+import qualified Semantics (fetchDecodeExec,Conf(..))
 import qualified Shifter (init,get,set)
 import qualified Sounds (Playing,initPlaying,soundOn,soundOff)
-import qualified Semantics (fetchDecodeExec,Conf(..))
 
 
 -- | Ticks of the 2 MHz clock
@@ -111,8 +110,8 @@ emulate buttons s0 =
       GetShifterReg r -> k s (Shifter.get shifter r)
       SetShifterReg r b -> k s { shifter = Shifter.set shifter r b} ()
 
-      ReadMem a -> k s (Mem.read crash mem a)
-      WriteMem a b -> k s { mem = Mem.write crash mem a b } ()
+      ReadMem a -> k s (Mem.read mem a)
+      WriteMem a b -> k s { mem = Mem.write mem a b } ()
 
       EnableInterrupts -> k s { interrupts_enabled = True } ()
       DisableInterrupts -> k s { interrupts_enabled = False } ()

@@ -7,11 +7,13 @@ module Addr(
 
 import Byte(Byte(..))
 import Data.Word (Word16)
+import GHC.Arr (Ix)
 import HiLo (HiLo(..))
 import Text.Printf (printf)
-import qualified Byte
+import qualified Byte (ofUnsigned)
 
-newtype Addr = Addr { unAddr :: Word16 } deriving (Eq,Ord,Num,Enum)
+newtype Addr = Addr { unAddr :: Word16 }
+  deriving (Eq,Ord,Num,Enum,Ix,Integral,Real)
 
 instance Show Addr where show = printf "%04X" . unAddr
 

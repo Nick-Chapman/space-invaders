@@ -8,8 +8,9 @@ import Data.Bits (bit)
 import Data.List (intercalate)
 import Emulate (Bit(..),EmuState(..),EmuStep(..),initState,emulate,Ticks(..),prettyPrefix)
 import InstructionSet (Instruction,prettyInstructionBytes)
-import Mem (Mem,initTst)
+import Mem (Mem,init)
 import Prelude hiding (init)
+import Rom (fromBytes)
 import System.IO (Handle,hPutStrLn)
 import qualified Data.ByteString as BS (readFile,unpack)
 
@@ -26,13 +27,14 @@ loadTestMem :: FilePath -> IO Mem
 loadTestMem path = do
   let offset = 0x100
   byteString <- BS.readFile path
-  let bytes = map Byte (BS.unpack byteString)
+  let bytes0 = map Byte (BS.unpack byteString)
+  let bytes = (reverse . dropWhile (== Byte 0) . reverse) bytes0
   let front =
         (patch 0x7 0xc9
          . patch 0x5 0xd3
          . patch 0x6 0x01
          . patch 0x0 0xd3) (take offset (repeat (Byte 0)))
-  return $ Mem.initTst (front ++ bytes)
+  return $ Mem.init $ Rom.fromBytes (front ++ bytes)
     where
       patch :: Int -> Byte -> [Byte] -> [Byte]
       patch i b xs =

@@ -14,8 +14,8 @@ import Effect (Eff(..))
 import HiLo (HiLo(..))
 import InstructionSet (Op(..),Instruction(..),Op0(..),Op1(..),Op2(..),RegPairSpec(..),Condition(..),cycles)
 import Phase (Addr,Byte,Bit)
-import qualified Ports (inputPort,outputPort)
 import qualified InstructionSet as Instr (RegSpec(..))
+import qualified Ports (inputPort,outputPort)
 
 
 -- | Semantics are defined to be Phase generic

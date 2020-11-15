@@ -17,6 +17,7 @@ import HiLo (HiLo(..))
 import InstructionSet (Instruction,decode)
 import Mem (Mem)
 import Phase (Phase)
+import Rom (Rom)
 import Semantics (InterruptHandling(..))
 import Shifter (Shifter)
 import Text.Printf (printf)
@@ -24,7 +25,7 @@ import qualified Addr (fromHiLo,toHiLo,bump)
 import qualified Buttons (get)
 import qualified Byte (toUnsigned)
 import qualified Cpu (init,get,set,getFlag,setFlag)
-import qualified Mem (read,write)
+import qualified Mem (init,read,write)
 import qualified Phase (Byte,Addr,Bit)
 import qualified Semantics (fetchDecodeExec,Conf(..))
 import qualified Shifter (init,get,set)
@@ -61,12 +62,12 @@ data EmuState = EmuState
   , playing :: Sounds.Playing
   }
 
-initState :: Mem -> EmuState
-initState mem = EmuState
+initState :: Rom -> EmuState
+initState rom = EmuState
   { ticks = 0
   , icount = 0
   , cpu = Cpu.init (Byte 0) (Bit False)
-  , mem
+  , mem = Mem.init rom
   , interrupts_enabled = False
 
   , nextWakeup = halfFrameTicks

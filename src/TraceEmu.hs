@@ -11,7 +11,7 @@ import InstructionSet (Instruction,prettyInstructionBytes)
 import Mem (Mem)
 import System.IO (Handle,hPutStrLn)
 import Text.Printf (printf)
-import qualified Mem (read,init)
+import qualified Mem (read)
 import qualified Rom (loadInvaders)
 
 data TraceConf = TraceConf
@@ -24,8 +24,7 @@ data TraceConf = TraceConf
 traceEmulate :: Handle -> TraceConf -> IO ()
 traceEmulate handle TraceConf{traceOnAfter,stopAfter,period,traceNearPing} = do
   rom <- Rom.loadInvaders
-  let mem = Mem.init rom
-  loop 1 firstPing (initState mem)
+  loop 1 firstPing (initState rom)
   where
     firstPing = cycles
     cycles = Ticks (cyclesInPeriod period)

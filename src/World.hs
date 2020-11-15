@@ -13,6 +13,7 @@ import Buttons (Buttons,buttons0,But(..))
 import Data.Bits (testBit)
 import Emulate (EmuStep(..),emulate,EmuState(..),Ticks(..))
 import Mem (Mem,read)
+import Rom (Rom)
 import Sounds (Sound(..), allSounds, isSoundPlaying)
 import System.Clock (TimeSpec(..),getTime,Clock(Monotonic))
 import Text.Printf (printf)
@@ -72,11 +73,11 @@ data World = World
   , soundsToPlay :: [Sound]
   }
 
-initWorld :: Mem -> IO World
-initWorld mem = do
+initWorld :: Rom -> IO World
+initWorld rom = do
   time <- getTime Monotonic
   return $ World
-    { state = Emulate.initState mem
+    { state = Emulate.initState rom
     , buttons = buttons0
     , paused = False
     , showControls = True

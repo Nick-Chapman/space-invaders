@@ -15,7 +15,6 @@ import System.IO (hFlush,stdout)
 import World (World,Key(..),KeyMotion(Down,Up),Picture(..))
 import qualified Data.Map.Strict as Map (fromList,lookup)
 import qualified Data.Text as Text (pack)
-import qualified Mem (init)
 import qualified Rom (loadInvaders)
 import qualified SDL
 import qualified SDL.Font as Font (initialize,load,solid,size)
@@ -31,8 +30,7 @@ data Conf = Conf
 main :: Conf -> IO ()
 main Conf{scaleFactor,fpsLimit,showControls} = do
 
-  roms <- Rom.loadInvaders
-  let mem = Mem.init roms
+  rom <- Rom.loadInvaders
 
   let sf = fromIntegral scaleFactor
 
@@ -96,7 +94,7 @@ main Conf{scaleFactor,fpsLimit,showControls} = do
                       then threadDelay (goalMs - durationMs)
                       else return ()
 
-  world <- World.initWorld mem
+  world <- World.initWorld rom
   loop world
 
   SDL.destroyRenderer renderer

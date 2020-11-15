@@ -9,7 +9,7 @@ import GHC.Int (Int64)
 import Mem (Mem)
 import System.Clock (TimeSpec(..),getTime,Clock(Monotonic))
 import Text.Printf (printf)
-import qualified Mem (read,init)
+import qualified Mem (read)
 import qualified Rom (loadInvaders)
 
 data State = State
@@ -21,9 +21,8 @@ data State = State
 
 main :: IO ()
 main = do
-  roms <- Rom.loadInvaders
-  let mem = Mem.init roms
-  (es1,nanos1) <- measureOneEmulatedSecond (initState mem)
+  rom <- Rom.loadInvaders
+  (es1,nanos1) <- measureOneEmulatedSecond (initState rom)
   loop State { emuSeconds = 1, durationNanos = nanos1, emuState = es1 }
   where
     loop :: State -> IO ()

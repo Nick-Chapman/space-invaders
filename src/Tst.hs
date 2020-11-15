@@ -8,23 +8,23 @@ import Data.Bits (bit)
 import Data.List (intercalate)
 import Emulate (Bit(..),EmuState(..),EmuStep(..),initState,emulate,Ticks(..),prettyPrefix)
 import InstructionSet (Instruction,prettyInstructionBytes)
-import Mem (Mem,init)
 import Prelude hiding (init)
-import Rom (fromBytes)
+import Rom (Rom)
 import System.IO (Handle,hPutStrLn)
 import qualified Data.ByteString as BS (readFile,unpack)
+import qualified Rom (fromBytes)
 
 main :: Handle -> IO ()
 main handle = do
-  mem <- loadTestMem "roms/TST8080.COM"
-  let state0 = initState mem
+  rom <- loadTestRom "roms/TST8080.COM"
+  let state0 = initState rom
   let EmuState{cpu=cpu0} = state0
   let cpu1 = Cpu.set cpu0 PCH 0x1
   let state1 = state0 { cpu = cpu1 }
   trace handle state1
 
-loadTestMem :: FilePath -> IO Mem
-loadTestMem path = do
+loadTestRom :: FilePath -> IO Rom
+loadTestRom path = do
   let offset = 0x100
   byteString <- BS.readFile path
   let bytes0 = map Byte (BS.unpack byteString)
@@ -34,7 +34,7 @@ loadTestMem path = do
          . patch 0x5 0xd3
          . patch 0x6 0x01
          . patch 0x0 0xd3) (take offset (repeat (Byte 0)))
-  return $ Mem.init $ Rom.fromBytes (front ++ bytes)
+  return $ Rom.fromBytes (front ++ bytes)
     where
       patch :: Int -> Byte -> [Byte] -> [Byte]
       patch i b xs =

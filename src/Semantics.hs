@@ -38,14 +38,15 @@ decodeExec :: Byte p -> Eff p (Instruction (Byte p), Int)
 decodeExec byte = do
   op <- Decode byte
   instruction <- fetchImmediates op
-  execute instruction >>= \case
+  TraceInstruction instruction
+  n <- execute instruction >>= \case
     Next -> do
-      let n = cycles False op
-      return (instruction,n)
+      return $ cycles False op
     Jump a -> do
-      let n = cycles True op
       setPC a
-      return (instruction,n)
+      return $ cycles True op
+  Advance n
+  return (instruction,n)
 
 fetchOrHandleInterrupt :: Eff p (Byte p)
 fetchOrHandleInterrupt = do

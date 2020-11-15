@@ -124,6 +124,8 @@ emulate buttons s0 =
       GetInterruptInstruction -> k s (interruptInstruction s)
       Decode byte -> k s (decode byte)
       MarkReturnAddress {} -> k s ()
+      TraceInstruction{} -> k s ()
+      Advance{} -> k s () -- TODO: do the advance here, replacing 32 lines up
 
       MakeBit (bool) -> k s (Bit bool)
       Flip (Bit bool) -> k s (Bit (not bool))

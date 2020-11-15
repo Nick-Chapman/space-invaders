@@ -15,7 +15,7 @@ import Byte (Byte(..))
 import Cpu (Reg(..),Flag(..))
 import Data.Word8 (Word8)
 import HiLo (HiLo(..))
-import InstructionSet (Op,encode)
+import InstructionSet (Op,Instruction,encode)
 import Sounds (Sound)
 import qualified Shifter
 
@@ -33,6 +33,8 @@ data Program
   | S_SetShiftRegsterOffset Exp8 Program
   | S_AtRef Addr Program
   | S_MarkReturnAddress Exp16 Program
+  | S_TraceInstruction (Instruction Exp8) Program
+  | S_Advance Int Program
   | S_UnknownOutput Word8 Program
   | S_SoundControl Sound Exp1 Program
   | S_EnableInterrupts Program
@@ -149,6 +151,14 @@ layProgram = \case
          ]
   S_MarkReturnAddress a next ->
     vert [ lay ("#return-to: " ++ show a)
+         , layProgram next
+         ]
+  S_TraceInstruction i next ->
+    vert [ lay ("#instruction: " ++ show i)
+         , layProgram next
+         ]
+  S_Advance n next ->
+    vert [ lay ("advance " ++ parenthesize (show n))
          , layProgram next
          ]
   S_UnknownOutput port next ->

@@ -1,34 +1,44 @@
 
 00 --> Op0 NOP
 
+    #instruction: NOP
+    advance (4)
     jump ((PCH,PCL));
 
 01 --> Op2 (LXI BC)
 
     let:16 a1 = (1 + (PCH,PCL)) in
     let:16 a2 = (1 + a1) in
+    #instruction: LD   BC,M[a1]M[(PCH,PCL)]
+    advance (10)
     B := M[a1];
     C := M[(PCH,PCL)];
     jump (a2);
 
 02 --> Op0 (STAX BC)
 
+    #instruction: LD   (BC),A
     M[(B,C)] := A;
+    advance (7)
     jump ((PCH,PCL));
 
 03 --> Op0 (INX BC)
 
+    #instruction: INC  BC
     let:16 a1 = (1 + (B,C)) in
+    advance (5)
     B := a1[15:8];
     C := a1[7:0];
     jump ((PCH,PCL));
 
 04 --> Op0 (INR B)
 
+    #instruction: INC  B
     let:16 a1 = addWithCarry(true,B,00) in
     let:8 a2 = (B & 0F) in
     let:8 a3 = (00 & 0F) in
     let:16 a4 = addWithCarry(true,a2,a3) in
+    advance (5)
     B := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -38,10 +48,12 @@
 
 05 --> Op0 (DCR B)
 
+    #instruction: DEC  B
     let:16 a1 = addWithCarry(!true,B,~00) in
     let:8 a2 = (B & 0F) in
     let:8 a3 = (~00 & 0F) in
     let:16 a4 = addWithCarry(!true,a2,a3) in
+    advance (5)
     B := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -52,22 +64,30 @@
 06 --> Op1 (MVI B)
 
     let:16 a1 = (1 + (PCH,PCL)) in
+    #instruction: LD   B,M[(PCH,PCL)]
+    advance (7)
     B := M[(PCH,PCL)];
     jump (a1);
 
 07 --> Op0 RLC
 
+    #instruction: RLCA 
+    advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
     jump ((PCH,PCL));
 
 08 --> Op0 (NOPx 1)
 
+    #instruction: *NOP
+    advance (4)
     jump ((PCH,PCL));
 
 09 --> Op0 (DAD BC)
 
+    #instruction: ADD  HL,BC
     let:17 a1 = add17((B,C),(H,L)) in
+    advance (10)
     H := a1[15:0][15:8];
     L := a1[15:0][7:0];
     FlagCY := a1[16];
@@ -75,22 +95,28 @@
 
 0A --> Op0 (LDAX BC)
 
+    #instruction: LD   A,(BC)
+    advance (7)
     A := M[(B,C)];
     jump ((PCH,PCL));
 
 0B --> Op0 (DCX BC)
 
+    #instruction: DEC  BC
     let:16 a1 = (-1 + (B,C)) in
+    advance (5)
     B := a1[15:8];
     C := a1[7:0];
     jump ((PCH,PCL));
 
 0C --> Op0 (INR C)
 
+    #instruction: INC  C
     let:16 a1 = addWithCarry(true,C,00) in
     let:8 a2 = (C & 0F) in
     let:8 a3 = (00 & 0F) in
     let:16 a4 = addWithCarry(true,a2,a3) in
+    advance (5)
     C := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -100,10 +126,12 @@
 
 0D --> Op0 (DCR C)
 
+    #instruction: DEC  C
     let:16 a1 = addWithCarry(!true,C,~00) in
     let:8 a2 = (C & 0F) in
     let:8 a3 = (~00 & 0F) in
     let:16 a4 = addWithCarry(!true,a2,a3) in
+    advance (5)
     C := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -114,45 +142,59 @@
 0E --> Op1 (MVI C)
 
     let:16 a1 = (1 + (PCH,PCL)) in
+    #instruction: LD   C,M[(PCH,PCL)]
+    advance (7)
     C := M[(PCH,PCL)];
     jump (a1);
 
 0F --> Op0 RRC
 
+    #instruction: RRCA 
+    advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
     jump ((PCH,PCL));
 
 10 --> Op0 (NOPx 2)
 
+    #instruction: *NOP
+    advance (4)
     jump ((PCH,PCL));
 
 11 --> Op2 (LXI DE)
 
     let:16 a1 = (1 + (PCH,PCL)) in
     let:16 a2 = (1 + a1) in
+    #instruction: LD   DE,M[a1]M[(PCH,PCL)]
+    advance (10)
     D := M[a1];
     E := M[(PCH,PCL)];
     jump (a2);
 
 12 --> Op0 (STAX DE)
 
+    #instruction: LD   (DE),A
     M[(D,E)] := A;
+    advance (7)
     jump ((PCH,PCL));
 
 13 --> Op0 (INX DE)
 
+    #instruction: INC  DE
     let:16 a1 = (1 + (D,E)) in
+    advance (5)
     D := a1[15:8];
     E := a1[7:0];
     jump ((PCH,PCL));
 
 14 --> Op0 (INR D)
 
+    #instruction: INC  D
     let:16 a1 = addWithCarry(true,D,00) in
     let:8 a2 = (D & 0F) in
     let:8 a3 = (00 & 0F) in
     let:16 a4 = addWithCarry(true,a2,a3) in
+    advance (5)
     D := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -162,10 +204,12 @@
 
 15 --> Op0 (DCR D)
 
+    #instruction: DEC  D
     let:16 a1 = addWithCarry(!true,D,~00) in
     let:8 a2 = (D & 0F) in
     let:8 a3 = (~00 & 0F) in
     let:16 a4 = addWithCarry(!true,a2,a3) in
+    advance (5)
     D := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -176,22 +220,30 @@
 16 --> Op1 (MVI D)
 
     let:16 a1 = (1 + (PCH,PCL)) in
+    #instruction: LD   D,M[(PCH,PCL)]
+    advance (7)
     D := M[(PCH,PCL)];
     jump (a1);
 
 17 --> Op0 RAL
 
+    #instruction: RAL  
+    advance (4)
     A := updateBit((A << 01),0,FlagCY);
     FlagCY := A[7];
     jump ((PCH,PCL));
 
 18 --> Op0 (NOPx 3)
 
+    #instruction: *NOP
+    advance (4)
     jump ((PCH,PCL));
 
 19 --> Op0 (DAD DE)
 
+    #instruction: ADD  HL,DE
     let:17 a1 = add17((D,E),(H,L)) in
+    advance (10)
     H := a1[15:0][15:8];
     L := a1[15:0][7:0];
     FlagCY := a1[16];
@@ -199,22 +251,28 @@
 
 1A --> Op0 (LDAX DE)
 
+    #instruction: LD   A,(DE)
+    advance (7)
     A := M[(D,E)];
     jump ((PCH,PCL));
 
 1B --> Op0 (DCX DE)
 
+    #instruction: DEC  DE
     let:16 a1 = (-1 + (D,E)) in
+    advance (5)
     D := a1[15:8];
     E := a1[7:0];
     jump ((PCH,PCL));
 
 1C --> Op0 (INR E)
 
+    #instruction: INC  E
     let:16 a1 = addWithCarry(true,E,00) in
     let:8 a2 = (E & 0F) in
     let:8 a3 = (00 & 0F) in
     let:16 a4 = addWithCarry(true,a2,a3) in
+    advance (5)
     E := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -224,10 +282,12 @@
 
 1D --> Op0 (DCR E)
 
+    #instruction: DEC  E
     let:16 a1 = addWithCarry(!true,E,~00) in
     let:8 a2 = (E & 0F) in
     let:8 a3 = (~00 & 0F) in
     let:16 a4 = addWithCarry(!true,a2,a3) in
+    advance (5)
     E := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -238,23 +298,31 @@
 1E --> Op1 (MVI E)
 
     let:16 a1 = (1 + (PCH,PCL)) in
+    #instruction: LD   E,M[(PCH,PCL)]
+    advance (7)
     E := M[(PCH,PCL)];
     jump (a1);
 
 1F --> Op0 RAR
 
+    #instruction: RAR
+    advance (4)
     A := updateBit((A >> 01),7,FlagCY);
     FlagCY := A[0];
     jump ((PCH,PCL));
 
 20 --> Op0 (NOPx 4)
 
+    #instruction: *NOP
+    advance (4)
     jump ((PCH,PCL));
 
 21 --> Op2 (LXI HL)
 
     let:16 a1 = (1 + (PCH,PCL)) in
     let:16 a2 = (1 + a1) in
+    #instruction: LD   HL,M[a1]M[(PCH,PCL)]
+    advance (10)
     H := M[a1];
     L := M[(PCH,PCL)];
     jump (a2);
@@ -263,24 +331,30 @@
 
     let:16 a1 = (1 + (PCH,PCL)) in
     let:16 a2 = (1 + a1) in
+    #instruction: LD   (M[a1]M[(PCH,PCL)]),HL
     M[(M[a1],M[(PCH,PCL)])] := L;
     let:16 a3 = (1 + (M[a1],M[(PCH,PCL)])) in
     M[a3] := H;
+    advance (16)
     jump (a2);
 
 23 --> Op0 (INX HL)
 
+    #instruction: INC  HL
     let:16 a1 = (1 + (H,L)) in
+    advance (5)
     H := a1[15:8];
     L := a1[7:0];
     jump ((PCH,PCL));
 
 24 --> Op0 (INR H)
 
+    #instruction: INC  H
     let:16 a1 = addWithCarry(true,H,00) in
     let:8 a2 = (H & 0F) in
     let:8 a3 = (00 & 0F) in
     let:16 a4 = addWithCarry(true,a2,a3) in
+    advance (5)
     H := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -290,10 +364,12 @@
 
 25 --> Op0 (DCR H)
 
+    #instruction: DEC  H
     let:16 a1 = addWithCarry(!true,H,~00) in
     let:8 a2 = (H & 0F) in
     let:8 a3 = (~00 & 0F) in
     let:16 a4 = addWithCarry(!true,a2,a3) in
+    advance (5)
     H := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -304,17 +380,21 @@
 26 --> Op1 (MVI H)
 
     let:16 a1 = (1 + (PCH,PCL)) in
+    #instruction: LD   H,M[(PCH,PCL)]
+    advance (7)
     H := M[(PCH,PCL)];
     jump (a1);
 
 27 --> Op0 DAA
 
+    #instruction: DAA
     let:8 a1 = (A & 0F) in
     let:16 a2 = addWithCarry(false,a1,06) in
     let:16 a3 = addWithCarry(((((a1[1] || a1[2]) && a1[3]) || FlagA) ? a2[7:0] : a1)[4],(A >> 04),00) in
     let:16 a4 = addWithCarry(false,a3[7:0],06) in
     let:8 a5 = (((((a1[1] || a1[2]) && a1[3]) || FlagA) ? a2[7:0] : a1) & 0F) in
     let:8 a6 = ((((((a3[7:0][1] || a3[7:0][2]) && a3[7:0][3]) || FlagCY) ? a4[7:0] : a3[7:0]) << 04) | a5) in
+    advance (4)
     A := a6;
     FlagS := a6[7];
     FlagZ := is_zero(a6);
@@ -325,11 +405,15 @@
 
 28 --> Op0 (NOPx 5)
 
+    #instruction: *NOP
+    advance (4)
     jump ((PCH,PCL));
 
 29 --> Op0 (DAD HL)
 
+    #instruction: ADD  HL,HL
     let:17 a1 = add17((H,L),(H,L)) in
+    advance (10)
     H := a1[15:0][15:8];
     L := a1[15:0][7:0];
     FlagCY := a1[16];
@@ -339,24 +423,30 @@
 
     let:16 a1 = (1 + (PCH,PCL)) in
     let:16 a2 = (1 + a1) in
+    #instruction: LD   HL,(M[a1]M[(PCH,PCL)])
     let:16 a3 = (1 + (M[a1],M[(PCH,PCL)])) in
+    advance (16)
     H := M[a3];
     L := M[(M[a1],M[(PCH,PCL)])];
     jump (a2);
 
 2B --> Op0 (DCX HL)
 
+    #instruction: DEC  HL
     let:16 a1 = (-1 + (H,L)) in
+    advance (5)
     H := a1[15:8];
     L := a1[7:0];
     jump ((PCH,PCL));
 
 2C --> Op0 (INR L)
 
+    #instruction: INC  L
     let:16 a1 = addWithCarry(true,L,00) in
     let:8 a2 = (L & 0F) in
     let:8 a3 = (00 & 0F) in
     let:16 a4 = addWithCarry(true,a2,a3) in
+    advance (5)
     L := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -366,10 +456,12 @@
 
 2D --> Op0 (DCR L)
 
+    #instruction: DEC  L
     let:16 a1 = addWithCarry(!true,L,~00) in
     let:8 a2 = (L & 0F) in
     let:8 a3 = (~00 & 0F) in
     let:16 a4 = addWithCarry(!true,a2,a3) in
+    advance (5)
     L := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -380,22 +472,30 @@
 2E --> Op1 (MVI L)
 
     let:16 a1 = (1 + (PCH,PCL)) in
+    #instruction: LD   L,M[(PCH,PCL)]
+    advance (7)
     L := M[(PCH,PCL)];
     jump (a1);
 
 2F --> Op0 CMA
 
+    #instruction: CPL
+    advance (4)
     A := ~A;
     jump ((PCH,PCL));
 
 30 --> Op0 (NOPx 6)
 
+    #instruction: *NOP
+    advance (4)
     jump ((PCH,PCL));
 
 31 --> Op2 (LXI SP)
 
     let:16 a1 = (1 + (PCH,PCL)) in
     let:16 a2 = (1 + a1) in
+    #instruction: LD   SP,M[a1]M[(PCH,PCL)]
+    advance (10)
     SPH := M[a1];
     SPL := M[(PCH,PCL)];
     jump (a2);
@@ -404,23 +504,29 @@
 
     let:16 a1 = (1 + (PCH,PCL)) in
     let:16 a2 = (1 + a1) in
+    #instruction: LD   (M[a1]M[(PCH,PCL)]),A
     M[(M[a1],M[(PCH,PCL)])] := A;
+    advance (13)
     jump (a2);
 
 33 --> Op0 (INX SP)
 
+    #instruction: INC  SP
     let:16 a1 = (1 + (SPH,SPL)) in
+    advance (5)
     SPH := a1[15:8];
     SPL := a1[7:0];
     jump ((PCH,PCL));
 
 34 --> Op0 (INR M)
 
+    #instruction: INC  (HL)
     let:16 a1 = addWithCarry(true,M[(H,L)],00) in
     let:8 a2 = (M[(H,L)] & 0F) in
     let:8 a3 = (00 & 0F) in
     let:16 a4 = addWithCarry(true,a2,a3) in
     M[(H,L)] := a1[7:0];
+    advance (10)
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
     FlagA := a4[7:0][4];
@@ -429,11 +535,13 @@
 
 35 --> Op0 (DCR M)
 
+    #instruction: DEC  (HL)
     let:16 a1 = addWithCarry(!true,M[(H,L)],~00) in
     let:8 a2 = (M[(H,L)] & 0F) in
     let:8 a3 = (~00 & 0F) in
     let:16 a4 = addWithCarry(!true,a2,a3) in
     M[(H,L)] := a1[7:0];
+    advance (10)
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
     FlagA := a4[7:0][4];
@@ -443,21 +551,29 @@
 36 --> Op1 (MVI M)
 
     let:16 a1 = (1 + (PCH,PCL)) in
+    #instruction: LD   (HL),M[(PCH,PCL)]
     M[(H,L)] := M[(PCH,PCL)];
+    advance (10)
     jump (a1);
 
 37 --> Op0 STC
 
+    #instruction: SCF
+    advance (4)
     FlagCY := true;
     jump ((PCH,PCL));
 
 38 --> Op0 (NOPx 7)
 
+    #instruction: *NOP
+    advance (4)
     jump ((PCH,PCL));
 
 39 --> Op0 (DAD SP)
 
+    #instruction: ADD  HL,SP
     let:17 a1 = add17((SPH,SPL),(H,L)) in
+    advance (10)
     H := a1[15:0][15:8];
     L := a1[15:0][7:0];
     FlagCY := a1[16];
@@ -467,22 +583,28 @@
 
     let:16 a1 = (1 + (PCH,PCL)) in
     let:16 a2 = (1 + a1) in
+    #instruction: LD   A,(M[a1]M[(PCH,PCL)])
+    advance (13)
     A := M[(M[a1],M[(PCH,PCL)])];
     jump (a2);
 
 3B --> Op0 (DCX SP)
 
+    #instruction: DEC  SP
     let:16 a1 = (-1 + (SPH,SPL)) in
+    advance (5)
     SPH := a1[15:8];
     SPL := a1[7:0];
     jump ((PCH,PCL));
 
 3C --> Op0 (INR A)
 
+    #instruction: INC  A
     let:16 a1 = addWithCarry(true,A,00) in
     let:8 a2 = (A & 0F) in
     let:8 a3 = (00 & 0F) in
     let:16 a4 = addWithCarry(true,a2,a3) in
+    advance (5)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -492,10 +614,12 @@
 
 3D --> Op0 (DCR A)
 
+    #instruction: DEC  A
     let:16 a1 = addWithCarry(!true,A,~00) in
     let:8 a2 = (A & 0F) in
     let:8 a3 = (~00 & 0F) in
     let:16 a4 = addWithCarry(!true,a2,a3) in
+    advance (5)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -506,333 +630,467 @@
 3E --> Op1 (MVI A)
 
     let:16 a1 = (1 + (PCH,PCL)) in
+    #instruction: LD   A,M[(PCH,PCL)]
+    advance (7)
     A := M[(PCH,PCL)];
     jump (a1);
 
 3F --> Op0 CMC
 
+    #instruction: CPC
+    advance (4)
     FlagCY := !FlagCY;
     jump ((PCH,PCL));
 
 40 --> Op0 (MOV {dest = B, src = B})
 
+    #instruction: LD   B,B
+    advance (5)
     jump ((PCH,PCL));
 
 41 --> Op0 (MOV {dest = B, src = C})
 
+    #instruction: LD   B,C
+    advance (5)
     B := C;
     jump ((PCH,PCL));
 
 42 --> Op0 (MOV {dest = B, src = D})
 
+    #instruction: LD   B,D
+    advance (5)
     B := D;
     jump ((PCH,PCL));
 
 43 --> Op0 (MOV {dest = B, src = E})
 
+    #instruction: LD   B,E
+    advance (5)
     B := E;
     jump ((PCH,PCL));
 
 44 --> Op0 (MOV {dest = B, src = H})
 
+    #instruction: LD   B,H
+    advance (5)
     B := H;
     jump ((PCH,PCL));
 
 45 --> Op0 (MOV {dest = B, src = L})
 
+    #instruction: LD   B,L
+    advance (5)
     B := L;
     jump ((PCH,PCL));
 
 46 --> Op0 (MOV {dest = B, src = M})
 
+    #instruction: LD   B,(HL)
+    advance (7)
     B := M[(H,L)];
     jump ((PCH,PCL));
 
 47 --> Op0 (MOV {dest = B, src = A})
 
+    #instruction: LD   B,A
+    advance (5)
     B := A;
     jump ((PCH,PCL));
 
 48 --> Op0 (MOV {dest = C, src = B})
 
+    #instruction: LD   C,B
+    advance (5)
     C := B;
     jump ((PCH,PCL));
 
 49 --> Op0 (MOV {dest = C, src = C})
 
+    #instruction: LD   C,C
+    advance (5)
     jump ((PCH,PCL));
 
 4A --> Op0 (MOV {dest = C, src = D})
 
+    #instruction: LD   C,D
+    advance (5)
     C := D;
     jump ((PCH,PCL));
 
 4B --> Op0 (MOV {dest = C, src = E})
 
+    #instruction: LD   C,E
+    advance (5)
     C := E;
     jump ((PCH,PCL));
 
 4C --> Op0 (MOV {dest = C, src = H})
 
+    #instruction: LD   C,H
+    advance (5)
     C := H;
     jump ((PCH,PCL));
 
 4D --> Op0 (MOV {dest = C, src = L})
 
+    #instruction: LD   C,L
+    advance (5)
     C := L;
     jump ((PCH,PCL));
 
 4E --> Op0 (MOV {dest = C, src = M})
 
+    #instruction: LD   C,(HL)
+    advance (7)
     C := M[(H,L)];
     jump ((PCH,PCL));
 
 4F --> Op0 (MOV {dest = C, src = A})
 
+    #instruction: LD   C,A
+    advance (5)
     C := A;
     jump ((PCH,PCL));
 
 50 --> Op0 (MOV {dest = D, src = B})
 
+    #instruction: LD   D,B
+    advance (5)
     D := B;
     jump ((PCH,PCL));
 
 51 --> Op0 (MOV {dest = D, src = C})
 
+    #instruction: LD   D,C
+    advance (5)
     D := C;
     jump ((PCH,PCL));
 
 52 --> Op0 (MOV {dest = D, src = D})
 
+    #instruction: LD   D,D
+    advance (5)
     jump ((PCH,PCL));
 
 53 --> Op0 (MOV {dest = D, src = E})
 
+    #instruction: LD   D,E
+    advance (5)
     D := E;
     jump ((PCH,PCL));
 
 54 --> Op0 (MOV {dest = D, src = H})
 
+    #instruction: LD   D,H
+    advance (5)
     D := H;
     jump ((PCH,PCL));
 
 55 --> Op0 (MOV {dest = D, src = L})
 
+    #instruction: LD   D,L
+    advance (5)
     D := L;
     jump ((PCH,PCL));
 
 56 --> Op0 (MOV {dest = D, src = M})
 
+    #instruction: LD   D,(HL)
+    advance (7)
     D := M[(H,L)];
     jump ((PCH,PCL));
 
 57 --> Op0 (MOV {dest = D, src = A})
 
+    #instruction: LD   D,A
+    advance (5)
     D := A;
     jump ((PCH,PCL));
 
 58 --> Op0 (MOV {dest = E, src = B})
 
+    #instruction: LD   E,B
+    advance (5)
     E := B;
     jump ((PCH,PCL));
 
 59 --> Op0 (MOV {dest = E, src = C})
 
+    #instruction: LD   E,C
+    advance (5)
     E := C;
     jump ((PCH,PCL));
 
 5A --> Op0 (MOV {dest = E, src = D})
 
+    #instruction: LD   E,D
+    advance (5)
     E := D;
     jump ((PCH,PCL));
 
 5B --> Op0 (MOV {dest = E, src = E})
 
+    #instruction: LD   E,E
+    advance (5)
     jump ((PCH,PCL));
 
 5C --> Op0 (MOV {dest = E, src = H})
 
+    #instruction: LD   E,H
+    advance (5)
     E := H;
     jump ((PCH,PCL));
 
 5D --> Op0 (MOV {dest = E, src = L})
 
+    #instruction: LD   E,L
+    advance (5)
     E := L;
     jump ((PCH,PCL));
 
 5E --> Op0 (MOV {dest = E, src = M})
 
+    #instruction: LD   E,(HL)
+    advance (7)
     E := M[(H,L)];
     jump ((PCH,PCL));
 
 5F --> Op0 (MOV {dest = E, src = A})
 
+    #instruction: LD   E,A
+    advance (5)
     E := A;
     jump ((PCH,PCL));
 
 60 --> Op0 (MOV {dest = H, src = B})
 
+    #instruction: LD   H,B
+    advance (5)
     H := B;
     jump ((PCH,PCL));
 
 61 --> Op0 (MOV {dest = H, src = C})
 
+    #instruction: LD   H,C
+    advance (5)
     H := C;
     jump ((PCH,PCL));
 
 62 --> Op0 (MOV {dest = H, src = D})
 
+    #instruction: LD   H,D
+    advance (5)
     H := D;
     jump ((PCH,PCL));
 
 63 --> Op0 (MOV {dest = H, src = E})
 
+    #instruction: LD   H,E
+    advance (5)
     H := E;
     jump ((PCH,PCL));
 
 64 --> Op0 (MOV {dest = H, src = H})
 
+    #instruction: LD   H,H
+    advance (5)
     jump ((PCH,PCL));
 
 65 --> Op0 (MOV {dest = H, src = L})
 
+    #instruction: LD   H,L
+    advance (5)
     H := L;
     jump ((PCH,PCL));
 
 66 --> Op0 (MOV {dest = H, src = M})
 
+    #instruction: LD   H,(HL)
+    advance (7)
     H := M[(H,L)];
     jump ((PCH,PCL));
 
 67 --> Op0 (MOV {dest = H, src = A})
 
+    #instruction: LD   H,A
+    advance (5)
     H := A;
     jump ((PCH,PCL));
 
 68 --> Op0 (MOV {dest = L, src = B})
 
+    #instruction: LD   L,B
+    advance (5)
     L := B;
     jump ((PCH,PCL));
 
 69 --> Op0 (MOV {dest = L, src = C})
 
+    #instruction: LD   L,C
+    advance (5)
     L := C;
     jump ((PCH,PCL));
 
 6A --> Op0 (MOV {dest = L, src = D})
 
+    #instruction: LD   L,D
+    advance (5)
     L := D;
     jump ((PCH,PCL));
 
 6B --> Op0 (MOV {dest = L, src = E})
 
+    #instruction: LD   L,E
+    advance (5)
     L := E;
     jump ((PCH,PCL));
 
 6C --> Op0 (MOV {dest = L, src = H})
 
+    #instruction: LD   L,H
+    advance (5)
     L := H;
     jump ((PCH,PCL));
 
 6D --> Op0 (MOV {dest = L, src = L})
 
+    #instruction: LD   L,L
+    advance (5)
     jump ((PCH,PCL));
 
 6E --> Op0 (MOV {dest = L, src = M})
 
+    #instruction: LD   L,(HL)
+    advance (7)
     L := M[(H,L)];
     jump ((PCH,PCL));
 
 6F --> Op0 (MOV {dest = L, src = A})
 
+    #instruction: LD   L,A
+    advance (5)
     L := A;
     jump ((PCH,PCL));
 
 70 --> Op0 (MOV {dest = M, src = B})
 
+    #instruction: LD   (HL),B
     M[(H,L)] := B;
+    advance (7)
     jump ((PCH,PCL));
 
 71 --> Op0 (MOV {dest = M, src = C})
 
+    #instruction: LD   (HL),C
     M[(H,L)] := C;
+    advance (7)
     jump ((PCH,PCL));
 
 72 --> Op0 (MOV {dest = M, src = D})
 
+    #instruction: LD   (HL),D
     M[(H,L)] := D;
+    advance (7)
     jump ((PCH,PCL));
 
 73 --> Op0 (MOV {dest = M, src = E})
 
+    #instruction: LD   (HL),E
     M[(H,L)] := E;
+    advance (7)
     jump ((PCH,PCL));
 
 74 --> Op0 (MOV {dest = M, src = H})
 
+    #instruction: LD   (HL),H
     M[(H,L)] := H;
+    advance (7)
     jump ((PCH,PCL));
 
 75 --> Op0 (MOV {dest = M, src = L})
 
+    #instruction: LD   (HL),L
     M[(H,L)] := L;
+    advance (7)
     jump ((PCH,PCL));
 
 76 --> Op0 HLT
 
+    #instruction: HLT
     let:16 a1 = (-1 + (PCH,PCL)) in
+    advance (7)
     jump (a1);
 
 77 --> Op0 (MOV {dest = M, src = A})
 
+    #instruction: LD   (HL),A
     M[(H,L)] := A;
+    advance (7)
     jump ((PCH,PCL));
 
 78 --> Op0 (MOV {dest = A, src = B})
 
+    #instruction: LD   A,B
+    advance (5)
     A := B;
     jump ((PCH,PCL));
 
 79 --> Op0 (MOV {dest = A, src = C})
 
+    #instruction: LD   A,C
+    advance (5)
     A := C;
     jump ((PCH,PCL));
 
 7A --> Op0 (MOV {dest = A, src = D})
 
+    #instruction: LD   A,D
+    advance (5)
     A := D;
     jump ((PCH,PCL));
 
 7B --> Op0 (MOV {dest = A, src = E})
 
+    #instruction: LD   A,E
+    advance (5)
     A := E;
     jump ((PCH,PCL));
 
 7C --> Op0 (MOV {dest = A, src = H})
 
+    #instruction: LD   A,H
+    advance (5)
     A := H;
     jump ((PCH,PCL));
 
 7D --> Op0 (MOV {dest = A, src = L})
 
+    #instruction: LD   A,L
+    advance (5)
     A := L;
     jump ((PCH,PCL));
 
 7E --> Op0 (MOV {dest = A, src = M})
 
+    #instruction: LD   A,(HL)
+    advance (7)
     A := M[(H,L)];
     jump ((PCH,PCL));
 
 7F --> Op0 (MOV {dest = A, src = A})
 
+    #instruction: LD   A,A
+    advance (5)
     jump ((PCH,PCL));
 
 80 --> Op0 (ADD B)
 
+    #instruction: ADD  B
     let:16 a1 = addWithCarry(false,B,A) in
     let:8 a2 = (B & 0F) in
     let:8 a3 = (A & 0F) in
     let:16 a4 = addWithCarry(false,a2,a3) in
+    advance (4)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -843,10 +1101,12 @@
 
 81 --> Op0 (ADD C)
 
+    #instruction: ADD  C
     let:16 a1 = addWithCarry(false,C,A) in
     let:8 a2 = (C & 0F) in
     let:8 a3 = (A & 0F) in
     let:16 a4 = addWithCarry(false,a2,a3) in
+    advance (4)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -857,10 +1117,12 @@
 
 82 --> Op0 (ADD D)
 
+    #instruction: ADD  D
     let:16 a1 = addWithCarry(false,D,A) in
     let:8 a2 = (D & 0F) in
     let:8 a3 = (A & 0F) in
     let:16 a4 = addWithCarry(false,a2,a3) in
+    advance (4)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -871,10 +1133,12 @@
 
 83 --> Op0 (ADD E)
 
+    #instruction: ADD  E
     let:16 a1 = addWithCarry(false,E,A) in
     let:8 a2 = (E & 0F) in
     let:8 a3 = (A & 0F) in
     let:16 a4 = addWithCarry(false,a2,a3) in
+    advance (4)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -885,10 +1149,12 @@
 
 84 --> Op0 (ADD H)
 
+    #instruction: ADD  H
     let:16 a1 = addWithCarry(false,H,A) in
     let:8 a2 = (H & 0F) in
     let:8 a3 = (A & 0F) in
     let:16 a4 = addWithCarry(false,a2,a3) in
+    advance (4)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -899,10 +1165,12 @@
 
 85 --> Op0 (ADD L)
 
+    #instruction: ADD  L
     let:16 a1 = addWithCarry(false,L,A) in
     let:8 a2 = (L & 0F) in
     let:8 a3 = (A & 0F) in
     let:16 a4 = addWithCarry(false,a2,a3) in
+    advance (4)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -913,10 +1181,12 @@
 
 86 --> Op0 (ADD M)
 
+    #instruction: ADD  (HL)
     let:16 a1 = addWithCarry(false,M[(H,L)],A) in
     let:8 a2 = (M[(H,L)] & 0F) in
     let:8 a3 = (A & 0F) in
     let:16 a4 = addWithCarry(false,a2,a3) in
+    advance (7)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -927,10 +1197,12 @@
 
 87 --> Op0 (ADD A)
 
+    #instruction: ADD  A
     let:16 a1 = addWithCarry(false,A,A) in
     let:8 a2 = (A & 0F) in
     let:8 a3 = (A & 0F) in
     let:16 a4 = addWithCarry(false,a2,a3) in
+    advance (4)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -941,10 +1213,12 @@
 
 88 --> Op0 (ADC B)
 
+    #instruction: ADC  B
     let:16 a1 = addWithCarry(FlagCY,B,A) in
     let:8 a2 = (B & 0F) in
     let:8 a3 = (A & 0F) in
     let:16 a4 = addWithCarry(FlagCY,a2,a3) in
+    advance (4)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -955,10 +1229,12 @@
 
 89 --> Op0 (ADC C)
 
+    #instruction: ADC  C
     let:16 a1 = addWithCarry(FlagCY,C,A) in
     let:8 a2 = (C & 0F) in
     let:8 a3 = (A & 0F) in
     let:16 a4 = addWithCarry(FlagCY,a2,a3) in
+    advance (4)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -969,10 +1245,12 @@
 
 8A --> Op0 (ADC D)
 
+    #instruction: ADC  D
     let:16 a1 = addWithCarry(FlagCY,D,A) in
     let:8 a2 = (D & 0F) in
     let:8 a3 = (A & 0F) in
     let:16 a4 = addWithCarry(FlagCY,a2,a3) in
+    advance (4)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -983,10 +1261,12 @@
 
 8B --> Op0 (ADC E)
 
+    #instruction: ADC  E
     let:16 a1 = addWithCarry(FlagCY,E,A) in
     let:8 a2 = (E & 0F) in
     let:8 a3 = (A & 0F) in
     let:16 a4 = addWithCarry(FlagCY,a2,a3) in
+    advance (4)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -997,10 +1277,12 @@
 
 8C --> Op0 (ADC H)
 
+    #instruction: ADC  H
     let:16 a1 = addWithCarry(FlagCY,H,A) in
     let:8 a2 = (H & 0F) in
     let:8 a3 = (A & 0F) in
     let:16 a4 = addWithCarry(FlagCY,a2,a3) in
+    advance (4)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -1011,10 +1293,12 @@
 
 8D --> Op0 (ADC L)
 
+    #instruction: ADC  L
     let:16 a1 = addWithCarry(FlagCY,L,A) in
     let:8 a2 = (L & 0F) in
     let:8 a3 = (A & 0F) in
     let:16 a4 = addWithCarry(FlagCY,a2,a3) in
+    advance (4)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -1025,10 +1309,12 @@
 
 8E --> Op0 (ADC M)
 
+    #instruction: ADC  (HL)
     let:16 a1 = addWithCarry(FlagCY,M[(H,L)],A) in
     let:8 a2 = (M[(H,L)] & 0F) in
     let:8 a3 = (A & 0F) in
     let:16 a4 = addWithCarry(FlagCY,a2,a3) in
+    advance (7)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -1039,10 +1325,12 @@
 
 8F --> Op0 (ADC A)
 
+    #instruction: ADC  A
     let:16 a1 = addWithCarry(FlagCY,A,A) in
     let:8 a2 = (A & 0F) in
     let:8 a3 = (A & 0F) in
     let:16 a4 = addWithCarry(FlagCY,a2,a3) in
+    advance (4)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -1053,10 +1341,12 @@
 
 90 --> Op0 (SUB B)
 
+    #instruction: SUB  B
     let:16 a1 = addWithCarry(!false,A,~B) in
     let:8 a2 = (A & 0F) in
     let:8 a3 = (~B & 0F) in
     let:16 a4 = addWithCarry(!false,a2,a3) in
+    advance (4)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -1067,10 +1357,12 @@
 
 91 --> Op0 (SUB C)
 
+    #instruction: SUB  C
     let:16 a1 = addWithCarry(!false,A,~C) in
     let:8 a2 = (A & 0F) in
     let:8 a3 = (~C & 0F) in
     let:16 a4 = addWithCarry(!false,a2,a3) in
+    advance (4)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -1081,10 +1373,12 @@
 
 92 --> Op0 (SUB D)
 
+    #instruction: SUB  D
     let:16 a1 = addWithCarry(!false,A,~D) in
     let:8 a2 = (A & 0F) in
     let:8 a3 = (~D & 0F) in
     let:16 a4 = addWithCarry(!false,a2,a3) in
+    advance (4)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -1095,10 +1389,12 @@
 
 93 --> Op0 (SUB E)
 
+    #instruction: SUB  E
     let:16 a1 = addWithCarry(!false,A,~E) in
     let:8 a2 = (A & 0F) in
     let:8 a3 = (~E & 0F) in
     let:16 a4 = addWithCarry(!false,a2,a3) in
+    advance (4)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -1109,10 +1405,12 @@
 
 94 --> Op0 (SUB H)
 
+    #instruction: SUB  H
     let:16 a1 = addWithCarry(!false,A,~H) in
     let:8 a2 = (A & 0F) in
     let:8 a3 = (~H & 0F) in
     let:16 a4 = addWithCarry(!false,a2,a3) in
+    advance (4)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -1123,10 +1421,12 @@
 
 95 --> Op0 (SUB L)
 
+    #instruction: SUB  L
     let:16 a1 = addWithCarry(!false,A,~L) in
     let:8 a2 = (A & 0F) in
     let:8 a3 = (~L & 0F) in
     let:16 a4 = addWithCarry(!false,a2,a3) in
+    advance (4)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -1137,10 +1437,12 @@
 
 96 --> Op0 (SUB M)
 
+    #instruction: SUB  (HL)
     let:16 a1 = addWithCarry(!false,A,~M[(H,L)]) in
     let:8 a2 = (A & 0F) in
     let:8 a3 = (~M[(H,L)] & 0F) in
     let:16 a4 = addWithCarry(!false,a2,a3) in
+    advance (7)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -1151,10 +1453,12 @@
 
 97 --> Op0 (SUB A)
 
+    #instruction: SUB  A
     let:16 a1 = addWithCarry(!false,A,~A) in
     let:8 a2 = (A & 0F) in
     let:8 a3 = (~A & 0F) in
     let:16 a4 = addWithCarry(!false,a2,a3) in
+    advance (4)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -1165,10 +1469,12 @@
 
 98 --> Op0 (SBB B)
 
+    #instruction: SBC  B
     let:16 a1 = addWithCarry(!FlagCY,A,~B) in
     let:8 a2 = (A & 0F) in
     let:8 a3 = (~B & 0F) in
     let:16 a4 = addWithCarry(!FlagCY,a2,a3) in
+    advance (4)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -1179,10 +1485,12 @@
 
 99 --> Op0 (SBB C)
 
+    #instruction: SBC  C
     let:16 a1 = addWithCarry(!FlagCY,A,~C) in
     let:8 a2 = (A & 0F) in
     let:8 a3 = (~C & 0F) in
     let:16 a4 = addWithCarry(!FlagCY,a2,a3) in
+    advance (4)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -1193,10 +1501,12 @@
 
 9A --> Op0 (SBB D)
 
+    #instruction: SBC  D
     let:16 a1 = addWithCarry(!FlagCY,A,~D) in
     let:8 a2 = (A & 0F) in
     let:8 a3 = (~D & 0F) in
     let:16 a4 = addWithCarry(!FlagCY,a2,a3) in
+    advance (4)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -1207,10 +1517,12 @@
 
 9B --> Op0 (SBB E)
 
+    #instruction: SBC  E
     let:16 a1 = addWithCarry(!FlagCY,A,~E) in
     let:8 a2 = (A & 0F) in
     let:8 a3 = (~E & 0F) in
     let:16 a4 = addWithCarry(!FlagCY,a2,a3) in
+    advance (4)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -1221,10 +1533,12 @@
 
 9C --> Op0 (SBB H)
 
+    #instruction: SBC  H
     let:16 a1 = addWithCarry(!FlagCY,A,~H) in
     let:8 a2 = (A & 0F) in
     let:8 a3 = (~H & 0F) in
     let:16 a4 = addWithCarry(!FlagCY,a2,a3) in
+    advance (4)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -1235,10 +1549,12 @@
 
 9D --> Op0 (SBB L)
 
+    #instruction: SBC  L
     let:16 a1 = addWithCarry(!FlagCY,A,~L) in
     let:8 a2 = (A & 0F) in
     let:8 a3 = (~L & 0F) in
     let:16 a4 = addWithCarry(!FlagCY,a2,a3) in
+    advance (4)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -1249,10 +1565,12 @@
 
 9E --> Op0 (SBB M)
 
+    #instruction: SBC  (HL)
     let:16 a1 = addWithCarry(!FlagCY,A,~M[(H,L)]) in
     let:8 a2 = (A & 0F) in
     let:8 a3 = (~M[(H,L)] & 0F) in
     let:16 a4 = addWithCarry(!FlagCY,a2,a3) in
+    advance (7)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -1263,10 +1581,12 @@
 
 9F --> Op0 (SBB A)
 
+    #instruction: SBC  A
     let:16 a1 = addWithCarry(!FlagCY,A,~A) in
     let:8 a2 = (A & 0F) in
     let:8 a3 = (~A & 0F) in
     let:16 a4 = addWithCarry(!FlagCY,a2,a3) in
+    advance (4)
     A := a1[7:0];
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
@@ -1277,8 +1597,10 @@
 
 A0 --> Op0 (ANA B)
 
+    #instruction: AND  B
     let:8 a1 = (B & A) in
     let:8 a2 = (B | A) in
+    advance (4)
     A := a1;
     FlagS := a1[7];
     FlagZ := is_zero(a1);
@@ -1289,8 +1611,10 @@ A0 --> Op0 (ANA B)
 
 A1 --> Op0 (ANA C)
 
+    #instruction: AND  C
     let:8 a1 = (C & A) in
     let:8 a2 = (C | A) in
+    advance (4)
     A := a1;
     FlagS := a1[7];
     FlagZ := is_zero(a1);
@@ -1301,8 +1625,10 @@ A1 --> Op0 (ANA C)
 
 A2 --> Op0 (ANA D)
 
+    #instruction: AND  D
     let:8 a1 = (D & A) in
     let:8 a2 = (D | A) in
+    advance (4)
     A := a1;
     FlagS := a1[7];
     FlagZ := is_zero(a1);
@@ -1313,8 +1639,10 @@ A2 --> Op0 (ANA D)
 
 A3 --> Op0 (ANA E)
 
+    #instruction: AND  E
     let:8 a1 = (E & A) in
     let:8 a2 = (E | A) in
+    advance (4)
     A := a1;
     FlagS := a1[7];
     FlagZ := is_zero(a1);
@@ -1325,8 +1653,10 @@ A3 --> Op0 (ANA E)
 
 A4 --> Op0 (ANA H)
 
+    #instruction: AND  H
     let:8 a1 = (H & A) in
     let:8 a2 = (H | A) in
+    advance (4)
     A := a1;
     FlagS := a1[7];
     FlagZ := is_zero(a1);
@@ -1337,8 +1667,10 @@ A4 --> Op0 (ANA H)
 
 A5 --> Op0 (ANA L)
 
+    #instruction: AND  L
     let:8 a1 = (L & A) in
     let:8 a2 = (L | A) in
+    advance (4)
     A := a1;
     FlagS := a1[7];
     FlagZ := is_zero(a1);
@@ -1349,8 +1681,10 @@ A5 --> Op0 (ANA L)
 
 A6 --> Op0 (ANA M)
 
+    #instruction: AND  (HL)
     let:8 a1 = (M[(H,L)] & A) in
     let:8 a2 = (M[(H,L)] | A) in
+    advance (7)
     A := a1;
     FlagS := a1[7];
     FlagZ := is_zero(a1);
@@ -1361,8 +1695,10 @@ A6 --> Op0 (ANA M)
 
 A7 --> Op0 (ANA A)
 
+    #instruction: AND  A
     let:8 a1 = (A & A) in
     let:8 a2 = (A | A) in
+    advance (4)
     A := a1;
     FlagS := a1[7];
     FlagZ := is_zero(a1);
@@ -1373,7 +1709,9 @@ A7 --> Op0 (ANA A)
 
 A8 --> Op0 (XRA B)
 
+    #instruction: XOR  B
     let:8 a1 = (B ^ A) in
+    advance (4)
     A := a1;
     FlagS := a1[7];
     FlagZ := is_zero(a1);
@@ -1384,7 +1722,9 @@ A8 --> Op0 (XRA B)
 
 A9 --> Op0 (XRA C)
 
+    #instruction: XOR  C
     let:8 a1 = (C ^ A) in
+    advance (4)
     A := a1;
     FlagS := a1[7];
     FlagZ := is_zero(a1);
@@ -1395,7 +1735,9 @@ A9 --> Op0 (XRA C)
 
 AA --> Op0 (XRA D)
 
+    #instruction: XOR  D
     let:8 a1 = (D ^ A) in
+    advance (4)
     A := a1;
     FlagS := a1[7];
     FlagZ := is_zero(a1);
@@ -1406,7 +1748,9 @@ AA --> Op0 (XRA D)
 
 AB --> Op0 (XRA E)
 
+    #instruction: XOR  E
     let:8 a1 = (E ^ A) in
+    advance (4)
     A := a1;
     FlagS := a1[7];
     FlagZ := is_zero(a1);
@@ -1417,7 +1761,9 @@ AB --> Op0 (XRA E)
 
 AC --> Op0 (XRA H)
 
+    #instruction: XOR  H
     let:8 a1 = (H ^ A) in
+    advance (4)
     A := a1;
     FlagS := a1[7];
     FlagZ := is_zero(a1);
@@ -1428,7 +1774,9 @@ AC --> Op0 (XRA H)
 
 AD --> Op0 (XRA L)
 
+    #instruction: XOR  L
     let:8 a1 = (L ^ A) in
+    advance (4)
     A := a1;
     FlagS := a1[7];
     FlagZ := is_zero(a1);
@@ -1439,7 +1787,9 @@ AD --> Op0 (XRA L)
 
 AE --> Op0 (XRA M)
 
+    #instruction: XOR  (HL)
     let:8 a1 = (M[(H,L)] ^ A) in
+    advance (7)
     A := a1;
     FlagS := a1[7];
     FlagZ := is_zero(a1);
@@ -1450,7 +1800,9 @@ AE --> Op0 (XRA M)
 
 AF --> Op0 (XRA A)
 
+    #instruction: XOR  A
     let:8 a1 = (A ^ A) in
+    advance (4)
     A := a1;
     FlagS := a1[7];
     FlagZ := is_zero(a1);
@@ -1461,7 +1813,9 @@ AF --> Op0 (XRA A)
 
 B0 --> Op0 (ORA B)
 
+    #instruction: OR   B
     let:8 a1 = (B | A) in
+    advance (4)
     A := a1;
     FlagS := a1[7];
     FlagZ := is_zero(a1);
@@ -1472,7 +1826,9 @@ B0 --> Op0 (ORA B)
 
 B1 --> Op0 (ORA C)
 
+    #instruction: OR   C
     let:8 a1 = (C | A) in
+    advance (4)
     A := a1;
     FlagS := a1[7];
     FlagZ := is_zero(a1);
@@ -1483,7 +1839,9 @@ B1 --> Op0 (ORA C)
 
 B2 --> Op0 (ORA D)
 
+    #instruction: OR   D
     let:8 a1 = (D | A) in
+    advance (4)
     A := a1;
     FlagS := a1[7];
     FlagZ := is_zero(a1);
@@ -1494,7 +1852,9 @@ B2 --> Op0 (ORA D)
 
 B3 --> Op0 (ORA E)
 
+    #instruction: OR   E
     let:8 a1 = (E | A) in
+    advance (4)
     A := a1;
     FlagS := a1[7];
     FlagZ := is_zero(a1);
@@ -1505,7 +1865,9 @@ B3 --> Op0 (ORA E)
 
 B4 --> Op0 (ORA H)
 
+    #instruction: OR   H
     let:8 a1 = (H | A) in
+    advance (4)
     A := a1;
     FlagS := a1[7];
     FlagZ := is_zero(a1);
@@ -1516,7 +1878,9 @@ B4 --> Op0 (ORA H)
 
 B5 --> Op0 (ORA L)
 
+    #instruction: OR   L
     let:8 a1 = (L | A) in
+    advance (4)
     A := a1;
     FlagS := a1[7];
     FlagZ := is_zero(a1);
@@ -1527,7 +1891,9 @@ B5 --> Op0 (ORA L)
 
 B6 --> Op0 (ORA M)
 
+    #instruction: OR   (HL)
     let:8 a1 = (M[(H,L)] | A) in
+    advance (7)
     A := a1;
     FlagS := a1[7];
     FlagZ := is_zero(a1);
@@ -1538,7 +1904,9 @@ B6 --> Op0 (ORA M)
 
 B7 --> Op0 (ORA A)
 
+    #instruction: OR   A
     let:8 a1 = (A | A) in
+    advance (4)
     A := a1;
     FlagS := a1[7];
     FlagZ := is_zero(a1);
@@ -1549,10 +1917,12 @@ B7 --> Op0 (ORA A)
 
 B8 --> Op0 (CMP B)
 
+    #instruction: CP   B
     let:16 a1 = addWithCarry(!false,A,~B) in
     let:8 a2 = (A & 0F) in
     let:8 a3 = (~B & 0F) in
     let:16 a4 = addWithCarry(!false,a2,a3) in
+    advance (4)
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
     FlagA := a4[7:0][4];
@@ -1562,10 +1932,12 @@ B8 --> Op0 (CMP B)
 
 B9 --> Op0 (CMP C)
 
+    #instruction: CP   C
     let:16 a1 = addWithCarry(!false,A,~C) in
     let:8 a2 = (A & 0F) in
     let:8 a3 = (~C & 0F) in
     let:16 a4 = addWithCarry(!false,a2,a3) in
+    advance (4)
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
     FlagA := a4[7:0][4];
@@ -1575,10 +1947,12 @@ B9 --> Op0 (CMP C)
 
 BA --> Op0 (CMP D)
 
+    #instruction: CP   D
     let:16 a1 = addWithCarry(!false,A,~D) in
     let:8 a2 = (A & 0F) in
     let:8 a3 = (~D & 0F) in
     let:16 a4 = addWithCarry(!false,a2,a3) in
+    advance (4)
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
     FlagA := a4[7:0][4];
@@ -1588,10 +1962,12 @@ BA --> Op0 (CMP D)
 
 BB --> Op0 (CMP E)
 
+    #instruction: CP   E
     let:16 a1 = addWithCarry(!false,A,~E) in
     let:8 a2 = (A & 0F) in
     let:8 a3 = (~E & 0F) in
     let:16 a4 = addWithCarry(!false,a2,a3) in
+    advance (4)
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
     FlagA := a4[7:0][4];
@@ -1601,10 +1977,12 @@ BB --> Op0 (CMP E)
 
 BC --> Op0 (CMP H)
 
+    #instruction: CP   H
     let:16 a1 = addWithCarry(!false,A,~H) in
     let:8 a2 = (A & 0F) in
     let:8 a3 = (~H & 0F) in
     let:16 a4 = addWithCarry(!false,a2,a3) in
+    advance (4)
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
     FlagA := a4[7:0][4];
@@ -1614,10 +1992,12 @@ BC --> Op0 (CMP H)
 
 BD --> Op0 (CMP L)
 
+    #instruction: CP   L
     let:16 a1 = addWithCarry(!false,A,~L) in
     let:8 a2 = (A & 0F) in
     let:8 a3 = (~L & 0F) in
     let:16 a4 = addWithCarry(!false,a2,a3) in
+    advance (4)
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
     FlagA := a4[7:0][4];
@@ -1627,10 +2007,12 @@ BD --> Op0 (CMP L)
 
 BE --> Op0 (CMP M)
 
+    #instruction: CP   (HL)
     let:16 a1 = addWithCarry(!false,A,~M[(H,L)]) in
     let:8 a2 = (A & 0F) in
     let:8 a3 = (~M[(H,L)] & 0F) in
     let:16 a4 = addWithCarry(!false,a2,a3) in
+    advance (7)
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
     FlagA := a4[7:0][4];
@@ -1640,10 +2022,12 @@ BE --> Op0 (CMP M)
 
 BF --> Op0 (CMP A)
 
+    #instruction: CP   A
     let:16 a1 = addWithCarry(!false,A,~A) in
     let:8 a2 = (A & 0F) in
     let:8 a3 = (~A & 0F) in
     let:16 a4 = addWithCarry(!false,a2,a3) in
+    advance (4)
     FlagS := a1[7:0][7];
     FlagZ := is_zero(a1[7:0]);
     FlagA := a4[7:0][4];
@@ -1653,20 +2037,25 @@ BF --> Op0 (CMP A)
 
 C0 --> Op0 (RCond NZ)
 
+    #instruction: RET  NZ
     if (!FlagZ) {
       let:16 a1 = (1 + (SPH,SPL)) in
       let:16 a2 = (1 + a1) in
+      advance (11)
       SPH := a2[15:8];
       SPL := a2[7:0];
       jump ((M[a1],M[(SPH,SPL)]));
     } else {
+      advance (5)
       jump ((PCH,PCL));
     }
 
 C1 --> Op0 (POP BC)
 
+    #instruction: POP  BC
     let:16 a1 = (1 + (SPH,SPL)) in
     let:16 a2 = (1 + a1) in
+    advance (10)
     B := M[a1];
     C := M[(SPH,SPL)];
     SPH := a2[15:8];
@@ -1677,9 +2066,12 @@ C2 --> Op2 (JCond NZ)
 
     let:16 a1 = (1 + (PCH,PCL)) in
     let:16 a2 = (1 + a1) in
+    #instruction: JP   NZ,M[a1]M[(PCH,PCL)]
     if (!FlagZ) {
+      advance (10)
       jump ((M[a1],M[(PCH,PCL)]));
     } else {
+      advance (10)
       jump (a2);
     }
 
@@ -1687,31 +2079,38 @@ C3 --> Op2 JMP
 
     let:16 a1 = (1 + (PCH,PCL)) in
     let:16 a2 = (1 + a1) in
+    #instruction: JP   M[a1]M[(PCH,PCL)]
+    advance (10)
     jump ((M[a1],M[(PCH,PCL)]));
 
 C4 --> Op2 (CCond NZ)
 
     let:16 a1 = (1 + (PCH,PCL)) in
     let:16 a2 = (1 + a1) in
+    #instruction: CALL NZ,M[a1]M[(PCH,PCL)]
     if (!FlagZ) {
       let:16 a3 = (-1 + (SPH,SPL)) in
       M[a3] := a2[15:8];
       let:16 a4 = (-1 + a3) in
       M[a4] := a2[7:0];
       #return-to: a2
+      advance (17)
       SPH := a4[15:8];
       SPL := a4[7:0];
       jump ((M[a1],M[(PCH,PCL)]));
     } else {
+      advance (11)
       jump (a2);
     }
 
 C5 --> Op0 (PUSH BC)
 
+    #instruction: PUSH BC
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := B;
     let:16 a2 = (-1 + a1) in
     M[a2] := C;
+    advance (11)
     SPH := a2[15:8];
     SPL := a2[7:0];
     jump ((PCH,PCL));
@@ -1719,10 +2118,12 @@ C5 --> Op0 (PUSH BC)
 C6 --> Op1 ADI
 
     let:16 a1 = (1 + (PCH,PCL)) in
+    #instruction: ADD  M[(PCH,PCL)]
     let:16 a2 = addWithCarry(false,M[(PCH,PCL)],A) in
     let:8 a3 = (M[(PCH,PCL)] & 0F) in
     let:8 a4 = (A & 0F) in
     let:16 a5 = addWithCarry(false,a3,a4) in
+    advance (7)
     A := a2[7:0];
     FlagS := a2[7:0][7];
     FlagZ := is_zero(a2[7:0]);
@@ -1733,30 +2134,37 @@ C6 --> Op1 ADI
 
 C7 --> Op0 (RST 0)
 
+    #instruction: RST  0
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := PCH;
     let:16 a2 = (-1 + a1) in
     M[a2] := PCL;
+    advance (4)
     SPH := a2[15:8];
     SPL := a2[7:0];
     jump (0000);
 
 C8 --> Op0 (RCond Z)
 
+    #instruction: RET  Z
     if (FlagZ) {
       let:16 a1 = (1 + (SPH,SPL)) in
       let:16 a2 = (1 + a1) in
+      advance (11)
       SPH := a2[15:8];
       SPL := a2[7:0];
       jump ((M[a1],M[(SPH,SPL)]));
     } else {
+      advance (5)
       jump ((PCH,PCL));
     }
 
 C9 --> Op0 RET
 
+    #instruction: RET
     let:16 a1 = (1 + (SPH,SPL)) in
     let:16 a2 = (1 + a1) in
+    advance (10)
     SPH := a2[15:8];
     SPL := a2[7:0];
     jump ((M[a1],M[(SPH,SPL)]));
@@ -1765,9 +2173,12 @@ CA --> Op2 (JCond Z)
 
     let:16 a1 = (1 + (PCH,PCL)) in
     let:16 a2 = (1 + a1) in
+    #instruction: JP   Z,M[a1]M[(PCH,PCL)]
     if (FlagZ) {
+      advance (10)
       jump ((M[a1],M[(PCH,PCL)]));
     } else {
+      advance (10)
       jump (a2);
     }
 
@@ -1775,22 +2186,27 @@ CB --> Op2 JMPx
 
     let:16 a1 = (1 + (PCH,PCL)) in
     let:16 a2 = (1 + a1) in
+    #instruction: *JP  M[a1]M[(PCH,PCL)]
+    advance (10)
     jump ((M[a1],M[(PCH,PCL)]));
 
 CC --> Op2 (CCond Z)
 
     let:16 a1 = (1 + (PCH,PCL)) in
     let:16 a2 = (1 + a1) in
+    #instruction: CALL Z,M[a1]M[(PCH,PCL)]
     if (FlagZ) {
       let:16 a3 = (-1 + (SPH,SPL)) in
       M[a3] := a2[15:8];
       let:16 a4 = (-1 + a3) in
       M[a4] := a2[7:0];
       #return-to: a2
+      advance (17)
       SPH := a4[15:8];
       SPL := a4[7:0];
       jump ((M[a1],M[(PCH,PCL)]));
     } else {
+      advance (11)
       jump (a2);
     }
 
@@ -1798,11 +2214,13 @@ CD --> Op2 CALL
 
     let:16 a1 = (1 + (PCH,PCL)) in
     let:16 a2 = (1 + a1) in
+    #instruction: CALL M[a1]M[(PCH,PCL)]
     let:16 a3 = (-1 + (SPH,SPL)) in
     M[a3] := a2[15:8];
     let:16 a4 = (-1 + a3) in
     M[a4] := a2[7:0];
     #return-to: a2
+    advance (17)
     SPH := a4[15:8];
     SPL := a4[7:0];
     jump ((M[a1],M[(PCH,PCL)]));
@@ -1810,10 +2228,12 @@ CD --> Op2 CALL
 CE --> Op1 ACI
 
     let:16 a1 = (1 + (PCH,PCL)) in
+    #instruction: ADC  M[(PCH,PCL)]
     let:16 a2 = addWithCarry(FlagCY,M[(PCH,PCL)],A) in
     let:8 a3 = (M[(PCH,PCL)] & 0F) in
     let:8 a4 = (A & 0F) in
     let:16 a5 = addWithCarry(FlagCY,a3,a4) in
+    advance (7)
     A := a2[7:0];
     FlagS := a2[7:0][7];
     FlagZ := is_zero(a2[7:0]);
@@ -1824,30 +2244,37 @@ CE --> Op1 ACI
 
 CF --> Op0 (RST 1)
 
+    #instruction: RST  1
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := PCH;
     let:16 a2 = (-1 + a1) in
     M[a2] := PCL;
+    advance (4)
     SPH := a2[15:8];
     SPL := a2[7:0];
     jump (0008);
 
 D0 --> Op0 (RCond NC)
 
+    #instruction: RET  NC
     if (!FlagCY) {
       let:16 a1 = (1 + (SPH,SPL)) in
       let:16 a2 = (1 + a1) in
+      advance (11)
       SPH := a2[15:8];
       SPL := a2[7:0];
       jump ((M[a1],M[(SPH,SPL)]));
     } else {
+      advance (5)
       jump ((PCH,PCL));
     }
 
 D1 --> Op0 (POP DE)
 
+    #instruction: POP  DE
     let:16 a1 = (1 + (SPH,SPL)) in
     let:16 a2 = (1 + a1) in
+    advance (10)
     D := M[a1];
     E := M[(SPH,SPL)];
     SPH := a2[15:8];
@@ -1858,9 +2285,12 @@ D2 --> Op2 (JCond NC)
 
     let:16 a1 = (1 + (PCH,PCL)) in
     let:16 a2 = (1 + a1) in
+    #instruction: JP   NC,M[a1]M[(PCH,PCL)]
     if (!FlagCY) {
+      advance (10)
       jump ((M[a1],M[(PCH,PCL)]));
     } else {
+      advance (10)
       jump (a2);
     }
 
@@ -1868,25 +2298,30 @@ D4 --> Op2 (CCond NC)
 
     let:16 a1 = (1 + (PCH,PCL)) in
     let:16 a2 = (1 + a1) in
+    #instruction: CALL NC,M[a1]M[(PCH,PCL)]
     if (!FlagCY) {
       let:16 a3 = (-1 + (SPH,SPL)) in
       M[a3] := a2[15:8];
       let:16 a4 = (-1 + a3) in
       M[a4] := a2[7:0];
       #return-to: a2
+      advance (17)
       SPH := a4[15:8];
       SPL := a4[7:0];
       jump ((M[a1],M[(PCH,PCL)]));
     } else {
+      advance (11)
       jump (a2);
     }
 
 D5 --> Op0 (PUSH DE)
 
+    #instruction: PUSH DE
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := D;
     let:16 a2 = (-1 + a1) in
     M[a2] := E;
+    advance (11)
     SPH := a2[15:8];
     SPL := a2[7:0];
     jump ((PCH,PCL));
@@ -1894,10 +2329,12 @@ D5 --> Op0 (PUSH DE)
 D6 --> Op1 SUI
 
     let:16 a1 = (1 + (PCH,PCL)) in
+    #instruction: SUB  M[(PCH,PCL)]
     let:16 a2 = addWithCarry(!false,A,~M[(PCH,PCL)]) in
     let:8 a3 = (A & 0F) in
     let:8 a4 = (~M[(PCH,PCL)] & 0F) in
     let:16 a5 = addWithCarry(!false,a3,a4) in
+    advance (7)
     A := a2[7:0];
     FlagS := a2[7:0][7];
     FlagZ := is_zero(a2[7:0]);
@@ -1908,30 +2345,37 @@ D6 --> Op1 SUI
 
 D7 --> Op0 (RST 2)
 
+    #instruction: RST  2
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := PCH;
     let:16 a2 = (-1 + a1) in
     M[a2] := PCL;
+    advance (4)
     SPH := a2[15:8];
     SPL := a2[7:0];
     jump (0010);
 
 D8 --> Op0 (RCond CY)
 
+    #instruction: RET  CY
     if (FlagCY) {
       let:16 a1 = (1 + (SPH,SPL)) in
       let:16 a2 = (1 + a1) in
+      advance (11)
       SPH := a2[15:8];
       SPL := a2[7:0];
       jump ((M[a1],M[(SPH,SPL)]));
     } else {
+      advance (5)
       jump ((PCH,PCL));
     }
 
 D9 --> Op0 RETx
 
+    #instruction: *RET
     let:16 a1 = (1 + (SPH,SPL)) in
     let:16 a2 = (1 + a1) in
+    advance (10)
     SPH := a2[15:8];
     SPL := a2[7:0];
     jump ((M[a1],M[(SPH,SPL)]));
@@ -1940,9 +2384,12 @@ DA --> Op2 (JCond CY)
 
     let:16 a1 = (1 + (PCH,PCL)) in
     let:16 a2 = (1 + a1) in
+    #instruction: JP   CY,M[a1]M[(PCH,PCL)]
     if (FlagCY) {
+      advance (10)
       jump ((M[a1],M[(PCH,PCL)]));
     } else {
+      advance (10)
       jump (a2);
     }
 
@@ -1950,16 +2397,19 @@ DC --> Op2 (CCond CY)
 
     let:16 a1 = (1 + (PCH,PCL)) in
     let:16 a2 = (1 + a1) in
+    #instruction: CALL CY,M[a1]M[(PCH,PCL)]
     if (FlagCY) {
       let:16 a3 = (-1 + (SPH,SPL)) in
       M[a3] := a2[15:8];
       let:16 a4 = (-1 + a3) in
       M[a4] := a2[7:0];
       #return-to: a2
+      advance (17)
       SPH := a4[15:8];
       SPL := a4[7:0];
       jump ((M[a1],M[(PCH,PCL)]));
     } else {
+      advance (11)
       jump (a2);
     }
 
@@ -1967,11 +2417,13 @@ DD --> Op2 (CALLx 1)
 
     let:16 a1 = (1 + (PCH,PCL)) in
     let:16 a2 = (1 + a1) in
+    #instruction: *CAL M[a1]M[(PCH,PCL)]
     let:16 a3 = (-1 + (SPH,SPL)) in
     M[a3] := a2[15:8];
     let:16 a4 = (-1 + a3) in
     M[a4] := a2[7:0];
     #return-to: a2
+    advance (17)
     SPH := a4[15:8];
     SPL := a4[7:0];
     jump ((M[a1],M[(PCH,PCL)]));
@@ -1979,10 +2431,12 @@ DD --> Op2 (CALLx 1)
 DE --> Op1 SBI
 
     let:16 a1 = (1 + (PCH,PCL)) in
+    #instruction: SBC  M[(PCH,PCL)]
     let:16 a2 = addWithCarry(!FlagCY,A,~M[(PCH,PCL)]) in
     let:8 a3 = (A & 0F) in
     let:8 a4 = (~M[(PCH,PCL)] & 0F) in
     let:16 a5 = addWithCarry(!FlagCY,a3,a4) in
+    advance (7)
     A := a2[7:0];
     FlagS := a2[7:0][7];
     FlagZ := is_zero(a2[7:0]);
@@ -1993,30 +2447,37 @@ DE --> Op1 SBI
 
 DF --> Op0 (RST 3)
 
+    #instruction: RST  3
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := PCH;
     let:16 a2 = (-1 + a1) in
     M[a2] := PCL;
+    advance (4)
     SPH := a2[15:8];
     SPL := a2[7:0];
     jump (0018);
 
 E0 --> Op0 (RCond PO)
 
+    #instruction: RET  PO
     if (!FlagP) {
       let:16 a1 = (1 + (SPH,SPL)) in
       let:16 a2 = (1 + a1) in
+      advance (11)
       SPH := a2[15:8];
       SPL := a2[7:0];
       jump ((M[a1],M[(SPH,SPL)]));
     } else {
+      advance (5)
       jump ((PCH,PCL));
     }
 
 E1 --> Op0 (POP HL)
 
+    #instruction: POP  HL
     let:16 a1 = (1 + (SPH,SPL)) in
     let:16 a2 = (1 + a1) in
+    advance (10)
     H := M[a1];
     L := M[(SPH,SPL)];
     SPH := a2[15:8];
@@ -2027,17 +2488,22 @@ E2 --> Op2 (JCond PO)
 
     let:16 a1 = (1 + (PCH,PCL)) in
     let:16 a2 = (1 + a1) in
+    #instruction: JP   PO,M[a1]M[(PCH,PCL)]
     if (!FlagP) {
+      advance (10)
       jump ((M[a1],M[(PCH,PCL)]));
     } else {
+      advance (10)
       jump (a2);
     }
 
 E3 --> Op0 XTHL
 
+    #instruction: EX   (SP),HL
     let:16 a1 = (1 + (SPH,SPL)) in
     M[(SPH,SPL)] := L;
     M[a1] := H;
+    advance (18)
     H := M[a1];
     L := M[(SPH,SPL)];
     jump ((PCH,PCL));
@@ -2046,25 +2512,30 @@ E4 --> Op2 (CCond PO)
 
     let:16 a1 = (1 + (PCH,PCL)) in
     let:16 a2 = (1 + a1) in
+    #instruction: CALL PO,M[a1]M[(PCH,PCL)]
     if (!FlagP) {
       let:16 a3 = (-1 + (SPH,SPL)) in
       M[a3] := a2[15:8];
       let:16 a4 = (-1 + a3) in
       M[a4] := a2[7:0];
       #return-to: a2
+      advance (17)
       SPH := a4[15:8];
       SPL := a4[7:0];
       jump ((M[a1],M[(PCH,PCL)]));
     } else {
+      advance (11)
       jump (a2);
     }
 
 E5 --> Op0 (PUSH HL)
 
+    #instruction: PUSH HL
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := H;
     let:16 a2 = (-1 + a1) in
     M[a2] := L;
+    advance (11)
     SPH := a2[15:8];
     SPL := a2[7:0];
     jump ((PCH,PCL));
@@ -2072,8 +2543,10 @@ E5 --> Op0 (PUSH HL)
 E6 --> Op1 ANI
 
     let:16 a1 = (1 + (PCH,PCL)) in
+    #instruction: AND  M[(PCH,PCL)]
     let:8 a2 = (M[(PCH,PCL)] & A) in
     let:8 a3 = (M[(PCH,PCL)] | A) in
+    advance (7)
     A := a2;
     FlagS := a2[7];
     FlagZ := is_zero(a2);
@@ -2084,42 +2557,54 @@ E6 --> Op1 ANI
 
 E7 --> Op0 (RST 4)
 
+    #instruction: RST  4
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := PCH;
     let:16 a2 = (-1 + a1) in
     M[a2] := PCL;
+    advance (4)
     SPH := a2[15:8];
     SPL := a2[7:0];
     jump (0020);
 
 E8 --> Op0 (RCond PE)
 
+    #instruction: RET  PE
     if (FlagP) {
       let:16 a1 = (1 + (SPH,SPL)) in
       let:16 a2 = (1 + a1) in
+      advance (11)
       SPH := a2[15:8];
       SPL := a2[7:0];
       jump ((M[a1],M[(SPH,SPL)]));
     } else {
+      advance (5)
       jump ((PCH,PCL));
     }
 
 E9 --> Op0 PCHL
 
+    #instruction: JP   (HL)
+    advance (5)
     jump ((H,L));
 
 EA --> Op2 (JCond PE)
 
     let:16 a1 = (1 + (PCH,PCL)) in
     let:16 a2 = (1 + a1) in
+    #instruction: JP   PE,M[a1]M[(PCH,PCL)]
     if (FlagP) {
+      advance (10)
       jump ((M[a1],M[(PCH,PCL)]));
     } else {
+      advance (10)
       jump (a2);
     }
 
 EB --> Op0 XCHG
 
+    #instruction: EX   DE,HL
+    advance (4)
     D := H;
     E := L;
     H := D;
@@ -2130,16 +2615,19 @@ EC --> Op2 (CCond PE)
 
     let:16 a1 = (1 + (PCH,PCL)) in
     let:16 a2 = (1 + a1) in
+    #instruction: CALL PE,M[a1]M[(PCH,PCL)]
     if (FlagP) {
       let:16 a3 = (-1 + (SPH,SPL)) in
       M[a3] := a2[15:8];
       let:16 a4 = (-1 + a3) in
       M[a4] := a2[7:0];
       #return-to: a2
+      advance (17)
       SPH := a4[15:8];
       SPL := a4[7:0];
       jump ((M[a1],M[(PCH,PCL)]));
     } else {
+      advance (11)
       jump (a2);
     }
 
@@ -2147,11 +2635,13 @@ ED --> Op2 (CALLx 2)
 
     let:16 a1 = (1 + (PCH,PCL)) in
     let:16 a2 = (1 + a1) in
+    #instruction: *CAL M[a1]M[(PCH,PCL)]
     let:16 a3 = (-1 + (SPH,SPL)) in
     M[a3] := a2[15:8];
     let:16 a4 = (-1 + a3) in
     M[a4] := a2[7:0];
     #return-to: a2
+    advance (17)
     SPH := a4[15:8];
     SPL := a4[7:0];
     jump ((M[a1],M[(PCH,PCL)]));
@@ -2159,7 +2649,9 @@ ED --> Op2 (CALLx 2)
 EE --> Op1 XRI
 
     let:16 a1 = (1 + (PCH,PCL)) in
+    #instruction: XOR  M[(PCH,PCL)]
     let:8 a2 = (M[(PCH,PCL)] ^ A) in
+    advance (7)
     A := a2;
     FlagS := a2[7];
     FlagZ := is_zero(a2);
@@ -2170,30 +2662,37 @@ EE --> Op1 XRI
 
 EF --> Op0 (RST 5)
 
+    #instruction: RST  5
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := PCH;
     let:16 a2 = (-1 + a1) in
     M[a2] := PCL;
+    advance (4)
     SPH := a2[15:8];
     SPL := a2[7:0];
     jump (0028);
 
 F0 --> Op0 (RCond P)
 
+    #instruction: RET  P
     if (!FlagS) {
       let:16 a1 = (1 + (SPH,SPL)) in
       let:16 a2 = (1 + a1) in
+      advance (11)
       SPH := a2[15:8];
       SPL := a2[7:0];
       jump ((M[a1],M[(SPH,SPL)]));
     } else {
+      advance (5)
       jump ((PCH,PCL));
     }
 
 F1 --> Op0 (POP PSW)
 
+    #instruction: POP  PSW
     let:16 a1 = (1 + (SPH,SPL)) in
     let:16 a2 = (1 + a1) in
+    advance (10)
     A := M[a1];
     SPH := a2[15:8];
     SPL := a2[7:0];
@@ -2208,40 +2707,50 @@ F2 --> Op2 (JCond P)
 
     let:16 a1 = (1 + (PCH,PCL)) in
     let:16 a2 = (1 + a1) in
+    #instruction: JP   P,M[a1]M[(PCH,PCL)]
     if (!FlagS) {
+      advance (10)
       jump ((M[a1],M[(PCH,PCL)]));
     } else {
+      advance (10)
       jump (a2);
     }
 
 F3 --> Op0 DI
 
+    #instruction: DI
     disable_interrupts()
+    advance (4)
     jump ((PCH,PCL));
 
 F4 --> Op2 (CCond P)
 
     let:16 a1 = (1 + (PCH,PCL)) in
     let:16 a2 = (1 + a1) in
+    #instruction: CALL P,M[a1]M[(PCH,PCL)]
     if (!FlagS) {
       let:16 a3 = (-1 + (SPH,SPL)) in
       M[a3] := a2[15:8];
       let:16 a4 = (-1 + a3) in
       M[a4] := a2[7:0];
       #return-to: a2
+      advance (17)
       SPH := a4[15:8];
       SPL := a4[7:0];
       jump ((M[a1],M[(PCH,PCL)]));
     } else {
+      advance (11)
       jump (a2);
     }
 
 F5 --> Op0 (PUSH PSW)
 
+    #instruction: PUSH PSW
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := A;
     let:16 a2 = (-1 + a1) in
     M[a2] := updateBit(updateBit(updateBit(updateBit(updateBit(02,7,FlagS),6,FlagZ),4,FlagA),2,FlagP),0,FlagCY);
+    advance (11)
     SPH := a2[15:8];
     SPL := a2[7:0];
     jump ((PCH,PCL));
@@ -2249,7 +2758,9 @@ F5 --> Op0 (PUSH PSW)
 F6 --> Op1 ORI
 
     let:16 a1 = (1 + (PCH,PCL)) in
+    #instruction: OR   M[(PCH,PCL)]
     let:8 a2 = (M[(PCH,PCL)] | A) in
+    advance (7)
     A := a2;
     FlagS := a2[7];
     FlagZ := is_zero(a2);
@@ -2260,28 +2771,35 @@ F6 --> Op1 ORI
 
 F7 --> Op0 (RST 6)
 
+    #instruction: RST  6
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := PCH;
     let:16 a2 = (-1 + a1) in
     M[a2] := PCL;
+    advance (4)
     SPH := a2[15:8];
     SPL := a2[7:0];
     jump (0030);
 
 F8 --> Op0 (RCond MI)
 
+    #instruction: RET  MI
     if (FlagS) {
       let:16 a1 = (1 + (SPH,SPL)) in
       let:16 a2 = (1 + a1) in
+      advance (11)
       SPH := a2[15:8];
       SPL := a2[7:0];
       jump ((M[a1],M[(SPH,SPL)]));
     } else {
+      advance (5)
       jump ((PCH,PCL));
     }
 
 F9 --> Op0 SPHL
 
+    #instruction: LD   SP,HL
+    advance (5)
     SPH := H;
     SPL := L;
     jump ((PCH,PCL));
@@ -2290,31 +2808,39 @@ FA --> Op2 (JCond MI)
 
     let:16 a1 = (1 + (PCH,PCL)) in
     let:16 a2 = (1 + a1) in
+    #instruction: JP   MI,M[a1]M[(PCH,PCL)]
     if (FlagS) {
+      advance (10)
       jump ((M[a1],M[(PCH,PCL)]));
     } else {
+      advance (10)
       jump (a2);
     }
 
 FB --> Op0 EI
 
+    #instruction: EI
     enable_interrupts()
+    advance (4)
     jump ((PCH,PCL));
 
 FC --> Op2 (CCond MI)
 
     let:16 a1 = (1 + (PCH,PCL)) in
     let:16 a2 = (1 + a1) in
+    #instruction: CALL MI,M[a1]M[(PCH,PCL)]
     if (FlagS) {
       let:16 a3 = (-1 + (SPH,SPL)) in
       M[a3] := a2[15:8];
       let:16 a4 = (-1 + a3) in
       M[a4] := a2[7:0];
       #return-to: a2
+      advance (17)
       SPH := a4[15:8];
       SPL := a4[7:0];
       jump ((M[a1],M[(PCH,PCL)]));
     } else {
+      advance (11)
       jump (a2);
     }
 
@@ -2322,11 +2848,13 @@ FD --> Op2 (CALLx 3)
 
     let:16 a1 = (1 + (PCH,PCL)) in
     let:16 a2 = (1 + a1) in
+    #instruction: *CAL M[a1]M[(PCH,PCL)]
     let:16 a3 = (-1 + (SPH,SPL)) in
     M[a3] := a2[15:8];
     let:16 a4 = (-1 + a3) in
     M[a4] := a2[7:0];
     #return-to: a2
+    advance (17)
     SPH := a4[15:8];
     SPL := a4[7:0];
     jump ((M[a1],M[(PCH,PCL)]));
@@ -2334,10 +2862,12 @@ FD --> Op2 (CALLx 3)
 FE --> Op1 CPI
 
     let:16 a1 = (1 + (PCH,PCL)) in
+    #instruction: CP   M[(PCH,PCL)]
     let:16 a2 = addWithCarry(!false,A,~M[(PCH,PCL)]) in
     let:8 a3 = (A & 0F) in
     let:8 a4 = (~M[(PCH,PCL)] & 0F) in
     let:16 a5 = addWithCarry(!false,a3,a4) in
+    advance (7)
     FlagS := a2[7:0][7];
     FlagZ := is_zero(a2[7:0]);
     FlagA := a5[7:0][4];
@@ -2347,10 +2877,12 @@ FE --> Op1 CPI
 
 FF --> Op0 (RST 7)
 
+    #instruction: RST  7
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := PCH;
     let:16 a2 = (-1 + a1) in
     M[a2] := PCL;
+    advance (4)
     SPH := a2[15:8];
     SPL := a2[7:0];
     jump (0038);

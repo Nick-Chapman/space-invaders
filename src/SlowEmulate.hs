@@ -62,8 +62,8 @@ data EmuState = EmuState
   , playing :: Sounds.Playing
   }
 
-initState :: Rom -> EmuState
-initState rom = EmuState
+initState :: Rom -> IO EmuState
+initState rom = return $ EmuState
   { ticks = 0
   , icount = 0
   , cpu = Cpu.init (Byte 0) (Bit False)

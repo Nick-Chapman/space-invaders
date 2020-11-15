@@ -85,13 +85,13 @@ data Exp16
   = E16_HiLo (HiLo Exp8)
   | E16_OffsetAdr Int Exp16
   | E16_Var AVar
-  | E16_AddWithCarry Exp1 Exp8 Exp8
+  | E16_AddWithCarry Exp1 Exp8 Exp8 -- TODO: This should construct E9
   | E16_DropHiBitOf17 Exp17
   | E16_Lit Addr
   deriving (Eq)
 
 newtype AVar = AVar { u :: Int } -- address (16bit) variable
-  deriving Eq
+  deriving (Eq,Ord)
 
 instance Show AVar where show AVar{u} = "a" ++ show u
 

@@ -76,8 +76,9 @@ data World = World
 initWorld :: Rom -> IO World
 initWorld rom = do
   time <- getTime Monotonic
+  state <- Emulate.initState rom
   return $ World
-    { state = Emulate.initState rom
+    { state
     , buttons = buttons0
     , paused = False
     , showControls = True

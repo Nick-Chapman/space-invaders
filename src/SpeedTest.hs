@@ -22,7 +22,8 @@ data State = State
 main :: IO ()
 main = do
   rom <- Rom.loadInvaders
-  (es1,nanos1) <- measureOneEmulatedSecond (initState rom)
+  state <- initState rom
+  (es1,nanos1) <- measureOneEmulatedSecond state
   loop State { emuSeconds = 1, durationNanos = nanos1, emuState = es1 }
   where
     loop :: State -> IO ()

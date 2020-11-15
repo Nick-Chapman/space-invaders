@@ -24,7 +24,8 @@ data TraceConf = TraceConf
 traceEmulate :: Handle -> TraceConf -> IO ()
 traceEmulate handle TraceConf{traceOnAfter,stopAfter,period,traceNearPing} = do
   rom <- Rom.loadInvaders
-  loop 1 firstPing (initState rom)
+  state <- initState rom
+  loop 1 firstPing state
   where
     firstPing = cycles
     cycles = Ticks (cyclesInPeriod period)

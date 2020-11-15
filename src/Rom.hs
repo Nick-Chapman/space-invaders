@@ -1,5 +1,5 @@
 
-module Rom (Rom,fromBytes,loadInvaders,lookup) where
+module Rom (Rom,fromBytes,loadInvaders,size,lookup) where
 
 import Prelude hiding (lookup)
 

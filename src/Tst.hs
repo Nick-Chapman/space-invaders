@@ -17,7 +17,7 @@ import qualified Rom (fromBytes)
 main :: Handle -> IO ()
 main handle = do
   rom <- loadTestRom "roms/TST8080.COM"
-  let state0 = initState rom
+  state0 <- initState rom
   let EmuState{cpu=cpu0} = state0
   let cpu1 = Cpu.set cpu0 PCH 0x1
   let state1 = state0 { cpu = cpu1 }

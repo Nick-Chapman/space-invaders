@@ -189,7 +189,6 @@ oneStepReach = \case
 
 afterProgram :: Program -> [Program]
 afterProgram = \case
-  S_Stop -> []
   S_Jump{} -> []
   S_If _ p1 p2 -> [p1,p2]
   S_AssignReg _ _ p -> [p]

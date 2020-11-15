@@ -20,8 +20,7 @@ import Sounds (Sound)
 import qualified Shifter
 
 data Program
-  = S_Stop
-  | S_Jump Exp16
+  = S_Jump Exp16
   | S_If Exp1 Program Program
   | S_AssignReg Reg Exp8 Program
   | S_AssignShifterReg Shifter.Reg Exp8 Program
@@ -100,7 +99,6 @@ instance Show Program where show = show . layProgram
 
 layProgram :: Program -> Lay
 layProgram = \case
-  S_Stop -> lay "stop;"
   S_Jump a -> lay ("jump " ++ parenthesize (show a) ++ ";")
   S_If e s1 s2 ->
     vert [ lay ("if " ++ parenthesize (show e) ++ " {")

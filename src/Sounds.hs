@@ -1,7 +1,7 @@
 
 module Sounds(
   Sound(..), allSounds,
-  Playing, initPlaying, isSoundPlaying, soundOn, soundOff,
+  Playing, initPlaying, isSoundPlaying, soundControl
   ) where
 
 import Data.Map (Map)
@@ -36,3 +36,8 @@ soundOn Playing{map} sound = Playing { map = Map.insert sound True map }
 
 soundOff :: Playing -> Sound -> Playing
 soundOff Playing{map} sound = Playing { map = Map.insert sound False map }
+
+soundControl :: Bool -> Playing -> Sound -> Playing
+soundControl = \case
+  True -> soundOn
+  False -> soundOff

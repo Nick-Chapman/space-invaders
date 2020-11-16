@@ -20,6 +20,7 @@ import Phase (Phase)
 import Rom (Rom)
 import Semantics (InterruptHandling(..))
 import Shifter (Shifter)
+import Sounds (soundControl)
 import Text.Printf (printf)
 import qualified Addr (fromHiLo,toHiLo,bump)
 import qualified Buttons (get)
@@ -29,7 +30,7 @@ import qualified Mem (init,read,write)
 import qualified Phase (Byte,Addr,Bit)
 import qualified Semantics (fetchDecodeExec,Conf(..))
 import qualified Shifter (init,get,set)
-import qualified Sounds (Playing,initPlaying,soundOn,soundOff)
+import qualified Sounds (Playing,initPlaying)
 
 
 -- | Ticks of the 2 MHz clock
@@ -162,7 +163,7 @@ emulate buttons s0 =
       UnknownOutput n -> crash $ "unknown input: " ++ show n
       GetButton but -> k s (Bit (Buttons.get but buttons))
       SoundControl sound (Bit bool) -> do
-        k s { playing = (if bool then Sounds.soundOn else Sounds.soundOff) playing sound } ()
+        k s { playing = soundControl bool playing sound } ()
 
 
 parity :: Byte -> Bool

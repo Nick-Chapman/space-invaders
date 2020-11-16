@@ -27,14 +27,14 @@ data InterruptHandling
 
 data Conf = Conf { interruptHandling :: InterruptHandling }
 
-fetchDecodeExec :: Conf -> Eff p (Instruction (Byte p), Int)
+fetchDecodeExec :: Conf -> Eff p ()
 fetchDecodeExec Conf{interruptHandling} = do
   byte <- case interruptHandling of
     IgnoreInterrupts -> fetch
     BeforeEveryInstruction -> fetchOrHandleInterrupt
   decodeExec byte
 
-decodeExec :: Byte p -> Eff p (Instruction (Byte p), Int)
+decodeExec :: Byte p -> Eff p ()
 decodeExec byte = do
   op <- Decode byte
   instruction <- fetchImmediates op
@@ -46,7 +46,6 @@ decodeExec byte = do
       setPC a
       return $ cycles True op
   Advance n
-  return (instruction,n)
 
 fetchOrHandleInterrupt :: Eff p (Byte p)
 fetchOrHandleInterrupt = do

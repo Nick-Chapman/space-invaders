@@ -61,6 +61,7 @@ data EmuState = EmuState
   , nextWakeup :: Ticks
   , shifter :: Shifter EmuTime
   , playing :: Sounds.Playing
+  , iopt :: Maybe (Instruction Byte)
   }
 
 initState :: Rom -> IO EmuState
@@ -74,6 +75,7 @@ initState rom = return $ EmuState
   , nextWakeup = halfFrameTicks
   , shifter = Shifter.init (Byte 0)
   , playing = Sounds.initPlaying
+  , iopt = Nothing
   }
 
 instance Show EmuState where
@@ -91,9 +93,14 @@ semConf :: Semantics.Conf
 semConf = Semantics.Conf { interruptHandling = BeforeEveryInstruction }
 
 emulate :: Buttons -> EmuState -> IO EmuStep
-emulate buttons s0 =
-  run s0 (Semantics.fetchDecodeExec semConf) $ \s (instruction,n) -> do
-  return $ EmuStep { instruction, post = advance (Ticks n) s }
+emulate buttons s0 = do
+  let semantics = Semantics.fetchDecodeExec semConf
+  run s0 { iopt = Nothing } semantics $ \post@EmuState{iopt} () -> do
+    case iopt of
+      Nothing -> error "SlowEmulate: no instruction was traced"
+      Just instruction -> do
+        return $ EmuStep { instruction, post }
+
   where
 
     crash :: String -> a
@@ -125,8 +132,8 @@ emulate buttons s0 =
       GetInterruptInstruction -> k s (interruptInstruction s)
       Decode byte -> k s (decode byte)
       MarkReturnAddress {} -> k s ()
-      TraceInstruction{} -> k s ()
-      Advance{} -> k s () -- TODO: do the advance here, replacing 32 lines up
+      TraceInstruction i -> k (traceInstruction i s) ()
+      Advance n -> k (advance (Ticks n) s) ()
 
       MakeBit (bool) -> k s (Bit bool)
       Flip (Bit bool) -> k s (Bit (not bool))
@@ -187,6 +194,11 @@ prettyPrefix s message = do
   let pc = programCounter s
   unwords [ prettyTicks s , show pc , ":", message ]
 
+traceInstruction :: Instruction Byte -> EmuState -> EmuState
+traceInstruction i s@EmuState{iopt} =
+  case iopt of
+    Just _ -> error "traceInstruction, 2!"
+    Nothing -> s { iopt = Just i }
 
 advance :: Ticks -> EmuState -> EmuState
 advance n s@EmuState{icount,ticks} =

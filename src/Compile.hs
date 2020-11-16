@@ -8,7 +8,7 @@ import Cpu (Cpu(..),Reg(..),Flag(..))
 import Data.Set (Set)
 import Effect (Eff)
 import HiLo (HiLo(..))
-import InstructionSet (Instruction,Op(..),Op1(..),decode,encode)
+import InstructionSet (Op(..),Op1(..),decode,encode)
 import Rom (Rom)
 import Phase (Phase)
 import Residual (Exp1(..),Exp8(..),Exp16(..),Exp17(..),Program(..),AVar(..))
@@ -168,9 +168,9 @@ programFromState State{cpu,shifter} = do
 
 
 
-compileThen :: Eff CompTime (Instruction Exp8, Int) -> State -> (State -> CompileRes) -> CompileRes
+compileThen :: Eff CompTime () -> State -> (State -> CompileRes) -> CompileRes
 compileThen semantics state k =
-  run state semantics $ \state (_i,_n) -> k state
+  run state semantics $ \state () -> k state
   where
 
     run :: State -> Eff CompTime a -> (State -> a -> CompileRes) -> CompileRes

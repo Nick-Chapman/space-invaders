@@ -167,7 +167,7 @@ emulate buttons s0 = do
         k s (w, Bit cout)
 
       UnknownInput n -> crash $ "unknown input: " ++ show n
-      UnknownOutput n -> crash $ "unknown input: " ++ show n
+      UnknownOutput n -> crash $ "unknown output: " ++ show n
       GetButton but -> k s (Bit (Buttons.get but buttons))
       SoundControl sound (Bit bool) -> do
         k s { playing = soundControl bool playing sound } ()

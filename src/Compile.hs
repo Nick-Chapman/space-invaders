@@ -12,7 +12,6 @@ import InstructionSet (Op(..),Op1(..),decode,encode)
 import Rom (Rom)
 import Phase (Phase)
 import Residual (Exp1(..),Exp8(..),Exp16(..),Exp17(..),Program(..),AVar(..))
-import Semantics (InterruptHandling(..))
 import Shifter (Shifter(..))
 import qualified Addr as Addr (toHiLo,fromHiLo,bump)
 import qualified Cpu (get,set,getFlag,setFlag)
@@ -20,7 +19,7 @@ import qualified Data.Set as Set
 import qualified Effect as E (Eff(..))
 import qualified Rom (lookup)
 import qualified Phase (Bit,Byte,Addr)
-import qualified Semantics (fetchDecodeExec,decodeExec,Conf(..))
+import qualified Semantics (fetchDecodeExec,decodeExec,Conf)
 import qualified Shifter (Reg(..),get,set,allRegs)
 
 
@@ -46,8 +45,8 @@ opPrograms rom = do
     ]
 
 
-compileAt :: (Addr -> Bool) -> Rom -> Addr -> Program
-compileAt inline rom addr = do
+compileAt :: Semantics.Conf -> (Addr -> Bool) -> Rom -> Addr -> Program
+compileAt semConf inline rom addr = do
   let cpu = initCpu HiLo {hi = pch, lo = pcl }
         where
           HiLo{hi,lo} = Addr.toHiLo addr
@@ -55,7 +54,7 @@ compileAt inline rom addr = do
           pcl = E8_Lit lo
   let state = initState rom cpu
   let visited :: Visited = Set.insert addr Set.empty
-  runGen $ compileFrom inline visited state
+  runGen $ compileFrom semConf inline visited state
 
 
 initCpu :: HiLo Exp8 -> Cpu CompTime
@@ -76,11 +75,8 @@ type Visited = Set Addr
 
 type CompileRes = Gen Program
 
-semConf :: Semantics.Conf
-semConf = Semantics.Conf { interruptHandling = IgnoreInterrupts }
-
-compileFrom :: (Addr -> Bool) -> Visited -> State -> CompileRes
-compileFrom inline = go
+compileFrom :: Semantics.Conf -> (Addr -> Bool) -> Visited -> State -> CompileRes
+compileFrom semConf inline = go
   where
 
     theSemantics = Semantics.fetchDecodeExec semConf

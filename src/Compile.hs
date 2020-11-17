@@ -88,6 +88,7 @@ compileFrom inline = go
     -- Tracking visited (for loop breaking) is not needed when we compile w.r.t join-points
     go :: Visited -> State -> CompileRes
     go visited state =
+      --TODO: put AtRef at start, not just when we inline
       compileThen theSemantics state $ \state@State{cpu} -> do
       case getConcreteAddrMaybe (getPC cpu) of
         Nothing ->

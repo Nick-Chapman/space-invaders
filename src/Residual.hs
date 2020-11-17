@@ -29,8 +29,6 @@ data Program
   | S_Let16 AVar Exp16 Program
   | S_Let8 AVar Exp8 Program
   | S_Let17 AVar Exp17 Program
-  | S_FillShiftRegister Exp8 Program
-  | S_SetShiftRegsterOffset Exp8 Program
   | S_AtRef Addr Program
   | S_MarkReturnAddress Exp16 Program
   | S_TraceInstruction (Instruction Exp8) Program
@@ -135,14 +133,6 @@ layProgram = \case
          ]
   S_Let17 v e next ->
     vert [ lay ("let:17 " ++ show v ++ " = " ++ show e ++ " in")
-         , layProgram next
-         ]
-  S_FillShiftRegister e next ->
-    vert [ lay ("fill_shift_register" ++ parenthesize (show e) ++ ";")
-         , layProgram next
-         ]
-  S_SetShiftRegsterOffset e next ->
-    vert [ lay ("set_shift_register_offset" ++ parenthesize (show e) ++ ";")
          , layProgram next
          ]
   S_AtRef pc next ->

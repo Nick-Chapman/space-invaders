@@ -198,8 +198,6 @@ afterProgram = \case
   S_Let16 _ _ p -> [p]
   S_Let8 _ _ p -> [p]
   S_Let17 _ _ p -> [p]
-  S_FillShiftRegister _ p  -> [p]
-  S_SetShiftRegsterOffset _ p -> [p]
   S_UnknownOutput _ p -> [p]
   S_SoundControl _ _ p -> [p]
   S_MarkReturnAddress _ p -> [p]

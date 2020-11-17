@@ -1,6 +1,7 @@
 
 0000:
 
+    #0000
     #instruction: NOP
     advance (4)
     #0001
@@ -92,6 +93,7 @@
 
 0008:
 
+    #0008
     #instruction: PUSH PSW
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := A;
@@ -940,6 +942,7 @@
 
 0010:
 
+    #0010
     #instruction: PUSH PSW
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := A;
@@ -1195,6 +1198,7 @@
 
 0020:
 
+    #0020
     #instruction: IN   01
     advance (10)
     #0022
@@ -3005,6 +3009,7 @@
 
 003E:
 
+    #003E
     #instruction: XOR  A
     let:8 a1 = (A ^ A) in
     advance (4)
@@ -3779,6 +3784,7 @@
 
 005A:
 
+    #005A
     #instruction: JP   0082
     advance (10)
     #0082
@@ -3828,6 +3834,7 @@
 
 0072:
 
+    #0072
     #instruction: LD   A,(2032)
     advance (13)
     #0075
@@ -4185,6 +4192,7 @@
 
 007B:
 
+    #007B
     #instruction: CALL 0248
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 00;
@@ -4525,6 +4533,7 @@
 
 007E:
 
+    #007E
     #instruction: CALL 0913
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 00;
@@ -4639,6 +4648,7 @@
 
 0081:
 
+    #0081
     #instruction: NOP
     advance (4)
     #0082
@@ -4688,6 +4698,7 @@
 
 00AB:
 
+    #00AB
     #instruction: CALL 0141
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 00;
@@ -4919,6 +4930,7 @@
 
 00AE:
 
+    #00AE
     #instruction: JP   0082
     advance (10)
     #0082
@@ -4968,6 +4980,7 @@
 
 00B4:
 
+    #00B4
     #instruction: PUSH HL
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := H;
@@ -5169,6 +5182,7 @@
 
 012E:
 
+    #012E
     #instruction: LD   HL,(200B)
     advance (16)
     #0131
@@ -5301,6 +5315,7 @@
 
 0136:
 
+    #0136
     #instruction: XOR  A
     let:8 a1 = (A ^ A) in
     advance (4)
@@ -5325,6 +5340,7 @@
 
 015A:
 
+    #015A
     #instruction: LD   L,A
     advance (5)
     #015B
@@ -5673,6 +5689,7 @@
 
 0166:
 
+    #0166
     #instruction: LD   H,C
     advance (5)
     #0167
@@ -6260,6 +6277,7 @@
 
 01B1:
 
+    #01B1
     #instruction: LD   HL,2005
     advance (10)
     #01B4
@@ -6310,6 +6328,7 @@
 
 0203:
 
+    #0203
     #instruction: POP  DE
     let:16 a1 = (1 + (SPH,SPL)) in
     let:16 a2 = (1 + a1) in
@@ -6426,6 +6445,7 @@
 
 0235:
 
+    #0235
     #instruction: POP  BC
     let:16 a1 = (1 + (SPH,SPL)) in
     let:16 a2 = (1 + a1) in
@@ -6784,12 +6804,14 @@
 
 0245:
 
+    #0245
     #instruction: JP   0235
     advance (10)
     jump (0235);
 
 026F:
 
+    #026F
     #instruction: POP  HL
     let:16 a1 = (1 + (SPH,SPL)) in
     let:16 a2 = (1 + a1) in
@@ -7144,6 +7166,7 @@
 
 028E:
 
+    #028E
     #instruction: POP  HL
     let:16 a1 = (1 + (SPH,SPL)) in
     let:16 a2 = (1 + a1) in
@@ -9024,6 +9047,7 @@
 
 02B6:
 
+    #02B6
     #instruction: LD   HL,2010
     advance (10)
     #02B9
@@ -9101,6 +9125,7 @@
 
 02C1:
 
+    #02C1
     #instruction: LD   B,00
     advance (7)
     #02C3
@@ -9149,6 +9174,7 @@
 
 02C6:
 
+    #02C6
     #instruction: LD   A,(206D)
     advance (13)
     #02C9
@@ -9239,6 +9265,7 @@
 
 02D7:
 
+    #02D7
     #instruction: CALL 092E
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 02;
@@ -9277,6 +9304,7 @@
 
 02DA:
 
+    #02DA
     #instruction: AND  A
     let:8 a1 = (A & A) in
     let:8 a2 = (A | A) in
@@ -9508,6 +9536,7 @@
 
 02E1:
 
+    #02E1
     #instruction: LD   A,(HL)
     advance (7)
     #02E2
@@ -10307,6 +10336,7 @@
 
 02F8:
 
+    #02F8
     #instruction: CALL 0878
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 02;
@@ -10355,6 +10385,7 @@
 
 02FB:
 
+    #02FB
     #instruction: LD   (HL),E
     M[(H,L)] := E;
     advance (7)
@@ -10462,6 +10493,7 @@
 
 0305:
 
+    #0305
     #instruction: POP  PSW
     let:16 a1 = (1 + (SPH,SPL)) in
     let:16 a2 = (1 + a1) in
@@ -10615,6 +10647,7 @@
 
 0318:
 
+    #0318
     #instruction: XOR  A
     let:8 a1 = (A ^ A) in
     advance (4)
@@ -10786,6 +10819,7 @@
 
 0326:
 
+    #0326
     #instruction: CALL 1A7F
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 03;
@@ -10832,24 +10866,28 @@
 
 0329:
 
+    #0329
     #instruction: JP   07F9
     advance (10)
     jump (07F9);
 
 032F:
 
+    #032F
     #instruction: JP   0817
     advance (10)
     jump (0817);
 
 0335:
 
+    #0335
     #instruction: JP   02F8
     advance (10)
     jump (02F8);
 
 0366:
 
+    #0366
     #instruction: RLCA 
     advance (4)
     #0367
@@ -11253,6 +11291,7 @@
 
 0375:
 
+    #0375
     #instruction: CALL 1A47
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 03;
@@ -11355,6 +11394,7 @@
 
 0378:
 
+    #0378
     #instruction: CALL 1439
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 03;
@@ -11444,6 +11484,7 @@
 
 037B:
 
+    #037B
     #instruction: LD   A,00
     advance (7)
     #037D
@@ -11462,6 +11503,7 @@
 
 03BB:
 
+    #03BB
     #instruction: LD   DE,202A
     advance (10)
     #03BE
@@ -11538,6 +11580,7 @@
 
 03C1:
 
+    #03C1
     #instruction: POP  HL
     let:16 a1 = (1 + (SPH,SPL)) in
     let:16 a2 = (1 + a1) in
@@ -12079,6 +12122,7 @@
 
 03E3:
 
+    #03E3
     #instruction: CALL 1452
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 03;
@@ -12205,6 +12249,7 @@
 
 03E6:
 
+    #03E6
     #instruction: POP  HL
     let:16 a1 = (1 + (SPH,SPL)) in
     let:16 a2 = (1 + a1) in
@@ -12350,6 +12395,7 @@
 
 03F7:
 
+    #03F7
     #instruction: JP   1400
     advance (10)
     #1400
@@ -12474,6 +12520,7 @@
 
 0407:
 
+    #0407
     #instruction: JP   1400
     advance (10)
     #1400
@@ -12598,6 +12645,7 @@
 
 040D:
 
+    #040D
     #instruction: PUSH DE
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := D;
@@ -12745,6 +12793,7 @@
 
 0413:
 
+    #0413
     #instruction: POP  BC
     let:16 a1 = (1 + (SPH,SPL)) in
     let:16 a2 = (1 + a1) in
@@ -12908,6 +12957,7 @@
 
 0421:
 
+    #0421
     #instruction: LD   A,(2061)
     advance (13)
     #0424
@@ -12954,6 +13004,7 @@
 
 0439:
 
+    #0439
     #instruction: CALL 1452
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 04;
@@ -13080,6 +13131,7 @@
 
 043C:
 
+    #043C
     #instruction: LD   HL,2025
     advance (10)
     #043F
@@ -13157,6 +13209,7 @@
 
 0447:
 
+    #0447
     #instruction: LD   HL,(208D)
     advance (16)
     #044A
@@ -13467,6 +13520,7 @@
 
 0476:
 
+    #0476
     #instruction: POP  HL
     let:16 a1 = (1 + (SPH,SPL)) in
     let:16 a2 = (1 + a1) in
@@ -13610,6 +13664,7 @@
 
 0492:
 
+    #0492
     #instruction: LD   A,(2046)
     advance (13)
     #0495
@@ -15064,6 +15119,7 @@
 
 04A1:
 
+    #04A1
     #instruction: LD   A,(2078)
     advance (13)
     #04A4
@@ -15221,6 +15277,7 @@
 
 04B6:
 
+    #04B6
     #instruction: POP  HL
     let:16 a1 = (1 + (SPH,SPL)) in
     let:16 a2 = (1 + a1) in
@@ -15373,6 +15430,7 @@
 
 04CA:
 
+    #04CA
     #instruction: LD   A,(2036)
     advance (13)
     #04CD
@@ -16827,6 +16885,7 @@
 
 04D9:
 
+    #04D9
     #instruction: LD   A,(2076)
     advance (13)
     #04DC
@@ -17177,6 +17236,7 @@
 
 04FC:
 
+    #04FC
     #instruction: LD   A,(2082)
     advance (13)
     #04FF
@@ -17255,6 +17315,7 @@
 
 050E:
 
+    #050E
     #instruction: POP  HL
     let:16 a1 = (1 + (SPH,SPL)) in
     let:16 a2 = (1 + a1) in
@@ -17347,6 +17408,7 @@
 
 0517:
 
+    #0517
     #instruction: LD   A,(2046)
     advance (13)
     #051A
@@ -18801,6 +18863,7 @@
 
 0526:
 
+    #0526
     #instruction: LD   A,(2076)
     advance (13)
     #0529
@@ -19151,6 +19214,7 @@
 
 0549:
 
+    #0549
     #instruction: LD   HL,(2076)
     advance (16)
     #054C
@@ -19171,6 +19235,7 @@
 
 05A8:
 
+    #05A8
     #instruction: RET  NC
     if (!FlagCY) {
       let:16 a1 = (1 + (SPH,SPL)) in
@@ -19351,6 +19416,7 @@
 
 05AC:
 
+    #05AC
     #instruction: LD   A,C
     advance (5)
     #05AD
@@ -19425,6 +19491,7 @@
 
 05C7:
 
+    #05C7
     #instruction: RET  NC
     if (!FlagCY) {
       let:16 a1 = (1 + (SPH,SPL)) in
@@ -19734,6 +19801,7 @@
 
 05D4:
 
+    #05D4
     #instruction: LD   A,(2079)
     advance (13)
     #05D7
@@ -19962,6 +20030,7 @@
 
 05F3:
 
+    #05F3
     #instruction: LD   A,(207B)
     advance (13)
     #05F6
@@ -20152,6 +20221,7 @@
 
 0624:
 
+    #0624
     #instruction: LD   A,C
     advance (5)
     #0625
@@ -20413,6 +20483,7 @@
 
 0651:
 
+    #0651
     #instruction: LD   HL,1CDC
     advance (10)
     #0654
@@ -20534,6 +20605,7 @@
 
 0672:
 
+    #0672
     #instruction: JP   1491
     advance (10)
     #1491
@@ -20655,6 +20727,7 @@
 
 067B:
 
+    #067B
     #instruction: JP   1452
     advance (10)
     #1452
@@ -20776,6 +20849,7 @@
 
 0682:
 
+    #0682
     #instruction: POP  HL
     let:16 a1 = (1 + (SPH,SPL)) in
     let:16 a2 = (1 + a1) in
@@ -21237,6 +21311,7 @@
 
 06AB:
 
+    #06AB
     #instruction: LD   DE,208A
     advance (10)
     #06AE
@@ -21313,6 +21388,7 @@
 
 06B1:
 
+    #06B1
     #instruction: RET  NC
     if (!FlagCY) {
       let:16 a1 = (1 + (SPH,SPL)) in
@@ -21496,6 +21572,7 @@
 
 06C7:
 
+    #06C7
     #instruction: LD   HL,208A
     advance (10)
     #06CA
@@ -21692,6 +21769,7 @@
 
 06DB:
 
+    #06DB
     #instruction: INC  HL
     let:16 a1 = (1 + (H,L)) in
     advance (5)
@@ -22213,6 +22291,7 @@
 
 06FC:
 
+    #06FC
     #instruction: CALL 14CB
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 06;
@@ -22295,6 +22374,7 @@
 
 06FF:
 
+    #06FF
     #instruction: LD   HL,2083
     advance (10)
     #0702
@@ -22375,6 +22455,7 @@
 
 0707:
 
+    #0707
     #instruction: LD   B,FE
     advance (7)
     #0709
@@ -22418,6 +22499,7 @@
 
 0739:
 
+    #0739
     #instruction: JP   08F1
     advance (10)
     #08F1
@@ -22572,6 +22654,7 @@
 
 073F:
 
+    #073F
     #instruction: JP   1439
     advance (10)
     #1439
@@ -22656,6 +22739,7 @@
 
 0748:
 
+    #0748
     #instruction: JP   1A47
     advance (10)
     #1A47
@@ -22753,6 +22837,7 @@
 
 0756:
 
+    #0756
     #instruction: LD   HL,1D7C
     advance (10)
     #0759
@@ -22833,6 +22918,7 @@
 
 0771:
 
+    #0771
     #instruction: CALL 09D6
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 07;
@@ -22974,6 +23060,7 @@
 
 0774:
 
+    #0774
     #instruction: LD   HL,3013
     advance (10)
     #0777
@@ -23139,6 +23226,7 @@
 
 077F:
 
+    #077F
     #instruction: LD   A,(20EB)
     advance (13)
     #0782
@@ -23478,6 +23566,7 @@
 
 0791:
 
+    #0791
     #instruction: IN   01
     advance (10)
     #0793
@@ -23730,6 +23819,7 @@
 
 07A9:
 
+    #07A9
     #instruction: LD   HL,0000
     advance (10)
     #07AC
@@ -23974,6 +24064,7 @@
 
 07B5:
 
+    #07B5
     #instruction: CALL 192B
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 07;
@@ -24205,6 +24296,7 @@
 
 07B8:
 
+    #07B8
     #instruction: CALL 19D7
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 07;
@@ -24240,6 +24332,7 @@
 
 07BB:
 
+    #07BB
     #instruction: LD   HL,0101
     advance (10)
     #07BE
@@ -24332,6 +24425,7 @@
 
 07CB:
 
+    #07CB
     #instruction: CALL 01EF
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 07;
@@ -24432,6 +24526,7 @@
 
 07CE:
 
+    #07CE
     #instruction: CALL 01F5
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 07;
@@ -24529,6 +24624,7 @@
 
 07D1:
 
+    #07D1
     #instruction: CALL 08D1
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 07;
@@ -24568,6 +24664,7 @@
 
 07D4:
 
+    #07D4
     #instruction: LD   (21FF),A
     M[21FF] := A;
     advance (13)
@@ -24707,6 +24804,7 @@
 
 07DD:
 
+    #07DD
     #instruction: XOR  A
     let:8 a1 = (A ^ A) in
     advance (4)
@@ -24785,6 +24883,7 @@
 
 07E7:
 
+    #07E7
     #instruction: CALL 1904
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 07;
@@ -24850,6 +24949,7 @@
 
 07EA:
 
+    #07EA
     #instruction: LD   HL,3878
     advance (10)
     #07ED
@@ -24943,6 +25043,7 @@
 
 07F6:
 
+    #07F6
     #instruction: CALL 1A7F
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 07;
@@ -24989,6 +25090,7 @@
 
 07F9:
 
+    #07F9
     #instruction: CALL 088D
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 07;
@@ -25162,6 +25264,7 @@
 
 07FC:
 
+    #07FC
     #instruction: CALL 09D6
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 07;
@@ -25303,6 +25406,7 @@
 
 07FF:
 
+    #07FF
     #instruction: NOP
     advance (4)
     #0800
@@ -25404,6 +25508,7 @@
 
 0807:
 
+    #0807
     #instruction: LD   A,(2067)
     advance (13)
     #080A
@@ -26064,6 +26169,7 @@
 
 0811:
 
+    #0811
     #instruction: CALL 01CF
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 08;
@@ -26154,6 +26260,7 @@
 
 0814:
 
+    #0814
     #instruction: CALL 00B1
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 08;
@@ -26192,6 +26299,7 @@
 
 0817:
 
+    #0817
     #instruction: CALL 19D1
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 08;
@@ -26218,6 +26326,7 @@
 
 081A:
 
+    #081A
     #instruction: LD   B,20
     advance (7)
     #081C
@@ -26265,6 +26374,7 @@
 
 081F:
 
+    #081F
     #instruction: CALL 1618
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 08;
@@ -26613,6 +26723,7 @@
 
 0822:
 
+    #0822
     #instruction: CALL 190A
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 08;
@@ -27151,6 +27262,7 @@
 
 0825:
 
+    #0825
     #instruction: CALL 15F3
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 08;
@@ -27189,6 +27301,7 @@
 
 0828:
 
+    #0828
     #instruction: CALL 0988
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 08;
@@ -27247,6 +27360,7 @@
 
 082B:
 
+    #082B
     #instruction: LD   A,(2082)
     advance (13)
     #082E
@@ -27368,6 +27482,7 @@
 
 0835:
 
+    #0835
     #instruction: CALL 0935
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 08;
@@ -27426,6 +27541,7 @@
 
 0838:
 
+    #0838
     #instruction: CALL 08D8
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 08;
@@ -27485,6 +27601,7 @@
 
 083B:
 
+    #083B
     #instruction: CALL 172C
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 08;
@@ -27593,6 +27710,7 @@
 
 083E:
 
+    #083E
     #instruction: CALL 0A59
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 08;
@@ -27627,6 +27745,7 @@
 
 0841:
 
+    #0841
     #instruction: JP   Z,0849
     if (FlagZ) {
       advance (10)
@@ -27682,6 +27801,7 @@
 
 0849:
 
+    #0849
     #instruction: CALL 1775
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 08;
@@ -28065,6 +28185,7 @@
 
 084C:
 
+    #084C
     #instruction: OUT  06
     advance (10)
     #084E
@@ -28180,12 +28301,14 @@
 
 0851:
 
+    #0851
     #instruction: JP   081F
     advance (10)
     jump (081F);
 
 085D:
 
+    #085D
     #instruction: LD   B,98
     advance (7)
     #085F
@@ -28679,12 +28802,14 @@
 
 0875:
 
+    #0875
     #instruction: JP   0814
     advance (10)
     jump (0814);
 
 0898:
 
+    #0898
     #instruction: LD   A,(2067)
     advance (13)
     #089B
@@ -28844,6 +28969,7 @@
 
 08A4:
 
+    #08A4
     #instruction: LD   A,B0
     advance (7)
     #08A6
@@ -29129,6 +29255,7 @@
 
 08B6:
 
+    #08B6
     #instruction: CALL 1931
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 08;
@@ -29357,6 +29484,7 @@
 
 08B9:
 
+    #08B9
     #instruction: JP   08A9
     advance (10)
     #08A9
@@ -29638,6 +29766,7 @@
 
 08CE:
 
+    #08CE
     #instruction: JP   08A9
     advance (10)
     #08A9
@@ -29919,6 +30048,7 @@
 
 08F8:
 
+    #08F8
     #instruction: POP  DE
     let:16 a1 = (1 + (SPH,SPL)) in
     let:16 a2 = (1 + a1) in
@@ -30105,6 +30235,7 @@
 
 0931:
 
+    #0931
     #instruction: LD   L,FF
     advance (7)
     #0933
@@ -30123,6 +30254,7 @@
 
 0938:
 
+    #0938
     #instruction: DEC  HL
     let:16 a1 = (-1 + (H,L)) in
     advance (5)
@@ -30298,6 +30430,7 @@
 
 094B:
 
+    #094B
     #instruction: INC  HL
     let:16 a1 = (1 + (H,L)) in
     advance (5)
@@ -30375,6 +30508,7 @@
 
 0952:
 
+    #0952
     #instruction: INC  (HL)
     let:16 a1 = addWithCarry(true,M[(H,L)],00) in
     let:8 a2 = (M[(H,L)] & 0F) in
@@ -30528,6 +30662,7 @@
 
 0966:
 
+    #0966
     #instruction: POP  PSW
     let:16 a1 = (1 + (SPH,SPL)) in
     let:16 a2 = (1 + a1) in
@@ -30699,6 +30834,7 @@
 
 096B:
 
+    #096B
     #instruction: CALL 1910
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 09;
@@ -30749,6 +30885,7 @@
 
 096E:
 
+    #096E
     #instruction: DEC  HL
     let:16 a1 = (-1 + (H,L)) in
     advance (5)
@@ -30812,6 +30949,7 @@
 
 098B:
 
+    #098B
     #instruction: LD   A,(20F1)
     advance (13)
     #098E
@@ -31130,6 +31268,7 @@
 
 09B1:
 
+    #09B1
     #instruction: LD   A,E
     advance (5)
     #09B2
@@ -31312,6 +31451,7 @@
 
 09BD:
 
+    #09BD
     #instruction: POP  PSW
     let:16 a1 = (1 + (SPH,SPL)) in
     let:16 a2 = (1 + a1) in
@@ -31470,6 +31610,7 @@
 
 09C3:
 
+    #09C3
     #instruction: POP  DE
     let:16 a1 = (1 + (SPH,SPL)) in
     let:16 a2 = (1 + a1) in
@@ -31487,6 +31628,7 @@
 
 09F2:
 
+    #09F2
     #instruction: XOR  A
     let:8 a1 = (A ^ A) in
     advance (4)
@@ -31636,6 +31778,7 @@
 
 09F9:
 
+    #09F9
     #instruction: LD   A,(2067)
     advance (13)
     #09FC
@@ -31726,6 +31869,7 @@
 
 0A00:
 
+    #0A00
     #instruction: POP  PSW
     let:16 a1 = (1 + (SPH,SPL)) in
     let:16 a2 = (1 + a1) in
@@ -32043,6 +32187,7 @@
 
 0A2D:
 
+    #0A2D
     #instruction: CALL 1904
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 0A;
@@ -32108,6 +32253,7 @@
 
 0A30:
 
+    #0A30
     #instruction: JP   0804
     advance (10)
     #0804
@@ -32201,6 +32347,7 @@
 
 0A36:
 
+    #0A36
     #instruction: CALL 01C0
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 0A;
@@ -32263,6 +32410,7 @@
 
 0A39:
 
+    #0A39
     #instruction: JP   0804
     advance (10)
     #0804
@@ -32356,6 +32504,7 @@
 
 0A3F:
 
+    #0A3F
     #instruction: JP   NZ,0A52
     if (!FlagZ) {
       advance (10)
@@ -32462,6 +32611,7 @@
 
 0A4F:
 
+    #0A4F
     #instruction: JP   Z,0A47
     if (FlagZ) {
       advance (10)
@@ -32561,6 +32711,7 @@
 
 0A55:
 
+    #0A55
     #instruction: JP   NZ,0A52
     if (!FlagZ) {
       advance (10)
@@ -32610,6 +32761,7 @@
 
 0A6C:
 
+    #0A6C
     #instruction: LD   B,C
     advance (5)
     #0A6D
@@ -32708,6 +32860,7 @@
 
 0A71:
 
+    #0A71
     #instruction: LD   A,(HL)
     advance (7)
     #0A72
@@ -32748,6 +32901,7 @@
 
 0A98:
 
+    #0A98
     #instruction: POP  DE
     let:16 a1 = (1 + (SPH,SPL)) in
     let:16 a2 = (1 + a1) in
@@ -32969,6 +33123,7 @@
 
 0AF2:
 
+    #0AF2
     #instruction: EI
     enable_interrupts()
     advance (4)
@@ -33031,6 +33186,7 @@
 
 0AF6:
 
+    #0AF6
     #instruction: LD   A,(20EC)
     advance (13)
     #0AF9
@@ -33368,6 +33524,7 @@
 
 0B08:
 
+    #0B08
     #instruction: LD   DE,1DAF
     advance (10)
     #0B0B
@@ -33536,6 +33693,7 @@
 
 0B0E:
 
+    #0B0E
     #instruction: CALL 0AB1
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 0B;
@@ -33594,6 +33752,7 @@
 
 0B11:
 
+    #0B11
     #instruction: CALL 1815
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 0B;
@@ -33767,6 +33926,7 @@
 
 0B14:
 
+    #0B14
     #instruction: CALL 0AB6
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 0B;
@@ -33825,6 +33985,7 @@
 
 0B17:
 
+    #0B17
     #instruction: LD   A,(20EC)
     advance (13)
     #0B1A
@@ -33929,6 +34090,7 @@
 
 0B24:
 
+    #0B24
     #instruction: CALL 0A80
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 0B;
@@ -33995,6 +34157,7 @@
 
 0B27:
 
+    #0B27
     #instruction: LD   DE,1BB0
     advance (10)
     #0B2A
@@ -34075,6 +34238,7 @@
 
 0B2D:
 
+    #0B2D
     #instruction: CALL 0A80
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 0B;
@@ -34141,6 +34305,7 @@
 
 0B30:
 
+    #0B30
     #instruction: CALL 0AB1
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 0B;
@@ -34199,6 +34364,7 @@
 
 0B33:
 
+    #0B33
     #instruction: LD   DE,1FC9
     advance (10)
     #0B36
@@ -34279,6 +34445,7 @@
 
 0B39:
 
+    #0B39
     #instruction: CALL 0A80
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 0B;
@@ -34345,6 +34512,7 @@
 
 0B3C:
 
+    #0B3C
     #instruction: CALL 0AB1
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 0B;
@@ -34403,6 +34571,7 @@
 
 0B3F:
 
+    #0B3F
     #instruction: LD   HL,33B7
     advance (10)
     #0B42
@@ -34491,6 +34660,7 @@
 
 0B47:
 
+    #0B47
     #instruction: CALL 0AB6
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 0B;
@@ -34549,6 +34719,7 @@
 
 0B4A:
 
+    #0B4A
     #instruction: CALL 09D6
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 0B;
@@ -34690,6 +34861,7 @@
 
 0B4D:
 
+    #0B4D
     #instruction: LD   A,(21FF)
     advance (13)
     #0B50
@@ -34751,6 +34923,7 @@
 
 0B57:
 
+    #0B57
     #instruction: LD   (21FF),A
     M[21FF] := A;
     advance (13)
@@ -34801,6 +34974,7 @@
 
 0B5D:
 
+    #0B5D
     #instruction: CALL 01E4
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 0B;
@@ -34881,6 +35055,7 @@
 
 0B60:
 
+    #0B60
     #instruction: CALL 01C0
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 0B;
@@ -34943,6 +35118,7 @@
 
 0B63:
 
+    #0B63
     #instruction: CALL 01EF
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 0B;
@@ -35043,6 +35219,7 @@
 
 0B66:
 
+    #0B66
     #instruction: CALL 021A
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 0B;
@@ -35366,6 +35543,7 @@
 
 0B69:
 
+    #0B69
     #instruction: LD   A,01
     advance (7)
     #0B6B
@@ -35463,6 +35641,7 @@
 
 0B71:
 
+    #0B71
     #instruction: CALL 1618
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 0B;
@@ -35811,6 +35990,7 @@
 
 0B74:
 
+    #0B74
     #instruction: CALL 0BF1
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 0B;
@@ -36357,6 +36537,7 @@
 
 0B77:
 
+    #0B77
     #instruction: OUT  06
     advance (10)
     #0B79
@@ -36394,6 +36575,7 @@
 
 0B7C:
 
+    #0B7C
     #instruction: JP   Z,0B71
     if (FlagZ) {
       advance (10)
@@ -36444,6 +36626,7 @@
 
 0B86:
 
+    #0B86
     #instruction: JP   NZ,0B83
     if (!FlagZ) {
       advance (10)
@@ -36549,6 +36732,7 @@
 
 0B90:
 
+    #0B90
     #instruction: CALL 1988
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 0B;
@@ -36693,6 +36877,7 @@
 
 0B93:
 
+    #0B93
     #instruction: LD   C,0C
     advance (7)
     #0B95
@@ -36858,6 +37043,7 @@
 
 0B9E:
 
+    #0B9E
     #instruction: LD   A,(20EC)
     advance (13)
     #0BA1
@@ -37026,6 +37212,7 @@
 
 0BAE:
 
+    #0BAE
     #instruction: LD   BC,1F9C
     advance (10)
     #0BB1
@@ -37130,6 +37317,7 @@
 
 0BB4:
 
+    #0BB4
     #instruction: CALL 184C
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 0B;
@@ -37307,6 +37495,7 @@
 
 0BB7:
 
+    #0BB7
     #instruction: IN   02
     advance (10)
     #0BB9
@@ -37435,6 +37624,7 @@
 
 0BC3:
 
+    #0BC3
     #instruction: CALL 0AB6
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 0B;
@@ -37493,6 +37683,7 @@
 
 0BC6:
 
+    #0BC6
     #instruction: LD   A,(20EC)
     advance (13)
     #0BC9
@@ -37599,6 +37790,7 @@
 
 0BD4:
 
+    #0BD4
     #instruction: CALL 0A80
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 0B;
@@ -37665,6 +37857,7 @@
 
 0BD7:
 
+    #0BD7
     #instruction: CALL 189E
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 0B;
@@ -37750,6 +37943,7 @@
 
 0BDA:
 
+    #0BDA
     #instruction: LD   HL,20EC
     advance (10)
     #0BDD
@@ -37913,12 +38107,14 @@
 
 0BE5:
 
+    #0BE5
     #instruction: JP   18DF
     advance (10)
     jump (18DF);
 
 0BEE:
 
+    #0BEE
     #instruction: JP   0B0B
     advance (10)
     #0B0B
@@ -38087,6 +38283,7 @@
 
 0BF4:
 
+    #0BF4
     #instruction: JP   199A
     advance (10)
     #199A
@@ -38533,6 +38730,7 @@
 
 1404:
 
+    #1404
     #instruction: NOP
     advance (4)
     #1405
@@ -38671,6 +38869,7 @@
 
 1427:
 
+    #1427
     #instruction: PUSH BC
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := B;
@@ -38769,6 +38968,7 @@
 
 1455:
 
+    #1455
     #instruction: PUSH BC
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := B;
@@ -38912,6 +39112,7 @@
 
 1494:
 
+    #1494
     #instruction: XOR  A
     let:8 a1 = (A ^ A) in
     advance (4)
@@ -39426,6 +39627,7 @@
 
 1508:
 
+    #1508
     #instruction: LD   A,(202A)
     advance (13)
     #150B
@@ -39534,6 +39736,7 @@
 
 150F:
 
+    #150F
     #instruction: LD   (2064),HL
     M[2064] := L;
     M[2065] := H;
@@ -39628,6 +39831,7 @@
 
 151A:
 
+    #151A
     #instruction: LD   A,(HL)
     advance (7)
     #151B
@@ -39799,6 +40003,7 @@
 
 1524:
 
+    #1524
     #instruction: CALL 1A3B
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 15;
@@ -39861,6 +40066,7 @@
 
 1527:
 
+    #1527
     #instruction: CALL 15D3
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 15;
@@ -39987,6 +40193,7 @@
 
 152A:
 
+    #152A
     #instruction: LD   A,10
     advance (7)
     #152C
@@ -40005,6 +40212,7 @@
 
 1545:
 
+    #1545
     #instruction: LD   A,04
     advance (7)
     #1547
@@ -40063,6 +40271,7 @@
 
 155A:
 
+    #155A
     #instruction: CP   H
     let:16 a1 = addWithCarry(!false,A,~H) in
     let:8 a2 = (A & 0F) in
@@ -40114,6 +40323,7 @@
 
 1569:
 
+    #1569
     #instruction: LD   B,C
     advance (5)
     #156A
@@ -40152,6 +40362,7 @@
 
 1575:
 
+    #1575
     #instruction: SBC  10
     let:16 a1 = addWithCarry(!FlagCY,A,~10) in
     let:8 a2 = (A & 0F) in
@@ -40179,6 +40390,7 @@
 
 15A4:
 
+    #15A4
     #instruction: RET  NC
     if (!FlagCY) {
       let:16 a1 = (1 + (SPH,SPL)) in
@@ -40227,6 +40439,7 @@
 
 15BD:
 
+    #15BD
     #instruction: RET  NC
     if (!FlagCY) {
       let:16 a1 = (1 + (SPH,SPL)) in
@@ -40301,6 +40514,7 @@
 
 15C1:
 
+    #15C1
     #instruction: XOR  A
     let:8 a1 = (A ^ A) in
     advance (4)
@@ -40342,6 +40556,7 @@
 
 15D6:
 
+    #15D6
     #instruction: PUSH HL
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := H;
@@ -40481,6 +40696,7 @@
 
 15F6:
 
+    #15F6
     #instruction: LD   BC,3700
     advance (10)
     #15F9
@@ -40688,6 +40904,7 @@
 
 163C:
 
+    #163C
     #instruction: AND  10
     let:8 a1 = (10 & A) in
     let:8 a2 = (10 | A) in
@@ -40738,6 +40955,7 @@
 
 164B:
 
+    #164B
     #instruction: AND  10
     let:8 a1 = (10 & A) in
     let:8 a2 = (10 | A) in
@@ -40781,6 +40999,7 @@
 
 1671:
 
+    #1671
     #instruction: CALL 1910
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 16;
@@ -40831,6 +41050,7 @@
 
 1674:
 
+    #1674
     #instruction: LD   (HL),00
     M[(H,L)] := 00;
     advance (10)
@@ -40885,6 +41105,7 @@
 
 1679:
 
+    #1679
     #instruction: INC  HL
     let:16 a1 = (1 + (H,L)) in
     advance (5)
@@ -41467,6 +41688,7 @@
 
 1698:
 
+    #1698
     #instruction: LD   A,(20CE)
     advance (13)
     #169B
@@ -41810,6 +42032,7 @@
 
 16AA:
 
+    #16AA
     #instruction: DEC  H
     let:16 a1 = addWithCarry(!true,H,~00) in
     let:8 a2 = (H & 0F) in
@@ -42123,6 +42346,7 @@
 
 16BB:
 
+    #16BB
     #instruction: CALL 0AB1
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 16;
@@ -42181,6 +42405,7 @@
 
 16BE:
 
+    #16BE
     #instruction: CALL 18E7
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 16;
@@ -42231,6 +42456,7 @@
 
 16C1:
 
+    #16C1
     #instruction: LD   A,(HL)
     advance (7)
     #16C2
@@ -43083,6 +43309,7 @@
 
 16D4:
 
+    #16D4
     #instruction: CALL 0AB6
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 16;
@@ -43141,6 +43368,7 @@
 
 16D7:
 
+    #16D7
     #instruction: CALL 09D6
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 16;
@@ -43282,6 +43510,7 @@
 
 16DA:
 
+    #16DA
     #instruction: XOR  A
     let:8 a1 = (A ^ A) in
     advance (4)
@@ -43329,6 +43558,7 @@
 
 16E3:
 
+    #16E3
     #instruction: JP   0B89
     advance (10)
     #0B89
@@ -43398,6 +43628,7 @@
 
 16F1:
 
+    #16F1
     #instruction: LD   B,04
     advance (7)
     #16F3
@@ -43445,6 +43676,7 @@
 
 16F6:
 
+    #16F6
     #instruction: CALL 0A59
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 16;
@@ -43479,6 +43711,7 @@
 
 16F9:
 
+    #16F9
     #instruction: JP   NZ,16EE
     if (!FlagZ) {
       advance (10)
@@ -44049,6 +44282,7 @@
 
 16FF:
 
+    #16FF
     #instruction: LD   HL,2701
     advance (10)
     #1702
@@ -44145,6 +44379,7 @@
 
 1705:
 
+    #1705
     #instruction: XOR  A
     let:8 a1 = (A ^ A) in
     advance (4)
@@ -44308,6 +44543,7 @@
 
 1709:
 
+    #1709
     #instruction: LD   B,FB
     advance (7)
     #170B
@@ -44359,6 +44595,7 @@
 
 1711:
 
+    #1711
     #instruction: INC  HL
     let:16 a1 = (1 + (H,L)) in
     advance (5)
@@ -44484,6 +44721,7 @@
 
 1747:
 
+    #1747
     #instruction: LD   A,(2068)
     advance (13)
     #174A
@@ -44666,6 +44904,7 @@
 
 17B4:
 
+    #17B4
     #instruction: LD   B,EF
     advance (7)
     #17B6
@@ -44711,6 +44950,7 @@
 
 17DF:
 
+    #17DF
     #instruction: DEC  B
     let:16 a1 = addWithCarry(!true,B,~00) in
     let:8 a2 = (B & 0F) in
@@ -44911,6 +45151,7 @@
 
 17EB:
 
+    #17EB
     #instruction: EI
     enable_interrupts()
     advance (4)
@@ -45080,6 +45321,7 @@
 
 17F7:
 
+    #17F7
     #instruction: CALL 0AB1
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 17;
@@ -45138,6 +45380,7 @@
 
 17FA:
 
+    #17FA
     #instruction: XOR  A
     let:8 a1 = (A ^ A) in
     advance (4)
@@ -45318,6 +45561,7 @@
 
 1820:
 
+    #1820
     #instruction: LD   A,0A
     advance (7)
     #1822
@@ -45429,6 +45673,7 @@
 
 182B:
 
+    #182B
     #instruction: JP   CY,1837
     if (FlagCY) {
       advance (10)
@@ -45544,6 +45789,7 @@
 
 1831:
 
+    #1831
     #instruction: JP   1828
     advance (10)
     #1828
@@ -45650,6 +45896,7 @@
 
 1834:
 
+    #1834
     #instruction: CALL 0AB1
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 18;
@@ -45708,6 +45955,7 @@
 
 1837:
 
+    #1837
     #instruction: LD   BC,1DCF
     advance (10)
     #183A
@@ -45812,6 +46060,7 @@
 
 183D:
 
+    #183D
     #instruction: RET  CY
     if (FlagCY) {
       let:16 a1 = (1 + (SPH,SPL)) in
@@ -46001,6 +46250,7 @@
 
 1841:
 
+    #1841
     #instruction: JP   183A
     advance (10)
     #183A
@@ -46107,6 +46357,7 @@
 
 184A:
 
+    #184A
     #instruction: POP  BC
     let:16 a1 = (1 + (SPH,SPL)) in
     let:16 a2 = (1 + a1) in
@@ -46124,6 +46375,7 @@
 
 1854:
 
+    #1854
     #instruction: POP  BC
     let:16 a1 = (1 + (SPH,SPL)) in
     let:16 a2 = (1 + a1) in
@@ -46141,6 +46393,7 @@
 
 1871:
 
+    #1871
     #instruction: LD   B,A
     advance (5)
     #1872
@@ -46348,6 +46601,7 @@
 
 1891:
 
+    #1891
     #instruction: EX   DE,HL
     advance (4)
     #1892
@@ -46476,6 +46730,7 @@
 
 18A9:
 
+    #18A9
     #instruction: LD   A,02
     advance (7)
     #18AB
@@ -46688,6 +46943,7 @@
 
 18D1:
 
+    #18D1
     #instruction: JP   0AB6
     advance (10)
     #0AB6
@@ -46739,6 +46995,7 @@
 
 18DC:
 
+    #18DC
     #instruction: CALL 1956
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 18;
@@ -46811,6 +47068,7 @@
 
 18DF:
 
+    #18DF
     #instruction: LD   A,08
     advance (7)
     #18E1
@@ -46869,6 +47127,7 @@
 
 190D:
 
+    #190D
     #instruction: JP   1597
     advance (10)
     #1597
@@ -47079,6 +47338,7 @@
 
 1959:
 
+    #1959
     #instruction: CALL 191A
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 19;
@@ -47247,6 +47507,7 @@
 
 195C:
 
+    #195C
     #instruction: CALL 1925
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 19;
@@ -47478,6 +47739,7 @@
 
 195F:
 
+    #195F
     #instruction: CALL 192B
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 19;
@@ -47709,6 +47971,7 @@
 
 1962:
 
+    #1962
     #instruction: CALL 1950
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 19;
@@ -47940,6 +48203,7 @@
 
 1965:
 
+    #1965
     #instruction: CALL 193C
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 19;
@@ -48108,6 +48372,7 @@
 
 1968:
 
+    #1968
     #instruction: JP   1947
     advance (10)
     #1947
@@ -48299,12 +48564,14 @@
 
 196E:
 
+    #196E
     #instruction: JP   1671
     advance (10)
     jump (1671);
 
 197C:
 
+    #197C
     #instruction: CALL 1947
     let:16 a1 = (-1 + (SPH,SPL)) in
     M[a1] := 19;
@@ -48501,6 +48768,7 @@
 
 197F:
 
+    #197F
     #instruction: JP   193C
     advance (10)
     #193C
@@ -48664,6 +48932,7 @@
 
 19F5:
 
+    #19F5
     #instruction: LD   A,C
     advance (5)
     #19F6
@@ -48861,6 +49130,7 @@
 
 19FF:
 
+    #19FF
     #instruction: LD   A,H
     advance (5)
     #1A00
@@ -48977,6 +49247,7 @@
 
 1A82:
 
+    #1A82
     #instruction: AND  A
     let:8 a1 = (A & A) in
     let:8 a2 = (A | A) in
@@ -49216,6 +49487,7 @@
 
 1A8A:
 
+    #1A8A
     #instruction: POP  PSW
     let:16 a1 = (1 + (SPH,SPL)) in
     let:16 a2 = (1 + a1) in

@@ -208,7 +208,7 @@ afterProgram = \case
   S_SoundControl _ _ p -> [p]
   S_MarkReturnAddress _ p -> [p]
   S_TraceInstruction _ p -> [p]
-  S_AtRef{} -> error "after, AtRef, not expected for non-inlined program"
+  S_AtRef _ p -> [p]
   S_Advance _ p -> [p]
   S_EnableInterrupts p -> [p]
   S_DisableInterrupts p -> [p]

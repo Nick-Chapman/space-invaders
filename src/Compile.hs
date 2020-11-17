@@ -83,8 +83,7 @@ compileFrom semConf inline = go
 
     -- Tracking visited (for loop breaking) is not needed when we compile w.r.t join-points
     go :: Visited -> State -> CompileRes
-    go visited state =
-      --TODO: put AtRef at start, not just when we inline
+    go visited state = insertAtRef state $ do
       compileThen theSemantics state $ \state@State{cpu} -> do
       case getConcreteAddrMaybe (getPC cpu) of
         Nothing ->
@@ -92,9 +91,17 @@ compileFrom semConf inline = go
         Just pc -> do
           if pcInRom pc && pc `notElem` visited && inline pc
           then
-            S_AtRef pc <$> go (Set.insert pc visited) state
+            go (Set.insert pc visited) state
           else
             return (programFromState state)
+
+
+insertAtRef :: State -> CompileRes -> CompileRes
+insertAtRef State{cpu} program = do
+  let pc = getConcreteAddrMaybe (getPC cpu)
+  case pc of
+    Nothing -> program
+    Just pc -> S_AtRef pc <$> program
 
 
 getPC :: Cpu CompTime -> Exp16

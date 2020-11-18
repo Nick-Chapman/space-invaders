@@ -9,12 +9,10 @@ import Data.Map (Map)
 import Data.Set (Set, union)
 import InstructionSet (theDecodeTable)
 import Residual (Program(..),Exp16(..),layOpPrograms,layPrograms)
-import Semantics (InterruptHandling(IgnoreInterrupts))
 import qualified Addr as Addr (toUnsigned)
 import qualified Data.Map.Strict as Map
 import qualified Data.Set as Set
 import qualified Rom (loadInvaders)
-import qualified Semantics (Conf(..))
 
 
 main :: IO ()
@@ -28,14 +26,10 @@ main = do
     layOpPrograms (opPrograms roms)
 
   let
-    semConf :: Semantics.Conf
-    semConf = Semantics.Conf { interruptHandling = IgnoreInterrupts }
-
-  let
     programsForEveryAddress =
       [ (addr,program)
       | addr <- [0..0x1FFF]
-      , let program = compileAt semConf (\_ -> False) roms addr ]
+      , let program = compileAt (\_ -> False) roms addr ]
 
   generateFile "1-programs-for-every-address" $
     layPrograms programsForEveryAddress
@@ -66,7 +60,7 @@ main = do
     inlinedDeep =
       [ (addr,program)
       | addr <- Set.toList labels
-      , let program = compileAt semConf (`notElem` labels) roms addr ]
+      , let program = compileAt (`notElem` labels) roms addr ]
       where
         labels = Set.fromList (startPoints ++ returnPoints)
 
@@ -89,7 +83,7 @@ main = do
     inlinedSharingJoins =
       [ (addr,program)
       | addr <- Set.toList labels
-      , let program = compileAt semConf (`notElem` labels) roms addr ]
+      , let program = compileAt (`notElem` labels) roms addr ]
       where
         labels = Set.fromList (startPoints ++ returnPoints ++ joinPoints)
 

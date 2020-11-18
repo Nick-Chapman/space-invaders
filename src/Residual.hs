@@ -46,9 +46,6 @@ data Exp17
 data Exp1
   = E1_False
   | E1_True
-  | E1_InterruptsEnabled
-  | E1_TimeToWakeup
-  | E1_HalfFrame
   | E1_Flag Flag
   | E1_TestBit Exp8 Int
   | E1_Flip Exp1
@@ -172,9 +169,6 @@ instance Show Exp1 where
   show = \case
     E1_False -> "false"
     E1_True -> "true"
-    E1_InterruptsEnabled -> "g_interrupts_enabled"
-    E1_TimeToWakeup -> "g_time_to_wakeup"
-    E1_HalfFrame -> "g_half_frame"
     E1_Flag flag -> show flag
     E1_TestBit e i -> show e ++ "[" ++ show i ++ "]"
     E1_Flip p -> "!" ++ show p

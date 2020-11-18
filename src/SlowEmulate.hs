@@ -18,7 +18,6 @@ import InstructionSet (Instruction,decode)
 import Mem (Mem)
 import Phase (Phase)
 import Rom (Rom)
-import Semantics (InterruptHandling(..))
 import Shifter (Shifter)
 import Sounds (soundControl)
 import Text.Printf (printf)
@@ -28,7 +27,7 @@ import qualified Byte (toUnsigned)
 import qualified Cpu (init,get,set,getFlag,setFlag)
 import qualified Mem (init,read,write)
 import qualified Phase (Byte,Addr,Bit)
-import qualified Semantics (fetchDecodeExec,Conf(..))
+import qualified Semantics (fetchDecodeExec,decodeExec)
 import qualified Shifter (init,get,set)
 import qualified Sounds (Playing,initPlaying)
 
@@ -88,13 +87,22 @@ data EmuStep = EmuStep
     , post :: EmuState
     }
 
-
-semConf :: Semantics.Conf
-semConf = Semantics.Conf { interruptHandling = BeforeEveryInstruction }
-
 emulate :: Buttons -> EmuState -> IO EmuStep
-emulate buttons s0 = do
-  let semantics = Semantics.fetchDecodeExec semConf
+emulate buttons s@EmuState{interrupts_enabled} = do
+  case timeToWakeup s of
+    Just s
+      | interrupts_enabled -> do
+          let s2 = s { interrupts_enabled = False }
+          let byte = interruptInstruction s2
+          emulateS (Semantics.decodeExec byte) buttons s2
+      | otherwise ->
+        emulateS Semantics.fetchDecodeExec buttons s
+    Nothing ->
+      emulateS Semantics.fetchDecodeExec buttons s
+
+
+emulateS :: Eff EmuTime () -> Buttons -> EmuState -> IO EmuStep
+emulateS semantics buttons s0 = do
   run s0 { iopt = Nothing } semantics $ \post@EmuState{iopt} () -> do
     case iopt of
       Nothing -> error "SlowEmulate: no instruction was traced"
@@ -124,12 +132,7 @@ emulate buttons s0 = do
 
       EnableInterrupts -> k s { interrupts_enabled = True } ()
       DisableInterrupts -> k s { interrupts_enabled = False } ()
-      AreInterruptsEnabled -> k s (Bit (interrupts_enabled s))
-      TimeToWakeup -> case timeToWakeup s of
-        Nothing -> k s (Bit False)
-        Just s -> k s (Bit True)
 
-      GetInterruptInstruction -> k s (interruptInstruction s)
       Decode byte -> k s (decode byte)
       MarkReturnAddress {} -> k s ()
       TraceInstruction i -> k (traceInstruction i s) ()

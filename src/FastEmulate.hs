@@ -13,17 +13,16 @@ module FastEmulate (
 import Addr (Addr)
 import Buttons (Buttons)
 import Byte (Byte(..))
-import Compile (compileAt)
+import Compile (compileOp,compileAt)
 import Cpu (Cpu,Reg(..),Flag(..))
 import Data.Bits (complement,(.&.),(.|.),xor,shiftL,shiftR,testBit,setBit,clearBit)
 import Data.Map (Map)
 import HiLo (HiLo(..))
-import InstructionSet (Instruction(..))
+import InstructionSet (Instruction(..),Op(Op0),Op0(RST))
 import Mem (Mem)
 import Phase (Phase)
 import Residual (Exp1(..),Exp8(..),Exp16(..),Exp17(..),Program(..),AVar)
 import Rom (Rom)
-import Semantics (InterruptHandling(..))
 import Shifter (Shifter)
 import Sounds (soundControl)
 import Text.Printf (printf)
@@ -35,7 +34,6 @@ import qualified Data.Map.Strict as Map (empty,findWithDefault,fromList,insert)
 import qualified Mem (init,read,write)
 import qualified Phase (Byte,Addr,Bit)
 import qualified Rom (size)
-import qualified Semantics (Conf(..))
 import qualified Shifter (Reg,init,set,get)
 import qualified Sounds (Playing,initPlaying)
 
@@ -77,10 +75,11 @@ data EmuState = EmuState
   , mem :: Mem
   , interrupts_enabled :: Bool
   , nextWakeup :: Ticks
-  , interruptTriggered :: Bool
   , playing :: Sounds.Playing
   , iopt :: Maybe (Instruction Exp8)
   , programs :: Map Addr Program
+  , rstHalf :: Program
+  , rstVblank :: Program
   }
 
 instance Show EmuState where
@@ -105,36 +104,50 @@ initState rom = do
     , mem = Mem.init rom
     , interrupts_enabled = False
     , nextWakeup = halfFrameTicks
-    , interruptTriggered = False
     , playing = Sounds.initPlaying
     , programs = Map.fromList programsForEveryAddress
+    , rstHalf = compileOp rom (Op0 (RST 1))
+    , rstVblank = compileOp rom (Op0 (RST 2))
     , iopt = Nothing
     }
   where
     programsForEveryAddress =
       [ (addr,program)
       | addr <- [0.. Rom.size rom - 1]
-      , let program = compileAt semConf (\_ -> False) rom addr ]
-
-semConf :: Semantics.Conf
-semConf = Semantics.Conf { interruptHandling = BeforeEveryInstruction }
+      , let program = compileAt (\_ -> False) rom addr ]
 
 emulate :: Buttons -> EmuState -> IO EmuStep
 emulate buttons state@EmuState{icount,ticks=_ticks,programs} = do
-  let pre = state { icount = icount + 1, iopt = Nothing, interruptTriggered = False }
-  let pc = programCounter pre
-  let program = Map.findWithDefault (error $ "no program at pc: " <> show pc) pc programs
-  let preW =
-        case timeToWakeup pre of
-          Nothing -> pre
-          Just s -> s { interruptTriggered = True }
+  let pre = state { icount = icount + 1, iopt = Nothing }
+  let EmuState{rstHalf,rstVblank} = pre
+  let (pre1,program) =
+        case checkI pre of
+          (pre1,Nothing) -> do
+            let pc = programCounter pre
+            (pre1,Map.findWithDefault (error $ "no program at pc: " <> show pc) pc programs)
+          (pre1,Just half) -> do
+            (pre1,if half then rstHalf else rstVblank)
   let env = emptyEnv buttons
-  let post@EmuState{iopt,cpu=_cpu} = emulateProgram env preW program
+  let post@EmuState{iopt,cpu=_cpu} = emulateProgram env pre1 program
   case iopt of
     Nothing -> error "FastEmulate: no instruction was traced"
     Just i -> do
       let instruction = getLitInstruction i
       return EmuStep { instruction, post }
+
+
+checkI :: EmuState -> (EmuState,Maybe Bool)
+checkI s@EmuState{interrupts_enabled} = do
+  case timeToWakeup s of
+    Just s
+      | interrupts_enabled -> do
+          let s2 = s { interrupts_enabled = False }
+          (s2,Just (halfFrame s2))
+      | otherwise ->
+        (s,Nothing)
+    Nothing ->
+      (s,Nothing)
+
 
 getLitInstruction :: Instruction Exp8 -> Instruction Byte
 getLitInstruction = \case
@@ -205,7 +218,7 @@ halfFrame EmuState{ticks} = do
 data V17 = V17 { hi :: Bit, dropHi :: Addr }
 
 eval1 :: Env -> EmuState -> Exp1 -> Bool
-eval1 q@Env{buttons} s@EmuState{cpu,interruptTriggered,interrupts_enabled} = \case
+eval1 q@Env{buttons} s@EmuState{cpu} = \case
   E1_Flag flag -> unBit (Cpu.getFlag cpu flag)
   E1_True -> True
   E1_False -> False
@@ -216,9 +229,6 @@ eval1 q@Env{buttons} s@EmuState{cpu,interruptTriggered,interrupts_enabled} = \ca
   E1_IsParity b -> parity (eval8 q s b)
   E1_OrBit c1 c2 -> eval1 q s c1 || eval1 q s c2
   E1_AndBit c1 c2 -> eval1 q s c1 && eval1 q s c2
-  E1_TimeToWakeup -> interruptTriggered
-  E1_InterruptsEnabled -> interrupts_enabled
-  E1_HalfFrame -> halfFrame s
   E1_Button but -> Buttons.get but buttons
 
 -- copied

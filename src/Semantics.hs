@@ -2,8 +2,7 @@
 -- | This defines the execution semantics (Effects) of the 8080 instructions
 
 module Semantics
-  ( Conf(..), InterruptHandling(..),
-    fetchDecodeExec
+  ( fetchDecodeExec
   , decodeExec
   ) where
 
@@ -17,21 +16,11 @@ import Phase (Addr,Byte,Bit)
 import qualified InstructionSet as Instr (RegSpec(..))
 import qualified Ports (inputPort,outputPort)
 
-
 -- | Semantics are defined to be Phase generic
 
-
-data InterruptHandling
-  = IgnoreInterrupts
-  | BeforeEveryInstruction
-
-data Conf = Conf { interruptHandling :: InterruptHandling }
-
-fetchDecodeExec :: Conf -> Eff p ()
-fetchDecodeExec Conf{interruptHandling} = do
-  byte <- case interruptHandling of
-    IgnoreInterrupts -> fetch
-    BeforeEveryInstruction -> fetchOrHandleInterrupt
+fetchDecodeExec :: Eff p ()
+fetchDecodeExec = do
+  byte <- fetch
   decodeExec byte
 
 decodeExec :: Byte p -> Eff p ()
@@ -46,20 +35,6 @@ decodeExec byte = do
       setPC a
       return $ cycles True op
   Advance n
-
-fetchOrHandleInterrupt :: Eff p (Byte p)
-fetchOrHandleInterrupt = do
-  processInterrupt >>= CaseBit >>= \case
-    False -> fetch
-    True -> do
-      DisableInterrupts
-      GetInterruptInstruction
-
-processInterrupt :: Eff p (Bit p)
-processInterrupt = do
-  isTime <- TimeToWakeup
-  enabled <- AreInterruptsEnabled
-  AndBit isTime enabled
 
 fetch :: Eff p (Byte p) -- fetch byte at PC, and increment PC
 fetch = do

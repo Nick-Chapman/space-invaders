@@ -29,14 +29,9 @@ data Eff p a where
   GetShifterReg :: Shifter.Reg -> Eff p (Byte p)
   SetShifterReg :: Shifter.Reg -> Byte p -> Eff p ()
 
-  -- TODO: rethink the interrupt timing & triggering, plus add effects to Advance the cycle-count
-  -- TODO: treatthe is_enabled like a cpu flag
   EnableInterrupts :: Eff p ()
   DisableInterrupts :: Eff p ()
-  AreInterruptsEnabled :: Eff p (Bit p)
-  TimeToWakeup :: Eff p (Bit p)
 
-  GetInterruptInstruction :: Eff p (Byte p)
   Decode :: Byte p -> Eff p Op
   TraceInstruction :: Instruction (Byte p) -> Eff p ()
   Advance :: Int -> Eff p ()

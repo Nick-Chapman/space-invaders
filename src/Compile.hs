@@ -1,5 +1,5 @@
 
-module Compile (opPrograms,compileAt) where
+module Compile (opPrograms,compileOp,compileAt) where
 
 import Addr (Addr)
 import Byte (Byte(..))
@@ -19,7 +19,7 @@ import qualified Data.Set as Set
 import qualified Effect as E (Eff(..))
 import qualified Rom (lookup)
 import qualified Phase (Bit,Byte,Addr)
-import qualified Semantics (fetchDecodeExec,decodeExec,Conf)
+import qualified Semantics (fetchDecodeExec,decodeExec)
 import qualified Shifter (Reg(..),get,set,allRegs)
 
 
@@ -35,18 +35,19 @@ opPrograms :: Rom -> [(Op,Program)]
 opPrograms rom = do
   let skipOps = [Op1 IN, Op1 OUT]
   let ops = [ op | b <- [0..0xFF], let op = decode b, op `notElem` skipOps ]
+  [ (op, compileOp rom op) | op <- ops ]
+
+
+compileOp :: Rom -> Op -> Program
+compileOp rom op  = do
   let cpu = initCpu HiLo {hi = E8_Reg PCH, lo = E8_Reg PCL }
   let state = initState rom cpu  -- TODO: shouldn't need rom here
-  [
-    (op,program)
-    | op <- ops
-    , let semantics = Semantics.decodeExec (E8_Lit (InstructionSet.encode op))
-    , let program = runGen $ compileThen semantics state (return . programFromState)
-    ]
+  let semantics = Semantics.decodeExec (E8_Lit (InstructionSet.encode op))
+  runGen $ compileThen semantics state (return . programFromState)
 
 
-compileAt :: Semantics.Conf -> (Addr -> Bool) -> Rom -> Addr -> Program
-compileAt semConf inline rom addr = do
+compileAt :: (Addr -> Bool) -> Rom -> Addr -> Program
+compileAt inline rom addr = do
   let cpu = initCpu HiLo {hi = pch, lo = pcl }
         where
           HiLo{hi,lo} = Addr.toHiLo addr
@@ -54,7 +55,7 @@ compileAt semConf inline rom addr = do
           pcl = E8_Lit lo
   let state = initState rom cpu
   let visited :: Visited = Set.insert addr Set.empty
-  runGen $ compileFrom semConf inline visited state
+  runGen $ compileFrom inline visited state
 
 
 initCpu :: HiLo Exp8 -> Cpu CompTime
@@ -75,11 +76,11 @@ type Visited = Set Addr
 
 type CompileRes = Gen Program
 
-compileFrom :: Semantics.Conf -> (Addr -> Bool) -> Visited -> State -> CompileRes
-compileFrom semConf inline = go
+compileFrom :: (Addr -> Bool) -> Visited -> State -> CompileRes
+compileFrom inline = go
   where
 
-    theSemantics = Semantics.fetchDecodeExec semConf
+    theSemantics = Semantics.fetchDecodeExec
 
     -- Tracking visited (for loop breaking) is not needed when we compile w.r.t join-points
     go :: Visited -> State -> CompileRes
@@ -199,18 +200,6 @@ compileThen semantics state k =
 
       E.EnableInterrupts -> S_EnableInterrupts <$> k s ()
       E.DisableInterrupts -> S_DisableInterrupts <$> k s ()
-
-      E.AreInterruptsEnabled -> k s E1_InterruptsEnabled
-
-      E.TimeToWakeup -> k s E1_TimeToWakeup
-
-      E.GetInterruptInstruction -> do
-        t <- k s (E8_Lit 0xCF)
-        e <- k s (E8_Lit 0xD7)
-        return $ S_If E1_HalfFrame t e
-
-      {-E.GetInterruptInstruction -> do
-        k s (E8_Ite E1_HalfFrame (E8_Lit 0xCF) (E8_Lit 0xD7))-} -- causes non-literal decode
 
       E.Decode e ->
         case e of

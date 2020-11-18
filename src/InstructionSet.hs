@@ -229,8 +229,8 @@ prettyInstruction = \case
   Ins0 (INR reg) -> tag "INC" (prettyReg reg)
   Ins0 (DCR reg) -> tag "DEC" (prettyReg reg)
   Ins1 (MVI dest) b1 -> tag "LD" (prettyReg dest <> "," <> show b1)
-  Ins0 RLC -> tag "RLCA" ""
-  Ins0 RAL -> tag "RAL" ""
+  Ins0 RLC -> "RLCA"
+  Ins0 RAL -> "RAL"
   Ins0 DAA -> "DAA"
   Ins0 STC -> "SCF"
   Ins0 (DAD rp) -> tag "ADD" ("HL," <> show rp)
@@ -238,7 +238,7 @@ prettyInstruction = \case
   Ins2 LHLD b1 b2 -> tag "LD" ("HL,(" <> show b2 <> show b1 <> ")")
   Ins2 LDA b1 b2 -> tag "LD" ("A,("<> show b2 <> show b1 <> ")")
   Ins0 (DCX rp) -> tag "DEC" (show rp)
-  Ins0 RRC -> tag "RRCA" ""
+  Ins0 RRC -> "RRCA"
   Ins0 RAR -> "RAR"
   Ins0 CMA -> "CPL"
   Ins0 CMC -> "CPC"

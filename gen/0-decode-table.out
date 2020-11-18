@@ -5,7 +5,7 @@
 04 --> INC  B
 05 --> DEC  B
 06 --> LD   B,b1
-07 --> RLCA 
+07 --> RLCA
 08 --> *NOP
 09 --> ADD  HL,BC
 0A --> LD   A,(BC)
@@ -13,7 +13,7 @@
 0C --> INC  C
 0D --> DEC  C
 0E --> LD   C,b1
-0F --> RRCA 
+0F --> RRCA
 10 --> *NOP
 11 --> LD   DE,b2b1
 12 --> LD   (DE),A
@@ -21,7 +21,7 @@
 14 --> INC  D
 15 --> DEC  D
 16 --> LD   D,b1
-17 --> RAL  
+17 --> RAL
 18 --> *NOP
 19 --> ADD  HL,DE
 1A --> LD   A,(DE)

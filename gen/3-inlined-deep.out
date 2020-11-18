@@ -546,7 +546,7 @@
         #instruction: LD   A,(20C1)
         advance (13)
         #00A1
-        #instruction: RRCA 
+        #instruction: RRCA
         advance (4)
         #00A2
         #instruction: JP   NC,0082
@@ -1202,7 +1202,7 @@
     #instruction: IN   01
     advance (10)
     #0022
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #0023
     #instruction: JP   CY,0067
@@ -1505,7 +1505,7 @@
             #instruction: LD   A,(20C1)
             advance (13)
             #0AC2
-            #instruction: RRCA 
+            #instruction: RRCA
             advance (4)
             #0AC3
             #instruction: JP   CY,0ABB
@@ -1533,7 +1533,7 @@
             } else {
               advance (10)
               #0AC6
-              #instruction: RRCA 
+              #instruction: RRCA
               advance (4)
               #0AC7
               #instruction: JP   CY,1868
@@ -1625,7 +1625,7 @@
               } else {
                 advance (10)
                 #0ACA
-                #instruction: RRCA 
+                #instruction: RRCA
                 advance (4)
                 #0ACB
                 #instruction: JP   CY,0AAB
@@ -2283,7 +2283,7 @@
               #instruction: LD   A,(20C1)
               advance (13)
               #0AC2
-              #instruction: RRCA 
+              #instruction: RRCA
               advance (4)
               #0AC3
               #instruction: JP   CY,0ABB
@@ -2311,7 +2311,7 @@
               } else {
                 advance (10)
                 #0AC6
-                #instruction: RRCA 
+                #instruction: RRCA
                 advance (4)
                 #0AC7
                 #instruction: JP   CY,1868
@@ -2403,7 +2403,7 @@
                 } else {
                   advance (10)
                   #0ACA
-                  #instruction: RRCA 
+                  #instruction: RRCA
                   advance (4)
                   #0ACB
                   #instruction: JP   CY,0AAB
@@ -2841,16 +2841,16 @@
           M[a244] := updateBit(updateBit(updateBit(updateBit(updateBit(02,7,a238[7]),6,is_zero(a238)),4,((((a233[1] || a233[2]) && a233[3]) || a232[7:0][4]) ? a234[7:0] : a233)[4]),2,parity(a238)),0,(((((a235[7:0][1] || a235[7:0][2]) && a235[7:0][3]) || a229[15:8][0]) ? a236[7:0] : a235[7:0])[4] || a229[15:8][0]));
           advance (11)
           #09B4
-          #instruction: RRCA 
+          #instruction: RRCA
           advance (4)
           #09B5
-          #instruction: RRCA 
+          #instruction: RRCA
           advance (4)
           #09B6
-          #instruction: RRCA 
+          #instruction: RRCA
           advance (4)
           #09B7
-          #instruction: RRCA 
+          #instruction: RRCA
           advance (4)
           #09B8
           #instruction: AND  0F
@@ -3300,7 +3300,7 @@
           #instruction: LD   A,(20C1)
           advance (13)
           #0AC2
-          #instruction: RRCA 
+          #instruction: RRCA
           advance (4)
           #0AC3
           #instruction: JP   CY,0ABB
@@ -3328,7 +3328,7 @@
           } else {
             advance (10)
             #0AC6
-            #instruction: RRCA 
+            #instruction: RRCA
             advance (4)
             #0AC7
             #instruction: JP   CY,1868
@@ -3420,7 +3420,7 @@
             } else {
               advance (10)
               #0ACA
-              #instruction: RRCA 
+              #instruction: RRCA
               advance (4)
               #0ACB
               #instruction: JP   CY,0AAB
@@ -4100,13 +4100,13 @@
         let:8 a40 = (FE | M[a37]) in
         advance (7)
         #011E
-        #instruction: RLCA 
+        #instruction: RLCA
         advance (4)
         #011F
-        #instruction: RLCA 
+        #instruction: RLCA
         advance (4)
         #0120
-        #instruction: RLCA 
+        #instruction: RLCA
         advance (4)
         #0121
         #instruction: LD   E,A
@@ -7244,7 +7244,7 @@
           #instruction: LD   A,(2067)
           advance (13)
           #17C3
-          #instruction: RRCA 
+          #instruction: RRCA
           advance (4)
           #17C4
           #instruction: JP   NC,17CA
@@ -7299,7 +7299,7 @@
           #instruction: LD   A,(201D)
           advance (13)
           #0358
-          #instruction: RRCA 
+          #instruction: RRCA
           advance (4)
           #0359
           #instruction: JP   CY,0381
@@ -7467,7 +7467,7 @@
           } else {
             advance (10)
             #035C
-            #instruction: RRCA 
+            #instruction: RRCA
             advance (4)
             #035D
             #instruction: JP   CY,038E
@@ -7751,7 +7751,7 @@
             #instruction: LD   A,(2067)
             advance (13)
             #17C3
-            #instruction: RRCA 
+            #instruction: RRCA
             advance (4)
             #17C4
             #instruction: JP   NC,17CA
@@ -7806,7 +7806,7 @@
             #instruction: LD   A,(201D)
             advance (13)
             #0358
-            #instruction: RRCA 
+            #instruction: RRCA
             advance (4)
             #0359
             #instruction: JP   CY,0381
@@ -7974,7 +7974,7 @@
             } else {
               advance (10)
               #035C
-              #instruction: RRCA 
+              #instruction: RRCA
               advance (4)
               #035D
               #instruction: JP   CY,038E
@@ -8256,7 +8256,7 @@
             #instruction: LD   A,(2067)
             advance (13)
             #17C3
-            #instruction: RRCA 
+            #instruction: RRCA
             advance (4)
             #17C4
             #instruction: JP   NC,17CA
@@ -8311,7 +8311,7 @@
             #instruction: LD   A,(201D)
             advance (13)
             #0358
-            #instruction: RRCA 
+            #instruction: RRCA
             advance (4)
             #0359
             #instruction: JP   CY,0381
@@ -8479,7 +8479,7 @@
             } else {
               advance (10)
               #035C
-              #instruction: RRCA 
+              #instruction: RRCA
               advance (4)
               #035D
               #instruction: JP   CY,038E
@@ -8813,16 +8813,16 @@
           M[2015] := a163;
           advance (13)
           #03A1
-          #instruction: RLCA 
+          #instruction: RLCA
           advance (4)
           #03A2
-          #instruction: RLCA 
+          #instruction: RLCA
           advance (4)
           #03A3
-          #instruction: RLCA 
+          #instruction: RLCA
           advance (4)
           #03A4
-          #instruction: RLCA 
+          #instruction: RLCA
           advance (4)
           #03A5
           #instruction: LD   HL,1C70
@@ -9491,7 +9491,7 @@
       #instruction: LD   HL,20E7
       advance (10)
       #18ED
-      #instruction: RRCA 
+      #instruction: RRCA
       advance (4)
       #18EE
       #instruction: RET  NC
@@ -9673,7 +9673,7 @@
         M[a22] := updateBit(updateBit(updateBit(updateBit(updateBit(02,7,a11[7]),6,is_zero(a11)),4,a12[3]),2,parity(a11)),0,false);
         advance (11)
         #02F1
-        #instruction: RRCA 
+        #instruction: RRCA
         advance (4)
         #02F2
         #instruction: JP   CY,0332
@@ -10499,7 +10499,7 @@
     let:16 a2 = (1 + a1) in
     advance (10)
     #0306
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #0307
     #instruction: LD   A,21
@@ -10888,10 +10888,10 @@
 0366:
 
     #0366
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     #0367
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     #0368
     #instruction: JP   CY,0381
@@ -11059,7 +11059,7 @@
     } else {
       advance (10)
       #036B
-      #instruction: RLCA 
+      #instruction: RLCA
       advance (4)
       #036C
       #instruction: JP   CY,038E
@@ -23653,16 +23653,16 @@
       M[a19] := updateBit(updateBit(updateBit(updateBit(updateBit(02,7,a13[7]),6,is_zero(a13)),4,((((a8[1] || a8[2]) && a8[3]) || a7[7:0][4]) ? a9[7:0] : a8)[4]),2,parity(a13)),0,(((((a10[7:0][1] || a10[7:0][2]) && a10[7:0][3]) || a4[15:8][0]) ? a11[7:0] : a10[7:0])[4] || a4[15:8][0]));
       advance (11)
       #09B4
-      #instruction: RRCA 
+      #instruction: RRCA
       advance (4)
       #09B5
-      #instruction: RRCA 
+      #instruction: RRCA
       advance (4)
       #09B6
-      #instruction: RRCA 
+      #instruction: RRCA
       advance (4)
       #09B7
-      #instruction: RRCA 
+      #instruction: RRCA
       advance (4)
       #09B8
       #instruction: AND  0F
@@ -23899,16 +23899,16 @@
     M[a8] := updateBit(updateBit(updateBit(updateBit(updateBit(02,7,FlagS),6,FlagZ),4,FlagA),2,FlagP),0,FlagCY);
     advance (11)
     #09B4
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B5
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B6
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B7
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B8
     #instruction: AND  0F
@@ -24131,16 +24131,16 @@
     M[a8] := updateBit(updateBit(updateBit(updateBit(updateBit(02,7,FlagS),6,FlagZ),4,FlagA),2,FlagP),0,FlagCY);
     advance (11)
     #09B4
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B5
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B6
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B7
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B8
     #instruction: AND  0F
@@ -25512,7 +25512,7 @@
     #instruction: LD   A,(2067)
     advance (13)
     #080A
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #080B
     #instruction: JP   CY,0872
@@ -26603,7 +26603,7 @@
               #instruction: LD   A,(2067)
               advance (13)
               #17C3
-              #instruction: RRCA 
+              #instruction: RRCA
               advance (4)
               #17C4
               #instruction: JP   NC,17CA
@@ -26666,7 +26666,7 @@
               #instruction: LD   A,(2067)
               advance (13)
               #17C3
-              #instruction: RRCA 
+              #instruction: RRCA
               advance (4)
               #17C4
               #instruction: JP   NC,17CA
@@ -27321,7 +27321,7 @@
     #instruction: LD   A,(2067)
     advance (13)
     #09CD
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09CE
     #instruction: LD   HL,20F8
@@ -27434,7 +27434,7 @@
       #instruction: LD   A,(2067)
       advance (13)
       #09CD
-      #instruction: RRCA 
+      #instruction: RRCA
       advance (4)
       #09CE
       #instruction: LD   HL,20F8
@@ -27505,7 +27505,7 @@
     #instruction: LD   A,(2067)
     advance (13)
     #1916
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #1917
     #instruction: RET  CY
@@ -27947,7 +27947,7 @@
         let:8 a22 = (0F | M[2098]) in
         advance (7)
         #179C
-        #instruction: RLCA 
+        #instruction: RLCA
         advance (4)
         #179D
         #instruction: CP   10
@@ -28315,10 +28315,10 @@
     #instruction: IN   01
     advance (10)
     #0861
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #0862
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #0863
     #instruction: JP   CY,086D
@@ -28389,16 +28389,16 @@
       M[a16] := updateBit(updateBit(updateBit(updateBit(updateBit(02,7,a10[7]),6,is_zero(a10)),4,((((a5[1] || a5[2]) && a5[3]) || a4[7:0][4]) ? a6[7:0] : a5)[4]),2,parity(a10)),0,(((((a7[7:0][1] || a7[7:0][2]) && a7[7:0][3]) || a1[15:8][0]) ? a8[7:0] : a7[7:0])[4] || a1[15:8][0]));
       advance (11)
       #09B4
-      #instruction: RRCA 
+      #instruction: RRCA
       advance (4)
       #09B5
-      #instruction: RRCA 
+      #instruction: RRCA
       advance (4)
       #09B6
-      #instruction: RRCA 
+      #instruction: RRCA
       advance (4)
       #09B7
-      #instruction: RRCA 
+      #instruction: RRCA
       advance (4)
       #09B8
       #instruction: AND  0F
@@ -28554,7 +28554,7 @@
     } else {
       advance (10)
       #0866
-      #instruction: RRCA 
+      #instruction: RRCA
       advance (4)
       #0867
       #instruction: JP   CY,0798
@@ -28626,16 +28626,16 @@
         M[a61] := updateBit(updateBit(updateBit(updateBit(updateBit(02,7,a55[7]),6,is_zero(a55)),4,((((a50[1] || a50[2]) && a50[3]) || a49[7:0][4]) ? a51[7:0] : a50)[4]),2,parity(a55)),0,(((((a52[7:0][1] || a52[7:0][2]) && a52[7:0][3]) || a46[15:8][0]) ? a53[7:0] : a52[7:0])[4] || a46[15:8][0]));
         advance (11)
         #09B4
-        #instruction: RRCA 
+        #instruction: RRCA
         advance (4)
         #09B5
-        #instruction: RRCA 
+        #instruction: RRCA
         advance (4)
         #09B6
-        #instruction: RRCA 
+        #instruction: RRCA
         advance (4)
         #09B7
-        #instruction: RRCA 
+        #instruction: RRCA
         advance (4)
         #09B8
         #instruction: AND  0F
@@ -28813,7 +28813,7 @@
     #instruction: LD   A,(2067)
     advance (13)
     #089B
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #089C
     #instruction: LD   A,1C
@@ -29020,7 +29020,7 @@
         #instruction: LD   A,(2067)
         advance (13)
         #08C4
-        #instruction: RRCA 
+        #instruction: RRCA
         advance (4)
         #08C5
         #instruction: JP   CY,08CB
@@ -29206,7 +29206,7 @@
         #instruction: LD   A,(2067)
         advance (13)
         #09CD
-        #instruction: RRCA 
+        #instruction: RRCA
         advance (4)
         #09CE
         #instruction: LD   HL,20F8
@@ -29319,16 +29319,16 @@
     M[a11] := updateBit(updateBit(updateBit(updateBit(updateBit(02,7,FlagS),6,FlagZ),4,FlagA),2,FlagP),0,FlagCY);
     advance (11)
     #09B4
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B5
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B6
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B7
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B8
     #instruction: AND  0F
@@ -29531,7 +29531,7 @@
         #instruction: LD   A,(2067)
         advance (13)
         #08C4
-        #instruction: RRCA 
+        #instruction: RRCA
         advance (4)
         #08C5
         #instruction: JP   CY,08CB
@@ -29717,7 +29717,7 @@
         #instruction: LD   A,(2067)
         advance (13)
         #09CD
-        #instruction: RRCA 
+        #instruction: RRCA
         advance (4)
         #09CE
         #instruction: LD   HL,20F8
@@ -29813,7 +29813,7 @@
         #instruction: LD   A,(2067)
         advance (13)
         #08C4
-        #instruction: RRCA 
+        #instruction: RRCA
         advance (4)
         #08C5
         #instruction: JP   CY,08CB
@@ -29999,7 +29999,7 @@
         #instruction: LD   A,(2067)
         advance (13)
         #09CD
-        #instruction: RRCA 
+        #instruction: RRCA
         advance (4)
         #09CE
         #instruction: LD   HL,20F8
@@ -30316,7 +30316,7 @@
         #instruction: LD   A,(2067)
         advance (13)
         #09CD
-        #instruction: RRCA 
+        #instruction: RRCA
         advance (4)
         #09CE
         #instruction: LD   HL,20F8
@@ -30379,7 +30379,7 @@
         #instruction: LD   A,(2067)
         advance (13)
         #09CD
-        #instruction: RRCA 
+        #instruction: RRCA
         advance (4)
         #09CE
         #instruction: LD   HL,20F8
@@ -30849,7 +30849,7 @@
     #instruction: LD   A,(2067)
     advance (13)
     #1916
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #1917
     #instruction: RET  CY
@@ -31102,16 +31102,16 @@
       M[a38] := updateBit(updateBit(updateBit(updateBit(updateBit(02,7,a30[7]),6,is_zero(a30)),4,((((a25[1] || a25[2]) && a25[3]) || a24[7:0][4]) ? a26[7:0] : a25)[4]),2,parity(a30)),0,(((((a27[7:0][1] || a27[7:0][2]) && a27[7:0][3]) || a21[15:8][0]) ? a28[7:0] : a27[7:0])[4] || a21[15:8][0]));
       advance (11)
       #09B4
-      #instruction: RRCA 
+      #instruction: RRCA
       advance (4)
       #09B5
-      #instruction: RRCA 
+      #instruction: RRCA
       advance (4)
       #09B6
-      #instruction: RRCA 
+      #instruction: RRCA
       advance (4)
       #09B7
-      #instruction: RRCA 
+      #instruction: RRCA
       advance (4)
       #09B8
       #instruction: AND  0F
@@ -31286,16 +31286,16 @@
     M[a4] := updateBit(updateBit(updateBit(updateBit(updateBit(02,7,FlagS),6,FlagZ),4,FlagA),2,FlagP),0,FlagCY);
     advance (11)
     #09B4
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B5
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B6
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B7
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B8
     #instruction: AND  0F
@@ -31970,7 +31970,7 @@
       #instruction: LD   A,H
       advance (5)
       #0A21
-      #instruction: RRCA 
+      #instruction: RRCA
       advance (4)
       #0A22
       #instruction: JP   CY,0A33
@@ -35870,7 +35870,7 @@
               #instruction: LD   A,(2067)
               advance (13)
               #17C3
-              #instruction: RRCA 
+              #instruction: RRCA
               advance (4)
               #17C4
               #instruction: JP   NC,17CA
@@ -35933,7 +35933,7 @@
               #instruction: LD   A,(2067)
               advance (13)
               #17C3
-              #instruction: RRCA 
+              #instruction: RRCA
               advance (4)
               #17C4
               #instruction: JP   NC,17CA
@@ -37499,7 +37499,7 @@
     #instruction: IN   02
     advance (10)
     #0BB9
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     #0BBA
     #instruction: JP   CY,0BC3
@@ -39760,13 +39760,13 @@
     #instruction: LD   A,B
     advance (5)
     #1582
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     #1583
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     #1584
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     #1585
     #instruction: ADD  B
@@ -41014,7 +41014,7 @@
     #instruction: LD   A,(2067)
     advance (13)
     #1916
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #1917
     #instruction: RET  CY
@@ -41066,7 +41066,7 @@
     #instruction: LD   A,(2067)
     advance (13)
     #09CD
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09CE
     #instruction: LD   HL,20F8
@@ -41248,16 +41248,16 @@
         M[a19] := updateBit(updateBit(updateBit(updateBit(updateBit(02,7,a7[7:0][7]),6,is_zero(a7[7:0])),4,a10[7:0][4]),2,parity(a7[7:0])),0,!a7[15:8][0]);
         advance (11)
         #09B4
-        #instruction: RRCA 
+        #instruction: RRCA
         advance (4)
         #09B5
-        #instruction: RRCA 
+        #instruction: RRCA
         advance (4)
         #09B6
-        #instruction: RRCA 
+        #instruction: RRCA
         advance (4)
         #09B7
-        #instruction: RRCA 
+        #instruction: RRCA
         advance (4)
         #09B8
         #instruction: AND  0F
@@ -41521,16 +41521,16 @@
         M[a56] := updateBit(updateBit(updateBit(updateBit(updateBit(02,7,a2[7:0][7]),6,is_zero(a2[7:0])),4,a5[7:0][4]),2,parity(a2[7:0])),0,!a2[15:8][0]);
         advance (11)
         #09B4
-        #instruction: RRCA 
+        #instruction: RRCA
         advance (4)
         #09B5
-        #instruction: RRCA 
+        #instruction: RRCA
         advance (4)
         #09B6
-        #instruction: RRCA 
+        #instruction: RRCA
         advance (4)
         #09B7
-        #instruction: RRCA 
+        #instruction: RRCA
         advance (4)
         #09B8
         #instruction: AND  0F
@@ -42053,7 +42053,7 @@
     #instruction: LD   A,(2067)
     advance (13)
     #16B1
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #16B2
     #instruction: JP   CY,16B7
@@ -42420,7 +42420,7 @@
     #instruction: LD   HL,20E7
     advance (10)
     #18ED
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #18EE
     #instruction: RET  NC
@@ -42647,7 +42647,7 @@
       M[a30] := updateBit(updateBit(updateBit(updateBit(updateBit(02,7,a1[7]),6,is_zero(a1)),4,a2[3]),2,parity(a1)),0,false);
       advance (11)
       #02F1
-      #instruction: RRCA 
+      #instruction: RRCA
       advance (4)
       #02F2
       #instruction: JP   CY,0332
@@ -47574,16 +47574,16 @@
     M[a8] := updateBit(updateBit(updateBit(updateBit(updateBit(02,7,FlagS),6,FlagZ),4,FlagA),2,FlagP),0,FlagCY);
     advance (11)
     #09B4
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B5
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B6
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B7
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B8
     #instruction: AND  0F
@@ -47806,16 +47806,16 @@
     M[a8] := updateBit(updateBit(updateBit(updateBit(updateBit(02,7,FlagS),6,FlagZ),4,FlagA),2,FlagP),0,FlagCY);
     advance (11)
     #09B4
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B5
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B6
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B7
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B8
     #instruction: AND  0F
@@ -48038,16 +48038,16 @@
     M[a8] := updateBit(updateBit(updateBit(updateBit(updateBit(02,7,FlagS),6,FlagZ),4,FlagA),2,FlagP),0,FlagCY);
     advance (11)
     #09B4
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B5
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B6
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B7
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B8
     #instruction: AND  0F
@@ -48399,16 +48399,16 @@
     M[a4] := updateBit(updateBit(updateBit(updateBit(updateBit(02,7,FlagS),6,FlagZ),4,FlagA),2,FlagP),0,FlagCY);
     advance (11)
     #09B4
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B5
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B6
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B7
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B8
     #instruction: AND  0F
@@ -48603,16 +48603,16 @@
     M[a6] := updateBit(updateBit(updateBit(updateBit(updateBit(02,7,FlagS),6,FlagZ),4,FlagA),2,FlagP),0,FlagCY);
     advance (11)
     #09B4
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B5
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B6
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B7
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     #09B8
     #instruction: AND  0F

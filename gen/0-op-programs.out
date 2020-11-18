@@ -71,7 +71,7 @@
 
 07 --> Op0 RLC
 
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -149,7 +149,7 @@
 
 0F --> Op0 RRC
 
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -227,7 +227,7 @@
 
 17 --> Op0 RAL
 
-    #instruction: RAL  
+    #instruction: RAL
     advance (4)
     A := updateBit((A << 01),0,FlagCY);
     FlagCY := A[7];

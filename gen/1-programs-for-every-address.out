@@ -336,7 +336,7 @@
 001F:
 
     #001F
-    #instruction: RAL  
+    #instruction: RAL
     advance (4)
     A := updateBit((A << 01),0,FlagCY);
     FlagCY := A[7];
@@ -362,7 +362,7 @@
 0022:
 
     #0022
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -1076,7 +1076,7 @@
 0066:
 
     #0066
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -1172,7 +1172,7 @@
 0071:
 
     #0071
-    #instruction: RAL  
+    #instruction: RAL
     advance (4)
     A := updateBit((A << 01),0,FlagCY);
     FlagCY := A[7];
@@ -1656,7 +1656,7 @@
 00A1:
 
     #00A1
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -2823,7 +2823,7 @@
 011E:
 
     #011E
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -2832,7 +2832,7 @@
 011F:
 
     #011F
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -2841,7 +2841,7 @@
 0120:
 
     #0120
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -7672,7 +7672,7 @@
 02F1:
 
     #02F1
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -7890,7 +7890,7 @@
 0306:
 
     #0306
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -8261,7 +8261,7 @@
 032B:
 
     #032B
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -8306,7 +8306,7 @@
 0330:
 
     #0330
-    #instruction: RAL  
+    #instruction: RAL
     advance (4)
     A := updateBit((A << 01),0,FlagCY);
     FlagCY := A[7];
@@ -8683,7 +8683,7 @@
 0358:
 
     #0358
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -8731,7 +8731,7 @@
 035C:
 
     #035C
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -8834,7 +8834,7 @@
 0365:
 
     #0365
-    #instruction: RAL  
+    #instruction: RAL
     advance (4)
     A := updateBit((A << 01),0,FlagCY);
     FlagCY := A[7];
@@ -8843,7 +8843,7 @@
 0366:
 
     #0366
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -8852,7 +8852,7 @@
 0367:
 
     #0367
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -8900,7 +8900,7 @@
 036B:
 
     #036B
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -9452,7 +9452,7 @@
 03A1:
 
     #03A1
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -9461,7 +9461,7 @@
 03A2:
 
     #03A2
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -9470,7 +9470,7 @@
 03A3:
 
     #03A3
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -9479,7 +9479,7 @@
 03A4:
 
     #03A4
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -10106,7 +10106,7 @@
 03DD:
 
     #03DD
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -11280,7 +11280,7 @@
 0443:
 
     #0443
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -14894,7 +14894,7 @@
 05AE:
 
     #05AE
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -17241,7 +17241,7 @@
 068F:
 
     #068F
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -17316,7 +17316,7 @@
 0696:
 
     #0696
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -17475,7 +17475,7 @@
 06A4:
 
     #06A4
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -17547,7 +17547,7 @@
 06AA:
 
     #06AA
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -17868,7 +17868,7 @@
 06C6:
 
     #06C6
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -18186,7 +18186,7 @@
 06E2:
 
     #06E2
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -18246,7 +18246,7 @@
 06E7:
 
     #06E7
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -18464,7 +18464,7 @@
 06FB:
 
     #06FB
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -18581,7 +18581,7 @@
 0706:
 
     #0706
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -18874,7 +18874,7 @@
 0721:
 
     #0721
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -18947,7 +18947,7 @@
 0727:
 
     #0727
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -19113,7 +19113,7 @@
 0738:
 
     #0738
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -19175,7 +19175,7 @@
 073E:
 
     #073E
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -19406,7 +19406,7 @@
 0755:
 
     #0755
-    #instruction: RAL  
+    #instruction: RAL
     advance (4)
     A := updateBit((A << 01),0,FlagCY);
     FlagCY := A[7];
@@ -19504,7 +19504,7 @@
 075E:
 
     #075E
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -20083,7 +20083,7 @@
 0797:
 
     #0797
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -21359,7 +21359,7 @@
 080A:
 
     #080A
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -21831,7 +21831,7 @@
 0834:
 
     #0834
-    #instruction: RAL  
+    #instruction: RAL
     advance (4)
     A := updateBit((A << 01),0,FlagCY);
     FlagCY := A[7];
@@ -21948,7 +21948,7 @@
 083D:
 
     #083D
-    #instruction: RAL  
+    #instruction: RAL
     advance (4)
     A := updateBit((A << 01),0,FlagCY);
     FlagCY := A[7];
@@ -22092,7 +22092,7 @@
 084B:
 
     #084B
-    #instruction: RAL  
+    #instruction: RAL
     advance (4)
     A := updateBit((A << 01),0,FlagCY);
     FlagCY := A[7];
@@ -22301,7 +22301,7 @@
 0861:
 
     #0861
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -22310,7 +22310,7 @@
 0862:
 
     #0862
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -22345,7 +22345,7 @@
 0866:
 
     #0866
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -22383,7 +22383,7 @@
 0869:
 
     #0869
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -22406,7 +22406,7 @@
 086C:
 
     #086C
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -22456,7 +22456,7 @@
 0871:
 
     #0871
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -22837,7 +22837,7 @@
 089B:
 
     #089B
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -23297,7 +23297,7 @@
 08C4:
 
     #08C4
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -25924,7 +25924,7 @@
 09B4:
 
     #09B4
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -25933,7 +25933,7 @@
 09B5:
 
     #09B5
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -25942,7 +25942,7 @@
 09B6:
 
     #09B6
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -25951,7 +25951,7 @@
 09B7:
 
     #09B7
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -25975,7 +25975,7 @@
 09B9:
 
     #09B9
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -26054,7 +26054,7 @@
 09BF:
 
     #09BF
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -26200,7 +26200,7 @@
 09CD:
 
     #09CD
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -26900,7 +26900,7 @@
 0A0D:
 
     #0A0D
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -27118,7 +27118,7 @@
 0A21:
 
     #0A21
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -28345,7 +28345,7 @@
 0A9A:
 
     #0A9A
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -28749,7 +28749,7 @@
 0AC2:
 
     #0AC2
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -28794,7 +28794,7 @@
 0AC6:
 
     #0AC6
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -28830,7 +28830,7 @@
 0ACA:
 
     #0ACA
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -28927,7 +28927,7 @@
 0AD3:
 
     #0AD3
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -29371,7 +29371,7 @@
 0AFB:
 
     #0AFB
-    #instruction: RAL  
+    #instruction: RAL
     advance (4)
     A := updateBit((A << 01),0,FlagCY);
     FlagCY := A[7];
@@ -31515,7 +31515,7 @@
 0BB9:
 
     #0BB9
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -32283,7 +32283,7 @@
 0BFF:
 
     #0BFF
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -47912,7 +47912,7 @@
 1476:
 
     #1476
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -50919,7 +50919,7 @@
 1582:
 
     #1582
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -50928,7 +50928,7 @@
 1583:
 
     #1583
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -50937,7 +50937,7 @@
 1584:
 
     #1584
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -51488,7 +51488,7 @@
 15B4:
 
     #15B4
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -51712,7 +51712,7 @@
 15C6:
 
     #15C6
-    #instruction: RAL  
+    #instruction: RAL
     advance (4)
     A := updateBit((A << 01),0,FlagCY);
     FlagCY := A[7];
@@ -53004,7 +53004,7 @@
 163B:
 
     #163B
-    #instruction: RAL  
+    #instruction: RAL
     advance (4)
     A := updateBit((A << 01),0,FlagCY);
     FlagCY := A[7];
@@ -53171,7 +53171,7 @@
 164A:
 
     #164A
-    #instruction: RAL  
+    #instruction: RAL
     advance (4)
     A := updateBit((A << 01),0,FlagCY);
     FlagCY := A[7];
@@ -54268,7 +54268,7 @@
 16B1:
 
     #16B1
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -55543,7 +55543,7 @@
 1720:
 
     #1720
-    #instruction: RAL  
+    #instruction: RAL
     advance (4)
     A := updateBit((A << 01),0,FlagCY);
     FlagCY := A[7];
@@ -55616,7 +55616,7 @@
 1726:
 
     #1726
-    #instruction: RAL  
+    #instruction: RAL
     advance (4)
     A := updateBit((A << 01),0,FlagCY);
     FlagCY := A[7];
@@ -55749,7 +55749,7 @@
 1733:
 
     #1733
-    #instruction: RAL  
+    #instruction: RAL
     advance (4)
     A := updateBit((A << 01),0,FlagCY);
     FlagCY := A[7];
@@ -55948,7 +55948,7 @@
 1746:
 
     #1746
-    #instruction: RAL  
+    #instruction: RAL
     advance (4)
     A := updateBit((A << 01),0,FlagCY);
     FlagCY := A[7];
@@ -56014,7 +56014,7 @@
 174D:
 
     #174D
-    #instruction: RAL  
+    #instruction: RAL
     advance (4)
     A := updateBit((A << 01),0,FlagCY);
     FlagCY := A[7];
@@ -56223,7 +56223,7 @@
 175F:
 
     #175F
-    #instruction: RAL  
+    #instruction: RAL
     advance (4)
     A := updateBit((A << 01),0,FlagCY);
     FlagCY := A[7];
@@ -56528,7 +56528,7 @@
 177B:
 
     #177B
-    #instruction: RAL  
+    #instruction: RAL
     advance (4)
     A := updateBit((A << 01),0,FlagCY);
     FlagCY := A[7];
@@ -56666,7 +56666,7 @@
 1788:
 
     #1788
-    #instruction: RAL  
+    #instruction: RAL
     advance (4)
     A := updateBit((A << 01),0,FlagCY);
     FlagCY := A[7];
@@ -56719,7 +56719,7 @@
 178D:
 
     #178D
-    #instruction: RAL  
+    #instruction: RAL
     advance (4)
     A := updateBit((A << 01),0,FlagCY);
     FlagCY := A[7];
@@ -56862,7 +56862,7 @@
 179B:
 
     #179B
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -56871,7 +56871,7 @@
 179C:
 
     #179C
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -56930,7 +56930,7 @@
 17A1:
 
     #17A1
-    #instruction: RAL  
+    #instruction: RAL
     advance (4)
     A := updateBit((A << 01),0,FlagCY);
     FlagCY := A[7];
@@ -57301,7 +57301,7 @@
 17C3:
 
     #17C3
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -57334,7 +57334,7 @@
 17C6:
 
     #17C6
-    #instruction: RAL  
+    #instruction: RAL
     advance (4)
     A := updateBit((A << 01),0,FlagCY);
     FlagCY := A[7];
@@ -57669,7 +57669,7 @@
 17E2:
 
     #17E2
-    #instruction: RAL  
+    #instruction: RAL
     advance (4)
     A := updateBit((A << 01),0,FlagCY);
     FlagCY := A[7];
@@ -58109,7 +58109,7 @@
 180A:
 
     #180A
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -58118,7 +58118,7 @@
 180B:
 
     #180B
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -60389,7 +60389,7 @@
 18ED:
 
     #18ED
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -60839,7 +60839,7 @@
 1916:
 
     #1916
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -61231,7 +61231,7 @@
 193D:
 
     #193D
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -62657,7 +62657,7 @@
 19C8:
 
     #19C8
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -63539,7 +63539,7 @@
 1A1A:
 
     #1A1A
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -63784,7 +63784,7 @@
 1A2F:
 
     #1A2F
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -64798,7 +64798,7 @@
 1A8F:
 
     #1A8F
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -65019,7 +65019,7 @@
 1AA5:
 
     #1AA5
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -65148,7 +65148,7 @@
 1AB1:
 
     #1AB1
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -65305,7 +65305,7 @@
 1AC0:
 
     #1AC0
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -65515,7 +65515,7 @@
 1AD5:
 
     #1AD5
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -65773,7 +65773,7 @@
 1AEE:
 
     #1AEE
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -67041,7 +67041,7 @@
 1B70:
 
     #1B70
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -67082,7 +67082,7 @@
 1B75:
 
     #1B75
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -67927,7 +67927,7 @@
 1BCA:
 
     #1BCA
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -69403,7 +69403,7 @@
 1C62:
 
     #1C62
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -69511,7 +69511,7 @@
 1C6E:
 
     #1C6E
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -69579,7 +69579,7 @@
 1C75:
 
     #1C75
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -69602,7 +69602,7 @@
 1C77:
 
     #1C77
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -69756,7 +69756,7 @@
 1C87:
 
     #1C87
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -69862,7 +69862,7 @@
 1C90:
 
     #1C90
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -70022,7 +70022,7 @@
 1C9D:
 
     #1C9D
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -71022,7 +71022,7 @@
 1CFA:
 
     #1CFA
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -71082,7 +71082,7 @@
 1D01:
 
     #1D01
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -71259,7 +71259,7 @@
 1D13:
 
     #1D13
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -71340,7 +71340,7 @@
 1D1A:
 
     #1D1A
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -71403,7 +71403,7 @@
 1D21:
 
     #1D21
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -71954,7 +71954,7 @@
 1D4B:
 
     #1D4B
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -72922,7 +72922,7 @@
 1DAB:
 
     #1DAB
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -72963,7 +72963,7 @@
 1DB0:
 
     #1DB0
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -73687,7 +73687,7 @@
 1DEE:
 
     #1DEE
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -73796,7 +73796,7 @@
 1DF8:
 
     #1DF8
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -75389,7 +75389,7 @@
 1EC3:
 
     #1EC3
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -76665,7 +76665,7 @@
 1F58:
 
     #1F58
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -76788,7 +76788,7 @@
 1F65:
 
     #1F65
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -77038,7 +77038,7 @@
 1F82:
 
     #1F82
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -77382,7 +77382,7 @@
 1FA4:
 
     #1FA4
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];
@@ -77525,7 +77525,7 @@
 1FB3:
 
     #1FB3
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -77999,7 +77999,7 @@
 1FE4:
 
     #1FE4
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -78144,7 +78144,7 @@
 1FF3:
 
     #1FF3
-    #instruction: RRCA 
+    #instruction: RRCA
     advance (4)
     A := updateBit((A >> 01),7,A[0]);
     FlagCY := A[0];
@@ -78177,7 +78177,7 @@
 1FF6:
 
     #1FF6
-    #instruction: RLCA 
+    #instruction: RLCA
     advance (4)
     A := updateBit((A << 01),0,A[7]);
     FlagCY := A[7];

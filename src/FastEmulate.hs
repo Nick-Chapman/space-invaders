@@ -37,6 +37,10 @@ import qualified Rom (size)
 import qualified Shifter (Reg,init,set,get)
 import qualified Sounds (Playing,initPlaying)
 
+import qualified Data.Set as Set
+import qualified Data.Map.Strict as Map (toList,fromListWith)
+import Static (startPoints,oneStepReach,searchReach,returnAddresses)
+
 
 -- dont think prettyPrefix should be here
 prettyPrefix :: EmuState -> String -> String
@@ -94,8 +98,13 @@ data EmuStep = EmuStep
     , post :: EmuState
     }
 
+
+goFaster :: Bool
+goFaster = False
+
 initState :: Rom -> IO EmuState
 initState rom = do
+  programs <- Map.fromList <$> if goFaster then fastPrograms rom else return (slowPrograms rom)
   return $ EmuState
     { ticks = 0
     , icount = 0
@@ -105,16 +114,62 @@ initState rom = do
     , interrupts_enabled = False
     , nextWakeup = halfFrameTicks
     , playing = Sounds.initPlaying
-    , programs = Map.fromList programsForEveryAddress
+    , programs
     , rstHalf = compileOp rom (Op0 (RST 1))
     , rstVblank = compileOp rom (Op0 (RST 2))
     , iopt = Nothing
     }
-  where
+
+
+slowPrograms :: Rom -> [(Addr,Program)]
+slowPrograms rom = do
+  let
     programsForEveryAddress =
       [ (addr,program)
       | addr <- [0.. Rom.size rom - 1]
       , let program = compileAt (\_ -> False) rom addr ]
+
+  programsForEveryAddress
+
+
+fastPrograms :: Rom -> IO [(Addr,Program)]
+fastPrograms rom = do
+  let
+    programsForEveryAddress = slowPrograms rom
+
+    step :: Addr -> [Addr]
+    step a = Map.findWithDefault (error $ "step: " <> show a) a stepMap
+        where
+          stepMap :: Map Addr [Addr]
+          stepMap = Map.fromList [ (a, oneStepReach p) | (a,p) <- programsForEveryAddress ]
+
+  reachSet <- searchReach step startPoints
+
+  let
+    joinPoints = [ b | (b,as) <- collate backward, length as > 1 ]
+      where
+        backward = [ (b,a) | a <- Set.toList reachSet, b <- step a ]
+
+        collate :: Ord a => [(a,b)] -> [(a,[b])]
+        collate pairs = Map.toList $ Map.fromListWith (++) [ (a,[b]) | (a,b) <- pairs ]
+
+    returnPoints =
+      [ r
+      | (a,p) <- programsForEveryAddress
+      , a `elem` reachSet
+      , r <- returnAddresses p
+      ]
+
+    inlinedSharingJoins =
+      [ (addr,program)
+      | addr <- Set.toList labels
+      , let program = compileAt (`notElem` labels) rom addr ]
+      where
+        labels = Set.fromList (startPoints ++ returnPoints ++ joinPoints)
+
+  return inlinedSharingJoins
+
+
 
 emulate :: Buttons -> EmuState -> IO EmuStep
 emulate buttons state@EmuState{icount,ticks=_ticks,programs} = do

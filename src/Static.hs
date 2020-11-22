@@ -1,5 +1,7 @@
 
-module Static (main) where
+module Static (main
+              ,startPoints,returnAddresses,searchReach,oneStepReach
+              ) where
 
 import Addr (Addr)
 import Compile (opPrograms,compileAt)

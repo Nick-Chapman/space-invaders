@@ -78,8 +78,10 @@ initState rom = return $ EmuState
   }
 
 instance Show EmuState where
-  show EmuState{cpu,shifter} =
-    unwords [ show cpu, show shifter ]
+  show EmuState{cpu,shifter=_} =
+    unwords [ show cpu
+            -- , show shifter
+            ]
 
 
 data EmuStep = EmuStep

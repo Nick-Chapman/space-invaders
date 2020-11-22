@@ -89,7 +89,7 @@ data EmuState = EmuState
 instance Show EmuState where
   show EmuState{cpu=_cpu} =
     unwords [ show _cpu
-            , "shifter(00,0000)"
+            -- , "shifter(00,0000)"
             --, show shifter -- TODO: seems we have no tests which show non-zero shifter regs
             ]
 

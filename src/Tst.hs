@@ -53,7 +53,7 @@ trace handle = do
       hPutStrLn handle (seeState s ++ prettyStep s i)
 
     cb :: CB
-    cb = CB { traceI }
+    cb = CB { traceI = Just traceI }
 
     loop :: Int -> EmuState -> IO ()
     loop i pre = do

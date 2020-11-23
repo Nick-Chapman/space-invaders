@@ -109,7 +109,7 @@ stepFrame world@World{state=state0,buttons,paused,frameCount} = do
   where
 
     cb :: CB
-    cb = CB { traceI = \_ _ -> return () }
+    cb = CB { traceI = Nothing }
 
     loop :: EmuState -> IO World
     loop pre = do

@@ -165,7 +165,7 @@ fastPrograms rom = do
 
 
 data CB = CB
-  { traceI :: EmuState -> Instruction Byte -> IO ()
+  { traceI :: Maybe (EmuState -> Instruction Byte -> IO ())
   }
 
 emulate :: CB -> Buttons -> EmuState -> IO EmuState
@@ -215,7 +215,9 @@ emulateProgram CB{traceI} env s = emu env s
       S_AtRef _ p -> emu q u p
       S_MarkReturnAddress _ p -> emu q u p
       S_TraceInstruction i p -> do
-        traceI s (getLitInstruction i) -- NOTE: using s here
+        case traceI of
+          Nothing -> return ()
+          Just tr -> tr s (getLitInstruction i) -- NOTE: using s here
         emu q u p
       S_Advance n p -> emu q (advance n u) p
       S_Jump a -> return $ setPC (eval16 q s a) u

@@ -69,7 +69,7 @@ emulateForOneEmulatedSecond es0 = loop es0
           twoMill = 2_000_000
 
     cb :: CB
-    cb = CB { traceI = \_ _ -> return () }
+    cb = CB { traceI = Nothing }
 
     loop :: EmuState -> IO EmuState
     loop pre = do

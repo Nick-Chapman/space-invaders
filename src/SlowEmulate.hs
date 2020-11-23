@@ -84,7 +84,7 @@ instance Show EmuState where
 
 
 data CB = CB
-  { traceI :: EmuState -> Instruction Byte -> IO ()
+  { traceI :: Maybe (EmuState -> Instruction Byte -> IO ())
   }
 
 emulate :: CB -> Buttons -> EmuState -> IO EmuState
@@ -133,7 +133,9 @@ emulateS CB{traceI} semantics buttons s0 = do
       Decode byte -> k s (decode byte)
       MarkReturnAddress {} -> k s ()
       TraceInstruction i -> do
-        traceI s0 i -- NOTE, using s0 here
+        case traceI of
+          Nothing -> return ()
+          Just tr -> tr s0 i -- NOTE, using s0 here
         k s ()
 
       Advance n -> k (advance (Ticks n) s) ()

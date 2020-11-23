@@ -47,7 +47,7 @@ traceEmulate handle TraceConf{traceOnAfter,stopAfter,period,traceNearPing} = do
             hPutStrLn handle $ traceLine s i
 
         cb :: CB
-        cb = CB { traceI }
+        cb = CB { traceI = Just traceI }
 
       post <- emulate cb buttons0 pre
 

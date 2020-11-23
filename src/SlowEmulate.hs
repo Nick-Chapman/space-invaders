@@ -4,7 +4,7 @@ module SlowEmulate (
   prettyPrefix,
   EmuState(..), initState,
   CB(..),
-  EmuStep(..), emulate,
+  emulate,
   Bit(..),
   ) where
 
@@ -61,7 +61,6 @@ data EmuState = EmuState
   , nextWakeup :: Ticks
   , shifter :: Shifter EmuTime
   , playing :: Sounds.Playing
-  , iopt :: Maybe (Instruction Byte)
   }
 
 initState :: Rom -> IO EmuState
@@ -75,7 +74,6 @@ initState rom = return $ EmuState
   , nextWakeup = halfFrameTicks
   , shifter = Shifter.init (Byte 0)
   , playing = Sounds.initPlaying
-  , iopt = Nothing
   }
 
 instance Show EmuState where
@@ -85,16 +83,11 @@ instance Show EmuState where
             ]
 
 
-data EmuStep = EmuStep
-    { instruction :: Instruction Byte
-    , post :: EmuState
-    }
-
 data CB = CB
   { traceI :: EmuState -> Instruction Byte -> IO ()
   }
 
-emulate :: CB -> Buttons -> EmuState -> IO EmuStep
+emulate :: CB -> Buttons -> EmuState -> IO EmuState
 emulate cb buttons s@EmuState{interrupts_enabled} = do
   case timeToWakeup s of
     Just s
@@ -108,20 +101,17 @@ emulate cb buttons s@EmuState{interrupts_enabled} = do
       emulateS cb Semantics.fetchDecodeExec buttons s
 
 
-emulateS :: CB -> Eff EmuTime () -> Buttons -> EmuState -> IO EmuStep
+emulateS :: CB -> Eff EmuTime () -> Buttons -> EmuState -> IO EmuState
 emulateS CB{traceI} semantics buttons s0 = do
-  run s0 { iopt = Nothing } semantics $ \post@EmuState{iopt} () -> do
-    case iopt of
-      Nothing -> error "SlowEmulate: no instruction was traced"
-      Just instruction -> do
-        return $ EmuStep { instruction, post }
+  run s0 semantics $ \post () -> do
+    return post
 
   where
 
     crash :: String -> a
     crash message = do error ("*crash*\n" <> prettyPrefix s0 message)
 
-    run :: EmuState -> Eff EmuTime a -> (EmuState -> a -> IO EmuStep) -> IO EmuStep
+    run :: EmuState -> Eff EmuTime a -> (EmuState -> a -> IO EmuState) -> IO EmuState
     run s@EmuState{cpu,shifter,mem,playing} eff k = case eff of
       Ret x -> k s x
       Bind eff f -> run s eff $ \s a -> run s (f a) k
@@ -144,7 +134,7 @@ emulateS CB{traceI} semantics buttons s0 = do
       MarkReturnAddress {} -> k s ()
       TraceInstruction i -> do
         traceI s0 i -- NOTE, using s0 here
-        k (traceInstruction i s) ()
+        k s ()
 
       Advance n -> k (advance (Ticks n) s) ()
 
@@ -206,12 +196,6 @@ prettyPrefix :: EmuState -> String -> String
 prettyPrefix s message = do
   let pc = programCounter s
   unwords [ prettyTicks s , show pc , ":", message ]
-
-traceInstruction :: Instruction Byte -> EmuState -> EmuState
-traceInstruction i s@EmuState{iopt} =
-  case iopt of
-    Just _ -> error "traceInstruction, 2!"
-    Nothing -> s { iopt = Just i }
 
 advance :: Ticks -> EmuState -> EmuState
 advance n s@EmuState{icount,ticks} =

@@ -6,8 +6,7 @@ module FastEmulate (
   Ticks(..),
   prettyPrefix,
   EmuState(..), initState,
-  CB(..),
-  EmuStep(..), emulate,
+  CB(..), emulate,
   Bit(..),
   ) where
 
@@ -81,7 +80,6 @@ data EmuState = EmuState
   , interrupts_enabled :: Bool
   , nextWakeup :: Ticks
   , playing :: Sounds.Playing
-  , iopt :: Maybe (Instruction Exp8)
   , programs :: Map Addr Program
   , rstHalf :: Program
   , rstVblank :: Program
@@ -93,11 +91,6 @@ instance Show EmuState where
             -- , "shifter(00,0000)"
             --, show shifter -- TODO: seems we have no tests which show non-zero shifter regs
             ]
-
-data EmuStep = EmuStep
-    { instruction :: Instruction Byte
-    , post :: EmuState
-    }
 
 
 goFaster :: Bool
@@ -118,7 +111,6 @@ initState rom = do
     , programs
     , rstHalf = compileOp rom (Op0 (RST 1))
     , rstVblank = compileOp rom (Op0 (RST 2))
-    , iopt = Nothing
     }
 
 
@@ -176,9 +168,8 @@ data CB = CB
   { traceI :: EmuState -> Instruction Byte -> IO ()
   }
 
-emulate :: CB -> Buttons -> EmuState -> IO EmuStep
-emulate cb buttons state@EmuState{programs} = do
-  let pre = state { iopt = Nothing }
+emulate :: CB -> Buttons -> EmuState -> IO EmuState
+emulate cb buttons pre@EmuState{programs} = do
   let EmuState{rstHalf,rstVblank} = pre
   let (pre1,program) =
         case checkI pre of
@@ -188,12 +179,8 @@ emulate cb buttons state@EmuState{programs} = do
           (pre1,Just half) -> do
             (pre1,if half then rstHalf else rstVblank)
   let env = emptyEnv buttons
-  post@EmuState{iopt,cpu=_cpu} <- emulateProgram cb env pre1 program
-  case iopt of
-    Nothing -> error "FastEmulate: no instruction was traced"
-    Just i -> do
-      let instruction = getLitInstruction i
-      return EmuStep { instruction, post }
+  post@EmuState{} <- emulateProgram cb env pre1 program
+  return post
 
 
 checkI :: EmuState -> (EmuState,Maybe Bool)
@@ -229,7 +216,7 @@ emulateProgram CB{traceI} env s = emu env s
       S_MarkReturnAddress _ p -> emu q u p
       S_TraceInstruction i p -> do
         traceI s (getLitInstruction i) -- NOTE: using s here
-        emu q (traceInstruction i u) p
+        emu q u p
       S_Advance n p -> emu q (advance n u) p
       S_Jump a -> return $ setPC (eval16 q s a) u
       S_If c p1 p2 -> if (eval1 q s c) then emu q u p1 else emu q u p2
@@ -246,12 +233,6 @@ emulateProgram CB{traceI} env s = emu env s
       S_DisableInterrupts p -> emu q u { interrupts_enabled = False } p
       S_UnknownOutput n _ -> error $ "emulateProgram, unknown output: " ++ show n
 
-traceInstruction :: Instruction Exp8 -> EmuState -> EmuState
-traceInstruction i s@EmuState{iopt} =
-  case iopt of
-    Just _ -> error "traceInstruction, 2!"
-    Nothing ->
-      s { iopt = Just i }
 
 advance :: Int -> EmuState -> EmuState
 advance n s@EmuState{ticks,icount} =

@@ -6,7 +6,7 @@ import Buttons (buttons0)
 import Byte (Byte)
 import Control.Monad (when)
 import Data.Bits (testBit)
-import Emulate (EmuState(..),initState,Ticks(..),CB(..),emulate,EmuStep(..))
+import Emulate (EmuState(..),initState,Ticks(..),CB(..),emulate)
 import InstructionSet (Instruction,prettyInstructionBytes)
 import Mem (Mem)
 import System.IO (Handle,hPutStrLn)
@@ -49,8 +49,7 @@ traceEmulate handle TraceConf{traceOnAfter,stopAfter,period,traceNearPing} = do
         cb :: CB
         cb = CB { traceI }
 
-      -- TODO: dont return instruction from emulate
-      EmuStep{instruction=__IGNORED,post} <- emulate cb buttons0 pre
+      post <- emulate cb buttons0 pre
 
       case isStop of
         True -> hPutStrLn handle "STOP"

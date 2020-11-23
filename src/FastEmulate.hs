@@ -6,6 +6,7 @@ module FastEmulate (
   Ticks(..),
   prettyPrefix,
   EmuState(..), initState,
+  CB(..),
   EmuStep(..), emulate,
   Bit(..),
   ) where
@@ -171,9 +172,13 @@ fastPrograms rom = do
 
 
 
-emulate :: Buttons -> EmuState -> IO EmuStep
-emulate buttons state@EmuState{icount,ticks=_ticks,programs} = do
-  let pre = state { icount = icount + 1, iopt = Nothing }
+data CB = CB
+  { traceI :: EmuState -> Instruction Byte -> IO ()
+  }
+
+emulate :: CB -> Buttons -> EmuState -> IO EmuStep
+emulate cb buttons state@EmuState{programs} = do
+  let pre = state { iopt = Nothing }
   let EmuState{rstHalf,rstVblank} = pre
   let (pre1,program) =
         case checkI pre of
@@ -183,7 +188,7 @@ emulate buttons state@EmuState{icount,ticks=_ticks,programs} = do
           (pre1,Just half) -> do
             (pre1,if half then rstHalf else rstVblank)
   let env = emptyEnv buttons
-  let post@EmuState{iopt,cpu=_cpu} = emulateProgram env pre1 program
+  post@EmuState{iopt,cpu=_cpu} <- emulateProgram cb env pre1 program
   case iopt of
     Nothing -> error "FastEmulate: no instruction was traced"
     Just i -> do
@@ -215,16 +220,18 @@ getLit = \case
   E8_Lit b -> b
   x -> error $ "getLit: " <> show x
 
-emulateProgram :: Env -> EmuState -> Program -> EmuState
-emulateProgram env s = emu env s
+emulateProgram :: CB -> Env -> EmuState -> Program -> IO EmuState
+emulateProgram CB{traceI} env s = emu env s
   where -- (s: read, u: write) -- TODO: eliminate double env using temp-vars during comp
-    emu :: Env -> EmuState -> Program -> EmuState
+    emu :: Env -> EmuState -> Program -> IO EmuState
     emu q u@EmuState{mem,playing} = \case
       S_AtRef _ p -> emu q u p
       S_MarkReturnAddress _ p -> emu q u p
-      S_TraceInstruction i p -> emu q (traceInstruction i u) p
+      S_TraceInstruction i p -> do
+        traceI s (getLitInstruction i) -- NOTE: using s here
+        emu q (traceInstruction i u) p
       S_Advance n p -> emu q (advance n u) p
-      S_Jump a -> setPC (eval16 q s a) u
+      S_Jump a -> return $ setPC (eval16 q s a) u
       S_If c p1 p2 -> if (eval1 q s c) then emu q u p1 else emu q u p2
       S_AssignReg r e p -> emu q (setReg r (eval8 q s e) u) p
       S_AssignFlag f e p -> emu q (setFlag f (eval1 q s e) u) p
@@ -247,8 +254,8 @@ traceInstruction i s@EmuState{iopt} =
       s { iopt = Just i }
 
 advance :: Int -> EmuState -> EmuState
-advance n s@EmuState{ticks} =
-  s { ticks = ticks + Ticks n } -- TODO: do icount+1 here instead of above
+advance n s@EmuState{ticks,icount} =
+  s { ticks = ticks + Ticks n, icount = icount + 1 }
 
 timeToWakeup :: EmuState -> Maybe EmuState
 timeToWakeup s@EmuState{ticks,nextWakeup} = do

@@ -3,6 +3,7 @@ module SlowEmulate (
   Ticks(..),
   prettyPrefix,
   EmuState(..), initState,
+  CB(..),
   EmuStep(..), emulate,
   Bit(..),
   ) where
@@ -89,22 +90,26 @@ data EmuStep = EmuStep
     , post :: EmuState
     }
 
-emulate :: Buttons -> EmuState -> IO EmuStep
-emulate buttons s@EmuState{interrupts_enabled} = do
+data CB = CB
+  { traceI :: EmuState -> Instruction Byte -> IO ()
+  }
+
+emulate :: CB -> Buttons -> EmuState -> IO EmuStep
+emulate cb buttons s@EmuState{interrupts_enabled} = do
   case timeToWakeup s of
     Just s
       | interrupts_enabled -> do
           let s2 = s { interrupts_enabled = False }
           let byte = interruptInstruction s2
-          emulateS (Semantics.decodeExec byte) buttons s2
+          emulateS cb (Semantics.decodeExec byte) buttons s2
       | otherwise ->
-        emulateS Semantics.fetchDecodeExec buttons s
+        emulateS cb Semantics.fetchDecodeExec buttons s
     Nothing ->
-      emulateS Semantics.fetchDecodeExec buttons s
+      emulateS cb Semantics.fetchDecodeExec buttons s
 
 
-emulateS :: Eff EmuTime () -> Buttons -> EmuState -> IO EmuStep
-emulateS semantics buttons s0 = do
+emulateS :: CB -> Eff EmuTime () -> Buttons -> EmuState -> IO EmuStep
+emulateS CB{traceI} semantics buttons s0 = do
   run s0 { iopt = Nothing } semantics $ \post@EmuState{iopt} () -> do
     case iopt of
       Nothing -> error "SlowEmulate: no instruction was traced"
@@ -137,7 +142,10 @@ emulateS semantics buttons s0 = do
 
       Decode byte -> k s (decode byte)
       MarkReturnAddress {} -> k s ()
-      TraceInstruction i -> k (traceInstruction i s) ()
+      TraceInstruction i -> do
+        traceI s0 i -- NOTE, using s0 here
+        k (traceInstruction i s) ()
+
       Advance n -> k (advance (Ticks n) s) ()
 
       MakeBit (bool) -> k s (Bit bool)

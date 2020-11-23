@@ -4,7 +4,7 @@ module SpeedTest (main) where
 import Addr (Addr(..))
 import Buttons (buttons0)
 import Data.Bits (testBit)
-import Emulate (EmuState(..),EmuStep(..),Ticks(..),initState,emulate)
+import Emulate (EmuState(..),EmuStep(..),Ticks(..),initState,CB(..),emulate)
 import GHC.Int (Int64)
 import Mem (Mem)
 import System.Clock (TimeSpec(..),getTime,Clock(Monotonic))
@@ -68,9 +68,12 @@ emulateForOneEmulatedSecond es0 = loop es0
         where
           twoMill = 2_000_000
 
+    cb :: CB
+    cb = CB { traceI = \_ _ -> return () }
+
     loop :: EmuState -> IO EmuState
     loop pre = do
-      EmuStep{post} <- emulate buttons0 pre
+      EmuStep{post} <- emulate cb buttons0 pre
       let EmuState{ticks} = post
       case ticks >= goal of
         False ->  loop post

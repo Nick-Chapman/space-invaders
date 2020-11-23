@@ -6,7 +6,7 @@ import Buttons (buttons0)
 import Byte (Byte)
 import Control.Monad (when)
 import Data.Bits (testBit)
-import Emulate (EmuState(..),initState,Ticks(..),emulate,EmuStep(..))
+import Emulate (EmuState(..),initState,Ticks(..),CB(..),emulate,EmuStep(..))
 import InstructionSet (Instruction,prettyInstructionBytes)
 import Mem (Mem)
 import System.IO (Handle,hPutStrLn)
@@ -33,22 +33,30 @@ traceEmulate handle TraceConf{traceOnAfter,stopAfter,period,traceNearPing} = do
     loop :: Int -> Ticks -> EmuState -> IO ()
     loop periodCount nextPing pre = do
 
-      EmuStep{instruction,post} <- emulate buttons0 pre
-      let EmuState{icount,ticks} = post
+      let EmuState{icount,ticks} = pre
 
-      let traceIsOn = case traceOnAfter of Just i -> (icount > i); Nothing -> False
-      let isStop = case stopAfter of Just i -> (icount > i+1); Nothing -> False
+      let traceIsOn = case traceOnAfter of Just i -> (icount >= i); Nothing -> False
+      let isStop = case stopAfter of Just i -> (icount >= i); Nothing -> False
+
+      let nearPing = ((ticks+50 >= nextPing) || (ticks-50 <= nextPing-cycles))
+
+      let
+        traceI :: EmuState -> Instruction Byte -> IO ()
+        traceI s i = do
+          when (traceIsOn || (traceNearPing && nearPing)) $
+            hPutStrLn handle $ traceLine s i
+
+        cb :: CB
+        cb = CB { traceI }
+
+      -- TODO: dont return instruction from emulate
+      EmuStep{instruction=__IGNORED,post} <- emulate cb buttons0 pre
 
       case isStop of
         True -> hPutStrLn handle "STOP"
         False -> do
-
+          let EmuState{ticks} = post
           let ping = (ticks >= nextPing)
-          let nearPing = ((ticks+50 >= nextPing) || (ticks-50 <= nextPing-cycles))
-
-          when (traceIsOn || (traceNearPing && nearPing)) $
-            hPutStrLn handle $ traceLine pre instruction
-
           case ping of
             False ->  loop periodCount nextPing post
             True -> do

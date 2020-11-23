@@ -11,7 +11,7 @@ module World
 import Addr (Addr(..))
 import Buttons (Buttons,buttons0,But(..))
 import Data.Bits (testBit)
-import Emulate (EmuStep(..),emulate,EmuState(..),Ticks(..))
+import Emulate (EmuStep(..),CB(..),emulate,EmuState(..),Ticks(..))
 import Mem (Mem,read)
 import Rom (Rom)
 import Sounds (Sound(..), allSounds, isSoundPlaying)
@@ -107,9 +107,13 @@ stepFrame world@World{state=state0,buttons,paused,frameCount} = do
   (if paused then return world else loop state0)
     >>= measureFps
   where
+
+    cb :: CB
+    cb = CB { traceI = \_ _ -> return () }
+
     loop :: EmuState -> IO World
     loop pre = do
-      EmuStep{post} <- emulate buttons pre
+      EmuStep{post} <- emulate cb buttons pre
       case reachFrame pre post of
         False -> loop post
         True -> do

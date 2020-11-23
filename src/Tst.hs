@@ -6,7 +6,7 @@ import Byte (Byte(..))
 import Cpu (Cpu(..),Reg(..),set)
 import Data.Bits (bit)
 import Data.List (intercalate)
-import Emulate (Bit(..),EmuState(..),EmuStep(..),initState,emulate,Ticks(..),prettyPrefix)
+import Emulate (Bit(..),EmuState(..),EmuStep(..),initState,CB(..),emulate,Ticks(..),prettyPrefix)
 import InstructionSet (Instruction,prettyInstructionBytes)
 import Prelude hiding (init)
 import Rom (Rom)
@@ -47,11 +47,18 @@ trace :: Handle -> EmuState -> IO ()
 trace handle = do
   loop 0
   where
+
+    traceI :: EmuState -> Instruction Byte -> IO ()
+    traceI s i = do
+      hPutStrLn handle (seeState s ++ prettyStep s i)
+
+    cb :: CB
+    cb = CB { traceI }
+
     loop :: Int -> EmuState -> IO ()
     loop i pre = do
       if (i>650) then return () else do
-        EmuStep{instruction,post} <- emulate buttons0 pre
-        hPutStrLn handle (seeState pre ++ prettyStep pre instruction)
+        EmuStep{instruction=__IGNORED,post} <- emulate cb buttons0 pre
         loop (i+1) post
 
 

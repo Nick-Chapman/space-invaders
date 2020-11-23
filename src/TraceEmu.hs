@@ -6,7 +6,7 @@ import Buttons (buttons0)
 import Byte (Byte)
 import Control.Monad (when)
 import Data.Bits (testBit)
-import Emulate (EmuState(..),initState,Ticks(..),prettyPrefix,emulate,EmuStep(..))
+import Emulate (EmuState(..),initState,Ticks(..),emulate,EmuStep(..))
 import InstructionSet (Instruction,prettyInstructionBytes)
 import Mem (Mem)
 import System.IO (Handle,hPutStrLn)
@@ -47,22 +47,25 @@ traceEmulate handle TraceConf{traceOnAfter,stopAfter,period,traceNearPing} = do
           let nearPing = ((ticks+50 >= nextPing) || (ticks-50 <= nextPing-cycles))
 
           when (traceIsOn || (traceNearPing && nearPing)) $
-            hPutStrLn handle (ljust 60 (prettyStep pre instruction) ++ show post)
+            hPutStrLn handle $ traceLine pre instruction
 
           case ping of
             False ->  loop periodCount nextPing post
             True -> do
-              printPeriodPixels handle period periodCount post
+              hPutStrLn handle $ printPeriodPixels pre period periodCount
               loop (periodCount + 1) (nextPing + cycles) post
 
 
-ljust :: Int -> String -> String
-ljust n s = s <> take (max 0 (n - length s)) (repeat ' ')
-
-prettyStep :: EmuState -> Instruction Byte -> String
-prettyStep s i =
-  prettyPrefix s $
-  unwords [ ljust 10 (prettyInstructionBytes i), show i ]
+traceLine :: EmuState -> Instruction Byte -> String
+traceLine s@EmuState{ticks,icount} i = do
+  unwords
+    [ printf "%8d" icount
+    , rjust 11 (show ticks)
+    , show s
+    , ":"
+    , ljust 10 (prettyInstructionBytes i)
+    , show i
+    ]
 
 
 data Period = Second | HalfFrame deriving Show
@@ -74,14 +77,18 @@ cyclesInPeriod = \case
   where twoMill = 2_000_000
 
 
-printPeriodPixels :: Handle -> Period -> Int -> EmuState -> IO ()
-printPeriodPixels handle period count s = do
+printPeriodPixels :: EmuState -> Period -> Int -> String
+printPeriodPixels s@EmuState{ticks,icount} period count = do
   let EmuState{mem} = s
   let pixs = onPixels (getDisplayFromMem mem)
-  hPutStrLn handle $ prettyPrefix s $ unwords
-    [ printf "%s{%d}" (show period) count
+  unwords
+    [ printf "%8d" icount
+    , rjust 11 (show ticks)
+    , show s
+    , printf "%s{%d}" (show period) count
     , printf "#onPixels = %d" (length pixs)
     ]
+
 
 data OnPixel = OnPixel { x :: Int, y :: Int }
 
@@ -98,3 +105,10 @@ getDisplayFromMem mem = do
     , byte `testBit` yBit
     , let y  = 8 * yByte + yBit
     ]
+
+
+ljust :: Int -> String -> String
+ljust n s = s <> take (max 0 (n - length s)) (repeat ' ')
+
+rjust :: Int -> String -> String
+rjust n s = take (max 0 (n - length s)) (repeat ' ') <> s

@@ -36,7 +36,7 @@ data Cpu p = Cpu
 
 instance (Show (Bit p), Show (Byte p)) => Show (Cpu p) where
   show Cpu{pch,pcl,sph,spl,regA,regB,regC,regD,regE,regH,regL
-          ,flagS,flagZ,flagCY} = unwords
+          ,flagS,flagZ,flagA,flagP,flagCY} = unwords
     [ name <> ":" <> v
     | (name,v) <-
       [ ("PC",show pch <> show pcl)
@@ -47,10 +47,7 @@ instance (Show (Bit p), Show (Byte p)) => Show (Cpu p) where
       , ("E", show regE)
       , ("HL", show regH <> show regL)
       , ("SP", show sph <> show spl)
-      , ("S", show flagS)
-      , ("Z", show flagZ)
-      , ("CY", show flagCY)
-      -- , ("A", show flagA) -- TODO: show & update expected trace
+      , ("SZAPY", show flagS <> show flagZ <> show flagA <> show flagP <> show flagCY)
       ]
     ]
 

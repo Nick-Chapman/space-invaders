@@ -14,7 +14,7 @@ import Addr (Addr)
 import Buttons (Buttons)
 import Byte (Byte(..))
 import Compile (compileOp,compileAt)
-import Cpu (Cpu,Reg(..),Flag(..))
+import Cpu (Cpu,Reg(..),Flag(..),kindOfMap)
 import Data.Bits (complement,(.&.),(.|.),xor,shiftL,shiftR,testBit,setBit,clearBit)
 import Data.Map (Map)
 import HiLo (HiLo(..))
@@ -86,8 +86,8 @@ data EmuState = EmuState
   }
 
 instance Show EmuState where
-  show EmuState{cpu=_cpu} =
-    unwords [ show _cpu
+  show EmuState{cpu} =
+    unwords [ show cpu
             -- , "shifter(00,0000)"
             --, show shifter -- TODO: seems we have no tests which show non-zero shifter regs
             ]
@@ -214,11 +214,17 @@ emulateProgram CB{traceI} env s = emu env s
     emu q u@EmuState{mem,playing} = \case
       S_AtRef _ p -> emu q u p
       S_MarkReturnAddress _ p -> emu q u p
-      S_TraceInstruction i p -> do
+      S_TraceInstruction cpu i p -> do
         case traceI of
           Nothing -> return ()
-          Just tr -> tr s (getLitInstruction i) -- NOTE: using s here
+          Just tr -> tr s { cpu = Cpu.kindOfMap fByte fBit cpu } (getLitInstruction i)
         emu q u p
+          where
+            fByte :: Exp8 -> Byte
+            fByte = eval8 q s
+            fBit :: Exp1 -> Bit
+            fBit x = Bit (eval1 q s x)
+
       S_Advance n p -> emu q (advance n u) p
       S_Jump a -> return $ setPC (eval16 q s a) u
       S_If c p1 p2 -> if (eval1 q s c) then emu q u p1 else emu q u p2

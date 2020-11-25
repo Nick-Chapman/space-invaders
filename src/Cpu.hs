@@ -4,6 +4,7 @@ module Cpu (
   init,
   get,set,
   getFlag,setFlag,
+  kindOfMap,
   ) where
 
 import Prelude hiding (init)
@@ -106,3 +107,26 @@ set cpu r x = case r of
   H -> cpu { regH = x }
   L -> cpu { regL = x }
   Flags -> error "Cpu.set Flags"
+
+
+kindOfMap :: (Byte a -> Byte b) -> (Bit a -> Bit b) -> Cpu a -> Cpu b
+kindOfMap f g = \case
+  Cpu{pch,pcl,sph,spl,regA,regB,regC,regD,regE,regH,regL
+     ,flagS,flagZ,flagA,flagP,flagCY} ->
+    Cpu { pch = f pch
+        , pcl = f pcl
+        , sph = f sph
+        , spl = f spl
+        , regA = f regA
+        , regB = f regB
+        , regC = f regC
+        , regD = f regD
+        , regE = f regE
+        , regH = f regH
+        , regL = f regL
+        , flagS = g flagS
+        , flagZ = g flagZ
+        , flagA = g flagA
+        , flagP = g flagP
+        , flagCY = g flagCY
+        }

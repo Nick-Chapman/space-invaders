@@ -1,23 +1,33 @@
 
 module Residual
-  ( Program(..)
+  ( CompTime
+  , Program(..)
   , Exp17(..)
   , Exp16(..)
   , Exp8(..)
   , Exp1(..)
   , AVar(..)
-  , Lay, layOpPrograms,layPrograms,
+  , Lay, layOpPrograms,layPrograms
   ) where
 
 import Addr (Addr)
 import Buttons (But)
 import Byte (Byte(..))
-import Cpu (Reg(..),Flag(..))
+import Cpu -- (Reg(..),Flag(..))
 import Data.Word8 (Word8)
 import HiLo (HiLo(..))
 import InstructionSet (Op,Instruction,encode)
+import Phase (Phase)
 import Sounds (Sound)
+import qualified Phase (Bit,Byte,Addr)
 import qualified Shifter
+
+data CompTime
+
+instance Phase CompTime where
+  type Bit CompTime = Exp1
+  type Byte CompTime = Exp8
+  type Addr CompTime = Exp16
 
 data Program
   = S_Jump Exp16
@@ -31,7 +41,7 @@ data Program
   | S_Let17 AVar Exp17 Program
   | S_AtRef Addr Program
   | S_MarkReturnAddress Exp16 Program
-  | S_TraceInstruction (Instruction Exp8) Program
+  | S_TraceInstruction (Cpu CompTime) (Instruction Exp8) Program
   | S_Advance Int Program
   | S_UnknownOutput Word8 Program
   | S_SoundControl Sound Exp1 Program
@@ -140,7 +150,7 @@ layProgram = \case
     vert [ lay ("#return-to: " ++ show a)
          , layProgram next
          ]
-  S_TraceInstruction i next ->
+  S_TraceInstruction _cpu i next ->
     vert [ lay ("#instruction: " ++ show i)
          , layProgram next
          ]

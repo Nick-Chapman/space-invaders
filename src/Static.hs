@@ -203,7 +203,7 @@ afterProgram = \case
   S_UnknownOutput _ p -> [p]
   S_SoundControl _ _ p -> [p]
   S_MarkReturnAddress _ p -> [p]
-  S_TraceInstruction _ p -> [p]
+  S_TraceInstruction _ _ p -> [p]
   S_AtRef _ p -> [p]
   S_Advance _ p -> [p]
   S_EnableInterrupts p -> [p]

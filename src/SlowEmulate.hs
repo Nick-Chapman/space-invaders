@@ -135,7 +135,7 @@ emulateS CB{traceI} semantics buttons s0 = do
       TraceInstruction i -> do
         case traceI of
           Nothing -> return ()
-          Just tr -> tr s0 i -- NOTE, using s0 here
+          Just tr -> tr s i
         k s ()
 
       Advance n -> k (advance (Ticks n) s) ()

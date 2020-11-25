@@ -10,25 +10,15 @@ import Effect (Eff)
 import HiLo (HiLo(..))
 import InstructionSet (Op(..),Op1(..),decode,encode)
 import Rom (Rom)
-import Phase (Phase)
-import Residual (Exp1(..),Exp8(..),Exp16(..),Exp17(..),Program(..),AVar(..))
+import Residual (CompTime,Exp1(..),Exp8(..),Exp16(..),Exp17(..),Program(..),AVar(..))
 import Shifter (Shifter(..))
 import qualified Addr as Addr (toHiLo,fromHiLo,bump)
 import qualified Cpu (get,set,getFlag,setFlag)
 import qualified Data.Set as Set
 import qualified Effect as E (Eff(..))
 import qualified Rom (lookup)
-import qualified Phase (Bit,Byte,Addr)
 import qualified Semantics (fetchDecodeExec,decodeExec)
 import qualified Shifter (Reg(..),get,set,allRegs)
-
-
-data CompTime
-
-instance Phase CompTime where
-  type Bit CompTime = Exp1
-  type Byte CompTime = Exp8
-  type Addr CompTime = Exp16
 
 
 opPrograms :: Rom -> [(Op,Program)]
@@ -192,6 +182,7 @@ compileThen semantics state k =
       E.ReadMem a ->
         case tryRomLookupE16 rom a of
           Just byte -> k s (E8_Lit byte)
+          --Nothing -> share8 (k s) (E8_ReadMem a)
           Nothing -> k s (E8_ReadMem a)
       E.WriteMem a b -> S_MemWrite a b <$> k s ()
 
@@ -206,7 +197,7 @@ compileThen semantics state k =
           E8_Lit byte -> k s (decode byte)
           _ -> error $ "Decode, non-literal: " <> show e
       E.MarkReturnAddress a -> S_MarkReturnAddress a <$> k s ()
-      E.TraceInstruction i -> S_TraceInstruction i <$> k s ()
+      E.TraceInstruction i -> S_TraceInstruction cpu i <$> k s ()
       E.Advance n -> S_Advance n <$> k s ()
 
       E.MakeBit bool -> k s (if bool then E1_True else E1_False)

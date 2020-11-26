@@ -182,8 +182,7 @@ compileThen semantics state k =
       E.ReadMem a ->
         case tryRomLookupE16 rom a of
           Just byte -> k s (E8_Lit byte)
-          --Nothing -> share8 (k s) (E8_ReadMem a)
-          Nothing -> k s (E8_ReadMem a)
+          Nothing -> share8 (k s) (E8_ReadMem a)
       E.WriteMem a b -> S_MemWrite a b <$> k s ()
 
       E.GetShifterReg r -> k s (Shifter.get shifter r)

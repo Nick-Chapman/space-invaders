@@ -268,7 +268,7 @@ halfFrameTicks = Ticks (2000000 `div` 120) - n -- Experiment with reducing this 
 
 halfFrame :: EmuState -> Bool
 halfFrame EmuState{ticks} = do
-  (unTicks ticks `mod` unTicks halfFrameTicks) `mod` 2 == 1
+  (unTicks ticks `div` unTicks halfFrameTicks) `mod` 2 == 1
 
 
 data V17 = V17 { hi :: Bit, dropHi :: Addr }

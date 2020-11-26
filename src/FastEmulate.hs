@@ -217,30 +217,35 @@ emulateProgram CB{traceI} env s = emu env s
       S_TraceInstruction cpu i p -> do
         case traceI of
           Nothing -> return ()
-          Just tr -> tr s { cpu = Cpu.kindOfMap fByte fBit cpu } (getLitInstruction i)
+          Just tr -> tr u { cpu = Cpu.kindOfMap fByte fBit cpu } (getLitInstruction i)
         emu q u p
           where
             fByte :: Exp8 -> Byte
-            fByte = eval8 q s
+            fByte = ev8
             fBit :: Exp1 -> Bit
-            fBit x = Bit (eval1 q s x)
+            fBit x = Bit (ev1 x)
 
       S_Advance n p -> emu q (advance n u) p
-      S_Jump a -> return $ setPC (eval16 q s a) u
-      S_If c p1 p2 -> if (eval1 q s c) then emu q u p1 else emu q u p2
-      S_AssignReg r e p -> emu q (setReg r (eval8 q s e) u) p
-      S_AssignFlag f e p -> emu q (setFlag f (eval1 q s e) u) p
-      S_AssignShifterReg r e p -> emu q (setShifterReg r (eval8 q s e) u) p
-      S_MemWrite a e p -> emu q u { mem = Mem.write mem (eval16 q s a) (eval8 q s e) } p
-      S_Let17 v x p -> emu (insert17 q v (eval17 q s x)) u p
-      S_Let16 v a p -> emu (insert16 q v (eval16 q s a)) u p
-      S_Let8 v b p -> emu (insert8 q v (eval8 q s b)) u p
+      S_Jump a -> return $ setPC (ev16 a) u
+      S_If c p1 p2 -> if (ev1 c) then emu q u p1 else emu q u p2
+      S_AssignReg r e p -> emu q (setReg r (ev8 e) u) p
+      S_AssignFlag f e p -> emu q (setFlag f (ev1 e) u) p
+      S_AssignShifterReg r e p -> emu q (setShifterReg r (ev8 e) u) p
+      S_MemWrite a e p -> emu q u { mem = Mem.write mem (ev16 a) (ev8 e) } p
+      S_Let17 v x p -> emu (insert17 q v (ev17 x)) u p
+      S_Let16 v a p -> emu (insert16 q v (ev16 a)) u p
+      S_Let8 v b p -> emu (insert8 q v (ev8 b)) u p
       S_SoundControl sound c p -> do
-        emu q u { playing = soundControl (eval1 q s c) playing sound} p
+        emu q u { playing = soundControl (ev1 c) playing sound} p
       S_EnableInterrupts p -> emu q u { interrupts_enabled = True } p
       S_DisableInterrupts p -> emu q u { interrupts_enabled = False } p
       S_UnknownOutput n _ -> error $ "emulateProgram, unknown output: " ++ show n
-
+      where
+         -- compenstate for this u/s hack thing
+        ev1 = eval1 q s { mem }
+        ev8 = eval8 q s { mem }
+        ev16 = eval16 q s { mem }
+        ev17 = eval17 q s { mem }
 
 advance :: Int -> EmuState -> EmuState
 advance n s@EmuState{ticks,icount} =

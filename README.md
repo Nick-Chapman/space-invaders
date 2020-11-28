@@ -22,7 +22,8 @@ Status:
 - `stack run` runs as fast the machine allows; about 70 fps on my laptop
 - fps can be limited with a command line flag, i.e.  `stack run -- -fps 60`
 - Headless emulation: `stack run trace`
-- Regression tests: `./test.sh` (45 secs)
+- Quick regression test: `stack run test` (4 secs)
+- Slow regression test: `stack run test2` (20 secs)
 - Implemented `DAA` (_decimal adjust accumulator_), so credits are calculated correctly
 - Spot bugs while refactoring `Semantics.hs` -- _it worked!_
 - Speed measurements (no graphics) : `stack run speed-test`

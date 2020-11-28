@@ -1,12 +1,12 @@
 
-module TraceEmu (TraceConf(..),traceEmulate,Period(..)) where
+module TraceEmu (TraceConf(..),traceEmulate) where
 
 import Addr (Addr(..))
 import Buttons (buttons0)
 import Byte (Byte)
 import Control.Monad (when)
 import Data.Bits (testBit)
-import Emulate (EmuState(..),initState,Ticks(..),CB(..),emulate)
+import Emulate (EmuState(..),initState,CB(..),emulate)
 import InstructionSet (Instruction,prettyInstructionBytes)
 import Mem (Mem)
 import System.IO (Handle,hPutStrLn)
@@ -15,82 +15,48 @@ import qualified Mem (read)
 import qualified Rom (loadInvaders)
 
 data TraceConf = TraceConf
-  { traceOnAfter :: Maybe Int
-  , stopAfter :: Maybe Int
-  , period :: Period
+  { stopAfter :: Maybe Int
+  , iPeriod :: Int
+  , showPixs :: Bool
   }
 
 traceEmulate :: Handle -> TraceConf -> IO ()
-traceEmulate handle TraceConf{traceOnAfter,stopAfter,period} = do
+traceEmulate handle TraceConf{stopAfter,iPeriod,showPixs} = do
   rom <- Rom.loadInvaders
   state <- initState rom
-  loop 1 firstPing state
+  loop state
   where
-    firstPing = cycles
-    cycles = Ticks (cyclesInPeriod period)
+    traceI :: EmuState -> Instruction Byte -> IO ()
+    traceI s instruction = do
+      let EmuState{icount} = s
+      let onPeriod = icount `mod` iPeriod == 0
+      let isStop = case stopAfter of Just i -> (icount > i); Nothing -> False
+      when (onPeriod && not isStop) $
+        hPutStrLn handle $ traceLine showPixs s instruction
 
-    loop :: Int -> Ticks -> EmuState -> IO ()
-    loop periodCount nextPing pre = do
+    cb = CB { traceI = Just traceI }
 
-      let
-        traceI :: EmuState -> Instruction Byte -> IO ()
-        traceI s i = do
-          let EmuState{icount} = s
-          let traceIsOn = case traceOnAfter of Just i -> (icount >= i); Nothing -> False
-          let isStop = case stopAfter of Just i -> (icount > i); Nothing -> False
-          when (traceIsOn && not isStop) $
-            hPutStrLn handle $ traceLine s i
-
-        cb :: CB
-        cb = CB { traceI = Just traceI }
-
-      post <- emulate cb buttons0 pre
-
-      let EmuState{icount} = post
+    loop :: EmuState -> IO ()
+    loop pre = do
+      post@EmuState{icount} <- emulate cb buttons0 pre
       let isStop = case stopAfter of Just i -> (icount > i); Nothing -> False
       case isStop of
         True -> hPutStrLn handle "STOP"
-        False -> do
-          let EmuState{ticks} = post
-          let ping = (ticks >= nextPing)
-          case ping of
-            False ->  loop periodCount nextPing post
-            True -> do
-              hPutStrLn handle $ printPeriodPixels pre period periodCount
-              loop (periodCount + 1) (nextPing + cycles) post
+        False -> loop post
 
 
-traceLine :: EmuState -> Instruction Byte -> String
-traceLine s@EmuState{ticks,icount} i = do
+traceLine :: Bool -> EmuState -> Instruction Byte -> String
+traceLine showPixs s@EmuState{ticks,icount,mem} i = do
+  let pixs = onPixels (getDisplayFromMem mem)
   unwords
     [ printf "%8d" icount
     , rjust 11 (show ticks)
     , show s
     , ":"
     , ljust 10 (prettyInstructionBytes i)
-    , show i
-    ]
-
-
-data Period = Second | HalfFrame deriving Show
-
-cyclesInPeriod :: Period -> Int
-cyclesInPeriod = \case
-  Second -> twoMill
-  HalfFrame -> twoMill `div` 120
-  where twoMill = 2_000_000
-
-
-printPeriodPixels :: EmuState -> Period -> Int -> String
-printPeriodPixels s@EmuState{ticks,icount} period count = do
-  let EmuState{mem} = s
-  let pixs = onPixels (getDisplayFromMem mem)
-  unwords
-    [ printf "%8d" icount
-    , rjust 11 (show ticks)
-    , show s
-    , printf "%s{%d}" (show period) count
-    , printf "#onPixels = %d" (length pixs)
+    , if showPixs
+      then unwords [ ljust 15 (show i), printf "#pixs:%d" (length pixs) ]
+      else show i
     ]
 
 

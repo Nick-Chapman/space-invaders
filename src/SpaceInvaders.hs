@@ -3,7 +3,7 @@ module SpaceInvaders (main) where
 
 import System.Environment (getArgs)
 import System.IO (Handle,withFile,IOMode(WriteMode),stdout)
-import TraceEmu (traceEmulate,Period(Second,HalfFrame),TraceConf(..))
+import TraceEmu (traceEmulate,TraceConf(..))
 import qualified GraphicsSDL as SDL (main,Conf(..))
 import qualified SpeedTest (main)
 import qualified Static (main)
@@ -14,7 +14,7 @@ main :: IO ()
 main = do
   putStrLn "*space-invaders*"
   args <- getArgs
-  let Conf{mode,traceConf,fpsLimit,scaleFactor,showControls} = parse args conf0
+  let Conf{mode,fpsLimit,scaleFactor,showControls} = parse args conf0
   case mode of
     ModeTest -> do test0; test1 -- ; test2 -- skip test2, too slow
     ModeTest0 -> test0
@@ -54,7 +54,6 @@ data Mode
 
 data Conf = Conf
   { mode :: Mode
-  , traceConf :: TraceConf
   , fpsLimit :: Maybe Int
   , scaleFactor :: Int
   , showControls :: Bool
@@ -63,30 +62,30 @@ data Conf = Conf
 conf0 :: Conf
 conf0 = Conf
   { mode = ModePlay
-  , traceConf = traceConf0
   , fpsLimit = Nothing
   , scaleFactor = 3
   , showControls = False
   }
 
-traceConf0 :: TraceConf
-traceConf0 = TraceConf
-  { traceOnAfter = Nothing -- dont trace instruction
-  , stopAfter = Nothing
-  , period = Second
+traceConf :: TraceConf
+traceConf = TraceConf
+  { stopAfter = Nothing
+  , iPeriod = 500_000 -- ~ 2.25 emulated seconds.
+  , showPixs = True
   }
 
 traceConfTest1 :: TraceConf
-traceConfTest1 = traceConf0
-  { traceOnAfter = Just 0 -- trace every instruction from the start
-  , stopAfter = Just 50000 --50k instructions
+traceConfTest1 = TraceConf
+  { stopAfter = Just 50000 -- ~1/5 emulated second. just long enough for interrupts to become enabled
+  , iPeriod = 1
+  , showPixs = False
   }
 
 traceConfTest2 :: TraceConf
-traceConfTest2 = traceConf0
-  { traceOnAfter = Nothing -- dont trace every instruction
-  , stopAfter = Just 10000000 -- 10mil instructions, approx 2400 frames, or 40 emulated seconds
-  , period = HalfFrame
+traceConfTest2 = TraceConf
+  { stopAfter = Just 10_000_000 -- 10mil instructions, aprox 44 emulated seconds
+  , iPeriod = 10_000
+  , showPixs = True
   }
 
 parse :: [String] -> Conf -> Conf
@@ -103,6 +102,5 @@ parse args conf = case args of
   "-no-controls":args -> parse args $ conf { showControls = False }
   "-sf":i:args -> parse args $ conf { scaleFactor = read i }
   "-fps":i:args -> parse args $ conf { fpsLimit = Just (read i) }
-  "-frame":args -> parse args $ conf { traceConf = (traceConf conf) { period = HalfFrame } }
   args ->
     error $ "parseArgs: " <> show args

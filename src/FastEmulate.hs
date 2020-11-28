@@ -173,7 +173,7 @@ data CB = CB
   }
 
 emulate :: CB -> Buttons -> EmuState -> IO EmuState
-emulate cb buttons pre@EmuState{slowPrograms,fastPrograms} = do
+emulate cb buttons pre@EmuState{ticks=_ticks,slowPrograms,fastPrograms} = do
   let n = ticksUntilNextInterrupt pre
 
   case checkI pre of
@@ -188,7 +188,7 @@ emulate cb buttons pre@EmuState{slowPrograms,fastPrograms} = do
       emulateProgram cb buttons pre1 program
 
     (pre1,Just half) -> do
-      --print ("INTERRUPT",n)
+      --print (_ticks,"INTERRUPT",n,half)
       let EmuState{rstHalf,rstVblank} = pre
       let program = if half then rstHalf else rstVblank
       emulateProgram cb buttons pre1 program

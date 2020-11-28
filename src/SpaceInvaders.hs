@@ -24,10 +24,10 @@ main = do
       traceEmulate stdout traceConf
     ModeSpeedTest -> do
       SpeedTest.main
-    ModeSDL -> do
-      SDL.main $ SDL.Conf { scaleFactor, fpsLimit, showControls }
     ModeStatic -> do
       Static.main
+    ModePlay -> do
+      SDL.main $ SDL.Conf { scaleFactor, fpsLimit, showControls }
   where
     test0 = do
       withTraceFile "test0" $ \h -> do
@@ -49,7 +49,8 @@ withTraceFile tag f = do
 data Mode
   = ModeTest -- all the tests
   | ModeTest0 | ModeTest1 | ModeTest2 -- selected tests
-  | ModeTrace | ModeSpeedTest | ModeSDL | ModeStatic
+  | ModeTrace | ModeSpeedTest | ModeStatic
+  | ModePlay
 
 data Conf = Conf
   { mode :: Mode
@@ -61,7 +62,7 @@ data Conf = Conf
 
 conf0 :: Conf
 conf0 = Conf
-  { mode = ModeSDL
+  { mode = ModePlay
   , traceConf = traceConf0
   , fpsLimit = Nothing
   , scaleFactor = 3
@@ -73,7 +74,6 @@ traceConf0 = TraceConf
   { traceOnAfter = Nothing -- dont trace instruction
   , stopAfter = Nothing
   , period = Second
-  , traceNearPing = False
   }
 
 traceConfTest1 :: TraceConf
@@ -89,13 +89,6 @@ traceConfTest2 = traceConf0
   , period = HalfFrame
   }
 
-traceConfPOI :: Int -> TraceConf
-traceConfPOI i = traceConf0
-  { traceOnAfter = Just (i-5) -- trace instruction from just before the POI...
-  , stopAfter = Just (i+5) -- until just after
-  , period = HalfFrame
-  }
-
 parse :: [String] -> Conf -> Conf
 parse args conf = case args of
   [] -> conf
@@ -105,14 +98,11 @@ parse args conf = case args of
   "test2":args -> parse args $ conf { mode = ModeTest2 }
   "trace":args -> parse args $ conf { mode = ModeTrace }
   "speed-test":args -> parse args $ conf { mode = ModeSpeedTest }
-  "sdl":args -> parse args $ conf { mode = ModeSDL }
   "static":args -> parse args $ conf { mode = ModeStatic }
-  "-poi":i:args -> parse args $ conf { traceConf = traceConfPOI (read i) }
   "-controls":args -> parse args $ conf { showControls = True }
   "-no-controls":args -> parse args $ conf { showControls = False }
   "-sf":i:args -> parse args $ conf { scaleFactor = read i }
   "-fps":i:args -> parse args $ conf { fpsLimit = Just (read i) }
   "-frame":args -> parse args $ conf { traceConf = (traceConf conf) { period = HalfFrame } }
-  "-trace-near-ping":args -> parse args $ conf { traceConf = (traceConf conf) { traceNearPing = True } }
   args ->
     error $ "parseArgs: " <> show args

@@ -18,11 +18,10 @@ data TraceConf = TraceConf
   { traceOnAfter :: Maybe Int
   , stopAfter :: Maybe Int
   , period :: Period
-  , traceNearPing :: Bool
   }
 
 traceEmulate :: Handle -> TraceConf -> IO ()
-traceEmulate handle TraceConf{traceOnAfter,stopAfter,period,traceNearPing} = do
+traceEmulate handle TraceConf{traceOnAfter,stopAfter,period} = do
   rom <- Rom.loadInvaders
   state <- initState rom
   loop 1 firstPing state
@@ -36,11 +35,10 @@ traceEmulate handle TraceConf{traceOnAfter,stopAfter,period,traceNearPing} = do
       let
         traceI :: EmuState -> Instruction Byte -> IO ()
         traceI s i = do
-          let EmuState{icount,ticks} = s
+          let EmuState{icount} = s
           let traceIsOn = case traceOnAfter of Just i -> (icount >= i); Nothing -> False
-          let nearPing = ((ticks+50 >= nextPing) || (ticks-50 <= nextPing-cycles))
           let isStop = case stopAfter of Just i -> (icount > i); Nothing -> False
-          when ((traceIsOn && not isStop) || (traceNearPing && nearPing)) $
+          when (traceIsOn && not isStop) $
             hPutStrLn handle $ traceLine s i
 
         cb :: CB

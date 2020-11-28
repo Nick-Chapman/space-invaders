@@ -77,7 +77,7 @@ data EmuState = EmuState
   , cpu :: Cpu FastEmuTime
   , shifter :: Shifter FastEmuTime
   , mem :: Mem
-  , interrupts_enabled :: Bool
+  , interruptsEnabled :: Bool
   , nextWakeup :: Ticks
   , playing :: Sounds.Playing
   , slowPrograms :: Map Addr Program
@@ -107,7 +107,7 @@ initState rom = do
     , cpu = Cpu.init (Byte 0) (Bit False)
     , shifter = Shifter.init (Byte 0)
     , mem = Mem.init rom
-    , interrupts_enabled = False
+    , interruptsEnabled = False
     , nextWakeup = halfFrameTicks
     , playing = Sounds.initPlaying
     , slowPrograms = Map.fromList slow
@@ -167,50 +167,38 @@ fastProgramsOfRom rom = do
   return inlinedSharingJoins
 
 
-
 data CB = CB
   { traceI :: Maybe (EmuState -> Instruction Byte -> IO ())
   }
 
 emulate :: CB -> Buttons -> EmuState -> IO EmuState
-emulate cb buttons pre@EmuState{ticks=_ticks,slowPrograms,fastPrograms} = do
-  let n = ticksUntilNextInterrupt pre
+emulate cb buttons s1 = if
+  | togo <= 0 && interruptsEnabled -> goInterrupt
+  | otherwise -> goNormal
+  where
+    togo = nextWakeup - ticks
+    EmuState{rstHalf,rstVblank,nextWakeup,ticks,slowPrograms,fastPrograms,interruptsEnabled} = s1
+    s2 = s1 { nextWakeup = Ticks ((unTicks ticks `div` unTicks halfFrameTicks) + 1) * halfFrameTicks }
 
-  case checkI pre of
-    (pre1,Nothing) -> do
-      let pc = programCounter pre
+    goInterrupt = do
+      --print (ticks,"INTERRUPT",togo,half)
+      let half = (unTicks ticks `div` unTicks halfFrameTicks) `mod` 2 == 1
+      let program = if half then rstHalf else rstVblank
+      emulateProgram cb buttons s2 { interruptsEnabled = False } program
+
+    goNormal = do
+      let pc = programCounter s1
       let hasFaster = Map.member pc fastPrograms
       let len = case Map.lookup pc fastPrograms of Nothing -> 1000; Just fast -> programLength fast
-      let safeForFast = not (unTicks n < len)
-      --print ("ticks-togo",n,("fast-len",len),("safe=",safeForFast),("has=",hasFaster))
+      let safeForFast = not (unTicks togo < len)
+      --print ("ticks-togo",togo,("fast-len",len),("safe=",safeForFast),("has=",hasFaster))
       let programs = if goFaster && safeForFast && hasFaster then fastPrograms else slowPrograms
       let program = Map.findWithDefault (error $ "no program at pc: " <> show pc) pc programs
-      emulateProgram cb buttons pre1 program
-
-    (pre1,Just half) -> do
-      --print (_ticks,"INTERRUPT",n,half)
-      let EmuState{rstHalf,rstVblank} = pre
-      let program = if half then rstHalf else rstVblank
-      emulateProgram cb buttons pre1 program
+      emulateProgram cb buttons s2 program
 
 
-ticksUntilNextInterrupt :: EmuState -> Ticks
-ticksUntilNextInterrupt EmuState{ticks,nextWakeup} = do
-  nextWakeup - ticks
-
-
-
-checkI :: EmuState -> (EmuState,Maybe Bool) -- TODO: inline
-checkI s@EmuState{interrupts_enabled} = do
-  case timeToWakeup s of -- TODO: inline
-    Just s
-      | interrupts_enabled -> do
-          let s2 = s { interrupts_enabled = False }
-          (s2,Just (halfFrame s2))
-      | otherwise ->
-        (s,Nothing)
-    Nothing ->
-      (s,Nothing)
+halfFrameTicks :: Ticks
+halfFrameTicks = Ticks (2000000 `div` 120)
 
 
 getLitInstruction :: Instruction Exp8 -> Instruction Byte
@@ -254,8 +242,8 @@ emulateProgram CB{traceI} buttons s = emu (emptyEnv buttons) s
       S_Let8 v b p -> emu (insert8 q v (ev8 b)) u p
       S_SoundControl sound c p -> do
         emu q u { playing = soundControl (ev1 c) playing sound} p
-      S_EnableInterrupts p -> emu q u { interrupts_enabled = True } p
-      S_DisableInterrupts p -> emu q u { interrupts_enabled = False } p
+      S_EnableInterrupts p -> emu q u { interruptsEnabled = True } p
+      S_DisableInterrupts p -> emu q u { interruptsEnabled = False } p
       S_UnknownOutput n _ -> error $ "emulateProgram, unknown output: " ++ show n
       where
          -- compenstate for this u/s hack thing
@@ -267,25 +255,6 @@ emulateProgram CB{traceI} buttons s = emu (emptyEnv buttons) s
 advance :: Int -> EmuState -> EmuState
 advance n s@EmuState{ticks,icount} =
   s { ticks = ticks + Ticks n, icount = icount + 1 }
-
-timeToWakeup :: EmuState -> Maybe EmuState
-timeToWakeup s@EmuState{ticks,nextWakeup} = do
-  if ticks < nextWakeup
-    then Nothing
-    else do
-    Just s { nextWakeup =
-             Ticks ((unTicks ticks `div` unTicks halfFrameTicks) + 1) * halfFrameTicks
-           }
-
-halfFrameTicks :: Ticks
-halfFrameTicks = Ticks (2000000 `div` 120) - n -- Experiment with reducing this value.
-  -- turns out that even a reduction of just 1000 cycles
-  -- will cause the game to hang after the "P" of "PLAY" is displayed
-  where n = 0 --1000
-
-halfFrame :: EmuState -> Bool
-halfFrame EmuState{ticks} = do
-  (unTicks ticks `div` unTicks halfFrameTicks) `mod` 2 == 1
 
 
 data V17 = V17 { hi :: Bit, dropHi :: Addr }

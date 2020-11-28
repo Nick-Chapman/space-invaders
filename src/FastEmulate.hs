@@ -95,7 +95,7 @@ instance Show EmuState where
 
 
 goFaster :: Bool
-goFaster = False
+goFaster = True
 
 initState :: Rom -> IO EmuState
 initState rom = do

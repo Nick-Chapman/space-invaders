@@ -47,8 +47,8 @@ main = do
 
   let reachablePrograms = [ (a,p) | (a,p) <- programsForEveryAddress, a `elem` reachSet ]
 
-  generateFile "2-reachable-programs" $
-    layPrograms reachablePrograms
+  generateFile "2-reachable-programs" $ layPrograms reachablePrograms
+  --print ("max-prog-length(2)",maxProgramLengths reachablePrograms)
 
   let
     returnPoints =
@@ -66,8 +66,8 @@ main = do
       where
         labels = Set.fromList (startPoints ++ returnPoints)
 
-  generateFile "3-inlined-deep" $
-    layPrograms inlinedDeep
+  generateFile "3-inlined-deep" $ layPrograms inlinedDeep
+  --print ("max-prog-length(3)",maxProgramLengths inlinedDeep)
 
   let
     joinPoints = [ b | (b,as) <- collate backward, length as > 1 ]
@@ -89,8 +89,8 @@ main = do
       where
         labels = Set.fromList (startPoints ++ returnPoints ++ joinPoints)
 
-  generateFile "4-inlined-upto-joins" $
-    layPrograms inlinedSharingJoins
+  generateFile "4-inlined-upto-joins" $ layPrograms inlinedSharingJoins
+  print ("max-prog-length(4)",maxProgramLengths inlinedSharingJoins)
 
   return ()
 
@@ -208,3 +208,28 @@ afterProgram = \case
   S_Advance _ p -> [p]
   S_EnableInterrupts p -> [p]
   S_DisableInterrupts p -> [p]
+
+maxProgramLengths :: [(a,Program)] -> Int
+maxProgramLengths xs = maximum [ programLength p | (_,p) <- xs ]
+
+programLength :: Program -> Int
+programLength = z
+  where
+    z = \case
+      S_Jump{} -> 0
+      S_If _ p1 p2 -> max (z p1) (z p2)
+      S_AssignReg _ _ p -> z p
+      S_AssignShifterReg _ _ p -> z p
+      S_AssignFlag _ _ p -> z p
+      S_MemWrite _ _ p -> z p
+      S_Let16 _ _ p -> z p
+      S_Let8 _ _ p -> z p
+      S_Let17 _ _ p -> z p
+      S_UnknownOutput _ p -> z p
+      S_SoundControl _ _ p -> z p
+      S_MarkReturnAddress _ p -> z p
+      S_TraceInstruction _ _ p -> z p
+      S_AtRef _ p -> z p
+      S_Advance n p -> n + z p
+      S_EnableInterrupts p -> z p
+      S_DisableInterrupts p -> z p

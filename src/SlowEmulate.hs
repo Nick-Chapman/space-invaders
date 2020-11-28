@@ -211,7 +211,7 @@ halfFrameTicks = Ticks (2000000 `div` 120) - n -- Experiment with reducing this 
 
 interruptInstruction :: EmuState -> Byte
 interruptInstruction EmuState{ticks} = do
-  let mid = (unTicks ticks `mod` unTicks halfFrameTicks) `mod` 2 == 1
+  let mid = (unTicks ticks `div` unTicks halfFrameTicks) `mod` 2 == 1
   if mid then 0xCF else 0xD7
 
 timeToWakeup :: EmuState -> Maybe EmuState

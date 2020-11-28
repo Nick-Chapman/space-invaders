@@ -30,7 +30,7 @@ import qualified Addr (toHiLo,fromHiLo,bump,addCarryOut)
 import qualified Buttons
 import qualified Byte (addWithCarry,toUnsigned)
 import qualified Cpu (init,get,set,getFlag,setFlag)
-import qualified Data.Map.Strict as Map (empty,lookup,findWithDefault,fromList,insert,member)
+import qualified Data.Map.Strict as Map (empty,lookup,findWithDefault,fromList,insert)
 import qualified Mem (init,read,write)
 import qualified Phase (Byte,Addr,Bit)
 import qualified Rom (size)
@@ -73,12 +73,13 @@ instance Phase FastEmuTime where
 
 data EmuState = EmuState
   { ticks :: Ticks -- cycle count
+  , togo :: Ticks
+  , half :: Bool
   , icount :: Int -- instruction count
   , cpu :: Cpu FastEmuTime
   , shifter :: Shifter FastEmuTime
   , mem :: Mem
   , interruptsEnabled :: Bool
-  , nextWakeup :: Ticks
   , playing :: Sounds.Playing
   , slowPrograms :: Map Addr Program
   , fastPrograms :: Map Addr Program
@@ -94,21 +95,19 @@ instance Show EmuState where
             ]
 
 
-goFaster :: Bool
-goFaster = True
-
 initState :: Rom -> IO EmuState
 initState rom = do
   let slow = slowProgramsOfRom rom
   fast <- fastProgramsOfRom rom
   return $ EmuState
     { ticks = 0
+    , togo = halfFrameTicks
+    , half = False
     , icount = 0
     , cpu = Cpu.init (Byte 0) (Bit False)
     , shifter = Shifter.init (Byte 0)
     , mem = Mem.init rom
     , interruptsEnabled = False
-    , nextWakeup = halfFrameTicks
     , playing = Sounds.initPlaying
     , slowPrograms = Map.fromList slow
     , fastPrograms = Map.fromList fast
@@ -172,29 +171,36 @@ data CB = CB
   }
 
 emulate :: CB -> Buttons -> EmuState -> IO EmuState
-emulate cb buttons s1 = if
-  | togo <= 0 && interruptsEnabled -> goInterrupt
-  | otherwise -> goNormal
+emulate cb buttons s@EmuState{interruptsEnabled,togo,half} = if
+  | togo > 0 -> goNormal cb buttons s
+  | interruptsEnabled -> goInterrupt cb buttons s2
+  | otherwise -> goNormal cb buttons s2
   where
-    togo = nextWakeup - ticks
-    EmuState{rstHalf,rstVblank,nextWakeup,ticks,slowPrograms,fastPrograms,interruptsEnabled} = s1
-    s2 = s1 { nextWakeup = Ticks ((unTicks ticks `div` unTicks halfFrameTicks) + 1) * halfFrameTicks }
+    s2 = s { togo = togo + halfFrameTicks, half = not half }
 
-    goInterrupt = do
-      --print (ticks,"INTERRUPT",togo,half)
-      let half = (unTicks ticks `div` unTicks halfFrameTicks) `mod` 2 == 1
-      let program = if half then rstHalf else rstVblank
-      emulateProgram cb buttons s2 { interruptsEnabled = False } program
+goInterrupt :: CB -> Buttons -> EmuState -> IO EmuState
+goInterrupt cb buttons s = do
+  let EmuState{ticks=_ticks,rstHalf,rstVblank,half} = s
+  let program = if half then rstHalf else rstVblank
+  --print (_ticks,"INTERRUPT",half)
+  emulateProgram cb buttons s { interruptsEnabled = False } program
 
-    goNormal = do
-      let pc = programCounter s1
-      let hasFaster = Map.member pc fastPrograms
-      let len = case Map.lookup pc fastPrograms of Nothing -> 1000; Just fast -> programLength fast
-      let safeForFast = not (unTicks togo < len)
-      --print ("ticks-togo",togo,("fast-len",len),("safe=",safeForFast),("has=",hasFaster))
-      let programs = if goFaster && safeForFast && hasFaster then fastPrograms else slowPrograms
-      let program = Map.findWithDefault (error $ "no program at pc: " <> show pc) pc programs
-      emulateProgram cb buttons s2 program
+goNormal :: CB -> Buttons -> EmuState -> IO EmuState
+goNormal cb buttons s = do
+  let EmuState{ticks=_ticks,slowPrograms,fastPrograms,togo} = s
+  let pc = programCounter s
+  let slow = Map.findWithDefault (error $ "no slow program at pc: " <> show pc) pc slowPrograms
+  program <-
+    case Map.lookup pc fastPrograms of
+      Nothing -> do
+        --print (_ticks,togo,"SLOW")
+        return slow
+      Just fast -> do
+        let len = programLength fast
+        let safeForFast = not (unTicks togo < len)
+        --print (_ticks,togo,"FAST",len,safeForFast)
+        return $ if safeForFast then fast else slow
+  emulateProgram cb buttons s program
 
 
 halfFrameTicks :: Ticks
@@ -253,8 +259,8 @@ emulateProgram CB{traceI} buttons s = emu (emptyEnv buttons) s
         ev17 = eval17 q s { mem }
 
 advance :: Int -> EmuState -> EmuState
-advance n s@EmuState{ticks,icount} =
-  s { ticks = ticks + Ticks n, icount = icount + 1 }
+advance n s@EmuState{ticks,icount,togo} =
+  s { ticks = ticks + Ticks n, togo = togo - Ticks n, icount = icount + 1 }
 
 
 data V17 = V17 { hi :: Bit, dropHi :: Addr }

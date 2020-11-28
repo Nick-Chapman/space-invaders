@@ -33,17 +33,14 @@ traceEmulate handle TraceConf{traceOnAfter,stopAfter,period,traceNearPing} = do
     loop :: Int -> Ticks -> EmuState -> IO ()
     loop periodCount nextPing pre = do
 
-      let EmuState{icount,ticks} = pre
-
-      let traceIsOn = case traceOnAfter of Just i -> (icount >= i); Nothing -> False
-      let isStop = case stopAfter of Just i -> (icount >= i); Nothing -> False
-
-      let nearPing = ((ticks+50 >= nextPing) || (ticks-50 <= nextPing-cycles))
-
       let
         traceI :: EmuState -> Instruction Byte -> IO ()
         traceI s i = do
-          when (traceIsOn || (traceNearPing && nearPing)) $
+          let EmuState{icount,ticks} = s
+          let traceIsOn = case traceOnAfter of Just i -> (icount >= i); Nothing -> False
+          let nearPing = ((ticks+50 >= nextPing) || (ticks-50 <= nextPing-cycles))
+          let isStop = case stopAfter of Just i -> (icount > i); Nothing -> False
+          when ((traceIsOn && not isStop) || (traceNearPing && nearPing)) $
             hPutStrLn handle $ traceLine s i
 
         cb :: CB
@@ -51,6 +48,8 @@ traceEmulate handle TraceConf{traceOnAfter,stopAfter,period,traceNearPing} = do
 
       post <- emulate cb buttons0 pre
 
+      let EmuState{icount} = post
+      let isStop = case stopAfter of Just i -> (icount > i); Nothing -> False
       case isStop of
         True -> hPutStrLn handle "STOP"
         False -> do

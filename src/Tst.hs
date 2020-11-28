@@ -44,22 +44,20 @@ loadTestRom path = do
         ]
 
 trace :: Handle -> EmuState -> IO ()
-trace handle = do
-  loop 0
+trace handle = loop
   where
-
+    max = 650
     traceI :: EmuState -> Instruction Byte -> IO ()
-    traceI s i = do
-      hPutStrLn handle (seeState s ++ prettyStep s i)
+    traceI s@EmuState{icount=i} instruction = do
+      if (i>max) then return () else do
+        hPutStrLn handle (seeState s ++ prettyStep s instruction)
 
-    cb :: CB
     cb = CB { traceI = Just traceI }
 
-    loop :: Int -> EmuState -> IO ()
-    loop i pre = do
-      if (i>650) then return () else do
-        post <- emulate cb buttons0 pre
-        loop (i+1) post
+    loop :: EmuState -> IO ()
+    loop s@EmuState{icount=i} = do
+      if (i>max) then return () else do
+        emulate cb buttons0 s >>= loop
 
 
 seeState :: EmuState -> String

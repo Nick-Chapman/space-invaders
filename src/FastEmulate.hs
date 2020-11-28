@@ -30,7 +30,7 @@ import qualified Addr (toHiLo,fromHiLo,bump,addCarryOut)
 import qualified Buttons
 import qualified Byte (addWithCarry,toUnsigned)
 import qualified Cpu (init,get,set,getFlag,setFlag)
-import qualified Data.Map.Strict as Map (empty,findWithDefault,fromList,insert)
+import qualified Data.Map.Strict as Map (empty,lookup,findWithDefault,fromList,insert,member)
 import qualified Mem (init,read,write)
 import qualified Phase (Byte,Addr,Bit)
 import qualified Rom (size)
@@ -39,7 +39,7 @@ import qualified Sounds (Playing,initPlaying)
 
 import qualified Data.Set as Set
 import qualified Data.Map.Strict as Map (toList,fromListWith)
-import Static (startPoints,oneStepReach,searchReach,returnAddresses)
+import Static (startPoints,oneStepReach,searchReach,returnAddresses,programLength)
 
 
 -- dont think prettyPrefix should be here
@@ -80,7 +80,8 @@ data EmuState = EmuState
   , interrupts_enabled :: Bool
   , nextWakeup :: Ticks
   , playing :: Sounds.Playing
-  , programs :: Map Addr Program
+  , slowPrograms :: Map Addr Program
+  , fastPrograms :: Map Addr Program
   , rstHalf :: Program
   , rstVblank :: Program
   }
@@ -98,7 +99,8 @@ goFaster = False
 
 initState :: Rom -> IO EmuState
 initState rom = do
-  programs <- Map.fromList <$> if goFaster then fastPrograms rom else return (slowPrograms rom)
+  let slow = slowProgramsOfRom rom
+  fast <- fastProgramsOfRom rom
   return $ EmuState
     { ticks = 0
     , icount = 0
@@ -108,14 +110,15 @@ initState rom = do
     , interrupts_enabled = False
     , nextWakeup = halfFrameTicks
     , playing = Sounds.initPlaying
-    , programs
+    , slowPrograms = Map.fromList slow
+    , fastPrograms = Map.fromList fast
     , rstHalf = compileOp rom (Op0 (RST 1))
     , rstVblank = compileOp rom (Op0 (RST 2))
     }
 
 
-slowPrograms :: Rom -> [(Addr,Program)]
-slowPrograms rom = do
+slowProgramsOfRom :: Rom -> [(Addr,Program)]
+slowProgramsOfRom rom = do
   let
     programsForEveryAddress =
       [ (addr,program)
@@ -125,13 +128,14 @@ slowPrograms rom = do
   programsForEveryAddress
 
 
-fastPrograms :: Rom -> IO [(Addr,Program)]
-fastPrograms rom = do
+fastProgramsOfRom :: Rom -> IO [(Addr,Program)]
+fastProgramsOfRom rom = do
   let
-    programsForEveryAddress = slowPrograms rom
+    programsForEveryAddress = slowProgramsOfRom rom
 
     step :: Addr -> [Addr]
-    step a = Map.findWithDefault (error $ "step: " <> show a) a stepMap
+    --step a = Map.findWithDefault (error $ "step: " <> show a) a stepMap
+    step a = Map.findWithDefault [] a stepMap
         where
           stepMap :: Map Addr [Addr]
           stepMap = Map.fromList [ (a, oneStepReach p) | (a,p) <- programsForEveryAddress ]
@@ -169,23 +173,36 @@ data CB = CB
   }
 
 emulate :: CB -> Buttons -> EmuState -> IO EmuState
-emulate cb buttons pre@EmuState{programs} = do
-  let EmuState{rstHalf,rstVblank} = pre
-  let (pre1,program) =
-        case checkI pre of
-          (pre1,Nothing) -> do
-            let pc = programCounter pre
-            (pre1,Map.findWithDefault (error $ "no program at pc: " <> show pc) pc programs)
-          (pre1,Just half) -> do
-            (pre1,if half then rstHalf else rstVblank)
-  let env = emptyEnv buttons
-  post@EmuState{} <- emulateProgram cb env pre1 program
-  return post
+emulate cb buttons pre@EmuState{slowPrograms,fastPrograms} = do
+  let n = ticksUntilNextInterrupt pre
+
+  case checkI pre of
+    (pre1,Nothing) -> do
+      let pc = programCounter pre
+      let hasFaster = Map.member pc fastPrograms
+      let len = case Map.lookup pc fastPrograms of Nothing -> 1000; Just fast -> programLength fast
+      let safeForFast = not (unTicks n < len)
+      --print ("ticks-togo",n,("fast-len",len),("safe=",safeForFast),("has=",hasFaster))
+      let programs = if goFaster && safeForFast && hasFaster then fastPrograms else slowPrograms
+      let program = Map.findWithDefault (error $ "no program at pc: " <> show pc) pc programs
+      emulateProgram cb buttons pre1 program
+
+    (pre1,Just half) -> do
+      --print ("INTERRUPT",n)
+      let EmuState{rstHalf,rstVblank} = pre
+      let program = if half then rstHalf else rstVblank
+      emulateProgram cb buttons pre1 program
 
 
-checkI :: EmuState -> (EmuState,Maybe Bool)
+ticksUntilNextInterrupt :: EmuState -> Ticks
+ticksUntilNextInterrupt EmuState{ticks,nextWakeup} = do
+  nextWakeup - ticks
+
+
+
+checkI :: EmuState -> (EmuState,Maybe Bool) -- TODO: inline
 checkI s@EmuState{interrupts_enabled} = do
-  case timeToWakeup s of
+  case timeToWakeup s of -- TODO: inline
     Just s
       | interrupts_enabled -> do
           let s2 = s { interrupts_enabled = False }
@@ -207,8 +224,8 @@ getLit = \case
   E8_Lit b -> b
   x -> error $ "getLit: " <> show x
 
-emulateProgram :: CB -> Env -> EmuState -> Program -> IO EmuState
-emulateProgram CB{traceI} env s = emu env s
+emulateProgram :: CB -> Buttons -> EmuState -> Program -> IO EmuState
+emulateProgram CB{traceI} buttons s = emu (emptyEnv buttons) s
   where -- (s: read, u: write) -- TODO: eliminate double env using temp-vars during comp
     emu :: Env -> EmuState -> Program -> IO EmuState
     emu q u@EmuState{mem,playing} = \case

@@ -1,6 +1,7 @@
 
 module Static (main
               ,startPoints,returnAddresses,searchReach,oneStepReach
+              ,programLength
               ) where
 
 import Addr (Addr)

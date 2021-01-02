@@ -7,6 +7,7 @@ import TraceEmu (traceEmulate,TraceConf(..))
 import qualified GraphicsSDL as SDL (main,Conf(..))
 import qualified SpeedTest (main)
 import qualified Static (main)
+import qualified GenerateC (main)
 import qualified Tst (main)
 
 -- | Entry point to the Space Invaders emulation
@@ -26,6 +27,8 @@ main = do
       SpeedTest.main
     ModeStatic -> do
       Static.main
+    ModeGenerateC -> do
+      GenerateC.main
     ModePlay -> do
       SDL.main $ SDL.Conf { scaleFactor, fpsLimit, showControls }
   where
@@ -50,6 +53,7 @@ data Mode
   = ModeTest -- all the tests
   | ModeTest0 | ModeTest1 | ModeTest2 -- selected tests
   | ModeTrace | ModeSpeedTest | ModeStatic
+  | ModeGenerateC
   | ModePlay
 
 data Conf = Conf
@@ -98,6 +102,7 @@ parse args conf = case args of
   "trace":args -> parse args $ conf { mode = ModeTrace }
   "speed-test":args -> parse args $ conf { mode = ModeSpeedTest }
   "static":args -> parse args $ conf { mode = ModeStatic }
+  "c":args -> parse args $ conf { mode = ModeGenerateC }
   "-controls":args -> parse args $ conf { showControls = True }
   "-no-controls":args -> parse args $ conf { showControls = False }
   "-sf":i:args -> parse args $ conf { scaleFactor = read i }

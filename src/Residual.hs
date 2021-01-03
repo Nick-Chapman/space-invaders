@@ -7,7 +7,7 @@ module Residual
   , Exp8(..)
   , Exp1(..)
   , AVar(..)
-  , Lay, layOpPrograms,layPrograms
+  , Lay, layOpPrograms,layPrograms, lay, vert, tab
   ) where
 
 import Addr (Addr)

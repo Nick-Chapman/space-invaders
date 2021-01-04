@@ -43,7 +43,7 @@ u8 Shifter_OFF;
 
 u8 mem [MEM_SIZE];
 
-void todo(const char*);
+//void todo(const char*);
 void at(const char*);
 void instruction(const char*, u16);
 void advance(int);

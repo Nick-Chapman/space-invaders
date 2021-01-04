@@ -25359,8 +25359,9 @@ Control prog_1408 ()
     instruction ( "OUT  04",e16_hi_lo ( 0x14,0x0A ) );
     u8 a1 = A ;
     advance ( 10 );
-    todo ( "S_AssignShifterReg" );
-    die;
+    Shifter_HI = a1;
+    Shifter_LO = Shifter_HI;
+    return jumpDirect ( 0x140A,prog_140A );
 }
 
 Control prog_140A ()
@@ -25455,8 +25456,9 @@ Control prog_1411 ()
     instruction ( "OUT  04",e16_hi_lo ( 0x14,0x13 ) );
     u8 a1 = A ;
     advance ( 10 );
-    todo ( "S_AssignShifterReg" );
-    die;
+    Shifter_HI = a1;
+    Shifter_LO = Shifter_HI;
+    return jumpDirect ( 0x1413,prog_1413 );
 }
 
 Control prog_1413 ()
@@ -26096,8 +26098,9 @@ Control prog_1458 ()
     instruction ( "OUT  04",e16_hi_lo ( 0x14,0x5A ) );
     u8 a1 = A ;
     advance ( 10 );
-    todo ( "S_AssignShifterReg" );
-    die;
+    Shifter_HI = a1;
+    Shifter_LO = Shifter_HI;
+    return jumpDirect ( 0x145A,prog_145A );
 }
 
 Control prog_145A ()
@@ -26203,8 +26206,9 @@ Control prog_1462 ()
     instruction ( "OUT  04",e16_hi_lo ( 0x14,0x64 ) );
     u8 a1 = A ;
     advance ( 10 );
-    todo ( "S_AssignShifterReg" );
-    die;
+    Shifter_HI = a1;
+    Shifter_LO = Shifter_HI;
+    return jumpDirect ( 0x1464,prog_1464 );
 }
 
 Control prog_1464 ()
@@ -26412,8 +26416,8 @@ Control prog_1477 ()
     instruction ( "OUT  02",e16_hi_lo ( 0x14,0x79 ) );
     u8 a1 = A ;
     advance ( 10 );
-    todo ( "S_AssignShifterReg" );
-    die;
+    Shifter_OFF = a1;
+    return jumpDirect ( 0x1479,prog_1479 );
 }
 
 Control prog_1479 ()
@@ -26770,8 +26774,9 @@ Control prog_149B ()
     instruction ( "OUT  04",e16_hi_lo ( 0x14,0x9D ) );
     u8 a1 = A ;
     advance ( 10 );
-    todo ( "S_AssignShifterReg" );
-    die;
+    Shifter_HI = a1;
+    Shifter_LO = Shifter_HI;
+    return jumpDirect ( 0x149D,prog_149D );
 }
 
 Control prog_149D ()
@@ -26964,8 +26969,9 @@ Control prog_14AF ()
     instruction ( "OUT  04",e16_hi_lo ( 0x14,0xB1 ) );
     u8 a1 = A ;
     advance ( 10 );
-    todo ( "S_AssignShifterReg" );
-    die;
+    Shifter_HI = a1;
+    Shifter_LO = Shifter_HI;
+    return jumpDirect ( 0x14B1,prog_14B1 );
 }
 
 Control prog_14B1 ()
@@ -29312,8 +29318,9 @@ Control prog_15DA ()
     instruction ( "OUT  04",e16_hi_lo ( 0x15,0xDC ) );
     u8 a1 = A ;
     advance ( 10 );
-    todo ( "S_AssignShifterReg" );
-    die;
+    Shifter_HI = a1;
+    Shifter_LO = Shifter_HI;
+    return jumpDirect ( 0x15DC,prog_15DC );
 }
 
 Control prog_15DC ()
@@ -29389,8 +29396,9 @@ Control prog_15E2 ()
     instruction ( "OUT  04",e16_hi_lo ( 0x15,0xE4 ) );
     u8 a1 = A ;
     advance ( 10 );
-    todo ( "S_AssignShifterReg" );
-    die;
+    Shifter_HI = a1;
+    Shifter_LO = Shifter_HI;
+    return jumpDirect ( 0x15E4,prog_15E4 );
 }
 
 Control prog_15E4 ()

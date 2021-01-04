@@ -103,7 +103,8 @@ convertProgram = \case
   S_If i t e -> [If (convert1 i) (Block (convertProgram t)) (Block (convertProgram e))]
   S_AssignReg reg exp next -> Expression (Assign (convertReg reg) (convert8 exp)) : convertProgram next
   S_AssignFlag flag exp next -> Expression (Assign (convertFlag flag) (convert1 exp)) : convertProgram next
-  S_AssignShifterReg{} -> todo "S_AssignShifterReg"
+  S_AssignShifterReg reg exp next ->
+    Expression (Assign (convertShifterReg reg) (convert8 exp)) : convertProgram next
   S_MemWrite i e next -> Expression (call "mem_write" [convert16 i, convert8 e]) : convertProgram next
   S_Let17 v e next -> Declare u17t (convertVar v) (convert17 e) : convertProgram next
   S_Let16 v e next -> Declare u16t (convertVar v) (convert16 e) : convertProgram next
@@ -111,8 +112,8 @@ convertProgram = \case
   S_SoundControl sound bool next ->
     Expression (call "sound_control" [LitS $ show sound, convert1 bool]) : convertProgram next
   S_EnableInterrupts next -> Expression (call "enable_interrupts" []) : convertProgram next
-  S_DisableInterrupts{} -> todo "S_DisableInterrupts"
-  S_UnknownOutput{} -> todo "S_UnknownOutput"
+  S_DisableInterrupts{} -> undefined --todo "S_DisableInterrupts"
+  S_UnknownOutput{} -> undefined --todo "S_UnknownOutput"
 
 convertJump :: Exp16 -> CExp
 convertJump = \case
@@ -124,8 +125,8 @@ convertJump = \case
 nameOfAddr :: Addr -> CName
 nameOfAddr a = CName ("prog_" ++ show a)
 
-todo :: String -> [CStat]
-todo s = [Expression $ call "todo" [LitS s], Die]
+--todo :: String -> [CStat]
+--todo s = [Expression $ call "todo" [LitS s], Die]
 
 convertVar :: AVar -> CName
 convertVar v = CName (show v)

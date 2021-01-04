@@ -2,13 +2,20 @@
 #include "machine.h"
 
 Control prog_0000 ();
+Control op_rst1();
+Control op_rst2();
 
 static int icount = 0;
-static int cycles = 0;
+static long cycles = 0;
 
 #define HALF_FRAME_CYCLES (2000000 / 120)
 
 static int credit = HALF_FRAME_CYCLES;
+
+static bool half = false;
+static int interrupts = 0;
+
+static bool interrupts_enabled = false;
 
 int main () {
   Func fn = prog_0000;
@@ -18,15 +25,13 @@ int main () {
   return 0;
 }
 
-void todo(const char* s) {
-  printf ("todo: %s\n",s);
-}
+//void todo(const char* s) { printf ("todo: %s\n",s); }
 
 void at(const char* s) {
 }
 
 void dump_state(const char* instruction, u16 pcAfterInstructionDecode) {
-  printf("%8d  [%08d] "
+  printf("%8d  [%08ld] "
          "PC:%04X "
          "A:%02X B:%02X C:%02X D:%02X E:%02X HL:%02X%02X SP:%02X%02X "
          "SZAPY:%1d%1d%1d%1d%1d"
@@ -41,12 +46,10 @@ void dump_state(const char* instruction, u16 pcAfterInstructionDecode) {
 }
 
 void instruction(const char* instruction, u16 pcAfterInstructionDecode) {
-  dump_state(instruction,pcAfterInstructionDecode);
+  //dump_state(instruction,pcAfterInstructionDecode);
   icount++;
-  if (icount>50000) {
-    printf("STOP\n");
-    exit(0);
-  }
+  //if (icount>50000) { printf("STOP\n"); exit(0); }
+  if ((interrupts / 120) >= 60) { printf("STOP-ONE-MINUTE\n"); exit(0); } // in < 0.4s
 }
 
 void advance(int n) {
@@ -54,25 +57,22 @@ void advance(int n) {
   credit -= n;
 }
 
-Control op_rst1();
-Control op_rst2();
-
-static bool half = false;
-static int interrupts = 0;
-
-static bool interrupts_enabled = false;
+void info_interrupt() {
+  printf ("secs = %d, cycles = %ld, interrupt (%d), enabled = %s: %s\n",
+          interrupts / 120,
+          cycles,
+          interrupts,
+          interrupts_enabled ? "ENABLED" : "disabled",
+          half ? "rstHalf (RST 1)" : "rstVblank (RST 2)"
+          );
+}
 
 Control jumpDirect(u16 pc, Func f) {
   if (credit <= 0) {
     credit += HALF_FRAME_CYCLES;
     half ^= true;
     interrupts++;
-    /*printf ("cycles = %d, interrupt (%d), enabled = %s: %s\n",
-            cycles,
-            interrupts,
-            interrupts_enabled ? "ENABLED" : "disabled",
-            half ? "rstHalf (RST 1)" : "rstVblank (RST 2)"
-            );*/
+    //info_interrupt();
     if (interrupts_enabled) {
       interrupts_enabled = false;
       PCH = e8_hi(pc);
@@ -85,7 +85,7 @@ Control jumpDirect(u16 pc, Func f) {
 }
 
 Control jump16(u16 a) {
-  //printf ("(%d) jump16: target address = %04x\n",cycles,a);
+  //printf ("(%d) jump16: target address = %04x\n",icount,a);
   if (a>=ROM_SIZE) {
     printf ("jump16: (a>=ROM_SIZE) : a=%04x, ROM_SIZE=%04x\n",a,ROM_SIZE);
     die
@@ -100,8 +100,9 @@ Control jump16(u16 a) {
 
 void mem_write(u16 a,u8 e) {
   if (a>=MEM_SIZE) {
-    printf ("mem_write: (a>=MEM_SIZE) : a=%04x, MEM_SIZE=%04x\n",a,MEM_SIZE);
-    die
+    //printf ("mem_write: (a>=MEM_SIZE) : a=%04x, MEM_SIZE=%04x\n",a,MEM_SIZE);
+    //die
+    a -= 0x2000; // ram mirror
   }
   if (a<ROM_SIZE) {
     printf ("mem_write: (a<ROM_SIZE) : a=%04x, ROM_SIZE=%04x\n",a,ROM_SIZE);
@@ -153,7 +154,7 @@ u8 e8_and(u8 x,u8 y) { return x&y; }
 u8 e8_or(u8 x,u8 y) { return x|y; }
 u8 e8_xor(u8 x,u8 y) { return x^y; }
 u8 e8_shiftR(u8 x,u8 y) { return x>>y; }
-u8 e8_shiftL(u8 x,u8 y) { die; }
+u8 e8_shiftL(u8 x,u8 y) { return x<<y; }
 u8 e8_ite(u1 i,u8 t,u8 e) { die; }
 
 u8 e8_read_mem(u16 a) {

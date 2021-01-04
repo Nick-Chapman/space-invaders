@@ -182,7 +182,7 @@ compileThen semantics state k =
       E.Ret x -> k s x
       E.Bind eff f -> run s eff $ \s a -> run s (f a) k
 
-      E.GetReg r -> k s (Cpu.get cpu r)
+      E.GetReg r -> share8 (k s) (Cpu.get cpu r)
       E.SetReg r b -> k s { cpu = Cpu.set cpu r b } ()
       E.GetFlag flag -> k s (Cpu.getFlag cpu flag)
       E.SetFlag flag v -> k s { cpu = Cpu.setFlag cpu flag v } ()
@@ -301,10 +301,18 @@ getConcreteAddrMaybe = \case
   _ -> Nothing
 
 share8 :: (Exp8 -> Gen Program) -> (Exp8 -> Gen Program)
-share8 k exp = do
-  var <- NewAVar
-  body <- k (E8_Var var)
-  return $ S_Let8 var exp body
+share8 k exp =
+  if atomic8 exp
+  then k exp
+  else do
+    var <- NewAVar
+    body <- k (E8_Var var)
+    return $ S_Let8 var exp body
+
+atomic8 :: Exp8 -> Bool
+atomic8 = \case
+  E8_Lit{} -> True
+  _ -> False
 
 
 data Gen a where

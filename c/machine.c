@@ -46,8 +46,15 @@ Control jumpDirect(Func f) {
 }
 
 Control jump16(u16 x) {
-  printf ("jump16: %x\n",x);
-  return 0; //TODO: lookup in array of reachable code
+  switch(x) {
+#define target(a) Control prog_ ## a (); case 0x ## a: return (Control) prog_ ## a;
+    target(18DC)
+    target(1959)
+  default: {
+    printf ("jump16: unknown target address: %x\n",x);
+    die;
+  }
+  }
 }
 
 void mem_write(u16 a,u8 e) {

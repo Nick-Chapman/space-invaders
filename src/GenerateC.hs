@@ -47,7 +47,7 @@ convertProgram = \case
 
   S_MarkReturnAddress{} -> undefined
 
-  S_TraceInstruction _cpu i next ->
+  S_TraceInstruction _cpu i _ next ->
     --Comment ("#instruction: " ++ show i) : convertProgram next
     Expression (Call (CName "instruction") [LitS $ show i]) : convertProgram next
 

@@ -35,6 +35,7 @@ void instruction(const char* instruction, u16 pcAfterInstructionDecode) {
          instruction
          );
   icount++;
+  if (icount>50000) die;
 }
 
 void advance(int n) {
@@ -60,6 +61,7 @@ Control jump16(u16 x) {
     target(1965)
     target(1968)
     target(18DF)
+    target(0AF2)
   default: {
     printf ("jump16: unknown target address: %04x\n",x);
     die;
@@ -78,6 +80,14 @@ void mem_write(u16 a,u8 e) {
   }
   //printf ("mem_write: M[%04x] = %02x\n",a,e);
   mem[a] = e;
+}
+
+void sound_control(const char* sound,u1 b) {
+  //printf ("sound_control: %s = %s\n", sound, b?"on":"off");
+}
+
+void enable_interrupts(void) {
+  //printf ("enable_interrupts\n");
 }
 
 u1 e1_true() { return 1; }

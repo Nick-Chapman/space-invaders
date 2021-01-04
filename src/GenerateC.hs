@@ -98,8 +98,9 @@ convertProgram = \case
   S_Let17 v e next -> Declare u17t (convertVar v) (convert17 e) : convertProgram next
   S_Let16 v e next -> Declare u16t (convertVar v) (convert16 e) : convertProgram next
   S_Let8 v e next -> Declare u8t (convertVar v) (convert8 e) : convertProgram next
-  S_SoundControl{} -> todo "S_SoundControl"
-  S_EnableInterrupts{} -> todo "S_EnableInterrupts"
+  S_SoundControl sound bool next ->
+    Expression (call "sound_control" [LitS $ show sound, convert1 bool]) : convertProgram next
+  S_EnableInterrupts next -> Expression (call "enable_interrupts" []) : convertProgram next
   S_DisableInterrupts{} -> todo "S_DisableInterrupts"
   S_UnknownOutput{} -> todo "S_UnknownOutput"
 

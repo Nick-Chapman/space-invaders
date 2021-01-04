@@ -5498,8 +5498,9 @@ Control prog_0086 ()
 {
     at ( "0086" );
     instruction ( "EI",0x0087 );
-    todo ( "S_EnableInterrupts" );
-    die;
+    enable_interrupts (  );
+    advance ( 4 );
+    return jumpDirect ( prog_0087 );
 }
 
 Control prog_0087 ()
@@ -9767,8 +9768,9 @@ Control prog_02D3 ()
 {
     at ( "02D3" );
     instruction ( "EI",0x02D4 );
-    todo ( "S_EnableInterrupts" );
-    die;
+    enable_interrupts (  );
+    advance ( 4 );
+    return jumpDirect ( prog_02D4 );
 }
 
 Control prog_02D4 ()
@@ -10306,8 +10308,13 @@ Control prog_031D ()
     at ( "031D" );
     instruction ( "OUT  05",0x031F );
     u8 a1 = A ;
-    todo ( "S_SoundControl" );
-    die;
+    sound_control ( "FleetMovement1",e1_test_bit ( a1,0 ) );
+    sound_control ( "FleetMovement2",e1_test_bit ( a1,1 ) );
+    sound_control ( "FleetMovement3",e1_test_bit ( a1,2 ) );
+    sound_control ( "FleetMovement4",e1_test_bit ( a1,3 ) );
+    sound_control ( "UfoHit",e1_test_bit ( a1,4 ) );
+    advance ( 10 );
+    return jumpDirect ( prog_031F );
 }
 
 Control prog_031F ()
@@ -17024,8 +17031,13 @@ Control prog_06F4 ()
     at ( "06F4" );
     instruction ( "OUT  05",0x06F6 );
     u8 a1 = A ;
-    todo ( "S_SoundControl" );
-    die;
+    sound_control ( "FleetMovement1",e1_test_bit ( a1,0 ) );
+    sound_control ( "FleetMovement2",e1_test_bit ( a1,1 ) );
+    sound_control ( "FleetMovement3",e1_test_bit ( a1,2 ) );
+    sound_control ( "FleetMovement4",e1_test_bit ( a1,3 ) );
+    sound_control ( "UfoHit",e1_test_bit ( a1,4 ) );
+    advance ( 10 );
+    return jumpDirect ( prog_06F6 );
 }
 
 Control prog_06F6 ()
@@ -17692,8 +17704,9 @@ Control prog_076D ()
 {
     at ( "076D" );
     instruction ( "EI",0x076E );
-    todo ( "S_EnableInterrupts" );
-    die;
+    enable_interrupts (  );
+    advance ( 4 );
+    return jumpDirect ( prog_076E );
 }
 
 Control prog_076E ()
@@ -23755,8 +23768,13 @@ Control prog_0AEB ()
     at ( "0AEB" );
     instruction ( "OUT  03",0x0AED );
     u8 a1 = A ;
-    todo ( "S_SoundControl" );
-    die;
+    sound_control ( "Ufo",e1_test_bit ( a1,0 ) );
+    sound_control ( "Shot",e1_test_bit ( a1,1 ) );
+    sound_control ( "PlayerDie",e1_test_bit ( a1,2 ) );
+    sound_control ( "InvaderDie",e1_test_bit ( a1,3 ) );
+    sound_control ( "ExtraLife",e1_test_bit ( a1,4 ) );
+    advance ( 10 );
+    return jumpDirect ( prog_0AED );
 }
 
 Control prog_0AED ()
@@ -23764,8 +23782,13 @@ Control prog_0AED ()
     at ( "0AED" );
     instruction ( "OUT  05",0x0AEF );
     u8 a1 = A ;
-    todo ( "S_SoundControl" );
-    die;
+    sound_control ( "FleetMovement1",e1_test_bit ( a1,0 ) );
+    sound_control ( "FleetMovement2",e1_test_bit ( a1,1 ) );
+    sound_control ( "FleetMovement3",e1_test_bit ( a1,2 ) );
+    sound_control ( "FleetMovement4",e1_test_bit ( a1,3 ) );
+    sound_control ( "UfoHit",e1_test_bit ( a1,4 ) );
+    advance ( 10 );
+    return jumpDirect ( prog_0AEF );
 }
 
 Control prog_0AEF ()
@@ -23791,8 +23814,9 @@ Control prog_0AF2 ()
 {
     at ( "0AF2" );
     instruction ( "EI",0x0AF3 );
-    todo ( "S_EnableInterrupts" );
-    die;
+    enable_interrupts (  );
+    advance ( 4 );
+    return jumpDirect ( prog_0AF3 );
 }
 
 Control prog_0AF3 ()
@@ -31255,8 +31279,13 @@ Control prog_16DE ()
     at ( "16DE" );
     instruction ( "OUT  05",0x16E0 );
     u8 a1 = A ;
-    todo ( "S_SoundControl" );
-    die;
+    sound_control ( "FleetMovement1",e1_test_bit ( a1,0 ) );
+    sound_control ( "FleetMovement2",e1_test_bit ( a1,1 ) );
+    sound_control ( "FleetMovement3",e1_test_bit ( a1,2 ) );
+    sound_control ( "FleetMovement4",e1_test_bit ( a1,3 ) );
+    sound_control ( "UfoHit",e1_test_bit ( a1,4 ) );
+    advance ( 10 );
+    return jumpDirect ( prog_16E0 );
 }
 
 Control prog_16E0 ()
@@ -31300,8 +31329,9 @@ Control prog_16E9 ()
 {
     at ( "16E9" );
     instruction ( "EI",0x16EA );
-    todo ( "S_EnableInterrupts" );
-    die;
+    enable_interrupts (  );
+    advance ( 4 );
+    return jumpDirect ( prog_16EA );
 }
 
 Control prog_16EA ()
@@ -32010,8 +32040,13 @@ Control prog_1757 ()
     at ( "1757" );
     instruction ( "OUT  05",0x1759 );
     u8 a1 = A ;
-    todo ( "S_SoundControl" );
-    die;
+    sound_control ( "FleetMovement1",e1_test_bit ( a1,0 ) );
+    sound_control ( "FleetMovement2",e1_test_bit ( a1,1 ) );
+    sound_control ( "FleetMovement3",e1_test_bit ( a1,2 ) );
+    sound_control ( "FleetMovement4",e1_test_bit ( a1,3 ) );
+    sound_control ( "UfoHit",e1_test_bit ( a1,4 ) );
+    advance ( 10 );
+    return jumpDirect ( prog_1759 );
 }
 
 Control prog_1759 ()
@@ -32201,8 +32236,13 @@ Control prog_1772 ()
     at ( "1772" );
     instruction ( "OUT  05",0x1774 );
     u8 a1 = A ;
-    todo ( "S_SoundControl" );
-    die;
+    sound_control ( "FleetMovement1",e1_test_bit ( a1,0 ) );
+    sound_control ( "FleetMovement2",e1_test_bit ( a1,1 ) );
+    sound_control ( "FleetMovement3",e1_test_bit ( a1,2 ) );
+    sound_control ( "FleetMovement4",e1_test_bit ( a1,3 ) );
+    sound_control ( "UfoHit",e1_test_bit ( a1,4 ) );
+    advance ( 10 );
+    return jumpDirect ( prog_1774 );
 }
 
 Control prog_1774 ()
@@ -32719,8 +32759,13 @@ Control prog_17BC ()
     at ( "17BC" );
     instruction ( "OUT  05",0x17BE );
     u8 a1 = A ;
-    todo ( "S_SoundControl" );
-    die;
+    sound_control ( "FleetMovement1",e1_test_bit ( a1,0 ) );
+    sound_control ( "FleetMovement2",e1_test_bit ( a1,1 ) );
+    sound_control ( "FleetMovement3",e1_test_bit ( a1,2 ) );
+    sound_control ( "FleetMovement4",e1_test_bit ( a1,3 ) );
+    sound_control ( "UfoHit",e1_test_bit ( a1,4 ) );
+    advance ( 10 );
+    return jumpDirect ( prog_17BE );
 }
 
 Control prog_17BE ()
@@ -33052,8 +33097,9 @@ Control prog_17EB ()
 {
     at ( "17EB" );
     instruction ( "EI",0x17EC );
-    todo ( "S_EnableInterrupts" );
-    die;
+    enable_interrupts (  );
+    advance ( 4 );
+    return jumpDirect ( prog_17EC );
 }
 
 Control prog_17EC ()
@@ -34834,8 +34880,13 @@ Control prog_1901 ()
     at ( "1901" );
     instruction ( "OUT  03",0x1903 );
     u8 a1 = A ;
-    todo ( "S_SoundControl" );
-    die;
+    sound_control ( "Ufo",e1_test_bit ( a1,0 ) );
+    sound_control ( "Shot",e1_test_bit ( a1,1 ) );
+    sound_control ( "PlayerDie",e1_test_bit ( a1,2 ) );
+    sound_control ( "InvaderDie",e1_test_bit ( a1,3 ) );
+    sound_control ( "ExtraLife",e1_test_bit ( a1,4 ) );
+    advance ( 10 );
+    return jumpDirect ( prog_1903 );
 }
 
 Control prog_1903 ()
@@ -35863,8 +35914,13 @@ Control prog_19E3 ()
     at ( "19E3" );
     instruction ( "OUT  03",0x19E5 );
     u8 a1 = A ;
-    todo ( "S_SoundControl" );
-    die;
+    sound_control ( "Ufo",e1_test_bit ( a1,0 ) );
+    sound_control ( "Shot",e1_test_bit ( a1,1 ) );
+    sound_control ( "PlayerDie",e1_test_bit ( a1,2 ) );
+    sound_control ( "InvaderDie",e1_test_bit ( a1,3 ) );
+    sound_control ( "ExtraLife",e1_test_bit ( a1,4 ) );
+    advance ( 10 );
+    return jumpDirect ( prog_19E5 );
 }
 
 Control prog_19E5 ()

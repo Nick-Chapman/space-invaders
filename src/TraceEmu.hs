@@ -7,7 +7,7 @@ import Byte (Byte)
 import Control.Monad (when)
 import Data.Bits (testBit)
 import Emulate (EmuState(..),initState,CB(..),emulate)
-import InstructionSet (Instruction,prettyInstructionBytes)
+import InstructionSet (Instruction) --,prettyInstructionBytes)
 import Mem (Mem)
 import System.IO (Handle,hPutStrLn)
 import Text.Printf (printf)
@@ -53,7 +53,7 @@ traceLine showPixs s@EmuState{ticks,icount,mem} i = do
     , rjust 11 (show ticks)
     , show s
     , ":"
-    , ljust 10 (prettyInstructionBytes i)
+    --, ljust 10 (prettyInstructionBytes i)
     , if showPixs
       then unwords [ ljust 15 (show i), printf "#pixs:%d" (length pixs) ]
       else show i

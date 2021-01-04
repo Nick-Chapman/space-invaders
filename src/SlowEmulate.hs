@@ -36,7 +36,7 @@ import qualified Sounds (Playing,initPlaying)
 -- | Ticks of the 2 MHz clock
 newtype Ticks = Ticks { unTicks :: Int } deriving (Eq,Ord,Num)
 
-instance Show Ticks where show = printf "[%d]" . unTicks
+instance Show Ticks where show = printf "[%08d]" . unTicks
 
 
 data EmuTime -- At Emulation type we have concrete Bytes

@@ -58,7 +58,7 @@ rjust n s = take (max 0 (n - length s)) (repeat ' ') <> s
 
 newtype Ticks = Ticks { unTicks :: Int } deriving (Eq,Ord,Num)
 
-instance Show Ticks where show = printf "[%d]" . unTicks
+instance Show Ticks where show = printf "[%08d]" . unTicks
 
 newtype Bit = Bit { unBit :: Bool }
 

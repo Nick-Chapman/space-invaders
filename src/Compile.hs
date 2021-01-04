@@ -95,14 +95,6 @@ insertAtRef State{cpu} program = do
     Just pc -> S_AtRef pc <$> program
 
 
-getConcretePC :: State -> Addr
-getConcretePC State{cpu} = do
-  let pc = getConcreteAddrMaybe (getPC cpu)
-  case pc of
-    Nothing -> error "getConcretePC"
-    Just pc -> pc
-
-
 getPC :: Cpu CompTime -> Exp16
 getPC cpu = E16_HiLo HiLo{hi,lo} where
   hi = Cpu.get cpu PCH
@@ -204,7 +196,7 @@ compileThen semantics state k =
           E8_Lit byte -> k s (decode byte)
           _ -> error $ "Decode, non-literal: " <> show e
       E.MarkReturnAddress a -> S_MarkReturnAddress a <$> k s ()
-      E.TraceInstruction i -> S_TraceInstruction cpu i (getConcretePC s) <$> k s ()
+      E.TraceInstruction i -> S_TraceInstruction cpu i (getPC cpu) <$> k s ()
       E.Advance n -> S_Advance n <$> k s ()
 
       E.MakeBit bool -> k s (if bool then E1_True else E1_False)

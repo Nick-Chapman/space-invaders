@@ -22,8 +22,9 @@ u1 FlagA;
 u1 FlagP;
 u1 FlagCY;
 
-u8 SPL;
-u8 SPH;
+u8 PCH;
+u8 PCL;
+
 u8 A;
 u8 B;
 u8 C;
@@ -31,6 +32,8 @@ u8 D;
 u8 E;
 u8 H;
 u8 L;
+u8 SPH;
+u8 SPL;
 
 u8 Shifter_HI;
 u8 Shifter_LO;
@@ -43,7 +46,7 @@ void at(const char*);
 void instruction(const char*, u16);
 void advance(int);
 
-Control jumpDirect(Func);
+Control jumpDirect(u16,Func);
 Control jump16(u16);
 
 void mem_write(u16,u8);

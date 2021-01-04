@@ -4583,39 +4583,39 @@ Control prog_1A90 ();
 Control prog_0000 ()
 {
     at ( "0000" );
-    instruction ( "NOP",0x0001 );
+    instruction ( "NOP",e16_hi_lo ( 0x00,0x01 ) );
     advance ( 4 );
-    return jumpDirect ( prog_0001 );
+    return jumpDirect ( 0x0001,prog_0001 );
 }
 
 Control prog_0001 ()
 {
     at ( "0001" );
-    instruction ( "NOP",0x0002 );
+    instruction ( "NOP",e16_hi_lo ( 0x00,0x02 ) );
     advance ( 4 );
-    return jumpDirect ( prog_0002 );
+    return jumpDirect ( 0x0002,prog_0002 );
 }
 
 Control prog_0002 ()
 {
     at ( "0002" );
-    instruction ( "NOP",0x0003 );
+    instruction ( "NOP",e16_hi_lo ( 0x00,0x03 ) );
     advance ( 4 );
-    return jumpDirect ( prog_0003 );
+    return jumpDirect ( 0x0003,prog_0003 );
 }
 
 Control prog_0003 ()
 {
     at ( "0003" );
-    instruction ( "JP   18D4",0x0006 );
+    instruction ( "JP   18D4",e16_hi_lo ( 0x00,0x06 ) );
     advance ( 10 );
-    return jumpDirect ( prog_18D4 );
+    return jumpDirect ( 0x18D4,prog_18D4 );
 }
 
 Control prog_0008 ()
 {
     at ( "0008" );
-    instruction ( "PUSH PSW",0x0009 );
+    instruction ( "PUSH PSW",e16_hi_lo ( 0x00,0x09 ) );
     u8 a1 = A ;
     u8 a2 = SPH ;
     u8 a3 = SPL ;
@@ -4628,13 +4628,13 @@ Control prog_0008 ()
     advance ( 11 );
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_0009 );
+    return jumpDirect ( 0x0009,prog_0009 );
 }
 
 Control prog_0009 ()
 {
     at ( "0009" );
-    instruction ( "PUSH BC",0x000A );
+    instruction ( "PUSH BC",e16_hi_lo ( 0x00,0x0A ) );
     u8 a1 = B ;
     u8 a2 = C ;
     u8 a3 = SPH ;
@@ -4648,13 +4648,13 @@ Control prog_0009 ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_000A );
+    return jumpDirect ( 0x000A,prog_000A );
 }
 
 Control prog_000A ()
 {
     at ( "000A" );
-    instruction ( "PUSH DE",0x000B );
+    instruction ( "PUSH DE",e16_hi_lo ( 0x00,0x0B ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = SPH ;
@@ -4668,13 +4668,13 @@ Control prog_000A ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_000B );
+    return jumpDirect ( 0x000B,prog_000B );
 }
 
 Control prog_000B ()
 {
     at ( "000B" );
-    instruction ( "PUSH HL",0x000C );
+    instruction ( "PUSH HL",e16_hi_lo ( 0x00,0x0C ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = SPH ;
@@ -4688,21 +4688,21 @@ Control prog_000B ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_000C );
+    return jumpDirect ( 0x000C,prog_000C );
 }
 
 Control prog_000C ()
 {
     at ( "000C" );
-    instruction ( "JP   008C",0x000F );
+    instruction ( "JP   008C",e16_hi_lo ( 0x00,0x0F ) );
     advance ( 10 );
-    return jumpDirect ( prog_008C );
+    return jumpDirect ( 0x008C,prog_008C );
 }
 
 Control prog_0010 ()
 {
     at ( "0010" );
-    instruction ( "PUSH PSW",0x0011 );
+    instruction ( "PUSH PSW",e16_hi_lo ( 0x00,0x11 ) );
     u8 a1 = A ;
     u8 a2 = SPH ;
     u8 a3 = SPL ;
@@ -4715,13 +4715,13 @@ Control prog_0010 ()
     advance ( 11 );
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_0011 );
+    return jumpDirect ( 0x0011,prog_0011 );
 }
 
 Control prog_0011 ()
 {
     at ( "0011" );
-    instruction ( "PUSH BC",0x0012 );
+    instruction ( "PUSH BC",e16_hi_lo ( 0x00,0x12 ) );
     u8 a1 = B ;
     u8 a2 = C ;
     u8 a3 = SPH ;
@@ -4735,13 +4735,13 @@ Control prog_0011 ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_0012 );
+    return jumpDirect ( 0x0012,prog_0012 );
 }
 
 Control prog_0012 ()
 {
     at ( "0012" );
-    instruction ( "PUSH DE",0x0013 );
+    instruction ( "PUSH DE",e16_hi_lo ( 0x00,0x13 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = SPH ;
@@ -4755,13 +4755,13 @@ Control prog_0012 ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_0013 );
+    return jumpDirect ( 0x0013,prog_0013 );
 }
 
 Control prog_0013 ()
 {
     at ( "0013" );
-    instruction ( "PUSH HL",0x0014 );
+    instruction ( "PUSH HL",e16_hi_lo ( 0x00,0x14 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = SPH ;
@@ -4775,42 +4775,42 @@ Control prog_0013 ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_0014 );
+    return jumpDirect ( 0x0014,prog_0014 );
 }
 
 Control prog_0014 ()
 {
     at ( "0014" );
-    instruction ( "LD   A,80",0x0016 );
+    instruction ( "LD   A,80",e16_hi_lo ( 0x00,0x16 ) );
     advance ( 7 );
     A = 0x80;
-    return jumpDirect ( prog_0016 );
+    return jumpDirect ( 0x0016,prog_0016 );
 }
 
 Control prog_0016 ()
 {
     at ( "0016" );
-    instruction ( "LD   (2072),A",0x0019 );
+    instruction ( "LD   (2072),A",e16_hi_lo ( 0x00,0x19 ) );
     u8 a1 = A ;
     mem_write ( 0x2072,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0019 );
+    return jumpDirect ( 0x0019,prog_0019 );
 }
 
 Control prog_0019 ()
 {
     at ( "0019" );
-    instruction ( "LD   HL,20C0",0x001C );
+    instruction ( "LD   HL,20C0",e16_hi_lo ( 0x00,0x1C ) );
     advance ( 10 );
     H = 0x20;
     L = 0xC0;
-    return jumpDirect ( prog_001C );
+    return jumpDirect ( 0x001C,prog_001C );
 }
 
 Control prog_001C ()
 {
     at ( "001C" );
-    instruction ( "DEC  (HL)",0x001D );
+    instruction ( "DEC  (HL)",e16_hi_lo ( 0x00,0x1D ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -4826,13 +4826,13 @@ Control prog_001C ()
     FlagZ = e1_is_zero ( e8_lo ( a4 ) );
     FlagA = e1_test_bit ( e8_lo ( a7 ),4 );
     FlagP = e1_parity ( e8_lo ( a4 ) );
-    return jumpDirect ( prog_001D );
+    return jumpDirect ( 0x001D,prog_001D );
 }
 
 Control prog_001D ()
 {
     at ( "001D" );
-    instruction ( "CALL 17CD",0x0020 );
+    instruction ( "CALL 17CD",e16_hi_lo ( 0x00,0x20 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -4845,59 +4845,59 @@ Control prog_001D ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_17CD );
+    return jumpDirect ( 0x17CD,prog_17CD );
 }
 
 Control prog_0020 ()
 {
     at ( "0020" );
-    instruction ( "IN   01",0x0022 );
+    instruction ( "IN   01",e16_hi_lo ( 0x00,0x22 ) );
     advance ( 10 );
     A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_flip ( e1_is_pressed ( "coin entry" ) ) ),1,e1_is_pressed ( "player2 start" ) ),2,e1_is_pressed ( "player1 start" ) ),4,e1_is_pressed ( "player1 shoot" ) ),5,e1_is_pressed ( "player1 left" ) ),6,e1_is_pressed ( "player1 right" ) );
-    return jumpDirect ( prog_0022 );
+    return jumpDirect ( 0x0022,prog_0022 );
 }
 
 Control prog_0022 ()
 {
     at ( "0022" );
-    instruction ( "RRCA",0x0023 );
+    instruction ( "RRCA",e16_hi_lo ( 0x00,0x23 ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftR ( a1,0x01 ),7,e1_test_bit ( a1,0 ) );
     FlagCY = e1_test_bit ( a1,0 );
-    return jumpDirect ( prog_0023 );
+    return jumpDirect ( 0x0023,prog_0023 );
 }
 
 Control prog_0023 ()
 {
     at ( "0023" );
-    instruction ( "JP   CY,0067",0x0026 );
+    instruction ( "JP   CY,0067",e16_hi_lo ( 0x00,0x26 ) );
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( prog_0067 );
+        return jumpDirect ( 0x0067,prog_0067 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0026 );
+        return jumpDirect ( 0x0026,prog_0026 );
     }
 }
 
 Control prog_0026 ()
 {
     at ( "0026" );
-    instruction ( "LD   A,(20EA)",0x0029 );
+    instruction ( "LD   A,(20EA)",e16_hi_lo ( 0x00,0x29 ) );
     u8 a1 = e8_read_mem ( 0x20EA ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0029 );
+    return jumpDirect ( 0x0029,prog_0029 );
 }
 
 Control prog_0029 ()
 {
     at ( "0029" );
-    instruction ( "AND  A",0x002A );
+    instruction ( "AND  A",e16_hi_lo ( 0x00,0x2A ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -4909,39 +4909,39 @@ Control prog_0029 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_002A );
+    return jumpDirect ( 0x002A,prog_002A );
 }
 
 Control prog_002A ()
 {
     at ( "002A" );
-    instruction ( "JP   Z,0042",0x002D );
+    instruction ( "JP   Z,0042",e16_hi_lo ( 0x00,0x2D ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_0042 );
+        return jumpDirect ( 0x0042,prog_0042 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_002D );
+        return jumpDirect ( 0x002D,prog_002D );
     }
 }
 
 Control prog_002D ()
 {
     at ( "002D" );
-    instruction ( "LD   A,(20EB)",0x0030 );
+    instruction ( "LD   A,(20EB)",e16_hi_lo ( 0x00,0x30 ) );
     u8 a1 = e8_read_mem ( 0x20EB ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0030 );
+    return jumpDirect ( 0x0030,prog_0030 );
 }
 
 Control prog_0030 ()
 {
     at ( "0030" );
-    instruction ( "CP   99",0x0032 );
+    instruction ( "CP   99",e16_hi_lo ( 0x00,0x32 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x99 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -4953,29 +4953,29 @@ Control prog_0030 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_0032 );
+    return jumpDirect ( 0x0032,prog_0032 );
 }
 
 Control prog_0032 ()
 {
     at ( "0032" );
-    instruction ( "JP   Z,003E",0x0035 );
+    instruction ( "JP   Z,003E",e16_hi_lo ( 0x00,0x35 ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_003E );
+        return jumpDirect ( 0x003E,prog_003E );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0035 );
+        return jumpDirect ( 0x0035,prog_0035 );
     }
 }
 
 Control prog_0035 ()
 {
     at ( "0035" );
-    instruction ( "ADD  01",0x0037 );
+    instruction ( "ADD  01",e16_hi_lo ( 0x00,0x37 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_false (  ),0x01,a1 ) ;
     u8 a3 = e8_and ( 0x01,0x0F ) ;
@@ -4988,13 +4988,13 @@ Control prog_0035 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_test_bit ( e8_hi ( a2 ),0 );
-    return jumpDirect ( prog_0037 );
+    return jumpDirect ( 0x0037,prog_0037 );
 }
 
 Control prog_0037 ()
 {
     at ( "0037" );
-    instruction ( "DAA",0x0038 );
+    instruction ( "DAA",e16_hi_lo ( 0x00,0x38 ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( a1,0x0F ) ;
     u16 a3 = e16_add_with_carry ( e1_false (  ),a2,0x06 ) ;
@@ -5009,23 +5009,23 @@ Control prog_0037 ()
     FlagA = e1_test_bit ( e8_ite ( e1_or_bit ( e1_and_bit ( e1_or_bit ( e1_test_bit ( a2,1 ),e1_test_bit ( a2,2 ) ),e1_test_bit ( a2,3 ) ),FlagA ),e8_lo ( a3 ),a2 ),4 );
     FlagP = e1_parity ( a7 );
     FlagCY = e1_or_bit ( e1_test_bit ( e8_ite ( e1_or_bit ( e1_and_bit ( e1_or_bit ( e1_test_bit ( e8_lo ( a4 ),1 ),e1_test_bit ( e8_lo ( a4 ),2 ) ),e1_test_bit ( e8_lo ( a4 ),3 ) ),FlagCY ),e8_lo ( a5 ),e8_lo ( a4 ) ),4 ),FlagCY );
-    return jumpDirect ( prog_0038 );
+    return jumpDirect ( 0x0038,prog_0038 );
 }
 
 Control prog_0038 ()
 {
     at ( "0038" );
-    instruction ( "LD   (20EB),A",0x003B );
+    instruction ( "LD   (20EB),A",e16_hi_lo ( 0x00,0x3B ) );
     u8 a1 = A ;
     mem_write ( 0x20EB,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_003B );
+    return jumpDirect ( 0x003B,prog_003B );
 }
 
 Control prog_003B ()
 {
     at ( "003B" );
-    instruction ( "CALL 1947",0x003E );
+    instruction ( "CALL 1947",e16_hi_lo ( 0x00,0x3E ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -5038,13 +5038,13 @@ Control prog_003B ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1947 );
+    return jumpDirect ( 0x1947,prog_1947 );
 }
 
 Control prog_003E ()
 {
     at ( "003E" );
-    instruction ( "XOR  A",0x003F );
+    instruction ( "XOR  A",e16_hi_lo ( 0x00,0x3F ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -5055,33 +5055,33 @@ Control prog_003E ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_003F );
+    return jumpDirect ( 0x003F,prog_003F );
 }
 
 Control prog_003F ()
 {
     at ( "003F" );
-    instruction ( "LD   (20EA),A",0x0042 );
+    instruction ( "LD   (20EA),A",e16_hi_lo ( 0x00,0x42 ) );
     u8 a1 = A ;
     mem_write ( 0x20EA,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0042 );
+    return jumpDirect ( 0x0042,prog_0042 );
 }
 
 Control prog_0042 ()
 {
     at ( "0042" );
-    instruction ( "LD   A,(20E9)",0x0045 );
+    instruction ( "LD   A,(20E9)",e16_hi_lo ( 0x00,0x45 ) );
     u8 a1 = e8_read_mem ( 0x20E9 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0045 );
+    return jumpDirect ( 0x0045,prog_0045 );
 }
 
 Control prog_0045 ()
 {
     at ( "0045" );
-    instruction ( "AND  A",0x0046 );
+    instruction ( "AND  A",e16_hi_lo ( 0x00,0x46 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -5093,39 +5093,39 @@ Control prog_0045 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0046 );
+    return jumpDirect ( 0x0046,prog_0046 );
 }
 
 Control prog_0046 ()
 {
     at ( "0046" );
-    instruction ( "JP   Z,0082",0x0049 );
+    instruction ( "JP   Z,0082",e16_hi_lo ( 0x00,0x49 ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_0082 );
+        return jumpDirect ( 0x0082,prog_0082 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0049 );
+        return jumpDirect ( 0x0049,prog_0049 );
     }
 }
 
 Control prog_0049 ()
 {
     at ( "0049" );
-    instruction ( "LD   A,(20EF)",0x004C );
+    instruction ( "LD   A,(20EF)",e16_hi_lo ( 0x00,0x4C ) );
     u8 a1 = e8_read_mem ( 0x20EF ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_004C );
+    return jumpDirect ( 0x004C,prog_004C );
 }
 
 Control prog_004C ()
 {
     at ( "004C" );
-    instruction ( "AND  A",0x004D );
+    instruction ( "AND  A",e16_hi_lo ( 0x00,0x4D ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -5137,39 +5137,39 @@ Control prog_004C ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_004D );
+    return jumpDirect ( 0x004D,prog_004D );
 }
 
 Control prog_004D ()
 {
     at ( "004D" );
-    instruction ( "JP   NZ,006F",0x0050 );
+    instruction ( "JP   NZ,006F",e16_hi_lo ( 0x00,0x50 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_006F );
+        return jumpDirect ( 0x006F,prog_006F );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0050 );
+        return jumpDirect ( 0x0050,prog_0050 );
     }
 }
 
 Control prog_0050 ()
 {
     at ( "0050" );
-    instruction ( "LD   A,(20EB)",0x0053 );
+    instruction ( "LD   A,(20EB)",e16_hi_lo ( 0x00,0x53 ) );
     u8 a1 = e8_read_mem ( 0x20EB ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0053 );
+    return jumpDirect ( 0x0053,prog_0053 );
 }
 
 Control prog_0053 ()
 {
     at ( "0053" );
-    instruction ( "AND  A",0x0054 );
+    instruction ( "AND  A",e16_hi_lo ( 0x00,0x54 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -5181,29 +5181,29 @@ Control prog_0053 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0054 );
+    return jumpDirect ( 0x0054,prog_0054 );
 }
 
 Control prog_0054 ()
 {
     at ( "0054" );
-    instruction ( "JP   NZ,005D",0x0057 );
+    instruction ( "JP   NZ,005D",e16_hi_lo ( 0x00,0x57 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_005D );
+        return jumpDirect ( 0x005D,prog_005D );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0057 );
+        return jumpDirect ( 0x0057,prog_0057 );
     }
 }
 
 Control prog_0057 ()
 {
     at ( "0057" );
-    instruction ( "CALL 0ABF",0x005A );
+    instruction ( "CALL 0ABF",e16_hi_lo ( 0x00,0x5A ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -5216,31 +5216,31 @@ Control prog_0057 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0ABF );
+    return jumpDirect ( 0x0ABF,prog_0ABF );
 }
 
 Control prog_005A ()
 {
     at ( "005A" );
-    instruction ( "JP   0082",0x005D );
+    instruction ( "JP   0082",e16_hi_lo ( 0x00,0x5D ) );
     advance ( 10 );
-    return jumpDirect ( prog_0082 );
+    return jumpDirect ( 0x0082,prog_0082 );
 }
 
 Control prog_005D ()
 {
     at ( "005D" );
-    instruction ( "LD   A,(2093)",0x0060 );
+    instruction ( "LD   A,(2093)",e16_hi_lo ( 0x00,0x60 ) );
     u8 a1 = e8_read_mem ( 0x2093 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0060 );
+    return jumpDirect ( 0x0060,prog_0060 );
 }
 
 Control prog_0060 ()
 {
     at ( "0060" );
-    instruction ( "AND  A",0x0061 );
+    instruction ( "AND  A",e16_hi_lo ( 0x00,0x61 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -5252,64 +5252,64 @@ Control prog_0060 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0061 );
+    return jumpDirect ( 0x0061,prog_0061 );
 }
 
 Control prog_0061 ()
 {
     at ( "0061" );
-    instruction ( "JP   NZ,0082",0x0064 );
+    instruction ( "JP   NZ,0082",e16_hi_lo ( 0x00,0x64 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_0082 );
+        return jumpDirect ( 0x0082,prog_0082 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0064 );
+        return jumpDirect ( 0x0064,prog_0064 );
     }
 }
 
 Control prog_0064 ()
 {
     at ( "0064" );
-    instruction ( "JP   0765",0x0067 );
+    instruction ( "JP   0765",e16_hi_lo ( 0x00,0x67 ) );
     advance ( 10 );
-    return jumpDirect ( prog_0765 );
+    return jumpDirect ( 0x0765,prog_0765 );
 }
 
 Control prog_0067 ()
 {
     at ( "0067" );
-    instruction ( "LD   A,01",0x0069 );
+    instruction ( "LD   A,01",e16_hi_lo ( 0x00,0x69 ) );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( prog_0069 );
+    return jumpDirect ( 0x0069,prog_0069 );
 }
 
 Control prog_0069 ()
 {
     at ( "0069" );
-    instruction ( "LD   (20EA),A",0x006C );
+    instruction ( "LD   (20EA),A",e16_hi_lo ( 0x00,0x6C ) );
     u8 a1 = A ;
     mem_write ( 0x20EA,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_006C );
+    return jumpDirect ( 0x006C,prog_006C );
 }
 
 Control prog_006C ()
 {
     at ( "006C" );
-    instruction ( "JP   003F",0x006F );
+    instruction ( "JP   003F",e16_hi_lo ( 0x00,0x6F ) );
     advance ( 10 );
-    return jumpDirect ( prog_003F );
+    return jumpDirect ( 0x003F,prog_003F );
 }
 
 Control prog_006F ()
 {
     at ( "006F" );
-    instruction ( "CALL 1740",0x0072 );
+    instruction ( "CALL 1740",e16_hi_lo ( 0x00,0x72 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -5322,33 +5322,33 @@ Control prog_006F ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1740 );
+    return jumpDirect ( 0x1740,prog_1740 );
 }
 
 Control prog_0072 ()
 {
     at ( "0072" );
-    instruction ( "LD   A,(2032)",0x0075 );
+    instruction ( "LD   A,(2032)",e16_hi_lo ( 0x00,0x75 ) );
     u8 a1 = e8_read_mem ( 0x2032 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0075 );
+    return jumpDirect ( 0x0075,prog_0075 );
 }
 
 Control prog_0075 ()
 {
     at ( "0075" );
-    instruction ( "LD   (2080),A",0x0078 );
+    instruction ( "LD   (2080),A",e16_hi_lo ( 0x00,0x78 ) );
     u8 a1 = A ;
     mem_write ( 0x2080,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0078 );
+    return jumpDirect ( 0x0078,prog_0078 );
 }
 
 Control prog_0078 ()
 {
     at ( "0078" );
-    instruction ( "CALL 0100",0x007B );
+    instruction ( "CALL 0100",e16_hi_lo ( 0x00,0x7B ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -5361,13 +5361,13 @@ Control prog_0078 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0100 );
+    return jumpDirect ( 0x0100,prog_0100 );
 }
 
 Control prog_007B ()
 {
     at ( "007B" );
-    instruction ( "CALL 0248",0x007E );
+    instruction ( "CALL 0248",e16_hi_lo ( 0x00,0x7E ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -5380,13 +5380,13 @@ Control prog_007B ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0248 );
+    return jumpDirect ( 0x0248,prog_0248 );
 }
 
 Control prog_007E ()
 {
     at ( "007E" );
-    instruction ( "CALL 0913",0x0081 );
+    instruction ( "CALL 0913",e16_hi_lo ( 0x00,0x81 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -5399,21 +5399,21 @@ Control prog_007E ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0913 );
+    return jumpDirect ( 0x0913,prog_0913 );
 }
 
 Control prog_0081 ()
 {
     at ( "0081" );
-    instruction ( "NOP",0x0082 );
+    instruction ( "NOP",e16_hi_lo ( 0x00,0x82 ) );
     advance ( 4 );
-    return jumpDirect ( prog_0082 );
+    return jumpDirect ( 0x0082,prog_0082 );
 }
 
 Control prog_0082 ()
 {
     at ( "0082" );
-    instruction ( "POP  HL",0x0083 );
+    instruction ( "POP  HL",e16_hi_lo ( 0x00,0x83 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -5427,13 +5427,13 @@ Control prog_0082 ()
     L = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_0083 );
+    return jumpDirect ( 0x0083,prog_0083 );
 }
 
 Control prog_0083 ()
 {
     at ( "0083" );
-    instruction ( "POP  DE",0x0084 );
+    instruction ( "POP  DE",e16_hi_lo ( 0x00,0x84 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -5447,13 +5447,13 @@ Control prog_0083 ()
     E = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_0084 );
+    return jumpDirect ( 0x0084,prog_0084 );
 }
 
 Control prog_0084 ()
 {
     at ( "0084" );
-    instruction ( "POP  BC",0x0085 );
+    instruction ( "POP  BC",e16_hi_lo ( 0x00,0x85 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -5467,13 +5467,13 @@ Control prog_0084 ()
     C = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_0085 );
+    return jumpDirect ( 0x0085,prog_0085 );
 }
 
 Control prog_0085 ()
 {
     at ( "0085" );
-    instruction ( "POP  PSW",0x0086 );
+    instruction ( "POP  PSW",e16_hi_lo ( 0x00,0x86 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -5491,22 +5491,22 @@ Control prog_0085 ()
     FlagA = e1_test_bit ( a4,4 );
     FlagP = e1_test_bit ( a4,2 );
     FlagCY = e1_test_bit ( a4,0 );
-    return jumpDirect ( prog_0086 );
+    return jumpDirect ( 0x0086,prog_0086 );
 }
 
 Control prog_0086 ()
 {
     at ( "0086" );
-    instruction ( "EI",0x0087 );
+    instruction ( "EI",e16_hi_lo ( 0x00,0x87 ) );
     enable_interrupts (  );
     advance ( 4 );
-    return jumpDirect ( prog_0087 );
+    return jumpDirect ( 0x0087,prog_0087 );
 }
 
 Control prog_0087 ()
 {
     at ( "0087" );
-    instruction ( "RET",0x0088 );
+    instruction ( "RET",e16_hi_lo ( 0x00,0x88 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -5524,7 +5524,7 @@ Control prog_0087 ()
 Control prog_008C ()
 {
     at ( "008C" );
-    instruction ( "XOR  A",0x008D );
+    instruction ( "XOR  A",e16_hi_lo ( 0x00,0x8D ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -5535,33 +5535,33 @@ Control prog_008C ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_008D );
+    return jumpDirect ( 0x008D,prog_008D );
 }
 
 Control prog_008D ()
 {
     at ( "008D" );
-    instruction ( "LD   (2072),A",0x0090 );
+    instruction ( "LD   (2072),A",e16_hi_lo ( 0x00,0x90 ) );
     u8 a1 = A ;
     mem_write ( 0x2072,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0090 );
+    return jumpDirect ( 0x0090,prog_0090 );
 }
 
 Control prog_0090 ()
 {
     at ( "0090" );
-    instruction ( "LD   A,(20E9)",0x0093 );
+    instruction ( "LD   A,(20E9)",e16_hi_lo ( 0x00,0x93 ) );
     u8 a1 = e8_read_mem ( 0x20E9 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0093 );
+    return jumpDirect ( 0x0093,prog_0093 );
 }
 
 Control prog_0093 ()
 {
     at ( "0093" );
-    instruction ( "AND  A",0x0094 );
+    instruction ( "AND  A",e16_hi_lo ( 0x00,0x94 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -5573,39 +5573,39 @@ Control prog_0093 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0094 );
+    return jumpDirect ( 0x0094,prog_0094 );
 }
 
 Control prog_0094 ()
 {
     at ( "0094" );
-    instruction ( "JP   Z,0082",0x0097 );
+    instruction ( "JP   Z,0082",e16_hi_lo ( 0x00,0x97 ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_0082 );
+        return jumpDirect ( 0x0082,prog_0082 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0097 );
+        return jumpDirect ( 0x0097,prog_0097 );
     }
 }
 
 Control prog_0097 ()
 {
     at ( "0097" );
-    instruction ( "LD   A,(20EF)",0x009A );
+    instruction ( "LD   A,(20EF)",e16_hi_lo ( 0x00,0x9A ) );
     u8 a1 = e8_read_mem ( 0x20EF ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_009A );
+    return jumpDirect ( 0x009A,prog_009A );
 }
 
 Control prog_009A ()
 {
     at ( "009A" );
-    instruction ( "AND  A",0x009B );
+    instruction ( "AND  A",e16_hi_lo ( 0x00,0x9B ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -5617,76 +5617,76 @@ Control prog_009A ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_009B );
+    return jumpDirect ( 0x009B,prog_009B );
 }
 
 Control prog_009B ()
 {
     at ( "009B" );
-    instruction ( "JP   NZ,00A5",0x009E );
+    instruction ( "JP   NZ,00A5",e16_hi_lo ( 0x00,0x9E ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_00A5 );
+        return jumpDirect ( 0x00A5,prog_00A5 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_009E );
+        return jumpDirect ( 0x009E,prog_009E );
     }
 }
 
 Control prog_009E ()
 {
     at ( "009E" );
-    instruction ( "LD   A,(20C1)",0x00A1 );
+    instruction ( "LD   A,(20C1)",e16_hi_lo ( 0x00,0xA1 ) );
     u8 a1 = e8_read_mem ( 0x20C1 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_00A1 );
+    return jumpDirect ( 0x00A1,prog_00A1 );
 }
 
 Control prog_00A1 ()
 {
     at ( "00A1" );
-    instruction ( "RRCA",0x00A2 );
+    instruction ( "RRCA",e16_hi_lo ( 0x00,0xA2 ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftR ( a1,0x01 ),7,e1_test_bit ( a1,0 ) );
     FlagCY = e1_test_bit ( a1,0 );
-    return jumpDirect ( prog_00A2 );
+    return jumpDirect ( 0x00A2,prog_00A2 );
 }
 
 Control prog_00A2 ()
 {
     at ( "00A2" );
-    instruction ( "JP   NC,0082",0x00A5 );
+    instruction ( "JP   NC,0082",e16_hi_lo ( 0x00,0xA5 ) );
     if (e1_flip ( FlagCY ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_0082 );
+        return jumpDirect ( 0x0082,prog_0082 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_00A5 );
+        return jumpDirect ( 0x00A5,prog_00A5 );
     }
 }
 
 Control prog_00A5 ()
 {
     at ( "00A5" );
-    instruction ( "LD   HL,2020",0x00A8 );
+    instruction ( "LD   HL,2020",e16_hi_lo ( 0x00,0xA8 ) );
     advance ( 10 );
     H = 0x20;
     L = 0x20;
-    return jumpDirect ( prog_00A8 );
+    return jumpDirect ( 0x00A8,prog_00A8 );
 }
 
 Control prog_00A8 ()
 {
     at ( "00A8" );
-    instruction ( "CALL 024B",0x00AB );
+    instruction ( "CALL 024B",e16_hi_lo ( 0x00,0xAB ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -5699,13 +5699,13 @@ Control prog_00A8 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_024B );
+    return jumpDirect ( 0x024B,prog_024B );
 }
 
 Control prog_00AB ()
 {
     at ( "00AB" );
-    instruction ( "CALL 0141",0x00AE );
+    instruction ( "CALL 0141",e16_hi_lo ( 0x00,0xAE ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -5718,21 +5718,21 @@ Control prog_00AB ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0141 );
+    return jumpDirect ( 0x0141,prog_0141 );
 }
 
 Control prog_00AE ()
 {
     at ( "00AE" );
-    instruction ( "JP   0082",0x00B1 );
+    instruction ( "JP   0082",e16_hi_lo ( 0x00,0xB1 ) );
     advance ( 10 );
-    return jumpDirect ( prog_0082 );
+    return jumpDirect ( 0x0082,prog_0082 );
 }
 
 Control prog_00B1 ()
 {
     at ( "00B1" );
-    instruction ( "CALL 0886",0x00B4 );
+    instruction ( "CALL 0886",e16_hi_lo ( 0x00,0xB4 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -5745,13 +5745,13 @@ Control prog_00B1 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0886 );
+    return jumpDirect ( 0x0886,prog_0886 );
 }
 
 Control prog_00B4 ()
 {
     at ( "00B4" );
-    instruction ( "PUSH HL",0x00B5 );
+    instruction ( "PUSH HL",e16_hi_lo ( 0x00,0xB5 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = SPH ;
@@ -5765,84 +5765,84 @@ Control prog_00B4 ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_00B5 );
+    return jumpDirect ( 0x00B5,prog_00B5 );
 }
 
 Control prog_00B5 ()
 {
     at ( "00B5" );
-    instruction ( "LD   A,(HL)",0x00B6 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x00,0xB6 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_00B6 );
+    return jumpDirect ( 0x00B6,prog_00B6 );
 }
 
 Control prog_00B6 ()
 {
     at ( "00B6" );
-    instruction ( "INC  HL",0x00B7 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x00,0xB7 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_00B7 );
+    return jumpDirect ( 0x00B7,prog_00B7 );
 }
 
 Control prog_00B7 ()
 {
     at ( "00B7" );
-    instruction ( "LD   H,(HL)",0x00B8 );
+    instruction ( "LD   H,(HL)",e16_hi_lo ( 0x00,0xB8 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     H = a3;
-    return jumpDirect ( prog_00B8 );
+    return jumpDirect ( 0x00B8,prog_00B8 );
 }
 
 Control prog_00B8 ()
 {
     at ( "00B8" );
-    instruction ( "LD   L,A",0x00B9 );
+    instruction ( "LD   L,A",e16_hi_lo ( 0x00,0xB9 ) );
     u8 a1 = A ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( prog_00B9 );
+    return jumpDirect ( 0x00B9,prog_00B9 );
 }
 
 Control prog_00B9 ()
 {
     at ( "00B9" );
-    instruction ( "LD   (2009),HL",0x00BC );
+    instruction ( "LD   (2009),HL",e16_hi_lo ( 0x00,0xBC ) );
     u8 a1 = L ;
     mem_write ( 0x2009,a1 );
     u8 a2 = H ;
     mem_write ( 0x200A,a2 );
     advance ( 16 );
-    return jumpDirect ( prog_00BC );
+    return jumpDirect ( 0x00BC,prog_00BC );
 }
 
 Control prog_00BC ()
 {
     at ( "00BC" );
-    instruction ( "LD   (200B),HL",0x00BF );
+    instruction ( "LD   (200B),HL",e16_hi_lo ( 0x00,0xBF ) );
     u8 a1 = L ;
     mem_write ( 0x200B,a1 );
     u8 a2 = H ;
     mem_write ( 0x200C,a2 );
     advance ( 16 );
-    return jumpDirect ( prog_00BF );
+    return jumpDirect ( 0x00BF,prog_00BF );
 }
 
 Control prog_00BF ()
 {
     at ( "00BF" );
-    instruction ( "POP  HL",0x00C0 );
+    instruction ( "POP  HL",e16_hi_lo ( 0x00,0xC0 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -5856,38 +5856,38 @@ Control prog_00BF ()
     L = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_00C0 );
+    return jumpDirect ( 0x00C0,prog_00C0 );
 }
 
 Control prog_00C0 ()
 {
     at ( "00C0" );
-    instruction ( "DEC  HL",0x00C1 );
+    instruction ( "DEC  HL",e16_hi_lo ( 0x00,0xC1 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_00C1 );
+    return jumpDirect ( 0x00C1,prog_00C1 );
 }
 
 Control prog_00C1 ()
 {
     at ( "00C1" );
-    instruction ( "LD   A,(HL)",0x00C2 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x00,0xC2 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_00C2 );
+    return jumpDirect ( 0x00C2,prog_00C2 );
 }
 
 Control prog_00C2 ()
 {
     at ( "00C2" );
-    instruction ( "CP   03",0x00C4 );
+    instruction ( "CP   03",e16_hi_lo ( 0x00,0xC4 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x03 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -5899,29 +5899,29 @@ Control prog_00C2 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_00C4 );
+    return jumpDirect ( 0x00C4,prog_00C4 );
 }
 
 Control prog_00C4 ()
 {
     at ( "00C4" );
-    instruction ( "JP   NZ,00C8",0x00C7 );
+    instruction ( "JP   NZ,00C8",e16_hi_lo ( 0x00,0xC7 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_00C8 );
+        return jumpDirect ( 0x00C8,prog_00C8 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_00C7 );
+        return jumpDirect ( 0x00C7,prog_00C7 );
     }
 }
 
 Control prog_00C7 ()
 {
     at ( "00C7" );
-    instruction ( "DEC  A",0x00C8 );
+    instruction ( "DEC  A",e16_hi_lo ( 0x00,0xC8 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -5933,23 +5933,23 @@ Control prog_00C7 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_00C8 );
+    return jumpDirect ( 0x00C8,prog_00C8 );
 }
 
 Control prog_00C8 ()
 {
     at ( "00C8" );
-    instruction ( "LD   (2008),A",0x00CB );
+    instruction ( "LD   (2008),A",e16_hi_lo ( 0x00,0xCB ) );
     u8 a1 = A ;
     mem_write ( 0x2008,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_00CB );
+    return jumpDirect ( 0x00CB,prog_00CB );
 }
 
 Control prog_00CB ()
 {
     at ( "00CB" );
-    instruction ( "CP   FE",0x00CD );
+    instruction ( "CP   FE",e16_hi_lo ( 0x00,0xCD ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0xFE ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -5961,38 +5961,38 @@ Control prog_00CB ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_00CD );
+    return jumpDirect ( 0x00CD,prog_00CD );
 }
 
 Control prog_00CD ()
 {
     at ( "00CD" );
-    instruction ( "LD   A,00",0x00CF );
+    instruction ( "LD   A,00",e16_hi_lo ( 0x00,0xCF ) );
     advance ( 7 );
     A = 0x00;
-    return jumpDirect ( prog_00CF );
+    return jumpDirect ( 0x00CF,prog_00CF );
 }
 
 Control prog_00CF ()
 {
     at ( "00CF" );
-    instruction ( "JP   NZ,00D3",0x00D2 );
+    instruction ( "JP   NZ,00D3",e16_hi_lo ( 0x00,0xD2 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_00D3 );
+        return jumpDirect ( 0x00D3,prog_00D3 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_00D2 );
+        return jumpDirect ( 0x00D2,prog_00D2 );
     }
 }
 
 Control prog_00D2 ()
 {
     at ( "00D2" );
-    instruction ( "INC  A",0x00D3 );
+    instruction ( "INC  A",e16_hi_lo ( 0x00,0xD3 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_true (  ),a1,0x00 ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -6004,23 +6004,23 @@ Control prog_00D2 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_00D3 );
+    return jumpDirect ( 0x00D3,prog_00D3 );
 }
 
 Control prog_00D3 ()
 {
     at ( "00D3" );
-    instruction ( "LD   (200D),A",0x00D6 );
+    instruction ( "LD   (200D),A",e16_hi_lo ( 0x00,0xD6 ) );
     u8 a1 = A ;
     mem_write ( 0x200D,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_00D6 );
+    return jumpDirect ( 0x00D6,prog_00D6 );
 }
 
 Control prog_00D6 ()
 {
     at ( "00D6" );
-    instruction ( "RET",0x00D7 );
+    instruction ( "RET",e16_hi_lo ( 0x00,0xD7 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -6038,66 +6038,66 @@ Control prog_00D6 ()
 Control prog_00D7 ()
 {
     at ( "00D7" );
-    instruction ( "LD   A,02",0x00D9 );
+    instruction ( "LD   A,02",e16_hi_lo ( 0x00,0xD9 ) );
     advance ( 7 );
     A = 0x02;
-    return jumpDirect ( prog_00D9 );
+    return jumpDirect ( 0x00D9,prog_00D9 );
 }
 
 Control prog_00D9 ()
 {
     at ( "00D9" );
-    instruction ( "LD   (21FB),A",0x00DC );
+    instruction ( "LD   (21FB),A",e16_hi_lo ( 0x00,0xDC ) );
     u8 a1 = A ;
     mem_write ( 0x21FB,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_00DC );
+    return jumpDirect ( 0x00DC,prog_00DC );
 }
 
 Control prog_00DC ()
 {
     at ( "00DC" );
-    instruction ( "LD   (22FB),A",0x00DF );
+    instruction ( "LD   (22FB),A",e16_hi_lo ( 0x00,0xDF ) );
     u8 a1 = A ;
     mem_write ( 0x22FB,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_00DF );
+    return jumpDirect ( 0x00DF,prog_00DF );
 }
 
 Control prog_00DF ()
 {
     at ( "00DF" );
-    instruction ( "JP   08E4",0x00E2 );
+    instruction ( "JP   08E4",e16_hi_lo ( 0x00,0xE2 ) );
     advance ( 10 );
-    return jumpDirect ( prog_08E4 );
+    return jumpDirect ( 0x08E4,prog_08E4 );
 }
 
 Control prog_0100 ()
 {
     at ( "0100" );
-    instruction ( "LD   HL,2002",0x0103 );
+    instruction ( "LD   HL,2002",e16_hi_lo ( 0x01,0x03 ) );
     advance ( 10 );
     H = 0x20;
     L = 0x02;
-    return jumpDirect ( prog_0103 );
+    return jumpDirect ( 0x0103,prog_0103 );
 }
 
 Control prog_0103 ()
 {
     at ( "0103" );
-    instruction ( "LD   A,(HL)",0x0104 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x01,0x04 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_0104 );
+    return jumpDirect ( 0x0104,prog_0104 );
 }
 
 Control prog_0104 ()
 {
     at ( "0104" );
-    instruction ( "AND  A",0x0105 );
+    instruction ( "AND  A",e16_hi_lo ( 0x01,0x05 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -6109,29 +6109,29 @@ Control prog_0104 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0105 );
+    return jumpDirect ( 0x0105,prog_0105 );
 }
 
 Control prog_0105 ()
 {
     at ( "0105" );
-    instruction ( "JP   NZ,1538",0x0108 );
+    instruction ( "JP   NZ,1538",e16_hi_lo ( 0x01,0x08 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_1538 );
+        return jumpDirect ( 0x1538,prog_1538 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0108 );
+        return jumpDirect ( 0x0108,prog_0108 );
     }
 }
 
 Control prog_0108 ()
 {
     at ( "0108" );
-    instruction ( "PUSH HL",0x0109 );
+    instruction ( "PUSH HL",e16_hi_lo ( 0x01,0x09 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = SPH ;
@@ -6145,65 +6145,65 @@ Control prog_0108 ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_0109 );
+    return jumpDirect ( 0x0109,prog_0109 );
 }
 
 Control prog_0109 ()
 {
     at ( "0109" );
-    instruction ( "LD   A,(2006)",0x010C );
+    instruction ( "LD   A,(2006)",e16_hi_lo ( 0x01,0x0C ) );
     u8 a1 = e8_read_mem ( 0x2006 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_010C );
+    return jumpDirect ( 0x010C,prog_010C );
 }
 
 Control prog_010C ()
 {
     at ( "010C" );
-    instruction ( "LD   L,A",0x010D );
+    instruction ( "LD   L,A",e16_hi_lo ( 0x01,0x0D ) );
     u8 a1 = A ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( prog_010D );
+    return jumpDirect ( 0x010D,prog_010D );
 }
 
 Control prog_010D ()
 {
     at ( "010D" );
-    instruction ( "LD   A,(2067)",0x0110 );
+    instruction ( "LD   A,(2067)",e16_hi_lo ( 0x01,0x10 ) );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0110 );
+    return jumpDirect ( 0x0110,prog_0110 );
 }
 
 Control prog_0110 ()
 {
     at ( "0110" );
-    instruction ( "LD   H,A",0x0111 );
+    instruction ( "LD   H,A",e16_hi_lo ( 0x01,0x11 ) );
     u8 a1 = A ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( prog_0111 );
+    return jumpDirect ( 0x0111,prog_0111 );
 }
 
 Control prog_0111 ()
 {
     at ( "0111" );
-    instruction ( "LD   A,(HL)",0x0112 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x01,0x12 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_0112 );
+    return jumpDirect ( 0x0112,prog_0112 );
 }
 
 Control prog_0112 ()
 {
     at ( "0112" );
-    instruction ( "AND  A",0x0113 );
+    instruction ( "AND  A",e16_hi_lo ( 0x01,0x13 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -6215,13 +6215,13 @@ Control prog_0112 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0113 );
+    return jumpDirect ( 0x0113,prog_0113 );
 }
 
 Control prog_0113 ()
 {
     at ( "0113" );
-    instruction ( "POP  HL",0x0114 );
+    instruction ( "POP  HL",e16_hi_lo ( 0x01,0x14 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -6235,92 +6235,92 @@ Control prog_0113 ()
     L = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_0114 );
+    return jumpDirect ( 0x0114,prog_0114 );
 }
 
 Control prog_0114 ()
 {
     at ( "0114" );
-    instruction ( "JP   Z,0136",0x0117 );
+    instruction ( "JP   Z,0136",e16_hi_lo ( 0x01,0x17 ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_0136 );
+        return jumpDirect ( 0x0136,prog_0136 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0117 );
+        return jumpDirect ( 0x0117,prog_0117 );
     }
 }
 
 Control prog_0117 ()
 {
     at ( "0117" );
-    instruction ( "INC  HL",0x0118 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x01,0x18 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_0118 );
+    return jumpDirect ( 0x0118,prog_0118 );
 }
 
 Control prog_0118 ()
 {
     at ( "0118" );
-    instruction ( "INC  HL",0x0119 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x01,0x19 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_0119 );
+    return jumpDirect ( 0x0119,prog_0119 );
 }
 
 Control prog_0119 ()
 {
     at ( "0119" );
-    instruction ( "LD   A,(HL)",0x011A );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x01,0x1A ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_011A );
+    return jumpDirect ( 0x011A,prog_011A );
 }
 
 Control prog_011A ()
 {
     at ( "011A" );
-    instruction ( "INC  HL",0x011B );
+    instruction ( "INC  HL",e16_hi_lo ( 0x01,0x1B ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_011B );
+    return jumpDirect ( 0x011B,prog_011B );
 }
 
 Control prog_011B ()
 {
     at ( "011B" );
-    instruction ( "LD   B,(HL)",0x011C );
+    instruction ( "LD   B,(HL)",e16_hi_lo ( 0x01,0x1C ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     B = a3;
-    return jumpDirect ( prog_011C );
+    return jumpDirect ( 0x011C,prog_011C );
 }
 
 Control prog_011C ()
 {
     at ( "011C" );
-    instruction ( "AND  FE",0x011E );
+    instruction ( "AND  FE",e16_hi_lo ( 0x01,0x1E ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( 0xFE,a1 ) ;
     u8 a3 = e8_or ( 0xFE,a1 ) ;
@@ -6331,75 +6331,75 @@ Control prog_011C ()
     FlagA = e1_test_bit ( a3,3 );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_011E );
+    return jumpDirect ( 0x011E,prog_011E );
 }
 
 Control prog_011E ()
 {
     at ( "011E" );
-    instruction ( "RLCA",0x011F );
+    instruction ( "RLCA",e16_hi_lo ( 0x01,0x1F ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftL ( a1,0x01 ),0,e1_test_bit ( a1,7 ) );
     FlagCY = e1_test_bit ( a1,7 );
-    return jumpDirect ( prog_011F );
+    return jumpDirect ( 0x011F,prog_011F );
 }
 
 Control prog_011F ()
 {
     at ( "011F" );
-    instruction ( "RLCA",0x0120 );
+    instruction ( "RLCA",e16_hi_lo ( 0x01,0x20 ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftL ( a1,0x01 ),0,e1_test_bit ( a1,7 ) );
     FlagCY = e1_test_bit ( a1,7 );
-    return jumpDirect ( prog_0120 );
+    return jumpDirect ( 0x0120,prog_0120 );
 }
 
 Control prog_0120 ()
 {
     at ( "0120" );
-    instruction ( "RLCA",0x0121 );
+    instruction ( "RLCA",e16_hi_lo ( 0x01,0x21 ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftL ( a1,0x01 ),0,e1_test_bit ( a1,7 ) );
     FlagCY = e1_test_bit ( a1,7 );
-    return jumpDirect ( prog_0121 );
+    return jumpDirect ( 0x0121,prog_0121 );
 }
 
 Control prog_0121 ()
 {
     at ( "0121" );
-    instruction ( "LD   E,A",0x0122 );
+    instruction ( "LD   E,A",e16_hi_lo ( 0x01,0x22 ) );
     u8 a1 = A ;
     advance ( 5 );
     E = a1;
-    return jumpDirect ( prog_0122 );
+    return jumpDirect ( 0x0122,prog_0122 );
 }
 
 Control prog_0122 ()
 {
     at ( "0122" );
-    instruction ( "LD   D,00",0x0124 );
+    instruction ( "LD   D,00",e16_hi_lo ( 0x01,0x24 ) );
     advance ( 7 );
     D = 0x00;
-    return jumpDirect ( prog_0124 );
+    return jumpDirect ( 0x0124,prog_0124 );
 }
 
 Control prog_0124 ()
 {
     at ( "0124" );
-    instruction ( "LD   HL,1C00",0x0127 );
+    instruction ( "LD   HL,1C00",e16_hi_lo ( 0x01,0x27 ) );
     advance ( 10 );
     H = 0x1C;
     L = 0x00;
-    return jumpDirect ( prog_0127 );
+    return jumpDirect ( 0x0127,prog_0127 );
 }
 
 Control prog_0127 ()
 {
     at ( "0127" );
-    instruction ( "ADD  HL,DE",0x0128 );
+    instruction ( "ADD  HL,DE",e16_hi_lo ( 0x01,0x28 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = H ;
@@ -6409,13 +6409,13 @@ Control prog_0127 ()
     H = e8_hi ( e16_drop_hi_bit_of_17 ( a5 ) );
     L = e8_lo ( e16_drop_hi_bit_of_17 ( a5 ) );
     FlagCY = e1_hi_bit_of_17 ( a5 );
-    return jumpDirect ( prog_0128 );
+    return jumpDirect ( 0x0128,prog_0128 );
 }
 
 Control prog_0128 ()
 {
     at ( "0128" );
-    instruction ( "EX   DE,HL",0x0129 );
+    instruction ( "EX   DE,HL",e16_hi_lo ( 0x01,0x29 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = H ;
@@ -6425,23 +6425,23 @@ Control prog_0128 ()
     E = a4;
     H = a1;
     L = a2;
-    return jumpDirect ( prog_0129 );
+    return jumpDirect ( 0x0129,prog_0129 );
 }
 
 Control prog_0129 ()
 {
     at ( "0129" );
-    instruction ( "LD   A,B",0x012A );
+    instruction ( "LD   A,B",e16_hi_lo ( 0x01,0x2A ) );
     u8 a1 = B ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_012A );
+    return jumpDirect ( 0x012A,prog_012A );
 }
 
 Control prog_012A ()
 {
     at ( "012A" );
-    instruction ( "AND  A",0x012B );
+    instruction ( "AND  A",e16_hi_lo ( 0x01,0x2B ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -6453,13 +6453,13 @@ Control prog_012A ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_012B );
+    return jumpDirect ( 0x012B,prog_012B );
 }
 
 Control prog_012B ()
 {
     at ( "012B" );
-    instruction ( "CALL NZ,013B",0x012E );
+    instruction ( "CALL NZ,013B",e16_hi_lo ( 0x01,0x2E ) );
     if (e1_flip ( FlagZ ))
     {
         u8 a1 = SPH ;
@@ -6474,40 +6474,40 @@ Control prog_012B ()
         advance ( 17 );
         SPH = e8_hi ( a6 );
         SPL = e8_lo ( a6 );
-        return jumpDirect ( prog_013B );
+        return jumpDirect ( 0x013B,prog_013B );
     }
     else
     {
         advance ( 11 );
-        return jumpDirect ( prog_012E );
+        return jumpDirect ( 0x012E,prog_012E );
     }
 }
 
 Control prog_012E ()
 {
     at ( "012E" );
-    instruction ( "LD   HL,(200B)",0x0131 );
+    instruction ( "LD   HL,(200B)",e16_hi_lo ( 0x01,0x31 ) );
     u8 a1 = e8_read_mem ( 0x200B ) ;
     u8 a2 = e8_read_mem ( 0x200C ) ;
     advance ( 16 );
     H = a2;
     L = a1;
-    return jumpDirect ( prog_0131 );
+    return jumpDirect ( 0x0131,prog_0131 );
 }
 
 Control prog_0131 ()
 {
     at ( "0131" );
-    instruction ( "LD   B,10",0x0133 );
+    instruction ( "LD   B,10",e16_hi_lo ( 0x01,0x33 ) );
     advance ( 7 );
     B = 0x10;
-    return jumpDirect ( prog_0133 );
+    return jumpDirect ( 0x0133,prog_0133 );
 }
 
 Control prog_0133 ()
 {
     at ( "0133" );
-    instruction ( "CALL 15D3",0x0136 );
+    instruction ( "CALL 15D3",e16_hi_lo ( 0x01,0x36 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -6520,13 +6520,13 @@ Control prog_0133 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_15D3 );
+    return jumpDirect ( 0x15D3,prog_15D3 );
 }
 
 Control prog_0136 ()
 {
     at ( "0136" );
-    instruction ( "XOR  A",0x0137 );
+    instruction ( "XOR  A",e16_hi_lo ( 0x01,0x37 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -6537,23 +6537,23 @@ Control prog_0136 ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0137 );
+    return jumpDirect ( 0x0137,prog_0137 );
 }
 
 Control prog_0137 ()
 {
     at ( "0137" );
-    instruction ( "LD   (2000),A",0x013A );
+    instruction ( "LD   (2000),A",e16_hi_lo ( 0x01,0x3A ) );
     u8 a1 = A ;
     mem_write ( 0x2000,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_013A );
+    return jumpDirect ( 0x013A,prog_013A );
 }
 
 Control prog_013A ()
 {
     at ( "013A" );
-    instruction ( "RET",0x013B );
+    instruction ( "RET",e16_hi_lo ( 0x01,0x3B ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -6571,17 +6571,17 @@ Control prog_013A ()
 Control prog_013B ()
 {
     at ( "013B" );
-    instruction ( "LD   HL,0030",0x013E );
+    instruction ( "LD   HL,0030",e16_hi_lo ( 0x01,0x3E ) );
     advance ( 10 );
     H = 0x00;
     L = 0x30;
-    return jumpDirect ( prog_013E );
+    return jumpDirect ( 0x013E,prog_013E );
 }
 
 Control prog_013E ()
 {
     at ( "013E" );
-    instruction ( "ADD  HL,DE",0x013F );
+    instruction ( "ADD  HL,DE",e16_hi_lo ( 0x01,0x3F ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = H ;
@@ -6591,13 +6591,13 @@ Control prog_013E ()
     H = e8_hi ( e16_drop_hi_bit_of_17 ( a5 ) );
     L = e8_lo ( e16_drop_hi_bit_of_17 ( a5 ) );
     FlagCY = e1_hi_bit_of_17 ( a5 );
-    return jumpDirect ( prog_013F );
+    return jumpDirect ( 0x013F,prog_013F );
 }
 
 Control prog_013F ()
 {
     at ( "013F" );
-    instruction ( "EX   DE,HL",0x0140 );
+    instruction ( "EX   DE,HL",e16_hi_lo ( 0x01,0x40 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = H ;
@@ -6607,13 +6607,13 @@ Control prog_013F ()
     E = a4;
     H = a1;
     L = a2;
-    return jumpDirect ( prog_0140 );
+    return jumpDirect ( 0x0140,prog_0140 );
 }
 
 Control prog_0140 ()
 {
     at ( "0140" );
-    instruction ( "RET",0x0141 );
+    instruction ( "RET",e16_hi_lo ( 0x01,0x41 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -6631,17 +6631,17 @@ Control prog_0140 ()
 Control prog_0141 ()
 {
     at ( "0141" );
-    instruction ( "LD   A,(2068)",0x0144 );
+    instruction ( "LD   A,(2068)",e16_hi_lo ( 0x01,0x44 ) );
     u8 a1 = e8_read_mem ( 0x2068 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0144 );
+    return jumpDirect ( 0x0144,prog_0144 );
 }
 
 Control prog_0144 ()
 {
     at ( "0144" );
-    instruction ( "AND  A",0x0145 );
+    instruction ( "AND  A",e16_hi_lo ( 0x01,0x45 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -6653,13 +6653,13 @@ Control prog_0144 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0145 );
+    return jumpDirect ( 0x0145,prog_0145 );
 }
 
 Control prog_0145 ()
 {
     at ( "0145" );
-    instruction ( "RET  Z",0x0146 );
+    instruction ( "RET  Z",e16_hi_lo ( 0x01,0x46 ) );
     if (FlagZ)
     {
         u8 a1 = SPH ;
@@ -6678,24 +6678,24 @@ Control prog_0145 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_0146 );
+        return jumpDirect ( 0x0146,prog_0146 );
     }
 }
 
 Control prog_0146 ()
 {
     at ( "0146" );
-    instruction ( "LD   A,(2000)",0x0149 );
+    instruction ( "LD   A,(2000)",e16_hi_lo ( 0x01,0x49 ) );
     u8 a1 = e8_read_mem ( 0x2000 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0149 );
+    return jumpDirect ( 0x0149,prog_0149 );
 }
 
 Control prog_0149 ()
 {
     at ( "0149" );
-    instruction ( "AND  A",0x014A );
+    instruction ( "AND  A",e16_hi_lo ( 0x01,0x4A ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -6707,13 +6707,13 @@ Control prog_0149 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_014A );
+    return jumpDirect ( 0x014A,prog_014A );
 }
 
 Control prog_014A ()
 {
     at ( "014A" );
-    instruction ( "RET  NZ",0x014B );
+    instruction ( "RET  NZ",e16_hi_lo ( 0x01,0x4B ) );
     if (e1_flip ( FlagZ ))
     {
         u8 a1 = SPH ;
@@ -6732,53 +6732,53 @@ Control prog_014A ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_014B );
+        return jumpDirect ( 0x014B,prog_014B );
     }
 }
 
 Control prog_014B ()
 {
     at ( "014B" );
-    instruction ( "LD   A,(2067)",0x014E );
+    instruction ( "LD   A,(2067)",e16_hi_lo ( 0x01,0x4E ) );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_014E );
+    return jumpDirect ( 0x014E,prog_014E );
 }
 
 Control prog_014E ()
 {
     at ( "014E" );
-    instruction ( "LD   H,A",0x014F );
+    instruction ( "LD   H,A",e16_hi_lo ( 0x01,0x4F ) );
     u8 a1 = A ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( prog_014F );
+    return jumpDirect ( 0x014F,prog_014F );
 }
 
 Control prog_014F ()
 {
     at ( "014F" );
-    instruction ( "LD   A,(2006)",0x0152 );
+    instruction ( "LD   A,(2006)",e16_hi_lo ( 0x01,0x52 ) );
     u8 a1 = e8_read_mem ( 0x2006 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0152 );
+    return jumpDirect ( 0x0152,prog_0152 );
 }
 
 Control prog_0152 ()
 {
     at ( "0152" );
-    instruction ( "LD   D,02",0x0154 );
+    instruction ( "LD   D,02",e16_hi_lo ( 0x01,0x54 ) );
     advance ( 7 );
     D = 0x02;
-    return jumpDirect ( prog_0154 );
+    return jumpDirect ( 0x0154,prog_0154 );
 }
 
 Control prog_0154 ()
 {
     at ( "0154" );
-    instruction ( "INC  A",0x0155 );
+    instruction ( "INC  A",e16_hi_lo ( 0x01,0x55 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_true (  ),a1,0x00 ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -6790,13 +6790,13 @@ Control prog_0154 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_0155 );
+    return jumpDirect ( 0x0155,prog_0155 );
 }
 
 Control prog_0155 ()
 {
     at ( "0155" );
-    instruction ( "CP   37",0x0157 );
+    instruction ( "CP   37",e16_hi_lo ( 0x01,0x57 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x37 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -6808,13 +6808,13 @@ Control prog_0155 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_0157 );
+    return jumpDirect ( 0x0157,prog_0157 );
 }
 
 Control prog_0157 ()
 {
     at ( "0157" );
-    instruction ( "CALL Z,01A1",0x015A );
+    instruction ( "CALL Z,01A1",e16_hi_lo ( 0x01,0x5A ) );
     if (FlagZ)
     {
         u8 a1 = SPH ;
@@ -6829,41 +6829,41 @@ Control prog_0157 ()
         advance ( 17 );
         SPH = e8_hi ( a6 );
         SPL = e8_lo ( a6 );
-        return jumpDirect ( prog_01A1 );
+        return jumpDirect ( 0x01A1,prog_01A1 );
     }
     else
     {
         advance ( 11 );
-        return jumpDirect ( prog_015A );
+        return jumpDirect ( 0x015A,prog_015A );
     }
 }
 
 Control prog_015A ()
 {
     at ( "015A" );
-    instruction ( "LD   L,A",0x015B );
+    instruction ( "LD   L,A",e16_hi_lo ( 0x01,0x5B ) );
     u8 a1 = A ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( prog_015B );
+    return jumpDirect ( 0x015B,prog_015B );
 }
 
 Control prog_015B ()
 {
     at ( "015B" );
-    instruction ( "LD   B,(HL)",0x015C );
+    instruction ( "LD   B,(HL)",e16_hi_lo ( 0x01,0x5C ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     B = a3;
-    return jumpDirect ( prog_015C );
+    return jumpDirect ( 0x015C,prog_015C );
 }
 
 Control prog_015C ()
 {
     at ( "015C" );
-    instruction ( "DEC  B",0x015D );
+    instruction ( "DEC  B",e16_hi_lo ( 0x01,0x5D ) );
     u8 a1 = B ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -6875,39 +6875,39 @@ Control prog_015C ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_015D );
+    return jumpDirect ( 0x015D,prog_015D );
 }
 
 Control prog_015D ()
 {
     at ( "015D" );
-    instruction ( "JP   NZ,0154",0x0160 );
+    instruction ( "JP   NZ,0154",e16_hi_lo ( 0x01,0x60 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_0154 );
+        return jumpDirect ( 0x0154,prog_0154 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0160 );
+        return jumpDirect ( 0x0160,prog_0160 );
     }
 }
 
 Control prog_0160 ()
 {
     at ( "0160" );
-    instruction ( "LD   (2006),A",0x0163 );
+    instruction ( "LD   (2006),A",e16_hi_lo ( 0x01,0x63 ) );
     u8 a1 = A ;
     mem_write ( 0x2006,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0163 );
+    return jumpDirect ( 0x0163,prog_0163 );
 }
 
 Control prog_0163 ()
 {
     at ( "0163" );
-    instruction ( "CALL 017A",0x0166 );
+    instruction ( "CALL 017A",e16_hi_lo ( 0x01,0x66 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -6920,45 +6920,45 @@ Control prog_0163 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_017A );
+    return jumpDirect ( 0x017A,prog_017A );
 }
 
 Control prog_0166 ()
 {
     at ( "0166" );
-    instruction ( "LD   H,C",0x0167 );
+    instruction ( "LD   H,C",e16_hi_lo ( 0x01,0x67 ) );
     u8 a1 = C ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( prog_0167 );
+    return jumpDirect ( 0x0167,prog_0167 );
 }
 
 Control prog_0167 ()
 {
     at ( "0167" );
-    instruction ( "LD   (200B),HL",0x016A );
+    instruction ( "LD   (200B),HL",e16_hi_lo ( 0x01,0x6A ) );
     u8 a1 = L ;
     mem_write ( 0x200B,a1 );
     u8 a2 = H ;
     mem_write ( 0x200C,a2 );
     advance ( 16 );
-    return jumpDirect ( prog_016A );
+    return jumpDirect ( 0x016A,prog_016A );
 }
 
 Control prog_016A ()
 {
     at ( "016A" );
-    instruction ( "LD   A,L",0x016B );
+    instruction ( "LD   A,L",e16_hi_lo ( 0x01,0x6B ) );
     u8 a1 = L ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_016B );
+    return jumpDirect ( 0x016B,prog_016B );
 }
 
 Control prog_016B ()
 {
     at ( "016B" );
-    instruction ( "CP   28",0x016D );
+    instruction ( "CP   28",e16_hi_lo ( 0x01,0x6D ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x28 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -6970,68 +6970,68 @@ Control prog_016B ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_016D );
+    return jumpDirect ( 0x016D,prog_016D );
 }
 
 Control prog_016D ()
 {
     at ( "016D" );
-    instruction ( "JP   CY,1971",0x0170 );
+    instruction ( "JP   CY,1971",e16_hi_lo ( 0x01,0x70 ) );
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( prog_1971 );
+        return jumpDirect ( 0x1971,prog_1971 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0170 );
+        return jumpDirect ( 0x0170,prog_0170 );
     }
 }
 
 Control prog_0170 ()
 {
     at ( "0170" );
-    instruction ( "LD   A,D",0x0171 );
+    instruction ( "LD   A,D",e16_hi_lo ( 0x01,0x71 ) );
     u8 a1 = D ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_0171 );
+    return jumpDirect ( 0x0171,prog_0171 );
 }
 
 Control prog_0171 ()
 {
     at ( "0171" );
-    instruction ( "LD   (2004),A",0x0174 );
+    instruction ( "LD   (2004),A",e16_hi_lo ( 0x01,0x74 ) );
     u8 a1 = A ;
     mem_write ( 0x2004,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0174 );
+    return jumpDirect ( 0x0174,prog_0174 );
 }
 
 Control prog_0174 ()
 {
     at ( "0174" );
-    instruction ( "LD   A,01",0x0176 );
+    instruction ( "LD   A,01",e16_hi_lo ( 0x01,0x76 ) );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( prog_0176 );
+    return jumpDirect ( 0x0176,prog_0176 );
 }
 
 Control prog_0176 ()
 {
     at ( "0176" );
-    instruction ( "LD   (2000),A",0x0179 );
+    instruction ( "LD   (2000),A",e16_hi_lo ( 0x01,0x79 ) );
     u8 a1 = A ;
     mem_write ( 0x2000,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0179 );
+    return jumpDirect ( 0x0179,prog_0179 );
 }
 
 Control prog_0179 ()
 {
     at ( "0179" );
-    instruction ( "RET",0x017A );
+    instruction ( "RET",e16_hi_lo ( 0x01,0x7A ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -7049,73 +7049,73 @@ Control prog_0179 ()
 Control prog_017A ()
 {
     at ( "017A" );
-    instruction ( "LD   D,00",0x017C );
+    instruction ( "LD   D,00",e16_hi_lo ( 0x01,0x7C ) );
     advance ( 7 );
     D = 0x00;
-    return jumpDirect ( prog_017C );
+    return jumpDirect ( 0x017C,prog_017C );
 }
 
 Control prog_017C ()
 {
     at ( "017C" );
-    instruction ( "LD   A,L",0x017D );
+    instruction ( "LD   A,L",e16_hi_lo ( 0x01,0x7D ) );
     u8 a1 = L ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_017D );
+    return jumpDirect ( 0x017D,prog_017D );
 }
 
 Control prog_017D ()
 {
     at ( "017D" );
-    instruction ( "LD   HL,2009",0x0180 );
+    instruction ( "LD   HL,2009",e16_hi_lo ( 0x01,0x80 ) );
     advance ( 10 );
     H = 0x20;
     L = 0x09;
-    return jumpDirect ( prog_0180 );
+    return jumpDirect ( 0x0180,prog_0180 );
 }
 
 Control prog_0180 ()
 {
     at ( "0180" );
-    instruction ( "LD   B,(HL)",0x0181 );
+    instruction ( "LD   B,(HL)",e16_hi_lo ( 0x01,0x81 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     B = a3;
-    return jumpDirect ( prog_0181 );
+    return jumpDirect ( 0x0181,prog_0181 );
 }
 
 Control prog_0181 ()
 {
     at ( "0181" );
-    instruction ( "INC  HL",0x0182 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x01,0x82 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_0182 );
+    return jumpDirect ( 0x0182,prog_0182 );
 }
 
 Control prog_0182 ()
 {
     at ( "0182" );
-    instruction ( "LD   C,(HL)",0x0183 );
+    instruction ( "LD   C,(HL)",e16_hi_lo ( 0x01,0x83 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     C = a3;
-    return jumpDirect ( prog_0183 );
+    return jumpDirect ( 0x0183,prog_0183 );
 }
 
 Control prog_0183 ()
 {
     at ( "0183" );
-    instruction ( "CP   0B",0x0185 );
+    instruction ( "CP   0B",e16_hi_lo ( 0x01,0x85 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x0B ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -7127,29 +7127,29 @@ Control prog_0183 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_0185 );
+    return jumpDirect ( 0x0185,prog_0185 );
 }
 
 Control prog_0185 ()
 {
     at ( "0185" );
-    instruction ( "JP   MI,0194",0x0188 );
+    instruction ( "JP   MI,0194",e16_hi_lo ( 0x01,0x88 ) );
     if (FlagS)
     {
         advance ( 10 );
-        return jumpDirect ( prog_0194 );
+        return jumpDirect ( 0x0194,prog_0194 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0188 );
+        return jumpDirect ( 0x0188,prog_0188 );
     }
 }
 
 Control prog_0188 ()
 {
     at ( "0188" );
-    instruction ( "SBC  0B",0x018A );
+    instruction ( "SBC  0B",e16_hi_lo ( 0x01,0x8A ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( FlagCY ),a1,e8_complement ( 0x0B ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -7162,33 +7162,33 @@ Control prog_0188 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_018A );
+    return jumpDirect ( 0x018A,prog_018A );
 }
 
 Control prog_018A ()
 {
     at ( "018A" );
-    instruction ( "LD   E,A",0x018B );
+    instruction ( "LD   E,A",e16_hi_lo ( 0x01,0x8B ) );
     u8 a1 = A ;
     advance ( 5 );
     E = a1;
-    return jumpDirect ( prog_018B );
+    return jumpDirect ( 0x018B,prog_018B );
 }
 
 Control prog_018B ()
 {
     at ( "018B" );
-    instruction ( "LD   A,B",0x018C );
+    instruction ( "LD   A,B",e16_hi_lo ( 0x01,0x8C ) );
     u8 a1 = B ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_018C );
+    return jumpDirect ( 0x018C,prog_018C );
 }
 
 Control prog_018C ()
 {
     at ( "018C" );
-    instruction ( "ADD  10",0x018E );
+    instruction ( "ADD  10",e16_hi_lo ( 0x01,0x8E ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_false (  ),0x10,a1 ) ;
     u8 a3 = e8_and ( 0x10,0x0F ) ;
@@ -7201,33 +7201,33 @@ Control prog_018C ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_test_bit ( e8_hi ( a2 ),0 );
-    return jumpDirect ( prog_018E );
+    return jumpDirect ( 0x018E,prog_018E );
 }
 
 Control prog_018E ()
 {
     at ( "018E" );
-    instruction ( "LD   B,A",0x018F );
+    instruction ( "LD   B,A",e16_hi_lo ( 0x01,0x8F ) );
     u8 a1 = A ;
     advance ( 5 );
     B = a1;
-    return jumpDirect ( prog_018F );
+    return jumpDirect ( 0x018F,prog_018F );
 }
 
 Control prog_018F ()
 {
     at ( "018F" );
-    instruction ( "LD   A,E",0x0190 );
+    instruction ( "LD   A,E",e16_hi_lo ( 0x01,0x90 ) );
     u8 a1 = E ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_0190 );
+    return jumpDirect ( 0x0190,prog_0190 );
 }
 
 Control prog_0190 ()
 {
     at ( "0190" );
-    instruction ( "INC  D",0x0191 );
+    instruction ( "INC  D",e16_hi_lo ( 0x01,0x91 ) );
     u8 a1 = D ;
     u16 a2 = e16_add_with_carry ( e1_true (  ),a1,0x00 ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -7239,31 +7239,31 @@ Control prog_0190 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_0191 );
+    return jumpDirect ( 0x0191,prog_0191 );
 }
 
 Control prog_0191 ()
 {
     at ( "0191" );
-    instruction ( "JP   0183",0x0194 );
+    instruction ( "JP   0183",e16_hi_lo ( 0x01,0x94 ) );
     advance ( 10 );
-    return jumpDirect ( prog_0183 );
+    return jumpDirect ( 0x0183,prog_0183 );
 }
 
 Control prog_0194 ()
 {
     at ( "0194" );
-    instruction ( "LD   L,B",0x0195 );
+    instruction ( "LD   L,B",e16_hi_lo ( 0x01,0x95 ) );
     u8 a1 = B ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( prog_0195 );
+    return jumpDirect ( 0x0195,prog_0195 );
 }
 
 Control prog_0195 ()
 {
     at ( "0195" );
-    instruction ( "AND  A",0x0196 );
+    instruction ( "AND  A",e16_hi_lo ( 0x01,0x96 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -7275,13 +7275,13 @@ Control prog_0195 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0196 );
+    return jumpDirect ( 0x0196,prog_0196 );
 }
 
 Control prog_0196 ()
 {
     at ( "0196" );
-    instruction ( "RET  Z",0x0197 );
+    instruction ( "RET  Z",e16_hi_lo ( 0x01,0x97 ) );
     if (FlagZ)
     {
         u8 a1 = SPH ;
@@ -7300,34 +7300,34 @@ Control prog_0196 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_0197 );
+        return jumpDirect ( 0x0197,prog_0197 );
     }
 }
 
 Control prog_0197 ()
 {
     at ( "0197" );
-    instruction ( "LD   E,A",0x0198 );
+    instruction ( "LD   E,A",e16_hi_lo ( 0x01,0x98 ) );
     u8 a1 = A ;
     advance ( 5 );
     E = a1;
-    return jumpDirect ( prog_0198 );
+    return jumpDirect ( 0x0198,prog_0198 );
 }
 
 Control prog_0198 ()
 {
     at ( "0198" );
-    instruction ( "LD   A,C",0x0199 );
+    instruction ( "LD   A,C",e16_hi_lo ( 0x01,0x99 ) );
     u8 a1 = C ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_0199 );
+    return jumpDirect ( 0x0199,prog_0199 );
 }
 
 Control prog_0199 ()
 {
     at ( "0199" );
-    instruction ( "ADD  10",0x019B );
+    instruction ( "ADD  10",e16_hi_lo ( 0x01,0x9B ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_false (  ),0x10,a1 ) ;
     u8 a3 = e8_and ( 0x10,0x0F ) ;
@@ -7340,33 +7340,33 @@ Control prog_0199 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_test_bit ( e8_hi ( a2 ),0 );
-    return jumpDirect ( prog_019B );
+    return jumpDirect ( 0x019B,prog_019B );
 }
 
 Control prog_019B ()
 {
     at ( "019B" );
-    instruction ( "LD   C,A",0x019C );
+    instruction ( "LD   C,A",e16_hi_lo ( 0x01,0x9C ) );
     u8 a1 = A ;
     advance ( 5 );
     C = a1;
-    return jumpDirect ( prog_019C );
+    return jumpDirect ( 0x019C,prog_019C );
 }
 
 Control prog_019C ()
 {
     at ( "019C" );
-    instruction ( "LD   A,E",0x019D );
+    instruction ( "LD   A,E",e16_hi_lo ( 0x01,0x9D ) );
     u8 a1 = E ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_019D );
+    return jumpDirect ( 0x019D,prog_019D );
 }
 
 Control prog_019D ()
 {
     at ( "019D" );
-    instruction ( "DEC  A",0x019E );
+    instruction ( "DEC  A",e16_hi_lo ( 0x01,0x9E ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -7378,21 +7378,21 @@ Control prog_019D ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_019E );
+    return jumpDirect ( 0x019E,prog_019E );
 }
 
 Control prog_019E ()
 {
     at ( "019E" );
-    instruction ( "JP   0195",0x01A1 );
+    instruction ( "JP   0195",e16_hi_lo ( 0x01,0xA1 ) );
     advance ( 10 );
-    return jumpDirect ( prog_0195 );
+    return jumpDirect ( 0x0195,prog_0195 );
 }
 
 Control prog_01A1 ()
 {
     at ( "01A1" );
-    instruction ( "DEC  D",0x01A2 );
+    instruction ( "DEC  D",e16_hi_lo ( 0x01,0xA2 ) );
     u8 a1 = D ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -7404,86 +7404,86 @@ Control prog_01A1 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_01A2 );
+    return jumpDirect ( 0x01A2,prog_01A2 );
 }
 
 Control prog_01A2 ()
 {
     at ( "01A2" );
-    instruction ( "JP   Z,01CD",0x01A5 );
+    instruction ( "JP   Z,01CD",e16_hi_lo ( 0x01,0xA5 ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_01CD );
+        return jumpDirect ( 0x01CD,prog_01CD );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_01A5 );
+        return jumpDirect ( 0x01A5,prog_01A5 );
     }
 }
 
 Control prog_01A5 ()
 {
     at ( "01A5" );
-    instruction ( "LD   HL,2006",0x01A8 );
+    instruction ( "LD   HL,2006",e16_hi_lo ( 0x01,0xA8 ) );
     advance ( 10 );
     H = 0x20;
     L = 0x06;
-    return jumpDirect ( prog_01A8 );
+    return jumpDirect ( 0x01A8,prog_01A8 );
 }
 
 Control prog_01A8 ()
 {
     at ( "01A8" );
-    instruction ( "LD   (HL),00",0x01AA );
+    instruction ( "LD   (HL),00",e16_hi_lo ( 0x01,0xAA ) );
     u8 a1 = H ;
     u8 a2 = L ;
     mem_write ( e16_hi_lo ( a1,a2 ),0x00 );
     advance ( 10 );
-    return jumpDirect ( prog_01AA );
+    return jumpDirect ( 0x01AA,prog_01AA );
 }
 
 Control prog_01AA ()
 {
     at ( "01AA" );
-    instruction ( "INC  HL",0x01AB );
+    instruction ( "INC  HL",e16_hi_lo ( 0x01,0xAB ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_01AB );
+    return jumpDirect ( 0x01AB,prog_01AB );
 }
 
 Control prog_01AB ()
 {
     at ( "01AB" );
-    instruction ( "LD   C,(HL)",0x01AC );
+    instruction ( "LD   C,(HL)",e16_hi_lo ( 0x01,0xAC ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     C = a3;
-    return jumpDirect ( prog_01AC );
+    return jumpDirect ( 0x01AC,prog_01AC );
 }
 
 Control prog_01AC ()
 {
     at ( "01AC" );
-    instruction ( "LD   (HL),00",0x01AE );
+    instruction ( "LD   (HL),00",e16_hi_lo ( 0x01,0xAE ) );
     u8 a1 = H ;
     u8 a2 = L ;
     mem_write ( e16_hi_lo ( a1,a2 ),0x00 );
     advance ( 10 );
-    return jumpDirect ( prog_01AE );
+    return jumpDirect ( 0x01AE,prog_01AE );
 }
 
 Control prog_01AE ()
 {
     at ( "01AE" );
-    instruction ( "CALL 01D9",0x01B1 );
+    instruction ( "CALL 01D9",e16_hi_lo ( 0x01,0xB1 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -7496,35 +7496,35 @@ Control prog_01AE ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_01D9 );
+    return jumpDirect ( 0x01D9,prog_01D9 );
 }
 
 Control prog_01B1 ()
 {
     at ( "01B1" );
-    instruction ( "LD   HL,2005",0x01B4 );
+    instruction ( "LD   HL,2005",e16_hi_lo ( 0x01,0xB4 ) );
     advance ( 10 );
     H = 0x20;
     L = 0x05;
-    return jumpDirect ( prog_01B4 );
+    return jumpDirect ( 0x01B4,prog_01B4 );
 }
 
 Control prog_01B4 ()
 {
     at ( "01B4" );
-    instruction ( "LD   A,(HL)",0x01B5 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x01,0xB5 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_01B5 );
+    return jumpDirect ( 0x01B5,prog_01B5 );
 }
 
 Control prog_01B5 ()
 {
     at ( "01B5" );
-    instruction ( "INC  A",0x01B6 );
+    instruction ( "INC  A",e16_hi_lo ( 0x01,0xB6 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_true (  ),a1,0x00 ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -7536,13 +7536,13 @@ Control prog_01B5 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_01B6 );
+    return jumpDirect ( 0x01B6,prog_01B6 );
 }
 
 Control prog_01B6 ()
 {
     at ( "01B6" );
-    instruction ( "AND  01",0x01B8 );
+    instruction ( "AND  01",e16_hi_lo ( 0x01,0xB8 ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( 0x01,a1 ) ;
     u8 a3 = e8_or ( 0x01,a1 ) ;
@@ -7553,25 +7553,25 @@ Control prog_01B6 ()
     FlagA = e1_test_bit ( a3,3 );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_01B8 );
+    return jumpDirect ( 0x01B8,prog_01B8 );
 }
 
 Control prog_01B8 ()
 {
     at ( "01B8" );
-    instruction ( "LD   (HL),A",0x01B9 );
+    instruction ( "LD   (HL),A",e16_hi_lo ( 0x01,0xB9 ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_01B9 );
+    return jumpDirect ( 0x01B9,prog_01B9 );
 }
 
 Control prog_01B9 ()
 {
     at ( "01B9" );
-    instruction ( "XOR  A",0x01BA );
+    instruction ( "XOR  A",e16_hi_lo ( 0x01,0xBA ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -7582,35 +7582,35 @@ Control prog_01B9 ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_01BA );
+    return jumpDirect ( 0x01BA,prog_01BA );
 }
 
 Control prog_01BA ()
 {
     at ( "01BA" );
-    instruction ( "LD   HL,2067",0x01BD );
+    instruction ( "LD   HL,2067",e16_hi_lo ( 0x01,0xBD ) );
     advance ( 10 );
     H = 0x20;
     L = 0x67;
-    return jumpDirect ( prog_01BD );
+    return jumpDirect ( 0x01BD,prog_01BD );
 }
 
 Control prog_01BD ()
 {
     at ( "01BD" );
-    instruction ( "LD   H,(HL)",0x01BE );
+    instruction ( "LD   H,(HL)",e16_hi_lo ( 0x01,0xBE ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     H = a3;
-    return jumpDirect ( prog_01BE );
+    return jumpDirect ( 0x01BE,prog_01BE );
 }
 
 Control prog_01BE ()
 {
     at ( "01BE" );
-    instruction ( "RET",0x01BF );
+    instruction ( "RET",e16_hi_lo ( 0x01,0xBF ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -7628,50 +7628,50 @@ Control prog_01BE ()
 Control prog_01C0 ()
 {
     at ( "01C0" );
-    instruction ( "LD   HL,2100",0x01C3 );
+    instruction ( "LD   HL,2100",e16_hi_lo ( 0x01,0xC3 ) );
     advance ( 10 );
     H = 0x21;
     L = 0x00;
-    return jumpDirect ( prog_01C3 );
+    return jumpDirect ( 0x01C3,prog_01C3 );
 }
 
 Control prog_01C3 ()
 {
     at ( "01C3" );
-    instruction ( "LD   B,37",0x01C5 );
+    instruction ( "LD   B,37",e16_hi_lo ( 0x01,0xC5 ) );
     advance ( 7 );
     B = 0x37;
-    return jumpDirect ( prog_01C5 );
+    return jumpDirect ( 0x01C5,prog_01C5 );
 }
 
 Control prog_01C5 ()
 {
     at ( "01C5" );
-    instruction ( "LD   (HL),01",0x01C7 );
+    instruction ( "LD   (HL),01",e16_hi_lo ( 0x01,0xC7 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     mem_write ( e16_hi_lo ( a1,a2 ),0x01 );
     advance ( 10 );
-    return jumpDirect ( prog_01C7 );
+    return jumpDirect ( 0x01C7,prog_01C7 );
 }
 
 Control prog_01C7 ()
 {
     at ( "01C7" );
-    instruction ( "INC  HL",0x01C8 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x01,0xC8 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_01C8 );
+    return jumpDirect ( 0x01C8,prog_01C8 );
 }
 
 Control prog_01C8 ()
 {
     at ( "01C8" );
-    instruction ( "DEC  B",0x01C9 );
+    instruction ( "DEC  B",e16_hi_lo ( 0x01,0xC9 ) );
     u8 a1 = B ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -7683,29 +7683,29 @@ Control prog_01C8 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_01C9 );
+    return jumpDirect ( 0x01C9,prog_01C9 );
 }
 
 Control prog_01C9 ()
 {
     at ( "01C9" );
-    instruction ( "JP   NZ,01C5",0x01CC );
+    instruction ( "JP   NZ,01C5",e16_hi_lo ( 0x01,0xCC ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_01C5 );
+        return jumpDirect ( 0x01C5,prog_01C5 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_01CC );
+        return jumpDirect ( 0x01CC,prog_01CC );
     }
 }
 
 Control prog_01CC ()
 {
     at ( "01CC" );
-    instruction ( "RET",0x01CD );
+    instruction ( "RET",e16_hi_lo ( 0x01,0xCD ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -7723,7 +7723,7 @@ Control prog_01CC ()
 Control prog_01CD ()
 {
     at ( "01CD" );
-    instruction ( "POP  HL",0x01CE );
+    instruction ( "POP  HL",e16_hi_lo ( 0x01,0xCE ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -7737,13 +7737,13 @@ Control prog_01CD ()
     L = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_01CE );
+    return jumpDirect ( 0x01CE,prog_01CE );
 }
 
 Control prog_01CE ()
 {
     at ( "01CE" );
-    instruction ( "RET",0x01CF );
+    instruction ( "RET",e16_hi_lo ( 0x01,0xCF ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -7761,91 +7761,91 @@ Control prog_01CE ()
 Control prog_01CF ()
 {
     at ( "01CF" );
-    instruction ( "LD   A,01",0x01D1 );
+    instruction ( "LD   A,01",e16_hi_lo ( 0x01,0xD1 ) );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( prog_01D1 );
+    return jumpDirect ( 0x01D1,prog_01D1 );
 }
 
 Control prog_01D1 ()
 {
     at ( "01D1" );
-    instruction ( "LD   B,E0",0x01D3 );
+    instruction ( "LD   B,E0",e16_hi_lo ( 0x01,0xD3 ) );
     advance ( 7 );
     B = 0xE0;
-    return jumpDirect ( prog_01D3 );
+    return jumpDirect ( 0x01D3,prog_01D3 );
 }
 
 Control prog_01D3 ()
 {
     at ( "01D3" );
-    instruction ( "LD   HL,2402",0x01D6 );
+    instruction ( "LD   HL,2402",e16_hi_lo ( 0x01,0xD6 ) );
     advance ( 10 );
     H = 0x24;
     L = 0x02;
-    return jumpDirect ( prog_01D6 );
+    return jumpDirect ( 0x01D6,prog_01D6 );
 }
 
 Control prog_01D6 ()
 {
     at ( "01D6" );
-    instruction ( "JP   14CC",0x01D9 );
+    instruction ( "JP   14CC",e16_hi_lo ( 0x01,0xD9 ) );
     advance ( 10 );
-    return jumpDirect ( prog_14CC );
+    return jumpDirect ( 0x14CC,prog_14CC );
 }
 
 Control prog_01D9 ()
 {
     at ( "01D9" );
-    instruction ( "INC  HL",0x01DA );
+    instruction ( "INC  HL",e16_hi_lo ( 0x01,0xDA ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_01DA );
+    return jumpDirect ( 0x01DA,prog_01DA );
 }
 
 Control prog_01DA ()
 {
     at ( "01DA" );
-    instruction ( "LD   B,(HL)",0x01DB );
+    instruction ( "LD   B,(HL)",e16_hi_lo ( 0x01,0xDB ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     B = a3;
-    return jumpDirect ( prog_01DB );
+    return jumpDirect ( 0x01DB,prog_01DB );
 }
 
 Control prog_01DB ()
 {
     at ( "01DB" );
-    instruction ( "INC  HL",0x01DC );
+    instruction ( "INC  HL",e16_hi_lo ( 0x01,0xDC ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_01DC );
+    return jumpDirect ( 0x01DC,prog_01DC );
 }
 
 Control prog_01DC ()
 {
     at ( "01DC" );
-    instruction ( "LD   A,C",0x01DD );
+    instruction ( "LD   A,C",e16_hi_lo ( 0x01,0xDD ) );
     u8 a1 = C ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_01DD );
+    return jumpDirect ( 0x01DD,prog_01DD );
 }
 
 Control prog_01DD ()
 {
     at ( "01DD" );
-    instruction ( "ADD  (HL)",0x01DE );
+    instruction ( "ADD  (HL)",e16_hi_lo ( 0x01,0xDE ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -7861,48 +7861,48 @@ Control prog_01DD ()
     FlagA = e1_test_bit ( e8_lo ( a8 ),4 );
     FlagP = e1_parity ( e8_lo ( a5 ) );
     FlagCY = e1_test_bit ( e8_hi ( a5 ),0 );
-    return jumpDirect ( prog_01DE );
+    return jumpDirect ( 0x01DE,prog_01DE );
 }
 
 Control prog_01DE ()
 {
     at ( "01DE" );
-    instruction ( "LD   (HL),A",0x01DF );
+    instruction ( "LD   (HL),A",e16_hi_lo ( 0x01,0xDF ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_01DF );
+    return jumpDirect ( 0x01DF,prog_01DF );
 }
 
 Control prog_01DF ()
 {
     at ( "01DF" );
-    instruction ( "INC  HL",0x01E0 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x01,0xE0 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_01E0 );
+    return jumpDirect ( 0x01E0,prog_01E0 );
 }
 
 Control prog_01E0 ()
 {
     at ( "01E0" );
-    instruction ( "LD   A,B",0x01E1 );
+    instruction ( "LD   A,B",e16_hi_lo ( 0x01,0xE1 ) );
     u8 a1 = B ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_01E1 );
+    return jumpDirect ( 0x01E1,prog_01E1 );
 }
 
 Control prog_01E1 ()
 {
     at ( "01E1" );
-    instruction ( "ADD  (HL)",0x01E2 );
+    instruction ( "ADD  (HL)",e16_hi_lo ( 0x01,0xE2 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -7918,25 +7918,25 @@ Control prog_01E1 ()
     FlagA = e1_test_bit ( e8_lo ( a8 ),4 );
     FlagP = e1_parity ( e8_lo ( a5 ) );
     FlagCY = e1_test_bit ( e8_hi ( a5 ),0 );
-    return jumpDirect ( prog_01E2 );
+    return jumpDirect ( 0x01E2,prog_01E2 );
 }
 
 Control prog_01E2 ()
 {
     at ( "01E2" );
-    instruction ( "LD   (HL),A",0x01E3 );
+    instruction ( "LD   (HL),A",e16_hi_lo ( 0x01,0xE3 ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_01E3 );
+    return jumpDirect ( 0x01E3,prog_01E3 );
 }
 
 Control prog_01E3 ()
 {
     at ( "01E3" );
-    instruction ( "RET",0x01E4 );
+    instruction ( "RET",e16_hi_lo ( 0x01,0xE4 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -7954,91 +7954,91 @@ Control prog_01E3 ()
 Control prog_01E4 ()
 {
     at ( "01E4" );
-    instruction ( "LD   B,C0",0x01E6 );
+    instruction ( "LD   B,C0",e16_hi_lo ( 0x01,0xE6 ) );
     advance ( 7 );
     B = 0xC0;
-    return jumpDirect ( prog_01E6 );
+    return jumpDirect ( 0x01E6,prog_01E6 );
 }
 
 Control prog_01E6 ()
 {
     at ( "01E6" );
-    instruction ( "LD   DE,1B00",0x01E9 );
+    instruction ( "LD   DE,1B00",e16_hi_lo ( 0x01,0xE9 ) );
     advance ( 10 );
     D = 0x1B;
     E = 0x00;
-    return jumpDirect ( prog_01E9 );
+    return jumpDirect ( 0x01E9,prog_01E9 );
 }
 
 Control prog_01E9 ()
 {
     at ( "01E9" );
-    instruction ( "LD   HL,2000",0x01EC );
+    instruction ( "LD   HL,2000",e16_hi_lo ( 0x01,0xEC ) );
     advance ( 10 );
     H = 0x20;
     L = 0x00;
-    return jumpDirect ( prog_01EC );
+    return jumpDirect ( 0x01EC,prog_01EC );
 }
 
 Control prog_01EC ()
 {
     at ( "01EC" );
-    instruction ( "JP   1A32",0x01EF );
+    instruction ( "JP   1A32",e16_hi_lo ( 0x01,0xEF ) );
     advance ( 10 );
-    return jumpDirect ( prog_1A32 );
+    return jumpDirect ( 0x1A32,prog_1A32 );
 }
 
 Control prog_01EF ()
 {
     at ( "01EF" );
-    instruction ( "LD   HL,2142",0x01F2 );
+    instruction ( "LD   HL,2142",e16_hi_lo ( 0x01,0xF2 ) );
     advance ( 10 );
     H = 0x21;
     L = 0x42;
-    return jumpDirect ( prog_01F2 );
+    return jumpDirect ( 0x01F2,prog_01F2 );
 }
 
 Control prog_01F2 ()
 {
     at ( "01F2" );
-    instruction ( "JP   01F8",0x01F5 );
+    instruction ( "JP   01F8",e16_hi_lo ( 0x01,0xF5 ) );
     advance ( 10 );
-    return jumpDirect ( prog_01F8 );
+    return jumpDirect ( 0x01F8,prog_01F8 );
 }
 
 Control prog_01F5 ()
 {
     at ( "01F5" );
-    instruction ( "LD   HL,2242",0x01F8 );
+    instruction ( "LD   HL,2242",e16_hi_lo ( 0x01,0xF8 ) );
     advance ( 10 );
     H = 0x22;
     L = 0x42;
-    return jumpDirect ( prog_01F8 );
+    return jumpDirect ( 0x01F8,prog_01F8 );
 }
 
 Control prog_01F8 ()
 {
     at ( "01F8" );
-    instruction ( "LD   C,04",0x01FA );
+    instruction ( "LD   C,04",e16_hi_lo ( 0x01,0xFA ) );
     advance ( 7 );
     C = 0x04;
-    return jumpDirect ( prog_01FA );
+    return jumpDirect ( 0x01FA,prog_01FA );
 }
 
 Control prog_01FA ()
 {
     at ( "01FA" );
-    instruction ( "LD   DE,1D20",0x01FD );
+    instruction ( "LD   DE,1D20",e16_hi_lo ( 0x01,0xFD ) );
     advance ( 10 );
     D = 0x1D;
     E = 0x20;
-    return jumpDirect ( prog_01FD );
+    return jumpDirect ( 0x01FD,prog_01FD );
 }
 
 Control prog_01FD ()
 {
     at ( "01FD" );
-    instruction ( "PUSH DE",0x01FE );
+    instruction ( "PUSH DE",e16_hi_lo ( 0x01,0xFE ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = SPH ;
@@ -8052,22 +8052,22 @@ Control prog_01FD ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_01FE );
+    return jumpDirect ( 0x01FE,prog_01FE );
 }
 
 Control prog_01FE ()
 {
     at ( "01FE" );
-    instruction ( "LD   B,2C",0x0200 );
+    instruction ( "LD   B,2C",e16_hi_lo ( 0x02,0x00 ) );
     advance ( 7 );
     B = 0x2C;
-    return jumpDirect ( prog_0200 );
+    return jumpDirect ( 0x0200,prog_0200 );
 }
 
 Control prog_0200 ()
 {
     at ( "0200" );
-    instruction ( "CALL 1A32",0x0203 );
+    instruction ( "CALL 1A32",e16_hi_lo ( 0x02,0x03 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -8080,13 +8080,13 @@ Control prog_0200 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1A32 );
+    return jumpDirect ( 0x1A32,prog_1A32 );
 }
 
 Control prog_0203 ()
 {
     at ( "0203" );
-    instruction ( "POP  DE",0x0204 );
+    instruction ( "POP  DE",e16_hi_lo ( 0x02,0x04 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -8100,13 +8100,13 @@ Control prog_0203 ()
     E = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_0204 );
+    return jumpDirect ( 0x0204,prog_0204 );
 }
 
 Control prog_0204 ()
 {
     at ( "0204" );
-    instruction ( "DEC  C",0x0205 );
+    instruction ( "DEC  C",e16_hi_lo ( 0x02,0x05 ) );
     u8 a1 = C ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -8118,29 +8118,29 @@ Control prog_0204 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_0205 );
+    return jumpDirect ( 0x0205,prog_0205 );
 }
 
 Control prog_0205 ()
 {
     at ( "0205" );
-    instruction ( "JP   NZ,01FD",0x0208 );
+    instruction ( "JP   NZ,01FD",e16_hi_lo ( 0x02,0x08 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_01FD );
+        return jumpDirect ( 0x01FD,prog_01FD );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0208 );
+        return jumpDirect ( 0x0208,prog_0208 );
     }
 }
 
 Control prog_0208 ()
 {
     at ( "0208" );
-    instruction ( "RET",0x0209 );
+    instruction ( "RET",e16_hi_lo ( 0x02,0x09 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -8158,41 +8158,41 @@ Control prog_0208 ()
 Control prog_0209 ()
 {
     at ( "0209" );
-    instruction ( "LD   A,01",0x020B );
+    instruction ( "LD   A,01",e16_hi_lo ( 0x02,0x0B ) );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( prog_020B );
+    return jumpDirect ( 0x020B,prog_020B );
 }
 
 Control prog_020B ()
 {
     at ( "020B" );
-    instruction ( "JP   021B",0x020E );
+    instruction ( "JP   021B",e16_hi_lo ( 0x02,0x0E ) );
     advance ( 10 );
-    return jumpDirect ( prog_021B );
+    return jumpDirect ( 0x021B,prog_021B );
 }
 
 Control prog_020E ()
 {
     at ( "020E" );
-    instruction ( "LD   A,01",0x0210 );
+    instruction ( "LD   A,01",e16_hi_lo ( 0x02,0x10 ) );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( prog_0210 );
+    return jumpDirect ( 0x0210,prog_0210 );
 }
 
 Control prog_0210 ()
 {
     at ( "0210" );
-    instruction ( "JP   0214",0x0213 );
+    instruction ( "JP   0214",e16_hi_lo ( 0x02,0x13 ) );
     advance ( 10 );
-    return jumpDirect ( prog_0214 );
+    return jumpDirect ( 0x0214,prog_0214 );
 }
 
 Control prog_0213 ()
 {
     at ( "0213" );
-    instruction ( "XOR  A",0x0214 );
+    instruction ( "XOR  A",e16_hi_lo ( 0x02,0x14 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -8203,31 +8203,31 @@ Control prog_0213 ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0214 );
+    return jumpDirect ( 0x0214,prog_0214 );
 }
 
 Control prog_0214 ()
 {
     at ( "0214" );
-    instruction ( "LD   DE,2242",0x0217 );
+    instruction ( "LD   DE,2242",e16_hi_lo ( 0x02,0x17 ) );
     advance ( 10 );
     D = 0x22;
     E = 0x42;
-    return jumpDirect ( prog_0217 );
+    return jumpDirect ( 0x0217,prog_0217 );
 }
 
 Control prog_0217 ()
 {
     at ( "0217" );
-    instruction ( "JP   021E",0x021A );
+    instruction ( "JP   021E",e16_hi_lo ( 0x02,0x1A ) );
     advance ( 10 );
-    return jumpDirect ( prog_021E );
+    return jumpDirect ( 0x021E,prog_021E );
 }
 
 Control prog_021A ()
 {
     at ( "021A" );
-    instruction ( "XOR  A",0x021B );
+    instruction ( "XOR  A",e16_hi_lo ( 0x02,0x1B ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -8238,62 +8238,62 @@ Control prog_021A ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_021B );
+    return jumpDirect ( 0x021B,prog_021B );
 }
 
 Control prog_021B ()
 {
     at ( "021B" );
-    instruction ( "LD   DE,2142",0x021E );
+    instruction ( "LD   DE,2142",e16_hi_lo ( 0x02,0x1E ) );
     advance ( 10 );
     D = 0x21;
     E = 0x42;
-    return jumpDirect ( prog_021E );
+    return jumpDirect ( 0x021E,prog_021E );
 }
 
 Control prog_021E ()
 {
     at ( "021E" );
-    instruction ( "LD   (2081),A",0x0221 );
+    instruction ( "LD   (2081),A",e16_hi_lo ( 0x02,0x21 ) );
     u8 a1 = A ;
     mem_write ( 0x2081,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0221 );
+    return jumpDirect ( 0x0221,prog_0221 );
 }
 
 Control prog_0221 ()
 {
     at ( "0221" );
-    instruction ( "LD   BC,1602",0x0224 );
+    instruction ( "LD   BC,1602",e16_hi_lo ( 0x02,0x24 ) );
     advance ( 10 );
     B = 0x16;
     C = 0x02;
-    return jumpDirect ( prog_0224 );
+    return jumpDirect ( 0x0224,prog_0224 );
 }
 
 Control prog_0224 ()
 {
     at ( "0224" );
-    instruction ( "LD   HL,2806",0x0227 );
+    instruction ( "LD   HL,2806",e16_hi_lo ( 0x02,0x27 ) );
     advance ( 10 );
     H = 0x28;
     L = 0x06;
-    return jumpDirect ( prog_0227 );
+    return jumpDirect ( 0x0227,prog_0227 );
 }
 
 Control prog_0227 ()
 {
     at ( "0227" );
-    instruction ( "LD   A,04",0x0229 );
+    instruction ( "LD   A,04",e16_hi_lo ( 0x02,0x29 ) );
     advance ( 7 );
     A = 0x04;
-    return jumpDirect ( prog_0229 );
+    return jumpDirect ( 0x0229,prog_0229 );
 }
 
 Control prog_0229 ()
 {
     at ( "0229" );
-    instruction ( "PUSH PSW",0x022A );
+    instruction ( "PUSH PSW",e16_hi_lo ( 0x02,0x2A ) );
     u8 a1 = A ;
     u8 a2 = SPH ;
     u8 a3 = SPL ;
@@ -8306,13 +8306,13 @@ Control prog_0229 ()
     advance ( 11 );
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_022A );
+    return jumpDirect ( 0x022A,prog_022A );
 }
 
 Control prog_022A ()
 {
     at ( "022A" );
-    instruction ( "PUSH BC",0x022B );
+    instruction ( "PUSH BC",e16_hi_lo ( 0x02,0x2B ) );
     u8 a1 = B ;
     u8 a2 = C ;
     u8 a3 = SPH ;
@@ -8326,23 +8326,23 @@ Control prog_022A ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_022B );
+    return jumpDirect ( 0x022B,prog_022B );
 }
 
 Control prog_022B ()
 {
     at ( "022B" );
-    instruction ( "LD   A,(2081)",0x022E );
+    instruction ( "LD   A,(2081)",e16_hi_lo ( 0x02,0x2E ) );
     u8 a1 = e8_read_mem ( 0x2081 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_022E );
+    return jumpDirect ( 0x022E,prog_022E );
 }
 
 Control prog_022E ()
 {
     at ( "022E" );
-    instruction ( "AND  A",0x022F );
+    instruction ( "AND  A",e16_hi_lo ( 0x02,0x2F ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -8354,29 +8354,29 @@ Control prog_022E ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_022F );
+    return jumpDirect ( 0x022F,prog_022F );
 }
 
 Control prog_022F ()
 {
     at ( "022F" );
-    instruction ( "JP   NZ,0242",0x0232 );
+    instruction ( "JP   NZ,0242",e16_hi_lo ( 0x02,0x32 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_0242 );
+        return jumpDirect ( 0x0242,prog_0242 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0232 );
+        return jumpDirect ( 0x0232,prog_0232 );
     }
 }
 
 Control prog_0232 ()
 {
     at ( "0232" );
-    instruction ( "CALL 1A69",0x0235 );
+    instruction ( "CALL 1A69",e16_hi_lo ( 0x02,0x35 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -8389,13 +8389,13 @@ Control prog_0232 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1A69 );
+    return jumpDirect ( 0x1A69,prog_1A69 );
 }
 
 Control prog_0235 ()
 {
     at ( "0235" );
-    instruction ( "POP  BC",0x0236 );
+    instruction ( "POP  BC",e16_hi_lo ( 0x02,0x36 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -8409,13 +8409,13 @@ Control prog_0235 ()
     C = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_0236 );
+    return jumpDirect ( 0x0236,prog_0236 );
 }
 
 Control prog_0236 ()
 {
     at ( "0236" );
-    instruction ( "POP  PSW",0x0237 );
+    instruction ( "POP  PSW",e16_hi_lo ( 0x02,0x37 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -8433,13 +8433,13 @@ Control prog_0236 ()
     FlagA = e1_test_bit ( a4,4 );
     FlagP = e1_test_bit ( a4,2 );
     FlagCY = e1_test_bit ( a4,0 );
-    return jumpDirect ( prog_0237 );
+    return jumpDirect ( 0x0237,prog_0237 );
 }
 
 Control prog_0237 ()
 {
     at ( "0237" );
-    instruction ( "DEC  A",0x0238 );
+    instruction ( "DEC  A",e16_hi_lo ( 0x02,0x38 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -8451,13 +8451,13 @@ Control prog_0237 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_0238 );
+    return jumpDirect ( 0x0238,prog_0238 );
 }
 
 Control prog_0238 ()
 {
     at ( "0238" );
-    instruction ( "RET  Z",0x0239 );
+    instruction ( "RET  Z",e16_hi_lo ( 0x02,0x39 ) );
     if (FlagZ)
     {
         u8 a1 = SPH ;
@@ -8476,14 +8476,14 @@ Control prog_0238 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_0239 );
+        return jumpDirect ( 0x0239,prog_0239 );
     }
 }
 
 Control prog_0239 ()
 {
     at ( "0239" );
-    instruction ( "PUSH DE",0x023A );
+    instruction ( "PUSH DE",e16_hi_lo ( 0x02,0x3A ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = SPH ;
@@ -8497,23 +8497,23 @@ Control prog_0239 ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_023A );
+    return jumpDirect ( 0x023A,prog_023A );
 }
 
 Control prog_023A ()
 {
     at ( "023A" );
-    instruction ( "LD   DE,02E0",0x023D );
+    instruction ( "LD   DE,02E0",e16_hi_lo ( 0x02,0x3D ) );
     advance ( 10 );
     D = 0x02;
     E = 0xE0;
-    return jumpDirect ( prog_023D );
+    return jumpDirect ( 0x023D,prog_023D );
 }
 
 Control prog_023D ()
 {
     at ( "023D" );
-    instruction ( "ADD  HL,DE",0x023E );
+    instruction ( "ADD  HL,DE",e16_hi_lo ( 0x02,0x3E ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = H ;
@@ -8523,13 +8523,13 @@ Control prog_023D ()
     H = e8_hi ( e16_drop_hi_bit_of_17 ( a5 ) );
     L = e8_lo ( e16_drop_hi_bit_of_17 ( a5 ) );
     FlagCY = e1_hi_bit_of_17 ( a5 );
-    return jumpDirect ( prog_023E );
+    return jumpDirect ( 0x023E,prog_023E );
 }
 
 Control prog_023E ()
 {
     at ( "023E" );
-    instruction ( "POP  DE",0x023F );
+    instruction ( "POP  DE",e16_hi_lo ( 0x02,0x3F ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -8543,21 +8543,21 @@ Control prog_023E ()
     E = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_023F );
+    return jumpDirect ( 0x023F,prog_023F );
 }
 
 Control prog_023F ()
 {
     at ( "023F" );
-    instruction ( "JP   0229",0x0242 );
+    instruction ( "JP   0229",e16_hi_lo ( 0x02,0x42 ) );
     advance ( 10 );
-    return jumpDirect ( prog_0229 );
+    return jumpDirect ( 0x0229,prog_0229 );
 }
 
 Control prog_0242 ()
 {
     at ( "0242" );
-    instruction ( "CALL 147C",0x0245 );
+    instruction ( "CALL 147C",e16_hi_lo ( 0x02,0x45 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -8570,43 +8570,43 @@ Control prog_0242 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_147C );
+    return jumpDirect ( 0x147C,prog_147C );
 }
 
 Control prog_0245 ()
 {
     at ( "0245" );
-    instruction ( "JP   0235",0x0248 );
+    instruction ( "JP   0235",e16_hi_lo ( 0x02,0x48 ) );
     advance ( 10 );
-    return jumpDirect ( prog_0235 );
+    return jumpDirect ( 0x0235,prog_0235 );
 }
 
 Control prog_0248 ()
 {
     at ( "0248" );
-    instruction ( "LD   HL,2010",0x024B );
+    instruction ( "LD   HL,2010",e16_hi_lo ( 0x02,0x4B ) );
     advance ( 10 );
     H = 0x20;
     L = 0x10;
-    return jumpDirect ( prog_024B );
+    return jumpDirect ( 0x024B,prog_024B );
 }
 
 Control prog_024B ()
 {
     at ( "024B" );
-    instruction ( "LD   A,(HL)",0x024C );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x02,0x4C ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_024C );
+    return jumpDirect ( 0x024C,prog_024C );
 }
 
 Control prog_024C ()
 {
     at ( "024C" );
-    instruction ( "CP   FF",0x024E );
+    instruction ( "CP   FF",e16_hi_lo ( 0x02,0x4E ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0xFF ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -8618,13 +8618,13 @@ Control prog_024C ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_024E );
+    return jumpDirect ( 0x024E,prog_024E );
 }
 
 Control prog_024E ()
 {
     at ( "024E" );
-    instruction ( "RET  Z",0x024F );
+    instruction ( "RET  Z",e16_hi_lo ( 0x02,0x4F ) );
     if (FlagZ)
     {
         u8 a1 = SPH ;
@@ -8643,14 +8643,14 @@ Control prog_024E ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_024F );
+        return jumpDirect ( 0x024F,prog_024F );
     }
 }
 
 Control prog_024F ()
 {
     at ( "024F" );
-    instruction ( "CP   FE",0x0251 );
+    instruction ( "CP   FE",e16_hi_lo ( 0x02,0x51 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0xFE ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -8662,64 +8662,64 @@ Control prog_024F ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_0251 );
+    return jumpDirect ( 0x0251,prog_0251 );
 }
 
 Control prog_0251 ()
 {
     at ( "0251" );
-    instruction ( "JP   Z,0281",0x0254 );
+    instruction ( "JP   Z,0281",e16_hi_lo ( 0x02,0x54 ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_0281 );
+        return jumpDirect ( 0x0281,prog_0281 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0254 );
+        return jumpDirect ( 0x0254,prog_0254 );
     }
 }
 
 Control prog_0254 ()
 {
     at ( "0254" );
-    instruction ( "INC  HL",0x0255 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x02,0x55 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_0255 );
+    return jumpDirect ( 0x0255,prog_0255 );
 }
 
 Control prog_0255 ()
 {
     at ( "0255" );
-    instruction ( "LD   B,(HL)",0x0256 );
+    instruction ( "LD   B,(HL)",e16_hi_lo ( 0x02,0x56 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     B = a3;
-    return jumpDirect ( prog_0256 );
+    return jumpDirect ( 0x0256,prog_0256 );
 }
 
 Control prog_0256 ()
 {
     at ( "0256" );
-    instruction ( "LD   C,A",0x0257 );
+    instruction ( "LD   C,A",e16_hi_lo ( 0x02,0x57 ) );
     u8 a1 = A ;
     advance ( 5 );
     C = a1;
-    return jumpDirect ( prog_0257 );
+    return jumpDirect ( 0x0257,prog_0257 );
 }
 
 Control prog_0257 ()
 {
     at ( "0257" );
-    instruction ( "OR   B",0x0258 );
+    instruction ( "OR   B",e16_hi_lo ( 0x02,0x58 ) );
     u8 a1 = B ;
     u8 a2 = A ;
     u8 a3 = e8_or ( a1,a2 ) ;
@@ -8730,64 +8730,64 @@ Control prog_0257 ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0258 );
+    return jumpDirect ( 0x0258,prog_0258 );
 }
 
 Control prog_0258 ()
 {
     at ( "0258" );
-    instruction ( "LD   A,C",0x0259 );
+    instruction ( "LD   A,C",e16_hi_lo ( 0x02,0x59 ) );
     u8 a1 = C ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_0259 );
+    return jumpDirect ( 0x0259,prog_0259 );
 }
 
 Control prog_0259 ()
 {
     at ( "0259" );
-    instruction ( "JP   NZ,0277",0x025C );
+    instruction ( "JP   NZ,0277",e16_hi_lo ( 0x02,0x5C ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_0277 );
+        return jumpDirect ( 0x0277,prog_0277 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_025C );
+        return jumpDirect ( 0x025C,prog_025C );
     }
 }
 
 Control prog_025C ()
 {
     at ( "025C" );
-    instruction ( "INC  HL",0x025D );
+    instruction ( "INC  HL",e16_hi_lo ( 0x02,0x5D ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_025D );
+    return jumpDirect ( 0x025D,prog_025D );
 }
 
 Control prog_025D ()
 {
     at ( "025D" );
-    instruction ( "LD   A,(HL)",0x025E );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x02,0x5E ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_025E );
+    return jumpDirect ( 0x025E,prog_025E );
 }
 
 Control prog_025E ()
 {
     at ( "025E" );
-    instruction ( "AND  A",0x025F );
+    instruction ( "AND  A",e16_hi_lo ( 0x02,0x5F ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -8799,79 +8799,79 @@ Control prog_025E ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_025F );
+    return jumpDirect ( 0x025F,prog_025F );
 }
 
 Control prog_025F ()
 {
     at ( "025F" );
-    instruction ( "JP   NZ,0288",0x0262 );
+    instruction ( "JP   NZ,0288",e16_hi_lo ( 0x02,0x62 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_0288 );
+        return jumpDirect ( 0x0288,prog_0288 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0262 );
+        return jumpDirect ( 0x0262,prog_0262 );
     }
 }
 
 Control prog_0262 ()
 {
     at ( "0262" );
-    instruction ( "INC  HL",0x0263 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x02,0x63 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_0263 );
+    return jumpDirect ( 0x0263,prog_0263 );
 }
 
 Control prog_0263 ()
 {
     at ( "0263" );
-    instruction ( "LD   E,(HL)",0x0264 );
+    instruction ( "LD   E,(HL)",e16_hi_lo ( 0x02,0x64 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     E = a3;
-    return jumpDirect ( prog_0264 );
+    return jumpDirect ( 0x0264,prog_0264 );
 }
 
 Control prog_0264 ()
 {
     at ( "0264" );
-    instruction ( "INC  HL",0x0265 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x02,0x65 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_0265 );
+    return jumpDirect ( 0x0265,prog_0265 );
 }
 
 Control prog_0265 ()
 {
     at ( "0265" );
-    instruction ( "LD   D,(HL)",0x0266 );
+    instruction ( "LD   D,(HL)",e16_hi_lo ( 0x02,0x66 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     D = a3;
-    return jumpDirect ( prog_0266 );
+    return jumpDirect ( 0x0266,prog_0266 );
 }
 
 Control prog_0266 ()
 {
     at ( "0266" );
-    instruction ( "PUSH HL",0x0267 );
+    instruction ( "PUSH HL",e16_hi_lo ( 0x02,0x67 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = SPH ;
@@ -8885,13 +8885,13 @@ Control prog_0266 ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_0267 );
+    return jumpDirect ( 0x0267,prog_0267 );
 }
 
 Control prog_0267 ()
 {
     at ( "0267" );
-    instruction ( "EX   DE,HL",0x0268 );
+    instruction ( "EX   DE,HL",e16_hi_lo ( 0x02,0x68 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = H ;
@@ -8901,13 +8901,13 @@ Control prog_0267 ()
     E = a4;
     H = a1;
     L = a2;
-    return jumpDirect ( prog_0268 );
+    return jumpDirect ( 0x0268,prog_0268 );
 }
 
 Control prog_0268 ()
 {
     at ( "0268" );
-    instruction ( "PUSH HL",0x0269 );
+    instruction ( "PUSH HL",e16_hi_lo ( 0x02,0x69 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = SPH ;
@@ -8921,23 +8921,23 @@ Control prog_0268 ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_0269 );
+    return jumpDirect ( 0x0269,prog_0269 );
 }
 
 Control prog_0269 ()
 {
     at ( "0269" );
-    instruction ( "LD   HL,026F",0x026C );
+    instruction ( "LD   HL,026F",e16_hi_lo ( 0x02,0x6C ) );
     advance ( 10 );
     H = 0x02;
     L = 0x6F;
-    return jumpDirect ( prog_026C );
+    return jumpDirect ( 0x026C,prog_026C );
 }
 
 Control prog_026C ()
 {
     at ( "026C" );
-    instruction ( "EX   (SP),HL",0x026D );
+    instruction ( "EX   (SP),HL",e16_hi_lo ( 0x02,0x6D ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -8950,13 +8950,13 @@ Control prog_026C ()
     advance ( 18 );
     H = a5;
     L = a4;
-    return jumpDirect ( prog_026D );
+    return jumpDirect ( 0x026D,prog_026D );
 }
 
 Control prog_026D ()
 {
     at ( "026D" );
-    instruction ( "PUSH DE",0x026E );
+    instruction ( "PUSH DE",e16_hi_lo ( 0x02,0x6E ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = SPH ;
@@ -8970,13 +8970,13 @@ Control prog_026D ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_026E );
+    return jumpDirect ( 0x026E,prog_026E );
 }
 
 Control prog_026E ()
 {
     at ( "026E" );
-    instruction ( "JP   (HL)",0x026F );
+    instruction ( "JP   (HL)",e16_hi_lo ( 0x02,0x6F ) );
     u8 a1 = H ;
     u8 a2 = L ;
     advance ( 5 );
@@ -8986,7 +8986,7 @@ Control prog_026E ()
 Control prog_026F ()
 {
     at ( "026F" );
-    instruction ( "POP  HL",0x0270 );
+    instruction ( "POP  HL",e16_hi_lo ( 0x02,0x70 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -9000,23 +9000,23 @@ Control prog_026F ()
     L = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_0270 );
+    return jumpDirect ( 0x0270,prog_0270 );
 }
 
 Control prog_0270 ()
 {
     at ( "0270" );
-    instruction ( "LD   DE,000C",0x0273 );
+    instruction ( "LD   DE,000C",e16_hi_lo ( 0x02,0x73 ) );
     advance ( 10 );
     D = 0x00;
     E = 0x0C;
-    return jumpDirect ( prog_0273 );
+    return jumpDirect ( 0x0273,prog_0273 );
 }
 
 Control prog_0273 ()
 {
     at ( "0273" );
-    instruction ( "ADD  HL,DE",0x0274 );
+    instruction ( "ADD  HL,DE",e16_hi_lo ( 0x02,0x74 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = H ;
@@ -9026,21 +9026,21 @@ Control prog_0273 ()
     H = e8_hi ( e16_drop_hi_bit_of_17 ( a5 ) );
     L = e8_lo ( e16_drop_hi_bit_of_17 ( a5 ) );
     FlagCY = e1_hi_bit_of_17 ( a5 );
-    return jumpDirect ( prog_0274 );
+    return jumpDirect ( 0x0274,prog_0274 );
 }
 
 Control prog_0274 ()
 {
     at ( "0274" );
-    instruction ( "JP   024B",0x0277 );
+    instruction ( "JP   024B",e16_hi_lo ( 0x02,0x77 ) );
     advance ( 10 );
-    return jumpDirect ( prog_024B );
+    return jumpDirect ( 0x024B,prog_024B );
 }
 
 Control prog_0277 ()
 {
     at ( "0277" );
-    instruction ( "DEC  B",0x0278 );
+    instruction ( "DEC  B",e16_hi_lo ( 0x02,0x78 ) );
     u8 a1 = B ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -9052,13 +9052,13 @@ Control prog_0277 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_0278 );
+    return jumpDirect ( 0x0278,prog_0278 );
 }
 
 Control prog_0278 ()
 {
     at ( "0278" );
-    instruction ( "INC  B",0x0279 );
+    instruction ( "INC  B",e16_hi_lo ( 0x02,0x79 ) );
     u8 a1 = B ;
     u16 a2 = e16_add_with_carry ( e1_true (  ),a1,0x00 ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -9070,29 +9070,29 @@ Control prog_0278 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_0279 );
+    return jumpDirect ( 0x0279,prog_0279 );
 }
 
 Control prog_0279 ()
 {
     at ( "0279" );
-    instruction ( "JP   NZ,027D",0x027C );
+    instruction ( "JP   NZ,027D",e16_hi_lo ( 0x02,0x7C ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_027D );
+        return jumpDirect ( 0x027D,prog_027D );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_027C );
+        return jumpDirect ( 0x027C,prog_027C );
     }
 }
 
 Control prog_027C ()
 {
     at ( "027C" );
-    instruction ( "DEC  A",0x027D );
+    instruction ( "DEC  A",e16_hi_lo ( 0x02,0x7D ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -9104,13 +9104,13 @@ Control prog_027C ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_027D );
+    return jumpDirect ( 0x027D,prog_027D );
 }
 
 Control prog_027D ()
 {
     at ( "027D" );
-    instruction ( "DEC  B",0x027E );
+    instruction ( "DEC  B",e16_hi_lo ( 0x02,0x7E ) );
     u8 a1 = B ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -9122,60 +9122,60 @@ Control prog_027D ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_027E );
+    return jumpDirect ( 0x027E,prog_027E );
 }
 
 Control prog_027E ()
 {
     at ( "027E" );
-    instruction ( "LD   (HL),B",0x027F );
+    instruction ( "LD   (HL),B",e16_hi_lo ( 0x02,0x7F ) );
     u8 a1 = B ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_027F );
+    return jumpDirect ( 0x027F,prog_027F );
 }
 
 Control prog_027F ()
 {
     at ( "027F" );
-    instruction ( "DEC  HL",0x0280 );
+    instruction ( "DEC  HL",e16_hi_lo ( 0x02,0x80 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_0280 );
+    return jumpDirect ( 0x0280,prog_0280 );
 }
 
 Control prog_0280 ()
 {
     at ( "0280" );
-    instruction ( "LD   (HL),A",0x0281 );
+    instruction ( "LD   (HL),A",e16_hi_lo ( 0x02,0x81 ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_0281 );
+    return jumpDirect ( 0x0281,prog_0281 );
 }
 
 Control prog_0281 ()
 {
     at ( "0281" );
-    instruction ( "LD   DE,0010",0x0284 );
+    instruction ( "LD   DE,0010",e16_hi_lo ( 0x02,0x84 ) );
     advance ( 10 );
     D = 0x00;
     E = 0x10;
-    return jumpDirect ( prog_0284 );
+    return jumpDirect ( 0x0284,prog_0284 );
 }
 
 Control prog_0284 ()
 {
     at ( "0284" );
-    instruction ( "ADD  HL,DE",0x0285 );
+    instruction ( "ADD  HL,DE",e16_hi_lo ( 0x02,0x85 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = H ;
@@ -9185,21 +9185,21 @@ Control prog_0284 ()
     H = e8_hi ( e16_drop_hi_bit_of_17 ( a5 ) );
     L = e8_lo ( e16_drop_hi_bit_of_17 ( a5 ) );
     FlagCY = e1_hi_bit_of_17 ( a5 );
-    return jumpDirect ( prog_0285 );
+    return jumpDirect ( 0x0285,prog_0285 );
 }
 
 Control prog_0285 ()
 {
     at ( "0285" );
-    instruction ( "JP   024B",0x0288 );
+    instruction ( "JP   024B",e16_hi_lo ( 0x02,0x88 ) );
     advance ( 10 );
-    return jumpDirect ( prog_024B );
+    return jumpDirect ( 0x024B,prog_024B );
 }
 
 Control prog_0288 ()
 {
     at ( "0288" );
-    instruction ( "DEC  (HL)",0x0289 );
+    instruction ( "DEC  (HL)",e16_hi_lo ( 0x02,0x89 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -9215,47 +9215,47 @@ Control prog_0288 ()
     FlagZ = e1_is_zero ( e8_lo ( a4 ) );
     FlagA = e1_test_bit ( e8_lo ( a7 ),4 );
     FlagP = e1_parity ( e8_lo ( a4 ) );
-    return jumpDirect ( prog_0289 );
+    return jumpDirect ( 0x0289,prog_0289 );
 }
 
 Control prog_0289 ()
 {
     at ( "0289" );
-    instruction ( "DEC  HL",0x028A );
+    instruction ( "DEC  HL",e16_hi_lo ( 0x02,0x8A ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_028A );
+    return jumpDirect ( 0x028A,prog_028A );
 }
 
 Control prog_028A ()
 {
     at ( "028A" );
-    instruction ( "DEC  HL",0x028B );
+    instruction ( "DEC  HL",e16_hi_lo ( 0x02,0x8B ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_028B );
+    return jumpDirect ( 0x028B,prog_028B );
 }
 
 Control prog_028B ()
 {
     at ( "028B" );
-    instruction ( "JP   0281",0x028E );
+    instruction ( "JP   0281",e16_hi_lo ( 0x02,0x8E ) );
     advance ( 10 );
-    return jumpDirect ( prog_0281 );
+    return jumpDirect ( 0x0281,prog_0281 );
 }
 
 Control prog_028E ()
 {
     at ( "028E" );
-    instruction ( "POP  HL",0x028F );
+    instruction ( "POP  HL",e16_hi_lo ( 0x02,0x8F ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -9269,38 +9269,38 @@ Control prog_028E ()
     L = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_028F );
+    return jumpDirect ( 0x028F,prog_028F );
 }
 
 Control prog_028F ()
 {
     at ( "028F" );
-    instruction ( "INC  HL",0x0290 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x02,0x90 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_0290 );
+    return jumpDirect ( 0x0290,prog_0290 );
 }
 
 Control prog_0290 ()
 {
     at ( "0290" );
-    instruction ( "LD   A,(HL)",0x0291 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x02,0x91 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_0291 );
+    return jumpDirect ( 0x0291,prog_0291 );
 }
 
 Control prog_0291 ()
 {
     at ( "0291" );
-    instruction ( "CP   FF",0x0293 );
+    instruction ( "CP   FF",e16_hi_lo ( 0x02,0x93 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0xFF ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -9312,42 +9312,42 @@ Control prog_0291 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_0293 );
+    return jumpDirect ( 0x0293,prog_0293 );
 }
 
 Control prog_0293 ()
 {
     at ( "0293" );
-    instruction ( "JP   Z,033B",0x0296 );
+    instruction ( "JP   Z,033B",e16_hi_lo ( 0x02,0x96 ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_033B );
+        return jumpDirect ( 0x033B,prog_033B );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0296 );
+        return jumpDirect ( 0x0296,prog_0296 );
     }
 }
 
 Control prog_0296 ()
 {
     at ( "0296" );
-    instruction ( "INC  HL",0x0297 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x02,0x97 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_0297 );
+    return jumpDirect ( 0x0297,prog_0297 );
 }
 
 Control prog_0297 ()
 {
     at ( "0297" );
-    instruction ( "DEC  (HL)",0x0298 );
+    instruction ( "DEC  (HL)",e16_hi_lo ( 0x02,0x98 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -9363,13 +9363,13 @@ Control prog_0297 ()
     FlagZ = e1_is_zero ( e8_lo ( a4 ) );
     FlagA = e1_test_bit ( e8_lo ( a7 ),4 );
     FlagP = e1_parity ( e8_lo ( a4 ) );
-    return jumpDirect ( prog_0298 );
+    return jumpDirect ( 0x0298,prog_0298 );
 }
 
 Control prog_0298 ()
 {
     at ( "0298" );
-    instruction ( "RET  NZ",0x0299 );
+    instruction ( "RET  NZ",e16_hi_lo ( 0x02,0x99 ) );
     if (e1_flip ( FlagZ ))
     {
         u8 a1 = SPH ;
@@ -9388,24 +9388,24 @@ Control prog_0298 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_0299 );
+        return jumpDirect ( 0x0299,prog_0299 );
     }
 }
 
 Control prog_0299 ()
 {
     at ( "0299" );
-    instruction ( "LD   B,A",0x029A );
+    instruction ( "LD   B,A",e16_hi_lo ( 0x02,0x9A ) );
     u8 a1 = A ;
     advance ( 5 );
     B = a1;
-    return jumpDirect ( prog_029A );
+    return jumpDirect ( 0x029A,prog_029A );
 }
 
 Control prog_029A ()
 {
     at ( "029A" );
-    instruction ( "XOR  A",0x029B );
+    instruction ( "XOR  A",e16_hi_lo ( 0x02,0x9B ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -9416,86 +9416,86 @@ Control prog_029A ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_029B );
+    return jumpDirect ( 0x029B,prog_029B );
 }
 
 Control prog_029B ()
 {
     at ( "029B" );
-    instruction ( "LD   (2068),A",0x029E );
+    instruction ( "LD   (2068),A",e16_hi_lo ( 0x02,0x9E ) );
     u8 a1 = A ;
     mem_write ( 0x2068,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_029E );
+    return jumpDirect ( 0x029E,prog_029E );
 }
 
 Control prog_029E ()
 {
     at ( "029E" );
-    instruction ( "LD   (2069),A",0x02A1 );
+    instruction ( "LD   (2069),A",e16_hi_lo ( 0x02,0xA1 ) );
     u8 a1 = A ;
     mem_write ( 0x2069,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_02A1 );
+    return jumpDirect ( 0x02A1,prog_02A1 );
 }
 
 Control prog_02A1 ()
 {
     at ( "02A1" );
-    instruction ( "LD   A,30",0x02A3 );
+    instruction ( "LD   A,30",e16_hi_lo ( 0x02,0xA3 ) );
     advance ( 7 );
     A = 0x30;
-    return jumpDirect ( prog_02A3 );
+    return jumpDirect ( 0x02A3,prog_02A3 );
 }
 
 Control prog_02A3 ()
 {
     at ( "02A3" );
-    instruction ( "LD   (206A),A",0x02A6 );
+    instruction ( "LD   (206A),A",e16_hi_lo ( 0x02,0xA6 ) );
     u8 a1 = A ;
     mem_write ( 0x206A,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_02A6 );
+    return jumpDirect ( 0x02A6,prog_02A6 );
 }
 
 Control prog_02A6 ()
 {
     at ( "02A6" );
-    instruction ( "LD   A,B",0x02A7 );
+    instruction ( "LD   A,B",e16_hi_lo ( 0x02,0xA7 ) );
     u8 a1 = B ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_02A7 );
+    return jumpDirect ( 0x02A7,prog_02A7 );
 }
 
 Control prog_02A7 ()
 {
     at ( "02A7" );
-    instruction ( "LD   (HL),05",0x02A9 );
+    instruction ( "LD   (HL),05",e16_hi_lo ( 0x02,0xA9 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     mem_write ( e16_hi_lo ( a1,a2 ),0x05 );
     advance ( 10 );
-    return jumpDirect ( prog_02A9 );
+    return jumpDirect ( 0x02A9,prog_02A9 );
 }
 
 Control prog_02A9 ()
 {
     at ( "02A9" );
-    instruction ( "INC  HL",0x02AA );
+    instruction ( "INC  HL",e16_hi_lo ( 0x02,0xAA ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_02AA );
+    return jumpDirect ( 0x02AA,prog_02AA );
 }
 
 Control prog_02AA ()
 {
     at ( "02AA" );
-    instruction ( "DEC  (HL)",0x02AB );
+    instruction ( "DEC  (HL)",e16_hi_lo ( 0x02,0xAB ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -9511,50 +9511,50 @@ Control prog_02AA ()
     FlagZ = e1_is_zero ( e8_lo ( a4 ) );
     FlagA = e1_test_bit ( e8_lo ( a7 ),4 );
     FlagP = e1_parity ( e8_lo ( a4 ) );
-    return jumpDirect ( prog_02AB );
+    return jumpDirect ( 0x02AB,prog_02AB );
 }
 
 Control prog_02AB ()
 {
     at ( "02AB" );
-    instruction ( "JP   NZ,039B",0x02AE );
+    instruction ( "JP   NZ,039B",e16_hi_lo ( 0x02,0xAE ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_039B );
+        return jumpDirect ( 0x039B,prog_039B );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_02AE );
+        return jumpDirect ( 0x02AE,prog_02AE );
     }
 }
 
 Control prog_02AE ()
 {
     at ( "02AE" );
-    instruction ( "LD   HL,(201A)",0x02B1 );
+    instruction ( "LD   HL,(201A)",e16_hi_lo ( 0x02,0xB1 ) );
     u8 a1 = e8_read_mem ( 0x201A ) ;
     u8 a2 = e8_read_mem ( 0x201B ) ;
     advance ( 16 );
     H = a2;
     L = a1;
-    return jumpDirect ( prog_02B1 );
+    return jumpDirect ( 0x02B1,prog_02B1 );
 }
 
 Control prog_02B1 ()
 {
     at ( "02B1" );
-    instruction ( "LD   B,10",0x02B3 );
+    instruction ( "LD   B,10",e16_hi_lo ( 0x02,0xB3 ) );
     advance ( 7 );
     B = 0x10;
-    return jumpDirect ( prog_02B3 );
+    return jumpDirect ( 0x02B3,prog_02B3 );
 }
 
 Control prog_02B3 ()
 {
     at ( "02B3" );
-    instruction ( "CALL 1424",0x02B6 );
+    instruction ( "CALL 1424",e16_hi_lo ( 0x02,0xB6 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -9567,42 +9567,42 @@ Control prog_02B3 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1424 );
+    return jumpDirect ( 0x1424,prog_1424 );
 }
 
 Control prog_02B6 ()
 {
     at ( "02B6" );
-    instruction ( "LD   HL,2010",0x02B9 );
+    instruction ( "LD   HL,2010",e16_hi_lo ( 0x02,0xB9 ) );
     advance ( 10 );
     H = 0x20;
     L = 0x10;
-    return jumpDirect ( prog_02B9 );
+    return jumpDirect ( 0x02B9,prog_02B9 );
 }
 
 Control prog_02B9 ()
 {
     at ( "02B9" );
-    instruction ( "LD   DE,1B10",0x02BC );
+    instruction ( "LD   DE,1B10",e16_hi_lo ( 0x02,0xBC ) );
     advance ( 10 );
     D = 0x1B;
     E = 0x10;
-    return jumpDirect ( prog_02BC );
+    return jumpDirect ( 0x02BC,prog_02BC );
 }
 
 Control prog_02BC ()
 {
     at ( "02BC" );
-    instruction ( "LD   B,10",0x02BE );
+    instruction ( "LD   B,10",e16_hi_lo ( 0x02,0xBE ) );
     advance ( 7 );
     B = 0x10;
-    return jumpDirect ( prog_02BE );
+    return jumpDirect ( 0x02BE,prog_02BE );
 }
 
 Control prog_02BE ()
 {
     at ( "02BE" );
-    instruction ( "CALL 1A32",0x02C1 );
+    instruction ( "CALL 1A32",e16_hi_lo ( 0x02,0xC1 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -9615,22 +9615,22 @@ Control prog_02BE ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1A32 );
+    return jumpDirect ( 0x1A32,prog_1A32 );
 }
 
 Control prog_02C1 ()
 {
     at ( "02C1" );
-    instruction ( "LD   B,00",0x02C3 );
+    instruction ( "LD   B,00",e16_hi_lo ( 0x02,0xC3 ) );
     advance ( 7 );
     B = 0x00;
-    return jumpDirect ( prog_02C3 );
+    return jumpDirect ( 0x02C3,prog_02C3 );
 }
 
 Control prog_02C3 ()
 {
     at ( "02C3" );
-    instruction ( "CALL 19DC",0x02C6 );
+    instruction ( "CALL 19DC",e16_hi_lo ( 0x02,0xC6 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -9643,23 +9643,23 @@ Control prog_02C3 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_19DC );
+    return jumpDirect ( 0x19DC,prog_19DC );
 }
 
 Control prog_02C6 ()
 {
     at ( "02C6" );
-    instruction ( "LD   A,(206D)",0x02C9 );
+    instruction ( "LD   A,(206D)",e16_hi_lo ( 0x02,0xC9 ) );
     u8 a1 = e8_read_mem ( 0x206D ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_02C9 );
+    return jumpDirect ( 0x02C9,prog_02C9 );
 }
 
 Control prog_02C9 ()
 {
     at ( "02C9" );
-    instruction ( "AND  A",0x02CA );
+    instruction ( "AND  A",e16_hi_lo ( 0x02,0xCA ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -9671,13 +9671,13 @@ Control prog_02C9 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_02CA );
+    return jumpDirect ( 0x02CA,prog_02CA );
 }
 
 Control prog_02CA ()
 {
     at ( "02CA" );
-    instruction ( "RET  NZ",0x02CB );
+    instruction ( "RET  NZ",e16_hi_lo ( 0x02,0xCB ) );
     if (e1_flip ( FlagZ ))
     {
         u8 a1 = SPH ;
@@ -9696,24 +9696,24 @@ Control prog_02CA ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_02CB );
+        return jumpDirect ( 0x02CB,prog_02CB );
     }
 }
 
 Control prog_02CB ()
 {
     at ( "02CB" );
-    instruction ( "LD   A,(20EF)",0x02CE );
+    instruction ( "LD   A,(20EF)",e16_hi_lo ( 0x02,0xCE ) );
     u8 a1 = e8_read_mem ( 0x20EF ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_02CE );
+    return jumpDirect ( 0x02CE,prog_02CE );
 }
 
 Control prog_02CE ()
 {
     at ( "02CE" );
-    instruction ( "AND  A",0x02CF );
+    instruction ( "AND  A",e16_hi_lo ( 0x02,0xCF ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -9725,13 +9725,13 @@ Control prog_02CE ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_02CF );
+    return jumpDirect ( 0x02CF,prog_02CF );
 }
 
 Control prog_02CF ()
 {
     at ( "02CF" );
-    instruction ( "RET  Z",0x02D0 );
+    instruction ( "RET  Z",e16_hi_lo ( 0x02,0xD0 ) );
     if (FlagZ)
     {
         u8 a1 = SPH ;
@@ -9750,33 +9750,33 @@ Control prog_02CF ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_02D0 );
+        return jumpDirect ( 0x02D0,prog_02D0 );
     }
 }
 
 Control prog_02D0 ()
 {
     at ( "02D0" );
-    instruction ( "LD   SP,2400",0x02D3 );
+    instruction ( "LD   SP,2400",e16_hi_lo ( 0x02,0xD3 ) );
     advance ( 10 );
     SPH = 0x24;
     SPL = 0x00;
-    return jumpDirect ( prog_02D3 );
+    return jumpDirect ( 0x02D3,prog_02D3 );
 }
 
 Control prog_02D3 ()
 {
     at ( "02D3" );
-    instruction ( "EI",0x02D4 );
+    instruction ( "EI",e16_hi_lo ( 0x02,0xD4 ) );
     enable_interrupts (  );
     advance ( 4 );
-    return jumpDirect ( prog_02D4 );
+    return jumpDirect ( 0x02D4,prog_02D4 );
 }
 
 Control prog_02D4 ()
 {
     at ( "02D4" );
-    instruction ( "CALL 19D7",0x02D7 );
+    instruction ( "CALL 19D7",e16_hi_lo ( 0x02,0xD7 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -9789,13 +9789,13 @@ Control prog_02D4 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_19D7 );
+    return jumpDirect ( 0x19D7,prog_19D7 );
 }
 
 Control prog_02D7 ()
 {
     at ( "02D7" );
-    instruction ( "CALL 092E",0x02DA );
+    instruction ( "CALL 092E",e16_hi_lo ( 0x02,0xDA ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -9808,13 +9808,13 @@ Control prog_02D7 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_092E );
+    return jumpDirect ( 0x092E,prog_092E );
 }
 
 Control prog_02DA ()
 {
     at ( "02DA" );
-    instruction ( "AND  A",0x02DB );
+    instruction ( "AND  A",e16_hi_lo ( 0x02,0xDB ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -9826,29 +9826,29 @@ Control prog_02DA ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_02DB );
+    return jumpDirect ( 0x02DB,prog_02DB );
 }
 
 Control prog_02DB ()
 {
     at ( "02DB" );
-    instruction ( "JP   Z,166D",0x02DE );
+    instruction ( "JP   Z,166D",e16_hi_lo ( 0x02,0xDE ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_166D );
+        return jumpDirect ( 0x166D,prog_166D );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_02DE );
+        return jumpDirect ( 0x02DE,prog_02DE );
     }
 }
 
 Control prog_02DE ()
 {
     at ( "02DE" );
-    instruction ( "CALL 18E7",0x02E1 );
+    instruction ( "CALL 18E7",e16_hi_lo ( 0x02,0xE1 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -9861,25 +9861,25 @@ Control prog_02DE ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_18E7 );
+    return jumpDirect ( 0x18E7,prog_18E7 );
 }
 
 Control prog_02E1 ()
 {
     at ( "02E1" );
-    instruction ( "LD   A,(HL)",0x02E2 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x02,0xE2 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_02E2 );
+    return jumpDirect ( 0x02E2,prog_02E2 );
 }
 
 Control prog_02E2 ()
 {
     at ( "02E2" );
-    instruction ( "AND  A",0x02E3 );
+    instruction ( "AND  A",e16_hi_lo ( 0x02,0xE3 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -9891,39 +9891,39 @@ Control prog_02E2 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_02E3 );
+    return jumpDirect ( 0x02E3,prog_02E3 );
 }
 
 Control prog_02E3 ()
 {
     at ( "02E3" );
-    instruction ( "JP   Z,032C",0x02E6 );
+    instruction ( "JP   Z,032C",e16_hi_lo ( 0x02,0xE6 ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_032C );
+        return jumpDirect ( 0x032C,prog_032C );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_02E6 );
+        return jumpDirect ( 0x02E6,prog_02E6 );
     }
 }
 
 Control prog_02E6 ()
 {
     at ( "02E6" );
-    instruction ( "LD   A,(20CE)",0x02E9 );
+    instruction ( "LD   A,(20CE)",e16_hi_lo ( 0x02,0xE9 ) );
     u8 a1 = e8_read_mem ( 0x20CE ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_02E9 );
+    return jumpDirect ( 0x02E9,prog_02E9 );
 }
 
 Control prog_02E9 ()
 {
     at ( "02E9" );
-    instruction ( "AND  A",0x02EA );
+    instruction ( "AND  A",e16_hi_lo ( 0x02,0xEA ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -9935,39 +9935,39 @@ Control prog_02E9 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_02EA );
+    return jumpDirect ( 0x02EA,prog_02EA );
 }
 
 Control prog_02EA ()
 {
     at ( "02EA" );
-    instruction ( "JP   Z,032C",0x02ED );
+    instruction ( "JP   Z,032C",e16_hi_lo ( 0x02,0xED ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_032C );
+        return jumpDirect ( 0x032C,prog_032C );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_02ED );
+        return jumpDirect ( 0x02ED,prog_02ED );
     }
 }
 
 Control prog_02ED ()
 {
     at ( "02ED" );
-    instruction ( "LD   A,(2067)",0x02F0 );
+    instruction ( "LD   A,(2067)",e16_hi_lo ( 0x02,0xF0 ) );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_02F0 );
+    return jumpDirect ( 0x02F0,prog_02F0 );
 }
 
 Control prog_02F0 ()
 {
     at ( "02F0" );
-    instruction ( "PUSH PSW",0x02F1 );
+    instruction ( "PUSH PSW",e16_hi_lo ( 0x02,0xF1 ) );
     u8 a1 = A ;
     u8 a2 = SPH ;
     u8 a3 = SPL ;
@@ -9980,40 +9980,40 @@ Control prog_02F0 ()
     advance ( 11 );
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_02F1 );
+    return jumpDirect ( 0x02F1,prog_02F1 );
 }
 
 Control prog_02F1 ()
 {
     at ( "02F1" );
-    instruction ( "RRCA",0x02F2 );
+    instruction ( "RRCA",e16_hi_lo ( 0x02,0xF2 ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftR ( a1,0x01 ),7,e1_test_bit ( a1,0 ) );
     FlagCY = e1_test_bit ( a1,0 );
-    return jumpDirect ( prog_02F2 );
+    return jumpDirect ( 0x02F2,prog_02F2 );
 }
 
 Control prog_02F2 ()
 {
     at ( "02F2" );
-    instruction ( "JP   CY,0332",0x02F5 );
+    instruction ( "JP   CY,0332",e16_hi_lo ( 0x02,0xF5 ) );
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( prog_0332 );
+        return jumpDirect ( 0x0332,prog_0332 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_02F5 );
+        return jumpDirect ( 0x02F5,prog_02F5 );
     }
 }
 
 Control prog_02F5 ()
 {
     at ( "02F5" );
-    instruction ( "CALL 020E",0x02F8 );
+    instruction ( "CALL 020E",e16_hi_lo ( 0x02,0xF8 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -10026,13 +10026,13 @@ Control prog_02F5 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_020E );
+    return jumpDirect ( 0x020E,prog_020E );
 }
 
 Control prog_02F8 ()
 {
     at ( "02F8" );
-    instruction ( "CALL 0878",0x02FB );
+    instruction ( "CALL 0878",e16_hi_lo ( 0x02,0xFB ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -10045,96 +10045,96 @@ Control prog_02F8 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0878 );
+    return jumpDirect ( 0x0878,prog_0878 );
 }
 
 Control prog_02FB ()
 {
     at ( "02FB" );
-    instruction ( "LD   (HL),E",0x02FC );
+    instruction ( "LD   (HL),E",e16_hi_lo ( 0x02,0xFC ) );
     u8 a1 = E ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_02FC );
+    return jumpDirect ( 0x02FC,prog_02FC );
 }
 
 Control prog_02FC ()
 {
     at ( "02FC" );
-    instruction ( "INC  HL",0x02FD );
+    instruction ( "INC  HL",e16_hi_lo ( 0x02,0xFD ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_02FD );
+    return jumpDirect ( 0x02FD,prog_02FD );
 }
 
 Control prog_02FD ()
 {
     at ( "02FD" );
-    instruction ( "LD   (HL),D",0x02FE );
+    instruction ( "LD   (HL),D",e16_hi_lo ( 0x02,0xFE ) );
     u8 a1 = D ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_02FE );
+    return jumpDirect ( 0x02FE,prog_02FE );
 }
 
 Control prog_02FE ()
 {
     at ( "02FE" );
-    instruction ( "DEC  HL",0x02FF );
+    instruction ( "DEC  HL",e16_hi_lo ( 0x02,0xFF ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_02FF );
+    return jumpDirect ( 0x02FF,prog_02FF );
 }
 
 Control prog_02FF ()
 {
     at ( "02FF" );
-    instruction ( "DEC  HL",0x0300 );
+    instruction ( "DEC  HL",e16_hi_lo ( 0x03,0x00 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_0300 );
+    return jumpDirect ( 0x0300,prog_0300 );
 }
 
 Control prog_0300 ()
 {
     at ( "0300" );
-    instruction ( "LD   (HL),B",0x0301 );
+    instruction ( "LD   (HL),B",e16_hi_lo ( 0x03,0x01 ) );
     u8 a1 = B ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_0301 );
+    return jumpDirect ( 0x0301,prog_0301 );
 }
 
 Control prog_0301 ()
 {
     at ( "0301" );
-    instruction ( "NOP",0x0302 );
+    instruction ( "NOP",e16_hi_lo ( 0x03,0x02 ) );
     advance ( 4 );
-    return jumpDirect ( prog_0302 );
+    return jumpDirect ( 0x0302,prog_0302 );
 }
 
 Control prog_0302 ()
 {
     at ( "0302" );
-    instruction ( "CALL 01E4",0x0305 );
+    instruction ( "CALL 01E4",e16_hi_lo ( 0x03,0x05 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -10147,13 +10147,13 @@ Control prog_0302 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_01E4 );
+    return jumpDirect ( 0x01E4,prog_01E4 );
 }
 
 Control prog_0305 ()
 {
     at ( "0305" );
-    instruction ( "POP  PSW",0x0306 );
+    instruction ( "POP  PSW",e16_hi_lo ( 0x03,0x06 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -10171,86 +10171,86 @@ Control prog_0305 ()
     FlagA = e1_test_bit ( a4,4 );
     FlagP = e1_test_bit ( a4,2 );
     FlagCY = e1_test_bit ( a4,0 );
-    return jumpDirect ( prog_0306 );
+    return jumpDirect ( 0x0306,prog_0306 );
 }
 
 Control prog_0306 ()
 {
     at ( "0306" );
-    instruction ( "RRCA",0x0307 );
+    instruction ( "RRCA",e16_hi_lo ( 0x03,0x07 ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftR ( a1,0x01 ),7,e1_test_bit ( a1,0 ) );
     FlagCY = e1_test_bit ( a1,0 );
-    return jumpDirect ( prog_0307 );
+    return jumpDirect ( 0x0307,prog_0307 );
 }
 
 Control prog_0307 ()
 {
     at ( "0307" );
-    instruction ( "LD   A,21",0x0309 );
+    instruction ( "LD   A,21",e16_hi_lo ( 0x03,0x09 ) );
     advance ( 7 );
     A = 0x21;
-    return jumpDirect ( prog_0309 );
+    return jumpDirect ( 0x0309,prog_0309 );
 }
 
 Control prog_0309 ()
 {
     at ( "0309" );
-    instruction ( "LD   B,00",0x030B );
+    instruction ( "LD   B,00",e16_hi_lo ( 0x03,0x0B ) );
     advance ( 7 );
     B = 0x00;
-    return jumpDirect ( prog_030B );
+    return jumpDirect ( 0x030B,prog_030B );
 }
 
 Control prog_030B ()
 {
     at ( "030B" );
-    instruction ( "JP   NC,0312",0x030E );
+    instruction ( "JP   NC,0312",e16_hi_lo ( 0x03,0x0E ) );
     if (e1_flip ( FlagCY ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_0312 );
+        return jumpDirect ( 0x0312,prog_0312 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_030E );
+        return jumpDirect ( 0x030E,prog_030E );
     }
 }
 
 Control prog_030E ()
 {
     at ( "030E" );
-    instruction ( "LD   B,20",0x0310 );
+    instruction ( "LD   B,20",e16_hi_lo ( 0x03,0x10 ) );
     advance ( 7 );
     B = 0x20;
-    return jumpDirect ( prog_0310 );
+    return jumpDirect ( 0x0310,prog_0310 );
 }
 
 Control prog_0310 ()
 {
     at ( "0310" );
-    instruction ( "LD   A,22",0x0312 );
+    instruction ( "LD   A,22",e16_hi_lo ( 0x03,0x12 ) );
     advance ( 7 );
     A = 0x22;
-    return jumpDirect ( prog_0312 );
+    return jumpDirect ( 0x0312,prog_0312 );
 }
 
 Control prog_0312 ()
 {
     at ( "0312" );
-    instruction ( "LD   (2067),A",0x0315 );
+    instruction ( "LD   (2067),A",e16_hi_lo ( 0x03,0x15 ) );
     u8 a1 = A ;
     mem_write ( 0x2067,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0315 );
+    return jumpDirect ( 0x0315,prog_0315 );
 }
 
 Control prog_0315 ()
 {
     at ( "0315" );
-    instruction ( "CALL 0AB6",0x0318 );
+    instruction ( "CALL 0AB6",e16_hi_lo ( 0x03,0x18 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -10263,13 +10263,13 @@ Control prog_0315 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0AB6 );
+    return jumpDirect ( 0x0AB6,prog_0AB6 );
 }
 
 Control prog_0318 ()
 {
     at ( "0318" );
-    instruction ( "XOR  A",0x0319 );
+    instruction ( "XOR  A",e16_hi_lo ( 0x03,0x19 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -10280,33 +10280,33 @@ Control prog_0318 ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0319 );
+    return jumpDirect ( 0x0319,prog_0319 );
 }
 
 Control prog_0319 ()
 {
     at ( "0319" );
-    instruction ( "LD   (2011),A",0x031C );
+    instruction ( "LD   (2011),A",e16_hi_lo ( 0x03,0x1C ) );
     u8 a1 = A ;
     mem_write ( 0x2011,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_031C );
+    return jumpDirect ( 0x031C,prog_031C );
 }
 
 Control prog_031C ()
 {
     at ( "031C" );
-    instruction ( "LD   A,B",0x031D );
+    instruction ( "LD   A,B",e16_hi_lo ( 0x03,0x1D ) );
     u8 a1 = B ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_031D );
+    return jumpDirect ( 0x031D,prog_031D );
 }
 
 Control prog_031D ()
 {
     at ( "031D" );
-    instruction ( "OUT  05",0x031F );
+    instruction ( "OUT  05",e16_hi_lo ( 0x03,0x1F ) );
     u8 a1 = A ;
     sound_control ( "FleetMovement1",e1_test_bit ( a1,0 ) );
     sound_control ( "FleetMovement2",e1_test_bit ( a1,1 ) );
@@ -10314,13 +10314,13 @@ Control prog_031D ()
     sound_control ( "FleetMovement4",e1_test_bit ( a1,3 ) );
     sound_control ( "UfoHit",e1_test_bit ( a1,4 ) );
     advance ( 10 );
-    return jumpDirect ( prog_031F );
+    return jumpDirect ( 0x031F,prog_031F );
 }
 
 Control prog_031F ()
 {
     at ( "031F" );
-    instruction ( "INC  A",0x0320 );
+    instruction ( "INC  A",e16_hi_lo ( 0x03,0x20 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_true (  ),a1,0x00 ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -10332,23 +10332,23 @@ Control prog_031F ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_0320 );
+    return jumpDirect ( 0x0320,prog_0320 );
 }
 
 Control prog_0320 ()
 {
     at ( "0320" );
-    instruction ( "LD   (2098),A",0x0323 );
+    instruction ( "LD   (2098),A",e16_hi_lo ( 0x03,0x23 ) );
     u8 a1 = A ;
     mem_write ( 0x2098,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0323 );
+    return jumpDirect ( 0x0323,prog_0323 );
 }
 
 Control prog_0323 ()
 {
     at ( "0323" );
-    instruction ( "CALL 09D6",0x0326 );
+    instruction ( "CALL 09D6",e16_hi_lo ( 0x03,0x26 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -10361,13 +10361,13 @@ Control prog_0323 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_09D6 );
+    return jumpDirect ( 0x09D6,prog_09D6 );
 }
 
 Control prog_0326 ()
 {
     at ( "0326" );
-    instruction ( "CALL 1A7F",0x0329 );
+    instruction ( "CALL 1A7F",e16_hi_lo ( 0x03,0x29 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -10380,21 +10380,21 @@ Control prog_0326 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1A7F );
+    return jumpDirect ( 0x1A7F,prog_1A7F );
 }
 
 Control prog_0329 ()
 {
     at ( "0329" );
-    instruction ( "JP   07F9",0x032C );
+    instruction ( "JP   07F9",e16_hi_lo ( 0x03,0x2C ) );
     advance ( 10 );
-    return jumpDirect ( prog_07F9 );
+    return jumpDirect ( 0x07F9,prog_07F9 );
 }
 
 Control prog_032C ()
 {
     at ( "032C" );
-    instruction ( "CALL 1A7F",0x032F );
+    instruction ( "CALL 1A7F",e16_hi_lo ( 0x03,0x2F ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -10407,21 +10407,21 @@ Control prog_032C ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1A7F );
+    return jumpDirect ( 0x1A7F,prog_1A7F );
 }
 
 Control prog_032F ()
 {
     at ( "032F" );
-    instruction ( "JP   0817",0x0332 );
+    instruction ( "JP   0817",e16_hi_lo ( 0x03,0x32 ) );
     advance ( 10 );
-    return jumpDirect ( prog_0817 );
+    return jumpDirect ( 0x0817,prog_0817 );
 }
 
 Control prog_0332 ()
 {
     at ( "0332" );
-    instruction ( "CALL 0209",0x0335 );
+    instruction ( "CALL 0209",e16_hi_lo ( 0x03,0x35 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -10434,67 +10434,67 @@ Control prog_0332 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0209 );
+    return jumpDirect ( 0x0209,prog_0209 );
 }
 
 Control prog_0335 ()
 {
     at ( "0335" );
-    instruction ( "JP   02F8",0x0338 );
+    instruction ( "JP   02F8",e16_hi_lo ( 0x03,0x38 ) );
     advance ( 10 );
-    return jumpDirect ( prog_02F8 );
+    return jumpDirect ( 0x02F8,prog_02F8 );
 }
 
 Control prog_033B ()
 {
     at ( "033B" );
-    instruction ( "LD   HL,2068",0x033E );
+    instruction ( "LD   HL,2068",e16_hi_lo ( 0x03,0x3E ) );
     advance ( 10 );
     H = 0x20;
     L = 0x68;
-    return jumpDirect ( prog_033E );
+    return jumpDirect ( 0x033E,prog_033E );
 }
 
 Control prog_033E ()
 {
     at ( "033E" );
-    instruction ( "LD   (HL),01",0x0340 );
+    instruction ( "LD   (HL),01",e16_hi_lo ( 0x03,0x40 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     mem_write ( e16_hi_lo ( a1,a2 ),0x01 );
     advance ( 10 );
-    return jumpDirect ( prog_0340 );
+    return jumpDirect ( 0x0340,prog_0340 );
 }
 
 Control prog_0340 ()
 {
     at ( "0340" );
-    instruction ( "INC  HL",0x0341 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x03,0x41 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_0341 );
+    return jumpDirect ( 0x0341,prog_0341 );
 }
 
 Control prog_0341 ()
 {
     at ( "0341" );
-    instruction ( "LD   A,(HL)",0x0342 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x03,0x42 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_0342 );
+    return jumpDirect ( 0x0342,prog_0342 );
 }
 
 Control prog_0342 ()
 {
     at ( "0342" );
-    instruction ( "AND  A",0x0343 );
+    instruction ( "AND  A",e16_hi_lo ( 0x03,0x43 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -10506,83 +10506,83 @@ Control prog_0342 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0343 );
+    return jumpDirect ( 0x0343,prog_0343 );
 }
 
 Control prog_0343 ()
 {
     at ( "0343" );
-    instruction ( "JP   03B0",0x0346 );
+    instruction ( "JP   03B0",e16_hi_lo ( 0x03,0x46 ) );
     advance ( 10 );
-    return jumpDirect ( prog_03B0 );
+    return jumpDirect ( 0x03B0,prog_03B0 );
 }
 
 Control prog_0346 ()
 {
     at ( "0346" );
-    instruction ( "NOP",0x0347 );
+    instruction ( "NOP",e16_hi_lo ( 0x03,0x47 ) );
     advance ( 4 );
-    return jumpDirect ( prog_0347 );
+    return jumpDirect ( 0x0347,prog_0347 );
 }
 
 Control prog_0347 ()
 {
     at ( "0347" );
-    instruction ( "DEC  HL",0x0348 );
+    instruction ( "DEC  HL",e16_hi_lo ( 0x03,0x48 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_0348 );
+    return jumpDirect ( 0x0348,prog_0348 );
 }
 
 Control prog_0348 ()
 {
     at ( "0348" );
-    instruction ( "LD   (HL),01",0x034A );
+    instruction ( "LD   (HL),01",e16_hi_lo ( 0x03,0x4A ) );
     u8 a1 = H ;
     u8 a2 = L ;
     mem_write ( e16_hi_lo ( a1,a2 ),0x01 );
     advance ( 10 );
-    return jumpDirect ( prog_034A );
+    return jumpDirect ( 0x034A,prog_034A );
 }
 
 Control prog_034A ()
 {
     at ( "034A" );
-    instruction ( "LD   A,(201B)",0x034D );
+    instruction ( "LD   A,(201B)",e16_hi_lo ( 0x03,0x4D ) );
     u8 a1 = e8_read_mem ( 0x201B ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_034D );
+    return jumpDirect ( 0x034D,prog_034D );
 }
 
 Control prog_034D ()
 {
     at ( "034D" );
-    instruction ( "LD   B,A",0x034E );
+    instruction ( "LD   B,A",e16_hi_lo ( 0x03,0x4E ) );
     u8 a1 = A ;
     advance ( 5 );
     B = a1;
-    return jumpDirect ( prog_034E );
+    return jumpDirect ( 0x034E,prog_034E );
 }
 
 Control prog_034E ()
 {
     at ( "034E" );
-    instruction ( "LD   A,(20EF)",0x0351 );
+    instruction ( "LD   A,(20EF)",e16_hi_lo ( 0x03,0x51 ) );
     u8 a1 = e8_read_mem ( 0x20EF ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0351 );
+    return jumpDirect ( 0x0351,prog_0351 );
 }
 
 Control prog_0351 ()
 {
     at ( "0351" );
-    instruction ( "AND  A",0x0352 );
+    instruction ( "AND  A",e16_hi_lo ( 0x03,0x52 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -10594,101 +10594,101 @@ Control prog_0351 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0352 );
+    return jumpDirect ( 0x0352,prog_0352 );
 }
 
 Control prog_0352 ()
 {
     at ( "0352" );
-    instruction ( "JP   NZ,0363",0x0355 );
+    instruction ( "JP   NZ,0363",e16_hi_lo ( 0x03,0x55 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_0363 );
+        return jumpDirect ( 0x0363,prog_0363 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0355 );
+        return jumpDirect ( 0x0355,prog_0355 );
     }
 }
 
 Control prog_0355 ()
 {
     at ( "0355" );
-    instruction ( "LD   A,(201D)",0x0358 );
+    instruction ( "LD   A,(201D)",e16_hi_lo ( 0x03,0x58 ) );
     u8 a1 = e8_read_mem ( 0x201D ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0358 );
+    return jumpDirect ( 0x0358,prog_0358 );
 }
 
 Control prog_0358 ()
 {
     at ( "0358" );
-    instruction ( "RRCA",0x0359 );
+    instruction ( "RRCA",e16_hi_lo ( 0x03,0x59 ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftR ( a1,0x01 ),7,e1_test_bit ( a1,0 ) );
     FlagCY = e1_test_bit ( a1,0 );
-    return jumpDirect ( prog_0359 );
+    return jumpDirect ( 0x0359,prog_0359 );
 }
 
 Control prog_0359 ()
 {
     at ( "0359" );
-    instruction ( "JP   CY,0381",0x035C );
+    instruction ( "JP   CY,0381",e16_hi_lo ( 0x03,0x5C ) );
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( prog_0381 );
+        return jumpDirect ( 0x0381,prog_0381 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_035C );
+        return jumpDirect ( 0x035C,prog_035C );
     }
 }
 
 Control prog_035C ()
 {
     at ( "035C" );
-    instruction ( "RRCA",0x035D );
+    instruction ( "RRCA",e16_hi_lo ( 0x03,0x5D ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftR ( a1,0x01 ),7,e1_test_bit ( a1,0 ) );
     FlagCY = e1_test_bit ( a1,0 );
-    return jumpDirect ( prog_035D );
+    return jumpDirect ( 0x035D,prog_035D );
 }
 
 Control prog_035D ()
 {
     at ( "035D" );
-    instruction ( "JP   CY,038E",0x0360 );
+    instruction ( "JP   CY,038E",e16_hi_lo ( 0x03,0x60 ) );
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( prog_038E );
+        return jumpDirect ( 0x038E,prog_038E );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0360 );
+        return jumpDirect ( 0x0360,prog_0360 );
     }
 }
 
 Control prog_0360 ()
 {
     at ( "0360" );
-    instruction ( "JP   036F",0x0363 );
+    instruction ( "JP   036F",e16_hi_lo ( 0x03,0x63 ) );
     advance ( 10 );
-    return jumpDirect ( prog_036F );
+    return jumpDirect ( 0x036F,prog_036F );
 }
 
 Control prog_0363 ()
 {
     at ( "0363" );
-    instruction ( "CALL 17C0",0x0366 );
+    instruction ( "CALL 17C0",e16_hi_lo ( 0x03,0x66 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -10701,88 +10701,88 @@ Control prog_0363 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_17C0 );
+    return jumpDirect ( 0x17C0,prog_17C0 );
 }
 
 Control prog_0366 ()
 {
     at ( "0366" );
-    instruction ( "RLCA",0x0367 );
+    instruction ( "RLCA",e16_hi_lo ( 0x03,0x67 ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftL ( a1,0x01 ),0,e1_test_bit ( a1,7 ) );
     FlagCY = e1_test_bit ( a1,7 );
-    return jumpDirect ( prog_0367 );
+    return jumpDirect ( 0x0367,prog_0367 );
 }
 
 Control prog_0367 ()
 {
     at ( "0367" );
-    instruction ( "RLCA",0x0368 );
+    instruction ( "RLCA",e16_hi_lo ( 0x03,0x68 ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftL ( a1,0x01 ),0,e1_test_bit ( a1,7 ) );
     FlagCY = e1_test_bit ( a1,7 );
-    return jumpDirect ( prog_0368 );
+    return jumpDirect ( 0x0368,prog_0368 );
 }
 
 Control prog_0368 ()
 {
     at ( "0368" );
-    instruction ( "JP   CY,0381",0x036B );
+    instruction ( "JP   CY,0381",e16_hi_lo ( 0x03,0x6B ) );
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( prog_0381 );
+        return jumpDirect ( 0x0381,prog_0381 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_036B );
+        return jumpDirect ( 0x036B,prog_036B );
     }
 }
 
 Control prog_036B ()
 {
     at ( "036B" );
-    instruction ( "RLCA",0x036C );
+    instruction ( "RLCA",e16_hi_lo ( 0x03,0x6C ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftL ( a1,0x01 ),0,e1_test_bit ( a1,7 ) );
     FlagCY = e1_test_bit ( a1,7 );
-    return jumpDirect ( prog_036C );
+    return jumpDirect ( 0x036C,prog_036C );
 }
 
 Control prog_036C ()
 {
     at ( "036C" );
-    instruction ( "JP   CY,038E",0x036F );
+    instruction ( "JP   CY,038E",e16_hi_lo ( 0x03,0x6F ) );
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( prog_038E );
+        return jumpDirect ( 0x038E,prog_038E );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_036F );
+        return jumpDirect ( 0x036F,prog_036F );
     }
 }
 
 Control prog_036F ()
 {
     at ( "036F" );
-    instruction ( "LD   HL,2018",0x0372 );
+    instruction ( "LD   HL,2018",e16_hi_lo ( 0x03,0x72 ) );
     advance ( 10 );
     H = 0x20;
     L = 0x18;
-    return jumpDirect ( prog_0372 );
+    return jumpDirect ( 0x0372,prog_0372 );
 }
 
 Control prog_0372 ()
 {
     at ( "0372" );
-    instruction ( "CALL 1A3B",0x0375 );
+    instruction ( "CALL 1A3B",e16_hi_lo ( 0x03,0x75 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -10795,13 +10795,13 @@ Control prog_0372 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1A3B );
+    return jumpDirect ( 0x1A3B,prog_1A3B );
 }
 
 Control prog_0375 ()
 {
     at ( "0375" );
-    instruction ( "CALL 1A47",0x0378 );
+    instruction ( "CALL 1A47",e16_hi_lo ( 0x03,0x78 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -10814,13 +10814,13 @@ Control prog_0375 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1A47 );
+    return jumpDirect ( 0x1A47,prog_1A47 );
 }
 
 Control prog_0378 ()
 {
     at ( "0378" );
-    instruction ( "CALL 1439",0x037B );
+    instruction ( "CALL 1439",e16_hi_lo ( 0x03,0x7B ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -10833,32 +10833,32 @@ Control prog_0378 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1439 );
+    return jumpDirect ( 0x1439,prog_1439 );
 }
 
 Control prog_037B ()
 {
     at ( "037B" );
-    instruction ( "LD   A,00",0x037D );
+    instruction ( "LD   A,00",e16_hi_lo ( 0x03,0x7D ) );
     advance ( 7 );
     A = 0x00;
-    return jumpDirect ( prog_037D );
+    return jumpDirect ( 0x037D,prog_037D );
 }
 
 Control prog_037D ()
 {
     at ( "037D" );
-    instruction ( "LD   (2012),A",0x0380 );
+    instruction ( "LD   (2012),A",e16_hi_lo ( 0x03,0x80 ) );
     u8 a1 = A ;
     mem_write ( 0x2012,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0380 );
+    return jumpDirect ( 0x0380,prog_0380 );
 }
 
 Control prog_0380 ()
 {
     at ( "0380" );
-    instruction ( "RET",0x0381 );
+    instruction ( "RET",e16_hi_lo ( 0x03,0x81 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -10876,17 +10876,17 @@ Control prog_0380 ()
 Control prog_0381 ()
 {
     at ( "0381" );
-    instruction ( "LD   A,B",0x0382 );
+    instruction ( "LD   A,B",e16_hi_lo ( 0x03,0x82 ) );
     u8 a1 = B ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_0382 );
+    return jumpDirect ( 0x0382,prog_0382 );
 }
 
 Control prog_0382 ()
 {
     at ( "0382" );
-    instruction ( "CP   D9",0x0384 );
+    instruction ( "CP   D9",e16_hi_lo ( 0x03,0x84 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0xD9 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -10898,29 +10898,29 @@ Control prog_0382 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_0384 );
+    return jumpDirect ( 0x0384,prog_0384 );
 }
 
 Control prog_0384 ()
 {
     at ( "0384" );
-    instruction ( "JP   Z,036F",0x0387 );
+    instruction ( "JP   Z,036F",e16_hi_lo ( 0x03,0x87 ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_036F );
+        return jumpDirect ( 0x036F,prog_036F );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0387 );
+        return jumpDirect ( 0x0387,prog_0387 );
     }
 }
 
 Control prog_0387 ()
 {
     at ( "0387" );
-    instruction ( "INC  A",0x0388 );
+    instruction ( "INC  A",e16_hi_lo ( 0x03,0x88 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_true (  ),a1,0x00 ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -10932,41 +10932,41 @@ Control prog_0387 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_0388 );
+    return jumpDirect ( 0x0388,prog_0388 );
 }
 
 Control prog_0388 ()
 {
     at ( "0388" );
-    instruction ( "LD   (201B),A",0x038B );
+    instruction ( "LD   (201B),A",e16_hi_lo ( 0x03,0x8B ) );
     u8 a1 = A ;
     mem_write ( 0x201B,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_038B );
+    return jumpDirect ( 0x038B,prog_038B );
 }
 
 Control prog_038B ()
 {
     at ( "038B" );
-    instruction ( "JP   036F",0x038E );
+    instruction ( "JP   036F",e16_hi_lo ( 0x03,0x8E ) );
     advance ( 10 );
-    return jumpDirect ( prog_036F );
+    return jumpDirect ( 0x036F,prog_036F );
 }
 
 Control prog_038E ()
 {
     at ( "038E" );
-    instruction ( "LD   A,B",0x038F );
+    instruction ( "LD   A,B",e16_hi_lo ( 0x03,0x8F ) );
     u8 a1 = B ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_038F );
+    return jumpDirect ( 0x038F,prog_038F );
 }
 
 Control prog_038F ()
 {
     at ( "038F" );
-    instruction ( "CP   30",0x0391 );
+    instruction ( "CP   30",e16_hi_lo ( 0x03,0x91 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x30 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -10978,29 +10978,29 @@ Control prog_038F ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_0391 );
+    return jumpDirect ( 0x0391,prog_0391 );
 }
 
 Control prog_0391 ()
 {
     at ( "0391" );
-    instruction ( "JP   Z,036F",0x0394 );
+    instruction ( "JP   Z,036F",e16_hi_lo ( 0x03,0x94 ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_036F );
+        return jumpDirect ( 0x036F,prog_036F );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0394 );
+        return jumpDirect ( 0x0394,prog_0394 );
     }
 }
 
 Control prog_0394 ()
 {
     at ( "0394" );
-    instruction ( "DEC  A",0x0395 );
+    instruction ( "DEC  A",e16_hi_lo ( 0x03,0x95 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -11012,31 +11012,31 @@ Control prog_0394 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_0395 );
+    return jumpDirect ( 0x0395,prog_0395 );
 }
 
 Control prog_0395 ()
 {
     at ( "0395" );
-    instruction ( "LD   (201B),A",0x0398 );
+    instruction ( "LD   (201B),A",e16_hi_lo ( 0x03,0x98 ) );
     u8 a1 = A ;
     mem_write ( 0x201B,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0398 );
+    return jumpDirect ( 0x0398,prog_0398 );
 }
 
 Control prog_0398 ()
 {
     at ( "0398" );
-    instruction ( "JP   036F",0x039B );
+    instruction ( "JP   036F",e16_hi_lo ( 0x03,0x9B ) );
     advance ( 10 );
-    return jumpDirect ( prog_036F );
+    return jumpDirect ( 0x036F,prog_036F );
 }
 
 Control prog_039B ()
 {
     at ( "039B" );
-    instruction ( "INC  A",0x039C );
+    instruction ( "INC  A",e16_hi_lo ( 0x03,0x9C ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_true (  ),a1,0x00 ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -11048,13 +11048,13 @@ Control prog_039B ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_039C );
+    return jumpDirect ( 0x039C,prog_039C );
 }
 
 Control prog_039C ()
 {
     at ( "039C" );
-    instruction ( "AND  01",0x039E );
+    instruction ( "AND  01",e16_hi_lo ( 0x03,0x9E ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( 0x01,a1 ) ;
     u8 a3 = e8_or ( 0x01,a1 ) ;
@@ -11065,77 +11065,77 @@ Control prog_039C ()
     FlagA = e1_test_bit ( a3,3 );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_039E );
+    return jumpDirect ( 0x039E,prog_039E );
 }
 
 Control prog_039E ()
 {
     at ( "039E" );
-    instruction ( "LD   (2015),A",0x03A1 );
+    instruction ( "LD   (2015),A",e16_hi_lo ( 0x03,0xA1 ) );
     u8 a1 = A ;
     mem_write ( 0x2015,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_03A1 );
+    return jumpDirect ( 0x03A1,prog_03A1 );
 }
 
 Control prog_03A1 ()
 {
     at ( "03A1" );
-    instruction ( "RLCA",0x03A2 );
+    instruction ( "RLCA",e16_hi_lo ( 0x03,0xA2 ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftL ( a1,0x01 ),0,e1_test_bit ( a1,7 ) );
     FlagCY = e1_test_bit ( a1,7 );
-    return jumpDirect ( prog_03A2 );
+    return jumpDirect ( 0x03A2,prog_03A2 );
 }
 
 Control prog_03A2 ()
 {
     at ( "03A2" );
-    instruction ( "RLCA",0x03A3 );
+    instruction ( "RLCA",e16_hi_lo ( 0x03,0xA3 ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftL ( a1,0x01 ),0,e1_test_bit ( a1,7 ) );
     FlagCY = e1_test_bit ( a1,7 );
-    return jumpDirect ( prog_03A3 );
+    return jumpDirect ( 0x03A3,prog_03A3 );
 }
 
 Control prog_03A3 ()
 {
     at ( "03A3" );
-    instruction ( "RLCA",0x03A4 );
+    instruction ( "RLCA",e16_hi_lo ( 0x03,0xA4 ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftL ( a1,0x01 ),0,e1_test_bit ( a1,7 ) );
     FlagCY = e1_test_bit ( a1,7 );
-    return jumpDirect ( prog_03A4 );
+    return jumpDirect ( 0x03A4,prog_03A4 );
 }
 
 Control prog_03A4 ()
 {
     at ( "03A4" );
-    instruction ( "RLCA",0x03A5 );
+    instruction ( "RLCA",e16_hi_lo ( 0x03,0xA5 ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftL ( a1,0x01 ),0,e1_test_bit ( a1,7 ) );
     FlagCY = e1_test_bit ( a1,7 );
-    return jumpDirect ( prog_03A5 );
+    return jumpDirect ( 0x03A5,prog_03A5 );
 }
 
 Control prog_03A5 ()
 {
     at ( "03A5" );
-    instruction ( "LD   HL,1C70",0x03A8 );
+    instruction ( "LD   HL,1C70",e16_hi_lo ( 0x03,0xA8 ) );
     advance ( 10 );
     H = 0x1C;
     L = 0x70;
-    return jumpDirect ( prog_03A8 );
+    return jumpDirect ( 0x03A8,prog_03A8 );
 }
 
 Control prog_03A8 ()
 {
     at ( "03A8" );
-    instruction ( "ADD  L",0x03A9 );
+    instruction ( "ADD  L",e16_hi_lo ( 0x03,0xA9 ) );
     u8 a1 = L ;
     u8 a2 = A ;
     u16 a3 = e16_add_with_carry ( e1_false (  ),a1,a2 ) ;
@@ -11149,72 +11149,72 @@ Control prog_03A8 ()
     FlagA = e1_test_bit ( e8_lo ( a6 ),4 );
     FlagP = e1_parity ( e8_lo ( a3 ) );
     FlagCY = e1_test_bit ( e8_hi ( a3 ),0 );
-    return jumpDirect ( prog_03A9 );
+    return jumpDirect ( 0x03A9,prog_03A9 );
 }
 
 Control prog_03A9 ()
 {
     at ( "03A9" );
-    instruction ( "LD   L,A",0x03AA );
+    instruction ( "LD   L,A",e16_hi_lo ( 0x03,0xAA ) );
     u8 a1 = A ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( prog_03AA );
+    return jumpDirect ( 0x03AA,prog_03AA );
 }
 
 Control prog_03AA ()
 {
     at ( "03AA" );
-    instruction ( "LD   (2018),HL",0x03AD );
+    instruction ( "LD   (2018),HL",e16_hi_lo ( 0x03,0xAD ) );
     u8 a1 = L ;
     mem_write ( 0x2018,a1 );
     u8 a2 = H ;
     mem_write ( 0x2019,a2 );
     advance ( 16 );
-    return jumpDirect ( prog_03AD );
+    return jumpDirect ( 0x03AD,prog_03AD );
 }
 
 Control prog_03AD ()
 {
     at ( "03AD" );
-    instruction ( "JP   036F",0x03B0 );
+    instruction ( "JP   036F",e16_hi_lo ( 0x03,0xB0 ) );
     advance ( 10 );
-    return jumpDirect ( prog_036F );
+    return jumpDirect ( 0x036F,prog_036F );
 }
 
 Control prog_03B0 ()
 {
     at ( "03B0" );
-    instruction ( "JP   NZ,034A",0x03B3 );
+    instruction ( "JP   NZ,034A",e16_hi_lo ( 0x03,0xB3 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_034A );
+        return jumpDirect ( 0x034A,prog_034A );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_03B3 );
+        return jumpDirect ( 0x03B3,prog_03B3 );
     }
 }
 
 Control prog_03B3 ()
 {
     at ( "03B3" );
-    instruction ( "INC  HL",0x03B4 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x03,0xB4 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_03B4 );
+    return jumpDirect ( 0x03B4,prog_03B4 );
 }
 
 Control prog_03B4 ()
 {
     at ( "03B4" );
-    instruction ( "DEC  (HL)",0x03B5 );
+    instruction ( "DEC  (HL)",e16_hi_lo ( 0x03,0xB5 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -11230,47 +11230,47 @@ Control prog_03B4 ()
     FlagZ = e1_is_zero ( e8_lo ( a4 ) );
     FlagA = e1_test_bit ( e8_lo ( a7 ),4 );
     FlagP = e1_parity ( e8_lo ( a4 ) );
-    return jumpDirect ( prog_03B5 );
+    return jumpDirect ( 0x03B5,prog_03B5 );
 }
 
 Control prog_03B5 ()
 {
     at ( "03B5" );
-    instruction ( "JP   NZ,034A",0x03B8 );
+    instruction ( "JP   NZ,034A",e16_hi_lo ( 0x03,0xB8 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_034A );
+        return jumpDirect ( 0x034A,prog_034A );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_03B8 );
+        return jumpDirect ( 0x03B8,prog_03B8 );
     }
 }
 
 Control prog_03B8 ()
 {
     at ( "03B8" );
-    instruction ( "JP   0346",0x03BB );
+    instruction ( "JP   0346",e16_hi_lo ( 0x03,0xBB ) );
     advance ( 10 );
-    return jumpDirect ( prog_0346 );
+    return jumpDirect ( 0x0346,prog_0346 );
 }
 
 Control prog_03BB ()
 {
     at ( "03BB" );
-    instruction ( "LD   DE,202A",0x03BE );
+    instruction ( "LD   DE,202A",e16_hi_lo ( 0x03,0xBE ) );
     advance ( 10 );
     D = 0x20;
     E = 0x2A;
-    return jumpDirect ( prog_03BE );
+    return jumpDirect ( 0x03BE,prog_03BE );
 }
 
 Control prog_03BE ()
 {
     at ( "03BE" );
-    instruction ( "CALL 1A06",0x03C1 );
+    instruction ( "CALL 1A06",e16_hi_lo ( 0x03,0xC1 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -11283,13 +11283,13 @@ Control prog_03BE ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1A06 );
+    return jumpDirect ( 0x1A06,prog_1A06 );
 }
 
 Control prog_03C1 ()
 {
     at ( "03C1" );
-    instruction ( "POP  HL",0x03C2 );
+    instruction ( "POP  HL",e16_hi_lo ( 0x03,0xC2 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -11303,13 +11303,13 @@ Control prog_03C1 ()
     L = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_03C2 );
+    return jumpDirect ( 0x03C2,prog_03C2 );
 }
 
 Control prog_03C2 ()
 {
     at ( "03C2" );
-    instruction ( "RET  NC",0x03C3 );
+    instruction ( "RET  NC",e16_hi_lo ( 0x03,0xC3 ) );
     if (e1_flip ( FlagCY ))
     {
         u8 a1 = SPH ;
@@ -11328,39 +11328,39 @@ Control prog_03C2 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_03C3 );
+        return jumpDirect ( 0x03C3,prog_03C3 );
     }
 }
 
 Control prog_03C3 ()
 {
     at ( "03C3" );
-    instruction ( "INC  HL",0x03C4 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x03,0xC4 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_03C4 );
+    return jumpDirect ( 0x03C4,prog_03C4 );
 }
 
 Control prog_03C4 ()
 {
     at ( "03C4" );
-    instruction ( "LD   A,(HL)",0x03C5 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x03,0xC5 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_03C5 );
+    return jumpDirect ( 0x03C5,prog_03C5 );
 }
 
 Control prog_03C5 ()
 {
     at ( "03C5" );
-    instruction ( "AND  A",0x03C6 );
+    instruction ( "AND  A",e16_hi_lo ( 0x03,0xC6 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -11372,13 +11372,13 @@ Control prog_03C5 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_03C6 );
+    return jumpDirect ( 0x03C6,prog_03C6 );
 }
 
 Control prog_03C6 ()
 {
     at ( "03C6" );
-    instruction ( "RET  Z",0x03C7 );
+    instruction ( "RET  Z",e16_hi_lo ( 0x03,0xC7 ) );
     if (FlagZ)
     {
         u8 a1 = SPH ;
@@ -11397,14 +11397,14 @@ Control prog_03C6 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_03C7 );
+        return jumpDirect ( 0x03C7,prog_03C7 );
     }
 }
 
 Control prog_03C7 ()
 {
     at ( "03C7" );
-    instruction ( "CP   01",0x03C9 );
+    instruction ( "CP   01",e16_hi_lo ( 0x03,0xC9 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x01 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -11416,29 +11416,29 @@ Control prog_03C7 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_03C9 );
+    return jumpDirect ( 0x03C9,prog_03C9 );
 }
 
 Control prog_03C9 ()
 {
     at ( "03C9" );
-    instruction ( "JP   Z,03FA",0x03CC );
+    instruction ( "JP   Z,03FA",e16_hi_lo ( 0x03,0xCC ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_03FA );
+        return jumpDirect ( 0x03FA,prog_03FA );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_03CC );
+        return jumpDirect ( 0x03CC,prog_03CC );
     }
 }
 
 Control prog_03CC ()
 {
     at ( "03CC" );
-    instruction ( "CP   02",0x03CE );
+    instruction ( "CP   02",e16_hi_lo ( 0x03,0xCE ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x02 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -11450,42 +11450,42 @@ Control prog_03CC ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_03CE );
+    return jumpDirect ( 0x03CE,prog_03CE );
 }
 
 Control prog_03CE ()
 {
     at ( "03CE" );
-    instruction ( "JP   Z,040A",0x03D1 );
+    instruction ( "JP   Z,040A",e16_hi_lo ( 0x03,0xD1 ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_040A );
+        return jumpDirect ( 0x040A,prog_040A );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_03D1 );
+        return jumpDirect ( 0x03D1,prog_03D1 );
     }
 }
 
 Control prog_03D1 ()
 {
     at ( "03D1" );
-    instruction ( "INC  HL",0x03D2 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x03,0xD2 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_03D2 );
+    return jumpDirect ( 0x03D2,prog_03D2 );
 }
 
 Control prog_03D2 ()
 {
     at ( "03D2" );
-    instruction ( "CP   03",0x03D4 );
+    instruction ( "CP   03",e16_hi_lo ( 0x03,0xD4 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x03 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -11497,29 +11497,29 @@ Control prog_03D2 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_03D4 );
+    return jumpDirect ( 0x03D4,prog_03D4 );
 }
 
 Control prog_03D4 ()
 {
     at ( "03D4" );
-    instruction ( "JP   NZ,042A",0x03D7 );
+    instruction ( "JP   NZ,042A",e16_hi_lo ( 0x03,0xD7 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_042A );
+        return jumpDirect ( 0x042A,prog_042A );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_03D7 );
+        return jumpDirect ( 0x03D7,prog_03D7 );
     }
 }
 
 Control prog_03D7 ()
 {
     at ( "03D7" );
-    instruction ( "DEC  (HL)",0x03D8 );
+    instruction ( "DEC  (HL)",e16_hi_lo ( 0x03,0xD8 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -11535,41 +11535,41 @@ Control prog_03D7 ()
     FlagZ = e1_is_zero ( e8_lo ( a4 ) );
     FlagA = e1_test_bit ( e8_lo ( a7 ),4 );
     FlagP = e1_parity ( e8_lo ( a4 ) );
-    return jumpDirect ( prog_03D8 );
+    return jumpDirect ( 0x03D8,prog_03D8 );
 }
 
 Control prog_03D8 ()
 {
     at ( "03D8" );
-    instruction ( "JP   Z,0436",0x03DB );
+    instruction ( "JP   Z,0436",e16_hi_lo ( 0x03,0xDB ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_0436 );
+        return jumpDirect ( 0x0436,prog_0436 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_03DB );
+        return jumpDirect ( 0x03DB,prog_03DB );
     }
 }
 
 Control prog_03DB ()
 {
     at ( "03DB" );
-    instruction ( "LD   A,(HL)",0x03DC );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x03,0xDC ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_03DC );
+    return jumpDirect ( 0x03DC,prog_03DC );
 }
 
 Control prog_03DC ()
 {
     at ( "03DC" );
-    instruction ( "CP   0F",0x03DE );
+    instruction ( "CP   0F",e16_hi_lo ( 0x03,0xDE ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x0F ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -11581,13 +11581,13 @@ Control prog_03DC ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_03DE );
+    return jumpDirect ( 0x03DE,prog_03DE );
 }
 
 Control prog_03DE ()
 {
     at ( "03DE" );
-    instruction ( "RET  NZ",0x03DF );
+    instruction ( "RET  NZ",e16_hi_lo ( 0x03,0xDF ) );
     if (e1_flip ( FlagZ ))
     {
         u8 a1 = SPH ;
@@ -11606,14 +11606,14 @@ Control prog_03DE ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_03DF );
+        return jumpDirect ( 0x03DF,prog_03DF );
     }
 }
 
 Control prog_03DF ()
 {
     at ( "03DF" );
-    instruction ( "PUSH HL",0x03E0 );
+    instruction ( "PUSH HL",e16_hi_lo ( 0x03,0xE0 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = SPH ;
@@ -11627,13 +11627,13 @@ Control prog_03DF ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_03E0 );
+    return jumpDirect ( 0x03E0,prog_03E0 );
 }
 
 Control prog_03E0 ()
 {
     at ( "03E0" );
-    instruction ( "CALL 0430",0x03E3 );
+    instruction ( "CALL 0430",e16_hi_lo ( 0x03,0xE3 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -11646,13 +11646,13 @@ Control prog_03E0 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0430 );
+    return jumpDirect ( 0x0430,prog_0430 );
 }
 
 Control prog_03E3 ()
 {
     at ( "03E3" );
-    instruction ( "CALL 1452",0x03E6 );
+    instruction ( "CALL 1452",e16_hi_lo ( 0x03,0xE6 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -11665,13 +11665,13 @@ Control prog_03E3 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1452 );
+    return jumpDirect ( 0x1452,prog_1452 );
 }
 
 Control prog_03E6 ()
 {
     at ( "03E6" );
-    instruction ( "POP  HL",0x03E7 );
+    instruction ( "POP  HL",e16_hi_lo ( 0x03,0xE7 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -11685,26 +11685,26 @@ Control prog_03E6 ()
     L = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_03E7 );
+    return jumpDirect ( 0x03E7,prog_03E7 );
 }
 
 Control prog_03E7 ()
 {
     at ( "03E7" );
-    instruction ( "INC  HL",0x03E8 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x03,0xE8 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_03E8 );
+    return jumpDirect ( 0x03E8,prog_03E8 );
 }
 
 Control prog_03E8 ()
 {
     at ( "03E8" );
-    instruction ( "INC  (HL)",0x03E9 );
+    instruction ( "INC  (HL)",e16_hi_lo ( 0x03,0xE9 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -11720,39 +11720,39 @@ Control prog_03E8 ()
     FlagZ = e1_is_zero ( e8_lo ( a4 ) );
     FlagA = e1_test_bit ( e8_lo ( a7 ),4 );
     FlagP = e1_parity ( e8_lo ( a4 ) );
-    return jumpDirect ( prog_03E9 );
+    return jumpDirect ( 0x03E9,prog_03E9 );
 }
 
 Control prog_03E9 ()
 {
     at ( "03E9" );
-    instruction ( "INC  HL",0x03EA );
+    instruction ( "INC  HL",e16_hi_lo ( 0x03,0xEA ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_03EA );
+    return jumpDirect ( 0x03EA,prog_03EA );
 }
 
 Control prog_03EA ()
 {
     at ( "03EA" );
-    instruction ( "INC  HL",0x03EB );
+    instruction ( "INC  HL",e16_hi_lo ( 0x03,0xEB ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_03EB );
+    return jumpDirect ( 0x03EB,prog_03EB );
 }
 
 Control prog_03EB ()
 {
     at ( "03EB" );
-    instruction ( "DEC  (HL)",0x03EC );
+    instruction ( "DEC  (HL)",e16_hi_lo ( 0x03,0xEC ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -11768,13 +11768,13 @@ Control prog_03EB ()
     FlagZ = e1_is_zero ( e8_lo ( a4 ) );
     FlagA = e1_test_bit ( e8_lo ( a7 ),4 );
     FlagP = e1_parity ( e8_lo ( a4 ) );
-    return jumpDirect ( prog_03EC );
+    return jumpDirect ( 0x03EC,prog_03EC );
 }
 
 Control prog_03EC ()
 {
     at ( "03EC" );
-    instruction ( "DEC  (HL)",0x03ED );
+    instruction ( "DEC  (HL)",e16_hi_lo ( 0x03,0xED ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -11790,26 +11790,26 @@ Control prog_03EC ()
     FlagZ = e1_is_zero ( e8_lo ( a4 ) );
     FlagA = e1_test_bit ( e8_lo ( a7 ),4 );
     FlagP = e1_parity ( e8_lo ( a4 ) );
-    return jumpDirect ( prog_03ED );
+    return jumpDirect ( 0x03ED,prog_03ED );
 }
 
 Control prog_03ED ()
 {
     at ( "03ED" );
-    instruction ( "INC  HL",0x03EE );
+    instruction ( "INC  HL",e16_hi_lo ( 0x03,0xEE ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_03EE );
+    return jumpDirect ( 0x03EE,prog_03EE );
 }
 
 Control prog_03EE ()
 {
     at ( "03EE" );
-    instruction ( "DEC  (HL)",0x03EF );
+    instruction ( "DEC  (HL)",e16_hi_lo ( 0x03,0xEF ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -11825,13 +11825,13 @@ Control prog_03EE ()
     FlagZ = e1_is_zero ( e8_lo ( a4 ) );
     FlagA = e1_test_bit ( e8_lo ( a7 ),4 );
     FlagP = e1_parity ( e8_lo ( a4 ) );
-    return jumpDirect ( prog_03EF );
+    return jumpDirect ( 0x03EF,prog_03EF );
 }
 
 Control prog_03EF ()
 {
     at ( "03EF" );
-    instruction ( "DEC  (HL)",0x03F0 );
+    instruction ( "DEC  (HL)",e16_hi_lo ( 0x03,0xF0 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -11847,13 +11847,13 @@ Control prog_03EF ()
     FlagZ = e1_is_zero ( e8_lo ( a4 ) );
     FlagA = e1_test_bit ( e8_lo ( a7 ),4 );
     FlagP = e1_parity ( e8_lo ( a4 ) );
-    return jumpDirect ( prog_03F0 );
+    return jumpDirect ( 0x03F0,prog_03F0 );
 }
 
 Control prog_03F0 ()
 {
     at ( "03F0" );
-    instruction ( "DEC  (HL)",0x03F1 );
+    instruction ( "DEC  (HL)",e16_hi_lo ( 0x03,0xF1 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -11869,37 +11869,37 @@ Control prog_03F0 ()
     FlagZ = e1_is_zero ( e8_lo ( a4 ) );
     FlagA = e1_test_bit ( e8_lo ( a7 ),4 );
     FlagP = e1_parity ( e8_lo ( a4 ) );
-    return jumpDirect ( prog_03F1 );
+    return jumpDirect ( 0x03F1,prog_03F1 );
 }
 
 Control prog_03F1 ()
 {
     at ( "03F1" );
-    instruction ( "INC  HL",0x03F2 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x03,0xF2 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_03F2 );
+    return jumpDirect ( 0x03F2,prog_03F2 );
 }
 
 Control prog_03F2 ()
 {
     at ( "03F2" );
-    instruction ( "LD   (HL),08",0x03F4 );
+    instruction ( "LD   (HL),08",e16_hi_lo ( 0x03,0xF4 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     mem_write ( e16_hi_lo ( a1,a2 ),0x08 );
     advance ( 10 );
-    return jumpDirect ( prog_03F4 );
+    return jumpDirect ( 0x03F4,prog_03F4 );
 }
 
 Control prog_03F4 ()
 {
     at ( "03F4" );
-    instruction ( "CALL 0430",0x03F7 );
+    instruction ( "CALL 0430",e16_hi_lo ( 0x03,0xF7 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -11912,21 +11912,21 @@ Control prog_03F4 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0430 );
+    return jumpDirect ( 0x0430,prog_0430 );
 }
 
 Control prog_03F7 ()
 {
     at ( "03F7" );
-    instruction ( "JP   1400",0x03FA );
+    instruction ( "JP   1400",e16_hi_lo ( 0x03,0xFA ) );
     advance ( 10 );
-    return jumpDirect ( prog_1400 );
+    return jumpDirect ( 0x1400,prog_1400 );
 }
 
 Control prog_03FA ()
 {
     at ( "03FA" );
-    instruction ( "INC  A",0x03FB );
+    instruction ( "INC  A",e16_hi_lo ( 0x03,0xFB ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_true (  ),a1,0x00 ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -11938,35 +11938,35 @@ Control prog_03FA ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_03FB );
+    return jumpDirect ( 0x03FB,prog_03FB );
 }
 
 Control prog_03FB ()
 {
     at ( "03FB" );
-    instruction ( "LD   (HL),A",0x03FC );
+    instruction ( "LD   (HL),A",e16_hi_lo ( 0x03,0xFC ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_03FC );
+    return jumpDirect ( 0x03FC,prog_03FC );
 }
 
 Control prog_03FC ()
 {
     at ( "03FC" );
-    instruction ( "LD   A,(201B)",0x03FF );
+    instruction ( "LD   A,(201B)",e16_hi_lo ( 0x03,0xFF ) );
     u8 a1 = e8_read_mem ( 0x201B ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_03FF );
+    return jumpDirect ( 0x03FF,prog_03FF );
 }
 
 Control prog_03FF ()
 {
     at ( "03FF" );
-    instruction ( "ADD  08",0x0401 );
+    instruction ( "ADD  08",e16_hi_lo ( 0x04,0x01 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_false (  ),0x08,a1 ) ;
     u8 a3 = e8_and ( 0x08,0x0F ) ;
@@ -11979,23 +11979,23 @@ Control prog_03FF ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_test_bit ( e8_hi ( a2 ),0 );
-    return jumpDirect ( prog_0401 );
+    return jumpDirect ( 0x0401,prog_0401 );
 }
 
 Control prog_0401 ()
 {
     at ( "0401" );
-    instruction ( "LD   (202A),A",0x0404 );
+    instruction ( "LD   (202A),A",e16_hi_lo ( 0x04,0x04 ) );
     u8 a1 = A ;
     mem_write ( 0x202A,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0404 );
+    return jumpDirect ( 0x0404,prog_0404 );
 }
 
 Control prog_0404 ()
 {
     at ( "0404" );
-    instruction ( "CALL 0430",0x0407 );
+    instruction ( "CALL 0430",e16_hi_lo ( 0x04,0x07 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -12008,21 +12008,21 @@ Control prog_0404 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0430 );
+    return jumpDirect ( 0x0430,prog_0430 );
 }
 
 Control prog_0407 ()
 {
     at ( "0407" );
-    instruction ( "JP   1400",0x040A );
+    instruction ( "JP   1400",e16_hi_lo ( 0x04,0x0A ) );
     advance ( 10 );
-    return jumpDirect ( prog_1400 );
+    return jumpDirect ( 0x1400,prog_1400 );
 }
 
 Control prog_040A ()
 {
     at ( "040A" );
-    instruction ( "CALL 0430",0x040D );
+    instruction ( "CALL 0430",e16_hi_lo ( 0x04,0x0D ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -12035,13 +12035,13 @@ Control prog_040A ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0430 );
+    return jumpDirect ( 0x0430,prog_0430 );
 }
 
 Control prog_040D ()
 {
     at ( "040D" );
-    instruction ( "PUSH DE",0x040E );
+    instruction ( "PUSH DE",e16_hi_lo ( 0x04,0x0E ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = SPH ;
@@ -12055,13 +12055,13 @@ Control prog_040D ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_040E );
+    return jumpDirect ( 0x040E,prog_040E );
 }
 
 Control prog_040E ()
 {
     at ( "040E" );
-    instruction ( "PUSH HL",0x040F );
+    instruction ( "PUSH HL",e16_hi_lo ( 0x04,0x0F ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = SPH ;
@@ -12075,13 +12075,13 @@ Control prog_040E ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_040F );
+    return jumpDirect ( 0x040F,prog_040F );
 }
 
 Control prog_040F ()
 {
     at ( "040F" );
-    instruction ( "PUSH BC",0x0410 );
+    instruction ( "PUSH BC",e16_hi_lo ( 0x04,0x10 ) );
     u8 a1 = B ;
     u8 a2 = C ;
     u8 a3 = SPH ;
@@ -12095,13 +12095,13 @@ Control prog_040F ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_0410 );
+    return jumpDirect ( 0x0410,prog_0410 );
 }
 
 Control prog_0410 ()
 {
     at ( "0410" );
-    instruction ( "CALL 1452",0x0413 );
+    instruction ( "CALL 1452",e16_hi_lo ( 0x04,0x13 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -12114,13 +12114,13 @@ Control prog_0410 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1452 );
+    return jumpDirect ( 0x1452,prog_1452 );
 }
 
 Control prog_0413 ()
 {
     at ( "0413" );
-    instruction ( "POP  BC",0x0414 );
+    instruction ( "POP  BC",e16_hi_lo ( 0x04,0x14 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -12134,13 +12134,13 @@ Control prog_0413 ()
     C = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_0414 );
+    return jumpDirect ( 0x0414,prog_0414 );
 }
 
 Control prog_0414 ()
 {
     at ( "0414" );
-    instruction ( "POP  HL",0x0415 );
+    instruction ( "POP  HL",e16_hi_lo ( 0x04,0x15 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -12154,13 +12154,13 @@ Control prog_0414 ()
     L = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_0415 );
+    return jumpDirect ( 0x0415,prog_0415 );
 }
 
 Control prog_0415 ()
 {
     at ( "0415" );
-    instruction ( "POP  DE",0x0416 );
+    instruction ( "POP  DE",e16_hi_lo ( 0x04,0x16 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -12174,23 +12174,23 @@ Control prog_0415 ()
     E = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_0416 );
+    return jumpDirect ( 0x0416,prog_0416 );
 }
 
 Control prog_0416 ()
 {
     at ( "0416" );
-    instruction ( "LD   A,(202C)",0x0419 );
+    instruction ( "LD   A,(202C)",e16_hi_lo ( 0x04,0x19 ) );
     u8 a1 = e8_read_mem ( 0x202C ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0419 );
+    return jumpDirect ( 0x0419,prog_0419 );
 }
 
 Control prog_0419 ()
 {
     at ( "0419" );
-    instruction ( "ADD  L",0x041A );
+    instruction ( "ADD  L",e16_hi_lo ( 0x04,0x1A ) );
     u8 a1 = L ;
     u8 a2 = A ;
     u16 a3 = e16_add_with_carry ( e1_false (  ),a1,a2 ) ;
@@ -12204,33 +12204,33 @@ Control prog_0419 ()
     FlagA = e1_test_bit ( e8_lo ( a6 ),4 );
     FlagP = e1_parity ( e8_lo ( a3 ) );
     FlagCY = e1_test_bit ( e8_hi ( a3 ),0 );
-    return jumpDirect ( prog_041A );
+    return jumpDirect ( 0x041A,prog_041A );
 }
 
 Control prog_041A ()
 {
     at ( "041A" );
-    instruction ( "LD   L,A",0x041B );
+    instruction ( "LD   L,A",e16_hi_lo ( 0x04,0x1B ) );
     u8 a1 = A ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( prog_041B );
+    return jumpDirect ( 0x041B,prog_041B );
 }
 
 Control prog_041B ()
 {
     at ( "041B" );
-    instruction ( "LD   (2029),A",0x041E );
+    instruction ( "LD   (2029),A",e16_hi_lo ( 0x04,0x1E ) );
     u8 a1 = A ;
     mem_write ( 0x2029,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_041E );
+    return jumpDirect ( 0x041E,prog_041E );
 }
 
 Control prog_041E ()
 {
     at ( "041E" );
-    instruction ( "CALL 1491",0x0421 );
+    instruction ( "CALL 1491",e16_hi_lo ( 0x04,0x21 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -12243,23 +12243,23 @@ Control prog_041E ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1491 );
+    return jumpDirect ( 0x1491,prog_1491 );
 }
 
 Control prog_0421 ()
 {
     at ( "0421" );
-    instruction ( "LD   A,(2061)",0x0424 );
+    instruction ( "LD   A,(2061)",e16_hi_lo ( 0x04,0x24 ) );
     u8 a1 = e8_read_mem ( 0x2061 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0424 );
+    return jumpDirect ( 0x0424,prog_0424 );
 }
 
 Control prog_0424 ()
 {
     at ( "0424" );
-    instruction ( "AND  A",0x0425 );
+    instruction ( "AND  A",e16_hi_lo ( 0x04,0x25 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -12271,13 +12271,13 @@ Control prog_0424 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0425 );
+    return jumpDirect ( 0x0425,prog_0425 );
 }
 
 Control prog_0425 ()
 {
     at ( "0425" );
-    instruction ( "RET  Z",0x0426 );
+    instruction ( "RET  Z",e16_hi_lo ( 0x04,0x26 ) );
     if (FlagZ)
     {
         u8 a1 = SPH ;
@@ -12296,24 +12296,24 @@ Control prog_0425 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_0426 );
+        return jumpDirect ( 0x0426,prog_0426 );
     }
 }
 
 Control prog_0426 ()
 {
     at ( "0426" );
-    instruction ( "LD   (2002),A",0x0429 );
+    instruction ( "LD   (2002),A",e16_hi_lo ( 0x04,0x29 ) );
     u8 a1 = A ;
     mem_write ( 0x2002,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0429 );
+    return jumpDirect ( 0x0429,prog_0429 );
 }
 
 Control prog_0429 ()
 {
     at ( "0429" );
-    instruction ( "RET",0x042A );
+    instruction ( "RET",e16_hi_lo ( 0x04,0x2A ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -12331,7 +12331,7 @@ Control prog_0429 ()
 Control prog_042A ()
 {
     at ( "042A" );
-    instruction ( "CP   05",0x042C );
+    instruction ( "CP   05",e16_hi_lo ( 0x04,0x2C ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x05 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -12343,13 +12343,13 @@ Control prog_042A ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_042C );
+    return jumpDirect ( 0x042C,prog_042C );
 }
 
 Control prog_042C ()
 {
     at ( "042C" );
-    instruction ( "RET  Z",0x042D );
+    instruction ( "RET  Z",e16_hi_lo ( 0x04,0x2D ) );
     if (FlagZ)
     {
         u8 a1 = SPH ;
@@ -12368,40 +12368,40 @@ Control prog_042C ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_042D );
+        return jumpDirect ( 0x042D,prog_042D );
     }
 }
 
 Control prog_042D ()
 {
     at ( "042D" );
-    instruction ( "JP   0436",0x0430 );
+    instruction ( "JP   0436",e16_hi_lo ( 0x04,0x30 ) );
     advance ( 10 );
-    return jumpDirect ( prog_0436 );
+    return jumpDirect ( 0x0436,prog_0436 );
 }
 
 Control prog_0430 ()
 {
     at ( "0430" );
-    instruction ( "LD   HL,2027",0x0433 );
+    instruction ( "LD   HL,2027",e16_hi_lo ( 0x04,0x33 ) );
     advance ( 10 );
     H = 0x20;
     L = 0x27;
-    return jumpDirect ( prog_0433 );
+    return jumpDirect ( 0x0433,prog_0433 );
 }
 
 Control prog_0433 ()
 {
     at ( "0433" );
-    instruction ( "JP   1A3B",0x0436 );
+    instruction ( "JP   1A3B",e16_hi_lo ( 0x04,0x36 ) );
     advance ( 10 );
-    return jumpDirect ( prog_1A3B );
+    return jumpDirect ( 0x1A3B,prog_1A3B );
 }
 
 Control prog_0436 ()
 {
     at ( "0436" );
-    instruction ( "CALL 0430",0x0439 );
+    instruction ( "CALL 0430",e16_hi_lo ( 0x04,0x39 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -12414,13 +12414,13 @@ Control prog_0436 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0430 );
+    return jumpDirect ( 0x0430,prog_0430 );
 }
 
 Control prog_0439 ()
 {
     at ( "0439" );
-    instruction ( "CALL 1452",0x043C );
+    instruction ( "CALL 1452",e16_hi_lo ( 0x04,0x3C ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -12433,42 +12433,42 @@ Control prog_0439 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1452 );
+    return jumpDirect ( 0x1452,prog_1452 );
 }
 
 Control prog_043C ()
 {
     at ( "043C" );
-    instruction ( "LD   HL,2025",0x043F );
+    instruction ( "LD   HL,2025",e16_hi_lo ( 0x04,0x3F ) );
     advance ( 10 );
     H = 0x20;
     L = 0x25;
-    return jumpDirect ( prog_043F );
+    return jumpDirect ( 0x043F,prog_043F );
 }
 
 Control prog_043F ()
 {
     at ( "043F" );
-    instruction ( "LD   DE,1B25",0x0442 );
+    instruction ( "LD   DE,1B25",e16_hi_lo ( 0x04,0x42 ) );
     advance ( 10 );
     D = 0x1B;
     E = 0x25;
-    return jumpDirect ( prog_0442 );
+    return jumpDirect ( 0x0442,prog_0442 );
 }
 
 Control prog_0442 ()
 {
     at ( "0442" );
-    instruction ( "LD   B,07",0x0444 );
+    instruction ( "LD   B,07",e16_hi_lo ( 0x04,0x44 ) );
     advance ( 7 );
     B = 0x07;
-    return jumpDirect ( prog_0444 );
+    return jumpDirect ( 0x0444,prog_0444 );
 }
 
 Control prog_0444 ()
 {
     at ( "0444" );
-    instruction ( "CALL 1A32",0x0447 );
+    instruction ( "CALL 1A32",e16_hi_lo ( 0x04,0x47 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -12481,25 +12481,25 @@ Control prog_0444 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1A32 );
+    return jumpDirect ( 0x1A32,prog_1A32 );
 }
 
 Control prog_0447 ()
 {
     at ( "0447" );
-    instruction ( "LD   HL,(208D)",0x044A );
+    instruction ( "LD   HL,(208D)",e16_hi_lo ( 0x04,0x4A ) );
     u8 a1 = e8_read_mem ( 0x208D ) ;
     u8 a2 = e8_read_mem ( 0x208E ) ;
     advance ( 16 );
     H = a2;
     L = a1;
-    return jumpDirect ( prog_044A );
+    return jumpDirect ( 0x044A,prog_044A );
 }
 
 Control prog_044A ()
 {
     at ( "044A" );
-    instruction ( "INC  L",0x044B );
+    instruction ( "INC  L",e16_hi_lo ( 0x04,0x4B ) );
     u8 a1 = L ;
     u16 a2 = e16_add_with_carry ( e1_true (  ),a1,0x00 ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -12511,23 +12511,23 @@ Control prog_044A ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_044B );
+    return jumpDirect ( 0x044B,prog_044B );
 }
 
 Control prog_044B ()
 {
     at ( "044B" );
-    instruction ( "LD   A,L",0x044C );
+    instruction ( "LD   A,L",e16_hi_lo ( 0x04,0x4C ) );
     u8 a1 = L ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_044C );
+    return jumpDirect ( 0x044C,prog_044C );
 }
 
 Control prog_044C ()
 {
     at ( "044C" );
-    instruction ( "CP   63",0x044E );
+    instruction ( "CP   63",e16_hi_lo ( 0x04,0x4E ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x63 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -12539,62 +12539,62 @@ Control prog_044C ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_044E );
+    return jumpDirect ( 0x044E,prog_044E );
 }
 
 Control prog_044E ()
 {
     at ( "044E" );
-    instruction ( "JP   CY,0453",0x0451 );
+    instruction ( "JP   CY,0453",e16_hi_lo ( 0x04,0x51 ) );
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( prog_0453 );
+        return jumpDirect ( 0x0453,prog_0453 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0451 );
+        return jumpDirect ( 0x0451,prog_0451 );
     }
 }
 
 Control prog_0451 ()
 {
     at ( "0451" );
-    instruction ( "LD   L,54",0x0453 );
+    instruction ( "LD   L,54",e16_hi_lo ( 0x04,0x53 ) );
     advance ( 7 );
     L = 0x54;
-    return jumpDirect ( prog_0453 );
+    return jumpDirect ( 0x0453,prog_0453 );
 }
 
 Control prog_0453 ()
 {
     at ( "0453" );
-    instruction ( "LD   (208D),HL",0x0456 );
+    instruction ( "LD   (208D),HL",e16_hi_lo ( 0x04,0x56 ) );
     u8 a1 = L ;
     mem_write ( 0x208D,a1 );
     u8 a2 = H ;
     mem_write ( 0x208E,a2 );
     advance ( 16 );
-    return jumpDirect ( prog_0456 );
+    return jumpDirect ( 0x0456,prog_0456 );
 }
 
 Control prog_0456 ()
 {
     at ( "0456" );
-    instruction ( "LD   HL,(208F)",0x0459 );
+    instruction ( "LD   HL,(208F)",e16_hi_lo ( 0x04,0x59 ) );
     u8 a1 = e8_read_mem ( 0x208F ) ;
     u8 a2 = e8_read_mem ( 0x2090 ) ;
     advance ( 16 );
     H = a2;
     L = a1;
-    return jumpDirect ( prog_0459 );
+    return jumpDirect ( 0x0459,prog_0459 );
 }
 
 Control prog_0459 ()
 {
     at ( "0459" );
-    instruction ( "INC  L",0x045A );
+    instruction ( "INC  L",e16_hi_lo ( 0x04,0x5A ) );
     u8 a1 = L ;
     u16 a2 = e16_add_with_carry ( e1_true (  ),a1,0x00 ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -12606,35 +12606,35 @@ Control prog_0459 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_045A );
+    return jumpDirect ( 0x045A,prog_045A );
 }
 
 Control prog_045A ()
 {
     at ( "045A" );
-    instruction ( "LD   (208F),HL",0x045D );
+    instruction ( "LD   (208F),HL",e16_hi_lo ( 0x04,0x5D ) );
     u8 a1 = L ;
     mem_write ( 0x208F,a1 );
     u8 a2 = H ;
     mem_write ( 0x2090,a2 );
     advance ( 16 );
-    return jumpDirect ( prog_045D );
+    return jumpDirect ( 0x045D,prog_045D );
 }
 
 Control prog_045D ()
 {
     at ( "045D" );
-    instruction ( "LD   A,(2084)",0x0460 );
+    instruction ( "LD   A,(2084)",e16_hi_lo ( 0x04,0x60 ) );
     u8 a1 = e8_read_mem ( 0x2084 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0460 );
+    return jumpDirect ( 0x0460,prog_0460 );
 }
 
 Control prog_0460 ()
 {
     at ( "0460" );
-    instruction ( "AND  A",0x0461 );
+    instruction ( "AND  A",e16_hi_lo ( 0x04,0x61 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -12646,13 +12646,13 @@ Control prog_0460 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0461 );
+    return jumpDirect ( 0x0461,prog_0461 );
 }
 
 Control prog_0461 ()
 {
     at ( "0461" );
-    instruction ( "RET  NZ",0x0462 );
+    instruction ( "RET  NZ",e16_hi_lo ( 0x04,0x62 ) );
     if (e1_flip ( FlagZ ))
     {
         u8 a1 = SPH ;
@@ -12671,26 +12671,26 @@ Control prog_0461 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_0462 );
+        return jumpDirect ( 0x0462,prog_0462 );
     }
 }
 
 Control prog_0462 ()
 {
     at ( "0462" );
-    instruction ( "LD   A,(HL)",0x0463 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x04,0x63 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_0463 );
+    return jumpDirect ( 0x0463,prog_0463 );
 }
 
 Control prog_0463 ()
 {
     at ( "0463" );
-    instruction ( "AND  01",0x0465 );
+    instruction ( "AND  01",e16_hi_lo ( 0x04,0x65 ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( 0x01,a1 ) ;
     u8 a3 = e8_or ( 0x01,a1 ) ;
@@ -12701,109 +12701,109 @@ Control prog_0463 ()
     FlagA = e1_test_bit ( a3,3 );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0465 );
+    return jumpDirect ( 0x0465,prog_0465 );
 }
 
 Control prog_0465 ()
 {
     at ( "0465" );
-    instruction ( "LD   BC,0229",0x0468 );
+    instruction ( "LD   BC,0229",e16_hi_lo ( 0x04,0x68 ) );
     advance ( 10 );
     B = 0x02;
     C = 0x29;
-    return jumpDirect ( prog_0468 );
+    return jumpDirect ( 0x0468,prog_0468 );
 }
 
 Control prog_0468 ()
 {
     at ( "0468" );
-    instruction ( "JP   NZ,046E",0x046B );
+    instruction ( "JP   NZ,046E",e16_hi_lo ( 0x04,0x6B ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_046E );
+        return jumpDirect ( 0x046E,prog_046E );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_046B );
+        return jumpDirect ( 0x046B,prog_046B );
     }
 }
 
 Control prog_046B ()
 {
     at ( "046B" );
-    instruction ( "LD   BC,FEE0",0x046E );
+    instruction ( "LD   BC,FEE0",e16_hi_lo ( 0x04,0x6E ) );
     advance ( 10 );
     B = 0xFE;
     C = 0xE0;
-    return jumpDirect ( prog_046E );
+    return jumpDirect ( 0x046E,prog_046E );
 }
 
 Control prog_046E ()
 {
     at ( "046E" );
-    instruction ( "LD   HL,208A",0x0471 );
+    instruction ( "LD   HL,208A",e16_hi_lo ( 0x04,0x71 ) );
     advance ( 10 );
     H = 0x20;
     L = 0x8A;
-    return jumpDirect ( prog_0471 );
+    return jumpDirect ( 0x0471,prog_0471 );
 }
 
 Control prog_0471 ()
 {
     at ( "0471" );
-    instruction ( "LD   (HL),C",0x0472 );
+    instruction ( "LD   (HL),C",e16_hi_lo ( 0x04,0x72 ) );
     u8 a1 = C ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_0472 );
+    return jumpDirect ( 0x0472,prog_0472 );
 }
 
 Control prog_0472 ()
 {
     at ( "0472" );
-    instruction ( "INC  HL",0x0473 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x04,0x73 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_0473 );
+    return jumpDirect ( 0x0473,prog_0473 );
 }
 
 Control prog_0473 ()
 {
     at ( "0473" );
-    instruction ( "INC  HL",0x0474 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x04,0x74 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_0474 );
+    return jumpDirect ( 0x0474,prog_0474 );
 }
 
 Control prog_0474 ()
 {
     at ( "0474" );
-    instruction ( "LD   (HL),B",0x0475 );
+    instruction ( "LD   (HL),B",e16_hi_lo ( 0x04,0x75 ) );
     u8 a1 = B ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_0475 );
+    return jumpDirect ( 0x0475,prog_0475 );
 }
 
 Control prog_0475 ()
 {
     at ( "0475" );
-    instruction ( "RET",0x0476 );
+    instruction ( "RET",e16_hi_lo ( 0x04,0x76 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -12821,7 +12821,7 @@ Control prog_0475 ()
 Control prog_0476 ()
 {
     at ( "0476" );
-    instruction ( "POP  HL",0x0477 );
+    instruction ( "POP  HL",e16_hi_lo ( 0x04,0x77 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -12835,54 +12835,54 @@ Control prog_0476 ()
     L = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_0477 );
+    return jumpDirect ( 0x0477,prog_0477 );
 }
 
 Control prog_0477 ()
 {
     at ( "0477" );
-    instruction ( "LD   A,(1B32)",0x047A );
+    instruction ( "LD   A,(1B32)",e16_hi_lo ( 0x04,0x7A ) );
     advance ( 13 );
     A = 0x02;
-    return jumpDirect ( prog_047A );
+    return jumpDirect ( 0x047A,prog_047A );
 }
 
 Control prog_047A ()
 {
     at ( "047A" );
-    instruction ( "LD   (2032),A",0x047D );
+    instruction ( "LD   (2032),A",e16_hi_lo ( 0x04,0x7D ) );
     u8 a1 = A ;
     mem_write ( 0x2032,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_047D );
+    return jumpDirect ( 0x047D,prog_047D );
 }
 
 Control prog_047D ()
 {
     at ( "047D" );
-    instruction ( "LD   HL,(2038)",0x0480 );
+    instruction ( "LD   HL,(2038)",e16_hi_lo ( 0x04,0x80 ) );
     u8 a1 = e8_read_mem ( 0x2038 ) ;
     u8 a2 = e8_read_mem ( 0x2039 ) ;
     advance ( 16 );
     H = a2;
     L = a1;
-    return jumpDirect ( prog_0480 );
+    return jumpDirect ( 0x0480,prog_0480 );
 }
 
 Control prog_0480 ()
 {
     at ( "0480" );
-    instruction ( "LD   A,L",0x0481 );
+    instruction ( "LD   A,L",e16_hi_lo ( 0x04,0x81 ) );
     u8 a1 = L ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_0481 );
+    return jumpDirect ( 0x0481,prog_0481 );
 }
 
 Control prog_0481 ()
 {
     at ( "0481" );
-    instruction ( "OR   H",0x0482 );
+    instruction ( "OR   H",e16_hi_lo ( 0x04,0x82 ) );
     u8 a1 = H ;
     u8 a2 = A ;
     u8 a3 = e8_or ( a1,a2 ) ;
@@ -12893,54 +12893,54 @@ Control prog_0481 ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0482 );
+    return jumpDirect ( 0x0482,prog_0482 );
 }
 
 Control prog_0482 ()
 {
     at ( "0482" );
-    instruction ( "JP   NZ,048A",0x0485 );
+    instruction ( "JP   NZ,048A",e16_hi_lo ( 0x04,0x85 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_048A );
+        return jumpDirect ( 0x048A,prog_048A );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0485 );
+        return jumpDirect ( 0x0485,prog_0485 );
     }
 }
 
 Control prog_0485 ()
 {
     at ( "0485" );
-    instruction ( "DEC  HL",0x0486 );
+    instruction ( "DEC  HL",e16_hi_lo ( 0x04,0x86 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_0486 );
+    return jumpDirect ( 0x0486,prog_0486 );
 }
 
 Control prog_0486 ()
 {
     at ( "0486" );
-    instruction ( "LD   (2038),HL",0x0489 );
+    instruction ( "LD   (2038),HL",e16_hi_lo ( 0x04,0x89 ) );
     u8 a1 = L ;
     mem_write ( 0x2038,a1 );
     u8 a2 = H ;
     mem_write ( 0x2039,a2 );
     advance ( 16 );
-    return jumpDirect ( prog_0489 );
+    return jumpDirect ( 0x0489,prog_0489 );
 }
 
 Control prog_0489 ()
 {
     at ( "0489" );
-    instruction ( "RET",0x048A );
+    instruction ( "RET",e16_hi_lo ( 0x04,0x8A ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -12958,26 +12958,26 @@ Control prog_0489 ()
 Control prog_048A ()
 {
     at ( "048A" );
-    instruction ( "LD   DE,2035",0x048D );
+    instruction ( "LD   DE,2035",e16_hi_lo ( 0x04,0x8D ) );
     advance ( 10 );
     D = 0x20;
     E = 0x35;
-    return jumpDirect ( prog_048D );
+    return jumpDirect ( 0x048D,prog_048D );
 }
 
 Control prog_048D ()
 {
     at ( "048D" );
-    instruction ( "LD   A,F9",0x048F );
+    instruction ( "LD   A,F9",e16_hi_lo ( 0x04,0x8F ) );
     advance ( 7 );
     A = 0xF9;
-    return jumpDirect ( prog_048F );
+    return jumpDirect ( 0x048F,prog_048F );
 }
 
 Control prog_048F ()
 {
     at ( "048F" );
-    instruction ( "CALL 0550",0x0492 );
+    instruction ( "CALL 0550",e16_hi_lo ( 0x04,0x92 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -12990,53 +12990,53 @@ Control prog_048F ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0550 );
+    return jumpDirect ( 0x0550,prog_0550 );
 }
 
 Control prog_0492 ()
 {
     at ( "0492" );
-    instruction ( "LD   A,(2046)",0x0495 );
+    instruction ( "LD   A,(2046)",e16_hi_lo ( 0x04,0x95 ) );
     u8 a1 = e8_read_mem ( 0x2046 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0495 );
+    return jumpDirect ( 0x0495,prog_0495 );
 }
 
 Control prog_0495 ()
 {
     at ( "0495" );
-    instruction ( "LD   (2070),A",0x0498 );
+    instruction ( "LD   (2070),A",e16_hi_lo ( 0x04,0x98 ) );
     u8 a1 = A ;
     mem_write ( 0x2070,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0498 );
+    return jumpDirect ( 0x0498,prog_0498 );
 }
 
 Control prog_0498 ()
 {
     at ( "0498" );
-    instruction ( "LD   A,(2056)",0x049B );
+    instruction ( "LD   A,(2056)",e16_hi_lo ( 0x04,0x9B ) );
     u8 a1 = e8_read_mem ( 0x2056 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_049B );
+    return jumpDirect ( 0x049B,prog_049B );
 }
 
 Control prog_049B ()
 {
     at ( "049B" );
-    instruction ( "LD   (2071),A",0x049E );
+    instruction ( "LD   (2071),A",e16_hi_lo ( 0x04,0x9E ) );
     u8 a1 = A ;
     mem_write ( 0x2071,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_049E );
+    return jumpDirect ( 0x049E,prog_049E );
 }
 
 Control prog_049E ()
 {
     at ( "049E" );
-    instruction ( "CALL 0563",0x04A1 );
+    instruction ( "CALL 0563",e16_hi_lo ( 0x04,0xA1 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -13049,23 +13049,23 @@ Control prog_049E ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0563 );
+    return jumpDirect ( 0x0563,prog_0563 );
 }
 
 Control prog_04A1 ()
 {
     at ( "04A1" );
-    instruction ( "LD   A,(2078)",0x04A4 );
+    instruction ( "LD   A,(2078)",e16_hi_lo ( 0x04,0xA4 ) );
     u8 a1 = e8_read_mem ( 0x2078 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_04A4 );
+    return jumpDirect ( 0x04A4,prog_04A4 );
 }
 
 Control prog_04A4 ()
 {
     at ( "04A4" );
-    instruction ( "AND  A",0x04A5 );
+    instruction ( "AND  A",e16_hi_lo ( 0x04,0xA5 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -13077,76 +13077,76 @@ Control prog_04A4 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_04A5 );
+    return jumpDirect ( 0x04A5,prog_04A5 );
 }
 
 Control prog_04A5 ()
 {
     at ( "04A5" );
-    instruction ( "LD   HL,2035",0x04A8 );
+    instruction ( "LD   HL,2035",e16_hi_lo ( 0x04,0xA8 ) );
     advance ( 10 );
     H = 0x20;
     L = 0x35;
-    return jumpDirect ( prog_04A8 );
+    return jumpDirect ( 0x04A8,prog_04A8 );
 }
 
 Control prog_04A8 ()
 {
     at ( "04A8" );
-    instruction ( "JP   NZ,055B",0x04AB );
+    instruction ( "JP   NZ,055B",e16_hi_lo ( 0x04,0xAB ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_055B );
+        return jumpDirect ( 0x055B,prog_055B );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_04AB );
+        return jumpDirect ( 0x04AB,prog_04AB );
     }
 }
 
 Control prog_04AB ()
 {
     at ( "04AB" );
-    instruction ( "LD   DE,1B30",0x04AE );
+    instruction ( "LD   DE,1B30",e16_hi_lo ( 0x04,0xAE ) );
     advance ( 10 );
     D = 0x1B;
     E = 0x30;
-    return jumpDirect ( prog_04AE );
+    return jumpDirect ( 0x04AE,prog_04AE );
 }
 
 Control prog_04AE ()
 {
     at ( "04AE" );
-    instruction ( "LD   HL,2030",0x04B1 );
+    instruction ( "LD   HL,2030",e16_hi_lo ( 0x04,0xB1 ) );
     advance ( 10 );
     H = 0x20;
     L = 0x30;
-    return jumpDirect ( prog_04B1 );
+    return jumpDirect ( 0x04B1,prog_04B1 );
 }
 
 Control prog_04B1 ()
 {
     at ( "04B1" );
-    instruction ( "LD   B,10",0x04B3 );
+    instruction ( "LD   B,10",e16_hi_lo ( 0x04,0xB3 ) );
     advance ( 7 );
     B = 0x10;
-    return jumpDirect ( prog_04B3 );
+    return jumpDirect ( 0x04B3,prog_04B3 );
 }
 
 Control prog_04B3 ()
 {
     at ( "04B3" );
-    instruction ( "JP   1A32",0x04B6 );
+    instruction ( "JP   1A32",e16_hi_lo ( 0x04,0xB6 ) );
     advance ( 10 );
-    return jumpDirect ( prog_1A32 );
+    return jumpDirect ( 0x1A32,prog_1A32 );
 }
 
 Control prog_04B6 ()
 {
     at ( "04B6" );
-    instruction ( "POP  HL",0x04B7 );
+    instruction ( "POP  HL",e16_hi_lo ( 0x04,0xB7 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -13160,23 +13160,23 @@ Control prog_04B6 ()
     L = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_04B7 );
+    return jumpDirect ( 0x04B7,prog_04B7 );
 }
 
 Control prog_04B7 ()
 {
     at ( "04B7" );
-    instruction ( "LD   A,(206E)",0x04BA );
+    instruction ( "LD   A,(206E)",e16_hi_lo ( 0x04,0xBA ) );
     u8 a1 = e8_read_mem ( 0x206E ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_04BA );
+    return jumpDirect ( 0x04BA,prog_04BA );
 }
 
 Control prog_04BA ()
 {
     at ( "04BA" );
-    instruction ( "AND  A",0x04BB );
+    instruction ( "AND  A",e16_hi_lo ( 0x04,0xBB ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -13188,13 +13188,13 @@ Control prog_04BA ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_04BB );
+    return jumpDirect ( 0x04BB,prog_04BB );
 }
 
 Control prog_04BB ()
 {
     at ( "04BB" );
-    instruction ( "RET  NZ",0x04BC );
+    instruction ( "RET  NZ",e16_hi_lo ( 0x04,0xBC ) );
     if (e1_flip ( FlagZ ))
     {
         u8 a1 = SPH ;
@@ -13213,24 +13213,24 @@ Control prog_04BB ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_04BC );
+        return jumpDirect ( 0x04BC,prog_04BC );
     }
 }
 
 Control prog_04BC ()
 {
     at ( "04BC" );
-    instruction ( "LD   A,(2080)",0x04BF );
+    instruction ( "LD   A,(2080)",e16_hi_lo ( 0x04,0xBF ) );
     u8 a1 = e8_read_mem ( 0x2080 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_04BF );
+    return jumpDirect ( 0x04BF,prog_04BF );
 }
 
 Control prog_04BF ()
 {
     at ( "04BF" );
-    instruction ( "CP   01",0x04C1 );
+    instruction ( "CP   01",e16_hi_lo ( 0x04,0xC1 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x01 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -13242,13 +13242,13 @@ Control prog_04BF ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_04C1 );
+    return jumpDirect ( 0x04C1,prog_04C1 );
 }
 
 Control prog_04C1 ()
 {
     at ( "04C1" );
-    instruction ( "RET  NZ",0x04C2 );
+    instruction ( "RET  NZ",e16_hi_lo ( 0x04,0xC2 ) );
     if (e1_flip ( FlagZ ))
     {
         u8 a1 = SPH ;
@@ -13267,33 +13267,33 @@ Control prog_04C1 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_04C2 );
+        return jumpDirect ( 0x04C2,prog_04C2 );
     }
 }
 
 Control prog_04C2 ()
 {
     at ( "04C2" );
-    instruction ( "LD   DE,2045",0x04C5 );
+    instruction ( "LD   DE,2045",e16_hi_lo ( 0x04,0xC5 ) );
     advance ( 10 );
     D = 0x20;
     E = 0x45;
-    return jumpDirect ( prog_04C5 );
+    return jumpDirect ( 0x04C5,prog_04C5 );
 }
 
 Control prog_04C5 ()
 {
     at ( "04C5" );
-    instruction ( "LD   A,ED",0x04C7 );
+    instruction ( "LD   A,ED",e16_hi_lo ( 0x04,0xC7 ) );
     advance ( 7 );
     A = 0xED;
-    return jumpDirect ( prog_04C7 );
+    return jumpDirect ( 0x04C7,prog_04C7 );
 }
 
 Control prog_04C7 ()
 {
     at ( "04C7" );
-    instruction ( "CALL 0550",0x04CA );
+    instruction ( "CALL 0550",e16_hi_lo ( 0x04,0xCA ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -13306,53 +13306,53 @@ Control prog_04C7 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0550 );
+    return jumpDirect ( 0x0550,prog_0550 );
 }
 
 Control prog_04CA ()
 {
     at ( "04CA" );
-    instruction ( "LD   A,(2036)",0x04CD );
+    instruction ( "LD   A,(2036)",e16_hi_lo ( 0x04,0xCD ) );
     u8 a1 = e8_read_mem ( 0x2036 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_04CD );
+    return jumpDirect ( 0x04CD,prog_04CD );
 }
 
 Control prog_04CD ()
 {
     at ( "04CD" );
-    instruction ( "LD   (2070),A",0x04D0 );
+    instruction ( "LD   (2070),A",e16_hi_lo ( 0x04,0xD0 ) );
     u8 a1 = A ;
     mem_write ( 0x2070,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_04D0 );
+    return jumpDirect ( 0x04D0,prog_04D0 );
 }
 
 Control prog_04D0 ()
 {
     at ( "04D0" );
-    instruction ( "LD   A,(2056)",0x04D3 );
+    instruction ( "LD   A,(2056)",e16_hi_lo ( 0x04,0xD3 ) );
     u8 a1 = e8_read_mem ( 0x2056 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_04D3 );
+    return jumpDirect ( 0x04D3,prog_04D3 );
 }
 
 Control prog_04D3 ()
 {
     at ( "04D3" );
-    instruction ( "LD   (2071),A",0x04D6 );
+    instruction ( "LD   (2071),A",e16_hi_lo ( 0x04,0xD6 ) );
     u8 a1 = A ;
     mem_write ( 0x2071,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_04D6 );
+    return jumpDirect ( 0x04D6,prog_04D6 );
 }
 
 Control prog_04D6 ()
 {
     at ( "04D6" );
-    instruction ( "CALL 0563",0x04D9 );
+    instruction ( "CALL 0563",e16_hi_lo ( 0x04,0xD9 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -13365,23 +13365,23 @@ Control prog_04D6 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0563 );
+    return jumpDirect ( 0x0563,prog_0563 );
 }
 
 Control prog_04D9 ()
 {
     at ( "04D9" );
-    instruction ( "LD   A,(2076)",0x04DC );
+    instruction ( "LD   A,(2076)",e16_hi_lo ( 0x04,0xDC ) );
     u8 a1 = e8_read_mem ( 0x2076 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_04DC );
+    return jumpDirect ( 0x04DC,prog_04DC );
 }
 
 Control prog_04DC ()
 {
     at ( "04DC" );
-    instruction ( "CP   10",0x04DE );
+    instruction ( "CP   10",e16_hi_lo ( 0x04,0xDE ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x10 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -13393,58 +13393,58 @@ Control prog_04DC ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_04DE );
+    return jumpDirect ( 0x04DE,prog_04DE );
 }
 
 Control prog_04DE ()
 {
     at ( "04DE" );
-    instruction ( "JP   CY,04E7",0x04E1 );
+    instruction ( "JP   CY,04E7",e16_hi_lo ( 0x04,0xE1 ) );
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( prog_04E7 );
+        return jumpDirect ( 0x04E7,prog_04E7 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_04E1 );
+        return jumpDirect ( 0x04E1,prog_04E1 );
     }
 }
 
 Control prog_04E1 ()
 {
     at ( "04E1" );
-    instruction ( "LD   A,(1B48)",0x04E4 );
+    instruction ( "LD   A,(1B48)",e16_hi_lo ( 0x04,0xE4 ) );
     advance ( 13 );
     A = 0x00;
-    return jumpDirect ( prog_04E4 );
+    return jumpDirect ( 0x04E4,prog_04E4 );
 }
 
 Control prog_04E4 ()
 {
     at ( "04E4" );
-    instruction ( "LD   (2076),A",0x04E7 );
+    instruction ( "LD   (2076),A",e16_hi_lo ( 0x04,0xE7 ) );
     u8 a1 = A ;
     mem_write ( 0x2076,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_04E7 );
+    return jumpDirect ( 0x04E7,prog_04E7 );
 }
 
 Control prog_04E7 ()
 {
     at ( "04E7" );
-    instruction ( "LD   A,(2078)",0x04EA );
+    instruction ( "LD   A,(2078)",e16_hi_lo ( 0x04,0xEA ) );
     u8 a1 = e8_read_mem ( 0x2078 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_04EA );
+    return jumpDirect ( 0x04EA,prog_04EA );
 }
 
 Control prog_04EA ()
 {
     at ( "04EA" );
-    instruction ( "AND  A",0x04EB );
+    instruction ( "AND  A",e16_hi_lo ( 0x04,0xEB ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -13456,68 +13456,68 @@ Control prog_04EA ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_04EB );
+    return jumpDirect ( 0x04EB,prog_04EB );
 }
 
 Control prog_04EB ()
 {
     at ( "04EB" );
-    instruction ( "LD   HL,2045",0x04EE );
+    instruction ( "LD   HL,2045",e16_hi_lo ( 0x04,0xEE ) );
     advance ( 10 );
     H = 0x20;
     L = 0x45;
-    return jumpDirect ( prog_04EE );
+    return jumpDirect ( 0x04EE,prog_04EE );
 }
 
 Control prog_04EE ()
 {
     at ( "04EE" );
-    instruction ( "JP   NZ,055B",0x04F1 );
+    instruction ( "JP   NZ,055B",e16_hi_lo ( 0x04,0xF1 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_055B );
+        return jumpDirect ( 0x055B,prog_055B );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_04F1 );
+        return jumpDirect ( 0x04F1,prog_04F1 );
     }
 }
 
 Control prog_04F1 ()
 {
     at ( "04F1" );
-    instruction ( "LD   DE,1B40",0x04F4 );
+    instruction ( "LD   DE,1B40",e16_hi_lo ( 0x04,0xF4 ) );
     advance ( 10 );
     D = 0x1B;
     E = 0x40;
-    return jumpDirect ( prog_04F4 );
+    return jumpDirect ( 0x04F4,prog_04F4 );
 }
 
 Control prog_04F4 ()
 {
     at ( "04F4" );
-    instruction ( "LD   HL,2040",0x04F7 );
+    instruction ( "LD   HL,2040",e16_hi_lo ( 0x04,0xF7 ) );
     advance ( 10 );
     H = 0x20;
     L = 0x40;
-    return jumpDirect ( prog_04F7 );
+    return jumpDirect ( 0x04F7,prog_04F7 );
 }
 
 Control prog_04F7 ()
 {
     at ( "04F7" );
-    instruction ( "LD   B,10",0x04F9 );
+    instruction ( "LD   B,10",e16_hi_lo ( 0x04,0xF9 ) );
     advance ( 7 );
     B = 0x10;
-    return jumpDirect ( prog_04F9 );
+    return jumpDirect ( 0x04F9,prog_04F9 );
 }
 
 Control prog_04F9 ()
 {
     at ( "04F9" );
-    instruction ( "CALL 1A32",0x04FC );
+    instruction ( "CALL 1A32",e16_hi_lo ( 0x04,0xFC ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -13530,23 +13530,23 @@ Control prog_04F9 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1A32 );
+    return jumpDirect ( 0x1A32,prog_1A32 );
 }
 
 Control prog_04FC ()
 {
     at ( "04FC" );
-    instruction ( "LD   A,(2082)",0x04FF );
+    instruction ( "LD   A,(2082)",e16_hi_lo ( 0x04,0xFF ) );
     u8 a1 = e8_read_mem ( 0x2082 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_04FF );
+    return jumpDirect ( 0x04FF,prog_04FF );
 }
 
 Control prog_04FF ()
 {
     at ( "04FF" );
-    instruction ( "DEC  A",0x0500 );
+    instruction ( "DEC  A",e16_hi_lo ( 0x05,0x00 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -13558,68 +13558,68 @@ Control prog_04FF ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_0500 );
+    return jumpDirect ( 0x0500,prog_0500 );
 }
 
 Control prog_0500 ()
 {
     at ( "0500" );
-    instruction ( "JP   NZ,0508",0x0503 );
+    instruction ( "JP   NZ,0508",e16_hi_lo ( 0x05,0x03 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_0508 );
+        return jumpDirect ( 0x0508,prog_0508 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0503 );
+        return jumpDirect ( 0x0503,prog_0503 );
     }
 }
 
 Control prog_0503 ()
 {
     at ( "0503" );
-    instruction ( "LD   A,01",0x0505 );
+    instruction ( "LD   A,01",e16_hi_lo ( 0x05,0x05 ) );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( prog_0505 );
+    return jumpDirect ( 0x0505,prog_0505 );
 }
 
 Control prog_0505 ()
 {
     at ( "0505" );
-    instruction ( "LD   (206E),A",0x0508 );
+    instruction ( "LD   (206E),A",e16_hi_lo ( 0x05,0x08 ) );
     u8 a1 = A ;
     mem_write ( 0x206E,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0508 );
+    return jumpDirect ( 0x0508,prog_0508 );
 }
 
 Control prog_0508 ()
 {
     at ( "0508" );
-    instruction ( "LD   HL,(2076)",0x050B );
+    instruction ( "LD   HL,(2076)",e16_hi_lo ( 0x05,0x0B ) );
     u8 a1 = e8_read_mem ( 0x2076 ) ;
     u8 a2 = e8_read_mem ( 0x2077 ) ;
     advance ( 16 );
     H = a2;
     L = a1;
-    return jumpDirect ( prog_050B );
+    return jumpDirect ( 0x050B,prog_050B );
 }
 
 Control prog_050B ()
 {
     at ( "050B" );
-    instruction ( "JP   067E",0x050E );
+    instruction ( "JP   067E",e16_hi_lo ( 0x05,0x0E ) );
     advance ( 10 );
-    return jumpDirect ( prog_067E );
+    return jumpDirect ( 0x067E,prog_067E );
 }
 
 Control prog_050E ()
 {
     at ( "050E" );
-    instruction ( "POP  HL",0x050F );
+    instruction ( "POP  HL",e16_hi_lo ( 0x05,0x0F ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -13633,32 +13633,32 @@ Control prog_050E ()
     L = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_050F );
+    return jumpDirect ( 0x050F,prog_050F );
 }
 
 Control prog_050F ()
 {
     at ( "050F" );
-    instruction ( "LD   DE,2055",0x0512 );
+    instruction ( "LD   DE,2055",e16_hi_lo ( 0x05,0x12 ) );
     advance ( 10 );
     D = 0x20;
     E = 0x55;
-    return jumpDirect ( prog_0512 );
+    return jumpDirect ( 0x0512,prog_0512 );
 }
 
 Control prog_0512 ()
 {
     at ( "0512" );
-    instruction ( "LD   A,DB",0x0514 );
+    instruction ( "LD   A,DB",e16_hi_lo ( 0x05,0x14 ) );
     advance ( 7 );
     A = 0xDB;
-    return jumpDirect ( prog_0514 );
+    return jumpDirect ( 0x0514,prog_0514 );
 }
 
 Control prog_0514 ()
 {
     at ( "0514" );
-    instruction ( "CALL 0550",0x0517 );
+    instruction ( "CALL 0550",e16_hi_lo ( 0x05,0x17 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -13671,53 +13671,53 @@ Control prog_0514 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0550 );
+    return jumpDirect ( 0x0550,prog_0550 );
 }
 
 Control prog_0517 ()
 {
     at ( "0517" );
-    instruction ( "LD   A,(2046)",0x051A );
+    instruction ( "LD   A,(2046)",e16_hi_lo ( 0x05,0x1A ) );
     u8 a1 = e8_read_mem ( 0x2046 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_051A );
+    return jumpDirect ( 0x051A,prog_051A );
 }
 
 Control prog_051A ()
 {
     at ( "051A" );
-    instruction ( "LD   (2070),A",0x051D );
+    instruction ( "LD   (2070),A",e16_hi_lo ( 0x05,0x1D ) );
     u8 a1 = A ;
     mem_write ( 0x2070,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_051D );
+    return jumpDirect ( 0x051D,prog_051D );
 }
 
 Control prog_051D ()
 {
     at ( "051D" );
-    instruction ( "LD   A,(2036)",0x0520 );
+    instruction ( "LD   A,(2036)",e16_hi_lo ( 0x05,0x20 ) );
     u8 a1 = e8_read_mem ( 0x2036 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0520 );
+    return jumpDirect ( 0x0520,prog_0520 );
 }
 
 Control prog_0520 ()
 {
     at ( "0520" );
-    instruction ( "LD   (2071),A",0x0523 );
+    instruction ( "LD   (2071),A",e16_hi_lo ( 0x05,0x23 ) );
     u8 a1 = A ;
     mem_write ( 0x2071,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0523 );
+    return jumpDirect ( 0x0523,prog_0523 );
 }
 
 Control prog_0523 ()
 {
     at ( "0523" );
-    instruction ( "CALL 0563",0x0526 );
+    instruction ( "CALL 0563",e16_hi_lo ( 0x05,0x26 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -13730,23 +13730,23 @@ Control prog_0523 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0563 );
+    return jumpDirect ( 0x0563,prog_0563 );
 }
 
 Control prog_0526 ()
 {
     at ( "0526" );
-    instruction ( "LD   A,(2076)",0x0529 );
+    instruction ( "LD   A,(2076)",e16_hi_lo ( 0x05,0x29 ) );
     u8 a1 = e8_read_mem ( 0x2076 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0529 );
+    return jumpDirect ( 0x0529,prog_0529 );
 }
 
 Control prog_0529 ()
 {
     at ( "0529" );
-    instruction ( "CP   15",0x052B );
+    instruction ( "CP   15",e16_hi_lo ( 0x05,0x2B ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x15 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -13758,58 +13758,58 @@ Control prog_0529 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_052B );
+    return jumpDirect ( 0x052B,prog_052B );
 }
 
 Control prog_052B ()
 {
     at ( "052B" );
-    instruction ( "JP   CY,0534",0x052E );
+    instruction ( "JP   CY,0534",e16_hi_lo ( 0x05,0x2E ) );
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( prog_0534 );
+        return jumpDirect ( 0x0534,prog_0534 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_052E );
+        return jumpDirect ( 0x052E,prog_052E );
     }
 }
 
 Control prog_052E ()
 {
     at ( "052E" );
-    instruction ( "LD   A,(1B58)",0x0531 );
+    instruction ( "LD   A,(1B58)",e16_hi_lo ( 0x05,0x31 ) );
     advance ( 13 );
     A = 0x06;
-    return jumpDirect ( prog_0531 );
+    return jumpDirect ( 0x0531,prog_0531 );
 }
 
 Control prog_0531 ()
 {
     at ( "0531" );
-    instruction ( "LD   (2076),A",0x0534 );
+    instruction ( "LD   (2076),A",e16_hi_lo ( 0x05,0x34 ) );
     u8 a1 = A ;
     mem_write ( 0x2076,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0534 );
+    return jumpDirect ( 0x0534,prog_0534 );
 }
 
 Control prog_0534 ()
 {
     at ( "0534" );
-    instruction ( "LD   A,(2078)",0x0537 );
+    instruction ( "LD   A,(2078)",e16_hi_lo ( 0x05,0x37 ) );
     u8 a1 = e8_read_mem ( 0x2078 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0537 );
+    return jumpDirect ( 0x0537,prog_0537 );
 }
 
 Control prog_0537 ()
 {
     at ( "0537" );
-    instruction ( "AND  A",0x0538 );
+    instruction ( "AND  A",e16_hi_lo ( 0x05,0x38 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -13821,68 +13821,68 @@ Control prog_0537 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0538 );
+    return jumpDirect ( 0x0538,prog_0538 );
 }
 
 Control prog_0538 ()
 {
     at ( "0538" );
-    instruction ( "LD   HL,2055",0x053B );
+    instruction ( "LD   HL,2055",e16_hi_lo ( 0x05,0x3B ) );
     advance ( 10 );
     H = 0x20;
     L = 0x55;
-    return jumpDirect ( prog_053B );
+    return jumpDirect ( 0x053B,prog_053B );
 }
 
 Control prog_053B ()
 {
     at ( "053B" );
-    instruction ( "JP   NZ,055B",0x053E );
+    instruction ( "JP   NZ,055B",e16_hi_lo ( 0x05,0x3E ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_055B );
+        return jumpDirect ( 0x055B,prog_055B );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_053E );
+        return jumpDirect ( 0x053E,prog_053E );
     }
 }
 
 Control prog_053E ()
 {
     at ( "053E" );
-    instruction ( "LD   DE,1B50",0x0541 );
+    instruction ( "LD   DE,1B50",e16_hi_lo ( 0x05,0x41 ) );
     advance ( 10 );
     D = 0x1B;
     E = 0x50;
-    return jumpDirect ( prog_0541 );
+    return jumpDirect ( 0x0541,prog_0541 );
 }
 
 Control prog_0541 ()
 {
     at ( "0541" );
-    instruction ( "LD   HL,2050",0x0544 );
+    instruction ( "LD   HL,2050",e16_hi_lo ( 0x05,0x44 ) );
     advance ( 10 );
     H = 0x20;
     L = 0x50;
-    return jumpDirect ( prog_0544 );
+    return jumpDirect ( 0x0544,prog_0544 );
 }
 
 Control prog_0544 ()
 {
     at ( "0544" );
-    instruction ( "LD   B,10",0x0546 );
+    instruction ( "LD   B,10",e16_hi_lo ( 0x05,0x46 ) );
     advance ( 7 );
     B = 0x10;
-    return jumpDirect ( prog_0546 );
+    return jumpDirect ( 0x0546,prog_0546 );
 }
 
 Control prog_0546 ()
 {
     at ( "0546" );
-    instruction ( "CALL 1A32",0x0549 );
+    instruction ( "CALL 1A32",e16_hi_lo ( 0x05,0x49 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -13895,37 +13895,37 @@ Control prog_0546 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1A32 );
+    return jumpDirect ( 0x1A32,prog_1A32 );
 }
 
 Control prog_0549 ()
 {
     at ( "0549" );
-    instruction ( "LD   HL,(2076)",0x054C );
+    instruction ( "LD   HL,(2076)",e16_hi_lo ( 0x05,0x4C ) );
     u8 a1 = e8_read_mem ( 0x2076 ) ;
     u8 a2 = e8_read_mem ( 0x2077 ) ;
     advance ( 16 );
     H = a2;
     L = a1;
-    return jumpDirect ( prog_054C );
+    return jumpDirect ( 0x054C,prog_054C );
 }
 
 Control prog_054C ()
 {
     at ( "054C" );
-    instruction ( "LD   (2058),HL",0x054F );
+    instruction ( "LD   (2058),HL",e16_hi_lo ( 0x05,0x4F ) );
     u8 a1 = L ;
     mem_write ( 0x2058,a1 );
     u8 a2 = H ;
     mem_write ( 0x2059,a2 );
     advance ( 16 );
-    return jumpDirect ( prog_054F );
+    return jumpDirect ( 0x054F,prog_054F );
 }
 
 Control prog_054F ()
 {
     at ( "054F" );
-    instruction ( "RET",0x0550 );
+    instruction ( "RET",e16_hi_lo ( 0x05,0x50 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -13943,93 +13943,93 @@ Control prog_054F ()
 Control prog_0550 ()
 {
     at ( "0550" );
-    instruction ( "LD   (207F),A",0x0553 );
+    instruction ( "LD   (207F),A",e16_hi_lo ( 0x05,0x53 ) );
     u8 a1 = A ;
     mem_write ( 0x207F,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0553 );
+    return jumpDirect ( 0x0553,prog_0553 );
 }
 
 Control prog_0553 ()
 {
     at ( "0553" );
-    instruction ( "LD   HL,2073",0x0556 );
+    instruction ( "LD   HL,2073",e16_hi_lo ( 0x05,0x56 ) );
     advance ( 10 );
     H = 0x20;
     L = 0x73;
-    return jumpDirect ( prog_0556 );
+    return jumpDirect ( 0x0556,prog_0556 );
 }
 
 Control prog_0556 ()
 {
     at ( "0556" );
-    instruction ( "LD   B,0B",0x0558 );
+    instruction ( "LD   B,0B",e16_hi_lo ( 0x05,0x58 ) );
     advance ( 7 );
     B = 0x0B;
-    return jumpDirect ( prog_0558 );
+    return jumpDirect ( 0x0558,prog_0558 );
 }
 
 Control prog_0558 ()
 {
     at ( "0558" );
-    instruction ( "JP   1A32",0x055B );
+    instruction ( "JP   1A32",e16_hi_lo ( 0x05,0x5B ) );
     advance ( 10 );
-    return jumpDirect ( prog_1A32 );
+    return jumpDirect ( 0x1A32,prog_1A32 );
 }
 
 Control prog_055B ()
 {
     at ( "055B" );
-    instruction ( "LD   DE,2073",0x055E );
+    instruction ( "LD   DE,2073",e16_hi_lo ( 0x05,0x5E ) );
     advance ( 10 );
     D = 0x20;
     E = 0x73;
-    return jumpDirect ( prog_055E );
+    return jumpDirect ( 0x055E,prog_055E );
 }
 
 Control prog_055E ()
 {
     at ( "055E" );
-    instruction ( "LD   B,0B",0x0560 );
+    instruction ( "LD   B,0B",e16_hi_lo ( 0x05,0x60 ) );
     advance ( 7 );
     B = 0x0B;
-    return jumpDirect ( prog_0560 );
+    return jumpDirect ( 0x0560,prog_0560 );
 }
 
 Control prog_0560 ()
 {
     at ( "0560" );
-    instruction ( "JP   1A32",0x0563 );
+    instruction ( "JP   1A32",e16_hi_lo ( 0x05,0x63 ) );
     advance ( 10 );
-    return jumpDirect ( prog_1A32 );
+    return jumpDirect ( 0x1A32,prog_1A32 );
 }
 
 Control prog_0563 ()
 {
     at ( "0563" );
-    instruction ( "LD   HL,2073",0x0566 );
+    instruction ( "LD   HL,2073",e16_hi_lo ( 0x05,0x66 ) );
     advance ( 10 );
     H = 0x20;
     L = 0x73;
-    return jumpDirect ( prog_0566 );
+    return jumpDirect ( 0x0566,prog_0566 );
 }
 
 Control prog_0566 ()
 {
     at ( "0566" );
-    instruction ( "LD   A,(HL)",0x0567 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x05,0x67 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_0567 );
+    return jumpDirect ( 0x0567,prog_0567 );
 }
 
 Control prog_0567 ()
 {
     at ( "0567" );
-    instruction ( "AND  80",0x0569 );
+    instruction ( "AND  80",e16_hi_lo ( 0x05,0x69 ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( 0x80,a1 ) ;
     u8 a3 = e8_or ( 0x80,a1 ) ;
@@ -14040,39 +14040,39 @@ Control prog_0567 ()
     FlagA = e1_test_bit ( a3,3 );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0569 );
+    return jumpDirect ( 0x0569,prog_0569 );
 }
 
 Control prog_0569 ()
 {
     at ( "0569" );
-    instruction ( "JP   NZ,05C1",0x056C );
+    instruction ( "JP   NZ,05C1",e16_hi_lo ( 0x05,0x6C ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_05C1 );
+        return jumpDirect ( 0x05C1,prog_05C1 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_056C );
+        return jumpDirect ( 0x056C,prog_056C );
     }
 }
 
 Control prog_056C ()
 {
     at ( "056C" );
-    instruction ( "LD   A,(20C1)",0x056F );
+    instruction ( "LD   A,(20C1)",e16_hi_lo ( 0x05,0x6F ) );
     u8 a1 = e8_read_mem ( 0x20C1 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_056F );
+    return jumpDirect ( 0x056F,prog_056F );
 }
 
 Control prog_056F ()
 {
     at ( "056F" );
-    instruction ( "CP   04",0x0571 );
+    instruction ( "CP   04",e16_hi_lo ( 0x05,0x71 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x04 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -14084,39 +14084,39 @@ Control prog_056F ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_0571 );
+    return jumpDirect ( 0x0571,prog_0571 );
 }
 
 Control prog_0571 ()
 {
     at ( "0571" );
-    instruction ( "LD   A,(2069)",0x0574 );
+    instruction ( "LD   A,(2069)",e16_hi_lo ( 0x05,0x74 ) );
     u8 a1 = e8_read_mem ( 0x2069 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0574 );
+    return jumpDirect ( 0x0574,prog_0574 );
 }
 
 Control prog_0574 ()
 {
     at ( "0574" );
-    instruction ( "JP   Z,05B7",0x0577 );
+    instruction ( "JP   Z,05B7",e16_hi_lo ( 0x05,0x77 ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_05B7 );
+        return jumpDirect ( 0x05B7,prog_05B7 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0577 );
+        return jumpDirect ( 0x0577,prog_0577 );
     }
 }
 
 Control prog_0577 ()
 {
     at ( "0577" );
-    instruction ( "AND  A",0x0578 );
+    instruction ( "AND  A",e16_hi_lo ( 0x05,0x78 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -14128,13 +14128,13 @@ Control prog_0577 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0578 );
+    return jumpDirect ( 0x0578,prog_0578 );
 }
 
 Control prog_0578 ()
 {
     at ( "0578" );
-    instruction ( "RET  Z",0x0579 );
+    instruction ( "RET  Z",e16_hi_lo ( 0x05,0x79 ) );
     if (FlagZ)
     {
         u8 a1 = SPH ;
@@ -14153,48 +14153,48 @@ Control prog_0578 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_0579 );
+        return jumpDirect ( 0x0579,prog_0579 );
     }
 }
 
 Control prog_0579 ()
 {
     at ( "0579" );
-    instruction ( "INC  HL",0x057A );
+    instruction ( "INC  HL",e16_hi_lo ( 0x05,0x7A ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_057A );
+    return jumpDirect ( 0x057A,prog_057A );
 }
 
 Control prog_057A ()
 {
     at ( "057A" );
-    instruction ( "LD   (HL),00",0x057C );
+    instruction ( "LD   (HL),00",e16_hi_lo ( 0x05,0x7C ) );
     u8 a1 = H ;
     u8 a2 = L ;
     mem_write ( e16_hi_lo ( a1,a2 ),0x00 );
     advance ( 10 );
-    return jumpDirect ( prog_057C );
+    return jumpDirect ( 0x057C,prog_057C );
 }
 
 Control prog_057C ()
 {
     at ( "057C" );
-    instruction ( "LD   A,(2070)",0x057F );
+    instruction ( "LD   A,(2070)",e16_hi_lo ( 0x05,0x7F ) );
     u8 a1 = e8_read_mem ( 0x2070 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_057F );
+    return jumpDirect ( 0x057F,prog_057F );
 }
 
 Control prog_057F ()
 {
     at ( "057F" );
-    instruction ( "AND  A",0x0580 );
+    instruction ( "AND  A",e16_hi_lo ( 0x05,0x80 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -14206,49 +14206,49 @@ Control prog_057F ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0580 );
+    return jumpDirect ( 0x0580,prog_0580 );
 }
 
 Control prog_0580 ()
 {
     at ( "0580" );
-    instruction ( "JP   Z,0589",0x0583 );
+    instruction ( "JP   Z,0589",e16_hi_lo ( 0x05,0x83 ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_0589 );
+        return jumpDirect ( 0x0589,prog_0589 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0583 );
+        return jumpDirect ( 0x0583,prog_0583 );
     }
 }
 
 Control prog_0583 ()
 {
     at ( "0583" );
-    instruction ( "LD   B,A",0x0584 );
+    instruction ( "LD   B,A",e16_hi_lo ( 0x05,0x84 ) );
     u8 a1 = A ;
     advance ( 5 );
     B = a1;
-    return jumpDirect ( prog_0584 );
+    return jumpDirect ( 0x0584,prog_0584 );
 }
 
 Control prog_0584 ()
 {
     at ( "0584" );
-    instruction ( "LD   A,(20CF)",0x0587 );
+    instruction ( "LD   A,(20CF)",e16_hi_lo ( 0x05,0x87 ) );
     u8 a1 = e8_read_mem ( 0x20CF ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0587 );
+    return jumpDirect ( 0x0587,prog_0587 );
 }
 
 Control prog_0587 ()
 {
     at ( "0587" );
-    instruction ( "CP   B",0x0588 );
+    instruction ( "CP   B",e16_hi_lo ( 0x05,0x88 ) );
     u8 a1 = A ;
     u8 a2 = B ;
     u16 a3 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( a2 ) ) ;
@@ -14261,13 +14261,13 @@ Control prog_0587 ()
     FlagA = e1_test_bit ( e8_lo ( a6 ),4 );
     FlagP = e1_parity ( e8_lo ( a3 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a3 ),0 ) );
-    return jumpDirect ( prog_0588 );
+    return jumpDirect ( 0x0588,prog_0588 );
 }
 
 Control prog_0588 ()
 {
     at ( "0588" );
-    instruction ( "RET  NC",0x0589 );
+    instruction ( "RET  NC",e16_hi_lo ( 0x05,0x89 ) );
     if (e1_flip ( FlagCY ))
     {
         u8 a1 = SPH ;
@@ -14286,24 +14286,24 @@ Control prog_0588 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_0589 );
+        return jumpDirect ( 0x0589,prog_0589 );
     }
 }
 
 Control prog_0589 ()
 {
     at ( "0589" );
-    instruction ( "LD   A,(2071)",0x058C );
+    instruction ( "LD   A,(2071)",e16_hi_lo ( 0x05,0x8C ) );
     u8 a1 = e8_read_mem ( 0x2071 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_058C );
+    return jumpDirect ( 0x058C,prog_058C );
 }
 
 Control prog_058C ()
 {
     at ( "058C" );
-    instruction ( "AND  A",0x058D );
+    instruction ( "AND  A",e16_hi_lo ( 0x05,0x8D ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -14315,49 +14315,49 @@ Control prog_058C ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_058D );
+    return jumpDirect ( 0x058D,prog_058D );
 }
 
 Control prog_058D ()
 {
     at ( "058D" );
-    instruction ( "JP   Z,0596",0x0590 );
+    instruction ( "JP   Z,0596",e16_hi_lo ( 0x05,0x90 ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_0596 );
+        return jumpDirect ( 0x0596,prog_0596 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0590 );
+        return jumpDirect ( 0x0590,prog_0590 );
     }
 }
 
 Control prog_0590 ()
 {
     at ( "0590" );
-    instruction ( "LD   B,A",0x0591 );
+    instruction ( "LD   B,A",e16_hi_lo ( 0x05,0x91 ) );
     u8 a1 = A ;
     advance ( 5 );
     B = a1;
-    return jumpDirect ( prog_0591 );
+    return jumpDirect ( 0x0591,prog_0591 );
 }
 
 Control prog_0591 ()
 {
     at ( "0591" );
-    instruction ( "LD   A,(20CF)",0x0594 );
+    instruction ( "LD   A,(20CF)",e16_hi_lo ( 0x05,0x94 ) );
     u8 a1 = e8_read_mem ( 0x20CF ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0594 );
+    return jumpDirect ( 0x0594,prog_0594 );
 }
 
 Control prog_0594 ()
 {
     at ( "0594" );
-    instruction ( "CP   B",0x0595 );
+    instruction ( "CP   B",e16_hi_lo ( 0x05,0x95 ) );
     u8 a1 = A ;
     u8 a2 = B ;
     u16 a3 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( a2 ) ) ;
@@ -14370,13 +14370,13 @@ Control prog_0594 ()
     FlagA = e1_test_bit ( e8_lo ( a6 ),4 );
     FlagP = e1_parity ( e8_lo ( a3 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a3 ),0 ) );
-    return jumpDirect ( prog_0595 );
+    return jumpDirect ( 0x0595,prog_0595 );
 }
 
 Control prog_0595 ()
 {
     at ( "0595" );
-    instruction ( "RET  NC",0x0596 );
+    instruction ( "RET  NC",e16_hi_lo ( 0x05,0x96 ) );
     if (e1_flip ( FlagCY ))
     {
         u8 a1 = SPH ;
@@ -14395,39 +14395,39 @@ Control prog_0595 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_0596 );
+        return jumpDirect ( 0x0596,prog_0596 );
     }
 }
 
 Control prog_0596 ()
 {
     at ( "0596" );
-    instruction ( "INC  HL",0x0597 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x05,0x97 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_0597 );
+    return jumpDirect ( 0x0597,prog_0597 );
 }
 
 Control prog_0597 ()
 {
     at ( "0597" );
-    instruction ( "LD   A,(HL)",0x0598 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x05,0x98 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_0598 );
+    return jumpDirect ( 0x0598,prog_0598 );
 }
 
 Control prog_0598 ()
 {
     at ( "0598" );
-    instruction ( "AND  A",0x0599 );
+    instruction ( "AND  A",e16_hi_lo ( 0x05,0x99 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -14439,86 +14439,86 @@ Control prog_0598 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0599 );
+    return jumpDirect ( 0x0599,prog_0599 );
 }
 
 Control prog_0599 ()
 {
     at ( "0599" );
-    instruction ( "JP   Z,061B",0x059C );
+    instruction ( "JP   Z,061B",e16_hi_lo ( 0x05,0x9C ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_061B );
+        return jumpDirect ( 0x061B,prog_061B );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_059C );
+        return jumpDirect ( 0x059C,prog_059C );
     }
 }
 
 Control prog_059C ()
 {
     at ( "059C" );
-    instruction ( "LD   HL,(2076)",0x059F );
+    instruction ( "LD   HL,(2076)",e16_hi_lo ( 0x05,0x9F ) );
     u8 a1 = e8_read_mem ( 0x2076 ) ;
     u8 a2 = e8_read_mem ( 0x2077 ) ;
     advance ( 16 );
     H = a2;
     L = a1;
-    return jumpDirect ( prog_059F );
+    return jumpDirect ( 0x059F,prog_059F );
 }
 
 Control prog_059F ()
 {
     at ( "059F" );
-    instruction ( "LD   C,(HL)",0x05A0 );
+    instruction ( "LD   C,(HL)",e16_hi_lo ( 0x05,0xA0 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     C = a3;
-    return jumpDirect ( prog_05A0 );
+    return jumpDirect ( 0x05A0,prog_05A0 );
 }
 
 Control prog_05A0 ()
 {
     at ( "05A0" );
-    instruction ( "INC  HL",0x05A1 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x05,0xA1 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_05A1 );
+    return jumpDirect ( 0x05A1,prog_05A1 );
 }
 
 Control prog_05A1 ()
 {
     at ( "05A1" );
-    instruction ( "NOP",0x05A2 );
+    instruction ( "NOP",e16_hi_lo ( 0x05,0xA2 ) );
     advance ( 4 );
-    return jumpDirect ( prog_05A2 );
+    return jumpDirect ( 0x05A2,prog_05A2 );
 }
 
 Control prog_05A2 ()
 {
     at ( "05A2" );
-    instruction ( "LD   (2076),HL",0x05A5 );
+    instruction ( "LD   (2076),HL",e16_hi_lo ( 0x05,0xA5 ) );
     u8 a1 = L ;
     mem_write ( 0x2076,a1 );
     u8 a2 = H ;
     mem_write ( 0x2077,a2 );
     advance ( 16 );
-    return jumpDirect ( prog_05A5 );
+    return jumpDirect ( 0x05A5,prog_05A5 );
 }
 
 Control prog_05A5 ()
 {
     at ( "05A5" );
-    instruction ( "CALL 062F",0x05A8 );
+    instruction ( "CALL 062F",e16_hi_lo ( 0x05,0xA8 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -14531,13 +14531,13 @@ Control prog_05A5 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_062F );
+    return jumpDirect ( 0x062F,prog_062F );
 }
 
 Control prog_05A8 ()
 {
     at ( "05A8" );
-    instruction ( "RET  NC",0x05A9 );
+    instruction ( "RET  NC",e16_hi_lo ( 0x05,0xA9 ) );
     if (e1_flip ( FlagCY ))
     {
         u8 a1 = SPH ;
@@ -14556,14 +14556,14 @@ Control prog_05A8 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_05A9 );
+        return jumpDirect ( 0x05A9,prog_05A9 );
     }
 }
 
 Control prog_05A9 ()
 {
     at ( "05A9" );
-    instruction ( "CALL 017A",0x05AC );
+    instruction ( "CALL 017A",e16_hi_lo ( 0x05,0xAC ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -14576,23 +14576,23 @@ Control prog_05A9 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_017A );
+    return jumpDirect ( 0x017A,prog_017A );
 }
 
 Control prog_05AC ()
 {
     at ( "05AC" );
-    instruction ( "LD   A,C",0x05AD );
+    instruction ( "LD   A,C",e16_hi_lo ( 0x05,0xAD ) );
     u8 a1 = C ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_05AD );
+    return jumpDirect ( 0x05AD,prog_05AD );
 }
 
 Control prog_05AD ()
 {
     at ( "05AD" );
-    instruction ( "ADD  07",0x05AF );
+    instruction ( "ADD  07",e16_hi_lo ( 0x05,0xAF ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_false (  ),0x07,a1 ) ;
     u8 a3 = e8_and ( 0x07,0x0F ) ;
@@ -14605,33 +14605,33 @@ Control prog_05AD ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_test_bit ( e8_hi ( a2 ),0 );
-    return jumpDirect ( prog_05AF );
+    return jumpDirect ( 0x05AF,prog_05AF );
 }
 
 Control prog_05AF ()
 {
     at ( "05AF" );
-    instruction ( "LD   H,A",0x05B0 );
+    instruction ( "LD   H,A",e16_hi_lo ( 0x05,0xB0 ) );
     u8 a1 = A ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( prog_05B0 );
+    return jumpDirect ( 0x05B0,prog_05B0 );
 }
 
 Control prog_05B0 ()
 {
     at ( "05B0" );
-    instruction ( "LD   A,L",0x05B1 );
+    instruction ( "LD   A,L",e16_hi_lo ( 0x05,0xB1 ) );
     u8 a1 = L ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_05B1 );
+    return jumpDirect ( 0x05B1,prog_05B1 );
 }
 
 Control prog_05B1 ()
 {
     at ( "05B1" );
-    instruction ( "SUB  0A",0x05B3 );
+    instruction ( "SUB  0A",e16_hi_lo ( 0x05,0xB3 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x0A ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -14644,57 +14644,57 @@ Control prog_05B1 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_05B3 );
+    return jumpDirect ( 0x05B3,prog_05B3 );
 }
 
 Control prog_05B3 ()
 {
     at ( "05B3" );
-    instruction ( "LD   L,A",0x05B4 );
+    instruction ( "LD   L,A",e16_hi_lo ( 0x05,0xB4 ) );
     u8 a1 = A ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( prog_05B4 );
+    return jumpDirect ( 0x05B4,prog_05B4 );
 }
 
 Control prog_05B4 ()
 {
     at ( "05B4" );
-    instruction ( "LD   (207B),HL",0x05B7 );
+    instruction ( "LD   (207B),HL",e16_hi_lo ( 0x05,0xB7 ) );
     u8 a1 = L ;
     mem_write ( 0x207B,a1 );
     u8 a2 = H ;
     mem_write ( 0x207C,a2 );
     advance ( 16 );
-    return jumpDirect ( prog_05B7 );
+    return jumpDirect ( 0x05B7,prog_05B7 );
 }
 
 Control prog_05B7 ()
 {
     at ( "05B7" );
-    instruction ( "LD   HL,2073",0x05BA );
+    instruction ( "LD   HL,2073",e16_hi_lo ( 0x05,0xBA ) );
     advance ( 10 );
     H = 0x20;
     L = 0x73;
-    return jumpDirect ( prog_05BA );
+    return jumpDirect ( 0x05BA,prog_05BA );
 }
 
 Control prog_05BA ()
 {
     at ( "05BA" );
-    instruction ( "LD   A,(HL)",0x05BB );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x05,0xBB ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_05BB );
+    return jumpDirect ( 0x05BB,prog_05BB );
 }
 
 Control prog_05BB ()
 {
     at ( "05BB" );
-    instruction ( "OR   80",0x05BD );
+    instruction ( "OR   80",e16_hi_lo ( 0x05,0xBD ) );
     u8 a1 = A ;
     u8 a2 = e8_or ( 0x80,a1 ) ;
     advance ( 7 );
@@ -14704,38 +14704,38 @@ Control prog_05BB ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_05BD );
+    return jumpDirect ( 0x05BD,prog_05BD );
 }
 
 Control prog_05BD ()
 {
     at ( "05BD" );
-    instruction ( "LD   (HL),A",0x05BE );
+    instruction ( "LD   (HL),A",e16_hi_lo ( 0x05,0xBE ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_05BE );
+    return jumpDirect ( 0x05BE,prog_05BE );
 }
 
 Control prog_05BE ()
 {
     at ( "05BE" );
-    instruction ( "INC  HL",0x05BF );
+    instruction ( "INC  HL",e16_hi_lo ( 0x05,0xBF ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_05BF );
+    return jumpDirect ( 0x05BF,prog_05BF );
 }
 
 Control prog_05BF ()
 {
     at ( "05BF" );
-    instruction ( "INC  (HL)",0x05C0 );
+    instruction ( "INC  (HL)",e16_hi_lo ( 0x05,0xC0 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -14751,13 +14751,13 @@ Control prog_05BF ()
     FlagZ = e1_is_zero ( e8_lo ( a4 ) );
     FlagA = e1_test_bit ( e8_lo ( a7 ),4 );
     FlagP = e1_parity ( e8_lo ( a4 ) );
-    return jumpDirect ( prog_05C0 );
+    return jumpDirect ( 0x05C0,prog_05C0 );
 }
 
 Control prog_05C0 ()
 {
     at ( "05C0" );
-    instruction ( "RET",0x05C1 );
+    instruction ( "RET",e16_hi_lo ( 0x05,0xC1 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -14775,17 +14775,17 @@ Control prog_05C0 ()
 Control prog_05C1 ()
 {
     at ( "05C1" );
-    instruction ( "LD   DE,207C",0x05C4 );
+    instruction ( "LD   DE,207C",e16_hi_lo ( 0x05,0xC4 ) );
     advance ( 10 );
     D = 0x20;
     E = 0x7C;
-    return jumpDirect ( prog_05C4 );
+    return jumpDirect ( 0x05C4,prog_05C4 );
 }
 
 Control prog_05C4 ()
 {
     at ( "05C4" );
-    instruction ( "CALL 1A06",0x05C7 );
+    instruction ( "CALL 1A06",e16_hi_lo ( 0x05,0xC7 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -14798,13 +14798,13 @@ Control prog_05C4 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1A06 );
+    return jumpDirect ( 0x1A06,prog_1A06 );
 }
 
 Control prog_05C7 ()
 {
     at ( "05C7" );
-    instruction ( "RET  NC",0x05C8 );
+    instruction ( "RET  NC",e16_hi_lo ( 0x05,0xC8 ) );
     if (e1_flip ( FlagCY ))
     {
         u8 a1 = SPH ;
@@ -14823,39 +14823,39 @@ Control prog_05C7 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_05C8 );
+        return jumpDirect ( 0x05C8,prog_05C8 );
     }
 }
 
 Control prog_05C8 ()
 {
     at ( "05C8" );
-    instruction ( "INC  HL",0x05C9 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x05,0xC9 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_05C9 );
+    return jumpDirect ( 0x05C9,prog_05C9 );
 }
 
 Control prog_05C9 ()
 {
     at ( "05C9" );
-    instruction ( "LD   A,(HL)",0x05CA );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x05,0xCA ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_05CA );
+    return jumpDirect ( 0x05CA,prog_05CA );
 }
 
 Control prog_05CA ()
 {
     at ( "05CA" );
-    instruction ( "AND  01",0x05CC );
+    instruction ( "AND  01",e16_hi_lo ( 0x05,0xCC ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( 0x01,a1 ) ;
     u8 a3 = e8_or ( 0x01,a1 ) ;
@@ -14866,42 +14866,42 @@ Control prog_05CA ()
     FlagA = e1_test_bit ( a3,3 );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_05CC );
+    return jumpDirect ( 0x05CC,prog_05CC );
 }
 
 Control prog_05CC ()
 {
     at ( "05CC" );
-    instruction ( "JP   NZ,0644",0x05CF );
+    instruction ( "JP   NZ,0644",e16_hi_lo ( 0x05,0xCF ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_0644 );
+        return jumpDirect ( 0x0644,prog_0644 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_05CF );
+        return jumpDirect ( 0x05CF,prog_05CF );
     }
 }
 
 Control prog_05CF ()
 {
     at ( "05CF" );
-    instruction ( "INC  HL",0x05D0 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x05,0xD0 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_05D0 );
+    return jumpDirect ( 0x05D0,prog_05D0 );
 }
 
 Control prog_05D0 ()
 {
     at ( "05D0" );
-    instruction ( "INC  (HL)",0x05D1 );
+    instruction ( "INC  (HL)",e16_hi_lo ( 0x05,0xD1 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -14917,13 +14917,13 @@ Control prog_05D0 ()
     FlagZ = e1_is_zero ( e8_lo ( a4 ) );
     FlagA = e1_test_bit ( e8_lo ( a7 ),4 );
     FlagP = e1_parity ( e8_lo ( a4 ) );
-    return jumpDirect ( prog_05D1 );
+    return jumpDirect ( 0x05D1,prog_05D1 );
 }
 
 Control prog_05D1 ()
 {
     at ( "05D1" );
-    instruction ( "CALL 0675",0x05D4 );
+    instruction ( "CALL 0675",e16_hi_lo ( 0x05,0xD4 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -14936,23 +14936,23 @@ Control prog_05D1 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0675 );
+    return jumpDirect ( 0x0675,prog_0675 );
 }
 
 Control prog_05D4 ()
 {
     at ( "05D4" );
-    instruction ( "LD   A,(2079)",0x05D7 );
+    instruction ( "LD   A,(2079)",e16_hi_lo ( 0x05,0xD7 ) );
     u8 a1 = e8_read_mem ( 0x2079 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_05D7 );
+    return jumpDirect ( 0x05D7,prog_05D7 );
 }
 
 Control prog_05D7 ()
 {
     at ( "05D7" );
-    instruction ( "ADD  03",0x05D9 );
+    instruction ( "ADD  03",e16_hi_lo ( 0x05,0xD9 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_false (  ),0x03,a1 ) ;
     u8 a3 = e8_and ( 0x03,0x0F ) ;
@@ -14965,23 +14965,23 @@ Control prog_05D7 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_test_bit ( e8_hi ( a2 ),0 );
-    return jumpDirect ( prog_05D9 );
+    return jumpDirect ( 0x05D9,prog_05D9 );
 }
 
 Control prog_05D9 ()
 {
     at ( "05D9" );
-    instruction ( "LD   HL,207F",0x05DC );
+    instruction ( "LD   HL,207F",e16_hi_lo ( 0x05,0xDC ) );
     advance ( 10 );
     H = 0x20;
     L = 0x7F;
-    return jumpDirect ( prog_05DC );
+    return jumpDirect ( 0x05DC,prog_05DC );
 }
 
 Control prog_05DC ()
 {
     at ( "05DC" );
-    instruction ( "CP   (HL)",0x05DD );
+    instruction ( "CP   (HL)",e16_hi_lo ( 0x05,0xDD ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
@@ -14996,29 +14996,29 @@ Control prog_05DC ()
     FlagA = e1_test_bit ( e8_lo ( a8 ),4 );
     FlagP = e1_parity ( e8_lo ( a5 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a5 ),0 ) );
-    return jumpDirect ( prog_05DD );
+    return jumpDirect ( 0x05DD,prog_05DD );
 }
 
 Control prog_05DD ()
 {
     at ( "05DD" );
-    instruction ( "JP   CY,05E2",0x05E0 );
+    instruction ( "JP   CY,05E2",e16_hi_lo ( 0x05,0xE0 ) );
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( prog_05E2 );
+        return jumpDirect ( 0x05E2,prog_05E2 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_05E0 );
+        return jumpDirect ( 0x05E0,prog_05E0 );
     }
 }
 
 Control prog_05E0 ()
 {
     at ( "05E0" );
-    instruction ( "SUB  0C",0x05E2 );
+    instruction ( "SUB  0C",e16_hi_lo ( 0x05,0xE2 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x0C ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -15031,53 +15031,53 @@ Control prog_05E0 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_05E2 );
+    return jumpDirect ( 0x05E2,prog_05E2 );
 }
 
 Control prog_05E2 ()
 {
     at ( "05E2" );
-    instruction ( "LD   (2079),A",0x05E5 );
+    instruction ( "LD   (2079),A",e16_hi_lo ( 0x05,0xE5 ) );
     u8 a1 = A ;
     mem_write ( 0x2079,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_05E5 );
+    return jumpDirect ( 0x05E5,prog_05E5 );
 }
 
 Control prog_05E5 ()
 {
     at ( "05E5" );
-    instruction ( "LD   A,(207B)",0x05E8 );
+    instruction ( "LD   A,(207B)",e16_hi_lo ( 0x05,0xE8 ) );
     u8 a1 = e8_read_mem ( 0x207B ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_05E8 );
+    return jumpDirect ( 0x05E8,prog_05E8 );
 }
 
 Control prog_05E8 ()
 {
     at ( "05E8" );
-    instruction ( "LD   B,A",0x05E9 );
+    instruction ( "LD   B,A",e16_hi_lo ( 0x05,0xE9 ) );
     u8 a1 = A ;
     advance ( 5 );
     B = a1;
-    return jumpDirect ( prog_05E9 );
+    return jumpDirect ( 0x05E9,prog_05E9 );
 }
 
 Control prog_05E9 ()
 {
     at ( "05E9" );
-    instruction ( "LD   A,(207E)",0x05EC );
+    instruction ( "LD   A,(207E)",e16_hi_lo ( 0x05,0xEC ) );
     u8 a1 = e8_read_mem ( 0x207E ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_05EC );
+    return jumpDirect ( 0x05EC,prog_05EC );
 }
 
 Control prog_05EC ()
 {
     at ( "05EC" );
-    instruction ( "ADD  B",0x05ED );
+    instruction ( "ADD  B",e16_hi_lo ( 0x05,0xED ) );
     u8 a1 = B ;
     u8 a2 = A ;
     u16 a3 = e16_add_with_carry ( e1_false (  ),a1,a2 ) ;
@@ -15091,23 +15091,23 @@ Control prog_05EC ()
     FlagA = e1_test_bit ( e8_lo ( a6 ),4 );
     FlagP = e1_parity ( e8_lo ( a3 ) );
     FlagCY = e1_test_bit ( e8_hi ( a3 ),0 );
-    return jumpDirect ( prog_05ED );
+    return jumpDirect ( 0x05ED,prog_05ED );
 }
 
 Control prog_05ED ()
 {
     at ( "05ED" );
-    instruction ( "LD   (207B),A",0x05F0 );
+    instruction ( "LD   (207B),A",e16_hi_lo ( 0x05,0xF0 ) );
     u8 a1 = A ;
     mem_write ( 0x207B,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_05F0 );
+    return jumpDirect ( 0x05F0,prog_05F0 );
 }
 
 Control prog_05F0 ()
 {
     at ( "05F0" );
-    instruction ( "CALL 066C",0x05F3 );
+    instruction ( "CALL 066C",e16_hi_lo ( 0x05,0xF3 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -15120,23 +15120,23 @@ Control prog_05F0 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_066C );
+    return jumpDirect ( 0x066C,prog_066C );
 }
 
 Control prog_05F3 ()
 {
     at ( "05F3" );
-    instruction ( "LD   A,(207B)",0x05F6 );
+    instruction ( "LD   A,(207B)",e16_hi_lo ( 0x05,0xF6 ) );
     u8 a1 = e8_read_mem ( 0x207B ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_05F6 );
+    return jumpDirect ( 0x05F6,prog_05F6 );
 }
 
 Control prog_05F6 ()
 {
     at ( "05F6" );
-    instruction ( "CP   15",0x05F8 );
+    instruction ( "CP   15",e16_hi_lo ( 0x05,0xF8 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x15 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -15148,39 +15148,39 @@ Control prog_05F6 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_05F8 );
+    return jumpDirect ( 0x05F8,prog_05F8 );
 }
 
 Control prog_05F8 ()
 {
     at ( "05F8" );
-    instruction ( "JP   CY,0612",0x05FB );
+    instruction ( "JP   CY,0612",e16_hi_lo ( 0x05,0xFB ) );
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( prog_0612 );
+        return jumpDirect ( 0x0612,prog_0612 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_05FB );
+        return jumpDirect ( 0x05FB,prog_05FB );
     }
 }
 
 Control prog_05FB ()
 {
     at ( "05FB" );
-    instruction ( "LD   A,(2061)",0x05FE );
+    instruction ( "LD   A,(2061)",e16_hi_lo ( 0x05,0xFE ) );
     u8 a1 = e8_read_mem ( 0x2061 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_05FE );
+    return jumpDirect ( 0x05FE,prog_05FE );
 }
 
 Control prog_05FE ()
 {
     at ( "05FE" );
-    instruction ( "AND  A",0x05FF );
+    instruction ( "AND  A",e16_hi_lo ( 0x05,0xFF ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -15192,13 +15192,13 @@ Control prog_05FE ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_05FF );
+    return jumpDirect ( 0x05FF,prog_05FF );
 }
 
 Control prog_05FF ()
 {
     at ( "05FF" );
-    instruction ( "RET  Z",0x0600 );
+    instruction ( "RET  Z",e16_hi_lo ( 0x06,0x00 ) );
     if (FlagZ)
     {
         u8 a1 = SPH ;
@@ -15217,24 +15217,24 @@ Control prog_05FF ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_0600 );
+        return jumpDirect ( 0x0600,prog_0600 );
     }
 }
 
 Control prog_0600 ()
 {
     at ( "0600" );
-    instruction ( "LD   A,(207B)",0x0603 );
+    instruction ( "LD   A,(207B)",e16_hi_lo ( 0x06,0x03 ) );
     u8 a1 = e8_read_mem ( 0x207B ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0603 );
+    return jumpDirect ( 0x0603,prog_0603 );
 }
 
 Control prog_0603 ()
 {
     at ( "0603" );
-    instruction ( "CP   1E",0x0605 );
+    instruction ( "CP   1E",e16_hi_lo ( 0x06,0x05 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x1E ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -15246,29 +15246,29 @@ Control prog_0603 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_0605 );
+    return jumpDirect ( 0x0605,prog_0605 );
 }
 
 Control prog_0605 ()
 {
     at ( "0605" );
-    instruction ( "JP   CY,0612",0x0608 );
+    instruction ( "JP   CY,0612",e16_hi_lo ( 0x06,0x08 ) );
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( prog_0612 );
+        return jumpDirect ( 0x0612,prog_0612 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0608 );
+        return jumpDirect ( 0x0608,prog_0608 );
     }
 }
 
 Control prog_0608 ()
 {
     at ( "0608" );
-    instruction ( "CP   27",0x060A );
+    instruction ( "CP   27",e16_hi_lo ( 0x06,0x0A ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x27 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -15280,37 +15280,37 @@ Control prog_0608 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_060A );
+    return jumpDirect ( 0x060A,prog_060A );
 }
 
 Control prog_060A ()
 {
     at ( "060A" );
-    instruction ( "NOP",0x060B );
+    instruction ( "NOP",e16_hi_lo ( 0x06,0x0B ) );
     advance ( 4 );
-    return jumpDirect ( prog_060B );
+    return jumpDirect ( 0x060B,prog_060B );
 }
 
 Control prog_060B ()
 {
     at ( "060B" );
-    instruction ( "JP   NC,0612",0x060E );
+    instruction ( "JP   NC,0612",e16_hi_lo ( 0x06,0x0E ) );
     if (e1_flip ( FlagCY ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_0612 );
+        return jumpDirect ( 0x0612,prog_0612 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_060E );
+        return jumpDirect ( 0x060E,prog_060E );
     }
 }
 
 Control prog_060E ()
 {
     at ( "060E" );
-    instruction ( "SUB  A",0x060F );
+    instruction ( "SUB  A",e16_hi_lo ( 0x06,0x0F ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u16 a3 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a2,e8_complement ( a1 ) ) ;
@@ -15324,33 +15324,33 @@ Control prog_060E ()
     FlagA = e1_test_bit ( e8_lo ( a6 ),4 );
     FlagP = e1_parity ( e8_lo ( a3 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a3 ),0 ) );
-    return jumpDirect ( prog_060F );
+    return jumpDirect ( 0x060F,prog_060F );
 }
 
 Control prog_060F ()
 {
     at ( "060F" );
-    instruction ( "LD   (2015),A",0x0612 );
+    instruction ( "LD   (2015),A",e16_hi_lo ( 0x06,0x12 ) );
     u8 a1 = A ;
     mem_write ( 0x2015,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0612 );
+    return jumpDirect ( 0x0612,prog_0612 );
 }
 
 Control prog_0612 ()
 {
     at ( "0612" );
-    instruction ( "LD   A,(2073)",0x0615 );
+    instruction ( "LD   A,(2073)",e16_hi_lo ( 0x06,0x15 ) );
     u8 a1 = e8_read_mem ( 0x2073 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0615 );
+    return jumpDirect ( 0x0615,prog_0615 );
 }
 
 Control prog_0615 ()
 {
     at ( "0615" );
-    instruction ( "OR   01",0x0617 );
+    instruction ( "OR   01",e16_hi_lo ( 0x06,0x17 ) );
     u8 a1 = A ;
     u8 a2 = e8_or ( 0x01,a1 ) ;
     advance ( 7 );
@@ -15360,23 +15360,23 @@ Control prog_0615 ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0617 );
+    return jumpDirect ( 0x0617,prog_0617 );
 }
 
 Control prog_0617 ()
 {
     at ( "0617" );
-    instruction ( "LD   (2073),A",0x061A );
+    instruction ( "LD   (2073),A",e16_hi_lo ( 0x06,0x1A ) );
     u8 a1 = A ;
     mem_write ( 0x2073,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_061A );
+    return jumpDirect ( 0x061A,prog_061A );
 }
 
 Control prog_061A ()
 {
     at ( "061A" );
-    instruction ( "RET",0x061B );
+    instruction ( "RET",e16_hi_lo ( 0x06,0x1B ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -15394,17 +15394,17 @@ Control prog_061A ()
 Control prog_061B ()
 {
     at ( "061B" );
-    instruction ( "LD   A,(201B)",0x061E );
+    instruction ( "LD   A,(201B)",e16_hi_lo ( 0x06,0x1E ) );
     u8 a1 = e8_read_mem ( 0x201B ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_061E );
+    return jumpDirect ( 0x061E,prog_061E );
 }
 
 Control prog_061E ()
 {
     at ( "061E" );
-    instruction ( "ADD  08",0x0620 );
+    instruction ( "ADD  08",e16_hi_lo ( 0x06,0x20 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_false (  ),0x08,a1 ) ;
     u8 a3 = e8_and ( 0x08,0x0F ) ;
@@ -15417,23 +15417,23 @@ Control prog_061E ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_test_bit ( e8_hi ( a2 ),0 );
-    return jumpDirect ( prog_0620 );
+    return jumpDirect ( 0x0620,prog_0620 );
 }
 
 Control prog_0620 ()
 {
     at ( "0620" );
-    instruction ( "LD   H,A",0x0621 );
+    instruction ( "LD   H,A",e16_hi_lo ( 0x06,0x21 ) );
     u8 a1 = A ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( prog_0621 );
+    return jumpDirect ( 0x0621,prog_0621 );
 }
 
 Control prog_0621 ()
 {
     at ( "0621" );
-    instruction ( "CALL 156F",0x0624 );
+    instruction ( "CALL 156F",e16_hi_lo ( 0x06,0x24 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -15446,23 +15446,23 @@ Control prog_0621 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_156F );
+    return jumpDirect ( 0x156F,prog_156F );
 }
 
 Control prog_0624 ()
 {
     at ( "0624" );
-    instruction ( "LD   A,C",0x0625 );
+    instruction ( "LD   A,C",e16_hi_lo ( 0x06,0x25 ) );
     u8 a1 = C ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_0625 );
+    return jumpDirect ( 0x0625,prog_0625 );
 }
 
 Control prog_0625 ()
 {
     at ( "0625" );
-    instruction ( "CP   0C",0x0627 );
+    instruction ( "CP   0C",e16_hi_lo ( 0x06,0x27 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x0C ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -15474,46 +15474,46 @@ Control prog_0625 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_0627 );
+    return jumpDirect ( 0x0627,prog_0627 );
 }
 
 Control prog_0627 ()
 {
     at ( "0627" );
-    instruction ( "JP   CY,05A5",0x062A );
+    instruction ( "JP   CY,05A5",e16_hi_lo ( 0x06,0x2A ) );
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( prog_05A5 );
+        return jumpDirect ( 0x05A5,prog_05A5 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_062A );
+        return jumpDirect ( 0x062A,prog_062A );
     }
 }
 
 Control prog_062A ()
 {
     at ( "062A" );
-    instruction ( "LD   C,0B",0x062C );
+    instruction ( "LD   C,0B",e16_hi_lo ( 0x06,0x2C ) );
     advance ( 7 );
     C = 0x0B;
-    return jumpDirect ( prog_062C );
+    return jumpDirect ( 0x062C,prog_062C );
 }
 
 Control prog_062C ()
 {
     at ( "062C" );
-    instruction ( "JP   05A5",0x062F );
+    instruction ( "JP   05A5",e16_hi_lo ( 0x06,0x2F ) );
     advance ( 10 );
-    return jumpDirect ( prog_05A5 );
+    return jumpDirect ( 0x05A5,prog_05A5 );
 }
 
 Control prog_062F ()
 {
     at ( "062F" );
-    instruction ( "DEC  C",0x0630 );
+    instruction ( "DEC  C",e16_hi_lo ( 0x06,0x30 ) );
     u8 a1 = C ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -15525,64 +15525,64 @@ Control prog_062F ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_0630 );
+    return jumpDirect ( 0x0630,prog_0630 );
 }
 
 Control prog_0630 ()
 {
     at ( "0630" );
-    instruction ( "LD   A,(2067)",0x0633 );
+    instruction ( "LD   A,(2067)",e16_hi_lo ( 0x06,0x33 ) );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0633 );
+    return jumpDirect ( 0x0633,prog_0633 );
 }
 
 Control prog_0633 ()
 {
     at ( "0633" );
-    instruction ( "LD   H,A",0x0634 );
+    instruction ( "LD   H,A",e16_hi_lo ( 0x06,0x34 ) );
     u8 a1 = A ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( prog_0634 );
+    return jumpDirect ( 0x0634,prog_0634 );
 }
 
 Control prog_0634 ()
 {
     at ( "0634" );
-    instruction ( "LD   L,C",0x0635 );
+    instruction ( "LD   L,C",e16_hi_lo ( 0x06,0x35 ) );
     u8 a1 = C ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( prog_0635 );
+    return jumpDirect ( 0x0635,prog_0635 );
 }
 
 Control prog_0635 ()
 {
     at ( "0635" );
-    instruction ( "LD   D,05",0x0637 );
+    instruction ( "LD   D,05",e16_hi_lo ( 0x06,0x37 ) );
     advance ( 7 );
     D = 0x05;
-    return jumpDirect ( prog_0637 );
+    return jumpDirect ( 0x0637,prog_0637 );
 }
 
 Control prog_0637 ()
 {
     at ( "0637" );
-    instruction ( "LD   A,(HL)",0x0638 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x06,0x38 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_0638 );
+    return jumpDirect ( 0x0638,prog_0638 );
 }
 
 Control prog_0638 ()
 {
     at ( "0638" );
-    instruction ( "AND  A",0x0639 );
+    instruction ( "AND  A",e16_hi_lo ( 0x06,0x39 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -15594,22 +15594,22 @@ Control prog_0638 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0639 );
+    return jumpDirect ( 0x0639,prog_0639 );
 }
 
 Control prog_0639 ()
 {
     at ( "0639" );
-    instruction ( "SCF",0x063A );
+    instruction ( "SCF",e16_hi_lo ( 0x06,0x3A ) );
     advance ( 4 );
     FlagCY = e1_true (  );
-    return jumpDirect ( prog_063A );
+    return jumpDirect ( 0x063A,prog_063A );
 }
 
 Control prog_063A ()
 {
     at ( "063A" );
-    instruction ( "RET  NZ",0x063B );
+    instruction ( "RET  NZ",e16_hi_lo ( 0x06,0x3B ) );
     if (e1_flip ( FlagZ ))
     {
         u8 a1 = SPH ;
@@ -15628,24 +15628,24 @@ Control prog_063A ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_063B );
+        return jumpDirect ( 0x063B,prog_063B );
     }
 }
 
 Control prog_063B ()
 {
     at ( "063B" );
-    instruction ( "LD   A,L",0x063C );
+    instruction ( "LD   A,L",e16_hi_lo ( 0x06,0x3C ) );
     u8 a1 = L ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_063C );
+    return jumpDirect ( 0x063C,prog_063C );
 }
 
 Control prog_063C ()
 {
     at ( "063C" );
-    instruction ( "ADD  0B",0x063E );
+    instruction ( "ADD  0B",e16_hi_lo ( 0x06,0x3E ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_false (  ),0x0B,a1 ) ;
     u8 a3 = e8_and ( 0x0B,0x0F ) ;
@@ -15658,23 +15658,23 @@ Control prog_063C ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_test_bit ( e8_hi ( a2 ),0 );
-    return jumpDirect ( prog_063E );
+    return jumpDirect ( 0x063E,prog_063E );
 }
 
 Control prog_063E ()
 {
     at ( "063E" );
-    instruction ( "LD   L,A",0x063F );
+    instruction ( "LD   L,A",e16_hi_lo ( 0x06,0x3F ) );
     u8 a1 = A ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( prog_063F );
+    return jumpDirect ( 0x063F,prog_063F );
 }
 
 Control prog_063F ()
 {
     at ( "063F" );
-    instruction ( "DEC  D",0x0640 );
+    instruction ( "DEC  D",e16_hi_lo ( 0x06,0x40 ) );
     u8 a1 = D ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -15686,29 +15686,29 @@ Control prog_063F ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_0640 );
+    return jumpDirect ( 0x0640,prog_0640 );
 }
 
 Control prog_0640 ()
 {
     at ( "0640" );
-    instruction ( "JP   NZ,0637",0x0643 );
+    instruction ( "JP   NZ,0637",e16_hi_lo ( 0x06,0x43 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_0637 );
+        return jumpDirect ( 0x0637,prog_0637 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0643 );
+        return jumpDirect ( 0x0643,prog_0643 );
     }
 }
 
 Control prog_0643 ()
 {
     at ( "0643" );
-    instruction ( "RET",0x0644 );
+    instruction ( "RET",e16_hi_lo ( 0x06,0x44 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -15726,17 +15726,17 @@ Control prog_0643 ()
 Control prog_0644 ()
 {
     at ( "0644" );
-    instruction ( "LD   HL,2078",0x0647 );
+    instruction ( "LD   HL,2078",e16_hi_lo ( 0x06,0x47 ) );
     advance ( 10 );
     H = 0x20;
     L = 0x78;
-    return jumpDirect ( prog_0647 );
+    return jumpDirect ( 0x0647,prog_0647 );
 }
 
 Control prog_0647 ()
 {
     at ( "0647" );
-    instruction ( "DEC  (HL)",0x0648 );
+    instruction ( "DEC  (HL)",e16_hi_lo ( 0x06,0x48 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -15752,25 +15752,25 @@ Control prog_0647 ()
     FlagZ = e1_is_zero ( e8_lo ( a4 ) );
     FlagA = e1_test_bit ( e8_lo ( a7 ),4 );
     FlagP = e1_parity ( e8_lo ( a4 ) );
-    return jumpDirect ( prog_0648 );
+    return jumpDirect ( 0x0648,prog_0648 );
 }
 
 Control prog_0648 ()
 {
     at ( "0648" );
-    instruction ( "LD   A,(HL)",0x0649 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x06,0x49 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_0649 );
+    return jumpDirect ( 0x0649,prog_0649 );
 }
 
 Control prog_0649 ()
 {
     at ( "0649" );
-    instruction ( "CP   03",0x064B );
+    instruction ( "CP   03",e16_hi_lo ( 0x06,0x4B ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x03 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -15782,29 +15782,29 @@ Control prog_0649 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_064B );
+    return jumpDirect ( 0x064B,prog_064B );
 }
 
 Control prog_064B ()
 {
     at ( "064B" );
-    instruction ( "JP   NZ,0667",0x064E );
+    instruction ( "JP   NZ,0667",e16_hi_lo ( 0x06,0x4E ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_0667 );
+        return jumpDirect ( 0x0667,prog_0667 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_064E );
+        return jumpDirect ( 0x064E,prog_064E );
     }
 }
 
 Control prog_064E ()
 {
     at ( "064E" );
-    instruction ( "CALL 0675",0x0651 );
+    instruction ( "CALL 0675",e16_hi_lo ( 0x06,0x51 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -15817,45 +15817,45 @@ Control prog_064E ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0675 );
+    return jumpDirect ( 0x0675,prog_0675 );
 }
 
 Control prog_0651 ()
 {
     at ( "0651" );
-    instruction ( "LD   HL,1CDC",0x0654 );
+    instruction ( "LD   HL,1CDC",e16_hi_lo ( 0x06,0x54 ) );
     advance ( 10 );
     H = 0x1C;
     L = 0xDC;
-    return jumpDirect ( prog_0654 );
+    return jumpDirect ( 0x0654,prog_0654 );
 }
 
 Control prog_0654 ()
 {
     at ( "0654" );
-    instruction ( "LD   (2079),HL",0x0657 );
+    instruction ( "LD   (2079),HL",e16_hi_lo ( 0x06,0x57 ) );
     u8 a1 = L ;
     mem_write ( 0x2079,a1 );
     u8 a2 = H ;
     mem_write ( 0x207A,a2 );
     advance ( 16 );
-    return jumpDirect ( prog_0657 );
+    return jumpDirect ( 0x0657,prog_0657 );
 }
 
 Control prog_0657 ()
 {
     at ( "0657" );
-    instruction ( "LD   HL,207C",0x065A );
+    instruction ( "LD   HL,207C",e16_hi_lo ( 0x06,0x5A ) );
     advance ( 10 );
     H = 0x20;
     L = 0x7C;
-    return jumpDirect ( prog_065A );
+    return jumpDirect ( 0x065A,prog_065A );
 }
 
 Control prog_065A ()
 {
     at ( "065A" );
-    instruction ( "DEC  (HL)",0x065B );
+    instruction ( "DEC  (HL)",e16_hi_lo ( 0x06,0x5B ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -15871,13 +15871,13 @@ Control prog_065A ()
     FlagZ = e1_is_zero ( e8_lo ( a4 ) );
     FlagA = e1_test_bit ( e8_lo ( a7 ),4 );
     FlagP = e1_parity ( e8_lo ( a4 ) );
-    return jumpDirect ( prog_065B );
+    return jumpDirect ( 0x065B,prog_065B );
 }
 
 Control prog_065B ()
 {
     at ( "065B" );
-    instruction ( "DEC  (HL)",0x065C );
+    instruction ( "DEC  (HL)",e16_hi_lo ( 0x06,0x5C ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -15893,26 +15893,26 @@ Control prog_065B ()
     FlagZ = e1_is_zero ( e8_lo ( a4 ) );
     FlagA = e1_test_bit ( e8_lo ( a7 ),4 );
     FlagP = e1_parity ( e8_lo ( a4 ) );
-    return jumpDirect ( prog_065C );
+    return jumpDirect ( 0x065C,prog_065C );
 }
 
 Control prog_065C ()
 {
     at ( "065C" );
-    instruction ( "DEC  HL",0x065D );
+    instruction ( "DEC  HL",e16_hi_lo ( 0x06,0x5D ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_065D );
+    return jumpDirect ( 0x065D,prog_065D );
 }
 
 Control prog_065D ()
 {
     at ( "065D" );
-    instruction ( "DEC  (HL)",0x065E );
+    instruction ( "DEC  (HL)",e16_hi_lo ( 0x06,0x5E ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -15928,13 +15928,13 @@ Control prog_065D ()
     FlagZ = e1_is_zero ( e8_lo ( a4 ) );
     FlagA = e1_test_bit ( e8_lo ( a7 ),4 );
     FlagP = e1_parity ( e8_lo ( a4 ) );
-    return jumpDirect ( prog_065E );
+    return jumpDirect ( 0x065E,prog_065E );
 }
 
 Control prog_065E ()
 {
     at ( "065E" );
-    instruction ( "DEC  (HL)",0x065F );
+    instruction ( "DEC  (HL)",e16_hi_lo ( 0x06,0x5F ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -15950,40 +15950,40 @@ Control prog_065E ()
     FlagZ = e1_is_zero ( e8_lo ( a4 ) );
     FlagA = e1_test_bit ( e8_lo ( a7 ),4 );
     FlagP = e1_parity ( e8_lo ( a4 ) );
-    return jumpDirect ( prog_065F );
+    return jumpDirect ( 0x065F,prog_065F );
 }
 
 Control prog_065F ()
 {
     at ( "065F" );
-    instruction ( "LD   A,06",0x0661 );
+    instruction ( "LD   A,06",e16_hi_lo ( 0x06,0x61 ) );
     advance ( 7 );
     A = 0x06;
-    return jumpDirect ( prog_0661 );
+    return jumpDirect ( 0x0661,prog_0661 );
 }
 
 Control prog_0661 ()
 {
     at ( "0661" );
-    instruction ( "LD   (207D),A",0x0664 );
+    instruction ( "LD   (207D),A",e16_hi_lo ( 0x06,0x64 ) );
     u8 a1 = A ;
     mem_write ( 0x207D,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0664 );
+    return jumpDirect ( 0x0664,prog_0664 );
 }
 
 Control prog_0664 ()
 {
     at ( "0664" );
-    instruction ( "JP   066C",0x0667 );
+    instruction ( "JP   066C",e16_hi_lo ( 0x06,0x67 ) );
     advance ( 10 );
-    return jumpDirect ( prog_066C );
+    return jumpDirect ( 0x066C,prog_066C );
 }
 
 Control prog_0667 ()
 {
     at ( "0667" );
-    instruction ( "AND  A",0x0668 );
+    instruction ( "AND  A",e16_hi_lo ( 0x06,0x68 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -15995,13 +15995,13 @@ Control prog_0667 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0668 );
+    return jumpDirect ( 0x0668,prog_0668 );
 }
 
 Control prog_0668 ()
 {
     at ( "0668" );
-    instruction ( "RET  NZ",0x0669 );
+    instruction ( "RET  NZ",e16_hi_lo ( 0x06,0x69 ) );
     if (e1_flip ( FlagZ ))
     {
         u8 a1 = SPH ;
@@ -16020,32 +16020,32 @@ Control prog_0668 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_0669 );
+        return jumpDirect ( 0x0669,prog_0669 );
     }
 }
 
 Control prog_0669 ()
 {
     at ( "0669" );
-    instruction ( "JP   0675",0x066C );
+    instruction ( "JP   0675",e16_hi_lo ( 0x06,0x6C ) );
     advance ( 10 );
-    return jumpDirect ( prog_0675 );
+    return jumpDirect ( 0x0675,prog_0675 );
 }
 
 Control prog_066C ()
 {
     at ( "066C" );
-    instruction ( "LD   HL,2079",0x066F );
+    instruction ( "LD   HL,2079",e16_hi_lo ( 0x06,0x6F ) );
     advance ( 10 );
     H = 0x20;
     L = 0x79;
-    return jumpDirect ( prog_066F );
+    return jumpDirect ( 0x066F,prog_066F );
 }
 
 Control prog_066F ()
 {
     at ( "066F" );
-    instruction ( "CALL 1A3B",0x0672 );
+    instruction ( "CALL 1A3B",e16_hi_lo ( 0x06,0x72 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -16058,31 +16058,31 @@ Control prog_066F ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1A3B );
+    return jumpDirect ( 0x1A3B,prog_1A3B );
 }
 
 Control prog_0672 ()
 {
     at ( "0672" );
-    instruction ( "JP   1491",0x0675 );
+    instruction ( "JP   1491",e16_hi_lo ( 0x06,0x75 ) );
     advance ( 10 );
-    return jumpDirect ( prog_1491 );
+    return jumpDirect ( 0x1491,prog_1491 );
 }
 
 Control prog_0675 ()
 {
     at ( "0675" );
-    instruction ( "LD   HL,2079",0x0678 );
+    instruction ( "LD   HL,2079",e16_hi_lo ( 0x06,0x78 ) );
     advance ( 10 );
     H = 0x20;
     L = 0x79;
-    return jumpDirect ( prog_0678 );
+    return jumpDirect ( 0x0678,prog_0678 );
 }
 
 Control prog_0678 ()
 {
     at ( "0678" );
-    instruction ( "CALL 1A3B",0x067B );
+    instruction ( "CALL 1A3B",e16_hi_lo ( 0x06,0x7B ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -16095,33 +16095,33 @@ Control prog_0678 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1A3B );
+    return jumpDirect ( 0x1A3B,prog_1A3B );
 }
 
 Control prog_067B ()
 {
     at ( "067B" );
-    instruction ( "JP   1452",0x067E );
+    instruction ( "JP   1452",e16_hi_lo ( 0x06,0x7E ) );
     advance ( 10 );
-    return jumpDirect ( prog_1452 );
+    return jumpDirect ( 0x1452,prog_1452 );
 }
 
 Control prog_067E ()
 {
     at ( "067E" );
-    instruction ( "LD   (2048),HL",0x0681 );
+    instruction ( "LD   (2048),HL",e16_hi_lo ( 0x06,0x81 ) );
     u8 a1 = L ;
     mem_write ( 0x2048,a1 );
     u8 a2 = H ;
     mem_write ( 0x2049,a2 );
     advance ( 16 );
-    return jumpDirect ( prog_0681 );
+    return jumpDirect ( 0x0681,prog_0681 );
 }
 
 Control prog_0681 ()
 {
     at ( "0681" );
-    instruction ( "RET",0x0682 );
+    instruction ( "RET",e16_hi_lo ( 0x06,0x82 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -16139,7 +16139,7 @@ Control prog_0681 ()
 Control prog_0682 ()
 {
     at ( "0682" );
-    instruction ( "POP  HL",0x0683 );
+    instruction ( "POP  HL",e16_hi_lo ( 0x06,0x83 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -16153,23 +16153,23 @@ Control prog_0682 ()
     L = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_0683 );
+    return jumpDirect ( 0x0683,prog_0683 );
 }
 
 Control prog_0683 ()
 {
     at ( "0683" );
-    instruction ( "LD   A,(2080)",0x0686 );
+    instruction ( "LD   A,(2080)",e16_hi_lo ( 0x06,0x86 ) );
     u8 a1 = e8_read_mem ( 0x2080 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0686 );
+    return jumpDirect ( 0x0686,prog_0686 );
 }
 
 Control prog_0686 ()
 {
     at ( "0686" );
-    instruction ( "CP   02",0x0688 );
+    instruction ( "CP   02",e16_hi_lo ( 0x06,0x88 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x02 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -16181,13 +16181,13 @@ Control prog_0686 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_0688 );
+    return jumpDirect ( 0x0688,prog_0688 );
 }
 
 Control prog_0688 ()
 {
     at ( "0688" );
-    instruction ( "RET  NZ",0x0689 );
+    instruction ( "RET  NZ",e16_hi_lo ( 0x06,0x89 ) );
     if (e1_flip ( FlagZ ))
     {
         u8 a1 = SPH ;
@@ -16206,36 +16206,36 @@ Control prog_0688 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_0689 );
+        return jumpDirect ( 0x0689,prog_0689 );
     }
 }
 
 Control prog_0689 ()
 {
     at ( "0689" );
-    instruction ( "LD   HL,2083",0x068C );
+    instruction ( "LD   HL,2083",e16_hi_lo ( 0x06,0x8C ) );
     advance ( 10 );
     H = 0x20;
     L = 0x83;
-    return jumpDirect ( prog_068C );
+    return jumpDirect ( 0x068C,prog_068C );
 }
 
 Control prog_068C ()
 {
     at ( "068C" );
-    instruction ( "LD   A,(HL)",0x068D );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x06,0x8D ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_068D );
+    return jumpDirect ( 0x068D,prog_068D );
 }
 
 Control prog_068D ()
 {
     at ( "068D" );
-    instruction ( "AND  A",0x068E );
+    instruction ( "AND  A",e16_hi_lo ( 0x06,0x8E ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -16247,39 +16247,39 @@ Control prog_068D ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_068E );
+    return jumpDirect ( 0x068E,prog_068E );
 }
 
 Control prog_068E ()
 {
     at ( "068E" );
-    instruction ( "JP   Z,050F",0x0691 );
+    instruction ( "JP   Z,050F",e16_hi_lo ( 0x06,0x91 ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_050F );
+        return jumpDirect ( 0x050F,prog_050F );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0691 );
+        return jumpDirect ( 0x0691,prog_0691 );
     }
 }
 
 Control prog_0691 ()
 {
     at ( "0691" );
-    instruction ( "LD   A,(2056)",0x0694 );
+    instruction ( "LD   A,(2056)",e16_hi_lo ( 0x06,0x94 ) );
     u8 a1 = e8_read_mem ( 0x2056 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0694 );
+    return jumpDirect ( 0x0694,prog_0694 );
 }
 
 Control prog_0694 ()
 {
     at ( "0694" );
-    instruction ( "AND  A",0x0695 );
+    instruction ( "AND  A",e16_hi_lo ( 0x06,0x95 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -16291,54 +16291,54 @@ Control prog_0694 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0695 );
+    return jumpDirect ( 0x0695,prog_0695 );
 }
 
 Control prog_0695 ()
 {
     at ( "0695" );
-    instruction ( "JP   NZ,050F",0x0698 );
+    instruction ( "JP   NZ,050F",e16_hi_lo ( 0x06,0x98 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_050F );
+        return jumpDirect ( 0x050F,prog_050F );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0698 );
+        return jumpDirect ( 0x0698,prog_0698 );
     }
 }
 
 Control prog_0698 ()
 {
     at ( "0698" );
-    instruction ( "INC  HL",0x0699 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x06,0x99 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_0699 );
+    return jumpDirect ( 0x0699,prog_0699 );
 }
 
 Control prog_0699 ()
 {
     at ( "0699" );
-    instruction ( "LD   A,(HL)",0x069A );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x06,0x9A ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_069A );
+    return jumpDirect ( 0x069A,prog_069A );
 }
 
 Control prog_069A ()
 {
     at ( "069A" );
-    instruction ( "AND  A",0x069B );
+    instruction ( "AND  A",e16_hi_lo ( 0x06,0x9B ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -16350,39 +16350,39 @@ Control prog_069A ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_069B );
+    return jumpDirect ( 0x069B,prog_069B );
 }
 
 Control prog_069B ()
 {
     at ( "069B" );
-    instruction ( "JP   NZ,06AB",0x069E );
+    instruction ( "JP   NZ,06AB",e16_hi_lo ( 0x06,0x9E ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_06AB );
+        return jumpDirect ( 0x06AB,prog_06AB );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_069E );
+        return jumpDirect ( 0x069E,prog_069E );
     }
 }
 
 Control prog_069E ()
 {
     at ( "069E" );
-    instruction ( "LD   A,(2082)",0x06A1 );
+    instruction ( "LD   A,(2082)",e16_hi_lo ( 0x06,0xA1 ) );
     u8 a1 = e8_read_mem ( 0x2082 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_06A1 );
+    return jumpDirect ( 0x06A1,prog_06A1 );
 }
 
 Control prog_06A1 ()
 {
     at ( "06A1" );
-    instruction ( "CP   08",0x06A3 );
+    instruction ( "CP   08",e16_hi_lo ( 0x06,0xA3 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x08 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -16394,40 +16394,40 @@ Control prog_06A1 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_06A3 );
+    return jumpDirect ( 0x06A3,prog_06A3 );
 }
 
 Control prog_06A3 ()
 {
     at ( "06A3" );
-    instruction ( "JP   CY,050F",0x06A6 );
+    instruction ( "JP   CY,050F",e16_hi_lo ( 0x06,0xA6 ) );
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( prog_050F );
+        return jumpDirect ( 0x050F,prog_050F );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_06A6 );
+        return jumpDirect ( 0x06A6,prog_06A6 );
     }
 }
 
 Control prog_06A6 ()
 {
     at ( "06A6" );
-    instruction ( "LD   (HL),01",0x06A8 );
+    instruction ( "LD   (HL),01",e16_hi_lo ( 0x06,0xA8 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     mem_write ( e16_hi_lo ( a1,a2 ),0x01 );
     advance ( 10 );
-    return jumpDirect ( prog_06A8 );
+    return jumpDirect ( 0x06A8,prog_06A8 );
 }
 
 Control prog_06A8 ()
 {
     at ( "06A8" );
-    instruction ( "CALL 073C",0x06AB );
+    instruction ( "CALL 073C",e16_hi_lo ( 0x06,0xAB ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -16440,23 +16440,23 @@ Control prog_06A8 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_073C );
+    return jumpDirect ( 0x073C,prog_073C );
 }
 
 Control prog_06AB ()
 {
     at ( "06AB" );
-    instruction ( "LD   DE,208A",0x06AE );
+    instruction ( "LD   DE,208A",e16_hi_lo ( 0x06,0xAE ) );
     advance ( 10 );
     D = 0x20;
     E = 0x8A;
-    return jumpDirect ( prog_06AE );
+    return jumpDirect ( 0x06AE,prog_06AE );
 }
 
 Control prog_06AE ()
 {
     at ( "06AE" );
-    instruction ( "CALL 1A06",0x06B1 );
+    instruction ( "CALL 1A06",e16_hi_lo ( 0x06,0xB1 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -16469,13 +16469,13 @@ Control prog_06AE ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1A06 );
+    return jumpDirect ( 0x1A06,prog_1A06 );
 }
 
 Control prog_06B1 ()
 {
     at ( "06B1" );
-    instruction ( "RET  NC",0x06B2 );
+    instruction ( "RET  NC",e16_hi_lo ( 0x06,0xB2 ) );
     if (e1_flip ( FlagCY ))
     {
         u8 a1 = SPH ;
@@ -16494,36 +16494,36 @@ Control prog_06B1 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_06B2 );
+        return jumpDirect ( 0x06B2,prog_06B2 );
     }
 }
 
 Control prog_06B2 ()
 {
     at ( "06B2" );
-    instruction ( "LD   HL,2085",0x06B5 );
+    instruction ( "LD   HL,2085",e16_hi_lo ( 0x06,0xB5 ) );
     advance ( 10 );
     H = 0x20;
     L = 0x85;
-    return jumpDirect ( prog_06B5 );
+    return jumpDirect ( 0x06B5,prog_06B5 );
 }
 
 Control prog_06B5 ()
 {
     at ( "06B5" );
-    instruction ( "LD   A,(HL)",0x06B6 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x06,0xB6 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_06B6 );
+    return jumpDirect ( 0x06B6,prog_06B6 );
 }
 
 Control prog_06B6 ()
 {
     at ( "06B6" );
-    instruction ( "AND  A",0x06B7 );
+    instruction ( "AND  A",e16_hi_lo ( 0x06,0xB7 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -16535,77 +16535,77 @@ Control prog_06B6 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_06B7 );
+    return jumpDirect ( 0x06B7,prog_06B7 );
 }
 
 Control prog_06B7 ()
 {
     at ( "06B7" );
-    instruction ( "JP   NZ,06D6",0x06BA );
+    instruction ( "JP   NZ,06D6",e16_hi_lo ( 0x06,0xBA ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_06D6 );
+        return jumpDirect ( 0x06D6,prog_06D6 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_06BA );
+        return jumpDirect ( 0x06BA,prog_06BA );
     }
 }
 
 Control prog_06BA ()
 {
     at ( "06BA" );
-    instruction ( "LD   HL,208A",0x06BD );
+    instruction ( "LD   HL,208A",e16_hi_lo ( 0x06,0xBD ) );
     advance ( 10 );
     H = 0x20;
     L = 0x8A;
-    return jumpDirect ( prog_06BD );
+    return jumpDirect ( 0x06BD,prog_06BD );
 }
 
 Control prog_06BD ()
 {
     at ( "06BD" );
-    instruction ( "LD   A,(HL)",0x06BE );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x06,0xBE ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_06BE );
+    return jumpDirect ( 0x06BE,prog_06BE );
 }
 
 Control prog_06BE ()
 {
     at ( "06BE" );
-    instruction ( "INC  HL",0x06BF );
+    instruction ( "INC  HL",e16_hi_lo ( 0x06,0xBF ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_06BF );
+    return jumpDirect ( 0x06BF,prog_06BF );
 }
 
 Control prog_06BF ()
 {
     at ( "06BF" );
-    instruction ( "INC  HL",0x06C0 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x06,0xC0 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_06C0 );
+    return jumpDirect ( 0x06C0,prog_06C0 );
 }
 
 Control prog_06C0 ()
 {
     at ( "06C0" );
-    instruction ( "ADD  (HL)",0x06C1 );
+    instruction ( "ADD  (HL)",e16_hi_lo ( 0x06,0xC1 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -16621,23 +16621,23 @@ Control prog_06C0 ()
     FlagA = e1_test_bit ( e8_lo ( a8 ),4 );
     FlagP = e1_parity ( e8_lo ( a5 ) );
     FlagCY = e1_test_bit ( e8_hi ( a5 ),0 );
-    return jumpDirect ( prog_06C1 );
+    return jumpDirect ( 0x06C1,prog_06C1 );
 }
 
 Control prog_06C1 ()
 {
     at ( "06C1" );
-    instruction ( "LD   (208A),A",0x06C4 );
+    instruction ( "LD   (208A),A",e16_hi_lo ( 0x06,0xC4 ) );
     u8 a1 = A ;
     mem_write ( 0x208A,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_06C4 );
+    return jumpDirect ( 0x06C4,prog_06C4 );
 }
 
 Control prog_06C4 ()
 {
     at ( "06C4" );
-    instruction ( "CALL 073C",0x06C7 );
+    instruction ( "CALL 073C",e16_hi_lo ( 0x06,0xC7 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -16650,35 +16650,35 @@ Control prog_06C4 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_073C );
+    return jumpDirect ( 0x073C,prog_073C );
 }
 
 Control prog_06C7 ()
 {
     at ( "06C7" );
-    instruction ( "LD   HL,208A",0x06CA );
+    instruction ( "LD   HL,208A",e16_hi_lo ( 0x06,0xCA ) );
     advance ( 10 );
     H = 0x20;
     L = 0x8A;
-    return jumpDirect ( prog_06CA );
+    return jumpDirect ( 0x06CA,prog_06CA );
 }
 
 Control prog_06CA ()
 {
     at ( "06CA" );
-    instruction ( "LD   A,(HL)",0x06CB );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x06,0xCB ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_06CB );
+    return jumpDirect ( 0x06CB,prog_06CB );
 }
 
 Control prog_06CB ()
 {
     at ( "06CB" );
-    instruction ( "CP   28",0x06CD );
+    instruction ( "CP   28",e16_hi_lo ( 0x06,0xCD ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x28 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -16690,29 +16690,29 @@ Control prog_06CB ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_06CD );
+    return jumpDirect ( 0x06CD,prog_06CD );
 }
 
 Control prog_06CD ()
 {
     at ( "06CD" );
-    instruction ( "JP   CY,06F9",0x06D0 );
+    instruction ( "JP   CY,06F9",e16_hi_lo ( 0x06,0xD0 ) );
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( prog_06F9 );
+        return jumpDirect ( 0x06F9,prog_06F9 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_06D0 );
+        return jumpDirect ( 0x06D0,prog_06D0 );
     }
 }
 
 Control prog_06D0 ()
 {
     at ( "06D0" );
-    instruction ( "CP   E1",0x06D2 );
+    instruction ( "CP   E1",e16_hi_lo ( 0x06,0xD2 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0xE1 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -16724,29 +16724,29 @@ Control prog_06D0 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_06D2 );
+    return jumpDirect ( 0x06D2,prog_06D2 );
 }
 
 Control prog_06D2 ()
 {
     at ( "06D2" );
-    instruction ( "JP   NC,06F9",0x06D5 );
+    instruction ( "JP   NC,06F9",e16_hi_lo ( 0x06,0xD5 ) );
     if (e1_flip ( FlagCY ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_06F9 );
+        return jumpDirect ( 0x06F9,prog_06F9 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_06D5 );
+        return jumpDirect ( 0x06D5,prog_06D5 );
     }
 }
 
 Control prog_06D5 ()
 {
     at ( "06D5" );
-    instruction ( "RET",0x06D6 );
+    instruction ( "RET",e16_hi_lo ( 0x06,0xD6 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -16764,16 +16764,16 @@ Control prog_06D5 ()
 Control prog_06D6 ()
 {
     at ( "06D6" );
-    instruction ( "LD   B,FE",0x06D8 );
+    instruction ( "LD   B,FE",e16_hi_lo ( 0x06,0xD8 ) );
     advance ( 7 );
     B = 0xFE;
-    return jumpDirect ( prog_06D8 );
+    return jumpDirect ( 0x06D8,prog_06D8 );
 }
 
 Control prog_06D8 ()
 {
     at ( "06D8" );
-    instruction ( "CALL 19DC",0x06DB );
+    instruction ( "CALL 19DC",e16_hi_lo ( 0x06,0xDB ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -16786,26 +16786,26 @@ Control prog_06D8 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_19DC );
+    return jumpDirect ( 0x19DC,prog_19DC );
 }
 
 Control prog_06DB ()
 {
     at ( "06DB" );
-    instruction ( "INC  HL",0x06DC );
+    instruction ( "INC  HL",e16_hi_lo ( 0x06,0xDC ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_06DC );
+    return jumpDirect ( 0x06DC,prog_06DC );
 }
 
 Control prog_06DC ()
 {
     at ( "06DC" );
-    instruction ( "DEC  (HL)",0x06DD );
+    instruction ( "DEC  (HL)",e16_hi_lo ( 0x06,0xDD ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -16821,25 +16821,25 @@ Control prog_06DC ()
     FlagZ = e1_is_zero ( e8_lo ( a4 ) );
     FlagA = e1_test_bit ( e8_lo ( a7 ),4 );
     FlagP = e1_parity ( e8_lo ( a4 ) );
-    return jumpDirect ( prog_06DD );
+    return jumpDirect ( 0x06DD,prog_06DD );
 }
 
 Control prog_06DD ()
 {
     at ( "06DD" );
-    instruction ( "LD   A,(HL)",0x06DE );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x06,0xDE ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_06DE );
+    return jumpDirect ( 0x06DE,prog_06DE );
 }
 
 Control prog_06DE ()
 {
     at ( "06DE" );
-    instruction ( "CP   1F",0x06E0 );
+    instruction ( "CP   1F",e16_hi_lo ( 0x06,0xE0 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x1F ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -16851,29 +16851,29 @@ Control prog_06DE ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_06E0 );
+    return jumpDirect ( 0x06E0,prog_06E0 );
 }
 
 Control prog_06E0 ()
 {
     at ( "06E0" );
-    instruction ( "JP   Z,074B",0x06E3 );
+    instruction ( "JP   Z,074B",e16_hi_lo ( 0x06,0xE3 ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_074B );
+        return jumpDirect ( 0x074B,prog_074B );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_06E3 );
+        return jumpDirect ( 0x06E3,prog_06E3 );
     }
 }
 
 Control prog_06E3 ()
 {
     at ( "06E3" );
-    instruction ( "CP   18",0x06E5 );
+    instruction ( "CP   18",e16_hi_lo ( 0x06,0xE5 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x18 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -16885,29 +16885,29 @@ Control prog_06E3 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_06E5 );
+    return jumpDirect ( 0x06E5,prog_06E5 );
 }
 
 Control prog_06E5 ()
 {
     at ( "06E5" );
-    instruction ( "JP   Z,070C",0x06E8 );
+    instruction ( "JP   Z,070C",e16_hi_lo ( 0x06,0xE8 ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_070C );
+        return jumpDirect ( 0x070C,prog_070C );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_06E8 );
+        return jumpDirect ( 0x06E8,prog_06E8 );
     }
 }
 
 Control prog_06E8 ()
 {
     at ( "06E8" );
-    instruction ( "AND  A",0x06E9 );
+    instruction ( "AND  A",e16_hi_lo ( 0x06,0xE9 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -16919,13 +16919,13 @@ Control prog_06E8 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_06E9 );
+    return jumpDirect ( 0x06E9,prog_06E9 );
 }
 
 Control prog_06E9 ()
 {
     at ( "06E9" );
-    instruction ( "RET  NZ",0x06EA );
+    instruction ( "RET  NZ",e16_hi_lo ( 0x06,0xEA ) );
     if (e1_flip ( FlagZ ))
     {
         u8 a1 = SPH ;
@@ -16944,45 +16944,45 @@ Control prog_06E9 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_06EA );
+        return jumpDirect ( 0x06EA,prog_06EA );
     }
 }
 
 Control prog_06EA ()
 {
     at ( "06EA" );
-    instruction ( "LD   B,EF",0x06EC );
+    instruction ( "LD   B,EF",e16_hi_lo ( 0x06,0xEC ) );
     advance ( 7 );
     B = 0xEF;
-    return jumpDirect ( prog_06EC );
+    return jumpDirect ( 0x06EC,prog_06EC );
 }
 
 Control prog_06EC ()
 {
     at ( "06EC" );
-    instruction ( "LD   HL,2098",0x06EF );
+    instruction ( "LD   HL,2098",e16_hi_lo ( 0x06,0xEF ) );
     advance ( 10 );
     H = 0x20;
     L = 0x98;
-    return jumpDirect ( prog_06EF );
+    return jumpDirect ( 0x06EF,prog_06EF );
 }
 
 Control prog_06EF ()
 {
     at ( "06EF" );
-    instruction ( "LD   A,(HL)",0x06F0 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x06,0xF0 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_06F0 );
+    return jumpDirect ( 0x06F0,prog_06F0 );
 }
 
 Control prog_06F0 ()
 {
     at ( "06F0" );
-    instruction ( "AND  B",0x06F1 );
+    instruction ( "AND  B",e16_hi_lo ( 0x06,0xF1 ) );
     u8 a1 = B ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -16994,25 +16994,25 @@ Control prog_06F0 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_06F1 );
+    return jumpDirect ( 0x06F1,prog_06F1 );
 }
 
 Control prog_06F1 ()
 {
     at ( "06F1" );
-    instruction ( "LD   (HL),A",0x06F2 );
+    instruction ( "LD   (HL),A",e16_hi_lo ( 0x06,0xF2 ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_06F2 );
+    return jumpDirect ( 0x06F2,prog_06F2 );
 }
 
 Control prog_06F2 ()
 {
     at ( "06F2" );
-    instruction ( "AND  20",0x06F4 );
+    instruction ( "AND  20",e16_hi_lo ( 0x06,0xF4 ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( 0x20,a1 ) ;
     u8 a3 = e8_or ( 0x20,a1 ) ;
@@ -17023,13 +17023,13 @@ Control prog_06F2 ()
     FlagA = e1_test_bit ( a3,3 );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_06F4 );
+    return jumpDirect ( 0x06F4,prog_06F4 );
 }
 
 Control prog_06F4 ()
 {
     at ( "06F4" );
-    instruction ( "OUT  05",0x06F6 );
+    instruction ( "OUT  05",e16_hi_lo ( 0x06,0xF6 ) );
     u8 a1 = A ;
     sound_control ( "FleetMovement1",e1_test_bit ( a1,0 ) );
     sound_control ( "FleetMovement2",e1_test_bit ( a1,1 ) );
@@ -17037,37 +17037,37 @@ Control prog_06F4 ()
     sound_control ( "FleetMovement4",e1_test_bit ( a1,3 ) );
     sound_control ( "UfoHit",e1_test_bit ( a1,4 ) );
     advance ( 10 );
-    return jumpDirect ( prog_06F6 );
+    return jumpDirect ( 0x06F6,prog_06F6 );
 }
 
 Control prog_06F6 ()
 {
     at ( "06F6" );
-    instruction ( "NOP",0x06F7 );
+    instruction ( "NOP",e16_hi_lo ( 0x06,0xF7 ) );
     advance ( 4 );
-    return jumpDirect ( prog_06F7 );
+    return jumpDirect ( 0x06F7,prog_06F7 );
 }
 
 Control prog_06F7 ()
 {
     at ( "06F7" );
-    instruction ( "NOP",0x06F8 );
+    instruction ( "NOP",e16_hi_lo ( 0x06,0xF8 ) );
     advance ( 4 );
-    return jumpDirect ( prog_06F8 );
+    return jumpDirect ( 0x06F8,prog_06F8 );
 }
 
 Control prog_06F8 ()
 {
     at ( "06F8" );
-    instruction ( "NOP",0x06F9 );
+    instruction ( "NOP",e16_hi_lo ( 0x06,0xF9 ) );
     advance ( 4 );
-    return jumpDirect ( prog_06F9 );
+    return jumpDirect ( 0x06F9,prog_06F9 );
 }
 
 Control prog_06F9 ()
 {
     at ( "06F9" );
-    instruction ( "CALL 0742",0x06FC );
+    instruction ( "CALL 0742",e16_hi_lo ( 0x06,0xFC ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -17080,13 +17080,13 @@ Control prog_06F9 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0742 );
+    return jumpDirect ( 0x0742,prog_0742 );
 }
 
 Control prog_06FC ()
 {
     at ( "06FC" );
-    instruction ( "CALL 14CB",0x06FF );
+    instruction ( "CALL 14CB",e16_hi_lo ( 0x06,0xFF ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -17099,32 +17099,32 @@ Control prog_06FC ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_14CB );
+    return jumpDirect ( 0x14CB,prog_14CB );
 }
 
 Control prog_06FF ()
 {
     at ( "06FF" );
-    instruction ( "LD   HL,2083",0x0702 );
+    instruction ( "LD   HL,2083",e16_hi_lo ( 0x07,0x02 ) );
     advance ( 10 );
     H = 0x20;
     L = 0x83;
-    return jumpDirect ( prog_0702 );
+    return jumpDirect ( 0x0702,prog_0702 );
 }
 
 Control prog_0702 ()
 {
     at ( "0702" );
-    instruction ( "LD   B,0A",0x0704 );
+    instruction ( "LD   B,0A",e16_hi_lo ( 0x07,0x04 ) );
     advance ( 7 );
     B = 0x0A;
-    return jumpDirect ( prog_0704 );
+    return jumpDirect ( 0x0704,prog_0704 );
 }
 
 Control prog_0704 ()
 {
     at ( "0704" );
-    instruction ( "CALL 075F",0x0707 );
+    instruction ( "CALL 075F",e16_hi_lo ( 0x07,0x07 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -17137,114 +17137,114 @@ Control prog_0704 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_075F );
+    return jumpDirect ( 0x075F,prog_075F );
 }
 
 Control prog_0707 ()
 {
     at ( "0707" );
-    instruction ( "LD   B,FE",0x0709 );
+    instruction ( "LD   B,FE",e16_hi_lo ( 0x07,0x09 ) );
     advance ( 7 );
     B = 0xFE;
-    return jumpDirect ( prog_0709 );
+    return jumpDirect ( 0x0709,prog_0709 );
 }
 
 Control prog_0709 ()
 {
     at ( "0709" );
-    instruction ( "JP   19DC",0x070C );
+    instruction ( "JP   19DC",e16_hi_lo ( 0x07,0x0C ) );
     advance ( 10 );
-    return jumpDirect ( prog_19DC );
+    return jumpDirect ( 0x19DC,prog_19DC );
 }
 
 Control prog_070C ()
 {
     at ( "070C" );
-    instruction ( "LD   A,01",0x070E );
+    instruction ( "LD   A,01",e16_hi_lo ( 0x07,0x0E ) );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( prog_070E );
+    return jumpDirect ( 0x070E,prog_070E );
 }
 
 Control prog_070E ()
 {
     at ( "070E" );
-    instruction ( "LD   (20F1),A",0x0711 );
+    instruction ( "LD   (20F1),A",e16_hi_lo ( 0x07,0x11 ) );
     u8 a1 = A ;
     mem_write ( 0x20F1,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0711 );
+    return jumpDirect ( 0x0711,prog_0711 );
 }
 
 Control prog_0711 ()
 {
     at ( "0711" );
-    instruction ( "LD   HL,(208D)",0x0714 );
+    instruction ( "LD   HL,(208D)",e16_hi_lo ( 0x07,0x14 ) );
     u8 a1 = e8_read_mem ( 0x208D ) ;
     u8 a2 = e8_read_mem ( 0x208E ) ;
     advance ( 16 );
     H = a2;
     L = a1;
-    return jumpDirect ( prog_0714 );
+    return jumpDirect ( 0x0714,prog_0714 );
 }
 
 Control prog_0714 ()
 {
     at ( "0714" );
-    instruction ( "LD   B,(HL)",0x0715 );
+    instruction ( "LD   B,(HL)",e16_hi_lo ( 0x07,0x15 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     B = a3;
-    return jumpDirect ( prog_0715 );
+    return jumpDirect ( 0x0715,prog_0715 );
 }
 
 Control prog_0715 ()
 {
     at ( "0715" );
-    instruction ( "LD   C,04",0x0717 );
+    instruction ( "LD   C,04",e16_hi_lo ( 0x07,0x17 ) );
     advance ( 7 );
     C = 0x04;
-    return jumpDirect ( prog_0717 );
+    return jumpDirect ( 0x0717,prog_0717 );
 }
 
 Control prog_0717 ()
 {
     at ( "0717" );
-    instruction ( "LD   HL,1D50",0x071A );
+    instruction ( "LD   HL,1D50",e16_hi_lo ( 0x07,0x1A ) );
     advance ( 10 );
     H = 0x1D;
     L = 0x50;
-    return jumpDirect ( prog_071A );
+    return jumpDirect ( 0x071A,prog_071A );
 }
 
 Control prog_071A ()
 {
     at ( "071A" );
-    instruction ( "LD   DE,1D4C",0x071D );
+    instruction ( "LD   DE,1D4C",e16_hi_lo ( 0x07,0x1D ) );
     advance ( 10 );
     D = 0x1D;
     E = 0x4C;
-    return jumpDirect ( prog_071D );
+    return jumpDirect ( 0x071D,prog_071D );
 }
 
 Control prog_071D ()
 {
     at ( "071D" );
-    instruction ( "LD   A,(DE)",0x071E );
+    instruction ( "LD   A,(DE)",e16_hi_lo ( 0x07,0x1E ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_071E );
+    return jumpDirect ( 0x071E,prog_071E );
 }
 
 Control prog_071E ()
 {
     at ( "071E" );
-    instruction ( "CP   B",0x071F );
+    instruction ( "CP   B",e16_hi_lo ( 0x07,0x1F ) );
     u8 a1 = A ;
     u8 a2 = B ;
     u16 a3 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( a2 ) ) ;
@@ -17257,55 +17257,55 @@ Control prog_071E ()
     FlagA = e1_test_bit ( e8_lo ( a6 ),4 );
     FlagP = e1_parity ( e8_lo ( a3 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a3 ),0 ) );
-    return jumpDirect ( prog_071F );
+    return jumpDirect ( 0x071F,prog_071F );
 }
 
 Control prog_071F ()
 {
     at ( "071F" );
-    instruction ( "JP   Z,0728",0x0722 );
+    instruction ( "JP   Z,0728",e16_hi_lo ( 0x07,0x22 ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_0728 );
+        return jumpDirect ( 0x0728,prog_0728 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0722 );
+        return jumpDirect ( 0x0722,prog_0722 );
     }
 }
 
 Control prog_0722 ()
 {
     at ( "0722" );
-    instruction ( "INC  HL",0x0723 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x07,0x23 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_0723 );
+    return jumpDirect ( 0x0723,prog_0723 );
 }
 
 Control prog_0723 ()
 {
     at ( "0723" );
-    instruction ( "INC  DE",0x0724 );
+    instruction ( "INC  DE",e16_hi_lo ( 0x07,0x24 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     D = e8_hi ( a3 );
     E = e8_lo ( a3 );
-    return jumpDirect ( prog_0724 );
+    return jumpDirect ( 0x0724,prog_0724 );
 }
 
 Control prog_0724 ()
 {
     at ( "0724" );
-    instruction ( "DEC  C",0x0725 );
+    instruction ( "DEC  C",e16_hi_lo ( 0x07,0x25 ) );
     u8 a1 = C ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -17317,70 +17317,70 @@ Control prog_0724 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_0725 );
+    return jumpDirect ( 0x0725,prog_0725 );
 }
 
 Control prog_0725 ()
 {
     at ( "0725" );
-    instruction ( "JP   NZ,071D",0x0728 );
+    instruction ( "JP   NZ,071D",e16_hi_lo ( 0x07,0x28 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_071D );
+        return jumpDirect ( 0x071D,prog_071D );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0728 );
+        return jumpDirect ( 0x0728,prog_0728 );
     }
 }
 
 Control prog_0728 ()
 {
     at ( "0728" );
-    instruction ( "LD   A,(HL)",0x0729 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x07,0x29 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_0729 );
+    return jumpDirect ( 0x0729,prog_0729 );
 }
 
 Control prog_0729 ()
 {
     at ( "0729" );
-    instruction ( "LD   (2087),A",0x072C );
+    instruction ( "LD   (2087),A",e16_hi_lo ( 0x07,0x2C ) );
     u8 a1 = A ;
     mem_write ( 0x2087,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_072C );
+    return jumpDirect ( 0x072C,prog_072C );
 }
 
 Control prog_072C ()
 {
     at ( "072C" );
-    instruction ( "LD   H,00",0x072E );
+    instruction ( "LD   H,00",e16_hi_lo ( 0x07,0x2E ) );
     advance ( 7 );
     H = 0x00;
-    return jumpDirect ( prog_072E );
+    return jumpDirect ( 0x072E,prog_072E );
 }
 
 Control prog_072E ()
 {
     at ( "072E" );
-    instruction ( "LD   L,B",0x072F );
+    instruction ( "LD   L,B",e16_hi_lo ( 0x07,0x2F ) );
     u8 a1 = B ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( prog_072F );
+    return jumpDirect ( 0x072F,prog_072F );
 }
 
 Control prog_072F ()
 {
     at ( "072F" );
-    instruction ( "ADD  HL,HL",0x0730 );
+    instruction ( "ADD  HL,HL",e16_hi_lo ( 0x07,0x30 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = H ;
@@ -17390,13 +17390,13 @@ Control prog_072F ()
     H = e8_hi ( e16_drop_hi_bit_of_17 ( a5 ) );
     L = e8_lo ( e16_drop_hi_bit_of_17 ( a5 ) );
     FlagCY = e1_hi_bit_of_17 ( a5 );
-    return jumpDirect ( prog_0730 );
+    return jumpDirect ( 0x0730,prog_0730 );
 }
 
 Control prog_0730 ()
 {
     at ( "0730" );
-    instruction ( "ADD  HL,HL",0x0731 );
+    instruction ( "ADD  HL,HL",e16_hi_lo ( 0x07,0x31 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = H ;
@@ -17406,13 +17406,13 @@ Control prog_0730 ()
     H = e8_hi ( e16_drop_hi_bit_of_17 ( a5 ) );
     L = e8_lo ( e16_drop_hi_bit_of_17 ( a5 ) );
     FlagCY = e1_hi_bit_of_17 ( a5 );
-    return jumpDirect ( prog_0731 );
+    return jumpDirect ( 0x0731,prog_0731 );
 }
 
 Control prog_0731 ()
 {
     at ( "0731" );
-    instruction ( "ADD  HL,HL",0x0732 );
+    instruction ( "ADD  HL,HL",e16_hi_lo ( 0x07,0x32 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = H ;
@@ -17422,13 +17422,13 @@ Control prog_0731 ()
     H = e8_hi ( e16_drop_hi_bit_of_17 ( a5 ) );
     L = e8_lo ( e16_drop_hi_bit_of_17 ( a5 ) );
     FlagCY = e1_hi_bit_of_17 ( a5 );
-    return jumpDirect ( prog_0732 );
+    return jumpDirect ( 0x0732,prog_0732 );
 }
 
 Control prog_0732 ()
 {
     at ( "0732" );
-    instruction ( "ADD  HL,HL",0x0733 );
+    instruction ( "ADD  HL,HL",e16_hi_lo ( 0x07,0x33 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = H ;
@@ -17438,25 +17438,25 @@ Control prog_0732 ()
     H = e8_hi ( e16_drop_hi_bit_of_17 ( a5 ) );
     L = e8_lo ( e16_drop_hi_bit_of_17 ( a5 ) );
     FlagCY = e1_hi_bit_of_17 ( a5 );
-    return jumpDirect ( prog_0733 );
+    return jumpDirect ( 0x0733,prog_0733 );
 }
 
 Control prog_0733 ()
 {
     at ( "0733" );
-    instruction ( "LD   (20F2),HL",0x0736 );
+    instruction ( "LD   (20F2),HL",e16_hi_lo ( 0x07,0x36 ) );
     u8 a1 = L ;
     mem_write ( 0x20F2,a1 );
     u8 a2 = H ;
     mem_write ( 0x20F3,a2 );
     advance ( 16 );
-    return jumpDirect ( prog_0736 );
+    return jumpDirect ( 0x0736,prog_0736 );
 }
 
 Control prog_0736 ()
 {
     at ( "0736" );
-    instruction ( "CALL 0742",0x0739 );
+    instruction ( "CALL 0742",e16_hi_lo ( 0x07,0x39 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -17469,21 +17469,21 @@ Control prog_0736 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0742 );
+    return jumpDirect ( 0x0742,prog_0742 );
 }
 
 Control prog_0739 ()
 {
     at ( "0739" );
-    instruction ( "JP   08F1",0x073C );
+    instruction ( "JP   08F1",e16_hi_lo ( 0x07,0x3C ) );
     advance ( 10 );
-    return jumpDirect ( prog_08F1 );
+    return jumpDirect ( 0x08F1,prog_08F1 );
 }
 
 Control prog_073C ()
 {
     at ( "073C" );
-    instruction ( "CALL 0742",0x073F );
+    instruction ( "CALL 0742",e16_hi_lo ( 0x07,0x3F ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -17496,31 +17496,31 @@ Control prog_073C ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0742 );
+    return jumpDirect ( 0x0742,prog_0742 );
 }
 
 Control prog_073F ()
 {
     at ( "073F" );
-    instruction ( "JP   1439",0x0742 );
+    instruction ( "JP   1439",e16_hi_lo ( 0x07,0x42 ) );
     advance ( 10 );
-    return jumpDirect ( prog_1439 );
+    return jumpDirect ( 0x1439,prog_1439 );
 }
 
 Control prog_0742 ()
 {
     at ( "0742" );
-    instruction ( "LD   HL,2087",0x0745 );
+    instruction ( "LD   HL,2087",e16_hi_lo ( 0x07,0x45 ) );
     advance ( 10 );
     H = 0x20;
     L = 0x87;
-    return jumpDirect ( prog_0745 );
+    return jumpDirect ( 0x0745,prog_0745 );
 }
 
 Control prog_0745 ()
 {
     at ( "0745" );
-    instruction ( "CALL 1A3B",0x0748 );
+    instruction ( "CALL 1A3B",e16_hi_lo ( 0x07,0x48 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -17533,52 +17533,52 @@ Control prog_0745 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1A3B );
+    return jumpDirect ( 0x1A3B,prog_1A3B );
 }
 
 Control prog_0748 ()
 {
     at ( "0748" );
-    instruction ( "JP   1A47",0x074B );
+    instruction ( "JP   1A47",e16_hi_lo ( 0x07,0x4B ) );
     advance ( 10 );
-    return jumpDirect ( prog_1A47 );
+    return jumpDirect ( 0x1A47,prog_1A47 );
 }
 
 Control prog_074B ()
 {
     at ( "074B" );
-    instruction ( "LD   B,10",0x074D );
+    instruction ( "LD   B,10",e16_hi_lo ( 0x07,0x4D ) );
     advance ( 7 );
     B = 0x10;
-    return jumpDirect ( prog_074D );
+    return jumpDirect ( 0x074D,prog_074D );
 }
 
 Control prog_074D ()
 {
     at ( "074D" );
-    instruction ( "LD   HL,2098",0x0750 );
+    instruction ( "LD   HL,2098",e16_hi_lo ( 0x07,0x50 ) );
     advance ( 10 );
     H = 0x20;
     L = 0x98;
-    return jumpDirect ( prog_0750 );
+    return jumpDirect ( 0x0750,prog_0750 );
 }
 
 Control prog_0750 ()
 {
     at ( "0750" );
-    instruction ( "LD   A,(HL)",0x0751 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x07,0x51 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_0751 );
+    return jumpDirect ( 0x0751,prog_0751 );
 }
 
 Control prog_0751 ()
 {
     at ( "0751" );
-    instruction ( "OR   B",0x0752 );
+    instruction ( "OR   B",e16_hi_lo ( 0x07,0x52 ) );
     u8 a1 = B ;
     u8 a2 = A ;
     u8 a3 = e8_or ( a1,a2 ) ;
@@ -17589,25 +17589,25 @@ Control prog_0751 ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0752 );
+    return jumpDirect ( 0x0752,prog_0752 );
 }
 
 Control prog_0752 ()
 {
     at ( "0752" );
-    instruction ( "LD   (HL),A",0x0753 );
+    instruction ( "LD   (HL),A",e16_hi_lo ( 0x07,0x53 ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_0753 );
+    return jumpDirect ( 0x0753,prog_0753 );
 }
 
 Control prog_0753 ()
 {
     at ( "0753" );
-    instruction ( "CALL 1770",0x0756 );
+    instruction ( "CALL 1770",e16_hi_lo ( 0x07,0x56 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -17620,99 +17620,99 @@ Control prog_0753 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1770 );
+    return jumpDirect ( 0x1770,prog_1770 );
 }
 
 Control prog_0756 ()
 {
     at ( "0756" );
-    instruction ( "LD   HL,1D7C",0x0759 );
+    instruction ( "LD   HL,1D7C",e16_hi_lo ( 0x07,0x59 ) );
     advance ( 10 );
     H = 0x1D;
     L = 0x7C;
-    return jumpDirect ( prog_0759 );
+    return jumpDirect ( 0x0759,prog_0759 );
 }
 
 Control prog_0759 ()
 {
     at ( "0759" );
-    instruction ( "LD   (2087),HL",0x075C );
+    instruction ( "LD   (2087),HL",e16_hi_lo ( 0x07,0x5C ) );
     u8 a1 = L ;
     mem_write ( 0x2087,a1 );
     u8 a2 = H ;
     mem_write ( 0x2088,a2 );
     advance ( 16 );
-    return jumpDirect ( prog_075C );
+    return jumpDirect ( 0x075C,prog_075C );
 }
 
 Control prog_075C ()
 {
     at ( "075C" );
-    instruction ( "JP   073C",0x075F );
+    instruction ( "JP   073C",e16_hi_lo ( 0x07,0x5F ) );
     advance ( 10 );
-    return jumpDirect ( prog_073C );
+    return jumpDirect ( 0x073C,prog_073C );
 }
 
 Control prog_075F ()
 {
     at ( "075F" );
-    instruction ( "LD   DE,1B83",0x0762 );
+    instruction ( "LD   DE,1B83",e16_hi_lo ( 0x07,0x62 ) );
     advance ( 10 );
     D = 0x1B;
     E = 0x83;
-    return jumpDirect ( prog_0762 );
+    return jumpDirect ( 0x0762,prog_0762 );
 }
 
 Control prog_0762 ()
 {
     at ( "0762" );
-    instruction ( "JP   1A32",0x0765 );
+    instruction ( "JP   1A32",e16_hi_lo ( 0x07,0x65 ) );
     advance ( 10 );
-    return jumpDirect ( prog_1A32 );
+    return jumpDirect ( 0x1A32,prog_1A32 );
 }
 
 Control prog_0765 ()
 {
     at ( "0765" );
-    instruction ( "LD   A,01",0x0767 );
+    instruction ( "LD   A,01",e16_hi_lo ( 0x07,0x67 ) );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( prog_0767 );
+    return jumpDirect ( 0x0767,prog_0767 );
 }
 
 Control prog_0767 ()
 {
     at ( "0767" );
-    instruction ( "LD   (2093),A",0x076A );
+    instruction ( "LD   (2093),A",e16_hi_lo ( 0x07,0x6A ) );
     u8 a1 = A ;
     mem_write ( 0x2093,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_076A );
+    return jumpDirect ( 0x076A,prog_076A );
 }
 
 Control prog_076A ()
 {
     at ( "076A" );
-    instruction ( "LD   SP,2400",0x076D );
+    instruction ( "LD   SP,2400",e16_hi_lo ( 0x07,0x6D ) );
     advance ( 10 );
     SPH = 0x24;
     SPL = 0x00;
-    return jumpDirect ( prog_076D );
+    return jumpDirect ( 0x076D,prog_076D );
 }
 
 Control prog_076D ()
 {
     at ( "076D" );
-    instruction ( "EI",0x076E );
+    instruction ( "EI",e16_hi_lo ( 0x07,0x6E ) );
     enable_interrupts (  );
     advance ( 4 );
-    return jumpDirect ( prog_076E );
+    return jumpDirect ( 0x076E,prog_076E );
 }
 
 Control prog_076E ()
 {
     at ( "076E" );
-    instruction ( "CALL 1979",0x0771 );
+    instruction ( "CALL 1979",e16_hi_lo ( 0x07,0x71 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -17725,13 +17725,13 @@ Control prog_076E ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1979 );
+    return jumpDirect ( 0x1979,prog_1979 );
 }
 
 Control prog_0771 ()
 {
     at ( "0771" );
-    instruction ( "CALL 09D6",0x0774 );
+    instruction ( "CALL 09D6",e16_hi_lo ( 0x07,0x74 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -17744,42 +17744,42 @@ Control prog_0771 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_09D6 );
+    return jumpDirect ( 0x09D6,prog_09D6 );
 }
 
 Control prog_0774 ()
 {
     at ( "0774" );
-    instruction ( "LD   HL,3013",0x0777 );
+    instruction ( "LD   HL,3013",e16_hi_lo ( 0x07,0x77 ) );
     advance ( 10 );
     H = 0x30;
     L = 0x13;
-    return jumpDirect ( prog_0777 );
+    return jumpDirect ( 0x0777,prog_0777 );
 }
 
 Control prog_0777 ()
 {
     at ( "0777" );
-    instruction ( "LD   DE,1FF3",0x077A );
+    instruction ( "LD   DE,1FF3",e16_hi_lo ( 0x07,0x7A ) );
     advance ( 10 );
     D = 0x1F;
     E = 0xF3;
-    return jumpDirect ( prog_077A );
+    return jumpDirect ( 0x077A,prog_077A );
 }
 
 Control prog_077A ()
 {
     at ( "077A" );
-    instruction ( "LD   C,04",0x077C );
+    instruction ( "LD   C,04",e16_hi_lo ( 0x07,0x7C ) );
     advance ( 7 );
     C = 0x04;
-    return jumpDirect ( prog_077C );
+    return jumpDirect ( 0x077C,prog_077C );
 }
 
 Control prog_077C ()
 {
     at ( "077C" );
-    instruction ( "CALL 08F3",0x077F );
+    instruction ( "CALL 08F3",e16_hi_lo ( 0x07,0x7F ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -17792,23 +17792,23 @@ Control prog_077C ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_08F3 );
+    return jumpDirect ( 0x08F3,prog_08F3 );
 }
 
 Control prog_077F ()
 {
     at ( "077F" );
-    instruction ( "LD   A,(20EB)",0x0782 );
+    instruction ( "LD   A,(20EB)",e16_hi_lo ( 0x07,0x82 ) );
     u8 a1 = e8_read_mem ( 0x20EB ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0782 );
+    return jumpDirect ( 0x0782,prog_0782 );
 }
 
 Control prog_0782 ()
 {
     at ( "0782" );
-    instruction ( "DEC  A",0x0783 );
+    instruction ( "DEC  A",e16_hi_lo ( 0x07,0x83 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -17820,58 +17820,58 @@ Control prog_0782 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_0783 );
+    return jumpDirect ( 0x0783,prog_0783 );
 }
 
 Control prog_0783 ()
 {
     at ( "0783" );
-    instruction ( "LD   HL,2810",0x0786 );
+    instruction ( "LD   HL,2810",e16_hi_lo ( 0x07,0x86 ) );
     advance ( 10 );
     H = 0x28;
     L = 0x10;
-    return jumpDirect ( prog_0786 );
+    return jumpDirect ( 0x0786,prog_0786 );
 }
 
 Control prog_0786 ()
 {
     at ( "0786" );
-    instruction ( "LD   C,14",0x0788 );
+    instruction ( "LD   C,14",e16_hi_lo ( 0x07,0x88 ) );
     advance ( 7 );
     C = 0x14;
-    return jumpDirect ( prog_0788 );
+    return jumpDirect ( 0x0788,prog_0788 );
 }
 
 Control prog_0788 ()
 {
     at ( "0788" );
-    instruction ( "JP   NZ,0857",0x078B );
+    instruction ( "JP   NZ,0857",e16_hi_lo ( 0x07,0x8B ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_0857 );
+        return jumpDirect ( 0x0857,prog_0857 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_078B );
+        return jumpDirect ( 0x078B,prog_078B );
     }
 }
 
 Control prog_078B ()
 {
     at ( "078B" );
-    instruction ( "LD   DE,1ACF",0x078E );
+    instruction ( "LD   DE,1ACF",e16_hi_lo ( 0x07,0x8E ) );
     advance ( 10 );
     D = 0x1A;
     E = 0xCF;
-    return jumpDirect ( prog_078E );
+    return jumpDirect ( 0x078E,prog_078E );
 }
 
 Control prog_078E ()
 {
     at ( "078E" );
-    instruction ( "CALL 08F3",0x0791 );
+    instruction ( "CALL 08F3",e16_hi_lo ( 0x07,0x91 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -17884,22 +17884,22 @@ Control prog_078E ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_08F3 );
+    return jumpDirect ( 0x08F3,prog_08F3 );
 }
 
 Control prog_0791 ()
 {
     at ( "0791" );
-    instruction ( "IN   01",0x0793 );
+    instruction ( "IN   01",e16_hi_lo ( 0x07,0x93 ) );
     advance ( 10 );
     A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_flip ( e1_is_pressed ( "coin entry" ) ) ),1,e1_is_pressed ( "player2 start" ) ),2,e1_is_pressed ( "player1 start" ) ),4,e1_is_pressed ( "player1 shoot" ) ),5,e1_is_pressed ( "player1 left" ) ),6,e1_is_pressed ( "player1 right" ) );
-    return jumpDirect ( prog_0793 );
+    return jumpDirect ( 0x0793,prog_0793 );
 }
 
 Control prog_0793 ()
 {
     at ( "0793" );
-    instruction ( "AND  04",0x0795 );
+    instruction ( "AND  04",e16_hi_lo ( 0x07,0x95 ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( 0x04,a1 ) ;
     u8 a3 = e8_or ( 0x04,a1 ) ;
@@ -17910,38 +17910,38 @@ Control prog_0793 ()
     FlagA = e1_test_bit ( a3,3 );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0795 );
+    return jumpDirect ( 0x0795,prog_0795 );
 }
 
 Control prog_0795 ()
 {
     at ( "0795" );
-    instruction ( "JP   Z,077F",0x0798 );
+    instruction ( "JP   Z,077F",e16_hi_lo ( 0x07,0x98 ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_077F );
+        return jumpDirect ( 0x077F,prog_077F );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0798 );
+        return jumpDirect ( 0x0798,prog_0798 );
     }
 }
 
 Control prog_0798 ()
 {
     at ( "0798" );
-    instruction ( "LD   B,99",0x079A );
+    instruction ( "LD   B,99",e16_hi_lo ( 0x07,0x9A ) );
     advance ( 7 );
     B = 0x99;
-    return jumpDirect ( prog_079A );
+    return jumpDirect ( 0x079A,prog_079A );
 }
 
 Control prog_079A ()
 {
     at ( "079A" );
-    instruction ( "XOR  A",0x079B );
+    instruction ( "XOR  A",e16_hi_lo ( 0x07,0x9B ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -17952,33 +17952,33 @@ Control prog_079A ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_079B );
+    return jumpDirect ( 0x079B,prog_079B );
 }
 
 Control prog_079B ()
 {
     at ( "079B" );
-    instruction ( "LD   (20CE),A",0x079E );
+    instruction ( "LD   (20CE),A",e16_hi_lo ( 0x07,0x9E ) );
     u8 a1 = A ;
     mem_write ( 0x20CE,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_079E );
+    return jumpDirect ( 0x079E,prog_079E );
 }
 
 Control prog_079E ()
 {
     at ( "079E" );
-    instruction ( "LD   A,(20EB)",0x07A1 );
+    instruction ( "LD   A,(20EB)",e16_hi_lo ( 0x07,0xA1 ) );
     u8 a1 = e8_read_mem ( 0x20EB ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_07A1 );
+    return jumpDirect ( 0x07A1,prog_07A1 );
 }
 
 Control prog_07A1 ()
 {
     at ( "07A1" );
-    instruction ( "ADD  B",0x07A2 );
+    instruction ( "ADD  B",e16_hi_lo ( 0x07,0xA2 ) );
     u8 a1 = B ;
     u8 a2 = A ;
     u16 a3 = e16_add_with_carry ( e1_false (  ),a1,a2 ) ;
@@ -17992,13 +17992,13 @@ Control prog_07A1 ()
     FlagA = e1_test_bit ( e8_lo ( a6 ),4 );
     FlagP = e1_parity ( e8_lo ( a3 ) );
     FlagCY = e1_test_bit ( e8_hi ( a3 ),0 );
-    return jumpDirect ( prog_07A2 );
+    return jumpDirect ( 0x07A2,prog_07A2 );
 }
 
 Control prog_07A2 ()
 {
     at ( "07A2" );
-    instruction ( "DAA",0x07A3 );
+    instruction ( "DAA",e16_hi_lo ( 0x07,0xA3 ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( a1,0x0F ) ;
     u16 a3 = e16_add_with_carry ( e1_false (  ),a2,0x06 ) ;
@@ -18013,23 +18013,23 @@ Control prog_07A2 ()
     FlagA = e1_test_bit ( e8_ite ( e1_or_bit ( e1_and_bit ( e1_or_bit ( e1_test_bit ( a2,1 ),e1_test_bit ( a2,2 ) ),e1_test_bit ( a2,3 ) ),FlagA ),e8_lo ( a3 ),a2 ),4 );
     FlagP = e1_parity ( a7 );
     FlagCY = e1_or_bit ( e1_test_bit ( e8_ite ( e1_or_bit ( e1_and_bit ( e1_or_bit ( e1_test_bit ( e8_lo ( a4 ),1 ),e1_test_bit ( e8_lo ( a4 ),2 ) ),e1_test_bit ( e8_lo ( a4 ),3 ) ),FlagCY ),e8_lo ( a5 ),e8_lo ( a4 ) ),4 ),FlagCY );
-    return jumpDirect ( prog_07A3 );
+    return jumpDirect ( 0x07A3,prog_07A3 );
 }
 
 Control prog_07A3 ()
 {
     at ( "07A3" );
-    instruction ( "LD   (20EB),A",0x07A6 );
+    instruction ( "LD   (20EB),A",e16_hi_lo ( 0x07,0xA6 ) );
     u8 a1 = A ;
     mem_write ( 0x20EB,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_07A6 );
+    return jumpDirect ( 0x07A6,prog_07A6 );
 }
 
 Control prog_07A6 ()
 {
     at ( "07A6" );
-    instruction ( "CALL 1947",0x07A9 );
+    instruction ( "CALL 1947",e16_hi_lo ( 0x07,0xA9 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -18042,47 +18042,47 @@ Control prog_07A6 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1947 );
+    return jumpDirect ( 0x1947,prog_1947 );
 }
 
 Control prog_07A9 ()
 {
     at ( "07A9" );
-    instruction ( "LD   HL,0000",0x07AC );
+    instruction ( "LD   HL,0000",e16_hi_lo ( 0x07,0xAC ) );
     advance ( 10 );
     H = 0x00;
     L = 0x00;
-    return jumpDirect ( prog_07AC );
+    return jumpDirect ( 0x07AC,prog_07AC );
 }
 
 Control prog_07AC ()
 {
     at ( "07AC" );
-    instruction ( "LD   (20F8),HL",0x07AF );
+    instruction ( "LD   (20F8),HL",e16_hi_lo ( 0x07,0xAF ) );
     u8 a1 = L ;
     mem_write ( 0x20F8,a1 );
     u8 a2 = H ;
     mem_write ( 0x20F9,a2 );
     advance ( 16 );
-    return jumpDirect ( prog_07AF );
+    return jumpDirect ( 0x07AF,prog_07AF );
 }
 
 Control prog_07AF ()
 {
     at ( "07AF" );
-    instruction ( "LD   (20FC),HL",0x07B2 );
+    instruction ( "LD   (20FC),HL",e16_hi_lo ( 0x07,0xB2 ) );
     u8 a1 = L ;
     mem_write ( 0x20FC,a1 );
     u8 a2 = H ;
     mem_write ( 0x20FD,a2 );
     advance ( 16 );
-    return jumpDirect ( prog_07B2 );
+    return jumpDirect ( 0x07B2,prog_07B2 );
 }
 
 Control prog_07B2 ()
 {
     at ( "07B2" );
-    instruction ( "CALL 1925",0x07B5 );
+    instruction ( "CALL 1925",e16_hi_lo ( 0x07,0xB5 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -18095,13 +18095,13 @@ Control prog_07B2 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1925 );
+    return jumpDirect ( 0x1925,prog_1925 );
 }
 
 Control prog_07B5 ()
 {
     at ( "07B5" );
-    instruction ( "CALL 192B",0x07B8 );
+    instruction ( "CALL 192B",e16_hi_lo ( 0x07,0xB8 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -18114,13 +18114,13 @@ Control prog_07B5 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_192B );
+    return jumpDirect ( 0x192B,prog_192B );
 }
 
 Control prog_07B8 ()
 {
     at ( "07B8" );
-    instruction ( "CALL 19D7",0x07BB );
+    instruction ( "CALL 19D7",e16_hi_lo ( 0x07,0xBB ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -18133,67 +18133,67 @@ Control prog_07B8 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_19D7 );
+    return jumpDirect ( 0x19D7,prog_19D7 );
 }
 
 Control prog_07BB ()
 {
     at ( "07BB" );
-    instruction ( "LD   HL,0101",0x07BE );
+    instruction ( "LD   HL,0101",e16_hi_lo ( 0x07,0xBE ) );
     advance ( 10 );
     H = 0x01;
     L = 0x01;
-    return jumpDirect ( prog_07BE );
+    return jumpDirect ( 0x07BE,prog_07BE );
 }
 
 Control prog_07BE ()
 {
     at ( "07BE" );
-    instruction ( "LD   A,H",0x07BF );
+    instruction ( "LD   A,H",e16_hi_lo ( 0x07,0xBF ) );
     u8 a1 = H ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_07BF );
+    return jumpDirect ( 0x07BF,prog_07BF );
 }
 
 Control prog_07BF ()
 {
     at ( "07BF" );
-    instruction ( "LD   (20EF),A",0x07C2 );
+    instruction ( "LD   (20EF),A",e16_hi_lo ( 0x07,0xC2 ) );
     u8 a1 = A ;
     mem_write ( 0x20EF,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_07C2 );
+    return jumpDirect ( 0x07C2,prog_07C2 );
 }
 
 Control prog_07C2 ()
 {
     at ( "07C2" );
-    instruction ( "LD   (20E7),HL",0x07C5 );
+    instruction ( "LD   (20E7),HL",e16_hi_lo ( 0x07,0xC5 ) );
     u8 a1 = L ;
     mem_write ( 0x20E7,a1 );
     u8 a2 = H ;
     mem_write ( 0x20E8,a2 );
     advance ( 16 );
-    return jumpDirect ( prog_07C5 );
+    return jumpDirect ( 0x07C5,prog_07C5 );
 }
 
 Control prog_07C5 ()
 {
     at ( "07C5" );
-    instruction ( "LD   (20E5),HL",0x07C8 );
+    instruction ( "LD   (20E5),HL",e16_hi_lo ( 0x07,0xC8 ) );
     u8 a1 = L ;
     mem_write ( 0x20E5,a1 );
     u8 a2 = H ;
     mem_write ( 0x20E6,a2 );
     advance ( 16 );
-    return jumpDirect ( prog_07C8 );
+    return jumpDirect ( 0x07C8,prog_07C8 );
 }
 
 Control prog_07C8 ()
 {
     at ( "07C8" );
-    instruction ( "CALL 1956",0x07CB );
+    instruction ( "CALL 1956",e16_hi_lo ( 0x07,0xCB ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -18206,13 +18206,13 @@ Control prog_07C8 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1956 );
+    return jumpDirect ( 0x1956,prog_1956 );
 }
 
 Control prog_07CB ()
 {
     at ( "07CB" );
-    instruction ( "CALL 01EF",0x07CE );
+    instruction ( "CALL 01EF",e16_hi_lo ( 0x07,0xCE ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -18225,13 +18225,13 @@ Control prog_07CB ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_01EF );
+    return jumpDirect ( 0x01EF,prog_01EF );
 }
 
 Control prog_07CE ()
 {
     at ( "07CE" );
-    instruction ( "CALL 01F5",0x07D1 );
+    instruction ( "CALL 01F5",e16_hi_lo ( 0x07,0xD1 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -18244,13 +18244,13 @@ Control prog_07CE ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_01F5 );
+    return jumpDirect ( 0x01F5,prog_01F5 );
 }
 
 Control prog_07D1 ()
 {
     at ( "07D1" );
-    instruction ( "CALL 08D1",0x07D4 );
+    instruction ( "CALL 08D1",e16_hi_lo ( 0x07,0xD4 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -18263,33 +18263,33 @@ Control prog_07D1 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_08D1 );
+    return jumpDirect ( 0x08D1,prog_08D1 );
 }
 
 Control prog_07D4 ()
 {
     at ( "07D4" );
-    instruction ( "LD   (21FF),A",0x07D7 );
+    instruction ( "LD   (21FF),A",e16_hi_lo ( 0x07,0xD7 ) );
     u8 a1 = A ;
     mem_write ( 0x21FF,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_07D7 );
+    return jumpDirect ( 0x07D7,prog_07D7 );
 }
 
 Control prog_07D7 ()
 {
     at ( "07D7" );
-    instruction ( "LD   (22FF),A",0x07DA );
+    instruction ( "LD   (22FF),A",e16_hi_lo ( 0x07,0xDA ) );
     u8 a1 = A ;
     mem_write ( 0x22FF,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_07DA );
+    return jumpDirect ( 0x07DA,prog_07DA );
 }
 
 Control prog_07DA ()
 {
     at ( "07DA" );
-    instruction ( "CALL 00D7",0x07DD );
+    instruction ( "CALL 00D7",e16_hi_lo ( 0x07,0xDD ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -18302,13 +18302,13 @@ Control prog_07DA ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_00D7 );
+    return jumpDirect ( 0x00D7,prog_00D7 );
 }
 
 Control prog_07DD ()
 {
     at ( "07DD" );
-    instruction ( "XOR  A",0x07DE );
+    instruction ( "XOR  A",e16_hi_lo ( 0x07,0xDE ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -18319,33 +18319,33 @@ Control prog_07DD ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_07DE );
+    return jumpDirect ( 0x07DE,prog_07DE );
 }
 
 Control prog_07DE ()
 {
     at ( "07DE" );
-    instruction ( "LD   (21FE),A",0x07E1 );
+    instruction ( "LD   (21FE),A",e16_hi_lo ( 0x07,0xE1 ) );
     u8 a1 = A ;
     mem_write ( 0x21FE,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_07E1 );
+    return jumpDirect ( 0x07E1,prog_07E1 );
 }
 
 Control prog_07E1 ()
 {
     at ( "07E1" );
-    instruction ( "LD   (22FE),A",0x07E4 );
+    instruction ( "LD   (22FE),A",e16_hi_lo ( 0x07,0xE4 ) );
     u8 a1 = A ;
     mem_write ( 0x22FE,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_07E4 );
+    return jumpDirect ( 0x07E4,prog_07E4 );
 }
 
 Control prog_07E4 ()
 {
     at ( "07E4" );
-    instruction ( "CALL 01C0",0x07E7 );
+    instruction ( "CALL 01C0",e16_hi_lo ( 0x07,0xE7 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -18358,13 +18358,13 @@ Control prog_07E4 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_01C0 );
+    return jumpDirect ( 0x01C0,prog_01C0 );
 }
 
 Control prog_07E7 ()
 {
     at ( "07E7" );
-    instruction ( "CALL 1904",0x07EA );
+    instruction ( "CALL 1904",e16_hi_lo ( 0x07,0xEA ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -18377,47 +18377,47 @@ Control prog_07E7 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1904 );
+    return jumpDirect ( 0x1904,prog_1904 );
 }
 
 Control prog_07EA ()
 {
     at ( "07EA" );
-    instruction ( "LD   HL,3878",0x07ED );
+    instruction ( "LD   HL,3878",e16_hi_lo ( 0x07,0xED ) );
     advance ( 10 );
     H = 0x38;
     L = 0x78;
-    return jumpDirect ( prog_07ED );
+    return jumpDirect ( 0x07ED,prog_07ED );
 }
 
 Control prog_07ED ()
 {
     at ( "07ED" );
-    instruction ( "LD   (21FC),HL",0x07F0 );
+    instruction ( "LD   (21FC),HL",e16_hi_lo ( 0x07,0xF0 ) );
     u8 a1 = L ;
     mem_write ( 0x21FC,a1 );
     u8 a2 = H ;
     mem_write ( 0x21FD,a2 );
     advance ( 16 );
-    return jumpDirect ( prog_07F0 );
+    return jumpDirect ( 0x07F0,prog_07F0 );
 }
 
 Control prog_07F0 ()
 {
     at ( "07F0" );
-    instruction ( "LD   (22FC),HL",0x07F3 );
+    instruction ( "LD   (22FC),HL",e16_hi_lo ( 0x07,0xF3 ) );
     u8 a1 = L ;
     mem_write ( 0x22FC,a1 );
     u8 a2 = H ;
     mem_write ( 0x22FD,a2 );
     advance ( 16 );
-    return jumpDirect ( prog_07F3 );
+    return jumpDirect ( 0x07F3,prog_07F3 );
 }
 
 Control prog_07F3 ()
 {
     at ( "07F3" );
-    instruction ( "CALL 01E4",0x07F6 );
+    instruction ( "CALL 01E4",e16_hi_lo ( 0x07,0xF6 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -18430,13 +18430,13 @@ Control prog_07F3 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_01E4 );
+    return jumpDirect ( 0x01E4,prog_01E4 );
 }
 
 Control prog_07F6 ()
 {
     at ( "07F6" );
-    instruction ( "CALL 1A7F",0x07F9 );
+    instruction ( "CALL 1A7F",e16_hi_lo ( 0x07,0xF9 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -18449,13 +18449,13 @@ Control prog_07F6 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1A7F );
+    return jumpDirect ( 0x1A7F,prog_1A7F );
 }
 
 Control prog_07F9 ()
 {
     at ( "07F9" );
-    instruction ( "CALL 088D",0x07FC );
+    instruction ( "CALL 088D",e16_hi_lo ( 0x07,0xFC ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -18468,13 +18468,13 @@ Control prog_07F9 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_088D );
+    return jumpDirect ( 0x088D,prog_088D );
 }
 
 Control prog_07FC ()
 {
     at ( "07FC" );
-    instruction ( "CALL 09D6",0x07FF );
+    instruction ( "CALL 09D6",e16_hi_lo ( 0x07,0xFF ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -18487,21 +18487,21 @@ Control prog_07FC ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_09D6 );
+    return jumpDirect ( 0x09D6,prog_09D6 );
 }
 
 Control prog_07FF ()
 {
     at ( "07FF" );
-    instruction ( "NOP",0x0800 );
+    instruction ( "NOP",e16_hi_lo ( 0x08,0x00 ) );
     advance ( 4 );
-    return jumpDirect ( prog_0800 );
+    return jumpDirect ( 0x0800,prog_0800 );
 }
 
 Control prog_0800 ()
 {
     at ( "0800" );
-    instruction ( "XOR  A",0x0801 );
+    instruction ( "XOR  A",e16_hi_lo ( 0x08,0x01 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -18512,23 +18512,23 @@ Control prog_0800 ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0801 );
+    return jumpDirect ( 0x0801,prog_0801 );
 }
 
 Control prog_0801 ()
 {
     at ( "0801" );
-    instruction ( "LD   (20C1),A",0x0804 );
+    instruction ( "LD   (20C1),A",e16_hi_lo ( 0x08,0x04 ) );
     u8 a1 = A ;
     mem_write ( 0x20C1,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0804 );
+    return jumpDirect ( 0x0804,prog_0804 );
 }
 
 Control prog_0804 ()
 {
     at ( "0804" );
-    instruction ( "CALL 01CF",0x0807 );
+    instruction ( "CALL 01CF",e16_hi_lo ( 0x08,0x07 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -18541,50 +18541,50 @@ Control prog_0804 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_01CF );
+    return jumpDirect ( 0x01CF,prog_01CF );
 }
 
 Control prog_0807 ()
 {
     at ( "0807" );
-    instruction ( "LD   A,(2067)",0x080A );
+    instruction ( "LD   A,(2067)",e16_hi_lo ( 0x08,0x0A ) );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_080A );
+    return jumpDirect ( 0x080A,prog_080A );
 }
 
 Control prog_080A ()
 {
     at ( "080A" );
-    instruction ( "RRCA",0x080B );
+    instruction ( "RRCA",e16_hi_lo ( 0x08,0x0B ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftR ( a1,0x01 ),7,e1_test_bit ( a1,0 ) );
     FlagCY = e1_test_bit ( a1,0 );
-    return jumpDirect ( prog_080B );
+    return jumpDirect ( 0x080B,prog_080B );
 }
 
 Control prog_080B ()
 {
     at ( "080B" );
-    instruction ( "JP   CY,0872",0x080E );
+    instruction ( "JP   CY,0872",e16_hi_lo ( 0x08,0x0E ) );
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( prog_0872 );
+        return jumpDirect ( 0x0872,prog_0872 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_080E );
+        return jumpDirect ( 0x080E,prog_080E );
     }
 }
 
 Control prog_080E ()
 {
     at ( "080E" );
-    instruction ( "CALL 0213",0x0811 );
+    instruction ( "CALL 0213",e16_hi_lo ( 0x08,0x11 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -18597,13 +18597,13 @@ Control prog_080E ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0213 );
+    return jumpDirect ( 0x0213,prog_0213 );
 }
 
 Control prog_0811 ()
 {
     at ( "0811" );
-    instruction ( "CALL 01CF",0x0814 );
+    instruction ( "CALL 01CF",e16_hi_lo ( 0x08,0x14 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -18616,13 +18616,13 @@ Control prog_0811 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_01CF );
+    return jumpDirect ( 0x01CF,prog_01CF );
 }
 
 Control prog_0814 ()
 {
     at ( "0814" );
-    instruction ( "CALL 00B1",0x0817 );
+    instruction ( "CALL 00B1",e16_hi_lo ( 0x08,0x17 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -18635,13 +18635,13 @@ Control prog_0814 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_00B1 );
+    return jumpDirect ( 0x00B1,prog_00B1 );
 }
 
 Control prog_0817 ()
 {
     at ( "0817" );
-    instruction ( "CALL 19D1",0x081A );
+    instruction ( "CALL 19D1",e16_hi_lo ( 0x08,0x1A ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -18654,22 +18654,22 @@ Control prog_0817 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_19D1 );
+    return jumpDirect ( 0x19D1,prog_19D1 );
 }
 
 Control prog_081A ()
 {
     at ( "081A" );
-    instruction ( "LD   B,20",0x081C );
+    instruction ( "LD   B,20",e16_hi_lo ( 0x08,0x1C ) );
     advance ( 7 );
     B = 0x20;
-    return jumpDirect ( prog_081C );
+    return jumpDirect ( 0x081C,prog_081C );
 }
 
 Control prog_081C ()
 {
     at ( "081C" );
-    instruction ( "CALL 18FA",0x081F );
+    instruction ( "CALL 18FA",e16_hi_lo ( 0x08,0x1F ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -18682,13 +18682,13 @@ Control prog_081C ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_18FA );
+    return jumpDirect ( 0x18FA,prog_18FA );
 }
 
 Control prog_081F ()
 {
     at ( "081F" );
-    instruction ( "CALL 1618",0x0822 );
+    instruction ( "CALL 1618",e16_hi_lo ( 0x08,0x22 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -18701,13 +18701,13 @@ Control prog_081F ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1618 );
+    return jumpDirect ( 0x1618,prog_1618 );
 }
 
 Control prog_0822 ()
 {
     at ( "0822" );
-    instruction ( "CALL 190A",0x0825 );
+    instruction ( "CALL 190A",e16_hi_lo ( 0x08,0x25 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -18720,13 +18720,13 @@ Control prog_0822 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_190A );
+    return jumpDirect ( 0x190A,prog_190A );
 }
 
 Control prog_0825 ()
 {
     at ( "0825" );
-    instruction ( "CALL 15F3",0x0828 );
+    instruction ( "CALL 15F3",e16_hi_lo ( 0x08,0x28 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -18739,13 +18739,13 @@ Control prog_0825 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_15F3 );
+    return jumpDirect ( 0x15F3,prog_15F3 );
 }
 
 Control prog_0828 ()
 {
     at ( "0828" );
-    instruction ( "CALL 0988",0x082B );
+    instruction ( "CALL 0988",e16_hi_lo ( 0x08,0x2B ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -18758,23 +18758,23 @@ Control prog_0828 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0988 );
+    return jumpDirect ( 0x0988,prog_0988 );
 }
 
 Control prog_082B ()
 {
     at ( "082B" );
-    instruction ( "LD   A,(2082)",0x082E );
+    instruction ( "LD   A,(2082)",e16_hi_lo ( 0x08,0x2E ) );
     u8 a1 = e8_read_mem ( 0x2082 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_082E );
+    return jumpDirect ( 0x082E,prog_082E );
 }
 
 Control prog_082E ()
 {
     at ( "082E" );
-    instruction ( "AND  A",0x082F );
+    instruction ( "AND  A",e16_hi_lo ( 0x08,0x2F ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -18786,29 +18786,29 @@ Control prog_082E ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_082F );
+    return jumpDirect ( 0x082F,prog_082F );
 }
 
 Control prog_082F ()
 {
     at ( "082F" );
-    instruction ( "JP   Z,09EF",0x0832 );
+    instruction ( "JP   Z,09EF",e16_hi_lo ( 0x08,0x32 ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_09EF );
+        return jumpDirect ( 0x09EF,prog_09EF );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0832 );
+        return jumpDirect ( 0x0832,prog_0832 );
     }
 }
 
 Control prog_0832 ()
 {
     at ( "0832" );
-    instruction ( "CALL 170E",0x0835 );
+    instruction ( "CALL 170E",e16_hi_lo ( 0x08,0x35 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -18821,13 +18821,13 @@ Control prog_0832 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_170E );
+    return jumpDirect ( 0x170E,prog_170E );
 }
 
 Control prog_0835 ()
 {
     at ( "0835" );
-    instruction ( "CALL 0935",0x0838 );
+    instruction ( "CALL 0935",e16_hi_lo ( 0x08,0x38 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -18840,13 +18840,13 @@ Control prog_0835 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0935 );
+    return jumpDirect ( 0x0935,prog_0935 );
 }
 
 Control prog_0838 ()
 {
     at ( "0838" );
-    instruction ( "CALL 08D8",0x083B );
+    instruction ( "CALL 08D8",e16_hi_lo ( 0x08,0x3B ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -18859,13 +18859,13 @@ Control prog_0838 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_08D8 );
+    return jumpDirect ( 0x08D8,prog_08D8 );
 }
 
 Control prog_083B ()
 {
     at ( "083B" );
-    instruction ( "CALL 172C",0x083E );
+    instruction ( "CALL 172C",e16_hi_lo ( 0x08,0x3E ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -18878,13 +18878,13 @@ Control prog_083B ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_172C );
+    return jumpDirect ( 0x172C,prog_172C );
 }
 
 Control prog_083E ()
 {
     at ( "083E" );
-    instruction ( "CALL 0A59",0x0841 );
+    instruction ( "CALL 0A59",e16_hi_lo ( 0x08,0x41 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -18897,38 +18897,38 @@ Control prog_083E ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0A59 );
+    return jumpDirect ( 0x0A59,prog_0A59 );
 }
 
 Control prog_0841 ()
 {
     at ( "0841" );
-    instruction ( "JP   Z,0849",0x0844 );
+    instruction ( "JP   Z,0849",e16_hi_lo ( 0x08,0x44 ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_0849 );
+        return jumpDirect ( 0x0849,prog_0849 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0844 );
+        return jumpDirect ( 0x0844,prog_0844 );
     }
 }
 
 Control prog_0844 ()
 {
     at ( "0844" );
-    instruction ( "LD   B,04",0x0846 );
+    instruction ( "LD   B,04",e16_hi_lo ( 0x08,0x46 ) );
     advance ( 7 );
     B = 0x04;
-    return jumpDirect ( prog_0846 );
+    return jumpDirect ( 0x0846,prog_0846 );
 }
 
 Control prog_0846 ()
 {
     at ( "0846" );
-    instruction ( "CALL 18FA",0x0849 );
+    instruction ( "CALL 18FA",e16_hi_lo ( 0x08,0x49 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -18941,13 +18941,13 @@ Control prog_0846 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_18FA );
+    return jumpDirect ( 0x18FA,prog_18FA );
 }
 
 Control prog_0849 ()
 {
     at ( "0849" );
-    instruction ( "CALL 1775",0x084C );
+    instruction ( "CALL 1775",e16_hi_lo ( 0x08,0x4C ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -18960,22 +18960,22 @@ Control prog_0849 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1775 );
+    return jumpDirect ( 0x1775,prog_1775 );
 }
 
 Control prog_084C ()
 {
     at ( "084C" );
-    instruction ( "OUT  06",0x084E );
+    instruction ( "OUT  06",e16_hi_lo ( 0x08,0x4E ) );
     u8 a1 = A ;
     advance ( 10 );
-    return jumpDirect ( prog_084E );
+    return jumpDirect ( 0x084E,prog_084E );
 }
 
 Control prog_084E ()
 {
     at ( "084E" );
-    instruction ( "CALL 1804",0x0851 );
+    instruction ( "CALL 1804",e16_hi_lo ( 0x08,0x51 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -18988,31 +18988,31 @@ Control prog_084E ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1804 );
+    return jumpDirect ( 0x1804,prog_1804 );
 }
 
 Control prog_0851 ()
 {
     at ( "0851" );
-    instruction ( "JP   081F",0x0854 );
+    instruction ( "JP   081F",e16_hi_lo ( 0x08,0x54 ) );
     advance ( 10 );
-    return jumpDirect ( prog_081F );
+    return jumpDirect ( 0x081F,prog_081F );
 }
 
 Control prog_0857 ()
 {
     at ( "0857" );
-    instruction ( "LD   DE,1ABA",0x085A );
+    instruction ( "LD   DE,1ABA",e16_hi_lo ( 0x08,0x5A ) );
     advance ( 10 );
     D = 0x1A;
     E = 0xBA;
-    return jumpDirect ( prog_085A );
+    return jumpDirect ( 0x085A,prog_085A );
 }
 
 Control prog_085A ()
 {
     at ( "085A" );
-    instruction ( "CALL 08F3",0x085D );
+    instruction ( "CALL 08F3",e16_hi_lo ( 0x08,0x5D ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -19025,121 +19025,121 @@ Control prog_085A ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_08F3 );
+    return jumpDirect ( 0x08F3,prog_08F3 );
 }
 
 Control prog_085D ()
 {
     at ( "085D" );
-    instruction ( "LD   B,98",0x085F );
+    instruction ( "LD   B,98",e16_hi_lo ( 0x08,0x5F ) );
     advance ( 7 );
     B = 0x98;
-    return jumpDirect ( prog_085F );
+    return jumpDirect ( 0x085F,prog_085F );
 }
 
 Control prog_085F ()
 {
     at ( "085F" );
-    instruction ( "IN   01",0x0861 );
+    instruction ( "IN   01",e16_hi_lo ( 0x08,0x61 ) );
     advance ( 10 );
     A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_flip ( e1_is_pressed ( "coin entry" ) ) ),1,e1_is_pressed ( "player2 start" ) ),2,e1_is_pressed ( "player1 start" ) ),4,e1_is_pressed ( "player1 shoot" ) ),5,e1_is_pressed ( "player1 left" ) ),6,e1_is_pressed ( "player1 right" ) );
-    return jumpDirect ( prog_0861 );
+    return jumpDirect ( 0x0861,prog_0861 );
 }
 
 Control prog_0861 ()
 {
     at ( "0861" );
-    instruction ( "RRCA",0x0862 );
+    instruction ( "RRCA",e16_hi_lo ( 0x08,0x62 ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftR ( a1,0x01 ),7,e1_test_bit ( a1,0 ) );
     FlagCY = e1_test_bit ( a1,0 );
-    return jumpDirect ( prog_0862 );
+    return jumpDirect ( 0x0862,prog_0862 );
 }
 
 Control prog_0862 ()
 {
     at ( "0862" );
-    instruction ( "RRCA",0x0863 );
+    instruction ( "RRCA",e16_hi_lo ( 0x08,0x63 ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftR ( a1,0x01 ),7,e1_test_bit ( a1,0 ) );
     FlagCY = e1_test_bit ( a1,0 );
-    return jumpDirect ( prog_0863 );
+    return jumpDirect ( 0x0863,prog_0863 );
 }
 
 Control prog_0863 ()
 {
     at ( "0863" );
-    instruction ( "JP   CY,086D",0x0866 );
+    instruction ( "JP   CY,086D",e16_hi_lo ( 0x08,0x66 ) );
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( prog_086D );
+        return jumpDirect ( 0x086D,prog_086D );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0866 );
+        return jumpDirect ( 0x0866,prog_0866 );
     }
 }
 
 Control prog_0866 ()
 {
     at ( "0866" );
-    instruction ( "RRCA",0x0867 );
+    instruction ( "RRCA",e16_hi_lo ( 0x08,0x67 ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftR ( a1,0x01 ),7,e1_test_bit ( a1,0 ) );
     FlagCY = e1_test_bit ( a1,0 );
-    return jumpDirect ( prog_0867 );
+    return jumpDirect ( 0x0867,prog_0867 );
 }
 
 Control prog_0867 ()
 {
     at ( "0867" );
-    instruction ( "JP   CY,0798",0x086A );
+    instruction ( "JP   CY,0798",e16_hi_lo ( 0x08,0x6A ) );
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( prog_0798 );
+        return jumpDirect ( 0x0798,prog_0798 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_086A );
+        return jumpDirect ( 0x086A,prog_086A );
     }
 }
 
 Control prog_086A ()
 {
     at ( "086A" );
-    instruction ( "JP   077F",0x086D );
+    instruction ( "JP   077F",e16_hi_lo ( 0x08,0x6D ) );
     advance ( 10 );
-    return jumpDirect ( prog_077F );
+    return jumpDirect ( 0x077F,prog_077F );
 }
 
 Control prog_086D ()
 {
     at ( "086D" );
-    instruction ( "LD   A,01",0x086F );
+    instruction ( "LD   A,01",e16_hi_lo ( 0x08,0x6F ) );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( prog_086F );
+    return jumpDirect ( 0x086F,prog_086F );
 }
 
 Control prog_086F ()
 {
     at ( "086F" );
-    instruction ( "JP   079B",0x0872 );
+    instruction ( "JP   079B",e16_hi_lo ( 0x08,0x72 ) );
     advance ( 10 );
-    return jumpDirect ( prog_079B );
+    return jumpDirect ( 0x079B,prog_079B );
 }
 
 Control prog_0872 ()
 {
     at ( "0872" );
-    instruction ( "CALL 021A",0x0875 );
+    instruction ( "CALL 021A",e16_hi_lo ( 0x08,0x75 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -19152,53 +19152,53 @@ Control prog_0872 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_021A );
+    return jumpDirect ( 0x021A,prog_021A );
 }
 
 Control prog_0875 ()
 {
     at ( "0875" );
-    instruction ( "JP   0814",0x0878 );
+    instruction ( "JP   0814",e16_hi_lo ( 0x08,0x78 ) );
     advance ( 10 );
-    return jumpDirect ( prog_0814 );
+    return jumpDirect ( 0x0814,prog_0814 );
 }
 
 Control prog_0878 ()
 {
     at ( "0878" );
-    instruction ( "LD   A,(2008)",0x087B );
+    instruction ( "LD   A,(2008)",e16_hi_lo ( 0x08,0x7B ) );
     u8 a1 = e8_read_mem ( 0x2008 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_087B );
+    return jumpDirect ( 0x087B,prog_087B );
 }
 
 Control prog_087B ()
 {
     at ( "087B" );
-    instruction ( "LD   B,A",0x087C );
+    instruction ( "LD   B,A",e16_hi_lo ( 0x08,0x7C ) );
     u8 a1 = A ;
     advance ( 5 );
     B = a1;
-    return jumpDirect ( prog_087C );
+    return jumpDirect ( 0x087C,prog_087C );
 }
 
 Control prog_087C ()
 {
     at ( "087C" );
-    instruction ( "LD   HL,(2009)",0x087F );
+    instruction ( "LD   HL,(2009)",e16_hi_lo ( 0x08,0x7F ) );
     u8 a1 = e8_read_mem ( 0x2009 ) ;
     u8 a2 = e8_read_mem ( 0x200A ) ;
     advance ( 16 );
     H = a2;
     L = a1;
-    return jumpDirect ( prog_087F );
+    return jumpDirect ( 0x087F,prog_087F );
 }
 
 Control prog_087F ()
 {
     at ( "087F" );
-    instruction ( "EX   DE,HL",0x0880 );
+    instruction ( "EX   DE,HL",e16_hi_lo ( 0x08,0x80 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = H ;
@@ -19208,50 +19208,50 @@ Control prog_087F ()
     E = a4;
     H = a1;
     L = a2;
-    return jumpDirect ( prog_0880 );
+    return jumpDirect ( 0x0880,prog_0880 );
 }
 
 Control prog_0880 ()
 {
     at ( "0880" );
-    instruction ( "JP   0886",0x0883 );
+    instruction ( "JP   0886",e16_hi_lo ( 0x08,0x83 ) );
     advance ( 10 );
-    return jumpDirect ( prog_0886 );
+    return jumpDirect ( 0x0886,prog_0886 );
 }
 
 Control prog_0886 ()
 {
     at ( "0886" );
-    instruction ( "LD   A,(2067)",0x0889 );
+    instruction ( "LD   A,(2067)",e16_hi_lo ( 0x08,0x89 ) );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0889 );
+    return jumpDirect ( 0x0889,prog_0889 );
 }
 
 Control prog_0889 ()
 {
     at ( "0889" );
-    instruction ( "LD   H,A",0x088A );
+    instruction ( "LD   H,A",e16_hi_lo ( 0x08,0x8A ) );
     u8 a1 = A ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( prog_088A );
+    return jumpDirect ( 0x088A,prog_088A );
 }
 
 Control prog_088A ()
 {
     at ( "088A" );
-    instruction ( "LD   L,FC",0x088C );
+    instruction ( "LD   L,FC",e16_hi_lo ( 0x08,0x8C ) );
     advance ( 7 );
     L = 0xFC;
-    return jumpDirect ( prog_088C );
+    return jumpDirect ( 0x088C,prog_088C );
 }
 
 Control prog_088C ()
 {
     at ( "088C" );
-    instruction ( "RET",0x088D );
+    instruction ( "RET",e16_hi_lo ( 0x08,0x8D ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -19269,36 +19269,36 @@ Control prog_088C ()
 Control prog_088D ()
 {
     at ( "088D" );
-    instruction ( "LD   HL,2B11",0x0890 );
+    instruction ( "LD   HL,2B11",e16_hi_lo ( 0x08,0x90 ) );
     advance ( 10 );
     H = 0x2B;
     L = 0x11;
-    return jumpDirect ( prog_0890 );
+    return jumpDirect ( 0x0890,prog_0890 );
 }
 
 Control prog_0890 ()
 {
     at ( "0890" );
-    instruction ( "LD   DE,1B70",0x0893 );
+    instruction ( "LD   DE,1B70",e16_hi_lo ( 0x08,0x93 ) );
     advance ( 10 );
     D = 0x1B;
     E = 0x70;
-    return jumpDirect ( prog_0893 );
+    return jumpDirect ( 0x0893,prog_0893 );
 }
 
 Control prog_0893 ()
 {
     at ( "0893" );
-    instruction ( "LD   C,0E",0x0895 );
+    instruction ( "LD   C,0E",e16_hi_lo ( 0x08,0x95 ) );
     advance ( 7 );
     C = 0x0E;
-    return jumpDirect ( prog_0895 );
+    return jumpDirect ( 0x0895,prog_0895 );
 }
 
 Control prog_0895 ()
 {
     at ( "0895" );
-    instruction ( "CALL 08F3",0x0898 );
+    instruction ( "CALL 08F3",e16_hi_lo ( 0x08,0x98 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -19311,53 +19311,53 @@ Control prog_0895 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_08F3 );
+    return jumpDirect ( 0x08F3,prog_08F3 );
 }
 
 Control prog_0898 ()
 {
     at ( "0898" );
-    instruction ( "LD   A,(2067)",0x089B );
+    instruction ( "LD   A,(2067)",e16_hi_lo ( 0x08,0x9B ) );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_089B );
+    return jumpDirect ( 0x089B,prog_089B );
 }
 
 Control prog_089B ()
 {
     at ( "089B" );
-    instruction ( "RRCA",0x089C );
+    instruction ( "RRCA",e16_hi_lo ( 0x08,0x9C ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftR ( a1,0x01 ),7,e1_test_bit ( a1,0 ) );
     FlagCY = e1_test_bit ( a1,0 );
-    return jumpDirect ( prog_089C );
+    return jumpDirect ( 0x089C,prog_089C );
 }
 
 Control prog_089C ()
 {
     at ( "089C" );
-    instruction ( "LD   A,1C",0x089E );
+    instruction ( "LD   A,1C",e16_hi_lo ( 0x08,0x9E ) );
     advance ( 7 );
     A = 0x1C;
-    return jumpDirect ( prog_089E );
+    return jumpDirect ( 0x089E,prog_089E );
 }
 
 Control prog_089E ()
 {
     at ( "089E" );
-    instruction ( "LD   HL,3711",0x08A1 );
+    instruction ( "LD   HL,3711",e16_hi_lo ( 0x08,0xA1 ) );
     advance ( 10 );
     H = 0x37;
     L = 0x11;
-    return jumpDirect ( prog_08A1 );
+    return jumpDirect ( 0x08A1,prog_08A1 );
 }
 
 Control prog_08A1 ()
 {
     at ( "08A1" );
-    instruction ( "CALL NC,08FF",0x08A4 );
+    instruction ( "CALL NC,08FF",e16_hi_lo ( 0x08,0xA4 ) );
     if (e1_flip ( FlagCY ))
     {
         u8 a1 = SPH ;
@@ -19372,48 +19372,48 @@ Control prog_08A1 ()
         advance ( 17 );
         SPH = e8_hi ( a6 );
         SPL = e8_lo ( a6 );
-        return jumpDirect ( prog_08FF );
+        return jumpDirect ( 0x08FF,prog_08FF );
     }
     else
     {
         advance ( 11 );
-        return jumpDirect ( prog_08A4 );
+        return jumpDirect ( 0x08A4,prog_08A4 );
     }
 }
 
 Control prog_08A4 ()
 {
     at ( "08A4" );
-    instruction ( "LD   A,B0",0x08A6 );
+    instruction ( "LD   A,B0",e16_hi_lo ( 0x08,0xA6 ) );
     advance ( 7 );
     A = 0xB0;
-    return jumpDirect ( prog_08A6 );
+    return jumpDirect ( 0x08A6,prog_08A6 );
 }
 
 Control prog_08A6 ()
 {
     at ( "08A6" );
-    instruction ( "LD   (20C0),A",0x08A9 );
+    instruction ( "LD   (20C0),A",e16_hi_lo ( 0x08,0xA9 ) );
     u8 a1 = A ;
     mem_write ( 0x20C0,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_08A9 );
+    return jumpDirect ( 0x08A9,prog_08A9 );
 }
 
 Control prog_08A9 ()
 {
     at ( "08A9" );
-    instruction ( "LD   A,(20C0)",0x08AC );
+    instruction ( "LD   A,(20C0)",e16_hi_lo ( 0x08,0xAC ) );
     u8 a1 = e8_read_mem ( 0x20C0 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_08AC );
+    return jumpDirect ( 0x08AC,prog_08AC );
 }
 
 Control prog_08AC ()
 {
     at ( "08AC" );
-    instruction ( "AND  A",0x08AD );
+    instruction ( "AND  A",e16_hi_lo ( 0x08,0xAD ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -19425,13 +19425,13 @@ Control prog_08AC ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_08AD );
+    return jumpDirect ( 0x08AD,prog_08AD );
 }
 
 Control prog_08AD ()
 {
     at ( "08AD" );
-    instruction ( "RET  Z",0x08AE );
+    instruction ( "RET  Z",e16_hi_lo ( 0x08,0xAE ) );
     if (FlagZ)
     {
         u8 a1 = SPH ;
@@ -19450,14 +19450,14 @@ Control prog_08AD ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_08AE );
+        return jumpDirect ( 0x08AE,prog_08AE );
     }
 }
 
 Control prog_08AE ()
 {
     at ( "08AE" );
-    instruction ( "AND  04",0x08B0 );
+    instruction ( "AND  04",e16_hi_lo ( 0x08,0xB0 ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( 0x04,a1 ) ;
     u8 a3 = e8_or ( 0x04,a1 ) ;
@@ -19468,29 +19468,29 @@ Control prog_08AE ()
     FlagA = e1_test_bit ( a3,3 );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_08B0 );
+    return jumpDirect ( 0x08B0,prog_08B0 );
 }
 
 Control prog_08B0 ()
 {
     at ( "08B0" );
-    instruction ( "JP   NZ,08BC",0x08B3 );
+    instruction ( "JP   NZ,08BC",e16_hi_lo ( 0x08,0xB3 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_08BC );
+        return jumpDirect ( 0x08BC,prog_08BC );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_08B3 );
+        return jumpDirect ( 0x08B3,prog_08B3 );
     }
 }
 
 Control prog_08B3 ()
 {
     at ( "08B3" );
-    instruction ( "CALL 09CA",0x08B6 );
+    instruction ( "CALL 09CA",e16_hi_lo ( 0x08,0xB6 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -19503,13 +19503,13 @@ Control prog_08B3 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_09CA );
+    return jumpDirect ( 0x09CA,prog_09CA );
 }
 
 Control prog_08B6 ()
 {
     at ( "08B6" );
-    instruction ( "CALL 1931",0x08B9 );
+    instruction ( "CALL 1931",e16_hi_lo ( 0x08,0xB9 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -19522,87 +19522,87 @@ Control prog_08B6 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1931 );
+    return jumpDirect ( 0x1931,prog_1931 );
 }
 
 Control prog_08B9 ()
 {
     at ( "08B9" );
-    instruction ( "JP   08A9",0x08BC );
+    instruction ( "JP   08A9",e16_hi_lo ( 0x08,0xBC ) );
     advance ( 10 );
-    return jumpDirect ( prog_08A9 );
+    return jumpDirect ( 0x08A9,prog_08A9 );
 }
 
 Control prog_08BC ()
 {
     at ( "08BC" );
-    instruction ( "LD   B,20",0x08BE );
+    instruction ( "LD   B,20",e16_hi_lo ( 0x08,0xBE ) );
     advance ( 7 );
     B = 0x20;
-    return jumpDirect ( prog_08BE );
+    return jumpDirect ( 0x08BE,prog_08BE );
 }
 
 Control prog_08BE ()
 {
     at ( "08BE" );
-    instruction ( "LD   HL,271C",0x08C1 );
+    instruction ( "LD   HL,271C",e16_hi_lo ( 0x08,0xC1 ) );
     advance ( 10 );
     H = 0x27;
     L = 0x1C;
-    return jumpDirect ( prog_08C1 );
+    return jumpDirect ( 0x08C1,prog_08C1 );
 }
 
 Control prog_08C1 ()
 {
     at ( "08C1" );
-    instruction ( "LD   A,(2067)",0x08C4 );
+    instruction ( "LD   A,(2067)",e16_hi_lo ( 0x08,0xC4 ) );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_08C4 );
+    return jumpDirect ( 0x08C4,prog_08C4 );
 }
 
 Control prog_08C4 ()
 {
     at ( "08C4" );
-    instruction ( "RRCA",0x08C5 );
+    instruction ( "RRCA",e16_hi_lo ( 0x08,0xC5 ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftR ( a1,0x01 ),7,e1_test_bit ( a1,0 ) );
     FlagCY = e1_test_bit ( a1,0 );
-    return jumpDirect ( prog_08C5 );
+    return jumpDirect ( 0x08C5,prog_08C5 );
 }
 
 Control prog_08C5 ()
 {
     at ( "08C5" );
-    instruction ( "JP   CY,08CB",0x08C8 );
+    instruction ( "JP   CY,08CB",e16_hi_lo ( 0x08,0xC8 ) );
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( prog_08CB );
+        return jumpDirect ( 0x08CB,prog_08CB );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_08C8 );
+        return jumpDirect ( 0x08C8,prog_08C8 );
     }
 }
 
 Control prog_08C8 ()
 {
     at ( "08C8" );
-    instruction ( "LD   HL,391C",0x08CB );
+    instruction ( "LD   HL,391C",e16_hi_lo ( 0x08,0xCB ) );
     advance ( 10 );
     H = 0x39;
     L = 0x1C;
-    return jumpDirect ( prog_08CB );
+    return jumpDirect ( 0x08CB,prog_08CB );
 }
 
 Control prog_08CB ()
 {
     at ( "08CB" );
-    instruction ( "CALL 14CB",0x08CE );
+    instruction ( "CALL 14CB",e16_hi_lo ( 0x08,0xCE ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -19615,30 +19615,30 @@ Control prog_08CB ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_14CB );
+    return jumpDirect ( 0x14CB,prog_14CB );
 }
 
 Control prog_08CE ()
 {
     at ( "08CE" );
-    instruction ( "JP   08A9",0x08D1 );
+    instruction ( "JP   08A9",e16_hi_lo ( 0x08,0xD1 ) );
     advance ( 10 );
-    return jumpDirect ( prog_08A9 );
+    return jumpDirect ( 0x08A9,prog_08A9 );
 }
 
 Control prog_08D1 ()
 {
     at ( "08D1" );
-    instruction ( "IN   02",0x08D3 );
+    instruction ( "IN   02",e16_hi_lo ( 0x08,0xD3 ) );
     advance ( 10 );
     A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_is_pressed ( "[dip3] lives (3,4,5,6) lsb" ) ),1,e1_is_pressed ( "[dip5] lives (3,4,5,6) msb" ) ),2,e1_is_pressed ( "TILT" ) ),3,e1_is_pressed ( "[dip6] extra ship at 1000" ) ),4,e1_is_pressed ( "player2 shoot" ) ),5,e1_is_pressed ( "player2 left" ) ),6,e1_is_pressed ( "player2 right" ) ),7,e1_is_pressed ( "[dip7] coin info off" ) );
-    return jumpDirect ( prog_08D3 );
+    return jumpDirect ( 0x08D3,prog_08D3 );
 }
 
 Control prog_08D3 ()
 {
     at ( "08D3" );
-    instruction ( "AND  03",0x08D5 );
+    instruction ( "AND  03",e16_hi_lo ( 0x08,0xD5 ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( 0x03,a1 ) ;
     u8 a3 = e8_or ( 0x03,a1 ) ;
@@ -19649,13 +19649,13 @@ Control prog_08D3 ()
     FlagA = e1_test_bit ( a3,3 );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_08D5 );
+    return jumpDirect ( 0x08D5,prog_08D5 );
 }
 
 Control prog_08D5 ()
 {
     at ( "08D5" );
-    instruction ( "ADD  03",0x08D7 );
+    instruction ( "ADD  03",e16_hi_lo ( 0x08,0xD7 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_false (  ),0x03,a1 ) ;
     u8 a3 = e8_and ( 0x03,0x0F ) ;
@@ -19668,13 +19668,13 @@ Control prog_08D5 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_test_bit ( e8_hi ( a2 ),0 );
-    return jumpDirect ( prog_08D7 );
+    return jumpDirect ( 0x08D7,prog_08D7 );
 }
 
 Control prog_08D7 ()
 {
     at ( "08D7" );
-    instruction ( "RET",0x08D8 );
+    instruction ( "RET",e16_hi_lo ( 0x08,0xD8 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -19692,17 +19692,17 @@ Control prog_08D7 ()
 Control prog_08D8 ()
 {
     at ( "08D8" );
-    instruction ( "LD   A,(2082)",0x08DB );
+    instruction ( "LD   A,(2082)",e16_hi_lo ( 0x08,0xDB ) );
     u8 a1 = e8_read_mem ( 0x2082 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_08DB );
+    return jumpDirect ( 0x08DB,prog_08DB );
 }
 
 Control prog_08DB ()
 {
     at ( "08DB" );
-    instruction ( "CP   09",0x08DD );
+    instruction ( "CP   09",e16_hi_lo ( 0x08,0xDD ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x09 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -19714,13 +19714,13 @@ Control prog_08DB ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_08DD );
+    return jumpDirect ( 0x08DD,prog_08DD );
 }
 
 Control prog_08DD ()
 {
     at ( "08DD" );
-    instruction ( "RET  NC",0x08DE );
+    instruction ( "RET  NC",e16_hi_lo ( 0x08,0xDE ) );
     if (e1_flip ( FlagCY ))
     {
         u8 a1 = SPH ;
@@ -19739,33 +19739,33 @@ Control prog_08DD ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_08DE );
+        return jumpDirect ( 0x08DE,prog_08DE );
     }
 }
 
 Control prog_08DE ()
 {
     at ( "08DE" );
-    instruction ( "LD   A,FB",0x08E0 );
+    instruction ( "LD   A,FB",e16_hi_lo ( 0x08,0xE0 ) );
     advance ( 7 );
     A = 0xFB;
-    return jumpDirect ( prog_08E0 );
+    return jumpDirect ( 0x08E0,prog_08E0 );
 }
 
 Control prog_08E0 ()
 {
     at ( "08E0" );
-    instruction ( "LD   (207E),A",0x08E3 );
+    instruction ( "LD   (207E),A",e16_hi_lo ( 0x08,0xE3 ) );
     u8 a1 = A ;
     mem_write ( 0x207E,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_08E3 );
+    return jumpDirect ( 0x08E3,prog_08E3 );
 }
 
 Control prog_08E3 ()
 {
     at ( "08E3" );
-    instruction ( "RET",0x08E4 );
+    instruction ( "RET",e16_hi_lo ( 0x08,0xE4 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -19783,17 +19783,17 @@ Control prog_08E3 ()
 Control prog_08E4 ()
 {
     at ( "08E4" );
-    instruction ( "LD   A,(20CE)",0x08E7 );
+    instruction ( "LD   A,(20CE)",e16_hi_lo ( 0x08,0xE7 ) );
     u8 a1 = e8_read_mem ( 0x20CE ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_08E7 );
+    return jumpDirect ( 0x08E7,prog_08E7 );
 }
 
 Control prog_08E7 ()
 {
     at ( "08E7" );
-    instruction ( "AND  A",0x08E8 );
+    instruction ( "AND  A",e16_hi_lo ( 0x08,0xE8 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -19805,13 +19805,13 @@ Control prog_08E7 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_08E8 );
+    return jumpDirect ( 0x08E8,prog_08E8 );
 }
 
 Control prog_08E8 ()
 {
     at ( "08E8" );
-    instruction ( "RET  NZ",0x08E9 );
+    instruction ( "RET  NZ",e16_hi_lo ( 0x08,0xE9 ) );
     if (e1_flip ( FlagZ ))
     {
         u8 a1 = SPH ;
@@ -19830,62 +19830,62 @@ Control prog_08E8 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_08E9 );
+        return jumpDirect ( 0x08E9,prog_08E9 );
     }
 }
 
 Control prog_08E9 ()
 {
     at ( "08E9" );
-    instruction ( "LD   HL,391C",0x08EC );
+    instruction ( "LD   HL,391C",e16_hi_lo ( 0x08,0xEC ) );
     advance ( 10 );
     H = 0x39;
     L = 0x1C;
-    return jumpDirect ( prog_08EC );
+    return jumpDirect ( 0x08EC,prog_08EC );
 }
 
 Control prog_08EC ()
 {
     at ( "08EC" );
-    instruction ( "LD   B,20",0x08EE );
+    instruction ( "LD   B,20",e16_hi_lo ( 0x08,0xEE ) );
     advance ( 7 );
     B = 0x20;
-    return jumpDirect ( prog_08EE );
+    return jumpDirect ( 0x08EE,prog_08EE );
 }
 
 Control prog_08EE ()
 {
     at ( "08EE" );
-    instruction ( "JP   14CB",0x08F1 );
+    instruction ( "JP   14CB",e16_hi_lo ( 0x08,0xF1 ) );
     advance ( 10 );
-    return jumpDirect ( prog_14CB );
+    return jumpDirect ( 0x14CB,prog_14CB );
 }
 
 Control prog_08F1 ()
 {
     at ( "08F1" );
-    instruction ( "LD   C,03",0x08F3 );
+    instruction ( "LD   C,03",e16_hi_lo ( 0x08,0xF3 ) );
     advance ( 7 );
     C = 0x03;
-    return jumpDirect ( prog_08F3 );
+    return jumpDirect ( 0x08F3,prog_08F3 );
 }
 
 Control prog_08F3 ()
 {
     at ( "08F3" );
-    instruction ( "LD   A,(DE)",0x08F4 );
+    instruction ( "LD   A,(DE)",e16_hi_lo ( 0x08,0xF4 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_08F4 );
+    return jumpDirect ( 0x08F4,prog_08F4 );
 }
 
 Control prog_08F4 ()
 {
     at ( "08F4" );
-    instruction ( "PUSH DE",0x08F5 );
+    instruction ( "PUSH DE",e16_hi_lo ( 0x08,0xF5 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = SPH ;
@@ -19899,13 +19899,13 @@ Control prog_08F4 ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_08F5 );
+    return jumpDirect ( 0x08F5,prog_08F5 );
 }
 
 Control prog_08F5 ()
 {
     at ( "08F5" );
-    instruction ( "CALL 08FF",0x08F8 );
+    instruction ( "CALL 08FF",e16_hi_lo ( 0x08,0xF8 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -19918,13 +19918,13 @@ Control prog_08F5 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_08FF );
+    return jumpDirect ( 0x08FF,prog_08FF );
 }
 
 Control prog_08F8 ()
 {
     at ( "08F8" );
-    instruction ( "POP  DE",0x08F9 );
+    instruction ( "POP  DE",e16_hi_lo ( 0x08,0xF9 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -19938,26 +19938,26 @@ Control prog_08F8 ()
     E = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_08F9 );
+    return jumpDirect ( 0x08F9,prog_08F9 );
 }
 
 Control prog_08F9 ()
 {
     at ( "08F9" );
-    instruction ( "INC  DE",0x08FA );
+    instruction ( "INC  DE",e16_hi_lo ( 0x08,0xFA ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     D = e8_hi ( a3 );
     E = e8_lo ( a3 );
-    return jumpDirect ( prog_08FA );
+    return jumpDirect ( 0x08FA,prog_08FA );
 }
 
 Control prog_08FA ()
 {
     at ( "08FA" );
-    instruction ( "DEC  C",0x08FB );
+    instruction ( "DEC  C",e16_hi_lo ( 0x08,0xFB ) );
     u8 a1 = C ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -19969,29 +19969,29 @@ Control prog_08FA ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_08FB );
+    return jumpDirect ( 0x08FB,prog_08FB );
 }
 
 Control prog_08FB ()
 {
     at ( "08FB" );
-    instruction ( "JP   NZ,08F3",0x08FE );
+    instruction ( "JP   NZ,08F3",e16_hi_lo ( 0x08,0xFE ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_08F3 );
+        return jumpDirect ( 0x08F3,prog_08F3 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_08FE );
+        return jumpDirect ( 0x08FE,prog_08FE );
     }
 }
 
 Control prog_08FE ()
 {
     at ( "08FE" );
-    instruction ( "RET",0x08FF );
+    instruction ( "RET",e16_hi_lo ( 0x08,0xFF ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -20009,17 +20009,17 @@ Control prog_08FE ()
 Control prog_08FF ()
 {
     at ( "08FF" );
-    instruction ( "LD   DE,1E00",0x0902 );
+    instruction ( "LD   DE,1E00",e16_hi_lo ( 0x09,0x02 ) );
     advance ( 10 );
     D = 0x1E;
     E = 0x00;
-    return jumpDirect ( prog_0902 );
+    return jumpDirect ( 0x0902,prog_0902 );
 }
 
 Control prog_0902 ()
 {
     at ( "0902" );
-    instruction ( "PUSH HL",0x0903 );
+    instruction ( "PUSH HL",e16_hi_lo ( 0x09,0x03 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = SPH ;
@@ -20033,32 +20033,32 @@ Control prog_0902 ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_0903 );
+    return jumpDirect ( 0x0903,prog_0903 );
 }
 
 Control prog_0903 ()
 {
     at ( "0903" );
-    instruction ( "LD   H,00",0x0905 );
+    instruction ( "LD   H,00",e16_hi_lo ( 0x09,0x05 ) );
     advance ( 7 );
     H = 0x00;
-    return jumpDirect ( prog_0905 );
+    return jumpDirect ( 0x0905,prog_0905 );
 }
 
 Control prog_0905 ()
 {
     at ( "0905" );
-    instruction ( "LD   L,A",0x0906 );
+    instruction ( "LD   L,A",e16_hi_lo ( 0x09,0x06 ) );
     u8 a1 = A ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( prog_0906 );
+    return jumpDirect ( 0x0906,prog_0906 );
 }
 
 Control prog_0906 ()
 {
     at ( "0906" );
-    instruction ( "ADD  HL,HL",0x0907 );
+    instruction ( "ADD  HL,HL",e16_hi_lo ( 0x09,0x07 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = H ;
@@ -20068,13 +20068,13 @@ Control prog_0906 ()
     H = e8_hi ( e16_drop_hi_bit_of_17 ( a5 ) );
     L = e8_lo ( e16_drop_hi_bit_of_17 ( a5 ) );
     FlagCY = e1_hi_bit_of_17 ( a5 );
-    return jumpDirect ( prog_0907 );
+    return jumpDirect ( 0x0907,prog_0907 );
 }
 
 Control prog_0907 ()
 {
     at ( "0907" );
-    instruction ( "ADD  HL,HL",0x0908 );
+    instruction ( "ADD  HL,HL",e16_hi_lo ( 0x09,0x08 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = H ;
@@ -20084,13 +20084,13 @@ Control prog_0907 ()
     H = e8_hi ( e16_drop_hi_bit_of_17 ( a5 ) );
     L = e8_lo ( e16_drop_hi_bit_of_17 ( a5 ) );
     FlagCY = e1_hi_bit_of_17 ( a5 );
-    return jumpDirect ( prog_0908 );
+    return jumpDirect ( 0x0908,prog_0908 );
 }
 
 Control prog_0908 ()
 {
     at ( "0908" );
-    instruction ( "ADD  HL,HL",0x0909 );
+    instruction ( "ADD  HL,HL",e16_hi_lo ( 0x09,0x09 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = H ;
@@ -20100,13 +20100,13 @@ Control prog_0908 ()
     H = e8_hi ( e16_drop_hi_bit_of_17 ( a5 ) );
     L = e8_lo ( e16_drop_hi_bit_of_17 ( a5 ) );
     FlagCY = e1_hi_bit_of_17 ( a5 );
-    return jumpDirect ( prog_0909 );
+    return jumpDirect ( 0x0909,prog_0909 );
 }
 
 Control prog_0909 ()
 {
     at ( "0909" );
-    instruction ( "ADD  HL,DE",0x090A );
+    instruction ( "ADD  HL,DE",e16_hi_lo ( 0x09,0x0A ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = H ;
@@ -20116,13 +20116,13 @@ Control prog_0909 ()
     H = e8_hi ( e16_drop_hi_bit_of_17 ( a5 ) );
     L = e8_lo ( e16_drop_hi_bit_of_17 ( a5 ) );
     FlagCY = e1_hi_bit_of_17 ( a5 );
-    return jumpDirect ( prog_090A );
+    return jumpDirect ( 0x090A,prog_090A );
 }
 
 Control prog_090A ()
 {
     at ( "090A" );
-    instruction ( "EX   DE,HL",0x090B );
+    instruction ( "EX   DE,HL",e16_hi_lo ( 0x09,0x0B ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = H ;
@@ -20132,13 +20132,13 @@ Control prog_090A ()
     E = a4;
     H = a1;
     L = a2;
-    return jumpDirect ( prog_090B );
+    return jumpDirect ( 0x090B,prog_090B );
 }
 
 Control prog_090B ()
 {
     at ( "090B" );
-    instruction ( "POP  HL",0x090C );
+    instruction ( "POP  HL",e16_hi_lo ( 0x09,0x0C ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -20152,49 +20152,49 @@ Control prog_090B ()
     L = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_090C );
+    return jumpDirect ( 0x090C,prog_090C );
 }
 
 Control prog_090C ()
 {
     at ( "090C" );
-    instruction ( "LD   B,08",0x090E );
+    instruction ( "LD   B,08",e16_hi_lo ( 0x09,0x0E ) );
     advance ( 7 );
     B = 0x08;
-    return jumpDirect ( prog_090E );
+    return jumpDirect ( 0x090E,prog_090E );
 }
 
 Control prog_090E ()
 {
     at ( "090E" );
-    instruction ( "OUT  06",0x0910 );
+    instruction ( "OUT  06",e16_hi_lo ( 0x09,0x10 ) );
     u8 a1 = A ;
     advance ( 10 );
-    return jumpDirect ( prog_0910 );
+    return jumpDirect ( 0x0910,prog_0910 );
 }
 
 Control prog_0910 ()
 {
     at ( "0910" );
-    instruction ( "JP   1439",0x0913 );
+    instruction ( "JP   1439",e16_hi_lo ( 0x09,0x13 ) );
     advance ( 10 );
-    return jumpDirect ( prog_1439 );
+    return jumpDirect ( 0x1439,prog_1439 );
 }
 
 Control prog_0913 ()
 {
     at ( "0913" );
-    instruction ( "LD   A,(2009)",0x0916 );
+    instruction ( "LD   A,(2009)",e16_hi_lo ( 0x09,0x16 ) );
     u8 a1 = e8_read_mem ( 0x2009 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0916 );
+    return jumpDirect ( 0x0916,prog_0916 );
 }
 
 Control prog_0916 ()
 {
     at ( "0916" );
-    instruction ( "CP   78",0x0918 );
+    instruction ( "CP   78",e16_hi_lo ( 0x09,0x18 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x78 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -20206,13 +20206,13 @@ Control prog_0916 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_0918 );
+    return jumpDirect ( 0x0918,prog_0918 );
 }
 
 Control prog_0918 ()
 {
     at ( "0918" );
-    instruction ( "RET  NC",0x0919 );
+    instruction ( "RET  NC",e16_hi_lo ( 0x09,0x19 ) );
     if (e1_flip ( FlagCY ))
     {
         u8 a1 = SPH ;
@@ -20231,36 +20231,36 @@ Control prog_0918 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_0919 );
+        return jumpDirect ( 0x0919,prog_0919 );
     }
 }
 
 Control prog_0919 ()
 {
     at ( "0919" );
-    instruction ( "LD   HL,(2091)",0x091C );
+    instruction ( "LD   HL,(2091)",e16_hi_lo ( 0x09,0x1C ) );
     u8 a1 = e8_read_mem ( 0x2091 ) ;
     u8 a2 = e8_read_mem ( 0x2092 ) ;
     advance ( 16 );
     H = a2;
     L = a1;
-    return jumpDirect ( prog_091C );
+    return jumpDirect ( 0x091C,prog_091C );
 }
 
 Control prog_091C ()
 {
     at ( "091C" );
-    instruction ( "LD   A,L",0x091D );
+    instruction ( "LD   A,L",e16_hi_lo ( 0x09,0x1D ) );
     u8 a1 = L ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_091D );
+    return jumpDirect ( 0x091D,prog_091D );
 }
 
 Control prog_091D ()
 {
     at ( "091D" );
-    instruction ( "OR   H",0x091E );
+    instruction ( "OR   H",e16_hi_lo ( 0x09,0x1E ) );
     u8 a1 = H ;
     u8 a2 = A ;
     u8 a3 = e8_or ( a1,a2 ) ;
@@ -20271,83 +20271,83 @@ Control prog_091D ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_091E );
+    return jumpDirect ( 0x091E,prog_091E );
 }
 
 Control prog_091E ()
 {
     at ( "091E" );
-    instruction ( "JP   NZ,0929",0x0921 );
+    instruction ( "JP   NZ,0929",e16_hi_lo ( 0x09,0x21 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_0929 );
+        return jumpDirect ( 0x0929,prog_0929 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0921 );
+        return jumpDirect ( 0x0921,prog_0921 );
     }
 }
 
 Control prog_0921 ()
 {
     at ( "0921" );
-    instruction ( "LD   HL,0600",0x0924 );
+    instruction ( "LD   HL,0600",e16_hi_lo ( 0x09,0x24 ) );
     advance ( 10 );
     H = 0x06;
     L = 0x00;
-    return jumpDirect ( prog_0924 );
+    return jumpDirect ( 0x0924,prog_0924 );
 }
 
 Control prog_0924 ()
 {
     at ( "0924" );
-    instruction ( "LD   A,01",0x0926 );
+    instruction ( "LD   A,01",e16_hi_lo ( 0x09,0x26 ) );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( prog_0926 );
+    return jumpDirect ( 0x0926,prog_0926 );
 }
 
 Control prog_0926 ()
 {
     at ( "0926" );
-    instruction ( "LD   (2083),A",0x0929 );
+    instruction ( "LD   (2083),A",e16_hi_lo ( 0x09,0x29 ) );
     u8 a1 = A ;
     mem_write ( 0x2083,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0929 );
+    return jumpDirect ( 0x0929,prog_0929 );
 }
 
 Control prog_0929 ()
 {
     at ( "0929" );
-    instruction ( "DEC  HL",0x092A );
+    instruction ( "DEC  HL",e16_hi_lo ( 0x09,0x2A ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_092A );
+    return jumpDirect ( 0x092A,prog_092A );
 }
 
 Control prog_092A ()
 {
     at ( "092A" );
-    instruction ( "LD   (2091),HL",0x092D );
+    instruction ( "LD   (2091),HL",e16_hi_lo ( 0x09,0x2D ) );
     u8 a1 = L ;
     mem_write ( 0x2091,a1 );
     u8 a2 = H ;
     mem_write ( 0x2092,a2 );
     advance ( 16 );
-    return jumpDirect ( prog_092D );
+    return jumpDirect ( 0x092D,prog_092D );
 }
 
 Control prog_092D ()
 {
     at ( "092D" );
-    instruction ( "RET",0x092E );
+    instruction ( "RET",e16_hi_lo ( 0x09,0x2E ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -20365,7 +20365,7 @@ Control prog_092D ()
 Control prog_092E ()
 {
     at ( "092E" );
-    instruction ( "CALL 1611",0x0931 );
+    instruction ( "CALL 1611",e16_hi_lo ( 0x09,0x31 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -20378,34 +20378,34 @@ Control prog_092E ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1611 );
+    return jumpDirect ( 0x1611,prog_1611 );
 }
 
 Control prog_0931 ()
 {
     at ( "0931" );
-    instruction ( "LD   L,FF",0x0933 );
+    instruction ( "LD   L,FF",e16_hi_lo ( 0x09,0x33 ) );
     advance ( 7 );
     L = 0xFF;
-    return jumpDirect ( prog_0933 );
+    return jumpDirect ( 0x0933,prog_0933 );
 }
 
 Control prog_0933 ()
 {
     at ( "0933" );
-    instruction ( "LD   A,(HL)",0x0934 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x09,0x34 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_0934 );
+    return jumpDirect ( 0x0934,prog_0934 );
 }
 
 Control prog_0934 ()
 {
     at ( "0934" );
-    instruction ( "RET",0x0935 );
+    instruction ( "RET",e16_hi_lo ( 0x09,0x35 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -20423,7 +20423,7 @@ Control prog_0934 ()
 Control prog_0935 ()
 {
     at ( "0935" );
-    instruction ( "CALL 1910",0x0938 );
+    instruction ( "CALL 1910",e16_hi_lo ( 0x09,0x38 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -20436,51 +20436,51 @@ Control prog_0935 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1910 );
+    return jumpDirect ( 0x1910,prog_1910 );
 }
 
 Control prog_0938 ()
 {
     at ( "0938" );
-    instruction ( "DEC  HL",0x0939 );
+    instruction ( "DEC  HL",e16_hi_lo ( 0x09,0x39 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_0939 );
+    return jumpDirect ( 0x0939,prog_0939 );
 }
 
 Control prog_0939 ()
 {
     at ( "0939" );
-    instruction ( "DEC  HL",0x093A );
+    instruction ( "DEC  HL",e16_hi_lo ( 0x09,0x3A ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_093A );
+    return jumpDirect ( 0x093A,prog_093A );
 }
 
 Control prog_093A ()
 {
     at ( "093A" );
-    instruction ( "LD   A,(HL)",0x093B );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x09,0x3B ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_093B );
+    return jumpDirect ( 0x093B,prog_093B );
 }
 
 Control prog_093B ()
 {
     at ( "093B" );
-    instruction ( "AND  A",0x093C );
+    instruction ( "AND  A",e16_hi_lo ( 0x09,0x3C ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -20492,13 +20492,13 @@ Control prog_093B ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_093C );
+    return jumpDirect ( 0x093C,prog_093C );
 }
 
 Control prog_093C ()
 {
     at ( "093C" );
-    instruction ( "RET  Z",0x093D );
+    instruction ( "RET  Z",e16_hi_lo ( 0x09,0x3D ) );
     if (FlagZ)
     {
         u8 a1 = SPH ;
@@ -20517,32 +20517,32 @@ Control prog_093C ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_093D );
+        return jumpDirect ( 0x093D,prog_093D );
     }
 }
 
 Control prog_093D ()
 {
     at ( "093D" );
-    instruction ( "LD   B,15",0x093F );
+    instruction ( "LD   B,15",e16_hi_lo ( 0x09,0x3F ) );
     advance ( 7 );
     B = 0x15;
-    return jumpDirect ( prog_093F );
+    return jumpDirect ( 0x093F,prog_093F );
 }
 
 Control prog_093F ()
 {
     at ( "093F" );
-    instruction ( "IN   02",0x0941 );
+    instruction ( "IN   02",e16_hi_lo ( 0x09,0x41 ) );
     advance ( 10 );
     A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_is_pressed ( "[dip3] lives (3,4,5,6) lsb" ) ),1,e1_is_pressed ( "[dip5] lives (3,4,5,6) msb" ) ),2,e1_is_pressed ( "TILT" ) ),3,e1_is_pressed ( "[dip6] extra ship at 1000" ) ),4,e1_is_pressed ( "player2 shoot" ) ),5,e1_is_pressed ( "player2 left" ) ),6,e1_is_pressed ( "player2 right" ) ),7,e1_is_pressed ( "[dip7] coin info off" ) );
-    return jumpDirect ( prog_0941 );
+    return jumpDirect ( 0x0941,prog_0941 );
 }
 
 Control prog_0941 ()
 {
     at ( "0941" );
-    instruction ( "AND  08",0x0943 );
+    instruction ( "AND  08",e16_hi_lo ( 0x09,0x43 ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( 0x08,a1 ) ;
     u8 a3 = e8_or ( 0x08,a1 ) ;
@@ -20553,38 +20553,38 @@ Control prog_0941 ()
     FlagA = e1_test_bit ( a3,3 );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0943 );
+    return jumpDirect ( 0x0943,prog_0943 );
 }
 
 Control prog_0943 ()
 {
     at ( "0943" );
-    instruction ( "JP   Z,0948",0x0946 );
+    instruction ( "JP   Z,0948",e16_hi_lo ( 0x09,0x46 ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_0948 );
+        return jumpDirect ( 0x0948,prog_0948 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0946 );
+        return jumpDirect ( 0x0946,prog_0946 );
     }
 }
 
 Control prog_0946 ()
 {
     at ( "0946" );
-    instruction ( "LD   B,10",0x0948 );
+    instruction ( "LD   B,10",e16_hi_lo ( 0x09,0x48 ) );
     advance ( 7 );
     B = 0x10;
-    return jumpDirect ( prog_0948 );
+    return jumpDirect ( 0x0948,prog_0948 );
 }
 
 Control prog_0948 ()
 {
     at ( "0948" );
-    instruction ( "CALL 09CA",0x094B );
+    instruction ( "CALL 09CA",e16_hi_lo ( 0x09,0x4B ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -20597,38 +20597,38 @@ Control prog_0948 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_09CA );
+    return jumpDirect ( 0x09CA,prog_09CA );
 }
 
 Control prog_094B ()
 {
     at ( "094B" );
-    instruction ( "INC  HL",0x094C );
+    instruction ( "INC  HL",e16_hi_lo ( 0x09,0x4C ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_094C );
+    return jumpDirect ( 0x094C,prog_094C );
 }
 
 Control prog_094C ()
 {
     at ( "094C" );
-    instruction ( "LD   A,(HL)",0x094D );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x09,0x4D ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_094D );
+    return jumpDirect ( 0x094D,prog_094D );
 }
 
 Control prog_094D ()
 {
     at ( "094D" );
-    instruction ( "CP   B",0x094E );
+    instruction ( "CP   B",e16_hi_lo ( 0x09,0x4E ) );
     u8 a1 = A ;
     u8 a2 = B ;
     u16 a3 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( a2 ) ) ;
@@ -20641,13 +20641,13 @@ Control prog_094D ()
     FlagA = e1_test_bit ( e8_lo ( a6 ),4 );
     FlagP = e1_parity ( e8_lo ( a3 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a3 ),0 ) );
-    return jumpDirect ( prog_094E );
+    return jumpDirect ( 0x094E,prog_094E );
 }
 
 Control prog_094E ()
 {
     at ( "094E" );
-    instruction ( "RET  CY",0x094F );
+    instruction ( "RET  CY",e16_hi_lo ( 0x09,0x4F ) );
     if (FlagCY)
     {
         u8 a1 = SPH ;
@@ -20666,14 +20666,14 @@ Control prog_094E ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_094F );
+        return jumpDirect ( 0x094F,prog_094F );
     }
 }
 
 Control prog_094F ()
 {
     at ( "094F" );
-    instruction ( "CALL 092E",0x0952 );
+    instruction ( "CALL 092E",e16_hi_lo ( 0x09,0x52 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -20686,13 +20686,13 @@ Control prog_094F ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_092E );
+    return jumpDirect ( 0x092E,prog_092E );
 }
 
 Control prog_0952 ()
 {
     at ( "0952" );
-    instruction ( "INC  (HL)",0x0953 );
+    instruction ( "INC  (HL)",e16_hi_lo ( 0x09,0x53 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -20708,25 +20708,25 @@ Control prog_0952 ()
     FlagZ = e1_is_zero ( e8_lo ( a4 ) );
     FlagA = e1_test_bit ( e8_lo ( a7 ),4 );
     FlagP = e1_parity ( e8_lo ( a4 ) );
-    return jumpDirect ( prog_0953 );
+    return jumpDirect ( 0x0953,prog_0953 );
 }
 
 Control prog_0953 ()
 {
     at ( "0953" );
-    instruction ( "LD   A,(HL)",0x0954 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x09,0x54 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_0954 );
+    return jumpDirect ( 0x0954,prog_0954 );
 }
 
 Control prog_0954 ()
 {
     at ( "0954" );
-    instruction ( "PUSH PSW",0x0955 );
+    instruction ( "PUSH PSW",e16_hi_lo ( 0x09,0x55 ) );
     u8 a1 = A ;
     u8 a2 = SPH ;
     u8 a3 = SPL ;
@@ -20739,23 +20739,23 @@ Control prog_0954 ()
     advance ( 11 );
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_0955 );
+    return jumpDirect ( 0x0955,prog_0955 );
 }
 
 Control prog_0955 ()
 {
     at ( "0955" );
-    instruction ( "LD   HL,2501",0x0958 );
+    instruction ( "LD   HL,2501",e16_hi_lo ( 0x09,0x58 ) );
     advance ( 10 );
     H = 0x25;
     L = 0x01;
-    return jumpDirect ( prog_0958 );
+    return jumpDirect ( 0x0958,prog_0958 );
 }
 
 Control prog_0958 ()
 {
     at ( "0958" );
-    instruction ( "INC  H",0x0959 );
+    instruction ( "INC  H",e16_hi_lo ( 0x09,0x59 ) );
     u8 a1 = H ;
     u16 a2 = e16_add_with_carry ( e1_true (  ),a1,0x00 ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -20767,13 +20767,13 @@ Control prog_0958 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_0959 );
+    return jumpDirect ( 0x0959,prog_0959 );
 }
 
 Control prog_0959 ()
 {
     at ( "0959" );
-    instruction ( "INC  H",0x095A );
+    instruction ( "INC  H",e16_hi_lo ( 0x09,0x5A ) );
     u8 a1 = H ;
     u16 a2 = e16_add_with_carry ( e1_true (  ),a1,0x00 ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -20785,13 +20785,13 @@ Control prog_0959 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_095A );
+    return jumpDirect ( 0x095A,prog_095A );
 }
 
 Control prog_095A ()
 {
     at ( "095A" );
-    instruction ( "DEC  A",0x095B );
+    instruction ( "DEC  A",e16_hi_lo ( 0x09,0x5B ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -20803,48 +20803,48 @@ Control prog_095A ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_095B );
+    return jumpDirect ( 0x095B,prog_095B );
 }
 
 Control prog_095B ()
 {
     at ( "095B" );
-    instruction ( "JP   NZ,0958",0x095E );
+    instruction ( "JP   NZ,0958",e16_hi_lo ( 0x09,0x5E ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_0958 );
+        return jumpDirect ( 0x0958,prog_0958 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_095E );
+        return jumpDirect ( 0x095E,prog_095E );
     }
 }
 
 Control prog_095E ()
 {
     at ( "095E" );
-    instruction ( "LD   B,10",0x0960 );
+    instruction ( "LD   B,10",e16_hi_lo ( 0x09,0x60 ) );
     advance ( 7 );
     B = 0x10;
-    return jumpDirect ( prog_0960 );
+    return jumpDirect ( 0x0960,prog_0960 );
 }
 
 Control prog_0960 ()
 {
     at ( "0960" );
-    instruction ( "LD   DE,1C60",0x0963 );
+    instruction ( "LD   DE,1C60",e16_hi_lo ( 0x09,0x63 ) );
     advance ( 10 );
     D = 0x1C;
     E = 0x60;
-    return jumpDirect ( prog_0963 );
+    return jumpDirect ( 0x0963,prog_0963 );
 }
 
 Control prog_0963 ()
 {
     at ( "0963" );
-    instruction ( "CALL 1439",0x0966 );
+    instruction ( "CALL 1439",e16_hi_lo ( 0x09,0x66 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -20857,13 +20857,13 @@ Control prog_0963 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1439 );
+    return jumpDirect ( 0x1439,prog_1439 );
 }
 
 Control prog_0966 ()
 {
     at ( "0966" );
-    instruction ( "POP  PSW",0x0967 );
+    instruction ( "POP  PSW",e16_hi_lo ( 0x09,0x67 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -20881,13 +20881,13 @@ Control prog_0966 ()
     FlagA = e1_test_bit ( a4,4 );
     FlagP = e1_test_bit ( a4,2 );
     FlagCY = e1_test_bit ( a4,0 );
-    return jumpDirect ( prog_0967 );
+    return jumpDirect ( 0x0967,prog_0967 );
 }
 
 Control prog_0967 ()
 {
     at ( "0967" );
-    instruction ( "INC  A",0x0968 );
+    instruction ( "INC  A",e16_hi_lo ( 0x09,0x68 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_true (  ),a1,0x00 ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -20899,13 +20899,13 @@ Control prog_0967 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_0968 );
+    return jumpDirect ( 0x0968,prog_0968 );
 }
 
 Control prog_0968 ()
 {
     at ( "0968" );
-    instruction ( "CALL 1A8B",0x096B );
+    instruction ( "CALL 1A8B",e16_hi_lo ( 0x09,0x6B ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -20918,13 +20918,13 @@ Control prog_0968 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1A8B );
+    return jumpDirect ( 0x1A8B,prog_1A8B );
 }
 
 Control prog_096B ()
 {
     at ( "096B" );
-    instruction ( "CALL 1910",0x096E );
+    instruction ( "CALL 1910",e16_hi_lo ( 0x09,0x6E ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -20937,96 +20937,96 @@ Control prog_096B ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1910 );
+    return jumpDirect ( 0x1910,prog_1910 );
 }
 
 Control prog_096E ()
 {
     at ( "096E" );
-    instruction ( "DEC  HL",0x096F );
+    instruction ( "DEC  HL",e16_hi_lo ( 0x09,0x6F ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_096F );
+    return jumpDirect ( 0x096F,prog_096F );
 }
 
 Control prog_096F ()
 {
     at ( "096F" );
-    instruction ( "DEC  HL",0x0970 );
+    instruction ( "DEC  HL",e16_hi_lo ( 0x09,0x70 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_0970 );
+    return jumpDirect ( 0x0970,prog_0970 );
 }
 
 Control prog_0970 ()
 {
     at ( "0970" );
-    instruction ( "LD   (HL),00",0x0972 );
+    instruction ( "LD   (HL),00",e16_hi_lo ( 0x09,0x72 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     mem_write ( e16_hi_lo ( a1,a2 ),0x00 );
     advance ( 10 );
-    return jumpDirect ( prog_0972 );
+    return jumpDirect ( 0x0972,prog_0972 );
 }
 
 Control prog_0972 ()
 {
     at ( "0972" );
-    instruction ( "LD   A,FF",0x0974 );
+    instruction ( "LD   A,FF",e16_hi_lo ( 0x09,0x74 ) );
     advance ( 7 );
     A = 0xFF;
-    return jumpDirect ( prog_0974 );
+    return jumpDirect ( 0x0974,prog_0974 );
 }
 
 Control prog_0974 ()
 {
     at ( "0974" );
-    instruction ( "LD   (2099),A",0x0977 );
+    instruction ( "LD   (2099),A",e16_hi_lo ( 0x09,0x77 ) );
     u8 a1 = A ;
     mem_write ( 0x2099,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0977 );
+    return jumpDirect ( 0x0977,prog_0977 );
 }
 
 Control prog_0977 ()
 {
     at ( "0977" );
-    instruction ( "LD   B,10",0x0979 );
+    instruction ( "LD   B,10",e16_hi_lo ( 0x09,0x79 ) );
     advance ( 7 );
     B = 0x10;
-    return jumpDirect ( prog_0979 );
+    return jumpDirect ( 0x0979,prog_0979 );
 }
 
 Control prog_0979 ()
 {
     at ( "0979" );
-    instruction ( "JP   18FA",0x097C );
+    instruction ( "JP   18FA",e16_hi_lo ( 0x09,0x7C ) );
     advance ( 10 );
-    return jumpDirect ( prog_18FA );
+    return jumpDirect ( 0x18FA,prog_18FA );
 }
 
 Control prog_097C ()
 {
     at ( "097C" );
-    instruction ( "LD   HL,1DA0",0x097F );
+    instruction ( "LD   HL,1DA0",e16_hi_lo ( 0x09,0x7F ) );
     advance ( 10 );
     H = 0x1D;
     L = 0xA0;
-    return jumpDirect ( prog_097F );
+    return jumpDirect ( 0x097F,prog_097F );
 }
 
 Control prog_097F ()
 {
     at ( "097F" );
-    instruction ( "CP   02",0x0981 );
+    instruction ( "CP   02",e16_hi_lo ( 0x09,0x81 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x02 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -21038,13 +21038,13 @@ Control prog_097F ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_0981 );
+    return jumpDirect ( 0x0981,prog_0981 );
 }
 
 Control prog_0981 ()
 {
     at ( "0981" );
-    instruction ( "RET  CY",0x0982 );
+    instruction ( "RET  CY",e16_hi_lo ( 0x09,0x82 ) );
     if (FlagCY)
     {
         u8 a1 = SPH ;
@@ -21063,27 +21063,27 @@ Control prog_0981 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_0982 );
+        return jumpDirect ( 0x0982,prog_0982 );
     }
 }
 
 Control prog_0982 ()
 {
     at ( "0982" );
-    instruction ( "INC  HL",0x0983 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x09,0x83 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_0983 );
+    return jumpDirect ( 0x0983,prog_0983 );
 }
 
 Control prog_0983 ()
 {
     at ( "0983" );
-    instruction ( "CP   04",0x0985 );
+    instruction ( "CP   04",e16_hi_lo ( 0x09,0x85 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x04 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -21095,13 +21095,13 @@ Control prog_0983 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_0985 );
+    return jumpDirect ( 0x0985,prog_0985 );
 }
 
 Control prog_0985 ()
 {
     at ( "0985" );
-    instruction ( "RET  CY",0x0986 );
+    instruction ( "RET  CY",e16_hi_lo ( 0x09,0x86 ) );
     if (FlagCY)
     {
         u8 a1 = SPH ;
@@ -21120,27 +21120,27 @@ Control prog_0985 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_0986 );
+        return jumpDirect ( 0x0986,prog_0986 );
     }
 }
 
 Control prog_0986 ()
 {
     at ( "0986" );
-    instruction ( "INC  HL",0x0987 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x09,0x87 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_0987 );
+    return jumpDirect ( 0x0987,prog_0987 );
 }
 
 Control prog_0987 ()
 {
     at ( "0987" );
-    instruction ( "RET",0x0988 );
+    instruction ( "RET",e16_hi_lo ( 0x09,0x88 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -21158,7 +21158,7 @@ Control prog_0987 ()
 Control prog_0988 ()
 {
     at ( "0988" );
-    instruction ( "CALL 09CA",0x098B );
+    instruction ( "CALL 09CA",e16_hi_lo ( 0x09,0x8B ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -21171,23 +21171,23 @@ Control prog_0988 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_09CA );
+    return jumpDirect ( 0x09CA,prog_09CA );
 }
 
 Control prog_098B ()
 {
     at ( "098B" );
-    instruction ( "LD   A,(20F1)",0x098E );
+    instruction ( "LD   A,(20F1)",e16_hi_lo ( 0x09,0x8E ) );
     u8 a1 = e8_read_mem ( 0x20F1 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_098E );
+    return jumpDirect ( 0x098E,prog_098E );
 }
 
 Control prog_098E ()
 {
     at ( "098E" );
-    instruction ( "AND  A",0x098F );
+    instruction ( "AND  A",e16_hi_lo ( 0x09,0x8F ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -21199,13 +21199,13 @@ Control prog_098E ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_098F );
+    return jumpDirect ( 0x098F,prog_098F );
 }
 
 Control prog_098F ()
 {
     at ( "098F" );
-    instruction ( "RET  Z",0x0990 );
+    instruction ( "RET  Z",e16_hi_lo ( 0x09,0x90 ) );
     if (FlagZ)
     {
         u8 a1 = SPH ;
@@ -21224,14 +21224,14 @@ Control prog_098F ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_0990 );
+        return jumpDirect ( 0x0990,prog_0990 );
     }
 }
 
 Control prog_0990 ()
 {
     at ( "0990" );
-    instruction ( "XOR  A",0x0991 );
+    instruction ( "XOR  A",e16_hi_lo ( 0x09,0x91 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -21242,23 +21242,23 @@ Control prog_0990 ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0991 );
+    return jumpDirect ( 0x0991,prog_0991 );
 }
 
 Control prog_0991 ()
 {
     at ( "0991" );
-    instruction ( "LD   (20F1),A",0x0994 );
+    instruction ( "LD   (20F1),A",e16_hi_lo ( 0x09,0x94 ) );
     u8 a1 = A ;
     mem_write ( 0x20F1,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0994 );
+    return jumpDirect ( 0x0994,prog_0994 );
 }
 
 Control prog_0994 ()
 {
     at ( "0994" );
-    instruction ( "PUSH HL",0x0995 );
+    instruction ( "PUSH HL",e16_hi_lo ( 0x09,0x95 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = SPH ;
@@ -21272,25 +21272,25 @@ Control prog_0994 ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_0995 );
+    return jumpDirect ( 0x0995,prog_0995 );
 }
 
 Control prog_0995 ()
 {
     at ( "0995" );
-    instruction ( "LD   HL,(20F2)",0x0998 );
+    instruction ( "LD   HL,(20F2)",e16_hi_lo ( 0x09,0x98 ) );
     u8 a1 = e8_read_mem ( 0x20F2 ) ;
     u8 a2 = e8_read_mem ( 0x20F3 ) ;
     advance ( 16 );
     H = a2;
     L = a1;
-    return jumpDirect ( prog_0998 );
+    return jumpDirect ( 0x0998,prog_0998 );
 }
 
 Control prog_0998 ()
 {
     at ( "0998" );
-    instruction ( "EX   DE,HL",0x0999 );
+    instruction ( "EX   DE,HL",e16_hi_lo ( 0x09,0x99 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = H ;
@@ -21300,13 +21300,13 @@ Control prog_0998 ()
     E = a4;
     H = a1;
     L = a2;
-    return jumpDirect ( prog_0999 );
+    return jumpDirect ( 0x0999,prog_0999 );
 }
 
 Control prog_0999 ()
 {
     at ( "0999" );
-    instruction ( "POP  HL",0x099A );
+    instruction ( "POP  HL",e16_hi_lo ( 0x09,0x9A ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -21320,25 +21320,25 @@ Control prog_0999 ()
     L = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_099A );
+    return jumpDirect ( 0x099A,prog_099A );
 }
 
 Control prog_099A ()
 {
     at ( "099A" );
-    instruction ( "LD   A,(HL)",0x099B );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x09,0x9B ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_099B );
+    return jumpDirect ( 0x099B,prog_099B );
 }
 
 Control prog_099B ()
 {
     at ( "099B" );
-    instruction ( "ADD  E",0x099C );
+    instruction ( "ADD  E",e16_hi_lo ( 0x09,0x9C ) );
     u8 a1 = E ;
     u8 a2 = A ;
     u16 a3 = e16_add_with_carry ( e1_false (  ),a1,a2 ) ;
@@ -21352,13 +21352,13 @@ Control prog_099B ()
     FlagA = e1_test_bit ( e8_lo ( a6 ),4 );
     FlagP = e1_parity ( e8_lo ( a3 ) );
     FlagCY = e1_test_bit ( e8_hi ( a3 ),0 );
-    return jumpDirect ( prog_099C );
+    return jumpDirect ( 0x099C,prog_099C );
 }
 
 Control prog_099C ()
 {
     at ( "099C" );
-    instruction ( "DAA",0x099D );
+    instruction ( "DAA",e16_hi_lo ( 0x09,0x9D ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( a1,0x0F ) ;
     u16 a3 = e16_add_with_carry ( e1_false (  ),a2,0x06 ) ;
@@ -21373,60 +21373,60 @@ Control prog_099C ()
     FlagA = e1_test_bit ( e8_ite ( e1_or_bit ( e1_and_bit ( e1_or_bit ( e1_test_bit ( a2,1 ),e1_test_bit ( a2,2 ) ),e1_test_bit ( a2,3 ) ),FlagA ),e8_lo ( a3 ),a2 ),4 );
     FlagP = e1_parity ( a7 );
     FlagCY = e1_or_bit ( e1_test_bit ( e8_ite ( e1_or_bit ( e1_and_bit ( e1_or_bit ( e1_test_bit ( e8_lo ( a4 ),1 ),e1_test_bit ( e8_lo ( a4 ),2 ) ),e1_test_bit ( e8_lo ( a4 ),3 ) ),FlagCY ),e8_lo ( a5 ),e8_lo ( a4 ) ),4 ),FlagCY );
-    return jumpDirect ( prog_099D );
+    return jumpDirect ( 0x099D,prog_099D );
 }
 
 Control prog_099D ()
 {
     at ( "099D" );
-    instruction ( "LD   (HL),A",0x099E );
+    instruction ( "LD   (HL),A",e16_hi_lo ( 0x09,0x9E ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_099E );
+    return jumpDirect ( 0x099E,prog_099E );
 }
 
 Control prog_099E ()
 {
     at ( "099E" );
-    instruction ( "LD   E,A",0x099F );
+    instruction ( "LD   E,A",e16_hi_lo ( 0x09,0x9F ) );
     u8 a1 = A ;
     advance ( 5 );
     E = a1;
-    return jumpDirect ( prog_099F );
+    return jumpDirect ( 0x099F,prog_099F );
 }
 
 Control prog_099F ()
 {
     at ( "099F" );
-    instruction ( "INC  HL",0x09A0 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x09,0xA0 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_09A0 );
+    return jumpDirect ( 0x09A0,prog_09A0 );
 }
 
 Control prog_09A0 ()
 {
     at ( "09A0" );
-    instruction ( "LD   A,(HL)",0x09A1 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x09,0xA1 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_09A1 );
+    return jumpDirect ( 0x09A1,prog_09A1 );
 }
 
 Control prog_09A1 ()
 {
     at ( "09A1" );
-    instruction ( "ADC  D",0x09A2 );
+    instruction ( "ADC  D",e16_hi_lo ( 0x09,0xA2 ) );
     u8 a1 = D ;
     u8 a2 = A ;
     u16 a3 = e16_add_with_carry ( FlagCY,a1,a2 ) ;
@@ -21440,13 +21440,13 @@ Control prog_09A1 ()
     FlagA = e1_test_bit ( e8_lo ( a6 ),4 );
     FlagP = e1_parity ( e8_lo ( a3 ) );
     FlagCY = e1_test_bit ( e8_hi ( a3 ),0 );
-    return jumpDirect ( prog_09A2 );
+    return jumpDirect ( 0x09A2,prog_09A2 );
 }
 
 Control prog_09A2 ()
 {
     at ( "09A2" );
-    instruction ( "DAA",0x09A3 );
+    instruction ( "DAA",e16_hi_lo ( 0x09,0xA3 ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( a1,0x0F ) ;
     u16 a3 = e16_add_with_carry ( e1_false (  ),a2,0x06 ) ;
@@ -21461,113 +21461,113 @@ Control prog_09A2 ()
     FlagA = e1_test_bit ( e8_ite ( e1_or_bit ( e1_and_bit ( e1_or_bit ( e1_test_bit ( a2,1 ),e1_test_bit ( a2,2 ) ),e1_test_bit ( a2,3 ) ),FlagA ),e8_lo ( a3 ),a2 ),4 );
     FlagP = e1_parity ( a7 );
     FlagCY = e1_or_bit ( e1_test_bit ( e8_ite ( e1_or_bit ( e1_and_bit ( e1_or_bit ( e1_test_bit ( e8_lo ( a4 ),1 ),e1_test_bit ( e8_lo ( a4 ),2 ) ),e1_test_bit ( e8_lo ( a4 ),3 ) ),FlagCY ),e8_lo ( a5 ),e8_lo ( a4 ) ),4 ),FlagCY );
-    return jumpDirect ( prog_09A3 );
+    return jumpDirect ( 0x09A3,prog_09A3 );
 }
 
 Control prog_09A3 ()
 {
     at ( "09A3" );
-    instruction ( "LD   (HL),A",0x09A4 );
+    instruction ( "LD   (HL),A",e16_hi_lo ( 0x09,0xA4 ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_09A4 );
+    return jumpDirect ( 0x09A4,prog_09A4 );
 }
 
 Control prog_09A4 ()
 {
     at ( "09A4" );
-    instruction ( "LD   D,A",0x09A5 );
+    instruction ( "LD   D,A",e16_hi_lo ( 0x09,0xA5 ) );
     u8 a1 = A ;
     advance ( 5 );
     D = a1;
-    return jumpDirect ( prog_09A5 );
+    return jumpDirect ( 0x09A5,prog_09A5 );
 }
 
 Control prog_09A5 ()
 {
     at ( "09A5" );
-    instruction ( "INC  HL",0x09A6 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x09,0xA6 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_09A6 );
+    return jumpDirect ( 0x09A6,prog_09A6 );
 }
 
 Control prog_09A6 ()
 {
     at ( "09A6" );
-    instruction ( "LD   A,(HL)",0x09A7 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x09,0xA7 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_09A7 );
+    return jumpDirect ( 0x09A7,prog_09A7 );
 }
 
 Control prog_09A7 ()
 {
     at ( "09A7" );
-    instruction ( "INC  HL",0x09A8 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x09,0xA8 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_09A8 );
+    return jumpDirect ( 0x09A8,prog_09A8 );
 }
 
 Control prog_09A8 ()
 {
     at ( "09A8" );
-    instruction ( "LD   H,(HL)",0x09A9 );
+    instruction ( "LD   H,(HL)",e16_hi_lo ( 0x09,0xA9 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     H = a3;
-    return jumpDirect ( prog_09A9 );
+    return jumpDirect ( 0x09A9,prog_09A9 );
 }
 
 Control prog_09A9 ()
 {
     at ( "09A9" );
-    instruction ( "LD   L,A",0x09AA );
+    instruction ( "LD   L,A",e16_hi_lo ( 0x09,0xAA ) );
     u8 a1 = A ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( prog_09AA );
+    return jumpDirect ( 0x09AA,prog_09AA );
 }
 
 Control prog_09AA ()
 {
     at ( "09AA" );
-    instruction ( "JP   09AD",0x09AD );
+    instruction ( "JP   09AD",e16_hi_lo ( 0x09,0xAD ) );
     advance ( 10 );
-    return jumpDirect ( prog_09AD );
+    return jumpDirect ( 0x09AD,prog_09AD );
 }
 
 Control prog_09AD ()
 {
     at ( "09AD" );
-    instruction ( "LD   A,D",0x09AE );
+    instruction ( "LD   A,D",e16_hi_lo ( 0x09,0xAE ) );
     u8 a1 = D ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_09AE );
+    return jumpDirect ( 0x09AE,prog_09AE );
 }
 
 Control prog_09AE ()
 {
     at ( "09AE" );
-    instruction ( "CALL 09B2",0x09B1 );
+    instruction ( "CALL 09B2",e16_hi_lo ( 0x09,0xB1 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -21580,23 +21580,23 @@ Control prog_09AE ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_09B2 );
+    return jumpDirect ( 0x09B2,prog_09B2 );
 }
 
 Control prog_09B1 ()
 {
     at ( "09B1" );
-    instruction ( "LD   A,E",0x09B2 );
+    instruction ( "LD   A,E",e16_hi_lo ( 0x09,0xB2 ) );
     u8 a1 = E ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_09B2 );
+    return jumpDirect ( 0x09B2,prog_09B2 );
 }
 
 Control prog_09B2 ()
 {
     at ( "09B2" );
-    instruction ( "PUSH DE",0x09B3 );
+    instruction ( "PUSH DE",e16_hi_lo ( 0x09,0xB3 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = SPH ;
@@ -21610,13 +21610,13 @@ Control prog_09B2 ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_09B3 );
+    return jumpDirect ( 0x09B3,prog_09B3 );
 }
 
 Control prog_09B3 ()
 {
     at ( "09B3" );
-    instruction ( "PUSH PSW",0x09B4 );
+    instruction ( "PUSH PSW",e16_hi_lo ( 0x09,0xB4 ) );
     u8 a1 = A ;
     u8 a2 = SPH ;
     u8 a3 = SPL ;
@@ -21629,57 +21629,57 @@ Control prog_09B3 ()
     advance ( 11 );
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_09B4 );
+    return jumpDirect ( 0x09B4,prog_09B4 );
 }
 
 Control prog_09B4 ()
 {
     at ( "09B4" );
-    instruction ( "RRCA",0x09B5 );
+    instruction ( "RRCA",e16_hi_lo ( 0x09,0xB5 ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftR ( a1,0x01 ),7,e1_test_bit ( a1,0 ) );
     FlagCY = e1_test_bit ( a1,0 );
-    return jumpDirect ( prog_09B5 );
+    return jumpDirect ( 0x09B5,prog_09B5 );
 }
 
 Control prog_09B5 ()
 {
     at ( "09B5" );
-    instruction ( "RRCA",0x09B6 );
+    instruction ( "RRCA",e16_hi_lo ( 0x09,0xB6 ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftR ( a1,0x01 ),7,e1_test_bit ( a1,0 ) );
     FlagCY = e1_test_bit ( a1,0 );
-    return jumpDirect ( prog_09B6 );
+    return jumpDirect ( 0x09B6,prog_09B6 );
 }
 
 Control prog_09B6 ()
 {
     at ( "09B6" );
-    instruction ( "RRCA",0x09B7 );
+    instruction ( "RRCA",e16_hi_lo ( 0x09,0xB7 ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftR ( a1,0x01 ),7,e1_test_bit ( a1,0 ) );
     FlagCY = e1_test_bit ( a1,0 );
-    return jumpDirect ( prog_09B7 );
+    return jumpDirect ( 0x09B7,prog_09B7 );
 }
 
 Control prog_09B7 ()
 {
     at ( "09B7" );
-    instruction ( "RRCA",0x09B8 );
+    instruction ( "RRCA",e16_hi_lo ( 0x09,0xB8 ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftR ( a1,0x01 ),7,e1_test_bit ( a1,0 ) );
     FlagCY = e1_test_bit ( a1,0 );
-    return jumpDirect ( prog_09B8 );
+    return jumpDirect ( 0x09B8,prog_09B8 );
 }
 
 Control prog_09B8 ()
 {
     at ( "09B8" );
-    instruction ( "AND  0F",0x09BA );
+    instruction ( "AND  0F",e16_hi_lo ( 0x09,0xBA ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( 0x0F,a1 ) ;
     u8 a3 = e8_or ( 0x0F,a1 ) ;
@@ -21690,13 +21690,13 @@ Control prog_09B8 ()
     FlagA = e1_test_bit ( a3,3 );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_09BA );
+    return jumpDirect ( 0x09BA,prog_09BA );
 }
 
 Control prog_09BA ()
 {
     at ( "09BA" );
-    instruction ( "CALL 09C5",0x09BD );
+    instruction ( "CALL 09C5",e16_hi_lo ( 0x09,0xBD ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -21709,13 +21709,13 @@ Control prog_09BA ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_09C5 );
+    return jumpDirect ( 0x09C5,prog_09C5 );
 }
 
 Control prog_09BD ()
 {
     at ( "09BD" );
-    instruction ( "POP  PSW",0x09BE );
+    instruction ( "POP  PSW",e16_hi_lo ( 0x09,0xBE ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -21733,13 +21733,13 @@ Control prog_09BD ()
     FlagA = e1_test_bit ( a4,4 );
     FlagP = e1_test_bit ( a4,2 );
     FlagCY = e1_test_bit ( a4,0 );
-    return jumpDirect ( prog_09BE );
+    return jumpDirect ( 0x09BE,prog_09BE );
 }
 
 Control prog_09BE ()
 {
     at ( "09BE" );
-    instruction ( "AND  0F",0x09C0 );
+    instruction ( "AND  0F",e16_hi_lo ( 0x09,0xC0 ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( 0x0F,a1 ) ;
     u8 a3 = e8_or ( 0x0F,a1 ) ;
@@ -21750,13 +21750,13 @@ Control prog_09BE ()
     FlagA = e1_test_bit ( a3,3 );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_09C0 );
+    return jumpDirect ( 0x09C0,prog_09C0 );
 }
 
 Control prog_09C0 ()
 {
     at ( "09C0" );
-    instruction ( "CALL 09C5",0x09C3 );
+    instruction ( "CALL 09C5",e16_hi_lo ( 0x09,0xC3 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -21769,13 +21769,13 @@ Control prog_09C0 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_09C5 );
+    return jumpDirect ( 0x09C5,prog_09C5 );
 }
 
 Control prog_09C3 ()
 {
     at ( "09C3" );
-    instruction ( "POP  DE",0x09C4 );
+    instruction ( "POP  DE",e16_hi_lo ( 0x09,0xC4 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -21789,13 +21789,13 @@ Control prog_09C3 ()
     E = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_09C4 );
+    return jumpDirect ( 0x09C4,prog_09C4 );
 }
 
 Control prog_09C4 ()
 {
     at ( "09C4" );
-    instruction ( "RET",0x09C5 );
+    instruction ( "RET",e16_hi_lo ( 0x09,0xC5 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -21813,7 +21813,7 @@ Control prog_09C4 ()
 Control prog_09C5 ()
 {
     at ( "09C5" );
-    instruction ( "ADD  1A",0x09C7 );
+    instruction ( "ADD  1A",e16_hi_lo ( 0x09,0xC7 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_false (  ),0x1A,a1 ) ;
     u8 a3 = e8_and ( 0x1A,0x0F ) ;
@@ -21826,52 +21826,52 @@ Control prog_09C5 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_test_bit ( e8_hi ( a2 ),0 );
-    return jumpDirect ( prog_09C7 );
+    return jumpDirect ( 0x09C7,prog_09C7 );
 }
 
 Control prog_09C7 ()
 {
     at ( "09C7" );
-    instruction ( "JP   08FF",0x09CA );
+    instruction ( "JP   08FF",e16_hi_lo ( 0x09,0xCA ) );
     advance ( 10 );
-    return jumpDirect ( prog_08FF );
+    return jumpDirect ( 0x08FF,prog_08FF );
 }
 
 Control prog_09CA ()
 {
     at ( "09CA" );
-    instruction ( "LD   A,(2067)",0x09CD );
+    instruction ( "LD   A,(2067)",e16_hi_lo ( 0x09,0xCD ) );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_09CD );
+    return jumpDirect ( 0x09CD,prog_09CD );
 }
 
 Control prog_09CD ()
 {
     at ( "09CD" );
-    instruction ( "RRCA",0x09CE );
+    instruction ( "RRCA",e16_hi_lo ( 0x09,0xCE ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftR ( a1,0x01 ),7,e1_test_bit ( a1,0 ) );
     FlagCY = e1_test_bit ( a1,0 );
-    return jumpDirect ( prog_09CE );
+    return jumpDirect ( 0x09CE,prog_09CE );
 }
 
 Control prog_09CE ()
 {
     at ( "09CE" );
-    instruction ( "LD   HL,20F8",0x09D1 );
+    instruction ( "LD   HL,20F8",e16_hi_lo ( 0x09,0xD1 ) );
     advance ( 10 );
     H = 0x20;
     L = 0xF8;
-    return jumpDirect ( prog_09D1 );
+    return jumpDirect ( 0x09D1,prog_09D1 );
 }
 
 Control prog_09D1 ()
 {
     at ( "09D1" );
-    instruction ( "RET  CY",0x09D2 );
+    instruction ( "RET  CY",e16_hi_lo ( 0x09,0xD2 ) );
     if (FlagCY)
     {
         u8 a1 = SPH ;
@@ -21890,24 +21890,24 @@ Control prog_09D1 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_09D2 );
+        return jumpDirect ( 0x09D2,prog_09D2 );
     }
 }
 
 Control prog_09D2 ()
 {
     at ( "09D2" );
-    instruction ( "LD   HL,20FC",0x09D5 );
+    instruction ( "LD   HL,20FC",e16_hi_lo ( 0x09,0xD5 ) );
     advance ( 10 );
     H = 0x20;
     L = 0xFC;
-    return jumpDirect ( prog_09D5 );
+    return jumpDirect ( 0x09D5,prog_09D5 );
 }
 
 Control prog_09D5 ()
 {
     at ( "09D5" );
-    instruction ( "RET",0x09D6 );
+    instruction ( "RET",e16_hi_lo ( 0x09,0xD6 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -21925,51 +21925,51 @@ Control prog_09D5 ()
 Control prog_09D6 ()
 {
     at ( "09D6" );
-    instruction ( "LD   HL,2402",0x09D9 );
+    instruction ( "LD   HL,2402",e16_hi_lo ( 0x09,0xD9 ) );
     advance ( 10 );
     H = 0x24;
     L = 0x02;
-    return jumpDirect ( prog_09D9 );
+    return jumpDirect ( 0x09D9,prog_09D9 );
 }
 
 Control prog_09D9 ()
 {
     at ( "09D9" );
-    instruction ( "LD   (HL),00",0x09DB );
+    instruction ( "LD   (HL),00",e16_hi_lo ( 0x09,0xDB ) );
     u8 a1 = H ;
     u8 a2 = L ;
     mem_write ( e16_hi_lo ( a1,a2 ),0x00 );
     advance ( 10 );
-    return jumpDirect ( prog_09DB );
+    return jumpDirect ( 0x09DB,prog_09DB );
 }
 
 Control prog_09DB ()
 {
     at ( "09DB" );
-    instruction ( "INC  HL",0x09DC );
+    instruction ( "INC  HL",e16_hi_lo ( 0x09,0xDC ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_09DC );
+    return jumpDirect ( 0x09DC,prog_09DC );
 }
 
 Control prog_09DC ()
 {
     at ( "09DC" );
-    instruction ( "LD   A,L",0x09DD );
+    instruction ( "LD   A,L",e16_hi_lo ( 0x09,0xDD ) );
     u8 a1 = L ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_09DD );
+    return jumpDirect ( 0x09DD,prog_09DD );
 }
 
 Control prog_09DD ()
 {
     at ( "09DD" );
-    instruction ( "AND  1F",0x09DF );
+    instruction ( "AND  1F",e16_hi_lo ( 0x09,0xDF ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( 0x1F,a1 ) ;
     u8 a3 = e8_or ( 0x1F,a1 ) ;
@@ -21980,13 +21980,13 @@ Control prog_09DD ()
     FlagA = e1_test_bit ( a3,3 );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_09DF );
+    return jumpDirect ( 0x09DF,prog_09DF );
 }
 
 Control prog_09DF ()
 {
     at ( "09DF" );
-    instruction ( "CP   1C",0x09E1 );
+    instruction ( "CP   1C",e16_hi_lo ( 0x09,0xE1 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x1C ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -21998,39 +21998,39 @@ Control prog_09DF ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_09E1 );
+    return jumpDirect ( 0x09E1,prog_09E1 );
 }
 
 Control prog_09E1 ()
 {
     at ( "09E1" );
-    instruction ( "JP   CY,09E8",0x09E4 );
+    instruction ( "JP   CY,09E8",e16_hi_lo ( 0x09,0xE4 ) );
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( prog_09E8 );
+        return jumpDirect ( 0x09E8,prog_09E8 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_09E4 );
+        return jumpDirect ( 0x09E4,prog_09E4 );
     }
 }
 
 Control prog_09E4 ()
 {
     at ( "09E4" );
-    instruction ( "LD   DE,0006",0x09E7 );
+    instruction ( "LD   DE,0006",e16_hi_lo ( 0x09,0xE7 ) );
     advance ( 10 );
     D = 0x00;
     E = 0x06;
-    return jumpDirect ( prog_09E7 );
+    return jumpDirect ( 0x09E7,prog_09E7 );
 }
 
 Control prog_09E7 ()
 {
     at ( "09E7" );
-    instruction ( "ADD  HL,DE",0x09E8 );
+    instruction ( "ADD  HL,DE",e16_hi_lo ( 0x09,0xE8 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = H ;
@@ -22040,23 +22040,23 @@ Control prog_09E7 ()
     H = e8_hi ( e16_drop_hi_bit_of_17 ( a5 ) );
     L = e8_lo ( e16_drop_hi_bit_of_17 ( a5 ) );
     FlagCY = e1_hi_bit_of_17 ( a5 );
-    return jumpDirect ( prog_09E8 );
+    return jumpDirect ( 0x09E8,prog_09E8 );
 }
 
 Control prog_09E8 ()
 {
     at ( "09E8" );
-    instruction ( "LD   A,H",0x09E9 );
+    instruction ( "LD   A,H",e16_hi_lo ( 0x09,0xE9 ) );
     u8 a1 = H ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_09E9 );
+    return jumpDirect ( 0x09E9,prog_09E9 );
 }
 
 Control prog_09E9 ()
 {
     at ( "09E9" );
-    instruction ( "CP   40",0x09EB );
+    instruction ( "CP   40",e16_hi_lo ( 0x09,0xEB ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x40 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -22068,29 +22068,29 @@ Control prog_09E9 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_09EB );
+    return jumpDirect ( 0x09EB,prog_09EB );
 }
 
 Control prog_09EB ()
 {
     at ( "09EB" );
-    instruction ( "JP   CY,09D9",0x09EE );
+    instruction ( "JP   CY,09D9",e16_hi_lo ( 0x09,0xEE ) );
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( prog_09D9 );
+        return jumpDirect ( 0x09D9,prog_09D9 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_09EE );
+        return jumpDirect ( 0x09EE,prog_09EE );
     }
 }
 
 Control prog_09EE ()
 {
     at ( "09EE" );
-    instruction ( "RET",0x09EF );
+    instruction ( "RET",e16_hi_lo ( 0x09,0xEF ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -22108,7 +22108,7 @@ Control prog_09EE ()
 Control prog_09EF ()
 {
     at ( "09EF" );
-    instruction ( "CALL 0A3C",0x09F2 );
+    instruction ( "CALL 0A3C",e16_hi_lo ( 0x09,0xF2 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -22121,13 +22121,13 @@ Control prog_09EF ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0A3C );
+    return jumpDirect ( 0x0A3C,prog_0A3C );
 }
 
 Control prog_09F2 ()
 {
     at ( "09F2" );
-    instruction ( "XOR  A",0x09F3 );
+    instruction ( "XOR  A",e16_hi_lo ( 0x09,0xF3 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -22138,23 +22138,23 @@ Control prog_09F2 ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_09F3 );
+    return jumpDirect ( 0x09F3,prog_09F3 );
 }
 
 Control prog_09F3 ()
 {
     at ( "09F3" );
-    instruction ( "LD   (20E9),A",0x09F6 );
+    instruction ( "LD   (20E9),A",e16_hi_lo ( 0x09,0xF6 ) );
     u8 a1 = A ;
     mem_write ( 0x20E9,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_09F6 );
+    return jumpDirect ( 0x09F6,prog_09F6 );
 }
 
 Control prog_09F6 ()
 {
     at ( "09F6" );
-    instruction ( "CALL 09D6",0x09F9 );
+    instruction ( "CALL 09D6",e16_hi_lo ( 0x09,0xF9 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -22167,23 +22167,23 @@ Control prog_09F6 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_09D6 );
+    return jumpDirect ( 0x09D6,prog_09D6 );
 }
 
 Control prog_09F9 ()
 {
     at ( "09F9" );
-    instruction ( "LD   A,(2067)",0x09FC );
+    instruction ( "LD   A,(2067)",e16_hi_lo ( 0x09,0xFC ) );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_09FC );
+    return jumpDirect ( 0x09FC,prog_09FC );
 }
 
 Control prog_09FC ()
 {
     at ( "09FC" );
-    instruction ( "PUSH PSW",0x09FD );
+    instruction ( "PUSH PSW",e16_hi_lo ( 0x09,0xFD ) );
     u8 a1 = A ;
     u8 a2 = SPH ;
     u8 a3 = SPL ;
@@ -22196,13 +22196,13 @@ Control prog_09FC ()
     advance ( 11 );
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_09FD );
+    return jumpDirect ( 0x09FD,prog_09FD );
 }
 
 Control prog_09FD ()
 {
     at ( "09FD" );
-    instruction ( "CALL 01E4",0x0A00 );
+    instruction ( "CALL 01E4",e16_hi_lo ( 0x0A,0x00 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -22215,13 +22215,13 @@ Control prog_09FD ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_01E4 );
+    return jumpDirect ( 0x01E4,prog_01E4 );
 }
 
 Control prog_0A00 ()
 {
     at ( "0A00" );
-    instruction ( "POP  PSW",0x0A01 );
+    instruction ( "POP  PSW",e16_hi_lo ( 0x0A,0x01 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -22239,43 +22239,43 @@ Control prog_0A00 ()
     FlagA = e1_test_bit ( a4,4 );
     FlagP = e1_test_bit ( a4,2 );
     FlagCY = e1_test_bit ( a4,0 );
-    return jumpDirect ( prog_0A01 );
+    return jumpDirect ( 0x0A01,prog_0A01 );
 }
 
 Control prog_0A01 ()
 {
     at ( "0A01" );
-    instruction ( "LD   (2067),A",0x0A04 );
+    instruction ( "LD   (2067),A",e16_hi_lo ( 0x0A,0x04 ) );
     u8 a1 = A ;
     mem_write ( 0x2067,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0A04 );
+    return jumpDirect ( 0x0A04,prog_0A04 );
 }
 
 Control prog_0A04 ()
 {
     at ( "0A04" );
-    instruction ( "LD   A,(2067)",0x0A07 );
+    instruction ( "LD   A,(2067)",e16_hi_lo ( 0x0A,0x07 ) );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0A07 );
+    return jumpDirect ( 0x0A07,prog_0A07 );
 }
 
 Control prog_0A07 ()
 {
     at ( "0A07" );
-    instruction ( "LD   H,A",0x0A08 );
+    instruction ( "LD   H,A",e16_hi_lo ( 0x0A,0x08 ) );
     u8 a1 = A ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( prog_0A08 );
+    return jumpDirect ( 0x0A08,prog_0A08 );
 }
 
 Control prog_0A08 ()
 {
     at ( "0A08" );
-    instruction ( "PUSH HL",0x0A09 );
+    instruction ( "PUSH HL",e16_hi_lo ( 0x0A,0x09 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = SPH ;
@@ -22289,34 +22289,34 @@ Control prog_0A08 ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_0A09 );
+    return jumpDirect ( 0x0A09,prog_0A09 );
 }
 
 Control prog_0A09 ()
 {
     at ( "0A09" );
-    instruction ( "LD   L,FE",0x0A0B );
+    instruction ( "LD   L,FE",e16_hi_lo ( 0x0A,0x0B ) );
     advance ( 7 );
     L = 0xFE;
-    return jumpDirect ( prog_0A0B );
+    return jumpDirect ( 0x0A0B,prog_0A0B );
 }
 
 Control prog_0A0B ()
 {
     at ( "0A0B" );
-    instruction ( "LD   A,(HL)",0x0A0C );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x0A,0x0C ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_0A0C );
+    return jumpDirect ( 0x0A0C,prog_0A0C );
 }
 
 Control prog_0A0C ()
 {
     at ( "0A0C" );
-    instruction ( "AND  07",0x0A0E );
+    instruction ( "AND  07",e16_hi_lo ( 0x0A,0x0E ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( 0x07,a1 ) ;
     u8 a3 = e8_or ( 0x07,a1 ) ;
@@ -22327,13 +22327,13 @@ Control prog_0A0C ()
     FlagA = e1_test_bit ( a3,3 );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0A0E );
+    return jumpDirect ( 0x0A0E,prog_0A0E );
 }
 
 Control prog_0A0E ()
 {
     at ( "0A0E" );
-    instruction ( "INC  A",0x0A0F );
+    instruction ( "INC  A",e16_hi_lo ( 0x0A,0x0F ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_true (  ),a1,0x00 ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -22345,48 +22345,48 @@ Control prog_0A0E ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_0A0F );
+    return jumpDirect ( 0x0A0F,prog_0A0F );
 }
 
 Control prog_0A0F ()
 {
     at ( "0A0F" );
-    instruction ( "LD   (HL),A",0x0A10 );
+    instruction ( "LD   (HL),A",e16_hi_lo ( 0x0A,0x10 ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_0A10 );
+    return jumpDirect ( 0x0A10,prog_0A10 );
 }
 
 Control prog_0A10 ()
 {
     at ( "0A10" );
-    instruction ( "LD   HL,1DA2",0x0A13 );
+    instruction ( "LD   HL,1DA2",e16_hi_lo ( 0x0A,0x13 ) );
     advance ( 10 );
     H = 0x1D;
     L = 0xA2;
-    return jumpDirect ( prog_0A13 );
+    return jumpDirect ( 0x0A13,prog_0A13 );
 }
 
 Control prog_0A13 ()
 {
     at ( "0A13" );
-    instruction ( "INC  HL",0x0A14 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x0A,0x14 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_0A14 );
+    return jumpDirect ( 0x0A14,prog_0A14 );
 }
 
 Control prog_0A14 ()
 {
     at ( "0A14" );
-    instruction ( "DEC  A",0x0A15 );
+    instruction ( "DEC  A",e16_hi_lo ( 0x0A,0x15 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -22398,41 +22398,41 @@ Control prog_0A14 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_0A15 );
+    return jumpDirect ( 0x0A15,prog_0A15 );
 }
 
 Control prog_0A15 ()
 {
     at ( "0A15" );
-    instruction ( "JP   NZ,0A13",0x0A18 );
+    instruction ( "JP   NZ,0A13",e16_hi_lo ( 0x0A,0x18 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_0A13 );
+        return jumpDirect ( 0x0A13,prog_0A13 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0A18 );
+        return jumpDirect ( 0x0A18,prog_0A18 );
     }
 }
 
 Control prog_0A18 ()
 {
     at ( "0A18" );
-    instruction ( "LD   A,(HL)",0x0A19 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x0A,0x19 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_0A19 );
+    return jumpDirect ( 0x0A19,prog_0A19 );
 }
 
 Control prog_0A19 ()
 {
     at ( "0A19" );
-    instruction ( "POP  HL",0x0A1A );
+    instruction ( "POP  HL",e16_hi_lo ( 0x0A,0x1A ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -22446,114 +22446,114 @@ Control prog_0A19 ()
     L = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_0A1A );
+    return jumpDirect ( 0x0A1A,prog_0A1A );
 }
 
 Control prog_0A1A ()
 {
     at ( "0A1A" );
-    instruction ( "LD   L,FC",0x0A1C );
+    instruction ( "LD   L,FC",e16_hi_lo ( 0x0A,0x1C ) );
     advance ( 7 );
     L = 0xFC;
-    return jumpDirect ( prog_0A1C );
+    return jumpDirect ( 0x0A1C,prog_0A1C );
 }
 
 Control prog_0A1C ()
 {
     at ( "0A1C" );
-    instruction ( "LD   (HL),A",0x0A1D );
+    instruction ( "LD   (HL),A",e16_hi_lo ( 0x0A,0x1D ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_0A1D );
+    return jumpDirect ( 0x0A1D,prog_0A1D );
 }
 
 Control prog_0A1D ()
 {
     at ( "0A1D" );
-    instruction ( "INC  HL",0x0A1E );
+    instruction ( "INC  HL",e16_hi_lo ( 0x0A,0x1E ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_0A1E );
+    return jumpDirect ( 0x0A1E,prog_0A1E );
 }
 
 Control prog_0A1E ()
 {
     at ( "0A1E" );
-    instruction ( "LD   (HL),38",0x0A20 );
+    instruction ( "LD   (HL),38",e16_hi_lo ( 0x0A,0x20 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     mem_write ( e16_hi_lo ( a1,a2 ),0x38 );
     advance ( 10 );
-    return jumpDirect ( prog_0A20 );
+    return jumpDirect ( 0x0A20,prog_0A20 );
 }
 
 Control prog_0A20 ()
 {
     at ( "0A20" );
-    instruction ( "LD   A,H",0x0A21 );
+    instruction ( "LD   A,H",e16_hi_lo ( 0x0A,0x21 ) );
     u8 a1 = H ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_0A21 );
+    return jumpDirect ( 0x0A21,prog_0A21 );
 }
 
 Control prog_0A21 ()
 {
     at ( "0A21" );
-    instruction ( "RRCA",0x0A22 );
+    instruction ( "RRCA",e16_hi_lo ( 0x0A,0x22 ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftR ( a1,0x01 ),7,e1_test_bit ( a1,0 ) );
     FlagCY = e1_test_bit ( a1,0 );
-    return jumpDirect ( prog_0A22 );
+    return jumpDirect ( 0x0A22,prog_0A22 );
 }
 
 Control prog_0A22 ()
 {
     at ( "0A22" );
-    instruction ( "JP   CY,0A33",0x0A25 );
+    instruction ( "JP   CY,0A33",e16_hi_lo ( 0x0A,0x25 ) );
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( prog_0A33 );
+        return jumpDirect ( 0x0A33,prog_0A33 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0A25 );
+        return jumpDirect ( 0x0A25,prog_0A25 );
     }
 }
 
 Control prog_0A25 ()
 {
     at ( "0A25" );
-    instruction ( "LD   A,21",0x0A27 );
+    instruction ( "LD   A,21",e16_hi_lo ( 0x0A,0x27 ) );
     advance ( 7 );
     A = 0x21;
-    return jumpDirect ( prog_0A27 );
+    return jumpDirect ( 0x0A27,prog_0A27 );
 }
 
 Control prog_0A27 ()
 {
     at ( "0A27" );
-    instruction ( "LD   (2098),A",0x0A2A );
+    instruction ( "LD   (2098),A",e16_hi_lo ( 0x0A,0x2A ) );
     u8 a1 = A ;
     mem_write ( 0x2098,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0A2A );
+    return jumpDirect ( 0x0A2A,prog_0A2A );
 }
 
 Control prog_0A2A ()
 {
     at ( "0A2A" );
-    instruction ( "CALL 01F5",0x0A2D );
+    instruction ( "CALL 01F5",e16_hi_lo ( 0x0A,0x2D ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -22566,13 +22566,13 @@ Control prog_0A2A ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_01F5 );
+    return jumpDirect ( 0x01F5,prog_01F5 );
 }
 
 Control prog_0A2D ()
 {
     at ( "0A2D" );
-    instruction ( "CALL 1904",0x0A30 );
+    instruction ( "CALL 1904",e16_hi_lo ( 0x0A,0x30 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -22585,21 +22585,21 @@ Control prog_0A2D ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1904 );
+    return jumpDirect ( 0x1904,prog_1904 );
 }
 
 Control prog_0A30 ()
 {
     at ( "0A30" );
-    instruction ( "JP   0804",0x0A33 );
+    instruction ( "JP   0804",e16_hi_lo ( 0x0A,0x33 ) );
     advance ( 10 );
-    return jumpDirect ( prog_0804 );
+    return jumpDirect ( 0x0804,prog_0804 );
 }
 
 Control prog_0A33 ()
 {
     at ( "0A33" );
-    instruction ( "CALL 01EF",0x0A36 );
+    instruction ( "CALL 01EF",e16_hi_lo ( 0x0A,0x36 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -22612,13 +22612,13 @@ Control prog_0A33 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_01EF );
+    return jumpDirect ( 0x01EF,prog_01EF );
 }
 
 Control prog_0A36 ()
 {
     at ( "0A36" );
-    instruction ( "CALL 01C0",0x0A39 );
+    instruction ( "CALL 01C0",e16_hi_lo ( 0x0A,0x39 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -22631,21 +22631,21 @@ Control prog_0A36 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_01C0 );
+    return jumpDirect ( 0x01C0,prog_01C0 );
 }
 
 Control prog_0A39 ()
 {
     at ( "0A39" );
-    instruction ( "JP   0804",0x0A3C );
+    instruction ( "JP   0804",e16_hi_lo ( 0x0A,0x3C ) );
     advance ( 10 );
-    return jumpDirect ( prog_0804 );
+    return jumpDirect ( 0x0804,prog_0804 );
 }
 
 Control prog_0A3C ()
 {
     at ( "0A3C" );
-    instruction ( "CALL 0A59",0x0A3F );
+    instruction ( "CALL 0A59",e16_hi_lo ( 0x0A,0x3F ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -22658,58 +22658,58 @@ Control prog_0A3C ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0A59 );
+    return jumpDirect ( 0x0A59,prog_0A59 );
 }
 
 Control prog_0A3F ()
 {
     at ( "0A3F" );
-    instruction ( "JP   NZ,0A52",0x0A42 );
+    instruction ( "JP   NZ,0A52",e16_hi_lo ( 0x0A,0x42 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_0A52 );
+        return jumpDirect ( 0x0A52,prog_0A52 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0A42 );
+        return jumpDirect ( 0x0A42,prog_0A42 );
     }
 }
 
 Control prog_0A42 ()
 {
     at ( "0A42" );
-    instruction ( "LD   A,30",0x0A44 );
+    instruction ( "LD   A,30",e16_hi_lo ( 0x0A,0x44 ) );
     advance ( 7 );
     A = 0x30;
-    return jumpDirect ( prog_0A44 );
+    return jumpDirect ( 0x0A44,prog_0A44 );
 }
 
 Control prog_0A44 ()
 {
     at ( "0A44" );
-    instruction ( "LD   (20C0),A",0x0A47 );
+    instruction ( "LD   (20C0),A",e16_hi_lo ( 0x0A,0x47 ) );
     u8 a1 = A ;
     mem_write ( 0x20C0,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0A47 );
+    return jumpDirect ( 0x0A47,prog_0A47 );
 }
 
 Control prog_0A47 ()
 {
     at ( "0A47" );
-    instruction ( "LD   A,(20C0)",0x0A4A );
+    instruction ( "LD   A,(20C0)",e16_hi_lo ( 0x0A,0x4A ) );
     u8 a1 = e8_read_mem ( 0x20C0 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0A4A );
+    return jumpDirect ( 0x0A4A,prog_0A4A );
 }
 
 Control prog_0A4A ()
 {
     at ( "0A4A" );
-    instruction ( "AND  A",0x0A4B );
+    instruction ( "AND  A",e16_hi_lo ( 0x0A,0x4B ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -22721,13 +22721,13 @@ Control prog_0A4A ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0A4B );
+    return jumpDirect ( 0x0A4B,prog_0A4B );
 }
 
 Control prog_0A4B ()
 {
     at ( "0A4B" );
-    instruction ( "RET  Z",0x0A4C );
+    instruction ( "RET  Z",e16_hi_lo ( 0x0A,0x4C ) );
     if (FlagZ)
     {
         u8 a1 = SPH ;
@@ -22746,14 +22746,14 @@ Control prog_0A4B ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_0A4C );
+        return jumpDirect ( 0x0A4C,prog_0A4C );
     }
 }
 
 Control prog_0A4C ()
 {
     at ( "0A4C" );
-    instruction ( "CALL 0A59",0x0A4F );
+    instruction ( "CALL 0A59",e16_hi_lo ( 0x0A,0x4F ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -22766,29 +22766,29 @@ Control prog_0A4C ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0A59 );
+    return jumpDirect ( 0x0A59,prog_0A59 );
 }
 
 Control prog_0A4F ()
 {
     at ( "0A4F" );
-    instruction ( "JP   Z,0A47",0x0A52 );
+    instruction ( "JP   Z,0A47",e16_hi_lo ( 0x0A,0x52 ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_0A47 );
+        return jumpDirect ( 0x0A47,prog_0A47 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0A52 );
+        return jumpDirect ( 0x0A52,prog_0A52 );
     }
 }
 
 Control prog_0A52 ()
 {
     at ( "0A52" );
-    instruction ( "CALL 0A59",0x0A55 );
+    instruction ( "CALL 0A59",e16_hi_lo ( 0x0A,0x55 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -22801,29 +22801,29 @@ Control prog_0A52 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0A59 );
+    return jumpDirect ( 0x0A59,prog_0A59 );
 }
 
 Control prog_0A55 ()
 {
     at ( "0A55" );
-    instruction ( "JP   NZ,0A52",0x0A58 );
+    instruction ( "JP   NZ,0A52",e16_hi_lo ( 0x0A,0x58 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_0A52 );
+        return jumpDirect ( 0x0A52,prog_0A52 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0A58 );
+        return jumpDirect ( 0x0A58,prog_0A58 );
     }
 }
 
 Control prog_0A58 ()
 {
     at ( "0A58" );
-    instruction ( "RET",0x0A59 );
+    instruction ( "RET",e16_hi_lo ( 0x0A,0x59 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -22841,17 +22841,17 @@ Control prog_0A58 ()
 Control prog_0A59 ()
 {
     at ( "0A59" );
-    instruction ( "LD   A,(2015)",0x0A5C );
+    instruction ( "LD   A,(2015)",e16_hi_lo ( 0x0A,0x5C ) );
     u8 a1 = e8_read_mem ( 0x2015 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0A5C );
+    return jumpDirect ( 0x0A5C,prog_0A5C );
 }
 
 Control prog_0A5C ()
 {
     at ( "0A5C" );
-    instruction ( "CP   FF",0x0A5E );
+    instruction ( "CP   FF",e16_hi_lo ( 0x0A,0x5E ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0xFF ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -22863,13 +22863,13 @@ Control prog_0A5C ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_0A5E );
+    return jumpDirect ( 0x0A5E,prog_0A5E );
 }
 
 Control prog_0A5E ()
 {
     at ( "0A5E" );
-    instruction ( "RET",0x0A5F );
+    instruction ( "RET",e16_hi_lo ( 0x0A,0x5F ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -22887,17 +22887,17 @@ Control prog_0A5E ()
 Control prog_0A5F ()
 {
     at ( "0A5F" );
-    instruction ( "LD   A,(20EF)",0x0A62 );
+    instruction ( "LD   A,(20EF)",e16_hi_lo ( 0x0A,0x62 ) );
     u8 a1 = e8_read_mem ( 0x20EF ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0A62 );
+    return jumpDirect ( 0x0A62,prog_0A62 );
 }
 
 Control prog_0A62 ()
 {
     at ( "0A62" );
-    instruction ( "AND  A",0x0A63 );
+    instruction ( "AND  A",e16_hi_lo ( 0x0A,0x63 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -22909,48 +22909,48 @@ Control prog_0A62 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0A63 );
+    return jumpDirect ( 0x0A63,prog_0A63 );
 }
 
 Control prog_0A63 ()
 {
     at ( "0A63" );
-    instruction ( "JP   Z,0A7C",0x0A66 );
+    instruction ( "JP   Z,0A7C",e16_hi_lo ( 0x0A,0x66 ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_0A7C );
+        return jumpDirect ( 0x0A7C,prog_0A7C );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0A66 );
+        return jumpDirect ( 0x0A66,prog_0A66 );
     }
 }
 
 Control prog_0A66 ()
 {
     at ( "0A66" );
-    instruction ( "LD   C,B",0x0A67 );
+    instruction ( "LD   C,B",e16_hi_lo ( 0x0A,0x67 ) );
     u8 a1 = B ;
     advance ( 5 );
     C = a1;
-    return jumpDirect ( prog_0A67 );
+    return jumpDirect ( 0x0A67,prog_0A67 );
 }
 
 Control prog_0A67 ()
 {
     at ( "0A67" );
-    instruction ( "LD   B,08",0x0A69 );
+    instruction ( "LD   B,08",e16_hi_lo ( 0x0A,0x69 ) );
     advance ( 7 );
     B = 0x08;
-    return jumpDirect ( prog_0A69 );
+    return jumpDirect ( 0x0A69,prog_0A69 );
 }
 
 Control prog_0A69 ()
 {
     at ( "0A69" );
-    instruction ( "CALL 18FA",0x0A6C );
+    instruction ( "CALL 18FA",e16_hi_lo ( 0x0A,0x6C ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -22963,33 +22963,33 @@ Control prog_0A69 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_18FA );
+    return jumpDirect ( 0x18FA,prog_18FA );
 }
 
 Control prog_0A6C ()
 {
     at ( "0A6C" );
-    instruction ( "LD   B,C",0x0A6D );
+    instruction ( "LD   B,C",e16_hi_lo ( 0x0A,0x6D ) );
     u8 a1 = C ;
     advance ( 5 );
     B = a1;
-    return jumpDirect ( prog_0A6D );
+    return jumpDirect ( 0x0A6D,prog_0A6D );
 }
 
 Control prog_0A6D ()
 {
     at ( "0A6D" );
-    instruction ( "LD   A,B",0x0A6E );
+    instruction ( "LD   A,B",e16_hi_lo ( 0x0A,0x6E ) );
     u8 a1 = B ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_0A6E );
+    return jumpDirect ( 0x0A6E,prog_0A6E );
 }
 
 Control prog_0A6E ()
 {
     at ( "0A6E" );
-    instruction ( "CALL 097C",0x0A71 );
+    instruction ( "CALL 097C",e16_hi_lo ( 0x0A,0x71 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -23002,105 +23002,105 @@ Control prog_0A6E ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_097C );
+    return jumpDirect ( 0x097C,prog_097C );
 }
 
 Control prog_0A71 ()
 {
     at ( "0A71" );
-    instruction ( "LD   A,(HL)",0x0A72 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x0A,0x72 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_0A72 );
+    return jumpDirect ( 0x0A72,prog_0A72 );
 }
 
 Control prog_0A72 ()
 {
     at ( "0A72" );
-    instruction ( "LD   HL,20F3",0x0A75 );
+    instruction ( "LD   HL,20F3",e16_hi_lo ( 0x0A,0x75 ) );
     advance ( 10 );
     H = 0x20;
     L = 0xF3;
-    return jumpDirect ( prog_0A75 );
+    return jumpDirect ( 0x0A75,prog_0A75 );
 }
 
 Control prog_0A75 ()
 {
     at ( "0A75" );
-    instruction ( "LD   (HL),00",0x0A77 );
+    instruction ( "LD   (HL),00",e16_hi_lo ( 0x0A,0x77 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     mem_write ( e16_hi_lo ( a1,a2 ),0x00 );
     advance ( 10 );
-    return jumpDirect ( prog_0A77 );
+    return jumpDirect ( 0x0A77,prog_0A77 );
 }
 
 Control prog_0A77 ()
 {
     at ( "0A77" );
-    instruction ( "DEC  HL",0x0A78 );
+    instruction ( "DEC  HL",e16_hi_lo ( 0x0A,0x78 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_0A78 );
+    return jumpDirect ( 0x0A78,prog_0A78 );
 }
 
 Control prog_0A78 ()
 {
     at ( "0A78" );
-    instruction ( "LD   (HL),A",0x0A79 );
+    instruction ( "LD   (HL),A",e16_hi_lo ( 0x0A,0x79 ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_0A79 );
+    return jumpDirect ( 0x0A79,prog_0A79 );
 }
 
 Control prog_0A79 ()
 {
     at ( "0A79" );
-    instruction ( "DEC  HL",0x0A7A );
+    instruction ( "DEC  HL",e16_hi_lo ( 0x0A,0x7A ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_0A7A );
+    return jumpDirect ( 0x0A7A,prog_0A7A );
 }
 
 Control prog_0A7A ()
 {
     at ( "0A7A" );
-    instruction ( "LD   (HL),01",0x0A7C );
+    instruction ( "LD   (HL),01",e16_hi_lo ( 0x0A,0x7C ) );
     u8 a1 = H ;
     u8 a2 = L ;
     mem_write ( e16_hi_lo ( a1,a2 ),0x01 );
     advance ( 10 );
-    return jumpDirect ( prog_0A7C );
+    return jumpDirect ( 0x0A7C,prog_0A7C );
 }
 
 Control prog_0A7C ()
 {
     at ( "0A7C" );
-    instruction ( "LD   HL,2062",0x0A7F );
+    instruction ( "LD   HL,2062",e16_hi_lo ( 0x0A,0x7F ) );
     advance ( 10 );
     H = 0x20;
     L = 0x62;
-    return jumpDirect ( prog_0A7F );
+    return jumpDirect ( 0x0A7F,prog_0A7F );
 }
 
 Control prog_0A7F ()
 {
     at ( "0A7F" );
-    instruction ( "RET",0x0A80 );
+    instruction ( "RET",e16_hi_lo ( 0x0A,0x80 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -23118,45 +23118,45 @@ Control prog_0A7F ()
 Control prog_0A80 ()
 {
     at ( "0A80" );
-    instruction ( "LD   A,02",0x0A82 );
+    instruction ( "LD   A,02",e16_hi_lo ( 0x0A,0x82 ) );
     advance ( 7 );
     A = 0x02;
-    return jumpDirect ( prog_0A82 );
+    return jumpDirect ( 0x0A82,prog_0A82 );
 }
 
 Control prog_0A82 ()
 {
     at ( "0A82" );
-    instruction ( "LD   (20C1),A",0x0A85 );
+    instruction ( "LD   (20C1),A",e16_hi_lo ( 0x0A,0x85 ) );
     u8 a1 = A ;
     mem_write ( 0x20C1,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0A85 );
+    return jumpDirect ( 0x0A85,prog_0A85 );
 }
 
 Control prog_0A85 ()
 {
     at ( "0A85" );
-    instruction ( "OUT  06",0x0A87 );
+    instruction ( "OUT  06",e16_hi_lo ( 0x0A,0x87 ) );
     u8 a1 = A ;
     advance ( 10 );
-    return jumpDirect ( prog_0A87 );
+    return jumpDirect ( 0x0A87,prog_0A87 );
 }
 
 Control prog_0A87 ()
 {
     at ( "0A87" );
-    instruction ( "LD   A,(20CB)",0x0A8A );
+    instruction ( "LD   A,(20CB)",e16_hi_lo ( 0x0A,0x8A ) );
     u8 a1 = e8_read_mem ( 0x20CB ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0A8A );
+    return jumpDirect ( 0x0A8A,prog_0A8A );
 }
 
 Control prog_0A8A ()
 {
     at ( "0A8A" );
-    instruction ( "AND  A",0x0A8B );
+    instruction ( "AND  A",e16_hi_lo ( 0x0A,0x8B ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -23168,29 +23168,29 @@ Control prog_0A8A ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0A8B );
+    return jumpDirect ( 0x0A8B,prog_0A8B );
 }
 
 Control prog_0A8B ()
 {
     at ( "0A8B" );
-    instruction ( "JP   Z,0A85",0x0A8E );
+    instruction ( "JP   Z,0A85",e16_hi_lo ( 0x0A,0x8E ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_0A85 );
+        return jumpDirect ( 0x0A85,prog_0A85 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0A8E );
+        return jumpDirect ( 0x0A8E,prog_0A8E );
     }
 }
 
 Control prog_0A8E ()
 {
     at ( "0A8E" );
-    instruction ( "XOR  A",0x0A8F );
+    instruction ( "XOR  A",e16_hi_lo ( 0x0A,0x8F ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -23201,23 +23201,23 @@ Control prog_0A8E ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0A8F );
+    return jumpDirect ( 0x0A8F,prog_0A8F );
 }
 
 Control prog_0A8F ()
 {
     at ( "0A8F" );
-    instruction ( "LD   (20C1),A",0x0A92 );
+    instruction ( "LD   (20C1),A",e16_hi_lo ( 0x0A,0x92 ) );
     u8 a1 = A ;
     mem_write ( 0x20C1,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0A92 );
+    return jumpDirect ( 0x0A92,prog_0A92 );
 }
 
 Control prog_0A92 ()
 {
     at ( "0A92" );
-    instruction ( "RET",0x0A93 );
+    instruction ( "RET",e16_hi_lo ( 0x0A,0x93 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -23235,7 +23235,7 @@ Control prog_0A92 ()
 Control prog_0A93 ()
 {
     at ( "0A93" );
-    instruction ( "PUSH DE",0x0A94 );
+    instruction ( "PUSH DE",e16_hi_lo ( 0x0A,0x94 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = SPH ;
@@ -23249,25 +23249,25 @@ Control prog_0A93 ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_0A94 );
+    return jumpDirect ( 0x0A94,prog_0A94 );
 }
 
 Control prog_0A94 ()
 {
     at ( "0A94" );
-    instruction ( "LD   A,(DE)",0x0A95 );
+    instruction ( "LD   A,(DE)",e16_hi_lo ( 0x0A,0x95 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_0A95 );
+    return jumpDirect ( 0x0A95,prog_0A95 );
 }
 
 Control prog_0A95 ()
 {
     at ( "0A95" );
-    instruction ( "CALL 08FF",0x0A98 );
+    instruction ( "CALL 08FF",e16_hi_lo ( 0x0A,0x98 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -23280,13 +23280,13 @@ Control prog_0A95 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_08FF );
+    return jumpDirect ( 0x08FF,prog_08FF );
 }
 
 Control prog_0A98 ()
 {
     at ( "0A98" );
-    instruction ( "POP  DE",0x0A99 );
+    instruction ( "POP  DE",e16_hi_lo ( 0x0A,0x99 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -23300,42 +23300,42 @@ Control prog_0A98 ()
     E = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_0A99 );
+    return jumpDirect ( 0x0A99,prog_0A99 );
 }
 
 Control prog_0A99 ()
 {
     at ( "0A99" );
-    instruction ( "LD   A,07",0x0A9B );
+    instruction ( "LD   A,07",e16_hi_lo ( 0x0A,0x9B ) );
     advance ( 7 );
     A = 0x07;
-    return jumpDirect ( prog_0A9B );
+    return jumpDirect ( 0x0A9B,prog_0A9B );
 }
 
 Control prog_0A9B ()
 {
     at ( "0A9B" );
-    instruction ( "LD   (20C0),A",0x0A9E );
+    instruction ( "LD   (20C0),A",e16_hi_lo ( 0x0A,0x9E ) );
     u8 a1 = A ;
     mem_write ( 0x20C0,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0A9E );
+    return jumpDirect ( 0x0A9E,prog_0A9E );
 }
 
 Control prog_0A9E ()
 {
     at ( "0A9E" );
-    instruction ( "LD   A,(20C0)",0x0AA1 );
+    instruction ( "LD   A,(20C0)",e16_hi_lo ( 0x0A,0xA1 ) );
     u8 a1 = e8_read_mem ( 0x20C0 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0AA1 );
+    return jumpDirect ( 0x0AA1,prog_0AA1 );
 }
 
 Control prog_0AA1 ()
 {
     at ( "0AA1" );
-    instruction ( "DEC  A",0x0AA2 );
+    instruction ( "DEC  A",e16_hi_lo ( 0x0A,0xA2 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -23347,42 +23347,42 @@ Control prog_0AA1 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_0AA2 );
+    return jumpDirect ( 0x0AA2,prog_0AA2 );
 }
 
 Control prog_0AA2 ()
 {
     at ( "0AA2" );
-    instruction ( "JP   NZ,0A9E",0x0AA5 );
+    instruction ( "JP   NZ,0A9E",e16_hi_lo ( 0x0A,0xA5 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_0A9E );
+        return jumpDirect ( 0x0A9E,prog_0A9E );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0AA5 );
+        return jumpDirect ( 0x0AA5,prog_0AA5 );
     }
 }
 
 Control prog_0AA5 ()
 {
     at ( "0AA5" );
-    instruction ( "INC  DE",0x0AA6 );
+    instruction ( "INC  DE",e16_hi_lo ( 0x0A,0xA6 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     D = e8_hi ( a3 );
     E = e8_lo ( a3 );
-    return jumpDirect ( prog_0AA6 );
+    return jumpDirect ( 0x0AA6,prog_0AA6 );
 }
 
 Control prog_0AA6 ()
 {
     at ( "0AA6" );
-    instruction ( "DEC  C",0x0AA7 );
+    instruction ( "DEC  C",e16_hi_lo ( 0x0A,0xA7 ) );
     u8 a1 = C ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -23394,29 +23394,29 @@ Control prog_0AA6 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_0AA7 );
+    return jumpDirect ( 0x0AA7,prog_0AA7 );
 }
 
 Control prog_0AA7 ()
 {
     at ( "0AA7" );
-    instruction ( "JP   NZ,0A93",0x0AAA );
+    instruction ( "JP   NZ,0A93",e16_hi_lo ( 0x0A,0xAA ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_0A93 );
+        return jumpDirect ( 0x0A93,prog_0A93 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0AAA );
+        return jumpDirect ( 0x0AAA,prog_0AAA );
     }
 }
 
 Control prog_0AAA ()
 {
     at ( "0AAA" );
-    instruction ( "RET",0x0AAB );
+    instruction ( "RET",e16_hi_lo ( 0x0A,0xAB ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -23434,59 +23434,59 @@ Control prog_0AAA ()
 Control prog_0AAB ()
 {
     at ( "0AAB" );
-    instruction ( "LD   HL,2050",0x0AAE );
+    instruction ( "LD   HL,2050",e16_hi_lo ( 0x0A,0xAE ) );
     advance ( 10 );
     H = 0x20;
     L = 0x50;
-    return jumpDirect ( prog_0AAE );
+    return jumpDirect ( 0x0AAE,prog_0AAE );
 }
 
 Control prog_0AAE ()
 {
     at ( "0AAE" );
-    instruction ( "JP   024B",0x0AB1 );
+    instruction ( "JP   024B",e16_hi_lo ( 0x0A,0xB1 ) );
     advance ( 10 );
-    return jumpDirect ( prog_024B );
+    return jumpDirect ( 0x024B,prog_024B );
 }
 
 Control prog_0AB1 ()
 {
     at ( "0AB1" );
-    instruction ( "LD   A,40",0x0AB3 );
+    instruction ( "LD   A,40",e16_hi_lo ( 0x0A,0xB3 ) );
     advance ( 7 );
     A = 0x40;
-    return jumpDirect ( prog_0AB3 );
+    return jumpDirect ( 0x0AB3,prog_0AB3 );
 }
 
 Control prog_0AB3 ()
 {
     at ( "0AB3" );
-    instruction ( "JP   0AD7",0x0AB6 );
+    instruction ( "JP   0AD7",e16_hi_lo ( 0x0A,0xB6 ) );
     advance ( 10 );
-    return jumpDirect ( prog_0AD7 );
+    return jumpDirect ( 0x0AD7,prog_0AD7 );
 }
 
 Control prog_0AB6 ()
 {
     at ( "0AB6" );
-    instruction ( "LD   A,80",0x0AB8 );
+    instruction ( "LD   A,80",e16_hi_lo ( 0x0A,0xB8 ) );
     advance ( 7 );
     A = 0x80;
-    return jumpDirect ( prog_0AB8 );
+    return jumpDirect ( 0x0AB8,prog_0AB8 );
 }
 
 Control prog_0AB8 ()
 {
     at ( "0AB8" );
-    instruction ( "JP   0AD7",0x0ABB );
+    instruction ( "JP   0AD7",e16_hi_lo ( 0x0A,0xBB ) );
     advance ( 10 );
-    return jumpDirect ( prog_0AD7 );
+    return jumpDirect ( 0x0AD7,prog_0AD7 );
 }
 
 Control prog_0ABB ()
 {
     at ( "0ABB" );
-    instruction ( "POP  HL",0x0ABC );
+    instruction ( "POP  HL",e16_hi_lo ( 0x0A,0xBC ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -23500,112 +23500,112 @@ Control prog_0ABB ()
     L = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_0ABC );
+    return jumpDirect ( 0x0ABC,prog_0ABC );
 }
 
 Control prog_0ABC ()
 {
     at ( "0ABC" );
-    instruction ( "JP   0072",0x0ABF );
+    instruction ( "JP   0072",e16_hi_lo ( 0x0A,0xBF ) );
     advance ( 10 );
-    return jumpDirect ( prog_0072 );
+    return jumpDirect ( 0x0072,prog_0072 );
 }
 
 Control prog_0ABF ()
 {
     at ( "0ABF" );
-    instruction ( "LD   A,(20C1)",0x0AC2 );
+    instruction ( "LD   A,(20C1)",e16_hi_lo ( 0x0A,0xC2 ) );
     u8 a1 = e8_read_mem ( 0x20C1 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0AC2 );
+    return jumpDirect ( 0x0AC2,prog_0AC2 );
 }
 
 Control prog_0AC2 ()
 {
     at ( "0AC2" );
-    instruction ( "RRCA",0x0AC3 );
+    instruction ( "RRCA",e16_hi_lo ( 0x0A,0xC3 ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftR ( a1,0x01 ),7,e1_test_bit ( a1,0 ) );
     FlagCY = e1_test_bit ( a1,0 );
-    return jumpDirect ( prog_0AC3 );
+    return jumpDirect ( 0x0AC3,prog_0AC3 );
 }
 
 Control prog_0AC3 ()
 {
     at ( "0AC3" );
-    instruction ( "JP   CY,0ABB",0x0AC6 );
+    instruction ( "JP   CY,0ABB",e16_hi_lo ( 0x0A,0xC6 ) );
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( prog_0ABB );
+        return jumpDirect ( 0x0ABB,prog_0ABB );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0AC6 );
+        return jumpDirect ( 0x0AC6,prog_0AC6 );
     }
 }
 
 Control prog_0AC6 ()
 {
     at ( "0AC6" );
-    instruction ( "RRCA",0x0AC7 );
+    instruction ( "RRCA",e16_hi_lo ( 0x0A,0xC7 ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftR ( a1,0x01 ),7,e1_test_bit ( a1,0 ) );
     FlagCY = e1_test_bit ( a1,0 );
-    return jumpDirect ( prog_0AC7 );
+    return jumpDirect ( 0x0AC7,prog_0AC7 );
 }
 
 Control prog_0AC7 ()
 {
     at ( "0AC7" );
-    instruction ( "JP   CY,1868",0x0ACA );
+    instruction ( "JP   CY,1868",e16_hi_lo ( 0x0A,0xCA ) );
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( prog_1868 );
+        return jumpDirect ( 0x1868,prog_1868 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0ACA );
+        return jumpDirect ( 0x0ACA,prog_0ACA );
     }
 }
 
 Control prog_0ACA ()
 {
     at ( "0ACA" );
-    instruction ( "RRCA",0x0ACB );
+    instruction ( "RRCA",e16_hi_lo ( 0x0A,0xCB ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftR ( a1,0x01 ),7,e1_test_bit ( a1,0 ) );
     FlagCY = e1_test_bit ( a1,0 );
-    return jumpDirect ( prog_0ACB );
+    return jumpDirect ( 0x0ACB,prog_0ACB );
 }
 
 Control prog_0ACB ()
 {
     at ( "0ACB" );
-    instruction ( "JP   CY,0AAB",0x0ACE );
+    instruction ( "JP   CY,0AAB",e16_hi_lo ( 0x0A,0xCE ) );
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( prog_0AAB );
+        return jumpDirect ( 0x0AAB,prog_0AAB );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0ACE );
+        return jumpDirect ( 0x0ACE,prog_0ACE );
     }
 }
 
 Control prog_0ACE ()
 {
     at ( "0ACE" );
-    instruction ( "RET",0x0ACF );
+    instruction ( "RET",e16_hi_lo ( 0x0A,0xCF ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -23623,54 +23623,54 @@ Control prog_0ACE ()
 Control prog_0ACF ()
 {
     at ( "0ACF" );
-    instruction ( "LD   HL,2B14",0x0AD2 );
+    instruction ( "LD   HL,2B14",e16_hi_lo ( 0x0A,0xD2 ) );
     advance ( 10 );
     H = 0x2B;
     L = 0x14;
-    return jumpDirect ( prog_0AD2 );
+    return jumpDirect ( 0x0AD2,prog_0AD2 );
 }
 
 Control prog_0AD2 ()
 {
     at ( "0AD2" );
-    instruction ( "LD   C,0F",0x0AD4 );
+    instruction ( "LD   C,0F",e16_hi_lo ( 0x0A,0xD4 ) );
     advance ( 7 );
     C = 0x0F;
-    return jumpDirect ( prog_0AD4 );
+    return jumpDirect ( 0x0AD4,prog_0AD4 );
 }
 
 Control prog_0AD4 ()
 {
     at ( "0AD4" );
-    instruction ( "JP   0A93",0x0AD7 );
+    instruction ( "JP   0A93",e16_hi_lo ( 0x0A,0xD7 ) );
     advance ( 10 );
-    return jumpDirect ( prog_0A93 );
+    return jumpDirect ( 0x0A93,prog_0A93 );
 }
 
 Control prog_0AD7 ()
 {
     at ( "0AD7" );
-    instruction ( "LD   (20C0),A",0x0ADA );
+    instruction ( "LD   (20C0),A",e16_hi_lo ( 0x0A,0xDA ) );
     u8 a1 = A ;
     mem_write ( 0x20C0,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0ADA );
+    return jumpDirect ( 0x0ADA,prog_0ADA );
 }
 
 Control prog_0ADA ()
 {
     at ( "0ADA" );
-    instruction ( "LD   A,(20C0)",0x0ADD );
+    instruction ( "LD   A,(20C0)",e16_hi_lo ( 0x0A,0xDD ) );
     u8 a1 = e8_read_mem ( 0x20C0 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0ADD );
+    return jumpDirect ( 0x0ADD,prog_0ADD );
 }
 
 Control prog_0ADD ()
 {
     at ( "0ADD" );
-    instruction ( "AND  A",0x0ADE );
+    instruction ( "AND  A",e16_hi_lo ( 0x0A,0xDE ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -23682,29 +23682,29 @@ Control prog_0ADD ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0ADE );
+    return jumpDirect ( 0x0ADE,prog_0ADE );
 }
 
 Control prog_0ADE ()
 {
     at ( "0ADE" );
-    instruction ( "JP   NZ,0ADA",0x0AE1 );
+    instruction ( "JP   NZ,0ADA",e16_hi_lo ( 0x0A,0xE1 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_0ADA );
+        return jumpDirect ( 0x0ADA,prog_0ADA );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0AE1 );
+        return jumpDirect ( 0x0AE1,prog_0AE1 );
     }
 }
 
 Control prog_0AE1 ()
 {
     at ( "0AE1" );
-    instruction ( "RET",0x0AE2 );
+    instruction ( "RET",e16_hi_lo ( 0x0A,0xE2 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -23722,34 +23722,34 @@ Control prog_0AE1 ()
 Control prog_0AE2 ()
 {
     at ( "0AE2" );
-    instruction ( "LD   HL,20C2",0x0AE5 );
+    instruction ( "LD   HL,20C2",e16_hi_lo ( 0x0A,0xE5 ) );
     advance ( 10 );
     H = 0x20;
     L = 0xC2;
-    return jumpDirect ( prog_0AE5 );
+    return jumpDirect ( 0x0AE5,prog_0AE5 );
 }
 
 Control prog_0AE5 ()
 {
     at ( "0AE5" );
-    instruction ( "LD   B,0C",0x0AE7 );
+    instruction ( "LD   B,0C",e16_hi_lo ( 0x0A,0xE7 ) );
     advance ( 7 );
     B = 0x0C;
-    return jumpDirect ( prog_0AE7 );
+    return jumpDirect ( 0x0AE7,prog_0AE7 );
 }
 
 Control prog_0AE7 ()
 {
     at ( "0AE7" );
-    instruction ( "JP   1A32",0x0AEA );
+    instruction ( "JP   1A32",e16_hi_lo ( 0x0A,0xEA ) );
     advance ( 10 );
-    return jumpDirect ( prog_1A32 );
+    return jumpDirect ( 0x1A32,prog_1A32 );
 }
 
 Control prog_0AEA ()
 {
     at ( "0AEA" );
-    instruction ( "XOR  A",0x0AEB );
+    instruction ( "XOR  A",e16_hi_lo ( 0x0A,0xEB ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -23760,13 +23760,13 @@ Control prog_0AEA ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0AEB );
+    return jumpDirect ( 0x0AEB,prog_0AEB );
 }
 
 Control prog_0AEB ()
 {
     at ( "0AEB" );
-    instruction ( "OUT  03",0x0AED );
+    instruction ( "OUT  03",e16_hi_lo ( 0x0A,0xED ) );
     u8 a1 = A ;
     sound_control ( "Ufo",e1_test_bit ( a1,0 ) );
     sound_control ( "Shot",e1_test_bit ( a1,1 ) );
@@ -23774,13 +23774,13 @@ Control prog_0AEB ()
     sound_control ( "InvaderDie",e1_test_bit ( a1,3 ) );
     sound_control ( "ExtraLife",e1_test_bit ( a1,4 ) );
     advance ( 10 );
-    return jumpDirect ( prog_0AED );
+    return jumpDirect ( 0x0AED,prog_0AED );
 }
 
 Control prog_0AED ()
 {
     at ( "0AED" );
-    instruction ( "OUT  05",0x0AEF );
+    instruction ( "OUT  05",e16_hi_lo ( 0x0A,0xEF ) );
     u8 a1 = A ;
     sound_control ( "FleetMovement1",e1_test_bit ( a1,0 ) );
     sound_control ( "FleetMovement2",e1_test_bit ( a1,1 ) );
@@ -23788,13 +23788,13 @@ Control prog_0AED ()
     sound_control ( "FleetMovement4",e1_test_bit ( a1,3 ) );
     sound_control ( "UfoHit",e1_test_bit ( a1,4 ) );
     advance ( 10 );
-    return jumpDirect ( prog_0AEF );
+    return jumpDirect ( 0x0AEF,prog_0AEF );
 }
 
 Control prog_0AEF ()
 {
     at ( "0AEF" );
-    instruction ( "CALL 1982",0x0AF2 );
+    instruction ( "CALL 1982",e16_hi_lo ( 0x0A,0xF2 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -23807,22 +23807,22 @@ Control prog_0AEF ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1982 );
+    return jumpDirect ( 0x1982,prog_1982 );
 }
 
 Control prog_0AF2 ()
 {
     at ( "0AF2" );
-    instruction ( "EI",0x0AF3 );
+    instruction ( "EI",e16_hi_lo ( 0x0A,0xF3 ) );
     enable_interrupts (  );
     advance ( 4 );
-    return jumpDirect ( prog_0AF3 );
+    return jumpDirect ( 0x0AF3,prog_0AF3 );
 }
 
 Control prog_0AF3 ()
 {
     at ( "0AF3" );
-    instruction ( "CALL 0AB1",0x0AF6 );
+    instruction ( "CALL 0AB1",e16_hi_lo ( 0x0A,0xF6 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -23835,23 +23835,23 @@ Control prog_0AF3 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0AB1 );
+    return jumpDirect ( 0x0AB1,prog_0AB1 );
 }
 
 Control prog_0AF6 ()
 {
     at ( "0AF6" );
-    instruction ( "LD   A,(20EC)",0x0AF9 );
+    instruction ( "LD   A,(20EC)",e16_hi_lo ( 0x0A,0xF9 ) );
     u8 a1 = e8_read_mem ( 0x20EC ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0AF9 );
+    return jumpDirect ( 0x0AF9,prog_0AF9 );
 }
 
 Control prog_0AF9 ()
 {
     at ( "0AF9" );
-    instruction ( "AND  A",0x0AFA );
+    instruction ( "AND  A",e16_hi_lo ( 0x0A,0xFA ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -23863,58 +23863,58 @@ Control prog_0AF9 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0AFA );
+    return jumpDirect ( 0x0AFA,prog_0AFA );
 }
 
 Control prog_0AFA ()
 {
     at ( "0AFA" );
-    instruction ( "LD   HL,3017",0x0AFD );
+    instruction ( "LD   HL,3017",e16_hi_lo ( 0x0A,0xFD ) );
     advance ( 10 );
     H = 0x30;
     L = 0x17;
-    return jumpDirect ( prog_0AFD );
+    return jumpDirect ( 0x0AFD,prog_0AFD );
 }
 
 Control prog_0AFD ()
 {
     at ( "0AFD" );
-    instruction ( "LD   C,04",0x0AFF );
+    instruction ( "LD   C,04",e16_hi_lo ( 0x0A,0xFF ) );
     advance ( 7 );
     C = 0x04;
-    return jumpDirect ( prog_0AFF );
+    return jumpDirect ( 0x0AFF,prog_0AFF );
 }
 
 Control prog_0AFF ()
 {
     at ( "0AFF" );
-    instruction ( "JP   NZ,0BE8",0x0B02 );
+    instruction ( "JP   NZ,0BE8",e16_hi_lo ( 0x0B,0x02 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_0BE8 );
+        return jumpDirect ( 0x0BE8,prog_0BE8 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0B02 );
+        return jumpDirect ( 0x0B02,prog_0B02 );
     }
 }
 
 Control prog_0B02 ()
 {
     at ( "0B02" );
-    instruction ( "LD   DE,1CFA",0x0B05 );
+    instruction ( "LD   DE,1CFA",e16_hi_lo ( 0x0B,0x05 ) );
     advance ( 10 );
     D = 0x1C;
     E = 0xFA;
-    return jumpDirect ( prog_0B05 );
+    return jumpDirect ( 0x0B05,prog_0B05 );
 }
 
 Control prog_0B05 ()
 {
     at ( "0B05" );
-    instruction ( "CALL 0A93",0x0B08 );
+    instruction ( "CALL 0A93",e16_hi_lo ( 0x0B,0x08 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -23927,23 +23927,23 @@ Control prog_0B05 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0A93 );
+    return jumpDirect ( 0x0A93,prog_0A93 );
 }
 
 Control prog_0B08 ()
 {
     at ( "0B08" );
-    instruction ( "LD   DE,1DAF",0x0B0B );
+    instruction ( "LD   DE,1DAF",e16_hi_lo ( 0x0B,0x0B ) );
     advance ( 10 );
     D = 0x1D;
     E = 0xAF;
-    return jumpDirect ( prog_0B0B );
+    return jumpDirect ( 0x0B0B,prog_0B0B );
 }
 
 Control prog_0B0B ()
 {
     at ( "0B0B" );
-    instruction ( "CALL 0ACF",0x0B0E );
+    instruction ( "CALL 0ACF",e16_hi_lo ( 0x0B,0x0E ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -23956,13 +23956,13 @@ Control prog_0B0B ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0ACF );
+    return jumpDirect ( 0x0ACF,prog_0ACF );
 }
 
 Control prog_0B0E ()
 {
     at ( "0B0E" );
-    instruction ( "CALL 0AB1",0x0B11 );
+    instruction ( "CALL 0AB1",e16_hi_lo ( 0x0B,0x11 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -23975,13 +23975,13 @@ Control prog_0B0E ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0AB1 );
+    return jumpDirect ( 0x0AB1,prog_0AB1 );
 }
 
 Control prog_0B11 ()
 {
     at ( "0B11" );
-    instruction ( "CALL 1815",0x0B14 );
+    instruction ( "CALL 1815",e16_hi_lo ( 0x0B,0x14 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -23994,13 +23994,13 @@ Control prog_0B11 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1815 );
+    return jumpDirect ( 0x1815,prog_1815 );
 }
 
 Control prog_0B14 ()
 {
     at ( "0B14" );
-    instruction ( "CALL 0AB6",0x0B17 );
+    instruction ( "CALL 0AB6",e16_hi_lo ( 0x0B,0x17 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -24013,23 +24013,23 @@ Control prog_0B14 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0AB6 );
+    return jumpDirect ( 0x0AB6,prog_0AB6 );
 }
 
 Control prog_0B17 ()
 {
     at ( "0B17" );
-    instruction ( "LD   A,(20EC)",0x0B1A );
+    instruction ( "LD   A,(20EC)",e16_hi_lo ( 0x0B,0x1A ) );
     u8 a1 = e8_read_mem ( 0x20EC ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0B1A );
+    return jumpDirect ( 0x0B1A,prog_0B1A );
 }
 
 Control prog_0B1A ()
 {
     at ( "0B1A" );
-    instruction ( "AND  A",0x0B1B );
+    instruction ( "AND  A",e16_hi_lo ( 0x0B,0x1B ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -24041,39 +24041,39 @@ Control prog_0B1A ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0B1B );
+    return jumpDirect ( 0x0B1B,prog_0B1B );
 }
 
 Control prog_0B1B ()
 {
     at ( "0B1B" );
-    instruction ( "JP   NZ,0B4A",0x0B1E );
+    instruction ( "JP   NZ,0B4A",e16_hi_lo ( 0x0B,0x1E ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_0B4A );
+        return jumpDirect ( 0x0B4A,prog_0B4A );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0B1E );
+        return jumpDirect ( 0x0B1E,prog_0B1E );
     }
 }
 
 Control prog_0B1E ()
 {
     at ( "0B1E" );
-    instruction ( "LD   DE,1A95",0x0B21 );
+    instruction ( "LD   DE,1A95",e16_hi_lo ( 0x0B,0x21 ) );
     advance ( 10 );
     D = 0x1A;
     E = 0x95;
-    return jumpDirect ( prog_0B21 );
+    return jumpDirect ( 0x0B21,prog_0B21 );
 }
 
 Control prog_0B21 ()
 {
     at ( "0B21" );
-    instruction ( "CALL 0AE2",0x0B24 );
+    instruction ( "CALL 0AE2",e16_hi_lo ( 0x0B,0x24 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -24086,13 +24086,13 @@ Control prog_0B21 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0AE2 );
+    return jumpDirect ( 0x0AE2,prog_0AE2 );
 }
 
 Control prog_0B24 ()
 {
     at ( "0B24" );
-    instruction ( "CALL 0A80",0x0B27 );
+    instruction ( "CALL 0A80",e16_hi_lo ( 0x0B,0x27 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -24105,23 +24105,23 @@ Control prog_0B24 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0A80 );
+    return jumpDirect ( 0x0A80,prog_0A80 );
 }
 
 Control prog_0B27 ()
 {
     at ( "0B27" );
-    instruction ( "LD   DE,1BB0",0x0B2A );
+    instruction ( "LD   DE,1BB0",e16_hi_lo ( 0x0B,0x2A ) );
     advance ( 10 );
     D = 0x1B;
     E = 0xB0;
-    return jumpDirect ( prog_0B2A );
+    return jumpDirect ( 0x0B2A,prog_0B2A );
 }
 
 Control prog_0B2A ()
 {
     at ( "0B2A" );
-    instruction ( "CALL 0AE2",0x0B2D );
+    instruction ( "CALL 0AE2",e16_hi_lo ( 0x0B,0x2D ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -24134,13 +24134,13 @@ Control prog_0B2A ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0AE2 );
+    return jumpDirect ( 0x0AE2,prog_0AE2 );
 }
 
 Control prog_0B2D ()
 {
     at ( "0B2D" );
-    instruction ( "CALL 0A80",0x0B30 );
+    instruction ( "CALL 0A80",e16_hi_lo ( 0x0B,0x30 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -24153,13 +24153,13 @@ Control prog_0B2D ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0A80 );
+    return jumpDirect ( 0x0A80,prog_0A80 );
 }
 
 Control prog_0B30 ()
 {
     at ( "0B30" );
-    instruction ( "CALL 0AB1",0x0B33 );
+    instruction ( "CALL 0AB1",e16_hi_lo ( 0x0B,0x33 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -24172,23 +24172,23 @@ Control prog_0B30 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0AB1 );
+    return jumpDirect ( 0x0AB1,prog_0AB1 );
 }
 
 Control prog_0B33 ()
 {
     at ( "0B33" );
-    instruction ( "LD   DE,1FC9",0x0B36 );
+    instruction ( "LD   DE,1FC9",e16_hi_lo ( 0x0B,0x36 ) );
     advance ( 10 );
     D = 0x1F;
     E = 0xC9;
-    return jumpDirect ( prog_0B36 );
+    return jumpDirect ( 0x0B36,prog_0B36 );
 }
 
 Control prog_0B36 ()
 {
     at ( "0B36" );
-    instruction ( "CALL 0AE2",0x0B39 );
+    instruction ( "CALL 0AE2",e16_hi_lo ( 0x0B,0x39 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -24201,13 +24201,13 @@ Control prog_0B36 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0AE2 );
+    return jumpDirect ( 0x0AE2,prog_0AE2 );
 }
 
 Control prog_0B39 ()
 {
     at ( "0B39" );
-    instruction ( "CALL 0A80",0x0B3C );
+    instruction ( "CALL 0A80",e16_hi_lo ( 0x0B,0x3C ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -24220,13 +24220,13 @@ Control prog_0B39 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0A80 );
+    return jumpDirect ( 0x0A80,prog_0A80 );
 }
 
 Control prog_0B3C ()
 {
     at ( "0B3C" );
-    instruction ( "CALL 0AB1",0x0B3F );
+    instruction ( "CALL 0AB1",e16_hi_lo ( 0x0B,0x3F ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -24239,32 +24239,32 @@ Control prog_0B3C ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0AB1 );
+    return jumpDirect ( 0x0AB1,prog_0AB1 );
 }
 
 Control prog_0B3F ()
 {
     at ( "0B3F" );
-    instruction ( "LD   HL,33B7",0x0B42 );
+    instruction ( "LD   HL,33B7",e16_hi_lo ( 0x0B,0x42 ) );
     advance ( 10 );
     H = 0x33;
     L = 0xB7;
-    return jumpDirect ( prog_0B42 );
+    return jumpDirect ( 0x0B42,prog_0B42 );
 }
 
 Control prog_0B42 ()
 {
     at ( "0B42" );
-    instruction ( "LD   B,0A",0x0B44 );
+    instruction ( "LD   B,0A",e16_hi_lo ( 0x0B,0x44 ) );
     advance ( 7 );
     B = 0x0A;
-    return jumpDirect ( prog_0B44 );
+    return jumpDirect ( 0x0B44,prog_0B44 );
 }
 
 Control prog_0B44 ()
 {
     at ( "0B44" );
-    instruction ( "CALL 14CB",0x0B47 );
+    instruction ( "CALL 14CB",e16_hi_lo ( 0x0B,0x47 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -24277,13 +24277,13 @@ Control prog_0B44 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_14CB );
+    return jumpDirect ( 0x14CB,prog_14CB );
 }
 
 Control prog_0B47 ()
 {
     at ( "0B47" );
-    instruction ( "CALL 0AB6",0x0B4A );
+    instruction ( "CALL 0AB6",e16_hi_lo ( 0x0B,0x4A ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -24296,13 +24296,13 @@ Control prog_0B47 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0AB6 );
+    return jumpDirect ( 0x0AB6,prog_0AB6 );
 }
 
 Control prog_0B4A ()
 {
     at ( "0B4A" );
-    instruction ( "CALL 09D6",0x0B4D );
+    instruction ( "CALL 09D6",e16_hi_lo ( 0x0B,0x4D ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -24315,23 +24315,23 @@ Control prog_0B4A ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_09D6 );
+    return jumpDirect ( 0x09D6,prog_09D6 );
 }
 
 Control prog_0B4D ()
 {
     at ( "0B4D" );
-    instruction ( "LD   A,(21FF)",0x0B50 );
+    instruction ( "LD   A,(21FF)",e16_hi_lo ( 0x0B,0x50 ) );
     u8 a1 = e8_read_mem ( 0x21FF ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0B50 );
+    return jumpDirect ( 0x0B50,prog_0B50 );
 }
 
 Control prog_0B50 ()
 {
     at ( "0B50" );
-    instruction ( "AND  A",0x0B51 );
+    instruction ( "AND  A",e16_hi_lo ( 0x0B,0x51 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -24343,29 +24343,29 @@ Control prog_0B50 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0B51 );
+    return jumpDirect ( 0x0B51,prog_0B51 );
 }
 
 Control prog_0B51 ()
 {
     at ( "0B51" );
-    instruction ( "JP   NZ,0B5D",0x0B54 );
+    instruction ( "JP   NZ,0B5D",e16_hi_lo ( 0x0B,0x54 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_0B5D );
+        return jumpDirect ( 0x0B5D,prog_0B5D );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0B54 );
+        return jumpDirect ( 0x0B54,prog_0B54 );
     }
 }
 
 Control prog_0B54 ()
 {
     at ( "0B54" );
-    instruction ( "CALL 08D1",0x0B57 );
+    instruction ( "CALL 08D1",e16_hi_lo ( 0x0B,0x57 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -24378,23 +24378,23 @@ Control prog_0B54 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_08D1 );
+    return jumpDirect ( 0x08D1,prog_08D1 );
 }
 
 Control prog_0B57 ()
 {
     at ( "0B57" );
-    instruction ( "LD   (21FF),A",0x0B5A );
+    instruction ( "LD   (21FF),A",e16_hi_lo ( 0x0B,0x5A ) );
     u8 a1 = A ;
     mem_write ( 0x21FF,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0B5A );
+    return jumpDirect ( 0x0B5A,prog_0B5A );
 }
 
 Control prog_0B5A ()
 {
     at ( "0B5A" );
-    instruction ( "CALL 1A7F",0x0B5D );
+    instruction ( "CALL 1A7F",e16_hi_lo ( 0x0B,0x5D ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -24407,13 +24407,13 @@ Control prog_0B5A ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1A7F );
+    return jumpDirect ( 0x1A7F,prog_1A7F );
 }
 
 Control prog_0B5D ()
 {
     at ( "0B5D" );
-    instruction ( "CALL 01E4",0x0B60 );
+    instruction ( "CALL 01E4",e16_hi_lo ( 0x0B,0x60 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -24426,13 +24426,13 @@ Control prog_0B5D ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_01E4 );
+    return jumpDirect ( 0x01E4,prog_01E4 );
 }
 
 Control prog_0B60 ()
 {
     at ( "0B60" );
-    instruction ( "CALL 01C0",0x0B63 );
+    instruction ( "CALL 01C0",e16_hi_lo ( 0x0B,0x63 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -24445,13 +24445,13 @@ Control prog_0B60 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_01C0 );
+    return jumpDirect ( 0x01C0,prog_01C0 );
 }
 
 Control prog_0B63 ()
 {
     at ( "0B63" );
-    instruction ( "CALL 01EF",0x0B66 );
+    instruction ( "CALL 01EF",e16_hi_lo ( 0x0B,0x66 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -24464,13 +24464,13 @@ Control prog_0B63 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_01EF );
+    return jumpDirect ( 0x01EF,prog_01EF );
 }
 
 Control prog_0B66 ()
 {
     at ( "0B66" );
-    instruction ( "CALL 021A",0x0B69 );
+    instruction ( "CALL 021A",e16_hi_lo ( 0x0B,0x69 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -24483,32 +24483,32 @@ Control prog_0B66 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_021A );
+    return jumpDirect ( 0x021A,prog_021A );
 }
 
 Control prog_0B69 ()
 {
     at ( "0B69" );
-    instruction ( "LD   A,01",0x0B6B );
+    instruction ( "LD   A,01",e16_hi_lo ( 0x0B,0x6B ) );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( prog_0B6B );
+    return jumpDirect ( 0x0B6B,prog_0B6B );
 }
 
 Control prog_0B6B ()
 {
     at ( "0B6B" );
-    instruction ( "LD   (20C1),A",0x0B6E );
+    instruction ( "LD   (20C1),A",e16_hi_lo ( 0x0B,0x6E ) );
     u8 a1 = A ;
     mem_write ( 0x20C1,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0B6E );
+    return jumpDirect ( 0x0B6E,prog_0B6E );
 }
 
 Control prog_0B6E ()
 {
     at ( "0B6E" );
-    instruction ( "CALL 01CF",0x0B71 );
+    instruction ( "CALL 01CF",e16_hi_lo ( 0x0B,0x71 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -24521,13 +24521,13 @@ Control prog_0B6E ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_01CF );
+    return jumpDirect ( 0x01CF,prog_01CF );
 }
 
 Control prog_0B71 ()
 {
     at ( "0B71" );
-    instruction ( "CALL 1618",0x0B74 );
+    instruction ( "CALL 1618",e16_hi_lo ( 0x0B,0x74 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -24540,13 +24540,13 @@ Control prog_0B71 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1618 );
+    return jumpDirect ( 0x1618,prog_1618 );
 }
 
 Control prog_0B74 ()
 {
     at ( "0B74" );
-    instruction ( "CALL 0BF1",0x0B77 );
+    instruction ( "CALL 0BF1",e16_hi_lo ( 0x0B,0x77 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -24559,22 +24559,22 @@ Control prog_0B74 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0BF1 );
+    return jumpDirect ( 0x0BF1,prog_0BF1 );
 }
 
 Control prog_0B77 ()
 {
     at ( "0B77" );
-    instruction ( "OUT  06",0x0B79 );
+    instruction ( "OUT  06",e16_hi_lo ( 0x0B,0x79 ) );
     u8 a1 = A ;
     advance ( 10 );
-    return jumpDirect ( prog_0B79 );
+    return jumpDirect ( 0x0B79,prog_0B79 );
 }
 
 Control prog_0B79 ()
 {
     at ( "0B79" );
-    instruction ( "CALL 0A59",0x0B7C );
+    instruction ( "CALL 0A59",e16_hi_lo ( 0x0B,0x7C ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -24587,29 +24587,29 @@ Control prog_0B79 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0A59 );
+    return jumpDirect ( 0x0A59,prog_0A59 );
 }
 
 Control prog_0B7C ()
 {
     at ( "0B7C" );
-    instruction ( "JP   Z,0B71",0x0B7F );
+    instruction ( "JP   Z,0B71",e16_hi_lo ( 0x0B,0x7F ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_0B71 );
+        return jumpDirect ( 0x0B71,prog_0B71 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0B7F );
+        return jumpDirect ( 0x0B7F,prog_0B7F );
     }
 }
 
 Control prog_0B7F ()
 {
     at ( "0B7F" );
-    instruction ( "XOR  A",0x0B80 );
+    instruction ( "XOR  A",e16_hi_lo ( 0x0B,0x80 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -24620,23 +24620,23 @@ Control prog_0B7F ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0B80 );
+    return jumpDirect ( 0x0B80,prog_0B80 );
 }
 
 Control prog_0B80 ()
 {
     at ( "0B80" );
-    instruction ( "LD   (2025),A",0x0B83 );
+    instruction ( "LD   (2025),A",e16_hi_lo ( 0x0B,0x83 ) );
     u8 a1 = A ;
     mem_write ( 0x2025,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0B83 );
+    return jumpDirect ( 0x0B83,prog_0B83 );
 }
 
 Control prog_0B83 ()
 {
     at ( "0B83" );
-    instruction ( "CALL 0A59",0x0B86 );
+    instruction ( "CALL 0A59",e16_hi_lo ( 0x0B,0x86 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -24649,29 +24649,29 @@ Control prog_0B83 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0A59 );
+    return jumpDirect ( 0x0A59,prog_0A59 );
 }
 
 Control prog_0B86 ()
 {
     at ( "0B86" );
-    instruction ( "JP   NZ,0B83",0x0B89 );
+    instruction ( "JP   NZ,0B83",e16_hi_lo ( 0x0B,0x89 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_0B83 );
+        return jumpDirect ( 0x0B83,prog_0B83 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0B89 );
+        return jumpDirect ( 0x0B89,prog_0B89 );
     }
 }
 
 Control prog_0B89 ()
 {
     at ( "0B89" );
-    instruction ( "XOR  A",0x0B8A );
+    instruction ( "XOR  A",e16_hi_lo ( 0x0B,0x8A ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -24682,23 +24682,23 @@ Control prog_0B89 ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0B8A );
+    return jumpDirect ( 0x0B8A,prog_0B8A );
 }
 
 Control prog_0B8A ()
 {
     at ( "0B8A" );
-    instruction ( "LD   (20C1),A",0x0B8D );
+    instruction ( "LD   (20C1),A",e16_hi_lo ( 0x0B,0x8D ) );
     u8 a1 = A ;
     mem_write ( 0x20C1,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_0B8D );
+    return jumpDirect ( 0x0B8D,prog_0B8D );
 }
 
 Control prog_0B8D ()
 {
     at ( "0B8D" );
-    instruction ( "CALL 0AB1",0x0B90 );
+    instruction ( "CALL 0AB1",e16_hi_lo ( 0x0B,0x90 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -24711,13 +24711,13 @@ Control prog_0B8D ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0AB1 );
+    return jumpDirect ( 0x0AB1,prog_0AB1 );
 }
 
 Control prog_0B90 ()
 {
     at ( "0B90" );
-    instruction ( "CALL 1988",0x0B93 );
+    instruction ( "CALL 1988",e16_hi_lo ( 0x0B,0x93 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -24730,42 +24730,42 @@ Control prog_0B90 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1988 );
+    return jumpDirect ( 0x1988,prog_1988 );
 }
 
 Control prog_0B93 ()
 {
     at ( "0B93" );
-    instruction ( "LD   C,0C",0x0B95 );
+    instruction ( "LD   C,0C",e16_hi_lo ( 0x0B,0x95 ) );
     advance ( 7 );
     C = 0x0C;
-    return jumpDirect ( prog_0B95 );
+    return jumpDirect ( 0x0B95,prog_0B95 );
 }
 
 Control prog_0B95 ()
 {
     at ( "0B95" );
-    instruction ( "LD   HL,2C11",0x0B98 );
+    instruction ( "LD   HL,2C11",e16_hi_lo ( 0x0B,0x98 ) );
     advance ( 10 );
     H = 0x2C;
     L = 0x11;
-    return jumpDirect ( prog_0B98 );
+    return jumpDirect ( 0x0B98,prog_0B98 );
 }
 
 Control prog_0B98 ()
 {
     at ( "0B98" );
-    instruction ( "LD   DE,1F90",0x0B9B );
+    instruction ( "LD   DE,1F90",e16_hi_lo ( 0x0B,0x9B ) );
     advance ( 10 );
     D = 0x1F;
     E = 0x90;
-    return jumpDirect ( prog_0B9B );
+    return jumpDirect ( 0x0B9B,prog_0B9B );
 }
 
 Control prog_0B9B ()
 {
     at ( "0B9B" );
-    instruction ( "CALL 08F3",0x0B9E );
+    instruction ( "CALL 08F3",e16_hi_lo ( 0x0B,0x9E ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -24778,23 +24778,23 @@ Control prog_0B9B ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_08F3 );
+    return jumpDirect ( 0x08F3,prog_08F3 );
 }
 
 Control prog_0B9E ()
 {
     at ( "0B9E" );
-    instruction ( "LD   A,(20EC)",0x0BA1 );
+    instruction ( "LD   A,(20EC)",e16_hi_lo ( 0x0B,0xA1 ) );
     u8 a1 = e8_read_mem ( 0x20EC ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0BA1 );
+    return jumpDirect ( 0x0BA1,prog_0BA1 );
 }
 
 Control prog_0BA1 ()
 {
     at ( "0BA1" );
-    instruction ( "CP   00",0x0BA3 );
+    instruction ( "CP   00",e16_hi_lo ( 0x0B,0xA3 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -24806,48 +24806,48 @@ Control prog_0BA1 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_0BA3 );
+    return jumpDirect ( 0x0BA3,prog_0BA3 );
 }
 
 Control prog_0BA3 ()
 {
     at ( "0BA3" );
-    instruction ( "JP   NZ,0BAE",0x0BA6 );
+    instruction ( "JP   NZ,0BAE",e16_hi_lo ( 0x0B,0xA6 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_0BAE );
+        return jumpDirect ( 0x0BAE,prog_0BAE );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0BA6 );
+        return jumpDirect ( 0x0BA6,prog_0BA6 );
     }
 }
 
 Control prog_0BA6 ()
 {
     at ( "0BA6" );
-    instruction ( "LD   HL,3311",0x0BA9 );
+    instruction ( "LD   HL,3311",e16_hi_lo ( 0x0B,0xA9 ) );
     advance ( 10 );
     H = 0x33;
     L = 0x11;
-    return jumpDirect ( prog_0BA9 );
+    return jumpDirect ( 0x0BA9,prog_0BA9 );
 }
 
 Control prog_0BA9 ()
 {
     at ( "0BA9" );
-    instruction ( "LD   A,02",0x0BAB );
+    instruction ( "LD   A,02",e16_hi_lo ( 0x0B,0xAB ) );
     advance ( 7 );
     A = 0x02;
-    return jumpDirect ( prog_0BAB );
+    return jumpDirect ( 0x0BAB,prog_0BAB );
 }
 
 Control prog_0BAB ()
 {
     at ( "0BAB" );
-    instruction ( "CALL 08FF",0x0BAE );
+    instruction ( "CALL 08FF",e16_hi_lo ( 0x0B,0xAE ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -24860,23 +24860,23 @@ Control prog_0BAB ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_08FF );
+    return jumpDirect ( 0x08FF,prog_08FF );
 }
 
 Control prog_0BAE ()
 {
     at ( "0BAE" );
-    instruction ( "LD   BC,1F9C",0x0BB1 );
+    instruction ( "LD   BC,1F9C",e16_hi_lo ( 0x0B,0xB1 ) );
     advance ( 10 );
     B = 0x1F;
     C = 0x9C;
-    return jumpDirect ( prog_0BB1 );
+    return jumpDirect ( 0x0BB1,prog_0BB1 );
 }
 
 Control prog_0BB1 ()
 {
     at ( "0BB1" );
-    instruction ( "CALL 1856",0x0BB4 );
+    instruction ( "CALL 1856",e16_hi_lo ( 0x0B,0xB4 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -24889,13 +24889,13 @@ Control prog_0BB1 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1856 );
+    return jumpDirect ( 0x1856,prog_1856 );
 }
 
 Control prog_0BB4 ()
 {
     at ( "0BB4" );
-    instruction ( "CALL 184C",0x0BB7 );
+    instruction ( "CALL 184C",e16_hi_lo ( 0x0B,0xB7 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -24908,59 +24908,59 @@ Control prog_0BB4 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_184C );
+    return jumpDirect ( 0x184C,prog_184C );
 }
 
 Control prog_0BB7 ()
 {
     at ( "0BB7" );
-    instruction ( "IN   02",0x0BB9 );
+    instruction ( "IN   02",e16_hi_lo ( 0x0B,0xB9 ) );
     advance ( 10 );
     A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_is_pressed ( "[dip3] lives (3,4,5,6) lsb" ) ),1,e1_is_pressed ( "[dip5] lives (3,4,5,6) msb" ) ),2,e1_is_pressed ( "TILT" ) ),3,e1_is_pressed ( "[dip6] extra ship at 1000" ) ),4,e1_is_pressed ( "player2 shoot" ) ),5,e1_is_pressed ( "player2 left" ) ),6,e1_is_pressed ( "player2 right" ) ),7,e1_is_pressed ( "[dip7] coin info off" ) );
-    return jumpDirect ( prog_0BB9 );
+    return jumpDirect ( 0x0BB9,prog_0BB9 );
 }
 
 Control prog_0BB9 ()
 {
     at ( "0BB9" );
-    instruction ( "RLCA",0x0BBA );
+    instruction ( "RLCA",e16_hi_lo ( 0x0B,0xBA ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftL ( a1,0x01 ),0,e1_test_bit ( a1,7 ) );
     FlagCY = e1_test_bit ( a1,7 );
-    return jumpDirect ( prog_0BBA );
+    return jumpDirect ( 0x0BBA,prog_0BBA );
 }
 
 Control prog_0BBA ()
 {
     at ( "0BBA" );
-    instruction ( "JP   CY,0BC3",0x0BBD );
+    instruction ( "JP   CY,0BC3",e16_hi_lo ( 0x0B,0xBD ) );
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( prog_0BC3 );
+        return jumpDirect ( 0x0BC3,prog_0BC3 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0BBD );
+        return jumpDirect ( 0x0BBD,prog_0BBD );
     }
 }
 
 Control prog_0BBD ()
 {
     at ( "0BBD" );
-    instruction ( "LD   BC,1FA0",0x0BC0 );
+    instruction ( "LD   BC,1FA0",e16_hi_lo ( 0x0B,0xC0 ) );
     advance ( 10 );
     B = 0x1F;
     C = 0xA0;
-    return jumpDirect ( prog_0BC0 );
+    return jumpDirect ( 0x0BC0,prog_0BC0 );
 }
 
 Control prog_0BC0 ()
 {
     at ( "0BC0" );
-    instruction ( "CALL 183A",0x0BC3 );
+    instruction ( "CALL 183A",e16_hi_lo ( 0x0B,0xC3 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -24973,13 +24973,13 @@ Control prog_0BC0 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_183A );
+    return jumpDirect ( 0x183A,prog_183A );
 }
 
 Control prog_0BC3 ()
 {
     at ( "0BC3" );
-    instruction ( "CALL 0AB6",0x0BC6 );
+    instruction ( "CALL 0AB6",e16_hi_lo ( 0x0B,0xC6 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -24992,23 +24992,23 @@ Control prog_0BC3 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0AB6 );
+    return jumpDirect ( 0x0AB6,prog_0AB6 );
 }
 
 Control prog_0BC6 ()
 {
     at ( "0BC6" );
-    instruction ( "LD   A,(20EC)",0x0BC9 );
+    instruction ( "LD   A,(20EC)",e16_hi_lo ( 0x0B,0xC9 ) );
     u8 a1 = e8_read_mem ( 0x20EC ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_0BC9 );
+    return jumpDirect ( 0x0BC9,prog_0BC9 );
 }
 
 Control prog_0BC9 ()
 {
     at ( "0BC9" );
-    instruction ( "CP   00",0x0BCB );
+    instruction ( "CP   00",e16_hi_lo ( 0x0B,0xCB ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -25020,39 +25020,39 @@ Control prog_0BC9 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_0BCB );
+    return jumpDirect ( 0x0BCB,prog_0BCB );
 }
 
 Control prog_0BCB ()
 {
     at ( "0BCB" );
-    instruction ( "JP   NZ,0BDA",0x0BCE );
+    instruction ( "JP   NZ,0BDA",e16_hi_lo ( 0x0B,0xCE ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_0BDA );
+        return jumpDirect ( 0x0BDA,prog_0BDA );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_0BCE );
+        return jumpDirect ( 0x0BCE,prog_0BCE );
     }
 }
 
 Control prog_0BCE ()
 {
     at ( "0BCE" );
-    instruction ( "LD   DE,1FD5",0x0BD1 );
+    instruction ( "LD   DE,1FD5",e16_hi_lo ( 0x0B,0xD1 ) );
     advance ( 10 );
     D = 0x1F;
     E = 0xD5;
-    return jumpDirect ( prog_0BD1 );
+    return jumpDirect ( 0x0BD1,prog_0BD1 );
 }
 
 Control prog_0BD1 ()
 {
     at ( "0BD1" );
-    instruction ( "CALL 0AE2",0x0BD4 );
+    instruction ( "CALL 0AE2",e16_hi_lo ( 0x0B,0xD4 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -25065,13 +25065,13 @@ Control prog_0BD1 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0AE2 );
+    return jumpDirect ( 0x0AE2,prog_0AE2 );
 }
 
 Control prog_0BD4 ()
 {
     at ( "0BD4" );
-    instruction ( "CALL 0A80",0x0BD7 );
+    instruction ( "CALL 0A80",e16_hi_lo ( 0x0B,0xD7 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -25084,13 +25084,13 @@ Control prog_0BD4 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0A80 );
+    return jumpDirect ( 0x0A80,prog_0A80 );
 }
 
 Control prog_0BD7 ()
 {
     at ( "0BD7" );
-    instruction ( "CALL 189E",0x0BDA );
+    instruction ( "CALL 189E",e16_hi_lo ( 0x0B,0xDA ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -25103,35 +25103,35 @@ Control prog_0BD7 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_189E );
+    return jumpDirect ( 0x189E,prog_189E );
 }
 
 Control prog_0BDA ()
 {
     at ( "0BDA" );
-    instruction ( "LD   HL,20EC",0x0BDD );
+    instruction ( "LD   HL,20EC",e16_hi_lo ( 0x0B,0xDD ) );
     advance ( 10 );
     H = 0x20;
     L = 0xEC;
-    return jumpDirect ( prog_0BDD );
+    return jumpDirect ( 0x0BDD,prog_0BDD );
 }
 
 Control prog_0BDD ()
 {
     at ( "0BDD" );
-    instruction ( "LD   A,(HL)",0x0BDE );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x0B,0xDE ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_0BDE );
+    return jumpDirect ( 0x0BDE,prog_0BDE );
 }
 
 Control prog_0BDE ()
 {
     at ( "0BDE" );
-    instruction ( "INC  A",0x0BDF );
+    instruction ( "INC  A",e16_hi_lo ( 0x0B,0xDF ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_true (  ),a1,0x00 ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -25143,13 +25143,13 @@ Control prog_0BDE ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_0BDF );
+    return jumpDirect ( 0x0BDF,prog_0BDF );
 }
 
 Control prog_0BDF ()
 {
     at ( "0BDF" );
-    instruction ( "AND  01",0x0BE1 );
+    instruction ( "AND  01",e16_hi_lo ( 0x0B,0xE1 ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( 0x01,a1 ) ;
     u8 a3 = e8_or ( 0x01,a1 ) ;
@@ -25160,25 +25160,25 @@ Control prog_0BDF ()
     FlagA = e1_test_bit ( a3,3 );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_0BE1 );
+    return jumpDirect ( 0x0BE1,prog_0BE1 );
 }
 
 Control prog_0BE1 ()
 {
     at ( "0BE1" );
-    instruction ( "LD   (HL),A",0x0BE2 );
+    instruction ( "LD   (HL),A",e16_hi_lo ( 0x0B,0xE2 ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_0BE2 );
+    return jumpDirect ( 0x0BE2,prog_0BE2 );
 }
 
 Control prog_0BE2 ()
 {
     at ( "0BE2" );
-    instruction ( "CALL 09D6",0x0BE5 );
+    instruction ( "CALL 09D6",e16_hi_lo ( 0x0B,0xE5 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -25191,31 +25191,31 @@ Control prog_0BE2 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_09D6 );
+    return jumpDirect ( 0x09D6,prog_09D6 );
 }
 
 Control prog_0BE5 ()
 {
     at ( "0BE5" );
-    instruction ( "JP   18DF",0x0BE8 );
+    instruction ( "JP   18DF",e16_hi_lo ( 0x0B,0xE8 ) );
     advance ( 10 );
-    return jumpDirect ( prog_18DF );
+    return jumpDirect ( 0x18DF,prog_18DF );
 }
 
 Control prog_0BE8 ()
 {
     at ( "0BE8" );
-    instruction ( "LD   DE,1DAB",0x0BEB );
+    instruction ( "LD   DE,1DAB",e16_hi_lo ( 0x0B,0xEB ) );
     advance ( 10 );
     D = 0x1D;
     E = 0xAB;
-    return jumpDirect ( prog_0BEB );
+    return jumpDirect ( 0x0BEB,prog_0BEB );
 }
 
 Control prog_0BEB ()
 {
     at ( "0BEB" );
-    instruction ( "CALL 0A93",0x0BEE );
+    instruction ( "CALL 0A93",e16_hi_lo ( 0x0B,0xEE ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -25228,21 +25228,21 @@ Control prog_0BEB ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0A93 );
+    return jumpDirect ( 0x0A93,prog_0A93 );
 }
 
 Control prog_0BEE ()
 {
     at ( "0BEE" );
-    instruction ( "JP   0B0B",0x0BF1 );
+    instruction ( "JP   0B0B",e16_hi_lo ( 0x0B,0xF1 ) );
     advance ( 10 );
-    return jumpDirect ( prog_0B0B );
+    return jumpDirect ( 0x0B0B,prog_0B0B );
 }
 
 Control prog_0BF1 ()
 {
     at ( "0BF1" );
-    instruction ( "CALL 190A",0x0BF4 );
+    instruction ( "CALL 190A",e16_hi_lo ( 0x0B,0xF4 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -25255,29 +25255,29 @@ Control prog_0BF1 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_190A );
+    return jumpDirect ( 0x190A,prog_190A );
 }
 
 Control prog_0BF4 ()
 {
     at ( "0BF4" );
-    instruction ( "JP   199A",0x0BF7 );
+    instruction ( "JP   199A",e16_hi_lo ( 0x0B,0xF7 ) );
     advance ( 10 );
-    return jumpDirect ( prog_199A );
+    return jumpDirect ( 0x199A,prog_199A );
 }
 
 Control prog_1400 ()
 {
     at ( "1400" );
-    instruction ( "NOP",0x1401 );
+    instruction ( "NOP",e16_hi_lo ( 0x14,0x01 ) );
     advance ( 4 );
-    return jumpDirect ( prog_1401 );
+    return jumpDirect ( 0x1401,prog_1401 );
 }
 
 Control prog_1401 ()
 {
     at ( "1401" );
-    instruction ( "CALL 1474",0x1404 );
+    instruction ( "CALL 1474",e16_hi_lo ( 0x14,0x04 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -25290,21 +25290,21 @@ Control prog_1401 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1474 );
+    return jumpDirect ( 0x1474,prog_1474 );
 }
 
 Control prog_1404 ()
 {
     at ( "1404" );
-    instruction ( "NOP",0x1405 );
+    instruction ( "NOP",e16_hi_lo ( 0x14,0x05 ) );
     advance ( 4 );
-    return jumpDirect ( prog_1405 );
+    return jumpDirect ( 0x1405,prog_1405 );
 }
 
 Control prog_1405 ()
 {
     at ( "1405" );
-    instruction ( "PUSH BC",0x1406 );
+    instruction ( "PUSH BC",e16_hi_lo ( 0x14,0x06 ) );
     u8 a1 = B ;
     u8 a2 = C ;
     u8 a3 = SPH ;
@@ -25318,13 +25318,13 @@ Control prog_1405 ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_1406 );
+    return jumpDirect ( 0x1406,prog_1406 );
 }
 
 Control prog_1406 ()
 {
     at ( "1406" );
-    instruction ( "PUSH HL",0x1407 );
+    instruction ( "PUSH HL",e16_hi_lo ( 0x14,0x07 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = SPH ;
@@ -25338,25 +25338,25 @@ Control prog_1406 ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_1407 );
+    return jumpDirect ( 0x1407,prog_1407 );
 }
 
 Control prog_1407 ()
 {
     at ( "1407" );
-    instruction ( "LD   A,(DE)",0x1408 );
+    instruction ( "LD   A,(DE)",e16_hi_lo ( 0x14,0x08 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_1408 );
+    return jumpDirect ( 0x1408,prog_1408 );
 }
 
 Control prog_1408 ()
 {
     at ( "1408" );
-    instruction ( "OUT  04",0x140A );
+    instruction ( "OUT  04",e16_hi_lo ( 0x14,0x0A ) );
     u8 a1 = A ;
     advance ( 10 );
     todo ( "S_AssignShifterReg" );
@@ -25366,19 +25366,19 @@ Control prog_1408 ()
 Control prog_140A ()
 {
     at ( "140A" );
-    instruction ( "IN   03",0x140C );
+    instruction ( "IN   03",e16_hi_lo ( 0x14,0x0C ) );
     u8 a1 = e8_and ( Shifter_OFF,0x07 ) ;
     u8 a2 = e8_and ( e8_complement ( Shifter_OFF ),0x07 ) ;
     u8 a3 = e8_or ( e8_shiftL ( Shifter_HI,a1 ),e8_shiftR ( e8_shiftR ( Shifter_LO,a2 ),0x01 ) ) ;
     advance ( 10 );
     A = a3;
-    return jumpDirect ( prog_140C );
+    return jumpDirect ( 0x140C,prog_140C );
 }
 
 Control prog_140C ()
 {
     at ( "140C" );
-    instruction ( "OR   (HL)",0x140D );
+    instruction ( "OR   (HL)",e16_hi_lo ( 0x14,0x0D ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -25391,51 +25391,51 @@ Control prog_140C ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a5 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_140D );
+    return jumpDirect ( 0x140D,prog_140D );
 }
 
 Control prog_140D ()
 {
     at ( "140D" );
-    instruction ( "LD   (HL),A",0x140E );
+    instruction ( "LD   (HL),A",e16_hi_lo ( 0x14,0x0E ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_140E );
+    return jumpDirect ( 0x140E,prog_140E );
 }
 
 Control prog_140E ()
 {
     at ( "140E" );
-    instruction ( "INC  HL",0x140F );
+    instruction ( "INC  HL",e16_hi_lo ( 0x14,0x0F ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_140F );
+    return jumpDirect ( 0x140F,prog_140F );
 }
 
 Control prog_140F ()
 {
     at ( "140F" );
-    instruction ( "INC  DE",0x1410 );
+    instruction ( "INC  DE",e16_hi_lo ( 0x14,0x10 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     D = e8_hi ( a3 );
     E = e8_lo ( a3 );
-    return jumpDirect ( prog_1410 );
+    return jumpDirect ( 0x1410,prog_1410 );
 }
 
 Control prog_1410 ()
 {
     at ( "1410" );
-    instruction ( "XOR  A",0x1411 );
+    instruction ( "XOR  A",e16_hi_lo ( 0x14,0x11 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -25446,13 +25446,13 @@ Control prog_1410 ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_1411 );
+    return jumpDirect ( 0x1411,prog_1411 );
 }
 
 Control prog_1411 ()
 {
     at ( "1411" );
-    instruction ( "OUT  04",0x1413 );
+    instruction ( "OUT  04",e16_hi_lo ( 0x14,0x13 ) );
     u8 a1 = A ;
     advance ( 10 );
     todo ( "S_AssignShifterReg" );
@@ -25462,19 +25462,19 @@ Control prog_1411 ()
 Control prog_1413 ()
 {
     at ( "1413" );
-    instruction ( "IN   03",0x1415 );
+    instruction ( "IN   03",e16_hi_lo ( 0x14,0x15 ) );
     u8 a1 = e8_and ( Shifter_OFF,0x07 ) ;
     u8 a2 = e8_and ( e8_complement ( Shifter_OFF ),0x07 ) ;
     u8 a3 = e8_or ( e8_shiftL ( Shifter_HI,a1 ),e8_shiftR ( e8_shiftR ( Shifter_LO,a2 ),0x01 ) ) ;
     advance ( 10 );
     A = a3;
-    return jumpDirect ( prog_1415 );
+    return jumpDirect ( 0x1415,prog_1415 );
 }
 
 Control prog_1415 ()
 {
     at ( "1415" );
-    instruction ( "OR   (HL)",0x1416 );
+    instruction ( "OR   (HL)",e16_hi_lo ( 0x14,0x16 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -25487,25 +25487,25 @@ Control prog_1415 ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a5 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_1416 );
+    return jumpDirect ( 0x1416,prog_1416 );
 }
 
 Control prog_1416 ()
 {
     at ( "1416" );
-    instruction ( "LD   (HL),A",0x1417 );
+    instruction ( "LD   (HL),A",e16_hi_lo ( 0x14,0x17 ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_1417 );
+    return jumpDirect ( 0x1417,prog_1417 );
 }
 
 Control prog_1417 ()
 {
     at ( "1417" );
-    instruction ( "POP  HL",0x1418 );
+    instruction ( "POP  HL",e16_hi_lo ( 0x14,0x18 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -25519,23 +25519,23 @@ Control prog_1417 ()
     L = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_1418 );
+    return jumpDirect ( 0x1418,prog_1418 );
 }
 
 Control prog_1418 ()
 {
     at ( "1418" );
-    instruction ( "LD   BC,0020",0x141B );
+    instruction ( "LD   BC,0020",e16_hi_lo ( 0x14,0x1B ) );
     advance ( 10 );
     B = 0x00;
     C = 0x20;
-    return jumpDirect ( prog_141B );
+    return jumpDirect ( 0x141B,prog_141B );
 }
 
 Control prog_141B ()
 {
     at ( "141B" );
-    instruction ( "ADD  HL,BC",0x141C );
+    instruction ( "ADD  HL,BC",e16_hi_lo ( 0x14,0x1C ) );
     u8 a1 = B ;
     u8 a2 = C ;
     u8 a3 = H ;
@@ -25545,13 +25545,13 @@ Control prog_141B ()
     H = e8_hi ( e16_drop_hi_bit_of_17 ( a5 ) );
     L = e8_lo ( e16_drop_hi_bit_of_17 ( a5 ) );
     FlagCY = e1_hi_bit_of_17 ( a5 );
-    return jumpDirect ( prog_141C );
+    return jumpDirect ( 0x141C,prog_141C );
 }
 
 Control prog_141C ()
 {
     at ( "141C" );
-    instruction ( "POP  BC",0x141D );
+    instruction ( "POP  BC",e16_hi_lo ( 0x14,0x1D ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -25565,13 +25565,13 @@ Control prog_141C ()
     C = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_141D );
+    return jumpDirect ( 0x141D,prog_141D );
 }
 
 Control prog_141D ()
 {
     at ( "141D" );
-    instruction ( "DEC  B",0x141E );
+    instruction ( "DEC  B",e16_hi_lo ( 0x14,0x1E ) );
     u8 a1 = B ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -25583,29 +25583,29 @@ Control prog_141D ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_141E );
+    return jumpDirect ( 0x141E,prog_141E );
 }
 
 Control prog_141E ()
 {
     at ( "141E" );
-    instruction ( "JP   NZ,1405",0x1421 );
+    instruction ( "JP   NZ,1405",e16_hi_lo ( 0x14,0x21 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_1405 );
+        return jumpDirect ( 0x1405,prog_1405 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_1421 );
+        return jumpDirect ( 0x1421,prog_1421 );
     }
 }
 
 Control prog_1421 ()
 {
     at ( "1421" );
-    instruction ( "RET",0x1422 );
+    instruction ( "RET",e16_hi_lo ( 0x14,0x22 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -25623,7 +25623,7 @@ Control prog_1421 ()
 Control prog_1424 ()
 {
     at ( "1424" );
-    instruction ( "CALL 1474",0x1427 );
+    instruction ( "CALL 1474",e16_hi_lo ( 0x14,0x27 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -25636,13 +25636,13 @@ Control prog_1424 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1474 );
+    return jumpDirect ( 0x1474,prog_1474 );
 }
 
 Control prog_1427 ()
 {
     at ( "1427" );
-    instruction ( "PUSH BC",0x1428 );
+    instruction ( "PUSH BC",e16_hi_lo ( 0x14,0x28 ) );
     u8 a1 = B ;
     u8 a2 = C ;
     u8 a3 = SPH ;
@@ -25656,13 +25656,13 @@ Control prog_1427 ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_1428 );
+    return jumpDirect ( 0x1428,prog_1428 );
 }
 
 Control prog_1428 ()
 {
     at ( "1428" );
-    instruction ( "PUSH HL",0x1429 );
+    instruction ( "PUSH HL",e16_hi_lo ( 0x14,0x29 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = SPH ;
@@ -25676,13 +25676,13 @@ Control prog_1428 ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_1429 );
+    return jumpDirect ( 0x1429,prog_1429 );
 }
 
 Control prog_1429 ()
 {
     at ( "1429" );
-    instruction ( "XOR  A",0x142A );
+    instruction ( "XOR  A",e16_hi_lo ( 0x14,0x2A ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -25693,63 +25693,63 @@ Control prog_1429 ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_142A );
+    return jumpDirect ( 0x142A,prog_142A );
 }
 
 Control prog_142A ()
 {
     at ( "142A" );
-    instruction ( "LD   (HL),A",0x142B );
+    instruction ( "LD   (HL),A",e16_hi_lo ( 0x14,0x2B ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_142B );
+    return jumpDirect ( 0x142B,prog_142B );
 }
 
 Control prog_142B ()
 {
     at ( "142B" );
-    instruction ( "INC  HL",0x142C );
+    instruction ( "INC  HL",e16_hi_lo ( 0x14,0x2C ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_142C );
+    return jumpDirect ( 0x142C,prog_142C );
 }
 
 Control prog_142C ()
 {
     at ( "142C" );
-    instruction ( "LD   (HL),A",0x142D );
+    instruction ( "LD   (HL),A",e16_hi_lo ( 0x14,0x2D ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_142D );
+    return jumpDirect ( 0x142D,prog_142D );
 }
 
 Control prog_142D ()
 {
     at ( "142D" );
-    instruction ( "INC  HL",0x142E );
+    instruction ( "INC  HL",e16_hi_lo ( 0x14,0x2E ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_142E );
+    return jumpDirect ( 0x142E,prog_142E );
 }
 
 Control prog_142E ()
 {
     at ( "142E" );
-    instruction ( "POP  HL",0x142F );
+    instruction ( "POP  HL",e16_hi_lo ( 0x14,0x2F ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -25763,23 +25763,23 @@ Control prog_142E ()
     L = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_142F );
+    return jumpDirect ( 0x142F,prog_142F );
 }
 
 Control prog_142F ()
 {
     at ( "142F" );
-    instruction ( "LD   BC,0020",0x1432 );
+    instruction ( "LD   BC,0020",e16_hi_lo ( 0x14,0x32 ) );
     advance ( 10 );
     B = 0x00;
     C = 0x20;
-    return jumpDirect ( prog_1432 );
+    return jumpDirect ( 0x1432,prog_1432 );
 }
 
 Control prog_1432 ()
 {
     at ( "1432" );
-    instruction ( "ADD  HL,BC",0x1433 );
+    instruction ( "ADD  HL,BC",e16_hi_lo ( 0x14,0x33 ) );
     u8 a1 = B ;
     u8 a2 = C ;
     u8 a3 = H ;
@@ -25789,13 +25789,13 @@ Control prog_1432 ()
     H = e8_hi ( e16_drop_hi_bit_of_17 ( a5 ) );
     L = e8_lo ( e16_drop_hi_bit_of_17 ( a5 ) );
     FlagCY = e1_hi_bit_of_17 ( a5 );
-    return jumpDirect ( prog_1433 );
+    return jumpDirect ( 0x1433,prog_1433 );
 }
 
 Control prog_1433 ()
 {
     at ( "1433" );
-    instruction ( "POP  BC",0x1434 );
+    instruction ( "POP  BC",e16_hi_lo ( 0x14,0x34 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -25809,13 +25809,13 @@ Control prog_1433 ()
     C = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_1434 );
+    return jumpDirect ( 0x1434,prog_1434 );
 }
 
 Control prog_1434 ()
 {
     at ( "1434" );
-    instruction ( "DEC  B",0x1435 );
+    instruction ( "DEC  B",e16_hi_lo ( 0x14,0x35 ) );
     u8 a1 = B ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -25827,29 +25827,29 @@ Control prog_1434 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_1435 );
+    return jumpDirect ( 0x1435,prog_1435 );
 }
 
 Control prog_1435 ()
 {
     at ( "1435" );
-    instruction ( "JP   NZ,1427",0x1438 );
+    instruction ( "JP   NZ,1427",e16_hi_lo ( 0x14,0x38 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_1427 );
+        return jumpDirect ( 0x1427,prog_1427 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_1438 );
+        return jumpDirect ( 0x1438,prog_1438 );
     }
 }
 
 Control prog_1438 ()
 {
     at ( "1438" );
-    instruction ( "RET",0x1439 );
+    instruction ( "RET",e16_hi_lo ( 0x14,0x39 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -25867,7 +25867,7 @@ Control prog_1438 ()
 Control prog_1439 ()
 {
     at ( "1439" );
-    instruction ( "PUSH BC",0x143A );
+    instruction ( "PUSH BC",e16_hi_lo ( 0x14,0x3A ) );
     u8 a1 = B ;
     u8 a2 = C ;
     u8 a3 = SPH ;
@@ -25881,60 +25881,60 @@ Control prog_1439 ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_143A );
+    return jumpDirect ( 0x143A,prog_143A );
 }
 
 Control prog_143A ()
 {
     at ( "143A" );
-    instruction ( "LD   A,(DE)",0x143B );
+    instruction ( "LD   A,(DE)",e16_hi_lo ( 0x14,0x3B ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_143B );
+    return jumpDirect ( 0x143B,prog_143B );
 }
 
 Control prog_143B ()
 {
     at ( "143B" );
-    instruction ( "LD   (HL),A",0x143C );
+    instruction ( "LD   (HL),A",e16_hi_lo ( 0x14,0x3C ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_143C );
+    return jumpDirect ( 0x143C,prog_143C );
 }
 
 Control prog_143C ()
 {
     at ( "143C" );
-    instruction ( "INC  DE",0x143D );
+    instruction ( "INC  DE",e16_hi_lo ( 0x14,0x3D ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     D = e8_hi ( a3 );
     E = e8_lo ( a3 );
-    return jumpDirect ( prog_143D );
+    return jumpDirect ( 0x143D,prog_143D );
 }
 
 Control prog_143D ()
 {
     at ( "143D" );
-    instruction ( "LD   BC,0020",0x1440 );
+    instruction ( "LD   BC,0020",e16_hi_lo ( 0x14,0x40 ) );
     advance ( 10 );
     B = 0x00;
     C = 0x20;
-    return jumpDirect ( prog_1440 );
+    return jumpDirect ( 0x1440,prog_1440 );
 }
 
 Control prog_1440 ()
 {
     at ( "1440" );
-    instruction ( "ADD  HL,BC",0x1441 );
+    instruction ( "ADD  HL,BC",e16_hi_lo ( 0x14,0x41 ) );
     u8 a1 = B ;
     u8 a2 = C ;
     u8 a3 = H ;
@@ -25944,13 +25944,13 @@ Control prog_1440 ()
     H = e8_hi ( e16_drop_hi_bit_of_17 ( a5 ) );
     L = e8_lo ( e16_drop_hi_bit_of_17 ( a5 ) );
     FlagCY = e1_hi_bit_of_17 ( a5 );
-    return jumpDirect ( prog_1441 );
+    return jumpDirect ( 0x1441,prog_1441 );
 }
 
 Control prog_1441 ()
 {
     at ( "1441" );
-    instruction ( "POP  BC",0x1442 );
+    instruction ( "POP  BC",e16_hi_lo ( 0x14,0x42 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -25964,13 +25964,13 @@ Control prog_1441 ()
     C = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_1442 );
+    return jumpDirect ( 0x1442,prog_1442 );
 }
 
 Control prog_1442 ()
 {
     at ( "1442" );
-    instruction ( "DEC  B",0x1443 );
+    instruction ( "DEC  B",e16_hi_lo ( 0x14,0x43 ) );
     u8 a1 = B ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -25982,29 +25982,29 @@ Control prog_1442 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_1443 );
+    return jumpDirect ( 0x1443,prog_1443 );
 }
 
 Control prog_1443 ()
 {
     at ( "1443" );
-    instruction ( "JP   NZ,1439",0x1446 );
+    instruction ( "JP   NZ,1439",e16_hi_lo ( 0x14,0x46 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_1439 );
+        return jumpDirect ( 0x1439,prog_1439 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_1446 );
+        return jumpDirect ( 0x1446,prog_1446 );
     }
 }
 
 Control prog_1446 ()
 {
     at ( "1446" );
-    instruction ( "RET",0x1447 );
+    instruction ( "RET",e16_hi_lo ( 0x14,0x47 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -26022,7 +26022,7 @@ Control prog_1446 ()
 Control prog_1452 ()
 {
     at ( "1452" );
-    instruction ( "CALL 1474",0x1455 );
+    instruction ( "CALL 1474",e16_hi_lo ( 0x14,0x55 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -26035,13 +26035,13 @@ Control prog_1452 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1474 );
+    return jumpDirect ( 0x1474,prog_1474 );
 }
 
 Control prog_1455 ()
 {
     at ( "1455" );
-    instruction ( "PUSH BC",0x1456 );
+    instruction ( "PUSH BC",e16_hi_lo ( 0x14,0x56 ) );
     u8 a1 = B ;
     u8 a2 = C ;
     u8 a3 = SPH ;
@@ -26055,13 +26055,13 @@ Control prog_1455 ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_1456 );
+    return jumpDirect ( 0x1456,prog_1456 );
 }
 
 Control prog_1456 ()
 {
     at ( "1456" );
-    instruction ( "PUSH HL",0x1457 );
+    instruction ( "PUSH HL",e16_hi_lo ( 0x14,0x57 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = SPH ;
@@ -26075,25 +26075,25 @@ Control prog_1456 ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_1457 );
+    return jumpDirect ( 0x1457,prog_1457 );
 }
 
 Control prog_1457 ()
 {
     at ( "1457" );
-    instruction ( "LD   A,(DE)",0x1458 );
+    instruction ( "LD   A,(DE)",e16_hi_lo ( 0x14,0x58 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_1458 );
+    return jumpDirect ( 0x1458,prog_1458 );
 }
 
 Control prog_1458 ()
 {
     at ( "1458" );
-    instruction ( "OUT  04",0x145A );
+    instruction ( "OUT  04",e16_hi_lo ( 0x14,0x5A ) );
     u8 a1 = A ;
     advance ( 10 );
     todo ( "S_AssignShifterReg" );
@@ -26103,29 +26103,29 @@ Control prog_1458 ()
 Control prog_145A ()
 {
     at ( "145A" );
-    instruction ( "IN   03",0x145C );
+    instruction ( "IN   03",e16_hi_lo ( 0x14,0x5C ) );
     u8 a1 = e8_and ( Shifter_OFF,0x07 ) ;
     u8 a2 = e8_and ( e8_complement ( Shifter_OFF ),0x07 ) ;
     u8 a3 = e8_or ( e8_shiftL ( Shifter_HI,a1 ),e8_shiftR ( e8_shiftR ( Shifter_LO,a2 ),0x01 ) ) ;
     advance ( 10 );
     A = a3;
-    return jumpDirect ( prog_145C );
+    return jumpDirect ( 0x145C,prog_145C );
 }
 
 Control prog_145C ()
 {
     at ( "145C" );
-    instruction ( "CPL",0x145D );
+    instruction ( "CPL",e16_hi_lo ( 0x14,0x5D ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_complement ( a1 );
-    return jumpDirect ( prog_145D );
+    return jumpDirect ( 0x145D,prog_145D );
 }
 
 Control prog_145D ()
 {
     at ( "145D" );
-    instruction ( "AND  (HL)",0x145E );
+    instruction ( "AND  (HL)",e16_hi_lo ( 0x14,0x5E ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -26139,51 +26139,51 @@ Control prog_145D ()
     FlagA = e1_test_bit ( a6,3 );
     FlagP = e1_parity ( a5 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_145E );
+    return jumpDirect ( 0x145E,prog_145E );
 }
 
 Control prog_145E ()
 {
     at ( "145E" );
-    instruction ( "LD   (HL),A",0x145F );
+    instruction ( "LD   (HL),A",e16_hi_lo ( 0x14,0x5F ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_145F );
+    return jumpDirect ( 0x145F,prog_145F );
 }
 
 Control prog_145F ()
 {
     at ( "145F" );
-    instruction ( "INC  HL",0x1460 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x14,0x60 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_1460 );
+    return jumpDirect ( 0x1460,prog_1460 );
 }
 
 Control prog_1460 ()
 {
     at ( "1460" );
-    instruction ( "INC  DE",0x1461 );
+    instruction ( "INC  DE",e16_hi_lo ( 0x14,0x61 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     D = e8_hi ( a3 );
     E = e8_lo ( a3 );
-    return jumpDirect ( prog_1461 );
+    return jumpDirect ( 0x1461,prog_1461 );
 }
 
 Control prog_1461 ()
 {
     at ( "1461" );
-    instruction ( "XOR  A",0x1462 );
+    instruction ( "XOR  A",e16_hi_lo ( 0x14,0x62 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -26194,13 +26194,13 @@ Control prog_1461 ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_1462 );
+    return jumpDirect ( 0x1462,prog_1462 );
 }
 
 Control prog_1462 ()
 {
     at ( "1462" );
-    instruction ( "OUT  04",0x1464 );
+    instruction ( "OUT  04",e16_hi_lo ( 0x14,0x64 ) );
     u8 a1 = A ;
     advance ( 10 );
     todo ( "S_AssignShifterReg" );
@@ -26210,29 +26210,29 @@ Control prog_1462 ()
 Control prog_1464 ()
 {
     at ( "1464" );
-    instruction ( "IN   03",0x1466 );
+    instruction ( "IN   03",e16_hi_lo ( 0x14,0x66 ) );
     u8 a1 = e8_and ( Shifter_OFF,0x07 ) ;
     u8 a2 = e8_and ( e8_complement ( Shifter_OFF ),0x07 ) ;
     u8 a3 = e8_or ( e8_shiftL ( Shifter_HI,a1 ),e8_shiftR ( e8_shiftR ( Shifter_LO,a2 ),0x01 ) ) ;
     advance ( 10 );
     A = a3;
-    return jumpDirect ( prog_1466 );
+    return jumpDirect ( 0x1466,prog_1466 );
 }
 
 Control prog_1466 ()
 {
     at ( "1466" );
-    instruction ( "CPL",0x1467 );
+    instruction ( "CPL",e16_hi_lo ( 0x14,0x67 ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_complement ( a1 );
-    return jumpDirect ( prog_1467 );
+    return jumpDirect ( 0x1467,prog_1467 );
 }
 
 Control prog_1467 ()
 {
     at ( "1467" );
-    instruction ( "AND  (HL)",0x1468 );
+    instruction ( "AND  (HL)",e16_hi_lo ( 0x14,0x68 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -26246,25 +26246,25 @@ Control prog_1467 ()
     FlagA = e1_test_bit ( a6,3 );
     FlagP = e1_parity ( a5 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_1468 );
+    return jumpDirect ( 0x1468,prog_1468 );
 }
 
 Control prog_1468 ()
 {
     at ( "1468" );
-    instruction ( "LD   (HL),A",0x1469 );
+    instruction ( "LD   (HL),A",e16_hi_lo ( 0x14,0x69 ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_1469 );
+    return jumpDirect ( 0x1469,prog_1469 );
 }
 
 Control prog_1469 ()
 {
     at ( "1469" );
-    instruction ( "POP  HL",0x146A );
+    instruction ( "POP  HL",e16_hi_lo ( 0x14,0x6A ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -26278,23 +26278,23 @@ Control prog_1469 ()
     L = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_146A );
+    return jumpDirect ( 0x146A,prog_146A );
 }
 
 Control prog_146A ()
 {
     at ( "146A" );
-    instruction ( "LD   BC,0020",0x146D );
+    instruction ( "LD   BC,0020",e16_hi_lo ( 0x14,0x6D ) );
     advance ( 10 );
     B = 0x00;
     C = 0x20;
-    return jumpDirect ( prog_146D );
+    return jumpDirect ( 0x146D,prog_146D );
 }
 
 Control prog_146D ()
 {
     at ( "146D" );
-    instruction ( "ADD  HL,BC",0x146E );
+    instruction ( "ADD  HL,BC",e16_hi_lo ( 0x14,0x6E ) );
     u8 a1 = B ;
     u8 a2 = C ;
     u8 a3 = H ;
@@ -26304,13 +26304,13 @@ Control prog_146D ()
     H = e8_hi ( e16_drop_hi_bit_of_17 ( a5 ) );
     L = e8_lo ( e16_drop_hi_bit_of_17 ( a5 ) );
     FlagCY = e1_hi_bit_of_17 ( a5 );
-    return jumpDirect ( prog_146E );
+    return jumpDirect ( 0x146E,prog_146E );
 }
 
 Control prog_146E ()
 {
     at ( "146E" );
-    instruction ( "POP  BC",0x146F );
+    instruction ( "POP  BC",e16_hi_lo ( 0x14,0x6F ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -26324,13 +26324,13 @@ Control prog_146E ()
     C = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_146F );
+    return jumpDirect ( 0x146F,prog_146F );
 }
 
 Control prog_146F ()
 {
     at ( "146F" );
-    instruction ( "DEC  B",0x1470 );
+    instruction ( "DEC  B",e16_hi_lo ( 0x14,0x70 ) );
     u8 a1 = B ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -26342,29 +26342,29 @@ Control prog_146F ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_1470 );
+    return jumpDirect ( 0x1470,prog_1470 );
 }
 
 Control prog_1470 ()
 {
     at ( "1470" );
-    instruction ( "JP   NZ,1455",0x1473 );
+    instruction ( "JP   NZ,1455",e16_hi_lo ( 0x14,0x73 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_1455 );
+        return jumpDirect ( 0x1455,prog_1455 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_1473 );
+        return jumpDirect ( 0x1473,prog_1473 );
     }
 }
 
 Control prog_1473 ()
 {
     at ( "1473" );
-    instruction ( "RET",0x1474 );
+    instruction ( "RET",e16_hi_lo ( 0x14,0x74 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -26382,17 +26382,17 @@ Control prog_1473 ()
 Control prog_1474 ()
 {
     at ( "1474" );
-    instruction ( "LD   A,L",0x1475 );
+    instruction ( "LD   A,L",e16_hi_lo ( 0x14,0x75 ) );
     u8 a1 = L ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_1475 );
+    return jumpDirect ( 0x1475,prog_1475 );
 }
 
 Control prog_1475 ()
 {
     at ( "1475" );
-    instruction ( "AND  07",0x1477 );
+    instruction ( "AND  07",e16_hi_lo ( 0x14,0x77 ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( 0x07,a1 ) ;
     u8 a3 = e8_or ( 0x07,a1 ) ;
@@ -26403,13 +26403,13 @@ Control prog_1475 ()
     FlagA = e1_test_bit ( a3,3 );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_1477 );
+    return jumpDirect ( 0x1477,prog_1477 );
 }
 
 Control prog_1477 ()
 {
     at ( "1477" );
-    instruction ( "OUT  02",0x1479 );
+    instruction ( "OUT  02",e16_hi_lo ( 0x14,0x79 ) );
     u8 a1 = A ;
     advance ( 10 );
     todo ( "S_AssignShifterReg" );
@@ -26419,15 +26419,15 @@ Control prog_1477 ()
 Control prog_1479 ()
 {
     at ( "1479" );
-    instruction ( "JP   1A47",0x147C );
+    instruction ( "JP   1A47",e16_hi_lo ( 0x14,0x7C ) );
     advance ( 10 );
-    return jumpDirect ( prog_1A47 );
+    return jumpDirect ( 0x1A47,prog_1A47 );
 }
 
 Control prog_147C ()
 {
     at ( "147C" );
-    instruction ( "PUSH BC",0x147D );
+    instruction ( "PUSH BC",e16_hi_lo ( 0x14,0x7D ) );
     u8 a1 = B ;
     u8 a2 = C ;
     u8 a3 = SPH ;
@@ -26441,13 +26441,13 @@ Control prog_147C ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_147D );
+    return jumpDirect ( 0x147D,prog_147D );
 }
 
 Control prog_147D ()
 {
     at ( "147D" );
-    instruction ( "PUSH HL",0x147E );
+    instruction ( "PUSH HL",e16_hi_lo ( 0x14,0x7E ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = SPH ;
@@ -26461,63 +26461,63 @@ Control prog_147D ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_147E );
+    return jumpDirect ( 0x147E,prog_147E );
 }
 
 Control prog_147E ()
 {
     at ( "147E" );
-    instruction ( "LD   A,(HL)",0x147F );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x14,0x7F ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_147F );
+    return jumpDirect ( 0x147F,prog_147F );
 }
 
 Control prog_147F ()
 {
     at ( "147F" );
-    instruction ( "LD   (DE),A",0x1480 );
+    instruction ( "LD   (DE),A",e16_hi_lo ( 0x14,0x80 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = A ;
     mem_write ( e16_hi_lo ( a1,a2 ),a3 );
     advance ( 7 );
-    return jumpDirect ( prog_1480 );
+    return jumpDirect ( 0x1480,prog_1480 );
 }
 
 Control prog_1480 ()
 {
     at ( "1480" );
-    instruction ( "INC  DE",0x1481 );
+    instruction ( "INC  DE",e16_hi_lo ( 0x14,0x81 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     D = e8_hi ( a3 );
     E = e8_lo ( a3 );
-    return jumpDirect ( prog_1481 );
+    return jumpDirect ( 0x1481,prog_1481 );
 }
 
 Control prog_1481 ()
 {
     at ( "1481" );
-    instruction ( "INC  HL",0x1482 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x14,0x82 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_1482 );
+    return jumpDirect ( 0x1482,prog_1482 );
 }
 
 Control prog_1482 ()
 {
     at ( "1482" );
-    instruction ( "DEC  C",0x1483 );
+    instruction ( "DEC  C",e16_hi_lo ( 0x14,0x83 ) );
     u8 a1 = C ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -26529,29 +26529,29 @@ Control prog_1482 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_1483 );
+    return jumpDirect ( 0x1483,prog_1483 );
 }
 
 Control prog_1483 ()
 {
     at ( "1483" );
-    instruction ( "JP   NZ,147E",0x1486 );
+    instruction ( "JP   NZ,147E",e16_hi_lo ( 0x14,0x86 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_147E );
+        return jumpDirect ( 0x147E,prog_147E );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_1486 );
+        return jumpDirect ( 0x1486,prog_1486 );
     }
 }
 
 Control prog_1486 ()
 {
     at ( "1486" );
-    instruction ( "POP  HL",0x1487 );
+    instruction ( "POP  HL",e16_hi_lo ( 0x14,0x87 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -26565,23 +26565,23 @@ Control prog_1486 ()
     L = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_1487 );
+    return jumpDirect ( 0x1487,prog_1487 );
 }
 
 Control prog_1487 ()
 {
     at ( "1487" );
-    instruction ( "LD   BC,0020",0x148A );
+    instruction ( "LD   BC,0020",e16_hi_lo ( 0x14,0x8A ) );
     advance ( 10 );
     B = 0x00;
     C = 0x20;
-    return jumpDirect ( prog_148A );
+    return jumpDirect ( 0x148A,prog_148A );
 }
 
 Control prog_148A ()
 {
     at ( "148A" );
-    instruction ( "ADD  HL,BC",0x148B );
+    instruction ( "ADD  HL,BC",e16_hi_lo ( 0x14,0x8B ) );
     u8 a1 = B ;
     u8 a2 = C ;
     u8 a3 = H ;
@@ -26591,13 +26591,13 @@ Control prog_148A ()
     H = e8_hi ( e16_drop_hi_bit_of_17 ( a5 ) );
     L = e8_lo ( e16_drop_hi_bit_of_17 ( a5 ) );
     FlagCY = e1_hi_bit_of_17 ( a5 );
-    return jumpDirect ( prog_148B );
+    return jumpDirect ( 0x148B,prog_148B );
 }
 
 Control prog_148B ()
 {
     at ( "148B" );
-    instruction ( "POP  BC",0x148C );
+    instruction ( "POP  BC",e16_hi_lo ( 0x14,0x8C ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -26611,13 +26611,13 @@ Control prog_148B ()
     C = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_148C );
+    return jumpDirect ( 0x148C,prog_148C );
 }
 
 Control prog_148C ()
 {
     at ( "148C" );
-    instruction ( "DEC  B",0x148D );
+    instruction ( "DEC  B",e16_hi_lo ( 0x14,0x8D ) );
     u8 a1 = B ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -26629,29 +26629,29 @@ Control prog_148C ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_148D );
+    return jumpDirect ( 0x148D,prog_148D );
 }
 
 Control prog_148D ()
 {
     at ( "148D" );
-    instruction ( "JP   NZ,147C",0x1490 );
+    instruction ( "JP   NZ,147C",e16_hi_lo ( 0x14,0x90 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_147C );
+        return jumpDirect ( 0x147C,prog_147C );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_1490 );
+        return jumpDirect ( 0x1490,prog_1490 );
     }
 }
 
 Control prog_1490 ()
 {
     at ( "1490" );
-    instruction ( "RET",0x1491 );
+    instruction ( "RET",e16_hi_lo ( 0x14,0x91 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -26669,7 +26669,7 @@ Control prog_1490 ()
 Control prog_1491 ()
 {
     at ( "1491" );
-    instruction ( "CALL 1474",0x1494 );
+    instruction ( "CALL 1474",e16_hi_lo ( 0x14,0x94 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -26682,13 +26682,13 @@ Control prog_1491 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1474 );
+    return jumpDirect ( 0x1474,prog_1474 );
 }
 
 Control prog_1494 ()
 {
     at ( "1494" );
-    instruction ( "XOR  A",0x1495 );
+    instruction ( "XOR  A",e16_hi_lo ( 0x14,0x95 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -26699,23 +26699,23 @@ Control prog_1494 ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_1495 );
+    return jumpDirect ( 0x1495,prog_1495 );
 }
 
 Control prog_1495 ()
 {
     at ( "1495" );
-    instruction ( "LD   (2061),A",0x1498 );
+    instruction ( "LD   (2061),A",e16_hi_lo ( 0x14,0x98 ) );
     u8 a1 = A ;
     mem_write ( 0x2061,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_1498 );
+    return jumpDirect ( 0x1498,prog_1498 );
 }
 
 Control prog_1498 ()
 {
     at ( "1498" );
-    instruction ( "PUSH BC",0x1499 );
+    instruction ( "PUSH BC",e16_hi_lo ( 0x14,0x99 ) );
     u8 a1 = B ;
     u8 a2 = C ;
     u8 a3 = SPH ;
@@ -26729,13 +26729,13 @@ Control prog_1498 ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_1499 );
+    return jumpDirect ( 0x1499,prog_1499 );
 }
 
 Control prog_1499 ()
 {
     at ( "1499" );
-    instruction ( "PUSH HL",0x149A );
+    instruction ( "PUSH HL",e16_hi_lo ( 0x14,0x9A ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = SPH ;
@@ -26749,25 +26749,25 @@ Control prog_1499 ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_149A );
+    return jumpDirect ( 0x149A,prog_149A );
 }
 
 Control prog_149A ()
 {
     at ( "149A" );
-    instruction ( "LD   A,(DE)",0x149B );
+    instruction ( "LD   A,(DE)",e16_hi_lo ( 0x14,0x9B ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_149B );
+    return jumpDirect ( 0x149B,prog_149B );
 }
 
 Control prog_149B ()
 {
     at ( "149B" );
-    instruction ( "OUT  04",0x149D );
+    instruction ( "OUT  04",e16_hi_lo ( 0x14,0x9D ) );
     u8 a1 = A ;
     advance ( 10 );
     todo ( "S_AssignShifterReg" );
@@ -26777,19 +26777,19 @@ Control prog_149B ()
 Control prog_149D ()
 {
     at ( "149D" );
-    instruction ( "IN   03",0x149F );
+    instruction ( "IN   03",e16_hi_lo ( 0x14,0x9F ) );
     u8 a1 = e8_and ( Shifter_OFF,0x07 ) ;
     u8 a2 = e8_and ( e8_complement ( Shifter_OFF ),0x07 ) ;
     u8 a3 = e8_or ( e8_shiftL ( Shifter_HI,a1 ),e8_shiftR ( e8_shiftR ( Shifter_LO,a2 ),0x01 ) ) ;
     advance ( 10 );
     A = a3;
-    return jumpDirect ( prog_149F );
+    return jumpDirect ( 0x149F,prog_149F );
 }
 
 Control prog_149F ()
 {
     at ( "149F" );
-    instruction ( "PUSH PSW",0x14A0 );
+    instruction ( "PUSH PSW",e16_hi_lo ( 0x14,0xA0 ) );
     u8 a1 = A ;
     u8 a2 = SPH ;
     u8 a3 = SPL ;
@@ -26802,13 +26802,13 @@ Control prog_149F ()
     advance ( 11 );
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_14A0 );
+    return jumpDirect ( 0x14A0,prog_14A0 );
 }
 
 Control prog_14A0 ()
 {
     at ( "14A0" );
-    instruction ( "AND  (HL)",0x14A1 );
+    instruction ( "AND  (HL)",e16_hi_lo ( 0x14,0xA1 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -26822,48 +26822,48 @@ Control prog_14A0 ()
     FlagA = e1_test_bit ( a6,3 );
     FlagP = e1_parity ( a5 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_14A1 );
+    return jumpDirect ( 0x14A1,prog_14A1 );
 }
 
 Control prog_14A1 ()
 {
     at ( "14A1" );
-    instruction ( "JP   Z,14A9",0x14A4 );
+    instruction ( "JP   Z,14A9",e16_hi_lo ( 0x14,0xA4 ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_14A9 );
+        return jumpDirect ( 0x14A9,prog_14A9 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_14A4 );
+        return jumpDirect ( 0x14A4,prog_14A4 );
     }
 }
 
 Control prog_14A4 ()
 {
     at ( "14A4" );
-    instruction ( "LD   A,01",0x14A6 );
+    instruction ( "LD   A,01",e16_hi_lo ( 0x14,0xA6 ) );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( prog_14A6 );
+    return jumpDirect ( 0x14A6,prog_14A6 );
 }
 
 Control prog_14A6 ()
 {
     at ( "14A6" );
-    instruction ( "LD   (2061),A",0x14A9 );
+    instruction ( "LD   (2061),A",e16_hi_lo ( 0x14,0xA9 ) );
     u8 a1 = A ;
     mem_write ( 0x2061,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_14A9 );
+    return jumpDirect ( 0x14A9,prog_14A9 );
 }
 
 Control prog_14A9 ()
 {
     at ( "14A9" );
-    instruction ( "POP  PSW",0x14AA );
+    instruction ( "POP  PSW",e16_hi_lo ( 0x14,0xAA ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -26881,13 +26881,13 @@ Control prog_14A9 ()
     FlagA = e1_test_bit ( a4,4 );
     FlagP = e1_test_bit ( a4,2 );
     FlagCY = e1_test_bit ( a4,0 );
-    return jumpDirect ( prog_14AA );
+    return jumpDirect ( 0x14AA,prog_14AA );
 }
 
 Control prog_14AA ()
 {
     at ( "14AA" );
-    instruction ( "OR   (HL)",0x14AB );
+    instruction ( "OR   (HL)",e16_hi_lo ( 0x14,0xAB ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -26900,51 +26900,51 @@ Control prog_14AA ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a5 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_14AB );
+    return jumpDirect ( 0x14AB,prog_14AB );
 }
 
 Control prog_14AB ()
 {
     at ( "14AB" );
-    instruction ( "LD   (HL),A",0x14AC );
+    instruction ( "LD   (HL),A",e16_hi_lo ( 0x14,0xAC ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_14AC );
+    return jumpDirect ( 0x14AC,prog_14AC );
 }
 
 Control prog_14AC ()
 {
     at ( "14AC" );
-    instruction ( "INC  HL",0x14AD );
+    instruction ( "INC  HL",e16_hi_lo ( 0x14,0xAD ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_14AD );
+    return jumpDirect ( 0x14AD,prog_14AD );
 }
 
 Control prog_14AD ()
 {
     at ( "14AD" );
-    instruction ( "INC  DE",0x14AE );
+    instruction ( "INC  DE",e16_hi_lo ( 0x14,0xAE ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     D = e8_hi ( a3 );
     E = e8_lo ( a3 );
-    return jumpDirect ( prog_14AE );
+    return jumpDirect ( 0x14AE,prog_14AE );
 }
 
 Control prog_14AE ()
 {
     at ( "14AE" );
-    instruction ( "XOR  A",0x14AF );
+    instruction ( "XOR  A",e16_hi_lo ( 0x14,0xAF ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -26955,13 +26955,13 @@ Control prog_14AE ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_14AF );
+    return jumpDirect ( 0x14AF,prog_14AF );
 }
 
 Control prog_14AF ()
 {
     at ( "14AF" );
-    instruction ( "OUT  04",0x14B1 );
+    instruction ( "OUT  04",e16_hi_lo ( 0x14,0xB1 ) );
     u8 a1 = A ;
     advance ( 10 );
     todo ( "S_AssignShifterReg" );
@@ -26971,19 +26971,19 @@ Control prog_14AF ()
 Control prog_14B1 ()
 {
     at ( "14B1" );
-    instruction ( "IN   03",0x14B3 );
+    instruction ( "IN   03",e16_hi_lo ( 0x14,0xB3 ) );
     u8 a1 = e8_and ( Shifter_OFF,0x07 ) ;
     u8 a2 = e8_and ( e8_complement ( Shifter_OFF ),0x07 ) ;
     u8 a3 = e8_or ( e8_shiftL ( Shifter_HI,a1 ),e8_shiftR ( e8_shiftR ( Shifter_LO,a2 ),0x01 ) ) ;
     advance ( 10 );
     A = a3;
-    return jumpDirect ( prog_14B3 );
+    return jumpDirect ( 0x14B3,prog_14B3 );
 }
 
 Control prog_14B3 ()
 {
     at ( "14B3" );
-    instruction ( "PUSH PSW",0x14B4 );
+    instruction ( "PUSH PSW",e16_hi_lo ( 0x14,0xB4 ) );
     u8 a1 = A ;
     u8 a2 = SPH ;
     u8 a3 = SPL ;
@@ -26996,13 +26996,13 @@ Control prog_14B3 ()
     advance ( 11 );
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_14B4 );
+    return jumpDirect ( 0x14B4,prog_14B4 );
 }
 
 Control prog_14B4 ()
 {
     at ( "14B4" );
-    instruction ( "AND  (HL)",0x14B5 );
+    instruction ( "AND  (HL)",e16_hi_lo ( 0x14,0xB5 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -27016,48 +27016,48 @@ Control prog_14B4 ()
     FlagA = e1_test_bit ( a6,3 );
     FlagP = e1_parity ( a5 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_14B5 );
+    return jumpDirect ( 0x14B5,prog_14B5 );
 }
 
 Control prog_14B5 ()
 {
     at ( "14B5" );
-    instruction ( "JP   Z,14BD",0x14B8 );
+    instruction ( "JP   Z,14BD",e16_hi_lo ( 0x14,0xB8 ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_14BD );
+        return jumpDirect ( 0x14BD,prog_14BD );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_14B8 );
+        return jumpDirect ( 0x14B8,prog_14B8 );
     }
 }
 
 Control prog_14B8 ()
 {
     at ( "14B8" );
-    instruction ( "LD   A,01",0x14BA );
+    instruction ( "LD   A,01",e16_hi_lo ( 0x14,0xBA ) );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( prog_14BA );
+    return jumpDirect ( 0x14BA,prog_14BA );
 }
 
 Control prog_14BA ()
 {
     at ( "14BA" );
-    instruction ( "LD   (2061),A",0x14BD );
+    instruction ( "LD   (2061),A",e16_hi_lo ( 0x14,0xBD ) );
     u8 a1 = A ;
     mem_write ( 0x2061,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_14BD );
+    return jumpDirect ( 0x14BD,prog_14BD );
 }
 
 Control prog_14BD ()
 {
     at ( "14BD" );
-    instruction ( "POP  PSW",0x14BE );
+    instruction ( "POP  PSW",e16_hi_lo ( 0x14,0xBE ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -27075,13 +27075,13 @@ Control prog_14BD ()
     FlagA = e1_test_bit ( a4,4 );
     FlagP = e1_test_bit ( a4,2 );
     FlagCY = e1_test_bit ( a4,0 );
-    return jumpDirect ( prog_14BE );
+    return jumpDirect ( 0x14BE,prog_14BE );
 }
 
 Control prog_14BE ()
 {
     at ( "14BE" );
-    instruction ( "OR   (HL)",0x14BF );
+    instruction ( "OR   (HL)",e16_hi_lo ( 0x14,0xBF ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -27094,25 +27094,25 @@ Control prog_14BE ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a5 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_14BF );
+    return jumpDirect ( 0x14BF,prog_14BF );
 }
 
 Control prog_14BF ()
 {
     at ( "14BF" );
-    instruction ( "LD   (HL),A",0x14C0 );
+    instruction ( "LD   (HL),A",e16_hi_lo ( 0x14,0xC0 ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_14C0 );
+    return jumpDirect ( 0x14C0,prog_14C0 );
 }
 
 Control prog_14C0 ()
 {
     at ( "14C0" );
-    instruction ( "POP  HL",0x14C1 );
+    instruction ( "POP  HL",e16_hi_lo ( 0x14,0xC1 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -27126,23 +27126,23 @@ Control prog_14C0 ()
     L = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_14C1 );
+    return jumpDirect ( 0x14C1,prog_14C1 );
 }
 
 Control prog_14C1 ()
 {
     at ( "14C1" );
-    instruction ( "LD   BC,0020",0x14C4 );
+    instruction ( "LD   BC,0020",e16_hi_lo ( 0x14,0xC4 ) );
     advance ( 10 );
     B = 0x00;
     C = 0x20;
-    return jumpDirect ( prog_14C4 );
+    return jumpDirect ( 0x14C4,prog_14C4 );
 }
 
 Control prog_14C4 ()
 {
     at ( "14C4" );
-    instruction ( "ADD  HL,BC",0x14C5 );
+    instruction ( "ADD  HL,BC",e16_hi_lo ( 0x14,0xC5 ) );
     u8 a1 = B ;
     u8 a2 = C ;
     u8 a3 = H ;
@@ -27152,13 +27152,13 @@ Control prog_14C4 ()
     H = e8_hi ( e16_drop_hi_bit_of_17 ( a5 ) );
     L = e8_lo ( e16_drop_hi_bit_of_17 ( a5 ) );
     FlagCY = e1_hi_bit_of_17 ( a5 );
-    return jumpDirect ( prog_14C5 );
+    return jumpDirect ( 0x14C5,prog_14C5 );
 }
 
 Control prog_14C5 ()
 {
     at ( "14C5" );
-    instruction ( "POP  BC",0x14C6 );
+    instruction ( "POP  BC",e16_hi_lo ( 0x14,0xC6 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -27172,13 +27172,13 @@ Control prog_14C5 ()
     C = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_14C6 );
+    return jumpDirect ( 0x14C6,prog_14C6 );
 }
 
 Control prog_14C6 ()
 {
     at ( "14C6" );
-    instruction ( "DEC  B",0x14C7 );
+    instruction ( "DEC  B",e16_hi_lo ( 0x14,0xC7 ) );
     u8 a1 = B ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -27190,29 +27190,29 @@ Control prog_14C6 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_14C7 );
+    return jumpDirect ( 0x14C7,prog_14C7 );
 }
 
 Control prog_14C7 ()
 {
     at ( "14C7" );
-    instruction ( "JP   NZ,1498",0x14CA );
+    instruction ( "JP   NZ,1498",e16_hi_lo ( 0x14,0xCA ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_1498 );
+        return jumpDirect ( 0x1498,prog_1498 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_14CA );
+        return jumpDirect ( 0x14CA,prog_14CA );
     }
 }
 
 Control prog_14CA ()
 {
     at ( "14CA" );
-    instruction ( "RET",0x14CB );
+    instruction ( "RET",e16_hi_lo ( 0x14,0xCB ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -27230,7 +27230,7 @@ Control prog_14CA ()
 Control prog_14CB ()
 {
     at ( "14CB" );
-    instruction ( "XOR  A",0x14CC );
+    instruction ( "XOR  A",e16_hi_lo ( 0x14,0xCC ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -27241,13 +27241,13 @@ Control prog_14CB ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_14CC );
+    return jumpDirect ( 0x14CC,prog_14CC );
 }
 
 Control prog_14CC ()
 {
     at ( "14CC" );
-    instruction ( "PUSH BC",0x14CD );
+    instruction ( "PUSH BC",e16_hi_lo ( 0x14,0xCD ) );
     u8 a1 = B ;
     u8 a2 = C ;
     u8 a3 = SPH ;
@@ -27261,35 +27261,35 @@ Control prog_14CC ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_14CD );
+    return jumpDirect ( 0x14CD,prog_14CD );
 }
 
 Control prog_14CD ()
 {
     at ( "14CD" );
-    instruction ( "LD   (HL),A",0x14CE );
+    instruction ( "LD   (HL),A",e16_hi_lo ( 0x14,0xCE ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_14CE );
+    return jumpDirect ( 0x14CE,prog_14CE );
 }
 
 Control prog_14CE ()
 {
     at ( "14CE" );
-    instruction ( "LD   BC,0020",0x14D1 );
+    instruction ( "LD   BC,0020",e16_hi_lo ( 0x14,0xD1 ) );
     advance ( 10 );
     B = 0x00;
     C = 0x20;
-    return jumpDirect ( prog_14D1 );
+    return jumpDirect ( 0x14D1,prog_14D1 );
 }
 
 Control prog_14D1 ()
 {
     at ( "14D1" );
-    instruction ( "ADD  HL,BC",0x14D2 );
+    instruction ( "ADD  HL,BC",e16_hi_lo ( 0x14,0xD2 ) );
     u8 a1 = B ;
     u8 a2 = C ;
     u8 a3 = H ;
@@ -27299,13 +27299,13 @@ Control prog_14D1 ()
     H = e8_hi ( e16_drop_hi_bit_of_17 ( a5 ) );
     L = e8_lo ( e16_drop_hi_bit_of_17 ( a5 ) );
     FlagCY = e1_hi_bit_of_17 ( a5 );
-    return jumpDirect ( prog_14D2 );
+    return jumpDirect ( 0x14D2,prog_14D2 );
 }
 
 Control prog_14D2 ()
 {
     at ( "14D2" );
-    instruction ( "POP  BC",0x14D3 );
+    instruction ( "POP  BC",e16_hi_lo ( 0x14,0xD3 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -27319,13 +27319,13 @@ Control prog_14D2 ()
     C = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_14D3 );
+    return jumpDirect ( 0x14D3,prog_14D3 );
 }
 
 Control prog_14D3 ()
 {
     at ( "14D3" );
-    instruction ( "DEC  B",0x14D4 );
+    instruction ( "DEC  B",e16_hi_lo ( 0x14,0xD4 ) );
     u8 a1 = B ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -27337,29 +27337,29 @@ Control prog_14D3 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_14D4 );
+    return jumpDirect ( 0x14D4,prog_14D4 );
 }
 
 Control prog_14D4 ()
 {
     at ( "14D4" );
-    instruction ( "JP   NZ,14CC",0x14D7 );
+    instruction ( "JP   NZ,14CC",e16_hi_lo ( 0x14,0xD7 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_14CC );
+        return jumpDirect ( 0x14CC,prog_14CC );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_14D7 );
+        return jumpDirect ( 0x14D7,prog_14D7 );
     }
 }
 
 Control prog_14D7 ()
 {
     at ( "14D7" );
-    instruction ( "RET",0x14D8 );
+    instruction ( "RET",e16_hi_lo ( 0x14,0xD8 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -27377,17 +27377,17 @@ Control prog_14D7 ()
 Control prog_14D8 ()
 {
     at ( "14D8" );
-    instruction ( "LD   A,(2025)",0x14DB );
+    instruction ( "LD   A,(2025)",e16_hi_lo ( 0x14,0xDB ) );
     u8 a1 = e8_read_mem ( 0x2025 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_14DB );
+    return jumpDirect ( 0x14DB,prog_14DB );
 }
 
 Control prog_14DB ()
 {
     at ( "14DB" );
-    instruction ( "CP   05",0x14DD );
+    instruction ( "CP   05",e16_hi_lo ( 0x14,0xDD ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x05 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -27399,13 +27399,13 @@ Control prog_14DB ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_14DD );
+    return jumpDirect ( 0x14DD,prog_14DD );
 }
 
 Control prog_14DD ()
 {
     at ( "14DD" );
-    instruction ( "RET  Z",0x14DE );
+    instruction ( "RET  Z",e16_hi_lo ( 0x14,0xDE ) );
     if (FlagZ)
     {
         u8 a1 = SPH ;
@@ -27424,14 +27424,14 @@ Control prog_14DD ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_14DE );
+        return jumpDirect ( 0x14DE,prog_14DE );
     }
 }
 
 Control prog_14DE ()
 {
     at ( "14DE" );
-    instruction ( "CP   02",0x14E0 );
+    instruction ( "CP   02",e16_hi_lo ( 0x14,0xE0 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x02 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -27443,13 +27443,13 @@ Control prog_14DE ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_14E0 );
+    return jumpDirect ( 0x14E0,prog_14E0 );
 }
 
 Control prog_14E0 ()
 {
     at ( "14E0" );
-    instruction ( "RET  NZ",0x14E1 );
+    instruction ( "RET  NZ",e16_hi_lo ( 0x14,0xE1 ) );
     if (e1_flip ( FlagZ ))
     {
         u8 a1 = SPH ;
@@ -27468,24 +27468,24 @@ Control prog_14E0 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_14E1 );
+        return jumpDirect ( 0x14E1,prog_14E1 );
     }
 }
 
 Control prog_14E1 ()
 {
     at ( "14E1" );
-    instruction ( "LD   A,(2029)",0x14E4 );
+    instruction ( "LD   A,(2029)",e16_hi_lo ( 0x14,0xE4 ) );
     u8 a1 = e8_read_mem ( 0x2029 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_14E4 );
+    return jumpDirect ( 0x14E4,prog_14E4 );
 }
 
 Control prog_14E4 ()
 {
     at ( "14E4" );
-    instruction ( "CP   D8",0x14E6 );
+    instruction ( "CP   D8",e16_hi_lo ( 0x14,0xE6 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0xD8 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -27497,49 +27497,49 @@ Control prog_14E4 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_14E6 );
+    return jumpDirect ( 0x14E6,prog_14E6 );
 }
 
 Control prog_14E6 ()
 {
     at ( "14E6" );
-    instruction ( "LD   B,A",0x14E7 );
+    instruction ( "LD   B,A",e16_hi_lo ( 0x14,0xE7 ) );
     u8 a1 = A ;
     advance ( 5 );
     B = a1;
-    return jumpDirect ( prog_14E7 );
+    return jumpDirect ( 0x14E7,prog_14E7 );
 }
 
 Control prog_14E7 ()
 {
     at ( "14E7" );
-    instruction ( "JP   NC,1530",0x14EA );
+    instruction ( "JP   NC,1530",e16_hi_lo ( 0x14,0xEA ) );
     if (e1_flip ( FlagCY ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_1530 );
+        return jumpDirect ( 0x1530,prog_1530 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_14EA );
+        return jumpDirect ( 0x14EA,prog_14EA );
     }
 }
 
 Control prog_14EA ()
 {
     at ( "14EA" );
-    instruction ( "LD   A,(2002)",0x14ED );
+    instruction ( "LD   A,(2002)",e16_hi_lo ( 0x14,0xED ) );
     u8 a1 = e8_read_mem ( 0x2002 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_14ED );
+    return jumpDirect ( 0x14ED,prog_14ED );
 }
 
 Control prog_14ED ()
 {
     at ( "14ED" );
-    instruction ( "AND  A",0x14EE );
+    instruction ( "AND  A",e16_hi_lo ( 0x14,0xEE ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -27551,13 +27551,13 @@ Control prog_14ED ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_14EE );
+    return jumpDirect ( 0x14EE,prog_14EE );
 }
 
 Control prog_14EE ()
 {
     at ( "14EE" );
-    instruction ( "RET  Z",0x14EF );
+    instruction ( "RET  Z",e16_hi_lo ( 0x14,0xEF ) );
     if (FlagZ)
     {
         u8 a1 = SPH ;
@@ -27576,24 +27576,24 @@ Control prog_14EE ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_14EF );
+        return jumpDirect ( 0x14EF,prog_14EF );
     }
 }
 
 Control prog_14EF ()
 {
     at ( "14EF" );
-    instruction ( "LD   A,B",0x14F0 );
+    instruction ( "LD   A,B",e16_hi_lo ( 0x14,0xF0 ) );
     u8 a1 = B ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_14F0 );
+    return jumpDirect ( 0x14F0,prog_14F0 );
 }
 
 Control prog_14F0 ()
 {
     at ( "14F0" );
-    instruction ( "CP   CE",0x14F2 );
+    instruction ( "CP   CE",e16_hi_lo ( 0x14,0xF2 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0xCE ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -27605,29 +27605,29 @@ Control prog_14F0 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_14F2 );
+    return jumpDirect ( 0x14F2,prog_14F2 );
 }
 
 Control prog_14F2 ()
 {
     at ( "14F2" );
-    instruction ( "JP   NC,1579",0x14F5 );
+    instruction ( "JP   NC,1579",e16_hi_lo ( 0x14,0xF5 ) );
     if (e1_flip ( FlagCY ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_1579 );
+        return jumpDirect ( 0x1579,prog_1579 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_14F5 );
+        return jumpDirect ( 0x14F5,prog_14F5 );
     }
 }
 
 Control prog_14F5 ()
 {
     at ( "14F5" );
-    instruction ( "ADD  06",0x14F7 );
+    instruction ( "ADD  06",e16_hi_lo ( 0x14,0xF7 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_false (  ),0x06,a1 ) ;
     u8 a3 = e8_and ( 0x06,0x0F ) ;
@@ -27640,33 +27640,33 @@ Control prog_14F5 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_test_bit ( e8_hi ( a2 ),0 );
-    return jumpDirect ( prog_14F7 );
+    return jumpDirect ( 0x14F7,prog_14F7 );
 }
 
 Control prog_14F7 ()
 {
     at ( "14F7" );
-    instruction ( "LD   B,A",0x14F8 );
+    instruction ( "LD   B,A",e16_hi_lo ( 0x14,0xF8 ) );
     u8 a1 = A ;
     advance ( 5 );
     B = a1;
-    return jumpDirect ( prog_14F8 );
+    return jumpDirect ( 0x14F8,prog_14F8 );
 }
 
 Control prog_14F8 ()
 {
     at ( "14F8" );
-    instruction ( "LD   A,(2009)",0x14FB );
+    instruction ( "LD   A,(2009)",e16_hi_lo ( 0x14,0xFB ) );
     u8 a1 = e8_read_mem ( 0x2009 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_14FB );
+    return jumpDirect ( 0x14FB,prog_14FB );
 }
 
 Control prog_14FB ()
 {
     at ( "14FB" );
-    instruction ( "CP   90",0x14FD );
+    instruction ( "CP   90",e16_hi_lo ( 0x14,0xFD ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x90 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -27678,29 +27678,29 @@ Control prog_14FB ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_14FD );
+    return jumpDirect ( 0x14FD,prog_14FD );
 }
 
 Control prog_14FD ()
 {
     at ( "14FD" );
-    instruction ( "JP   NC,1504",0x1500 );
+    instruction ( "JP   NC,1504",e16_hi_lo ( 0x15,0x00 ) );
     if (e1_flip ( FlagCY ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_1504 );
+        return jumpDirect ( 0x1504,prog_1504 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_1500 );
+        return jumpDirect ( 0x1500,prog_1500 );
     }
 }
 
 Control prog_1500 ()
 {
     at ( "1500" );
-    instruction ( "CP   B",0x1501 );
+    instruction ( "CP   B",e16_hi_lo ( 0x15,0x01 ) );
     u8 a1 = A ;
     u8 a2 = B ;
     u16 a3 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( a2 ) ) ;
@@ -27713,39 +27713,39 @@ Control prog_1500 ()
     FlagA = e1_test_bit ( e8_lo ( a6 ),4 );
     FlagP = e1_parity ( e8_lo ( a3 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a3 ),0 ) );
-    return jumpDirect ( prog_1501 );
+    return jumpDirect ( 0x1501,prog_1501 );
 }
 
 Control prog_1501 ()
 {
     at ( "1501" );
-    instruction ( "JP   NC,1530",0x1504 );
+    instruction ( "JP   NC,1530",e16_hi_lo ( 0x15,0x04 ) );
     if (e1_flip ( FlagCY ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_1530 );
+        return jumpDirect ( 0x1530,prog_1530 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_1504 );
+        return jumpDirect ( 0x1504,prog_1504 );
     }
 }
 
 Control prog_1504 ()
 {
     at ( "1504" );
-    instruction ( "LD   L,B",0x1505 );
+    instruction ( "LD   L,B",e16_hi_lo ( 0x15,0x05 ) );
     u8 a1 = B ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( prog_1505 );
+    return jumpDirect ( 0x1505,prog_1505 );
 }
 
 Control prog_1505 ()
 {
     at ( "1505" );
-    instruction ( "CALL 1562",0x1508 );
+    instruction ( "CALL 1562",e16_hi_lo ( 0x15,0x08 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -27758,33 +27758,33 @@ Control prog_1505 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1562 );
+    return jumpDirect ( 0x1562,prog_1562 );
 }
 
 Control prog_1508 ()
 {
     at ( "1508" );
-    instruction ( "LD   A,(202A)",0x150B );
+    instruction ( "LD   A,(202A)",e16_hi_lo ( 0x15,0x0B ) );
     u8 a1 = e8_read_mem ( 0x202A ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_150B );
+    return jumpDirect ( 0x150B,prog_150B );
 }
 
 Control prog_150B ()
 {
     at ( "150B" );
-    instruction ( "LD   H,A",0x150C );
+    instruction ( "LD   H,A",e16_hi_lo ( 0x15,0x0C ) );
     u8 a1 = A ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( prog_150C );
+    return jumpDirect ( 0x150C,prog_150C );
 }
 
 Control prog_150C ()
 {
     at ( "150C" );
-    instruction ( "CALL 156F",0x150F );
+    instruction ( "CALL 156F",e16_hi_lo ( 0x15,0x0F ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -27797,44 +27797,44 @@ Control prog_150C ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_156F );
+    return jumpDirect ( 0x156F,prog_156F );
 }
 
 Control prog_150F ()
 {
     at ( "150F" );
-    instruction ( "LD   (2064),HL",0x1512 );
+    instruction ( "LD   (2064),HL",e16_hi_lo ( 0x15,0x12 ) );
     u8 a1 = L ;
     mem_write ( 0x2064,a1 );
     u8 a2 = H ;
     mem_write ( 0x2065,a2 );
     advance ( 16 );
-    return jumpDirect ( prog_1512 );
+    return jumpDirect ( 0x1512,prog_1512 );
 }
 
 Control prog_1512 ()
 {
     at ( "1512" );
-    instruction ( "LD   A,05",0x1514 );
+    instruction ( "LD   A,05",e16_hi_lo ( 0x15,0x14 ) );
     advance ( 7 );
     A = 0x05;
-    return jumpDirect ( prog_1514 );
+    return jumpDirect ( 0x1514,prog_1514 );
 }
 
 Control prog_1514 ()
 {
     at ( "1514" );
-    instruction ( "LD   (2025),A",0x1517 );
+    instruction ( "LD   (2025),A",e16_hi_lo ( 0x15,0x17 ) );
     u8 a1 = A ;
     mem_write ( 0x2025,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_1517 );
+    return jumpDirect ( 0x1517,prog_1517 );
 }
 
 Control prog_1517 ()
 {
     at ( "1517" );
-    instruction ( "CALL 1581",0x151A );
+    instruction ( "CALL 1581",e16_hi_lo ( 0x15,0x1A ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -27847,25 +27847,25 @@ Control prog_1517 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1581 );
+    return jumpDirect ( 0x1581,prog_1581 );
 }
 
 Control prog_151A ()
 {
     at ( "151A" );
-    instruction ( "LD   A,(HL)",0x151B );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x15,0x1B ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_151B );
+    return jumpDirect ( 0x151B,prog_151B );
 }
 
 Control prog_151B ()
 {
     at ( "151B" );
-    instruction ( "AND  A",0x151C );
+    instruction ( "AND  A",e16_hi_lo ( 0x15,0x1C ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -27877,40 +27877,40 @@ Control prog_151B ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_151C );
+    return jumpDirect ( 0x151C,prog_151C );
 }
 
 Control prog_151C ()
 {
     at ( "151C" );
-    instruction ( "JP   Z,1530",0x151F );
+    instruction ( "JP   Z,1530",e16_hi_lo ( 0x15,0x1F ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_1530 );
+        return jumpDirect ( 0x1530,prog_1530 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_151F );
+        return jumpDirect ( 0x151F,prog_151F );
     }
 }
 
 Control prog_151F ()
 {
     at ( "151F" );
-    instruction ( "LD   (HL),00",0x1521 );
+    instruction ( "LD   (HL),00",e16_hi_lo ( 0x15,0x21 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     mem_write ( e16_hi_lo ( a1,a2 ),0x00 );
     advance ( 10 );
-    return jumpDirect ( prog_1521 );
+    return jumpDirect ( 0x1521,prog_1521 );
 }
 
 Control prog_1521 ()
 {
     at ( "1521" );
-    instruction ( "CALL 0A5F",0x1524 );
+    instruction ( "CALL 0A5F",e16_hi_lo ( 0x15,0x24 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -27923,13 +27923,13 @@ Control prog_1521 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0A5F );
+    return jumpDirect ( 0x0A5F,prog_0A5F );
 }
 
 Control prog_1524 ()
 {
     at ( "1524" );
-    instruction ( "CALL 1A3B",0x1527 );
+    instruction ( "CALL 1A3B",e16_hi_lo ( 0x15,0x27 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -27942,13 +27942,13 @@ Control prog_1524 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1A3B );
+    return jumpDirect ( 0x1A3B,prog_1A3B );
 }
 
 Control prog_1527 ()
 {
     at ( "1527" );
-    instruction ( "CALL 15D3",0x152A );
+    instruction ( "CALL 15D3",e16_hi_lo ( 0x15,0x2A ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -27961,32 +27961,32 @@ Control prog_1527 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_15D3 );
+    return jumpDirect ( 0x15D3,prog_15D3 );
 }
 
 Control prog_152A ()
 {
     at ( "152A" );
-    instruction ( "LD   A,10",0x152C );
+    instruction ( "LD   A,10",e16_hi_lo ( 0x15,0x2C ) );
     advance ( 7 );
     A = 0x10;
-    return jumpDirect ( prog_152C );
+    return jumpDirect ( 0x152C,prog_152C );
 }
 
 Control prog_152C ()
 {
     at ( "152C" );
-    instruction ( "LD   (2003),A",0x152F );
+    instruction ( "LD   (2003),A",e16_hi_lo ( 0x15,0x2F ) );
     u8 a1 = A ;
     mem_write ( 0x2003,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_152F );
+    return jumpDirect ( 0x152F,prog_152F );
 }
 
 Control prog_152F ()
 {
     at ( "152F" );
-    instruction ( "RET",0x1530 );
+    instruction ( "RET",e16_hi_lo ( 0x15,0x30 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -28004,44 +28004,44 @@ Control prog_152F ()
 Control prog_1530 ()
 {
     at ( "1530" );
-    instruction ( "LD   A,03",0x1532 );
+    instruction ( "LD   A,03",e16_hi_lo ( 0x15,0x32 ) );
     advance ( 7 );
     A = 0x03;
-    return jumpDirect ( prog_1532 );
+    return jumpDirect ( 0x1532,prog_1532 );
 }
 
 Control prog_1532 ()
 {
     at ( "1532" );
-    instruction ( "LD   (2025),A",0x1535 );
+    instruction ( "LD   (2025),A",e16_hi_lo ( 0x15,0x35 ) );
     u8 a1 = A ;
     mem_write ( 0x2025,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_1535 );
+    return jumpDirect ( 0x1535,prog_1535 );
 }
 
 Control prog_1535 ()
 {
     at ( "1535" );
-    instruction ( "JP   154A",0x1538 );
+    instruction ( "JP   154A",e16_hi_lo ( 0x15,0x38 ) );
     advance ( 10 );
-    return jumpDirect ( prog_154A );
+    return jumpDirect ( 0x154A,prog_154A );
 }
 
 Control prog_1538 ()
 {
     at ( "1538" );
-    instruction ( "LD   HL,2003",0x153B );
+    instruction ( "LD   HL,2003",e16_hi_lo ( 0x15,0x3B ) );
     advance ( 10 );
     H = 0x20;
     L = 0x03;
-    return jumpDirect ( prog_153B );
+    return jumpDirect ( 0x153B,prog_153B );
 }
 
 Control prog_153B ()
 {
     at ( "153B" );
-    instruction ( "DEC  (HL)",0x153C );
+    instruction ( "DEC  (HL)",e16_hi_lo ( 0x15,0x3C ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -28057,13 +28057,13 @@ Control prog_153B ()
     FlagZ = e1_is_zero ( e8_lo ( a4 ) );
     FlagA = e1_test_bit ( e8_lo ( a7 ),4 );
     FlagP = e1_parity ( e8_lo ( a4 ) );
-    return jumpDirect ( prog_153C );
+    return jumpDirect ( 0x153C,prog_153C );
 }
 
 Control prog_153C ()
 {
     at ( "153C" );
-    instruction ( "RET  NZ",0x153D );
+    instruction ( "RET  NZ",e16_hi_lo ( 0x15,0x3D ) );
     if (e1_flip ( FlagZ ))
     {
         u8 a1 = SPH ;
@@ -28082,35 +28082,35 @@ Control prog_153C ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_153D );
+        return jumpDirect ( 0x153D,prog_153D );
     }
 }
 
 Control prog_153D ()
 {
     at ( "153D" );
-    instruction ( "LD   HL,(2064)",0x1540 );
+    instruction ( "LD   HL,(2064)",e16_hi_lo ( 0x15,0x40 ) );
     u8 a1 = e8_read_mem ( 0x2064 ) ;
     u8 a2 = e8_read_mem ( 0x2065 ) ;
     advance ( 16 );
     H = a2;
     L = a1;
-    return jumpDirect ( prog_1540 );
+    return jumpDirect ( 0x1540,prog_1540 );
 }
 
 Control prog_1540 ()
 {
     at ( "1540" );
-    instruction ( "LD   B,10",0x1542 );
+    instruction ( "LD   B,10",e16_hi_lo ( 0x15,0x42 ) );
     advance ( 7 );
     B = 0x10;
-    return jumpDirect ( prog_1542 );
+    return jumpDirect ( 0x1542,prog_1542 );
 }
 
 Control prog_1542 ()
 {
     at ( "1542" );
-    instruction ( "CALL 1424",0x1545 );
+    instruction ( "CALL 1424",e16_hi_lo ( 0x15,0x45 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -28123,32 +28123,32 @@ Control prog_1542 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1424 );
+    return jumpDirect ( 0x1424,prog_1424 );
 }
 
 Control prog_1545 ()
 {
     at ( "1545" );
-    instruction ( "LD   A,04",0x1547 );
+    instruction ( "LD   A,04",e16_hi_lo ( 0x15,0x47 ) );
     advance ( 7 );
     A = 0x04;
-    return jumpDirect ( prog_1547 );
+    return jumpDirect ( 0x1547,prog_1547 );
 }
 
 Control prog_1547 ()
 {
     at ( "1547" );
-    instruction ( "LD   (2025),A",0x154A );
+    instruction ( "LD   (2025),A",e16_hi_lo ( 0x15,0x4A ) );
     u8 a1 = A ;
     mem_write ( 0x2025,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_154A );
+    return jumpDirect ( 0x154A,prog_154A );
 }
 
 Control prog_154A ()
 {
     at ( "154A" );
-    instruction ( "XOR  A",0x154B );
+    instruction ( "XOR  A",e16_hi_lo ( 0x15,0x4B ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -28159,49 +28159,49 @@ Control prog_154A ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_154B );
+    return jumpDirect ( 0x154B,prog_154B );
 }
 
 Control prog_154B ()
 {
     at ( "154B" );
-    instruction ( "LD   (2002),A",0x154E );
+    instruction ( "LD   (2002),A",e16_hi_lo ( 0x15,0x4E ) );
     u8 a1 = A ;
     mem_write ( 0x2002,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_154E );
+    return jumpDirect ( 0x154E,prog_154E );
 }
 
 Control prog_154E ()
 {
     at ( "154E" );
-    instruction ( "LD   B,F7",0x1550 );
+    instruction ( "LD   B,F7",e16_hi_lo ( 0x15,0x50 ) );
     advance ( 7 );
     B = 0xF7;
-    return jumpDirect ( prog_1550 );
+    return jumpDirect ( 0x1550,prog_1550 );
 }
 
 Control prog_1550 ()
 {
     at ( "1550" );
-    instruction ( "JP   19DC",0x1553 );
+    instruction ( "JP   19DC",e16_hi_lo ( 0x15,0x53 ) );
     advance ( 10 );
-    return jumpDirect ( prog_19DC );
+    return jumpDirect ( 0x19DC,prog_19DC );
 }
 
 Control prog_1554 ()
 {
     at ( "1554" );
-    instruction ( "LD   C,00",0x1556 );
+    instruction ( "LD   C,00",e16_hi_lo ( 0x15,0x56 ) );
     advance ( 7 );
     C = 0x00;
-    return jumpDirect ( prog_1556 );
+    return jumpDirect ( 0x1556,prog_1556 );
 }
 
 Control prog_1556 ()
 {
     at ( "1556" );
-    instruction ( "CP   H",0x1557 );
+    instruction ( "CP   H",e16_hi_lo ( 0x15,0x57 ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u16 a3 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( a2 ) ) ;
@@ -28214,13 +28214,13 @@ Control prog_1556 ()
     FlagA = e1_test_bit ( e8_lo ( a6 ),4 );
     FlagP = e1_parity ( e8_lo ( a3 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a3 ),0 ) );
-    return jumpDirect ( prog_1557 );
+    return jumpDirect ( 0x1557,prog_1557 );
 }
 
 Control prog_1557 ()
 {
     at ( "1557" );
-    instruction ( "CALL NC,1590",0x155A );
+    instruction ( "CALL NC,1590",e16_hi_lo ( 0x15,0x5A ) );
     if (e1_flip ( FlagCY ))
     {
         u8 a1 = SPH ;
@@ -28235,19 +28235,19 @@ Control prog_1557 ()
         advance ( 17 );
         SPH = e8_hi ( a6 );
         SPL = e8_lo ( a6 );
-        return jumpDirect ( prog_1590 );
+        return jumpDirect ( 0x1590,prog_1590 );
     }
     else
     {
         advance ( 11 );
-        return jumpDirect ( prog_155A );
+        return jumpDirect ( 0x155A,prog_155A );
     }
 }
 
 Control prog_155A ()
 {
     at ( "155A" );
-    instruction ( "CP   H",0x155B );
+    instruction ( "CP   H",e16_hi_lo ( 0x15,0x5B ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u16 a3 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( a2 ) ) ;
@@ -28260,13 +28260,13 @@ Control prog_155A ()
     FlagA = e1_test_bit ( e8_lo ( a6 ),4 );
     FlagP = e1_parity ( e8_lo ( a3 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a3 ),0 ) );
-    return jumpDirect ( prog_155B );
+    return jumpDirect ( 0x155B,prog_155B );
 }
 
 Control prog_155B ()
 {
     at ( "155B" );
-    instruction ( "RET  NC",0x155C );
+    instruction ( "RET  NC",e16_hi_lo ( 0x15,0x5C ) );
     if (e1_flip ( FlagCY ))
     {
         u8 a1 = SPH ;
@@ -28285,14 +28285,14 @@ Control prog_155B ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_155C );
+        return jumpDirect ( 0x155C,prog_155C );
     }
 }
 
 Control prog_155C ()
 {
     at ( "155C" );
-    instruction ( "ADD  10",0x155E );
+    instruction ( "ADD  10",e16_hi_lo ( 0x15,0x5E ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_false (  ),0x10,a1 ) ;
     u8 a3 = e8_and ( 0x10,0x0F ) ;
@@ -28305,13 +28305,13 @@ Control prog_155C ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_test_bit ( e8_hi ( a2 ),0 );
-    return jumpDirect ( prog_155E );
+    return jumpDirect ( 0x155E,prog_155E );
 }
 
 Control prog_155E ()
 {
     at ( "155E" );
-    instruction ( "INC  C",0x155F );
+    instruction ( "INC  C",e16_hi_lo ( 0x15,0x5F ) );
     u8 a1 = C ;
     u16 a2 = e16_add_with_carry ( e1_true (  ),a1,0x00 ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -28323,41 +28323,41 @@ Control prog_155E ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_155F );
+    return jumpDirect ( 0x155F,prog_155F );
 }
 
 Control prog_155F ()
 {
     at ( "155F" );
-    instruction ( "JP   155A",0x1562 );
+    instruction ( "JP   155A",e16_hi_lo ( 0x15,0x62 ) );
     advance ( 10 );
-    return jumpDirect ( prog_155A );
+    return jumpDirect ( 0x155A,prog_155A );
 }
 
 Control prog_1562 ()
 {
     at ( "1562" );
-    instruction ( "LD   A,(2009)",0x1565 );
+    instruction ( "LD   A,(2009)",e16_hi_lo ( 0x15,0x65 ) );
     u8 a1 = e8_read_mem ( 0x2009 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_1565 );
+    return jumpDirect ( 0x1565,prog_1565 );
 }
 
 Control prog_1565 ()
 {
     at ( "1565" );
-    instruction ( "LD   H,L",0x1566 );
+    instruction ( "LD   H,L",e16_hi_lo ( 0x15,0x66 ) );
     u8 a1 = L ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( prog_1566 );
+    return jumpDirect ( 0x1566,prog_1566 );
 }
 
 Control prog_1566 ()
 {
     at ( "1566" );
-    instruction ( "CALL 1554",0x1569 );
+    instruction ( "CALL 1554",e16_hi_lo ( 0x15,0x69 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -28370,23 +28370,23 @@ Control prog_1566 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1554 );
+    return jumpDirect ( 0x1554,prog_1554 );
 }
 
 Control prog_1569 ()
 {
     at ( "1569" );
-    instruction ( "LD   B,C",0x156A );
+    instruction ( "LD   B,C",e16_hi_lo ( 0x15,0x6A ) );
     u8 a1 = C ;
     advance ( 5 );
     B = a1;
-    return jumpDirect ( prog_156A );
+    return jumpDirect ( 0x156A,prog_156A );
 }
 
 Control prog_156A ()
 {
     at ( "156A" );
-    instruction ( "DEC  B",0x156B );
+    instruction ( "DEC  B",e16_hi_lo ( 0x15,0x6B ) );
     u8 a1 = B ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -28398,13 +28398,13 @@ Control prog_156A ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_156B );
+    return jumpDirect ( 0x156B,prog_156B );
 }
 
 Control prog_156B ()
 {
     at ( "156B" );
-    instruction ( "SBC  10",0x156D );
+    instruction ( "SBC  10",e16_hi_lo ( 0x15,0x6D ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( FlagCY ),a1,e8_complement ( 0x10 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -28417,23 +28417,23 @@ Control prog_156B ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_156D );
+    return jumpDirect ( 0x156D,prog_156D );
 }
 
 Control prog_156D ()
 {
     at ( "156D" );
-    instruction ( "LD   L,A",0x156E );
+    instruction ( "LD   L,A",e16_hi_lo ( 0x15,0x6E ) );
     u8 a1 = A ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( prog_156E );
+    return jumpDirect ( 0x156E,prog_156E );
 }
 
 Control prog_156E ()
 {
     at ( "156E" );
-    instruction ( "RET",0x156F );
+    instruction ( "RET",e16_hi_lo ( 0x15,0x6F ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -28451,17 +28451,17 @@ Control prog_156E ()
 Control prog_156F ()
 {
     at ( "156F" );
-    instruction ( "LD   A,(200A)",0x1572 );
+    instruction ( "LD   A,(200A)",e16_hi_lo ( 0x15,0x72 ) );
     u8 a1 = e8_read_mem ( 0x200A ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_1572 );
+    return jumpDirect ( 0x1572,prog_1572 );
 }
 
 Control prog_1572 ()
 {
     at ( "1572" );
-    instruction ( "CALL 1554",0x1575 );
+    instruction ( "CALL 1554",e16_hi_lo ( 0x15,0x75 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -28474,13 +28474,13 @@ Control prog_1572 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1554 );
+    return jumpDirect ( 0x1554,prog_1554 );
 }
 
 Control prog_1575 ()
 {
     at ( "1575" );
-    instruction ( "SBC  10",0x1577 );
+    instruction ( "SBC  10",e16_hi_lo ( 0x15,0x77 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( FlagCY ),a1,e8_complement ( 0x10 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -28493,23 +28493,23 @@ Control prog_1575 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_1577 );
+    return jumpDirect ( 0x1577,prog_1577 );
 }
 
 Control prog_1577 ()
 {
     at ( "1577" );
-    instruction ( "LD   H,A",0x1578 );
+    instruction ( "LD   H,A",e16_hi_lo ( 0x15,0x78 ) );
     u8 a1 = A ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( prog_1578 );
+    return jumpDirect ( 0x1578,prog_1578 );
 }
 
 Control prog_1578 ()
 {
     at ( "1578" );
-    instruction ( "RET",0x1579 );
+    instruction ( "RET",e16_hi_lo ( 0x15,0x79 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -28527,77 +28527,77 @@ Control prog_1578 ()
 Control prog_1579 ()
 {
     at ( "1579" );
-    instruction ( "LD   A,01",0x157B );
+    instruction ( "LD   A,01",e16_hi_lo ( 0x15,0x7B ) );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( prog_157B );
+    return jumpDirect ( 0x157B,prog_157B );
 }
 
 Control prog_157B ()
 {
     at ( "157B" );
-    instruction ( "LD   (2085),A",0x157E );
+    instruction ( "LD   (2085),A",e16_hi_lo ( 0x15,0x7E ) );
     u8 a1 = A ;
     mem_write ( 0x2085,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_157E );
+    return jumpDirect ( 0x157E,prog_157E );
 }
 
 Control prog_157E ()
 {
     at ( "157E" );
-    instruction ( "JP   1545",0x1581 );
+    instruction ( "JP   1545",e16_hi_lo ( 0x15,0x81 ) );
     advance ( 10 );
-    return jumpDirect ( prog_1545 );
+    return jumpDirect ( 0x1545,prog_1545 );
 }
 
 Control prog_1581 ()
 {
     at ( "1581" );
-    instruction ( "LD   A,B",0x1582 );
+    instruction ( "LD   A,B",e16_hi_lo ( 0x15,0x82 ) );
     u8 a1 = B ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_1582 );
+    return jumpDirect ( 0x1582,prog_1582 );
 }
 
 Control prog_1582 ()
 {
     at ( "1582" );
-    instruction ( "RLCA",0x1583 );
+    instruction ( "RLCA",e16_hi_lo ( 0x15,0x83 ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftL ( a1,0x01 ),0,e1_test_bit ( a1,7 ) );
     FlagCY = e1_test_bit ( a1,7 );
-    return jumpDirect ( prog_1583 );
+    return jumpDirect ( 0x1583,prog_1583 );
 }
 
 Control prog_1583 ()
 {
     at ( "1583" );
-    instruction ( "RLCA",0x1584 );
+    instruction ( "RLCA",e16_hi_lo ( 0x15,0x84 ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftL ( a1,0x01 ),0,e1_test_bit ( a1,7 ) );
     FlagCY = e1_test_bit ( a1,7 );
-    return jumpDirect ( prog_1584 );
+    return jumpDirect ( 0x1584,prog_1584 );
 }
 
 Control prog_1584 ()
 {
     at ( "1584" );
-    instruction ( "RLCA",0x1585 );
+    instruction ( "RLCA",e16_hi_lo ( 0x15,0x85 ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftL ( a1,0x01 ),0,e1_test_bit ( a1,7 ) );
     FlagCY = e1_test_bit ( a1,7 );
-    return jumpDirect ( prog_1585 );
+    return jumpDirect ( 0x1585,prog_1585 );
 }
 
 Control prog_1585 ()
 {
     at ( "1585" );
-    instruction ( "ADD  B",0x1586 );
+    instruction ( "ADD  B",e16_hi_lo ( 0x15,0x86 ) );
     u8 a1 = B ;
     u8 a2 = A ;
     u16 a3 = e16_add_with_carry ( e1_false (  ),a1,a2 ) ;
@@ -28611,13 +28611,13 @@ Control prog_1585 ()
     FlagA = e1_test_bit ( e8_lo ( a6 ),4 );
     FlagP = e1_parity ( e8_lo ( a3 ) );
     FlagCY = e1_test_bit ( e8_hi ( a3 ),0 );
-    return jumpDirect ( prog_1586 );
+    return jumpDirect ( 0x1586,prog_1586 );
 }
 
 Control prog_1586 ()
 {
     at ( "1586" );
-    instruction ( "ADD  B",0x1587 );
+    instruction ( "ADD  B",e16_hi_lo ( 0x15,0x87 ) );
     u8 a1 = B ;
     u8 a2 = A ;
     u16 a3 = e16_add_with_carry ( e1_false (  ),a1,a2 ) ;
@@ -28631,13 +28631,13 @@ Control prog_1586 ()
     FlagA = e1_test_bit ( e8_lo ( a6 ),4 );
     FlagP = e1_parity ( e8_lo ( a3 ) );
     FlagCY = e1_test_bit ( e8_hi ( a3 ),0 );
-    return jumpDirect ( prog_1587 );
+    return jumpDirect ( 0x1587,prog_1587 );
 }
 
 Control prog_1587 ()
 {
     at ( "1587" );
-    instruction ( "ADD  B",0x1588 );
+    instruction ( "ADD  B",e16_hi_lo ( 0x15,0x88 ) );
     u8 a1 = B ;
     u8 a2 = A ;
     u16 a3 = e16_add_with_carry ( e1_false (  ),a1,a2 ) ;
@@ -28651,13 +28651,13 @@ Control prog_1587 ()
     FlagA = e1_test_bit ( e8_lo ( a6 ),4 );
     FlagP = e1_parity ( e8_lo ( a3 ) );
     FlagCY = e1_test_bit ( e8_hi ( a3 ),0 );
-    return jumpDirect ( prog_1588 );
+    return jumpDirect ( 0x1588,prog_1588 );
 }
 
 Control prog_1588 ()
 {
     at ( "1588" );
-    instruction ( "ADD  C",0x1589 );
+    instruction ( "ADD  C",e16_hi_lo ( 0x15,0x89 ) );
     u8 a1 = C ;
     u8 a2 = A ;
     u16 a3 = e16_add_with_carry ( e1_false (  ),a1,a2 ) ;
@@ -28671,13 +28671,13 @@ Control prog_1588 ()
     FlagA = e1_test_bit ( e8_lo ( a6 ),4 );
     FlagP = e1_parity ( e8_lo ( a3 ) );
     FlagCY = e1_test_bit ( e8_hi ( a3 ),0 );
-    return jumpDirect ( prog_1589 );
+    return jumpDirect ( 0x1589,prog_1589 );
 }
 
 Control prog_1589 ()
 {
     at ( "1589" );
-    instruction ( "DEC  A",0x158A );
+    instruction ( "DEC  A",e16_hi_lo ( 0x15,0x8A ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -28689,43 +28689,43 @@ Control prog_1589 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_158A );
+    return jumpDirect ( 0x158A,prog_158A );
 }
 
 Control prog_158A ()
 {
     at ( "158A" );
-    instruction ( "LD   L,A",0x158B );
+    instruction ( "LD   L,A",e16_hi_lo ( 0x15,0x8B ) );
     u8 a1 = A ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( prog_158B );
+    return jumpDirect ( 0x158B,prog_158B );
 }
 
 Control prog_158B ()
 {
     at ( "158B" );
-    instruction ( "LD   A,(2067)",0x158E );
+    instruction ( "LD   A,(2067)",e16_hi_lo ( 0x15,0x8E ) );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_158E );
+    return jumpDirect ( 0x158E,prog_158E );
 }
 
 Control prog_158E ()
 {
     at ( "158E" );
-    instruction ( "LD   H,A",0x158F );
+    instruction ( "LD   H,A",e16_hi_lo ( 0x15,0x8F ) );
     u8 a1 = A ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( prog_158F );
+    return jumpDirect ( 0x158F,prog_158F );
 }
 
 Control prog_158F ()
 {
     at ( "158F" );
-    instruction ( "RET",0x1590 );
+    instruction ( "RET",e16_hi_lo ( 0x15,0x90 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -28743,7 +28743,7 @@ Control prog_158F ()
 Control prog_1590 ()
 {
     at ( "1590" );
-    instruction ( "INC  C",0x1591 );
+    instruction ( "INC  C",e16_hi_lo ( 0x15,0x91 ) );
     u8 a1 = C ;
     u16 a2 = e16_add_with_carry ( e1_true (  ),a1,0x00 ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -28755,13 +28755,13 @@ Control prog_1590 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_1591 );
+    return jumpDirect ( 0x1591,prog_1591 );
 }
 
 Control prog_1591 ()
 {
     at ( "1591" );
-    instruction ( "ADD  10",0x1593 );
+    instruction ( "ADD  10",e16_hi_lo ( 0x15,0x93 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_false (  ),0x10,a1 ) ;
     u8 a3 = e8_and ( 0x10,0x0F ) ;
@@ -28774,29 +28774,29 @@ Control prog_1591 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_test_bit ( e8_hi ( a2 ),0 );
-    return jumpDirect ( prog_1593 );
+    return jumpDirect ( 0x1593,prog_1593 );
 }
 
 Control prog_1593 ()
 {
     at ( "1593" );
-    instruction ( "JP   MI,1590",0x1596 );
+    instruction ( "JP   MI,1590",e16_hi_lo ( 0x15,0x96 ) );
     if (FlagS)
     {
         advance ( 10 );
-        return jumpDirect ( prog_1590 );
+        return jumpDirect ( 0x1590,prog_1590 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_1596 );
+        return jumpDirect ( 0x1596,prog_1596 );
     }
 }
 
 Control prog_1596 ()
 {
     at ( "1596" );
-    instruction ( "RET",0x1597 );
+    instruction ( "RET",e16_hi_lo ( 0x15,0x97 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -28814,17 +28814,17 @@ Control prog_1596 ()
 Control prog_1597 ()
 {
     at ( "1597" );
-    instruction ( "LD   A,(200D)",0x159A );
+    instruction ( "LD   A,(200D)",e16_hi_lo ( 0x15,0x9A ) );
     u8 a1 = e8_read_mem ( 0x200D ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_159A );
+    return jumpDirect ( 0x159A,prog_159A );
 }
 
 Control prog_159A ()
 {
     at ( "159A" );
-    instruction ( "AND  A",0x159B );
+    instruction ( "AND  A",e16_hi_lo ( 0x15,0x9B ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -28836,39 +28836,39 @@ Control prog_159A ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_159B );
+    return jumpDirect ( 0x159B,prog_159B );
 }
 
 Control prog_159B ()
 {
     at ( "159B" );
-    instruction ( "JP   NZ,15B7",0x159E );
+    instruction ( "JP   NZ,15B7",e16_hi_lo ( 0x15,0x9E ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_15B7 );
+        return jumpDirect ( 0x15B7,prog_15B7 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_159E );
+        return jumpDirect ( 0x159E,prog_159E );
     }
 }
 
 Control prog_159E ()
 {
     at ( "159E" );
-    instruction ( "LD   HL,3EA4",0x15A1 );
+    instruction ( "LD   HL,3EA4",e16_hi_lo ( 0x15,0xA1 ) );
     advance ( 10 );
     H = 0x3E;
     L = 0xA4;
-    return jumpDirect ( prog_15A1 );
+    return jumpDirect ( 0x15A1,prog_15A1 );
 }
 
 Control prog_15A1 ()
 {
     at ( "15A1" );
-    instruction ( "CALL 15C5",0x15A4 );
+    instruction ( "CALL 15C5",e16_hi_lo ( 0x15,0xA4 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -28881,13 +28881,13 @@ Control prog_15A1 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_15C5 );
+    return jumpDirect ( 0x15C5,prog_15C5 );
 }
 
 Control prog_15A4 ()
 {
     at ( "15A4" );
-    instruction ( "RET  NC",0x15A5 );
+    instruction ( "RET  NC",e16_hi_lo ( 0x15,0xA5 ) );
     if (e1_flip ( FlagCY ))
     {
         u8 a1 = SPH ;
@@ -28906,82 +28906,82 @@ Control prog_15A4 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_15A5 );
+        return jumpDirect ( 0x15A5,prog_15A5 );
     }
 }
 
 Control prog_15A5 ()
 {
     at ( "15A5" );
-    instruction ( "LD   B,FE",0x15A7 );
+    instruction ( "LD   B,FE",e16_hi_lo ( 0x15,0xA7 ) );
     advance ( 7 );
     B = 0xFE;
-    return jumpDirect ( prog_15A7 );
+    return jumpDirect ( 0x15A7,prog_15A7 );
 }
 
 Control prog_15A7 ()
 {
     at ( "15A7" );
-    instruction ( "LD   A,01",0x15A9 );
+    instruction ( "LD   A,01",e16_hi_lo ( 0x15,0xA9 ) );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( prog_15A9 );
+    return jumpDirect ( 0x15A9,prog_15A9 );
 }
 
 Control prog_15A9 ()
 {
     at ( "15A9" );
-    instruction ( "LD   (200D),A",0x15AC );
+    instruction ( "LD   (200D),A",e16_hi_lo ( 0x15,0xAC ) );
     u8 a1 = A ;
     mem_write ( 0x200D,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_15AC );
+    return jumpDirect ( 0x15AC,prog_15AC );
 }
 
 Control prog_15AC ()
 {
     at ( "15AC" );
-    instruction ( "LD   A,B",0x15AD );
+    instruction ( "LD   A,B",e16_hi_lo ( 0x15,0xAD ) );
     u8 a1 = B ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_15AD );
+    return jumpDirect ( 0x15AD,prog_15AD );
 }
 
 Control prog_15AD ()
 {
     at ( "15AD" );
-    instruction ( "LD   (2008),A",0x15B0 );
+    instruction ( "LD   (2008),A",e16_hi_lo ( 0x15,0xB0 ) );
     u8 a1 = A ;
     mem_write ( 0x2008,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_15B0 );
+    return jumpDirect ( 0x15B0,prog_15B0 );
 }
 
 Control prog_15B0 ()
 {
     at ( "15B0" );
-    instruction ( "LD   A,(200E)",0x15B3 );
+    instruction ( "LD   A,(200E)",e16_hi_lo ( 0x15,0xB3 ) );
     u8 a1 = e8_read_mem ( 0x200E ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_15B3 );
+    return jumpDirect ( 0x15B3,prog_15B3 );
 }
 
 Control prog_15B3 ()
 {
     at ( "15B3" );
-    instruction ( "LD   (2007),A",0x15B6 );
+    instruction ( "LD   (2007),A",e16_hi_lo ( 0x15,0xB6 ) );
     u8 a1 = A ;
     mem_write ( 0x2007,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_15B6 );
+    return jumpDirect ( 0x15B6,prog_15B6 );
 }
 
 Control prog_15B6 ()
 {
     at ( "15B6" );
-    instruction ( "RET",0x15B7 );
+    instruction ( "RET",e16_hi_lo ( 0x15,0xB7 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -28999,17 +28999,17 @@ Control prog_15B6 ()
 Control prog_15B7 ()
 {
     at ( "15B7" );
-    instruction ( "LD   HL,2524",0x15BA );
+    instruction ( "LD   HL,2524",e16_hi_lo ( 0x15,0xBA ) );
     advance ( 10 );
     H = 0x25;
     L = 0x24;
-    return jumpDirect ( prog_15BA );
+    return jumpDirect ( 0x15BA,prog_15BA );
 }
 
 Control prog_15BA ()
 {
     at ( "15BA" );
-    instruction ( "CALL 15C5",0x15BD );
+    instruction ( "CALL 15C5",e16_hi_lo ( 0x15,0xBD ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -29022,13 +29022,13 @@ Control prog_15BA ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_15C5 );
+    return jumpDirect ( 0x15C5,prog_15C5 );
 }
 
 Control prog_15BD ()
 {
     at ( "15BD" );
-    instruction ( "RET  NC",0x15BE );
+    instruction ( "RET  NC",e16_hi_lo ( 0x15,0xBE ) );
     if (e1_flip ( FlagCY ))
     {
         u8 a1 = SPH ;
@@ -29047,14 +29047,14 @@ Control prog_15BD ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_15BE );
+        return jumpDirect ( 0x15BE,prog_15BE );
     }
 }
 
 Control prog_15BE ()
 {
     at ( "15BE" );
-    instruction ( "CALL 18F1",0x15C1 );
+    instruction ( "CALL 18F1",e16_hi_lo ( 0x15,0xC1 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -29067,13 +29067,13 @@ Control prog_15BE ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_18F1 );
+    return jumpDirect ( 0x18F1,prog_18F1 );
 }
 
 Control prog_15C1 ()
 {
     at ( "15C1" );
-    instruction ( "XOR  A",0x15C2 );
+    instruction ( "XOR  A",e16_hi_lo ( 0x15,0xC2 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -29084,42 +29084,42 @@ Control prog_15C1 ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_15C2 );
+    return jumpDirect ( 0x15C2,prog_15C2 );
 }
 
 Control prog_15C2 ()
 {
     at ( "15C2" );
-    instruction ( "JP   15A9",0x15C5 );
+    instruction ( "JP   15A9",e16_hi_lo ( 0x15,0xC5 ) );
     advance ( 10 );
-    return jumpDirect ( prog_15A9 );
+    return jumpDirect ( 0x15A9,prog_15A9 );
 }
 
 Control prog_15C5 ()
 {
     at ( "15C5" );
-    instruction ( "LD   B,17",0x15C7 );
+    instruction ( "LD   B,17",e16_hi_lo ( 0x15,0xC7 ) );
     advance ( 7 );
     B = 0x17;
-    return jumpDirect ( prog_15C7 );
+    return jumpDirect ( 0x15C7,prog_15C7 );
 }
 
 Control prog_15C7 ()
 {
     at ( "15C7" );
-    instruction ( "LD   A,(HL)",0x15C8 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x15,0xC8 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_15C8 );
+    return jumpDirect ( 0x15C8,prog_15C8 );
 }
 
 Control prog_15C8 ()
 {
     at ( "15C8" );
-    instruction ( "AND  A",0x15C9 );
+    instruction ( "AND  A",e16_hi_lo ( 0x15,0xC9 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -29131,42 +29131,42 @@ Control prog_15C8 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_15C9 );
+    return jumpDirect ( 0x15C9,prog_15C9 );
 }
 
 Control prog_15C9 ()
 {
     at ( "15C9" );
-    instruction ( "JP   NZ,166B",0x15CC );
+    instruction ( "JP   NZ,166B",e16_hi_lo ( 0x15,0xCC ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_166B );
+        return jumpDirect ( 0x166B,prog_166B );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_15CC );
+        return jumpDirect ( 0x15CC,prog_15CC );
     }
 }
 
 Control prog_15CC ()
 {
     at ( "15CC" );
-    instruction ( "INC  HL",0x15CD );
+    instruction ( "INC  HL",e16_hi_lo ( 0x15,0xCD ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_15CD );
+    return jumpDirect ( 0x15CD,prog_15CD );
 }
 
 Control prog_15CD ()
 {
     at ( "15CD" );
-    instruction ( "DEC  B",0x15CE );
+    instruction ( "DEC  B",e16_hi_lo ( 0x15,0xCE ) );
     u8 a1 = B ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -29178,29 +29178,29 @@ Control prog_15CD ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_15CE );
+    return jumpDirect ( 0x15CE,prog_15CE );
 }
 
 Control prog_15CE ()
 {
     at ( "15CE" );
-    instruction ( "JP   NZ,15C7",0x15D1 );
+    instruction ( "JP   NZ,15C7",e16_hi_lo ( 0x15,0xD1 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_15C7 );
+        return jumpDirect ( 0x15C7,prog_15C7 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_15D1 );
+        return jumpDirect ( 0x15D1,prog_15D1 );
     }
 }
 
 Control prog_15D1 ()
 {
     at ( "15D1" );
-    instruction ( "RET",0x15D2 );
+    instruction ( "RET",e16_hi_lo ( 0x15,0xD2 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -29218,7 +29218,7 @@ Control prog_15D1 ()
 Control prog_15D3 ()
 {
     at ( "15D3" );
-    instruction ( "CALL 1474",0x15D6 );
+    instruction ( "CALL 1474",e16_hi_lo ( 0x15,0xD6 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -29231,13 +29231,13 @@ Control prog_15D3 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1474 );
+    return jumpDirect ( 0x1474,prog_1474 );
 }
 
 Control prog_15D6 ()
 {
     at ( "15D6" );
-    instruction ( "PUSH HL",0x15D7 );
+    instruction ( "PUSH HL",e16_hi_lo ( 0x15,0xD7 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = SPH ;
@@ -29251,13 +29251,13 @@ Control prog_15D6 ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_15D7 );
+    return jumpDirect ( 0x15D7,prog_15D7 );
 }
 
 Control prog_15D7 ()
 {
     at ( "15D7" );
-    instruction ( "PUSH BC",0x15D8 );
+    instruction ( "PUSH BC",e16_hi_lo ( 0x15,0xD8 ) );
     u8 a1 = B ;
     u8 a2 = C ;
     u8 a3 = SPH ;
@@ -29271,13 +29271,13 @@ Control prog_15D7 ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_15D8 );
+    return jumpDirect ( 0x15D8,prog_15D8 );
 }
 
 Control prog_15D8 ()
 {
     at ( "15D8" );
-    instruction ( "PUSH HL",0x15D9 );
+    instruction ( "PUSH HL",e16_hi_lo ( 0x15,0xD9 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = SPH ;
@@ -29291,25 +29291,25 @@ Control prog_15D8 ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_15D9 );
+    return jumpDirect ( 0x15D9,prog_15D9 );
 }
 
 Control prog_15D9 ()
 {
     at ( "15D9" );
-    instruction ( "LD   A,(DE)",0x15DA );
+    instruction ( "LD   A,(DE)",e16_hi_lo ( 0x15,0xDA ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_15DA );
+    return jumpDirect ( 0x15DA,prog_15DA );
 }
 
 Control prog_15DA ()
 {
     at ( "15DA" );
-    instruction ( "OUT  04",0x15DC );
+    instruction ( "OUT  04",e16_hi_lo ( 0x15,0xDC ) );
     u8 a1 = A ;
     advance ( 10 );
     todo ( "S_AssignShifterReg" );
@@ -29319,57 +29319,57 @@ Control prog_15DA ()
 Control prog_15DC ()
 {
     at ( "15DC" );
-    instruction ( "IN   03",0x15DE );
+    instruction ( "IN   03",e16_hi_lo ( 0x15,0xDE ) );
     u8 a1 = e8_and ( Shifter_OFF,0x07 ) ;
     u8 a2 = e8_and ( e8_complement ( Shifter_OFF ),0x07 ) ;
     u8 a3 = e8_or ( e8_shiftL ( Shifter_HI,a1 ),e8_shiftR ( e8_shiftR ( Shifter_LO,a2 ),0x01 ) ) ;
     advance ( 10 );
     A = a3;
-    return jumpDirect ( prog_15DE );
+    return jumpDirect ( 0x15DE,prog_15DE );
 }
 
 Control prog_15DE ()
 {
     at ( "15DE" );
-    instruction ( "LD   (HL),A",0x15DF );
+    instruction ( "LD   (HL),A",e16_hi_lo ( 0x15,0xDF ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_15DF );
+    return jumpDirect ( 0x15DF,prog_15DF );
 }
 
 Control prog_15DF ()
 {
     at ( "15DF" );
-    instruction ( "INC  HL",0x15E0 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x15,0xE0 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_15E0 );
+    return jumpDirect ( 0x15E0,prog_15E0 );
 }
 
 Control prog_15E0 ()
 {
     at ( "15E0" );
-    instruction ( "INC  DE",0x15E1 );
+    instruction ( "INC  DE",e16_hi_lo ( 0x15,0xE1 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     D = e8_hi ( a3 );
     E = e8_lo ( a3 );
-    return jumpDirect ( prog_15E1 );
+    return jumpDirect ( 0x15E1,prog_15E1 );
 }
 
 Control prog_15E1 ()
 {
     at ( "15E1" );
-    instruction ( "XOR  A",0x15E2 );
+    instruction ( "XOR  A",e16_hi_lo ( 0x15,0xE2 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -29380,13 +29380,13 @@ Control prog_15E1 ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_15E2 );
+    return jumpDirect ( 0x15E2,prog_15E2 );
 }
 
 Control prog_15E2 ()
 {
     at ( "15E2" );
-    instruction ( "OUT  04",0x15E4 );
+    instruction ( "OUT  04",e16_hi_lo ( 0x15,0xE4 ) );
     u8 a1 = A ;
     advance ( 10 );
     todo ( "S_AssignShifterReg" );
@@ -29396,31 +29396,31 @@ Control prog_15E2 ()
 Control prog_15E4 ()
 {
     at ( "15E4" );
-    instruction ( "IN   03",0x15E6 );
+    instruction ( "IN   03",e16_hi_lo ( 0x15,0xE6 ) );
     u8 a1 = e8_and ( Shifter_OFF,0x07 ) ;
     u8 a2 = e8_and ( e8_complement ( Shifter_OFF ),0x07 ) ;
     u8 a3 = e8_or ( e8_shiftL ( Shifter_HI,a1 ),e8_shiftR ( e8_shiftR ( Shifter_LO,a2 ),0x01 ) ) ;
     advance ( 10 );
     A = a3;
-    return jumpDirect ( prog_15E6 );
+    return jumpDirect ( 0x15E6,prog_15E6 );
 }
 
 Control prog_15E6 ()
 {
     at ( "15E6" );
-    instruction ( "LD   (HL),A",0x15E7 );
+    instruction ( "LD   (HL),A",e16_hi_lo ( 0x15,0xE7 ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_15E7 );
+    return jumpDirect ( 0x15E7,prog_15E7 );
 }
 
 Control prog_15E7 ()
 {
     at ( "15E7" );
-    instruction ( "POP  HL",0x15E8 );
+    instruction ( "POP  HL",e16_hi_lo ( 0x15,0xE8 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -29434,23 +29434,23 @@ Control prog_15E7 ()
     L = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_15E8 );
+    return jumpDirect ( 0x15E8,prog_15E8 );
 }
 
 Control prog_15E8 ()
 {
     at ( "15E8" );
-    instruction ( "LD   BC,0020",0x15EB );
+    instruction ( "LD   BC,0020",e16_hi_lo ( 0x15,0xEB ) );
     advance ( 10 );
     B = 0x00;
     C = 0x20;
-    return jumpDirect ( prog_15EB );
+    return jumpDirect ( 0x15EB,prog_15EB );
 }
 
 Control prog_15EB ()
 {
     at ( "15EB" );
-    instruction ( "ADD  HL,BC",0x15EC );
+    instruction ( "ADD  HL,BC",e16_hi_lo ( 0x15,0xEC ) );
     u8 a1 = B ;
     u8 a2 = C ;
     u8 a3 = H ;
@@ -29460,13 +29460,13 @@ Control prog_15EB ()
     H = e8_hi ( e16_drop_hi_bit_of_17 ( a5 ) );
     L = e8_lo ( e16_drop_hi_bit_of_17 ( a5 ) );
     FlagCY = e1_hi_bit_of_17 ( a5 );
-    return jumpDirect ( prog_15EC );
+    return jumpDirect ( 0x15EC,prog_15EC );
 }
 
 Control prog_15EC ()
 {
     at ( "15EC" );
-    instruction ( "POP  BC",0x15ED );
+    instruction ( "POP  BC",e16_hi_lo ( 0x15,0xED ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -29480,13 +29480,13 @@ Control prog_15EC ()
     C = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_15ED );
+    return jumpDirect ( 0x15ED,prog_15ED );
 }
 
 Control prog_15ED ()
 {
     at ( "15ED" );
-    instruction ( "DEC  B",0x15EE );
+    instruction ( "DEC  B",e16_hi_lo ( 0x15,0xEE ) );
     u8 a1 = B ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -29498,29 +29498,29 @@ Control prog_15ED ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_15EE );
+    return jumpDirect ( 0x15EE,prog_15EE );
 }
 
 Control prog_15EE ()
 {
     at ( "15EE" );
-    instruction ( "JP   NZ,15D7",0x15F1 );
+    instruction ( "JP   NZ,15D7",e16_hi_lo ( 0x15,0xF1 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_15D7 );
+        return jumpDirect ( 0x15D7,prog_15D7 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_15F1 );
+        return jumpDirect ( 0x15F1,prog_15F1 );
     }
 }
 
 Control prog_15F1 ()
 {
     at ( "15F1" );
-    instruction ( "POP  HL",0x15F2 );
+    instruction ( "POP  HL",e16_hi_lo ( 0x15,0xF2 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -29534,13 +29534,13 @@ Control prog_15F1 ()
     L = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_15F2 );
+    return jumpDirect ( 0x15F2,prog_15F2 );
 }
 
 Control prog_15F2 ()
 {
     at ( "15F2" );
-    instruction ( "RET",0x15F3 );
+    instruction ( "RET",e16_hi_lo ( 0x15,0xF3 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -29558,7 +29558,7 @@ Control prog_15F2 ()
 Control prog_15F3 ()
 {
     at ( "15F3" );
-    instruction ( "CALL 1611",0x15F6 );
+    instruction ( "CALL 1611",e16_hi_lo ( 0x15,0xF6 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -29571,35 +29571,35 @@ Control prog_15F3 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1611 );
+    return jumpDirect ( 0x1611,prog_1611 );
 }
 
 Control prog_15F6 ()
 {
     at ( "15F6" );
-    instruction ( "LD   BC,3700",0x15F9 );
+    instruction ( "LD   BC,3700",e16_hi_lo ( 0x15,0xF9 ) );
     advance ( 10 );
     B = 0x37;
     C = 0x00;
-    return jumpDirect ( prog_15F9 );
+    return jumpDirect ( 0x15F9,prog_15F9 );
 }
 
 Control prog_15F9 ()
 {
     at ( "15F9" );
-    instruction ( "LD   A,(HL)",0x15FA );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x15,0xFA ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_15FA );
+    return jumpDirect ( 0x15FA,prog_15FA );
 }
 
 Control prog_15FA ()
 {
     at ( "15FA" );
-    instruction ( "AND  A",0x15FB );
+    instruction ( "AND  A",e16_hi_lo ( 0x15,0xFB ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -29611,29 +29611,29 @@ Control prog_15FA ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_15FB );
+    return jumpDirect ( 0x15FB,prog_15FB );
 }
 
 Control prog_15FB ()
 {
     at ( "15FB" );
-    instruction ( "JP   Z,15FF",0x15FE );
+    instruction ( "JP   Z,15FF",e16_hi_lo ( 0x15,0xFE ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_15FF );
+        return jumpDirect ( 0x15FF,prog_15FF );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_15FE );
+        return jumpDirect ( 0x15FE,prog_15FE );
     }
 }
 
 Control prog_15FE ()
 {
     at ( "15FE" );
-    instruction ( "INC  C",0x15FF );
+    instruction ( "INC  C",e16_hi_lo ( 0x15,0xFF ) );
     u8 a1 = C ;
     u16 a2 = e16_add_with_carry ( e1_true (  ),a1,0x00 ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -29645,26 +29645,26 @@ Control prog_15FE ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_15FF );
+    return jumpDirect ( 0x15FF,prog_15FF );
 }
 
 Control prog_15FF ()
 {
     at ( "15FF" );
-    instruction ( "INC  HL",0x1600 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x16,0x00 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_1600 );
+    return jumpDirect ( 0x1600,prog_1600 );
 }
 
 Control prog_1600 ()
 {
     at ( "1600" );
-    instruction ( "DEC  B",0x1601 );
+    instruction ( "DEC  B",e16_hi_lo ( 0x16,0x01 ) );
     u8 a1 = B ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -29676,49 +29676,49 @@ Control prog_1600 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_1601 );
+    return jumpDirect ( 0x1601,prog_1601 );
 }
 
 Control prog_1601 ()
 {
     at ( "1601" );
-    instruction ( "JP   NZ,15F9",0x1604 );
+    instruction ( "JP   NZ,15F9",e16_hi_lo ( 0x16,0x04 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_15F9 );
+        return jumpDirect ( 0x15F9,prog_15F9 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_1604 );
+        return jumpDirect ( 0x1604,prog_1604 );
     }
 }
 
 Control prog_1604 ()
 {
     at ( "1604" );
-    instruction ( "LD   A,C",0x1605 );
+    instruction ( "LD   A,C",e16_hi_lo ( 0x16,0x05 ) );
     u8 a1 = C ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_1605 );
+    return jumpDirect ( 0x1605,prog_1605 );
 }
 
 Control prog_1605 ()
 {
     at ( "1605" );
-    instruction ( "LD   (2082),A",0x1608 );
+    instruction ( "LD   (2082),A",e16_hi_lo ( 0x16,0x08 ) );
     u8 a1 = A ;
     mem_write ( 0x2082,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_1608 );
+    return jumpDirect ( 0x1608,prog_1608 );
 }
 
 Control prog_1608 ()
 {
     at ( "1608" );
-    instruction ( "CP   01",0x160A );
+    instruction ( "CP   01",e16_hi_lo ( 0x16,0x0A ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x01 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -29730,13 +29730,13 @@ Control prog_1608 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_160A );
+    return jumpDirect ( 0x160A,prog_160A );
 }
 
 Control prog_160A ()
 {
     at ( "160A" );
-    instruction ( "RET  NZ",0x160B );
+    instruction ( "RET  NZ",e16_hi_lo ( 0x16,0x0B ) );
     if (e1_flip ( FlagZ ))
     {
         u8 a1 = SPH ;
@@ -29755,35 +29755,35 @@ Control prog_160A ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_160B );
+        return jumpDirect ( 0x160B,prog_160B );
     }
 }
 
 Control prog_160B ()
 {
     at ( "160B" );
-    instruction ( "LD   HL,206B",0x160E );
+    instruction ( "LD   HL,206B",e16_hi_lo ( 0x16,0x0E ) );
     advance ( 10 );
     H = 0x20;
     L = 0x6B;
-    return jumpDirect ( prog_160E );
+    return jumpDirect ( 0x160E,prog_160E );
 }
 
 Control prog_160E ()
 {
     at ( "160E" );
-    instruction ( "LD   (HL),01",0x1610 );
+    instruction ( "LD   (HL),01",e16_hi_lo ( 0x16,0x10 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     mem_write ( e16_hi_lo ( a1,a2 ),0x01 );
     advance ( 10 );
-    return jumpDirect ( prog_1610 );
+    return jumpDirect ( 0x1610,prog_1610 );
 }
 
 Control prog_1610 ()
 {
     at ( "1610" );
-    instruction ( "RET",0x1611 );
+    instruction ( "RET",e16_hi_lo ( 0x16,0x11 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -29801,36 +29801,36 @@ Control prog_1610 ()
 Control prog_1611 ()
 {
     at ( "1611" );
-    instruction ( "LD   L,00",0x1613 );
+    instruction ( "LD   L,00",e16_hi_lo ( 0x16,0x13 ) );
     advance ( 7 );
     L = 0x00;
-    return jumpDirect ( prog_1613 );
+    return jumpDirect ( 0x1613,prog_1613 );
 }
 
 Control prog_1613 ()
 {
     at ( "1613" );
-    instruction ( "LD   A,(2067)",0x1616 );
+    instruction ( "LD   A,(2067)",e16_hi_lo ( 0x16,0x16 ) );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_1616 );
+    return jumpDirect ( 0x1616,prog_1616 );
 }
 
 Control prog_1616 ()
 {
     at ( "1616" );
-    instruction ( "LD   H,A",0x1617 );
+    instruction ( "LD   H,A",e16_hi_lo ( 0x16,0x17 ) );
     u8 a1 = A ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( prog_1617 );
+    return jumpDirect ( 0x1617,prog_1617 );
 }
 
 Control prog_1617 ()
 {
     at ( "1617" );
-    instruction ( "RET",0x1618 );
+    instruction ( "RET",e16_hi_lo ( 0x16,0x18 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -29848,17 +29848,17 @@ Control prog_1617 ()
 Control prog_1618 ()
 {
     at ( "1618" );
-    instruction ( "LD   A,(2015)",0x161B );
+    instruction ( "LD   A,(2015)",e16_hi_lo ( 0x16,0x1B ) );
     u8 a1 = e8_read_mem ( 0x2015 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_161B );
+    return jumpDirect ( 0x161B,prog_161B );
 }
 
 Control prog_161B ()
 {
     at ( "161B" );
-    instruction ( "CP   FF",0x161D );
+    instruction ( "CP   FF",e16_hi_lo ( 0x16,0x1D ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0xFF ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -29870,13 +29870,13 @@ Control prog_161B ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_161D );
+    return jumpDirect ( 0x161D,prog_161D );
 }
 
 Control prog_161D ()
 {
     at ( "161D" );
-    instruction ( "RET  NZ",0x161E );
+    instruction ( "RET  NZ",e16_hi_lo ( 0x16,0x1E ) );
     if (e1_flip ( FlagZ ))
     {
         u8 a1 = SPH ;
@@ -29895,61 +29895,61 @@ Control prog_161D ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_161E );
+        return jumpDirect ( 0x161E,prog_161E );
     }
 }
 
 Control prog_161E ()
 {
     at ( "161E" );
-    instruction ( "LD   HL,2010",0x1621 );
+    instruction ( "LD   HL,2010",e16_hi_lo ( 0x16,0x21 ) );
     advance ( 10 );
     H = 0x20;
     L = 0x10;
-    return jumpDirect ( prog_1621 );
+    return jumpDirect ( 0x1621,prog_1621 );
 }
 
 Control prog_1621 ()
 {
     at ( "1621" );
-    instruction ( "LD   A,(HL)",0x1622 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x16,0x22 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_1622 );
+    return jumpDirect ( 0x1622,prog_1622 );
 }
 
 Control prog_1622 ()
 {
     at ( "1622" );
-    instruction ( "INC  HL",0x1623 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x16,0x23 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_1623 );
+    return jumpDirect ( 0x1623,prog_1623 );
 }
 
 Control prog_1623 ()
 {
     at ( "1623" );
-    instruction ( "LD   B,(HL)",0x1624 );
+    instruction ( "LD   B,(HL)",e16_hi_lo ( 0x16,0x24 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     B = a3;
-    return jumpDirect ( prog_1624 );
+    return jumpDirect ( 0x1624,prog_1624 );
 }
 
 Control prog_1624 ()
 {
     at ( "1624" );
-    instruction ( "OR   B",0x1625 );
+    instruction ( "OR   B",e16_hi_lo ( 0x16,0x25 ) );
     u8 a1 = B ;
     u8 a2 = A ;
     u8 a3 = e8_or ( a1,a2 ) ;
@@ -29960,13 +29960,13 @@ Control prog_1624 ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_1625 );
+    return jumpDirect ( 0x1625,prog_1625 );
 }
 
 Control prog_1625 ()
 {
     at ( "1625" );
-    instruction ( "RET  NZ",0x1626 );
+    instruction ( "RET  NZ",e16_hi_lo ( 0x16,0x26 ) );
     if (e1_flip ( FlagZ ))
     {
         u8 a1 = SPH ;
@@ -29985,24 +29985,24 @@ Control prog_1625 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_1626 );
+        return jumpDirect ( 0x1626,prog_1626 );
     }
 }
 
 Control prog_1626 ()
 {
     at ( "1626" );
-    instruction ( "LD   A,(2025)",0x1629 );
+    instruction ( "LD   A,(2025)",e16_hi_lo ( 0x16,0x29 ) );
     u8 a1 = e8_read_mem ( 0x2025 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_1629 );
+    return jumpDirect ( 0x1629,prog_1629 );
 }
 
 Control prog_1629 ()
 {
     at ( "1629" );
-    instruction ( "AND  A",0x162A );
+    instruction ( "AND  A",e16_hi_lo ( 0x16,0x2A ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -30014,13 +30014,13 @@ Control prog_1629 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_162A );
+    return jumpDirect ( 0x162A,prog_162A );
 }
 
 Control prog_162A ()
 {
     at ( "162A" );
-    instruction ( "RET  NZ",0x162B );
+    instruction ( "RET  NZ",e16_hi_lo ( 0x16,0x2B ) );
     if (e1_flip ( FlagZ ))
     {
         u8 a1 = SPH ;
@@ -30039,24 +30039,24 @@ Control prog_162A ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_162B );
+        return jumpDirect ( 0x162B,prog_162B );
     }
 }
 
 Control prog_162B ()
 {
     at ( "162B" );
-    instruction ( "LD   A,(20EF)",0x162E );
+    instruction ( "LD   A,(20EF)",e16_hi_lo ( 0x16,0x2E ) );
     u8 a1 = e8_read_mem ( 0x20EF ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_162E );
+    return jumpDirect ( 0x162E,prog_162E );
 }
 
 Control prog_162E ()
 {
     at ( "162E" );
-    instruction ( "AND  A",0x162F );
+    instruction ( "AND  A",e16_hi_lo ( 0x16,0x2F ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -30068,39 +30068,39 @@ Control prog_162E ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_162F );
+    return jumpDirect ( 0x162F,prog_162F );
 }
 
 Control prog_162F ()
 {
     at ( "162F" );
-    instruction ( "JP   Z,1652",0x1632 );
+    instruction ( "JP   Z,1652",e16_hi_lo ( 0x16,0x32 ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_1652 );
+        return jumpDirect ( 0x1652,prog_1652 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_1632 );
+        return jumpDirect ( 0x1632,prog_1632 );
     }
 }
 
 Control prog_1632 ()
 {
     at ( "1632" );
-    instruction ( "LD   A,(202D)",0x1635 );
+    instruction ( "LD   A,(202D)",e16_hi_lo ( 0x16,0x35 ) );
     u8 a1 = e8_read_mem ( 0x202D ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_1635 );
+    return jumpDirect ( 0x1635,prog_1635 );
 }
 
 Control prog_1635 ()
 {
     at ( "1635" );
-    instruction ( "AND  A",0x1636 );
+    instruction ( "AND  A",e16_hi_lo ( 0x16,0x36 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -30112,29 +30112,29 @@ Control prog_1635 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_1636 );
+    return jumpDirect ( 0x1636,prog_1636 );
 }
 
 Control prog_1636 ()
 {
     at ( "1636" );
-    instruction ( "JP   NZ,1648",0x1639 );
+    instruction ( "JP   NZ,1648",e16_hi_lo ( 0x16,0x39 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_1648 );
+        return jumpDirect ( 0x1648,prog_1648 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_1639 );
+        return jumpDirect ( 0x1639,prog_1639 );
     }
 }
 
 Control prog_1639 ()
 {
     at ( "1639" );
-    instruction ( "CALL 17C0",0x163C );
+    instruction ( "CALL 17C0",e16_hi_lo ( 0x16,0x3C ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -30147,13 +30147,13 @@ Control prog_1639 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_17C0 );
+    return jumpDirect ( 0x17C0,prog_17C0 );
 }
 
 Control prog_163C ()
 {
     at ( "163C" );
-    instruction ( "AND  10",0x163E );
+    instruction ( "AND  10",e16_hi_lo ( 0x16,0x3E ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( 0x10,a1 ) ;
     u8 a3 = e8_or ( 0x10,a1 ) ;
@@ -30164,13 +30164,13 @@ Control prog_163C ()
     FlagA = e1_test_bit ( a3,3 );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_163E );
+    return jumpDirect ( 0x163E,prog_163E );
 }
 
 Control prog_163E ()
 {
     at ( "163E" );
-    instruction ( "RET  Z",0x163F );
+    instruction ( "RET  Z",e16_hi_lo ( 0x16,0x3F ) );
     if (FlagZ)
     {
         u8 a1 = SPH ;
@@ -30189,43 +30189,43 @@ Control prog_163E ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_163F );
+        return jumpDirect ( 0x163F,prog_163F );
     }
 }
 
 Control prog_163F ()
 {
     at ( "163F" );
-    instruction ( "LD   A,01",0x1641 );
+    instruction ( "LD   A,01",e16_hi_lo ( 0x16,0x41 ) );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( prog_1641 );
+    return jumpDirect ( 0x1641,prog_1641 );
 }
 
 Control prog_1641 ()
 {
     at ( "1641" );
-    instruction ( "LD   (2025),A",0x1644 );
+    instruction ( "LD   (2025),A",e16_hi_lo ( 0x16,0x44 ) );
     u8 a1 = A ;
     mem_write ( 0x2025,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_1644 );
+    return jumpDirect ( 0x1644,prog_1644 );
 }
 
 Control prog_1644 ()
 {
     at ( "1644" );
-    instruction ( "LD   (202D),A",0x1647 );
+    instruction ( "LD   (202D),A",e16_hi_lo ( 0x16,0x47 ) );
     u8 a1 = A ;
     mem_write ( 0x202D,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_1647 );
+    return jumpDirect ( 0x1647,prog_1647 );
 }
 
 Control prog_1647 ()
 {
     at ( "1647" );
-    instruction ( "RET",0x1648 );
+    instruction ( "RET",e16_hi_lo ( 0x16,0x48 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -30243,7 +30243,7 @@ Control prog_1647 ()
 Control prog_1648 ()
 {
     at ( "1648" );
-    instruction ( "CALL 17C0",0x164B );
+    instruction ( "CALL 17C0",e16_hi_lo ( 0x16,0x4B ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -30256,13 +30256,13 @@ Control prog_1648 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_17C0 );
+    return jumpDirect ( 0x17C0,prog_17C0 );
 }
 
 Control prog_164B ()
 {
     at ( "164B" );
-    instruction ( "AND  10",0x164D );
+    instruction ( "AND  10",e16_hi_lo ( 0x16,0x4D ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( 0x10,a1 ) ;
     u8 a3 = e8_or ( 0x10,a1 ) ;
@@ -30273,13 +30273,13 @@ Control prog_164B ()
     FlagA = e1_test_bit ( a3,3 );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_164D );
+    return jumpDirect ( 0x164D,prog_164D );
 }
 
 Control prog_164D ()
 {
     at ( "164D" );
-    instruction ( "RET  NZ",0x164E );
+    instruction ( "RET  NZ",e16_hi_lo ( 0x16,0x4E ) );
     if (e1_flip ( FlagZ ))
     {
         u8 a1 = SPH ;
@@ -30298,24 +30298,24 @@ Control prog_164D ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_164E );
+        return jumpDirect ( 0x164E,prog_164E );
     }
 }
 
 Control prog_164E ()
 {
     at ( "164E" );
-    instruction ( "LD   (202D),A",0x1651 );
+    instruction ( "LD   (202D),A",e16_hi_lo ( 0x16,0x51 ) );
     u8 a1 = A ;
     mem_write ( 0x202D,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_1651 );
+    return jumpDirect ( 0x1651,prog_1651 );
 }
 
 Control prog_1651 ()
 {
     at ( "1651" );
-    instruction ( "RET",0x1652 );
+    instruction ( "RET",e16_hi_lo ( 0x16,0x52 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -30333,63 +30333,63 @@ Control prog_1651 ()
 Control prog_1652 ()
 {
     at ( "1652" );
-    instruction ( "LD   HL,2025",0x1655 );
+    instruction ( "LD   HL,2025",e16_hi_lo ( 0x16,0x55 ) );
     advance ( 10 );
     H = 0x20;
     L = 0x25;
-    return jumpDirect ( prog_1655 );
+    return jumpDirect ( 0x1655,prog_1655 );
 }
 
 Control prog_1655 ()
 {
     at ( "1655" );
-    instruction ( "LD   (HL),01",0x1657 );
+    instruction ( "LD   (HL),01",e16_hi_lo ( 0x16,0x57 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     mem_write ( e16_hi_lo ( a1,a2 ),0x01 );
     advance ( 10 );
-    return jumpDirect ( prog_1657 );
+    return jumpDirect ( 0x1657,prog_1657 );
 }
 
 Control prog_1657 ()
 {
     at ( "1657" );
-    instruction ( "LD   HL,(20ED)",0x165A );
+    instruction ( "LD   HL,(20ED)",e16_hi_lo ( 0x16,0x5A ) );
     u8 a1 = e8_read_mem ( 0x20ED ) ;
     u8 a2 = e8_read_mem ( 0x20EE ) ;
     advance ( 16 );
     H = a2;
     L = a1;
-    return jumpDirect ( prog_165A );
+    return jumpDirect ( 0x165A,prog_165A );
 }
 
 Control prog_165A ()
 {
     at ( "165A" );
-    instruction ( "INC  HL",0x165B );
+    instruction ( "INC  HL",e16_hi_lo ( 0x16,0x5B ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_165B );
+    return jumpDirect ( 0x165B,prog_165B );
 }
 
 Control prog_165B ()
 {
     at ( "165B" );
-    instruction ( "LD   A,L",0x165C );
+    instruction ( "LD   A,L",e16_hi_lo ( 0x16,0x5C ) );
     u8 a1 = L ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_165C );
+    return jumpDirect ( 0x165C,prog_165C );
 }
 
 Control prog_165C ()
 {
     at ( "165C" );
-    instruction ( "CP   7E",0x165E );
+    instruction ( "CP   7E",e16_hi_lo ( 0x16,0x5E ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x7E ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -30401,72 +30401,72 @@ Control prog_165C ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_165E );
+    return jumpDirect ( 0x165E,prog_165E );
 }
 
 Control prog_165E ()
 {
     at ( "165E" );
-    instruction ( "JP   CY,1663",0x1661 );
+    instruction ( "JP   CY,1663",e16_hi_lo ( 0x16,0x61 ) );
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( prog_1663 );
+        return jumpDirect ( 0x1663,prog_1663 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_1661 );
+        return jumpDirect ( 0x1661,prog_1661 );
     }
 }
 
 Control prog_1661 ()
 {
     at ( "1661" );
-    instruction ( "LD   L,74",0x1663 );
+    instruction ( "LD   L,74",e16_hi_lo ( 0x16,0x63 ) );
     advance ( 7 );
     L = 0x74;
-    return jumpDirect ( prog_1663 );
+    return jumpDirect ( 0x1663,prog_1663 );
 }
 
 Control prog_1663 ()
 {
     at ( "1663" );
-    instruction ( "LD   (20ED),HL",0x1666 );
+    instruction ( "LD   (20ED),HL",e16_hi_lo ( 0x16,0x66 ) );
     u8 a1 = L ;
     mem_write ( 0x20ED,a1 );
     u8 a2 = H ;
     mem_write ( 0x20EE,a2 );
     advance ( 16 );
-    return jumpDirect ( prog_1666 );
+    return jumpDirect ( 0x1666,prog_1666 );
 }
 
 Control prog_1666 ()
 {
     at ( "1666" );
-    instruction ( "LD   A,(HL)",0x1667 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x16,0x67 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_1667 );
+    return jumpDirect ( 0x1667,prog_1667 );
 }
 
 Control prog_1667 ()
 {
     at ( "1667" );
-    instruction ( "LD   (201D),A",0x166A );
+    instruction ( "LD   (201D),A",e16_hi_lo ( 0x16,0x6A ) );
     u8 a1 = A ;
     mem_write ( 0x201D,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_166A );
+    return jumpDirect ( 0x166A,prog_166A );
 }
 
 Control prog_166A ()
 {
     at ( "166A" );
-    instruction ( "RET",0x166B );
+    instruction ( "RET",e16_hi_lo ( 0x16,0x6B ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -30484,16 +30484,16 @@ Control prog_166A ()
 Control prog_166B ()
 {
     at ( "166B" );
-    instruction ( "SCF",0x166C );
+    instruction ( "SCF",e16_hi_lo ( 0x16,0x6C ) );
     advance ( 4 );
     FlagCY = e1_true (  );
-    return jumpDirect ( prog_166C );
+    return jumpDirect ( 0x166C,prog_166C );
 }
 
 Control prog_166C ()
 {
     at ( "166C" );
-    instruction ( "RET",0x166D );
+    instruction ( "RET",e16_hi_lo ( 0x16,0x6D ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -30511,7 +30511,7 @@ Control prog_166C ()
 Control prog_166D ()
 {
     at ( "166D" );
-    instruction ( "XOR  A",0x166E );
+    instruction ( "XOR  A",e16_hi_lo ( 0x16,0x6E ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -30522,13 +30522,13 @@ Control prog_166D ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_166E );
+    return jumpDirect ( 0x166E,prog_166E );
 }
 
 Control prog_166E ()
 {
     at ( "166E" );
-    instruction ( "CALL 1A8B",0x1671 );
+    instruction ( "CALL 1A8B",e16_hi_lo ( 0x16,0x71 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -30541,13 +30541,13 @@ Control prog_166E ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1A8B );
+    return jumpDirect ( 0x1A8B,prog_1A8B );
 }
 
 Control prog_1671 ()
 {
     at ( "1671" );
-    instruction ( "CALL 1910",0x1674 );
+    instruction ( "CALL 1910",e16_hi_lo ( 0x16,0x74 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -30560,24 +30560,24 @@ Control prog_1671 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1910 );
+    return jumpDirect ( 0x1910,prog_1910 );
 }
 
 Control prog_1674 ()
 {
     at ( "1674" );
-    instruction ( "LD   (HL),00",0x1676 );
+    instruction ( "LD   (HL),00",e16_hi_lo ( 0x16,0x76 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     mem_write ( e16_hi_lo ( a1,a2 ),0x00 );
     advance ( 10 );
-    return jumpDirect ( prog_1676 );
+    return jumpDirect ( 0x1676,prog_1676 );
 }
 
 Control prog_1676 ()
 {
     at ( "1676" );
-    instruction ( "CALL 09CA",0x1679 );
+    instruction ( "CALL 09CA",e16_hi_lo ( 0x16,0x79 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -30590,48 +30590,48 @@ Control prog_1676 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_09CA );
+    return jumpDirect ( 0x09CA,prog_09CA );
 }
 
 Control prog_1679 ()
 {
     at ( "1679" );
-    instruction ( "INC  HL",0x167A );
+    instruction ( "INC  HL",e16_hi_lo ( 0x16,0x7A ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_167A );
+    return jumpDirect ( 0x167A,prog_167A );
 }
 
 Control prog_167A ()
 {
     at ( "167A" );
-    instruction ( "LD   DE,20F5",0x167D );
+    instruction ( "LD   DE,20F5",e16_hi_lo ( 0x16,0x7D ) );
     advance ( 10 );
     D = 0x20;
     E = 0xF5;
-    return jumpDirect ( prog_167D );
+    return jumpDirect ( 0x167D,prog_167D );
 }
 
 Control prog_167D ()
 {
     at ( "167D" );
-    instruction ( "LD   A,(DE)",0x167E );
+    instruction ( "LD   A,(DE)",e16_hi_lo ( 0x16,0x7E ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_167E );
+    return jumpDirect ( 0x167E,prog_167E );
 }
 
 Control prog_167E ()
 {
     at ( "167E" );
-    instruction ( "CP   (HL)",0x167F );
+    instruction ( "CP   (HL)",e16_hi_lo ( 0x16,0x7F ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
@@ -30646,91 +30646,91 @@ Control prog_167E ()
     FlagA = e1_test_bit ( e8_lo ( a8 ),4 );
     FlagP = e1_parity ( e8_lo ( a5 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a5 ),0 ) );
-    return jumpDirect ( prog_167F );
+    return jumpDirect ( 0x167F,prog_167F );
 }
 
 Control prog_167F ()
 {
     at ( "167F" );
-    instruction ( "DEC  DE",0x1680 );
+    instruction ( "DEC  DE",e16_hi_lo ( 0x16,0x80 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     D = e8_hi ( a3 );
     E = e8_lo ( a3 );
-    return jumpDirect ( prog_1680 );
+    return jumpDirect ( 0x1680,prog_1680 );
 }
 
 Control prog_1680 ()
 {
     at ( "1680" );
-    instruction ( "DEC  HL",0x1681 );
+    instruction ( "DEC  HL",e16_hi_lo ( 0x16,0x81 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_1681 );
+    return jumpDirect ( 0x1681,prog_1681 );
 }
 
 Control prog_1681 ()
 {
     at ( "1681" );
-    instruction ( "LD   A,(DE)",0x1682 );
+    instruction ( "LD   A,(DE)",e16_hi_lo ( 0x16,0x82 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_1682 );
+    return jumpDirect ( 0x1682,prog_1682 );
 }
 
 Control prog_1682 ()
 {
     at ( "1682" );
-    instruction ( "JP   Z,168B",0x1685 );
+    instruction ( "JP   Z,168B",e16_hi_lo ( 0x16,0x85 ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_168B );
+        return jumpDirect ( 0x168B,prog_168B );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_1685 );
+        return jumpDirect ( 0x1685,prog_1685 );
     }
 }
 
 Control prog_1685 ()
 {
     at ( "1685" );
-    instruction ( "JP   NC,1698",0x1688 );
+    instruction ( "JP   NC,1698",e16_hi_lo ( 0x16,0x88 ) );
     if (e1_flip ( FlagCY ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_1698 );
+        return jumpDirect ( 0x1698,prog_1698 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_1688 );
+        return jumpDirect ( 0x1688,prog_1688 );
     }
 }
 
 Control prog_1688 ()
 {
     at ( "1688" );
-    instruction ( "JP   168F",0x168B );
+    instruction ( "JP   168F",e16_hi_lo ( 0x16,0x8B ) );
     advance ( 10 );
-    return jumpDirect ( prog_168F );
+    return jumpDirect ( 0x168F,prog_168F );
 }
 
 Control prog_168B ()
 {
     at ( "168B" );
-    instruction ( "CP   (HL)",0x168C );
+    instruction ( "CP   (HL)",e16_hi_lo ( 0x16,0x8C ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
@@ -30745,103 +30745,103 @@ Control prog_168B ()
     FlagA = e1_test_bit ( e8_lo ( a8 ),4 );
     FlagP = e1_parity ( e8_lo ( a5 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a5 ),0 ) );
-    return jumpDirect ( prog_168C );
+    return jumpDirect ( 0x168C,prog_168C );
 }
 
 Control prog_168C ()
 {
     at ( "168C" );
-    instruction ( "JP   NC,1698",0x168F );
+    instruction ( "JP   NC,1698",e16_hi_lo ( 0x16,0x8F ) );
     if (e1_flip ( FlagCY ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_1698 );
+        return jumpDirect ( 0x1698,prog_1698 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_168F );
+        return jumpDirect ( 0x168F,prog_168F );
     }
 }
 
 Control prog_168F ()
 {
     at ( "168F" );
-    instruction ( "LD   A,(HL)",0x1690 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x16,0x90 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_1690 );
+    return jumpDirect ( 0x1690,prog_1690 );
 }
 
 Control prog_1690 ()
 {
     at ( "1690" );
-    instruction ( "LD   (DE),A",0x1691 );
+    instruction ( "LD   (DE),A",e16_hi_lo ( 0x16,0x91 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = A ;
     mem_write ( e16_hi_lo ( a1,a2 ),a3 );
     advance ( 7 );
-    return jumpDirect ( prog_1691 );
+    return jumpDirect ( 0x1691,prog_1691 );
 }
 
 Control prog_1691 ()
 {
     at ( "1691" );
-    instruction ( "INC  DE",0x1692 );
+    instruction ( "INC  DE",e16_hi_lo ( 0x16,0x92 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     D = e8_hi ( a3 );
     E = e8_lo ( a3 );
-    return jumpDirect ( prog_1692 );
+    return jumpDirect ( 0x1692,prog_1692 );
 }
 
 Control prog_1692 ()
 {
     at ( "1692" );
-    instruction ( "INC  HL",0x1693 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x16,0x93 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_1693 );
+    return jumpDirect ( 0x1693,prog_1693 );
 }
 
 Control prog_1693 ()
 {
     at ( "1693" );
-    instruction ( "LD   A,(HL)",0x1694 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x16,0x94 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_1694 );
+    return jumpDirect ( 0x1694,prog_1694 );
 }
 
 Control prog_1694 ()
 {
     at ( "1694" );
-    instruction ( "LD   (DE),A",0x1695 );
+    instruction ( "LD   (DE),A",e16_hi_lo ( 0x16,0x95 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = A ;
     mem_write ( e16_hi_lo ( a1,a2 ),a3 );
     advance ( 7 );
-    return jumpDirect ( prog_1695 );
+    return jumpDirect ( 0x1695,prog_1695 );
 }
 
 Control prog_1695 ()
 {
     at ( "1695" );
-    instruction ( "CALL 1950",0x1698 );
+    instruction ( "CALL 1950",e16_hi_lo ( 0x16,0x98 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -30854,23 +30854,23 @@ Control prog_1695 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1950 );
+    return jumpDirect ( 0x1950,prog_1950 );
 }
 
 Control prog_1698 ()
 {
     at ( "1698" );
-    instruction ( "LD   A,(20CE)",0x169B );
+    instruction ( "LD   A,(20CE)",e16_hi_lo ( 0x16,0x9B ) );
     u8 a1 = e8_read_mem ( 0x20CE ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_169B );
+    return jumpDirect ( 0x169B,prog_169B );
 }
 
 Control prog_169B ()
 {
     at ( "169B" );
-    instruction ( "AND  A",0x169C );
+    instruction ( "AND  A",e16_hi_lo ( 0x16,0x9C ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -30882,58 +30882,58 @@ Control prog_169B ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_169C );
+    return jumpDirect ( 0x169C,prog_169C );
 }
 
 Control prog_169C ()
 {
     at ( "169C" );
-    instruction ( "JP   Z,16C9",0x169F );
+    instruction ( "JP   Z,16C9",e16_hi_lo ( 0x16,0x9F ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_16C9 );
+        return jumpDirect ( 0x16C9,prog_16C9 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_169F );
+        return jumpDirect ( 0x169F,prog_169F );
     }
 }
 
 Control prog_169F ()
 {
     at ( "169F" );
-    instruction ( "LD   HL,2803",0x16A2 );
+    instruction ( "LD   HL,2803",e16_hi_lo ( 0x16,0xA2 ) );
     advance ( 10 );
     H = 0x28;
     L = 0x03;
-    return jumpDirect ( prog_16A2 );
+    return jumpDirect ( 0x16A2,prog_16A2 );
 }
 
 Control prog_16A2 ()
 {
     at ( "16A2" );
-    instruction ( "LD   DE,1AA6",0x16A5 );
+    instruction ( "LD   DE,1AA6",e16_hi_lo ( 0x16,0xA5 ) );
     advance ( 10 );
     D = 0x1A;
     E = 0xA6;
-    return jumpDirect ( prog_16A5 );
+    return jumpDirect ( 0x16A5,prog_16A5 );
 }
 
 Control prog_16A5 ()
 {
     at ( "16A5" );
-    instruction ( "LD   C,14",0x16A7 );
+    instruction ( "LD   C,14",e16_hi_lo ( 0x16,0xA7 ) );
     advance ( 7 );
     C = 0x14;
-    return jumpDirect ( prog_16A7 );
+    return jumpDirect ( 0x16A7,prog_16A7 );
 }
 
 Control prog_16A7 ()
 {
     at ( "16A7" );
-    instruction ( "CALL 0A93",0x16AA );
+    instruction ( "CALL 0A93",e16_hi_lo ( 0x16,0xAA ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -30946,13 +30946,13 @@ Control prog_16A7 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0A93 );
+    return jumpDirect ( 0x0A93,prog_0A93 );
 }
 
 Control prog_16AA ()
 {
     at ( "16AA" );
-    instruction ( "DEC  H",0x16AB );
+    instruction ( "DEC  H",e16_hi_lo ( 0x16,0xAB ) );
     u8 a1 = H ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -30964,13 +30964,13 @@ Control prog_16AA ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_16AB );
+    return jumpDirect ( 0x16AB,prog_16AB );
 }
 
 Control prog_16AB ()
 {
     at ( "16AB" );
-    instruction ( "DEC  H",0x16AC );
+    instruction ( "DEC  H",e16_hi_lo ( 0x16,0xAC ) );
     u8 a1 = H ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -30982,78 +30982,78 @@ Control prog_16AB ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_16AC );
+    return jumpDirect ( 0x16AC,prog_16AC );
 }
 
 Control prog_16AC ()
 {
     at ( "16AC" );
-    instruction ( "LD   B,1B",0x16AE );
+    instruction ( "LD   B,1B",e16_hi_lo ( 0x16,0xAE ) );
     advance ( 7 );
     B = 0x1B;
-    return jumpDirect ( prog_16AE );
+    return jumpDirect ( 0x16AE,prog_16AE );
 }
 
 Control prog_16AE ()
 {
     at ( "16AE" );
-    instruction ( "LD   A,(2067)",0x16B1 );
+    instruction ( "LD   A,(2067)",e16_hi_lo ( 0x16,0xB1 ) );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_16B1 );
+    return jumpDirect ( 0x16B1,prog_16B1 );
 }
 
 Control prog_16B1 ()
 {
     at ( "16B1" );
-    instruction ( "RRCA",0x16B2 );
+    instruction ( "RRCA",e16_hi_lo ( 0x16,0xB2 ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftR ( a1,0x01 ),7,e1_test_bit ( a1,0 ) );
     FlagCY = e1_test_bit ( a1,0 );
-    return jumpDirect ( prog_16B2 );
+    return jumpDirect ( 0x16B2,prog_16B2 );
 }
 
 Control prog_16B2 ()
 {
     at ( "16B2" );
-    instruction ( "JP   CY,16B7",0x16B5 );
+    instruction ( "JP   CY,16B7",e16_hi_lo ( 0x16,0xB5 ) );
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( prog_16B7 );
+        return jumpDirect ( 0x16B7,prog_16B7 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_16B5 );
+        return jumpDirect ( 0x16B5,prog_16B5 );
     }
 }
 
 Control prog_16B5 ()
 {
     at ( "16B5" );
-    instruction ( "LD   B,1C",0x16B7 );
+    instruction ( "LD   B,1C",e16_hi_lo ( 0x16,0xB7 ) );
     advance ( 7 );
     B = 0x1C;
-    return jumpDirect ( prog_16B7 );
+    return jumpDirect ( 0x16B7,prog_16B7 );
 }
 
 Control prog_16B7 ()
 {
     at ( "16B7" );
-    instruction ( "LD   A,B",0x16B8 );
+    instruction ( "LD   A,B",e16_hi_lo ( 0x16,0xB8 ) );
     u8 a1 = B ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_16B8 );
+    return jumpDirect ( 0x16B8,prog_16B8 );
 }
 
 Control prog_16B8 ()
 {
     at ( "16B8" );
-    instruction ( "CALL 08FF",0x16BB );
+    instruction ( "CALL 08FF",e16_hi_lo ( 0x16,0xBB ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -31066,13 +31066,13 @@ Control prog_16B8 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_08FF );
+    return jumpDirect ( 0x08FF,prog_08FF );
 }
 
 Control prog_16BB ()
 {
     at ( "16BB" );
-    instruction ( "CALL 0AB1",0x16BE );
+    instruction ( "CALL 0AB1",e16_hi_lo ( 0x16,0xBE ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -31085,13 +31085,13 @@ Control prog_16BB ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0AB1 );
+    return jumpDirect ( 0x0AB1,prog_0AB1 );
 }
 
 Control prog_16BE ()
 {
     at ( "16BE" );
-    instruction ( "CALL 18E7",0x16C1 );
+    instruction ( "CALL 18E7",e16_hi_lo ( 0x16,0xC1 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -31104,25 +31104,25 @@ Control prog_16BE ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_18E7 );
+    return jumpDirect ( 0x18E7,prog_18E7 );
 }
 
 Control prog_16C1 ()
 {
     at ( "16C1" );
-    instruction ( "LD   A,(HL)",0x16C2 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x16,0xC2 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_16C2 );
+    return jumpDirect ( 0x16C2,prog_16C2 );
 }
 
 Control prog_16C2 ()
 {
     at ( "16C2" );
-    instruction ( "AND  A",0x16C3 );
+    instruction ( "AND  A",e16_hi_lo ( 0x16,0xC3 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -31134,66 +31134,66 @@ Control prog_16C2 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_16C3 );
+    return jumpDirect ( 0x16C3,prog_16C3 );
 }
 
 Control prog_16C3 ()
 {
     at ( "16C3" );
-    instruction ( "JP   Z,16C9",0x16C6 );
+    instruction ( "JP   Z,16C9",e16_hi_lo ( 0x16,0xC6 ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_16C9 );
+        return jumpDirect ( 0x16C9,prog_16C9 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_16C6 );
+        return jumpDirect ( 0x16C6,prog_16C6 );
     }
 }
 
 Control prog_16C6 ()
 {
     at ( "16C6" );
-    instruction ( "JP   02ED",0x16C9 );
+    instruction ( "JP   02ED",e16_hi_lo ( 0x16,0xC9 ) );
     advance ( 10 );
-    return jumpDirect ( prog_02ED );
+    return jumpDirect ( 0x02ED,prog_02ED );
 }
 
 Control prog_16C9 ()
 {
     at ( "16C9" );
-    instruction ( "LD   HL,2D18",0x16CC );
+    instruction ( "LD   HL,2D18",e16_hi_lo ( 0x16,0xCC ) );
     advance ( 10 );
     H = 0x2D;
     L = 0x18;
-    return jumpDirect ( prog_16CC );
+    return jumpDirect ( 0x16CC,prog_16CC );
 }
 
 Control prog_16CC ()
 {
     at ( "16CC" );
-    instruction ( "LD   DE,1AA6",0x16CF );
+    instruction ( "LD   DE,1AA6",e16_hi_lo ( 0x16,0xCF ) );
     advance ( 10 );
     D = 0x1A;
     E = 0xA6;
-    return jumpDirect ( prog_16CF );
+    return jumpDirect ( 0x16CF,prog_16CF );
 }
 
 Control prog_16CF ()
 {
     at ( "16CF" );
-    instruction ( "LD   C,0A",0x16D1 );
+    instruction ( "LD   C,0A",e16_hi_lo ( 0x16,0xD1 ) );
     advance ( 7 );
     C = 0x0A;
-    return jumpDirect ( prog_16D1 );
+    return jumpDirect ( 0x16D1,prog_16D1 );
 }
 
 Control prog_16D1 ()
 {
     at ( "16D1" );
-    instruction ( "CALL 0A93",0x16D4 );
+    instruction ( "CALL 0A93",e16_hi_lo ( 0x16,0xD4 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -31206,13 +31206,13 @@ Control prog_16D1 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0A93 );
+    return jumpDirect ( 0x0A93,prog_0A93 );
 }
 
 Control prog_16D4 ()
 {
     at ( "16D4" );
-    instruction ( "CALL 0AB6",0x16D7 );
+    instruction ( "CALL 0AB6",e16_hi_lo ( 0x16,0xD7 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -31225,13 +31225,13 @@ Control prog_16D4 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0AB6 );
+    return jumpDirect ( 0x0AB6,prog_0AB6 );
 }
 
 Control prog_16D7 ()
 {
     at ( "16D7" );
-    instruction ( "CALL 09D6",0x16DA );
+    instruction ( "CALL 09D6",e16_hi_lo ( 0x16,0xDA ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -31244,13 +31244,13 @@ Control prog_16D7 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_09D6 );
+    return jumpDirect ( 0x09D6,prog_09D6 );
 }
 
 Control prog_16DA ()
 {
     at ( "16DA" );
-    instruction ( "XOR  A",0x16DB );
+    instruction ( "XOR  A",e16_hi_lo ( 0x16,0xDB ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -31261,23 +31261,23 @@ Control prog_16DA ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_16DB );
+    return jumpDirect ( 0x16DB,prog_16DB );
 }
 
 Control prog_16DB ()
 {
     at ( "16DB" );
-    instruction ( "LD   (20EF),A",0x16DE );
+    instruction ( "LD   (20EF),A",e16_hi_lo ( 0x16,0xDE ) );
     u8 a1 = A ;
     mem_write ( 0x20EF,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_16DE );
+    return jumpDirect ( 0x16DE,prog_16DE );
 }
 
 Control prog_16DE ()
 {
     at ( "16DE" );
-    instruction ( "OUT  05",0x16E0 );
+    instruction ( "OUT  05",e16_hi_lo ( 0x16,0xE0 ) );
     u8 a1 = A ;
     sound_control ( "FleetMovement1",e1_test_bit ( a1,0 ) );
     sound_control ( "FleetMovement2",e1_test_bit ( a1,1 ) );
@@ -31285,13 +31285,13 @@ Control prog_16DE ()
     sound_control ( "FleetMovement4",e1_test_bit ( a1,3 ) );
     sound_control ( "UfoHit",e1_test_bit ( a1,4 ) );
     advance ( 10 );
-    return jumpDirect ( prog_16E0 );
+    return jumpDirect ( 0x16E0,prog_16E0 );
 }
 
 Control prog_16E0 ()
 {
     at ( "16E0" );
-    instruction ( "CALL 19D1",0x16E3 );
+    instruction ( "CALL 19D1",e16_hi_lo ( 0x16,0xE3 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -31304,40 +31304,40 @@ Control prog_16E0 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_19D1 );
+    return jumpDirect ( 0x19D1,prog_19D1 );
 }
 
 Control prog_16E3 ()
 {
     at ( "16E3" );
-    instruction ( "JP   0B89",0x16E6 );
+    instruction ( "JP   0B89",e16_hi_lo ( 0x16,0xE6 ) );
     advance ( 10 );
-    return jumpDirect ( prog_0B89 );
+    return jumpDirect ( 0x0B89,prog_0B89 );
 }
 
 Control prog_16E6 ()
 {
     at ( "16E6" );
-    instruction ( "LD   SP,2400",0x16E9 );
+    instruction ( "LD   SP,2400",e16_hi_lo ( 0x16,0xE9 ) );
     advance ( 10 );
     SPH = 0x24;
     SPL = 0x00;
-    return jumpDirect ( prog_16E9 );
+    return jumpDirect ( 0x16E9,prog_16E9 );
 }
 
 Control prog_16E9 ()
 {
     at ( "16E9" );
-    instruction ( "EI",0x16EA );
+    instruction ( "EI",e16_hi_lo ( 0x16,0xEA ) );
     enable_interrupts (  );
     advance ( 4 );
-    return jumpDirect ( prog_16EA );
+    return jumpDirect ( 0x16EA,prog_16EA );
 }
 
 Control prog_16EA ()
 {
     at ( "16EA" );
-    instruction ( "XOR  A",0x16EB );
+    instruction ( "XOR  A",e16_hi_lo ( 0x16,0xEB ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -31348,23 +31348,23 @@ Control prog_16EA ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_16EB );
+    return jumpDirect ( 0x16EB,prog_16EB );
 }
 
 Control prog_16EB ()
 {
     at ( "16EB" );
-    instruction ( "LD   (2015),A",0x16EE );
+    instruction ( "LD   (2015),A",e16_hi_lo ( 0x16,0xEE ) );
     u8 a1 = A ;
     mem_write ( 0x2015,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_16EE );
+    return jumpDirect ( 0x16EE,prog_16EE );
 }
 
 Control prog_16EE ()
 {
     at ( "16EE" );
-    instruction ( "CALL 14D8",0x16F1 );
+    instruction ( "CALL 14D8",e16_hi_lo ( 0x16,0xF1 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -31377,22 +31377,22 @@ Control prog_16EE ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_14D8 );
+    return jumpDirect ( 0x14D8,prog_14D8 );
 }
 
 Control prog_16F1 ()
 {
     at ( "16F1" );
-    instruction ( "LD   B,04",0x16F3 );
+    instruction ( "LD   B,04",e16_hi_lo ( 0x16,0xF3 ) );
     advance ( 7 );
     B = 0x04;
-    return jumpDirect ( prog_16F3 );
+    return jumpDirect ( 0x16F3,prog_16F3 );
 }
 
 Control prog_16F3 ()
 {
     at ( "16F3" );
-    instruction ( "CALL 18FA",0x16F6 );
+    instruction ( "CALL 18FA",e16_hi_lo ( 0x16,0xF6 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -31405,13 +31405,13 @@ Control prog_16F3 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_18FA );
+    return jumpDirect ( 0x18FA,prog_18FA );
 }
 
 Control prog_16F6 ()
 {
     at ( "16F6" );
-    instruction ( "CALL 0A59",0x16F9 );
+    instruction ( "CALL 0A59",e16_hi_lo ( 0x16,0xF9 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -31424,29 +31424,29 @@ Control prog_16F6 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0A59 );
+    return jumpDirect ( 0x0A59,prog_0A59 );
 }
 
 Control prog_16F9 ()
 {
     at ( "16F9" );
-    instruction ( "JP   NZ,16EE",0x16FC );
+    instruction ( "JP   NZ,16EE",e16_hi_lo ( 0x16,0xFC ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_16EE );
+        return jumpDirect ( 0x16EE,prog_16EE );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_16FC );
+        return jumpDirect ( 0x16FC,prog_16FC );
     }
 }
 
 Control prog_16FC ()
 {
     at ( "16FC" );
-    instruction ( "CALL 19D7",0x16FF );
+    instruction ( "CALL 19D7",e16_hi_lo ( 0x16,0xFF ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -31459,23 +31459,23 @@ Control prog_16FC ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_19D7 );
+    return jumpDirect ( 0x19D7,prog_19D7 );
 }
 
 Control prog_16FF ()
 {
     at ( "16FF" );
-    instruction ( "LD   HL,2701",0x1702 );
+    instruction ( "LD   HL,2701",e16_hi_lo ( 0x17,0x02 ) );
     advance ( 10 );
     H = 0x27;
     L = 0x01;
-    return jumpDirect ( prog_1702 );
+    return jumpDirect ( 0x1702,prog_1702 );
 }
 
 Control prog_1702 ()
 {
     at ( "1702" );
-    instruction ( "CALL 19FA",0x1705 );
+    instruction ( "CALL 19FA",e16_hi_lo ( 0x17,0x05 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -31488,13 +31488,13 @@ Control prog_1702 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_19FA );
+    return jumpDirect ( 0x19FA,prog_19FA );
 }
 
 Control prog_1705 ()
 {
     at ( "1705" );
-    instruction ( "XOR  A",0x1706 );
+    instruction ( "XOR  A",e16_hi_lo ( 0x17,0x06 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -31505,13 +31505,13 @@ Control prog_1705 ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_1706 );
+    return jumpDirect ( 0x1706,prog_1706 );
 }
 
 Control prog_1706 ()
 {
     at ( "1706" );
-    instruction ( "CALL 1A8B",0x1709 );
+    instruction ( "CALL 1A8B",e16_hi_lo ( 0x17,0x09 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -31524,30 +31524,30 @@ Control prog_1706 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1A8B );
+    return jumpDirect ( 0x1A8B,prog_1A8B );
 }
 
 Control prog_1709 ()
 {
     at ( "1709" );
-    instruction ( "LD   B,FB",0x170B );
+    instruction ( "LD   B,FB",e16_hi_lo ( 0x17,0x0B ) );
     advance ( 7 );
     B = 0xFB;
-    return jumpDirect ( prog_170B );
+    return jumpDirect ( 0x170B,prog_170B );
 }
 
 Control prog_170B ()
 {
     at ( "170B" );
-    instruction ( "JP   196B",0x170E );
+    instruction ( "JP   196B",e16_hi_lo ( 0x17,0x0E ) );
     advance ( 10 );
-    return jumpDirect ( prog_196B );
+    return jumpDirect ( 0x196B,prog_196B );
 }
 
 Control prog_170E ()
 {
     at ( "170E" );
-    instruction ( "CALL 09CA",0x1711 );
+    instruction ( "CALL 09CA",e16_hi_lo ( 0x17,0x11 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -31560,89 +31560,89 @@ Control prog_170E ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_09CA );
+    return jumpDirect ( 0x09CA,prog_09CA );
 }
 
 Control prog_1711 ()
 {
     at ( "1711" );
-    instruction ( "INC  HL",0x1712 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x17,0x12 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_1712 );
+    return jumpDirect ( 0x1712,prog_1712 );
 }
 
 Control prog_1712 ()
 {
     at ( "1712" );
-    instruction ( "LD   A,(HL)",0x1713 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x17,0x13 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_1713 );
+    return jumpDirect ( 0x1713,prog_1713 );
 }
 
 Control prog_1713 ()
 {
     at ( "1713" );
-    instruction ( "LD   DE,1CB8",0x1716 );
+    instruction ( "LD   DE,1CB8",e16_hi_lo ( 0x17,0x16 ) );
     advance ( 10 );
     D = 0x1C;
     E = 0xB8;
-    return jumpDirect ( prog_1716 );
+    return jumpDirect ( 0x1716,prog_1716 );
 }
 
 Control prog_1716 ()
 {
     at ( "1716" );
-    instruction ( "LD   HL,1AA1",0x1719 );
+    instruction ( "LD   HL,1AA1",e16_hi_lo ( 0x17,0x19 ) );
     advance ( 10 );
     H = 0x1A;
     L = 0xA1;
-    return jumpDirect ( prog_1719 );
+    return jumpDirect ( 0x1719,prog_1719 );
 }
 
 Control prog_1719 ()
 {
     at ( "1719" );
-    instruction ( "LD   C,04",0x171B );
+    instruction ( "LD   C,04",e16_hi_lo ( 0x17,0x1B ) );
     advance ( 7 );
     C = 0x04;
-    return jumpDirect ( prog_171B );
+    return jumpDirect ( 0x171B,prog_171B );
 }
 
 Control prog_171B ()
 {
     at ( "171B" );
-    instruction ( "LD   B,A",0x171C );
+    instruction ( "LD   B,A",e16_hi_lo ( 0x17,0x1C ) );
     u8 a1 = A ;
     advance ( 5 );
     B = a1;
-    return jumpDirect ( prog_171C );
+    return jumpDirect ( 0x171C,prog_171C );
 }
 
 Control prog_171C ()
 {
     at ( "171C" );
-    instruction ( "LD   A,(DE)",0x171D );
+    instruction ( "LD   A,(DE)",e16_hi_lo ( 0x17,0x1D ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_171D );
+    return jumpDirect ( 0x171D,prog_171D );
 }
 
 Control prog_171D ()
 {
     at ( "171D" );
-    instruction ( "CP   B",0x171E );
+    instruction ( "CP   B",e16_hi_lo ( 0x17,0x1E ) );
     u8 a1 = A ;
     u8 a2 = B ;
     u16 a3 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( a2 ) ) ;
@@ -31655,55 +31655,55 @@ Control prog_171D ()
     FlagA = e1_test_bit ( e8_lo ( a6 ),4 );
     FlagP = e1_parity ( e8_lo ( a3 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a3 ),0 ) );
-    return jumpDirect ( prog_171E );
+    return jumpDirect ( 0x171E,prog_171E );
 }
 
 Control prog_171E ()
 {
     at ( "171E" );
-    instruction ( "JP   NC,1727",0x1721 );
+    instruction ( "JP   NC,1727",e16_hi_lo ( 0x17,0x21 ) );
     if (e1_flip ( FlagCY ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_1727 );
+        return jumpDirect ( 0x1727,prog_1727 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_1721 );
+        return jumpDirect ( 0x1721,prog_1721 );
     }
 }
 
 Control prog_1721 ()
 {
     at ( "1721" );
-    instruction ( "INC  HL",0x1722 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x17,0x22 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_1722 );
+    return jumpDirect ( 0x1722,prog_1722 );
 }
 
 Control prog_1722 ()
 {
     at ( "1722" );
-    instruction ( "INC  DE",0x1723 );
+    instruction ( "INC  DE",e16_hi_lo ( 0x17,0x23 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     D = e8_hi ( a3 );
     E = e8_lo ( a3 );
-    return jumpDirect ( prog_1723 );
+    return jumpDirect ( 0x1723,prog_1723 );
 }
 
 Control prog_1723 ()
 {
     at ( "1723" );
-    instruction ( "DEC  C",0x1724 );
+    instruction ( "DEC  C",e16_hi_lo ( 0x17,0x24 ) );
     u8 a1 = C ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -31715,51 +31715,51 @@ Control prog_1723 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_1724 );
+    return jumpDirect ( 0x1724,prog_1724 );
 }
 
 Control prog_1724 ()
 {
     at ( "1724" );
-    instruction ( "JP   NZ,171C",0x1727 );
+    instruction ( "JP   NZ,171C",e16_hi_lo ( 0x17,0x27 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_171C );
+        return jumpDirect ( 0x171C,prog_171C );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_1727 );
+        return jumpDirect ( 0x1727,prog_1727 );
     }
 }
 
 Control prog_1727 ()
 {
     at ( "1727" );
-    instruction ( "LD   A,(HL)",0x1728 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x17,0x28 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_1728 );
+    return jumpDirect ( 0x1728,prog_1728 );
 }
 
 Control prog_1728 ()
 {
     at ( "1728" );
-    instruction ( "LD   (20CF),A",0x172B );
+    instruction ( "LD   (20CF),A",e16_hi_lo ( 0x17,0x2B ) );
     u8 a1 = A ;
     mem_write ( 0x20CF,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_172B );
+    return jumpDirect ( 0x172B,prog_172B );
 }
 
 Control prog_172B ()
 {
     at ( "172B" );
-    instruction ( "RET",0x172C );
+    instruction ( "RET",e16_hi_lo ( 0x17,0x2C ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -31777,17 +31777,17 @@ Control prog_172B ()
 Control prog_172C ()
 {
     at ( "172C" );
-    instruction ( "LD   A,(2025)",0x172F );
+    instruction ( "LD   A,(2025)",e16_hi_lo ( 0x17,0x2F ) );
     u8 a1 = e8_read_mem ( 0x2025 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_172F );
+    return jumpDirect ( 0x172F,prog_172F );
 }
 
 Control prog_172F ()
 {
     at ( "172F" );
-    instruction ( "CP   00",0x1731 );
+    instruction ( "CP   00",e16_hi_lo ( 0x17,0x31 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -31799,73 +31799,73 @@ Control prog_172F ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_1731 );
+    return jumpDirect ( 0x1731,prog_1731 );
 }
 
 Control prog_1731 ()
 {
     at ( "1731" );
-    instruction ( "JP   NZ,1739",0x1734 );
+    instruction ( "JP   NZ,1739",e16_hi_lo ( 0x17,0x34 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_1739 );
+        return jumpDirect ( 0x1739,prog_1739 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_1734 );
+        return jumpDirect ( 0x1734,prog_1734 );
     }
 }
 
 Control prog_1734 ()
 {
     at ( "1734" );
-    instruction ( "LD   B,FD",0x1736 );
+    instruction ( "LD   B,FD",e16_hi_lo ( 0x17,0x36 ) );
     advance ( 7 );
     B = 0xFD;
-    return jumpDirect ( prog_1736 );
+    return jumpDirect ( 0x1736,prog_1736 );
 }
 
 Control prog_1736 ()
 {
     at ( "1736" );
-    instruction ( "JP   19DC",0x1739 );
+    instruction ( "JP   19DC",e16_hi_lo ( 0x17,0x39 ) );
     advance ( 10 );
-    return jumpDirect ( prog_19DC );
+    return jumpDirect ( 0x19DC,prog_19DC );
 }
 
 Control prog_1739 ()
 {
     at ( "1739" );
-    instruction ( "LD   B,02",0x173B );
+    instruction ( "LD   B,02",e16_hi_lo ( 0x17,0x3B ) );
     advance ( 7 );
     B = 0x02;
-    return jumpDirect ( prog_173B );
+    return jumpDirect ( 0x173B,prog_173B );
 }
 
 Control prog_173B ()
 {
     at ( "173B" );
-    instruction ( "JP   18FA",0x173E );
+    instruction ( "JP   18FA",e16_hi_lo ( 0x17,0x3E ) );
     advance ( 10 );
-    return jumpDirect ( prog_18FA );
+    return jumpDirect ( 0x18FA,prog_18FA );
 }
 
 Control prog_1740 ()
 {
     at ( "1740" );
-    instruction ( "LD   HL,209B",0x1743 );
+    instruction ( "LD   HL,209B",e16_hi_lo ( 0x17,0x43 ) );
     advance ( 10 );
     H = 0x20;
     L = 0x9B;
-    return jumpDirect ( prog_1743 );
+    return jumpDirect ( 0x1743,prog_1743 );
 }
 
 Control prog_1743 ()
 {
     at ( "1743" );
-    instruction ( "DEC  (HL)",0x1744 );
+    instruction ( "DEC  (HL)",e16_hi_lo ( 0x17,0x44 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -31881,13 +31881,13 @@ Control prog_1743 ()
     FlagZ = e1_is_zero ( e8_lo ( a4 ) );
     FlagA = e1_test_bit ( e8_lo ( a7 ),4 );
     FlagP = e1_parity ( e8_lo ( a4 ) );
-    return jumpDirect ( prog_1744 );
+    return jumpDirect ( 0x1744,prog_1744 );
 }
 
 Control prog_1744 ()
 {
     at ( "1744" );
-    instruction ( "CALL Z,176D",0x1747 );
+    instruction ( "CALL Z,176D",e16_hi_lo ( 0x17,0x47 ) );
     if (FlagZ)
     {
         u8 a1 = SPH ;
@@ -31902,29 +31902,29 @@ Control prog_1744 ()
         advance ( 17 );
         SPH = e8_hi ( a6 );
         SPL = e8_lo ( a6 );
-        return jumpDirect ( prog_176D );
+        return jumpDirect ( 0x176D,prog_176D );
     }
     else
     {
         advance ( 11 );
-        return jumpDirect ( prog_1747 );
+        return jumpDirect ( 0x1747,prog_1747 );
     }
 }
 
 Control prog_1747 ()
 {
     at ( "1747" );
-    instruction ( "LD   A,(2068)",0x174A );
+    instruction ( "LD   A,(2068)",e16_hi_lo ( 0x17,0x4A ) );
     u8 a1 = e8_read_mem ( 0x2068 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_174A );
+    return jumpDirect ( 0x174A,prog_174A );
 }
 
 Control prog_174A ()
 {
     at ( "174A" );
-    instruction ( "AND  A",0x174B );
+    instruction ( "AND  A",e16_hi_lo ( 0x17,0x4B ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -31936,39 +31936,39 @@ Control prog_174A ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_174B );
+    return jumpDirect ( 0x174B,prog_174B );
 }
 
 Control prog_174B ()
 {
     at ( "174B" );
-    instruction ( "JP   Z,176D",0x174E );
+    instruction ( "JP   Z,176D",e16_hi_lo ( 0x17,0x4E ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_176D );
+        return jumpDirect ( 0x176D,prog_176D );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_174E );
+        return jumpDirect ( 0x174E,prog_174E );
     }
 }
 
 Control prog_174E ()
 {
     at ( "174E" );
-    instruction ( "LD   HL,2096",0x1751 );
+    instruction ( "LD   HL,2096",e16_hi_lo ( 0x17,0x51 ) );
     advance ( 10 );
     H = 0x20;
     L = 0x96;
-    return jumpDirect ( prog_1751 );
+    return jumpDirect ( 0x1751,prog_1751 );
 }
 
 Control prog_1751 ()
 {
     at ( "1751" );
-    instruction ( "DEC  (HL)",0x1752 );
+    instruction ( "DEC  (HL)",e16_hi_lo ( 0x17,0x52 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -31984,13 +31984,13 @@ Control prog_1751 ()
     FlagZ = e1_is_zero ( e8_lo ( a4 ) );
     FlagA = e1_test_bit ( e8_lo ( a7 ),4 );
     FlagP = e1_parity ( e8_lo ( a4 ) );
-    return jumpDirect ( prog_1752 );
+    return jumpDirect ( 0x1752,prog_1752 );
 }
 
 Control prog_1752 ()
 {
     at ( "1752" );
-    instruction ( "RET  NZ",0x1753 );
+    instruction ( "RET  NZ",e16_hi_lo ( 0x17,0x53 ) );
     if (e1_flip ( FlagZ ))
     {
         u8 a1 = SPH ;
@@ -32009,36 +32009,36 @@ Control prog_1752 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_1753 );
+        return jumpDirect ( 0x1753,prog_1753 );
     }
 }
 
 Control prog_1753 ()
 {
     at ( "1753" );
-    instruction ( "LD   HL,2098",0x1756 );
+    instruction ( "LD   HL,2098",e16_hi_lo ( 0x17,0x56 ) );
     advance ( 10 );
     H = 0x20;
     L = 0x98;
-    return jumpDirect ( prog_1756 );
+    return jumpDirect ( 0x1756,prog_1756 );
 }
 
 Control prog_1756 ()
 {
     at ( "1756" );
-    instruction ( "LD   A,(HL)",0x1757 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x17,0x57 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_1757 );
+    return jumpDirect ( 0x1757,prog_1757 );
 }
 
 Control prog_1757 ()
 {
     at ( "1757" );
-    instruction ( "OUT  05",0x1759 );
+    instruction ( "OUT  05",e16_hi_lo ( 0x17,0x59 ) );
     u8 a1 = A ;
     sound_control ( "FleetMovement1",e1_test_bit ( a1,0 ) );
     sound_control ( "FleetMovement2",e1_test_bit ( a1,1 ) );
@@ -32046,23 +32046,23 @@ Control prog_1757 ()
     sound_control ( "FleetMovement4",e1_test_bit ( a1,3 ) );
     sound_control ( "UfoHit",e1_test_bit ( a1,4 ) );
     advance ( 10 );
-    return jumpDirect ( prog_1759 );
+    return jumpDirect ( 0x1759,prog_1759 );
 }
 
 Control prog_1759 ()
 {
     at ( "1759" );
-    instruction ( "LD   A,(2082)",0x175C );
+    instruction ( "LD   A,(2082)",e16_hi_lo ( 0x17,0x5C ) );
     u8 a1 = e8_read_mem ( 0x2082 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_175C );
+    return jumpDirect ( 0x175C,prog_175C );
 }
 
 Control prog_175C ()
 {
     at ( "175C" );
-    instruction ( "AND  A",0x175D );
+    instruction ( "AND  A",e16_hi_lo ( 0x17,0x5D ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -32074,122 +32074,122 @@ Control prog_175C ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_175D );
+    return jumpDirect ( 0x175D,prog_175D );
 }
 
 Control prog_175D ()
 {
     at ( "175D" );
-    instruction ( "JP   Z,176D",0x1760 );
+    instruction ( "JP   Z,176D",e16_hi_lo ( 0x17,0x60 ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_176D );
+        return jumpDirect ( 0x176D,prog_176D );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_1760 );
+        return jumpDirect ( 0x1760,prog_1760 );
     }
 }
 
 Control prog_1760 ()
 {
     at ( "1760" );
-    instruction ( "DEC  HL",0x1761 );
+    instruction ( "DEC  HL",e16_hi_lo ( 0x17,0x61 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_1761 );
+    return jumpDirect ( 0x1761,prog_1761 );
 }
 
 Control prog_1761 ()
 {
     at ( "1761" );
-    instruction ( "LD   A,(HL)",0x1762 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x17,0x62 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_1762 );
+    return jumpDirect ( 0x1762,prog_1762 );
 }
 
 Control prog_1762 ()
 {
     at ( "1762" );
-    instruction ( "DEC  HL",0x1763 );
+    instruction ( "DEC  HL",e16_hi_lo ( 0x17,0x63 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_1763 );
+    return jumpDirect ( 0x1763,prog_1763 );
 }
 
 Control prog_1763 ()
 {
     at ( "1763" );
-    instruction ( "LD   (HL),A",0x1764 );
+    instruction ( "LD   (HL),A",e16_hi_lo ( 0x17,0x64 ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_1764 );
+    return jumpDirect ( 0x1764,prog_1764 );
 }
 
 Control prog_1764 ()
 {
     at ( "1764" );
-    instruction ( "DEC  HL",0x1765 );
+    instruction ( "DEC  HL",e16_hi_lo ( 0x17,0x65 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_1765 );
+    return jumpDirect ( 0x1765,prog_1765 );
 }
 
 Control prog_1765 ()
 {
     at ( "1765" );
-    instruction ( "LD   (HL),01",0x1767 );
+    instruction ( "LD   (HL),01",e16_hi_lo ( 0x17,0x67 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     mem_write ( e16_hi_lo ( a1,a2 ),0x01 );
     advance ( 10 );
-    return jumpDirect ( prog_1767 );
+    return jumpDirect ( 0x1767,prog_1767 );
 }
 
 Control prog_1767 ()
 {
     at ( "1767" );
-    instruction ( "LD   A,04",0x1769 );
+    instruction ( "LD   A,04",e16_hi_lo ( 0x17,0x69 ) );
     advance ( 7 );
     A = 0x04;
-    return jumpDirect ( prog_1769 );
+    return jumpDirect ( 0x1769,prog_1769 );
 }
 
 Control prog_1769 ()
 {
     at ( "1769" );
-    instruction ( "LD   (209B),A",0x176C );
+    instruction ( "LD   (209B),A",e16_hi_lo ( 0x17,0x6C ) );
     u8 a1 = A ;
     mem_write ( 0x209B,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_176C );
+    return jumpDirect ( 0x176C,prog_176C );
 }
 
 Control prog_176C ()
 {
     at ( "176C" );
-    instruction ( "RET",0x176D );
+    instruction ( "RET",e16_hi_lo ( 0x17,0x6D ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -32207,17 +32207,17 @@ Control prog_176C ()
 Control prog_176D ()
 {
     at ( "176D" );
-    instruction ( "LD   A,(2098)",0x1770 );
+    instruction ( "LD   A,(2098)",e16_hi_lo ( 0x17,0x70 ) );
     u8 a1 = e8_read_mem ( 0x2098 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_1770 );
+    return jumpDirect ( 0x1770,prog_1770 );
 }
 
 Control prog_1770 ()
 {
     at ( "1770" );
-    instruction ( "AND  30",0x1772 );
+    instruction ( "AND  30",e16_hi_lo ( 0x17,0x72 ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( 0x30,a1 ) ;
     u8 a3 = e8_or ( 0x30,a1 ) ;
@@ -32228,13 +32228,13 @@ Control prog_1770 ()
     FlagA = e1_test_bit ( a3,3 );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_1772 );
+    return jumpDirect ( 0x1772,prog_1772 );
 }
 
 Control prog_1772 ()
 {
     at ( "1772" );
-    instruction ( "OUT  05",0x1774 );
+    instruction ( "OUT  05",e16_hi_lo ( 0x17,0x74 ) );
     u8 a1 = A ;
     sound_control ( "FleetMovement1",e1_test_bit ( a1,0 ) );
     sound_control ( "FleetMovement2",e1_test_bit ( a1,1 ) );
@@ -32242,13 +32242,13 @@ Control prog_1772 ()
     sound_control ( "FleetMovement4",e1_test_bit ( a1,3 ) );
     sound_control ( "UfoHit",e1_test_bit ( a1,4 ) );
     advance ( 10 );
-    return jumpDirect ( prog_1774 );
+    return jumpDirect ( 0x1774,prog_1774 );
 }
 
 Control prog_1774 ()
 {
     at ( "1774" );
-    instruction ( "RET",0x1775 );
+    instruction ( "RET",e16_hi_lo ( 0x17,0x75 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -32266,17 +32266,17 @@ Control prog_1774 ()
 Control prog_1775 ()
 {
     at ( "1775" );
-    instruction ( "LD   A,(2095)",0x1778 );
+    instruction ( "LD   A,(2095)",e16_hi_lo ( 0x17,0x78 ) );
     u8 a1 = e8_read_mem ( 0x2095 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_1778 );
+    return jumpDirect ( 0x1778,prog_1778 );
 }
 
 Control prog_1778 ()
 {
     at ( "1778" );
-    instruction ( "AND  A",0x1779 );
+    instruction ( "AND  A",e16_hi_lo ( 0x17,0x79 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -32288,59 +32288,59 @@ Control prog_1778 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_1779 );
+    return jumpDirect ( 0x1779,prog_1779 );
 }
 
 Control prog_1779 ()
 {
     at ( "1779" );
-    instruction ( "JP   Z,17AA",0x177C );
+    instruction ( "JP   Z,17AA",e16_hi_lo ( 0x17,0x7C ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_17AA );
+        return jumpDirect ( 0x17AA,prog_17AA );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_177C );
+        return jumpDirect ( 0x177C,prog_177C );
     }
 }
 
 Control prog_177C ()
 {
     at ( "177C" );
-    instruction ( "LD   HL,1A11",0x177F );
+    instruction ( "LD   HL,1A11",e16_hi_lo ( 0x17,0x7F ) );
     advance ( 10 );
     H = 0x1A;
     L = 0x11;
-    return jumpDirect ( prog_177F );
+    return jumpDirect ( 0x177F,prog_177F );
 }
 
 Control prog_177F ()
 {
     at ( "177F" );
-    instruction ( "LD   DE,1A21",0x1782 );
+    instruction ( "LD   DE,1A21",e16_hi_lo ( 0x17,0x82 ) );
     advance ( 10 );
     D = 0x1A;
     E = 0x21;
-    return jumpDirect ( prog_1782 );
+    return jumpDirect ( 0x1782,prog_1782 );
 }
 
 Control prog_1782 ()
 {
     at ( "1782" );
-    instruction ( "LD   A,(2082)",0x1785 );
+    instruction ( "LD   A,(2082)",e16_hi_lo ( 0x17,0x85 ) );
     u8 a1 = e8_read_mem ( 0x2082 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_1785 );
+    return jumpDirect ( 0x1785,prog_1785 );
 }
 
 Control prog_1785 ()
 {
     at ( "1785" );
-    instruction ( "CP   (HL)",0x1786 );
+    instruction ( "CP   (HL)",e16_hi_lo ( 0x17,0x86 ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
@@ -32355,107 +32355,107 @@ Control prog_1785 ()
     FlagA = e1_test_bit ( e8_lo ( a8 ),4 );
     FlagP = e1_parity ( e8_lo ( a5 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a5 ),0 ) );
-    return jumpDirect ( prog_1786 );
+    return jumpDirect ( 0x1786,prog_1786 );
 }
 
 Control prog_1786 ()
 {
     at ( "1786" );
-    instruction ( "JP   NC,178E",0x1789 );
+    instruction ( "JP   NC,178E",e16_hi_lo ( 0x17,0x89 ) );
     if (e1_flip ( FlagCY ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_178E );
+        return jumpDirect ( 0x178E,prog_178E );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_1789 );
+        return jumpDirect ( 0x1789,prog_1789 );
     }
 }
 
 Control prog_1789 ()
 {
     at ( "1789" );
-    instruction ( "INC  HL",0x178A );
+    instruction ( "INC  HL",e16_hi_lo ( 0x17,0x8A ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_178A );
+    return jumpDirect ( 0x178A,prog_178A );
 }
 
 Control prog_178A ()
 {
     at ( "178A" );
-    instruction ( "INC  DE",0x178B );
+    instruction ( "INC  DE",e16_hi_lo ( 0x17,0x8B ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     D = e8_hi ( a3 );
     E = e8_lo ( a3 );
-    return jumpDirect ( prog_178B );
+    return jumpDirect ( 0x178B,prog_178B );
 }
 
 Control prog_178B ()
 {
     at ( "178B" );
-    instruction ( "JP   1785",0x178E );
+    instruction ( "JP   1785",e16_hi_lo ( 0x17,0x8E ) );
     advance ( 10 );
-    return jumpDirect ( prog_1785 );
+    return jumpDirect ( 0x1785,prog_1785 );
 }
 
 Control prog_178E ()
 {
     at ( "178E" );
-    instruction ( "LD   A,(DE)",0x178F );
+    instruction ( "LD   A,(DE)",e16_hi_lo ( 0x17,0x8F ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_178F );
+    return jumpDirect ( 0x178F,prog_178F );
 }
 
 Control prog_178F ()
 {
     at ( "178F" );
-    instruction ( "LD   (2097),A",0x1792 );
+    instruction ( "LD   (2097),A",e16_hi_lo ( 0x17,0x92 ) );
     u8 a1 = A ;
     mem_write ( 0x2097,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_1792 );
+    return jumpDirect ( 0x1792,prog_1792 );
 }
 
 Control prog_1792 ()
 {
     at ( "1792" );
-    instruction ( "LD   HL,2098",0x1795 );
+    instruction ( "LD   HL,2098",e16_hi_lo ( 0x17,0x95 ) );
     advance ( 10 );
     H = 0x20;
     L = 0x98;
-    return jumpDirect ( prog_1795 );
+    return jumpDirect ( 0x1795,prog_1795 );
 }
 
 Control prog_1795 ()
 {
     at ( "1795" );
-    instruction ( "LD   A,(HL)",0x1796 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x17,0x96 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_1796 );
+    return jumpDirect ( 0x1796,prog_1796 );
 }
 
 Control prog_1796 ()
 {
     at ( "1796" );
-    instruction ( "AND  30",0x1798 );
+    instruction ( "AND  30",e16_hi_lo ( 0x17,0x98 ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( 0x30,a1 ) ;
     u8 a3 = e8_or ( 0x30,a1 ) ;
@@ -32466,35 +32466,35 @@ Control prog_1796 ()
     FlagA = e1_test_bit ( a3,3 );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_1798 );
+    return jumpDirect ( 0x1798,prog_1798 );
 }
 
 Control prog_1798 ()
 {
     at ( "1798" );
-    instruction ( "LD   B,A",0x1799 );
+    instruction ( "LD   B,A",e16_hi_lo ( 0x17,0x99 ) );
     u8 a1 = A ;
     advance ( 5 );
     B = a1;
-    return jumpDirect ( prog_1799 );
+    return jumpDirect ( 0x1799,prog_1799 );
 }
 
 Control prog_1799 ()
 {
     at ( "1799" );
-    instruction ( "LD   A,(HL)",0x179A );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x17,0x9A ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_179A );
+    return jumpDirect ( 0x179A,prog_179A );
 }
 
 Control prog_179A ()
 {
     at ( "179A" );
-    instruction ( "AND  0F",0x179C );
+    instruction ( "AND  0F",e16_hi_lo ( 0x17,0x9C ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( 0x0F,a1 ) ;
     u8 a3 = e8_or ( 0x0F,a1 ) ;
@@ -32505,24 +32505,24 @@ Control prog_179A ()
     FlagA = e1_test_bit ( a3,3 );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_179C );
+    return jumpDirect ( 0x179C,prog_179C );
 }
 
 Control prog_179C ()
 {
     at ( "179C" );
-    instruction ( "RLCA",0x179D );
+    instruction ( "RLCA",e16_hi_lo ( 0x17,0x9D ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftL ( a1,0x01 ),0,e1_test_bit ( a1,7 ) );
     FlagCY = e1_test_bit ( a1,7 );
-    return jumpDirect ( prog_179D );
+    return jumpDirect ( 0x179D,prog_179D );
 }
 
 Control prog_179D ()
 {
     at ( "179D" );
-    instruction ( "CP   10",0x179F );
+    instruction ( "CP   10",e16_hi_lo ( 0x17,0x9F ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x10 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -32534,38 +32534,38 @@ Control prog_179D ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_179F );
+    return jumpDirect ( 0x179F,prog_179F );
 }
 
 Control prog_179F ()
 {
     at ( "179F" );
-    instruction ( "JP   NZ,17A4",0x17A2 );
+    instruction ( "JP   NZ,17A4",e16_hi_lo ( 0x17,0xA2 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_17A4 );
+        return jumpDirect ( 0x17A4,prog_17A4 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_17A2 );
+        return jumpDirect ( 0x17A2,prog_17A2 );
     }
 }
 
 Control prog_17A2 ()
 {
     at ( "17A2" );
-    instruction ( "LD   A,01",0x17A4 );
+    instruction ( "LD   A,01",e16_hi_lo ( 0x17,0xA4 ) );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( prog_17A4 );
+    return jumpDirect ( 0x17A4,prog_17A4 );
 }
 
 Control prog_17A4 ()
 {
     at ( "17A4" );
-    instruction ( "OR   B",0x17A5 );
+    instruction ( "OR   B",e16_hi_lo ( 0x17,0xA5 ) );
     u8 a1 = B ;
     u8 a2 = A ;
     u8 a3 = e8_or ( a1,a2 ) ;
@@ -32576,25 +32576,25 @@ Control prog_17A4 ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_17A5 );
+    return jumpDirect ( 0x17A5,prog_17A5 );
 }
 
 Control prog_17A5 ()
 {
     at ( "17A5" );
-    instruction ( "LD   (HL),A",0x17A6 );
+    instruction ( "LD   (HL),A",e16_hi_lo ( 0x17,0xA6 ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_17A6 );
+    return jumpDirect ( 0x17A6,prog_17A6 );
 }
 
 Control prog_17A6 ()
 {
     at ( "17A6" );
-    instruction ( "XOR  A",0x17A7 );
+    instruction ( "XOR  A",e16_hi_lo ( 0x17,0xA7 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -32605,33 +32605,33 @@ Control prog_17A6 ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_17A7 );
+    return jumpDirect ( 0x17A7,prog_17A7 );
 }
 
 Control prog_17A7 ()
 {
     at ( "17A7" );
-    instruction ( "LD   (2095),A",0x17AA );
+    instruction ( "LD   (2095),A",e16_hi_lo ( 0x17,0xAA ) );
     u8 a1 = A ;
     mem_write ( 0x2095,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_17AA );
+    return jumpDirect ( 0x17AA,prog_17AA );
 }
 
 Control prog_17AA ()
 {
     at ( "17AA" );
-    instruction ( "LD   HL,2099",0x17AD );
+    instruction ( "LD   HL,2099",e16_hi_lo ( 0x17,0xAD ) );
     advance ( 10 );
     H = 0x20;
     L = 0x99;
-    return jumpDirect ( prog_17AD );
+    return jumpDirect ( 0x17AD,prog_17AD );
 }
 
 Control prog_17AD ()
 {
     at ( "17AD" );
-    instruction ( "DEC  (HL)",0x17AE );
+    instruction ( "DEC  (HL)",e16_hi_lo ( 0x17,0xAE ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -32647,13 +32647,13 @@ Control prog_17AD ()
     FlagZ = e1_is_zero ( e8_lo ( a4 ) );
     FlagA = e1_test_bit ( e8_lo ( a7 ),4 );
     FlagP = e1_parity ( e8_lo ( a4 ) );
-    return jumpDirect ( prog_17AE );
+    return jumpDirect ( 0x17AE,prog_17AE );
 }
 
 Control prog_17AE ()
 {
     at ( "17AE" );
-    instruction ( "RET  NZ",0x17AF );
+    instruction ( "RET  NZ",e16_hi_lo ( 0x17,0xAF ) );
     if (e1_flip ( FlagZ ))
     {
         u8 a1 = SPH ;
@@ -32672,62 +32672,62 @@ Control prog_17AE ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_17AF );
+        return jumpDirect ( 0x17AF,prog_17AF );
     }
 }
 
 Control prog_17AF ()
 {
     at ( "17AF" );
-    instruction ( "LD   B,EF",0x17B1 );
+    instruction ( "LD   B,EF",e16_hi_lo ( 0x17,0xB1 ) );
     advance ( 7 );
     B = 0xEF;
-    return jumpDirect ( prog_17B1 );
+    return jumpDirect ( 0x17B1,prog_17B1 );
 }
 
 Control prog_17B1 ()
 {
     at ( "17B1" );
-    instruction ( "JP   19DC",0x17B4 );
+    instruction ( "JP   19DC",e16_hi_lo ( 0x17,0xB4 ) );
     advance ( 10 );
-    return jumpDirect ( prog_19DC );
+    return jumpDirect ( 0x19DC,prog_19DC );
 }
 
 Control prog_17B4 ()
 {
     at ( "17B4" );
-    instruction ( "LD   B,EF",0x17B6 );
+    instruction ( "LD   B,EF",e16_hi_lo ( 0x17,0xB6 ) );
     advance ( 7 );
     B = 0xEF;
-    return jumpDirect ( prog_17B6 );
+    return jumpDirect ( 0x17B6,prog_17B6 );
 }
 
 Control prog_17B6 ()
 {
     at ( "17B6" );
-    instruction ( "LD   HL,2098",0x17B9 );
+    instruction ( "LD   HL,2098",e16_hi_lo ( 0x17,0xB9 ) );
     advance ( 10 );
     H = 0x20;
     L = 0x98;
-    return jumpDirect ( prog_17B9 );
+    return jumpDirect ( 0x17B9,prog_17B9 );
 }
 
 Control prog_17B9 ()
 {
     at ( "17B9" );
-    instruction ( "LD   A,(HL)",0x17BA );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x17,0xBA ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_17BA );
+    return jumpDirect ( 0x17BA,prog_17BA );
 }
 
 Control prog_17BA ()
 {
     at ( "17BA" );
-    instruction ( "AND  B",0x17BB );
+    instruction ( "AND  B",e16_hi_lo ( 0x17,0xBB ) );
     u8 a1 = B ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -32739,25 +32739,25 @@ Control prog_17BA ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_17BB );
+    return jumpDirect ( 0x17BB,prog_17BB );
 }
 
 Control prog_17BB ()
 {
     at ( "17BB" );
-    instruction ( "LD   (HL),A",0x17BC );
+    instruction ( "LD   (HL),A",e16_hi_lo ( 0x17,0xBC ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_17BC );
+    return jumpDirect ( 0x17BC,prog_17BC );
 }
 
 Control prog_17BC ()
 {
     at ( "17BC" );
-    instruction ( "OUT  05",0x17BE );
+    instruction ( "OUT  05",e16_hi_lo ( 0x17,0xBE ) );
     u8 a1 = A ;
     sound_control ( "FleetMovement1",e1_test_bit ( a1,0 ) );
     sound_control ( "FleetMovement2",e1_test_bit ( a1,1 ) );
@@ -32765,13 +32765,13 @@ Control prog_17BC ()
     sound_control ( "FleetMovement4",e1_test_bit ( a1,3 ) );
     sound_control ( "UfoHit",e1_test_bit ( a1,4 ) );
     advance ( 10 );
-    return jumpDirect ( prog_17BE );
+    return jumpDirect ( 0x17BE,prog_17BE );
 }
 
 Control prog_17BE ()
 {
     at ( "17BE" );
-    instruction ( "RET",0x17BF );
+    instruction ( "RET",e16_hi_lo ( 0x17,0xBF ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -32789,53 +32789,53 @@ Control prog_17BE ()
 Control prog_17C0 ()
 {
     at ( "17C0" );
-    instruction ( "LD   A,(2067)",0x17C3 );
+    instruction ( "LD   A,(2067)",e16_hi_lo ( 0x17,0xC3 ) );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_17C3 );
+    return jumpDirect ( 0x17C3,prog_17C3 );
 }
 
 Control prog_17C3 ()
 {
     at ( "17C3" );
-    instruction ( "RRCA",0x17C4 );
+    instruction ( "RRCA",e16_hi_lo ( 0x17,0xC4 ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftR ( a1,0x01 ),7,e1_test_bit ( a1,0 ) );
     FlagCY = e1_test_bit ( a1,0 );
-    return jumpDirect ( prog_17C4 );
+    return jumpDirect ( 0x17C4,prog_17C4 );
 }
 
 Control prog_17C4 ()
 {
     at ( "17C4" );
-    instruction ( "JP   NC,17CA",0x17C7 );
+    instruction ( "JP   NC,17CA",e16_hi_lo ( 0x17,0xC7 ) );
     if (e1_flip ( FlagCY ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_17CA );
+        return jumpDirect ( 0x17CA,prog_17CA );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_17C7 );
+        return jumpDirect ( 0x17C7,prog_17C7 );
     }
 }
 
 Control prog_17C7 ()
 {
     at ( "17C7" );
-    instruction ( "IN   01",0x17C9 );
+    instruction ( "IN   01",e16_hi_lo ( 0x17,0xC9 ) );
     advance ( 10 );
     A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_flip ( e1_is_pressed ( "coin entry" ) ) ),1,e1_is_pressed ( "player2 start" ) ),2,e1_is_pressed ( "player1 start" ) ),4,e1_is_pressed ( "player1 shoot" ) ),5,e1_is_pressed ( "player1 left" ) ),6,e1_is_pressed ( "player1 right" ) );
-    return jumpDirect ( prog_17C9 );
+    return jumpDirect ( 0x17C9,prog_17C9 );
 }
 
 Control prog_17C9 ()
 {
     at ( "17C9" );
-    instruction ( "RET",0x17CA );
+    instruction ( "RET",e16_hi_lo ( 0x17,0xCA ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -32853,16 +32853,16 @@ Control prog_17C9 ()
 Control prog_17CA ()
 {
     at ( "17CA" );
-    instruction ( "IN   02",0x17CC );
+    instruction ( "IN   02",e16_hi_lo ( 0x17,0xCC ) );
     advance ( 10 );
     A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_is_pressed ( "[dip3] lives (3,4,5,6) lsb" ) ),1,e1_is_pressed ( "[dip5] lives (3,4,5,6) msb" ) ),2,e1_is_pressed ( "TILT" ) ),3,e1_is_pressed ( "[dip6] extra ship at 1000" ) ),4,e1_is_pressed ( "player2 shoot" ) ),5,e1_is_pressed ( "player2 left" ) ),6,e1_is_pressed ( "player2 right" ) ),7,e1_is_pressed ( "[dip7] coin info off" ) );
-    return jumpDirect ( prog_17CC );
+    return jumpDirect ( 0x17CC,prog_17CC );
 }
 
 Control prog_17CC ()
 {
     at ( "17CC" );
-    instruction ( "RET",0x17CD );
+    instruction ( "RET",e16_hi_lo ( 0x17,0xCD ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -32880,16 +32880,16 @@ Control prog_17CC ()
 Control prog_17CD ()
 {
     at ( "17CD" );
-    instruction ( "IN   02",0x17CF );
+    instruction ( "IN   02",e16_hi_lo ( 0x17,0xCF ) );
     advance ( 10 );
     A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_is_pressed ( "[dip3] lives (3,4,5,6) lsb" ) ),1,e1_is_pressed ( "[dip5] lives (3,4,5,6) msb" ) ),2,e1_is_pressed ( "TILT" ) ),3,e1_is_pressed ( "[dip6] extra ship at 1000" ) ),4,e1_is_pressed ( "player2 shoot" ) ),5,e1_is_pressed ( "player2 left" ) ),6,e1_is_pressed ( "player2 right" ) ),7,e1_is_pressed ( "[dip7] coin info off" ) );
-    return jumpDirect ( prog_17CF );
+    return jumpDirect ( 0x17CF,prog_17CF );
 }
 
 Control prog_17CF ()
 {
     at ( "17CF" );
-    instruction ( "AND  04",0x17D1 );
+    instruction ( "AND  04",e16_hi_lo ( 0x17,0xD1 ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( 0x04,a1 ) ;
     u8 a3 = e8_or ( 0x04,a1 ) ;
@@ -32900,13 +32900,13 @@ Control prog_17CF ()
     FlagA = e1_test_bit ( a3,3 );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_17D1 );
+    return jumpDirect ( 0x17D1,prog_17D1 );
 }
 
 Control prog_17D1 ()
 {
     at ( "17D1" );
-    instruction ( "RET  Z",0x17D2 );
+    instruction ( "RET  Z",e16_hi_lo ( 0x17,0xD2 ) );
     if (FlagZ)
     {
         u8 a1 = SPH ;
@@ -32925,24 +32925,24 @@ Control prog_17D1 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_17D2 );
+        return jumpDirect ( 0x17D2,prog_17D2 );
     }
 }
 
 Control prog_17D2 ()
 {
     at ( "17D2" );
-    instruction ( "LD   A,(209A)",0x17D5 );
+    instruction ( "LD   A,(209A)",e16_hi_lo ( 0x17,0xD5 ) );
     u8 a1 = e8_read_mem ( 0x209A ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_17D5 );
+    return jumpDirect ( 0x17D5,prog_17D5 );
 }
 
 Control prog_17D5 ()
 {
     at ( "17D5" );
-    instruction ( "AND  A",0x17D6 );
+    instruction ( "AND  A",e16_hi_lo ( 0x17,0xD6 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -32954,13 +32954,13 @@ Control prog_17D5 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_17D6 );
+    return jumpDirect ( 0x17D6,prog_17D6 );
 }
 
 Control prog_17D6 ()
 {
     at ( "17D6" );
-    instruction ( "RET  NZ",0x17D7 );
+    instruction ( "RET  NZ",e16_hi_lo ( 0x17,0xD7 ) );
     if (e1_flip ( FlagZ ))
     {
         u8 a1 = SPH ;
@@ -32979,33 +32979,33 @@ Control prog_17D6 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_17D7 );
+        return jumpDirect ( 0x17D7,prog_17D7 );
     }
 }
 
 Control prog_17D7 ()
 {
     at ( "17D7" );
-    instruction ( "LD   SP,2400",0x17DA );
+    instruction ( "LD   SP,2400",e16_hi_lo ( 0x17,0xDA ) );
     advance ( 10 );
     SPH = 0x24;
     SPL = 0x00;
-    return jumpDirect ( prog_17DA );
+    return jumpDirect ( 0x17DA,prog_17DA );
 }
 
 Control prog_17DA ()
 {
     at ( "17DA" );
-    instruction ( "LD   B,04",0x17DC );
+    instruction ( "LD   B,04",e16_hi_lo ( 0x17,0xDC ) );
     advance ( 7 );
     B = 0x04;
-    return jumpDirect ( prog_17DC );
+    return jumpDirect ( 0x17DC,prog_17DC );
 }
 
 Control prog_17DC ()
 {
     at ( "17DC" );
-    instruction ( "CALL 09D6",0x17DF );
+    instruction ( "CALL 09D6",e16_hi_lo ( 0x17,0xDF ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -33018,13 +33018,13 @@ Control prog_17DC ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_09D6 );
+    return jumpDirect ( 0x09D6,prog_09D6 );
 }
 
 Control prog_17DF ()
 {
     at ( "17DF" );
-    instruction ( "DEC  B",0x17E0 );
+    instruction ( "DEC  B",e16_hi_lo ( 0x17,0xE0 ) );
     u8 a1 = B ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -33036,48 +33036,48 @@ Control prog_17DF ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_17E0 );
+    return jumpDirect ( 0x17E0,prog_17E0 );
 }
 
 Control prog_17E0 ()
 {
     at ( "17E0" );
-    instruction ( "JP   NZ,17DC",0x17E3 );
+    instruction ( "JP   NZ,17DC",e16_hi_lo ( 0x17,0xE3 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_17DC );
+        return jumpDirect ( 0x17DC,prog_17DC );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_17E3 );
+        return jumpDirect ( 0x17E3,prog_17E3 );
     }
 }
 
 Control prog_17E3 ()
 {
     at ( "17E3" );
-    instruction ( "LD   A,01",0x17E5 );
+    instruction ( "LD   A,01",e16_hi_lo ( 0x17,0xE5 ) );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( prog_17E5 );
+    return jumpDirect ( 0x17E5,prog_17E5 );
 }
 
 Control prog_17E5 ()
 {
     at ( "17E5" );
-    instruction ( "LD   (209A),A",0x17E8 );
+    instruction ( "LD   (209A),A",e16_hi_lo ( 0x17,0xE8 ) );
     u8 a1 = A ;
     mem_write ( 0x209A,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_17E8 );
+    return jumpDirect ( 0x17E8,prog_17E8 );
 }
 
 Control prog_17E8 ()
 {
     at ( "17E8" );
-    instruction ( "CALL 19D7",0x17EB );
+    instruction ( "CALL 19D7",e16_hi_lo ( 0x17,0xEB ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -33090,51 +33090,51 @@ Control prog_17E8 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_19D7 );
+    return jumpDirect ( 0x19D7,prog_19D7 );
 }
 
 Control prog_17EB ()
 {
     at ( "17EB" );
-    instruction ( "EI",0x17EC );
+    instruction ( "EI",e16_hi_lo ( 0x17,0xEC ) );
     enable_interrupts (  );
     advance ( 4 );
-    return jumpDirect ( prog_17EC );
+    return jumpDirect ( 0x17EC,prog_17EC );
 }
 
 Control prog_17EC ()
 {
     at ( "17EC" );
-    instruction ( "LD   DE,1CBC",0x17EF );
+    instruction ( "LD   DE,1CBC",e16_hi_lo ( 0x17,0xEF ) );
     advance ( 10 );
     D = 0x1C;
     E = 0xBC;
-    return jumpDirect ( prog_17EF );
+    return jumpDirect ( 0x17EF,prog_17EF );
 }
 
 Control prog_17EF ()
 {
     at ( "17EF" );
-    instruction ( "LD   HL,3016",0x17F2 );
+    instruction ( "LD   HL,3016",e16_hi_lo ( 0x17,0xF2 ) );
     advance ( 10 );
     H = 0x30;
     L = 0x16;
-    return jumpDirect ( prog_17F2 );
+    return jumpDirect ( 0x17F2,prog_17F2 );
 }
 
 Control prog_17F2 ()
 {
     at ( "17F2" );
-    instruction ( "LD   C,04",0x17F4 );
+    instruction ( "LD   C,04",e16_hi_lo ( 0x17,0xF4 ) );
     advance ( 7 );
     C = 0x04;
-    return jumpDirect ( prog_17F4 );
+    return jumpDirect ( 0x17F4,prog_17F4 );
 }
 
 Control prog_17F4 ()
 {
     at ( "17F4" );
-    instruction ( "CALL 0A93",0x17F7 );
+    instruction ( "CALL 0A93",e16_hi_lo ( 0x17,0xF7 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -33147,13 +33147,13 @@ Control prog_17F4 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0A93 );
+    return jumpDirect ( 0x0A93,prog_0A93 );
 }
 
 Control prog_17F7 ()
 {
     at ( "17F7" );
-    instruction ( "CALL 0AB1",0x17FA );
+    instruction ( "CALL 0AB1",e16_hi_lo ( 0x17,0xFA ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -33166,13 +33166,13 @@ Control prog_17F7 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0AB1 );
+    return jumpDirect ( 0x0AB1,prog_0AB1 );
 }
 
 Control prog_17FA ()
 {
     at ( "17FA" );
-    instruction ( "XOR  A",0x17FB );
+    instruction ( "XOR  A",e16_hi_lo ( 0x17,0xFB ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -33183,63 +33183,63 @@ Control prog_17FA ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_17FB );
+    return jumpDirect ( 0x17FB,prog_17FB );
 }
 
 Control prog_17FB ()
 {
     at ( "17FB" );
-    instruction ( "LD   (209A),A",0x17FE );
+    instruction ( "LD   (209A),A",e16_hi_lo ( 0x17,0xFE ) );
     u8 a1 = A ;
     mem_write ( 0x209A,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_17FE );
+    return jumpDirect ( 0x17FE,prog_17FE );
 }
 
 Control prog_17FE ()
 {
     at ( "17FE" );
-    instruction ( "LD   (2093),A",0x1801 );
+    instruction ( "LD   (2093),A",e16_hi_lo ( 0x18,0x01 ) );
     u8 a1 = A ;
     mem_write ( 0x2093,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_1801 );
+    return jumpDirect ( 0x1801,prog_1801 );
 }
 
 Control prog_1801 ()
 {
     at ( "1801" );
-    instruction ( "JP   16C9",0x1804 );
+    instruction ( "JP   16C9",e16_hi_lo ( 0x18,0x04 ) );
     advance ( 10 );
-    return jumpDirect ( prog_16C9 );
+    return jumpDirect ( 0x16C9,prog_16C9 );
 }
 
 Control prog_1804 ()
 {
     at ( "1804" );
-    instruction ( "LD   HL,2084",0x1807 );
+    instruction ( "LD   HL,2084",e16_hi_lo ( 0x18,0x07 ) );
     advance ( 10 );
     H = 0x20;
     L = 0x84;
-    return jumpDirect ( prog_1807 );
+    return jumpDirect ( 0x1807,prog_1807 );
 }
 
 Control prog_1807 ()
 {
     at ( "1807" );
-    instruction ( "LD   A,(HL)",0x1808 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x18,0x08 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_1808 );
+    return jumpDirect ( 0x1808,prog_1808 );
 }
 
 Control prog_1808 ()
 {
     at ( "1808" );
-    instruction ( "AND  A",0x1809 );
+    instruction ( "AND  A",e16_hi_lo ( 0x18,0x09 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -33251,54 +33251,54 @@ Control prog_1808 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_1809 );
+    return jumpDirect ( 0x1809,prog_1809 );
 }
 
 Control prog_1809 ()
 {
     at ( "1809" );
-    instruction ( "JP   Z,0707",0x180C );
+    instruction ( "JP   Z,0707",e16_hi_lo ( 0x18,0x0C ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_0707 );
+        return jumpDirect ( 0x0707,prog_0707 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_180C );
+        return jumpDirect ( 0x180C,prog_180C );
     }
 }
 
 Control prog_180C ()
 {
     at ( "180C" );
-    instruction ( "INC  HL",0x180D );
+    instruction ( "INC  HL",e16_hi_lo ( 0x18,0x0D ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_180D );
+    return jumpDirect ( 0x180D,prog_180D );
 }
 
 Control prog_180D ()
 {
     at ( "180D" );
-    instruction ( "LD   A,(HL)",0x180E );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x18,0x0E ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_180E );
+    return jumpDirect ( 0x180E,prog_180E );
 }
 
 Control prog_180E ()
 {
     at ( "180E" );
-    instruction ( "AND  A",0x180F );
+    instruction ( "AND  A",e16_hi_lo ( 0x18,0x0F ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -33310,13 +33310,13 @@ Control prog_180E ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_180F );
+    return jumpDirect ( 0x180F,prog_180F );
 }
 
 Control prog_180F ()
 {
     at ( "180F" );
-    instruction ( "RET  NZ",0x1810 );
+    instruction ( "RET  NZ",e16_hi_lo ( 0x18,0x10 ) );
     if (e1_flip ( FlagZ ))
     {
         u8 a1 = SPH ;
@@ -33335,60 +33335,60 @@ Control prog_180F ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_1810 );
+        return jumpDirect ( 0x1810,prog_1810 );
     }
 }
 
 Control prog_1810 ()
 {
     at ( "1810" );
-    instruction ( "LD   B,01",0x1812 );
+    instruction ( "LD   B,01",e16_hi_lo ( 0x18,0x12 ) );
     advance ( 7 );
     B = 0x01;
-    return jumpDirect ( prog_1812 );
+    return jumpDirect ( 0x1812,prog_1812 );
 }
 
 Control prog_1812 ()
 {
     at ( "1812" );
-    instruction ( "JP   18FA",0x1815 );
+    instruction ( "JP   18FA",e16_hi_lo ( 0x18,0x15 ) );
     advance ( 10 );
-    return jumpDirect ( prog_18FA );
+    return jumpDirect ( 0x18FA,prog_18FA );
 }
 
 Control prog_1815 ()
 {
     at ( "1815" );
-    instruction ( "LD   HL,2810",0x1818 );
+    instruction ( "LD   HL,2810",e16_hi_lo ( 0x18,0x18 ) );
     advance ( 10 );
     H = 0x28;
     L = 0x10;
-    return jumpDirect ( prog_1818 );
+    return jumpDirect ( 0x1818,prog_1818 );
 }
 
 Control prog_1818 ()
 {
     at ( "1818" );
-    instruction ( "LD   DE,1CA3",0x181B );
+    instruction ( "LD   DE,1CA3",e16_hi_lo ( 0x18,0x1B ) );
     advance ( 10 );
     D = 0x1C;
     E = 0xA3;
-    return jumpDirect ( prog_181B );
+    return jumpDirect ( 0x181B,prog_181B );
 }
 
 Control prog_181B ()
 {
     at ( "181B" );
-    instruction ( "LD   C,15",0x181D );
+    instruction ( "LD   C,15",e16_hi_lo ( 0x18,0x1D ) );
     advance ( 7 );
     C = 0x15;
-    return jumpDirect ( prog_181D );
+    return jumpDirect ( 0x181D,prog_181D );
 }
 
 Control prog_181D ()
 {
     at ( "181D" );
-    instruction ( "CALL 08F3",0x1820 );
+    instruction ( "CALL 08F3",e16_hi_lo ( 0x18,0x20 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -33401,42 +33401,42 @@ Control prog_181D ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_08F3 );
+    return jumpDirect ( 0x08F3,prog_08F3 );
 }
 
 Control prog_1820 ()
 {
     at ( "1820" );
-    instruction ( "LD   A,0A",0x1822 );
+    instruction ( "LD   A,0A",e16_hi_lo ( 0x18,0x22 ) );
     advance ( 7 );
     A = 0x0A;
-    return jumpDirect ( prog_1822 );
+    return jumpDirect ( 0x1822,prog_1822 );
 }
 
 Control prog_1822 ()
 {
     at ( "1822" );
-    instruction ( "LD   (206C),A",0x1825 );
+    instruction ( "LD   (206C),A",e16_hi_lo ( 0x18,0x25 ) );
     u8 a1 = A ;
     mem_write ( 0x206C,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_1825 );
+    return jumpDirect ( 0x1825,prog_1825 );
 }
 
 Control prog_1825 ()
 {
     at ( "1825" );
-    instruction ( "LD   BC,1DBE",0x1828 );
+    instruction ( "LD   BC,1DBE",e16_hi_lo ( 0x18,0x28 ) );
     advance ( 10 );
     B = 0x1D;
     C = 0xBE;
-    return jumpDirect ( prog_1828 );
+    return jumpDirect ( 0x1828,prog_1828 );
 }
 
 Control prog_1828 ()
 {
     at ( "1828" );
-    instruction ( "CALL 1856",0x182B );
+    instruction ( "CALL 1856",e16_hi_lo ( 0x18,0x2B ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -33449,29 +33449,29 @@ Control prog_1828 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1856 );
+    return jumpDirect ( 0x1856,prog_1856 );
 }
 
 Control prog_182B ()
 {
     at ( "182B" );
-    instruction ( "JP   CY,1837",0x182E );
+    instruction ( "JP   CY,1837",e16_hi_lo ( 0x18,0x2E ) );
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( prog_1837 );
+        return jumpDirect ( 0x1837,prog_1837 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_182E );
+        return jumpDirect ( 0x182E,prog_182E );
     }
 }
 
 Control prog_182E ()
 {
     at ( "182E" );
-    instruction ( "CALL 1844",0x1831 );
+    instruction ( "CALL 1844",e16_hi_lo ( 0x18,0x31 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -33484,21 +33484,21 @@ Control prog_182E ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1844 );
+    return jumpDirect ( 0x1844,prog_1844 );
 }
 
 Control prog_1831 ()
 {
     at ( "1831" );
-    instruction ( "JP   1828",0x1834 );
+    instruction ( "JP   1828",e16_hi_lo ( 0x18,0x34 ) );
     advance ( 10 );
-    return jumpDirect ( prog_1828 );
+    return jumpDirect ( 0x1828,prog_1828 );
 }
 
 Control prog_1834 ()
 {
     at ( "1834" );
-    instruction ( "CALL 0AB1",0x1837 );
+    instruction ( "CALL 0AB1",e16_hi_lo ( 0x18,0x37 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -33511,23 +33511,23 @@ Control prog_1834 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0AB1 );
+    return jumpDirect ( 0x0AB1,prog_0AB1 );
 }
 
 Control prog_1837 ()
 {
     at ( "1837" );
-    instruction ( "LD   BC,1DCF",0x183A );
+    instruction ( "LD   BC,1DCF",e16_hi_lo ( 0x18,0x3A ) );
     advance ( 10 );
     B = 0x1D;
     C = 0xCF;
-    return jumpDirect ( prog_183A );
+    return jumpDirect ( 0x183A,prog_183A );
 }
 
 Control prog_183A ()
 {
     at ( "183A" );
-    instruction ( "CALL 1856",0x183D );
+    instruction ( "CALL 1856",e16_hi_lo ( 0x18,0x3D ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -33540,13 +33540,13 @@ Control prog_183A ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1856 );
+    return jumpDirect ( 0x1856,prog_1856 );
 }
 
 Control prog_183D ()
 {
     at ( "183D" );
-    instruction ( "RET  CY",0x183E );
+    instruction ( "RET  CY",e16_hi_lo ( 0x18,0x3E ) );
     if (FlagCY)
     {
         u8 a1 = SPH ;
@@ -33565,14 +33565,14 @@ Control prog_183D ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_183E );
+        return jumpDirect ( 0x183E,prog_183E );
     }
 }
 
 Control prog_183E ()
 {
     at ( "183E" );
-    instruction ( "CALL 184C",0x1841 );
+    instruction ( "CALL 184C",e16_hi_lo ( 0x18,0x41 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -33585,21 +33585,21 @@ Control prog_183E ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_184C );
+    return jumpDirect ( 0x184C,prog_184C );
 }
 
 Control prog_1841 ()
 {
     at ( "1841" );
-    instruction ( "JP   183A",0x1844 );
+    instruction ( "JP   183A",e16_hi_lo ( 0x18,0x44 ) );
     advance ( 10 );
-    return jumpDirect ( prog_183A );
+    return jumpDirect ( 0x183A,prog_183A );
 }
 
 Control prog_1844 ()
 {
     at ( "1844" );
-    instruction ( "PUSH BC",0x1845 );
+    instruction ( "PUSH BC",e16_hi_lo ( 0x18,0x45 ) );
     u8 a1 = B ;
     u8 a2 = C ;
     u8 a3 = SPH ;
@@ -33613,22 +33613,22 @@ Control prog_1844 ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_1845 );
+    return jumpDirect ( 0x1845,prog_1845 );
 }
 
 Control prog_1845 ()
 {
     at ( "1845" );
-    instruction ( "LD   B,10",0x1847 );
+    instruction ( "LD   B,10",e16_hi_lo ( 0x18,0x47 ) );
     advance ( 7 );
     B = 0x10;
-    return jumpDirect ( prog_1847 );
+    return jumpDirect ( 0x1847,prog_1847 );
 }
 
 Control prog_1847 ()
 {
     at ( "1847" );
-    instruction ( "CALL 1439",0x184A );
+    instruction ( "CALL 1439",e16_hi_lo ( 0x18,0x4A ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -33641,13 +33641,13 @@ Control prog_1847 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1439 );
+    return jumpDirect ( 0x1439,prog_1439 );
 }
 
 Control prog_184A ()
 {
     at ( "184A" );
-    instruction ( "POP  BC",0x184B );
+    instruction ( "POP  BC",e16_hi_lo ( 0x18,0x4B ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -33661,13 +33661,13 @@ Control prog_184A ()
     C = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_184B );
+    return jumpDirect ( 0x184B,prog_184B );
 }
 
 Control prog_184B ()
 {
     at ( "184B" );
-    instruction ( "RET",0x184C );
+    instruction ( "RET",e16_hi_lo ( 0x18,0x4C ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -33685,7 +33685,7 @@ Control prog_184B ()
 Control prog_184C ()
 {
     at ( "184C" );
-    instruction ( "PUSH BC",0x184D );
+    instruction ( "PUSH BC",e16_hi_lo ( 0x18,0x4D ) );
     u8 a1 = B ;
     u8 a2 = C ;
     u8 a3 = SPH ;
@@ -33699,33 +33699,33 @@ Control prog_184C ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_184D );
+    return jumpDirect ( 0x184D,prog_184D );
 }
 
 Control prog_184D ()
 {
     at ( "184D" );
-    instruction ( "LD   A,(206C)",0x1850 );
+    instruction ( "LD   A,(206C)",e16_hi_lo ( 0x18,0x50 ) );
     u8 a1 = e8_read_mem ( 0x206C ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_1850 );
+    return jumpDirect ( 0x1850,prog_1850 );
 }
 
 Control prog_1850 ()
 {
     at ( "1850" );
-    instruction ( "LD   C,A",0x1851 );
+    instruction ( "LD   C,A",e16_hi_lo ( 0x18,0x51 ) );
     u8 a1 = A ;
     advance ( 5 );
     C = a1;
-    return jumpDirect ( prog_1851 );
+    return jumpDirect ( 0x1851,prog_1851 );
 }
 
 Control prog_1851 ()
 {
     at ( "1851" );
-    instruction ( "CALL 0A93",0x1854 );
+    instruction ( "CALL 0A93",e16_hi_lo ( 0x18,0x54 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -33738,13 +33738,13 @@ Control prog_1851 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_0A93 );
+    return jumpDirect ( 0x0A93,prog_0A93 );
 }
 
 Control prog_1854 ()
 {
     at ( "1854" );
-    instruction ( "POP  BC",0x1855 );
+    instruction ( "POP  BC",e16_hi_lo ( 0x18,0x55 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -33758,13 +33758,13 @@ Control prog_1854 ()
     C = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_1855 );
+    return jumpDirect ( 0x1855,prog_1855 );
 }
 
 Control prog_1855 ()
 {
     at ( "1855" );
-    instruction ( "RET",0x1856 );
+    instruction ( "RET",e16_hi_lo ( 0x18,0x56 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -33782,19 +33782,19 @@ Control prog_1855 ()
 Control prog_1856 ()
 {
     at ( "1856" );
-    instruction ( "LD   A,(BC)",0x1857 );
+    instruction ( "LD   A,(BC)",e16_hi_lo ( 0x18,0x57 ) );
     u8 a1 = B ;
     u8 a2 = C ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_1857 );
+    return jumpDirect ( 0x1857,prog_1857 );
 }
 
 Control prog_1857 ()
 {
     at ( "1857" );
-    instruction ( "CP   FF",0x1859 );
+    instruction ( "CP   FF",e16_hi_lo ( 0x18,0x59 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0xFF ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -33806,22 +33806,22 @@ Control prog_1857 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_1859 );
+    return jumpDirect ( 0x1859,prog_1859 );
 }
 
 Control prog_1859 ()
 {
     at ( "1859" );
-    instruction ( "SCF",0x185A );
+    instruction ( "SCF",e16_hi_lo ( 0x18,0x5A ) );
     advance ( 4 );
     FlagCY = e1_true (  );
-    return jumpDirect ( prog_185A );
+    return jumpDirect ( 0x185A,prog_185A );
 }
 
 Control prog_185A ()
 {
     at ( "185A" );
-    instruction ( "RET  Z",0x185B );
+    instruction ( "RET  Z",e16_hi_lo ( 0x18,0x5B ) );
     if (FlagZ)
     {
         u8 a1 = SPH ;
@@ -33840,142 +33840,142 @@ Control prog_185A ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_185B );
+        return jumpDirect ( 0x185B,prog_185B );
     }
 }
 
 Control prog_185B ()
 {
     at ( "185B" );
-    instruction ( "LD   L,A",0x185C );
+    instruction ( "LD   L,A",e16_hi_lo ( 0x18,0x5C ) );
     u8 a1 = A ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( prog_185C );
+    return jumpDirect ( 0x185C,prog_185C );
 }
 
 Control prog_185C ()
 {
     at ( "185C" );
-    instruction ( "INC  BC",0x185D );
+    instruction ( "INC  BC",e16_hi_lo ( 0x18,0x5D ) );
     u8 a1 = B ;
     u8 a2 = C ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     B = e8_hi ( a3 );
     C = e8_lo ( a3 );
-    return jumpDirect ( prog_185D );
+    return jumpDirect ( 0x185D,prog_185D );
 }
 
 Control prog_185D ()
 {
     at ( "185D" );
-    instruction ( "LD   A,(BC)",0x185E );
+    instruction ( "LD   A,(BC)",e16_hi_lo ( 0x18,0x5E ) );
     u8 a1 = B ;
     u8 a2 = C ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_185E );
+    return jumpDirect ( 0x185E,prog_185E );
 }
 
 Control prog_185E ()
 {
     at ( "185E" );
-    instruction ( "LD   H,A",0x185F );
+    instruction ( "LD   H,A",e16_hi_lo ( 0x18,0x5F ) );
     u8 a1 = A ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( prog_185F );
+    return jumpDirect ( 0x185F,prog_185F );
 }
 
 Control prog_185F ()
 {
     at ( "185F" );
-    instruction ( "INC  BC",0x1860 );
+    instruction ( "INC  BC",e16_hi_lo ( 0x18,0x60 ) );
     u8 a1 = B ;
     u8 a2 = C ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     B = e8_hi ( a3 );
     C = e8_lo ( a3 );
-    return jumpDirect ( prog_1860 );
+    return jumpDirect ( 0x1860,prog_1860 );
 }
 
 Control prog_1860 ()
 {
     at ( "1860" );
-    instruction ( "LD   A,(BC)",0x1861 );
+    instruction ( "LD   A,(BC)",e16_hi_lo ( 0x18,0x61 ) );
     u8 a1 = B ;
     u8 a2 = C ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_1861 );
+    return jumpDirect ( 0x1861,prog_1861 );
 }
 
 Control prog_1861 ()
 {
     at ( "1861" );
-    instruction ( "LD   E,A",0x1862 );
+    instruction ( "LD   E,A",e16_hi_lo ( 0x18,0x62 ) );
     u8 a1 = A ;
     advance ( 5 );
     E = a1;
-    return jumpDirect ( prog_1862 );
+    return jumpDirect ( 0x1862,prog_1862 );
 }
 
 Control prog_1862 ()
 {
     at ( "1862" );
-    instruction ( "INC  BC",0x1863 );
+    instruction ( "INC  BC",e16_hi_lo ( 0x18,0x63 ) );
     u8 a1 = B ;
     u8 a2 = C ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     B = e8_hi ( a3 );
     C = e8_lo ( a3 );
-    return jumpDirect ( prog_1863 );
+    return jumpDirect ( 0x1863,prog_1863 );
 }
 
 Control prog_1863 ()
 {
     at ( "1863" );
-    instruction ( "LD   A,(BC)",0x1864 );
+    instruction ( "LD   A,(BC)",e16_hi_lo ( 0x18,0x64 ) );
     u8 a1 = B ;
     u8 a2 = C ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_1864 );
+    return jumpDirect ( 0x1864,prog_1864 );
 }
 
 Control prog_1864 ()
 {
     at ( "1864" );
-    instruction ( "LD   D,A",0x1865 );
+    instruction ( "LD   D,A",e16_hi_lo ( 0x18,0x65 ) );
     u8 a1 = A ;
     advance ( 5 );
     D = a1;
-    return jumpDirect ( prog_1865 );
+    return jumpDirect ( 0x1865,prog_1865 );
 }
 
 Control prog_1865 ()
 {
     at ( "1865" );
-    instruction ( "INC  BC",0x1866 );
+    instruction ( "INC  BC",e16_hi_lo ( 0x18,0x66 ) );
     u8 a1 = B ;
     u8 a2 = C ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     B = e8_hi ( a3 );
     C = e8_lo ( a3 );
-    return jumpDirect ( prog_1866 );
+    return jumpDirect ( 0x1866,prog_1866 );
 }
 
 Control prog_1866 ()
 {
     at ( "1866" );
-    instruction ( "AND  A",0x1867 );
+    instruction ( "AND  A",e16_hi_lo ( 0x18,0x67 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -33987,13 +33987,13 @@ Control prog_1866 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_1867 );
+    return jumpDirect ( 0x1867,prog_1867 );
 }
 
 Control prog_1867 ()
 {
     at ( "1867" );
-    instruction ( "RET",0x1868 );
+    instruction ( "RET",e16_hi_lo ( 0x18,0x68 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -34011,17 +34011,17 @@ Control prog_1867 ()
 Control prog_1868 ()
 {
     at ( "1868" );
-    instruction ( "LD   HL,20C2",0x186B );
+    instruction ( "LD   HL,20C2",e16_hi_lo ( 0x18,0x6B ) );
     advance ( 10 );
     H = 0x20;
     L = 0xC2;
-    return jumpDirect ( prog_186B );
+    return jumpDirect ( 0x186B,prog_186B );
 }
 
 Control prog_186B ()
 {
     at ( "186B" );
-    instruction ( "INC  (HL)",0x186C );
+    instruction ( "INC  (HL)",e16_hi_lo ( 0x18,0x6C ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -34037,38 +34037,38 @@ Control prog_186B ()
     FlagZ = e1_is_zero ( e8_lo ( a4 ) );
     FlagA = e1_test_bit ( e8_lo ( a7 ),4 );
     FlagP = e1_parity ( e8_lo ( a4 ) );
-    return jumpDirect ( prog_186C );
+    return jumpDirect ( 0x186C,prog_186C );
 }
 
 Control prog_186C ()
 {
     at ( "186C" );
-    instruction ( "INC  HL",0x186D );
+    instruction ( "INC  HL",e16_hi_lo ( 0x18,0x6D ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_186D );
+    return jumpDirect ( 0x186D,prog_186D );
 }
 
 Control prog_186D ()
 {
     at ( "186D" );
-    instruction ( "LD   C,(HL)",0x186E );
+    instruction ( "LD   C,(HL)",e16_hi_lo ( 0x18,0x6E ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     C = a3;
-    return jumpDirect ( prog_186E );
+    return jumpDirect ( 0x186E,prog_186E );
 }
 
 Control prog_186E ()
 {
     at ( "186E" );
-    instruction ( "CALL 01D9",0x1871 );
+    instruction ( "CALL 01D9",e16_hi_lo ( 0x18,0x71 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -34081,33 +34081,33 @@ Control prog_186E ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_01D9 );
+    return jumpDirect ( 0x01D9,prog_01D9 );
 }
 
 Control prog_1871 ()
 {
     at ( "1871" );
-    instruction ( "LD   B,A",0x1872 );
+    instruction ( "LD   B,A",e16_hi_lo ( 0x18,0x72 ) );
     u8 a1 = A ;
     advance ( 5 );
     B = a1;
-    return jumpDirect ( prog_1872 );
+    return jumpDirect ( 0x1872,prog_1872 );
 }
 
 Control prog_1872 ()
 {
     at ( "1872" );
-    instruction ( "LD   A,(20CA)",0x1875 );
+    instruction ( "LD   A,(20CA)",e16_hi_lo ( 0x18,0x75 ) );
     u8 a1 = e8_read_mem ( 0x20CA ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_1875 );
+    return jumpDirect ( 0x1875,prog_1875 );
 }
 
 Control prog_1875 ()
 {
     at ( "1875" );
-    instruction ( "CP   B",0x1876 );
+    instruction ( "CP   B",e16_hi_lo ( 0x18,0x76 ) );
     u8 a1 = A ;
     u8 a2 = B ;
     u16 a3 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( a2 ) ) ;
@@ -34120,39 +34120,39 @@ Control prog_1875 ()
     FlagA = e1_test_bit ( e8_lo ( a6 ),4 );
     FlagP = e1_parity ( e8_lo ( a3 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a3 ),0 ) );
-    return jumpDirect ( prog_1876 );
+    return jumpDirect ( 0x1876,prog_1876 );
 }
 
 Control prog_1876 ()
 {
     at ( "1876" );
-    instruction ( "JP   Z,1898",0x1879 );
+    instruction ( "JP   Z,1898",e16_hi_lo ( 0x18,0x79 ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_1898 );
+        return jumpDirect ( 0x1898,prog_1898 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_1879 );
+        return jumpDirect ( 0x1879,prog_1879 );
     }
 }
 
 Control prog_1879 ()
 {
     at ( "1879" );
-    instruction ( "LD   A,(20C2)",0x187C );
+    instruction ( "LD   A,(20C2)",e16_hi_lo ( 0x18,0x7C ) );
     u8 a1 = e8_read_mem ( 0x20C2 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_187C );
+    return jumpDirect ( 0x187C,prog_187C );
 }
 
 Control prog_187C ()
 {
     at ( "187C" );
-    instruction ( "AND  04",0x187E );
+    instruction ( "AND  04",e16_hi_lo ( 0x18,0x7E ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( 0x04,a1 ) ;
     u8 a3 = e8_or ( 0x04,a1 ) ;
@@ -34163,51 +34163,51 @@ Control prog_187C ()
     FlagA = e1_test_bit ( a3,3 );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_187E );
+    return jumpDirect ( 0x187E,prog_187E );
 }
 
 Control prog_187E ()
 {
     at ( "187E" );
-    instruction ( "LD   HL,(20CC)",0x1881 );
+    instruction ( "LD   HL,(20CC)",e16_hi_lo ( 0x18,0x81 ) );
     u8 a1 = e8_read_mem ( 0x20CC ) ;
     u8 a2 = e8_read_mem ( 0x20CD ) ;
     advance ( 16 );
     H = a2;
     L = a1;
-    return jumpDirect ( prog_1881 );
+    return jumpDirect ( 0x1881,prog_1881 );
 }
 
 Control prog_1881 ()
 {
     at ( "1881" );
-    instruction ( "JP   NZ,1888",0x1884 );
+    instruction ( "JP   NZ,1888",e16_hi_lo ( 0x18,0x84 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_1888 );
+        return jumpDirect ( 0x1888,prog_1888 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_1884 );
+        return jumpDirect ( 0x1884,prog_1884 );
     }
 }
 
 Control prog_1884 ()
 {
     at ( "1884" );
-    instruction ( "LD   DE,0030",0x1887 );
+    instruction ( "LD   DE,0030",e16_hi_lo ( 0x18,0x87 ) );
     advance ( 10 );
     D = 0x00;
     E = 0x30;
-    return jumpDirect ( prog_1887 );
+    return jumpDirect ( 0x1887,prog_1887 );
 }
 
 Control prog_1887 ()
 {
     at ( "1887" );
-    instruction ( "ADD  HL,DE",0x1888 );
+    instruction ( "ADD  HL,DE",e16_hi_lo ( 0x18,0x88 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = H ;
@@ -34217,35 +34217,35 @@ Control prog_1887 ()
     H = e8_hi ( e16_drop_hi_bit_of_17 ( a5 ) );
     L = e8_lo ( e16_drop_hi_bit_of_17 ( a5 ) );
     FlagCY = e1_hi_bit_of_17 ( a5 );
-    return jumpDirect ( prog_1888 );
+    return jumpDirect ( 0x1888,prog_1888 );
 }
 
 Control prog_1888 ()
 {
     at ( "1888" );
-    instruction ( "LD   (20C7),HL",0x188B );
+    instruction ( "LD   (20C7),HL",e16_hi_lo ( 0x18,0x8B ) );
     u8 a1 = L ;
     mem_write ( 0x20C7,a1 );
     u8 a2 = H ;
     mem_write ( 0x20C8,a2 );
     advance ( 16 );
-    return jumpDirect ( prog_188B );
+    return jumpDirect ( 0x188B,prog_188B );
 }
 
 Control prog_188B ()
 {
     at ( "188B" );
-    instruction ( "LD   HL,20C5",0x188E );
+    instruction ( "LD   HL,20C5",e16_hi_lo ( 0x18,0x8E ) );
     advance ( 10 );
     H = 0x20;
     L = 0xC5;
-    return jumpDirect ( prog_188E );
+    return jumpDirect ( 0x188E,prog_188E );
 }
 
 Control prog_188E ()
 {
     at ( "188E" );
-    instruction ( "CALL 1A3B",0x1891 );
+    instruction ( "CALL 1A3B",e16_hi_lo ( 0x18,0x91 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -34258,13 +34258,13 @@ Control prog_188E ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1A3B );
+    return jumpDirect ( 0x1A3B,prog_1A3B );
 }
 
 Control prog_1891 ()
 {
     at ( "1891" );
-    instruction ( "EX   DE,HL",0x1892 );
+    instruction ( "EX   DE,HL",e16_hi_lo ( 0x18,0x92 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = H ;
@@ -34274,40 +34274,40 @@ Control prog_1891 ()
     E = a4;
     H = a1;
     L = a2;
-    return jumpDirect ( prog_1892 );
+    return jumpDirect ( 0x1892,prog_1892 );
 }
 
 Control prog_1892 ()
 {
     at ( "1892" );
-    instruction ( "JP   15D3",0x1895 );
+    instruction ( "JP   15D3",e16_hi_lo ( 0x18,0x95 ) );
     advance ( 10 );
-    return jumpDirect ( prog_15D3 );
+    return jumpDirect ( 0x15D3,prog_15D3 );
 }
 
 Control prog_1898 ()
 {
     at ( "1898" );
-    instruction ( "LD   A,01",0x189A );
+    instruction ( "LD   A,01",e16_hi_lo ( 0x18,0x9A ) );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( prog_189A );
+    return jumpDirect ( 0x189A,prog_189A );
 }
 
 Control prog_189A ()
 {
     at ( "189A" );
-    instruction ( "LD   (20CB),A",0x189D );
+    instruction ( "LD   (20CB),A",e16_hi_lo ( 0x18,0x9D ) );
     u8 a1 = A ;
     mem_write ( 0x20CB,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_189D );
+    return jumpDirect ( 0x189D,prog_189D );
 }
 
 Control prog_189D ()
 {
     at ( "189D" );
-    instruction ( "RET",0x189E );
+    instruction ( "RET",e16_hi_lo ( 0x18,0x9E ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -34325,36 +34325,36 @@ Control prog_189D ()
 Control prog_189E ()
 {
     at ( "189E" );
-    instruction ( "LD   HL,2050",0x18A1 );
+    instruction ( "LD   HL,2050",e16_hi_lo ( 0x18,0xA1 ) );
     advance ( 10 );
     H = 0x20;
     L = 0x50;
-    return jumpDirect ( prog_18A1 );
+    return jumpDirect ( 0x18A1,prog_18A1 );
 }
 
 Control prog_18A1 ()
 {
     at ( "18A1" );
-    instruction ( "LD   DE,1BC0",0x18A4 );
+    instruction ( "LD   DE,1BC0",e16_hi_lo ( 0x18,0xA4 ) );
     advance ( 10 );
     D = 0x1B;
     E = 0xC0;
-    return jumpDirect ( prog_18A4 );
+    return jumpDirect ( 0x18A4,prog_18A4 );
 }
 
 Control prog_18A4 ()
 {
     at ( "18A4" );
-    instruction ( "LD   B,10",0x18A6 );
+    instruction ( "LD   B,10",e16_hi_lo ( 0x18,0xA6 ) );
     advance ( 7 );
     B = 0x10;
-    return jumpDirect ( prog_18A6 );
+    return jumpDirect ( 0x18A6,prog_18A6 );
 }
 
 Control prog_18A6 ()
 {
     at ( "18A6" );
-    instruction ( "CALL 1A32",0x18A9 );
+    instruction ( "CALL 1A32",e16_hi_lo ( 0x18,0xA9 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -34367,80 +34367,80 @@ Control prog_18A6 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1A32 );
+    return jumpDirect ( 0x1A32,prog_1A32 );
 }
 
 Control prog_18A9 ()
 {
     at ( "18A9" );
-    instruction ( "LD   A,02",0x18AB );
+    instruction ( "LD   A,02",e16_hi_lo ( 0x18,0xAB ) );
     advance ( 7 );
     A = 0x02;
-    return jumpDirect ( prog_18AB );
+    return jumpDirect ( 0x18AB,prog_18AB );
 }
 
 Control prog_18AB ()
 {
     at ( "18AB" );
-    instruction ( "LD   (2080),A",0x18AE );
+    instruction ( "LD   (2080),A",e16_hi_lo ( 0x18,0xAE ) );
     u8 a1 = A ;
     mem_write ( 0x2080,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_18AE );
+    return jumpDirect ( 0x18AE,prog_18AE );
 }
 
 Control prog_18AE ()
 {
     at ( "18AE" );
-    instruction ( "LD   A,FF",0x18B0 );
+    instruction ( "LD   A,FF",e16_hi_lo ( 0x18,0xB0 ) );
     advance ( 7 );
     A = 0xFF;
-    return jumpDirect ( prog_18B0 );
+    return jumpDirect ( 0x18B0,prog_18B0 );
 }
 
 Control prog_18B0 ()
 {
     at ( "18B0" );
-    instruction ( "LD   (207E),A",0x18B3 );
+    instruction ( "LD   (207E),A",e16_hi_lo ( 0x18,0xB3 ) );
     u8 a1 = A ;
     mem_write ( 0x207E,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_18B3 );
+    return jumpDirect ( 0x18B3,prog_18B3 );
 }
 
 Control prog_18B3 ()
 {
     at ( "18B3" );
-    instruction ( "LD   A,04",0x18B5 );
+    instruction ( "LD   A,04",e16_hi_lo ( 0x18,0xB5 ) );
     advance ( 7 );
     A = 0x04;
-    return jumpDirect ( prog_18B5 );
+    return jumpDirect ( 0x18B5,prog_18B5 );
 }
 
 Control prog_18B5 ()
 {
     at ( "18B5" );
-    instruction ( "LD   (20C1),A",0x18B8 );
+    instruction ( "LD   (20C1),A",e16_hi_lo ( 0x18,0xB8 ) );
     u8 a1 = A ;
     mem_write ( 0x20C1,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_18B8 );
+    return jumpDirect ( 0x18B8,prog_18B8 );
 }
 
 Control prog_18B8 ()
 {
     at ( "18B8" );
-    instruction ( "LD   A,(2055)",0x18BB );
+    instruction ( "LD   A,(2055)",e16_hi_lo ( 0x18,0xBB ) );
     u8 a1 = e8_read_mem ( 0x2055 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_18BB );
+    return jumpDirect ( 0x18BB,prog_18BB );
 }
 
 Control prog_18BB ()
 {
     at ( "18BB" );
-    instruction ( "AND  01",0x18BD );
+    instruction ( "AND  01",e16_hi_lo ( 0x18,0xBD ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( 0x01,a1 ) ;
     u8 a3 = e8_or ( 0x01,a1 ) ;
@@ -34451,39 +34451,39 @@ Control prog_18BB ()
     FlagA = e1_test_bit ( a3,3 );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_18BD );
+    return jumpDirect ( 0x18BD,prog_18BD );
 }
 
 Control prog_18BD ()
 {
     at ( "18BD" );
-    instruction ( "JP   Z,18B8",0x18C0 );
+    instruction ( "JP   Z,18B8",e16_hi_lo ( 0x18,0xC0 ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_18B8 );
+        return jumpDirect ( 0x18B8,prog_18B8 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_18C0 );
+        return jumpDirect ( 0x18C0,prog_18C0 );
     }
 }
 
 Control prog_18C0 ()
 {
     at ( "18C0" );
-    instruction ( "LD   A,(2055)",0x18C3 );
+    instruction ( "LD   A,(2055)",e16_hi_lo ( 0x18,0xC3 ) );
     u8 a1 = e8_read_mem ( 0x2055 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_18C3 );
+    return jumpDirect ( 0x18C3,prog_18C3 );
 }
 
 Control prog_18C3 ()
 {
     at ( "18C3" );
-    instruction ( "AND  01",0x18C5 );
+    instruction ( "AND  01",e16_hi_lo ( 0x18,0xC5 ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( 0x01,a1 ) ;
     u8 a3 = e8_or ( 0x01,a1 ) ;
@@ -34494,56 +34494,56 @@ Control prog_18C3 ()
     FlagA = e1_test_bit ( a3,3 );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_18C5 );
+    return jumpDirect ( 0x18C5,prog_18C5 );
 }
 
 Control prog_18C5 ()
 {
     at ( "18C5" );
-    instruction ( "JP   NZ,18C0",0x18C8 );
+    instruction ( "JP   NZ,18C0",e16_hi_lo ( 0x18,0xC8 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_18C0 );
+        return jumpDirect ( 0x18C0,prog_18C0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_18C8 );
+        return jumpDirect ( 0x18C8,prog_18C8 );
     }
 }
 
 Control prog_18C8 ()
 {
     at ( "18C8" );
-    instruction ( "LD   HL,3311",0x18CB );
+    instruction ( "LD   HL,3311",e16_hi_lo ( 0x18,0xCB ) );
     advance ( 10 );
     H = 0x33;
     L = 0x11;
-    return jumpDirect ( prog_18CB );
+    return jumpDirect ( 0x18CB,prog_18CB );
 }
 
 Control prog_18CB ()
 {
     at ( "18CB" );
-    instruction ( "LD   A,26",0x18CD );
+    instruction ( "LD   A,26",e16_hi_lo ( 0x18,0xCD ) );
     advance ( 7 );
     A = 0x26;
-    return jumpDirect ( prog_18CD );
+    return jumpDirect ( 0x18CD,prog_18CD );
 }
 
 Control prog_18CD ()
 {
     at ( "18CD" );
-    instruction ( "NOP",0x18CE );
+    instruction ( "NOP",e16_hi_lo ( 0x18,0xCE ) );
     advance ( 4 );
-    return jumpDirect ( prog_18CE );
+    return jumpDirect ( 0x18CE,prog_18CE );
 }
 
 Control prog_18CE ()
 {
     at ( "18CE" );
-    instruction ( "CALL 08FF",0x18D1 );
+    instruction ( "CALL 08FF",e16_hi_lo ( 0x18,0xD1 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -34556,40 +34556,40 @@ Control prog_18CE ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_08FF );
+    return jumpDirect ( 0x08FF,prog_08FF );
 }
 
 Control prog_18D1 ()
 {
     at ( "18D1" );
-    instruction ( "JP   0AB6",0x18D4 );
+    instruction ( "JP   0AB6",e16_hi_lo ( 0x18,0xD4 ) );
     advance ( 10 );
-    return jumpDirect ( prog_0AB6 );
+    return jumpDirect ( 0x0AB6,prog_0AB6 );
 }
 
 Control prog_18D4 ()
 {
     at ( "18D4" );
-    instruction ( "LD   SP,2400",0x18D7 );
+    instruction ( "LD   SP,2400",e16_hi_lo ( 0x18,0xD7 ) );
     advance ( 10 );
     SPH = 0x24;
     SPL = 0x00;
-    return jumpDirect ( prog_18D7 );
+    return jumpDirect ( 0x18D7,prog_18D7 );
 }
 
 Control prog_18D7 ()
 {
     at ( "18D7" );
-    instruction ( "LD   B,00",0x18D9 );
+    instruction ( "LD   B,00",e16_hi_lo ( 0x18,0xD9 ) );
     advance ( 7 );
     B = 0x00;
-    return jumpDirect ( prog_18D9 );
+    return jumpDirect ( 0x18D9,prog_18D9 );
 }
 
 Control prog_18D9 ()
 {
     at ( "18D9" );
-    instruction ( "CALL 01E6",0x18DC );
+    instruction ( "CALL 01E6",e16_hi_lo ( 0x18,0xDC ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -34602,13 +34602,13 @@ Control prog_18D9 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_01E6 );
+    return jumpDirect ( 0x01E6,prog_01E6 );
 }
 
 Control prog_18DC ()
 {
     at ( "18DC" );
-    instruction ( "CALL 1956",0x18DF );
+    instruction ( "CALL 1956",e16_hi_lo ( 0x18,0xDF ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -34621,71 +34621,71 @@ Control prog_18DC ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1956 );
+    return jumpDirect ( 0x1956,prog_1956 );
 }
 
 Control prog_18DF ()
 {
     at ( "18DF" );
-    instruction ( "LD   A,08",0x18E1 );
+    instruction ( "LD   A,08",e16_hi_lo ( 0x18,0xE1 ) );
     advance ( 7 );
     A = 0x08;
-    return jumpDirect ( prog_18E1 );
+    return jumpDirect ( 0x18E1,prog_18E1 );
 }
 
 Control prog_18E1 ()
 {
     at ( "18E1" );
-    instruction ( "LD   (20CF),A",0x18E4 );
+    instruction ( "LD   (20CF),A",e16_hi_lo ( 0x18,0xE4 ) );
     u8 a1 = A ;
     mem_write ( 0x20CF,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_18E4 );
+    return jumpDirect ( 0x18E4,prog_18E4 );
 }
 
 Control prog_18E4 ()
 {
     at ( "18E4" );
-    instruction ( "JP   0AEA",0x18E7 );
+    instruction ( "JP   0AEA",e16_hi_lo ( 0x18,0xE7 ) );
     advance ( 10 );
-    return jumpDirect ( prog_0AEA );
+    return jumpDirect ( 0x0AEA,prog_0AEA );
 }
 
 Control prog_18E7 ()
 {
     at ( "18E7" );
-    instruction ( "LD   A,(2067)",0x18EA );
+    instruction ( "LD   A,(2067)",e16_hi_lo ( 0x18,0xEA ) );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_18EA );
+    return jumpDirect ( 0x18EA,prog_18EA );
 }
 
 Control prog_18EA ()
 {
     at ( "18EA" );
-    instruction ( "LD   HL,20E7",0x18ED );
+    instruction ( "LD   HL,20E7",e16_hi_lo ( 0x18,0xED ) );
     advance ( 10 );
     H = 0x20;
     L = 0xE7;
-    return jumpDirect ( prog_18ED );
+    return jumpDirect ( 0x18ED,prog_18ED );
 }
 
 Control prog_18ED ()
 {
     at ( "18ED" );
-    instruction ( "RRCA",0x18EE );
+    instruction ( "RRCA",e16_hi_lo ( 0x18,0xEE ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftR ( a1,0x01 ),7,e1_test_bit ( a1,0 ) );
     FlagCY = e1_test_bit ( a1,0 );
-    return jumpDirect ( prog_18EE );
+    return jumpDirect ( 0x18EE,prog_18EE );
 }
 
 Control prog_18EE ()
 {
     at ( "18EE" );
-    instruction ( "RET  NC",0x18EF );
+    instruction ( "RET  NC",e16_hi_lo ( 0x18,0xEF ) );
     if (e1_flip ( FlagCY ))
     {
         u8 a1 = SPH ;
@@ -34704,27 +34704,27 @@ Control prog_18EE ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_18EF );
+        return jumpDirect ( 0x18EF,prog_18EF );
     }
 }
 
 Control prog_18EF ()
 {
     at ( "18EF" );
-    instruction ( "INC  HL",0x18F0 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x18,0xF0 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_18F0 );
+    return jumpDirect ( 0x18F0,prog_18F0 );
 }
 
 Control prog_18F0 ()
 {
     at ( "18F0" );
-    instruction ( "RET",0x18F1 );
+    instruction ( "RET",e16_hi_lo ( 0x18,0xF1 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -34742,26 +34742,26 @@ Control prog_18F0 ()
 Control prog_18F1 ()
 {
     at ( "18F1" );
-    instruction ( "LD   B,02",0x18F3 );
+    instruction ( "LD   B,02",e16_hi_lo ( 0x18,0xF3 ) );
     advance ( 7 );
     B = 0x02;
-    return jumpDirect ( prog_18F3 );
+    return jumpDirect ( 0x18F3,prog_18F3 );
 }
 
 Control prog_18F3 ()
 {
     at ( "18F3" );
-    instruction ( "LD   A,(2082)",0x18F6 );
+    instruction ( "LD   A,(2082)",e16_hi_lo ( 0x18,0xF6 ) );
     u8 a1 = e8_read_mem ( 0x2082 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_18F6 );
+    return jumpDirect ( 0x18F6,prog_18F6 );
 }
 
 Control prog_18F6 ()
 {
     at ( "18F6" );
-    instruction ( "DEC  A",0x18F7 );
+    instruction ( "DEC  A",e16_hi_lo ( 0x18,0xF7 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -34773,13 +34773,13 @@ Control prog_18F6 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_18F7 );
+    return jumpDirect ( 0x18F7,prog_18F7 );
 }
 
 Control prog_18F7 ()
 {
     at ( "18F7" );
-    instruction ( "RET  NZ",0x18F8 );
+    instruction ( "RET  NZ",e16_hi_lo ( 0x18,0xF8 ) );
     if (e1_flip ( FlagZ ))
     {
         u8 a1 = SPH ;
@@ -34798,14 +34798,14 @@ Control prog_18F7 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_18F8 );
+        return jumpDirect ( 0x18F8,prog_18F8 );
     }
 }
 
 Control prog_18F8 ()
 {
     at ( "18F8" );
-    instruction ( "INC  B",0x18F9 );
+    instruction ( "INC  B",e16_hi_lo ( 0x18,0xF9 ) );
     u8 a1 = B ;
     u16 a2 = e16_add_with_carry ( e1_true (  ),a1,0x00 ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -34817,13 +34817,13 @@ Control prog_18F8 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_18F9 );
+    return jumpDirect ( 0x18F9,prog_18F9 );
 }
 
 Control prog_18F9 ()
 {
     at ( "18F9" );
-    instruction ( "RET",0x18FA );
+    instruction ( "RET",e16_hi_lo ( 0x18,0xFA ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -34841,17 +34841,17 @@ Control prog_18F9 ()
 Control prog_18FA ()
 {
     at ( "18FA" );
-    instruction ( "LD   A,(2094)",0x18FD );
+    instruction ( "LD   A,(2094)",e16_hi_lo ( 0x18,0xFD ) );
     u8 a1 = e8_read_mem ( 0x2094 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_18FD );
+    return jumpDirect ( 0x18FD,prog_18FD );
 }
 
 Control prog_18FD ()
 {
     at ( "18FD" );
-    instruction ( "OR   B",0x18FE );
+    instruction ( "OR   B",e16_hi_lo ( 0x18,0xFE ) );
     u8 a1 = B ;
     u8 a2 = A ;
     u8 a3 = e8_or ( a1,a2 ) ;
@@ -34862,23 +34862,23 @@ Control prog_18FD ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_18FE );
+    return jumpDirect ( 0x18FE,prog_18FE );
 }
 
 Control prog_18FE ()
 {
     at ( "18FE" );
-    instruction ( "LD   (2094),A",0x1901 );
+    instruction ( "LD   (2094),A",e16_hi_lo ( 0x19,0x01 ) );
     u8 a1 = A ;
     mem_write ( 0x2094,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_1901 );
+    return jumpDirect ( 0x1901,prog_1901 );
 }
 
 Control prog_1901 ()
 {
     at ( "1901" );
-    instruction ( "OUT  03",0x1903 );
+    instruction ( "OUT  03",e16_hi_lo ( 0x19,0x03 ) );
     u8 a1 = A ;
     sound_control ( "Ufo",e1_test_bit ( a1,0 ) );
     sound_control ( "Shot",e1_test_bit ( a1,1 ) );
@@ -34886,13 +34886,13 @@ Control prog_1901 ()
     sound_control ( "InvaderDie",e1_test_bit ( a1,3 ) );
     sound_control ( "ExtraLife",e1_test_bit ( a1,4 ) );
     advance ( 10 );
-    return jumpDirect ( prog_1903 );
+    return jumpDirect ( 0x1903,prog_1903 );
 }
 
 Control prog_1903 ()
 {
     at ( "1903" );
-    instruction ( "RET",0x1904 );
+    instruction ( "RET",e16_hi_lo ( 0x19,0x04 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -34910,25 +34910,25 @@ Control prog_1903 ()
 Control prog_1904 ()
 {
     at ( "1904" );
-    instruction ( "LD   HL,2200",0x1907 );
+    instruction ( "LD   HL,2200",e16_hi_lo ( 0x19,0x07 ) );
     advance ( 10 );
     H = 0x22;
     L = 0x00;
-    return jumpDirect ( prog_1907 );
+    return jumpDirect ( 0x1907,prog_1907 );
 }
 
 Control prog_1907 ()
 {
     at ( "1907" );
-    instruction ( "JP   01C3",0x190A );
+    instruction ( "JP   01C3",e16_hi_lo ( 0x19,0x0A ) );
     advance ( 10 );
-    return jumpDirect ( prog_01C3 );
+    return jumpDirect ( 0x01C3,prog_01C3 );
 }
 
 Control prog_190A ()
 {
     at ( "190A" );
-    instruction ( "CALL 14D8",0x190D );
+    instruction ( "CALL 14D8",e16_hi_lo ( 0x19,0x0D ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -34941,52 +34941,52 @@ Control prog_190A ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_14D8 );
+    return jumpDirect ( 0x14D8,prog_14D8 );
 }
 
 Control prog_190D ()
 {
     at ( "190D" );
-    instruction ( "JP   1597",0x1910 );
+    instruction ( "JP   1597",e16_hi_lo ( 0x19,0x10 ) );
     advance ( 10 );
-    return jumpDirect ( prog_1597 );
+    return jumpDirect ( 0x1597,prog_1597 );
 }
 
 Control prog_1910 ()
 {
     at ( "1910" );
-    instruction ( "LD   HL,20E7",0x1913 );
+    instruction ( "LD   HL,20E7",e16_hi_lo ( 0x19,0x13 ) );
     advance ( 10 );
     H = 0x20;
     L = 0xE7;
-    return jumpDirect ( prog_1913 );
+    return jumpDirect ( 0x1913,prog_1913 );
 }
 
 Control prog_1913 ()
 {
     at ( "1913" );
-    instruction ( "LD   A,(2067)",0x1916 );
+    instruction ( "LD   A,(2067)",e16_hi_lo ( 0x19,0x16 ) );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_1916 );
+    return jumpDirect ( 0x1916,prog_1916 );
 }
 
 Control prog_1916 ()
 {
     at ( "1916" );
-    instruction ( "RRCA",0x1917 );
+    instruction ( "RRCA",e16_hi_lo ( 0x19,0x17 ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftR ( a1,0x01 ),7,e1_test_bit ( a1,0 ) );
     FlagCY = e1_test_bit ( a1,0 );
-    return jumpDirect ( prog_1917 );
+    return jumpDirect ( 0x1917,prog_1917 );
 }
 
 Control prog_1917 ()
 {
     at ( "1917" );
-    instruction ( "RET  CY",0x1918 );
+    instruction ( "RET  CY",e16_hi_lo ( 0x19,0x18 ) );
     if (FlagCY)
     {
         u8 a1 = SPH ;
@@ -35005,27 +35005,27 @@ Control prog_1917 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_1918 );
+        return jumpDirect ( 0x1918,prog_1918 );
     }
 }
 
 Control prog_1918 ()
 {
     at ( "1918" );
-    instruction ( "INC  HL",0x1919 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x19,0x19 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_1919 );
+    return jumpDirect ( 0x1919,prog_1919 );
 }
 
 Control prog_1919 ()
 {
     at ( "1919" );
-    instruction ( "RET",0x191A );
+    instruction ( "RET",e16_hi_lo ( 0x19,0x1A ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -35043,268 +35043,268 @@ Control prog_1919 ()
 Control prog_191A ()
 {
     at ( "191A" );
-    instruction ( "LD   C,1C",0x191C );
+    instruction ( "LD   C,1C",e16_hi_lo ( 0x19,0x1C ) );
     advance ( 7 );
     C = 0x1C;
-    return jumpDirect ( prog_191C );
+    return jumpDirect ( 0x191C,prog_191C );
 }
 
 Control prog_191C ()
 {
     at ( "191C" );
-    instruction ( "LD   HL,241E",0x191F );
+    instruction ( "LD   HL,241E",e16_hi_lo ( 0x19,0x1F ) );
     advance ( 10 );
     H = 0x24;
     L = 0x1E;
-    return jumpDirect ( prog_191F );
+    return jumpDirect ( 0x191F,prog_191F );
 }
 
 Control prog_191F ()
 {
     at ( "191F" );
-    instruction ( "LD   DE,1AE4",0x1922 );
+    instruction ( "LD   DE,1AE4",e16_hi_lo ( 0x19,0x22 ) );
     advance ( 10 );
     D = 0x1A;
     E = 0xE4;
-    return jumpDirect ( prog_1922 );
+    return jumpDirect ( 0x1922,prog_1922 );
 }
 
 Control prog_1922 ()
 {
     at ( "1922" );
-    instruction ( "JP   08F3",0x1925 );
+    instruction ( "JP   08F3",e16_hi_lo ( 0x19,0x25 ) );
     advance ( 10 );
-    return jumpDirect ( prog_08F3 );
+    return jumpDirect ( 0x08F3,prog_08F3 );
 }
 
 Control prog_1925 ()
 {
     at ( "1925" );
-    instruction ( "LD   HL,20F8",0x1928 );
+    instruction ( "LD   HL,20F8",e16_hi_lo ( 0x19,0x28 ) );
     advance ( 10 );
     H = 0x20;
     L = 0xF8;
-    return jumpDirect ( prog_1928 );
+    return jumpDirect ( 0x1928,prog_1928 );
 }
 
 Control prog_1928 ()
 {
     at ( "1928" );
-    instruction ( "JP   1931",0x192B );
+    instruction ( "JP   1931",e16_hi_lo ( 0x19,0x2B ) );
     advance ( 10 );
-    return jumpDirect ( prog_1931 );
+    return jumpDirect ( 0x1931,prog_1931 );
 }
 
 Control prog_192B ()
 {
     at ( "192B" );
-    instruction ( "LD   HL,20FC",0x192E );
+    instruction ( "LD   HL,20FC",e16_hi_lo ( 0x19,0x2E ) );
     advance ( 10 );
     H = 0x20;
     L = 0xFC;
-    return jumpDirect ( prog_192E );
+    return jumpDirect ( 0x192E,prog_192E );
 }
 
 Control prog_192E ()
 {
     at ( "192E" );
-    instruction ( "JP   1931",0x1931 );
+    instruction ( "JP   1931",e16_hi_lo ( 0x19,0x31 ) );
     advance ( 10 );
-    return jumpDirect ( prog_1931 );
+    return jumpDirect ( 0x1931,prog_1931 );
 }
 
 Control prog_1931 ()
 {
     at ( "1931" );
-    instruction ( "LD   E,(HL)",0x1932 );
+    instruction ( "LD   E,(HL)",e16_hi_lo ( 0x19,0x32 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     E = a3;
-    return jumpDirect ( prog_1932 );
+    return jumpDirect ( 0x1932,prog_1932 );
 }
 
 Control prog_1932 ()
 {
     at ( "1932" );
-    instruction ( "INC  HL",0x1933 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x19,0x33 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_1933 );
+    return jumpDirect ( 0x1933,prog_1933 );
 }
 
 Control prog_1933 ()
 {
     at ( "1933" );
-    instruction ( "LD   D,(HL)",0x1934 );
+    instruction ( "LD   D,(HL)",e16_hi_lo ( 0x19,0x34 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     D = a3;
-    return jumpDirect ( prog_1934 );
+    return jumpDirect ( 0x1934,prog_1934 );
 }
 
 Control prog_1934 ()
 {
     at ( "1934" );
-    instruction ( "INC  HL",0x1935 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x19,0x35 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_1935 );
+    return jumpDirect ( 0x1935,prog_1935 );
 }
 
 Control prog_1935 ()
 {
     at ( "1935" );
-    instruction ( "LD   A,(HL)",0x1936 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x19,0x36 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_1936 );
+    return jumpDirect ( 0x1936,prog_1936 );
 }
 
 Control prog_1936 ()
 {
     at ( "1936" );
-    instruction ( "INC  HL",0x1937 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x19,0x37 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_1937 );
+    return jumpDirect ( 0x1937,prog_1937 );
 }
 
 Control prog_1937 ()
 {
     at ( "1937" );
-    instruction ( "LD   H,(HL)",0x1938 );
+    instruction ( "LD   H,(HL)",e16_hi_lo ( 0x19,0x38 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     H = a3;
-    return jumpDirect ( prog_1938 );
+    return jumpDirect ( 0x1938,prog_1938 );
 }
 
 Control prog_1938 ()
 {
     at ( "1938" );
-    instruction ( "LD   L,A",0x1939 );
+    instruction ( "LD   L,A",e16_hi_lo ( 0x19,0x39 ) );
     u8 a1 = A ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( prog_1939 );
+    return jumpDirect ( 0x1939,prog_1939 );
 }
 
 Control prog_1939 ()
 {
     at ( "1939" );
-    instruction ( "JP   09AD",0x193C );
+    instruction ( "JP   09AD",e16_hi_lo ( 0x19,0x3C ) );
     advance ( 10 );
-    return jumpDirect ( prog_09AD );
+    return jumpDirect ( 0x09AD,prog_09AD );
 }
 
 Control prog_193C ()
 {
     at ( "193C" );
-    instruction ( "LD   C,07",0x193E );
+    instruction ( "LD   C,07",e16_hi_lo ( 0x19,0x3E ) );
     advance ( 7 );
     C = 0x07;
-    return jumpDirect ( prog_193E );
+    return jumpDirect ( 0x193E,prog_193E );
 }
 
 Control prog_193E ()
 {
     at ( "193E" );
-    instruction ( "LD   HL,3501",0x1941 );
+    instruction ( "LD   HL,3501",e16_hi_lo ( 0x19,0x41 ) );
     advance ( 10 );
     H = 0x35;
     L = 0x01;
-    return jumpDirect ( prog_1941 );
+    return jumpDirect ( 0x1941,prog_1941 );
 }
 
 Control prog_1941 ()
 {
     at ( "1941" );
-    instruction ( "LD   DE,1FA9",0x1944 );
+    instruction ( "LD   DE,1FA9",e16_hi_lo ( 0x19,0x44 ) );
     advance ( 10 );
     D = 0x1F;
     E = 0xA9;
-    return jumpDirect ( prog_1944 );
+    return jumpDirect ( 0x1944,prog_1944 );
 }
 
 Control prog_1944 ()
 {
     at ( "1944" );
-    instruction ( "JP   08F3",0x1947 );
+    instruction ( "JP   08F3",e16_hi_lo ( 0x19,0x47 ) );
     advance ( 10 );
-    return jumpDirect ( prog_08F3 );
+    return jumpDirect ( 0x08F3,prog_08F3 );
 }
 
 Control prog_1947 ()
 {
     at ( "1947" );
-    instruction ( "LD   A,(20EB)",0x194A );
+    instruction ( "LD   A,(20EB)",e16_hi_lo ( 0x19,0x4A ) );
     u8 a1 = e8_read_mem ( 0x20EB ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_194A );
+    return jumpDirect ( 0x194A,prog_194A );
 }
 
 Control prog_194A ()
 {
     at ( "194A" );
-    instruction ( "LD   HL,3C01",0x194D );
+    instruction ( "LD   HL,3C01",e16_hi_lo ( 0x19,0x4D ) );
     advance ( 10 );
     H = 0x3C;
     L = 0x01;
-    return jumpDirect ( prog_194D );
+    return jumpDirect ( 0x194D,prog_194D );
 }
 
 Control prog_194D ()
 {
     at ( "194D" );
-    instruction ( "JP   09B2",0x1950 );
+    instruction ( "JP   09B2",e16_hi_lo ( 0x19,0x50 ) );
     advance ( 10 );
-    return jumpDirect ( prog_09B2 );
+    return jumpDirect ( 0x09B2,prog_09B2 );
 }
 
 Control prog_1950 ()
 {
     at ( "1950" );
-    instruction ( "LD   HL,20F4",0x1953 );
+    instruction ( "LD   HL,20F4",e16_hi_lo ( 0x19,0x53 ) );
     advance ( 10 );
     H = 0x20;
     L = 0xF4;
-    return jumpDirect ( prog_1953 );
+    return jumpDirect ( 0x1953,prog_1953 );
 }
 
 Control prog_1953 ()
 {
     at ( "1953" );
-    instruction ( "JP   1931",0x1956 );
+    instruction ( "JP   1931",e16_hi_lo ( 0x19,0x56 ) );
     advance ( 10 );
-    return jumpDirect ( prog_1931 );
+    return jumpDirect ( 0x1931,prog_1931 );
 }
 
 Control prog_1956 ()
 {
     at ( "1956" );
-    instruction ( "CALL 1A5C",0x1959 );
+    instruction ( "CALL 1A5C",e16_hi_lo ( 0x19,0x59 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -35317,13 +35317,13 @@ Control prog_1956 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1A5C );
+    return jumpDirect ( 0x1A5C,prog_1A5C );
 }
 
 Control prog_1959 ()
 {
     at ( "1959" );
-    instruction ( "CALL 191A",0x195C );
+    instruction ( "CALL 191A",e16_hi_lo ( 0x19,0x5C ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -35336,13 +35336,13 @@ Control prog_1959 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_191A );
+    return jumpDirect ( 0x191A,prog_191A );
 }
 
 Control prog_195C ()
 {
     at ( "195C" );
-    instruction ( "CALL 1925",0x195F );
+    instruction ( "CALL 1925",e16_hi_lo ( 0x19,0x5F ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -35355,13 +35355,13 @@ Control prog_195C ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1925 );
+    return jumpDirect ( 0x1925,prog_1925 );
 }
 
 Control prog_195F ()
 {
     at ( "195F" );
-    instruction ( "CALL 192B",0x1962 );
+    instruction ( "CALL 192B",e16_hi_lo ( 0x19,0x62 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -35374,13 +35374,13 @@ Control prog_195F ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_192B );
+    return jumpDirect ( 0x192B,prog_192B );
 }
 
 Control prog_1962 ()
 {
     at ( "1962" );
-    instruction ( "CALL 1950",0x1965 );
+    instruction ( "CALL 1950",e16_hi_lo ( 0x19,0x65 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -35393,13 +35393,13 @@ Control prog_1962 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1950 );
+    return jumpDirect ( 0x1950,prog_1950 );
 }
 
 Control prog_1965 ()
 {
     at ( "1965" );
-    instruction ( "CALL 193C",0x1968 );
+    instruction ( "CALL 193C",e16_hi_lo ( 0x19,0x68 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -35412,21 +35412,21 @@ Control prog_1965 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_193C );
+    return jumpDirect ( 0x193C,prog_193C );
 }
 
 Control prog_1968 ()
 {
     at ( "1968" );
-    instruction ( "JP   1947",0x196B );
+    instruction ( "JP   1947",e16_hi_lo ( 0x19,0x6B ) );
     advance ( 10 );
-    return jumpDirect ( prog_1947 );
+    return jumpDirect ( 0x1947,prog_1947 );
 }
 
 Control prog_196B ()
 {
     at ( "196B" );
-    instruction ( "CALL 19DC",0x196E );
+    instruction ( "CALL 19DC",e16_hi_lo ( 0x19,0x6E ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -35439,48 +35439,48 @@ Control prog_196B ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_19DC );
+    return jumpDirect ( 0x19DC,prog_19DC );
 }
 
 Control prog_196E ()
 {
     at ( "196E" );
-    instruction ( "JP   1671",0x1971 );
+    instruction ( "JP   1671",e16_hi_lo ( 0x19,0x71 ) );
     advance ( 10 );
-    return jumpDirect ( prog_1671 );
+    return jumpDirect ( 0x1671,prog_1671 );
 }
 
 Control prog_1971 ()
 {
     at ( "1971" );
-    instruction ( "LD   A,01",0x1973 );
+    instruction ( "LD   A,01",e16_hi_lo ( 0x19,0x73 ) );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( prog_1973 );
+    return jumpDirect ( 0x1973,prog_1973 );
 }
 
 Control prog_1973 ()
 {
     at ( "1973" );
-    instruction ( "LD   (206D),A",0x1976 );
+    instruction ( "LD   (206D),A",e16_hi_lo ( 0x19,0x76 ) );
     u8 a1 = A ;
     mem_write ( 0x206D,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_1976 );
+    return jumpDirect ( 0x1976,prog_1976 );
 }
 
 Control prog_1976 ()
 {
     at ( "1976" );
-    instruction ( "JP   16E6",0x1979 );
+    instruction ( "JP   16E6",e16_hi_lo ( 0x19,0x79 ) );
     advance ( 10 );
-    return jumpDirect ( prog_16E6 );
+    return jumpDirect ( 0x16E6,prog_16E6 );
 }
 
 Control prog_1979 ()
 {
     at ( "1979" );
-    instruction ( "CALL 19D7",0x197C );
+    instruction ( "CALL 19D7",e16_hi_lo ( 0x19,0x7C ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -35493,13 +35493,13 @@ Control prog_1979 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_19D7 );
+    return jumpDirect ( 0x19D7,prog_19D7 );
 }
 
 Control prog_197C ()
 {
     at ( "197C" );
-    instruction ( "CALL 1947",0x197F );
+    instruction ( "CALL 1947",e16_hi_lo ( 0x19,0x7F ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -35512,31 +35512,31 @@ Control prog_197C ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1947 );
+    return jumpDirect ( 0x1947,prog_1947 );
 }
 
 Control prog_197F ()
 {
     at ( "197F" );
-    instruction ( "JP   193C",0x1982 );
+    instruction ( "JP   193C",e16_hi_lo ( 0x19,0x82 ) );
     advance ( 10 );
-    return jumpDirect ( prog_193C );
+    return jumpDirect ( 0x193C,prog_193C );
 }
 
 Control prog_1982 ()
 {
     at ( "1982" );
-    instruction ( "LD   (20C1),A",0x1985 );
+    instruction ( "LD   (20C1),A",e16_hi_lo ( 0x19,0x85 ) );
     u8 a1 = A ;
     mem_write ( 0x20C1,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_1985 );
+    return jumpDirect ( 0x1985,prog_1985 );
 }
 
 Control prog_1985 ()
 {
     at ( "1985" );
-    instruction ( "RET",0x1986 );
+    instruction ( "RET",e16_hi_lo ( 0x19,0x86 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -35554,25 +35554,25 @@ Control prog_1985 ()
 Control prog_1988 ()
 {
     at ( "1988" );
-    instruction ( "JP   09D6",0x198B );
+    instruction ( "JP   09D6",e16_hi_lo ( 0x19,0x8B ) );
     advance ( 10 );
-    return jumpDirect ( prog_09D6 );
+    return jumpDirect ( 0x09D6,prog_09D6 );
 }
 
 Control prog_199A ()
 {
     at ( "199A" );
-    instruction ( "LD   A,(201E)",0x199D );
+    instruction ( "LD   A,(201E)",e16_hi_lo ( 0x19,0x9D ) );
     u8 a1 = e8_read_mem ( 0x201E ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_199D );
+    return jumpDirect ( 0x199D,prog_199D );
 }
 
 Control prog_199D ()
 {
     at ( "199D" );
-    instruction ( "AND  A",0x199E );
+    instruction ( "AND  A",e16_hi_lo ( 0x19,0x9E ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -35584,38 +35584,38 @@ Control prog_199D ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_199E );
+    return jumpDirect ( 0x199E,prog_199E );
 }
 
 Control prog_199E ()
 {
     at ( "199E" );
-    instruction ( "JP   NZ,19AC",0x19A1 );
+    instruction ( "JP   NZ,19AC",e16_hi_lo ( 0x19,0xA1 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_19AC );
+        return jumpDirect ( 0x19AC,prog_19AC );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_19A1 );
+        return jumpDirect ( 0x19A1,prog_19A1 );
     }
 }
 
 Control prog_19A1 ()
 {
     at ( "19A1" );
-    instruction ( "IN   01",0x19A3 );
+    instruction ( "IN   01",e16_hi_lo ( 0x19,0xA3 ) );
     advance ( 10 );
     A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_flip ( e1_is_pressed ( "coin entry" ) ) ),1,e1_is_pressed ( "player2 start" ) ),2,e1_is_pressed ( "player1 start" ) ),4,e1_is_pressed ( "player1 shoot" ) ),5,e1_is_pressed ( "player1 left" ) ),6,e1_is_pressed ( "player1 right" ) );
-    return jumpDirect ( prog_19A3 );
+    return jumpDirect ( 0x19A3,prog_19A3 );
 }
 
 Control prog_19A3 ()
 {
     at ( "19A3" );
-    instruction ( "AND  76",0x19A5 );
+    instruction ( "AND  76",e16_hi_lo ( 0x19,0xA5 ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( 0x76,a1 ) ;
     u8 a3 = e8_or ( 0x76,a1 ) ;
@@ -35626,13 +35626,13 @@ Control prog_19A3 ()
     FlagA = e1_test_bit ( a3,3 );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_19A5 );
+    return jumpDirect ( 0x19A5,prog_19A5 );
 }
 
 Control prog_19A5 ()
 {
     at ( "19A5" );
-    instruction ( "SUB  72",0x19A7 );
+    instruction ( "SUB  72",e16_hi_lo ( 0x19,0xA7 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x72 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -35645,13 +35645,13 @@ Control prog_19A5 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_19A7 );
+    return jumpDirect ( 0x19A7,prog_19A7 );
 }
 
 Control prog_19A7 ()
 {
     at ( "19A7" );
-    instruction ( "RET  NZ",0x19A8 );
+    instruction ( "RET  NZ",e16_hi_lo ( 0x19,0xA8 ) );
     if (e1_flip ( FlagZ ))
     {
         u8 a1 = SPH ;
@@ -35670,14 +35670,14 @@ Control prog_19A7 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_19A8 );
+        return jumpDirect ( 0x19A8,prog_19A8 );
     }
 }
 
 Control prog_19A8 ()
 {
     at ( "19A8" );
-    instruction ( "INC  A",0x19A9 );
+    instruction ( "INC  A",e16_hi_lo ( 0x19,0xA9 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_true (  ),a1,0x00 ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -35689,32 +35689,32 @@ Control prog_19A8 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_19A9 );
+    return jumpDirect ( 0x19A9,prog_19A9 );
 }
 
 Control prog_19A9 ()
 {
     at ( "19A9" );
-    instruction ( "LD   (201E),A",0x19AC );
+    instruction ( "LD   (201E),A",e16_hi_lo ( 0x19,0xAC ) );
     u8 a1 = A ;
     mem_write ( 0x201E,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_19AC );
+    return jumpDirect ( 0x19AC,prog_19AC );
 }
 
 Control prog_19AC ()
 {
     at ( "19AC" );
-    instruction ( "IN   01",0x19AE );
+    instruction ( "IN   01",e16_hi_lo ( 0x19,0xAE ) );
     advance ( 10 );
     A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_flip ( e1_is_pressed ( "coin entry" ) ) ),1,e1_is_pressed ( "player2 start" ) ),2,e1_is_pressed ( "player1 start" ) ),4,e1_is_pressed ( "player1 shoot" ) ),5,e1_is_pressed ( "player1 left" ) ),6,e1_is_pressed ( "player1 right" ) );
-    return jumpDirect ( prog_19AE );
+    return jumpDirect ( 0x19AE,prog_19AE );
 }
 
 Control prog_19AE ()
 {
     at ( "19AE" );
-    instruction ( "AND  76",0x19B0 );
+    instruction ( "AND  76",e16_hi_lo ( 0x19,0xB0 ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( 0x76,a1 ) ;
     u8 a3 = e8_or ( 0x76,a1 ) ;
@@ -35725,13 +35725,13 @@ Control prog_19AE ()
     FlagA = e1_test_bit ( a3,3 );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_19B0 );
+    return jumpDirect ( 0x19B0,prog_19B0 );
 }
 
 Control prog_19B0 ()
 {
     at ( "19B0" );
-    instruction ( "CP   34",0x19B2 );
+    instruction ( "CP   34",e16_hi_lo ( 0x19,0xB2 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x34 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -35743,13 +35743,13 @@ Control prog_19B0 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_19B2 );
+    return jumpDirect ( 0x19B2,prog_19B2 );
 }
 
 Control prog_19B2 ()
 {
     at ( "19B2" );
-    instruction ( "RET  NZ",0x19B3 );
+    instruction ( "RET  NZ",e16_hi_lo ( 0x19,0xB3 ) );
     if (e1_flip ( FlagZ ))
     {
         u8 a1 = SPH ;
@@ -35768,70 +35768,70 @@ Control prog_19B2 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_19B3 );
+        return jumpDirect ( 0x19B3,prog_19B3 );
     }
 }
 
 Control prog_19B3 ()
 {
     at ( "19B3" );
-    instruction ( "LD   HL,2E1B",0x19B6 );
+    instruction ( "LD   HL,2E1B",e16_hi_lo ( 0x19,0xB6 ) );
     advance ( 10 );
     H = 0x2E;
     L = 0x1B;
-    return jumpDirect ( prog_19B6 );
+    return jumpDirect ( 0x19B6,prog_19B6 );
 }
 
 Control prog_19B6 ()
 {
     at ( "19B6" );
-    instruction ( "LD   DE,0BF7",0x19B9 );
+    instruction ( "LD   DE,0BF7",e16_hi_lo ( 0x19,0xB9 ) );
     advance ( 10 );
     D = 0x0B;
     E = 0xF7;
-    return jumpDirect ( prog_19B9 );
+    return jumpDirect ( 0x19B9,prog_19B9 );
 }
 
 Control prog_19B9 ()
 {
     at ( "19B9" );
-    instruction ( "LD   C,09",0x19BB );
+    instruction ( "LD   C,09",e16_hi_lo ( 0x19,0xBB ) );
     advance ( 7 );
     C = 0x09;
-    return jumpDirect ( prog_19BB );
+    return jumpDirect ( 0x19BB,prog_19BB );
 }
 
 Control prog_19BB ()
 {
     at ( "19BB" );
-    instruction ( "JP   08F3",0x19BE );
+    instruction ( "JP   08F3",e16_hi_lo ( 0x19,0xBE ) );
     advance ( 10 );
-    return jumpDirect ( prog_08F3 );
+    return jumpDirect ( 0x08F3,prog_08F3 );
 }
 
 Control prog_19D1 ()
 {
     at ( "19D1" );
-    instruction ( "LD   A,01",0x19D3 );
+    instruction ( "LD   A,01",e16_hi_lo ( 0x19,0xD3 ) );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( prog_19D3 );
+    return jumpDirect ( 0x19D3,prog_19D3 );
 }
 
 Control prog_19D3 ()
 {
     at ( "19D3" );
-    instruction ( "LD   (20E9),A",0x19D6 );
+    instruction ( "LD   (20E9),A",e16_hi_lo ( 0x19,0xD6 ) );
     u8 a1 = A ;
     mem_write ( 0x20E9,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_19D6 );
+    return jumpDirect ( 0x19D6,prog_19D6 );
 }
 
 Control prog_19D6 ()
 {
     at ( "19D6" );
-    instruction ( "RET",0x19D7 );
+    instruction ( "RET",e16_hi_lo ( 0x19,0xD7 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -35849,7 +35849,7 @@ Control prog_19D6 ()
 Control prog_19D7 ()
 {
     at ( "19D7" );
-    instruction ( "XOR  A",0x19D8 );
+    instruction ( "XOR  A",e16_hi_lo ( 0x19,0xD8 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -35860,31 +35860,31 @@ Control prog_19D7 ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_19D8 );
+    return jumpDirect ( 0x19D8,prog_19D8 );
 }
 
 Control prog_19D8 ()
 {
     at ( "19D8" );
-    instruction ( "JP   19D3",0x19DB );
+    instruction ( "JP   19D3",e16_hi_lo ( 0x19,0xDB ) );
     advance ( 10 );
-    return jumpDirect ( prog_19D3 );
+    return jumpDirect ( 0x19D3,prog_19D3 );
 }
 
 Control prog_19DC ()
 {
     at ( "19DC" );
-    instruction ( "LD   A,(2094)",0x19DF );
+    instruction ( "LD   A,(2094)",e16_hi_lo ( 0x19,0xDF ) );
     u8 a1 = e8_read_mem ( 0x2094 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( prog_19DF );
+    return jumpDirect ( 0x19DF,prog_19DF );
 }
 
 Control prog_19DF ()
 {
     at ( "19DF" );
-    instruction ( "AND  B",0x19E0 );
+    instruction ( "AND  B",e16_hi_lo ( 0x19,0xE0 ) );
     u8 a1 = B ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -35896,23 +35896,23 @@ Control prog_19DF ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_19E0 );
+    return jumpDirect ( 0x19E0,prog_19E0 );
 }
 
 Control prog_19E0 ()
 {
     at ( "19E0" );
-    instruction ( "LD   (2094),A",0x19E3 );
+    instruction ( "LD   (2094),A",e16_hi_lo ( 0x19,0xE3 ) );
     u8 a1 = A ;
     mem_write ( 0x2094,a1 );
     advance ( 13 );
-    return jumpDirect ( prog_19E3 );
+    return jumpDirect ( 0x19E3,prog_19E3 );
 }
 
 Control prog_19E3 ()
 {
     at ( "19E3" );
-    instruction ( "OUT  03",0x19E5 );
+    instruction ( "OUT  03",e16_hi_lo ( 0x19,0xE5 ) );
     u8 a1 = A ;
     sound_control ( "Ufo",e1_test_bit ( a1,0 ) );
     sound_control ( "Shot",e1_test_bit ( a1,1 ) );
@@ -35920,13 +35920,13 @@ Control prog_19E3 ()
     sound_control ( "InvaderDie",e1_test_bit ( a1,3 ) );
     sound_control ( "ExtraLife",e1_test_bit ( a1,4 ) );
     advance ( 10 );
-    return jumpDirect ( prog_19E5 );
+    return jumpDirect ( 0x19E5,prog_19E5 );
 }
 
 Control prog_19E5 ()
 {
     at ( "19E5" );
-    instruction ( "RET",0x19E6 );
+    instruction ( "RET",e16_hi_lo ( 0x19,0xE6 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -35944,62 +35944,62 @@ Control prog_19E5 ()
 Control prog_19E6 ()
 {
     at ( "19E6" );
-    instruction ( "LD   HL,2701",0x19E9 );
+    instruction ( "LD   HL,2701",e16_hi_lo ( 0x19,0xE9 ) );
     advance ( 10 );
     H = 0x27;
     L = 0x01;
-    return jumpDirect ( prog_19E9 );
+    return jumpDirect ( 0x19E9,prog_19E9 );
 }
 
 Control prog_19E9 ()
 {
     at ( "19E9" );
-    instruction ( "JP   Z,19FA",0x19EC );
+    instruction ( "JP   Z,19FA",e16_hi_lo ( 0x19,0xEC ) );
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( prog_19FA );
+        return jumpDirect ( 0x19FA,prog_19FA );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_19EC );
+        return jumpDirect ( 0x19EC,prog_19EC );
     }
 }
 
 Control prog_19EC ()
 {
     at ( "19EC" );
-    instruction ( "LD   DE,1C60",0x19EF );
+    instruction ( "LD   DE,1C60",e16_hi_lo ( 0x19,0xEF ) );
     advance ( 10 );
     D = 0x1C;
     E = 0x60;
-    return jumpDirect ( prog_19EF );
+    return jumpDirect ( 0x19EF,prog_19EF );
 }
 
 Control prog_19EF ()
 {
     at ( "19EF" );
-    instruction ( "LD   B,10",0x19F1 );
+    instruction ( "LD   B,10",e16_hi_lo ( 0x19,0xF1 ) );
     advance ( 7 );
     B = 0x10;
-    return jumpDirect ( prog_19F1 );
+    return jumpDirect ( 0x19F1,prog_19F1 );
 }
 
 Control prog_19F1 ()
 {
     at ( "19F1" );
-    instruction ( "LD   C,A",0x19F2 );
+    instruction ( "LD   C,A",e16_hi_lo ( 0x19,0xF2 ) );
     u8 a1 = A ;
     advance ( 5 );
     C = a1;
-    return jumpDirect ( prog_19F2 );
+    return jumpDirect ( 0x19F2,prog_19F2 );
 }
 
 Control prog_19F2 ()
 {
     at ( "19F2" );
-    instruction ( "CALL 1439",0x19F5 );
+    instruction ( "CALL 1439",e16_hi_lo ( 0x19,0xF5 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -36012,23 +36012,23 @@ Control prog_19F2 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_1439 );
+    return jumpDirect ( 0x1439,prog_1439 );
 }
 
 Control prog_19F5 ()
 {
     at ( "19F5" );
-    instruction ( "LD   A,C",0x19F6 );
+    instruction ( "LD   A,C",e16_hi_lo ( 0x19,0xF6 ) );
     u8 a1 = C ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_19F6 );
+    return jumpDirect ( 0x19F6,prog_19F6 );
 }
 
 Control prog_19F6 ()
 {
     at ( "19F6" );
-    instruction ( "DEC  A",0x19F7 );
+    instruction ( "DEC  A",e16_hi_lo ( 0x19,0xF7 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -36040,38 +36040,38 @@ Control prog_19F6 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_19F7 );
+    return jumpDirect ( 0x19F7,prog_19F7 );
 }
 
 Control prog_19F7 ()
 {
     at ( "19F7" );
-    instruction ( "JP   NZ,19EC",0x19FA );
+    instruction ( "JP   NZ,19EC",e16_hi_lo ( 0x19,0xFA ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_19EC );
+        return jumpDirect ( 0x19EC,prog_19EC );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_19FA );
+        return jumpDirect ( 0x19FA,prog_19FA );
     }
 }
 
 Control prog_19FA ()
 {
     at ( "19FA" );
-    instruction ( "LD   B,10",0x19FC );
+    instruction ( "LD   B,10",e16_hi_lo ( 0x19,0xFC ) );
     advance ( 7 );
     B = 0x10;
-    return jumpDirect ( prog_19FC );
+    return jumpDirect ( 0x19FC,prog_19FC );
 }
 
 Control prog_19FC ()
 {
     at ( "19FC" );
-    instruction ( "CALL 14CB",0x19FF );
+    instruction ( "CALL 14CB",e16_hi_lo ( 0x19,0xFF ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -36084,23 +36084,23 @@ Control prog_19FC ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_14CB );
+    return jumpDirect ( 0x14CB,prog_14CB );
 }
 
 Control prog_19FF ()
 {
     at ( "19FF" );
-    instruction ( "LD   A,H",0x1A00 );
+    instruction ( "LD   A,H",e16_hi_lo ( 0x1A,0x00 ) );
     u8 a1 = H ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_1A00 );
+    return jumpDirect ( 0x1A00,prog_1A00 );
 }
 
 Control prog_1A00 ()
 {
     at ( "1A00" );
-    instruction ( "CP   35",0x1A02 );
+    instruction ( "CP   35",e16_hi_lo ( 0x1A,0x02 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x35 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -36112,29 +36112,29 @@ Control prog_1A00 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_1A02 );
+    return jumpDirect ( 0x1A02,prog_1A02 );
 }
 
 Control prog_1A02 ()
 {
     at ( "1A02" );
-    instruction ( "JP   NZ,19FA",0x1A05 );
+    instruction ( "JP   NZ,19FA",e16_hi_lo ( 0x1A,0x05 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_19FA );
+        return jumpDirect ( 0x19FA,prog_19FA );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_1A05 );
+        return jumpDirect ( 0x1A05,prog_1A05 );
     }
 }
 
 Control prog_1A05 ()
 {
     at ( "1A05" );
-    instruction ( "RET",0x1A06 );
+    instruction ( "RET",e16_hi_lo ( 0x1A,0x06 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -36152,41 +36152,41 @@ Control prog_1A05 ()
 Control prog_1A06 ()
 {
     at ( "1A06" );
-    instruction ( "LD   HL,2072",0x1A09 );
+    instruction ( "LD   HL,2072",e16_hi_lo ( 0x1A,0x09 ) );
     advance ( 10 );
     H = 0x20;
     L = 0x72;
-    return jumpDirect ( prog_1A09 );
+    return jumpDirect ( 0x1A09,prog_1A09 );
 }
 
 Control prog_1A09 ()
 {
     at ( "1A09" );
-    instruction ( "LD   B,(HL)",0x1A0A );
+    instruction ( "LD   B,(HL)",e16_hi_lo ( 0x1A,0x0A ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     B = a3;
-    return jumpDirect ( prog_1A0A );
+    return jumpDirect ( 0x1A0A,prog_1A0A );
 }
 
 Control prog_1A0A ()
 {
     at ( "1A0A" );
-    instruction ( "LD   A,(DE)",0x1A0B );
+    instruction ( "LD   A,(DE)",e16_hi_lo ( 0x1A,0x0B ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_1A0B );
+    return jumpDirect ( 0x1A0B,prog_1A0B );
 }
 
 Control prog_1A0B ()
 {
     at ( "1A0B" );
-    instruction ( "AND  80",0x1A0D );
+    instruction ( "AND  80",e16_hi_lo ( 0x1A,0x0D ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( 0x80,a1 ) ;
     u8 a3 = e8_or ( 0x80,a1 ) ;
@@ -36197,13 +36197,13 @@ Control prog_1A0B ()
     FlagA = e1_test_bit ( a3,3 );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_1A0D );
+    return jumpDirect ( 0x1A0D,prog_1A0D );
 }
 
 Control prog_1A0D ()
 {
     at ( "1A0D" );
-    instruction ( "XOR  B",0x1A0E );
+    instruction ( "XOR  B",e16_hi_lo ( 0x1A,0x0E ) );
     u8 a1 = B ;
     u8 a2 = A ;
     u8 a3 = e8_xor ( a1,a2 ) ;
@@ -36214,13 +36214,13 @@ Control prog_1A0D ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_1A0E );
+    return jumpDirect ( 0x1A0E,prog_1A0E );
 }
 
 Control prog_1A0E ()
 {
     at ( "1A0E" );
-    instruction ( "RET  NZ",0x1A0F );
+    instruction ( "RET  NZ",e16_hi_lo ( 0x1A,0x0F ) );
     if (e1_flip ( FlagZ ))
     {
         u8 a1 = SPH ;
@@ -36239,23 +36239,23 @@ Control prog_1A0E ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_1A0F );
+        return jumpDirect ( 0x1A0F,prog_1A0F );
     }
 }
 
 Control prog_1A0F ()
 {
     at ( "1A0F" );
-    instruction ( "SCF",0x1A10 );
+    instruction ( "SCF",e16_hi_lo ( 0x1A,0x10 ) );
     advance ( 4 );
     FlagCY = e1_true (  );
-    return jumpDirect ( prog_1A10 );
+    return jumpDirect ( 0x1A10,prog_1A10 );
 }
 
 Control prog_1A10 ()
 {
     at ( "1A10" );
-    instruction ( "RET",0x1A11 );
+    instruction ( "RET",e16_hi_lo ( 0x1A,0x11 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -36273,57 +36273,57 @@ Control prog_1A10 ()
 Control prog_1A32 ()
 {
     at ( "1A32" );
-    instruction ( "LD   A,(DE)",0x1A33 );
+    instruction ( "LD   A,(DE)",e16_hi_lo ( 0x1A,0x33 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_1A33 );
+    return jumpDirect ( 0x1A33,prog_1A33 );
 }
 
 Control prog_1A33 ()
 {
     at ( "1A33" );
-    instruction ( "LD   (HL),A",0x1A34 );
+    instruction ( "LD   (HL),A",e16_hi_lo ( 0x1A,0x34 ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_1A34 );
+    return jumpDirect ( 0x1A34,prog_1A34 );
 }
 
 Control prog_1A34 ()
 {
     at ( "1A34" );
-    instruction ( "INC  HL",0x1A35 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x1A,0x35 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_1A35 );
+    return jumpDirect ( 0x1A35,prog_1A35 );
 }
 
 Control prog_1A35 ()
 {
     at ( "1A35" );
-    instruction ( "INC  DE",0x1A36 );
+    instruction ( "INC  DE",e16_hi_lo ( 0x1A,0x36 ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     D = e8_hi ( a3 );
     E = e8_lo ( a3 );
-    return jumpDirect ( prog_1A36 );
+    return jumpDirect ( 0x1A36,prog_1A36 );
 }
 
 Control prog_1A36 ()
 {
     at ( "1A36" );
-    instruction ( "DEC  B",0x1A37 );
+    instruction ( "DEC  B",e16_hi_lo ( 0x1A,0x37 ) );
     u8 a1 = B ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -36335,29 +36335,29 @@ Control prog_1A36 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_1A37 );
+    return jumpDirect ( 0x1A37,prog_1A37 );
 }
 
 Control prog_1A37 ()
 {
     at ( "1A37" );
-    instruction ( "JP   NZ,1A32",0x1A3A );
+    instruction ( "JP   NZ,1A32",e16_hi_lo ( 0x1A,0x3A ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_1A32 );
+        return jumpDirect ( 0x1A32,prog_1A32 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_1A3A );
+        return jumpDirect ( 0x1A3A,prog_1A3A );
     }
 }
 
 Control prog_1A3A ()
 {
     at ( "1A3A" );
-    instruction ( "RET",0x1A3B );
+    instruction ( "RET",e16_hi_lo ( 0x1A,0x3B ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -36375,139 +36375,139 @@ Control prog_1A3A ()
 Control prog_1A3B ()
 {
     at ( "1A3B" );
-    instruction ( "LD   E,(HL)",0x1A3C );
+    instruction ( "LD   E,(HL)",e16_hi_lo ( 0x1A,0x3C ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     E = a3;
-    return jumpDirect ( prog_1A3C );
+    return jumpDirect ( 0x1A3C,prog_1A3C );
 }
 
 Control prog_1A3C ()
 {
     at ( "1A3C" );
-    instruction ( "INC  HL",0x1A3D );
+    instruction ( "INC  HL",e16_hi_lo ( 0x1A,0x3D ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_1A3D );
+    return jumpDirect ( 0x1A3D,prog_1A3D );
 }
 
 Control prog_1A3D ()
 {
     at ( "1A3D" );
-    instruction ( "LD   D,(HL)",0x1A3E );
+    instruction ( "LD   D,(HL)",e16_hi_lo ( 0x1A,0x3E ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     D = a3;
-    return jumpDirect ( prog_1A3E );
+    return jumpDirect ( 0x1A3E,prog_1A3E );
 }
 
 Control prog_1A3E ()
 {
     at ( "1A3E" );
-    instruction ( "INC  HL",0x1A3F );
+    instruction ( "INC  HL",e16_hi_lo ( 0x1A,0x3F ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_1A3F );
+    return jumpDirect ( 0x1A3F,prog_1A3F );
 }
 
 Control prog_1A3F ()
 {
     at ( "1A3F" );
-    instruction ( "LD   A,(HL)",0x1A40 );
+    instruction ( "LD   A,(HL)",e16_hi_lo ( 0x1A,0x40 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_1A40 );
+    return jumpDirect ( 0x1A40,prog_1A40 );
 }
 
 Control prog_1A40 ()
 {
     at ( "1A40" );
-    instruction ( "INC  HL",0x1A41 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x1A,0x41 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_1A41 );
+    return jumpDirect ( 0x1A41,prog_1A41 );
 }
 
 Control prog_1A41 ()
 {
     at ( "1A41" );
-    instruction ( "LD   C,(HL)",0x1A42 );
+    instruction ( "LD   C,(HL)",e16_hi_lo ( 0x1A,0x42 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     C = a3;
-    return jumpDirect ( prog_1A42 );
+    return jumpDirect ( 0x1A42,prog_1A42 );
 }
 
 Control prog_1A42 ()
 {
     at ( "1A42" );
-    instruction ( "INC  HL",0x1A43 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x1A,0x43 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_1A43 );
+    return jumpDirect ( 0x1A43,prog_1A43 );
 }
 
 Control prog_1A43 ()
 {
     at ( "1A43" );
-    instruction ( "LD   B,(HL)",0x1A44 );
+    instruction ( "LD   B,(HL)",e16_hi_lo ( 0x1A,0x44 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     B = a3;
-    return jumpDirect ( prog_1A44 );
+    return jumpDirect ( 0x1A44,prog_1A44 );
 }
 
 Control prog_1A44 ()
 {
     at ( "1A44" );
-    instruction ( "LD   H,C",0x1A45 );
+    instruction ( "LD   H,C",e16_hi_lo ( 0x1A,0x45 ) );
     u8 a1 = C ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( prog_1A45 );
+    return jumpDirect ( 0x1A45,prog_1A45 );
 }
 
 Control prog_1A45 ()
 {
     at ( "1A45" );
-    instruction ( "LD   L,A",0x1A46 );
+    instruction ( "LD   L,A",e16_hi_lo ( 0x1A,0x46 ) );
     u8 a1 = A ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( prog_1A46 );
+    return jumpDirect ( 0x1A46,prog_1A46 );
 }
 
 Control prog_1A46 ()
 {
     at ( "1A46" );
-    instruction ( "RET",0x1A47 );
+    instruction ( "RET",e16_hi_lo ( 0x1A,0x47 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -36525,7 +36525,7 @@ Control prog_1A46 ()
 Control prog_1A47 ()
 {
     at ( "1A47" );
-    instruction ( "PUSH BC",0x1A48 );
+    instruction ( "PUSH BC",e16_hi_lo ( 0x1A,0x48 ) );
     u8 a1 = B ;
     u8 a2 = C ;
     u8 a3 = SPH ;
@@ -36539,84 +36539,84 @@ Control prog_1A47 ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_1A48 );
+    return jumpDirect ( 0x1A48,prog_1A48 );
 }
 
 Control prog_1A48 ()
 {
     at ( "1A48" );
-    instruction ( "LD   B,03",0x1A4A );
+    instruction ( "LD   B,03",e16_hi_lo ( 0x1A,0x4A ) );
     advance ( 7 );
     B = 0x03;
-    return jumpDirect ( prog_1A4A );
+    return jumpDirect ( 0x1A4A,prog_1A4A );
 }
 
 Control prog_1A4A ()
 {
     at ( "1A4A" );
-    instruction ( "LD   A,H",0x1A4B );
+    instruction ( "LD   A,H",e16_hi_lo ( 0x1A,0x4B ) );
     u8 a1 = H ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_1A4B );
+    return jumpDirect ( 0x1A4B,prog_1A4B );
 }
 
 Control prog_1A4B ()
 {
     at ( "1A4B" );
-    instruction ( "RAR",0x1A4C );
+    instruction ( "RAR",e16_hi_lo ( 0x1A,0x4C ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftR ( a1,0x01 ),7,FlagCY );
     FlagCY = e1_test_bit ( a1,0 );
-    return jumpDirect ( prog_1A4C );
+    return jumpDirect ( 0x1A4C,prog_1A4C );
 }
 
 Control prog_1A4C ()
 {
     at ( "1A4C" );
-    instruction ( "LD   H,A",0x1A4D );
+    instruction ( "LD   H,A",e16_hi_lo ( 0x1A,0x4D ) );
     u8 a1 = A ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( prog_1A4D );
+    return jumpDirect ( 0x1A4D,prog_1A4D );
 }
 
 Control prog_1A4D ()
 {
     at ( "1A4D" );
-    instruction ( "LD   A,L",0x1A4E );
+    instruction ( "LD   A,L",e16_hi_lo ( 0x1A,0x4E ) );
     u8 a1 = L ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_1A4E );
+    return jumpDirect ( 0x1A4E,prog_1A4E );
 }
 
 Control prog_1A4E ()
 {
     at ( "1A4E" );
-    instruction ( "RAR",0x1A4F );
+    instruction ( "RAR",e16_hi_lo ( 0x1A,0x4F ) );
     u8 a1 = A ;
     advance ( 4 );
     A = e8_update_bit ( e8_shiftR ( a1,0x01 ),7,FlagCY );
     FlagCY = e1_test_bit ( a1,0 );
-    return jumpDirect ( prog_1A4F );
+    return jumpDirect ( 0x1A4F,prog_1A4F );
 }
 
 Control prog_1A4F ()
 {
     at ( "1A4F" );
-    instruction ( "LD   L,A",0x1A50 );
+    instruction ( "LD   L,A",e16_hi_lo ( 0x1A,0x50 ) );
     u8 a1 = A ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( prog_1A50 );
+    return jumpDirect ( 0x1A50,prog_1A50 );
 }
 
 Control prog_1A50 ()
 {
     at ( "1A50" );
-    instruction ( "DEC  B",0x1A51 );
+    instruction ( "DEC  B",e16_hi_lo ( 0x1A,0x51 ) );
     u8 a1 = B ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -36628,39 +36628,39 @@ Control prog_1A50 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_1A51 );
+    return jumpDirect ( 0x1A51,prog_1A51 );
 }
 
 Control prog_1A51 ()
 {
     at ( "1A51" );
-    instruction ( "JP   NZ,1A4A",0x1A54 );
+    instruction ( "JP   NZ,1A4A",e16_hi_lo ( 0x1A,0x54 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_1A4A );
+        return jumpDirect ( 0x1A4A,prog_1A4A );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_1A54 );
+        return jumpDirect ( 0x1A54,prog_1A54 );
     }
 }
 
 Control prog_1A54 ()
 {
     at ( "1A54" );
-    instruction ( "LD   A,H",0x1A55 );
+    instruction ( "LD   A,H",e16_hi_lo ( 0x1A,0x55 ) );
     u8 a1 = H ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_1A55 );
+    return jumpDirect ( 0x1A55,prog_1A55 );
 }
 
 Control prog_1A55 ()
 {
     at ( "1A55" );
-    instruction ( "AND  3F",0x1A57 );
+    instruction ( "AND  3F",e16_hi_lo ( 0x1A,0x57 ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( 0x3F,a1 ) ;
     u8 a3 = e8_or ( 0x3F,a1 ) ;
@@ -36671,13 +36671,13 @@ Control prog_1A55 ()
     FlagA = e1_test_bit ( a3,3 );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_1A57 );
+    return jumpDirect ( 0x1A57,prog_1A57 );
 }
 
 Control prog_1A57 ()
 {
     at ( "1A57" );
-    instruction ( "OR   20",0x1A59 );
+    instruction ( "OR   20",e16_hi_lo ( 0x1A,0x59 ) );
     u8 a1 = A ;
     u8 a2 = e8_or ( 0x20,a1 ) ;
     advance ( 7 );
@@ -36687,23 +36687,23 @@ Control prog_1A57 ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_1A59 );
+    return jumpDirect ( 0x1A59,prog_1A59 );
 }
 
 Control prog_1A59 ()
 {
     at ( "1A59" );
-    instruction ( "LD   H,A",0x1A5A );
+    instruction ( "LD   H,A",e16_hi_lo ( 0x1A,0x5A ) );
     u8 a1 = A ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( prog_1A5A );
+    return jumpDirect ( 0x1A5A,prog_1A5A );
 }
 
 Control prog_1A5A ()
 {
     at ( "1A5A" );
-    instruction ( "POP  BC",0x1A5B );
+    instruction ( "POP  BC",e16_hi_lo ( 0x1A,0x5B ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -36717,13 +36717,13 @@ Control prog_1A5A ()
     C = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_1A5B );
+    return jumpDirect ( 0x1A5B,prog_1A5B );
 }
 
 Control prog_1A5B ()
 {
     at ( "1A5B" );
-    instruction ( "RET",0x1A5C );
+    instruction ( "RET",e16_hi_lo ( 0x1A,0x5C ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -36741,51 +36741,51 @@ Control prog_1A5B ()
 Control prog_1A5C ()
 {
     at ( "1A5C" );
-    instruction ( "LD   HL,2400",0x1A5F );
+    instruction ( "LD   HL,2400",e16_hi_lo ( 0x1A,0x5F ) );
     advance ( 10 );
     H = 0x24;
     L = 0x00;
-    return jumpDirect ( prog_1A5F );
+    return jumpDirect ( 0x1A5F,prog_1A5F );
 }
 
 Control prog_1A5F ()
 {
     at ( "1A5F" );
-    instruction ( "LD   (HL),00",0x1A61 );
+    instruction ( "LD   (HL),00",e16_hi_lo ( 0x1A,0x61 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     mem_write ( e16_hi_lo ( a1,a2 ),0x00 );
     advance ( 10 );
-    return jumpDirect ( prog_1A61 );
+    return jumpDirect ( 0x1A61,prog_1A61 );
 }
 
 Control prog_1A61 ()
 {
     at ( "1A61" );
-    instruction ( "INC  HL",0x1A62 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x1A,0x62 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_1A62 );
+    return jumpDirect ( 0x1A62,prog_1A62 );
 }
 
 Control prog_1A62 ()
 {
     at ( "1A62" );
-    instruction ( "LD   A,H",0x1A63 );
+    instruction ( "LD   A,H",e16_hi_lo ( 0x1A,0x63 ) );
     u8 a1 = H ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( prog_1A63 );
+    return jumpDirect ( 0x1A63,prog_1A63 );
 }
 
 Control prog_1A63 ()
 {
     at ( "1A63" );
-    instruction ( "CP   40",0x1A65 );
+    instruction ( "CP   40",e16_hi_lo ( 0x1A,0x65 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_false (  ) ),a1,e8_complement ( 0x40 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -36797,29 +36797,29 @@ Control prog_1A63 ()
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
     FlagCY = e1_flip ( e1_test_bit ( e8_hi ( a2 ),0 ) );
-    return jumpDirect ( prog_1A65 );
+    return jumpDirect ( 0x1A65,prog_1A65 );
 }
 
 Control prog_1A65 ()
 {
     at ( "1A65" );
-    instruction ( "JP   NZ,1A5F",0x1A68 );
+    instruction ( "JP   NZ,1A5F",e16_hi_lo ( 0x1A,0x68 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_1A5F );
+        return jumpDirect ( 0x1A5F,prog_1A5F );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_1A68 );
+        return jumpDirect ( 0x1A68,prog_1A68 );
     }
 }
 
 Control prog_1A68 ()
 {
     at ( "1A68" );
-    instruction ( "RET",0x1A69 );
+    instruction ( "RET",e16_hi_lo ( 0x1A,0x69 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -36837,7 +36837,7 @@ Control prog_1A68 ()
 Control prog_1A69 ()
 {
     at ( "1A69" );
-    instruction ( "PUSH BC",0x1A6A );
+    instruction ( "PUSH BC",e16_hi_lo ( 0x1A,0x6A ) );
     u8 a1 = B ;
     u8 a2 = C ;
     u8 a3 = SPH ;
@@ -36851,13 +36851,13 @@ Control prog_1A69 ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_1A6A );
+    return jumpDirect ( 0x1A6A,prog_1A6A );
 }
 
 Control prog_1A6A ()
 {
     at ( "1A6A" );
-    instruction ( "PUSH HL",0x1A6B );
+    instruction ( "PUSH HL",e16_hi_lo ( 0x1A,0x6B ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = SPH ;
@@ -36871,25 +36871,25 @@ Control prog_1A6A ()
     advance ( 11 );
     SPH = e8_hi ( a8 );
     SPL = e8_lo ( a8 );
-    return jumpDirect ( prog_1A6B );
+    return jumpDirect ( 0x1A6B,prog_1A6B );
 }
 
 Control prog_1A6B ()
 {
     at ( "1A6B" );
-    instruction ( "LD   A,(DE)",0x1A6C );
+    instruction ( "LD   A,(DE)",e16_hi_lo ( 0x1A,0x6C ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( prog_1A6C );
+    return jumpDirect ( 0x1A6C,prog_1A6C );
 }
 
 Control prog_1A6C ()
 {
     at ( "1A6C" );
-    instruction ( "OR   (HL)",0x1A6D );
+    instruction ( "OR   (HL)",e16_hi_lo ( 0x1A,0x6D ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u8 a3 = e8_read_mem ( e16_hi_lo ( a1,a2 ) ) ;
@@ -36902,51 +36902,51 @@ Control prog_1A6C ()
     FlagA = e1_false (  );
     FlagP = e1_parity ( a5 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_1A6D );
+    return jumpDirect ( 0x1A6D,prog_1A6D );
 }
 
 Control prog_1A6D ()
 {
     at ( "1A6D" );
-    instruction ( "LD   (HL),A",0x1A6E );
+    instruction ( "LD   (HL),A",e16_hi_lo ( 0x1A,0x6E ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_1A6E );
+    return jumpDirect ( 0x1A6E,prog_1A6E );
 }
 
 Control prog_1A6E ()
 {
     at ( "1A6E" );
-    instruction ( "INC  DE",0x1A6F );
+    instruction ( "INC  DE",e16_hi_lo ( 0x1A,0x6F ) );
     u8 a1 = D ;
     u8 a2 = E ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     D = e8_hi ( a3 );
     E = e8_lo ( a3 );
-    return jumpDirect ( prog_1A6F );
+    return jumpDirect ( 0x1A6F,prog_1A6F );
 }
 
 Control prog_1A6F ()
 {
     at ( "1A6F" );
-    instruction ( "INC  HL",0x1A70 );
+    instruction ( "INC  HL",e16_hi_lo ( 0x1A,0x70 ) );
     u8 a1 = H ;
     u8 a2 = L ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
     advance ( 5 );
     H = e8_hi ( a3 );
     L = e8_lo ( a3 );
-    return jumpDirect ( prog_1A70 );
+    return jumpDirect ( 0x1A70,prog_1A70 );
 }
 
 Control prog_1A70 ()
 {
     at ( "1A70" );
-    instruction ( "DEC  C",0x1A71 );
+    instruction ( "DEC  C",e16_hi_lo ( 0x1A,0x71 ) );
     u8 a1 = C ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -36958,29 +36958,29 @@ Control prog_1A70 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_1A71 );
+    return jumpDirect ( 0x1A71,prog_1A71 );
 }
 
 Control prog_1A71 ()
 {
     at ( "1A71" );
-    instruction ( "JP   NZ,1A6B",0x1A74 );
+    instruction ( "JP   NZ,1A6B",e16_hi_lo ( 0x1A,0x74 ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_1A6B );
+        return jumpDirect ( 0x1A6B,prog_1A6B );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_1A74 );
+        return jumpDirect ( 0x1A74,prog_1A74 );
     }
 }
 
 Control prog_1A74 ()
 {
     at ( "1A74" );
-    instruction ( "POP  HL",0x1A75 );
+    instruction ( "POP  HL",e16_hi_lo ( 0x1A,0x75 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -36994,23 +36994,23 @@ Control prog_1A74 ()
     L = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_1A75 );
+    return jumpDirect ( 0x1A75,prog_1A75 );
 }
 
 Control prog_1A75 ()
 {
     at ( "1A75" );
-    instruction ( "LD   BC,0020",0x1A78 );
+    instruction ( "LD   BC,0020",e16_hi_lo ( 0x1A,0x78 ) );
     advance ( 10 );
     B = 0x00;
     C = 0x20;
-    return jumpDirect ( prog_1A78 );
+    return jumpDirect ( 0x1A78,prog_1A78 );
 }
 
 Control prog_1A78 ()
 {
     at ( "1A78" );
-    instruction ( "ADD  HL,BC",0x1A79 );
+    instruction ( "ADD  HL,BC",e16_hi_lo ( 0x1A,0x79 ) );
     u8 a1 = B ;
     u8 a2 = C ;
     u8 a3 = H ;
@@ -37020,13 +37020,13 @@ Control prog_1A78 ()
     H = e8_hi ( e16_drop_hi_bit_of_17 ( a5 ) );
     L = e8_lo ( e16_drop_hi_bit_of_17 ( a5 ) );
     FlagCY = e1_hi_bit_of_17 ( a5 );
-    return jumpDirect ( prog_1A79 );
+    return jumpDirect ( 0x1A79,prog_1A79 );
 }
 
 Control prog_1A79 ()
 {
     at ( "1A79" );
-    instruction ( "POP  BC",0x1A7A );
+    instruction ( "POP  BC",e16_hi_lo ( 0x1A,0x7A ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -37040,13 +37040,13 @@ Control prog_1A79 ()
     C = a4;
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_1A7A );
+    return jumpDirect ( 0x1A7A,prog_1A7A );
 }
 
 Control prog_1A7A ()
 {
     at ( "1A7A" );
-    instruction ( "DEC  B",0x1A7B );
+    instruction ( "DEC  B",e16_hi_lo ( 0x1A,0x7B ) );
     u8 a1 = B ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -37058,29 +37058,29 @@ Control prog_1A7A ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_1A7B );
+    return jumpDirect ( 0x1A7B,prog_1A7B );
 }
 
 Control prog_1A7B ()
 {
     at ( "1A7B" );
-    instruction ( "JP   NZ,1A69",0x1A7E );
+    instruction ( "JP   NZ,1A69",e16_hi_lo ( 0x1A,0x7E ) );
     if (e1_flip ( FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( prog_1A69 );
+        return jumpDirect ( 0x1A69,prog_1A69 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( prog_1A7E );
+        return jumpDirect ( 0x1A7E,prog_1A7E );
     }
 }
 
 Control prog_1A7E ()
 {
     at ( "1A7E" );
-    instruction ( "RET",0x1A7F );
+    instruction ( "RET",e16_hi_lo ( 0x1A,0x7F ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -37098,7 +37098,7 @@ Control prog_1A7E ()
 Control prog_1A7F ()
 {
     at ( "1A7F" );
-    instruction ( "CALL 092E",0x1A82 );
+    instruction ( "CALL 092E",e16_hi_lo ( 0x1A,0x82 ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -37111,13 +37111,13 @@ Control prog_1A7F ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_092E );
+    return jumpDirect ( 0x092E,prog_092E );
 }
 
 Control prog_1A82 ()
 {
     at ( "1A82" );
-    instruction ( "AND  A",0x1A83 );
+    instruction ( "AND  A",e16_hi_lo ( 0x1A,0x83 ) );
     u8 a1 = A ;
     u8 a2 = A ;
     u8 a3 = e8_and ( a1,a2 ) ;
@@ -37129,13 +37129,13 @@ Control prog_1A82 ()
     FlagA = e1_test_bit ( a4,3 );
     FlagP = e1_parity ( a3 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_1A83 );
+    return jumpDirect ( 0x1A83,prog_1A83 );
 }
 
 Control prog_1A83 ()
 {
     at ( "1A83" );
-    instruction ( "RET  Z",0x1A84 );
+    instruction ( "RET  Z",e16_hi_lo ( 0x1A,0x84 ) );
     if (FlagZ)
     {
         u8 a1 = SPH ;
@@ -37154,14 +37154,14 @@ Control prog_1A83 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( prog_1A84 );
+        return jumpDirect ( 0x1A84,prog_1A84 );
     }
 }
 
 Control prog_1A84 ()
 {
     at ( "1A84" );
-    instruction ( "PUSH PSW",0x1A85 );
+    instruction ( "PUSH PSW",e16_hi_lo ( 0x1A,0x85 ) );
     u8 a1 = A ;
     u8 a2 = SPH ;
     u8 a3 = SPL ;
@@ -37174,13 +37174,13 @@ Control prog_1A84 ()
     advance ( 11 );
     SPH = e8_hi ( a7 );
     SPL = e8_lo ( a7 );
-    return jumpDirect ( prog_1A85 );
+    return jumpDirect ( 0x1A85,prog_1A85 );
 }
 
 Control prog_1A85 ()
 {
     at ( "1A85" );
-    instruction ( "DEC  A",0x1A86 );
+    instruction ( "DEC  A",e16_hi_lo ( 0x1A,0x86 ) );
     u8 a1 = A ;
     u16 a2 = e16_add_with_carry ( e1_flip ( e1_true (  ) ),a1,e8_complement ( 0x00 ) ) ;
     u8 a3 = e8_and ( a1,0x0F ) ;
@@ -37192,25 +37192,25 @@ Control prog_1A85 ()
     FlagZ = e1_is_zero ( e8_lo ( a2 ) );
     FlagA = e1_test_bit ( e8_lo ( a5 ),4 );
     FlagP = e1_parity ( e8_lo ( a2 ) );
-    return jumpDirect ( prog_1A86 );
+    return jumpDirect ( 0x1A86,prog_1A86 );
 }
 
 Control prog_1A86 ()
 {
     at ( "1A86" );
-    instruction ( "LD   (HL),A",0x1A87 );
+    instruction ( "LD   (HL),A",e16_hi_lo ( 0x1A,0x87 ) );
     u8 a1 = A ;
     u8 a2 = H ;
     u8 a3 = L ;
     mem_write ( e16_hi_lo ( a2,a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( prog_1A87 );
+    return jumpDirect ( 0x1A87,prog_1A87 );
 }
 
 Control prog_1A87 ()
 {
     at ( "1A87" );
-    instruction ( "CALL 19E6",0x1A8A );
+    instruction ( "CALL 19E6",e16_hi_lo ( 0x1A,0x8A ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( -1,e16_hi_lo ( a1,a2 ) ) ;
@@ -37223,13 +37223,13 @@ Control prog_1A87 ()
     advance ( 17 );
     SPH = e8_hi ( a6 );
     SPL = e8_lo ( a6 );
-    return jumpDirect ( prog_19E6 );
+    return jumpDirect ( 0x19E6,prog_19E6 );
 }
 
 Control prog_1A8A ()
 {
     at ( "1A8A" );
-    instruction ( "POP  PSW",0x1A8B );
+    instruction ( "POP  PSW",e16_hi_lo ( 0x1A,0x8B ) );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
     u16 a3 = e16_offset_addr ( 1,e16_hi_lo ( a1,a2 ) ) ;
@@ -37247,23 +37247,23 @@ Control prog_1A8A ()
     FlagA = e1_test_bit ( a4,4 );
     FlagP = e1_test_bit ( a4,2 );
     FlagCY = e1_test_bit ( a4,0 );
-    return jumpDirect ( prog_1A8B );
+    return jumpDirect ( 0x1A8B,prog_1A8B );
 }
 
 Control prog_1A8B ()
 {
     at ( "1A8B" );
-    instruction ( "LD   HL,2501",0x1A8E );
+    instruction ( "LD   HL,2501",e16_hi_lo ( 0x1A,0x8E ) );
     advance ( 10 );
     H = 0x25;
     L = 0x01;
-    return jumpDirect ( prog_1A8E );
+    return jumpDirect ( 0x1A8E,prog_1A8E );
 }
 
 Control prog_1A8E ()
 {
     at ( "1A8E" );
-    instruction ( "AND  0F",0x1A90 );
+    instruction ( "AND  0F",e16_hi_lo ( 0x1A,0x90 ) );
     u8 a1 = A ;
     u8 a2 = e8_and ( 0x0F,a1 ) ;
     u8 a3 = e8_or ( 0x0F,a1 ) ;
@@ -37274,14 +37274,52 @@ Control prog_1A8E ()
     FlagA = e1_test_bit ( a3,3 );
     FlagP = e1_parity ( a2 );
     FlagCY = e1_false (  );
-    return jumpDirect ( prog_1A90 );
+    return jumpDirect ( 0x1A90,prog_1A90 );
 }
 
 Control prog_1A90 ()
 {
     at ( "1A90" );
-    instruction ( "JP   09C5",0x1A93 );
+    instruction ( "JP   09C5",e16_hi_lo ( 0x1A,0x93 ) );
     advance ( 10 );
-    return jumpDirect ( prog_09C5 );
+    return jumpDirect ( 0x09C5,prog_09C5 );
+}
+
+Control op_rst1 ()
+{
+    instruction ( "RST  1",e16_hi_lo ( PCH,PCL ) );
+    u8 a1 = PCH ;
+    u8 a2 = SPH ;
+    u8 a3 = SPL ;
+    u16 a4 = e16_offset_addr ( -1,e16_hi_lo ( a2,a3 ) ) ;
+    mem_write ( a4,a1 );
+    u8 a5 = PCL ;
+    u8 a6 = e8_hi ( a4 ) ;
+    u8 a7 = e8_lo ( a4 ) ;
+    u16 a8 = e16_offset_addr ( -1,e16_hi_lo ( a6,a7 ) ) ;
+    mem_write ( a8,a5 );
+    advance ( 4 );
+    SPH = e8_hi ( a8 );
+    SPL = e8_lo ( a8 );
+    return jumpDirect ( 0x0008,prog_0008 );
+}
+
+Control op_rst2 ()
+{
+    instruction ( "RST  2",e16_hi_lo ( PCH,PCL ) );
+    u8 a1 = PCH ;
+    u8 a2 = SPH ;
+    u8 a3 = SPL ;
+    u16 a4 = e16_offset_addr ( -1,e16_hi_lo ( a2,a3 ) ) ;
+    mem_write ( a4,a1 );
+    u8 a5 = PCL ;
+    u8 a6 = e8_hi ( a4 ) ;
+    u8 a7 = e8_lo ( a4 ) ;
+    u16 a8 = e16_offset_addr ( -1,e16_hi_lo ( a6,a7 ) ) ;
+    mem_write ( a8,a5 );
+    advance ( 4 );
+    SPH = e8_hi ( a8 );
+    SPL = e8_lo ( a8 );
+    return jumpDirect ( 0x0010,prog_0010 );
 }
 

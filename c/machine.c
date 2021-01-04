@@ -3,8 +3,12 @@
 
 Control prog_0000 ();
 
-int icount = 0;
-int cycles = 0;
+static int icount = 0;
+static int cycles = 0;
+
+#define HALF_FRAME_CYCLES (2000000 / 120)
+
+static int credit = HALF_FRAME_CYCLES;
 
 int main () {
   Func fn = prog_0000;
@@ -40,19 +44,47 @@ void instruction(const char* instruction, u16 pcAfterInstructionDecode) {
   dump_state(instruction,pcAfterInstructionDecode);
   icount++;
   if (icount>50000) die;
+  //if (icount>42270) die;
 }
 
 void advance(int n) {
   cycles += n;
+  credit -= n;
 }
 
-Control jumpDirect(Func f) {
+Control op_rst1();
+Control op_rst2();
+
+static bool half = false;
+static int interrupts = 0;
+
+static bool interrupts_enabled = false;
+
+Control jumpDirect(u16 pc, Func f) {
+  if (credit <= 0) {
+    credit += HALF_FRAME_CYCLES;
+    half ^= true;
+    interrupts++;
+    /*printf ("cycles = %d, interrupt (%d), enabled = %s: %s\n",
+            cycles,
+            interrupts,
+            interrupts_enabled ? "ENABLED" : "disabled",
+            half ? "rstHalf (RST 1)" : "rstVblank (RST 2)"
+            );*/
+    if (interrupts_enabled) {
+      interrupts_enabled = false;
+      PCH = e8_hi(pc);
+      PCL = e8_lo(pc);
+      return (Control)(half ? op_rst1 : op_rst2);
+    }
+  }
+  //printf ("jumpDirect\n");
   return (Control)f;
 }
 
 Control jump16(u16 x) {
   switch(x) {
-#define target(a) Control prog_ ## a (); case 0x ## a: return (Control) prog_ ## a;
+#define target(A) Control prog_##A (); case 0x##A: return jumpDirect( 0x##A, prog_##A );
     target(18DC)
     target(1959)
     target(08F8)
@@ -66,6 +98,7 @@ Control jump16(u16 x) {
     target(1968)
     target(18DF)
     target(0AF2)
+    target(0ADD)
   default: {
     printf ("jump16: unknown target address: %04x\n",x);
     die;
@@ -92,6 +125,7 @@ void sound_control(const char* sound,u1 b) {
 
 void enable_interrupts(void) {
   //printf ("enable_interrupts\n");
+  interrupts_enabled = true;
 }
 
 u1 e1_true() { return 1; }

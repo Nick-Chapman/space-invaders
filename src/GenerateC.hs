@@ -5,12 +5,13 @@ import Prelude hiding (init)
 
 import Addr (Addr)
 import Byte (Byte)
-import Compile (compileAt)
+import Compile (compileOp,compileAt)
 import Cpu (Reg(..),Flag(..))
 import Data.List (intercalate)
 import Data.Map (Map)
 import Data.Maybe (fromJust)
 import HiLo (HiLo(..))
+import InstructionSet (Op(Op0),Op0(RST))
 import Residual (Exp1(..),Exp8(..),Exp16(..),Exp17(..),Program(..),AVar,Lay,vert,lay,tab)
 import Rom (Rom,lookup)
 import Static (oneStepReach,searchReach,startPoints)
@@ -45,11 +46,6 @@ convertRom rom = do
 
   let reachablePrograms = [ (a,p) | (a,p) <- programsForEveryAddress, a `elem` reachSet ]
   let
-    forwards = [FunDec $ makeForward addr | (addr,_) <- reachablePrograms ]
-  let
-    defs = [ FunDef $ convertProgramForAddress addr program
-           | (addr,program) <- reachablePrograms ]
-  let
     mem =
       ArrDef (CArrDef
                { typ=u8t
@@ -58,38 +54,40 @@ convertRom rom = do
                , init = [ LitB $ fromJust $ Rom.lookup rom a
                         | a <- take 0x2000 [0..] ]
                })
+  let
+    forwards =
+      [FunDec $ CFunDec
+        { typ = CType "Control"
+        , name = nameOfAddr addr
+        }
+      | (addr,_) <- reachablePrograms ]
+  let
+    defs =
+      [ FunDef $ CFunDef
+        { typ = CType "Control"
+        , name = nameOfAddr addr
+        , body = Block (convertProgram program)
+        }
+      | (addr,program) <- reachablePrograms ]
+  let
+    op_rst n = FunDef $ CFunDef
+        { typ = CType "Control"
+        , name = CName ("op_rst" ++ show n)
+        , body = Block (convertProgram $ compileOp rom (Op0 (RST n)))
+        }
 
   return $ CFile $ [ Include "<stdio.h>"
                    , Include "\"machine.h\""
-                   ] ++ [mem] ++ forwards ++ defs
-
-makeForward :: Addr -> CFunDec
-makeForward addr =
-  CFunDec { typ = control, name }
-  where
-    control = CType "Control"
-    name = nameOfAddr addr
-
-convertProgramForAddress :: Addr -> Program -> CFunDef
-convertProgramForAddress addr program =
-  CFunDef { typ = control, name, body }
-  where
-    control = CType "Control"
-    name = nameOfAddr addr
-    body = Block (convertProgram program)
-
-nameOfAddr :: Addr -> CName
-nameOfAddr a = CName ("prog_" ++ show a)
+                   ] ++ [mem] ++ forwards ++ defs ++ [op_rst 1, op_rst 2]
 
 convertProgram :: Program  -> [CStat]
 convertProgram = \case
   S_AtRef a next -> Expression (call "at" [LitS $ show a]) : convertProgram next
   S_MarkReturnAddress a next -> Comment ("#mark-return: " ++ show a) : convertProgram next
-  S_TraceInstruction _cpu i pc next ->
-    Expression (call "instruction" [LitS $ show i, LitA pc]) : convertProgram next
+  S_TraceInstruction _cpu i pcAfterDecode next ->
+    Expression (call "instruction" [LitS $ show i, convert16 pcAfterDecode]) : convertProgram next
   S_Advance n next -> Expression (call "advance" [LitI n]) : convertProgram next
-  S_Jump (E16_Lit a) -> [Return (call "jumpDirect" [Ident $ nameOfAddr a])]
-  S_Jump e -> [Return (call "jump16" [convert16 e])]
+  S_Jump a -> [Return $ convertJump a]
   S_If i t e -> [If (convert1 i) (Block (convertProgram t)) (Block (convertProgram e))]
   S_AssignReg reg exp next -> Expression (Assign (convertReg reg) (convert8 exp)) : convertProgram next
   S_AssignFlag flag exp next -> Expression (Assign (convertFlag flag) (convert1 exp)) : convertProgram next
@@ -103,6 +101,16 @@ convertProgram = \case
   S_EnableInterrupts next -> Expression (call "enable_interrupts" []) : convertProgram next
   S_DisableInterrupts{} -> todo "S_DisableInterrupts"
   S_UnknownOutput{} -> todo "S_UnknownOutput"
+
+convertJump :: Exp16 -> CExp
+convertJump = \case
+  E16_Lit a ->
+    call "jumpDirect" [LitA a, Ident $ nameOfAddr a]
+  e ->
+    call "jump16" [convert16 e]
+
+nameOfAddr :: Addr -> CName
+nameOfAddr a = CName ("prog_" ++ show a)
 
 todo :: String -> [CStat]
 todo s = [Expression $ call "todo" [LitS s], Die]

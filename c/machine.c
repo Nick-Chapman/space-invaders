@@ -52,6 +52,14 @@ Control jump16(u16 x) {
     target(1959)
     target(08F8)
     target(195C)
+    target(09BD)
+    target(09C3)
+    target(09B1)
+    target(195F)
+    target(1962)
+    target(1965)
+    target(1968)
+    target(18DF)
   default: {
     printf ("jump16: unknown target address: %04x\n",x);
     die;
@@ -93,12 +101,18 @@ u1 e1_is_pressed(const char* s) { //TODO: use enum for buttons
 
 u8 e8_hi(u16 a) { return a>>8; }
 u8 e8_lo(u16 a) { return a & 0xFF; }
-u8 e8_update_bit(u8 e,int n,u1 p) { die; }
+u8 e8_update_bit(u8 e,int n,u1 p) {
+  return
+    p
+    ? e | (1<<n)
+    : e & ~(1<<n)
+    ;
+}
 u8 e8_complement(u8 e) { return ~e; }
 u8 e8_and(u8 x,u8 y) { return x&y; }
-u8 e8_or(u8 x,u8 y) { die; }
-u8 e8_xor(u8 x,u8 y) { die; }
-u8 e8_shiftR(u8 x,u8 y) { die; }
+u8 e8_or(u8 x,u8 y) { return x|y; }
+u8 e8_xor(u8 x,u8 y) { return x^y; }
+u8 e8_shiftR(u8 x,u8 y) { return x>>y; }
 u8 e8_shiftL(u8 x,u8 y) { die; }
 u8 e8_ite(u1 i,u8 t,u8 e) { die; }
 

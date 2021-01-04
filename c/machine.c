@@ -21,7 +21,7 @@ void todo(const char* s) {
 void at(const char* s) {
 }
 
-void instruction(const char* instruction, u16 pcAfterInstructionDecode) {
+void dump_state(const char* instruction, u16 pcAfterInstructionDecode) {
   printf("%8d  [%08d] "
          "PC:%04X "
          "A:%02X B:%02X C:%02X D:%02X E:%02X HL:%02X%02X SP:%02X%02X "
@@ -34,6 +34,10 @@ void instruction(const char* instruction, u16 pcAfterInstructionDecode) {
          FlagS,FlagZ,FlagA,FlagP,FlagCY,
          instruction
          );
+}
+
+void instruction(const char* instruction, u16 pcAfterInstructionDecode) {
+  dump_state(instruction,pcAfterInstructionDecode);
   icount++;
   if (icount>50000) die;
 }

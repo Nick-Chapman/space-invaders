@@ -43,8 +43,10 @@ void dump_state(const char* instruction, u16 pcAfterInstructionDecode) {
 void instruction(const char* instruction, u16 pcAfterInstructionDecode) {
   dump_state(instruction,pcAfterInstructionDecode);
   icount++;
-  if (icount>50000) die;
-  //if (icount>42270) die;
+  if (icount>50000) {
+    printf("STOP\n");
+    exit(0);
+  }
 }
 
 void advance(int n) {
@@ -99,6 +101,9 @@ Control jump16(u16 x) {
     target(18DF)
     target(0AF2)
     target(0ADD)
+    target(0020)
+    target(005A)
+    target(0ADA)
   default: {
     printf ("jump16: unknown target address: %04x\n",x);
     die;
@@ -143,8 +148,8 @@ u1 e1_parity(u8 e) {
 }
 
 u1 e1_is_pressed(const char* s) { //TODO: use enum for buttons
-  printf ("e1_is_pressed: %s\n", s);
-  die;
+  //printf ("e1_is_pressed: %s\n", s);
+  return false;
 }
 
 u8 e8_hi(u16 a) { return a>>8; }

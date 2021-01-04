@@ -83,12 +83,15 @@ main = do
   print ("#join",length joinPoints)
 
   let
+    labels = Set.fromList (startPoints ++ returnPoints ++ joinPoints)
+
+  print ("#labels",length labels)
+
+  let
     inlinedSharingJoins =
       [ (addr,program)
       | addr <- Set.toList labels
       , let program = compileAt (`notElem` labels) roms addr ]
-      where
-        labels = Set.fromList (startPoints ++ returnPoints ++ joinPoints)
 
   generateFile "4-inlined-upto-joins" $ layPrograms inlinedSharingJoins
   print ("max-prog-length(4)",maxProgramLengths inlinedSharingJoins)

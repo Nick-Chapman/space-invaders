@@ -84,31 +84,18 @@ Control jumpDirect(u16 pc, Func f) {
   return (Control)f;
 }
 
-Control jump16(u16 x) {
-  switch(x) {
-#define target(A) Control prog_##A (); case 0x##A: return jumpDirect( 0x##A, prog_##A );
-    target(18DC)
-    target(1959)
-    target(08F8)
-    target(195C)
-    target(09BD)
-    target(09C3)
-    target(09B1)
-    target(195F)
-    target(1962)
-    target(1965)
-    target(1968)
-    target(18DF)
-    target(0AF2)
-    target(0ADD)
-    target(0020)
-    target(005A)
-    target(0ADA)
-  default: {
-    printf ("jump16: unknown target address: %04x\n",x);
-    die;
+Control jump16(u16 a) {
+  //printf ("(%d) jump16: target address = %04x\n",cycles,a);
+  if (a>=ROM_SIZE) {
+    printf ("jump16: (a>=ROM_SIZE) : a=%04x, ROM_SIZE=%04x\n",a,ROM_SIZE);
+    die
   }
+  Func fn = prog[a];
+  if (fn == 0) {
+    printf ("jump16: no program for target address: %04x\n",a);
+    die
   }
+  return jumpDirect(a,fn);
 }
 
 void mem_write(u16 a,u8 e) {
@@ -116,8 +103,8 @@ void mem_write(u16 a,u8 e) {
     printf ("mem_write: (a>=MEM_SIZE) : a=%04x, MEM_SIZE=%04x\n",a,MEM_SIZE);
     die
   }
-  if (a<RAM_BASE) {
-    printf ("mem_write: (a<RAM_BASE) : a=%04x, RAM_BASE=%04x\n",a,RAM_BASE);
+  if (a<ROM_SIZE) {
+    printf ("mem_write: (a<ROM_SIZE) : a=%04x, ROM_SIZE=%04x\n",a,ROM_SIZE);
     die
   }
   //printf ("mem_write: M[%04x] = %02x\n",a,e);

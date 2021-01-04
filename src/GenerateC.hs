@@ -76,9 +76,21 @@ convertRom rom = do
         , body = Block (convertProgram $ compileOp rom (Op0 (RST n)))
         }
 
+  let
+    progs =
+      ArrDef (CArrDef
+               { typ  = CType "Func"
+               , name = CName "prog"
+               , size = Ident (CName "ROM_SIZE")
+               , init = [ if a `elem` reachSet
+                          then Ident (nameOfAddr a)
+                          else LitI 0
+                        | a <- take 0x2000 [0..] ]
+               })
+
   return $ CFile $ [ Include "<stdio.h>"
                    , Include "\"machine.h\""
-                   ] ++ [mem] ++ forwards ++ defs ++ [op_rst 1, op_rst 2]
+                   ] ++ [mem] ++ forwards ++ defs ++ [op_rst 1, op_rst 2] ++ [progs]
 
 convertProgram :: Program  -> [CStat]
 convertProgram = \case

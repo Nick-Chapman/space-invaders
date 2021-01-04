@@ -13,8 +13,10 @@ typedef unsigned char u8;
 typedef unsigned short u16;
 typedef unsigned int u17;
 
+#define ROM_SIZE 0x2000
 #define MEM_SIZE 0x4000
-#define RAM_BASE 0x2000
+
+Func prog [ROM_SIZE];
 
 u1 FlagS;
 u1 FlagZ;

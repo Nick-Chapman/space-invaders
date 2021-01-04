@@ -6188,8 +6188,12 @@ Control prog_0127 ()
 {
     at ( "0127" );
     instruction ( "ADD  HL,DE",0x0128 );
-    todo ( "S_Let17" );
-    die;
+    u17 a1 = e17_add ( e16_hi_lo ( D,E ),e16_hi_lo ( H,L ) ) ;
+    advance ( 10 );
+    H = e8_hi ( e16_drop_hi_bit_of_17 ( a1 ) );
+    L = e8_lo ( e16_drop_hi_bit_of_17 ( a1 ) );
+    FlagCY = e1_hi_bit_of_17 ( a1 );
+    return jumpDirect ( prog_0128 );
 }
 
 Control prog_0128 ()
@@ -6340,8 +6344,12 @@ Control prog_013E ()
 {
     at ( "013E" );
     instruction ( "ADD  HL,DE",0x013F );
-    todo ( "S_Let17" );
-    die;
+    u17 a1 = e17_add ( e16_hi_lo ( D,E ),e16_hi_lo ( H,L ) ) ;
+    advance ( 10 );
+    H = e8_hi ( e16_drop_hi_bit_of_17 ( a1 ) );
+    L = e8_lo ( e16_drop_hi_bit_of_17 ( a1 ) );
+    FlagCY = e1_hi_bit_of_17 ( a1 );
+    return jumpDirect ( prog_013F );
 }
 
 Control prog_013F ()
@@ -8057,8 +8065,12 @@ Control prog_023D ()
 {
     at ( "023D" );
     instruction ( "ADD  HL,DE",0x023E );
-    todo ( "S_Let17" );
-    die;
+    u17 a1 = e17_add ( e16_hi_lo ( D,E ),e16_hi_lo ( H,L ) ) ;
+    advance ( 10 );
+    H = e8_hi ( e16_drop_hi_bit_of_17 ( a1 ) );
+    L = e8_lo ( e16_drop_hi_bit_of_17 ( a1 ) );
+    FlagCY = e1_hi_bit_of_17 ( a1 );
+    return jumpDirect ( prog_023E );
 }
 
 Control prog_023E ()
@@ -8482,8 +8494,12 @@ Control prog_0273 ()
 {
     at ( "0273" );
     instruction ( "ADD  HL,DE",0x0274 );
-    todo ( "S_Let17" );
-    die;
+    u17 a1 = e17_add ( e16_hi_lo ( D,E ),e16_hi_lo ( H,L ) ) ;
+    advance ( 10 );
+    H = e8_hi ( e16_drop_hi_bit_of_17 ( a1 ) );
+    L = e8_lo ( e16_drop_hi_bit_of_17 ( a1 ) );
+    FlagCY = e1_hi_bit_of_17 ( a1 );
+    return jumpDirect ( prog_0274 );
 }
 
 Control prog_0274 ()
@@ -8621,8 +8637,12 @@ Control prog_0284 ()
 {
     at ( "0284" );
     instruction ( "ADD  HL,DE",0x0285 );
-    todo ( "S_Let17" );
-    die;
+    u17 a1 = e17_add ( e16_hi_lo ( D,E ),e16_hi_lo ( H,L ) ) ;
+    advance ( 10 );
+    H = e8_hi ( e16_drop_hi_bit_of_17 ( a1 ) );
+    L = e8_lo ( e16_drop_hi_bit_of_17 ( a1 ) );
+    FlagCY = e1_hi_bit_of_17 ( a1 );
+    return jumpDirect ( prog_0285 );
 }
 
 Control prog_0285 ()
@@ -15952,32 +15972,48 @@ Control prog_072F ()
 {
     at ( "072F" );
     instruction ( "ADD  HL,HL",0x0730 );
-    todo ( "S_Let17" );
-    die;
+    u17 a1 = e17_add ( e16_hi_lo ( H,L ),e16_hi_lo ( H,L ) ) ;
+    advance ( 10 );
+    H = e8_hi ( e16_drop_hi_bit_of_17 ( a1 ) );
+    L = e8_lo ( e16_drop_hi_bit_of_17 ( a1 ) );
+    FlagCY = e1_hi_bit_of_17 ( a1 );
+    return jumpDirect ( prog_0730 );
 }
 
 Control prog_0730 ()
 {
     at ( "0730" );
     instruction ( "ADD  HL,HL",0x0731 );
-    todo ( "S_Let17" );
-    die;
+    u17 a1 = e17_add ( e16_hi_lo ( H,L ),e16_hi_lo ( H,L ) ) ;
+    advance ( 10 );
+    H = e8_hi ( e16_drop_hi_bit_of_17 ( a1 ) );
+    L = e8_lo ( e16_drop_hi_bit_of_17 ( a1 ) );
+    FlagCY = e1_hi_bit_of_17 ( a1 );
+    return jumpDirect ( prog_0731 );
 }
 
 Control prog_0731 ()
 {
     at ( "0731" );
     instruction ( "ADD  HL,HL",0x0732 );
-    todo ( "S_Let17" );
-    die;
+    u17 a1 = e17_add ( e16_hi_lo ( H,L ),e16_hi_lo ( H,L ) ) ;
+    advance ( 10 );
+    H = e8_hi ( e16_drop_hi_bit_of_17 ( a1 ) );
+    L = e8_lo ( e16_drop_hi_bit_of_17 ( a1 ) );
+    FlagCY = e1_hi_bit_of_17 ( a1 );
+    return jumpDirect ( prog_0732 );
 }
 
 Control prog_0732 ()
 {
     at ( "0732" );
     instruction ( "ADD  HL,HL",0x0733 );
-    todo ( "S_Let17" );
-    die;
+    u17 a1 = e17_add ( e16_hi_lo ( H,L ),e16_hi_lo ( H,L ) ) ;
+    advance ( 10 );
+    H = e8_hi ( e16_drop_hi_bit_of_17 ( a1 ) );
+    L = e8_lo ( e16_drop_hi_bit_of_17 ( a1 ) );
+    FlagCY = e1_hi_bit_of_17 ( a1 );
+    return jumpDirect ( prog_0733 );
 }
 
 Control prog_0733 ()
@@ -18282,32 +18318,48 @@ Control prog_0906 ()
 {
     at ( "0906" );
     instruction ( "ADD  HL,HL",0x0907 );
-    todo ( "S_Let17" );
-    die;
+    u17 a1 = e17_add ( e16_hi_lo ( H,L ),e16_hi_lo ( H,L ) ) ;
+    advance ( 10 );
+    H = e8_hi ( e16_drop_hi_bit_of_17 ( a1 ) );
+    L = e8_lo ( e16_drop_hi_bit_of_17 ( a1 ) );
+    FlagCY = e1_hi_bit_of_17 ( a1 );
+    return jumpDirect ( prog_0907 );
 }
 
 Control prog_0907 ()
 {
     at ( "0907" );
     instruction ( "ADD  HL,HL",0x0908 );
-    todo ( "S_Let17" );
-    die;
+    u17 a1 = e17_add ( e16_hi_lo ( H,L ),e16_hi_lo ( H,L ) ) ;
+    advance ( 10 );
+    H = e8_hi ( e16_drop_hi_bit_of_17 ( a1 ) );
+    L = e8_lo ( e16_drop_hi_bit_of_17 ( a1 ) );
+    FlagCY = e1_hi_bit_of_17 ( a1 );
+    return jumpDirect ( prog_0908 );
 }
 
 Control prog_0908 ()
 {
     at ( "0908" );
     instruction ( "ADD  HL,HL",0x0909 );
-    todo ( "S_Let17" );
-    die;
+    u17 a1 = e17_add ( e16_hi_lo ( H,L ),e16_hi_lo ( H,L ) ) ;
+    advance ( 10 );
+    H = e8_hi ( e16_drop_hi_bit_of_17 ( a1 ) );
+    L = e8_lo ( e16_drop_hi_bit_of_17 ( a1 ) );
+    FlagCY = e1_hi_bit_of_17 ( a1 );
+    return jumpDirect ( prog_0909 );
 }
 
 Control prog_0909 ()
 {
     at ( "0909" );
     instruction ( "ADD  HL,DE",0x090A );
-    todo ( "S_Let17" );
-    die;
+    u17 a1 = e17_add ( e16_hi_lo ( D,E ),e16_hi_lo ( H,L ) ) ;
+    advance ( 10 );
+    H = e8_hi ( e16_drop_hi_bit_of_17 ( a1 ) );
+    L = e8_lo ( e16_drop_hi_bit_of_17 ( a1 ) );
+    FlagCY = e1_hi_bit_of_17 ( a1 );
+    return jumpDirect ( prog_090A );
 }
 
 Control prog_090A ()
@@ -19979,8 +20031,12 @@ Control prog_09E7 ()
 {
     at ( "09E7" );
     instruction ( "ADD  HL,DE",0x09E8 );
-    todo ( "S_Let17" );
-    die;
+    u17 a1 = e17_add ( e16_hi_lo ( D,E ),e16_hi_lo ( H,L ) ) ;
+    advance ( 10 );
+    H = e8_hi ( e16_drop_hi_bit_of_17 ( a1 ) );
+    L = e8_lo ( e16_drop_hi_bit_of_17 ( a1 ) );
+    FlagCY = e1_hi_bit_of_17 ( a1 );
+    return jumpDirect ( prog_09E8 );
 }
 
 Control prog_09E8 ()
@@ -23030,8 +23086,12 @@ Control prog_141B ()
 {
     at ( "141B" );
     instruction ( "ADD  HL,BC",0x141C );
-    todo ( "S_Let17" );
-    die;
+    u17 a1 = e17_add ( e16_hi_lo ( B,C ),e16_hi_lo ( H,L ) ) ;
+    advance ( 10 );
+    H = e8_hi ( e16_drop_hi_bit_of_17 ( a1 ) );
+    L = e8_lo ( e16_drop_hi_bit_of_17 ( a1 ) );
+    FlagCY = e1_hi_bit_of_17 ( a1 );
+    return jumpDirect ( prog_141C );
 }
 
 Control prog_141C ()
@@ -23225,8 +23285,12 @@ Control prog_1432 ()
 {
     at ( "1432" );
     instruction ( "ADD  HL,BC",0x1433 );
-    todo ( "S_Let17" );
-    die;
+    u17 a1 = e17_add ( e16_hi_lo ( B,C ),e16_hi_lo ( H,L ) ) ;
+    advance ( 10 );
+    H = e8_hi ( e16_drop_hi_bit_of_17 ( a1 ) );
+    L = e8_lo ( e16_drop_hi_bit_of_17 ( a1 ) );
+    FlagCY = e1_hi_bit_of_17 ( a1 );
+    return jumpDirect ( prog_1433 );
 }
 
 Control prog_1433 ()
@@ -23350,8 +23414,12 @@ Control prog_1440 ()
 {
     at ( "1440" );
     instruction ( "ADD  HL,BC",0x1441 );
-    todo ( "S_Let17" );
-    die;
+    u17 a1 = e17_add ( e16_hi_lo ( B,C ),e16_hi_lo ( H,L ) ) ;
+    advance ( 10 );
+    H = e8_hi ( e16_drop_hi_bit_of_17 ( a1 ) );
+    L = e8_lo ( e16_drop_hi_bit_of_17 ( a1 ) );
+    FlagCY = e1_hi_bit_of_17 ( a1 );
+    return jumpDirect ( prog_1441 );
 }
 
 Control prog_1441 ()
@@ -23649,8 +23717,12 @@ Control prog_146D ()
 {
     at ( "146D" );
     instruction ( "ADD  HL,BC",0x146E );
-    todo ( "S_Let17" );
-    die;
+    u17 a1 = e17_add ( e16_hi_lo ( B,C ),e16_hi_lo ( H,L ) ) ;
+    advance ( 10 );
+    H = e8_hi ( e16_drop_hi_bit_of_17 ( a1 ) );
+    L = e8_lo ( e16_drop_hi_bit_of_17 ( a1 ) );
+    FlagCY = e1_hi_bit_of_17 ( a1 );
+    return jumpDirect ( prog_146E );
 }
 
 Control prog_146E ()
@@ -23890,8 +23962,12 @@ Control prog_148A ()
 {
     at ( "148A" );
     instruction ( "ADD  HL,BC",0x148B );
-    todo ( "S_Let17" );
-    die;
+    u17 a1 = e17_add ( e16_hi_lo ( B,C ),e16_hi_lo ( H,L ) ) ;
+    advance ( 10 );
+    H = e8_hi ( e16_drop_hi_bit_of_17 ( a1 ) );
+    L = e8_lo ( e16_drop_hi_bit_of_17 ( a1 ) );
+    FlagCY = e1_hi_bit_of_17 ( a1 );
+    return jumpDirect ( prog_148B );
 }
 
 Control prog_148B ()
@@ -24363,8 +24439,12 @@ Control prog_14C4 ()
 {
     at ( "14C4" );
     instruction ( "ADD  HL,BC",0x14C5 );
-    todo ( "S_Let17" );
-    die;
+    u17 a1 = e17_add ( e16_hi_lo ( B,C ),e16_hi_lo ( H,L ) ) ;
+    advance ( 10 );
+    H = e8_hi ( e16_drop_hi_bit_of_17 ( a1 ) );
+    L = e8_lo ( e16_drop_hi_bit_of_17 ( a1 ) );
+    FlagCY = e1_hi_bit_of_17 ( a1 );
+    return jumpDirect ( prog_14C5 );
 }
 
 Control prog_14C5 ()
@@ -24482,8 +24562,12 @@ Control prog_14D1 ()
 {
     at ( "14D1" );
     instruction ( "ADD  HL,BC",0x14D2 );
-    todo ( "S_Let17" );
-    die;
+    u17 a1 = e17_add ( e16_hi_lo ( B,C ),e16_hi_lo ( H,L ) ) ;
+    advance ( 10 );
+    H = e8_hi ( e16_drop_hi_bit_of_17 ( a1 ) );
+    L = e8_lo ( e16_drop_hi_bit_of_17 ( a1 ) );
+    FlagCY = e1_hi_bit_of_17 ( a1 );
+    return jumpDirect ( prog_14D2 );
 }
 
 Control prog_14D2 ()
@@ -26396,8 +26480,12 @@ Control prog_15EB ()
 {
     at ( "15EB" );
     instruction ( "ADD  HL,BC",0x15EC );
-    todo ( "S_Let17" );
-    die;
+    u17 a1 = e17_add ( e16_hi_lo ( B,C ),e16_hi_lo ( H,L ) ) ;
+    advance ( 10 );
+    H = e8_hi ( e16_drop_hi_bit_of_17 ( a1 ) );
+    L = e8_lo ( e16_drop_hi_bit_of_17 ( a1 ) );
+    FlagCY = e1_hi_bit_of_17 ( a1 );
+    return jumpDirect ( prog_15EC );
 }
 
 Control prog_15EC ()
@@ -30589,8 +30677,12 @@ Control prog_1887 ()
 {
     at ( "1887" );
     instruction ( "ADD  HL,DE",0x1888 );
-    todo ( "S_Let17" );
-    die;
+    u17 a1 = e17_add ( e16_hi_lo ( D,E ),e16_hi_lo ( H,L ) ) ;
+    advance ( 10 );
+    H = e8_hi ( e16_drop_hi_bit_of_17 ( a1 ) );
+    L = e8_lo ( e16_drop_hi_bit_of_17 ( a1 ) );
+    FlagCY = e1_hi_bit_of_17 ( a1 );
+    return jumpDirect ( prog_1888 );
 }
 
 Control prog_1888 ()
@@ -33071,8 +33163,12 @@ Control prog_1A78 ()
 {
     at ( "1A78" );
     instruction ( "ADD  HL,BC",0x1A79 );
-    todo ( "S_Let17" );
-    die;
+    u17 a1 = e17_add ( e16_hi_lo ( B,C ),e16_hi_lo ( H,L ) ) ;
+    advance ( 10 );
+    H = e8_hi ( e16_drop_hi_bit_of_17 ( a1 ) );
+    L = e8_lo ( e16_drop_hi_bit_of_17 ( a1 ) );
+    FlagCY = e1_hi_bit_of_17 ( a1 );
+    return jumpDirect ( prog_1A79 );
 }
 
 Control prog_1A79 ()

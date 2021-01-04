@@ -11,6 +11,7 @@ typedef bool u1;
 // TODO: use uint8_t etc
 typedef unsigned char u8;
 typedef unsigned short u16;
+typedef unsigned int u17;
 
 #define MEM_SIZE 0x4000
 #define RAM_BASE 0x2000
@@ -54,6 +55,7 @@ u1 e1_is_zero(u8);
 u1 e1_test_bit(u8,int);
 u1 e1_or_bit(u1,u1);
 u1 e1_and_bit(u1,u1);
+u1 e1_hi_bit_of_17(u17);
 u1 e1_parity(u8);
 u1 e1_is_pressed(const char*);
 
@@ -72,3 +74,6 @@ u8 e8_read_mem(u16);
 u16 e16_hi_lo(u8,u8);
 u16 e16_offset_addr(int,u16);
 u16 e16_add_with_carry(u1,u8,u8);
+u16 e16_drop_hi_bit_of_17(u17);
+
+u17 e17_add(u16,u16);

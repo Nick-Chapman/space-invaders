@@ -11,7 +11,7 @@ import Data.List (intercalate)
 import Data.Map (Map)
 import Data.Maybe (fromJust)
 import HiLo (HiLo(..))
-import Residual (Exp1(..),Exp8(..),Exp16(..),Program(..),AVar,Lay,vert,lay,tab)
+import Residual (Exp1(..),Exp8(..),Exp16(..),Exp17(..),Program(..),AVar,Lay,vert,lay,tab)
 import Rom (Rom,lookup)
 import Static (oneStepReach,searchReach,startPoints)
 import qualified Data.Map.Strict as Map
@@ -95,7 +95,7 @@ convertProgram = \case
   S_AssignFlag flag exp next -> Expression (Assign (convertFlag flag) (convert1 exp)) : convertProgram next
   S_AssignShifterReg{} -> todo "S_AssignShifterReg"
   S_MemWrite i e next -> Expression (call "mem_write" [convert16 i, convert8 e]) : convertProgram next
-  S_Let17{} -> todo "S_Let17"
+  S_Let17 v e next -> Declare u17t (convertVar v) (convert17 e) : convertProgram next
   S_Let16 v e next -> Declare u16t (convertVar v) (convert16 e) : convertProgram next
   S_Let8 v e next -> Declare u8t (convertVar v) (convert8 e) : convertProgram next
   S_SoundControl{} -> todo "S_SoundControl"
@@ -115,6 +115,9 @@ u8t = CType "u8"
 u16t :: CType
 u16t = CType "u16"
 
+u17t :: CType
+u17t = CType "u17"
+
 convert1 :: Exp1 -> CExp
 convert1 = \case
   E1_Flag flag -> Ident (convertFlag flag)
@@ -123,7 +126,7 @@ convert1 = \case
   E1_Flip c -> call "e1_flip" [convert1 c]
   E1_IsZero b -> call "e1_is_zero" [convert8 b]
   E1_TestBit b i -> call "e1_test_bit" [convert8 b, LitI i]
-  E1_HiBitOf17 x -> undefined x -- let V17{hi = Bit hi} = eval17 q s x in hi
+  E1_HiBitOf17 x -> call "e1_hi_bit_of_17" [convert17 x]
   E1_IsParity b -> call "e1_parity" [convert8 b]
   E1_OrBit c1 c2 -> call "e1_or_bit" [convert1 c1, convert1 c2]
   E1_AndBit c1 c2 -> call "e1_and_bit" [convert1 c1, convert1 c2]
@@ -154,8 +157,13 @@ convert16 = \case
   E16_OffsetAdr n e -> call "e16_offset_addr" [LitI n, convert16 e]
   E16_Var v -> Ident (convertVar v)
   E16_AddWithCarry cin e1 e2 -> call "e16_add_with_carry" [convert1 cin, convert8 e1, convert8 e2]
-  E16_DropHiBitOf17 e -> undefined e --let V17{dropHi=res} = eval17 q s x in res
+  E16_DropHiBitOf17 e -> call "e16_drop_hi_bit_of_17" [convert17 e]
   E16_Lit x -> LitA x
+
+convert17 :: Exp17 -> CExp
+convert17 = \case
+  E17_Var v -> Ident (convertVar v)
+  E17_Add a1 a2 -> call "e17_add" [convert16 a1, convert16 a2]
 
 call :: String -> [CExp] -> CExp
 call s xs = Call (CName s) xs

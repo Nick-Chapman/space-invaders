@@ -50,8 +50,10 @@ Control jump16(u16 x) {
 #define target(a) Control prog_ ## a (); case 0x ## a: return (Control) prog_ ## a;
     target(18DC)
     target(1959)
+    target(08F8)
+    target(195C)
   default: {
-    printf ("jump16: unknown target address: %x\n",x);
+    printf ("jump16: unknown target address: %04x\n",x);
     die;
   }
   }
@@ -77,6 +79,7 @@ u1 e1_is_zero(u8 e) { return (e == 0); }
 u1 e1_test_bit(u8 e,int n) { return (e>>n)&0x1; }
 u1 e1_or_bit(u1 x,u1 y) { return x||y; }
 u1 e1_and_bit(u1 x,u1 y) { return x&&y; }
+u1 e1_hi_bit_of_17(u17 x) { return (x>>16)&0x1; }
 
 u1 e1_parity(u8 e) {
   return (((e>>0)&0x1) + ((e>>1)&0x1) + ((e>>2)&0x1) + ((e>>3)&0x1)
@@ -112,3 +115,6 @@ u8 e8_read_mem(u16 a) {
 u16 e16_hi_lo(u8 hi,u8 lo) { return hi<<8 | lo; }
 u16 e16_offset_addr(int n,u16 x) { return x+n; }
 u16 e16_add_with_carry(u1 cin,u8 x,u8 y) { return cin+x+y; }
+u16 e16_drop_hi_bit_of_17(u17 x) { return x & 0xffff; }
+
+u17 e17_add(u16 x,u16 y) { return x+y; }

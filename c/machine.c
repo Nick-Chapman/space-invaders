@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "machine.h"
 
 Control prog_0000 ();
@@ -17,15 +18,47 @@ static int interrupts = 0;
 
 static bool interrupts_enabled = false;
 
-int main () {
+static bool dump_state_every_instruction = false;
+
+int test1 ();
+int speed ();
+
+int main (int argc, char* argv[]) {
+  if (argc != 2) {
+    printf("expected exactly one command line arg, got %d\n",argc-1);
+    die
+  }
+  char* arg = argv[1];
+  if (0 == strcmp(arg,"test1")) return test1();
+  else if (0 == strcmp(arg,"speed")) return speed();
+  else {
+    printf("unexpected command line arg: \"%s\"\n",arg);
+    die
+  }
+}
+
+int test1 () {
+  dump_state_every_instruction = true;
   Func fn = prog_0000;
   while (fn) {
     fn = (Func)fn();
+    if (icount>50000) break;
   }
+  printf("STOP\n");
   return 0;
 }
 
-//void todo(const char* s) { printf ("todo: %s\n",s); }
+int speed () {
+  printf("speed...\n");
+  dump_state_every_instruction = false;
+  Func fn = prog_0000;
+  while (fn) {
+    fn = (Func)fn();
+    if ((interrupts / 120) >= 60) break;
+  }
+  printf("STOP-ONE-MINUTE\n"); // in < 0.4s
+  return 0;
+}
 
 void at(const char* s) {
 }
@@ -46,10 +79,10 @@ void dump_state(const char* instruction, u16 pcAfterInstructionDecode) {
 }
 
 void instruction(const char* instruction, u16 pcAfterInstructionDecode) {
-  //dump_state(instruction,pcAfterInstructionDecode);
+  if (dump_state_every_instruction) {
+    dump_state(instruction,pcAfterInstructionDecode);
+  }
   icount++;
-  //if (icount>50000) { printf("STOP\n"); exit(0); }
-  if ((interrupts / 120) >= 60) { printf("STOP-ONE-MINUTE\n"); exit(0); } // in < 0.4s
 }
 
 void advance(int n) {
@@ -57,7 +90,7 @@ void advance(int n) {
   credit -= n;
 }
 
-void info_interrupt() {
+/*void info_interrupt() {
   printf ("secs = %d, cycles = %ld, interrupt (%d), enabled = %s: %s\n",
           interrupts / 120,
           cycles,
@@ -65,7 +98,7 @@ void info_interrupt() {
           interrupts_enabled ? "ENABLED" : "disabled",
           half ? "rstHalf (RST 1)" : "rstVblank (RST 2)"
           );
-}
+}*/
 
 Control jumpDirect(u16 pc, Func f) {
   if (credit <= 0) {
@@ -80,7 +113,6 @@ Control jumpDirect(u16 pc, Func f) {
       return (Control)(half ? op_rst1 : op_rst2);
     }
   }
-  //printf ("jumpDirect\n");
   return (Control)f;
 }
 

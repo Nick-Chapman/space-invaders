@@ -49,6 +49,7 @@ Status:
 - [computerarcheology (Hardware)](https://www.computerarcheology.com/Arcade/SpaceInvaders/Hardware.html)
 - [computerarcheology (Commented dissasembly)](https://www.computerarcheology.com/Arcade/SpaceInvaders/Code.html)
 - [emulator101 (emulator tutorial)](http://www.emulator101.com)
+- [loadzero's restoration](https://blog.loadzero.com/blog/si78c)
 
 ### 8080 opcode summary
 - [pastraiser](https://pastraiser.com/cpu/i8080/i8080_opcodes.html)

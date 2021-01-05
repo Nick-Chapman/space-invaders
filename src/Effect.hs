@@ -65,7 +65,7 @@ data Eff p a where
   Add16 :: Addr p -> Addr p -> Eff p (Addr p, Bit p)
 
   UnknownInput :: Word8 -> Eff p (Byte p)
-  UnknownOutput :: Word8 -> Eff p ()
+  UnknownOutput :: Word8 -> Byte p -> Eff p ()
   GetButton :: But -> Eff p (Bit p)
   SoundControl :: Sound -> Bit p -> Eff p ()
 

@@ -113,7 +113,8 @@ convertProgram = \case
     Expression (call "sound_control" [LitS $ show sound, convert1 bool]) : convertProgram next
   S_EnableInterrupts next -> Expression (call "enable_interrupts" []) : convertProgram next
   S_DisableInterrupts{} -> undefined --todo "S_DisableInterrupts"
-  S_UnknownOutput{} -> undefined --todo "S_UnknownOutput"
+  S_UnknownOutput port byte next ->
+    Expression (call "unknown_output" [LitI (fromIntegral port), convert8 byte]) : convertProgram next
 
 convertJump :: Exp16 -> CExp
 convertJump = \case

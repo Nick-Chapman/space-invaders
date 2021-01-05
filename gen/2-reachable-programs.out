@@ -13041,6 +13041,7 @@
     #084C
     #instruction: OUT  06
     let:8 a1 = A in
+    unknown_output(6,a1);
     advance (10)
     jump (084E);
 
@@ -14126,6 +14127,7 @@
     #090E
     #instruction: OUT  06
     let:8 a1 = A in
+    unknown_output(6,a1);
     advance (10)
     jump (0910);
 
@@ -16836,6 +16838,7 @@
     #0A85
     #instruction: OUT  06
     let:8 a1 = A in
+    unknown_output(6,a1);
     advance (10)
     jump (0A87);
 
@@ -18135,6 +18138,7 @@
     #0B77
     #instruction: OUT  06
     let:8 a1 = A in
+    unknown_output(6,a1);
     advance (10)
     jump (0B79);
 

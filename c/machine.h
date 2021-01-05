@@ -55,6 +55,7 @@ void mem_write(u16,u8);
 
 void sound_control(const char*,u1);
 void enable_interrupts(void);
+void unknown_output(int,u8);
 
 u1 e1_true(void);
 u1 e1_false(void);

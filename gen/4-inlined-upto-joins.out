@@ -10252,6 +10252,7 @@
     #084C
     #instruction: OUT  06
     let:8 a1 = A in
+    unknown_output(6,a1);
     advance (10)
     #084E
     #instruction: CALL 1804
@@ -10899,6 +10900,7 @@
     #090E
     #instruction: OUT  06
     let:8 a36 = A in
+    unknown_output(6,a36);
     advance (10)
     #0910
     #instruction: JP   1439
@@ -12688,6 +12690,7 @@
     #0A85
     #instruction: OUT  06
     let:8 a1 = A in
+    unknown_output(6,a1);
     advance (10)
     #0A87
     #instruction: LD   A,(20CB)
@@ -13688,6 +13691,7 @@
     #0B77
     #instruction: OUT  06
     let:8 a1 = A in
+    unknown_output(6,a1);
     advance (10)
     #0B79
     #instruction: CALL 0A59

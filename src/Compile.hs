@@ -253,7 +253,7 @@ compileThen semantics state k =
         return $ S_Let17 var (E17_Add a1 a2) body
 
       E.UnknownInput port -> k s (E8_UnknownInput port)
-      E.UnknownOutput port -> S_UnknownOutput port <$> k s ()
+      E.UnknownOutput port byte -> S_UnknownOutput port byte <$> k s ()
       E.GetButton but -> k s (E1_Button but)
       E.SoundControl sound p -> S_SoundControl sound p <$> k s ()
 

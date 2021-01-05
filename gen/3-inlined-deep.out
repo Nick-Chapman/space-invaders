@@ -3608,6 +3608,7 @@
           #090E
           #instruction: OUT  06
           let:8 a691 = a654[7:0] in
+          unknown_output(6,a691);
           advance (10)
           #0910
           #instruction: JP   1439
@@ -11780,6 +11781,7 @@
       #090E
       #instruction: OUT  06
       let:8 a55 = a18[7:0] in
+      unknown_output(6,a55);
       advance (10)
       #0910
       #instruction: JP   1439
@@ -28244,6 +28246,7 @@
     #090E
     #instruction: OUT  06
     let:8 a53 = a3 in
+    unknown_output(6,a53);
     advance (10)
     #0910
     #instruction: JP   1439
@@ -28974,6 +28977,7 @@
     advance (7)
     #090E
     #instruction: OUT  06
+    unknown_output(6,0F);
     advance (10)
     #0910
     #instruction: JP   1439
@@ -29217,6 +29221,7 @@
       advance (7)
       #090E
       #instruction: OUT  06
+      unknown_output(6,1B);
       advance (10)
       #0910
       #instruction: JP   1439
@@ -29437,6 +29442,7 @@
       advance (7)
       #090E
       #instruction: OUT  06
+      unknown_output(6,0E);
       advance (10)
       #0910
       #instruction: JP   1439
@@ -29777,6 +29783,7 @@
       #090E
       #instruction: OUT  06
       let:8 a95 = a58[7:0] in
+      unknown_output(6,a95);
       advance (10)
       #0910
       #instruction: JP   1439
@@ -30114,6 +30121,7 @@
     #090E
     #instruction: OUT  06
     let:8 a87 = a48[7:0] in
+    unknown_output(6,a87);
     advance (10)
     #0910
     #instruction: JP   1439
@@ -30437,6 +30445,7 @@
     #090E
     #instruction: OUT  06
     let:8 a87 = a48[7:0] in
+    unknown_output(6,a87);
     advance (10)
     #0910
     #instruction: JP   1439
@@ -31636,6 +31645,7 @@
     advance (7)
     #090E
     #instruction: OUT  06
+    unknown_output(6,0F);
     advance (10)
     #0910
     #instruction: JP   1439
@@ -35424,6 +35434,7 @@
     #084C
     #instruction: OUT  06
     let:8 a1 = A in
+    unknown_output(6,a1);
     advance (10)
     #084E
     #instruction: CALL 1804
@@ -35789,6 +35800,7 @@
       #090E
       #instruction: OUT  06
       let:8 a90 = a53[7:0] in
+      unknown_output(6,a90);
       advance (10)
       #0910
       #instruction: JP   1439
@@ -36114,6 +36126,7 @@
         #090E
         #instruction: OUT  06
         let:8 a223 = a186[7:0] in
+        unknown_output(6,a223);
         advance (10)
         #0910
         #instruction: JP   1439
@@ -36340,6 +36353,7 @@
       advance (7)
       #090E
       #instruction: OUT  06
+      unknown_output(6,1C);
       advance (10)
       #0910
       #instruction: JP   1439
@@ -37048,6 +37062,7 @@
     #090E
     #instruction: OUT  06
     let:8 a104 = a65[7:0] in
+    unknown_output(6,a104);
     advance (10)
     #0910
     #instruction: JP   1439
@@ -38019,6 +38034,7 @@
       #090E
       #instruction: OUT  06
       let:8 a69 = a19 in
+      unknown_output(6,a69);
       advance (10)
       #0910
       #instruction: JP   1439
@@ -38837,6 +38853,7 @@
     #090E
     #instruction: OUT  06
     let:8 a61 = a24[7:0] in
+    unknown_output(6,a61);
     advance (10)
     #0910
     #instruction: JP   1439
@@ -39449,6 +39466,7 @@
       #090E
       #instruction: OUT  06
       let:8 a171 = a132[7:0] in
+      unknown_output(6,a171);
       advance (10)
       #0910
       #instruction: JP   1439
@@ -39711,6 +39729,7 @@
     #090E
     #instruction: OUT  06
     let:8 a70 = a31[7:0] in
+    unknown_output(6,a70);
     advance (10)
     #0910
     #instruction: JP   1439
@@ -39938,6 +39957,7 @@
     #090E
     #instruction: OUT  06
     let:8 a58 = a19[7:0] in
+    unknown_output(6,a58);
     advance (10)
     #0910
     #instruction: JP   1439
@@ -41815,6 +41835,7 @@
         #090E
         #instruction: OUT  06
         let:8 a75 = a33 in
+        unknown_output(6,a75);
         advance (10)
         #0910
         #instruction: JP   1439
@@ -42160,6 +42181,7 @@
       advance (7)
       #090E
       #instruction: OUT  06
+      unknown_output(6,0F);
       advance (10)
       #0910
       #instruction: JP   1439
@@ -42380,6 +42402,7 @@
       advance (7)
       #090E
       #instruction: OUT  06
+      unknown_output(6,0F);
       advance (10)
       #0910
       #instruction: JP   1439
@@ -42611,6 +42634,7 @@
     advance (7)
     #090E
     #instruction: OUT  06
+    unknown_output(6,12);
     advance (10)
     #0910
     #instruction: JP   1439
@@ -42922,6 +42946,7 @@
     advance (7)
     #090E
     #instruction: OUT  06
+    unknown_output(6,28);
     advance (10)
     #0910
     #instruction: JP   1439
@@ -43246,6 +43271,7 @@
     advance (13)
     #0A85
     #instruction: OUT  06
+    unknown_output(6,02);
     advance (10)
     #0A87
     #instruction: LD   A,(20CB)
@@ -43420,6 +43446,7 @@
     advance (13)
     #0A85
     #instruction: OUT  06
+    unknown_output(6,02);
     advance (10)
     #0A87
     #instruction: LD   A,(20CB)
@@ -43666,6 +43693,7 @@
     advance (13)
     #0A85
     #instruction: OUT  06
+    unknown_output(6,02);
     advance (10)
     #0A87
     #instruction: LD   A,(20CB)
@@ -46230,6 +46258,7 @@
     #0B77
     #instruction: OUT  06
     let:8 a1 = A in
+    unknown_output(6,a1);
     advance (10)
     #0B79
     #instruction: CALL 0A59
@@ -46756,6 +46785,7 @@
     advance (7)
     #090E
     #instruction: OUT  06
+    unknown_output(6,08);
     advance (10)
     #0910
     #instruction: JP   1439
@@ -46979,6 +47009,7 @@
       advance (7)
       #090E
       #instruction: OUT  06
+      unknown_output(6,02);
       advance (10)
       #0910
       #instruction: JP   1439
@@ -47364,6 +47395,7 @@
     #090E
     #instruction: OUT  06
     let:8 a75 = a33 in
+    unknown_output(6,a75);
     advance (10)
     #0910
     #instruction: JP   1439
@@ -47840,6 +47872,7 @@
     advance (13)
     #0A85
     #instruction: OUT  06
+    unknown_output(6,02);
     advance (10)
     #0A87
     #instruction: LD   A,(20CB)
@@ -48322,6 +48355,7 @@
     #090E
     #instruction: OUT  06
     let:8 a57 = a17 in
+    unknown_output(6,a57);
     advance (10)
     #0910
     #instruction: JP   1439
@@ -48598,6 +48632,7 @@
         advance (7)
         #090E
         #instruction: OUT  06
+        unknown_output(6,13);
         advance (10)
         #0910
         #instruction: JP   1439
@@ -48909,6 +48944,7 @@
           advance (7)
           #090E
           #instruction: OUT  06
+          unknown_output(6,13);
           advance (10)
           #0910
           #instruction: JP   1439
@@ -52525,6 +52561,7 @@
         #090E
         #instruction: OUT  06
         let:8 a122 = a83[7:0] in
+        unknown_output(6,a122);
         advance (10)
         #0910
         #instruction: JP   1439
@@ -52899,6 +52936,7 @@
         #090E
         #instruction: OUT  06
         let:8 a260 = a221[7:0] in
+        unknown_output(6,a260);
         advance (10)
         #0910
         #instruction: JP   1439
@@ -53144,6 +53182,7 @@
       advance (7)
       #090E
       #instruction: OUT  06
+      unknown_output(6,06);
       advance (10)
       #0910
       #instruction: JP   1439
@@ -53370,6 +53409,7 @@
       advance (7)
       #090E
       #instruction: OUT  06
+      unknown_output(6,06);
       advance (10)
       #0910
       #instruction: JP   1439
@@ -53599,6 +53639,7 @@
       advance (7)
       #090E
       #instruction: OUT  06
+      unknown_output(6,1B);
       advance (10)
       #0910
       #instruction: JP   1439
@@ -53799,6 +53840,7 @@
       advance (7)
       #090E
       #instruction: OUT  06
+      unknown_output(6,1C);
       advance (10)
       #0910
       #instruction: JP   1439
@@ -54186,6 +54228,7 @@
       advance (7)
       #090E
       #instruction: OUT  06
+      unknown_output(6,06);
       advance (10)
       #0910
       #instruction: JP   1439
@@ -56576,6 +56619,7 @@
     #090E
     #instruction: OUT  06
     let:8 a51 = a14[7:0] in
+    unknown_output(6,a51);
     advance (10)
     #0910
     #instruction: JP   1439
@@ -57531,6 +57575,7 @@
     advance (7)
     #090E
     #instruction: OUT  06
+    unknown_output(6,13);
     advance (10)
     #0910
     #instruction: JP   1439
@@ -57849,6 +57894,7 @@
     advance (7)
     #090E
     #instruction: OUT  06
+    unknown_output(6,06);
     advance (10)
     #0910
     #instruction: JP   1439
@@ -58757,6 +58803,7 @@
       #090E
       #instruction: OUT  06
       let:8 a83 = a41 in
+      unknown_output(6,a83);
       advance (10)
       #0910
       #instruction: JP   1439
@@ -59667,6 +59714,7 @@
         advance (7)
         #090E
         #instruction: OUT  06
+        unknown_output(6,26);
         advance (10)
         #0910
         #instruction: JP   1439
@@ -60372,6 +60420,7 @@
     advance (7)
     #090E
     #instruction: OUT  06
+    unknown_output(6,26);
     advance (10)
     #0910
     #instruction: JP   1439
@@ -60694,6 +60743,7 @@
     #090E
     #instruction: OUT  06
     let:8 a87 = a48[7:0] in
+    unknown_output(6,a87);
     advance (10)
     #0910
     #instruction: JP   1439
@@ -61017,6 +61067,7 @@
     #090E
     #instruction: OUT  06
     let:8 a87 = a48[7:0] in
+    unknown_output(6,a87);
     advance (10)
     #0910
     #instruction: JP   1439
@@ -61340,6 +61391,7 @@
     #090E
     #instruction: OUT  06
     let:8 a87 = a48[7:0] in
+    unknown_output(6,a87);
     advance (10)
     #0910
     #instruction: JP   1439
@@ -61571,6 +61623,7 @@
     advance (7)
     #090E
     #instruction: OUT  06
+    unknown_output(6,02);
     advance (10)
     #0910
     #instruction: JP   1439
@@ -61838,6 +61891,7 @@
     #090E
     #instruction: OUT  06
     let:8 a68 = a31[7:0] in
+    unknown_output(6,a68);
     advance (10)
     #0910
     #instruction: JP   1439
@@ -62122,6 +62176,7 @@
     #090E
     #instruction: OUT  06
     let:8 a74 = a37[7:0] in
+    unknown_output(6,a74);
     advance (10)
     #0910
     #instruction: JP   1439
@@ -62344,6 +62399,7 @@
     advance (7)
     #090E
     #instruction: OUT  06
+    unknown_output(6,02);
     advance (10)
     #0910
     #instruction: JP   1439
@@ -63281,6 +63337,7 @@
     #090E
     #instruction: OUT  06
     let:8 a50 = a13[7:0] in
+    unknown_output(6,a50);
     advance (10)
     #0910
     #instruction: JP   1439

@@ -204,7 +204,7 @@ afterProgram = \case
   S_Let16 _ _ p -> [p]
   S_Let8 _ _ p -> [p]
   S_Let17 _ _ p -> [p]
-  S_UnknownOutput _ p -> [p]
+  S_UnknownOutput _ _ p -> [p]
   S_SoundControl _ _ p -> [p]
   S_MarkReturnAddress _ p -> [p]
   S_TraceInstruction _ _ _ p -> [p]
@@ -229,7 +229,7 @@ programLength = z
       S_Let16 _ _ p -> z p
       S_Let8 _ _ p -> z p
       S_Let17 _ _ p -> z p
-      S_UnknownOutput _ p -> z p
+      S_UnknownOutput _ _ p -> z p
       S_SoundControl _ _ p -> z p
       S_MarkReturnAddress _ p -> z p
       S_TraceInstruction _ _ _ p -> z p

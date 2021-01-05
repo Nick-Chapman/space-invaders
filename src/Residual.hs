@@ -43,7 +43,7 @@ data Program
   | S_MarkReturnAddress Exp16 Program
   | S_TraceInstruction (Cpu CompTime) (Instruction Exp8) Exp16 Program
   | S_Advance Int Program
-  | S_UnknownOutput Word8 Program
+  | S_UnknownOutput Word8 Exp8 Program
   | S_SoundControl Sound Exp1 Program
   | S_EnableInterrupts Program
   | S_DisableInterrupts Program
@@ -158,8 +158,8 @@ layProgram = \case
     vert [ lay ("advance " ++ parenthesize (show n))
          , layProgram next
          ]
-  S_UnknownOutput port next ->
-    vert [ lay ("unknown_output" ++ parenthesize (show port) ++ ";")
+  S_UnknownOutput port byte next ->
+    vert [ lay ("unknown_output" ++ show (port, byte) ++ ";")
          , layProgram next
          ]
   S_SoundControl sound bool next ->

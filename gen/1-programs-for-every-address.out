@@ -3466,7 +3466,7 @@
     #0134
     #instruction: OUT  15
     let:8 a1 = A in
-    unknown_output(21);
+    unknown_output(21,a1);
     advance (10)
     jump (0136);
 
@@ -25442,6 +25442,7 @@
     #084C
     #instruction: OUT  06
     let:8 a1 = A in
+    unknown_output(6,a1);
     advance (10)
     jump (084E);
 
@@ -27695,6 +27696,7 @@
     #090E
     #instruction: OUT  06
     let:8 a1 = A in
+    unknown_output(6,a1);
     advance (10)
     jump (0910);
 
@@ -32503,6 +32505,7 @@
     #0A85
     #instruction: OUT  06
     let:8 a1 = A in
+    unknown_output(6,a1);
     advance (10)
     jump (0A87);
 
@@ -35679,6 +35682,7 @@
     #0B77
     #instruction: OUT  06
     let:8 a1 = A in
+    unknown_output(6,a1);
     advance (10)
     jump (0B79);
 
@@ -55650,7 +55654,7 @@
     #1528
     #instruction: OUT  15
     let:8 a1 = A in
-    unknown_output(21);
+    unknown_output(21,a1);
     advance (10)
     jump (152A);
 
@@ -66707,7 +66711,7 @@
     #1893
     #instruction: OUT  15
     let:8 a1 = A in
-    unknown_output(21);
+    unknown_output(21,a1);
     advance (10)
     jump (1895);
 
@@ -70479,7 +70483,7 @@
     #19D9
     #instruction: OUT  19
     let:8 a1 = A in
-    unknown_output(25);
+    unknown_output(25,a1);
     advance (10)
     jump (19DB);
 

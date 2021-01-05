@@ -18968,6 +18968,7 @@ Control prog_084C ()
     at ( "084C" );
     instruction ( "OUT  06",e16_hi_lo ( 0x08,0x4E ) );
     u8 a1 = A ;
+    unknown_output ( 6,a1 );
     advance ( 10 );
     return jumpDirect ( 0x084E,prog_084E );
 }
@@ -20169,6 +20170,7 @@ Control prog_090E ()
     at ( "090E" );
     instruction ( "OUT  06",e16_hi_lo ( 0x09,0x10 ) );
     u8 a1 = A ;
+    unknown_output ( 6,a1 );
     advance ( 10 );
     return jumpDirect ( 0x0910,prog_0910 );
 }
@@ -23139,6 +23141,7 @@ Control prog_0A85 ()
     at ( "0A85" );
     instruction ( "OUT  06",e16_hi_lo ( 0x0A,0x87 ) );
     u8 a1 = A ;
+    unknown_output ( 6,a1 );
     advance ( 10 );
     return jumpDirect ( 0x0A87,prog_0A87 );
 }
@@ -24567,6 +24570,7 @@ Control prog_0B77 ()
     at ( "0B77" );
     instruction ( "OUT  06",e16_hi_lo ( 0x0B,0x79 ) );
     u8 a1 = A ;
+    unknown_output ( 6,a1 );
     advance ( 10 );
     return jumpDirect ( 0x0B79,prog_0B79 );
 }

@@ -121,6 +121,10 @@ void enable_interrupts(void) {
   interrupts_enabled = true;
 }
 
+void unknown_output(int p,u8 b) {
+  //printf ("unknown_output: %d %02x\n",p,b);
+}
+
 u1 e1_true() { return 1; }
 u1 e1_false() { return 0; }
 u1 e1_flip(u1 x) { return !x; }

@@ -43,6 +43,13 @@ Status:
     Writing file: gen/4-inlined-upto-joins.out
 
 
+`stack run c`
+
+    make speed
+
+mhz=313, speedup=x156
+
+
 ### Resource for Space Invaders and 8080
 - [wikipedia](https://en.wikipedia.org/wiki/Space_Invaders)
 - [computerarcheology](https://www.computerarcheology.com/Arcade/SpaceInvaders)

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 #include "machine.h"
 
 Control prog_0000 ();
@@ -48,15 +49,39 @@ int test1 () {
   return 0;
 }
 
+#define MEG 1000000
+#define TWO_MEG 2000000
+
 int speed () {
-  printf("speed...\n");
   dump_state_every_instruction = false;
+  const int sim_seconds_to_run_for = 60;
   Func fn = prog_0000;
+  clock_t tic = clock();
+  cycles = 0;
   while (fn) {
     fn = (Func)fn();
-    if ((interrupts / 120) >= 60) break;
+    if (cycles > TWO_MEG * sim_seconds_to_run_for) break;
   }
-  printf("STOP-ONE-MINUTE\n"); // in < 0.4s
+  clock_t toc = clock();
+  clock_t duration_us = toc - tic;
+  double duration_s = duration_us / (double)MEG;
+  int mhz = cycles/duration_us;
+  int secs = cycles/TWO_MEG;
+  int speedup = mhz/2;
+  printf("sim-time(secs)=%d, "
+         "cycles=%ld, "
+         "duration(us)=%ld, "
+         "duration(s)=%.3g, "
+         "mhz=%d, "
+         "speedup=x%d"
+         "\n",
+         secs,
+         cycles,
+         duration_us,
+         duration_s,
+         mhz,
+         speedup
+         );
   return 0;
 }
 

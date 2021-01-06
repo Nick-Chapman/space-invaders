@@ -88,8 +88,7 @@ convertRom rom = do
                         | a <- take 0x2000 [0..] ]
                })
 
-  return $ CFile $ [ Include "<stdio.h>"
-                   , Include "\"machine.h\""
+  return $ CFile $ [ Include "\"program.h\""
                    ] ++ [mem] ++ forwards ++ defs ++ [op_rst 1, op_rst 2] ++ [progs]
 
 convertProgram :: Program  -> [CStat]

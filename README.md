@@ -47,8 +47,8 @@ Status:
 
     make speed
 
-mhz=313, speedup=x156
-
+Original C runtime code: speedup=x156
+Inline ops into geerated program.c -> speedup x700
 
 ### Resource for Space Invaders and 8080
 - [wikipedia](https://en.wikipedia.org/wiki/Space_Invaders)

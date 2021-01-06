@@ -1,14 +1,97 @@
+
 #include <stdio.h>
-#include <string.h>
-#include <time.h>
-#include "machine.h"
+#include <stdlib.h>
+#include <stdbool.h>
 
-Control prog_0000 ();
-Control op_rst1();
-Control op_rst2();
+#include "shared.h"
 
-static int icount = 0;
-static long cycles = 0;
+#define noinline __attribute__ ((noinline))
+
+typedef bool u1;
+typedef unsigned char u8; // TODO: use uint8_t etc
+typedef unsigned short u16;
+typedef unsigned int u17;
+
+#define ROM_SIZE 0x2000
+#define MEM_SIZE 0x4000
+
+Func prog [ROM_SIZE];
+
+u1 FlagS;
+u1 FlagZ;
+u1 FlagA;
+u1 FlagP;
+u1 FlagCY;
+
+u8 PCH;
+u8 PCL;
+
+u8 A;
+u8 B;
+u8 C;
+u8 D;
+u8 E;
+u8 H;
+u8 L;
+u8 SPH;
+u8 SPL;
+
+u8 Shifter_HI;
+u8 Shifter_LO;
+u8 Shifter_OFF;
+
+u8 mem [MEM_SIZE];
+
+inline static void at(const char*);
+inline static void instruction(const char*, u16);
+inline static void advance(int);
+
+noinline Control jumpInterrupt(u16 pc, Func f);
+inline static Control jumpDirect(u16,Func);
+inline static Control jump16(u16);
+
+noinline static void mem_write(u16,u8);
+inline static void sound_control(const char*,u1);
+inline static void enable_interrupts(void);
+inline static void unknown_output(int,u8);
+
+inline static u1 e1_true(void);
+inline static u1 e1_false(void);
+inline static u1 e1_flip(u1);
+inline static u1 e1_is_zero(u8);
+inline static u1 e1_test_bit(u8,int);
+inline static u1 e1_or_bit(u1,u1);
+inline static u1 e1_and_bit(u1,u1);
+inline static u1 e1_hi_bit_of_17(u17);
+noinline static u1 e1_parity(u8);
+inline static u1 e1_is_pressed(const char*);
+
+inline static u8 e8_hi(u16);
+inline static u8 e8_lo(u16);
+inline static u8 e8_update_bit(u8,int,u1);
+inline static u8 e8_complement(u8);
+inline static u8 e8_and(u8,u8);
+inline static u8 e8_or(u8,u8);
+inline static u8 e8_xor(u8,u8);
+inline static u8 e8_shiftR(u8,u8);
+inline static u8 e8_shiftL(u8,u8);
+noinline static u8 e8_ite(u1,u8,u8);
+inline static u8 e8_read_mem(u16);
+
+inline static u16 e16_hi_lo(u8,u8);
+inline static u16 e16_offset_addr(int,u16);
+inline static u16 e16_add_with_carry(u1,u8,u8);
+inline static u16 e16_drop_hi_bit_of_17(u17);
+
+inline static u17 e17_add(u16,u16);
+
+
+extern Control op_rst1();
+extern Control op_rst2();
+
+int icount = 0;
+long cycles = 0;
+bool dump_state_every_instruction = false;
 
 #define HALF_FRAME_CYCLES (2000000 / 120)
 
@@ -18,72 +101,6 @@ static bool half = false;
 static int interrupts = 0;
 
 static bool interrupts_enabled = false;
-
-static bool dump_state_every_instruction = false;
-
-int test1 ();
-int speed ();
-
-int main (int argc, char* argv[]) {
-  if (argc != 2) {
-    printf("expected exactly one command line arg, got %d\n",argc-1);
-    die
-  }
-  char* arg = argv[1];
-  if (0 == strcmp(arg,"test1")) return test1();
-  else if (0 == strcmp(arg,"speed")) return speed();
-  else {
-    printf("unexpected command line arg: \"%s\"\n",arg);
-    die
-  }
-}
-
-int test1 () {
-  dump_state_every_instruction = true;
-  Func fn = prog_0000;
-  while (fn) {
-    fn = (Func)fn();
-    if (icount>50000) break;
-  }
-  printf("STOP\n");
-  return 0;
-}
-
-#define MEG 1000000
-#define TWO_MEG 2000000
-
-int speed () {
-  dump_state_every_instruction = false;
-  const int sim_seconds_to_run_for = 60;
-  Func fn = prog_0000;
-  clock_t tic = clock();
-  cycles = 0;
-  while (fn) {
-    fn = (Func)fn();
-    if (cycles > TWO_MEG * sim_seconds_to_run_for) break;
-  }
-  clock_t toc = clock();
-  clock_t duration_us = toc - tic;
-  double duration_s = duration_us / (double)MEG;
-  int mhz = cycles/duration_us;
-  int secs = cycles/TWO_MEG;
-  int speedup = mhz/2;
-  printf("sim-time(secs)=%d, "
-         "cycles=%ld, "
-         "duration(us)=%ld, "
-         "duration(s)=%.3g, "
-         "mhz=%d, "
-         "speedup=x%d"
-         "\n",
-         secs,
-         cycles,
-         duration_us,
-         duration_s,
-         mhz,
-         speedup
-         );
-  return 0;
-}
 
 void at(const char* s) {
 }
@@ -125,21 +142,29 @@ void advance(int n) {
           );
 }*/
 
-Control jumpDirect(u16 pc, Func f) {
-  if (credit <= 0) {
-    credit += HALF_FRAME_CYCLES;
-    half ^= true;
-    interrupts++;
-    //info_interrupt();
-    if (interrupts_enabled) {
-      interrupts_enabled = false;
-      PCH = e8_hi(pc);
-      PCL = e8_lo(pc);
-      return (Control)(half ? op_rst1 : op_rst2);
-    }
+
+Control jumpInterrupt(u16 pc, Func f) {
+  credit += HALF_FRAME_CYCLES;
+  half ^= true;
+  interrupts++;
+  //info_interrupt();
+  if (interrupts_enabled) {
+    interrupts_enabled = false;
+    PCH = e8_hi(pc);
+    PCL = e8_lo(pc);
+    return (Control)(half ? op_rst1 : op_rst2);
   }
   return (Control)f;
 }
+
+Control jumpDirect(u16 pc, Func f) {
+  if (credit <= 0) {
+    return jumpInterrupt(pc,f);
+  }
+  return (Control)f;
+}
+
+
 
 Control jump16(u16 a) {
   //printf ("(%d) jump16: target address = %04x\n",icount,a);
@@ -168,6 +193,7 @@ void mem_write(u16 a,u8 e) {
   //printf ("mem_write: M[%04x] = %02x\n",a,e);
   mem[a] = e;
 }
+
 
 void sound_control(const char* sound,u1 b) {
   //printf ("sound_control: %s = %s\n", sound, b?"on":"off");
@@ -216,7 +242,7 @@ u8 e8_or(u8 x,u8 y) { return x|y; }
 u8 e8_xor(u8 x,u8 y) { return x^y; }
 u8 e8_shiftR(u8 x,u8 y) { return x>>y; }
 u8 e8_shiftL(u8 x,u8 y) { return x<<y; }
-u8 e8_ite(u1 i,u8 t,u8 e) { die; }
+u8 e8_ite(u1 i,u8 t,u8 e) { die; } //TODO: think needed when insert coin
 
 u8 e8_read_mem(u16 a) {
   if (a>=MEM_SIZE) {

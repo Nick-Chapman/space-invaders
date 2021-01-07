@@ -11,3 +11,12 @@ extern Control prog_0000 ();
 extern int icount;
 extern long cycles;
 extern bool dump_state_every_instruction;
+
+typedef bool u1;
+typedef unsigned char u8; // TODO: use uint8_t etc
+typedef unsigned short u16;
+typedef unsigned int u17;
+
+#define MEM_SIZE 0x4000
+
+extern u8 mem [MEM_SIZE];

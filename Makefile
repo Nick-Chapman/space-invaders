@@ -1,6 +1,11 @@
 
 top: test1
 
+#OPT = -O2 # uncomment this for speedup: x155 -> x750 (at the cost of slower compiles)
+
+CFLAGS = -Wall -Werror -Winline $(OPT) -I /usr/include/SDL2
+LDFLAGS = -lSDL2
+
 test1: invaders.exe
 	./invaders.exe test1 > trace/test1.out
 	git diff trace/test1.out
@@ -8,14 +13,17 @@ test1: invaders.exe
 speed: invaders.exe
 	./invaders.exe speed
 
+play: invaders.exe
+	./invaders.exe play
+
 invaders.exe: c/program.o c/main.o
-	gcc $^ -o $@
+	gcc $^ -o $@ $(LDFLAGS)
 
 c/program.o: c/program.c c/program.h c/shared.h Makefile
-	gcc -Wall -Werror -c $< -o $@ -Winline -O2
+	gcc $(CFLAGS) -c $< -o $@
 
 c/main.o: c/main.c c/shared.h Makefile
-	gcc -Wall -Werror -c $< -o $@
+	gcc $(CFLAGS) -c $< -o $@
 
 c/program.c: src/*.hs
 	stack run c

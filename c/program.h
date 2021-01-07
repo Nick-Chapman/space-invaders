@@ -7,13 +7,7 @@
 
 #define noinline __attribute__ ((noinline))
 
-typedef bool u1;
-typedef unsigned char u8; // TODO: use uint8_t etc
-typedef unsigned short u16;
-typedef unsigned int u17;
-
 #define ROM_SIZE 0x2000
-#define MEM_SIZE 0x4000
 
 Func prog [ROM_SIZE];
 
@@ -40,8 +34,6 @@ u8 Shifter_HI;
 u8 Shifter_LO;
 u8 Shifter_OFF;
 
-u8 mem [MEM_SIZE];
-
 inline static void at(const char*);
 inline static void instruction(const char*, u16);
 inline static void advance(int);
@@ -64,7 +56,7 @@ inline static u1 e1_or_bit(u1,u1);
 inline static u1 e1_and_bit(u1,u1);
 inline static u1 e1_hi_bit_of_17(u17);
 noinline static u1 e1_parity(u8);
-inline static u1 e1_is_pressed(const char*);
+noinline extern u1 e1_is_pressed(const char*);
 
 inline static u8 e8_hi(u16);
 inline static u8 e8_lo(u16);
@@ -220,11 +212,6 @@ u1 e1_hi_bit_of_17(u17 x) { return (x>>16)&0x1; }
 u1 e1_parity(u8 e) {
   return (((e>>0)&0x1) + ((e>>1)&0x1) + ((e>>2)&0x1) + ((e>>3)&0x1)
           + ((e>>4)&0x1) + ((e>>5)&0x1) + ((e>>6)&0x1) + ((e>>7)&0x1)) % 2 == 0;
-}
-
-u1 e1_is_pressed(const char* s) { //TODO: use enum for buttons
-  //printf ("e1_is_pressed: %s\n", s);
-  return false;
 }
 
 u8 e8_hi(u16 a) { return a>>8; }

@@ -148,7 +148,7 @@ int play () {
 }
 
 static void render(SDL_Renderer* renderer) {
-  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+  SDL_SetRenderDrawColor(renderer, 10, 10, 10, 255);
   SDL_RenderClear(renderer);
   SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
   const uint8_t *iter = mem + 0x2400;

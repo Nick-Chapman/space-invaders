@@ -175,12 +175,14 @@ Control jump16(u16 a) {
 void mem_write(u16 a,u8 e) {
   if (a>=MEM_SIZE) {
     //printf ("mem_write: (a>=MEM_SIZE) : a=%04x, MEM_SIZE=%04x\n",a,MEM_SIZE);
-    //die
+    //die;
     a -= 0x2000; // ram mirror
+    //return;
   }
   if (a<ROM_SIZE) {
-    printf ("mem_write: (a<ROM_SIZE) : a=%04x, ROM_SIZE=%04x\n",a,ROM_SIZE);
-    die
+    //printf ("mem_write: (a<ROM_SIZE) : a=%04x, ROM_SIZE=%04x\n",a,ROM_SIZE);
+    //die;
+    return;
   }
   //printf ("mem_write: M[%04x] = %02x\n",a,e);
   mem[a] = e;

@@ -229,7 +229,7 @@ u8 e8_or(u8 x,u8 y) { return x|y; }
 u8 e8_xor(u8 x,u8 y) { return x^y; }
 u8 e8_shiftR(u8 x,u8 y) { return x>>y; }
 u8 e8_shiftL(u8 x,u8 y) { return x<<y; }
-u8 e8_ite(u1 i,u8 t,u8 e) { die; } //TODO: think needed when insert coin
+u8 e8_ite(u1 i,u8 t,u8 e) { return i?t:e; } //TODO: think needed when insert coin
 
 u8 e8_read_mem(u16 a) {
   if (a>=MEM_SIZE) {

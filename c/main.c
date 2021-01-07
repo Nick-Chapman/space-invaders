@@ -7,9 +7,9 @@
 static int test1 ();
 static int speed ();
 static int play ();
-static void render();
-static void init_renderer();
-static void fini_renderer();
+
+static void render(SDL_Renderer*);
+static void input();
 
 int main (int argc, char* argv[]) {
   if (argc != 2) {
@@ -73,97 +73,133 @@ int speed () {
   return 0;
 }
 
+enum Keys {
+    KEYS_LEFT      =  1,
+    KEYS_RIGHT     =  2,
+    KEYS_START     =  4,
+    KEYS_START2    =  8,
+    KEYS_FIRE      =  16,
+    KEYS_COIN      =  32,
+    KEYS_TILT      =  64,
+    KEYS_QUIT      =  2048
+};
+
+static uint64_t keystate;
+
+#define BIT(x) (!!(keystate & (x)))
+
+u1 e1_is_pressed(const char* s) { //TODO: use enum for buttons
+  int k = 0;
+  if (0 == strcmp(s,"[dip3] lives (3,4,5,6) lsb")) { return false; }
+  else if (0 == strcmp(s,"[dip5] lives (3,4,5,6) msb")) { return false; }
+  else if (0 == strcmp(s,"[dip6] extra ship at 1000")) { return false; }
+  else if (0 == strcmp(s,"[dip7] coin info off")) { return false; }
+  else if (0 == strcmp(s,"player1 left")) { k = KEYS_LEFT; }
+  else if (0 == strcmp(s,"player1 right")) { k = KEYS_RIGHT; }
+  else if (0 == strcmp(s,"player1 shoot")) { k = KEYS_FIRE; }
+  else if (0 == strcmp(s,"player2 left")) { k = KEYS_LEFT; }
+  else if (0 == strcmp(s,"player2 right")) { k = KEYS_RIGHT; }
+  else if (0 == strcmp(s,"player2 shoot")) { k = KEYS_FIRE; }
+  else if (0 == strcmp(s,"player1 start")) { k = KEYS_START; }
+  else if (0 == strcmp(s,"player2 start")) { k = KEYS_START2; }
+  else if (0 == strcmp(s,"coin entry")) { k = KEYS_COIN; }
+  else if (0 == strcmp(s,"TILT")) { k = KEYS_TILT; }
+  if (k == 0) {
+    printf("e1_is_pressed, string not converted to enum: %s\n",s);
+    die;
+  }
+  bool res = BIT(k);
+  //printf ("e1_is_pressed: %s --> %d\n", s, res);
+  return res;
+}
+
+static const int renderscale = 3;
+static const long speedup = 3;
 
 int play () {
-
-  printf("play...\n");
-  init_renderer();
-
+  SDL_Init(SDL_INIT_EVERYTHING);
+  SDL_Window* window =
+    SDL_CreateWindow("space-invaders", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+                     224 * renderscale, 256 * renderscale, 0);
+  SDL_ShowCursor(SDL_DISABLE);
+  SDL_Renderer* renderer =
+    // Think something here causes fps to be limited to about 60 fps?
+    SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+  const long cycles_between_frames = (TWO_MEG / 60) * speedup;
   Func fn = prog_0000;
-  int frame_count = 0;
-  for (;;) {
-    while (fn) {
-      fn = (Func)fn();
-      if (icount>50000) break; //random period
+  long frame_count = 0;
+  long frame_credit = cycles_between_frames;
+  while (fn) {
+    const long c1 = cycles;
+    fn = (Func)fn();
+    const long c2 = cycles;
+    frame_credit -= (c2-c1);
+    if (frame_credit < 0) {
+      frame_count ++;
+      frame_credit += cycles_between_frames;
+      render(renderer);
+      input();
+      if (BIT(KEYS_QUIT)) fn = 0;
     }
-    frame_count++;
-    //printf("calling render (%d)\n", frame_count);
-    render();
   }
-
-  fini_renderer();
+  SDL_DestroyRenderer(renderer);
+  SDL_DestroyWindow(window);
   return 0;
 }
 
-
-static SDL_Renderer *renderer;
-static SDL_Window *window;
-static const int renderscale = 3;
-
-static uint8_t *rawmem = (uint8_t*) &mem;
-#include <assert.h>
-
-
-static void init_renderer()
-{
-    int rc = SDL_Init(SDL_INIT_EVERYTHING);
-    assert(rc == 0);
-
-    window = SDL_CreateWindow("space-invaders", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-            224 * renderscale, 256 * renderscale, 0);
-    assert(window);
-
-    SDL_ShowCursor(SDL_DISABLE);
-
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-    assert(renderer);
-}
-
-static void fini_renderer()
-{
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-}
-
-static void render()
-{
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-    SDL_RenderClear(renderer);
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-
-    const uint8_t *iter = rawmem + 0x2400;
-
-    for (int y = 0; y < 224; ++y)
-    {
-        for (int xi = 0; xi < 32; ++xi)
-        {
-            uint8_t byte = *iter++;
-
-            for (int i = 0; i < 8; ++i)
-            {
-                int x = xi * 8 + i;
-                int on = (byte >> i) & 0x1;
-
-                if (on)
-                {
-                    SDL_Rect rect;
-                    rect.x = y * renderscale;
-                    rect.y = (256 - x - 1) * renderscale;
-                    rect.w = renderscale;
-                    rect.h = renderscale;
-
-                    SDL_RenderDrawRect(renderer, &rect);
-                }
-            }
+static void render(SDL_Renderer* renderer) {
+  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+  SDL_RenderClear(renderer);
+  SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+  const uint8_t *iter = mem + 0x2400;
+  for (int y = 0; y < 224; ++y) {
+    for (int xi = 0; xi < 32; ++xi) {
+      uint8_t byte = *iter++;
+      for (int i = 0; i < 8; ++i) {
+        int x = xi * 8 + i;
+        int on = (byte >> i) & 0x1;
+        if (on) {
+          SDL_Rect rect;
+          rect.x = y * renderscale;
+          rect.y = (256 - x - 1) * renderscale;
+          rect.w = renderscale;
+          rect.h = renderscale;
+          SDL_RenderDrawRect(renderer, &rect);
         }
+      }
     }
-
-    SDL_RenderPresent(renderer);
+  }
+  SDL_RenderPresent(renderer);
 }
 
-
-u1 e1_is_pressed(const char* s) { //TODO: use enum for buttons
-  bool res = false; //(0 == strcmp(s,"coin entry"));
-  //printf ("e1_is_pressed: %s --> %d\n", s, res);
-  return res;
+static void input() {
+  SDL_Event event_buffer[64];
+  size_t num = 0;
+  while (num < 64) {
+    int has = SDL_PollEvent(&event_buffer[num]);
+    if (!has) break;
+    num++;
+  }
+  for (size_t i = 0; i < num; ++i) {
+    SDL_Event e = event_buffer[i];
+    if (e.type == SDL_QUIT) {
+      e.type = SDL_KEYDOWN;
+      e.key.keysym.sym = SDLK_ESCAPE;
+    }
+    if (! (e.type == SDL_KEYDOWN || e.type == SDL_KEYUP)) continue;
+    uint64_t mask = 0;
+    uint64_t f = e.type == SDL_KEYDOWN;
+    switch (e.key.keysym.sym) {
+#define KEY_MAP(x, y) case x: mask = y; break;
+      KEY_MAP('z', KEYS_LEFT);
+      KEY_MAP('x', KEYS_RIGHT);
+      KEY_MAP(SDLK_F1, KEYS_START);
+      KEY_MAP(SDLK_F2, KEYS_START2);
+      KEY_MAP(SDLK_RETURN, KEYS_FIRE);
+      KEY_MAP(SDLK_INSERT, KEYS_COIN);
+      KEY_MAP(SDLK_TAB, KEYS_TILT);
+      KEY_MAP(SDLK_ESCAPE, KEYS_QUIT);
+    }
+    keystate = (keystate & ~mask) | (-f & mask);
+  }
 }

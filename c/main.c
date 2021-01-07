@@ -81,6 +81,8 @@ enum Keys {
     KEYS_FIRE      =  16,
     KEYS_COIN      =  32,
     KEYS_TILT      =  64,
+    KEYS_SLOWER    =  128,
+    KEYS_FASTER    =  256,
     KEYS_QUIT      =  2048
 };
 
@@ -114,7 +116,7 @@ u1 e1_is_pressed(const char* s) { //TODO: use enum for buttons
 }
 
 static const int renderscale = 3;
-static const long speedup = 3;
+const long cycles_between_frames = (TWO_MEG / 60);
 
 int play () {
   SDL_Init(SDL_INIT_EVERYTHING);
@@ -125,10 +127,10 @@ int play () {
   SDL_Renderer* renderer =
     // Think something here causes fps to be limited to about 60 fps?
     SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-  const long cycles_between_frames = (TWO_MEG / 60) * speedup;
   Func fn = prog_0000;
   long frame_count = 0;
   long frame_credit = cycles_between_frames;
+  double speedup = 1.0;
   while (fn) {
     const long c1 = cycles;
     fn = (Func)fn();
@@ -136,10 +138,19 @@ int play () {
     frame_credit -= (c2-c1);
     if (frame_credit < 0) {
       frame_count ++;
-      frame_credit += cycles_between_frames;
+      frame_credit += (cycles_between_frames * speedup);
       render(renderer);
       input();
       if (BIT(KEYS_QUIT)) fn = 0;
+
+      if (BIT(KEYS_SLOWER)) {
+        speedup /= 1.1;
+        printf("slower, speedup=%g\n",speedup);
+      }
+      if (BIT(KEYS_FASTER)) {
+        speedup *= 1.1;
+        printf("faster, speedup=%g\n",speedup);
+      }
     }
   }
   SDL_DestroyRenderer(renderer);
@@ -198,6 +209,8 @@ static void input() {
       KEY_MAP(SDLK_RETURN, KEYS_FIRE);
       KEY_MAP(SDLK_INSERT, KEYS_COIN);
       KEY_MAP(SDLK_TAB, KEYS_TILT);
+      KEY_MAP(',', KEYS_SLOWER);
+      KEY_MAP('.', KEYS_FASTER);
       KEY_MAP(SDLK_ESCAPE, KEYS_QUIT);
     }
     keystate = (keystate & ~mask) | (-f & mask);

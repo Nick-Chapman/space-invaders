@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <string.h>
-#include <time.h>
 #include "shared.h"
 #include "SDL.h"
+#include <sys/time.h>
 
 static int test1 ();
 static int speed ();
@@ -10,6 +10,12 @@ static int play ();
 
 static void render(SDL_Renderer*);
 static void input();
+
+static u64 time() { //in micro-seconds
+  struct timeval tv;
+  gettimeofday(&tv,NULL);
+  return tv.tv_sec*(u64)1000000+tv.tv_usec;
+}
 
 int main (int argc, char* argv[]) {
   if (argc != 2) {
@@ -44,13 +50,13 @@ int speed () {
   dump_state_every_instruction = false;
   const int sim_seconds_to_run_for = 60;
   Func fn = prog_0000;
-  clock_t tic = clock();
+  u64 tic = time();
   cycles = 0;
   while (fn) {
     fn = (Func)fn();
     if (cycles > TWO_MEG * sim_seconds_to_run_for) break;
   }
-  clock_t toc = clock();
+  u64 toc = time();
   clock_t duration_us = toc - tic;
   double duration_s = duration_us / (double)MEG;
   int mhz = cycles/duration_us;
@@ -86,7 +92,7 @@ enum Keys {
     KEYS_QUIT      =  2048
 };
 
-static uint64_t keystate;
+static u64 keystate;
 
 #define BIT(x) (!!(keystate & (x)))
 
@@ -145,11 +151,11 @@ int play () {
 
       if (BIT(KEYS_SLOWER)) {
         speedup /= 1.1;
-        printf("slower, speedup=%g\n",speedup);
+        printf("slower, speedup = x%g\n",speedup);
       }
       if (BIT(KEYS_FASTER)) {
         speedup *= 1.1;
-        printf("faster, speedup=%g\n",speedup);
+        printf("faster, speedup = x%g\n",speedup);
       }
     }
   }
@@ -158,14 +164,32 @@ int play () {
   return 0;
 }
 
+static void measure_fps() {
+  static int frames = 0;
+  static u64 last = 0;
+  if (last == 0) {
+    last = time();
+  } else {
+    frames++;
+    u64 now = time();
+    u64 elapsed = now - last;
+    if (elapsed >= MEG) {
+      printf("fps = %d\n",frames);
+      frames = 0;
+      last = now;
+    }
+  }
+}
+
 static void render(SDL_Renderer* renderer) {
+  measure_fps();
   SDL_SetRenderDrawColor(renderer, 10, 10, 10, 255);
   SDL_RenderClear(renderer);
   SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-  const uint8_t *iter = mem + 0x2400;
+  const u8 *iter = mem + 0x2400;
   for (int y = 0; y < 224; ++y) {
     for (int xi = 0; xi < 32; ++xi) {
-      uint8_t byte = *iter++;
+      u8 byte = *iter++;
       for (int i = 0; i < 8; ++i) {
         int x = xi * 8 + i;
         int on = (byte >> i) & 0x1;
@@ -198,8 +222,8 @@ static void input() {
       e.key.keysym.sym = SDLK_ESCAPE;
     }
     if (! (e.type == SDL_KEYDOWN || e.type == SDL_KEYUP)) continue;
-    uint64_t mask = 0;
-    uint64_t f = e.type == SDL_KEYDOWN;
+    u64 mask = 0;
+    u64 f = e.type == SDL_KEYDOWN;
     switch (e.key.keysym.sym) {
 #define KEY_MAP(x, y) case x: mask = y; break;
       KEY_MAP('z', KEYS_LEFT);

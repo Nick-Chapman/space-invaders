@@ -1,6 +1,6 @@
-
 #include <stdlib.h>
 #include <stdbool.h>
+#include <stdint.h>
 
 #define die { printf("die: %s:%d (%s)\n", __FILE__, __LINE__, __FUNCTION__); exit(1); }
 
@@ -13,9 +13,10 @@ extern long cycles;
 extern bool dump_state_every_instruction;
 
 typedef bool u1;
-typedef unsigned char u8; // TODO: use uint8_t etc
-typedef unsigned short u16;
-typedef unsigned int u17;
+typedef uint8_t u8;
+typedef uint16_t u16;
+typedef uint32_t u17;
+typedef uint64_t u64;
 
 #define MEM_SIZE 0x4000
 

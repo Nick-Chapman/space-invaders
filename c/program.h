@@ -64,7 +64,6 @@ inline static u1 e1_or_bit(u1,u1);
 inline static u1 e1_and_bit(u1,u1);
 inline static u1 e1_hi_bit_of_17(u17);
 noinline static u1 e1_parity(u8);
-noinline extern u1 e1_is_pressed(const char*);
 
 inline static u8 e8_hi(u16);
 inline static u8 e8_lo(u16);

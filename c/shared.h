@@ -21,3 +21,22 @@ typedef uint64_t u64;
 #define MEM_SIZE 0x4000
 
 extern u8 mem [MEM_SIZE];
+
+typedef enum ButtonE
+  { CoinEntry,
+    Tilt,
+    P1start,
+    P1left,
+    P1right,
+    P1shoot,
+    P2start,
+    P2left,
+    P2right,
+    P2shoot,
+    Dip3_livesLow,
+    Dip5_livesHigh,
+    Dip6_extraShipEarly,
+    Dip7_coinInfoOff,
+  } Button;
+
+u1 e1_is_pressed(Button);

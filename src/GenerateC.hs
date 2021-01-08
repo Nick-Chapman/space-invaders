@@ -152,7 +152,7 @@ convert1 = \case
   E1_IsParity b -> call "e1_parity" [convert8 b]
   E1_OrBit c1 c2 -> call "e1_or_bit" [convert1 c1, convert1 c2]
   E1_AndBit c1 c2 -> call "e1_and_bit" [convert1 c1, convert1 c2]
-  E1_Button but -> call "e1_is_pressed" [LitS $ show but] -- TODO: use an enum for the buttons
+  E1_Button but -> call "e1_is_pressed" [Ident $ CName $ show but]
 
 convert8 :: Exp8 -> CExp
 convert8 = \case

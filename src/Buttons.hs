@@ -22,9 +22,9 @@ data But
   | Dip5_livesHigh
   | Dip6_extraShipEarly
   | Dip7_coinInfoOff
-  deriving (Eq,Ord)
+  deriving (Eq,Ord,Show)
 
-instance Show But where
+{-instance Show But where
   show = \case
     CoinEntry -> "coin entry"
     Tilt -> "TILT"
@@ -40,7 +40,7 @@ instance Show But where
     Dip5_livesHigh -> "[dip5] lives (3,4,5,6) msb"
     Dip6_extraShipEarly -> "[dip6] extra ship at 1000"
     Dip7_coinInfoOff -> "[dip7] coin info off"
-
+-}
 
 newtype Buttons = Buttons { map :: Map But Bool } deriving Show
 

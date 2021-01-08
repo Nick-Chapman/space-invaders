@@ -4852,7 +4852,7 @@ Control prog_0020 ()
     at ( "0020" );
     instruction ( "IN   01",e16_hi_lo ( 0x00,0x22 ) );
     advance ( 10 );
-    A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_flip ( e1_is_pressed ( "coin entry" ) ) ),1,e1_is_pressed ( "player2 start" ) ),2,e1_is_pressed ( "player1 start" ) ),4,e1_is_pressed ( "player1 shoot" ) ),5,e1_is_pressed ( "player1 left" ) ),6,e1_is_pressed ( "player1 right" ) );
+    A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_flip ( e1_is_pressed ( CoinEntry ) ) ),1,e1_is_pressed ( P2start ) ),2,e1_is_pressed ( P1start ) ),4,e1_is_pressed ( P1shoot ) ),5,e1_is_pressed ( P1left ) ),6,e1_is_pressed ( P1right ) );
     return jumpDirect ( 0x0022,prog_0022 );
 }
 
@@ -17891,7 +17891,7 @@ Control prog_0791 ()
     at ( "0791" );
     instruction ( "IN   01",e16_hi_lo ( 0x07,0x93 ) );
     advance ( 10 );
-    A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_flip ( e1_is_pressed ( "coin entry" ) ) ),1,e1_is_pressed ( "player2 start" ) ),2,e1_is_pressed ( "player1 start" ) ),4,e1_is_pressed ( "player1 shoot" ) ),5,e1_is_pressed ( "player1 left" ) ),6,e1_is_pressed ( "player1 right" ) );
+    A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_flip ( e1_is_pressed ( CoinEntry ) ) ),1,e1_is_pressed ( P2start ) ),2,e1_is_pressed ( P1start ) ),4,e1_is_pressed ( P1shoot ) ),5,e1_is_pressed ( P1left ) ),6,e1_is_pressed ( P1right ) );
     return jumpDirect ( 0x0793,prog_0793 );
 }
 
@@ -19042,7 +19042,7 @@ Control prog_085F ()
     at ( "085F" );
     instruction ( "IN   01",e16_hi_lo ( 0x08,0x61 ) );
     advance ( 10 );
-    A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_flip ( e1_is_pressed ( "coin entry" ) ) ),1,e1_is_pressed ( "player2 start" ) ),2,e1_is_pressed ( "player1 start" ) ),4,e1_is_pressed ( "player1 shoot" ) ),5,e1_is_pressed ( "player1 left" ) ),6,e1_is_pressed ( "player1 right" ) );
+    A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_flip ( e1_is_pressed ( CoinEntry ) ) ),1,e1_is_pressed ( P2start ) ),2,e1_is_pressed ( P1start ) ),4,e1_is_pressed ( P1shoot ) ),5,e1_is_pressed ( P1left ) ),6,e1_is_pressed ( P1right ) );
     return jumpDirect ( 0x0861,prog_0861 );
 }
 
@@ -19631,7 +19631,7 @@ Control prog_08D1 ()
     at ( "08D1" );
     instruction ( "IN   02",e16_hi_lo ( 0x08,0xD3 ) );
     advance ( 10 );
-    A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_is_pressed ( "[dip3] lives (3,4,5,6) lsb" ) ),1,e1_is_pressed ( "[dip5] lives (3,4,5,6) msb" ) ),2,e1_is_pressed ( "TILT" ) ),3,e1_is_pressed ( "[dip6] extra ship at 1000" ) ),4,e1_is_pressed ( "player2 shoot" ) ),5,e1_is_pressed ( "player2 left" ) ),6,e1_is_pressed ( "player2 right" ) ),7,e1_is_pressed ( "[dip7] coin info off" ) );
+    A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_is_pressed ( Dip3_livesLow ) ),1,e1_is_pressed ( Dip5_livesHigh ) ),2,e1_is_pressed ( Tilt ) ),3,e1_is_pressed ( Dip6_extraShipEarly ) ),4,e1_is_pressed ( P2shoot ) ),5,e1_is_pressed ( P2left ) ),6,e1_is_pressed ( P2right ) ),7,e1_is_pressed ( Dip7_coinInfoOff ) );
     return jumpDirect ( 0x08D3,prog_08D3 );
 }
 
@@ -20536,7 +20536,7 @@ Control prog_093F ()
     at ( "093F" );
     instruction ( "IN   02",e16_hi_lo ( 0x09,0x41 ) );
     advance ( 10 );
-    A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_is_pressed ( "[dip3] lives (3,4,5,6) lsb" ) ),1,e1_is_pressed ( "[dip5] lives (3,4,5,6) msb" ) ),2,e1_is_pressed ( "TILT" ) ),3,e1_is_pressed ( "[dip6] extra ship at 1000" ) ),4,e1_is_pressed ( "player2 shoot" ) ),5,e1_is_pressed ( "player2 left" ) ),6,e1_is_pressed ( "player2 right" ) ),7,e1_is_pressed ( "[dip7] coin info off" ) );
+    A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_is_pressed ( Dip3_livesLow ) ),1,e1_is_pressed ( Dip5_livesHigh ) ),2,e1_is_pressed ( Tilt ) ),3,e1_is_pressed ( Dip6_extraShipEarly ) ),4,e1_is_pressed ( P2shoot ) ),5,e1_is_pressed ( P2left ) ),6,e1_is_pressed ( P2right ) ),7,e1_is_pressed ( Dip7_coinInfoOff ) );
     return jumpDirect ( 0x0941,prog_0941 );
 }
 
@@ -24919,7 +24919,7 @@ Control prog_0BB7 ()
     at ( "0BB7" );
     instruction ( "IN   02",e16_hi_lo ( 0x0B,0xB9 ) );
     advance ( 10 );
-    A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_is_pressed ( "[dip3] lives (3,4,5,6) lsb" ) ),1,e1_is_pressed ( "[dip5] lives (3,4,5,6) msb" ) ),2,e1_is_pressed ( "TILT" ) ),3,e1_is_pressed ( "[dip6] extra ship at 1000" ) ),4,e1_is_pressed ( "player2 shoot" ) ),5,e1_is_pressed ( "player2 left" ) ),6,e1_is_pressed ( "player2 right" ) ),7,e1_is_pressed ( "[dip7] coin info off" ) );
+    A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_is_pressed ( Dip3_livesLow ) ),1,e1_is_pressed ( Dip5_livesHigh ) ),2,e1_is_pressed ( Tilt ) ),3,e1_is_pressed ( Dip6_extraShipEarly ) ),4,e1_is_pressed ( P2shoot ) ),5,e1_is_pressed ( P2left ) ),6,e1_is_pressed ( P2right ) ),7,e1_is_pressed ( Dip7_coinInfoOff ) );
     return jumpDirect ( 0x0BB9,prog_0BB9 );
 }
 
@@ -32839,7 +32839,7 @@ Control prog_17C7 ()
     at ( "17C7" );
     instruction ( "IN   01",e16_hi_lo ( 0x17,0xC9 ) );
     advance ( 10 );
-    A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_flip ( e1_is_pressed ( "coin entry" ) ) ),1,e1_is_pressed ( "player2 start" ) ),2,e1_is_pressed ( "player1 start" ) ),4,e1_is_pressed ( "player1 shoot" ) ),5,e1_is_pressed ( "player1 left" ) ),6,e1_is_pressed ( "player1 right" ) );
+    A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_flip ( e1_is_pressed ( CoinEntry ) ) ),1,e1_is_pressed ( P2start ) ),2,e1_is_pressed ( P1start ) ),4,e1_is_pressed ( P1shoot ) ),5,e1_is_pressed ( P1left ) ),6,e1_is_pressed ( P1right ) );
     return jumpDirect ( 0x17C9,prog_17C9 );
 }
 
@@ -32866,7 +32866,7 @@ Control prog_17CA ()
     at ( "17CA" );
     instruction ( "IN   02",e16_hi_lo ( 0x17,0xCC ) );
     advance ( 10 );
-    A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_is_pressed ( "[dip3] lives (3,4,5,6) lsb" ) ),1,e1_is_pressed ( "[dip5] lives (3,4,5,6) msb" ) ),2,e1_is_pressed ( "TILT" ) ),3,e1_is_pressed ( "[dip6] extra ship at 1000" ) ),4,e1_is_pressed ( "player2 shoot" ) ),5,e1_is_pressed ( "player2 left" ) ),6,e1_is_pressed ( "player2 right" ) ),7,e1_is_pressed ( "[dip7] coin info off" ) );
+    A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_is_pressed ( Dip3_livesLow ) ),1,e1_is_pressed ( Dip5_livesHigh ) ),2,e1_is_pressed ( Tilt ) ),3,e1_is_pressed ( Dip6_extraShipEarly ) ),4,e1_is_pressed ( P2shoot ) ),5,e1_is_pressed ( P2left ) ),6,e1_is_pressed ( P2right ) ),7,e1_is_pressed ( Dip7_coinInfoOff ) );
     return jumpDirect ( 0x17CC,prog_17CC );
 }
 
@@ -32893,7 +32893,7 @@ Control prog_17CD ()
     at ( "17CD" );
     instruction ( "IN   02",e16_hi_lo ( 0x17,0xCF ) );
     advance ( 10 );
-    A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_is_pressed ( "[dip3] lives (3,4,5,6) lsb" ) ),1,e1_is_pressed ( "[dip5] lives (3,4,5,6) msb" ) ),2,e1_is_pressed ( "TILT" ) ),3,e1_is_pressed ( "[dip6] extra ship at 1000" ) ),4,e1_is_pressed ( "player2 shoot" ) ),5,e1_is_pressed ( "player2 left" ) ),6,e1_is_pressed ( "player2 right" ) ),7,e1_is_pressed ( "[dip7] coin info off" ) );
+    A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_is_pressed ( Dip3_livesLow ) ),1,e1_is_pressed ( Dip5_livesHigh ) ),2,e1_is_pressed ( Tilt ) ),3,e1_is_pressed ( Dip6_extraShipEarly ) ),4,e1_is_pressed ( P2shoot ) ),5,e1_is_pressed ( P2left ) ),6,e1_is_pressed ( P2right ) ),7,e1_is_pressed ( Dip7_coinInfoOff ) );
     return jumpDirect ( 0x17CF,prog_17CF );
 }
 
@@ -35619,7 +35619,7 @@ Control prog_19A1 ()
     at ( "19A1" );
     instruction ( "IN   01",e16_hi_lo ( 0x19,0xA3 ) );
     advance ( 10 );
-    A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_flip ( e1_is_pressed ( "coin entry" ) ) ),1,e1_is_pressed ( "player2 start" ) ),2,e1_is_pressed ( "player1 start" ) ),4,e1_is_pressed ( "player1 shoot" ) ),5,e1_is_pressed ( "player1 left" ) ),6,e1_is_pressed ( "player1 right" ) );
+    A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_flip ( e1_is_pressed ( CoinEntry ) ) ),1,e1_is_pressed ( P2start ) ),2,e1_is_pressed ( P1start ) ),4,e1_is_pressed ( P1shoot ) ),5,e1_is_pressed ( P1left ) ),6,e1_is_pressed ( P1right ) );
     return jumpDirect ( 0x19A3,prog_19A3 );
 }
 
@@ -35718,7 +35718,7 @@ Control prog_19AC ()
     at ( "19AC" );
     instruction ( "IN   01",e16_hi_lo ( 0x19,0xAE ) );
     advance ( 10 );
-    A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_flip ( e1_is_pressed ( "coin entry" ) ) ),1,e1_is_pressed ( "player2 start" ) ),2,e1_is_pressed ( "player1 start" ) ),4,e1_is_pressed ( "player1 shoot" ) ),5,e1_is_pressed ( "player1 left" ) ),6,e1_is_pressed ( "player1 right" ) );
+    A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_flip ( e1_is_pressed ( CoinEntry ) ) ),1,e1_is_pressed ( P2start ) ),2,e1_is_pressed ( P1start ) ),4,e1_is_pressed ( P1shoot ) ),5,e1_is_pressed ( P1left ) ),6,e1_is_pressed ( P1right ) );
     return jumpDirect ( 0x19AE,prog_19AE );
 }
 

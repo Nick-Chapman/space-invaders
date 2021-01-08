@@ -96,29 +96,24 @@ static u64 keystate;
 
 #define BIT(x) (!!(keystate & (x)))
 
-u1 e1_is_pressed(const char* s) { //TODO: use enum for buttons
-  int k = 0;
-  if (0 == strcmp(s,"[dip3] lives (3,4,5,6) lsb")) { return false; }
-  else if (0 == strcmp(s,"[dip5] lives (3,4,5,6) msb")) { return false; }
-  else if (0 == strcmp(s,"[dip6] extra ship at 1000")) { return false; }
-  else if (0 == strcmp(s,"[dip7] coin info off")) { return false; }
-  else if (0 == strcmp(s,"player1 left")) { k = KEYS_LEFT; }
-  else if (0 == strcmp(s,"player1 right")) { k = KEYS_RIGHT; }
-  else if (0 == strcmp(s,"player1 shoot")) { k = KEYS_FIRE; }
-  else if (0 == strcmp(s,"player2 left")) { k = KEYS_LEFT; }
-  else if (0 == strcmp(s,"player2 right")) { k = KEYS_RIGHT; }
-  else if (0 == strcmp(s,"player2 shoot")) { k = KEYS_FIRE; }
-  else if (0 == strcmp(s,"player1 start")) { k = KEYS_START; }
-  else if (0 == strcmp(s,"player2 start")) { k = KEYS_START2; }
-  else if (0 == strcmp(s,"coin entry")) { k = KEYS_COIN; }
-  else if (0 == strcmp(s,"TILT")) { k = KEYS_TILT; }
-  if (k == 0) {
-    printf("e1_is_pressed, string not converted to enum: %s\n",s);
-    die;
+u1 e1_is_pressed(Button but) {
+  switch (but) {
+  case CoinEntry: { return BIT(KEYS_COIN); }
+  case Tilt: { return BIT(KEYS_TILT); }
+  case P1start: { return BIT(KEYS_START); }
+  case P1left: { return BIT(KEYS_LEFT); }
+  case P1right: { return BIT(KEYS_RIGHT); }
+  case P1shoot: { return BIT(KEYS_FIRE); }
+  case P2start: { return BIT(KEYS_START2); }
+  case P2left: { return BIT(KEYS_LEFT); }
+  case P2right: { return BIT(KEYS_RIGHT); }
+  case P2shoot: { return BIT(KEYS_FIRE); }
+  case Dip3_livesLow: { return 0; }
+  case Dip5_livesHigh: { return 0; }
+  case Dip6_extraShipEarly: { return 0; }
+  case Dip7_coinInfoOff: { return 0; }
+  default: { printf("e1_is_pressed: but = %d\n",but); die; }
   }
-  bool res = BIT(k);
-  //printf ("e1_is_pressed: %s --> %d\n", s, res);
-  return res;
 }
 
 static const int renderscale = 3;

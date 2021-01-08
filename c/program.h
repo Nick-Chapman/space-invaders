@@ -34,9 +34,17 @@ u8 Shifter_HI;
 u8 Shifter_LO;
 u8 Shifter_OFF;
 
-inline static void at(const char*);
-inline static void instruction(const char*, u16);
+inline static void f_at(const char*);
+inline static void f_instruction(const char*, u16);
 inline static void advance(int);
+
+
+#define instruction(x...) f_instruction(x)
+//#define instruction(x...) {}
+
+//#define at(x...) f_at(x)
+#define at(x...) {}
+
 
 noinline Control jumpInterrupt(u16 pc, Func f);
 inline static Control jumpDirect(u16,Func);
@@ -94,7 +102,7 @@ static int interrupts = 0;
 
 static bool interrupts_enabled = false;
 
-void at(const char* s) {
+void f_at(const char* s) {
 }
 
 void dump_state(const char* instruction, u16 pcAfterInstructionDecode) {
@@ -112,7 +120,7 @@ void dump_state(const char* instruction, u16 pcAfterInstructionDecode) {
          );
 }
 
-void instruction(const char* instruction, u16 pcAfterInstructionDecode) {
+void f_instruction(const char* instruction, u16 pcAfterInstructionDecode) {
   if (dump_state_every_instruction) {
     dump_state(instruction,pcAfterInstructionDecode);
   }

@@ -96,7 +96,7 @@ insertAtRef State{cpu} program = do
 
 
 getPC :: Cpu CompTime -> Exp16
-getPC cpu = E16_HiLo HiLo{hi,lo} where
+getPC cpu = make_E16_HiLo HiLo{hi,lo} where
   hi = Cpu.get cpu PCH
   lo = Cpu.get cpu PCL
 

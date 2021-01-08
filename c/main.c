@@ -199,7 +199,7 @@ static void render(SDL_Renderer* renderer) {
           rect.y = (256 - x - 1) * renderscale;
           rect.w = renderscale;
           rect.h = renderscale;
-          SDL_RenderDrawRect(renderer, &rect);
+          SDL_RenderFillRect(renderer, &rect);
         }
       }
     }

@@ -4581,7 +4581,7 @@ Control prog_1A90 ();
 
 Control prog_0000 ()
 {
-    at ( "0000" );
+    // #at: 0000
     instruction ( "NOP",0x0001 );
     advance ( 4 );
     return jumpDirect ( 0x0001,prog_0001 );
@@ -4589,7 +4589,7 @@ Control prog_0000 ()
 
 Control prog_0001 ()
 {
-    at ( "0001" );
+    // #at: 0001
     instruction ( "NOP",0x0002 );
     advance ( 4 );
     return jumpDirect ( 0x0002,prog_0002 );
@@ -4597,7 +4597,7 @@ Control prog_0001 ()
 
 Control prog_0002 ()
 {
-    at ( "0002" );
+    // #at: 0002
     instruction ( "NOP",0x0003 );
     advance ( 4 );
     return jumpDirect ( 0x0003,prog_0003 );
@@ -4605,7 +4605,7 @@ Control prog_0002 ()
 
 Control prog_0003 ()
 {
-    at ( "0003" );
+    // #at: 0003
     instruction ( "JP   18D4",0x0006 );
     advance ( 10 );
     return jumpDirect ( 0x18D4,prog_18D4 );
@@ -4613,7 +4613,7 @@ Control prog_0003 ()
 
 Control prog_0008 ()
 {
-    at ( "0008" );
+    // #at: 0008
     instruction ( "PUSH PSW",0x0009 );
     u8 a1 = A ;
     u8 a2 = SPH ;
@@ -4632,7 +4632,7 @@ Control prog_0008 ()
 
 Control prog_0009 ()
 {
-    at ( "0009" );
+    // #at: 0009
     instruction ( "PUSH BC",0x000A );
     u8 a1 = B ;
     u8 a2 = C ;
@@ -4652,7 +4652,7 @@ Control prog_0009 ()
 
 Control prog_000A ()
 {
-    at ( "000A" );
+    // #at: 000A
     instruction ( "PUSH DE",0x000B );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -4672,7 +4672,7 @@ Control prog_000A ()
 
 Control prog_000B ()
 {
-    at ( "000B" );
+    // #at: 000B
     instruction ( "PUSH HL",0x000C );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -4692,7 +4692,7 @@ Control prog_000B ()
 
 Control prog_000C ()
 {
-    at ( "000C" );
+    // #at: 000C
     instruction ( "JP   008C",0x000F );
     advance ( 10 );
     return jumpDirect ( 0x008C,prog_008C );
@@ -4700,7 +4700,7 @@ Control prog_000C ()
 
 Control prog_0010 ()
 {
-    at ( "0010" );
+    // #at: 0010
     instruction ( "PUSH PSW",0x0011 );
     u8 a1 = A ;
     u8 a2 = SPH ;
@@ -4719,7 +4719,7 @@ Control prog_0010 ()
 
 Control prog_0011 ()
 {
-    at ( "0011" );
+    // #at: 0011
     instruction ( "PUSH BC",0x0012 );
     u8 a1 = B ;
     u8 a2 = C ;
@@ -4739,7 +4739,7 @@ Control prog_0011 ()
 
 Control prog_0012 ()
 {
-    at ( "0012" );
+    // #at: 0012
     instruction ( "PUSH DE",0x0013 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -4759,7 +4759,7 @@ Control prog_0012 ()
 
 Control prog_0013 ()
 {
-    at ( "0013" );
+    // #at: 0013
     instruction ( "PUSH HL",0x0014 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -4779,7 +4779,7 @@ Control prog_0013 ()
 
 Control prog_0014 ()
 {
-    at ( "0014" );
+    // #at: 0014
     instruction ( "LD   A,80",0x0016 );
     advance ( 7 );
     A = 0x80;
@@ -4788,7 +4788,7 @@ Control prog_0014 ()
 
 Control prog_0016 ()
 {
-    at ( "0016" );
+    // #at: 0016
     instruction ( "LD   (2072),A",0x0019 );
     u8 a1 = A ;
     mem_write ( 0x2072,a1 );
@@ -4798,7 +4798,7 @@ Control prog_0016 ()
 
 Control prog_0019 ()
 {
-    at ( "0019" );
+    // #at: 0019
     instruction ( "LD   HL,20C0",0x001C );
     advance ( 10 );
     H = 0x20;
@@ -4808,7 +4808,7 @@ Control prog_0019 ()
 
 Control prog_001C ()
 {
-    at ( "001C" );
+    // #at: 001C
     instruction ( "DEC  (HL)",0x001D );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -4830,7 +4830,7 @@ Control prog_001C ()
 
 Control prog_001D ()
 {
-    at ( "001D" );
+    // #at: 001D
     instruction ( "CALL 17CD",0x0020 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -4849,7 +4849,7 @@ Control prog_001D ()
 
 Control prog_0020 ()
 {
-    at ( "0020" );
+    // #at: 0020
     instruction ( "IN   01",0x0022 );
     advance ( 10 );
     A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,( ! e1_is_pressed ( CoinEntry ) ) ),1,e1_is_pressed ( P2start ) ),2,e1_is_pressed ( P1start ) ),4,e1_is_pressed ( P1shoot ) ),5,e1_is_pressed ( P1left ) ),6,e1_is_pressed ( P1right ) );
@@ -4858,7 +4858,7 @@ Control prog_0020 ()
 
 Control prog_0022 ()
 {
-    at ( "0022" );
+    // #at: 0022
     instruction ( "RRCA",0x0023 );
     u8 a1 = A ;
     advance ( 4 );
@@ -4869,7 +4869,7 @@ Control prog_0022 ()
 
 Control prog_0023 ()
 {
-    at ( "0023" );
+    // #at: 0023
     instruction ( "JP   CY,0067",0x0026 );
     if (FlagCY)
     {
@@ -4885,7 +4885,7 @@ Control prog_0023 ()
 
 Control prog_0026 ()
 {
-    at ( "0026" );
+    // #at: 0026
     instruction ( "LD   A,(20EA)",0x0029 );
     u8 a1 = e8_read_mem ( 0x20EA ) ;
     advance ( 13 );
@@ -4895,7 +4895,7 @@ Control prog_0026 ()
 
 Control prog_0029 ()
 {
-    at ( "0029" );
+    // #at: 0029
     instruction ( "AND  A",0x002A );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -4913,7 +4913,7 @@ Control prog_0029 ()
 
 Control prog_002A ()
 {
-    at ( "002A" );
+    // #at: 002A
     instruction ( "JP   Z,0042",0x002D );
     if (FlagZ)
     {
@@ -4929,7 +4929,7 @@ Control prog_002A ()
 
 Control prog_002D ()
 {
-    at ( "002D" );
+    // #at: 002D
     instruction ( "LD   A,(20EB)",0x0030 );
     u8 a1 = e8_read_mem ( 0x20EB ) ;
     advance ( 13 );
@@ -4939,7 +4939,7 @@ Control prog_002D ()
 
 Control prog_0030 ()
 {
-    at ( "0030" );
+    // #at: 0030
     instruction ( "CP   99",0x0032 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x99 ) ) ) + ( ! false ) ) ;
@@ -4957,7 +4957,7 @@ Control prog_0030 ()
 
 Control prog_0032 ()
 {
-    at ( "0032" );
+    // #at: 0032
     instruction ( "JP   Z,003E",0x0035 );
     if (FlagZ)
     {
@@ -4973,7 +4973,7 @@ Control prog_0032 ()
 
 Control prog_0035 ()
 {
-    at ( "0035" );
+    // #at: 0035
     instruction ( "ADD  01",0x0037 );
     u8 a1 = A ;
     u16 a2 = ( ( 0x01 + a1 ) + false ) ;
@@ -4992,7 +4992,7 @@ Control prog_0035 ()
 
 Control prog_0037 ()
 {
-    at ( "0037" );
+    // #at: 0037
     instruction ( "DAA",0x0038 );
     u8 a1 = A ;
     u8 a2 = ( a1 & 0x0F ) ;
@@ -5013,7 +5013,7 @@ Control prog_0037 ()
 
 Control prog_0038 ()
 {
-    at ( "0038" );
+    // #at: 0038
     instruction ( "LD   (20EB),A",0x003B );
     u8 a1 = A ;
     mem_write ( 0x20EB,a1 );
@@ -5023,7 +5023,7 @@ Control prog_0038 ()
 
 Control prog_003B ()
 {
-    at ( "003B" );
+    // #at: 003B
     instruction ( "CALL 1947",0x003E );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -5042,7 +5042,7 @@ Control prog_003B ()
 
 Control prog_003E ()
 {
-    at ( "003E" );
+    // #at: 003E
     instruction ( "XOR  A",0x003F );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -5059,7 +5059,7 @@ Control prog_003E ()
 
 Control prog_003F ()
 {
-    at ( "003F" );
+    // #at: 003F
     instruction ( "LD   (20EA),A",0x0042 );
     u8 a1 = A ;
     mem_write ( 0x20EA,a1 );
@@ -5069,7 +5069,7 @@ Control prog_003F ()
 
 Control prog_0042 ()
 {
-    at ( "0042" );
+    // #at: 0042
     instruction ( "LD   A,(20E9)",0x0045 );
     u8 a1 = e8_read_mem ( 0x20E9 ) ;
     advance ( 13 );
@@ -5079,7 +5079,7 @@ Control prog_0042 ()
 
 Control prog_0045 ()
 {
-    at ( "0045" );
+    // #at: 0045
     instruction ( "AND  A",0x0046 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -5097,7 +5097,7 @@ Control prog_0045 ()
 
 Control prog_0046 ()
 {
-    at ( "0046" );
+    // #at: 0046
     instruction ( "JP   Z,0082",0x0049 );
     if (FlagZ)
     {
@@ -5113,7 +5113,7 @@ Control prog_0046 ()
 
 Control prog_0049 ()
 {
-    at ( "0049" );
+    // #at: 0049
     instruction ( "LD   A,(20EF)",0x004C );
     u8 a1 = e8_read_mem ( 0x20EF ) ;
     advance ( 13 );
@@ -5123,7 +5123,7 @@ Control prog_0049 ()
 
 Control prog_004C ()
 {
-    at ( "004C" );
+    // #at: 004C
     instruction ( "AND  A",0x004D );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -5141,7 +5141,7 @@ Control prog_004C ()
 
 Control prog_004D ()
 {
-    at ( "004D" );
+    // #at: 004D
     instruction ( "JP   NZ,006F",0x0050 );
     if (( ! FlagZ ))
     {
@@ -5157,7 +5157,7 @@ Control prog_004D ()
 
 Control prog_0050 ()
 {
-    at ( "0050" );
+    // #at: 0050
     instruction ( "LD   A,(20EB)",0x0053 );
     u8 a1 = e8_read_mem ( 0x20EB ) ;
     advance ( 13 );
@@ -5167,7 +5167,7 @@ Control prog_0050 ()
 
 Control prog_0053 ()
 {
-    at ( "0053" );
+    // #at: 0053
     instruction ( "AND  A",0x0054 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -5185,7 +5185,7 @@ Control prog_0053 ()
 
 Control prog_0054 ()
 {
-    at ( "0054" );
+    // #at: 0054
     instruction ( "JP   NZ,005D",0x0057 );
     if (( ! FlagZ ))
     {
@@ -5201,7 +5201,7 @@ Control prog_0054 ()
 
 Control prog_0057 ()
 {
-    at ( "0057" );
+    // #at: 0057
     instruction ( "CALL 0ABF",0x005A );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -5220,7 +5220,7 @@ Control prog_0057 ()
 
 Control prog_005A ()
 {
-    at ( "005A" );
+    // #at: 005A
     instruction ( "JP   0082",0x005D );
     advance ( 10 );
     return jumpDirect ( 0x0082,prog_0082 );
@@ -5228,7 +5228,7 @@ Control prog_005A ()
 
 Control prog_005D ()
 {
-    at ( "005D" );
+    // #at: 005D
     instruction ( "LD   A,(2093)",0x0060 );
     u8 a1 = e8_read_mem ( 0x2093 ) ;
     advance ( 13 );
@@ -5238,7 +5238,7 @@ Control prog_005D ()
 
 Control prog_0060 ()
 {
-    at ( "0060" );
+    // #at: 0060
     instruction ( "AND  A",0x0061 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -5256,7 +5256,7 @@ Control prog_0060 ()
 
 Control prog_0061 ()
 {
-    at ( "0061" );
+    // #at: 0061
     instruction ( "JP   NZ,0082",0x0064 );
     if (( ! FlagZ ))
     {
@@ -5272,7 +5272,7 @@ Control prog_0061 ()
 
 Control prog_0064 ()
 {
-    at ( "0064" );
+    // #at: 0064
     instruction ( "JP   0765",0x0067 );
     advance ( 10 );
     return jumpDirect ( 0x0765,prog_0765 );
@@ -5280,7 +5280,7 @@ Control prog_0064 ()
 
 Control prog_0067 ()
 {
-    at ( "0067" );
+    // #at: 0067
     instruction ( "LD   A,01",0x0069 );
     advance ( 7 );
     A = 0x01;
@@ -5289,7 +5289,7 @@ Control prog_0067 ()
 
 Control prog_0069 ()
 {
-    at ( "0069" );
+    // #at: 0069
     instruction ( "LD   (20EA),A",0x006C );
     u8 a1 = A ;
     mem_write ( 0x20EA,a1 );
@@ -5299,7 +5299,7 @@ Control prog_0069 ()
 
 Control prog_006C ()
 {
-    at ( "006C" );
+    // #at: 006C
     instruction ( "JP   003F",0x006F );
     advance ( 10 );
     return jumpDirect ( 0x003F,prog_003F );
@@ -5307,7 +5307,7 @@ Control prog_006C ()
 
 Control prog_006F ()
 {
-    at ( "006F" );
+    // #at: 006F
     instruction ( "CALL 1740",0x0072 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -5326,7 +5326,7 @@ Control prog_006F ()
 
 Control prog_0072 ()
 {
-    at ( "0072" );
+    // #at: 0072
     instruction ( "LD   A,(2032)",0x0075 );
     u8 a1 = e8_read_mem ( 0x2032 ) ;
     advance ( 13 );
@@ -5336,7 +5336,7 @@ Control prog_0072 ()
 
 Control prog_0075 ()
 {
-    at ( "0075" );
+    // #at: 0075
     instruction ( "LD   (2080),A",0x0078 );
     u8 a1 = A ;
     mem_write ( 0x2080,a1 );
@@ -5346,7 +5346,7 @@ Control prog_0075 ()
 
 Control prog_0078 ()
 {
-    at ( "0078" );
+    // #at: 0078
     instruction ( "CALL 0100",0x007B );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -5365,7 +5365,7 @@ Control prog_0078 ()
 
 Control prog_007B ()
 {
-    at ( "007B" );
+    // #at: 007B
     instruction ( "CALL 0248",0x007E );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -5384,7 +5384,7 @@ Control prog_007B ()
 
 Control prog_007E ()
 {
-    at ( "007E" );
+    // #at: 007E
     instruction ( "CALL 0913",0x0081 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -5403,7 +5403,7 @@ Control prog_007E ()
 
 Control prog_0081 ()
 {
-    at ( "0081" );
+    // #at: 0081
     instruction ( "NOP",0x0082 );
     advance ( 4 );
     return jumpDirect ( 0x0082,prog_0082 );
@@ -5411,7 +5411,7 @@ Control prog_0081 ()
 
 Control prog_0082 ()
 {
-    at ( "0082" );
+    // #at: 0082
     instruction ( "POP  HL",0x0083 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -5431,7 +5431,7 @@ Control prog_0082 ()
 
 Control prog_0083 ()
 {
-    at ( "0083" );
+    // #at: 0083
     instruction ( "POP  DE",0x0084 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -5451,7 +5451,7 @@ Control prog_0083 ()
 
 Control prog_0084 ()
 {
-    at ( "0084" );
+    // #at: 0084
     instruction ( "POP  BC",0x0085 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -5471,7 +5471,7 @@ Control prog_0084 ()
 
 Control prog_0085 ()
 {
-    at ( "0085" );
+    // #at: 0085
     instruction ( "POP  PSW",0x0086 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -5495,7 +5495,7 @@ Control prog_0085 ()
 
 Control prog_0086 ()
 {
-    at ( "0086" );
+    // #at: 0086
     instruction ( "EI",0x0087 );
     enable_interrupts (  );
     advance ( 4 );
@@ -5504,7 +5504,7 @@ Control prog_0086 ()
 
 Control prog_0087 ()
 {
-    at ( "0087" );
+    // #at: 0087
     instruction ( "RET",0x0088 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -5522,7 +5522,7 @@ Control prog_0087 ()
 
 Control prog_008C ()
 {
-    at ( "008C" );
+    // #at: 008C
     instruction ( "XOR  A",0x008D );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -5539,7 +5539,7 @@ Control prog_008C ()
 
 Control prog_008D ()
 {
-    at ( "008D" );
+    // #at: 008D
     instruction ( "LD   (2072),A",0x0090 );
     u8 a1 = A ;
     mem_write ( 0x2072,a1 );
@@ -5549,7 +5549,7 @@ Control prog_008D ()
 
 Control prog_0090 ()
 {
-    at ( "0090" );
+    // #at: 0090
     instruction ( "LD   A,(20E9)",0x0093 );
     u8 a1 = e8_read_mem ( 0x20E9 ) ;
     advance ( 13 );
@@ -5559,7 +5559,7 @@ Control prog_0090 ()
 
 Control prog_0093 ()
 {
-    at ( "0093" );
+    // #at: 0093
     instruction ( "AND  A",0x0094 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -5577,7 +5577,7 @@ Control prog_0093 ()
 
 Control prog_0094 ()
 {
-    at ( "0094" );
+    // #at: 0094
     instruction ( "JP   Z,0082",0x0097 );
     if (FlagZ)
     {
@@ -5593,7 +5593,7 @@ Control prog_0094 ()
 
 Control prog_0097 ()
 {
-    at ( "0097" );
+    // #at: 0097
     instruction ( "LD   A,(20EF)",0x009A );
     u8 a1 = e8_read_mem ( 0x20EF ) ;
     advance ( 13 );
@@ -5603,7 +5603,7 @@ Control prog_0097 ()
 
 Control prog_009A ()
 {
-    at ( "009A" );
+    // #at: 009A
     instruction ( "AND  A",0x009B );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -5621,7 +5621,7 @@ Control prog_009A ()
 
 Control prog_009B ()
 {
-    at ( "009B" );
+    // #at: 009B
     instruction ( "JP   NZ,00A5",0x009E );
     if (( ! FlagZ ))
     {
@@ -5637,7 +5637,7 @@ Control prog_009B ()
 
 Control prog_009E ()
 {
-    at ( "009E" );
+    // #at: 009E
     instruction ( "LD   A,(20C1)",0x00A1 );
     u8 a1 = e8_read_mem ( 0x20C1 ) ;
     advance ( 13 );
@@ -5647,7 +5647,7 @@ Control prog_009E ()
 
 Control prog_00A1 ()
 {
-    at ( "00A1" );
+    // #at: 00A1
     instruction ( "RRCA",0x00A2 );
     u8 a1 = A ;
     advance ( 4 );
@@ -5658,7 +5658,7 @@ Control prog_00A1 ()
 
 Control prog_00A2 ()
 {
-    at ( "00A2" );
+    // #at: 00A2
     instruction ( "JP   NC,0082",0x00A5 );
     if (( ! FlagCY ))
     {
@@ -5674,7 +5674,7 @@ Control prog_00A2 ()
 
 Control prog_00A5 ()
 {
-    at ( "00A5" );
+    // #at: 00A5
     instruction ( "LD   HL,2020",0x00A8 );
     advance ( 10 );
     H = 0x20;
@@ -5684,7 +5684,7 @@ Control prog_00A5 ()
 
 Control prog_00A8 ()
 {
-    at ( "00A8" );
+    // #at: 00A8
     instruction ( "CALL 024B",0x00AB );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -5703,7 +5703,7 @@ Control prog_00A8 ()
 
 Control prog_00AB ()
 {
-    at ( "00AB" );
+    // #at: 00AB
     instruction ( "CALL 0141",0x00AE );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -5722,7 +5722,7 @@ Control prog_00AB ()
 
 Control prog_00AE ()
 {
-    at ( "00AE" );
+    // #at: 00AE
     instruction ( "JP   0082",0x00B1 );
     advance ( 10 );
     return jumpDirect ( 0x0082,prog_0082 );
@@ -5730,7 +5730,7 @@ Control prog_00AE ()
 
 Control prog_00B1 ()
 {
-    at ( "00B1" );
+    // #at: 00B1
     instruction ( "CALL 0886",0x00B4 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -5749,7 +5749,7 @@ Control prog_00B1 ()
 
 Control prog_00B4 ()
 {
-    at ( "00B4" );
+    // #at: 00B4
     instruction ( "PUSH HL",0x00B5 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -5769,7 +5769,7 @@ Control prog_00B4 ()
 
 Control prog_00B5 ()
 {
-    at ( "00B5" );
+    // #at: 00B5
     instruction ( "LD   A,(HL)",0x00B6 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -5781,7 +5781,7 @@ Control prog_00B5 ()
 
 Control prog_00B6 ()
 {
-    at ( "00B6" );
+    // #at: 00B6
     instruction ( "INC  HL",0x00B7 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -5794,7 +5794,7 @@ Control prog_00B6 ()
 
 Control prog_00B7 ()
 {
-    at ( "00B7" );
+    // #at: 00B7
     instruction ( "LD   H,(HL)",0x00B8 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -5806,7 +5806,7 @@ Control prog_00B7 ()
 
 Control prog_00B8 ()
 {
-    at ( "00B8" );
+    // #at: 00B8
     instruction ( "LD   L,A",0x00B9 );
     u8 a1 = A ;
     advance ( 5 );
@@ -5816,7 +5816,7 @@ Control prog_00B8 ()
 
 Control prog_00B9 ()
 {
-    at ( "00B9" );
+    // #at: 00B9
     instruction ( "LD   (2009),HL",0x00BC );
     u8 a1 = L ;
     mem_write ( 0x2009,a1 );
@@ -5828,7 +5828,7 @@ Control prog_00B9 ()
 
 Control prog_00BC ()
 {
-    at ( "00BC" );
+    // #at: 00BC
     instruction ( "LD   (200B),HL",0x00BF );
     u8 a1 = L ;
     mem_write ( 0x200B,a1 );
@@ -5840,7 +5840,7 @@ Control prog_00BC ()
 
 Control prog_00BF ()
 {
-    at ( "00BF" );
+    // #at: 00BF
     instruction ( "POP  HL",0x00C0 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -5860,7 +5860,7 @@ Control prog_00BF ()
 
 Control prog_00C0 ()
 {
-    at ( "00C0" );
+    // #at: 00C0
     instruction ( "DEC  HL",0x00C1 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -5873,7 +5873,7 @@ Control prog_00C0 ()
 
 Control prog_00C1 ()
 {
-    at ( "00C1" );
+    // #at: 00C1
     instruction ( "LD   A,(HL)",0x00C2 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -5885,7 +5885,7 @@ Control prog_00C1 ()
 
 Control prog_00C2 ()
 {
-    at ( "00C2" );
+    // #at: 00C2
     instruction ( "CP   03",0x00C4 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x03 ) ) ) + ( ! false ) ) ;
@@ -5903,7 +5903,7 @@ Control prog_00C2 ()
 
 Control prog_00C4 ()
 {
-    at ( "00C4" );
+    // #at: 00C4
     instruction ( "JP   NZ,00C8",0x00C7 );
     if (( ! FlagZ ))
     {
@@ -5919,7 +5919,7 @@ Control prog_00C4 ()
 
 Control prog_00C7 ()
 {
-    at ( "00C7" );
+    // #at: 00C7
     instruction ( "DEC  A",0x00C8 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -5937,7 +5937,7 @@ Control prog_00C7 ()
 
 Control prog_00C8 ()
 {
-    at ( "00C8" );
+    // #at: 00C8
     instruction ( "LD   (2008),A",0x00CB );
     u8 a1 = A ;
     mem_write ( 0x2008,a1 );
@@ -5947,7 +5947,7 @@ Control prog_00C8 ()
 
 Control prog_00CB ()
 {
-    at ( "00CB" );
+    // #at: 00CB
     instruction ( "CP   FE",0x00CD );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0xFE ) ) ) + ( ! false ) ) ;
@@ -5965,7 +5965,7 @@ Control prog_00CB ()
 
 Control prog_00CD ()
 {
-    at ( "00CD" );
+    // #at: 00CD
     instruction ( "LD   A,00",0x00CF );
     advance ( 7 );
     A = 0x00;
@@ -5974,7 +5974,7 @@ Control prog_00CD ()
 
 Control prog_00CF ()
 {
-    at ( "00CF" );
+    // #at: 00CF
     instruction ( "JP   NZ,00D3",0x00D2 );
     if (( ! FlagZ ))
     {
@@ -5990,7 +5990,7 @@ Control prog_00CF ()
 
 Control prog_00D2 ()
 {
-    at ( "00D2" );
+    // #at: 00D2
     instruction ( "INC  A",0x00D3 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + 0x00 ) + true ) ;
@@ -6008,7 +6008,7 @@ Control prog_00D2 ()
 
 Control prog_00D3 ()
 {
-    at ( "00D3" );
+    // #at: 00D3
     instruction ( "LD   (200D),A",0x00D6 );
     u8 a1 = A ;
     mem_write ( 0x200D,a1 );
@@ -6018,7 +6018,7 @@ Control prog_00D3 ()
 
 Control prog_00D6 ()
 {
-    at ( "00D6" );
+    // #at: 00D6
     instruction ( "RET",0x00D7 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -6036,7 +6036,7 @@ Control prog_00D6 ()
 
 Control prog_00D7 ()
 {
-    at ( "00D7" );
+    // #at: 00D7
     instruction ( "LD   A,02",0x00D9 );
     advance ( 7 );
     A = 0x02;
@@ -6045,7 +6045,7 @@ Control prog_00D7 ()
 
 Control prog_00D9 ()
 {
-    at ( "00D9" );
+    // #at: 00D9
     instruction ( "LD   (21FB),A",0x00DC );
     u8 a1 = A ;
     mem_write ( 0x21FB,a1 );
@@ -6055,7 +6055,7 @@ Control prog_00D9 ()
 
 Control prog_00DC ()
 {
-    at ( "00DC" );
+    // #at: 00DC
     instruction ( "LD   (22FB),A",0x00DF );
     u8 a1 = A ;
     mem_write ( 0x22FB,a1 );
@@ -6065,7 +6065,7 @@ Control prog_00DC ()
 
 Control prog_00DF ()
 {
-    at ( "00DF" );
+    // #at: 00DF
     instruction ( "JP   08E4",0x00E2 );
     advance ( 10 );
     return jumpDirect ( 0x08E4,prog_08E4 );
@@ -6073,7 +6073,7 @@ Control prog_00DF ()
 
 Control prog_0100 ()
 {
-    at ( "0100" );
+    // #at: 0100
     instruction ( "LD   HL,2002",0x0103 );
     advance ( 10 );
     H = 0x20;
@@ -6083,7 +6083,7 @@ Control prog_0100 ()
 
 Control prog_0103 ()
 {
-    at ( "0103" );
+    // #at: 0103
     instruction ( "LD   A,(HL)",0x0104 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -6095,7 +6095,7 @@ Control prog_0103 ()
 
 Control prog_0104 ()
 {
-    at ( "0104" );
+    // #at: 0104
     instruction ( "AND  A",0x0105 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -6113,7 +6113,7 @@ Control prog_0104 ()
 
 Control prog_0105 ()
 {
-    at ( "0105" );
+    // #at: 0105
     instruction ( "JP   NZ,1538",0x0108 );
     if (( ! FlagZ ))
     {
@@ -6129,7 +6129,7 @@ Control prog_0105 ()
 
 Control prog_0108 ()
 {
-    at ( "0108" );
+    // #at: 0108
     instruction ( "PUSH HL",0x0109 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -6149,7 +6149,7 @@ Control prog_0108 ()
 
 Control prog_0109 ()
 {
-    at ( "0109" );
+    // #at: 0109
     instruction ( "LD   A,(2006)",0x010C );
     u8 a1 = e8_read_mem ( 0x2006 ) ;
     advance ( 13 );
@@ -6159,7 +6159,7 @@ Control prog_0109 ()
 
 Control prog_010C ()
 {
-    at ( "010C" );
+    // #at: 010C
     instruction ( "LD   L,A",0x010D );
     u8 a1 = A ;
     advance ( 5 );
@@ -6169,7 +6169,7 @@ Control prog_010C ()
 
 Control prog_010D ()
 {
-    at ( "010D" );
+    // #at: 010D
     instruction ( "LD   A,(2067)",0x0110 );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
@@ -6179,7 +6179,7 @@ Control prog_010D ()
 
 Control prog_0110 ()
 {
-    at ( "0110" );
+    // #at: 0110
     instruction ( "LD   H,A",0x0111 );
     u8 a1 = A ;
     advance ( 5 );
@@ -6189,7 +6189,7 @@ Control prog_0110 ()
 
 Control prog_0111 ()
 {
-    at ( "0111" );
+    // #at: 0111
     instruction ( "LD   A,(HL)",0x0112 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -6201,7 +6201,7 @@ Control prog_0111 ()
 
 Control prog_0112 ()
 {
-    at ( "0112" );
+    // #at: 0112
     instruction ( "AND  A",0x0113 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -6219,7 +6219,7 @@ Control prog_0112 ()
 
 Control prog_0113 ()
 {
-    at ( "0113" );
+    // #at: 0113
     instruction ( "POP  HL",0x0114 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -6239,7 +6239,7 @@ Control prog_0113 ()
 
 Control prog_0114 ()
 {
-    at ( "0114" );
+    // #at: 0114
     instruction ( "JP   Z,0136",0x0117 );
     if (FlagZ)
     {
@@ -6255,7 +6255,7 @@ Control prog_0114 ()
 
 Control prog_0117 ()
 {
-    at ( "0117" );
+    // #at: 0117
     instruction ( "INC  HL",0x0118 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -6268,7 +6268,7 @@ Control prog_0117 ()
 
 Control prog_0118 ()
 {
-    at ( "0118" );
+    // #at: 0118
     instruction ( "INC  HL",0x0119 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -6281,7 +6281,7 @@ Control prog_0118 ()
 
 Control prog_0119 ()
 {
-    at ( "0119" );
+    // #at: 0119
     instruction ( "LD   A,(HL)",0x011A );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -6293,7 +6293,7 @@ Control prog_0119 ()
 
 Control prog_011A ()
 {
-    at ( "011A" );
+    // #at: 011A
     instruction ( "INC  HL",0x011B );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -6306,7 +6306,7 @@ Control prog_011A ()
 
 Control prog_011B ()
 {
-    at ( "011B" );
+    // #at: 011B
     instruction ( "LD   B,(HL)",0x011C );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -6318,7 +6318,7 @@ Control prog_011B ()
 
 Control prog_011C ()
 {
-    at ( "011C" );
+    // #at: 011C
     instruction ( "AND  FE",0x011E );
     u8 a1 = A ;
     u8 a2 = ( 0xFE & a1 ) ;
@@ -6335,7 +6335,7 @@ Control prog_011C ()
 
 Control prog_011E ()
 {
-    at ( "011E" );
+    // #at: 011E
     instruction ( "RLCA",0x011F );
     u8 a1 = A ;
     advance ( 4 );
@@ -6346,7 +6346,7 @@ Control prog_011E ()
 
 Control prog_011F ()
 {
-    at ( "011F" );
+    // #at: 011F
     instruction ( "RLCA",0x0120 );
     u8 a1 = A ;
     advance ( 4 );
@@ -6357,7 +6357,7 @@ Control prog_011F ()
 
 Control prog_0120 ()
 {
-    at ( "0120" );
+    // #at: 0120
     instruction ( "RLCA",0x0121 );
     u8 a1 = A ;
     advance ( 4 );
@@ -6368,7 +6368,7 @@ Control prog_0120 ()
 
 Control prog_0121 ()
 {
-    at ( "0121" );
+    // #at: 0121
     instruction ( "LD   E,A",0x0122 );
     u8 a1 = A ;
     advance ( 5 );
@@ -6378,7 +6378,7 @@ Control prog_0121 ()
 
 Control prog_0122 ()
 {
-    at ( "0122" );
+    // #at: 0122
     instruction ( "LD   D,00",0x0124 );
     advance ( 7 );
     D = 0x00;
@@ -6387,7 +6387,7 @@ Control prog_0122 ()
 
 Control prog_0124 ()
 {
-    at ( "0124" );
+    // #at: 0124
     instruction ( "LD   HL,1C00",0x0127 );
     advance ( 10 );
     H = 0x1C;
@@ -6397,7 +6397,7 @@ Control prog_0124 ()
 
 Control prog_0127 ()
 {
-    at ( "0127" );
+    // #at: 0127
     instruction ( "ADD  HL,DE",0x0128 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -6413,7 +6413,7 @@ Control prog_0127 ()
 
 Control prog_0128 ()
 {
-    at ( "0128" );
+    // #at: 0128
     instruction ( "EX   DE,HL",0x0129 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -6429,7 +6429,7 @@ Control prog_0128 ()
 
 Control prog_0129 ()
 {
-    at ( "0129" );
+    // #at: 0129
     instruction ( "LD   A,B",0x012A );
     u8 a1 = B ;
     advance ( 5 );
@@ -6439,7 +6439,7 @@ Control prog_0129 ()
 
 Control prog_012A ()
 {
-    at ( "012A" );
+    // #at: 012A
     instruction ( "AND  A",0x012B );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -6457,7 +6457,7 @@ Control prog_012A ()
 
 Control prog_012B ()
 {
-    at ( "012B" );
+    // #at: 012B
     instruction ( "CALL NZ,013B",0x012E );
     if (( ! FlagZ ))
     {
@@ -6484,7 +6484,7 @@ Control prog_012B ()
 
 Control prog_012E ()
 {
-    at ( "012E" );
+    // #at: 012E
     instruction ( "LD   HL,(200B)",0x0131 );
     u8 a1 = e8_read_mem ( 0x200B ) ;
     u8 a2 = e8_read_mem ( 0x200C ) ;
@@ -6496,7 +6496,7 @@ Control prog_012E ()
 
 Control prog_0131 ()
 {
-    at ( "0131" );
+    // #at: 0131
     instruction ( "LD   B,10",0x0133 );
     advance ( 7 );
     B = 0x10;
@@ -6505,7 +6505,7 @@ Control prog_0131 ()
 
 Control prog_0133 ()
 {
-    at ( "0133" );
+    // #at: 0133
     instruction ( "CALL 15D3",0x0136 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -6524,7 +6524,7 @@ Control prog_0133 ()
 
 Control prog_0136 ()
 {
-    at ( "0136" );
+    // #at: 0136
     instruction ( "XOR  A",0x0137 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -6541,7 +6541,7 @@ Control prog_0136 ()
 
 Control prog_0137 ()
 {
-    at ( "0137" );
+    // #at: 0137
     instruction ( "LD   (2000),A",0x013A );
     u8 a1 = A ;
     mem_write ( 0x2000,a1 );
@@ -6551,7 +6551,7 @@ Control prog_0137 ()
 
 Control prog_013A ()
 {
-    at ( "013A" );
+    // #at: 013A
     instruction ( "RET",0x013B );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -6569,7 +6569,7 @@ Control prog_013A ()
 
 Control prog_013B ()
 {
-    at ( "013B" );
+    // #at: 013B
     instruction ( "LD   HL,0030",0x013E );
     advance ( 10 );
     H = 0x00;
@@ -6579,7 +6579,7 @@ Control prog_013B ()
 
 Control prog_013E ()
 {
-    at ( "013E" );
+    // #at: 013E
     instruction ( "ADD  HL,DE",0x013F );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -6595,7 +6595,7 @@ Control prog_013E ()
 
 Control prog_013F ()
 {
-    at ( "013F" );
+    // #at: 013F
     instruction ( "EX   DE,HL",0x0140 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -6611,7 +6611,7 @@ Control prog_013F ()
 
 Control prog_0140 ()
 {
-    at ( "0140" );
+    // #at: 0140
     instruction ( "RET",0x0141 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -6629,7 +6629,7 @@ Control prog_0140 ()
 
 Control prog_0141 ()
 {
-    at ( "0141" );
+    // #at: 0141
     instruction ( "LD   A,(2068)",0x0144 );
     u8 a1 = e8_read_mem ( 0x2068 ) ;
     advance ( 13 );
@@ -6639,7 +6639,7 @@ Control prog_0141 ()
 
 Control prog_0144 ()
 {
-    at ( "0144" );
+    // #at: 0144
     instruction ( "AND  A",0x0145 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -6657,7 +6657,7 @@ Control prog_0144 ()
 
 Control prog_0145 ()
 {
-    at ( "0145" );
+    // #at: 0145
     instruction ( "RET  Z",0x0146 );
     if (FlagZ)
     {
@@ -6683,7 +6683,7 @@ Control prog_0145 ()
 
 Control prog_0146 ()
 {
-    at ( "0146" );
+    // #at: 0146
     instruction ( "LD   A,(2000)",0x0149 );
     u8 a1 = e8_read_mem ( 0x2000 ) ;
     advance ( 13 );
@@ -6693,7 +6693,7 @@ Control prog_0146 ()
 
 Control prog_0149 ()
 {
-    at ( "0149" );
+    // #at: 0149
     instruction ( "AND  A",0x014A );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -6711,7 +6711,7 @@ Control prog_0149 ()
 
 Control prog_014A ()
 {
-    at ( "014A" );
+    // #at: 014A
     instruction ( "RET  NZ",0x014B );
     if (( ! FlagZ ))
     {
@@ -6737,7 +6737,7 @@ Control prog_014A ()
 
 Control prog_014B ()
 {
-    at ( "014B" );
+    // #at: 014B
     instruction ( "LD   A,(2067)",0x014E );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
@@ -6747,7 +6747,7 @@ Control prog_014B ()
 
 Control prog_014E ()
 {
-    at ( "014E" );
+    // #at: 014E
     instruction ( "LD   H,A",0x014F );
     u8 a1 = A ;
     advance ( 5 );
@@ -6757,7 +6757,7 @@ Control prog_014E ()
 
 Control prog_014F ()
 {
-    at ( "014F" );
+    // #at: 014F
     instruction ( "LD   A,(2006)",0x0152 );
     u8 a1 = e8_read_mem ( 0x2006 ) ;
     advance ( 13 );
@@ -6767,7 +6767,7 @@ Control prog_014F ()
 
 Control prog_0152 ()
 {
-    at ( "0152" );
+    // #at: 0152
     instruction ( "LD   D,02",0x0154 );
     advance ( 7 );
     D = 0x02;
@@ -6776,7 +6776,7 @@ Control prog_0152 ()
 
 Control prog_0154 ()
 {
-    at ( "0154" );
+    // #at: 0154
     instruction ( "INC  A",0x0155 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + 0x00 ) + true ) ;
@@ -6794,7 +6794,7 @@ Control prog_0154 ()
 
 Control prog_0155 ()
 {
-    at ( "0155" );
+    // #at: 0155
     instruction ( "CP   37",0x0157 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x37 ) ) ) + ( ! false ) ) ;
@@ -6812,7 +6812,7 @@ Control prog_0155 ()
 
 Control prog_0157 ()
 {
-    at ( "0157" );
+    // #at: 0157
     instruction ( "CALL Z,01A1",0x015A );
     if (FlagZ)
     {
@@ -6839,7 +6839,7 @@ Control prog_0157 ()
 
 Control prog_015A ()
 {
-    at ( "015A" );
+    // #at: 015A
     instruction ( "LD   L,A",0x015B );
     u8 a1 = A ;
     advance ( 5 );
@@ -6849,7 +6849,7 @@ Control prog_015A ()
 
 Control prog_015B ()
 {
-    at ( "015B" );
+    // #at: 015B
     instruction ( "LD   B,(HL)",0x015C );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -6861,7 +6861,7 @@ Control prog_015B ()
 
 Control prog_015C ()
 {
-    at ( "015C" );
+    // #at: 015C
     instruction ( "DEC  B",0x015D );
     u8 a1 = B ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -6879,7 +6879,7 @@ Control prog_015C ()
 
 Control prog_015D ()
 {
-    at ( "015D" );
+    // #at: 015D
     instruction ( "JP   NZ,0154",0x0160 );
     if (( ! FlagZ ))
     {
@@ -6895,7 +6895,7 @@ Control prog_015D ()
 
 Control prog_0160 ()
 {
-    at ( "0160" );
+    // #at: 0160
     instruction ( "LD   (2006),A",0x0163 );
     u8 a1 = A ;
     mem_write ( 0x2006,a1 );
@@ -6905,7 +6905,7 @@ Control prog_0160 ()
 
 Control prog_0163 ()
 {
-    at ( "0163" );
+    // #at: 0163
     instruction ( "CALL 017A",0x0166 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -6924,7 +6924,7 @@ Control prog_0163 ()
 
 Control prog_0166 ()
 {
-    at ( "0166" );
+    // #at: 0166
     instruction ( "LD   H,C",0x0167 );
     u8 a1 = C ;
     advance ( 5 );
@@ -6934,7 +6934,7 @@ Control prog_0166 ()
 
 Control prog_0167 ()
 {
-    at ( "0167" );
+    // #at: 0167
     instruction ( "LD   (200B),HL",0x016A );
     u8 a1 = L ;
     mem_write ( 0x200B,a1 );
@@ -6946,7 +6946,7 @@ Control prog_0167 ()
 
 Control prog_016A ()
 {
-    at ( "016A" );
+    // #at: 016A
     instruction ( "LD   A,L",0x016B );
     u8 a1 = L ;
     advance ( 5 );
@@ -6956,7 +6956,7 @@ Control prog_016A ()
 
 Control prog_016B ()
 {
-    at ( "016B" );
+    // #at: 016B
     instruction ( "CP   28",0x016D );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x28 ) ) ) + ( ! false ) ) ;
@@ -6974,7 +6974,7 @@ Control prog_016B ()
 
 Control prog_016D ()
 {
-    at ( "016D" );
+    // #at: 016D
     instruction ( "JP   CY,1971",0x0170 );
     if (FlagCY)
     {
@@ -6990,7 +6990,7 @@ Control prog_016D ()
 
 Control prog_0170 ()
 {
-    at ( "0170" );
+    // #at: 0170
     instruction ( "LD   A,D",0x0171 );
     u8 a1 = D ;
     advance ( 5 );
@@ -7000,7 +7000,7 @@ Control prog_0170 ()
 
 Control prog_0171 ()
 {
-    at ( "0171" );
+    // #at: 0171
     instruction ( "LD   (2004),A",0x0174 );
     u8 a1 = A ;
     mem_write ( 0x2004,a1 );
@@ -7010,7 +7010,7 @@ Control prog_0171 ()
 
 Control prog_0174 ()
 {
-    at ( "0174" );
+    // #at: 0174
     instruction ( "LD   A,01",0x0176 );
     advance ( 7 );
     A = 0x01;
@@ -7019,7 +7019,7 @@ Control prog_0174 ()
 
 Control prog_0176 ()
 {
-    at ( "0176" );
+    // #at: 0176
     instruction ( "LD   (2000),A",0x0179 );
     u8 a1 = A ;
     mem_write ( 0x2000,a1 );
@@ -7029,7 +7029,7 @@ Control prog_0176 ()
 
 Control prog_0179 ()
 {
-    at ( "0179" );
+    // #at: 0179
     instruction ( "RET",0x017A );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -7047,7 +7047,7 @@ Control prog_0179 ()
 
 Control prog_017A ()
 {
-    at ( "017A" );
+    // #at: 017A
     instruction ( "LD   D,00",0x017C );
     advance ( 7 );
     D = 0x00;
@@ -7056,7 +7056,7 @@ Control prog_017A ()
 
 Control prog_017C ()
 {
-    at ( "017C" );
+    // #at: 017C
     instruction ( "LD   A,L",0x017D );
     u8 a1 = L ;
     advance ( 5 );
@@ -7066,7 +7066,7 @@ Control prog_017C ()
 
 Control prog_017D ()
 {
-    at ( "017D" );
+    // #at: 017D
     instruction ( "LD   HL,2009",0x0180 );
     advance ( 10 );
     H = 0x20;
@@ -7076,7 +7076,7 @@ Control prog_017D ()
 
 Control prog_0180 ()
 {
-    at ( "0180" );
+    // #at: 0180
     instruction ( "LD   B,(HL)",0x0181 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -7088,7 +7088,7 @@ Control prog_0180 ()
 
 Control prog_0181 ()
 {
-    at ( "0181" );
+    // #at: 0181
     instruction ( "INC  HL",0x0182 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -7101,7 +7101,7 @@ Control prog_0181 ()
 
 Control prog_0182 ()
 {
-    at ( "0182" );
+    // #at: 0182
     instruction ( "LD   C,(HL)",0x0183 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -7113,7 +7113,7 @@ Control prog_0182 ()
 
 Control prog_0183 ()
 {
-    at ( "0183" );
+    // #at: 0183
     instruction ( "CP   0B",0x0185 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x0B ) ) ) + ( ! false ) ) ;
@@ -7131,7 +7131,7 @@ Control prog_0183 ()
 
 Control prog_0185 ()
 {
-    at ( "0185" );
+    // #at: 0185
     instruction ( "JP   MI,0194",0x0188 );
     if (FlagS)
     {
@@ -7147,7 +7147,7 @@ Control prog_0185 ()
 
 Control prog_0188 ()
 {
-    at ( "0188" );
+    // #at: 0188
     instruction ( "SBC  0B",0x018A );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x0B ) ) ) + ( ! FlagCY ) ) ;
@@ -7166,7 +7166,7 @@ Control prog_0188 ()
 
 Control prog_018A ()
 {
-    at ( "018A" );
+    // #at: 018A
     instruction ( "LD   E,A",0x018B );
     u8 a1 = A ;
     advance ( 5 );
@@ -7176,7 +7176,7 @@ Control prog_018A ()
 
 Control prog_018B ()
 {
-    at ( "018B" );
+    // #at: 018B
     instruction ( "LD   A,B",0x018C );
     u8 a1 = B ;
     advance ( 5 );
@@ -7186,7 +7186,7 @@ Control prog_018B ()
 
 Control prog_018C ()
 {
-    at ( "018C" );
+    // #at: 018C
     instruction ( "ADD  10",0x018E );
     u8 a1 = A ;
     u16 a2 = ( ( 0x10 + a1 ) + false ) ;
@@ -7205,7 +7205,7 @@ Control prog_018C ()
 
 Control prog_018E ()
 {
-    at ( "018E" );
+    // #at: 018E
     instruction ( "LD   B,A",0x018F );
     u8 a1 = A ;
     advance ( 5 );
@@ -7215,7 +7215,7 @@ Control prog_018E ()
 
 Control prog_018F ()
 {
-    at ( "018F" );
+    // #at: 018F
     instruction ( "LD   A,E",0x0190 );
     u8 a1 = E ;
     advance ( 5 );
@@ -7225,7 +7225,7 @@ Control prog_018F ()
 
 Control prog_0190 ()
 {
-    at ( "0190" );
+    // #at: 0190
     instruction ( "INC  D",0x0191 );
     u8 a1 = D ;
     u16 a2 = ( ( a1 + 0x00 ) + true ) ;
@@ -7243,7 +7243,7 @@ Control prog_0190 ()
 
 Control prog_0191 ()
 {
-    at ( "0191" );
+    // #at: 0191
     instruction ( "JP   0183",0x0194 );
     advance ( 10 );
     return jumpDirect ( 0x0183,prog_0183 );
@@ -7251,7 +7251,7 @@ Control prog_0191 ()
 
 Control prog_0194 ()
 {
-    at ( "0194" );
+    // #at: 0194
     instruction ( "LD   L,B",0x0195 );
     u8 a1 = B ;
     advance ( 5 );
@@ -7261,7 +7261,7 @@ Control prog_0194 ()
 
 Control prog_0195 ()
 {
-    at ( "0195" );
+    // #at: 0195
     instruction ( "AND  A",0x0196 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -7279,7 +7279,7 @@ Control prog_0195 ()
 
 Control prog_0196 ()
 {
-    at ( "0196" );
+    // #at: 0196
     instruction ( "RET  Z",0x0197 );
     if (FlagZ)
     {
@@ -7305,7 +7305,7 @@ Control prog_0196 ()
 
 Control prog_0197 ()
 {
-    at ( "0197" );
+    // #at: 0197
     instruction ( "LD   E,A",0x0198 );
     u8 a1 = A ;
     advance ( 5 );
@@ -7315,7 +7315,7 @@ Control prog_0197 ()
 
 Control prog_0198 ()
 {
-    at ( "0198" );
+    // #at: 0198
     instruction ( "LD   A,C",0x0199 );
     u8 a1 = C ;
     advance ( 5 );
@@ -7325,7 +7325,7 @@ Control prog_0198 ()
 
 Control prog_0199 ()
 {
-    at ( "0199" );
+    // #at: 0199
     instruction ( "ADD  10",0x019B );
     u8 a1 = A ;
     u16 a2 = ( ( 0x10 + a1 ) + false ) ;
@@ -7344,7 +7344,7 @@ Control prog_0199 ()
 
 Control prog_019B ()
 {
-    at ( "019B" );
+    // #at: 019B
     instruction ( "LD   C,A",0x019C );
     u8 a1 = A ;
     advance ( 5 );
@@ -7354,7 +7354,7 @@ Control prog_019B ()
 
 Control prog_019C ()
 {
-    at ( "019C" );
+    // #at: 019C
     instruction ( "LD   A,E",0x019D );
     u8 a1 = E ;
     advance ( 5 );
@@ -7364,7 +7364,7 @@ Control prog_019C ()
 
 Control prog_019D ()
 {
-    at ( "019D" );
+    // #at: 019D
     instruction ( "DEC  A",0x019E );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -7382,7 +7382,7 @@ Control prog_019D ()
 
 Control prog_019E ()
 {
-    at ( "019E" );
+    // #at: 019E
     instruction ( "JP   0195",0x01A1 );
     advance ( 10 );
     return jumpDirect ( 0x0195,prog_0195 );
@@ -7390,7 +7390,7 @@ Control prog_019E ()
 
 Control prog_01A1 ()
 {
-    at ( "01A1" );
+    // #at: 01A1
     instruction ( "DEC  D",0x01A2 );
     u8 a1 = D ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -7408,7 +7408,7 @@ Control prog_01A1 ()
 
 Control prog_01A2 ()
 {
-    at ( "01A2" );
+    // #at: 01A2
     instruction ( "JP   Z,01CD",0x01A5 );
     if (FlagZ)
     {
@@ -7424,7 +7424,7 @@ Control prog_01A2 ()
 
 Control prog_01A5 ()
 {
-    at ( "01A5" );
+    // #at: 01A5
     instruction ( "LD   HL,2006",0x01A8 );
     advance ( 10 );
     H = 0x20;
@@ -7434,7 +7434,7 @@ Control prog_01A5 ()
 
 Control prog_01A8 ()
 {
-    at ( "01A8" );
+    // #at: 01A8
     instruction ( "LD   (HL),00",0x01AA );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -7445,7 +7445,7 @@ Control prog_01A8 ()
 
 Control prog_01AA ()
 {
-    at ( "01AA" );
+    // #at: 01AA
     instruction ( "INC  HL",0x01AB );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -7458,7 +7458,7 @@ Control prog_01AA ()
 
 Control prog_01AB ()
 {
-    at ( "01AB" );
+    // #at: 01AB
     instruction ( "LD   C,(HL)",0x01AC );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -7470,7 +7470,7 @@ Control prog_01AB ()
 
 Control prog_01AC ()
 {
-    at ( "01AC" );
+    // #at: 01AC
     instruction ( "LD   (HL),00",0x01AE );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -7481,7 +7481,7 @@ Control prog_01AC ()
 
 Control prog_01AE ()
 {
-    at ( "01AE" );
+    // #at: 01AE
     instruction ( "CALL 01D9",0x01B1 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -7500,7 +7500,7 @@ Control prog_01AE ()
 
 Control prog_01B1 ()
 {
-    at ( "01B1" );
+    // #at: 01B1
     instruction ( "LD   HL,2005",0x01B4 );
     advance ( 10 );
     H = 0x20;
@@ -7510,7 +7510,7 @@ Control prog_01B1 ()
 
 Control prog_01B4 ()
 {
-    at ( "01B4" );
+    // #at: 01B4
     instruction ( "LD   A,(HL)",0x01B5 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -7522,7 +7522,7 @@ Control prog_01B4 ()
 
 Control prog_01B5 ()
 {
-    at ( "01B5" );
+    // #at: 01B5
     instruction ( "INC  A",0x01B6 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + 0x00 ) + true ) ;
@@ -7540,7 +7540,7 @@ Control prog_01B5 ()
 
 Control prog_01B6 ()
 {
-    at ( "01B6" );
+    // #at: 01B6
     instruction ( "AND  01",0x01B8 );
     u8 a1 = A ;
     u8 a2 = ( 0x01 & a1 ) ;
@@ -7557,7 +7557,7 @@ Control prog_01B6 ()
 
 Control prog_01B8 ()
 {
-    at ( "01B8" );
+    // #at: 01B8
     instruction ( "LD   (HL),A",0x01B9 );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -7569,7 +7569,7 @@ Control prog_01B8 ()
 
 Control prog_01B9 ()
 {
-    at ( "01B9" );
+    // #at: 01B9
     instruction ( "XOR  A",0x01BA );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -7586,7 +7586,7 @@ Control prog_01B9 ()
 
 Control prog_01BA ()
 {
-    at ( "01BA" );
+    // #at: 01BA
     instruction ( "LD   HL,2067",0x01BD );
     advance ( 10 );
     H = 0x20;
@@ -7596,7 +7596,7 @@ Control prog_01BA ()
 
 Control prog_01BD ()
 {
-    at ( "01BD" );
+    // #at: 01BD
     instruction ( "LD   H,(HL)",0x01BE );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -7608,7 +7608,7 @@ Control prog_01BD ()
 
 Control prog_01BE ()
 {
-    at ( "01BE" );
+    // #at: 01BE
     instruction ( "RET",0x01BF );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -7626,7 +7626,7 @@ Control prog_01BE ()
 
 Control prog_01C0 ()
 {
-    at ( "01C0" );
+    // #at: 01C0
     instruction ( "LD   HL,2100",0x01C3 );
     advance ( 10 );
     H = 0x21;
@@ -7636,7 +7636,7 @@ Control prog_01C0 ()
 
 Control prog_01C3 ()
 {
-    at ( "01C3" );
+    // #at: 01C3
     instruction ( "LD   B,37",0x01C5 );
     advance ( 7 );
     B = 0x37;
@@ -7645,7 +7645,7 @@ Control prog_01C3 ()
 
 Control prog_01C5 ()
 {
-    at ( "01C5" );
+    // #at: 01C5
     instruction ( "LD   (HL),01",0x01C7 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -7656,7 +7656,7 @@ Control prog_01C5 ()
 
 Control prog_01C7 ()
 {
-    at ( "01C7" );
+    // #at: 01C7
     instruction ( "INC  HL",0x01C8 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -7669,7 +7669,7 @@ Control prog_01C7 ()
 
 Control prog_01C8 ()
 {
-    at ( "01C8" );
+    // #at: 01C8
     instruction ( "DEC  B",0x01C9 );
     u8 a1 = B ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -7687,7 +7687,7 @@ Control prog_01C8 ()
 
 Control prog_01C9 ()
 {
-    at ( "01C9" );
+    // #at: 01C9
     instruction ( "JP   NZ,01C5",0x01CC );
     if (( ! FlagZ ))
     {
@@ -7703,7 +7703,7 @@ Control prog_01C9 ()
 
 Control prog_01CC ()
 {
-    at ( "01CC" );
+    // #at: 01CC
     instruction ( "RET",0x01CD );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -7721,7 +7721,7 @@ Control prog_01CC ()
 
 Control prog_01CD ()
 {
-    at ( "01CD" );
+    // #at: 01CD
     instruction ( "POP  HL",0x01CE );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -7741,7 +7741,7 @@ Control prog_01CD ()
 
 Control prog_01CE ()
 {
-    at ( "01CE" );
+    // #at: 01CE
     instruction ( "RET",0x01CF );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -7759,7 +7759,7 @@ Control prog_01CE ()
 
 Control prog_01CF ()
 {
-    at ( "01CF" );
+    // #at: 01CF
     instruction ( "LD   A,01",0x01D1 );
     advance ( 7 );
     A = 0x01;
@@ -7768,7 +7768,7 @@ Control prog_01CF ()
 
 Control prog_01D1 ()
 {
-    at ( "01D1" );
+    // #at: 01D1
     instruction ( "LD   B,E0",0x01D3 );
     advance ( 7 );
     B = 0xE0;
@@ -7777,7 +7777,7 @@ Control prog_01D1 ()
 
 Control prog_01D3 ()
 {
-    at ( "01D3" );
+    // #at: 01D3
     instruction ( "LD   HL,2402",0x01D6 );
     advance ( 10 );
     H = 0x24;
@@ -7787,7 +7787,7 @@ Control prog_01D3 ()
 
 Control prog_01D6 ()
 {
-    at ( "01D6" );
+    // #at: 01D6
     instruction ( "JP   14CC",0x01D9 );
     advance ( 10 );
     return jumpDirect ( 0x14CC,prog_14CC );
@@ -7795,7 +7795,7 @@ Control prog_01D6 ()
 
 Control prog_01D9 ()
 {
-    at ( "01D9" );
+    // #at: 01D9
     instruction ( "INC  HL",0x01DA );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -7808,7 +7808,7 @@ Control prog_01D9 ()
 
 Control prog_01DA ()
 {
-    at ( "01DA" );
+    // #at: 01DA
     instruction ( "LD   B,(HL)",0x01DB );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -7820,7 +7820,7 @@ Control prog_01DA ()
 
 Control prog_01DB ()
 {
-    at ( "01DB" );
+    // #at: 01DB
     instruction ( "INC  HL",0x01DC );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -7833,7 +7833,7 @@ Control prog_01DB ()
 
 Control prog_01DC ()
 {
-    at ( "01DC" );
+    // #at: 01DC
     instruction ( "LD   A,C",0x01DD );
     u8 a1 = C ;
     advance ( 5 );
@@ -7843,7 +7843,7 @@ Control prog_01DC ()
 
 Control prog_01DD ()
 {
-    at ( "01DD" );
+    // #at: 01DD
     instruction ( "ADD  (HL)",0x01DE );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -7865,7 +7865,7 @@ Control prog_01DD ()
 
 Control prog_01DE ()
 {
-    at ( "01DE" );
+    // #at: 01DE
     instruction ( "LD   (HL),A",0x01DF );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -7877,7 +7877,7 @@ Control prog_01DE ()
 
 Control prog_01DF ()
 {
-    at ( "01DF" );
+    // #at: 01DF
     instruction ( "INC  HL",0x01E0 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -7890,7 +7890,7 @@ Control prog_01DF ()
 
 Control prog_01E0 ()
 {
-    at ( "01E0" );
+    // #at: 01E0
     instruction ( "LD   A,B",0x01E1 );
     u8 a1 = B ;
     advance ( 5 );
@@ -7900,7 +7900,7 @@ Control prog_01E0 ()
 
 Control prog_01E1 ()
 {
-    at ( "01E1" );
+    // #at: 01E1
     instruction ( "ADD  (HL)",0x01E2 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -7922,7 +7922,7 @@ Control prog_01E1 ()
 
 Control prog_01E2 ()
 {
-    at ( "01E2" );
+    // #at: 01E2
     instruction ( "LD   (HL),A",0x01E3 );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -7934,7 +7934,7 @@ Control prog_01E2 ()
 
 Control prog_01E3 ()
 {
-    at ( "01E3" );
+    // #at: 01E3
     instruction ( "RET",0x01E4 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -7952,7 +7952,7 @@ Control prog_01E3 ()
 
 Control prog_01E4 ()
 {
-    at ( "01E4" );
+    // #at: 01E4
     instruction ( "LD   B,C0",0x01E6 );
     advance ( 7 );
     B = 0xC0;
@@ -7961,7 +7961,7 @@ Control prog_01E4 ()
 
 Control prog_01E6 ()
 {
-    at ( "01E6" );
+    // #at: 01E6
     instruction ( "LD   DE,1B00",0x01E9 );
     advance ( 10 );
     D = 0x1B;
@@ -7971,7 +7971,7 @@ Control prog_01E6 ()
 
 Control prog_01E9 ()
 {
-    at ( "01E9" );
+    // #at: 01E9
     instruction ( "LD   HL,2000",0x01EC );
     advance ( 10 );
     H = 0x20;
@@ -7981,7 +7981,7 @@ Control prog_01E9 ()
 
 Control prog_01EC ()
 {
-    at ( "01EC" );
+    // #at: 01EC
     instruction ( "JP   1A32",0x01EF );
     advance ( 10 );
     return jumpDirect ( 0x1A32,prog_1A32 );
@@ -7989,7 +7989,7 @@ Control prog_01EC ()
 
 Control prog_01EF ()
 {
-    at ( "01EF" );
+    // #at: 01EF
     instruction ( "LD   HL,2142",0x01F2 );
     advance ( 10 );
     H = 0x21;
@@ -7999,7 +7999,7 @@ Control prog_01EF ()
 
 Control prog_01F2 ()
 {
-    at ( "01F2" );
+    // #at: 01F2
     instruction ( "JP   01F8",0x01F5 );
     advance ( 10 );
     return jumpDirect ( 0x01F8,prog_01F8 );
@@ -8007,7 +8007,7 @@ Control prog_01F2 ()
 
 Control prog_01F5 ()
 {
-    at ( "01F5" );
+    // #at: 01F5
     instruction ( "LD   HL,2242",0x01F8 );
     advance ( 10 );
     H = 0x22;
@@ -8017,7 +8017,7 @@ Control prog_01F5 ()
 
 Control prog_01F8 ()
 {
-    at ( "01F8" );
+    // #at: 01F8
     instruction ( "LD   C,04",0x01FA );
     advance ( 7 );
     C = 0x04;
@@ -8026,7 +8026,7 @@ Control prog_01F8 ()
 
 Control prog_01FA ()
 {
-    at ( "01FA" );
+    // #at: 01FA
     instruction ( "LD   DE,1D20",0x01FD );
     advance ( 10 );
     D = 0x1D;
@@ -8036,7 +8036,7 @@ Control prog_01FA ()
 
 Control prog_01FD ()
 {
-    at ( "01FD" );
+    // #at: 01FD
     instruction ( "PUSH DE",0x01FE );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -8056,7 +8056,7 @@ Control prog_01FD ()
 
 Control prog_01FE ()
 {
-    at ( "01FE" );
+    // #at: 01FE
     instruction ( "LD   B,2C",0x0200 );
     advance ( 7 );
     B = 0x2C;
@@ -8065,7 +8065,7 @@ Control prog_01FE ()
 
 Control prog_0200 ()
 {
-    at ( "0200" );
+    // #at: 0200
     instruction ( "CALL 1A32",0x0203 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -8084,7 +8084,7 @@ Control prog_0200 ()
 
 Control prog_0203 ()
 {
-    at ( "0203" );
+    // #at: 0203
     instruction ( "POP  DE",0x0204 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -8104,7 +8104,7 @@ Control prog_0203 ()
 
 Control prog_0204 ()
 {
-    at ( "0204" );
+    // #at: 0204
     instruction ( "DEC  C",0x0205 );
     u8 a1 = C ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -8122,7 +8122,7 @@ Control prog_0204 ()
 
 Control prog_0205 ()
 {
-    at ( "0205" );
+    // #at: 0205
     instruction ( "JP   NZ,01FD",0x0208 );
     if (( ! FlagZ ))
     {
@@ -8138,7 +8138,7 @@ Control prog_0205 ()
 
 Control prog_0208 ()
 {
-    at ( "0208" );
+    // #at: 0208
     instruction ( "RET",0x0209 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -8156,7 +8156,7 @@ Control prog_0208 ()
 
 Control prog_0209 ()
 {
-    at ( "0209" );
+    // #at: 0209
     instruction ( "LD   A,01",0x020B );
     advance ( 7 );
     A = 0x01;
@@ -8165,7 +8165,7 @@ Control prog_0209 ()
 
 Control prog_020B ()
 {
-    at ( "020B" );
+    // #at: 020B
     instruction ( "JP   021B",0x020E );
     advance ( 10 );
     return jumpDirect ( 0x021B,prog_021B );
@@ -8173,7 +8173,7 @@ Control prog_020B ()
 
 Control prog_020E ()
 {
-    at ( "020E" );
+    // #at: 020E
     instruction ( "LD   A,01",0x0210 );
     advance ( 7 );
     A = 0x01;
@@ -8182,7 +8182,7 @@ Control prog_020E ()
 
 Control prog_0210 ()
 {
-    at ( "0210" );
+    // #at: 0210
     instruction ( "JP   0214",0x0213 );
     advance ( 10 );
     return jumpDirect ( 0x0214,prog_0214 );
@@ -8190,7 +8190,7 @@ Control prog_0210 ()
 
 Control prog_0213 ()
 {
-    at ( "0213" );
+    // #at: 0213
     instruction ( "XOR  A",0x0214 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -8207,7 +8207,7 @@ Control prog_0213 ()
 
 Control prog_0214 ()
 {
-    at ( "0214" );
+    // #at: 0214
     instruction ( "LD   DE,2242",0x0217 );
     advance ( 10 );
     D = 0x22;
@@ -8217,7 +8217,7 @@ Control prog_0214 ()
 
 Control prog_0217 ()
 {
-    at ( "0217" );
+    // #at: 0217
     instruction ( "JP   021E",0x021A );
     advance ( 10 );
     return jumpDirect ( 0x021E,prog_021E );
@@ -8225,7 +8225,7 @@ Control prog_0217 ()
 
 Control prog_021A ()
 {
-    at ( "021A" );
+    // #at: 021A
     instruction ( "XOR  A",0x021B );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -8242,7 +8242,7 @@ Control prog_021A ()
 
 Control prog_021B ()
 {
-    at ( "021B" );
+    // #at: 021B
     instruction ( "LD   DE,2142",0x021E );
     advance ( 10 );
     D = 0x21;
@@ -8252,7 +8252,7 @@ Control prog_021B ()
 
 Control prog_021E ()
 {
-    at ( "021E" );
+    // #at: 021E
     instruction ( "LD   (2081),A",0x0221 );
     u8 a1 = A ;
     mem_write ( 0x2081,a1 );
@@ -8262,7 +8262,7 @@ Control prog_021E ()
 
 Control prog_0221 ()
 {
-    at ( "0221" );
+    // #at: 0221
     instruction ( "LD   BC,1602",0x0224 );
     advance ( 10 );
     B = 0x16;
@@ -8272,7 +8272,7 @@ Control prog_0221 ()
 
 Control prog_0224 ()
 {
-    at ( "0224" );
+    // #at: 0224
     instruction ( "LD   HL,2806",0x0227 );
     advance ( 10 );
     H = 0x28;
@@ -8282,7 +8282,7 @@ Control prog_0224 ()
 
 Control prog_0227 ()
 {
-    at ( "0227" );
+    // #at: 0227
     instruction ( "LD   A,04",0x0229 );
     advance ( 7 );
     A = 0x04;
@@ -8291,7 +8291,7 @@ Control prog_0227 ()
 
 Control prog_0229 ()
 {
-    at ( "0229" );
+    // #at: 0229
     instruction ( "PUSH PSW",0x022A );
     u8 a1 = A ;
     u8 a2 = SPH ;
@@ -8310,7 +8310,7 @@ Control prog_0229 ()
 
 Control prog_022A ()
 {
-    at ( "022A" );
+    // #at: 022A
     instruction ( "PUSH BC",0x022B );
     u8 a1 = B ;
     u8 a2 = C ;
@@ -8330,7 +8330,7 @@ Control prog_022A ()
 
 Control prog_022B ()
 {
-    at ( "022B" );
+    // #at: 022B
     instruction ( "LD   A,(2081)",0x022E );
     u8 a1 = e8_read_mem ( 0x2081 ) ;
     advance ( 13 );
@@ -8340,7 +8340,7 @@ Control prog_022B ()
 
 Control prog_022E ()
 {
-    at ( "022E" );
+    // #at: 022E
     instruction ( "AND  A",0x022F );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -8358,7 +8358,7 @@ Control prog_022E ()
 
 Control prog_022F ()
 {
-    at ( "022F" );
+    // #at: 022F
     instruction ( "JP   NZ,0242",0x0232 );
     if (( ! FlagZ ))
     {
@@ -8374,7 +8374,7 @@ Control prog_022F ()
 
 Control prog_0232 ()
 {
-    at ( "0232" );
+    // #at: 0232
     instruction ( "CALL 1A69",0x0235 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -8393,7 +8393,7 @@ Control prog_0232 ()
 
 Control prog_0235 ()
 {
-    at ( "0235" );
+    // #at: 0235
     instruction ( "POP  BC",0x0236 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -8413,7 +8413,7 @@ Control prog_0235 ()
 
 Control prog_0236 ()
 {
-    at ( "0236" );
+    // #at: 0236
     instruction ( "POP  PSW",0x0237 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -8437,7 +8437,7 @@ Control prog_0236 ()
 
 Control prog_0237 ()
 {
-    at ( "0237" );
+    // #at: 0237
     instruction ( "DEC  A",0x0238 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -8455,7 +8455,7 @@ Control prog_0237 ()
 
 Control prog_0238 ()
 {
-    at ( "0238" );
+    // #at: 0238
     instruction ( "RET  Z",0x0239 );
     if (FlagZ)
     {
@@ -8481,7 +8481,7 @@ Control prog_0238 ()
 
 Control prog_0239 ()
 {
-    at ( "0239" );
+    // #at: 0239
     instruction ( "PUSH DE",0x023A );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -8501,7 +8501,7 @@ Control prog_0239 ()
 
 Control prog_023A ()
 {
-    at ( "023A" );
+    // #at: 023A
     instruction ( "LD   DE,02E0",0x023D );
     advance ( 10 );
     D = 0x02;
@@ -8511,7 +8511,7 @@ Control prog_023A ()
 
 Control prog_023D ()
 {
-    at ( "023D" );
+    // #at: 023D
     instruction ( "ADD  HL,DE",0x023E );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -8527,7 +8527,7 @@ Control prog_023D ()
 
 Control prog_023E ()
 {
-    at ( "023E" );
+    // #at: 023E
     instruction ( "POP  DE",0x023F );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -8547,7 +8547,7 @@ Control prog_023E ()
 
 Control prog_023F ()
 {
-    at ( "023F" );
+    // #at: 023F
     instruction ( "JP   0229",0x0242 );
     advance ( 10 );
     return jumpDirect ( 0x0229,prog_0229 );
@@ -8555,7 +8555,7 @@ Control prog_023F ()
 
 Control prog_0242 ()
 {
-    at ( "0242" );
+    // #at: 0242
     instruction ( "CALL 147C",0x0245 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -8574,7 +8574,7 @@ Control prog_0242 ()
 
 Control prog_0245 ()
 {
-    at ( "0245" );
+    // #at: 0245
     instruction ( "JP   0235",0x0248 );
     advance ( 10 );
     return jumpDirect ( 0x0235,prog_0235 );
@@ -8582,7 +8582,7 @@ Control prog_0245 ()
 
 Control prog_0248 ()
 {
-    at ( "0248" );
+    // #at: 0248
     instruction ( "LD   HL,2010",0x024B );
     advance ( 10 );
     H = 0x20;
@@ -8592,7 +8592,7 @@ Control prog_0248 ()
 
 Control prog_024B ()
 {
-    at ( "024B" );
+    // #at: 024B
     instruction ( "LD   A,(HL)",0x024C );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -8604,7 +8604,7 @@ Control prog_024B ()
 
 Control prog_024C ()
 {
-    at ( "024C" );
+    // #at: 024C
     instruction ( "CP   FF",0x024E );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0xFF ) ) ) + ( ! false ) ) ;
@@ -8622,7 +8622,7 @@ Control prog_024C ()
 
 Control prog_024E ()
 {
-    at ( "024E" );
+    // #at: 024E
     instruction ( "RET  Z",0x024F );
     if (FlagZ)
     {
@@ -8648,7 +8648,7 @@ Control prog_024E ()
 
 Control prog_024F ()
 {
-    at ( "024F" );
+    // #at: 024F
     instruction ( "CP   FE",0x0251 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0xFE ) ) ) + ( ! false ) ) ;
@@ -8666,7 +8666,7 @@ Control prog_024F ()
 
 Control prog_0251 ()
 {
-    at ( "0251" );
+    // #at: 0251
     instruction ( "JP   Z,0281",0x0254 );
     if (FlagZ)
     {
@@ -8682,7 +8682,7 @@ Control prog_0251 ()
 
 Control prog_0254 ()
 {
-    at ( "0254" );
+    // #at: 0254
     instruction ( "INC  HL",0x0255 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -8695,7 +8695,7 @@ Control prog_0254 ()
 
 Control prog_0255 ()
 {
-    at ( "0255" );
+    // #at: 0255
     instruction ( "LD   B,(HL)",0x0256 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -8707,7 +8707,7 @@ Control prog_0255 ()
 
 Control prog_0256 ()
 {
-    at ( "0256" );
+    // #at: 0256
     instruction ( "LD   C,A",0x0257 );
     u8 a1 = A ;
     advance ( 5 );
@@ -8717,7 +8717,7 @@ Control prog_0256 ()
 
 Control prog_0257 ()
 {
-    at ( "0257" );
+    // #at: 0257
     instruction ( "OR   B",0x0258 );
     u8 a1 = B ;
     u8 a2 = A ;
@@ -8734,7 +8734,7 @@ Control prog_0257 ()
 
 Control prog_0258 ()
 {
-    at ( "0258" );
+    // #at: 0258
     instruction ( "LD   A,C",0x0259 );
     u8 a1 = C ;
     advance ( 5 );
@@ -8744,7 +8744,7 @@ Control prog_0258 ()
 
 Control prog_0259 ()
 {
-    at ( "0259" );
+    // #at: 0259
     instruction ( "JP   NZ,0277",0x025C );
     if (( ! FlagZ ))
     {
@@ -8760,7 +8760,7 @@ Control prog_0259 ()
 
 Control prog_025C ()
 {
-    at ( "025C" );
+    // #at: 025C
     instruction ( "INC  HL",0x025D );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -8773,7 +8773,7 @@ Control prog_025C ()
 
 Control prog_025D ()
 {
-    at ( "025D" );
+    // #at: 025D
     instruction ( "LD   A,(HL)",0x025E );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -8785,7 +8785,7 @@ Control prog_025D ()
 
 Control prog_025E ()
 {
-    at ( "025E" );
+    // #at: 025E
     instruction ( "AND  A",0x025F );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -8803,7 +8803,7 @@ Control prog_025E ()
 
 Control prog_025F ()
 {
-    at ( "025F" );
+    // #at: 025F
     instruction ( "JP   NZ,0288",0x0262 );
     if (( ! FlagZ ))
     {
@@ -8819,7 +8819,7 @@ Control prog_025F ()
 
 Control prog_0262 ()
 {
-    at ( "0262" );
+    // #at: 0262
     instruction ( "INC  HL",0x0263 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -8832,7 +8832,7 @@ Control prog_0262 ()
 
 Control prog_0263 ()
 {
-    at ( "0263" );
+    // #at: 0263
     instruction ( "LD   E,(HL)",0x0264 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -8844,7 +8844,7 @@ Control prog_0263 ()
 
 Control prog_0264 ()
 {
-    at ( "0264" );
+    // #at: 0264
     instruction ( "INC  HL",0x0265 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -8857,7 +8857,7 @@ Control prog_0264 ()
 
 Control prog_0265 ()
 {
-    at ( "0265" );
+    // #at: 0265
     instruction ( "LD   D,(HL)",0x0266 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -8869,7 +8869,7 @@ Control prog_0265 ()
 
 Control prog_0266 ()
 {
-    at ( "0266" );
+    // #at: 0266
     instruction ( "PUSH HL",0x0267 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -8889,7 +8889,7 @@ Control prog_0266 ()
 
 Control prog_0267 ()
 {
-    at ( "0267" );
+    // #at: 0267
     instruction ( "EX   DE,HL",0x0268 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -8905,7 +8905,7 @@ Control prog_0267 ()
 
 Control prog_0268 ()
 {
-    at ( "0268" );
+    // #at: 0268
     instruction ( "PUSH HL",0x0269 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -8925,7 +8925,7 @@ Control prog_0268 ()
 
 Control prog_0269 ()
 {
-    at ( "0269" );
+    // #at: 0269
     instruction ( "LD   HL,026F",0x026C );
     advance ( 10 );
     H = 0x02;
@@ -8935,7 +8935,7 @@ Control prog_0269 ()
 
 Control prog_026C ()
 {
-    at ( "026C" );
+    // #at: 026C
     instruction ( "EX   (SP),HL",0x026D );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -8954,7 +8954,7 @@ Control prog_026C ()
 
 Control prog_026D ()
 {
-    at ( "026D" );
+    // #at: 026D
     instruction ( "PUSH DE",0x026E );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -8974,7 +8974,7 @@ Control prog_026D ()
 
 Control prog_026E ()
 {
-    at ( "026E" );
+    // #at: 026E
     instruction ( "JP   (HL)",0x026F );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -8984,7 +8984,7 @@ Control prog_026E ()
 
 Control prog_026F ()
 {
-    at ( "026F" );
+    // #at: 026F
     instruction ( "POP  HL",0x0270 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -9004,7 +9004,7 @@ Control prog_026F ()
 
 Control prog_0270 ()
 {
-    at ( "0270" );
+    // #at: 0270
     instruction ( "LD   DE,000C",0x0273 );
     advance ( 10 );
     D = 0x00;
@@ -9014,7 +9014,7 @@ Control prog_0270 ()
 
 Control prog_0273 ()
 {
-    at ( "0273" );
+    // #at: 0273
     instruction ( "ADD  HL,DE",0x0274 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -9030,7 +9030,7 @@ Control prog_0273 ()
 
 Control prog_0274 ()
 {
-    at ( "0274" );
+    // #at: 0274
     instruction ( "JP   024B",0x0277 );
     advance ( 10 );
     return jumpDirect ( 0x024B,prog_024B );
@@ -9038,7 +9038,7 @@ Control prog_0274 ()
 
 Control prog_0277 ()
 {
-    at ( "0277" );
+    // #at: 0277
     instruction ( "DEC  B",0x0278 );
     u8 a1 = B ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -9056,7 +9056,7 @@ Control prog_0277 ()
 
 Control prog_0278 ()
 {
-    at ( "0278" );
+    // #at: 0278
     instruction ( "INC  B",0x0279 );
     u8 a1 = B ;
     u16 a2 = ( ( a1 + 0x00 ) + true ) ;
@@ -9074,7 +9074,7 @@ Control prog_0278 ()
 
 Control prog_0279 ()
 {
-    at ( "0279" );
+    // #at: 0279
     instruction ( "JP   NZ,027D",0x027C );
     if (( ! FlagZ ))
     {
@@ -9090,7 +9090,7 @@ Control prog_0279 ()
 
 Control prog_027C ()
 {
-    at ( "027C" );
+    // #at: 027C
     instruction ( "DEC  A",0x027D );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -9108,7 +9108,7 @@ Control prog_027C ()
 
 Control prog_027D ()
 {
-    at ( "027D" );
+    // #at: 027D
     instruction ( "DEC  B",0x027E );
     u8 a1 = B ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -9126,7 +9126,7 @@ Control prog_027D ()
 
 Control prog_027E ()
 {
-    at ( "027E" );
+    // #at: 027E
     instruction ( "LD   (HL),B",0x027F );
     u8 a1 = B ;
     u8 a2 = H ;
@@ -9138,7 +9138,7 @@ Control prog_027E ()
 
 Control prog_027F ()
 {
-    at ( "027F" );
+    // #at: 027F
     instruction ( "DEC  HL",0x0280 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -9151,7 +9151,7 @@ Control prog_027F ()
 
 Control prog_0280 ()
 {
-    at ( "0280" );
+    // #at: 0280
     instruction ( "LD   (HL),A",0x0281 );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -9163,7 +9163,7 @@ Control prog_0280 ()
 
 Control prog_0281 ()
 {
-    at ( "0281" );
+    // #at: 0281
     instruction ( "LD   DE,0010",0x0284 );
     advance ( 10 );
     D = 0x00;
@@ -9173,7 +9173,7 @@ Control prog_0281 ()
 
 Control prog_0284 ()
 {
-    at ( "0284" );
+    // #at: 0284
     instruction ( "ADD  HL,DE",0x0285 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -9189,7 +9189,7 @@ Control prog_0284 ()
 
 Control prog_0285 ()
 {
-    at ( "0285" );
+    // #at: 0285
     instruction ( "JP   024B",0x0288 );
     advance ( 10 );
     return jumpDirect ( 0x024B,prog_024B );
@@ -9197,7 +9197,7 @@ Control prog_0285 ()
 
 Control prog_0288 ()
 {
-    at ( "0288" );
+    // #at: 0288
     instruction ( "DEC  (HL)",0x0289 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -9219,7 +9219,7 @@ Control prog_0288 ()
 
 Control prog_0289 ()
 {
-    at ( "0289" );
+    // #at: 0289
     instruction ( "DEC  HL",0x028A );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -9232,7 +9232,7 @@ Control prog_0289 ()
 
 Control prog_028A ()
 {
-    at ( "028A" );
+    // #at: 028A
     instruction ( "DEC  HL",0x028B );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -9245,7 +9245,7 @@ Control prog_028A ()
 
 Control prog_028B ()
 {
-    at ( "028B" );
+    // #at: 028B
     instruction ( "JP   0281",0x028E );
     advance ( 10 );
     return jumpDirect ( 0x0281,prog_0281 );
@@ -9253,7 +9253,7 @@ Control prog_028B ()
 
 Control prog_028E ()
 {
-    at ( "028E" );
+    // #at: 028E
     instruction ( "POP  HL",0x028F );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -9273,7 +9273,7 @@ Control prog_028E ()
 
 Control prog_028F ()
 {
-    at ( "028F" );
+    // #at: 028F
     instruction ( "INC  HL",0x0290 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -9286,7 +9286,7 @@ Control prog_028F ()
 
 Control prog_0290 ()
 {
-    at ( "0290" );
+    // #at: 0290
     instruction ( "LD   A,(HL)",0x0291 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -9298,7 +9298,7 @@ Control prog_0290 ()
 
 Control prog_0291 ()
 {
-    at ( "0291" );
+    // #at: 0291
     instruction ( "CP   FF",0x0293 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0xFF ) ) ) + ( ! false ) ) ;
@@ -9316,7 +9316,7 @@ Control prog_0291 ()
 
 Control prog_0293 ()
 {
-    at ( "0293" );
+    // #at: 0293
     instruction ( "JP   Z,033B",0x0296 );
     if (FlagZ)
     {
@@ -9332,7 +9332,7 @@ Control prog_0293 ()
 
 Control prog_0296 ()
 {
-    at ( "0296" );
+    // #at: 0296
     instruction ( "INC  HL",0x0297 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -9345,7 +9345,7 @@ Control prog_0296 ()
 
 Control prog_0297 ()
 {
-    at ( "0297" );
+    // #at: 0297
     instruction ( "DEC  (HL)",0x0298 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -9367,7 +9367,7 @@ Control prog_0297 ()
 
 Control prog_0298 ()
 {
-    at ( "0298" );
+    // #at: 0298
     instruction ( "RET  NZ",0x0299 );
     if (( ! FlagZ ))
     {
@@ -9393,7 +9393,7 @@ Control prog_0298 ()
 
 Control prog_0299 ()
 {
-    at ( "0299" );
+    // #at: 0299
     instruction ( "LD   B,A",0x029A );
     u8 a1 = A ;
     advance ( 5 );
@@ -9403,7 +9403,7 @@ Control prog_0299 ()
 
 Control prog_029A ()
 {
-    at ( "029A" );
+    // #at: 029A
     instruction ( "XOR  A",0x029B );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -9420,7 +9420,7 @@ Control prog_029A ()
 
 Control prog_029B ()
 {
-    at ( "029B" );
+    // #at: 029B
     instruction ( "LD   (2068),A",0x029E );
     u8 a1 = A ;
     mem_write ( 0x2068,a1 );
@@ -9430,7 +9430,7 @@ Control prog_029B ()
 
 Control prog_029E ()
 {
-    at ( "029E" );
+    // #at: 029E
     instruction ( "LD   (2069),A",0x02A1 );
     u8 a1 = A ;
     mem_write ( 0x2069,a1 );
@@ -9440,7 +9440,7 @@ Control prog_029E ()
 
 Control prog_02A1 ()
 {
-    at ( "02A1" );
+    // #at: 02A1
     instruction ( "LD   A,30",0x02A3 );
     advance ( 7 );
     A = 0x30;
@@ -9449,7 +9449,7 @@ Control prog_02A1 ()
 
 Control prog_02A3 ()
 {
-    at ( "02A3" );
+    // #at: 02A3
     instruction ( "LD   (206A),A",0x02A6 );
     u8 a1 = A ;
     mem_write ( 0x206A,a1 );
@@ -9459,7 +9459,7 @@ Control prog_02A3 ()
 
 Control prog_02A6 ()
 {
-    at ( "02A6" );
+    // #at: 02A6
     instruction ( "LD   A,B",0x02A7 );
     u8 a1 = B ;
     advance ( 5 );
@@ -9469,7 +9469,7 @@ Control prog_02A6 ()
 
 Control prog_02A7 ()
 {
-    at ( "02A7" );
+    // #at: 02A7
     instruction ( "LD   (HL),05",0x02A9 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -9480,7 +9480,7 @@ Control prog_02A7 ()
 
 Control prog_02A9 ()
 {
-    at ( "02A9" );
+    // #at: 02A9
     instruction ( "INC  HL",0x02AA );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -9493,7 +9493,7 @@ Control prog_02A9 ()
 
 Control prog_02AA ()
 {
-    at ( "02AA" );
+    // #at: 02AA
     instruction ( "DEC  (HL)",0x02AB );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -9515,7 +9515,7 @@ Control prog_02AA ()
 
 Control prog_02AB ()
 {
-    at ( "02AB" );
+    // #at: 02AB
     instruction ( "JP   NZ,039B",0x02AE );
     if (( ! FlagZ ))
     {
@@ -9531,7 +9531,7 @@ Control prog_02AB ()
 
 Control prog_02AE ()
 {
-    at ( "02AE" );
+    // #at: 02AE
     instruction ( "LD   HL,(201A)",0x02B1 );
     u8 a1 = e8_read_mem ( 0x201A ) ;
     u8 a2 = e8_read_mem ( 0x201B ) ;
@@ -9543,7 +9543,7 @@ Control prog_02AE ()
 
 Control prog_02B1 ()
 {
-    at ( "02B1" );
+    // #at: 02B1
     instruction ( "LD   B,10",0x02B3 );
     advance ( 7 );
     B = 0x10;
@@ -9552,7 +9552,7 @@ Control prog_02B1 ()
 
 Control prog_02B3 ()
 {
-    at ( "02B3" );
+    // #at: 02B3
     instruction ( "CALL 1424",0x02B6 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -9571,7 +9571,7 @@ Control prog_02B3 ()
 
 Control prog_02B6 ()
 {
-    at ( "02B6" );
+    // #at: 02B6
     instruction ( "LD   HL,2010",0x02B9 );
     advance ( 10 );
     H = 0x20;
@@ -9581,7 +9581,7 @@ Control prog_02B6 ()
 
 Control prog_02B9 ()
 {
-    at ( "02B9" );
+    // #at: 02B9
     instruction ( "LD   DE,1B10",0x02BC );
     advance ( 10 );
     D = 0x1B;
@@ -9591,7 +9591,7 @@ Control prog_02B9 ()
 
 Control prog_02BC ()
 {
-    at ( "02BC" );
+    // #at: 02BC
     instruction ( "LD   B,10",0x02BE );
     advance ( 7 );
     B = 0x10;
@@ -9600,7 +9600,7 @@ Control prog_02BC ()
 
 Control prog_02BE ()
 {
-    at ( "02BE" );
+    // #at: 02BE
     instruction ( "CALL 1A32",0x02C1 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -9619,7 +9619,7 @@ Control prog_02BE ()
 
 Control prog_02C1 ()
 {
-    at ( "02C1" );
+    // #at: 02C1
     instruction ( "LD   B,00",0x02C3 );
     advance ( 7 );
     B = 0x00;
@@ -9628,7 +9628,7 @@ Control prog_02C1 ()
 
 Control prog_02C3 ()
 {
-    at ( "02C3" );
+    // #at: 02C3
     instruction ( "CALL 19DC",0x02C6 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -9647,7 +9647,7 @@ Control prog_02C3 ()
 
 Control prog_02C6 ()
 {
-    at ( "02C6" );
+    // #at: 02C6
     instruction ( "LD   A,(206D)",0x02C9 );
     u8 a1 = e8_read_mem ( 0x206D ) ;
     advance ( 13 );
@@ -9657,7 +9657,7 @@ Control prog_02C6 ()
 
 Control prog_02C9 ()
 {
-    at ( "02C9" );
+    // #at: 02C9
     instruction ( "AND  A",0x02CA );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -9675,7 +9675,7 @@ Control prog_02C9 ()
 
 Control prog_02CA ()
 {
-    at ( "02CA" );
+    // #at: 02CA
     instruction ( "RET  NZ",0x02CB );
     if (( ! FlagZ ))
     {
@@ -9701,7 +9701,7 @@ Control prog_02CA ()
 
 Control prog_02CB ()
 {
-    at ( "02CB" );
+    // #at: 02CB
     instruction ( "LD   A,(20EF)",0x02CE );
     u8 a1 = e8_read_mem ( 0x20EF ) ;
     advance ( 13 );
@@ -9711,7 +9711,7 @@ Control prog_02CB ()
 
 Control prog_02CE ()
 {
-    at ( "02CE" );
+    // #at: 02CE
     instruction ( "AND  A",0x02CF );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -9729,7 +9729,7 @@ Control prog_02CE ()
 
 Control prog_02CF ()
 {
-    at ( "02CF" );
+    // #at: 02CF
     instruction ( "RET  Z",0x02D0 );
     if (FlagZ)
     {
@@ -9755,7 +9755,7 @@ Control prog_02CF ()
 
 Control prog_02D0 ()
 {
-    at ( "02D0" );
+    // #at: 02D0
     instruction ( "LD   SP,2400",0x02D3 );
     advance ( 10 );
     SPH = 0x24;
@@ -9765,7 +9765,7 @@ Control prog_02D0 ()
 
 Control prog_02D3 ()
 {
-    at ( "02D3" );
+    // #at: 02D3
     instruction ( "EI",0x02D4 );
     enable_interrupts (  );
     advance ( 4 );
@@ -9774,7 +9774,7 @@ Control prog_02D3 ()
 
 Control prog_02D4 ()
 {
-    at ( "02D4" );
+    // #at: 02D4
     instruction ( "CALL 19D7",0x02D7 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -9793,7 +9793,7 @@ Control prog_02D4 ()
 
 Control prog_02D7 ()
 {
-    at ( "02D7" );
+    // #at: 02D7
     instruction ( "CALL 092E",0x02DA );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -9812,7 +9812,7 @@ Control prog_02D7 ()
 
 Control prog_02DA ()
 {
-    at ( "02DA" );
+    // #at: 02DA
     instruction ( "AND  A",0x02DB );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -9830,7 +9830,7 @@ Control prog_02DA ()
 
 Control prog_02DB ()
 {
-    at ( "02DB" );
+    // #at: 02DB
     instruction ( "JP   Z,166D",0x02DE );
     if (FlagZ)
     {
@@ -9846,7 +9846,7 @@ Control prog_02DB ()
 
 Control prog_02DE ()
 {
-    at ( "02DE" );
+    // #at: 02DE
     instruction ( "CALL 18E7",0x02E1 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -9865,7 +9865,7 @@ Control prog_02DE ()
 
 Control prog_02E1 ()
 {
-    at ( "02E1" );
+    // #at: 02E1
     instruction ( "LD   A,(HL)",0x02E2 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -9877,7 +9877,7 @@ Control prog_02E1 ()
 
 Control prog_02E2 ()
 {
-    at ( "02E2" );
+    // #at: 02E2
     instruction ( "AND  A",0x02E3 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -9895,7 +9895,7 @@ Control prog_02E2 ()
 
 Control prog_02E3 ()
 {
-    at ( "02E3" );
+    // #at: 02E3
     instruction ( "JP   Z,032C",0x02E6 );
     if (FlagZ)
     {
@@ -9911,7 +9911,7 @@ Control prog_02E3 ()
 
 Control prog_02E6 ()
 {
-    at ( "02E6" );
+    // #at: 02E6
     instruction ( "LD   A,(20CE)",0x02E9 );
     u8 a1 = e8_read_mem ( 0x20CE ) ;
     advance ( 13 );
@@ -9921,7 +9921,7 @@ Control prog_02E6 ()
 
 Control prog_02E9 ()
 {
-    at ( "02E9" );
+    // #at: 02E9
     instruction ( "AND  A",0x02EA );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -9939,7 +9939,7 @@ Control prog_02E9 ()
 
 Control prog_02EA ()
 {
-    at ( "02EA" );
+    // #at: 02EA
     instruction ( "JP   Z,032C",0x02ED );
     if (FlagZ)
     {
@@ -9955,7 +9955,7 @@ Control prog_02EA ()
 
 Control prog_02ED ()
 {
-    at ( "02ED" );
+    // #at: 02ED
     instruction ( "LD   A,(2067)",0x02F0 );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
@@ -9965,7 +9965,7 @@ Control prog_02ED ()
 
 Control prog_02F0 ()
 {
-    at ( "02F0" );
+    // #at: 02F0
     instruction ( "PUSH PSW",0x02F1 );
     u8 a1 = A ;
     u8 a2 = SPH ;
@@ -9984,7 +9984,7 @@ Control prog_02F0 ()
 
 Control prog_02F1 ()
 {
-    at ( "02F1" );
+    // #at: 02F1
     instruction ( "RRCA",0x02F2 );
     u8 a1 = A ;
     advance ( 4 );
@@ -9995,7 +9995,7 @@ Control prog_02F1 ()
 
 Control prog_02F2 ()
 {
-    at ( "02F2" );
+    // #at: 02F2
     instruction ( "JP   CY,0332",0x02F5 );
     if (FlagCY)
     {
@@ -10011,7 +10011,7 @@ Control prog_02F2 ()
 
 Control prog_02F5 ()
 {
-    at ( "02F5" );
+    // #at: 02F5
     instruction ( "CALL 020E",0x02F8 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -10030,7 +10030,7 @@ Control prog_02F5 ()
 
 Control prog_02F8 ()
 {
-    at ( "02F8" );
+    // #at: 02F8
     instruction ( "CALL 0878",0x02FB );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -10049,7 +10049,7 @@ Control prog_02F8 ()
 
 Control prog_02FB ()
 {
-    at ( "02FB" );
+    // #at: 02FB
     instruction ( "LD   (HL),E",0x02FC );
     u8 a1 = E ;
     u8 a2 = H ;
@@ -10061,7 +10061,7 @@ Control prog_02FB ()
 
 Control prog_02FC ()
 {
-    at ( "02FC" );
+    // #at: 02FC
     instruction ( "INC  HL",0x02FD );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -10074,7 +10074,7 @@ Control prog_02FC ()
 
 Control prog_02FD ()
 {
-    at ( "02FD" );
+    // #at: 02FD
     instruction ( "LD   (HL),D",0x02FE );
     u8 a1 = D ;
     u8 a2 = H ;
@@ -10086,7 +10086,7 @@ Control prog_02FD ()
 
 Control prog_02FE ()
 {
-    at ( "02FE" );
+    // #at: 02FE
     instruction ( "DEC  HL",0x02FF );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -10099,7 +10099,7 @@ Control prog_02FE ()
 
 Control prog_02FF ()
 {
-    at ( "02FF" );
+    // #at: 02FF
     instruction ( "DEC  HL",0x0300 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -10112,7 +10112,7 @@ Control prog_02FF ()
 
 Control prog_0300 ()
 {
-    at ( "0300" );
+    // #at: 0300
     instruction ( "LD   (HL),B",0x0301 );
     u8 a1 = B ;
     u8 a2 = H ;
@@ -10124,7 +10124,7 @@ Control prog_0300 ()
 
 Control prog_0301 ()
 {
-    at ( "0301" );
+    // #at: 0301
     instruction ( "NOP",0x0302 );
     advance ( 4 );
     return jumpDirect ( 0x0302,prog_0302 );
@@ -10132,7 +10132,7 @@ Control prog_0301 ()
 
 Control prog_0302 ()
 {
-    at ( "0302" );
+    // #at: 0302
     instruction ( "CALL 01E4",0x0305 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -10151,7 +10151,7 @@ Control prog_0302 ()
 
 Control prog_0305 ()
 {
-    at ( "0305" );
+    // #at: 0305
     instruction ( "POP  PSW",0x0306 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -10175,7 +10175,7 @@ Control prog_0305 ()
 
 Control prog_0306 ()
 {
-    at ( "0306" );
+    // #at: 0306
     instruction ( "RRCA",0x0307 );
     u8 a1 = A ;
     advance ( 4 );
@@ -10186,7 +10186,7 @@ Control prog_0306 ()
 
 Control prog_0307 ()
 {
-    at ( "0307" );
+    // #at: 0307
     instruction ( "LD   A,21",0x0309 );
     advance ( 7 );
     A = 0x21;
@@ -10195,7 +10195,7 @@ Control prog_0307 ()
 
 Control prog_0309 ()
 {
-    at ( "0309" );
+    // #at: 0309
     instruction ( "LD   B,00",0x030B );
     advance ( 7 );
     B = 0x00;
@@ -10204,7 +10204,7 @@ Control prog_0309 ()
 
 Control prog_030B ()
 {
-    at ( "030B" );
+    // #at: 030B
     instruction ( "JP   NC,0312",0x030E );
     if (( ! FlagCY ))
     {
@@ -10220,7 +10220,7 @@ Control prog_030B ()
 
 Control prog_030E ()
 {
-    at ( "030E" );
+    // #at: 030E
     instruction ( "LD   B,20",0x0310 );
     advance ( 7 );
     B = 0x20;
@@ -10229,7 +10229,7 @@ Control prog_030E ()
 
 Control prog_0310 ()
 {
-    at ( "0310" );
+    // #at: 0310
     instruction ( "LD   A,22",0x0312 );
     advance ( 7 );
     A = 0x22;
@@ -10238,7 +10238,7 @@ Control prog_0310 ()
 
 Control prog_0312 ()
 {
-    at ( "0312" );
+    // #at: 0312
     instruction ( "LD   (2067),A",0x0315 );
     u8 a1 = A ;
     mem_write ( 0x2067,a1 );
@@ -10248,7 +10248,7 @@ Control prog_0312 ()
 
 Control prog_0315 ()
 {
-    at ( "0315" );
+    // #at: 0315
     instruction ( "CALL 0AB6",0x0318 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -10267,7 +10267,7 @@ Control prog_0315 ()
 
 Control prog_0318 ()
 {
-    at ( "0318" );
+    // #at: 0318
     instruction ( "XOR  A",0x0319 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -10284,7 +10284,7 @@ Control prog_0318 ()
 
 Control prog_0319 ()
 {
-    at ( "0319" );
+    // #at: 0319
     instruction ( "LD   (2011),A",0x031C );
     u8 a1 = A ;
     mem_write ( 0x2011,a1 );
@@ -10294,7 +10294,7 @@ Control prog_0319 ()
 
 Control prog_031C ()
 {
-    at ( "031C" );
+    // #at: 031C
     instruction ( "LD   A,B",0x031D );
     u8 a1 = B ;
     advance ( 5 );
@@ -10304,7 +10304,7 @@ Control prog_031C ()
 
 Control prog_031D ()
 {
-    at ( "031D" );
+    // #at: 031D
     instruction ( "OUT  05",0x031F );
     u8 a1 = A ;
     sound_control ( "FleetMovement1",( ( a1 >> 0 ) & 0x01 ) );
@@ -10318,7 +10318,7 @@ Control prog_031D ()
 
 Control prog_031F ()
 {
-    at ( "031F" );
+    // #at: 031F
     instruction ( "INC  A",0x0320 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + 0x00 ) + true ) ;
@@ -10336,7 +10336,7 @@ Control prog_031F ()
 
 Control prog_0320 ()
 {
-    at ( "0320" );
+    // #at: 0320
     instruction ( "LD   (2098),A",0x0323 );
     u8 a1 = A ;
     mem_write ( 0x2098,a1 );
@@ -10346,7 +10346,7 @@ Control prog_0320 ()
 
 Control prog_0323 ()
 {
-    at ( "0323" );
+    // #at: 0323
     instruction ( "CALL 09D6",0x0326 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -10365,7 +10365,7 @@ Control prog_0323 ()
 
 Control prog_0326 ()
 {
-    at ( "0326" );
+    // #at: 0326
     instruction ( "CALL 1A7F",0x0329 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -10384,7 +10384,7 @@ Control prog_0326 ()
 
 Control prog_0329 ()
 {
-    at ( "0329" );
+    // #at: 0329
     instruction ( "JP   07F9",0x032C );
     advance ( 10 );
     return jumpDirect ( 0x07F9,prog_07F9 );
@@ -10392,7 +10392,7 @@ Control prog_0329 ()
 
 Control prog_032C ()
 {
-    at ( "032C" );
+    // #at: 032C
     instruction ( "CALL 1A7F",0x032F );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -10411,7 +10411,7 @@ Control prog_032C ()
 
 Control prog_032F ()
 {
-    at ( "032F" );
+    // #at: 032F
     instruction ( "JP   0817",0x0332 );
     advance ( 10 );
     return jumpDirect ( 0x0817,prog_0817 );
@@ -10419,7 +10419,7 @@ Control prog_032F ()
 
 Control prog_0332 ()
 {
-    at ( "0332" );
+    // #at: 0332
     instruction ( "CALL 0209",0x0335 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -10438,7 +10438,7 @@ Control prog_0332 ()
 
 Control prog_0335 ()
 {
-    at ( "0335" );
+    // #at: 0335
     instruction ( "JP   02F8",0x0338 );
     advance ( 10 );
     return jumpDirect ( 0x02F8,prog_02F8 );
@@ -10446,7 +10446,7 @@ Control prog_0335 ()
 
 Control prog_033B ()
 {
-    at ( "033B" );
+    // #at: 033B
     instruction ( "LD   HL,2068",0x033E );
     advance ( 10 );
     H = 0x20;
@@ -10456,7 +10456,7 @@ Control prog_033B ()
 
 Control prog_033E ()
 {
-    at ( "033E" );
+    // #at: 033E
     instruction ( "LD   (HL),01",0x0340 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -10467,7 +10467,7 @@ Control prog_033E ()
 
 Control prog_0340 ()
 {
-    at ( "0340" );
+    // #at: 0340
     instruction ( "INC  HL",0x0341 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -10480,7 +10480,7 @@ Control prog_0340 ()
 
 Control prog_0341 ()
 {
-    at ( "0341" );
+    // #at: 0341
     instruction ( "LD   A,(HL)",0x0342 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -10492,7 +10492,7 @@ Control prog_0341 ()
 
 Control prog_0342 ()
 {
-    at ( "0342" );
+    // #at: 0342
     instruction ( "AND  A",0x0343 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -10510,7 +10510,7 @@ Control prog_0342 ()
 
 Control prog_0343 ()
 {
-    at ( "0343" );
+    // #at: 0343
     instruction ( "JP   03B0",0x0346 );
     advance ( 10 );
     return jumpDirect ( 0x03B0,prog_03B0 );
@@ -10518,7 +10518,7 @@ Control prog_0343 ()
 
 Control prog_0346 ()
 {
-    at ( "0346" );
+    // #at: 0346
     instruction ( "NOP",0x0347 );
     advance ( 4 );
     return jumpDirect ( 0x0347,prog_0347 );
@@ -10526,7 +10526,7 @@ Control prog_0346 ()
 
 Control prog_0347 ()
 {
-    at ( "0347" );
+    // #at: 0347
     instruction ( "DEC  HL",0x0348 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -10539,7 +10539,7 @@ Control prog_0347 ()
 
 Control prog_0348 ()
 {
-    at ( "0348" );
+    // #at: 0348
     instruction ( "LD   (HL),01",0x034A );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -10550,7 +10550,7 @@ Control prog_0348 ()
 
 Control prog_034A ()
 {
-    at ( "034A" );
+    // #at: 034A
     instruction ( "LD   A,(201B)",0x034D );
     u8 a1 = e8_read_mem ( 0x201B ) ;
     advance ( 13 );
@@ -10560,7 +10560,7 @@ Control prog_034A ()
 
 Control prog_034D ()
 {
-    at ( "034D" );
+    // #at: 034D
     instruction ( "LD   B,A",0x034E );
     u8 a1 = A ;
     advance ( 5 );
@@ -10570,7 +10570,7 @@ Control prog_034D ()
 
 Control prog_034E ()
 {
-    at ( "034E" );
+    // #at: 034E
     instruction ( "LD   A,(20EF)",0x0351 );
     u8 a1 = e8_read_mem ( 0x20EF ) ;
     advance ( 13 );
@@ -10580,7 +10580,7 @@ Control prog_034E ()
 
 Control prog_0351 ()
 {
-    at ( "0351" );
+    // #at: 0351
     instruction ( "AND  A",0x0352 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -10598,7 +10598,7 @@ Control prog_0351 ()
 
 Control prog_0352 ()
 {
-    at ( "0352" );
+    // #at: 0352
     instruction ( "JP   NZ,0363",0x0355 );
     if (( ! FlagZ ))
     {
@@ -10614,7 +10614,7 @@ Control prog_0352 ()
 
 Control prog_0355 ()
 {
-    at ( "0355" );
+    // #at: 0355
     instruction ( "LD   A,(201D)",0x0358 );
     u8 a1 = e8_read_mem ( 0x201D ) ;
     advance ( 13 );
@@ -10624,7 +10624,7 @@ Control prog_0355 ()
 
 Control prog_0358 ()
 {
-    at ( "0358" );
+    // #at: 0358
     instruction ( "RRCA",0x0359 );
     u8 a1 = A ;
     advance ( 4 );
@@ -10635,7 +10635,7 @@ Control prog_0358 ()
 
 Control prog_0359 ()
 {
-    at ( "0359" );
+    // #at: 0359
     instruction ( "JP   CY,0381",0x035C );
     if (FlagCY)
     {
@@ -10651,7 +10651,7 @@ Control prog_0359 ()
 
 Control prog_035C ()
 {
-    at ( "035C" );
+    // #at: 035C
     instruction ( "RRCA",0x035D );
     u8 a1 = A ;
     advance ( 4 );
@@ -10662,7 +10662,7 @@ Control prog_035C ()
 
 Control prog_035D ()
 {
-    at ( "035D" );
+    // #at: 035D
     instruction ( "JP   CY,038E",0x0360 );
     if (FlagCY)
     {
@@ -10678,7 +10678,7 @@ Control prog_035D ()
 
 Control prog_0360 ()
 {
-    at ( "0360" );
+    // #at: 0360
     instruction ( "JP   036F",0x0363 );
     advance ( 10 );
     return jumpDirect ( 0x036F,prog_036F );
@@ -10686,7 +10686,7 @@ Control prog_0360 ()
 
 Control prog_0363 ()
 {
-    at ( "0363" );
+    // #at: 0363
     instruction ( "CALL 17C0",0x0366 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -10705,7 +10705,7 @@ Control prog_0363 ()
 
 Control prog_0366 ()
 {
-    at ( "0366" );
+    // #at: 0366
     instruction ( "RLCA",0x0367 );
     u8 a1 = A ;
     advance ( 4 );
@@ -10716,7 +10716,7 @@ Control prog_0366 ()
 
 Control prog_0367 ()
 {
-    at ( "0367" );
+    // #at: 0367
     instruction ( "RLCA",0x0368 );
     u8 a1 = A ;
     advance ( 4 );
@@ -10727,7 +10727,7 @@ Control prog_0367 ()
 
 Control prog_0368 ()
 {
-    at ( "0368" );
+    // #at: 0368
     instruction ( "JP   CY,0381",0x036B );
     if (FlagCY)
     {
@@ -10743,7 +10743,7 @@ Control prog_0368 ()
 
 Control prog_036B ()
 {
-    at ( "036B" );
+    // #at: 036B
     instruction ( "RLCA",0x036C );
     u8 a1 = A ;
     advance ( 4 );
@@ -10754,7 +10754,7 @@ Control prog_036B ()
 
 Control prog_036C ()
 {
-    at ( "036C" );
+    // #at: 036C
     instruction ( "JP   CY,038E",0x036F );
     if (FlagCY)
     {
@@ -10770,7 +10770,7 @@ Control prog_036C ()
 
 Control prog_036F ()
 {
-    at ( "036F" );
+    // #at: 036F
     instruction ( "LD   HL,2018",0x0372 );
     advance ( 10 );
     H = 0x20;
@@ -10780,7 +10780,7 @@ Control prog_036F ()
 
 Control prog_0372 ()
 {
-    at ( "0372" );
+    // #at: 0372
     instruction ( "CALL 1A3B",0x0375 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -10799,7 +10799,7 @@ Control prog_0372 ()
 
 Control prog_0375 ()
 {
-    at ( "0375" );
+    // #at: 0375
     instruction ( "CALL 1A47",0x0378 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -10818,7 +10818,7 @@ Control prog_0375 ()
 
 Control prog_0378 ()
 {
-    at ( "0378" );
+    // #at: 0378
     instruction ( "CALL 1439",0x037B );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -10837,7 +10837,7 @@ Control prog_0378 ()
 
 Control prog_037B ()
 {
-    at ( "037B" );
+    // #at: 037B
     instruction ( "LD   A,00",0x037D );
     advance ( 7 );
     A = 0x00;
@@ -10846,7 +10846,7 @@ Control prog_037B ()
 
 Control prog_037D ()
 {
-    at ( "037D" );
+    // #at: 037D
     instruction ( "LD   (2012),A",0x0380 );
     u8 a1 = A ;
     mem_write ( 0x2012,a1 );
@@ -10856,7 +10856,7 @@ Control prog_037D ()
 
 Control prog_0380 ()
 {
-    at ( "0380" );
+    // #at: 0380
     instruction ( "RET",0x0381 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -10874,7 +10874,7 @@ Control prog_0380 ()
 
 Control prog_0381 ()
 {
-    at ( "0381" );
+    // #at: 0381
     instruction ( "LD   A,B",0x0382 );
     u8 a1 = B ;
     advance ( 5 );
@@ -10884,7 +10884,7 @@ Control prog_0381 ()
 
 Control prog_0382 ()
 {
-    at ( "0382" );
+    // #at: 0382
     instruction ( "CP   D9",0x0384 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0xD9 ) ) ) + ( ! false ) ) ;
@@ -10902,7 +10902,7 @@ Control prog_0382 ()
 
 Control prog_0384 ()
 {
-    at ( "0384" );
+    // #at: 0384
     instruction ( "JP   Z,036F",0x0387 );
     if (FlagZ)
     {
@@ -10918,7 +10918,7 @@ Control prog_0384 ()
 
 Control prog_0387 ()
 {
-    at ( "0387" );
+    // #at: 0387
     instruction ( "INC  A",0x0388 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + 0x00 ) + true ) ;
@@ -10936,7 +10936,7 @@ Control prog_0387 ()
 
 Control prog_0388 ()
 {
-    at ( "0388" );
+    // #at: 0388
     instruction ( "LD   (201B),A",0x038B );
     u8 a1 = A ;
     mem_write ( 0x201B,a1 );
@@ -10946,7 +10946,7 @@ Control prog_0388 ()
 
 Control prog_038B ()
 {
-    at ( "038B" );
+    // #at: 038B
     instruction ( "JP   036F",0x038E );
     advance ( 10 );
     return jumpDirect ( 0x036F,prog_036F );
@@ -10954,7 +10954,7 @@ Control prog_038B ()
 
 Control prog_038E ()
 {
-    at ( "038E" );
+    // #at: 038E
     instruction ( "LD   A,B",0x038F );
     u8 a1 = B ;
     advance ( 5 );
@@ -10964,7 +10964,7 @@ Control prog_038E ()
 
 Control prog_038F ()
 {
-    at ( "038F" );
+    // #at: 038F
     instruction ( "CP   30",0x0391 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x30 ) ) ) + ( ! false ) ) ;
@@ -10982,7 +10982,7 @@ Control prog_038F ()
 
 Control prog_0391 ()
 {
-    at ( "0391" );
+    // #at: 0391
     instruction ( "JP   Z,036F",0x0394 );
     if (FlagZ)
     {
@@ -10998,7 +10998,7 @@ Control prog_0391 ()
 
 Control prog_0394 ()
 {
-    at ( "0394" );
+    // #at: 0394
     instruction ( "DEC  A",0x0395 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -11016,7 +11016,7 @@ Control prog_0394 ()
 
 Control prog_0395 ()
 {
-    at ( "0395" );
+    // #at: 0395
     instruction ( "LD   (201B),A",0x0398 );
     u8 a1 = A ;
     mem_write ( 0x201B,a1 );
@@ -11026,7 +11026,7 @@ Control prog_0395 ()
 
 Control prog_0398 ()
 {
-    at ( "0398" );
+    // #at: 0398
     instruction ( "JP   036F",0x039B );
     advance ( 10 );
     return jumpDirect ( 0x036F,prog_036F );
@@ -11034,7 +11034,7 @@ Control prog_0398 ()
 
 Control prog_039B ()
 {
-    at ( "039B" );
+    // #at: 039B
     instruction ( "INC  A",0x039C );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + 0x00 ) + true ) ;
@@ -11052,7 +11052,7 @@ Control prog_039B ()
 
 Control prog_039C ()
 {
-    at ( "039C" );
+    // #at: 039C
     instruction ( "AND  01",0x039E );
     u8 a1 = A ;
     u8 a2 = ( 0x01 & a1 ) ;
@@ -11069,7 +11069,7 @@ Control prog_039C ()
 
 Control prog_039E ()
 {
-    at ( "039E" );
+    // #at: 039E
     instruction ( "LD   (2015),A",0x03A1 );
     u8 a1 = A ;
     mem_write ( 0x2015,a1 );
@@ -11079,7 +11079,7 @@ Control prog_039E ()
 
 Control prog_03A1 ()
 {
-    at ( "03A1" );
+    // #at: 03A1
     instruction ( "RLCA",0x03A2 );
     u8 a1 = A ;
     advance ( 4 );
@@ -11090,7 +11090,7 @@ Control prog_03A1 ()
 
 Control prog_03A2 ()
 {
-    at ( "03A2" );
+    // #at: 03A2
     instruction ( "RLCA",0x03A3 );
     u8 a1 = A ;
     advance ( 4 );
@@ -11101,7 +11101,7 @@ Control prog_03A2 ()
 
 Control prog_03A3 ()
 {
-    at ( "03A3" );
+    // #at: 03A3
     instruction ( "RLCA",0x03A4 );
     u8 a1 = A ;
     advance ( 4 );
@@ -11112,7 +11112,7 @@ Control prog_03A3 ()
 
 Control prog_03A4 ()
 {
-    at ( "03A4" );
+    // #at: 03A4
     instruction ( "RLCA",0x03A5 );
     u8 a1 = A ;
     advance ( 4 );
@@ -11123,7 +11123,7 @@ Control prog_03A4 ()
 
 Control prog_03A5 ()
 {
-    at ( "03A5" );
+    // #at: 03A5
     instruction ( "LD   HL,1C70",0x03A8 );
     advance ( 10 );
     H = 0x1C;
@@ -11133,7 +11133,7 @@ Control prog_03A5 ()
 
 Control prog_03A8 ()
 {
-    at ( "03A8" );
+    // #at: 03A8
     instruction ( "ADD  L",0x03A9 );
     u8 a1 = L ;
     u8 a2 = A ;
@@ -11153,7 +11153,7 @@ Control prog_03A8 ()
 
 Control prog_03A9 ()
 {
-    at ( "03A9" );
+    // #at: 03A9
     instruction ( "LD   L,A",0x03AA );
     u8 a1 = A ;
     advance ( 5 );
@@ -11163,7 +11163,7 @@ Control prog_03A9 ()
 
 Control prog_03AA ()
 {
-    at ( "03AA" );
+    // #at: 03AA
     instruction ( "LD   (2018),HL",0x03AD );
     u8 a1 = L ;
     mem_write ( 0x2018,a1 );
@@ -11175,7 +11175,7 @@ Control prog_03AA ()
 
 Control prog_03AD ()
 {
-    at ( "03AD" );
+    // #at: 03AD
     instruction ( "JP   036F",0x03B0 );
     advance ( 10 );
     return jumpDirect ( 0x036F,prog_036F );
@@ -11183,7 +11183,7 @@ Control prog_03AD ()
 
 Control prog_03B0 ()
 {
-    at ( "03B0" );
+    // #at: 03B0
     instruction ( "JP   NZ,034A",0x03B3 );
     if (( ! FlagZ ))
     {
@@ -11199,7 +11199,7 @@ Control prog_03B0 ()
 
 Control prog_03B3 ()
 {
-    at ( "03B3" );
+    // #at: 03B3
     instruction ( "INC  HL",0x03B4 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -11212,7 +11212,7 @@ Control prog_03B3 ()
 
 Control prog_03B4 ()
 {
-    at ( "03B4" );
+    // #at: 03B4
     instruction ( "DEC  (HL)",0x03B5 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -11234,7 +11234,7 @@ Control prog_03B4 ()
 
 Control prog_03B5 ()
 {
-    at ( "03B5" );
+    // #at: 03B5
     instruction ( "JP   NZ,034A",0x03B8 );
     if (( ! FlagZ ))
     {
@@ -11250,7 +11250,7 @@ Control prog_03B5 ()
 
 Control prog_03B8 ()
 {
-    at ( "03B8" );
+    // #at: 03B8
     instruction ( "JP   0346",0x03BB );
     advance ( 10 );
     return jumpDirect ( 0x0346,prog_0346 );
@@ -11258,7 +11258,7 @@ Control prog_03B8 ()
 
 Control prog_03BB ()
 {
-    at ( "03BB" );
+    // #at: 03BB
     instruction ( "LD   DE,202A",0x03BE );
     advance ( 10 );
     D = 0x20;
@@ -11268,7 +11268,7 @@ Control prog_03BB ()
 
 Control prog_03BE ()
 {
-    at ( "03BE" );
+    // #at: 03BE
     instruction ( "CALL 1A06",0x03C1 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -11287,7 +11287,7 @@ Control prog_03BE ()
 
 Control prog_03C1 ()
 {
-    at ( "03C1" );
+    // #at: 03C1
     instruction ( "POP  HL",0x03C2 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -11307,7 +11307,7 @@ Control prog_03C1 ()
 
 Control prog_03C2 ()
 {
-    at ( "03C2" );
+    // #at: 03C2
     instruction ( "RET  NC",0x03C3 );
     if (( ! FlagCY ))
     {
@@ -11333,7 +11333,7 @@ Control prog_03C2 ()
 
 Control prog_03C3 ()
 {
-    at ( "03C3" );
+    // #at: 03C3
     instruction ( "INC  HL",0x03C4 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -11346,7 +11346,7 @@ Control prog_03C3 ()
 
 Control prog_03C4 ()
 {
-    at ( "03C4" );
+    // #at: 03C4
     instruction ( "LD   A,(HL)",0x03C5 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -11358,7 +11358,7 @@ Control prog_03C4 ()
 
 Control prog_03C5 ()
 {
-    at ( "03C5" );
+    // #at: 03C5
     instruction ( "AND  A",0x03C6 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -11376,7 +11376,7 @@ Control prog_03C5 ()
 
 Control prog_03C6 ()
 {
-    at ( "03C6" );
+    // #at: 03C6
     instruction ( "RET  Z",0x03C7 );
     if (FlagZ)
     {
@@ -11402,7 +11402,7 @@ Control prog_03C6 ()
 
 Control prog_03C7 ()
 {
-    at ( "03C7" );
+    // #at: 03C7
     instruction ( "CP   01",0x03C9 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x01 ) ) ) + ( ! false ) ) ;
@@ -11420,7 +11420,7 @@ Control prog_03C7 ()
 
 Control prog_03C9 ()
 {
-    at ( "03C9" );
+    // #at: 03C9
     instruction ( "JP   Z,03FA",0x03CC );
     if (FlagZ)
     {
@@ -11436,7 +11436,7 @@ Control prog_03C9 ()
 
 Control prog_03CC ()
 {
-    at ( "03CC" );
+    // #at: 03CC
     instruction ( "CP   02",0x03CE );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x02 ) ) ) + ( ! false ) ) ;
@@ -11454,7 +11454,7 @@ Control prog_03CC ()
 
 Control prog_03CE ()
 {
-    at ( "03CE" );
+    // #at: 03CE
     instruction ( "JP   Z,040A",0x03D1 );
     if (FlagZ)
     {
@@ -11470,7 +11470,7 @@ Control prog_03CE ()
 
 Control prog_03D1 ()
 {
-    at ( "03D1" );
+    // #at: 03D1
     instruction ( "INC  HL",0x03D2 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -11483,7 +11483,7 @@ Control prog_03D1 ()
 
 Control prog_03D2 ()
 {
-    at ( "03D2" );
+    // #at: 03D2
     instruction ( "CP   03",0x03D4 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x03 ) ) ) + ( ! false ) ) ;
@@ -11501,7 +11501,7 @@ Control prog_03D2 ()
 
 Control prog_03D4 ()
 {
-    at ( "03D4" );
+    // #at: 03D4
     instruction ( "JP   NZ,042A",0x03D7 );
     if (( ! FlagZ ))
     {
@@ -11517,7 +11517,7 @@ Control prog_03D4 ()
 
 Control prog_03D7 ()
 {
-    at ( "03D7" );
+    // #at: 03D7
     instruction ( "DEC  (HL)",0x03D8 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -11539,7 +11539,7 @@ Control prog_03D7 ()
 
 Control prog_03D8 ()
 {
-    at ( "03D8" );
+    // #at: 03D8
     instruction ( "JP   Z,0436",0x03DB );
     if (FlagZ)
     {
@@ -11555,7 +11555,7 @@ Control prog_03D8 ()
 
 Control prog_03DB ()
 {
-    at ( "03DB" );
+    // #at: 03DB
     instruction ( "LD   A,(HL)",0x03DC );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -11567,7 +11567,7 @@ Control prog_03DB ()
 
 Control prog_03DC ()
 {
-    at ( "03DC" );
+    // #at: 03DC
     instruction ( "CP   0F",0x03DE );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x0F ) ) ) + ( ! false ) ) ;
@@ -11585,7 +11585,7 @@ Control prog_03DC ()
 
 Control prog_03DE ()
 {
-    at ( "03DE" );
+    // #at: 03DE
     instruction ( "RET  NZ",0x03DF );
     if (( ! FlagZ ))
     {
@@ -11611,7 +11611,7 @@ Control prog_03DE ()
 
 Control prog_03DF ()
 {
-    at ( "03DF" );
+    // #at: 03DF
     instruction ( "PUSH HL",0x03E0 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -11631,7 +11631,7 @@ Control prog_03DF ()
 
 Control prog_03E0 ()
 {
-    at ( "03E0" );
+    // #at: 03E0
     instruction ( "CALL 0430",0x03E3 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -11650,7 +11650,7 @@ Control prog_03E0 ()
 
 Control prog_03E3 ()
 {
-    at ( "03E3" );
+    // #at: 03E3
     instruction ( "CALL 1452",0x03E6 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -11669,7 +11669,7 @@ Control prog_03E3 ()
 
 Control prog_03E6 ()
 {
-    at ( "03E6" );
+    // #at: 03E6
     instruction ( "POP  HL",0x03E7 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -11689,7 +11689,7 @@ Control prog_03E6 ()
 
 Control prog_03E7 ()
 {
-    at ( "03E7" );
+    // #at: 03E7
     instruction ( "INC  HL",0x03E8 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -11702,7 +11702,7 @@ Control prog_03E7 ()
 
 Control prog_03E8 ()
 {
-    at ( "03E8" );
+    // #at: 03E8
     instruction ( "INC  (HL)",0x03E9 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -11724,7 +11724,7 @@ Control prog_03E8 ()
 
 Control prog_03E9 ()
 {
-    at ( "03E9" );
+    // #at: 03E9
     instruction ( "INC  HL",0x03EA );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -11737,7 +11737,7 @@ Control prog_03E9 ()
 
 Control prog_03EA ()
 {
-    at ( "03EA" );
+    // #at: 03EA
     instruction ( "INC  HL",0x03EB );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -11750,7 +11750,7 @@ Control prog_03EA ()
 
 Control prog_03EB ()
 {
-    at ( "03EB" );
+    // #at: 03EB
     instruction ( "DEC  (HL)",0x03EC );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -11772,7 +11772,7 @@ Control prog_03EB ()
 
 Control prog_03EC ()
 {
-    at ( "03EC" );
+    // #at: 03EC
     instruction ( "DEC  (HL)",0x03ED );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -11794,7 +11794,7 @@ Control prog_03EC ()
 
 Control prog_03ED ()
 {
-    at ( "03ED" );
+    // #at: 03ED
     instruction ( "INC  HL",0x03EE );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -11807,7 +11807,7 @@ Control prog_03ED ()
 
 Control prog_03EE ()
 {
-    at ( "03EE" );
+    // #at: 03EE
     instruction ( "DEC  (HL)",0x03EF );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -11829,7 +11829,7 @@ Control prog_03EE ()
 
 Control prog_03EF ()
 {
-    at ( "03EF" );
+    // #at: 03EF
     instruction ( "DEC  (HL)",0x03F0 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -11851,7 +11851,7 @@ Control prog_03EF ()
 
 Control prog_03F0 ()
 {
-    at ( "03F0" );
+    // #at: 03F0
     instruction ( "DEC  (HL)",0x03F1 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -11873,7 +11873,7 @@ Control prog_03F0 ()
 
 Control prog_03F1 ()
 {
-    at ( "03F1" );
+    // #at: 03F1
     instruction ( "INC  HL",0x03F2 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -11886,7 +11886,7 @@ Control prog_03F1 ()
 
 Control prog_03F2 ()
 {
-    at ( "03F2" );
+    // #at: 03F2
     instruction ( "LD   (HL),08",0x03F4 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -11897,7 +11897,7 @@ Control prog_03F2 ()
 
 Control prog_03F4 ()
 {
-    at ( "03F4" );
+    // #at: 03F4
     instruction ( "CALL 0430",0x03F7 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -11916,7 +11916,7 @@ Control prog_03F4 ()
 
 Control prog_03F7 ()
 {
-    at ( "03F7" );
+    // #at: 03F7
     instruction ( "JP   1400",0x03FA );
     advance ( 10 );
     return jumpDirect ( 0x1400,prog_1400 );
@@ -11924,7 +11924,7 @@ Control prog_03F7 ()
 
 Control prog_03FA ()
 {
-    at ( "03FA" );
+    // #at: 03FA
     instruction ( "INC  A",0x03FB );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + 0x00 ) + true ) ;
@@ -11942,7 +11942,7 @@ Control prog_03FA ()
 
 Control prog_03FB ()
 {
-    at ( "03FB" );
+    // #at: 03FB
     instruction ( "LD   (HL),A",0x03FC );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -11954,7 +11954,7 @@ Control prog_03FB ()
 
 Control prog_03FC ()
 {
-    at ( "03FC" );
+    // #at: 03FC
     instruction ( "LD   A,(201B)",0x03FF );
     u8 a1 = e8_read_mem ( 0x201B ) ;
     advance ( 13 );
@@ -11964,7 +11964,7 @@ Control prog_03FC ()
 
 Control prog_03FF ()
 {
-    at ( "03FF" );
+    // #at: 03FF
     instruction ( "ADD  08",0x0401 );
     u8 a1 = A ;
     u16 a2 = ( ( 0x08 + a1 ) + false ) ;
@@ -11983,7 +11983,7 @@ Control prog_03FF ()
 
 Control prog_0401 ()
 {
-    at ( "0401" );
+    // #at: 0401
     instruction ( "LD   (202A),A",0x0404 );
     u8 a1 = A ;
     mem_write ( 0x202A,a1 );
@@ -11993,7 +11993,7 @@ Control prog_0401 ()
 
 Control prog_0404 ()
 {
-    at ( "0404" );
+    // #at: 0404
     instruction ( "CALL 0430",0x0407 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -12012,7 +12012,7 @@ Control prog_0404 ()
 
 Control prog_0407 ()
 {
-    at ( "0407" );
+    // #at: 0407
     instruction ( "JP   1400",0x040A );
     advance ( 10 );
     return jumpDirect ( 0x1400,prog_1400 );
@@ -12020,7 +12020,7 @@ Control prog_0407 ()
 
 Control prog_040A ()
 {
-    at ( "040A" );
+    // #at: 040A
     instruction ( "CALL 0430",0x040D );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -12039,7 +12039,7 @@ Control prog_040A ()
 
 Control prog_040D ()
 {
-    at ( "040D" );
+    // #at: 040D
     instruction ( "PUSH DE",0x040E );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -12059,7 +12059,7 @@ Control prog_040D ()
 
 Control prog_040E ()
 {
-    at ( "040E" );
+    // #at: 040E
     instruction ( "PUSH HL",0x040F );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -12079,7 +12079,7 @@ Control prog_040E ()
 
 Control prog_040F ()
 {
-    at ( "040F" );
+    // #at: 040F
     instruction ( "PUSH BC",0x0410 );
     u8 a1 = B ;
     u8 a2 = C ;
@@ -12099,7 +12099,7 @@ Control prog_040F ()
 
 Control prog_0410 ()
 {
-    at ( "0410" );
+    // #at: 0410
     instruction ( "CALL 1452",0x0413 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -12118,7 +12118,7 @@ Control prog_0410 ()
 
 Control prog_0413 ()
 {
-    at ( "0413" );
+    // #at: 0413
     instruction ( "POP  BC",0x0414 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -12138,7 +12138,7 @@ Control prog_0413 ()
 
 Control prog_0414 ()
 {
-    at ( "0414" );
+    // #at: 0414
     instruction ( "POP  HL",0x0415 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -12158,7 +12158,7 @@ Control prog_0414 ()
 
 Control prog_0415 ()
 {
-    at ( "0415" );
+    // #at: 0415
     instruction ( "POP  DE",0x0416 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -12178,7 +12178,7 @@ Control prog_0415 ()
 
 Control prog_0416 ()
 {
-    at ( "0416" );
+    // #at: 0416
     instruction ( "LD   A,(202C)",0x0419 );
     u8 a1 = e8_read_mem ( 0x202C ) ;
     advance ( 13 );
@@ -12188,7 +12188,7 @@ Control prog_0416 ()
 
 Control prog_0419 ()
 {
-    at ( "0419" );
+    // #at: 0419
     instruction ( "ADD  L",0x041A );
     u8 a1 = L ;
     u8 a2 = A ;
@@ -12208,7 +12208,7 @@ Control prog_0419 ()
 
 Control prog_041A ()
 {
-    at ( "041A" );
+    // #at: 041A
     instruction ( "LD   L,A",0x041B );
     u8 a1 = A ;
     advance ( 5 );
@@ -12218,7 +12218,7 @@ Control prog_041A ()
 
 Control prog_041B ()
 {
-    at ( "041B" );
+    // #at: 041B
     instruction ( "LD   (2029),A",0x041E );
     u8 a1 = A ;
     mem_write ( 0x2029,a1 );
@@ -12228,7 +12228,7 @@ Control prog_041B ()
 
 Control prog_041E ()
 {
-    at ( "041E" );
+    // #at: 041E
     instruction ( "CALL 1491",0x0421 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -12247,7 +12247,7 @@ Control prog_041E ()
 
 Control prog_0421 ()
 {
-    at ( "0421" );
+    // #at: 0421
     instruction ( "LD   A,(2061)",0x0424 );
     u8 a1 = e8_read_mem ( 0x2061 ) ;
     advance ( 13 );
@@ -12257,7 +12257,7 @@ Control prog_0421 ()
 
 Control prog_0424 ()
 {
-    at ( "0424" );
+    // #at: 0424
     instruction ( "AND  A",0x0425 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -12275,7 +12275,7 @@ Control prog_0424 ()
 
 Control prog_0425 ()
 {
-    at ( "0425" );
+    // #at: 0425
     instruction ( "RET  Z",0x0426 );
     if (FlagZ)
     {
@@ -12301,7 +12301,7 @@ Control prog_0425 ()
 
 Control prog_0426 ()
 {
-    at ( "0426" );
+    // #at: 0426
     instruction ( "LD   (2002),A",0x0429 );
     u8 a1 = A ;
     mem_write ( 0x2002,a1 );
@@ -12311,7 +12311,7 @@ Control prog_0426 ()
 
 Control prog_0429 ()
 {
-    at ( "0429" );
+    // #at: 0429
     instruction ( "RET",0x042A );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -12329,7 +12329,7 @@ Control prog_0429 ()
 
 Control prog_042A ()
 {
-    at ( "042A" );
+    // #at: 042A
     instruction ( "CP   05",0x042C );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x05 ) ) ) + ( ! false ) ) ;
@@ -12347,7 +12347,7 @@ Control prog_042A ()
 
 Control prog_042C ()
 {
-    at ( "042C" );
+    // #at: 042C
     instruction ( "RET  Z",0x042D );
     if (FlagZ)
     {
@@ -12373,7 +12373,7 @@ Control prog_042C ()
 
 Control prog_042D ()
 {
-    at ( "042D" );
+    // #at: 042D
     instruction ( "JP   0436",0x0430 );
     advance ( 10 );
     return jumpDirect ( 0x0436,prog_0436 );
@@ -12381,7 +12381,7 @@ Control prog_042D ()
 
 Control prog_0430 ()
 {
-    at ( "0430" );
+    // #at: 0430
     instruction ( "LD   HL,2027",0x0433 );
     advance ( 10 );
     H = 0x20;
@@ -12391,7 +12391,7 @@ Control prog_0430 ()
 
 Control prog_0433 ()
 {
-    at ( "0433" );
+    // #at: 0433
     instruction ( "JP   1A3B",0x0436 );
     advance ( 10 );
     return jumpDirect ( 0x1A3B,prog_1A3B );
@@ -12399,7 +12399,7 @@ Control prog_0433 ()
 
 Control prog_0436 ()
 {
-    at ( "0436" );
+    // #at: 0436
     instruction ( "CALL 0430",0x0439 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -12418,7 +12418,7 @@ Control prog_0436 ()
 
 Control prog_0439 ()
 {
-    at ( "0439" );
+    // #at: 0439
     instruction ( "CALL 1452",0x043C );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -12437,7 +12437,7 @@ Control prog_0439 ()
 
 Control prog_043C ()
 {
-    at ( "043C" );
+    // #at: 043C
     instruction ( "LD   HL,2025",0x043F );
     advance ( 10 );
     H = 0x20;
@@ -12447,7 +12447,7 @@ Control prog_043C ()
 
 Control prog_043F ()
 {
-    at ( "043F" );
+    // #at: 043F
     instruction ( "LD   DE,1B25",0x0442 );
     advance ( 10 );
     D = 0x1B;
@@ -12457,7 +12457,7 @@ Control prog_043F ()
 
 Control prog_0442 ()
 {
-    at ( "0442" );
+    // #at: 0442
     instruction ( "LD   B,07",0x0444 );
     advance ( 7 );
     B = 0x07;
@@ -12466,7 +12466,7 @@ Control prog_0442 ()
 
 Control prog_0444 ()
 {
-    at ( "0444" );
+    // #at: 0444
     instruction ( "CALL 1A32",0x0447 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -12485,7 +12485,7 @@ Control prog_0444 ()
 
 Control prog_0447 ()
 {
-    at ( "0447" );
+    // #at: 0447
     instruction ( "LD   HL,(208D)",0x044A );
     u8 a1 = e8_read_mem ( 0x208D ) ;
     u8 a2 = e8_read_mem ( 0x208E ) ;
@@ -12497,7 +12497,7 @@ Control prog_0447 ()
 
 Control prog_044A ()
 {
-    at ( "044A" );
+    // #at: 044A
     instruction ( "INC  L",0x044B );
     u8 a1 = L ;
     u16 a2 = ( ( a1 + 0x00 ) + true ) ;
@@ -12515,7 +12515,7 @@ Control prog_044A ()
 
 Control prog_044B ()
 {
-    at ( "044B" );
+    // #at: 044B
     instruction ( "LD   A,L",0x044C );
     u8 a1 = L ;
     advance ( 5 );
@@ -12525,7 +12525,7 @@ Control prog_044B ()
 
 Control prog_044C ()
 {
-    at ( "044C" );
+    // #at: 044C
     instruction ( "CP   63",0x044E );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x63 ) ) ) + ( ! false ) ) ;
@@ -12543,7 +12543,7 @@ Control prog_044C ()
 
 Control prog_044E ()
 {
-    at ( "044E" );
+    // #at: 044E
     instruction ( "JP   CY,0453",0x0451 );
     if (FlagCY)
     {
@@ -12559,7 +12559,7 @@ Control prog_044E ()
 
 Control prog_0451 ()
 {
-    at ( "0451" );
+    // #at: 0451
     instruction ( "LD   L,54",0x0453 );
     advance ( 7 );
     L = 0x54;
@@ -12568,7 +12568,7 @@ Control prog_0451 ()
 
 Control prog_0453 ()
 {
-    at ( "0453" );
+    // #at: 0453
     instruction ( "LD   (208D),HL",0x0456 );
     u8 a1 = L ;
     mem_write ( 0x208D,a1 );
@@ -12580,7 +12580,7 @@ Control prog_0453 ()
 
 Control prog_0456 ()
 {
-    at ( "0456" );
+    // #at: 0456
     instruction ( "LD   HL,(208F)",0x0459 );
     u8 a1 = e8_read_mem ( 0x208F ) ;
     u8 a2 = e8_read_mem ( 0x2090 ) ;
@@ -12592,7 +12592,7 @@ Control prog_0456 ()
 
 Control prog_0459 ()
 {
-    at ( "0459" );
+    // #at: 0459
     instruction ( "INC  L",0x045A );
     u8 a1 = L ;
     u16 a2 = ( ( a1 + 0x00 ) + true ) ;
@@ -12610,7 +12610,7 @@ Control prog_0459 ()
 
 Control prog_045A ()
 {
-    at ( "045A" );
+    // #at: 045A
     instruction ( "LD   (208F),HL",0x045D );
     u8 a1 = L ;
     mem_write ( 0x208F,a1 );
@@ -12622,7 +12622,7 @@ Control prog_045A ()
 
 Control prog_045D ()
 {
-    at ( "045D" );
+    // #at: 045D
     instruction ( "LD   A,(2084)",0x0460 );
     u8 a1 = e8_read_mem ( 0x2084 ) ;
     advance ( 13 );
@@ -12632,7 +12632,7 @@ Control prog_045D ()
 
 Control prog_0460 ()
 {
-    at ( "0460" );
+    // #at: 0460
     instruction ( "AND  A",0x0461 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -12650,7 +12650,7 @@ Control prog_0460 ()
 
 Control prog_0461 ()
 {
-    at ( "0461" );
+    // #at: 0461
     instruction ( "RET  NZ",0x0462 );
     if (( ! FlagZ ))
     {
@@ -12676,7 +12676,7 @@ Control prog_0461 ()
 
 Control prog_0462 ()
 {
-    at ( "0462" );
+    // #at: 0462
     instruction ( "LD   A,(HL)",0x0463 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -12688,7 +12688,7 @@ Control prog_0462 ()
 
 Control prog_0463 ()
 {
-    at ( "0463" );
+    // #at: 0463
     instruction ( "AND  01",0x0465 );
     u8 a1 = A ;
     u8 a2 = ( 0x01 & a1 ) ;
@@ -12705,7 +12705,7 @@ Control prog_0463 ()
 
 Control prog_0465 ()
 {
-    at ( "0465" );
+    // #at: 0465
     instruction ( "LD   BC,0229",0x0468 );
     advance ( 10 );
     B = 0x02;
@@ -12715,7 +12715,7 @@ Control prog_0465 ()
 
 Control prog_0468 ()
 {
-    at ( "0468" );
+    // #at: 0468
     instruction ( "JP   NZ,046E",0x046B );
     if (( ! FlagZ ))
     {
@@ -12731,7 +12731,7 @@ Control prog_0468 ()
 
 Control prog_046B ()
 {
-    at ( "046B" );
+    // #at: 046B
     instruction ( "LD   BC,FEE0",0x046E );
     advance ( 10 );
     B = 0xFE;
@@ -12741,7 +12741,7 @@ Control prog_046B ()
 
 Control prog_046E ()
 {
-    at ( "046E" );
+    // #at: 046E
     instruction ( "LD   HL,208A",0x0471 );
     advance ( 10 );
     H = 0x20;
@@ -12751,7 +12751,7 @@ Control prog_046E ()
 
 Control prog_0471 ()
 {
-    at ( "0471" );
+    // #at: 0471
     instruction ( "LD   (HL),C",0x0472 );
     u8 a1 = C ;
     u8 a2 = H ;
@@ -12763,7 +12763,7 @@ Control prog_0471 ()
 
 Control prog_0472 ()
 {
-    at ( "0472" );
+    // #at: 0472
     instruction ( "INC  HL",0x0473 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -12776,7 +12776,7 @@ Control prog_0472 ()
 
 Control prog_0473 ()
 {
-    at ( "0473" );
+    // #at: 0473
     instruction ( "INC  HL",0x0474 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -12789,7 +12789,7 @@ Control prog_0473 ()
 
 Control prog_0474 ()
 {
-    at ( "0474" );
+    // #at: 0474
     instruction ( "LD   (HL),B",0x0475 );
     u8 a1 = B ;
     u8 a2 = H ;
@@ -12801,7 +12801,7 @@ Control prog_0474 ()
 
 Control prog_0475 ()
 {
-    at ( "0475" );
+    // #at: 0475
     instruction ( "RET",0x0476 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -12819,7 +12819,7 @@ Control prog_0475 ()
 
 Control prog_0476 ()
 {
-    at ( "0476" );
+    // #at: 0476
     instruction ( "POP  HL",0x0477 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -12839,7 +12839,7 @@ Control prog_0476 ()
 
 Control prog_0477 ()
 {
-    at ( "0477" );
+    // #at: 0477
     instruction ( "LD   A,(1B32)",0x047A );
     advance ( 13 );
     A = 0x02;
@@ -12848,7 +12848,7 @@ Control prog_0477 ()
 
 Control prog_047A ()
 {
-    at ( "047A" );
+    // #at: 047A
     instruction ( "LD   (2032),A",0x047D );
     u8 a1 = A ;
     mem_write ( 0x2032,a1 );
@@ -12858,7 +12858,7 @@ Control prog_047A ()
 
 Control prog_047D ()
 {
-    at ( "047D" );
+    // #at: 047D
     instruction ( "LD   HL,(2038)",0x0480 );
     u8 a1 = e8_read_mem ( 0x2038 ) ;
     u8 a2 = e8_read_mem ( 0x2039 ) ;
@@ -12870,7 +12870,7 @@ Control prog_047D ()
 
 Control prog_0480 ()
 {
-    at ( "0480" );
+    // #at: 0480
     instruction ( "LD   A,L",0x0481 );
     u8 a1 = L ;
     advance ( 5 );
@@ -12880,7 +12880,7 @@ Control prog_0480 ()
 
 Control prog_0481 ()
 {
-    at ( "0481" );
+    // #at: 0481
     instruction ( "OR   H",0x0482 );
     u8 a1 = H ;
     u8 a2 = A ;
@@ -12897,7 +12897,7 @@ Control prog_0481 ()
 
 Control prog_0482 ()
 {
-    at ( "0482" );
+    // #at: 0482
     instruction ( "JP   NZ,048A",0x0485 );
     if (( ! FlagZ ))
     {
@@ -12913,7 +12913,7 @@ Control prog_0482 ()
 
 Control prog_0485 ()
 {
-    at ( "0485" );
+    // #at: 0485
     instruction ( "DEC  HL",0x0486 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -12926,7 +12926,7 @@ Control prog_0485 ()
 
 Control prog_0486 ()
 {
-    at ( "0486" );
+    // #at: 0486
     instruction ( "LD   (2038),HL",0x0489 );
     u8 a1 = L ;
     mem_write ( 0x2038,a1 );
@@ -12938,7 +12938,7 @@ Control prog_0486 ()
 
 Control prog_0489 ()
 {
-    at ( "0489" );
+    // #at: 0489
     instruction ( "RET",0x048A );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -12956,7 +12956,7 @@ Control prog_0489 ()
 
 Control prog_048A ()
 {
-    at ( "048A" );
+    // #at: 048A
     instruction ( "LD   DE,2035",0x048D );
     advance ( 10 );
     D = 0x20;
@@ -12966,7 +12966,7 @@ Control prog_048A ()
 
 Control prog_048D ()
 {
-    at ( "048D" );
+    // #at: 048D
     instruction ( "LD   A,F9",0x048F );
     advance ( 7 );
     A = 0xF9;
@@ -12975,7 +12975,7 @@ Control prog_048D ()
 
 Control prog_048F ()
 {
-    at ( "048F" );
+    // #at: 048F
     instruction ( "CALL 0550",0x0492 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -12994,7 +12994,7 @@ Control prog_048F ()
 
 Control prog_0492 ()
 {
-    at ( "0492" );
+    // #at: 0492
     instruction ( "LD   A,(2046)",0x0495 );
     u8 a1 = e8_read_mem ( 0x2046 ) ;
     advance ( 13 );
@@ -13004,7 +13004,7 @@ Control prog_0492 ()
 
 Control prog_0495 ()
 {
-    at ( "0495" );
+    // #at: 0495
     instruction ( "LD   (2070),A",0x0498 );
     u8 a1 = A ;
     mem_write ( 0x2070,a1 );
@@ -13014,7 +13014,7 @@ Control prog_0495 ()
 
 Control prog_0498 ()
 {
-    at ( "0498" );
+    // #at: 0498
     instruction ( "LD   A,(2056)",0x049B );
     u8 a1 = e8_read_mem ( 0x2056 ) ;
     advance ( 13 );
@@ -13024,7 +13024,7 @@ Control prog_0498 ()
 
 Control prog_049B ()
 {
-    at ( "049B" );
+    // #at: 049B
     instruction ( "LD   (2071),A",0x049E );
     u8 a1 = A ;
     mem_write ( 0x2071,a1 );
@@ -13034,7 +13034,7 @@ Control prog_049B ()
 
 Control prog_049E ()
 {
-    at ( "049E" );
+    // #at: 049E
     instruction ( "CALL 0563",0x04A1 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -13053,7 +13053,7 @@ Control prog_049E ()
 
 Control prog_04A1 ()
 {
-    at ( "04A1" );
+    // #at: 04A1
     instruction ( "LD   A,(2078)",0x04A4 );
     u8 a1 = e8_read_mem ( 0x2078 ) ;
     advance ( 13 );
@@ -13063,7 +13063,7 @@ Control prog_04A1 ()
 
 Control prog_04A4 ()
 {
-    at ( "04A4" );
+    // #at: 04A4
     instruction ( "AND  A",0x04A5 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -13081,7 +13081,7 @@ Control prog_04A4 ()
 
 Control prog_04A5 ()
 {
-    at ( "04A5" );
+    // #at: 04A5
     instruction ( "LD   HL,2035",0x04A8 );
     advance ( 10 );
     H = 0x20;
@@ -13091,7 +13091,7 @@ Control prog_04A5 ()
 
 Control prog_04A8 ()
 {
-    at ( "04A8" );
+    // #at: 04A8
     instruction ( "JP   NZ,055B",0x04AB );
     if (( ! FlagZ ))
     {
@@ -13107,7 +13107,7 @@ Control prog_04A8 ()
 
 Control prog_04AB ()
 {
-    at ( "04AB" );
+    // #at: 04AB
     instruction ( "LD   DE,1B30",0x04AE );
     advance ( 10 );
     D = 0x1B;
@@ -13117,7 +13117,7 @@ Control prog_04AB ()
 
 Control prog_04AE ()
 {
-    at ( "04AE" );
+    // #at: 04AE
     instruction ( "LD   HL,2030",0x04B1 );
     advance ( 10 );
     H = 0x20;
@@ -13127,7 +13127,7 @@ Control prog_04AE ()
 
 Control prog_04B1 ()
 {
-    at ( "04B1" );
+    // #at: 04B1
     instruction ( "LD   B,10",0x04B3 );
     advance ( 7 );
     B = 0x10;
@@ -13136,7 +13136,7 @@ Control prog_04B1 ()
 
 Control prog_04B3 ()
 {
-    at ( "04B3" );
+    // #at: 04B3
     instruction ( "JP   1A32",0x04B6 );
     advance ( 10 );
     return jumpDirect ( 0x1A32,prog_1A32 );
@@ -13144,7 +13144,7 @@ Control prog_04B3 ()
 
 Control prog_04B6 ()
 {
-    at ( "04B6" );
+    // #at: 04B6
     instruction ( "POP  HL",0x04B7 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -13164,7 +13164,7 @@ Control prog_04B6 ()
 
 Control prog_04B7 ()
 {
-    at ( "04B7" );
+    // #at: 04B7
     instruction ( "LD   A,(206E)",0x04BA );
     u8 a1 = e8_read_mem ( 0x206E ) ;
     advance ( 13 );
@@ -13174,7 +13174,7 @@ Control prog_04B7 ()
 
 Control prog_04BA ()
 {
-    at ( "04BA" );
+    // #at: 04BA
     instruction ( "AND  A",0x04BB );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -13192,7 +13192,7 @@ Control prog_04BA ()
 
 Control prog_04BB ()
 {
-    at ( "04BB" );
+    // #at: 04BB
     instruction ( "RET  NZ",0x04BC );
     if (( ! FlagZ ))
     {
@@ -13218,7 +13218,7 @@ Control prog_04BB ()
 
 Control prog_04BC ()
 {
-    at ( "04BC" );
+    // #at: 04BC
     instruction ( "LD   A,(2080)",0x04BF );
     u8 a1 = e8_read_mem ( 0x2080 ) ;
     advance ( 13 );
@@ -13228,7 +13228,7 @@ Control prog_04BC ()
 
 Control prog_04BF ()
 {
-    at ( "04BF" );
+    // #at: 04BF
     instruction ( "CP   01",0x04C1 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x01 ) ) ) + ( ! false ) ) ;
@@ -13246,7 +13246,7 @@ Control prog_04BF ()
 
 Control prog_04C1 ()
 {
-    at ( "04C1" );
+    // #at: 04C1
     instruction ( "RET  NZ",0x04C2 );
     if (( ! FlagZ ))
     {
@@ -13272,7 +13272,7 @@ Control prog_04C1 ()
 
 Control prog_04C2 ()
 {
-    at ( "04C2" );
+    // #at: 04C2
     instruction ( "LD   DE,2045",0x04C5 );
     advance ( 10 );
     D = 0x20;
@@ -13282,7 +13282,7 @@ Control prog_04C2 ()
 
 Control prog_04C5 ()
 {
-    at ( "04C5" );
+    // #at: 04C5
     instruction ( "LD   A,ED",0x04C7 );
     advance ( 7 );
     A = 0xED;
@@ -13291,7 +13291,7 @@ Control prog_04C5 ()
 
 Control prog_04C7 ()
 {
-    at ( "04C7" );
+    // #at: 04C7
     instruction ( "CALL 0550",0x04CA );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -13310,7 +13310,7 @@ Control prog_04C7 ()
 
 Control prog_04CA ()
 {
-    at ( "04CA" );
+    // #at: 04CA
     instruction ( "LD   A,(2036)",0x04CD );
     u8 a1 = e8_read_mem ( 0x2036 ) ;
     advance ( 13 );
@@ -13320,7 +13320,7 @@ Control prog_04CA ()
 
 Control prog_04CD ()
 {
-    at ( "04CD" );
+    // #at: 04CD
     instruction ( "LD   (2070),A",0x04D0 );
     u8 a1 = A ;
     mem_write ( 0x2070,a1 );
@@ -13330,7 +13330,7 @@ Control prog_04CD ()
 
 Control prog_04D0 ()
 {
-    at ( "04D0" );
+    // #at: 04D0
     instruction ( "LD   A,(2056)",0x04D3 );
     u8 a1 = e8_read_mem ( 0x2056 ) ;
     advance ( 13 );
@@ -13340,7 +13340,7 @@ Control prog_04D0 ()
 
 Control prog_04D3 ()
 {
-    at ( "04D3" );
+    // #at: 04D3
     instruction ( "LD   (2071),A",0x04D6 );
     u8 a1 = A ;
     mem_write ( 0x2071,a1 );
@@ -13350,7 +13350,7 @@ Control prog_04D3 ()
 
 Control prog_04D6 ()
 {
-    at ( "04D6" );
+    // #at: 04D6
     instruction ( "CALL 0563",0x04D9 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -13369,7 +13369,7 @@ Control prog_04D6 ()
 
 Control prog_04D9 ()
 {
-    at ( "04D9" );
+    // #at: 04D9
     instruction ( "LD   A,(2076)",0x04DC );
     u8 a1 = e8_read_mem ( 0x2076 ) ;
     advance ( 13 );
@@ -13379,7 +13379,7 @@ Control prog_04D9 ()
 
 Control prog_04DC ()
 {
-    at ( "04DC" );
+    // #at: 04DC
     instruction ( "CP   10",0x04DE );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x10 ) ) ) + ( ! false ) ) ;
@@ -13397,7 +13397,7 @@ Control prog_04DC ()
 
 Control prog_04DE ()
 {
-    at ( "04DE" );
+    // #at: 04DE
     instruction ( "JP   CY,04E7",0x04E1 );
     if (FlagCY)
     {
@@ -13413,7 +13413,7 @@ Control prog_04DE ()
 
 Control prog_04E1 ()
 {
-    at ( "04E1" );
+    // #at: 04E1
     instruction ( "LD   A,(1B48)",0x04E4 );
     advance ( 13 );
     A = 0x00;
@@ -13422,7 +13422,7 @@ Control prog_04E1 ()
 
 Control prog_04E4 ()
 {
-    at ( "04E4" );
+    // #at: 04E4
     instruction ( "LD   (2076),A",0x04E7 );
     u8 a1 = A ;
     mem_write ( 0x2076,a1 );
@@ -13432,7 +13432,7 @@ Control prog_04E4 ()
 
 Control prog_04E7 ()
 {
-    at ( "04E7" );
+    // #at: 04E7
     instruction ( "LD   A,(2078)",0x04EA );
     u8 a1 = e8_read_mem ( 0x2078 ) ;
     advance ( 13 );
@@ -13442,7 +13442,7 @@ Control prog_04E7 ()
 
 Control prog_04EA ()
 {
-    at ( "04EA" );
+    // #at: 04EA
     instruction ( "AND  A",0x04EB );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -13460,7 +13460,7 @@ Control prog_04EA ()
 
 Control prog_04EB ()
 {
-    at ( "04EB" );
+    // #at: 04EB
     instruction ( "LD   HL,2045",0x04EE );
     advance ( 10 );
     H = 0x20;
@@ -13470,7 +13470,7 @@ Control prog_04EB ()
 
 Control prog_04EE ()
 {
-    at ( "04EE" );
+    // #at: 04EE
     instruction ( "JP   NZ,055B",0x04F1 );
     if (( ! FlagZ ))
     {
@@ -13486,7 +13486,7 @@ Control prog_04EE ()
 
 Control prog_04F1 ()
 {
-    at ( "04F1" );
+    // #at: 04F1
     instruction ( "LD   DE,1B40",0x04F4 );
     advance ( 10 );
     D = 0x1B;
@@ -13496,7 +13496,7 @@ Control prog_04F1 ()
 
 Control prog_04F4 ()
 {
-    at ( "04F4" );
+    // #at: 04F4
     instruction ( "LD   HL,2040",0x04F7 );
     advance ( 10 );
     H = 0x20;
@@ -13506,7 +13506,7 @@ Control prog_04F4 ()
 
 Control prog_04F7 ()
 {
-    at ( "04F7" );
+    // #at: 04F7
     instruction ( "LD   B,10",0x04F9 );
     advance ( 7 );
     B = 0x10;
@@ -13515,7 +13515,7 @@ Control prog_04F7 ()
 
 Control prog_04F9 ()
 {
-    at ( "04F9" );
+    // #at: 04F9
     instruction ( "CALL 1A32",0x04FC );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -13534,7 +13534,7 @@ Control prog_04F9 ()
 
 Control prog_04FC ()
 {
-    at ( "04FC" );
+    // #at: 04FC
     instruction ( "LD   A,(2082)",0x04FF );
     u8 a1 = e8_read_mem ( 0x2082 ) ;
     advance ( 13 );
@@ -13544,7 +13544,7 @@ Control prog_04FC ()
 
 Control prog_04FF ()
 {
-    at ( "04FF" );
+    // #at: 04FF
     instruction ( "DEC  A",0x0500 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -13562,7 +13562,7 @@ Control prog_04FF ()
 
 Control prog_0500 ()
 {
-    at ( "0500" );
+    // #at: 0500
     instruction ( "JP   NZ,0508",0x0503 );
     if (( ! FlagZ ))
     {
@@ -13578,7 +13578,7 @@ Control prog_0500 ()
 
 Control prog_0503 ()
 {
-    at ( "0503" );
+    // #at: 0503
     instruction ( "LD   A,01",0x0505 );
     advance ( 7 );
     A = 0x01;
@@ -13587,7 +13587,7 @@ Control prog_0503 ()
 
 Control prog_0505 ()
 {
-    at ( "0505" );
+    // #at: 0505
     instruction ( "LD   (206E),A",0x0508 );
     u8 a1 = A ;
     mem_write ( 0x206E,a1 );
@@ -13597,7 +13597,7 @@ Control prog_0505 ()
 
 Control prog_0508 ()
 {
-    at ( "0508" );
+    // #at: 0508
     instruction ( "LD   HL,(2076)",0x050B );
     u8 a1 = e8_read_mem ( 0x2076 ) ;
     u8 a2 = e8_read_mem ( 0x2077 ) ;
@@ -13609,7 +13609,7 @@ Control prog_0508 ()
 
 Control prog_050B ()
 {
-    at ( "050B" );
+    // #at: 050B
     instruction ( "JP   067E",0x050E );
     advance ( 10 );
     return jumpDirect ( 0x067E,prog_067E );
@@ -13617,7 +13617,7 @@ Control prog_050B ()
 
 Control prog_050E ()
 {
-    at ( "050E" );
+    // #at: 050E
     instruction ( "POP  HL",0x050F );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -13637,7 +13637,7 @@ Control prog_050E ()
 
 Control prog_050F ()
 {
-    at ( "050F" );
+    // #at: 050F
     instruction ( "LD   DE,2055",0x0512 );
     advance ( 10 );
     D = 0x20;
@@ -13647,7 +13647,7 @@ Control prog_050F ()
 
 Control prog_0512 ()
 {
-    at ( "0512" );
+    // #at: 0512
     instruction ( "LD   A,DB",0x0514 );
     advance ( 7 );
     A = 0xDB;
@@ -13656,7 +13656,7 @@ Control prog_0512 ()
 
 Control prog_0514 ()
 {
-    at ( "0514" );
+    // #at: 0514
     instruction ( "CALL 0550",0x0517 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -13675,7 +13675,7 @@ Control prog_0514 ()
 
 Control prog_0517 ()
 {
-    at ( "0517" );
+    // #at: 0517
     instruction ( "LD   A,(2046)",0x051A );
     u8 a1 = e8_read_mem ( 0x2046 ) ;
     advance ( 13 );
@@ -13685,7 +13685,7 @@ Control prog_0517 ()
 
 Control prog_051A ()
 {
-    at ( "051A" );
+    // #at: 051A
     instruction ( "LD   (2070),A",0x051D );
     u8 a1 = A ;
     mem_write ( 0x2070,a1 );
@@ -13695,7 +13695,7 @@ Control prog_051A ()
 
 Control prog_051D ()
 {
-    at ( "051D" );
+    // #at: 051D
     instruction ( "LD   A,(2036)",0x0520 );
     u8 a1 = e8_read_mem ( 0x2036 ) ;
     advance ( 13 );
@@ -13705,7 +13705,7 @@ Control prog_051D ()
 
 Control prog_0520 ()
 {
-    at ( "0520" );
+    // #at: 0520
     instruction ( "LD   (2071),A",0x0523 );
     u8 a1 = A ;
     mem_write ( 0x2071,a1 );
@@ -13715,7 +13715,7 @@ Control prog_0520 ()
 
 Control prog_0523 ()
 {
-    at ( "0523" );
+    // #at: 0523
     instruction ( "CALL 0563",0x0526 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -13734,7 +13734,7 @@ Control prog_0523 ()
 
 Control prog_0526 ()
 {
-    at ( "0526" );
+    // #at: 0526
     instruction ( "LD   A,(2076)",0x0529 );
     u8 a1 = e8_read_mem ( 0x2076 ) ;
     advance ( 13 );
@@ -13744,7 +13744,7 @@ Control prog_0526 ()
 
 Control prog_0529 ()
 {
-    at ( "0529" );
+    // #at: 0529
     instruction ( "CP   15",0x052B );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x15 ) ) ) + ( ! false ) ) ;
@@ -13762,7 +13762,7 @@ Control prog_0529 ()
 
 Control prog_052B ()
 {
-    at ( "052B" );
+    // #at: 052B
     instruction ( "JP   CY,0534",0x052E );
     if (FlagCY)
     {
@@ -13778,7 +13778,7 @@ Control prog_052B ()
 
 Control prog_052E ()
 {
-    at ( "052E" );
+    // #at: 052E
     instruction ( "LD   A,(1B58)",0x0531 );
     advance ( 13 );
     A = 0x06;
@@ -13787,7 +13787,7 @@ Control prog_052E ()
 
 Control prog_0531 ()
 {
-    at ( "0531" );
+    // #at: 0531
     instruction ( "LD   (2076),A",0x0534 );
     u8 a1 = A ;
     mem_write ( 0x2076,a1 );
@@ -13797,7 +13797,7 @@ Control prog_0531 ()
 
 Control prog_0534 ()
 {
-    at ( "0534" );
+    // #at: 0534
     instruction ( "LD   A,(2078)",0x0537 );
     u8 a1 = e8_read_mem ( 0x2078 ) ;
     advance ( 13 );
@@ -13807,7 +13807,7 @@ Control prog_0534 ()
 
 Control prog_0537 ()
 {
-    at ( "0537" );
+    // #at: 0537
     instruction ( "AND  A",0x0538 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -13825,7 +13825,7 @@ Control prog_0537 ()
 
 Control prog_0538 ()
 {
-    at ( "0538" );
+    // #at: 0538
     instruction ( "LD   HL,2055",0x053B );
     advance ( 10 );
     H = 0x20;
@@ -13835,7 +13835,7 @@ Control prog_0538 ()
 
 Control prog_053B ()
 {
-    at ( "053B" );
+    // #at: 053B
     instruction ( "JP   NZ,055B",0x053E );
     if (( ! FlagZ ))
     {
@@ -13851,7 +13851,7 @@ Control prog_053B ()
 
 Control prog_053E ()
 {
-    at ( "053E" );
+    // #at: 053E
     instruction ( "LD   DE,1B50",0x0541 );
     advance ( 10 );
     D = 0x1B;
@@ -13861,7 +13861,7 @@ Control prog_053E ()
 
 Control prog_0541 ()
 {
-    at ( "0541" );
+    // #at: 0541
     instruction ( "LD   HL,2050",0x0544 );
     advance ( 10 );
     H = 0x20;
@@ -13871,7 +13871,7 @@ Control prog_0541 ()
 
 Control prog_0544 ()
 {
-    at ( "0544" );
+    // #at: 0544
     instruction ( "LD   B,10",0x0546 );
     advance ( 7 );
     B = 0x10;
@@ -13880,7 +13880,7 @@ Control prog_0544 ()
 
 Control prog_0546 ()
 {
-    at ( "0546" );
+    // #at: 0546
     instruction ( "CALL 1A32",0x0549 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -13899,7 +13899,7 @@ Control prog_0546 ()
 
 Control prog_0549 ()
 {
-    at ( "0549" );
+    // #at: 0549
     instruction ( "LD   HL,(2076)",0x054C );
     u8 a1 = e8_read_mem ( 0x2076 ) ;
     u8 a2 = e8_read_mem ( 0x2077 ) ;
@@ -13911,7 +13911,7 @@ Control prog_0549 ()
 
 Control prog_054C ()
 {
-    at ( "054C" );
+    // #at: 054C
     instruction ( "LD   (2058),HL",0x054F );
     u8 a1 = L ;
     mem_write ( 0x2058,a1 );
@@ -13923,7 +13923,7 @@ Control prog_054C ()
 
 Control prog_054F ()
 {
-    at ( "054F" );
+    // #at: 054F
     instruction ( "RET",0x0550 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -13941,7 +13941,7 @@ Control prog_054F ()
 
 Control prog_0550 ()
 {
-    at ( "0550" );
+    // #at: 0550
     instruction ( "LD   (207F),A",0x0553 );
     u8 a1 = A ;
     mem_write ( 0x207F,a1 );
@@ -13951,7 +13951,7 @@ Control prog_0550 ()
 
 Control prog_0553 ()
 {
-    at ( "0553" );
+    // #at: 0553
     instruction ( "LD   HL,2073",0x0556 );
     advance ( 10 );
     H = 0x20;
@@ -13961,7 +13961,7 @@ Control prog_0553 ()
 
 Control prog_0556 ()
 {
-    at ( "0556" );
+    // #at: 0556
     instruction ( "LD   B,0B",0x0558 );
     advance ( 7 );
     B = 0x0B;
@@ -13970,7 +13970,7 @@ Control prog_0556 ()
 
 Control prog_0558 ()
 {
-    at ( "0558" );
+    // #at: 0558
     instruction ( "JP   1A32",0x055B );
     advance ( 10 );
     return jumpDirect ( 0x1A32,prog_1A32 );
@@ -13978,7 +13978,7 @@ Control prog_0558 ()
 
 Control prog_055B ()
 {
-    at ( "055B" );
+    // #at: 055B
     instruction ( "LD   DE,2073",0x055E );
     advance ( 10 );
     D = 0x20;
@@ -13988,7 +13988,7 @@ Control prog_055B ()
 
 Control prog_055E ()
 {
-    at ( "055E" );
+    // #at: 055E
     instruction ( "LD   B,0B",0x0560 );
     advance ( 7 );
     B = 0x0B;
@@ -13997,7 +13997,7 @@ Control prog_055E ()
 
 Control prog_0560 ()
 {
-    at ( "0560" );
+    // #at: 0560
     instruction ( "JP   1A32",0x0563 );
     advance ( 10 );
     return jumpDirect ( 0x1A32,prog_1A32 );
@@ -14005,7 +14005,7 @@ Control prog_0560 ()
 
 Control prog_0563 ()
 {
-    at ( "0563" );
+    // #at: 0563
     instruction ( "LD   HL,2073",0x0566 );
     advance ( 10 );
     H = 0x20;
@@ -14015,7 +14015,7 @@ Control prog_0563 ()
 
 Control prog_0566 ()
 {
-    at ( "0566" );
+    // #at: 0566
     instruction ( "LD   A,(HL)",0x0567 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -14027,7 +14027,7 @@ Control prog_0566 ()
 
 Control prog_0567 ()
 {
-    at ( "0567" );
+    // #at: 0567
     instruction ( "AND  80",0x0569 );
     u8 a1 = A ;
     u8 a2 = ( 0x80 & a1 ) ;
@@ -14044,7 +14044,7 @@ Control prog_0567 ()
 
 Control prog_0569 ()
 {
-    at ( "0569" );
+    // #at: 0569
     instruction ( "JP   NZ,05C1",0x056C );
     if (( ! FlagZ ))
     {
@@ -14060,7 +14060,7 @@ Control prog_0569 ()
 
 Control prog_056C ()
 {
-    at ( "056C" );
+    // #at: 056C
     instruction ( "LD   A,(20C1)",0x056F );
     u8 a1 = e8_read_mem ( 0x20C1 ) ;
     advance ( 13 );
@@ -14070,7 +14070,7 @@ Control prog_056C ()
 
 Control prog_056F ()
 {
-    at ( "056F" );
+    // #at: 056F
     instruction ( "CP   04",0x0571 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x04 ) ) ) + ( ! false ) ) ;
@@ -14088,7 +14088,7 @@ Control prog_056F ()
 
 Control prog_0571 ()
 {
-    at ( "0571" );
+    // #at: 0571
     instruction ( "LD   A,(2069)",0x0574 );
     u8 a1 = e8_read_mem ( 0x2069 ) ;
     advance ( 13 );
@@ -14098,7 +14098,7 @@ Control prog_0571 ()
 
 Control prog_0574 ()
 {
-    at ( "0574" );
+    // #at: 0574
     instruction ( "JP   Z,05B7",0x0577 );
     if (FlagZ)
     {
@@ -14114,7 +14114,7 @@ Control prog_0574 ()
 
 Control prog_0577 ()
 {
-    at ( "0577" );
+    // #at: 0577
     instruction ( "AND  A",0x0578 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -14132,7 +14132,7 @@ Control prog_0577 ()
 
 Control prog_0578 ()
 {
-    at ( "0578" );
+    // #at: 0578
     instruction ( "RET  Z",0x0579 );
     if (FlagZ)
     {
@@ -14158,7 +14158,7 @@ Control prog_0578 ()
 
 Control prog_0579 ()
 {
-    at ( "0579" );
+    // #at: 0579
     instruction ( "INC  HL",0x057A );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -14171,7 +14171,7 @@ Control prog_0579 ()
 
 Control prog_057A ()
 {
-    at ( "057A" );
+    // #at: 057A
     instruction ( "LD   (HL),00",0x057C );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -14182,7 +14182,7 @@ Control prog_057A ()
 
 Control prog_057C ()
 {
-    at ( "057C" );
+    // #at: 057C
     instruction ( "LD   A,(2070)",0x057F );
     u8 a1 = e8_read_mem ( 0x2070 ) ;
     advance ( 13 );
@@ -14192,7 +14192,7 @@ Control prog_057C ()
 
 Control prog_057F ()
 {
-    at ( "057F" );
+    // #at: 057F
     instruction ( "AND  A",0x0580 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -14210,7 +14210,7 @@ Control prog_057F ()
 
 Control prog_0580 ()
 {
-    at ( "0580" );
+    // #at: 0580
     instruction ( "JP   Z,0589",0x0583 );
     if (FlagZ)
     {
@@ -14226,7 +14226,7 @@ Control prog_0580 ()
 
 Control prog_0583 ()
 {
-    at ( "0583" );
+    // #at: 0583
     instruction ( "LD   B,A",0x0584 );
     u8 a1 = A ;
     advance ( 5 );
@@ -14236,7 +14236,7 @@ Control prog_0583 ()
 
 Control prog_0584 ()
 {
-    at ( "0584" );
+    // #at: 0584
     instruction ( "LD   A,(20CF)",0x0587 );
     u8 a1 = e8_read_mem ( 0x20CF ) ;
     advance ( 13 );
@@ -14246,7 +14246,7 @@ Control prog_0584 ()
 
 Control prog_0587 ()
 {
-    at ( "0587" );
+    // #at: 0587
     instruction ( "CP   B",0x0588 );
     u8 a1 = A ;
     u8 a2 = B ;
@@ -14265,7 +14265,7 @@ Control prog_0587 ()
 
 Control prog_0588 ()
 {
-    at ( "0588" );
+    // #at: 0588
     instruction ( "RET  NC",0x0589 );
     if (( ! FlagCY ))
     {
@@ -14291,7 +14291,7 @@ Control prog_0588 ()
 
 Control prog_0589 ()
 {
-    at ( "0589" );
+    // #at: 0589
     instruction ( "LD   A,(2071)",0x058C );
     u8 a1 = e8_read_mem ( 0x2071 ) ;
     advance ( 13 );
@@ -14301,7 +14301,7 @@ Control prog_0589 ()
 
 Control prog_058C ()
 {
-    at ( "058C" );
+    // #at: 058C
     instruction ( "AND  A",0x058D );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -14319,7 +14319,7 @@ Control prog_058C ()
 
 Control prog_058D ()
 {
-    at ( "058D" );
+    // #at: 058D
     instruction ( "JP   Z,0596",0x0590 );
     if (FlagZ)
     {
@@ -14335,7 +14335,7 @@ Control prog_058D ()
 
 Control prog_0590 ()
 {
-    at ( "0590" );
+    // #at: 0590
     instruction ( "LD   B,A",0x0591 );
     u8 a1 = A ;
     advance ( 5 );
@@ -14345,7 +14345,7 @@ Control prog_0590 ()
 
 Control prog_0591 ()
 {
-    at ( "0591" );
+    // #at: 0591
     instruction ( "LD   A,(20CF)",0x0594 );
     u8 a1 = e8_read_mem ( 0x20CF ) ;
     advance ( 13 );
@@ -14355,7 +14355,7 @@ Control prog_0591 ()
 
 Control prog_0594 ()
 {
-    at ( "0594" );
+    // #at: 0594
     instruction ( "CP   B",0x0595 );
     u8 a1 = A ;
     u8 a2 = B ;
@@ -14374,7 +14374,7 @@ Control prog_0594 ()
 
 Control prog_0595 ()
 {
-    at ( "0595" );
+    // #at: 0595
     instruction ( "RET  NC",0x0596 );
     if (( ! FlagCY ))
     {
@@ -14400,7 +14400,7 @@ Control prog_0595 ()
 
 Control prog_0596 ()
 {
-    at ( "0596" );
+    // #at: 0596
     instruction ( "INC  HL",0x0597 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -14413,7 +14413,7 @@ Control prog_0596 ()
 
 Control prog_0597 ()
 {
-    at ( "0597" );
+    // #at: 0597
     instruction ( "LD   A,(HL)",0x0598 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -14425,7 +14425,7 @@ Control prog_0597 ()
 
 Control prog_0598 ()
 {
-    at ( "0598" );
+    // #at: 0598
     instruction ( "AND  A",0x0599 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -14443,7 +14443,7 @@ Control prog_0598 ()
 
 Control prog_0599 ()
 {
-    at ( "0599" );
+    // #at: 0599
     instruction ( "JP   Z,061B",0x059C );
     if (FlagZ)
     {
@@ -14459,7 +14459,7 @@ Control prog_0599 ()
 
 Control prog_059C ()
 {
-    at ( "059C" );
+    // #at: 059C
     instruction ( "LD   HL,(2076)",0x059F );
     u8 a1 = e8_read_mem ( 0x2076 ) ;
     u8 a2 = e8_read_mem ( 0x2077 ) ;
@@ -14471,7 +14471,7 @@ Control prog_059C ()
 
 Control prog_059F ()
 {
-    at ( "059F" );
+    // #at: 059F
     instruction ( "LD   C,(HL)",0x05A0 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -14483,7 +14483,7 @@ Control prog_059F ()
 
 Control prog_05A0 ()
 {
-    at ( "05A0" );
+    // #at: 05A0
     instruction ( "INC  HL",0x05A1 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -14496,7 +14496,7 @@ Control prog_05A0 ()
 
 Control prog_05A1 ()
 {
-    at ( "05A1" );
+    // #at: 05A1
     instruction ( "NOP",0x05A2 );
     advance ( 4 );
     return jumpDirect ( 0x05A2,prog_05A2 );
@@ -14504,7 +14504,7 @@ Control prog_05A1 ()
 
 Control prog_05A2 ()
 {
-    at ( "05A2" );
+    // #at: 05A2
     instruction ( "LD   (2076),HL",0x05A5 );
     u8 a1 = L ;
     mem_write ( 0x2076,a1 );
@@ -14516,7 +14516,7 @@ Control prog_05A2 ()
 
 Control prog_05A5 ()
 {
-    at ( "05A5" );
+    // #at: 05A5
     instruction ( "CALL 062F",0x05A8 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -14535,7 +14535,7 @@ Control prog_05A5 ()
 
 Control prog_05A8 ()
 {
-    at ( "05A8" );
+    // #at: 05A8
     instruction ( "RET  NC",0x05A9 );
     if (( ! FlagCY ))
     {
@@ -14561,7 +14561,7 @@ Control prog_05A8 ()
 
 Control prog_05A9 ()
 {
-    at ( "05A9" );
+    // #at: 05A9
     instruction ( "CALL 017A",0x05AC );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -14580,7 +14580,7 @@ Control prog_05A9 ()
 
 Control prog_05AC ()
 {
-    at ( "05AC" );
+    // #at: 05AC
     instruction ( "LD   A,C",0x05AD );
     u8 a1 = C ;
     advance ( 5 );
@@ -14590,7 +14590,7 @@ Control prog_05AC ()
 
 Control prog_05AD ()
 {
-    at ( "05AD" );
+    // #at: 05AD
     instruction ( "ADD  07",0x05AF );
     u8 a1 = A ;
     u16 a2 = ( ( 0x07 + a1 ) + false ) ;
@@ -14609,7 +14609,7 @@ Control prog_05AD ()
 
 Control prog_05AF ()
 {
-    at ( "05AF" );
+    // #at: 05AF
     instruction ( "LD   H,A",0x05B0 );
     u8 a1 = A ;
     advance ( 5 );
@@ -14619,7 +14619,7 @@ Control prog_05AF ()
 
 Control prog_05B0 ()
 {
-    at ( "05B0" );
+    // #at: 05B0
     instruction ( "LD   A,L",0x05B1 );
     u8 a1 = L ;
     advance ( 5 );
@@ -14629,7 +14629,7 @@ Control prog_05B0 ()
 
 Control prog_05B1 ()
 {
-    at ( "05B1" );
+    // #at: 05B1
     instruction ( "SUB  0A",0x05B3 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x0A ) ) ) + ( ! false ) ) ;
@@ -14648,7 +14648,7 @@ Control prog_05B1 ()
 
 Control prog_05B3 ()
 {
-    at ( "05B3" );
+    // #at: 05B3
     instruction ( "LD   L,A",0x05B4 );
     u8 a1 = A ;
     advance ( 5 );
@@ -14658,7 +14658,7 @@ Control prog_05B3 ()
 
 Control prog_05B4 ()
 {
-    at ( "05B4" );
+    // #at: 05B4
     instruction ( "LD   (207B),HL",0x05B7 );
     u8 a1 = L ;
     mem_write ( 0x207B,a1 );
@@ -14670,7 +14670,7 @@ Control prog_05B4 ()
 
 Control prog_05B7 ()
 {
-    at ( "05B7" );
+    // #at: 05B7
     instruction ( "LD   HL,2073",0x05BA );
     advance ( 10 );
     H = 0x20;
@@ -14680,7 +14680,7 @@ Control prog_05B7 ()
 
 Control prog_05BA ()
 {
-    at ( "05BA" );
+    // #at: 05BA
     instruction ( "LD   A,(HL)",0x05BB );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -14692,7 +14692,7 @@ Control prog_05BA ()
 
 Control prog_05BB ()
 {
-    at ( "05BB" );
+    // #at: 05BB
     instruction ( "OR   80",0x05BD );
     u8 a1 = A ;
     u8 a2 = ( 0x80 | a1 ) ;
@@ -14708,7 +14708,7 @@ Control prog_05BB ()
 
 Control prog_05BD ()
 {
-    at ( "05BD" );
+    // #at: 05BD
     instruction ( "LD   (HL),A",0x05BE );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -14720,7 +14720,7 @@ Control prog_05BD ()
 
 Control prog_05BE ()
 {
-    at ( "05BE" );
+    // #at: 05BE
     instruction ( "INC  HL",0x05BF );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -14733,7 +14733,7 @@ Control prog_05BE ()
 
 Control prog_05BF ()
 {
-    at ( "05BF" );
+    // #at: 05BF
     instruction ( "INC  (HL)",0x05C0 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -14755,7 +14755,7 @@ Control prog_05BF ()
 
 Control prog_05C0 ()
 {
-    at ( "05C0" );
+    // #at: 05C0
     instruction ( "RET",0x05C1 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -14773,7 +14773,7 @@ Control prog_05C0 ()
 
 Control prog_05C1 ()
 {
-    at ( "05C1" );
+    // #at: 05C1
     instruction ( "LD   DE,207C",0x05C4 );
     advance ( 10 );
     D = 0x20;
@@ -14783,7 +14783,7 @@ Control prog_05C1 ()
 
 Control prog_05C4 ()
 {
-    at ( "05C4" );
+    // #at: 05C4
     instruction ( "CALL 1A06",0x05C7 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -14802,7 +14802,7 @@ Control prog_05C4 ()
 
 Control prog_05C7 ()
 {
-    at ( "05C7" );
+    // #at: 05C7
     instruction ( "RET  NC",0x05C8 );
     if (( ! FlagCY ))
     {
@@ -14828,7 +14828,7 @@ Control prog_05C7 ()
 
 Control prog_05C8 ()
 {
-    at ( "05C8" );
+    // #at: 05C8
     instruction ( "INC  HL",0x05C9 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -14841,7 +14841,7 @@ Control prog_05C8 ()
 
 Control prog_05C9 ()
 {
-    at ( "05C9" );
+    // #at: 05C9
     instruction ( "LD   A,(HL)",0x05CA );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -14853,7 +14853,7 @@ Control prog_05C9 ()
 
 Control prog_05CA ()
 {
-    at ( "05CA" );
+    // #at: 05CA
     instruction ( "AND  01",0x05CC );
     u8 a1 = A ;
     u8 a2 = ( 0x01 & a1 ) ;
@@ -14870,7 +14870,7 @@ Control prog_05CA ()
 
 Control prog_05CC ()
 {
-    at ( "05CC" );
+    // #at: 05CC
     instruction ( "JP   NZ,0644",0x05CF );
     if (( ! FlagZ ))
     {
@@ -14886,7 +14886,7 @@ Control prog_05CC ()
 
 Control prog_05CF ()
 {
-    at ( "05CF" );
+    // #at: 05CF
     instruction ( "INC  HL",0x05D0 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -14899,7 +14899,7 @@ Control prog_05CF ()
 
 Control prog_05D0 ()
 {
-    at ( "05D0" );
+    // #at: 05D0
     instruction ( "INC  (HL)",0x05D1 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -14921,7 +14921,7 @@ Control prog_05D0 ()
 
 Control prog_05D1 ()
 {
-    at ( "05D1" );
+    // #at: 05D1
     instruction ( "CALL 0675",0x05D4 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -14940,7 +14940,7 @@ Control prog_05D1 ()
 
 Control prog_05D4 ()
 {
-    at ( "05D4" );
+    // #at: 05D4
     instruction ( "LD   A,(2079)",0x05D7 );
     u8 a1 = e8_read_mem ( 0x2079 ) ;
     advance ( 13 );
@@ -14950,7 +14950,7 @@ Control prog_05D4 ()
 
 Control prog_05D7 ()
 {
-    at ( "05D7" );
+    // #at: 05D7
     instruction ( "ADD  03",0x05D9 );
     u8 a1 = A ;
     u16 a2 = ( ( 0x03 + a1 ) + false ) ;
@@ -14969,7 +14969,7 @@ Control prog_05D7 ()
 
 Control prog_05D9 ()
 {
-    at ( "05D9" );
+    // #at: 05D9
     instruction ( "LD   HL,207F",0x05DC );
     advance ( 10 );
     H = 0x20;
@@ -14979,7 +14979,7 @@ Control prog_05D9 ()
 
 Control prog_05DC ()
 {
-    at ( "05DC" );
+    // #at: 05DC
     instruction ( "CP   (HL)",0x05DD );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -15000,7 +15000,7 @@ Control prog_05DC ()
 
 Control prog_05DD ()
 {
-    at ( "05DD" );
+    // #at: 05DD
     instruction ( "JP   CY,05E2",0x05E0 );
     if (FlagCY)
     {
@@ -15016,7 +15016,7 @@ Control prog_05DD ()
 
 Control prog_05E0 ()
 {
-    at ( "05E0" );
+    // #at: 05E0
     instruction ( "SUB  0C",0x05E2 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x0C ) ) ) + ( ! false ) ) ;
@@ -15035,7 +15035,7 @@ Control prog_05E0 ()
 
 Control prog_05E2 ()
 {
-    at ( "05E2" );
+    // #at: 05E2
     instruction ( "LD   (2079),A",0x05E5 );
     u8 a1 = A ;
     mem_write ( 0x2079,a1 );
@@ -15045,7 +15045,7 @@ Control prog_05E2 ()
 
 Control prog_05E5 ()
 {
-    at ( "05E5" );
+    // #at: 05E5
     instruction ( "LD   A,(207B)",0x05E8 );
     u8 a1 = e8_read_mem ( 0x207B ) ;
     advance ( 13 );
@@ -15055,7 +15055,7 @@ Control prog_05E5 ()
 
 Control prog_05E8 ()
 {
-    at ( "05E8" );
+    // #at: 05E8
     instruction ( "LD   B,A",0x05E9 );
     u8 a1 = A ;
     advance ( 5 );
@@ -15065,7 +15065,7 @@ Control prog_05E8 ()
 
 Control prog_05E9 ()
 {
-    at ( "05E9" );
+    // #at: 05E9
     instruction ( "LD   A,(207E)",0x05EC );
     u8 a1 = e8_read_mem ( 0x207E ) ;
     advance ( 13 );
@@ -15075,7 +15075,7 @@ Control prog_05E9 ()
 
 Control prog_05EC ()
 {
-    at ( "05EC" );
+    // #at: 05EC
     instruction ( "ADD  B",0x05ED );
     u8 a1 = B ;
     u8 a2 = A ;
@@ -15095,7 +15095,7 @@ Control prog_05EC ()
 
 Control prog_05ED ()
 {
-    at ( "05ED" );
+    // #at: 05ED
     instruction ( "LD   (207B),A",0x05F0 );
     u8 a1 = A ;
     mem_write ( 0x207B,a1 );
@@ -15105,7 +15105,7 @@ Control prog_05ED ()
 
 Control prog_05F0 ()
 {
-    at ( "05F0" );
+    // #at: 05F0
     instruction ( "CALL 066C",0x05F3 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -15124,7 +15124,7 @@ Control prog_05F0 ()
 
 Control prog_05F3 ()
 {
-    at ( "05F3" );
+    // #at: 05F3
     instruction ( "LD   A,(207B)",0x05F6 );
     u8 a1 = e8_read_mem ( 0x207B ) ;
     advance ( 13 );
@@ -15134,7 +15134,7 @@ Control prog_05F3 ()
 
 Control prog_05F6 ()
 {
-    at ( "05F6" );
+    // #at: 05F6
     instruction ( "CP   15",0x05F8 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x15 ) ) ) + ( ! false ) ) ;
@@ -15152,7 +15152,7 @@ Control prog_05F6 ()
 
 Control prog_05F8 ()
 {
-    at ( "05F8" );
+    // #at: 05F8
     instruction ( "JP   CY,0612",0x05FB );
     if (FlagCY)
     {
@@ -15168,7 +15168,7 @@ Control prog_05F8 ()
 
 Control prog_05FB ()
 {
-    at ( "05FB" );
+    // #at: 05FB
     instruction ( "LD   A,(2061)",0x05FE );
     u8 a1 = e8_read_mem ( 0x2061 ) ;
     advance ( 13 );
@@ -15178,7 +15178,7 @@ Control prog_05FB ()
 
 Control prog_05FE ()
 {
-    at ( "05FE" );
+    // #at: 05FE
     instruction ( "AND  A",0x05FF );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -15196,7 +15196,7 @@ Control prog_05FE ()
 
 Control prog_05FF ()
 {
-    at ( "05FF" );
+    // #at: 05FF
     instruction ( "RET  Z",0x0600 );
     if (FlagZ)
     {
@@ -15222,7 +15222,7 @@ Control prog_05FF ()
 
 Control prog_0600 ()
 {
-    at ( "0600" );
+    // #at: 0600
     instruction ( "LD   A,(207B)",0x0603 );
     u8 a1 = e8_read_mem ( 0x207B ) ;
     advance ( 13 );
@@ -15232,7 +15232,7 @@ Control prog_0600 ()
 
 Control prog_0603 ()
 {
-    at ( "0603" );
+    // #at: 0603
     instruction ( "CP   1E",0x0605 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x1E ) ) ) + ( ! false ) ) ;
@@ -15250,7 +15250,7 @@ Control prog_0603 ()
 
 Control prog_0605 ()
 {
-    at ( "0605" );
+    // #at: 0605
     instruction ( "JP   CY,0612",0x0608 );
     if (FlagCY)
     {
@@ -15266,7 +15266,7 @@ Control prog_0605 ()
 
 Control prog_0608 ()
 {
-    at ( "0608" );
+    // #at: 0608
     instruction ( "CP   27",0x060A );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x27 ) ) ) + ( ! false ) ) ;
@@ -15284,7 +15284,7 @@ Control prog_0608 ()
 
 Control prog_060A ()
 {
-    at ( "060A" );
+    // #at: 060A
     instruction ( "NOP",0x060B );
     advance ( 4 );
     return jumpDirect ( 0x060B,prog_060B );
@@ -15292,7 +15292,7 @@ Control prog_060A ()
 
 Control prog_060B ()
 {
-    at ( "060B" );
+    // #at: 060B
     instruction ( "JP   NC,0612",0x060E );
     if (( ! FlagCY ))
     {
@@ -15308,7 +15308,7 @@ Control prog_060B ()
 
 Control prog_060E ()
 {
-    at ( "060E" );
+    // #at: 060E
     instruction ( "SUB  A",0x060F );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -15328,7 +15328,7 @@ Control prog_060E ()
 
 Control prog_060F ()
 {
-    at ( "060F" );
+    // #at: 060F
     instruction ( "LD   (2015),A",0x0612 );
     u8 a1 = A ;
     mem_write ( 0x2015,a1 );
@@ -15338,7 +15338,7 @@ Control prog_060F ()
 
 Control prog_0612 ()
 {
-    at ( "0612" );
+    // #at: 0612
     instruction ( "LD   A,(2073)",0x0615 );
     u8 a1 = e8_read_mem ( 0x2073 ) ;
     advance ( 13 );
@@ -15348,7 +15348,7 @@ Control prog_0612 ()
 
 Control prog_0615 ()
 {
-    at ( "0615" );
+    // #at: 0615
     instruction ( "OR   01",0x0617 );
     u8 a1 = A ;
     u8 a2 = ( 0x01 | a1 ) ;
@@ -15364,7 +15364,7 @@ Control prog_0615 ()
 
 Control prog_0617 ()
 {
-    at ( "0617" );
+    // #at: 0617
     instruction ( "LD   (2073),A",0x061A );
     u8 a1 = A ;
     mem_write ( 0x2073,a1 );
@@ -15374,7 +15374,7 @@ Control prog_0617 ()
 
 Control prog_061A ()
 {
-    at ( "061A" );
+    // #at: 061A
     instruction ( "RET",0x061B );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -15392,7 +15392,7 @@ Control prog_061A ()
 
 Control prog_061B ()
 {
-    at ( "061B" );
+    // #at: 061B
     instruction ( "LD   A,(201B)",0x061E );
     u8 a1 = e8_read_mem ( 0x201B ) ;
     advance ( 13 );
@@ -15402,7 +15402,7 @@ Control prog_061B ()
 
 Control prog_061E ()
 {
-    at ( "061E" );
+    // #at: 061E
     instruction ( "ADD  08",0x0620 );
     u8 a1 = A ;
     u16 a2 = ( ( 0x08 + a1 ) + false ) ;
@@ -15421,7 +15421,7 @@ Control prog_061E ()
 
 Control prog_0620 ()
 {
-    at ( "0620" );
+    // #at: 0620
     instruction ( "LD   H,A",0x0621 );
     u8 a1 = A ;
     advance ( 5 );
@@ -15431,7 +15431,7 @@ Control prog_0620 ()
 
 Control prog_0621 ()
 {
-    at ( "0621" );
+    // #at: 0621
     instruction ( "CALL 156F",0x0624 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -15450,7 +15450,7 @@ Control prog_0621 ()
 
 Control prog_0624 ()
 {
-    at ( "0624" );
+    // #at: 0624
     instruction ( "LD   A,C",0x0625 );
     u8 a1 = C ;
     advance ( 5 );
@@ -15460,7 +15460,7 @@ Control prog_0624 ()
 
 Control prog_0625 ()
 {
-    at ( "0625" );
+    // #at: 0625
     instruction ( "CP   0C",0x0627 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x0C ) ) ) + ( ! false ) ) ;
@@ -15478,7 +15478,7 @@ Control prog_0625 ()
 
 Control prog_0627 ()
 {
-    at ( "0627" );
+    // #at: 0627
     instruction ( "JP   CY,05A5",0x062A );
     if (FlagCY)
     {
@@ -15494,7 +15494,7 @@ Control prog_0627 ()
 
 Control prog_062A ()
 {
-    at ( "062A" );
+    // #at: 062A
     instruction ( "LD   C,0B",0x062C );
     advance ( 7 );
     C = 0x0B;
@@ -15503,7 +15503,7 @@ Control prog_062A ()
 
 Control prog_062C ()
 {
-    at ( "062C" );
+    // #at: 062C
     instruction ( "JP   05A5",0x062F );
     advance ( 10 );
     return jumpDirect ( 0x05A5,prog_05A5 );
@@ -15511,7 +15511,7 @@ Control prog_062C ()
 
 Control prog_062F ()
 {
-    at ( "062F" );
+    // #at: 062F
     instruction ( "DEC  C",0x0630 );
     u8 a1 = C ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -15529,7 +15529,7 @@ Control prog_062F ()
 
 Control prog_0630 ()
 {
-    at ( "0630" );
+    // #at: 0630
     instruction ( "LD   A,(2067)",0x0633 );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
@@ -15539,7 +15539,7 @@ Control prog_0630 ()
 
 Control prog_0633 ()
 {
-    at ( "0633" );
+    // #at: 0633
     instruction ( "LD   H,A",0x0634 );
     u8 a1 = A ;
     advance ( 5 );
@@ -15549,7 +15549,7 @@ Control prog_0633 ()
 
 Control prog_0634 ()
 {
-    at ( "0634" );
+    // #at: 0634
     instruction ( "LD   L,C",0x0635 );
     u8 a1 = C ;
     advance ( 5 );
@@ -15559,7 +15559,7 @@ Control prog_0634 ()
 
 Control prog_0635 ()
 {
-    at ( "0635" );
+    // #at: 0635
     instruction ( "LD   D,05",0x0637 );
     advance ( 7 );
     D = 0x05;
@@ -15568,7 +15568,7 @@ Control prog_0635 ()
 
 Control prog_0637 ()
 {
-    at ( "0637" );
+    // #at: 0637
     instruction ( "LD   A,(HL)",0x0638 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -15580,7 +15580,7 @@ Control prog_0637 ()
 
 Control prog_0638 ()
 {
-    at ( "0638" );
+    // #at: 0638
     instruction ( "AND  A",0x0639 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -15598,7 +15598,7 @@ Control prog_0638 ()
 
 Control prog_0639 ()
 {
-    at ( "0639" );
+    // #at: 0639
     instruction ( "SCF",0x063A );
     advance ( 4 );
     FlagCY = true;
@@ -15607,7 +15607,7 @@ Control prog_0639 ()
 
 Control prog_063A ()
 {
-    at ( "063A" );
+    // #at: 063A
     instruction ( "RET  NZ",0x063B );
     if (( ! FlagZ ))
     {
@@ -15633,7 +15633,7 @@ Control prog_063A ()
 
 Control prog_063B ()
 {
-    at ( "063B" );
+    // #at: 063B
     instruction ( "LD   A,L",0x063C );
     u8 a1 = L ;
     advance ( 5 );
@@ -15643,7 +15643,7 @@ Control prog_063B ()
 
 Control prog_063C ()
 {
-    at ( "063C" );
+    // #at: 063C
     instruction ( "ADD  0B",0x063E );
     u8 a1 = A ;
     u16 a2 = ( ( 0x0B + a1 ) + false ) ;
@@ -15662,7 +15662,7 @@ Control prog_063C ()
 
 Control prog_063E ()
 {
-    at ( "063E" );
+    // #at: 063E
     instruction ( "LD   L,A",0x063F );
     u8 a1 = A ;
     advance ( 5 );
@@ -15672,7 +15672,7 @@ Control prog_063E ()
 
 Control prog_063F ()
 {
-    at ( "063F" );
+    // #at: 063F
     instruction ( "DEC  D",0x0640 );
     u8 a1 = D ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -15690,7 +15690,7 @@ Control prog_063F ()
 
 Control prog_0640 ()
 {
-    at ( "0640" );
+    // #at: 0640
     instruction ( "JP   NZ,0637",0x0643 );
     if (( ! FlagZ ))
     {
@@ -15706,7 +15706,7 @@ Control prog_0640 ()
 
 Control prog_0643 ()
 {
-    at ( "0643" );
+    // #at: 0643
     instruction ( "RET",0x0644 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -15724,7 +15724,7 @@ Control prog_0643 ()
 
 Control prog_0644 ()
 {
-    at ( "0644" );
+    // #at: 0644
     instruction ( "LD   HL,2078",0x0647 );
     advance ( 10 );
     H = 0x20;
@@ -15734,7 +15734,7 @@ Control prog_0644 ()
 
 Control prog_0647 ()
 {
-    at ( "0647" );
+    // #at: 0647
     instruction ( "DEC  (HL)",0x0648 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -15756,7 +15756,7 @@ Control prog_0647 ()
 
 Control prog_0648 ()
 {
-    at ( "0648" );
+    // #at: 0648
     instruction ( "LD   A,(HL)",0x0649 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -15768,7 +15768,7 @@ Control prog_0648 ()
 
 Control prog_0649 ()
 {
-    at ( "0649" );
+    // #at: 0649
     instruction ( "CP   03",0x064B );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x03 ) ) ) + ( ! false ) ) ;
@@ -15786,7 +15786,7 @@ Control prog_0649 ()
 
 Control prog_064B ()
 {
-    at ( "064B" );
+    // #at: 064B
     instruction ( "JP   NZ,0667",0x064E );
     if (( ! FlagZ ))
     {
@@ -15802,7 +15802,7 @@ Control prog_064B ()
 
 Control prog_064E ()
 {
-    at ( "064E" );
+    // #at: 064E
     instruction ( "CALL 0675",0x0651 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -15821,7 +15821,7 @@ Control prog_064E ()
 
 Control prog_0651 ()
 {
-    at ( "0651" );
+    // #at: 0651
     instruction ( "LD   HL,1CDC",0x0654 );
     advance ( 10 );
     H = 0x1C;
@@ -15831,7 +15831,7 @@ Control prog_0651 ()
 
 Control prog_0654 ()
 {
-    at ( "0654" );
+    // #at: 0654
     instruction ( "LD   (2079),HL",0x0657 );
     u8 a1 = L ;
     mem_write ( 0x2079,a1 );
@@ -15843,7 +15843,7 @@ Control prog_0654 ()
 
 Control prog_0657 ()
 {
-    at ( "0657" );
+    // #at: 0657
     instruction ( "LD   HL,207C",0x065A );
     advance ( 10 );
     H = 0x20;
@@ -15853,7 +15853,7 @@ Control prog_0657 ()
 
 Control prog_065A ()
 {
-    at ( "065A" );
+    // #at: 065A
     instruction ( "DEC  (HL)",0x065B );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -15875,7 +15875,7 @@ Control prog_065A ()
 
 Control prog_065B ()
 {
-    at ( "065B" );
+    // #at: 065B
     instruction ( "DEC  (HL)",0x065C );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -15897,7 +15897,7 @@ Control prog_065B ()
 
 Control prog_065C ()
 {
-    at ( "065C" );
+    // #at: 065C
     instruction ( "DEC  HL",0x065D );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -15910,7 +15910,7 @@ Control prog_065C ()
 
 Control prog_065D ()
 {
-    at ( "065D" );
+    // #at: 065D
     instruction ( "DEC  (HL)",0x065E );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -15932,7 +15932,7 @@ Control prog_065D ()
 
 Control prog_065E ()
 {
-    at ( "065E" );
+    // #at: 065E
     instruction ( "DEC  (HL)",0x065F );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -15954,7 +15954,7 @@ Control prog_065E ()
 
 Control prog_065F ()
 {
-    at ( "065F" );
+    // #at: 065F
     instruction ( "LD   A,06",0x0661 );
     advance ( 7 );
     A = 0x06;
@@ -15963,7 +15963,7 @@ Control prog_065F ()
 
 Control prog_0661 ()
 {
-    at ( "0661" );
+    // #at: 0661
     instruction ( "LD   (207D),A",0x0664 );
     u8 a1 = A ;
     mem_write ( 0x207D,a1 );
@@ -15973,7 +15973,7 @@ Control prog_0661 ()
 
 Control prog_0664 ()
 {
-    at ( "0664" );
+    // #at: 0664
     instruction ( "JP   066C",0x0667 );
     advance ( 10 );
     return jumpDirect ( 0x066C,prog_066C );
@@ -15981,7 +15981,7 @@ Control prog_0664 ()
 
 Control prog_0667 ()
 {
-    at ( "0667" );
+    // #at: 0667
     instruction ( "AND  A",0x0668 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -15999,7 +15999,7 @@ Control prog_0667 ()
 
 Control prog_0668 ()
 {
-    at ( "0668" );
+    // #at: 0668
     instruction ( "RET  NZ",0x0669 );
     if (( ! FlagZ ))
     {
@@ -16025,7 +16025,7 @@ Control prog_0668 ()
 
 Control prog_0669 ()
 {
-    at ( "0669" );
+    // #at: 0669
     instruction ( "JP   0675",0x066C );
     advance ( 10 );
     return jumpDirect ( 0x0675,prog_0675 );
@@ -16033,7 +16033,7 @@ Control prog_0669 ()
 
 Control prog_066C ()
 {
-    at ( "066C" );
+    // #at: 066C
     instruction ( "LD   HL,2079",0x066F );
     advance ( 10 );
     H = 0x20;
@@ -16043,7 +16043,7 @@ Control prog_066C ()
 
 Control prog_066F ()
 {
-    at ( "066F" );
+    // #at: 066F
     instruction ( "CALL 1A3B",0x0672 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -16062,7 +16062,7 @@ Control prog_066F ()
 
 Control prog_0672 ()
 {
-    at ( "0672" );
+    // #at: 0672
     instruction ( "JP   1491",0x0675 );
     advance ( 10 );
     return jumpDirect ( 0x1491,prog_1491 );
@@ -16070,7 +16070,7 @@ Control prog_0672 ()
 
 Control prog_0675 ()
 {
-    at ( "0675" );
+    // #at: 0675
     instruction ( "LD   HL,2079",0x0678 );
     advance ( 10 );
     H = 0x20;
@@ -16080,7 +16080,7 @@ Control prog_0675 ()
 
 Control prog_0678 ()
 {
-    at ( "0678" );
+    // #at: 0678
     instruction ( "CALL 1A3B",0x067B );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -16099,7 +16099,7 @@ Control prog_0678 ()
 
 Control prog_067B ()
 {
-    at ( "067B" );
+    // #at: 067B
     instruction ( "JP   1452",0x067E );
     advance ( 10 );
     return jumpDirect ( 0x1452,prog_1452 );
@@ -16107,7 +16107,7 @@ Control prog_067B ()
 
 Control prog_067E ()
 {
-    at ( "067E" );
+    // #at: 067E
     instruction ( "LD   (2048),HL",0x0681 );
     u8 a1 = L ;
     mem_write ( 0x2048,a1 );
@@ -16119,7 +16119,7 @@ Control prog_067E ()
 
 Control prog_0681 ()
 {
-    at ( "0681" );
+    // #at: 0681
     instruction ( "RET",0x0682 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -16137,7 +16137,7 @@ Control prog_0681 ()
 
 Control prog_0682 ()
 {
-    at ( "0682" );
+    // #at: 0682
     instruction ( "POP  HL",0x0683 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -16157,7 +16157,7 @@ Control prog_0682 ()
 
 Control prog_0683 ()
 {
-    at ( "0683" );
+    // #at: 0683
     instruction ( "LD   A,(2080)",0x0686 );
     u8 a1 = e8_read_mem ( 0x2080 ) ;
     advance ( 13 );
@@ -16167,7 +16167,7 @@ Control prog_0683 ()
 
 Control prog_0686 ()
 {
-    at ( "0686" );
+    // #at: 0686
     instruction ( "CP   02",0x0688 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x02 ) ) ) + ( ! false ) ) ;
@@ -16185,7 +16185,7 @@ Control prog_0686 ()
 
 Control prog_0688 ()
 {
-    at ( "0688" );
+    // #at: 0688
     instruction ( "RET  NZ",0x0689 );
     if (( ! FlagZ ))
     {
@@ -16211,7 +16211,7 @@ Control prog_0688 ()
 
 Control prog_0689 ()
 {
-    at ( "0689" );
+    // #at: 0689
     instruction ( "LD   HL,2083",0x068C );
     advance ( 10 );
     H = 0x20;
@@ -16221,7 +16221,7 @@ Control prog_0689 ()
 
 Control prog_068C ()
 {
-    at ( "068C" );
+    // #at: 068C
     instruction ( "LD   A,(HL)",0x068D );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -16233,7 +16233,7 @@ Control prog_068C ()
 
 Control prog_068D ()
 {
-    at ( "068D" );
+    // #at: 068D
     instruction ( "AND  A",0x068E );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -16251,7 +16251,7 @@ Control prog_068D ()
 
 Control prog_068E ()
 {
-    at ( "068E" );
+    // #at: 068E
     instruction ( "JP   Z,050F",0x0691 );
     if (FlagZ)
     {
@@ -16267,7 +16267,7 @@ Control prog_068E ()
 
 Control prog_0691 ()
 {
-    at ( "0691" );
+    // #at: 0691
     instruction ( "LD   A,(2056)",0x0694 );
     u8 a1 = e8_read_mem ( 0x2056 ) ;
     advance ( 13 );
@@ -16277,7 +16277,7 @@ Control prog_0691 ()
 
 Control prog_0694 ()
 {
-    at ( "0694" );
+    // #at: 0694
     instruction ( "AND  A",0x0695 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -16295,7 +16295,7 @@ Control prog_0694 ()
 
 Control prog_0695 ()
 {
-    at ( "0695" );
+    // #at: 0695
     instruction ( "JP   NZ,050F",0x0698 );
     if (( ! FlagZ ))
     {
@@ -16311,7 +16311,7 @@ Control prog_0695 ()
 
 Control prog_0698 ()
 {
-    at ( "0698" );
+    // #at: 0698
     instruction ( "INC  HL",0x0699 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -16324,7 +16324,7 @@ Control prog_0698 ()
 
 Control prog_0699 ()
 {
-    at ( "0699" );
+    // #at: 0699
     instruction ( "LD   A,(HL)",0x069A );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -16336,7 +16336,7 @@ Control prog_0699 ()
 
 Control prog_069A ()
 {
-    at ( "069A" );
+    // #at: 069A
     instruction ( "AND  A",0x069B );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -16354,7 +16354,7 @@ Control prog_069A ()
 
 Control prog_069B ()
 {
-    at ( "069B" );
+    // #at: 069B
     instruction ( "JP   NZ,06AB",0x069E );
     if (( ! FlagZ ))
     {
@@ -16370,7 +16370,7 @@ Control prog_069B ()
 
 Control prog_069E ()
 {
-    at ( "069E" );
+    // #at: 069E
     instruction ( "LD   A,(2082)",0x06A1 );
     u8 a1 = e8_read_mem ( 0x2082 ) ;
     advance ( 13 );
@@ -16380,7 +16380,7 @@ Control prog_069E ()
 
 Control prog_06A1 ()
 {
-    at ( "06A1" );
+    // #at: 06A1
     instruction ( "CP   08",0x06A3 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x08 ) ) ) + ( ! false ) ) ;
@@ -16398,7 +16398,7 @@ Control prog_06A1 ()
 
 Control prog_06A3 ()
 {
-    at ( "06A3" );
+    // #at: 06A3
     instruction ( "JP   CY,050F",0x06A6 );
     if (FlagCY)
     {
@@ -16414,7 +16414,7 @@ Control prog_06A3 ()
 
 Control prog_06A6 ()
 {
-    at ( "06A6" );
+    // #at: 06A6
     instruction ( "LD   (HL),01",0x06A8 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -16425,7 +16425,7 @@ Control prog_06A6 ()
 
 Control prog_06A8 ()
 {
-    at ( "06A8" );
+    // #at: 06A8
     instruction ( "CALL 073C",0x06AB );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -16444,7 +16444,7 @@ Control prog_06A8 ()
 
 Control prog_06AB ()
 {
-    at ( "06AB" );
+    // #at: 06AB
     instruction ( "LD   DE,208A",0x06AE );
     advance ( 10 );
     D = 0x20;
@@ -16454,7 +16454,7 @@ Control prog_06AB ()
 
 Control prog_06AE ()
 {
-    at ( "06AE" );
+    // #at: 06AE
     instruction ( "CALL 1A06",0x06B1 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -16473,7 +16473,7 @@ Control prog_06AE ()
 
 Control prog_06B1 ()
 {
-    at ( "06B1" );
+    // #at: 06B1
     instruction ( "RET  NC",0x06B2 );
     if (( ! FlagCY ))
     {
@@ -16499,7 +16499,7 @@ Control prog_06B1 ()
 
 Control prog_06B2 ()
 {
-    at ( "06B2" );
+    // #at: 06B2
     instruction ( "LD   HL,2085",0x06B5 );
     advance ( 10 );
     H = 0x20;
@@ -16509,7 +16509,7 @@ Control prog_06B2 ()
 
 Control prog_06B5 ()
 {
-    at ( "06B5" );
+    // #at: 06B5
     instruction ( "LD   A,(HL)",0x06B6 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -16521,7 +16521,7 @@ Control prog_06B5 ()
 
 Control prog_06B6 ()
 {
-    at ( "06B6" );
+    // #at: 06B6
     instruction ( "AND  A",0x06B7 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -16539,7 +16539,7 @@ Control prog_06B6 ()
 
 Control prog_06B7 ()
 {
-    at ( "06B7" );
+    // #at: 06B7
     instruction ( "JP   NZ,06D6",0x06BA );
     if (( ! FlagZ ))
     {
@@ -16555,7 +16555,7 @@ Control prog_06B7 ()
 
 Control prog_06BA ()
 {
-    at ( "06BA" );
+    // #at: 06BA
     instruction ( "LD   HL,208A",0x06BD );
     advance ( 10 );
     H = 0x20;
@@ -16565,7 +16565,7 @@ Control prog_06BA ()
 
 Control prog_06BD ()
 {
-    at ( "06BD" );
+    // #at: 06BD
     instruction ( "LD   A,(HL)",0x06BE );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -16577,7 +16577,7 @@ Control prog_06BD ()
 
 Control prog_06BE ()
 {
-    at ( "06BE" );
+    // #at: 06BE
     instruction ( "INC  HL",0x06BF );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -16590,7 +16590,7 @@ Control prog_06BE ()
 
 Control prog_06BF ()
 {
-    at ( "06BF" );
+    // #at: 06BF
     instruction ( "INC  HL",0x06C0 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -16603,7 +16603,7 @@ Control prog_06BF ()
 
 Control prog_06C0 ()
 {
-    at ( "06C0" );
+    // #at: 06C0
     instruction ( "ADD  (HL)",0x06C1 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -16625,7 +16625,7 @@ Control prog_06C0 ()
 
 Control prog_06C1 ()
 {
-    at ( "06C1" );
+    // #at: 06C1
     instruction ( "LD   (208A),A",0x06C4 );
     u8 a1 = A ;
     mem_write ( 0x208A,a1 );
@@ -16635,7 +16635,7 @@ Control prog_06C1 ()
 
 Control prog_06C4 ()
 {
-    at ( "06C4" );
+    // #at: 06C4
     instruction ( "CALL 073C",0x06C7 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -16654,7 +16654,7 @@ Control prog_06C4 ()
 
 Control prog_06C7 ()
 {
-    at ( "06C7" );
+    // #at: 06C7
     instruction ( "LD   HL,208A",0x06CA );
     advance ( 10 );
     H = 0x20;
@@ -16664,7 +16664,7 @@ Control prog_06C7 ()
 
 Control prog_06CA ()
 {
-    at ( "06CA" );
+    // #at: 06CA
     instruction ( "LD   A,(HL)",0x06CB );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -16676,7 +16676,7 @@ Control prog_06CA ()
 
 Control prog_06CB ()
 {
-    at ( "06CB" );
+    // #at: 06CB
     instruction ( "CP   28",0x06CD );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x28 ) ) ) + ( ! false ) ) ;
@@ -16694,7 +16694,7 @@ Control prog_06CB ()
 
 Control prog_06CD ()
 {
-    at ( "06CD" );
+    // #at: 06CD
     instruction ( "JP   CY,06F9",0x06D0 );
     if (FlagCY)
     {
@@ -16710,7 +16710,7 @@ Control prog_06CD ()
 
 Control prog_06D0 ()
 {
-    at ( "06D0" );
+    // #at: 06D0
     instruction ( "CP   E1",0x06D2 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0xE1 ) ) ) + ( ! false ) ) ;
@@ -16728,7 +16728,7 @@ Control prog_06D0 ()
 
 Control prog_06D2 ()
 {
-    at ( "06D2" );
+    // #at: 06D2
     instruction ( "JP   NC,06F9",0x06D5 );
     if (( ! FlagCY ))
     {
@@ -16744,7 +16744,7 @@ Control prog_06D2 ()
 
 Control prog_06D5 ()
 {
-    at ( "06D5" );
+    // #at: 06D5
     instruction ( "RET",0x06D6 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -16762,7 +16762,7 @@ Control prog_06D5 ()
 
 Control prog_06D6 ()
 {
-    at ( "06D6" );
+    // #at: 06D6
     instruction ( "LD   B,FE",0x06D8 );
     advance ( 7 );
     B = 0xFE;
@@ -16771,7 +16771,7 @@ Control prog_06D6 ()
 
 Control prog_06D8 ()
 {
-    at ( "06D8" );
+    // #at: 06D8
     instruction ( "CALL 19DC",0x06DB );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -16790,7 +16790,7 @@ Control prog_06D8 ()
 
 Control prog_06DB ()
 {
-    at ( "06DB" );
+    // #at: 06DB
     instruction ( "INC  HL",0x06DC );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -16803,7 +16803,7 @@ Control prog_06DB ()
 
 Control prog_06DC ()
 {
-    at ( "06DC" );
+    // #at: 06DC
     instruction ( "DEC  (HL)",0x06DD );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -16825,7 +16825,7 @@ Control prog_06DC ()
 
 Control prog_06DD ()
 {
-    at ( "06DD" );
+    // #at: 06DD
     instruction ( "LD   A,(HL)",0x06DE );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -16837,7 +16837,7 @@ Control prog_06DD ()
 
 Control prog_06DE ()
 {
-    at ( "06DE" );
+    // #at: 06DE
     instruction ( "CP   1F",0x06E0 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x1F ) ) ) + ( ! false ) ) ;
@@ -16855,7 +16855,7 @@ Control prog_06DE ()
 
 Control prog_06E0 ()
 {
-    at ( "06E0" );
+    // #at: 06E0
     instruction ( "JP   Z,074B",0x06E3 );
     if (FlagZ)
     {
@@ -16871,7 +16871,7 @@ Control prog_06E0 ()
 
 Control prog_06E3 ()
 {
-    at ( "06E3" );
+    // #at: 06E3
     instruction ( "CP   18",0x06E5 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x18 ) ) ) + ( ! false ) ) ;
@@ -16889,7 +16889,7 @@ Control prog_06E3 ()
 
 Control prog_06E5 ()
 {
-    at ( "06E5" );
+    // #at: 06E5
     instruction ( "JP   Z,070C",0x06E8 );
     if (FlagZ)
     {
@@ -16905,7 +16905,7 @@ Control prog_06E5 ()
 
 Control prog_06E8 ()
 {
-    at ( "06E8" );
+    // #at: 06E8
     instruction ( "AND  A",0x06E9 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -16923,7 +16923,7 @@ Control prog_06E8 ()
 
 Control prog_06E9 ()
 {
-    at ( "06E9" );
+    // #at: 06E9
     instruction ( "RET  NZ",0x06EA );
     if (( ! FlagZ ))
     {
@@ -16949,7 +16949,7 @@ Control prog_06E9 ()
 
 Control prog_06EA ()
 {
-    at ( "06EA" );
+    // #at: 06EA
     instruction ( "LD   B,EF",0x06EC );
     advance ( 7 );
     B = 0xEF;
@@ -16958,7 +16958,7 @@ Control prog_06EA ()
 
 Control prog_06EC ()
 {
-    at ( "06EC" );
+    // #at: 06EC
     instruction ( "LD   HL,2098",0x06EF );
     advance ( 10 );
     H = 0x20;
@@ -16968,7 +16968,7 @@ Control prog_06EC ()
 
 Control prog_06EF ()
 {
-    at ( "06EF" );
+    // #at: 06EF
     instruction ( "LD   A,(HL)",0x06F0 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -16980,7 +16980,7 @@ Control prog_06EF ()
 
 Control prog_06F0 ()
 {
-    at ( "06F0" );
+    // #at: 06F0
     instruction ( "AND  B",0x06F1 );
     u8 a1 = B ;
     u8 a2 = A ;
@@ -16998,7 +16998,7 @@ Control prog_06F0 ()
 
 Control prog_06F1 ()
 {
-    at ( "06F1" );
+    // #at: 06F1
     instruction ( "LD   (HL),A",0x06F2 );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -17010,7 +17010,7 @@ Control prog_06F1 ()
 
 Control prog_06F2 ()
 {
-    at ( "06F2" );
+    // #at: 06F2
     instruction ( "AND  20",0x06F4 );
     u8 a1 = A ;
     u8 a2 = ( 0x20 & a1 ) ;
@@ -17027,7 +17027,7 @@ Control prog_06F2 ()
 
 Control prog_06F4 ()
 {
-    at ( "06F4" );
+    // #at: 06F4
     instruction ( "OUT  05",0x06F6 );
     u8 a1 = A ;
     sound_control ( "FleetMovement1",( ( a1 >> 0 ) & 0x01 ) );
@@ -17041,7 +17041,7 @@ Control prog_06F4 ()
 
 Control prog_06F6 ()
 {
-    at ( "06F6" );
+    // #at: 06F6
     instruction ( "NOP",0x06F7 );
     advance ( 4 );
     return jumpDirect ( 0x06F7,prog_06F7 );
@@ -17049,7 +17049,7 @@ Control prog_06F6 ()
 
 Control prog_06F7 ()
 {
-    at ( "06F7" );
+    // #at: 06F7
     instruction ( "NOP",0x06F8 );
     advance ( 4 );
     return jumpDirect ( 0x06F8,prog_06F8 );
@@ -17057,7 +17057,7 @@ Control prog_06F7 ()
 
 Control prog_06F8 ()
 {
-    at ( "06F8" );
+    // #at: 06F8
     instruction ( "NOP",0x06F9 );
     advance ( 4 );
     return jumpDirect ( 0x06F9,prog_06F9 );
@@ -17065,7 +17065,7 @@ Control prog_06F8 ()
 
 Control prog_06F9 ()
 {
-    at ( "06F9" );
+    // #at: 06F9
     instruction ( "CALL 0742",0x06FC );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -17084,7 +17084,7 @@ Control prog_06F9 ()
 
 Control prog_06FC ()
 {
-    at ( "06FC" );
+    // #at: 06FC
     instruction ( "CALL 14CB",0x06FF );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -17103,7 +17103,7 @@ Control prog_06FC ()
 
 Control prog_06FF ()
 {
-    at ( "06FF" );
+    // #at: 06FF
     instruction ( "LD   HL,2083",0x0702 );
     advance ( 10 );
     H = 0x20;
@@ -17113,7 +17113,7 @@ Control prog_06FF ()
 
 Control prog_0702 ()
 {
-    at ( "0702" );
+    // #at: 0702
     instruction ( "LD   B,0A",0x0704 );
     advance ( 7 );
     B = 0x0A;
@@ -17122,7 +17122,7 @@ Control prog_0702 ()
 
 Control prog_0704 ()
 {
-    at ( "0704" );
+    // #at: 0704
     instruction ( "CALL 075F",0x0707 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -17141,7 +17141,7 @@ Control prog_0704 ()
 
 Control prog_0707 ()
 {
-    at ( "0707" );
+    // #at: 0707
     instruction ( "LD   B,FE",0x0709 );
     advance ( 7 );
     B = 0xFE;
@@ -17150,7 +17150,7 @@ Control prog_0707 ()
 
 Control prog_0709 ()
 {
-    at ( "0709" );
+    // #at: 0709
     instruction ( "JP   19DC",0x070C );
     advance ( 10 );
     return jumpDirect ( 0x19DC,prog_19DC );
@@ -17158,7 +17158,7 @@ Control prog_0709 ()
 
 Control prog_070C ()
 {
-    at ( "070C" );
+    // #at: 070C
     instruction ( "LD   A,01",0x070E );
     advance ( 7 );
     A = 0x01;
@@ -17167,7 +17167,7 @@ Control prog_070C ()
 
 Control prog_070E ()
 {
-    at ( "070E" );
+    // #at: 070E
     instruction ( "LD   (20F1),A",0x0711 );
     u8 a1 = A ;
     mem_write ( 0x20F1,a1 );
@@ -17177,7 +17177,7 @@ Control prog_070E ()
 
 Control prog_0711 ()
 {
-    at ( "0711" );
+    // #at: 0711
     instruction ( "LD   HL,(208D)",0x0714 );
     u8 a1 = e8_read_mem ( 0x208D ) ;
     u8 a2 = e8_read_mem ( 0x208E ) ;
@@ -17189,7 +17189,7 @@ Control prog_0711 ()
 
 Control prog_0714 ()
 {
-    at ( "0714" );
+    // #at: 0714
     instruction ( "LD   B,(HL)",0x0715 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -17201,7 +17201,7 @@ Control prog_0714 ()
 
 Control prog_0715 ()
 {
-    at ( "0715" );
+    // #at: 0715
     instruction ( "LD   C,04",0x0717 );
     advance ( 7 );
     C = 0x04;
@@ -17210,7 +17210,7 @@ Control prog_0715 ()
 
 Control prog_0717 ()
 {
-    at ( "0717" );
+    // #at: 0717
     instruction ( "LD   HL,1D50",0x071A );
     advance ( 10 );
     H = 0x1D;
@@ -17220,7 +17220,7 @@ Control prog_0717 ()
 
 Control prog_071A ()
 {
-    at ( "071A" );
+    // #at: 071A
     instruction ( "LD   DE,1D4C",0x071D );
     advance ( 10 );
     D = 0x1D;
@@ -17230,7 +17230,7 @@ Control prog_071A ()
 
 Control prog_071D ()
 {
-    at ( "071D" );
+    // #at: 071D
     instruction ( "LD   A,(DE)",0x071E );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -17242,7 +17242,7 @@ Control prog_071D ()
 
 Control prog_071E ()
 {
-    at ( "071E" );
+    // #at: 071E
     instruction ( "CP   B",0x071F );
     u8 a1 = A ;
     u8 a2 = B ;
@@ -17261,7 +17261,7 @@ Control prog_071E ()
 
 Control prog_071F ()
 {
-    at ( "071F" );
+    // #at: 071F
     instruction ( "JP   Z,0728",0x0722 );
     if (FlagZ)
     {
@@ -17277,7 +17277,7 @@ Control prog_071F ()
 
 Control prog_0722 ()
 {
-    at ( "0722" );
+    // #at: 0722
     instruction ( "INC  HL",0x0723 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -17290,7 +17290,7 @@ Control prog_0722 ()
 
 Control prog_0723 ()
 {
-    at ( "0723" );
+    // #at: 0723
     instruction ( "INC  DE",0x0724 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -17303,7 +17303,7 @@ Control prog_0723 ()
 
 Control prog_0724 ()
 {
-    at ( "0724" );
+    // #at: 0724
     instruction ( "DEC  C",0x0725 );
     u8 a1 = C ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -17321,7 +17321,7 @@ Control prog_0724 ()
 
 Control prog_0725 ()
 {
-    at ( "0725" );
+    // #at: 0725
     instruction ( "JP   NZ,071D",0x0728 );
     if (( ! FlagZ ))
     {
@@ -17337,7 +17337,7 @@ Control prog_0725 ()
 
 Control prog_0728 ()
 {
-    at ( "0728" );
+    // #at: 0728
     instruction ( "LD   A,(HL)",0x0729 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -17349,7 +17349,7 @@ Control prog_0728 ()
 
 Control prog_0729 ()
 {
-    at ( "0729" );
+    // #at: 0729
     instruction ( "LD   (2087),A",0x072C );
     u8 a1 = A ;
     mem_write ( 0x2087,a1 );
@@ -17359,7 +17359,7 @@ Control prog_0729 ()
 
 Control prog_072C ()
 {
-    at ( "072C" );
+    // #at: 072C
     instruction ( "LD   H,00",0x072E );
     advance ( 7 );
     H = 0x00;
@@ -17368,7 +17368,7 @@ Control prog_072C ()
 
 Control prog_072E ()
 {
-    at ( "072E" );
+    // #at: 072E
     instruction ( "LD   L,B",0x072F );
     u8 a1 = B ;
     advance ( 5 );
@@ -17378,7 +17378,7 @@ Control prog_072E ()
 
 Control prog_072F ()
 {
-    at ( "072F" );
+    // #at: 072F
     instruction ( "ADD  HL,HL",0x0730 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -17394,7 +17394,7 @@ Control prog_072F ()
 
 Control prog_0730 ()
 {
-    at ( "0730" );
+    // #at: 0730
     instruction ( "ADD  HL,HL",0x0731 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -17410,7 +17410,7 @@ Control prog_0730 ()
 
 Control prog_0731 ()
 {
-    at ( "0731" );
+    // #at: 0731
     instruction ( "ADD  HL,HL",0x0732 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -17426,7 +17426,7 @@ Control prog_0731 ()
 
 Control prog_0732 ()
 {
-    at ( "0732" );
+    // #at: 0732
     instruction ( "ADD  HL,HL",0x0733 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -17442,7 +17442,7 @@ Control prog_0732 ()
 
 Control prog_0733 ()
 {
-    at ( "0733" );
+    // #at: 0733
     instruction ( "LD   (20F2),HL",0x0736 );
     u8 a1 = L ;
     mem_write ( 0x20F2,a1 );
@@ -17454,7 +17454,7 @@ Control prog_0733 ()
 
 Control prog_0736 ()
 {
-    at ( "0736" );
+    // #at: 0736
     instruction ( "CALL 0742",0x0739 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -17473,7 +17473,7 @@ Control prog_0736 ()
 
 Control prog_0739 ()
 {
-    at ( "0739" );
+    // #at: 0739
     instruction ( "JP   08F1",0x073C );
     advance ( 10 );
     return jumpDirect ( 0x08F1,prog_08F1 );
@@ -17481,7 +17481,7 @@ Control prog_0739 ()
 
 Control prog_073C ()
 {
-    at ( "073C" );
+    // #at: 073C
     instruction ( "CALL 0742",0x073F );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -17500,7 +17500,7 @@ Control prog_073C ()
 
 Control prog_073F ()
 {
-    at ( "073F" );
+    // #at: 073F
     instruction ( "JP   1439",0x0742 );
     advance ( 10 );
     return jumpDirect ( 0x1439,prog_1439 );
@@ -17508,7 +17508,7 @@ Control prog_073F ()
 
 Control prog_0742 ()
 {
-    at ( "0742" );
+    // #at: 0742
     instruction ( "LD   HL,2087",0x0745 );
     advance ( 10 );
     H = 0x20;
@@ -17518,7 +17518,7 @@ Control prog_0742 ()
 
 Control prog_0745 ()
 {
-    at ( "0745" );
+    // #at: 0745
     instruction ( "CALL 1A3B",0x0748 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -17537,7 +17537,7 @@ Control prog_0745 ()
 
 Control prog_0748 ()
 {
-    at ( "0748" );
+    // #at: 0748
     instruction ( "JP   1A47",0x074B );
     advance ( 10 );
     return jumpDirect ( 0x1A47,prog_1A47 );
@@ -17545,7 +17545,7 @@ Control prog_0748 ()
 
 Control prog_074B ()
 {
-    at ( "074B" );
+    // #at: 074B
     instruction ( "LD   B,10",0x074D );
     advance ( 7 );
     B = 0x10;
@@ -17554,7 +17554,7 @@ Control prog_074B ()
 
 Control prog_074D ()
 {
-    at ( "074D" );
+    // #at: 074D
     instruction ( "LD   HL,2098",0x0750 );
     advance ( 10 );
     H = 0x20;
@@ -17564,7 +17564,7 @@ Control prog_074D ()
 
 Control prog_0750 ()
 {
-    at ( "0750" );
+    // #at: 0750
     instruction ( "LD   A,(HL)",0x0751 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -17576,7 +17576,7 @@ Control prog_0750 ()
 
 Control prog_0751 ()
 {
-    at ( "0751" );
+    // #at: 0751
     instruction ( "OR   B",0x0752 );
     u8 a1 = B ;
     u8 a2 = A ;
@@ -17593,7 +17593,7 @@ Control prog_0751 ()
 
 Control prog_0752 ()
 {
-    at ( "0752" );
+    // #at: 0752
     instruction ( "LD   (HL),A",0x0753 );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -17605,7 +17605,7 @@ Control prog_0752 ()
 
 Control prog_0753 ()
 {
-    at ( "0753" );
+    // #at: 0753
     instruction ( "CALL 1770",0x0756 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -17624,7 +17624,7 @@ Control prog_0753 ()
 
 Control prog_0756 ()
 {
-    at ( "0756" );
+    // #at: 0756
     instruction ( "LD   HL,1D7C",0x0759 );
     advance ( 10 );
     H = 0x1D;
@@ -17634,7 +17634,7 @@ Control prog_0756 ()
 
 Control prog_0759 ()
 {
-    at ( "0759" );
+    // #at: 0759
     instruction ( "LD   (2087),HL",0x075C );
     u8 a1 = L ;
     mem_write ( 0x2087,a1 );
@@ -17646,7 +17646,7 @@ Control prog_0759 ()
 
 Control prog_075C ()
 {
-    at ( "075C" );
+    // #at: 075C
     instruction ( "JP   073C",0x075F );
     advance ( 10 );
     return jumpDirect ( 0x073C,prog_073C );
@@ -17654,7 +17654,7 @@ Control prog_075C ()
 
 Control prog_075F ()
 {
-    at ( "075F" );
+    // #at: 075F
     instruction ( "LD   DE,1B83",0x0762 );
     advance ( 10 );
     D = 0x1B;
@@ -17664,7 +17664,7 @@ Control prog_075F ()
 
 Control prog_0762 ()
 {
-    at ( "0762" );
+    // #at: 0762
     instruction ( "JP   1A32",0x0765 );
     advance ( 10 );
     return jumpDirect ( 0x1A32,prog_1A32 );
@@ -17672,7 +17672,7 @@ Control prog_0762 ()
 
 Control prog_0765 ()
 {
-    at ( "0765" );
+    // #at: 0765
     instruction ( "LD   A,01",0x0767 );
     advance ( 7 );
     A = 0x01;
@@ -17681,7 +17681,7 @@ Control prog_0765 ()
 
 Control prog_0767 ()
 {
-    at ( "0767" );
+    // #at: 0767
     instruction ( "LD   (2093),A",0x076A );
     u8 a1 = A ;
     mem_write ( 0x2093,a1 );
@@ -17691,7 +17691,7 @@ Control prog_0767 ()
 
 Control prog_076A ()
 {
-    at ( "076A" );
+    // #at: 076A
     instruction ( "LD   SP,2400",0x076D );
     advance ( 10 );
     SPH = 0x24;
@@ -17701,7 +17701,7 @@ Control prog_076A ()
 
 Control prog_076D ()
 {
-    at ( "076D" );
+    // #at: 076D
     instruction ( "EI",0x076E );
     enable_interrupts (  );
     advance ( 4 );
@@ -17710,7 +17710,7 @@ Control prog_076D ()
 
 Control prog_076E ()
 {
-    at ( "076E" );
+    // #at: 076E
     instruction ( "CALL 1979",0x0771 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -17729,7 +17729,7 @@ Control prog_076E ()
 
 Control prog_0771 ()
 {
-    at ( "0771" );
+    // #at: 0771
     instruction ( "CALL 09D6",0x0774 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -17748,7 +17748,7 @@ Control prog_0771 ()
 
 Control prog_0774 ()
 {
-    at ( "0774" );
+    // #at: 0774
     instruction ( "LD   HL,3013",0x0777 );
     advance ( 10 );
     H = 0x30;
@@ -17758,7 +17758,7 @@ Control prog_0774 ()
 
 Control prog_0777 ()
 {
-    at ( "0777" );
+    // #at: 0777
     instruction ( "LD   DE,1FF3",0x077A );
     advance ( 10 );
     D = 0x1F;
@@ -17768,7 +17768,7 @@ Control prog_0777 ()
 
 Control prog_077A ()
 {
-    at ( "077A" );
+    // #at: 077A
     instruction ( "LD   C,04",0x077C );
     advance ( 7 );
     C = 0x04;
@@ -17777,7 +17777,7 @@ Control prog_077A ()
 
 Control prog_077C ()
 {
-    at ( "077C" );
+    // #at: 077C
     instruction ( "CALL 08F3",0x077F );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -17796,7 +17796,7 @@ Control prog_077C ()
 
 Control prog_077F ()
 {
-    at ( "077F" );
+    // #at: 077F
     instruction ( "LD   A,(20EB)",0x0782 );
     u8 a1 = e8_read_mem ( 0x20EB ) ;
     advance ( 13 );
@@ -17806,7 +17806,7 @@ Control prog_077F ()
 
 Control prog_0782 ()
 {
-    at ( "0782" );
+    // #at: 0782
     instruction ( "DEC  A",0x0783 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -17824,7 +17824,7 @@ Control prog_0782 ()
 
 Control prog_0783 ()
 {
-    at ( "0783" );
+    // #at: 0783
     instruction ( "LD   HL,2810",0x0786 );
     advance ( 10 );
     H = 0x28;
@@ -17834,7 +17834,7 @@ Control prog_0783 ()
 
 Control prog_0786 ()
 {
-    at ( "0786" );
+    // #at: 0786
     instruction ( "LD   C,14",0x0788 );
     advance ( 7 );
     C = 0x14;
@@ -17843,7 +17843,7 @@ Control prog_0786 ()
 
 Control prog_0788 ()
 {
-    at ( "0788" );
+    // #at: 0788
     instruction ( "JP   NZ,0857",0x078B );
     if (( ! FlagZ ))
     {
@@ -17859,7 +17859,7 @@ Control prog_0788 ()
 
 Control prog_078B ()
 {
-    at ( "078B" );
+    // #at: 078B
     instruction ( "LD   DE,1ACF",0x078E );
     advance ( 10 );
     D = 0x1A;
@@ -17869,7 +17869,7 @@ Control prog_078B ()
 
 Control prog_078E ()
 {
-    at ( "078E" );
+    // #at: 078E
     instruction ( "CALL 08F3",0x0791 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -17888,7 +17888,7 @@ Control prog_078E ()
 
 Control prog_0791 ()
 {
-    at ( "0791" );
+    // #at: 0791
     instruction ( "IN   01",0x0793 );
     advance ( 10 );
     A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,( ! e1_is_pressed ( CoinEntry ) ) ),1,e1_is_pressed ( P2start ) ),2,e1_is_pressed ( P1start ) ),4,e1_is_pressed ( P1shoot ) ),5,e1_is_pressed ( P1left ) ),6,e1_is_pressed ( P1right ) );
@@ -17897,7 +17897,7 @@ Control prog_0791 ()
 
 Control prog_0793 ()
 {
-    at ( "0793" );
+    // #at: 0793
     instruction ( "AND  04",0x0795 );
     u8 a1 = A ;
     u8 a2 = ( 0x04 & a1 ) ;
@@ -17914,7 +17914,7 @@ Control prog_0793 ()
 
 Control prog_0795 ()
 {
-    at ( "0795" );
+    // #at: 0795
     instruction ( "JP   Z,077F",0x0798 );
     if (FlagZ)
     {
@@ -17930,7 +17930,7 @@ Control prog_0795 ()
 
 Control prog_0798 ()
 {
-    at ( "0798" );
+    // #at: 0798
     instruction ( "LD   B,99",0x079A );
     advance ( 7 );
     B = 0x99;
@@ -17939,7 +17939,7 @@ Control prog_0798 ()
 
 Control prog_079A ()
 {
-    at ( "079A" );
+    // #at: 079A
     instruction ( "XOR  A",0x079B );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -17956,7 +17956,7 @@ Control prog_079A ()
 
 Control prog_079B ()
 {
-    at ( "079B" );
+    // #at: 079B
     instruction ( "LD   (20CE),A",0x079E );
     u8 a1 = A ;
     mem_write ( 0x20CE,a1 );
@@ -17966,7 +17966,7 @@ Control prog_079B ()
 
 Control prog_079E ()
 {
-    at ( "079E" );
+    // #at: 079E
     instruction ( "LD   A,(20EB)",0x07A1 );
     u8 a1 = e8_read_mem ( 0x20EB ) ;
     advance ( 13 );
@@ -17976,7 +17976,7 @@ Control prog_079E ()
 
 Control prog_07A1 ()
 {
-    at ( "07A1" );
+    // #at: 07A1
     instruction ( "ADD  B",0x07A2 );
     u8 a1 = B ;
     u8 a2 = A ;
@@ -17996,7 +17996,7 @@ Control prog_07A1 ()
 
 Control prog_07A2 ()
 {
-    at ( "07A2" );
+    // #at: 07A2
     instruction ( "DAA",0x07A3 );
     u8 a1 = A ;
     u8 a2 = ( a1 & 0x0F ) ;
@@ -18017,7 +18017,7 @@ Control prog_07A2 ()
 
 Control prog_07A3 ()
 {
-    at ( "07A3" );
+    // #at: 07A3
     instruction ( "LD   (20EB),A",0x07A6 );
     u8 a1 = A ;
     mem_write ( 0x20EB,a1 );
@@ -18027,7 +18027,7 @@ Control prog_07A3 ()
 
 Control prog_07A6 ()
 {
-    at ( "07A6" );
+    // #at: 07A6
     instruction ( "CALL 1947",0x07A9 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -18046,7 +18046,7 @@ Control prog_07A6 ()
 
 Control prog_07A9 ()
 {
-    at ( "07A9" );
+    // #at: 07A9
     instruction ( "LD   HL,0000",0x07AC );
     advance ( 10 );
     H = 0x00;
@@ -18056,7 +18056,7 @@ Control prog_07A9 ()
 
 Control prog_07AC ()
 {
-    at ( "07AC" );
+    // #at: 07AC
     instruction ( "LD   (20F8),HL",0x07AF );
     u8 a1 = L ;
     mem_write ( 0x20F8,a1 );
@@ -18068,7 +18068,7 @@ Control prog_07AC ()
 
 Control prog_07AF ()
 {
-    at ( "07AF" );
+    // #at: 07AF
     instruction ( "LD   (20FC),HL",0x07B2 );
     u8 a1 = L ;
     mem_write ( 0x20FC,a1 );
@@ -18080,7 +18080,7 @@ Control prog_07AF ()
 
 Control prog_07B2 ()
 {
-    at ( "07B2" );
+    // #at: 07B2
     instruction ( "CALL 1925",0x07B5 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -18099,7 +18099,7 @@ Control prog_07B2 ()
 
 Control prog_07B5 ()
 {
-    at ( "07B5" );
+    // #at: 07B5
     instruction ( "CALL 192B",0x07B8 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -18118,7 +18118,7 @@ Control prog_07B5 ()
 
 Control prog_07B8 ()
 {
-    at ( "07B8" );
+    // #at: 07B8
     instruction ( "CALL 19D7",0x07BB );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -18137,7 +18137,7 @@ Control prog_07B8 ()
 
 Control prog_07BB ()
 {
-    at ( "07BB" );
+    // #at: 07BB
     instruction ( "LD   HL,0101",0x07BE );
     advance ( 10 );
     H = 0x01;
@@ -18147,7 +18147,7 @@ Control prog_07BB ()
 
 Control prog_07BE ()
 {
-    at ( "07BE" );
+    // #at: 07BE
     instruction ( "LD   A,H",0x07BF );
     u8 a1 = H ;
     advance ( 5 );
@@ -18157,7 +18157,7 @@ Control prog_07BE ()
 
 Control prog_07BF ()
 {
-    at ( "07BF" );
+    // #at: 07BF
     instruction ( "LD   (20EF),A",0x07C2 );
     u8 a1 = A ;
     mem_write ( 0x20EF,a1 );
@@ -18167,7 +18167,7 @@ Control prog_07BF ()
 
 Control prog_07C2 ()
 {
-    at ( "07C2" );
+    // #at: 07C2
     instruction ( "LD   (20E7),HL",0x07C5 );
     u8 a1 = L ;
     mem_write ( 0x20E7,a1 );
@@ -18179,7 +18179,7 @@ Control prog_07C2 ()
 
 Control prog_07C5 ()
 {
-    at ( "07C5" );
+    // #at: 07C5
     instruction ( "LD   (20E5),HL",0x07C8 );
     u8 a1 = L ;
     mem_write ( 0x20E5,a1 );
@@ -18191,7 +18191,7 @@ Control prog_07C5 ()
 
 Control prog_07C8 ()
 {
-    at ( "07C8" );
+    // #at: 07C8
     instruction ( "CALL 1956",0x07CB );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -18210,7 +18210,7 @@ Control prog_07C8 ()
 
 Control prog_07CB ()
 {
-    at ( "07CB" );
+    // #at: 07CB
     instruction ( "CALL 01EF",0x07CE );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -18229,7 +18229,7 @@ Control prog_07CB ()
 
 Control prog_07CE ()
 {
-    at ( "07CE" );
+    // #at: 07CE
     instruction ( "CALL 01F5",0x07D1 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -18248,7 +18248,7 @@ Control prog_07CE ()
 
 Control prog_07D1 ()
 {
-    at ( "07D1" );
+    // #at: 07D1
     instruction ( "CALL 08D1",0x07D4 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -18267,7 +18267,7 @@ Control prog_07D1 ()
 
 Control prog_07D4 ()
 {
-    at ( "07D4" );
+    // #at: 07D4
     instruction ( "LD   (21FF),A",0x07D7 );
     u8 a1 = A ;
     mem_write ( 0x21FF,a1 );
@@ -18277,7 +18277,7 @@ Control prog_07D4 ()
 
 Control prog_07D7 ()
 {
-    at ( "07D7" );
+    // #at: 07D7
     instruction ( "LD   (22FF),A",0x07DA );
     u8 a1 = A ;
     mem_write ( 0x22FF,a1 );
@@ -18287,7 +18287,7 @@ Control prog_07D7 ()
 
 Control prog_07DA ()
 {
-    at ( "07DA" );
+    // #at: 07DA
     instruction ( "CALL 00D7",0x07DD );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -18306,7 +18306,7 @@ Control prog_07DA ()
 
 Control prog_07DD ()
 {
-    at ( "07DD" );
+    // #at: 07DD
     instruction ( "XOR  A",0x07DE );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -18323,7 +18323,7 @@ Control prog_07DD ()
 
 Control prog_07DE ()
 {
-    at ( "07DE" );
+    // #at: 07DE
     instruction ( "LD   (21FE),A",0x07E1 );
     u8 a1 = A ;
     mem_write ( 0x21FE,a1 );
@@ -18333,7 +18333,7 @@ Control prog_07DE ()
 
 Control prog_07E1 ()
 {
-    at ( "07E1" );
+    // #at: 07E1
     instruction ( "LD   (22FE),A",0x07E4 );
     u8 a1 = A ;
     mem_write ( 0x22FE,a1 );
@@ -18343,7 +18343,7 @@ Control prog_07E1 ()
 
 Control prog_07E4 ()
 {
-    at ( "07E4" );
+    // #at: 07E4
     instruction ( "CALL 01C0",0x07E7 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -18362,7 +18362,7 @@ Control prog_07E4 ()
 
 Control prog_07E7 ()
 {
-    at ( "07E7" );
+    // #at: 07E7
     instruction ( "CALL 1904",0x07EA );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -18381,7 +18381,7 @@ Control prog_07E7 ()
 
 Control prog_07EA ()
 {
-    at ( "07EA" );
+    // #at: 07EA
     instruction ( "LD   HL,3878",0x07ED );
     advance ( 10 );
     H = 0x38;
@@ -18391,7 +18391,7 @@ Control prog_07EA ()
 
 Control prog_07ED ()
 {
-    at ( "07ED" );
+    // #at: 07ED
     instruction ( "LD   (21FC),HL",0x07F0 );
     u8 a1 = L ;
     mem_write ( 0x21FC,a1 );
@@ -18403,7 +18403,7 @@ Control prog_07ED ()
 
 Control prog_07F0 ()
 {
-    at ( "07F0" );
+    // #at: 07F0
     instruction ( "LD   (22FC),HL",0x07F3 );
     u8 a1 = L ;
     mem_write ( 0x22FC,a1 );
@@ -18415,7 +18415,7 @@ Control prog_07F0 ()
 
 Control prog_07F3 ()
 {
-    at ( "07F3" );
+    // #at: 07F3
     instruction ( "CALL 01E4",0x07F6 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -18434,7 +18434,7 @@ Control prog_07F3 ()
 
 Control prog_07F6 ()
 {
-    at ( "07F6" );
+    // #at: 07F6
     instruction ( "CALL 1A7F",0x07F9 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -18453,7 +18453,7 @@ Control prog_07F6 ()
 
 Control prog_07F9 ()
 {
-    at ( "07F9" );
+    // #at: 07F9
     instruction ( "CALL 088D",0x07FC );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -18472,7 +18472,7 @@ Control prog_07F9 ()
 
 Control prog_07FC ()
 {
-    at ( "07FC" );
+    // #at: 07FC
     instruction ( "CALL 09D6",0x07FF );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -18491,7 +18491,7 @@ Control prog_07FC ()
 
 Control prog_07FF ()
 {
-    at ( "07FF" );
+    // #at: 07FF
     instruction ( "NOP",0x0800 );
     advance ( 4 );
     return jumpDirect ( 0x0800,prog_0800 );
@@ -18499,7 +18499,7 @@ Control prog_07FF ()
 
 Control prog_0800 ()
 {
-    at ( "0800" );
+    // #at: 0800
     instruction ( "XOR  A",0x0801 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -18516,7 +18516,7 @@ Control prog_0800 ()
 
 Control prog_0801 ()
 {
-    at ( "0801" );
+    // #at: 0801
     instruction ( "LD   (20C1),A",0x0804 );
     u8 a1 = A ;
     mem_write ( 0x20C1,a1 );
@@ -18526,7 +18526,7 @@ Control prog_0801 ()
 
 Control prog_0804 ()
 {
-    at ( "0804" );
+    // #at: 0804
     instruction ( "CALL 01CF",0x0807 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -18545,7 +18545,7 @@ Control prog_0804 ()
 
 Control prog_0807 ()
 {
-    at ( "0807" );
+    // #at: 0807
     instruction ( "LD   A,(2067)",0x080A );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
@@ -18555,7 +18555,7 @@ Control prog_0807 ()
 
 Control prog_080A ()
 {
-    at ( "080A" );
+    // #at: 080A
     instruction ( "RRCA",0x080B );
     u8 a1 = A ;
     advance ( 4 );
@@ -18566,7 +18566,7 @@ Control prog_080A ()
 
 Control prog_080B ()
 {
-    at ( "080B" );
+    // #at: 080B
     instruction ( "JP   CY,0872",0x080E );
     if (FlagCY)
     {
@@ -18582,7 +18582,7 @@ Control prog_080B ()
 
 Control prog_080E ()
 {
-    at ( "080E" );
+    // #at: 080E
     instruction ( "CALL 0213",0x0811 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -18601,7 +18601,7 @@ Control prog_080E ()
 
 Control prog_0811 ()
 {
-    at ( "0811" );
+    // #at: 0811
     instruction ( "CALL 01CF",0x0814 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -18620,7 +18620,7 @@ Control prog_0811 ()
 
 Control prog_0814 ()
 {
-    at ( "0814" );
+    // #at: 0814
     instruction ( "CALL 00B1",0x0817 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -18639,7 +18639,7 @@ Control prog_0814 ()
 
 Control prog_0817 ()
 {
-    at ( "0817" );
+    // #at: 0817
     instruction ( "CALL 19D1",0x081A );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -18658,7 +18658,7 @@ Control prog_0817 ()
 
 Control prog_081A ()
 {
-    at ( "081A" );
+    // #at: 081A
     instruction ( "LD   B,20",0x081C );
     advance ( 7 );
     B = 0x20;
@@ -18667,7 +18667,7 @@ Control prog_081A ()
 
 Control prog_081C ()
 {
-    at ( "081C" );
+    // #at: 081C
     instruction ( "CALL 18FA",0x081F );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -18686,7 +18686,7 @@ Control prog_081C ()
 
 Control prog_081F ()
 {
-    at ( "081F" );
+    // #at: 081F
     instruction ( "CALL 1618",0x0822 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -18705,7 +18705,7 @@ Control prog_081F ()
 
 Control prog_0822 ()
 {
-    at ( "0822" );
+    // #at: 0822
     instruction ( "CALL 190A",0x0825 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -18724,7 +18724,7 @@ Control prog_0822 ()
 
 Control prog_0825 ()
 {
-    at ( "0825" );
+    // #at: 0825
     instruction ( "CALL 15F3",0x0828 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -18743,7 +18743,7 @@ Control prog_0825 ()
 
 Control prog_0828 ()
 {
-    at ( "0828" );
+    // #at: 0828
     instruction ( "CALL 0988",0x082B );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -18762,7 +18762,7 @@ Control prog_0828 ()
 
 Control prog_082B ()
 {
-    at ( "082B" );
+    // #at: 082B
     instruction ( "LD   A,(2082)",0x082E );
     u8 a1 = e8_read_mem ( 0x2082 ) ;
     advance ( 13 );
@@ -18772,7 +18772,7 @@ Control prog_082B ()
 
 Control prog_082E ()
 {
-    at ( "082E" );
+    // #at: 082E
     instruction ( "AND  A",0x082F );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -18790,7 +18790,7 @@ Control prog_082E ()
 
 Control prog_082F ()
 {
-    at ( "082F" );
+    // #at: 082F
     instruction ( "JP   Z,09EF",0x0832 );
     if (FlagZ)
     {
@@ -18806,7 +18806,7 @@ Control prog_082F ()
 
 Control prog_0832 ()
 {
-    at ( "0832" );
+    // #at: 0832
     instruction ( "CALL 170E",0x0835 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -18825,7 +18825,7 @@ Control prog_0832 ()
 
 Control prog_0835 ()
 {
-    at ( "0835" );
+    // #at: 0835
     instruction ( "CALL 0935",0x0838 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -18844,7 +18844,7 @@ Control prog_0835 ()
 
 Control prog_0838 ()
 {
-    at ( "0838" );
+    // #at: 0838
     instruction ( "CALL 08D8",0x083B );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -18863,7 +18863,7 @@ Control prog_0838 ()
 
 Control prog_083B ()
 {
-    at ( "083B" );
+    // #at: 083B
     instruction ( "CALL 172C",0x083E );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -18882,7 +18882,7 @@ Control prog_083B ()
 
 Control prog_083E ()
 {
-    at ( "083E" );
+    // #at: 083E
     instruction ( "CALL 0A59",0x0841 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -18901,7 +18901,7 @@ Control prog_083E ()
 
 Control prog_0841 ()
 {
-    at ( "0841" );
+    // #at: 0841
     instruction ( "JP   Z,0849",0x0844 );
     if (FlagZ)
     {
@@ -18917,7 +18917,7 @@ Control prog_0841 ()
 
 Control prog_0844 ()
 {
-    at ( "0844" );
+    // #at: 0844
     instruction ( "LD   B,04",0x0846 );
     advance ( 7 );
     B = 0x04;
@@ -18926,7 +18926,7 @@ Control prog_0844 ()
 
 Control prog_0846 ()
 {
-    at ( "0846" );
+    // #at: 0846
     instruction ( "CALL 18FA",0x0849 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -18945,7 +18945,7 @@ Control prog_0846 ()
 
 Control prog_0849 ()
 {
-    at ( "0849" );
+    // #at: 0849
     instruction ( "CALL 1775",0x084C );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -18964,7 +18964,7 @@ Control prog_0849 ()
 
 Control prog_084C ()
 {
-    at ( "084C" );
+    // #at: 084C
     instruction ( "OUT  06",0x084E );
     u8 a1 = A ;
     unknown_output ( 6,a1 );
@@ -18974,7 +18974,7 @@ Control prog_084C ()
 
 Control prog_084E ()
 {
-    at ( "084E" );
+    // #at: 084E
     instruction ( "CALL 1804",0x0851 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -18993,7 +18993,7 @@ Control prog_084E ()
 
 Control prog_0851 ()
 {
-    at ( "0851" );
+    // #at: 0851
     instruction ( "JP   081F",0x0854 );
     advance ( 10 );
     return jumpDirect ( 0x081F,prog_081F );
@@ -19001,7 +19001,7 @@ Control prog_0851 ()
 
 Control prog_0857 ()
 {
-    at ( "0857" );
+    // #at: 0857
     instruction ( "LD   DE,1ABA",0x085A );
     advance ( 10 );
     D = 0x1A;
@@ -19011,7 +19011,7 @@ Control prog_0857 ()
 
 Control prog_085A ()
 {
-    at ( "085A" );
+    // #at: 085A
     instruction ( "CALL 08F3",0x085D );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -19030,7 +19030,7 @@ Control prog_085A ()
 
 Control prog_085D ()
 {
-    at ( "085D" );
+    // #at: 085D
     instruction ( "LD   B,98",0x085F );
     advance ( 7 );
     B = 0x98;
@@ -19039,7 +19039,7 @@ Control prog_085D ()
 
 Control prog_085F ()
 {
-    at ( "085F" );
+    // #at: 085F
     instruction ( "IN   01",0x0861 );
     advance ( 10 );
     A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,( ! e1_is_pressed ( CoinEntry ) ) ),1,e1_is_pressed ( P2start ) ),2,e1_is_pressed ( P1start ) ),4,e1_is_pressed ( P1shoot ) ),5,e1_is_pressed ( P1left ) ),6,e1_is_pressed ( P1right ) );
@@ -19048,7 +19048,7 @@ Control prog_085F ()
 
 Control prog_0861 ()
 {
-    at ( "0861" );
+    // #at: 0861
     instruction ( "RRCA",0x0862 );
     u8 a1 = A ;
     advance ( 4 );
@@ -19059,7 +19059,7 @@ Control prog_0861 ()
 
 Control prog_0862 ()
 {
-    at ( "0862" );
+    // #at: 0862
     instruction ( "RRCA",0x0863 );
     u8 a1 = A ;
     advance ( 4 );
@@ -19070,7 +19070,7 @@ Control prog_0862 ()
 
 Control prog_0863 ()
 {
-    at ( "0863" );
+    // #at: 0863
     instruction ( "JP   CY,086D",0x0866 );
     if (FlagCY)
     {
@@ -19086,7 +19086,7 @@ Control prog_0863 ()
 
 Control prog_0866 ()
 {
-    at ( "0866" );
+    // #at: 0866
     instruction ( "RRCA",0x0867 );
     u8 a1 = A ;
     advance ( 4 );
@@ -19097,7 +19097,7 @@ Control prog_0866 ()
 
 Control prog_0867 ()
 {
-    at ( "0867" );
+    // #at: 0867
     instruction ( "JP   CY,0798",0x086A );
     if (FlagCY)
     {
@@ -19113,7 +19113,7 @@ Control prog_0867 ()
 
 Control prog_086A ()
 {
-    at ( "086A" );
+    // #at: 086A
     instruction ( "JP   077F",0x086D );
     advance ( 10 );
     return jumpDirect ( 0x077F,prog_077F );
@@ -19121,7 +19121,7 @@ Control prog_086A ()
 
 Control prog_086D ()
 {
-    at ( "086D" );
+    // #at: 086D
     instruction ( "LD   A,01",0x086F );
     advance ( 7 );
     A = 0x01;
@@ -19130,7 +19130,7 @@ Control prog_086D ()
 
 Control prog_086F ()
 {
-    at ( "086F" );
+    // #at: 086F
     instruction ( "JP   079B",0x0872 );
     advance ( 10 );
     return jumpDirect ( 0x079B,prog_079B );
@@ -19138,7 +19138,7 @@ Control prog_086F ()
 
 Control prog_0872 ()
 {
-    at ( "0872" );
+    // #at: 0872
     instruction ( "CALL 021A",0x0875 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -19157,7 +19157,7 @@ Control prog_0872 ()
 
 Control prog_0875 ()
 {
-    at ( "0875" );
+    // #at: 0875
     instruction ( "JP   0814",0x0878 );
     advance ( 10 );
     return jumpDirect ( 0x0814,prog_0814 );
@@ -19165,7 +19165,7 @@ Control prog_0875 ()
 
 Control prog_0878 ()
 {
-    at ( "0878" );
+    // #at: 0878
     instruction ( "LD   A,(2008)",0x087B );
     u8 a1 = e8_read_mem ( 0x2008 ) ;
     advance ( 13 );
@@ -19175,7 +19175,7 @@ Control prog_0878 ()
 
 Control prog_087B ()
 {
-    at ( "087B" );
+    // #at: 087B
     instruction ( "LD   B,A",0x087C );
     u8 a1 = A ;
     advance ( 5 );
@@ -19185,7 +19185,7 @@ Control prog_087B ()
 
 Control prog_087C ()
 {
-    at ( "087C" );
+    // #at: 087C
     instruction ( "LD   HL,(2009)",0x087F );
     u8 a1 = e8_read_mem ( 0x2009 ) ;
     u8 a2 = e8_read_mem ( 0x200A ) ;
@@ -19197,7 +19197,7 @@ Control prog_087C ()
 
 Control prog_087F ()
 {
-    at ( "087F" );
+    // #at: 087F
     instruction ( "EX   DE,HL",0x0880 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -19213,7 +19213,7 @@ Control prog_087F ()
 
 Control prog_0880 ()
 {
-    at ( "0880" );
+    // #at: 0880
     instruction ( "JP   0886",0x0883 );
     advance ( 10 );
     return jumpDirect ( 0x0886,prog_0886 );
@@ -19221,7 +19221,7 @@ Control prog_0880 ()
 
 Control prog_0886 ()
 {
-    at ( "0886" );
+    // #at: 0886
     instruction ( "LD   A,(2067)",0x0889 );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
@@ -19231,7 +19231,7 @@ Control prog_0886 ()
 
 Control prog_0889 ()
 {
-    at ( "0889" );
+    // #at: 0889
     instruction ( "LD   H,A",0x088A );
     u8 a1 = A ;
     advance ( 5 );
@@ -19241,7 +19241,7 @@ Control prog_0889 ()
 
 Control prog_088A ()
 {
-    at ( "088A" );
+    // #at: 088A
     instruction ( "LD   L,FC",0x088C );
     advance ( 7 );
     L = 0xFC;
@@ -19250,7 +19250,7 @@ Control prog_088A ()
 
 Control prog_088C ()
 {
-    at ( "088C" );
+    // #at: 088C
     instruction ( "RET",0x088D );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -19268,7 +19268,7 @@ Control prog_088C ()
 
 Control prog_088D ()
 {
-    at ( "088D" );
+    // #at: 088D
     instruction ( "LD   HL,2B11",0x0890 );
     advance ( 10 );
     H = 0x2B;
@@ -19278,7 +19278,7 @@ Control prog_088D ()
 
 Control prog_0890 ()
 {
-    at ( "0890" );
+    // #at: 0890
     instruction ( "LD   DE,1B70",0x0893 );
     advance ( 10 );
     D = 0x1B;
@@ -19288,7 +19288,7 @@ Control prog_0890 ()
 
 Control prog_0893 ()
 {
-    at ( "0893" );
+    // #at: 0893
     instruction ( "LD   C,0E",0x0895 );
     advance ( 7 );
     C = 0x0E;
@@ -19297,7 +19297,7 @@ Control prog_0893 ()
 
 Control prog_0895 ()
 {
-    at ( "0895" );
+    // #at: 0895
     instruction ( "CALL 08F3",0x0898 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -19316,7 +19316,7 @@ Control prog_0895 ()
 
 Control prog_0898 ()
 {
-    at ( "0898" );
+    // #at: 0898
     instruction ( "LD   A,(2067)",0x089B );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
@@ -19326,7 +19326,7 @@ Control prog_0898 ()
 
 Control prog_089B ()
 {
-    at ( "089B" );
+    // #at: 089B
     instruction ( "RRCA",0x089C );
     u8 a1 = A ;
     advance ( 4 );
@@ -19337,7 +19337,7 @@ Control prog_089B ()
 
 Control prog_089C ()
 {
-    at ( "089C" );
+    // #at: 089C
     instruction ( "LD   A,1C",0x089E );
     advance ( 7 );
     A = 0x1C;
@@ -19346,7 +19346,7 @@ Control prog_089C ()
 
 Control prog_089E ()
 {
-    at ( "089E" );
+    // #at: 089E
     instruction ( "LD   HL,3711",0x08A1 );
     advance ( 10 );
     H = 0x37;
@@ -19356,7 +19356,7 @@ Control prog_089E ()
 
 Control prog_08A1 ()
 {
-    at ( "08A1" );
+    // #at: 08A1
     instruction ( "CALL NC,08FF",0x08A4 );
     if (( ! FlagCY ))
     {
@@ -19383,7 +19383,7 @@ Control prog_08A1 ()
 
 Control prog_08A4 ()
 {
-    at ( "08A4" );
+    // #at: 08A4
     instruction ( "LD   A,B0",0x08A6 );
     advance ( 7 );
     A = 0xB0;
@@ -19392,7 +19392,7 @@ Control prog_08A4 ()
 
 Control prog_08A6 ()
 {
-    at ( "08A6" );
+    // #at: 08A6
     instruction ( "LD   (20C0),A",0x08A9 );
     u8 a1 = A ;
     mem_write ( 0x20C0,a1 );
@@ -19402,7 +19402,7 @@ Control prog_08A6 ()
 
 Control prog_08A9 ()
 {
-    at ( "08A9" );
+    // #at: 08A9
     instruction ( "LD   A,(20C0)",0x08AC );
     u8 a1 = e8_read_mem ( 0x20C0 ) ;
     advance ( 13 );
@@ -19412,7 +19412,7 @@ Control prog_08A9 ()
 
 Control prog_08AC ()
 {
-    at ( "08AC" );
+    // #at: 08AC
     instruction ( "AND  A",0x08AD );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -19430,7 +19430,7 @@ Control prog_08AC ()
 
 Control prog_08AD ()
 {
-    at ( "08AD" );
+    // #at: 08AD
     instruction ( "RET  Z",0x08AE );
     if (FlagZ)
     {
@@ -19456,7 +19456,7 @@ Control prog_08AD ()
 
 Control prog_08AE ()
 {
-    at ( "08AE" );
+    // #at: 08AE
     instruction ( "AND  04",0x08B0 );
     u8 a1 = A ;
     u8 a2 = ( 0x04 & a1 ) ;
@@ -19473,7 +19473,7 @@ Control prog_08AE ()
 
 Control prog_08B0 ()
 {
-    at ( "08B0" );
+    // #at: 08B0
     instruction ( "JP   NZ,08BC",0x08B3 );
     if (( ! FlagZ ))
     {
@@ -19489,7 +19489,7 @@ Control prog_08B0 ()
 
 Control prog_08B3 ()
 {
-    at ( "08B3" );
+    // #at: 08B3
     instruction ( "CALL 09CA",0x08B6 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -19508,7 +19508,7 @@ Control prog_08B3 ()
 
 Control prog_08B6 ()
 {
-    at ( "08B6" );
+    // #at: 08B6
     instruction ( "CALL 1931",0x08B9 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -19527,7 +19527,7 @@ Control prog_08B6 ()
 
 Control prog_08B9 ()
 {
-    at ( "08B9" );
+    // #at: 08B9
     instruction ( "JP   08A9",0x08BC );
     advance ( 10 );
     return jumpDirect ( 0x08A9,prog_08A9 );
@@ -19535,7 +19535,7 @@ Control prog_08B9 ()
 
 Control prog_08BC ()
 {
-    at ( "08BC" );
+    // #at: 08BC
     instruction ( "LD   B,20",0x08BE );
     advance ( 7 );
     B = 0x20;
@@ -19544,7 +19544,7 @@ Control prog_08BC ()
 
 Control prog_08BE ()
 {
-    at ( "08BE" );
+    // #at: 08BE
     instruction ( "LD   HL,271C",0x08C1 );
     advance ( 10 );
     H = 0x27;
@@ -19554,7 +19554,7 @@ Control prog_08BE ()
 
 Control prog_08C1 ()
 {
-    at ( "08C1" );
+    // #at: 08C1
     instruction ( "LD   A,(2067)",0x08C4 );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
@@ -19564,7 +19564,7 @@ Control prog_08C1 ()
 
 Control prog_08C4 ()
 {
-    at ( "08C4" );
+    // #at: 08C4
     instruction ( "RRCA",0x08C5 );
     u8 a1 = A ;
     advance ( 4 );
@@ -19575,7 +19575,7 @@ Control prog_08C4 ()
 
 Control prog_08C5 ()
 {
-    at ( "08C5" );
+    // #at: 08C5
     instruction ( "JP   CY,08CB",0x08C8 );
     if (FlagCY)
     {
@@ -19591,7 +19591,7 @@ Control prog_08C5 ()
 
 Control prog_08C8 ()
 {
-    at ( "08C8" );
+    // #at: 08C8
     instruction ( "LD   HL,391C",0x08CB );
     advance ( 10 );
     H = 0x39;
@@ -19601,7 +19601,7 @@ Control prog_08C8 ()
 
 Control prog_08CB ()
 {
-    at ( "08CB" );
+    // #at: 08CB
     instruction ( "CALL 14CB",0x08CE );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -19620,7 +19620,7 @@ Control prog_08CB ()
 
 Control prog_08CE ()
 {
-    at ( "08CE" );
+    // #at: 08CE
     instruction ( "JP   08A9",0x08D1 );
     advance ( 10 );
     return jumpDirect ( 0x08A9,prog_08A9 );
@@ -19628,7 +19628,7 @@ Control prog_08CE ()
 
 Control prog_08D1 ()
 {
-    at ( "08D1" );
+    // #at: 08D1
     instruction ( "IN   02",0x08D3 );
     advance ( 10 );
     A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_is_pressed ( Dip3_livesLow ) ),1,e1_is_pressed ( Dip5_livesHigh ) ),2,e1_is_pressed ( Tilt ) ),3,e1_is_pressed ( Dip6_extraShipEarly ) ),4,e1_is_pressed ( P2shoot ) ),5,e1_is_pressed ( P2left ) ),6,e1_is_pressed ( P2right ) ),7,e1_is_pressed ( Dip7_coinInfoOff ) );
@@ -19637,7 +19637,7 @@ Control prog_08D1 ()
 
 Control prog_08D3 ()
 {
-    at ( "08D3" );
+    // #at: 08D3
     instruction ( "AND  03",0x08D5 );
     u8 a1 = A ;
     u8 a2 = ( 0x03 & a1 ) ;
@@ -19654,7 +19654,7 @@ Control prog_08D3 ()
 
 Control prog_08D5 ()
 {
-    at ( "08D5" );
+    // #at: 08D5
     instruction ( "ADD  03",0x08D7 );
     u8 a1 = A ;
     u16 a2 = ( ( 0x03 + a1 ) + false ) ;
@@ -19673,7 +19673,7 @@ Control prog_08D5 ()
 
 Control prog_08D7 ()
 {
-    at ( "08D7" );
+    // #at: 08D7
     instruction ( "RET",0x08D8 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -19691,7 +19691,7 @@ Control prog_08D7 ()
 
 Control prog_08D8 ()
 {
-    at ( "08D8" );
+    // #at: 08D8
     instruction ( "LD   A,(2082)",0x08DB );
     u8 a1 = e8_read_mem ( 0x2082 ) ;
     advance ( 13 );
@@ -19701,7 +19701,7 @@ Control prog_08D8 ()
 
 Control prog_08DB ()
 {
-    at ( "08DB" );
+    // #at: 08DB
     instruction ( "CP   09",0x08DD );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x09 ) ) ) + ( ! false ) ) ;
@@ -19719,7 +19719,7 @@ Control prog_08DB ()
 
 Control prog_08DD ()
 {
-    at ( "08DD" );
+    // #at: 08DD
     instruction ( "RET  NC",0x08DE );
     if (( ! FlagCY ))
     {
@@ -19745,7 +19745,7 @@ Control prog_08DD ()
 
 Control prog_08DE ()
 {
-    at ( "08DE" );
+    // #at: 08DE
     instruction ( "LD   A,FB",0x08E0 );
     advance ( 7 );
     A = 0xFB;
@@ -19754,7 +19754,7 @@ Control prog_08DE ()
 
 Control prog_08E0 ()
 {
-    at ( "08E0" );
+    // #at: 08E0
     instruction ( "LD   (207E),A",0x08E3 );
     u8 a1 = A ;
     mem_write ( 0x207E,a1 );
@@ -19764,7 +19764,7 @@ Control prog_08E0 ()
 
 Control prog_08E3 ()
 {
-    at ( "08E3" );
+    // #at: 08E3
     instruction ( "RET",0x08E4 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -19782,7 +19782,7 @@ Control prog_08E3 ()
 
 Control prog_08E4 ()
 {
-    at ( "08E4" );
+    // #at: 08E4
     instruction ( "LD   A,(20CE)",0x08E7 );
     u8 a1 = e8_read_mem ( 0x20CE ) ;
     advance ( 13 );
@@ -19792,7 +19792,7 @@ Control prog_08E4 ()
 
 Control prog_08E7 ()
 {
-    at ( "08E7" );
+    // #at: 08E7
     instruction ( "AND  A",0x08E8 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -19810,7 +19810,7 @@ Control prog_08E7 ()
 
 Control prog_08E8 ()
 {
-    at ( "08E8" );
+    // #at: 08E8
     instruction ( "RET  NZ",0x08E9 );
     if (( ! FlagZ ))
     {
@@ -19836,7 +19836,7 @@ Control prog_08E8 ()
 
 Control prog_08E9 ()
 {
-    at ( "08E9" );
+    // #at: 08E9
     instruction ( "LD   HL,391C",0x08EC );
     advance ( 10 );
     H = 0x39;
@@ -19846,7 +19846,7 @@ Control prog_08E9 ()
 
 Control prog_08EC ()
 {
-    at ( "08EC" );
+    // #at: 08EC
     instruction ( "LD   B,20",0x08EE );
     advance ( 7 );
     B = 0x20;
@@ -19855,7 +19855,7 @@ Control prog_08EC ()
 
 Control prog_08EE ()
 {
-    at ( "08EE" );
+    // #at: 08EE
     instruction ( "JP   14CB",0x08F1 );
     advance ( 10 );
     return jumpDirect ( 0x14CB,prog_14CB );
@@ -19863,7 +19863,7 @@ Control prog_08EE ()
 
 Control prog_08F1 ()
 {
-    at ( "08F1" );
+    // #at: 08F1
     instruction ( "LD   C,03",0x08F3 );
     advance ( 7 );
     C = 0x03;
@@ -19872,7 +19872,7 @@ Control prog_08F1 ()
 
 Control prog_08F3 ()
 {
-    at ( "08F3" );
+    // #at: 08F3
     instruction ( "LD   A,(DE)",0x08F4 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -19884,7 +19884,7 @@ Control prog_08F3 ()
 
 Control prog_08F4 ()
 {
-    at ( "08F4" );
+    // #at: 08F4
     instruction ( "PUSH DE",0x08F5 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -19904,7 +19904,7 @@ Control prog_08F4 ()
 
 Control prog_08F5 ()
 {
-    at ( "08F5" );
+    // #at: 08F5
     instruction ( "CALL 08FF",0x08F8 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -19923,7 +19923,7 @@ Control prog_08F5 ()
 
 Control prog_08F8 ()
 {
-    at ( "08F8" );
+    // #at: 08F8
     instruction ( "POP  DE",0x08F9 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -19943,7 +19943,7 @@ Control prog_08F8 ()
 
 Control prog_08F9 ()
 {
-    at ( "08F9" );
+    // #at: 08F9
     instruction ( "INC  DE",0x08FA );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -19956,7 +19956,7 @@ Control prog_08F9 ()
 
 Control prog_08FA ()
 {
-    at ( "08FA" );
+    // #at: 08FA
     instruction ( "DEC  C",0x08FB );
     u8 a1 = C ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -19974,7 +19974,7 @@ Control prog_08FA ()
 
 Control prog_08FB ()
 {
-    at ( "08FB" );
+    // #at: 08FB
     instruction ( "JP   NZ,08F3",0x08FE );
     if (( ! FlagZ ))
     {
@@ -19990,7 +19990,7 @@ Control prog_08FB ()
 
 Control prog_08FE ()
 {
-    at ( "08FE" );
+    // #at: 08FE
     instruction ( "RET",0x08FF );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -20008,7 +20008,7 @@ Control prog_08FE ()
 
 Control prog_08FF ()
 {
-    at ( "08FF" );
+    // #at: 08FF
     instruction ( "LD   DE,1E00",0x0902 );
     advance ( 10 );
     D = 0x1E;
@@ -20018,7 +20018,7 @@ Control prog_08FF ()
 
 Control prog_0902 ()
 {
-    at ( "0902" );
+    // #at: 0902
     instruction ( "PUSH HL",0x0903 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -20038,7 +20038,7 @@ Control prog_0902 ()
 
 Control prog_0903 ()
 {
-    at ( "0903" );
+    // #at: 0903
     instruction ( "LD   H,00",0x0905 );
     advance ( 7 );
     H = 0x00;
@@ -20047,7 +20047,7 @@ Control prog_0903 ()
 
 Control prog_0905 ()
 {
-    at ( "0905" );
+    // #at: 0905
     instruction ( "LD   L,A",0x0906 );
     u8 a1 = A ;
     advance ( 5 );
@@ -20057,7 +20057,7 @@ Control prog_0905 ()
 
 Control prog_0906 ()
 {
-    at ( "0906" );
+    // #at: 0906
     instruction ( "ADD  HL,HL",0x0907 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -20073,7 +20073,7 @@ Control prog_0906 ()
 
 Control prog_0907 ()
 {
-    at ( "0907" );
+    // #at: 0907
     instruction ( "ADD  HL,HL",0x0908 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -20089,7 +20089,7 @@ Control prog_0907 ()
 
 Control prog_0908 ()
 {
-    at ( "0908" );
+    // #at: 0908
     instruction ( "ADD  HL,HL",0x0909 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -20105,7 +20105,7 @@ Control prog_0908 ()
 
 Control prog_0909 ()
 {
-    at ( "0909" );
+    // #at: 0909
     instruction ( "ADD  HL,DE",0x090A );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -20121,7 +20121,7 @@ Control prog_0909 ()
 
 Control prog_090A ()
 {
-    at ( "090A" );
+    // #at: 090A
     instruction ( "EX   DE,HL",0x090B );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -20137,7 +20137,7 @@ Control prog_090A ()
 
 Control prog_090B ()
 {
-    at ( "090B" );
+    // #at: 090B
     instruction ( "POP  HL",0x090C );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -20157,7 +20157,7 @@ Control prog_090B ()
 
 Control prog_090C ()
 {
-    at ( "090C" );
+    // #at: 090C
     instruction ( "LD   B,08",0x090E );
     advance ( 7 );
     B = 0x08;
@@ -20166,7 +20166,7 @@ Control prog_090C ()
 
 Control prog_090E ()
 {
-    at ( "090E" );
+    // #at: 090E
     instruction ( "OUT  06",0x0910 );
     u8 a1 = A ;
     unknown_output ( 6,a1 );
@@ -20176,7 +20176,7 @@ Control prog_090E ()
 
 Control prog_0910 ()
 {
-    at ( "0910" );
+    // #at: 0910
     instruction ( "JP   1439",0x0913 );
     advance ( 10 );
     return jumpDirect ( 0x1439,prog_1439 );
@@ -20184,7 +20184,7 @@ Control prog_0910 ()
 
 Control prog_0913 ()
 {
-    at ( "0913" );
+    // #at: 0913
     instruction ( "LD   A,(2009)",0x0916 );
     u8 a1 = e8_read_mem ( 0x2009 ) ;
     advance ( 13 );
@@ -20194,7 +20194,7 @@ Control prog_0913 ()
 
 Control prog_0916 ()
 {
-    at ( "0916" );
+    // #at: 0916
     instruction ( "CP   78",0x0918 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x78 ) ) ) + ( ! false ) ) ;
@@ -20212,7 +20212,7 @@ Control prog_0916 ()
 
 Control prog_0918 ()
 {
-    at ( "0918" );
+    // #at: 0918
     instruction ( "RET  NC",0x0919 );
     if (( ! FlagCY ))
     {
@@ -20238,7 +20238,7 @@ Control prog_0918 ()
 
 Control prog_0919 ()
 {
-    at ( "0919" );
+    // #at: 0919
     instruction ( "LD   HL,(2091)",0x091C );
     u8 a1 = e8_read_mem ( 0x2091 ) ;
     u8 a2 = e8_read_mem ( 0x2092 ) ;
@@ -20250,7 +20250,7 @@ Control prog_0919 ()
 
 Control prog_091C ()
 {
-    at ( "091C" );
+    // #at: 091C
     instruction ( "LD   A,L",0x091D );
     u8 a1 = L ;
     advance ( 5 );
@@ -20260,7 +20260,7 @@ Control prog_091C ()
 
 Control prog_091D ()
 {
-    at ( "091D" );
+    // #at: 091D
     instruction ( "OR   H",0x091E );
     u8 a1 = H ;
     u8 a2 = A ;
@@ -20277,7 +20277,7 @@ Control prog_091D ()
 
 Control prog_091E ()
 {
-    at ( "091E" );
+    // #at: 091E
     instruction ( "JP   NZ,0929",0x0921 );
     if (( ! FlagZ ))
     {
@@ -20293,7 +20293,7 @@ Control prog_091E ()
 
 Control prog_0921 ()
 {
-    at ( "0921" );
+    // #at: 0921
     instruction ( "LD   HL,0600",0x0924 );
     advance ( 10 );
     H = 0x06;
@@ -20303,7 +20303,7 @@ Control prog_0921 ()
 
 Control prog_0924 ()
 {
-    at ( "0924" );
+    // #at: 0924
     instruction ( "LD   A,01",0x0926 );
     advance ( 7 );
     A = 0x01;
@@ -20312,7 +20312,7 @@ Control prog_0924 ()
 
 Control prog_0926 ()
 {
-    at ( "0926" );
+    // #at: 0926
     instruction ( "LD   (2083),A",0x0929 );
     u8 a1 = A ;
     mem_write ( 0x2083,a1 );
@@ -20322,7 +20322,7 @@ Control prog_0926 ()
 
 Control prog_0929 ()
 {
-    at ( "0929" );
+    // #at: 0929
     instruction ( "DEC  HL",0x092A );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -20335,7 +20335,7 @@ Control prog_0929 ()
 
 Control prog_092A ()
 {
-    at ( "092A" );
+    // #at: 092A
     instruction ( "LD   (2091),HL",0x092D );
     u8 a1 = L ;
     mem_write ( 0x2091,a1 );
@@ -20347,7 +20347,7 @@ Control prog_092A ()
 
 Control prog_092D ()
 {
-    at ( "092D" );
+    // #at: 092D
     instruction ( "RET",0x092E );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -20365,7 +20365,7 @@ Control prog_092D ()
 
 Control prog_092E ()
 {
-    at ( "092E" );
+    // #at: 092E
     instruction ( "CALL 1611",0x0931 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -20384,7 +20384,7 @@ Control prog_092E ()
 
 Control prog_0931 ()
 {
-    at ( "0931" );
+    // #at: 0931
     instruction ( "LD   L,FF",0x0933 );
     advance ( 7 );
     L = 0xFF;
@@ -20393,7 +20393,7 @@ Control prog_0931 ()
 
 Control prog_0933 ()
 {
-    at ( "0933" );
+    // #at: 0933
     instruction ( "LD   A,(HL)",0x0934 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -20405,7 +20405,7 @@ Control prog_0933 ()
 
 Control prog_0934 ()
 {
-    at ( "0934" );
+    // #at: 0934
     instruction ( "RET",0x0935 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -20423,7 +20423,7 @@ Control prog_0934 ()
 
 Control prog_0935 ()
 {
-    at ( "0935" );
+    // #at: 0935
     instruction ( "CALL 1910",0x0938 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -20442,7 +20442,7 @@ Control prog_0935 ()
 
 Control prog_0938 ()
 {
-    at ( "0938" );
+    // #at: 0938
     instruction ( "DEC  HL",0x0939 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -20455,7 +20455,7 @@ Control prog_0938 ()
 
 Control prog_0939 ()
 {
-    at ( "0939" );
+    // #at: 0939
     instruction ( "DEC  HL",0x093A );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -20468,7 +20468,7 @@ Control prog_0939 ()
 
 Control prog_093A ()
 {
-    at ( "093A" );
+    // #at: 093A
     instruction ( "LD   A,(HL)",0x093B );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -20480,7 +20480,7 @@ Control prog_093A ()
 
 Control prog_093B ()
 {
-    at ( "093B" );
+    // #at: 093B
     instruction ( "AND  A",0x093C );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -20498,7 +20498,7 @@ Control prog_093B ()
 
 Control prog_093C ()
 {
-    at ( "093C" );
+    // #at: 093C
     instruction ( "RET  Z",0x093D );
     if (FlagZ)
     {
@@ -20524,7 +20524,7 @@ Control prog_093C ()
 
 Control prog_093D ()
 {
-    at ( "093D" );
+    // #at: 093D
     instruction ( "LD   B,15",0x093F );
     advance ( 7 );
     B = 0x15;
@@ -20533,7 +20533,7 @@ Control prog_093D ()
 
 Control prog_093F ()
 {
-    at ( "093F" );
+    // #at: 093F
     instruction ( "IN   02",0x0941 );
     advance ( 10 );
     A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_is_pressed ( Dip3_livesLow ) ),1,e1_is_pressed ( Dip5_livesHigh ) ),2,e1_is_pressed ( Tilt ) ),3,e1_is_pressed ( Dip6_extraShipEarly ) ),4,e1_is_pressed ( P2shoot ) ),5,e1_is_pressed ( P2left ) ),6,e1_is_pressed ( P2right ) ),7,e1_is_pressed ( Dip7_coinInfoOff ) );
@@ -20542,7 +20542,7 @@ Control prog_093F ()
 
 Control prog_0941 ()
 {
-    at ( "0941" );
+    // #at: 0941
     instruction ( "AND  08",0x0943 );
     u8 a1 = A ;
     u8 a2 = ( 0x08 & a1 ) ;
@@ -20559,7 +20559,7 @@ Control prog_0941 ()
 
 Control prog_0943 ()
 {
-    at ( "0943" );
+    // #at: 0943
     instruction ( "JP   Z,0948",0x0946 );
     if (FlagZ)
     {
@@ -20575,7 +20575,7 @@ Control prog_0943 ()
 
 Control prog_0946 ()
 {
-    at ( "0946" );
+    // #at: 0946
     instruction ( "LD   B,10",0x0948 );
     advance ( 7 );
     B = 0x10;
@@ -20584,7 +20584,7 @@ Control prog_0946 ()
 
 Control prog_0948 ()
 {
-    at ( "0948" );
+    // #at: 0948
     instruction ( "CALL 09CA",0x094B );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -20603,7 +20603,7 @@ Control prog_0948 ()
 
 Control prog_094B ()
 {
-    at ( "094B" );
+    // #at: 094B
     instruction ( "INC  HL",0x094C );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -20616,7 +20616,7 @@ Control prog_094B ()
 
 Control prog_094C ()
 {
-    at ( "094C" );
+    // #at: 094C
     instruction ( "LD   A,(HL)",0x094D );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -20628,7 +20628,7 @@ Control prog_094C ()
 
 Control prog_094D ()
 {
-    at ( "094D" );
+    // #at: 094D
     instruction ( "CP   B",0x094E );
     u8 a1 = A ;
     u8 a2 = B ;
@@ -20647,7 +20647,7 @@ Control prog_094D ()
 
 Control prog_094E ()
 {
-    at ( "094E" );
+    // #at: 094E
     instruction ( "RET  CY",0x094F );
     if (FlagCY)
     {
@@ -20673,7 +20673,7 @@ Control prog_094E ()
 
 Control prog_094F ()
 {
-    at ( "094F" );
+    // #at: 094F
     instruction ( "CALL 092E",0x0952 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -20692,7 +20692,7 @@ Control prog_094F ()
 
 Control prog_0952 ()
 {
-    at ( "0952" );
+    // #at: 0952
     instruction ( "INC  (HL)",0x0953 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -20714,7 +20714,7 @@ Control prog_0952 ()
 
 Control prog_0953 ()
 {
-    at ( "0953" );
+    // #at: 0953
     instruction ( "LD   A,(HL)",0x0954 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -20726,7 +20726,7 @@ Control prog_0953 ()
 
 Control prog_0954 ()
 {
-    at ( "0954" );
+    // #at: 0954
     instruction ( "PUSH PSW",0x0955 );
     u8 a1 = A ;
     u8 a2 = SPH ;
@@ -20745,7 +20745,7 @@ Control prog_0954 ()
 
 Control prog_0955 ()
 {
-    at ( "0955" );
+    // #at: 0955
     instruction ( "LD   HL,2501",0x0958 );
     advance ( 10 );
     H = 0x25;
@@ -20755,7 +20755,7 @@ Control prog_0955 ()
 
 Control prog_0958 ()
 {
-    at ( "0958" );
+    // #at: 0958
     instruction ( "INC  H",0x0959 );
     u8 a1 = H ;
     u16 a2 = ( ( a1 + 0x00 ) + true ) ;
@@ -20773,7 +20773,7 @@ Control prog_0958 ()
 
 Control prog_0959 ()
 {
-    at ( "0959" );
+    // #at: 0959
     instruction ( "INC  H",0x095A );
     u8 a1 = H ;
     u16 a2 = ( ( a1 + 0x00 ) + true ) ;
@@ -20791,7 +20791,7 @@ Control prog_0959 ()
 
 Control prog_095A ()
 {
-    at ( "095A" );
+    // #at: 095A
     instruction ( "DEC  A",0x095B );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -20809,7 +20809,7 @@ Control prog_095A ()
 
 Control prog_095B ()
 {
-    at ( "095B" );
+    // #at: 095B
     instruction ( "JP   NZ,0958",0x095E );
     if (( ! FlagZ ))
     {
@@ -20825,7 +20825,7 @@ Control prog_095B ()
 
 Control prog_095E ()
 {
-    at ( "095E" );
+    // #at: 095E
     instruction ( "LD   B,10",0x0960 );
     advance ( 7 );
     B = 0x10;
@@ -20834,7 +20834,7 @@ Control prog_095E ()
 
 Control prog_0960 ()
 {
-    at ( "0960" );
+    // #at: 0960
     instruction ( "LD   DE,1C60",0x0963 );
     advance ( 10 );
     D = 0x1C;
@@ -20844,7 +20844,7 @@ Control prog_0960 ()
 
 Control prog_0963 ()
 {
-    at ( "0963" );
+    // #at: 0963
     instruction ( "CALL 1439",0x0966 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -20863,7 +20863,7 @@ Control prog_0963 ()
 
 Control prog_0966 ()
 {
-    at ( "0966" );
+    // #at: 0966
     instruction ( "POP  PSW",0x0967 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -20887,7 +20887,7 @@ Control prog_0966 ()
 
 Control prog_0967 ()
 {
-    at ( "0967" );
+    // #at: 0967
     instruction ( "INC  A",0x0968 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + 0x00 ) + true ) ;
@@ -20905,7 +20905,7 @@ Control prog_0967 ()
 
 Control prog_0968 ()
 {
-    at ( "0968" );
+    // #at: 0968
     instruction ( "CALL 1A8B",0x096B );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -20924,7 +20924,7 @@ Control prog_0968 ()
 
 Control prog_096B ()
 {
-    at ( "096B" );
+    // #at: 096B
     instruction ( "CALL 1910",0x096E );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -20943,7 +20943,7 @@ Control prog_096B ()
 
 Control prog_096E ()
 {
-    at ( "096E" );
+    // #at: 096E
     instruction ( "DEC  HL",0x096F );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -20956,7 +20956,7 @@ Control prog_096E ()
 
 Control prog_096F ()
 {
-    at ( "096F" );
+    // #at: 096F
     instruction ( "DEC  HL",0x0970 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -20969,7 +20969,7 @@ Control prog_096F ()
 
 Control prog_0970 ()
 {
-    at ( "0970" );
+    // #at: 0970
     instruction ( "LD   (HL),00",0x0972 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -20980,7 +20980,7 @@ Control prog_0970 ()
 
 Control prog_0972 ()
 {
-    at ( "0972" );
+    // #at: 0972
     instruction ( "LD   A,FF",0x0974 );
     advance ( 7 );
     A = 0xFF;
@@ -20989,7 +20989,7 @@ Control prog_0972 ()
 
 Control prog_0974 ()
 {
-    at ( "0974" );
+    // #at: 0974
     instruction ( "LD   (2099),A",0x0977 );
     u8 a1 = A ;
     mem_write ( 0x2099,a1 );
@@ -20999,7 +20999,7 @@ Control prog_0974 ()
 
 Control prog_0977 ()
 {
-    at ( "0977" );
+    // #at: 0977
     instruction ( "LD   B,10",0x0979 );
     advance ( 7 );
     B = 0x10;
@@ -21008,7 +21008,7 @@ Control prog_0977 ()
 
 Control prog_0979 ()
 {
-    at ( "0979" );
+    // #at: 0979
     instruction ( "JP   18FA",0x097C );
     advance ( 10 );
     return jumpDirect ( 0x18FA,prog_18FA );
@@ -21016,7 +21016,7 @@ Control prog_0979 ()
 
 Control prog_097C ()
 {
-    at ( "097C" );
+    // #at: 097C
     instruction ( "LD   HL,1DA0",0x097F );
     advance ( 10 );
     H = 0x1D;
@@ -21026,7 +21026,7 @@ Control prog_097C ()
 
 Control prog_097F ()
 {
-    at ( "097F" );
+    // #at: 097F
     instruction ( "CP   02",0x0981 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x02 ) ) ) + ( ! false ) ) ;
@@ -21044,7 +21044,7 @@ Control prog_097F ()
 
 Control prog_0981 ()
 {
-    at ( "0981" );
+    // #at: 0981
     instruction ( "RET  CY",0x0982 );
     if (FlagCY)
     {
@@ -21070,7 +21070,7 @@ Control prog_0981 ()
 
 Control prog_0982 ()
 {
-    at ( "0982" );
+    // #at: 0982
     instruction ( "INC  HL",0x0983 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -21083,7 +21083,7 @@ Control prog_0982 ()
 
 Control prog_0983 ()
 {
-    at ( "0983" );
+    // #at: 0983
     instruction ( "CP   04",0x0985 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x04 ) ) ) + ( ! false ) ) ;
@@ -21101,7 +21101,7 @@ Control prog_0983 ()
 
 Control prog_0985 ()
 {
-    at ( "0985" );
+    // #at: 0985
     instruction ( "RET  CY",0x0986 );
     if (FlagCY)
     {
@@ -21127,7 +21127,7 @@ Control prog_0985 ()
 
 Control prog_0986 ()
 {
-    at ( "0986" );
+    // #at: 0986
     instruction ( "INC  HL",0x0987 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -21140,7 +21140,7 @@ Control prog_0986 ()
 
 Control prog_0987 ()
 {
-    at ( "0987" );
+    // #at: 0987
     instruction ( "RET",0x0988 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -21158,7 +21158,7 @@ Control prog_0987 ()
 
 Control prog_0988 ()
 {
-    at ( "0988" );
+    // #at: 0988
     instruction ( "CALL 09CA",0x098B );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -21177,7 +21177,7 @@ Control prog_0988 ()
 
 Control prog_098B ()
 {
-    at ( "098B" );
+    // #at: 098B
     instruction ( "LD   A,(20F1)",0x098E );
     u8 a1 = e8_read_mem ( 0x20F1 ) ;
     advance ( 13 );
@@ -21187,7 +21187,7 @@ Control prog_098B ()
 
 Control prog_098E ()
 {
-    at ( "098E" );
+    // #at: 098E
     instruction ( "AND  A",0x098F );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -21205,7 +21205,7 @@ Control prog_098E ()
 
 Control prog_098F ()
 {
-    at ( "098F" );
+    // #at: 098F
     instruction ( "RET  Z",0x0990 );
     if (FlagZ)
     {
@@ -21231,7 +21231,7 @@ Control prog_098F ()
 
 Control prog_0990 ()
 {
-    at ( "0990" );
+    // #at: 0990
     instruction ( "XOR  A",0x0991 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -21248,7 +21248,7 @@ Control prog_0990 ()
 
 Control prog_0991 ()
 {
-    at ( "0991" );
+    // #at: 0991
     instruction ( "LD   (20F1),A",0x0994 );
     u8 a1 = A ;
     mem_write ( 0x20F1,a1 );
@@ -21258,7 +21258,7 @@ Control prog_0991 ()
 
 Control prog_0994 ()
 {
-    at ( "0994" );
+    // #at: 0994
     instruction ( "PUSH HL",0x0995 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -21278,7 +21278,7 @@ Control prog_0994 ()
 
 Control prog_0995 ()
 {
-    at ( "0995" );
+    // #at: 0995
     instruction ( "LD   HL,(20F2)",0x0998 );
     u8 a1 = e8_read_mem ( 0x20F2 ) ;
     u8 a2 = e8_read_mem ( 0x20F3 ) ;
@@ -21290,7 +21290,7 @@ Control prog_0995 ()
 
 Control prog_0998 ()
 {
-    at ( "0998" );
+    // #at: 0998
     instruction ( "EX   DE,HL",0x0999 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -21306,7 +21306,7 @@ Control prog_0998 ()
 
 Control prog_0999 ()
 {
-    at ( "0999" );
+    // #at: 0999
     instruction ( "POP  HL",0x099A );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -21326,7 +21326,7 @@ Control prog_0999 ()
 
 Control prog_099A ()
 {
-    at ( "099A" );
+    // #at: 099A
     instruction ( "LD   A,(HL)",0x099B );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -21338,7 +21338,7 @@ Control prog_099A ()
 
 Control prog_099B ()
 {
-    at ( "099B" );
+    // #at: 099B
     instruction ( "ADD  E",0x099C );
     u8 a1 = E ;
     u8 a2 = A ;
@@ -21358,7 +21358,7 @@ Control prog_099B ()
 
 Control prog_099C ()
 {
-    at ( "099C" );
+    // #at: 099C
     instruction ( "DAA",0x099D );
     u8 a1 = A ;
     u8 a2 = ( a1 & 0x0F ) ;
@@ -21379,7 +21379,7 @@ Control prog_099C ()
 
 Control prog_099D ()
 {
-    at ( "099D" );
+    // #at: 099D
     instruction ( "LD   (HL),A",0x099E );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -21391,7 +21391,7 @@ Control prog_099D ()
 
 Control prog_099E ()
 {
-    at ( "099E" );
+    // #at: 099E
     instruction ( "LD   E,A",0x099F );
     u8 a1 = A ;
     advance ( 5 );
@@ -21401,7 +21401,7 @@ Control prog_099E ()
 
 Control prog_099F ()
 {
-    at ( "099F" );
+    // #at: 099F
     instruction ( "INC  HL",0x09A0 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -21414,7 +21414,7 @@ Control prog_099F ()
 
 Control prog_09A0 ()
 {
-    at ( "09A0" );
+    // #at: 09A0
     instruction ( "LD   A,(HL)",0x09A1 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -21426,7 +21426,7 @@ Control prog_09A0 ()
 
 Control prog_09A1 ()
 {
-    at ( "09A1" );
+    // #at: 09A1
     instruction ( "ADC  D",0x09A2 );
     u8 a1 = D ;
     u8 a2 = A ;
@@ -21446,7 +21446,7 @@ Control prog_09A1 ()
 
 Control prog_09A2 ()
 {
-    at ( "09A2" );
+    // #at: 09A2
     instruction ( "DAA",0x09A3 );
     u8 a1 = A ;
     u8 a2 = ( a1 & 0x0F ) ;
@@ -21467,7 +21467,7 @@ Control prog_09A2 ()
 
 Control prog_09A3 ()
 {
-    at ( "09A3" );
+    // #at: 09A3
     instruction ( "LD   (HL),A",0x09A4 );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -21479,7 +21479,7 @@ Control prog_09A3 ()
 
 Control prog_09A4 ()
 {
-    at ( "09A4" );
+    // #at: 09A4
     instruction ( "LD   D,A",0x09A5 );
     u8 a1 = A ;
     advance ( 5 );
@@ -21489,7 +21489,7 @@ Control prog_09A4 ()
 
 Control prog_09A5 ()
 {
-    at ( "09A5" );
+    // #at: 09A5
     instruction ( "INC  HL",0x09A6 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -21502,7 +21502,7 @@ Control prog_09A5 ()
 
 Control prog_09A6 ()
 {
-    at ( "09A6" );
+    // #at: 09A6
     instruction ( "LD   A,(HL)",0x09A7 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -21514,7 +21514,7 @@ Control prog_09A6 ()
 
 Control prog_09A7 ()
 {
-    at ( "09A7" );
+    // #at: 09A7
     instruction ( "INC  HL",0x09A8 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -21527,7 +21527,7 @@ Control prog_09A7 ()
 
 Control prog_09A8 ()
 {
-    at ( "09A8" );
+    // #at: 09A8
     instruction ( "LD   H,(HL)",0x09A9 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -21539,7 +21539,7 @@ Control prog_09A8 ()
 
 Control prog_09A9 ()
 {
-    at ( "09A9" );
+    // #at: 09A9
     instruction ( "LD   L,A",0x09AA );
     u8 a1 = A ;
     advance ( 5 );
@@ -21549,7 +21549,7 @@ Control prog_09A9 ()
 
 Control prog_09AA ()
 {
-    at ( "09AA" );
+    // #at: 09AA
     instruction ( "JP   09AD",0x09AD );
     advance ( 10 );
     return jumpDirect ( 0x09AD,prog_09AD );
@@ -21557,7 +21557,7 @@ Control prog_09AA ()
 
 Control prog_09AD ()
 {
-    at ( "09AD" );
+    // #at: 09AD
     instruction ( "LD   A,D",0x09AE );
     u8 a1 = D ;
     advance ( 5 );
@@ -21567,7 +21567,7 @@ Control prog_09AD ()
 
 Control prog_09AE ()
 {
-    at ( "09AE" );
+    // #at: 09AE
     instruction ( "CALL 09B2",0x09B1 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -21586,7 +21586,7 @@ Control prog_09AE ()
 
 Control prog_09B1 ()
 {
-    at ( "09B1" );
+    // #at: 09B1
     instruction ( "LD   A,E",0x09B2 );
     u8 a1 = E ;
     advance ( 5 );
@@ -21596,7 +21596,7 @@ Control prog_09B1 ()
 
 Control prog_09B2 ()
 {
-    at ( "09B2" );
+    // #at: 09B2
     instruction ( "PUSH DE",0x09B3 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -21616,7 +21616,7 @@ Control prog_09B2 ()
 
 Control prog_09B3 ()
 {
-    at ( "09B3" );
+    // #at: 09B3
     instruction ( "PUSH PSW",0x09B4 );
     u8 a1 = A ;
     u8 a2 = SPH ;
@@ -21635,7 +21635,7 @@ Control prog_09B3 ()
 
 Control prog_09B4 ()
 {
-    at ( "09B4" );
+    // #at: 09B4
     instruction ( "RRCA",0x09B5 );
     u8 a1 = A ;
     advance ( 4 );
@@ -21646,7 +21646,7 @@ Control prog_09B4 ()
 
 Control prog_09B5 ()
 {
-    at ( "09B5" );
+    // #at: 09B5
     instruction ( "RRCA",0x09B6 );
     u8 a1 = A ;
     advance ( 4 );
@@ -21657,7 +21657,7 @@ Control prog_09B5 ()
 
 Control prog_09B6 ()
 {
-    at ( "09B6" );
+    // #at: 09B6
     instruction ( "RRCA",0x09B7 );
     u8 a1 = A ;
     advance ( 4 );
@@ -21668,7 +21668,7 @@ Control prog_09B6 ()
 
 Control prog_09B7 ()
 {
-    at ( "09B7" );
+    // #at: 09B7
     instruction ( "RRCA",0x09B8 );
     u8 a1 = A ;
     advance ( 4 );
@@ -21679,7 +21679,7 @@ Control prog_09B7 ()
 
 Control prog_09B8 ()
 {
-    at ( "09B8" );
+    // #at: 09B8
     instruction ( "AND  0F",0x09BA );
     u8 a1 = A ;
     u8 a2 = ( 0x0F & a1 ) ;
@@ -21696,7 +21696,7 @@ Control prog_09B8 ()
 
 Control prog_09BA ()
 {
-    at ( "09BA" );
+    // #at: 09BA
     instruction ( "CALL 09C5",0x09BD );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -21715,7 +21715,7 @@ Control prog_09BA ()
 
 Control prog_09BD ()
 {
-    at ( "09BD" );
+    // #at: 09BD
     instruction ( "POP  PSW",0x09BE );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -21739,7 +21739,7 @@ Control prog_09BD ()
 
 Control prog_09BE ()
 {
-    at ( "09BE" );
+    // #at: 09BE
     instruction ( "AND  0F",0x09C0 );
     u8 a1 = A ;
     u8 a2 = ( 0x0F & a1 ) ;
@@ -21756,7 +21756,7 @@ Control prog_09BE ()
 
 Control prog_09C0 ()
 {
-    at ( "09C0" );
+    // #at: 09C0
     instruction ( "CALL 09C5",0x09C3 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -21775,7 +21775,7 @@ Control prog_09C0 ()
 
 Control prog_09C3 ()
 {
-    at ( "09C3" );
+    // #at: 09C3
     instruction ( "POP  DE",0x09C4 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -21795,7 +21795,7 @@ Control prog_09C3 ()
 
 Control prog_09C4 ()
 {
-    at ( "09C4" );
+    // #at: 09C4
     instruction ( "RET",0x09C5 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -21813,7 +21813,7 @@ Control prog_09C4 ()
 
 Control prog_09C5 ()
 {
-    at ( "09C5" );
+    // #at: 09C5
     instruction ( "ADD  1A",0x09C7 );
     u8 a1 = A ;
     u16 a2 = ( ( 0x1A + a1 ) + false ) ;
@@ -21832,7 +21832,7 @@ Control prog_09C5 ()
 
 Control prog_09C7 ()
 {
-    at ( "09C7" );
+    // #at: 09C7
     instruction ( "JP   08FF",0x09CA );
     advance ( 10 );
     return jumpDirect ( 0x08FF,prog_08FF );
@@ -21840,7 +21840,7 @@ Control prog_09C7 ()
 
 Control prog_09CA ()
 {
-    at ( "09CA" );
+    // #at: 09CA
     instruction ( "LD   A,(2067)",0x09CD );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
@@ -21850,7 +21850,7 @@ Control prog_09CA ()
 
 Control prog_09CD ()
 {
-    at ( "09CD" );
+    // #at: 09CD
     instruction ( "RRCA",0x09CE );
     u8 a1 = A ;
     advance ( 4 );
@@ -21861,7 +21861,7 @@ Control prog_09CD ()
 
 Control prog_09CE ()
 {
-    at ( "09CE" );
+    // #at: 09CE
     instruction ( "LD   HL,20F8",0x09D1 );
     advance ( 10 );
     H = 0x20;
@@ -21871,7 +21871,7 @@ Control prog_09CE ()
 
 Control prog_09D1 ()
 {
-    at ( "09D1" );
+    // #at: 09D1
     instruction ( "RET  CY",0x09D2 );
     if (FlagCY)
     {
@@ -21897,7 +21897,7 @@ Control prog_09D1 ()
 
 Control prog_09D2 ()
 {
-    at ( "09D2" );
+    // #at: 09D2
     instruction ( "LD   HL,20FC",0x09D5 );
     advance ( 10 );
     H = 0x20;
@@ -21907,7 +21907,7 @@ Control prog_09D2 ()
 
 Control prog_09D5 ()
 {
-    at ( "09D5" );
+    // #at: 09D5
     instruction ( "RET",0x09D6 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -21925,7 +21925,7 @@ Control prog_09D5 ()
 
 Control prog_09D6 ()
 {
-    at ( "09D6" );
+    // #at: 09D6
     instruction ( "LD   HL,2402",0x09D9 );
     advance ( 10 );
     H = 0x24;
@@ -21935,7 +21935,7 @@ Control prog_09D6 ()
 
 Control prog_09D9 ()
 {
-    at ( "09D9" );
+    // #at: 09D9
     instruction ( "LD   (HL),00",0x09DB );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -21946,7 +21946,7 @@ Control prog_09D9 ()
 
 Control prog_09DB ()
 {
-    at ( "09DB" );
+    // #at: 09DB
     instruction ( "INC  HL",0x09DC );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -21959,7 +21959,7 @@ Control prog_09DB ()
 
 Control prog_09DC ()
 {
-    at ( "09DC" );
+    // #at: 09DC
     instruction ( "LD   A,L",0x09DD );
     u8 a1 = L ;
     advance ( 5 );
@@ -21969,7 +21969,7 @@ Control prog_09DC ()
 
 Control prog_09DD ()
 {
-    at ( "09DD" );
+    // #at: 09DD
     instruction ( "AND  1F",0x09DF );
     u8 a1 = A ;
     u8 a2 = ( 0x1F & a1 ) ;
@@ -21986,7 +21986,7 @@ Control prog_09DD ()
 
 Control prog_09DF ()
 {
-    at ( "09DF" );
+    // #at: 09DF
     instruction ( "CP   1C",0x09E1 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x1C ) ) ) + ( ! false ) ) ;
@@ -22004,7 +22004,7 @@ Control prog_09DF ()
 
 Control prog_09E1 ()
 {
-    at ( "09E1" );
+    // #at: 09E1
     instruction ( "JP   CY,09E8",0x09E4 );
     if (FlagCY)
     {
@@ -22020,7 +22020,7 @@ Control prog_09E1 ()
 
 Control prog_09E4 ()
 {
-    at ( "09E4" );
+    // #at: 09E4
     instruction ( "LD   DE,0006",0x09E7 );
     advance ( 10 );
     D = 0x00;
@@ -22030,7 +22030,7 @@ Control prog_09E4 ()
 
 Control prog_09E7 ()
 {
-    at ( "09E7" );
+    // #at: 09E7
     instruction ( "ADD  HL,DE",0x09E8 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -22046,7 +22046,7 @@ Control prog_09E7 ()
 
 Control prog_09E8 ()
 {
-    at ( "09E8" );
+    // #at: 09E8
     instruction ( "LD   A,H",0x09E9 );
     u8 a1 = H ;
     advance ( 5 );
@@ -22056,7 +22056,7 @@ Control prog_09E8 ()
 
 Control prog_09E9 ()
 {
-    at ( "09E9" );
+    // #at: 09E9
     instruction ( "CP   40",0x09EB );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x40 ) ) ) + ( ! false ) ) ;
@@ -22074,7 +22074,7 @@ Control prog_09E9 ()
 
 Control prog_09EB ()
 {
-    at ( "09EB" );
+    // #at: 09EB
     instruction ( "JP   CY,09D9",0x09EE );
     if (FlagCY)
     {
@@ -22090,7 +22090,7 @@ Control prog_09EB ()
 
 Control prog_09EE ()
 {
-    at ( "09EE" );
+    // #at: 09EE
     instruction ( "RET",0x09EF );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -22108,7 +22108,7 @@ Control prog_09EE ()
 
 Control prog_09EF ()
 {
-    at ( "09EF" );
+    // #at: 09EF
     instruction ( "CALL 0A3C",0x09F2 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -22127,7 +22127,7 @@ Control prog_09EF ()
 
 Control prog_09F2 ()
 {
-    at ( "09F2" );
+    // #at: 09F2
     instruction ( "XOR  A",0x09F3 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -22144,7 +22144,7 @@ Control prog_09F2 ()
 
 Control prog_09F3 ()
 {
-    at ( "09F3" );
+    // #at: 09F3
     instruction ( "LD   (20E9),A",0x09F6 );
     u8 a1 = A ;
     mem_write ( 0x20E9,a1 );
@@ -22154,7 +22154,7 @@ Control prog_09F3 ()
 
 Control prog_09F6 ()
 {
-    at ( "09F6" );
+    // #at: 09F6
     instruction ( "CALL 09D6",0x09F9 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -22173,7 +22173,7 @@ Control prog_09F6 ()
 
 Control prog_09F9 ()
 {
-    at ( "09F9" );
+    // #at: 09F9
     instruction ( "LD   A,(2067)",0x09FC );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
@@ -22183,7 +22183,7 @@ Control prog_09F9 ()
 
 Control prog_09FC ()
 {
-    at ( "09FC" );
+    // #at: 09FC
     instruction ( "PUSH PSW",0x09FD );
     u8 a1 = A ;
     u8 a2 = SPH ;
@@ -22202,7 +22202,7 @@ Control prog_09FC ()
 
 Control prog_09FD ()
 {
-    at ( "09FD" );
+    // #at: 09FD
     instruction ( "CALL 01E4",0x0A00 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -22221,7 +22221,7 @@ Control prog_09FD ()
 
 Control prog_0A00 ()
 {
-    at ( "0A00" );
+    // #at: 0A00
     instruction ( "POP  PSW",0x0A01 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -22245,7 +22245,7 @@ Control prog_0A00 ()
 
 Control prog_0A01 ()
 {
-    at ( "0A01" );
+    // #at: 0A01
     instruction ( "LD   (2067),A",0x0A04 );
     u8 a1 = A ;
     mem_write ( 0x2067,a1 );
@@ -22255,7 +22255,7 @@ Control prog_0A01 ()
 
 Control prog_0A04 ()
 {
-    at ( "0A04" );
+    // #at: 0A04
     instruction ( "LD   A,(2067)",0x0A07 );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
@@ -22265,7 +22265,7 @@ Control prog_0A04 ()
 
 Control prog_0A07 ()
 {
-    at ( "0A07" );
+    // #at: 0A07
     instruction ( "LD   H,A",0x0A08 );
     u8 a1 = A ;
     advance ( 5 );
@@ -22275,7 +22275,7 @@ Control prog_0A07 ()
 
 Control prog_0A08 ()
 {
-    at ( "0A08" );
+    // #at: 0A08
     instruction ( "PUSH HL",0x0A09 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -22295,7 +22295,7 @@ Control prog_0A08 ()
 
 Control prog_0A09 ()
 {
-    at ( "0A09" );
+    // #at: 0A09
     instruction ( "LD   L,FE",0x0A0B );
     advance ( 7 );
     L = 0xFE;
@@ -22304,7 +22304,7 @@ Control prog_0A09 ()
 
 Control prog_0A0B ()
 {
-    at ( "0A0B" );
+    // #at: 0A0B
     instruction ( "LD   A,(HL)",0x0A0C );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -22316,7 +22316,7 @@ Control prog_0A0B ()
 
 Control prog_0A0C ()
 {
-    at ( "0A0C" );
+    // #at: 0A0C
     instruction ( "AND  07",0x0A0E );
     u8 a1 = A ;
     u8 a2 = ( 0x07 & a1 ) ;
@@ -22333,7 +22333,7 @@ Control prog_0A0C ()
 
 Control prog_0A0E ()
 {
-    at ( "0A0E" );
+    // #at: 0A0E
     instruction ( "INC  A",0x0A0F );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + 0x00 ) + true ) ;
@@ -22351,7 +22351,7 @@ Control prog_0A0E ()
 
 Control prog_0A0F ()
 {
-    at ( "0A0F" );
+    // #at: 0A0F
     instruction ( "LD   (HL),A",0x0A10 );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -22363,7 +22363,7 @@ Control prog_0A0F ()
 
 Control prog_0A10 ()
 {
-    at ( "0A10" );
+    // #at: 0A10
     instruction ( "LD   HL,1DA2",0x0A13 );
     advance ( 10 );
     H = 0x1D;
@@ -22373,7 +22373,7 @@ Control prog_0A10 ()
 
 Control prog_0A13 ()
 {
-    at ( "0A13" );
+    // #at: 0A13
     instruction ( "INC  HL",0x0A14 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -22386,7 +22386,7 @@ Control prog_0A13 ()
 
 Control prog_0A14 ()
 {
-    at ( "0A14" );
+    // #at: 0A14
     instruction ( "DEC  A",0x0A15 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -22404,7 +22404,7 @@ Control prog_0A14 ()
 
 Control prog_0A15 ()
 {
-    at ( "0A15" );
+    // #at: 0A15
     instruction ( "JP   NZ,0A13",0x0A18 );
     if (( ! FlagZ ))
     {
@@ -22420,7 +22420,7 @@ Control prog_0A15 ()
 
 Control prog_0A18 ()
 {
-    at ( "0A18" );
+    // #at: 0A18
     instruction ( "LD   A,(HL)",0x0A19 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -22432,7 +22432,7 @@ Control prog_0A18 ()
 
 Control prog_0A19 ()
 {
-    at ( "0A19" );
+    // #at: 0A19
     instruction ( "POP  HL",0x0A1A );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -22452,7 +22452,7 @@ Control prog_0A19 ()
 
 Control prog_0A1A ()
 {
-    at ( "0A1A" );
+    // #at: 0A1A
     instruction ( "LD   L,FC",0x0A1C );
     advance ( 7 );
     L = 0xFC;
@@ -22461,7 +22461,7 @@ Control prog_0A1A ()
 
 Control prog_0A1C ()
 {
-    at ( "0A1C" );
+    // #at: 0A1C
     instruction ( "LD   (HL),A",0x0A1D );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -22473,7 +22473,7 @@ Control prog_0A1C ()
 
 Control prog_0A1D ()
 {
-    at ( "0A1D" );
+    // #at: 0A1D
     instruction ( "INC  HL",0x0A1E );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -22486,7 +22486,7 @@ Control prog_0A1D ()
 
 Control prog_0A1E ()
 {
-    at ( "0A1E" );
+    // #at: 0A1E
     instruction ( "LD   (HL),38",0x0A20 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -22497,7 +22497,7 @@ Control prog_0A1E ()
 
 Control prog_0A20 ()
 {
-    at ( "0A20" );
+    // #at: 0A20
     instruction ( "LD   A,H",0x0A21 );
     u8 a1 = H ;
     advance ( 5 );
@@ -22507,7 +22507,7 @@ Control prog_0A20 ()
 
 Control prog_0A21 ()
 {
-    at ( "0A21" );
+    // #at: 0A21
     instruction ( "RRCA",0x0A22 );
     u8 a1 = A ;
     advance ( 4 );
@@ -22518,7 +22518,7 @@ Control prog_0A21 ()
 
 Control prog_0A22 ()
 {
-    at ( "0A22" );
+    // #at: 0A22
     instruction ( "JP   CY,0A33",0x0A25 );
     if (FlagCY)
     {
@@ -22534,7 +22534,7 @@ Control prog_0A22 ()
 
 Control prog_0A25 ()
 {
-    at ( "0A25" );
+    // #at: 0A25
     instruction ( "LD   A,21",0x0A27 );
     advance ( 7 );
     A = 0x21;
@@ -22543,7 +22543,7 @@ Control prog_0A25 ()
 
 Control prog_0A27 ()
 {
-    at ( "0A27" );
+    // #at: 0A27
     instruction ( "LD   (2098),A",0x0A2A );
     u8 a1 = A ;
     mem_write ( 0x2098,a1 );
@@ -22553,7 +22553,7 @@ Control prog_0A27 ()
 
 Control prog_0A2A ()
 {
-    at ( "0A2A" );
+    // #at: 0A2A
     instruction ( "CALL 01F5",0x0A2D );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -22572,7 +22572,7 @@ Control prog_0A2A ()
 
 Control prog_0A2D ()
 {
-    at ( "0A2D" );
+    // #at: 0A2D
     instruction ( "CALL 1904",0x0A30 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -22591,7 +22591,7 @@ Control prog_0A2D ()
 
 Control prog_0A30 ()
 {
-    at ( "0A30" );
+    // #at: 0A30
     instruction ( "JP   0804",0x0A33 );
     advance ( 10 );
     return jumpDirect ( 0x0804,prog_0804 );
@@ -22599,7 +22599,7 @@ Control prog_0A30 ()
 
 Control prog_0A33 ()
 {
-    at ( "0A33" );
+    // #at: 0A33
     instruction ( "CALL 01EF",0x0A36 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -22618,7 +22618,7 @@ Control prog_0A33 ()
 
 Control prog_0A36 ()
 {
-    at ( "0A36" );
+    // #at: 0A36
     instruction ( "CALL 01C0",0x0A39 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -22637,7 +22637,7 @@ Control prog_0A36 ()
 
 Control prog_0A39 ()
 {
-    at ( "0A39" );
+    // #at: 0A39
     instruction ( "JP   0804",0x0A3C );
     advance ( 10 );
     return jumpDirect ( 0x0804,prog_0804 );
@@ -22645,7 +22645,7 @@ Control prog_0A39 ()
 
 Control prog_0A3C ()
 {
-    at ( "0A3C" );
+    // #at: 0A3C
     instruction ( "CALL 0A59",0x0A3F );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -22664,7 +22664,7 @@ Control prog_0A3C ()
 
 Control prog_0A3F ()
 {
-    at ( "0A3F" );
+    // #at: 0A3F
     instruction ( "JP   NZ,0A52",0x0A42 );
     if (( ! FlagZ ))
     {
@@ -22680,7 +22680,7 @@ Control prog_0A3F ()
 
 Control prog_0A42 ()
 {
-    at ( "0A42" );
+    // #at: 0A42
     instruction ( "LD   A,30",0x0A44 );
     advance ( 7 );
     A = 0x30;
@@ -22689,7 +22689,7 @@ Control prog_0A42 ()
 
 Control prog_0A44 ()
 {
-    at ( "0A44" );
+    // #at: 0A44
     instruction ( "LD   (20C0),A",0x0A47 );
     u8 a1 = A ;
     mem_write ( 0x20C0,a1 );
@@ -22699,7 +22699,7 @@ Control prog_0A44 ()
 
 Control prog_0A47 ()
 {
-    at ( "0A47" );
+    // #at: 0A47
     instruction ( "LD   A,(20C0)",0x0A4A );
     u8 a1 = e8_read_mem ( 0x20C0 ) ;
     advance ( 13 );
@@ -22709,7 +22709,7 @@ Control prog_0A47 ()
 
 Control prog_0A4A ()
 {
-    at ( "0A4A" );
+    // #at: 0A4A
     instruction ( "AND  A",0x0A4B );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -22727,7 +22727,7 @@ Control prog_0A4A ()
 
 Control prog_0A4B ()
 {
-    at ( "0A4B" );
+    // #at: 0A4B
     instruction ( "RET  Z",0x0A4C );
     if (FlagZ)
     {
@@ -22753,7 +22753,7 @@ Control prog_0A4B ()
 
 Control prog_0A4C ()
 {
-    at ( "0A4C" );
+    // #at: 0A4C
     instruction ( "CALL 0A59",0x0A4F );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -22772,7 +22772,7 @@ Control prog_0A4C ()
 
 Control prog_0A4F ()
 {
-    at ( "0A4F" );
+    // #at: 0A4F
     instruction ( "JP   Z,0A47",0x0A52 );
     if (FlagZ)
     {
@@ -22788,7 +22788,7 @@ Control prog_0A4F ()
 
 Control prog_0A52 ()
 {
-    at ( "0A52" );
+    // #at: 0A52
     instruction ( "CALL 0A59",0x0A55 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -22807,7 +22807,7 @@ Control prog_0A52 ()
 
 Control prog_0A55 ()
 {
-    at ( "0A55" );
+    // #at: 0A55
     instruction ( "JP   NZ,0A52",0x0A58 );
     if (( ! FlagZ ))
     {
@@ -22823,7 +22823,7 @@ Control prog_0A55 ()
 
 Control prog_0A58 ()
 {
-    at ( "0A58" );
+    // #at: 0A58
     instruction ( "RET",0x0A59 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -22841,7 +22841,7 @@ Control prog_0A58 ()
 
 Control prog_0A59 ()
 {
-    at ( "0A59" );
+    // #at: 0A59
     instruction ( "LD   A,(2015)",0x0A5C );
     u8 a1 = e8_read_mem ( 0x2015 ) ;
     advance ( 13 );
@@ -22851,7 +22851,7 @@ Control prog_0A59 ()
 
 Control prog_0A5C ()
 {
-    at ( "0A5C" );
+    // #at: 0A5C
     instruction ( "CP   FF",0x0A5E );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0xFF ) ) ) + ( ! false ) ) ;
@@ -22869,7 +22869,7 @@ Control prog_0A5C ()
 
 Control prog_0A5E ()
 {
-    at ( "0A5E" );
+    // #at: 0A5E
     instruction ( "RET",0x0A5F );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -22887,7 +22887,7 @@ Control prog_0A5E ()
 
 Control prog_0A5F ()
 {
-    at ( "0A5F" );
+    // #at: 0A5F
     instruction ( "LD   A,(20EF)",0x0A62 );
     u8 a1 = e8_read_mem ( 0x20EF ) ;
     advance ( 13 );
@@ -22897,7 +22897,7 @@ Control prog_0A5F ()
 
 Control prog_0A62 ()
 {
-    at ( "0A62" );
+    // #at: 0A62
     instruction ( "AND  A",0x0A63 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -22915,7 +22915,7 @@ Control prog_0A62 ()
 
 Control prog_0A63 ()
 {
-    at ( "0A63" );
+    // #at: 0A63
     instruction ( "JP   Z,0A7C",0x0A66 );
     if (FlagZ)
     {
@@ -22931,7 +22931,7 @@ Control prog_0A63 ()
 
 Control prog_0A66 ()
 {
-    at ( "0A66" );
+    // #at: 0A66
     instruction ( "LD   C,B",0x0A67 );
     u8 a1 = B ;
     advance ( 5 );
@@ -22941,7 +22941,7 @@ Control prog_0A66 ()
 
 Control prog_0A67 ()
 {
-    at ( "0A67" );
+    // #at: 0A67
     instruction ( "LD   B,08",0x0A69 );
     advance ( 7 );
     B = 0x08;
@@ -22950,7 +22950,7 @@ Control prog_0A67 ()
 
 Control prog_0A69 ()
 {
-    at ( "0A69" );
+    // #at: 0A69
     instruction ( "CALL 18FA",0x0A6C );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -22969,7 +22969,7 @@ Control prog_0A69 ()
 
 Control prog_0A6C ()
 {
-    at ( "0A6C" );
+    // #at: 0A6C
     instruction ( "LD   B,C",0x0A6D );
     u8 a1 = C ;
     advance ( 5 );
@@ -22979,7 +22979,7 @@ Control prog_0A6C ()
 
 Control prog_0A6D ()
 {
-    at ( "0A6D" );
+    // #at: 0A6D
     instruction ( "LD   A,B",0x0A6E );
     u8 a1 = B ;
     advance ( 5 );
@@ -22989,7 +22989,7 @@ Control prog_0A6D ()
 
 Control prog_0A6E ()
 {
-    at ( "0A6E" );
+    // #at: 0A6E
     instruction ( "CALL 097C",0x0A71 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -23008,7 +23008,7 @@ Control prog_0A6E ()
 
 Control prog_0A71 ()
 {
-    at ( "0A71" );
+    // #at: 0A71
     instruction ( "LD   A,(HL)",0x0A72 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -23020,7 +23020,7 @@ Control prog_0A71 ()
 
 Control prog_0A72 ()
 {
-    at ( "0A72" );
+    // #at: 0A72
     instruction ( "LD   HL,20F3",0x0A75 );
     advance ( 10 );
     H = 0x20;
@@ -23030,7 +23030,7 @@ Control prog_0A72 ()
 
 Control prog_0A75 ()
 {
-    at ( "0A75" );
+    // #at: 0A75
     instruction ( "LD   (HL),00",0x0A77 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -23041,7 +23041,7 @@ Control prog_0A75 ()
 
 Control prog_0A77 ()
 {
-    at ( "0A77" );
+    // #at: 0A77
     instruction ( "DEC  HL",0x0A78 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -23054,7 +23054,7 @@ Control prog_0A77 ()
 
 Control prog_0A78 ()
 {
-    at ( "0A78" );
+    // #at: 0A78
     instruction ( "LD   (HL),A",0x0A79 );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -23066,7 +23066,7 @@ Control prog_0A78 ()
 
 Control prog_0A79 ()
 {
-    at ( "0A79" );
+    // #at: 0A79
     instruction ( "DEC  HL",0x0A7A );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -23079,7 +23079,7 @@ Control prog_0A79 ()
 
 Control prog_0A7A ()
 {
-    at ( "0A7A" );
+    // #at: 0A7A
     instruction ( "LD   (HL),01",0x0A7C );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -23090,7 +23090,7 @@ Control prog_0A7A ()
 
 Control prog_0A7C ()
 {
-    at ( "0A7C" );
+    // #at: 0A7C
     instruction ( "LD   HL,2062",0x0A7F );
     advance ( 10 );
     H = 0x20;
@@ -23100,7 +23100,7 @@ Control prog_0A7C ()
 
 Control prog_0A7F ()
 {
-    at ( "0A7F" );
+    // #at: 0A7F
     instruction ( "RET",0x0A80 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -23118,7 +23118,7 @@ Control prog_0A7F ()
 
 Control prog_0A80 ()
 {
-    at ( "0A80" );
+    // #at: 0A80
     instruction ( "LD   A,02",0x0A82 );
     advance ( 7 );
     A = 0x02;
@@ -23127,7 +23127,7 @@ Control prog_0A80 ()
 
 Control prog_0A82 ()
 {
-    at ( "0A82" );
+    // #at: 0A82
     instruction ( "LD   (20C1),A",0x0A85 );
     u8 a1 = A ;
     mem_write ( 0x20C1,a1 );
@@ -23137,7 +23137,7 @@ Control prog_0A82 ()
 
 Control prog_0A85 ()
 {
-    at ( "0A85" );
+    // #at: 0A85
     instruction ( "OUT  06",0x0A87 );
     u8 a1 = A ;
     unknown_output ( 6,a1 );
@@ -23147,7 +23147,7 @@ Control prog_0A85 ()
 
 Control prog_0A87 ()
 {
-    at ( "0A87" );
+    // #at: 0A87
     instruction ( "LD   A,(20CB)",0x0A8A );
     u8 a1 = e8_read_mem ( 0x20CB ) ;
     advance ( 13 );
@@ -23157,7 +23157,7 @@ Control prog_0A87 ()
 
 Control prog_0A8A ()
 {
-    at ( "0A8A" );
+    // #at: 0A8A
     instruction ( "AND  A",0x0A8B );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -23175,7 +23175,7 @@ Control prog_0A8A ()
 
 Control prog_0A8B ()
 {
-    at ( "0A8B" );
+    // #at: 0A8B
     instruction ( "JP   Z,0A85",0x0A8E );
     if (FlagZ)
     {
@@ -23191,7 +23191,7 @@ Control prog_0A8B ()
 
 Control prog_0A8E ()
 {
-    at ( "0A8E" );
+    // #at: 0A8E
     instruction ( "XOR  A",0x0A8F );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -23208,7 +23208,7 @@ Control prog_0A8E ()
 
 Control prog_0A8F ()
 {
-    at ( "0A8F" );
+    // #at: 0A8F
     instruction ( "LD   (20C1),A",0x0A92 );
     u8 a1 = A ;
     mem_write ( 0x20C1,a1 );
@@ -23218,7 +23218,7 @@ Control prog_0A8F ()
 
 Control prog_0A92 ()
 {
-    at ( "0A92" );
+    // #at: 0A92
     instruction ( "RET",0x0A93 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -23236,7 +23236,7 @@ Control prog_0A92 ()
 
 Control prog_0A93 ()
 {
-    at ( "0A93" );
+    // #at: 0A93
     instruction ( "PUSH DE",0x0A94 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -23256,7 +23256,7 @@ Control prog_0A93 ()
 
 Control prog_0A94 ()
 {
-    at ( "0A94" );
+    // #at: 0A94
     instruction ( "LD   A,(DE)",0x0A95 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -23268,7 +23268,7 @@ Control prog_0A94 ()
 
 Control prog_0A95 ()
 {
-    at ( "0A95" );
+    // #at: 0A95
     instruction ( "CALL 08FF",0x0A98 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -23287,7 +23287,7 @@ Control prog_0A95 ()
 
 Control prog_0A98 ()
 {
-    at ( "0A98" );
+    // #at: 0A98
     instruction ( "POP  DE",0x0A99 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -23307,7 +23307,7 @@ Control prog_0A98 ()
 
 Control prog_0A99 ()
 {
-    at ( "0A99" );
+    // #at: 0A99
     instruction ( "LD   A,07",0x0A9B );
     advance ( 7 );
     A = 0x07;
@@ -23316,7 +23316,7 @@ Control prog_0A99 ()
 
 Control prog_0A9B ()
 {
-    at ( "0A9B" );
+    // #at: 0A9B
     instruction ( "LD   (20C0),A",0x0A9E );
     u8 a1 = A ;
     mem_write ( 0x20C0,a1 );
@@ -23326,7 +23326,7 @@ Control prog_0A9B ()
 
 Control prog_0A9E ()
 {
-    at ( "0A9E" );
+    // #at: 0A9E
     instruction ( "LD   A,(20C0)",0x0AA1 );
     u8 a1 = e8_read_mem ( 0x20C0 ) ;
     advance ( 13 );
@@ -23336,7 +23336,7 @@ Control prog_0A9E ()
 
 Control prog_0AA1 ()
 {
-    at ( "0AA1" );
+    // #at: 0AA1
     instruction ( "DEC  A",0x0AA2 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -23354,7 +23354,7 @@ Control prog_0AA1 ()
 
 Control prog_0AA2 ()
 {
-    at ( "0AA2" );
+    // #at: 0AA2
     instruction ( "JP   NZ,0A9E",0x0AA5 );
     if (( ! FlagZ ))
     {
@@ -23370,7 +23370,7 @@ Control prog_0AA2 ()
 
 Control prog_0AA5 ()
 {
-    at ( "0AA5" );
+    // #at: 0AA5
     instruction ( "INC  DE",0x0AA6 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -23383,7 +23383,7 @@ Control prog_0AA5 ()
 
 Control prog_0AA6 ()
 {
-    at ( "0AA6" );
+    // #at: 0AA6
     instruction ( "DEC  C",0x0AA7 );
     u8 a1 = C ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -23401,7 +23401,7 @@ Control prog_0AA6 ()
 
 Control prog_0AA7 ()
 {
-    at ( "0AA7" );
+    // #at: 0AA7
     instruction ( "JP   NZ,0A93",0x0AAA );
     if (( ! FlagZ ))
     {
@@ -23417,7 +23417,7 @@ Control prog_0AA7 ()
 
 Control prog_0AAA ()
 {
-    at ( "0AAA" );
+    // #at: 0AAA
     instruction ( "RET",0x0AAB );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -23435,7 +23435,7 @@ Control prog_0AAA ()
 
 Control prog_0AAB ()
 {
-    at ( "0AAB" );
+    // #at: 0AAB
     instruction ( "LD   HL,2050",0x0AAE );
     advance ( 10 );
     H = 0x20;
@@ -23445,7 +23445,7 @@ Control prog_0AAB ()
 
 Control prog_0AAE ()
 {
-    at ( "0AAE" );
+    // #at: 0AAE
     instruction ( "JP   024B",0x0AB1 );
     advance ( 10 );
     return jumpDirect ( 0x024B,prog_024B );
@@ -23453,7 +23453,7 @@ Control prog_0AAE ()
 
 Control prog_0AB1 ()
 {
-    at ( "0AB1" );
+    // #at: 0AB1
     instruction ( "LD   A,40",0x0AB3 );
     advance ( 7 );
     A = 0x40;
@@ -23462,7 +23462,7 @@ Control prog_0AB1 ()
 
 Control prog_0AB3 ()
 {
-    at ( "0AB3" );
+    // #at: 0AB3
     instruction ( "JP   0AD7",0x0AB6 );
     advance ( 10 );
     return jumpDirect ( 0x0AD7,prog_0AD7 );
@@ -23470,7 +23470,7 @@ Control prog_0AB3 ()
 
 Control prog_0AB6 ()
 {
-    at ( "0AB6" );
+    // #at: 0AB6
     instruction ( "LD   A,80",0x0AB8 );
     advance ( 7 );
     A = 0x80;
@@ -23479,7 +23479,7 @@ Control prog_0AB6 ()
 
 Control prog_0AB8 ()
 {
-    at ( "0AB8" );
+    // #at: 0AB8
     instruction ( "JP   0AD7",0x0ABB );
     advance ( 10 );
     return jumpDirect ( 0x0AD7,prog_0AD7 );
@@ -23487,7 +23487,7 @@ Control prog_0AB8 ()
 
 Control prog_0ABB ()
 {
-    at ( "0ABB" );
+    // #at: 0ABB
     instruction ( "POP  HL",0x0ABC );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -23507,7 +23507,7 @@ Control prog_0ABB ()
 
 Control prog_0ABC ()
 {
-    at ( "0ABC" );
+    // #at: 0ABC
     instruction ( "JP   0072",0x0ABF );
     advance ( 10 );
     return jumpDirect ( 0x0072,prog_0072 );
@@ -23515,7 +23515,7 @@ Control prog_0ABC ()
 
 Control prog_0ABF ()
 {
-    at ( "0ABF" );
+    // #at: 0ABF
     instruction ( "LD   A,(20C1)",0x0AC2 );
     u8 a1 = e8_read_mem ( 0x20C1 ) ;
     advance ( 13 );
@@ -23525,7 +23525,7 @@ Control prog_0ABF ()
 
 Control prog_0AC2 ()
 {
-    at ( "0AC2" );
+    // #at: 0AC2
     instruction ( "RRCA",0x0AC3 );
     u8 a1 = A ;
     advance ( 4 );
@@ -23536,7 +23536,7 @@ Control prog_0AC2 ()
 
 Control prog_0AC3 ()
 {
-    at ( "0AC3" );
+    // #at: 0AC3
     instruction ( "JP   CY,0ABB",0x0AC6 );
     if (FlagCY)
     {
@@ -23552,7 +23552,7 @@ Control prog_0AC3 ()
 
 Control prog_0AC6 ()
 {
-    at ( "0AC6" );
+    // #at: 0AC6
     instruction ( "RRCA",0x0AC7 );
     u8 a1 = A ;
     advance ( 4 );
@@ -23563,7 +23563,7 @@ Control prog_0AC6 ()
 
 Control prog_0AC7 ()
 {
-    at ( "0AC7" );
+    // #at: 0AC7
     instruction ( "JP   CY,1868",0x0ACA );
     if (FlagCY)
     {
@@ -23579,7 +23579,7 @@ Control prog_0AC7 ()
 
 Control prog_0ACA ()
 {
-    at ( "0ACA" );
+    // #at: 0ACA
     instruction ( "RRCA",0x0ACB );
     u8 a1 = A ;
     advance ( 4 );
@@ -23590,7 +23590,7 @@ Control prog_0ACA ()
 
 Control prog_0ACB ()
 {
-    at ( "0ACB" );
+    // #at: 0ACB
     instruction ( "JP   CY,0AAB",0x0ACE );
     if (FlagCY)
     {
@@ -23606,7 +23606,7 @@ Control prog_0ACB ()
 
 Control prog_0ACE ()
 {
-    at ( "0ACE" );
+    // #at: 0ACE
     instruction ( "RET",0x0ACF );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -23624,7 +23624,7 @@ Control prog_0ACE ()
 
 Control prog_0ACF ()
 {
-    at ( "0ACF" );
+    // #at: 0ACF
     instruction ( "LD   HL,2B14",0x0AD2 );
     advance ( 10 );
     H = 0x2B;
@@ -23634,7 +23634,7 @@ Control prog_0ACF ()
 
 Control prog_0AD2 ()
 {
-    at ( "0AD2" );
+    // #at: 0AD2
     instruction ( "LD   C,0F",0x0AD4 );
     advance ( 7 );
     C = 0x0F;
@@ -23643,7 +23643,7 @@ Control prog_0AD2 ()
 
 Control prog_0AD4 ()
 {
-    at ( "0AD4" );
+    // #at: 0AD4
     instruction ( "JP   0A93",0x0AD7 );
     advance ( 10 );
     return jumpDirect ( 0x0A93,prog_0A93 );
@@ -23651,7 +23651,7 @@ Control prog_0AD4 ()
 
 Control prog_0AD7 ()
 {
-    at ( "0AD7" );
+    // #at: 0AD7
     instruction ( "LD   (20C0),A",0x0ADA );
     u8 a1 = A ;
     mem_write ( 0x20C0,a1 );
@@ -23661,7 +23661,7 @@ Control prog_0AD7 ()
 
 Control prog_0ADA ()
 {
-    at ( "0ADA" );
+    // #at: 0ADA
     instruction ( "LD   A,(20C0)",0x0ADD );
     u8 a1 = e8_read_mem ( 0x20C0 ) ;
     advance ( 13 );
@@ -23671,7 +23671,7 @@ Control prog_0ADA ()
 
 Control prog_0ADD ()
 {
-    at ( "0ADD" );
+    // #at: 0ADD
     instruction ( "AND  A",0x0ADE );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -23689,7 +23689,7 @@ Control prog_0ADD ()
 
 Control prog_0ADE ()
 {
-    at ( "0ADE" );
+    // #at: 0ADE
     instruction ( "JP   NZ,0ADA",0x0AE1 );
     if (( ! FlagZ ))
     {
@@ -23705,7 +23705,7 @@ Control prog_0ADE ()
 
 Control prog_0AE1 ()
 {
-    at ( "0AE1" );
+    // #at: 0AE1
     instruction ( "RET",0x0AE2 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -23723,7 +23723,7 @@ Control prog_0AE1 ()
 
 Control prog_0AE2 ()
 {
-    at ( "0AE2" );
+    // #at: 0AE2
     instruction ( "LD   HL,20C2",0x0AE5 );
     advance ( 10 );
     H = 0x20;
@@ -23733,7 +23733,7 @@ Control prog_0AE2 ()
 
 Control prog_0AE5 ()
 {
-    at ( "0AE5" );
+    // #at: 0AE5
     instruction ( "LD   B,0C",0x0AE7 );
     advance ( 7 );
     B = 0x0C;
@@ -23742,7 +23742,7 @@ Control prog_0AE5 ()
 
 Control prog_0AE7 ()
 {
-    at ( "0AE7" );
+    // #at: 0AE7
     instruction ( "JP   1A32",0x0AEA );
     advance ( 10 );
     return jumpDirect ( 0x1A32,prog_1A32 );
@@ -23750,7 +23750,7 @@ Control prog_0AE7 ()
 
 Control prog_0AEA ()
 {
-    at ( "0AEA" );
+    // #at: 0AEA
     instruction ( "XOR  A",0x0AEB );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -23767,7 +23767,7 @@ Control prog_0AEA ()
 
 Control prog_0AEB ()
 {
-    at ( "0AEB" );
+    // #at: 0AEB
     instruction ( "OUT  03",0x0AED );
     u8 a1 = A ;
     sound_control ( "Ufo",( ( a1 >> 0 ) & 0x01 ) );
@@ -23781,7 +23781,7 @@ Control prog_0AEB ()
 
 Control prog_0AED ()
 {
-    at ( "0AED" );
+    // #at: 0AED
     instruction ( "OUT  05",0x0AEF );
     u8 a1 = A ;
     sound_control ( "FleetMovement1",( ( a1 >> 0 ) & 0x01 ) );
@@ -23795,7 +23795,7 @@ Control prog_0AED ()
 
 Control prog_0AEF ()
 {
-    at ( "0AEF" );
+    // #at: 0AEF
     instruction ( "CALL 1982",0x0AF2 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -23814,7 +23814,7 @@ Control prog_0AEF ()
 
 Control prog_0AF2 ()
 {
-    at ( "0AF2" );
+    // #at: 0AF2
     instruction ( "EI",0x0AF3 );
     enable_interrupts (  );
     advance ( 4 );
@@ -23823,7 +23823,7 @@ Control prog_0AF2 ()
 
 Control prog_0AF3 ()
 {
-    at ( "0AF3" );
+    // #at: 0AF3
     instruction ( "CALL 0AB1",0x0AF6 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -23842,7 +23842,7 @@ Control prog_0AF3 ()
 
 Control prog_0AF6 ()
 {
-    at ( "0AF6" );
+    // #at: 0AF6
     instruction ( "LD   A,(20EC)",0x0AF9 );
     u8 a1 = e8_read_mem ( 0x20EC ) ;
     advance ( 13 );
@@ -23852,7 +23852,7 @@ Control prog_0AF6 ()
 
 Control prog_0AF9 ()
 {
-    at ( "0AF9" );
+    // #at: 0AF9
     instruction ( "AND  A",0x0AFA );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -23870,7 +23870,7 @@ Control prog_0AF9 ()
 
 Control prog_0AFA ()
 {
-    at ( "0AFA" );
+    // #at: 0AFA
     instruction ( "LD   HL,3017",0x0AFD );
     advance ( 10 );
     H = 0x30;
@@ -23880,7 +23880,7 @@ Control prog_0AFA ()
 
 Control prog_0AFD ()
 {
-    at ( "0AFD" );
+    // #at: 0AFD
     instruction ( "LD   C,04",0x0AFF );
     advance ( 7 );
     C = 0x04;
@@ -23889,7 +23889,7 @@ Control prog_0AFD ()
 
 Control prog_0AFF ()
 {
-    at ( "0AFF" );
+    // #at: 0AFF
     instruction ( "JP   NZ,0BE8",0x0B02 );
     if (( ! FlagZ ))
     {
@@ -23905,7 +23905,7 @@ Control prog_0AFF ()
 
 Control prog_0B02 ()
 {
-    at ( "0B02" );
+    // #at: 0B02
     instruction ( "LD   DE,1CFA",0x0B05 );
     advance ( 10 );
     D = 0x1C;
@@ -23915,7 +23915,7 @@ Control prog_0B02 ()
 
 Control prog_0B05 ()
 {
-    at ( "0B05" );
+    // #at: 0B05
     instruction ( "CALL 0A93",0x0B08 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -23934,7 +23934,7 @@ Control prog_0B05 ()
 
 Control prog_0B08 ()
 {
-    at ( "0B08" );
+    // #at: 0B08
     instruction ( "LD   DE,1DAF",0x0B0B );
     advance ( 10 );
     D = 0x1D;
@@ -23944,7 +23944,7 @@ Control prog_0B08 ()
 
 Control prog_0B0B ()
 {
-    at ( "0B0B" );
+    // #at: 0B0B
     instruction ( "CALL 0ACF",0x0B0E );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -23963,7 +23963,7 @@ Control prog_0B0B ()
 
 Control prog_0B0E ()
 {
-    at ( "0B0E" );
+    // #at: 0B0E
     instruction ( "CALL 0AB1",0x0B11 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -23982,7 +23982,7 @@ Control prog_0B0E ()
 
 Control prog_0B11 ()
 {
-    at ( "0B11" );
+    // #at: 0B11
     instruction ( "CALL 1815",0x0B14 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -24001,7 +24001,7 @@ Control prog_0B11 ()
 
 Control prog_0B14 ()
 {
-    at ( "0B14" );
+    // #at: 0B14
     instruction ( "CALL 0AB6",0x0B17 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -24020,7 +24020,7 @@ Control prog_0B14 ()
 
 Control prog_0B17 ()
 {
-    at ( "0B17" );
+    // #at: 0B17
     instruction ( "LD   A,(20EC)",0x0B1A );
     u8 a1 = e8_read_mem ( 0x20EC ) ;
     advance ( 13 );
@@ -24030,7 +24030,7 @@ Control prog_0B17 ()
 
 Control prog_0B1A ()
 {
-    at ( "0B1A" );
+    // #at: 0B1A
     instruction ( "AND  A",0x0B1B );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -24048,7 +24048,7 @@ Control prog_0B1A ()
 
 Control prog_0B1B ()
 {
-    at ( "0B1B" );
+    // #at: 0B1B
     instruction ( "JP   NZ,0B4A",0x0B1E );
     if (( ! FlagZ ))
     {
@@ -24064,7 +24064,7 @@ Control prog_0B1B ()
 
 Control prog_0B1E ()
 {
-    at ( "0B1E" );
+    // #at: 0B1E
     instruction ( "LD   DE,1A95",0x0B21 );
     advance ( 10 );
     D = 0x1A;
@@ -24074,7 +24074,7 @@ Control prog_0B1E ()
 
 Control prog_0B21 ()
 {
-    at ( "0B21" );
+    // #at: 0B21
     instruction ( "CALL 0AE2",0x0B24 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -24093,7 +24093,7 @@ Control prog_0B21 ()
 
 Control prog_0B24 ()
 {
-    at ( "0B24" );
+    // #at: 0B24
     instruction ( "CALL 0A80",0x0B27 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -24112,7 +24112,7 @@ Control prog_0B24 ()
 
 Control prog_0B27 ()
 {
-    at ( "0B27" );
+    // #at: 0B27
     instruction ( "LD   DE,1BB0",0x0B2A );
     advance ( 10 );
     D = 0x1B;
@@ -24122,7 +24122,7 @@ Control prog_0B27 ()
 
 Control prog_0B2A ()
 {
-    at ( "0B2A" );
+    // #at: 0B2A
     instruction ( "CALL 0AE2",0x0B2D );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -24141,7 +24141,7 @@ Control prog_0B2A ()
 
 Control prog_0B2D ()
 {
-    at ( "0B2D" );
+    // #at: 0B2D
     instruction ( "CALL 0A80",0x0B30 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -24160,7 +24160,7 @@ Control prog_0B2D ()
 
 Control prog_0B30 ()
 {
-    at ( "0B30" );
+    // #at: 0B30
     instruction ( "CALL 0AB1",0x0B33 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -24179,7 +24179,7 @@ Control prog_0B30 ()
 
 Control prog_0B33 ()
 {
-    at ( "0B33" );
+    // #at: 0B33
     instruction ( "LD   DE,1FC9",0x0B36 );
     advance ( 10 );
     D = 0x1F;
@@ -24189,7 +24189,7 @@ Control prog_0B33 ()
 
 Control prog_0B36 ()
 {
-    at ( "0B36" );
+    // #at: 0B36
     instruction ( "CALL 0AE2",0x0B39 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -24208,7 +24208,7 @@ Control prog_0B36 ()
 
 Control prog_0B39 ()
 {
-    at ( "0B39" );
+    // #at: 0B39
     instruction ( "CALL 0A80",0x0B3C );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -24227,7 +24227,7 @@ Control prog_0B39 ()
 
 Control prog_0B3C ()
 {
-    at ( "0B3C" );
+    // #at: 0B3C
     instruction ( "CALL 0AB1",0x0B3F );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -24246,7 +24246,7 @@ Control prog_0B3C ()
 
 Control prog_0B3F ()
 {
-    at ( "0B3F" );
+    // #at: 0B3F
     instruction ( "LD   HL,33B7",0x0B42 );
     advance ( 10 );
     H = 0x33;
@@ -24256,7 +24256,7 @@ Control prog_0B3F ()
 
 Control prog_0B42 ()
 {
-    at ( "0B42" );
+    // #at: 0B42
     instruction ( "LD   B,0A",0x0B44 );
     advance ( 7 );
     B = 0x0A;
@@ -24265,7 +24265,7 @@ Control prog_0B42 ()
 
 Control prog_0B44 ()
 {
-    at ( "0B44" );
+    // #at: 0B44
     instruction ( "CALL 14CB",0x0B47 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -24284,7 +24284,7 @@ Control prog_0B44 ()
 
 Control prog_0B47 ()
 {
-    at ( "0B47" );
+    // #at: 0B47
     instruction ( "CALL 0AB6",0x0B4A );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -24303,7 +24303,7 @@ Control prog_0B47 ()
 
 Control prog_0B4A ()
 {
-    at ( "0B4A" );
+    // #at: 0B4A
     instruction ( "CALL 09D6",0x0B4D );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -24322,7 +24322,7 @@ Control prog_0B4A ()
 
 Control prog_0B4D ()
 {
-    at ( "0B4D" );
+    // #at: 0B4D
     instruction ( "LD   A,(21FF)",0x0B50 );
     u8 a1 = e8_read_mem ( 0x21FF ) ;
     advance ( 13 );
@@ -24332,7 +24332,7 @@ Control prog_0B4D ()
 
 Control prog_0B50 ()
 {
-    at ( "0B50" );
+    // #at: 0B50
     instruction ( "AND  A",0x0B51 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -24350,7 +24350,7 @@ Control prog_0B50 ()
 
 Control prog_0B51 ()
 {
-    at ( "0B51" );
+    // #at: 0B51
     instruction ( "JP   NZ,0B5D",0x0B54 );
     if (( ! FlagZ ))
     {
@@ -24366,7 +24366,7 @@ Control prog_0B51 ()
 
 Control prog_0B54 ()
 {
-    at ( "0B54" );
+    // #at: 0B54
     instruction ( "CALL 08D1",0x0B57 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -24385,7 +24385,7 @@ Control prog_0B54 ()
 
 Control prog_0B57 ()
 {
-    at ( "0B57" );
+    // #at: 0B57
     instruction ( "LD   (21FF),A",0x0B5A );
     u8 a1 = A ;
     mem_write ( 0x21FF,a1 );
@@ -24395,7 +24395,7 @@ Control prog_0B57 ()
 
 Control prog_0B5A ()
 {
-    at ( "0B5A" );
+    // #at: 0B5A
     instruction ( "CALL 1A7F",0x0B5D );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -24414,7 +24414,7 @@ Control prog_0B5A ()
 
 Control prog_0B5D ()
 {
-    at ( "0B5D" );
+    // #at: 0B5D
     instruction ( "CALL 01E4",0x0B60 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -24433,7 +24433,7 @@ Control prog_0B5D ()
 
 Control prog_0B60 ()
 {
-    at ( "0B60" );
+    // #at: 0B60
     instruction ( "CALL 01C0",0x0B63 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -24452,7 +24452,7 @@ Control prog_0B60 ()
 
 Control prog_0B63 ()
 {
-    at ( "0B63" );
+    // #at: 0B63
     instruction ( "CALL 01EF",0x0B66 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -24471,7 +24471,7 @@ Control prog_0B63 ()
 
 Control prog_0B66 ()
 {
-    at ( "0B66" );
+    // #at: 0B66
     instruction ( "CALL 021A",0x0B69 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -24490,7 +24490,7 @@ Control prog_0B66 ()
 
 Control prog_0B69 ()
 {
-    at ( "0B69" );
+    // #at: 0B69
     instruction ( "LD   A,01",0x0B6B );
     advance ( 7 );
     A = 0x01;
@@ -24499,7 +24499,7 @@ Control prog_0B69 ()
 
 Control prog_0B6B ()
 {
-    at ( "0B6B" );
+    // #at: 0B6B
     instruction ( "LD   (20C1),A",0x0B6E );
     u8 a1 = A ;
     mem_write ( 0x20C1,a1 );
@@ -24509,7 +24509,7 @@ Control prog_0B6B ()
 
 Control prog_0B6E ()
 {
-    at ( "0B6E" );
+    // #at: 0B6E
     instruction ( "CALL 01CF",0x0B71 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -24528,7 +24528,7 @@ Control prog_0B6E ()
 
 Control prog_0B71 ()
 {
-    at ( "0B71" );
+    // #at: 0B71
     instruction ( "CALL 1618",0x0B74 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -24547,7 +24547,7 @@ Control prog_0B71 ()
 
 Control prog_0B74 ()
 {
-    at ( "0B74" );
+    // #at: 0B74
     instruction ( "CALL 0BF1",0x0B77 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -24566,7 +24566,7 @@ Control prog_0B74 ()
 
 Control prog_0B77 ()
 {
-    at ( "0B77" );
+    // #at: 0B77
     instruction ( "OUT  06",0x0B79 );
     u8 a1 = A ;
     unknown_output ( 6,a1 );
@@ -24576,7 +24576,7 @@ Control prog_0B77 ()
 
 Control prog_0B79 ()
 {
-    at ( "0B79" );
+    // #at: 0B79
     instruction ( "CALL 0A59",0x0B7C );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -24595,7 +24595,7 @@ Control prog_0B79 ()
 
 Control prog_0B7C ()
 {
-    at ( "0B7C" );
+    // #at: 0B7C
     instruction ( "JP   Z,0B71",0x0B7F );
     if (FlagZ)
     {
@@ -24611,7 +24611,7 @@ Control prog_0B7C ()
 
 Control prog_0B7F ()
 {
-    at ( "0B7F" );
+    // #at: 0B7F
     instruction ( "XOR  A",0x0B80 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -24628,7 +24628,7 @@ Control prog_0B7F ()
 
 Control prog_0B80 ()
 {
-    at ( "0B80" );
+    // #at: 0B80
     instruction ( "LD   (2025),A",0x0B83 );
     u8 a1 = A ;
     mem_write ( 0x2025,a1 );
@@ -24638,7 +24638,7 @@ Control prog_0B80 ()
 
 Control prog_0B83 ()
 {
-    at ( "0B83" );
+    // #at: 0B83
     instruction ( "CALL 0A59",0x0B86 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -24657,7 +24657,7 @@ Control prog_0B83 ()
 
 Control prog_0B86 ()
 {
-    at ( "0B86" );
+    // #at: 0B86
     instruction ( "JP   NZ,0B83",0x0B89 );
     if (( ! FlagZ ))
     {
@@ -24673,7 +24673,7 @@ Control prog_0B86 ()
 
 Control prog_0B89 ()
 {
-    at ( "0B89" );
+    // #at: 0B89
     instruction ( "XOR  A",0x0B8A );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -24690,7 +24690,7 @@ Control prog_0B89 ()
 
 Control prog_0B8A ()
 {
-    at ( "0B8A" );
+    // #at: 0B8A
     instruction ( "LD   (20C1),A",0x0B8D );
     u8 a1 = A ;
     mem_write ( 0x20C1,a1 );
@@ -24700,7 +24700,7 @@ Control prog_0B8A ()
 
 Control prog_0B8D ()
 {
-    at ( "0B8D" );
+    // #at: 0B8D
     instruction ( "CALL 0AB1",0x0B90 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -24719,7 +24719,7 @@ Control prog_0B8D ()
 
 Control prog_0B90 ()
 {
-    at ( "0B90" );
+    // #at: 0B90
     instruction ( "CALL 1988",0x0B93 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -24738,7 +24738,7 @@ Control prog_0B90 ()
 
 Control prog_0B93 ()
 {
-    at ( "0B93" );
+    // #at: 0B93
     instruction ( "LD   C,0C",0x0B95 );
     advance ( 7 );
     C = 0x0C;
@@ -24747,7 +24747,7 @@ Control prog_0B93 ()
 
 Control prog_0B95 ()
 {
-    at ( "0B95" );
+    // #at: 0B95
     instruction ( "LD   HL,2C11",0x0B98 );
     advance ( 10 );
     H = 0x2C;
@@ -24757,7 +24757,7 @@ Control prog_0B95 ()
 
 Control prog_0B98 ()
 {
-    at ( "0B98" );
+    // #at: 0B98
     instruction ( "LD   DE,1F90",0x0B9B );
     advance ( 10 );
     D = 0x1F;
@@ -24767,7 +24767,7 @@ Control prog_0B98 ()
 
 Control prog_0B9B ()
 {
-    at ( "0B9B" );
+    // #at: 0B9B
     instruction ( "CALL 08F3",0x0B9E );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -24786,7 +24786,7 @@ Control prog_0B9B ()
 
 Control prog_0B9E ()
 {
-    at ( "0B9E" );
+    // #at: 0B9E
     instruction ( "LD   A,(20EC)",0x0BA1 );
     u8 a1 = e8_read_mem ( 0x20EC ) ;
     advance ( 13 );
@@ -24796,7 +24796,7 @@ Control prog_0B9E ()
 
 Control prog_0BA1 ()
 {
-    at ( "0BA1" );
+    // #at: 0BA1
     instruction ( "CP   00",0x0BA3 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! false ) ) ;
@@ -24814,7 +24814,7 @@ Control prog_0BA1 ()
 
 Control prog_0BA3 ()
 {
-    at ( "0BA3" );
+    // #at: 0BA3
     instruction ( "JP   NZ,0BAE",0x0BA6 );
     if (( ! FlagZ ))
     {
@@ -24830,7 +24830,7 @@ Control prog_0BA3 ()
 
 Control prog_0BA6 ()
 {
-    at ( "0BA6" );
+    // #at: 0BA6
     instruction ( "LD   HL,3311",0x0BA9 );
     advance ( 10 );
     H = 0x33;
@@ -24840,7 +24840,7 @@ Control prog_0BA6 ()
 
 Control prog_0BA9 ()
 {
-    at ( "0BA9" );
+    // #at: 0BA9
     instruction ( "LD   A,02",0x0BAB );
     advance ( 7 );
     A = 0x02;
@@ -24849,7 +24849,7 @@ Control prog_0BA9 ()
 
 Control prog_0BAB ()
 {
-    at ( "0BAB" );
+    // #at: 0BAB
     instruction ( "CALL 08FF",0x0BAE );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -24868,7 +24868,7 @@ Control prog_0BAB ()
 
 Control prog_0BAE ()
 {
-    at ( "0BAE" );
+    // #at: 0BAE
     instruction ( "LD   BC,1F9C",0x0BB1 );
     advance ( 10 );
     B = 0x1F;
@@ -24878,7 +24878,7 @@ Control prog_0BAE ()
 
 Control prog_0BB1 ()
 {
-    at ( "0BB1" );
+    // #at: 0BB1
     instruction ( "CALL 1856",0x0BB4 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -24897,7 +24897,7 @@ Control prog_0BB1 ()
 
 Control prog_0BB4 ()
 {
-    at ( "0BB4" );
+    // #at: 0BB4
     instruction ( "CALL 184C",0x0BB7 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -24916,7 +24916,7 @@ Control prog_0BB4 ()
 
 Control prog_0BB7 ()
 {
-    at ( "0BB7" );
+    // #at: 0BB7
     instruction ( "IN   02",0x0BB9 );
     advance ( 10 );
     A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_is_pressed ( Dip3_livesLow ) ),1,e1_is_pressed ( Dip5_livesHigh ) ),2,e1_is_pressed ( Tilt ) ),3,e1_is_pressed ( Dip6_extraShipEarly ) ),4,e1_is_pressed ( P2shoot ) ),5,e1_is_pressed ( P2left ) ),6,e1_is_pressed ( P2right ) ),7,e1_is_pressed ( Dip7_coinInfoOff ) );
@@ -24925,7 +24925,7 @@ Control prog_0BB7 ()
 
 Control prog_0BB9 ()
 {
-    at ( "0BB9" );
+    // #at: 0BB9
     instruction ( "RLCA",0x0BBA );
     u8 a1 = A ;
     advance ( 4 );
@@ -24936,7 +24936,7 @@ Control prog_0BB9 ()
 
 Control prog_0BBA ()
 {
-    at ( "0BBA" );
+    // #at: 0BBA
     instruction ( "JP   CY,0BC3",0x0BBD );
     if (FlagCY)
     {
@@ -24952,7 +24952,7 @@ Control prog_0BBA ()
 
 Control prog_0BBD ()
 {
-    at ( "0BBD" );
+    // #at: 0BBD
     instruction ( "LD   BC,1FA0",0x0BC0 );
     advance ( 10 );
     B = 0x1F;
@@ -24962,7 +24962,7 @@ Control prog_0BBD ()
 
 Control prog_0BC0 ()
 {
-    at ( "0BC0" );
+    // #at: 0BC0
     instruction ( "CALL 183A",0x0BC3 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -24981,7 +24981,7 @@ Control prog_0BC0 ()
 
 Control prog_0BC3 ()
 {
-    at ( "0BC3" );
+    // #at: 0BC3
     instruction ( "CALL 0AB6",0x0BC6 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -25000,7 +25000,7 @@ Control prog_0BC3 ()
 
 Control prog_0BC6 ()
 {
-    at ( "0BC6" );
+    // #at: 0BC6
     instruction ( "LD   A,(20EC)",0x0BC9 );
     u8 a1 = e8_read_mem ( 0x20EC ) ;
     advance ( 13 );
@@ -25010,7 +25010,7 @@ Control prog_0BC6 ()
 
 Control prog_0BC9 ()
 {
-    at ( "0BC9" );
+    // #at: 0BC9
     instruction ( "CP   00",0x0BCB );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! false ) ) ;
@@ -25028,7 +25028,7 @@ Control prog_0BC9 ()
 
 Control prog_0BCB ()
 {
-    at ( "0BCB" );
+    // #at: 0BCB
     instruction ( "JP   NZ,0BDA",0x0BCE );
     if (( ! FlagZ ))
     {
@@ -25044,7 +25044,7 @@ Control prog_0BCB ()
 
 Control prog_0BCE ()
 {
-    at ( "0BCE" );
+    // #at: 0BCE
     instruction ( "LD   DE,1FD5",0x0BD1 );
     advance ( 10 );
     D = 0x1F;
@@ -25054,7 +25054,7 @@ Control prog_0BCE ()
 
 Control prog_0BD1 ()
 {
-    at ( "0BD1" );
+    // #at: 0BD1
     instruction ( "CALL 0AE2",0x0BD4 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -25073,7 +25073,7 @@ Control prog_0BD1 ()
 
 Control prog_0BD4 ()
 {
-    at ( "0BD4" );
+    // #at: 0BD4
     instruction ( "CALL 0A80",0x0BD7 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -25092,7 +25092,7 @@ Control prog_0BD4 ()
 
 Control prog_0BD7 ()
 {
-    at ( "0BD7" );
+    // #at: 0BD7
     instruction ( "CALL 189E",0x0BDA );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -25111,7 +25111,7 @@ Control prog_0BD7 ()
 
 Control prog_0BDA ()
 {
-    at ( "0BDA" );
+    // #at: 0BDA
     instruction ( "LD   HL,20EC",0x0BDD );
     advance ( 10 );
     H = 0x20;
@@ -25121,7 +25121,7 @@ Control prog_0BDA ()
 
 Control prog_0BDD ()
 {
-    at ( "0BDD" );
+    // #at: 0BDD
     instruction ( "LD   A,(HL)",0x0BDE );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -25133,7 +25133,7 @@ Control prog_0BDD ()
 
 Control prog_0BDE ()
 {
-    at ( "0BDE" );
+    // #at: 0BDE
     instruction ( "INC  A",0x0BDF );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + 0x00 ) + true ) ;
@@ -25151,7 +25151,7 @@ Control prog_0BDE ()
 
 Control prog_0BDF ()
 {
-    at ( "0BDF" );
+    // #at: 0BDF
     instruction ( "AND  01",0x0BE1 );
     u8 a1 = A ;
     u8 a2 = ( 0x01 & a1 ) ;
@@ -25168,7 +25168,7 @@ Control prog_0BDF ()
 
 Control prog_0BE1 ()
 {
-    at ( "0BE1" );
+    // #at: 0BE1
     instruction ( "LD   (HL),A",0x0BE2 );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -25180,7 +25180,7 @@ Control prog_0BE1 ()
 
 Control prog_0BE2 ()
 {
-    at ( "0BE2" );
+    // #at: 0BE2
     instruction ( "CALL 09D6",0x0BE5 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -25199,7 +25199,7 @@ Control prog_0BE2 ()
 
 Control prog_0BE5 ()
 {
-    at ( "0BE5" );
+    // #at: 0BE5
     instruction ( "JP   18DF",0x0BE8 );
     advance ( 10 );
     return jumpDirect ( 0x18DF,prog_18DF );
@@ -25207,7 +25207,7 @@ Control prog_0BE5 ()
 
 Control prog_0BE8 ()
 {
-    at ( "0BE8" );
+    // #at: 0BE8
     instruction ( "LD   DE,1DAB",0x0BEB );
     advance ( 10 );
     D = 0x1D;
@@ -25217,7 +25217,7 @@ Control prog_0BE8 ()
 
 Control prog_0BEB ()
 {
-    at ( "0BEB" );
+    // #at: 0BEB
     instruction ( "CALL 0A93",0x0BEE );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -25236,7 +25236,7 @@ Control prog_0BEB ()
 
 Control prog_0BEE ()
 {
-    at ( "0BEE" );
+    // #at: 0BEE
     instruction ( "JP   0B0B",0x0BF1 );
     advance ( 10 );
     return jumpDirect ( 0x0B0B,prog_0B0B );
@@ -25244,7 +25244,7 @@ Control prog_0BEE ()
 
 Control prog_0BF1 ()
 {
-    at ( "0BF1" );
+    // #at: 0BF1
     instruction ( "CALL 190A",0x0BF4 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -25263,7 +25263,7 @@ Control prog_0BF1 ()
 
 Control prog_0BF4 ()
 {
-    at ( "0BF4" );
+    // #at: 0BF4
     instruction ( "JP   199A",0x0BF7 );
     advance ( 10 );
     return jumpDirect ( 0x199A,prog_199A );
@@ -25271,7 +25271,7 @@ Control prog_0BF4 ()
 
 Control prog_1400 ()
 {
-    at ( "1400" );
+    // #at: 1400
     instruction ( "NOP",0x1401 );
     advance ( 4 );
     return jumpDirect ( 0x1401,prog_1401 );
@@ -25279,7 +25279,7 @@ Control prog_1400 ()
 
 Control prog_1401 ()
 {
-    at ( "1401" );
+    // #at: 1401
     instruction ( "CALL 1474",0x1404 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -25298,7 +25298,7 @@ Control prog_1401 ()
 
 Control prog_1404 ()
 {
-    at ( "1404" );
+    // #at: 1404
     instruction ( "NOP",0x1405 );
     advance ( 4 );
     return jumpDirect ( 0x1405,prog_1405 );
@@ -25306,7 +25306,7 @@ Control prog_1404 ()
 
 Control prog_1405 ()
 {
-    at ( "1405" );
+    // #at: 1405
     instruction ( "PUSH BC",0x1406 );
     u8 a1 = B ;
     u8 a2 = C ;
@@ -25326,7 +25326,7 @@ Control prog_1405 ()
 
 Control prog_1406 ()
 {
-    at ( "1406" );
+    // #at: 1406
     instruction ( "PUSH HL",0x1407 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -25346,7 +25346,7 @@ Control prog_1406 ()
 
 Control prog_1407 ()
 {
-    at ( "1407" );
+    // #at: 1407
     instruction ( "LD   A,(DE)",0x1408 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -25358,7 +25358,7 @@ Control prog_1407 ()
 
 Control prog_1408 ()
 {
-    at ( "1408" );
+    // #at: 1408
     instruction ( "OUT  04",0x140A );
     u8 a1 = A ;
     advance ( 10 );
@@ -25369,7 +25369,7 @@ Control prog_1408 ()
 
 Control prog_140A ()
 {
-    at ( "140A" );
+    // #at: 140A
     instruction ( "IN   03",0x140C );
     u8 a1 = ( Shifter_OFF & 0x07 ) ;
     u8 a2 = ( ( ( u8 ) ( ~ Shifter_OFF ) ) & 0x07 ) ;
@@ -25381,7 +25381,7 @@ Control prog_140A ()
 
 Control prog_140C ()
 {
-    at ( "140C" );
+    // #at: 140C
     instruction ( "OR   (HL)",0x140D );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -25400,7 +25400,7 @@ Control prog_140C ()
 
 Control prog_140D ()
 {
-    at ( "140D" );
+    // #at: 140D
     instruction ( "LD   (HL),A",0x140E );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -25412,7 +25412,7 @@ Control prog_140D ()
 
 Control prog_140E ()
 {
-    at ( "140E" );
+    // #at: 140E
     instruction ( "INC  HL",0x140F );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -25425,7 +25425,7 @@ Control prog_140E ()
 
 Control prog_140F ()
 {
-    at ( "140F" );
+    // #at: 140F
     instruction ( "INC  DE",0x1410 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -25438,7 +25438,7 @@ Control prog_140F ()
 
 Control prog_1410 ()
 {
-    at ( "1410" );
+    // #at: 1410
     instruction ( "XOR  A",0x1411 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -25455,7 +25455,7 @@ Control prog_1410 ()
 
 Control prog_1411 ()
 {
-    at ( "1411" );
+    // #at: 1411
     instruction ( "OUT  04",0x1413 );
     u8 a1 = A ;
     advance ( 10 );
@@ -25466,7 +25466,7 @@ Control prog_1411 ()
 
 Control prog_1413 ()
 {
-    at ( "1413" );
+    // #at: 1413
     instruction ( "IN   03",0x1415 );
     u8 a1 = ( Shifter_OFF & 0x07 ) ;
     u8 a2 = ( ( ( u8 ) ( ~ Shifter_OFF ) ) & 0x07 ) ;
@@ -25478,7 +25478,7 @@ Control prog_1413 ()
 
 Control prog_1415 ()
 {
-    at ( "1415" );
+    // #at: 1415
     instruction ( "OR   (HL)",0x1416 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -25497,7 +25497,7 @@ Control prog_1415 ()
 
 Control prog_1416 ()
 {
-    at ( "1416" );
+    // #at: 1416
     instruction ( "LD   (HL),A",0x1417 );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -25509,7 +25509,7 @@ Control prog_1416 ()
 
 Control prog_1417 ()
 {
-    at ( "1417" );
+    // #at: 1417
     instruction ( "POP  HL",0x1418 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -25529,7 +25529,7 @@ Control prog_1417 ()
 
 Control prog_1418 ()
 {
-    at ( "1418" );
+    // #at: 1418
     instruction ( "LD   BC,0020",0x141B );
     advance ( 10 );
     B = 0x00;
@@ -25539,7 +25539,7 @@ Control prog_1418 ()
 
 Control prog_141B ()
 {
-    at ( "141B" );
+    // #at: 141B
     instruction ( "ADD  HL,BC",0x141C );
     u8 a1 = B ;
     u8 a2 = C ;
@@ -25555,7 +25555,7 @@ Control prog_141B ()
 
 Control prog_141C ()
 {
-    at ( "141C" );
+    // #at: 141C
     instruction ( "POP  BC",0x141D );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -25575,7 +25575,7 @@ Control prog_141C ()
 
 Control prog_141D ()
 {
-    at ( "141D" );
+    // #at: 141D
     instruction ( "DEC  B",0x141E );
     u8 a1 = B ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -25593,7 +25593,7 @@ Control prog_141D ()
 
 Control prog_141E ()
 {
-    at ( "141E" );
+    // #at: 141E
     instruction ( "JP   NZ,1405",0x1421 );
     if (( ! FlagZ ))
     {
@@ -25609,7 +25609,7 @@ Control prog_141E ()
 
 Control prog_1421 ()
 {
-    at ( "1421" );
+    // #at: 1421
     instruction ( "RET",0x1422 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -25627,7 +25627,7 @@ Control prog_1421 ()
 
 Control prog_1424 ()
 {
-    at ( "1424" );
+    // #at: 1424
     instruction ( "CALL 1474",0x1427 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -25646,7 +25646,7 @@ Control prog_1424 ()
 
 Control prog_1427 ()
 {
-    at ( "1427" );
+    // #at: 1427
     instruction ( "PUSH BC",0x1428 );
     u8 a1 = B ;
     u8 a2 = C ;
@@ -25666,7 +25666,7 @@ Control prog_1427 ()
 
 Control prog_1428 ()
 {
-    at ( "1428" );
+    // #at: 1428
     instruction ( "PUSH HL",0x1429 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -25686,7 +25686,7 @@ Control prog_1428 ()
 
 Control prog_1429 ()
 {
-    at ( "1429" );
+    // #at: 1429
     instruction ( "XOR  A",0x142A );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -25703,7 +25703,7 @@ Control prog_1429 ()
 
 Control prog_142A ()
 {
-    at ( "142A" );
+    // #at: 142A
     instruction ( "LD   (HL),A",0x142B );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -25715,7 +25715,7 @@ Control prog_142A ()
 
 Control prog_142B ()
 {
-    at ( "142B" );
+    // #at: 142B
     instruction ( "INC  HL",0x142C );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -25728,7 +25728,7 @@ Control prog_142B ()
 
 Control prog_142C ()
 {
-    at ( "142C" );
+    // #at: 142C
     instruction ( "LD   (HL),A",0x142D );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -25740,7 +25740,7 @@ Control prog_142C ()
 
 Control prog_142D ()
 {
-    at ( "142D" );
+    // #at: 142D
     instruction ( "INC  HL",0x142E );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -25753,7 +25753,7 @@ Control prog_142D ()
 
 Control prog_142E ()
 {
-    at ( "142E" );
+    // #at: 142E
     instruction ( "POP  HL",0x142F );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -25773,7 +25773,7 @@ Control prog_142E ()
 
 Control prog_142F ()
 {
-    at ( "142F" );
+    // #at: 142F
     instruction ( "LD   BC,0020",0x1432 );
     advance ( 10 );
     B = 0x00;
@@ -25783,7 +25783,7 @@ Control prog_142F ()
 
 Control prog_1432 ()
 {
-    at ( "1432" );
+    // #at: 1432
     instruction ( "ADD  HL,BC",0x1433 );
     u8 a1 = B ;
     u8 a2 = C ;
@@ -25799,7 +25799,7 @@ Control prog_1432 ()
 
 Control prog_1433 ()
 {
-    at ( "1433" );
+    // #at: 1433
     instruction ( "POP  BC",0x1434 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -25819,7 +25819,7 @@ Control prog_1433 ()
 
 Control prog_1434 ()
 {
-    at ( "1434" );
+    // #at: 1434
     instruction ( "DEC  B",0x1435 );
     u8 a1 = B ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -25837,7 +25837,7 @@ Control prog_1434 ()
 
 Control prog_1435 ()
 {
-    at ( "1435" );
+    // #at: 1435
     instruction ( "JP   NZ,1427",0x1438 );
     if (( ! FlagZ ))
     {
@@ -25853,7 +25853,7 @@ Control prog_1435 ()
 
 Control prog_1438 ()
 {
-    at ( "1438" );
+    // #at: 1438
     instruction ( "RET",0x1439 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -25871,7 +25871,7 @@ Control prog_1438 ()
 
 Control prog_1439 ()
 {
-    at ( "1439" );
+    // #at: 1439
     instruction ( "PUSH BC",0x143A );
     u8 a1 = B ;
     u8 a2 = C ;
@@ -25891,7 +25891,7 @@ Control prog_1439 ()
 
 Control prog_143A ()
 {
-    at ( "143A" );
+    // #at: 143A
     instruction ( "LD   A,(DE)",0x143B );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -25903,7 +25903,7 @@ Control prog_143A ()
 
 Control prog_143B ()
 {
-    at ( "143B" );
+    // #at: 143B
     instruction ( "LD   (HL),A",0x143C );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -25915,7 +25915,7 @@ Control prog_143B ()
 
 Control prog_143C ()
 {
-    at ( "143C" );
+    // #at: 143C
     instruction ( "INC  DE",0x143D );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -25928,7 +25928,7 @@ Control prog_143C ()
 
 Control prog_143D ()
 {
-    at ( "143D" );
+    // #at: 143D
     instruction ( "LD   BC,0020",0x1440 );
     advance ( 10 );
     B = 0x00;
@@ -25938,7 +25938,7 @@ Control prog_143D ()
 
 Control prog_1440 ()
 {
-    at ( "1440" );
+    // #at: 1440
     instruction ( "ADD  HL,BC",0x1441 );
     u8 a1 = B ;
     u8 a2 = C ;
@@ -25954,7 +25954,7 @@ Control prog_1440 ()
 
 Control prog_1441 ()
 {
-    at ( "1441" );
+    // #at: 1441
     instruction ( "POP  BC",0x1442 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -25974,7 +25974,7 @@ Control prog_1441 ()
 
 Control prog_1442 ()
 {
-    at ( "1442" );
+    // #at: 1442
     instruction ( "DEC  B",0x1443 );
     u8 a1 = B ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -25992,7 +25992,7 @@ Control prog_1442 ()
 
 Control prog_1443 ()
 {
-    at ( "1443" );
+    // #at: 1443
     instruction ( "JP   NZ,1439",0x1446 );
     if (( ! FlagZ ))
     {
@@ -26008,7 +26008,7 @@ Control prog_1443 ()
 
 Control prog_1446 ()
 {
-    at ( "1446" );
+    // #at: 1446
     instruction ( "RET",0x1447 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -26026,7 +26026,7 @@ Control prog_1446 ()
 
 Control prog_1452 ()
 {
-    at ( "1452" );
+    // #at: 1452
     instruction ( "CALL 1474",0x1455 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -26045,7 +26045,7 @@ Control prog_1452 ()
 
 Control prog_1455 ()
 {
-    at ( "1455" );
+    // #at: 1455
     instruction ( "PUSH BC",0x1456 );
     u8 a1 = B ;
     u8 a2 = C ;
@@ -26065,7 +26065,7 @@ Control prog_1455 ()
 
 Control prog_1456 ()
 {
-    at ( "1456" );
+    // #at: 1456
     instruction ( "PUSH HL",0x1457 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -26085,7 +26085,7 @@ Control prog_1456 ()
 
 Control prog_1457 ()
 {
-    at ( "1457" );
+    // #at: 1457
     instruction ( "LD   A,(DE)",0x1458 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -26097,7 +26097,7 @@ Control prog_1457 ()
 
 Control prog_1458 ()
 {
-    at ( "1458" );
+    // #at: 1458
     instruction ( "OUT  04",0x145A );
     u8 a1 = A ;
     advance ( 10 );
@@ -26108,7 +26108,7 @@ Control prog_1458 ()
 
 Control prog_145A ()
 {
-    at ( "145A" );
+    // #at: 145A
     instruction ( "IN   03",0x145C );
     u8 a1 = ( Shifter_OFF & 0x07 ) ;
     u8 a2 = ( ( ( u8 ) ( ~ Shifter_OFF ) ) & 0x07 ) ;
@@ -26120,7 +26120,7 @@ Control prog_145A ()
 
 Control prog_145C ()
 {
-    at ( "145C" );
+    // #at: 145C
     instruction ( "CPL",0x145D );
     u8 a1 = A ;
     advance ( 4 );
@@ -26130,7 +26130,7 @@ Control prog_145C ()
 
 Control prog_145D ()
 {
-    at ( "145D" );
+    // #at: 145D
     instruction ( "AND  (HL)",0x145E );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -26150,7 +26150,7 @@ Control prog_145D ()
 
 Control prog_145E ()
 {
-    at ( "145E" );
+    // #at: 145E
     instruction ( "LD   (HL),A",0x145F );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -26162,7 +26162,7 @@ Control prog_145E ()
 
 Control prog_145F ()
 {
-    at ( "145F" );
+    // #at: 145F
     instruction ( "INC  HL",0x1460 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -26175,7 +26175,7 @@ Control prog_145F ()
 
 Control prog_1460 ()
 {
-    at ( "1460" );
+    // #at: 1460
     instruction ( "INC  DE",0x1461 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -26188,7 +26188,7 @@ Control prog_1460 ()
 
 Control prog_1461 ()
 {
-    at ( "1461" );
+    // #at: 1461
     instruction ( "XOR  A",0x1462 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -26205,7 +26205,7 @@ Control prog_1461 ()
 
 Control prog_1462 ()
 {
-    at ( "1462" );
+    // #at: 1462
     instruction ( "OUT  04",0x1464 );
     u8 a1 = A ;
     advance ( 10 );
@@ -26216,7 +26216,7 @@ Control prog_1462 ()
 
 Control prog_1464 ()
 {
-    at ( "1464" );
+    // #at: 1464
     instruction ( "IN   03",0x1466 );
     u8 a1 = ( Shifter_OFF & 0x07 ) ;
     u8 a2 = ( ( ( u8 ) ( ~ Shifter_OFF ) ) & 0x07 ) ;
@@ -26228,7 +26228,7 @@ Control prog_1464 ()
 
 Control prog_1466 ()
 {
-    at ( "1466" );
+    // #at: 1466
     instruction ( "CPL",0x1467 );
     u8 a1 = A ;
     advance ( 4 );
@@ -26238,7 +26238,7 @@ Control prog_1466 ()
 
 Control prog_1467 ()
 {
-    at ( "1467" );
+    // #at: 1467
     instruction ( "AND  (HL)",0x1468 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -26258,7 +26258,7 @@ Control prog_1467 ()
 
 Control prog_1468 ()
 {
-    at ( "1468" );
+    // #at: 1468
     instruction ( "LD   (HL),A",0x1469 );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -26270,7 +26270,7 @@ Control prog_1468 ()
 
 Control prog_1469 ()
 {
-    at ( "1469" );
+    // #at: 1469
     instruction ( "POP  HL",0x146A );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -26290,7 +26290,7 @@ Control prog_1469 ()
 
 Control prog_146A ()
 {
-    at ( "146A" );
+    // #at: 146A
     instruction ( "LD   BC,0020",0x146D );
     advance ( 10 );
     B = 0x00;
@@ -26300,7 +26300,7 @@ Control prog_146A ()
 
 Control prog_146D ()
 {
-    at ( "146D" );
+    // #at: 146D
     instruction ( "ADD  HL,BC",0x146E );
     u8 a1 = B ;
     u8 a2 = C ;
@@ -26316,7 +26316,7 @@ Control prog_146D ()
 
 Control prog_146E ()
 {
-    at ( "146E" );
+    // #at: 146E
     instruction ( "POP  BC",0x146F );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -26336,7 +26336,7 @@ Control prog_146E ()
 
 Control prog_146F ()
 {
-    at ( "146F" );
+    // #at: 146F
     instruction ( "DEC  B",0x1470 );
     u8 a1 = B ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -26354,7 +26354,7 @@ Control prog_146F ()
 
 Control prog_1470 ()
 {
-    at ( "1470" );
+    // #at: 1470
     instruction ( "JP   NZ,1455",0x1473 );
     if (( ! FlagZ ))
     {
@@ -26370,7 +26370,7 @@ Control prog_1470 ()
 
 Control prog_1473 ()
 {
-    at ( "1473" );
+    // #at: 1473
     instruction ( "RET",0x1474 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -26388,7 +26388,7 @@ Control prog_1473 ()
 
 Control prog_1474 ()
 {
-    at ( "1474" );
+    // #at: 1474
     instruction ( "LD   A,L",0x1475 );
     u8 a1 = L ;
     advance ( 5 );
@@ -26398,7 +26398,7 @@ Control prog_1474 ()
 
 Control prog_1475 ()
 {
-    at ( "1475" );
+    // #at: 1475
     instruction ( "AND  07",0x1477 );
     u8 a1 = A ;
     u8 a2 = ( 0x07 & a1 ) ;
@@ -26415,7 +26415,7 @@ Control prog_1475 ()
 
 Control prog_1477 ()
 {
-    at ( "1477" );
+    // #at: 1477
     instruction ( "OUT  02",0x1479 );
     u8 a1 = A ;
     advance ( 10 );
@@ -26425,7 +26425,7 @@ Control prog_1477 ()
 
 Control prog_1479 ()
 {
-    at ( "1479" );
+    // #at: 1479
     instruction ( "JP   1A47",0x147C );
     advance ( 10 );
     return jumpDirect ( 0x1A47,prog_1A47 );
@@ -26433,7 +26433,7 @@ Control prog_1479 ()
 
 Control prog_147C ()
 {
-    at ( "147C" );
+    // #at: 147C
     instruction ( "PUSH BC",0x147D );
     u8 a1 = B ;
     u8 a2 = C ;
@@ -26453,7 +26453,7 @@ Control prog_147C ()
 
 Control prog_147D ()
 {
-    at ( "147D" );
+    // #at: 147D
     instruction ( "PUSH HL",0x147E );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -26473,7 +26473,7 @@ Control prog_147D ()
 
 Control prog_147E ()
 {
-    at ( "147E" );
+    // #at: 147E
     instruction ( "LD   A,(HL)",0x147F );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -26485,7 +26485,7 @@ Control prog_147E ()
 
 Control prog_147F ()
 {
-    at ( "147F" );
+    // #at: 147F
     instruction ( "LD   (DE),A",0x1480 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -26497,7 +26497,7 @@ Control prog_147F ()
 
 Control prog_1480 ()
 {
-    at ( "1480" );
+    // #at: 1480
     instruction ( "INC  DE",0x1481 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -26510,7 +26510,7 @@ Control prog_1480 ()
 
 Control prog_1481 ()
 {
-    at ( "1481" );
+    // #at: 1481
     instruction ( "INC  HL",0x1482 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -26523,7 +26523,7 @@ Control prog_1481 ()
 
 Control prog_1482 ()
 {
-    at ( "1482" );
+    // #at: 1482
     instruction ( "DEC  C",0x1483 );
     u8 a1 = C ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -26541,7 +26541,7 @@ Control prog_1482 ()
 
 Control prog_1483 ()
 {
-    at ( "1483" );
+    // #at: 1483
     instruction ( "JP   NZ,147E",0x1486 );
     if (( ! FlagZ ))
     {
@@ -26557,7 +26557,7 @@ Control prog_1483 ()
 
 Control prog_1486 ()
 {
-    at ( "1486" );
+    // #at: 1486
     instruction ( "POP  HL",0x1487 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -26577,7 +26577,7 @@ Control prog_1486 ()
 
 Control prog_1487 ()
 {
-    at ( "1487" );
+    // #at: 1487
     instruction ( "LD   BC,0020",0x148A );
     advance ( 10 );
     B = 0x00;
@@ -26587,7 +26587,7 @@ Control prog_1487 ()
 
 Control prog_148A ()
 {
-    at ( "148A" );
+    // #at: 148A
     instruction ( "ADD  HL,BC",0x148B );
     u8 a1 = B ;
     u8 a2 = C ;
@@ -26603,7 +26603,7 @@ Control prog_148A ()
 
 Control prog_148B ()
 {
-    at ( "148B" );
+    // #at: 148B
     instruction ( "POP  BC",0x148C );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -26623,7 +26623,7 @@ Control prog_148B ()
 
 Control prog_148C ()
 {
-    at ( "148C" );
+    // #at: 148C
     instruction ( "DEC  B",0x148D );
     u8 a1 = B ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -26641,7 +26641,7 @@ Control prog_148C ()
 
 Control prog_148D ()
 {
-    at ( "148D" );
+    // #at: 148D
     instruction ( "JP   NZ,147C",0x1490 );
     if (( ! FlagZ ))
     {
@@ -26657,7 +26657,7 @@ Control prog_148D ()
 
 Control prog_1490 ()
 {
-    at ( "1490" );
+    // #at: 1490
     instruction ( "RET",0x1491 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -26675,7 +26675,7 @@ Control prog_1490 ()
 
 Control prog_1491 ()
 {
-    at ( "1491" );
+    // #at: 1491
     instruction ( "CALL 1474",0x1494 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -26694,7 +26694,7 @@ Control prog_1491 ()
 
 Control prog_1494 ()
 {
-    at ( "1494" );
+    // #at: 1494
     instruction ( "XOR  A",0x1495 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -26711,7 +26711,7 @@ Control prog_1494 ()
 
 Control prog_1495 ()
 {
-    at ( "1495" );
+    // #at: 1495
     instruction ( "LD   (2061),A",0x1498 );
     u8 a1 = A ;
     mem_write ( 0x2061,a1 );
@@ -26721,7 +26721,7 @@ Control prog_1495 ()
 
 Control prog_1498 ()
 {
-    at ( "1498" );
+    // #at: 1498
     instruction ( "PUSH BC",0x1499 );
     u8 a1 = B ;
     u8 a2 = C ;
@@ -26741,7 +26741,7 @@ Control prog_1498 ()
 
 Control prog_1499 ()
 {
-    at ( "1499" );
+    // #at: 1499
     instruction ( "PUSH HL",0x149A );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -26761,7 +26761,7 @@ Control prog_1499 ()
 
 Control prog_149A ()
 {
-    at ( "149A" );
+    // #at: 149A
     instruction ( "LD   A,(DE)",0x149B );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -26773,7 +26773,7 @@ Control prog_149A ()
 
 Control prog_149B ()
 {
-    at ( "149B" );
+    // #at: 149B
     instruction ( "OUT  04",0x149D );
     u8 a1 = A ;
     advance ( 10 );
@@ -26784,7 +26784,7 @@ Control prog_149B ()
 
 Control prog_149D ()
 {
-    at ( "149D" );
+    // #at: 149D
     instruction ( "IN   03",0x149F );
     u8 a1 = ( Shifter_OFF & 0x07 ) ;
     u8 a2 = ( ( ( u8 ) ( ~ Shifter_OFF ) ) & 0x07 ) ;
@@ -26796,7 +26796,7 @@ Control prog_149D ()
 
 Control prog_149F ()
 {
-    at ( "149F" );
+    // #at: 149F
     instruction ( "PUSH PSW",0x14A0 );
     u8 a1 = A ;
     u8 a2 = SPH ;
@@ -26815,7 +26815,7 @@ Control prog_149F ()
 
 Control prog_14A0 ()
 {
-    at ( "14A0" );
+    // #at: 14A0
     instruction ( "AND  (HL)",0x14A1 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -26835,7 +26835,7 @@ Control prog_14A0 ()
 
 Control prog_14A1 ()
 {
-    at ( "14A1" );
+    // #at: 14A1
     instruction ( "JP   Z,14A9",0x14A4 );
     if (FlagZ)
     {
@@ -26851,7 +26851,7 @@ Control prog_14A1 ()
 
 Control prog_14A4 ()
 {
-    at ( "14A4" );
+    // #at: 14A4
     instruction ( "LD   A,01",0x14A6 );
     advance ( 7 );
     A = 0x01;
@@ -26860,7 +26860,7 @@ Control prog_14A4 ()
 
 Control prog_14A6 ()
 {
-    at ( "14A6" );
+    // #at: 14A6
     instruction ( "LD   (2061),A",0x14A9 );
     u8 a1 = A ;
     mem_write ( 0x2061,a1 );
@@ -26870,7 +26870,7 @@ Control prog_14A6 ()
 
 Control prog_14A9 ()
 {
-    at ( "14A9" );
+    // #at: 14A9
     instruction ( "POP  PSW",0x14AA );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -26894,7 +26894,7 @@ Control prog_14A9 ()
 
 Control prog_14AA ()
 {
-    at ( "14AA" );
+    // #at: 14AA
     instruction ( "OR   (HL)",0x14AB );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -26913,7 +26913,7 @@ Control prog_14AA ()
 
 Control prog_14AB ()
 {
-    at ( "14AB" );
+    // #at: 14AB
     instruction ( "LD   (HL),A",0x14AC );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -26925,7 +26925,7 @@ Control prog_14AB ()
 
 Control prog_14AC ()
 {
-    at ( "14AC" );
+    // #at: 14AC
     instruction ( "INC  HL",0x14AD );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -26938,7 +26938,7 @@ Control prog_14AC ()
 
 Control prog_14AD ()
 {
-    at ( "14AD" );
+    // #at: 14AD
     instruction ( "INC  DE",0x14AE );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -26951,7 +26951,7 @@ Control prog_14AD ()
 
 Control prog_14AE ()
 {
-    at ( "14AE" );
+    // #at: 14AE
     instruction ( "XOR  A",0x14AF );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -26968,7 +26968,7 @@ Control prog_14AE ()
 
 Control prog_14AF ()
 {
-    at ( "14AF" );
+    // #at: 14AF
     instruction ( "OUT  04",0x14B1 );
     u8 a1 = A ;
     advance ( 10 );
@@ -26979,7 +26979,7 @@ Control prog_14AF ()
 
 Control prog_14B1 ()
 {
-    at ( "14B1" );
+    // #at: 14B1
     instruction ( "IN   03",0x14B3 );
     u8 a1 = ( Shifter_OFF & 0x07 ) ;
     u8 a2 = ( ( ( u8 ) ( ~ Shifter_OFF ) ) & 0x07 ) ;
@@ -26991,7 +26991,7 @@ Control prog_14B1 ()
 
 Control prog_14B3 ()
 {
-    at ( "14B3" );
+    // #at: 14B3
     instruction ( "PUSH PSW",0x14B4 );
     u8 a1 = A ;
     u8 a2 = SPH ;
@@ -27010,7 +27010,7 @@ Control prog_14B3 ()
 
 Control prog_14B4 ()
 {
-    at ( "14B4" );
+    // #at: 14B4
     instruction ( "AND  (HL)",0x14B5 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -27030,7 +27030,7 @@ Control prog_14B4 ()
 
 Control prog_14B5 ()
 {
-    at ( "14B5" );
+    // #at: 14B5
     instruction ( "JP   Z,14BD",0x14B8 );
     if (FlagZ)
     {
@@ -27046,7 +27046,7 @@ Control prog_14B5 ()
 
 Control prog_14B8 ()
 {
-    at ( "14B8" );
+    // #at: 14B8
     instruction ( "LD   A,01",0x14BA );
     advance ( 7 );
     A = 0x01;
@@ -27055,7 +27055,7 @@ Control prog_14B8 ()
 
 Control prog_14BA ()
 {
-    at ( "14BA" );
+    // #at: 14BA
     instruction ( "LD   (2061),A",0x14BD );
     u8 a1 = A ;
     mem_write ( 0x2061,a1 );
@@ -27065,7 +27065,7 @@ Control prog_14BA ()
 
 Control prog_14BD ()
 {
-    at ( "14BD" );
+    // #at: 14BD
     instruction ( "POP  PSW",0x14BE );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -27089,7 +27089,7 @@ Control prog_14BD ()
 
 Control prog_14BE ()
 {
-    at ( "14BE" );
+    // #at: 14BE
     instruction ( "OR   (HL)",0x14BF );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -27108,7 +27108,7 @@ Control prog_14BE ()
 
 Control prog_14BF ()
 {
-    at ( "14BF" );
+    // #at: 14BF
     instruction ( "LD   (HL),A",0x14C0 );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -27120,7 +27120,7 @@ Control prog_14BF ()
 
 Control prog_14C0 ()
 {
-    at ( "14C0" );
+    // #at: 14C0
     instruction ( "POP  HL",0x14C1 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -27140,7 +27140,7 @@ Control prog_14C0 ()
 
 Control prog_14C1 ()
 {
-    at ( "14C1" );
+    // #at: 14C1
     instruction ( "LD   BC,0020",0x14C4 );
     advance ( 10 );
     B = 0x00;
@@ -27150,7 +27150,7 @@ Control prog_14C1 ()
 
 Control prog_14C4 ()
 {
-    at ( "14C4" );
+    // #at: 14C4
     instruction ( "ADD  HL,BC",0x14C5 );
     u8 a1 = B ;
     u8 a2 = C ;
@@ -27166,7 +27166,7 @@ Control prog_14C4 ()
 
 Control prog_14C5 ()
 {
-    at ( "14C5" );
+    // #at: 14C5
     instruction ( "POP  BC",0x14C6 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -27186,7 +27186,7 @@ Control prog_14C5 ()
 
 Control prog_14C6 ()
 {
-    at ( "14C6" );
+    // #at: 14C6
     instruction ( "DEC  B",0x14C7 );
     u8 a1 = B ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -27204,7 +27204,7 @@ Control prog_14C6 ()
 
 Control prog_14C7 ()
 {
-    at ( "14C7" );
+    // #at: 14C7
     instruction ( "JP   NZ,1498",0x14CA );
     if (( ! FlagZ ))
     {
@@ -27220,7 +27220,7 @@ Control prog_14C7 ()
 
 Control prog_14CA ()
 {
-    at ( "14CA" );
+    // #at: 14CA
     instruction ( "RET",0x14CB );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -27238,7 +27238,7 @@ Control prog_14CA ()
 
 Control prog_14CB ()
 {
-    at ( "14CB" );
+    // #at: 14CB
     instruction ( "XOR  A",0x14CC );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -27255,7 +27255,7 @@ Control prog_14CB ()
 
 Control prog_14CC ()
 {
-    at ( "14CC" );
+    // #at: 14CC
     instruction ( "PUSH BC",0x14CD );
     u8 a1 = B ;
     u8 a2 = C ;
@@ -27275,7 +27275,7 @@ Control prog_14CC ()
 
 Control prog_14CD ()
 {
-    at ( "14CD" );
+    // #at: 14CD
     instruction ( "LD   (HL),A",0x14CE );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -27287,7 +27287,7 @@ Control prog_14CD ()
 
 Control prog_14CE ()
 {
-    at ( "14CE" );
+    // #at: 14CE
     instruction ( "LD   BC,0020",0x14D1 );
     advance ( 10 );
     B = 0x00;
@@ -27297,7 +27297,7 @@ Control prog_14CE ()
 
 Control prog_14D1 ()
 {
-    at ( "14D1" );
+    // #at: 14D1
     instruction ( "ADD  HL,BC",0x14D2 );
     u8 a1 = B ;
     u8 a2 = C ;
@@ -27313,7 +27313,7 @@ Control prog_14D1 ()
 
 Control prog_14D2 ()
 {
-    at ( "14D2" );
+    // #at: 14D2
     instruction ( "POP  BC",0x14D3 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -27333,7 +27333,7 @@ Control prog_14D2 ()
 
 Control prog_14D3 ()
 {
-    at ( "14D3" );
+    // #at: 14D3
     instruction ( "DEC  B",0x14D4 );
     u8 a1 = B ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -27351,7 +27351,7 @@ Control prog_14D3 ()
 
 Control prog_14D4 ()
 {
-    at ( "14D4" );
+    // #at: 14D4
     instruction ( "JP   NZ,14CC",0x14D7 );
     if (( ! FlagZ ))
     {
@@ -27367,7 +27367,7 @@ Control prog_14D4 ()
 
 Control prog_14D7 ()
 {
-    at ( "14D7" );
+    // #at: 14D7
     instruction ( "RET",0x14D8 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -27385,7 +27385,7 @@ Control prog_14D7 ()
 
 Control prog_14D8 ()
 {
-    at ( "14D8" );
+    // #at: 14D8
     instruction ( "LD   A,(2025)",0x14DB );
     u8 a1 = e8_read_mem ( 0x2025 ) ;
     advance ( 13 );
@@ -27395,7 +27395,7 @@ Control prog_14D8 ()
 
 Control prog_14DB ()
 {
-    at ( "14DB" );
+    // #at: 14DB
     instruction ( "CP   05",0x14DD );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x05 ) ) ) + ( ! false ) ) ;
@@ -27413,7 +27413,7 @@ Control prog_14DB ()
 
 Control prog_14DD ()
 {
-    at ( "14DD" );
+    // #at: 14DD
     instruction ( "RET  Z",0x14DE );
     if (FlagZ)
     {
@@ -27439,7 +27439,7 @@ Control prog_14DD ()
 
 Control prog_14DE ()
 {
-    at ( "14DE" );
+    // #at: 14DE
     instruction ( "CP   02",0x14E0 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x02 ) ) ) + ( ! false ) ) ;
@@ -27457,7 +27457,7 @@ Control prog_14DE ()
 
 Control prog_14E0 ()
 {
-    at ( "14E0" );
+    // #at: 14E0
     instruction ( "RET  NZ",0x14E1 );
     if (( ! FlagZ ))
     {
@@ -27483,7 +27483,7 @@ Control prog_14E0 ()
 
 Control prog_14E1 ()
 {
-    at ( "14E1" );
+    // #at: 14E1
     instruction ( "LD   A,(2029)",0x14E4 );
     u8 a1 = e8_read_mem ( 0x2029 ) ;
     advance ( 13 );
@@ -27493,7 +27493,7 @@ Control prog_14E1 ()
 
 Control prog_14E4 ()
 {
-    at ( "14E4" );
+    // #at: 14E4
     instruction ( "CP   D8",0x14E6 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0xD8 ) ) ) + ( ! false ) ) ;
@@ -27511,7 +27511,7 @@ Control prog_14E4 ()
 
 Control prog_14E6 ()
 {
-    at ( "14E6" );
+    // #at: 14E6
     instruction ( "LD   B,A",0x14E7 );
     u8 a1 = A ;
     advance ( 5 );
@@ -27521,7 +27521,7 @@ Control prog_14E6 ()
 
 Control prog_14E7 ()
 {
-    at ( "14E7" );
+    // #at: 14E7
     instruction ( "JP   NC,1530",0x14EA );
     if (( ! FlagCY ))
     {
@@ -27537,7 +27537,7 @@ Control prog_14E7 ()
 
 Control prog_14EA ()
 {
-    at ( "14EA" );
+    // #at: 14EA
     instruction ( "LD   A,(2002)",0x14ED );
     u8 a1 = e8_read_mem ( 0x2002 ) ;
     advance ( 13 );
@@ -27547,7 +27547,7 @@ Control prog_14EA ()
 
 Control prog_14ED ()
 {
-    at ( "14ED" );
+    // #at: 14ED
     instruction ( "AND  A",0x14EE );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -27565,7 +27565,7 @@ Control prog_14ED ()
 
 Control prog_14EE ()
 {
-    at ( "14EE" );
+    // #at: 14EE
     instruction ( "RET  Z",0x14EF );
     if (FlagZ)
     {
@@ -27591,7 +27591,7 @@ Control prog_14EE ()
 
 Control prog_14EF ()
 {
-    at ( "14EF" );
+    // #at: 14EF
     instruction ( "LD   A,B",0x14F0 );
     u8 a1 = B ;
     advance ( 5 );
@@ -27601,7 +27601,7 @@ Control prog_14EF ()
 
 Control prog_14F0 ()
 {
-    at ( "14F0" );
+    // #at: 14F0
     instruction ( "CP   CE",0x14F2 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0xCE ) ) ) + ( ! false ) ) ;
@@ -27619,7 +27619,7 @@ Control prog_14F0 ()
 
 Control prog_14F2 ()
 {
-    at ( "14F2" );
+    // #at: 14F2
     instruction ( "JP   NC,1579",0x14F5 );
     if (( ! FlagCY ))
     {
@@ -27635,7 +27635,7 @@ Control prog_14F2 ()
 
 Control prog_14F5 ()
 {
-    at ( "14F5" );
+    // #at: 14F5
     instruction ( "ADD  06",0x14F7 );
     u8 a1 = A ;
     u16 a2 = ( ( 0x06 + a1 ) + false ) ;
@@ -27654,7 +27654,7 @@ Control prog_14F5 ()
 
 Control prog_14F7 ()
 {
-    at ( "14F7" );
+    // #at: 14F7
     instruction ( "LD   B,A",0x14F8 );
     u8 a1 = A ;
     advance ( 5 );
@@ -27664,7 +27664,7 @@ Control prog_14F7 ()
 
 Control prog_14F8 ()
 {
-    at ( "14F8" );
+    // #at: 14F8
     instruction ( "LD   A,(2009)",0x14FB );
     u8 a1 = e8_read_mem ( 0x2009 ) ;
     advance ( 13 );
@@ -27674,7 +27674,7 @@ Control prog_14F8 ()
 
 Control prog_14FB ()
 {
-    at ( "14FB" );
+    // #at: 14FB
     instruction ( "CP   90",0x14FD );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x90 ) ) ) + ( ! false ) ) ;
@@ -27692,7 +27692,7 @@ Control prog_14FB ()
 
 Control prog_14FD ()
 {
-    at ( "14FD" );
+    // #at: 14FD
     instruction ( "JP   NC,1504",0x1500 );
     if (( ! FlagCY ))
     {
@@ -27708,7 +27708,7 @@ Control prog_14FD ()
 
 Control prog_1500 ()
 {
-    at ( "1500" );
+    // #at: 1500
     instruction ( "CP   B",0x1501 );
     u8 a1 = A ;
     u8 a2 = B ;
@@ -27727,7 +27727,7 @@ Control prog_1500 ()
 
 Control prog_1501 ()
 {
-    at ( "1501" );
+    // #at: 1501
     instruction ( "JP   NC,1530",0x1504 );
     if (( ! FlagCY ))
     {
@@ -27743,7 +27743,7 @@ Control prog_1501 ()
 
 Control prog_1504 ()
 {
-    at ( "1504" );
+    // #at: 1504
     instruction ( "LD   L,B",0x1505 );
     u8 a1 = B ;
     advance ( 5 );
@@ -27753,7 +27753,7 @@ Control prog_1504 ()
 
 Control prog_1505 ()
 {
-    at ( "1505" );
+    // #at: 1505
     instruction ( "CALL 1562",0x1508 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -27772,7 +27772,7 @@ Control prog_1505 ()
 
 Control prog_1508 ()
 {
-    at ( "1508" );
+    // #at: 1508
     instruction ( "LD   A,(202A)",0x150B );
     u8 a1 = e8_read_mem ( 0x202A ) ;
     advance ( 13 );
@@ -27782,7 +27782,7 @@ Control prog_1508 ()
 
 Control prog_150B ()
 {
-    at ( "150B" );
+    // #at: 150B
     instruction ( "LD   H,A",0x150C );
     u8 a1 = A ;
     advance ( 5 );
@@ -27792,7 +27792,7 @@ Control prog_150B ()
 
 Control prog_150C ()
 {
-    at ( "150C" );
+    // #at: 150C
     instruction ( "CALL 156F",0x150F );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -27811,7 +27811,7 @@ Control prog_150C ()
 
 Control prog_150F ()
 {
-    at ( "150F" );
+    // #at: 150F
     instruction ( "LD   (2064),HL",0x1512 );
     u8 a1 = L ;
     mem_write ( 0x2064,a1 );
@@ -27823,7 +27823,7 @@ Control prog_150F ()
 
 Control prog_1512 ()
 {
-    at ( "1512" );
+    // #at: 1512
     instruction ( "LD   A,05",0x1514 );
     advance ( 7 );
     A = 0x05;
@@ -27832,7 +27832,7 @@ Control prog_1512 ()
 
 Control prog_1514 ()
 {
-    at ( "1514" );
+    // #at: 1514
     instruction ( "LD   (2025),A",0x1517 );
     u8 a1 = A ;
     mem_write ( 0x2025,a1 );
@@ -27842,7 +27842,7 @@ Control prog_1514 ()
 
 Control prog_1517 ()
 {
-    at ( "1517" );
+    // #at: 1517
     instruction ( "CALL 1581",0x151A );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -27861,7 +27861,7 @@ Control prog_1517 ()
 
 Control prog_151A ()
 {
-    at ( "151A" );
+    // #at: 151A
     instruction ( "LD   A,(HL)",0x151B );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -27873,7 +27873,7 @@ Control prog_151A ()
 
 Control prog_151B ()
 {
-    at ( "151B" );
+    // #at: 151B
     instruction ( "AND  A",0x151C );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -27891,7 +27891,7 @@ Control prog_151B ()
 
 Control prog_151C ()
 {
-    at ( "151C" );
+    // #at: 151C
     instruction ( "JP   Z,1530",0x151F );
     if (FlagZ)
     {
@@ -27907,7 +27907,7 @@ Control prog_151C ()
 
 Control prog_151F ()
 {
-    at ( "151F" );
+    // #at: 151F
     instruction ( "LD   (HL),00",0x1521 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -27918,7 +27918,7 @@ Control prog_151F ()
 
 Control prog_1521 ()
 {
-    at ( "1521" );
+    // #at: 1521
     instruction ( "CALL 0A5F",0x1524 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -27937,7 +27937,7 @@ Control prog_1521 ()
 
 Control prog_1524 ()
 {
-    at ( "1524" );
+    // #at: 1524
     instruction ( "CALL 1A3B",0x1527 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -27956,7 +27956,7 @@ Control prog_1524 ()
 
 Control prog_1527 ()
 {
-    at ( "1527" );
+    // #at: 1527
     instruction ( "CALL 15D3",0x152A );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -27975,7 +27975,7 @@ Control prog_1527 ()
 
 Control prog_152A ()
 {
-    at ( "152A" );
+    // #at: 152A
     instruction ( "LD   A,10",0x152C );
     advance ( 7 );
     A = 0x10;
@@ -27984,7 +27984,7 @@ Control prog_152A ()
 
 Control prog_152C ()
 {
-    at ( "152C" );
+    // #at: 152C
     instruction ( "LD   (2003),A",0x152F );
     u8 a1 = A ;
     mem_write ( 0x2003,a1 );
@@ -27994,7 +27994,7 @@ Control prog_152C ()
 
 Control prog_152F ()
 {
-    at ( "152F" );
+    // #at: 152F
     instruction ( "RET",0x1530 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -28012,7 +28012,7 @@ Control prog_152F ()
 
 Control prog_1530 ()
 {
-    at ( "1530" );
+    // #at: 1530
     instruction ( "LD   A,03",0x1532 );
     advance ( 7 );
     A = 0x03;
@@ -28021,7 +28021,7 @@ Control prog_1530 ()
 
 Control prog_1532 ()
 {
-    at ( "1532" );
+    // #at: 1532
     instruction ( "LD   (2025),A",0x1535 );
     u8 a1 = A ;
     mem_write ( 0x2025,a1 );
@@ -28031,7 +28031,7 @@ Control prog_1532 ()
 
 Control prog_1535 ()
 {
-    at ( "1535" );
+    // #at: 1535
     instruction ( "JP   154A",0x1538 );
     advance ( 10 );
     return jumpDirect ( 0x154A,prog_154A );
@@ -28039,7 +28039,7 @@ Control prog_1535 ()
 
 Control prog_1538 ()
 {
-    at ( "1538" );
+    // #at: 1538
     instruction ( "LD   HL,2003",0x153B );
     advance ( 10 );
     H = 0x20;
@@ -28049,7 +28049,7 @@ Control prog_1538 ()
 
 Control prog_153B ()
 {
-    at ( "153B" );
+    // #at: 153B
     instruction ( "DEC  (HL)",0x153C );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -28071,7 +28071,7 @@ Control prog_153B ()
 
 Control prog_153C ()
 {
-    at ( "153C" );
+    // #at: 153C
     instruction ( "RET  NZ",0x153D );
     if (( ! FlagZ ))
     {
@@ -28097,7 +28097,7 @@ Control prog_153C ()
 
 Control prog_153D ()
 {
-    at ( "153D" );
+    // #at: 153D
     instruction ( "LD   HL,(2064)",0x1540 );
     u8 a1 = e8_read_mem ( 0x2064 ) ;
     u8 a2 = e8_read_mem ( 0x2065 ) ;
@@ -28109,7 +28109,7 @@ Control prog_153D ()
 
 Control prog_1540 ()
 {
-    at ( "1540" );
+    // #at: 1540
     instruction ( "LD   B,10",0x1542 );
     advance ( 7 );
     B = 0x10;
@@ -28118,7 +28118,7 @@ Control prog_1540 ()
 
 Control prog_1542 ()
 {
-    at ( "1542" );
+    // #at: 1542
     instruction ( "CALL 1424",0x1545 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -28137,7 +28137,7 @@ Control prog_1542 ()
 
 Control prog_1545 ()
 {
-    at ( "1545" );
+    // #at: 1545
     instruction ( "LD   A,04",0x1547 );
     advance ( 7 );
     A = 0x04;
@@ -28146,7 +28146,7 @@ Control prog_1545 ()
 
 Control prog_1547 ()
 {
-    at ( "1547" );
+    // #at: 1547
     instruction ( "LD   (2025),A",0x154A );
     u8 a1 = A ;
     mem_write ( 0x2025,a1 );
@@ -28156,7 +28156,7 @@ Control prog_1547 ()
 
 Control prog_154A ()
 {
-    at ( "154A" );
+    // #at: 154A
     instruction ( "XOR  A",0x154B );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -28173,7 +28173,7 @@ Control prog_154A ()
 
 Control prog_154B ()
 {
-    at ( "154B" );
+    // #at: 154B
     instruction ( "LD   (2002),A",0x154E );
     u8 a1 = A ;
     mem_write ( 0x2002,a1 );
@@ -28183,7 +28183,7 @@ Control prog_154B ()
 
 Control prog_154E ()
 {
-    at ( "154E" );
+    // #at: 154E
     instruction ( "LD   B,F7",0x1550 );
     advance ( 7 );
     B = 0xF7;
@@ -28192,7 +28192,7 @@ Control prog_154E ()
 
 Control prog_1550 ()
 {
-    at ( "1550" );
+    // #at: 1550
     instruction ( "JP   19DC",0x1553 );
     advance ( 10 );
     return jumpDirect ( 0x19DC,prog_19DC );
@@ -28200,7 +28200,7 @@ Control prog_1550 ()
 
 Control prog_1554 ()
 {
-    at ( "1554" );
+    // #at: 1554
     instruction ( "LD   C,00",0x1556 );
     advance ( 7 );
     C = 0x00;
@@ -28209,7 +28209,7 @@ Control prog_1554 ()
 
 Control prog_1556 ()
 {
-    at ( "1556" );
+    // #at: 1556
     instruction ( "CP   H",0x1557 );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -28228,7 +28228,7 @@ Control prog_1556 ()
 
 Control prog_1557 ()
 {
-    at ( "1557" );
+    // #at: 1557
     instruction ( "CALL NC,1590",0x155A );
     if (( ! FlagCY ))
     {
@@ -28255,7 +28255,7 @@ Control prog_1557 ()
 
 Control prog_155A ()
 {
-    at ( "155A" );
+    // #at: 155A
     instruction ( "CP   H",0x155B );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -28274,7 +28274,7 @@ Control prog_155A ()
 
 Control prog_155B ()
 {
-    at ( "155B" );
+    // #at: 155B
     instruction ( "RET  NC",0x155C );
     if (( ! FlagCY ))
     {
@@ -28300,7 +28300,7 @@ Control prog_155B ()
 
 Control prog_155C ()
 {
-    at ( "155C" );
+    // #at: 155C
     instruction ( "ADD  10",0x155E );
     u8 a1 = A ;
     u16 a2 = ( ( 0x10 + a1 ) + false ) ;
@@ -28319,7 +28319,7 @@ Control prog_155C ()
 
 Control prog_155E ()
 {
-    at ( "155E" );
+    // #at: 155E
     instruction ( "INC  C",0x155F );
     u8 a1 = C ;
     u16 a2 = ( ( a1 + 0x00 ) + true ) ;
@@ -28337,7 +28337,7 @@ Control prog_155E ()
 
 Control prog_155F ()
 {
-    at ( "155F" );
+    // #at: 155F
     instruction ( "JP   155A",0x1562 );
     advance ( 10 );
     return jumpDirect ( 0x155A,prog_155A );
@@ -28345,7 +28345,7 @@ Control prog_155F ()
 
 Control prog_1562 ()
 {
-    at ( "1562" );
+    // #at: 1562
     instruction ( "LD   A,(2009)",0x1565 );
     u8 a1 = e8_read_mem ( 0x2009 ) ;
     advance ( 13 );
@@ -28355,7 +28355,7 @@ Control prog_1562 ()
 
 Control prog_1565 ()
 {
-    at ( "1565" );
+    // #at: 1565
     instruction ( "LD   H,L",0x1566 );
     u8 a1 = L ;
     advance ( 5 );
@@ -28365,7 +28365,7 @@ Control prog_1565 ()
 
 Control prog_1566 ()
 {
-    at ( "1566" );
+    // #at: 1566
     instruction ( "CALL 1554",0x1569 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -28384,7 +28384,7 @@ Control prog_1566 ()
 
 Control prog_1569 ()
 {
-    at ( "1569" );
+    // #at: 1569
     instruction ( "LD   B,C",0x156A );
     u8 a1 = C ;
     advance ( 5 );
@@ -28394,7 +28394,7 @@ Control prog_1569 ()
 
 Control prog_156A ()
 {
-    at ( "156A" );
+    // #at: 156A
     instruction ( "DEC  B",0x156B );
     u8 a1 = B ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -28412,7 +28412,7 @@ Control prog_156A ()
 
 Control prog_156B ()
 {
-    at ( "156B" );
+    // #at: 156B
     instruction ( "SBC  10",0x156D );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x10 ) ) ) + ( ! FlagCY ) ) ;
@@ -28431,7 +28431,7 @@ Control prog_156B ()
 
 Control prog_156D ()
 {
-    at ( "156D" );
+    // #at: 156D
     instruction ( "LD   L,A",0x156E );
     u8 a1 = A ;
     advance ( 5 );
@@ -28441,7 +28441,7 @@ Control prog_156D ()
 
 Control prog_156E ()
 {
-    at ( "156E" );
+    // #at: 156E
     instruction ( "RET",0x156F );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -28459,7 +28459,7 @@ Control prog_156E ()
 
 Control prog_156F ()
 {
-    at ( "156F" );
+    // #at: 156F
     instruction ( "LD   A,(200A)",0x1572 );
     u8 a1 = e8_read_mem ( 0x200A ) ;
     advance ( 13 );
@@ -28469,7 +28469,7 @@ Control prog_156F ()
 
 Control prog_1572 ()
 {
-    at ( "1572" );
+    // #at: 1572
     instruction ( "CALL 1554",0x1575 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -28488,7 +28488,7 @@ Control prog_1572 ()
 
 Control prog_1575 ()
 {
-    at ( "1575" );
+    // #at: 1575
     instruction ( "SBC  10",0x1577 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x10 ) ) ) + ( ! FlagCY ) ) ;
@@ -28507,7 +28507,7 @@ Control prog_1575 ()
 
 Control prog_1577 ()
 {
-    at ( "1577" );
+    // #at: 1577
     instruction ( "LD   H,A",0x1578 );
     u8 a1 = A ;
     advance ( 5 );
@@ -28517,7 +28517,7 @@ Control prog_1577 ()
 
 Control prog_1578 ()
 {
-    at ( "1578" );
+    // #at: 1578
     instruction ( "RET",0x1579 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -28535,7 +28535,7 @@ Control prog_1578 ()
 
 Control prog_1579 ()
 {
-    at ( "1579" );
+    // #at: 1579
     instruction ( "LD   A,01",0x157B );
     advance ( 7 );
     A = 0x01;
@@ -28544,7 +28544,7 @@ Control prog_1579 ()
 
 Control prog_157B ()
 {
-    at ( "157B" );
+    // #at: 157B
     instruction ( "LD   (2085),A",0x157E );
     u8 a1 = A ;
     mem_write ( 0x2085,a1 );
@@ -28554,7 +28554,7 @@ Control prog_157B ()
 
 Control prog_157E ()
 {
-    at ( "157E" );
+    // #at: 157E
     instruction ( "JP   1545",0x1581 );
     advance ( 10 );
     return jumpDirect ( 0x1545,prog_1545 );
@@ -28562,7 +28562,7 @@ Control prog_157E ()
 
 Control prog_1581 ()
 {
-    at ( "1581" );
+    // #at: 1581
     instruction ( "LD   A,B",0x1582 );
     u8 a1 = B ;
     advance ( 5 );
@@ -28572,7 +28572,7 @@ Control prog_1581 ()
 
 Control prog_1582 ()
 {
-    at ( "1582" );
+    // #at: 1582
     instruction ( "RLCA",0x1583 );
     u8 a1 = A ;
     advance ( 4 );
@@ -28583,7 +28583,7 @@ Control prog_1582 ()
 
 Control prog_1583 ()
 {
-    at ( "1583" );
+    // #at: 1583
     instruction ( "RLCA",0x1584 );
     u8 a1 = A ;
     advance ( 4 );
@@ -28594,7 +28594,7 @@ Control prog_1583 ()
 
 Control prog_1584 ()
 {
-    at ( "1584" );
+    // #at: 1584
     instruction ( "RLCA",0x1585 );
     u8 a1 = A ;
     advance ( 4 );
@@ -28605,7 +28605,7 @@ Control prog_1584 ()
 
 Control prog_1585 ()
 {
-    at ( "1585" );
+    // #at: 1585
     instruction ( "ADD  B",0x1586 );
     u8 a1 = B ;
     u8 a2 = A ;
@@ -28625,7 +28625,7 @@ Control prog_1585 ()
 
 Control prog_1586 ()
 {
-    at ( "1586" );
+    // #at: 1586
     instruction ( "ADD  B",0x1587 );
     u8 a1 = B ;
     u8 a2 = A ;
@@ -28645,7 +28645,7 @@ Control prog_1586 ()
 
 Control prog_1587 ()
 {
-    at ( "1587" );
+    // #at: 1587
     instruction ( "ADD  B",0x1588 );
     u8 a1 = B ;
     u8 a2 = A ;
@@ -28665,7 +28665,7 @@ Control prog_1587 ()
 
 Control prog_1588 ()
 {
-    at ( "1588" );
+    // #at: 1588
     instruction ( "ADD  C",0x1589 );
     u8 a1 = C ;
     u8 a2 = A ;
@@ -28685,7 +28685,7 @@ Control prog_1588 ()
 
 Control prog_1589 ()
 {
-    at ( "1589" );
+    // #at: 1589
     instruction ( "DEC  A",0x158A );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -28703,7 +28703,7 @@ Control prog_1589 ()
 
 Control prog_158A ()
 {
-    at ( "158A" );
+    // #at: 158A
     instruction ( "LD   L,A",0x158B );
     u8 a1 = A ;
     advance ( 5 );
@@ -28713,7 +28713,7 @@ Control prog_158A ()
 
 Control prog_158B ()
 {
-    at ( "158B" );
+    // #at: 158B
     instruction ( "LD   A,(2067)",0x158E );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
@@ -28723,7 +28723,7 @@ Control prog_158B ()
 
 Control prog_158E ()
 {
-    at ( "158E" );
+    // #at: 158E
     instruction ( "LD   H,A",0x158F );
     u8 a1 = A ;
     advance ( 5 );
@@ -28733,7 +28733,7 @@ Control prog_158E ()
 
 Control prog_158F ()
 {
-    at ( "158F" );
+    // #at: 158F
     instruction ( "RET",0x1590 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -28751,7 +28751,7 @@ Control prog_158F ()
 
 Control prog_1590 ()
 {
-    at ( "1590" );
+    // #at: 1590
     instruction ( "INC  C",0x1591 );
     u8 a1 = C ;
     u16 a2 = ( ( a1 + 0x00 ) + true ) ;
@@ -28769,7 +28769,7 @@ Control prog_1590 ()
 
 Control prog_1591 ()
 {
-    at ( "1591" );
+    // #at: 1591
     instruction ( "ADD  10",0x1593 );
     u8 a1 = A ;
     u16 a2 = ( ( 0x10 + a1 ) + false ) ;
@@ -28788,7 +28788,7 @@ Control prog_1591 ()
 
 Control prog_1593 ()
 {
-    at ( "1593" );
+    // #at: 1593
     instruction ( "JP   MI,1590",0x1596 );
     if (FlagS)
     {
@@ -28804,7 +28804,7 @@ Control prog_1593 ()
 
 Control prog_1596 ()
 {
-    at ( "1596" );
+    // #at: 1596
     instruction ( "RET",0x1597 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -28822,7 +28822,7 @@ Control prog_1596 ()
 
 Control prog_1597 ()
 {
-    at ( "1597" );
+    // #at: 1597
     instruction ( "LD   A,(200D)",0x159A );
     u8 a1 = e8_read_mem ( 0x200D ) ;
     advance ( 13 );
@@ -28832,7 +28832,7 @@ Control prog_1597 ()
 
 Control prog_159A ()
 {
-    at ( "159A" );
+    // #at: 159A
     instruction ( "AND  A",0x159B );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -28850,7 +28850,7 @@ Control prog_159A ()
 
 Control prog_159B ()
 {
-    at ( "159B" );
+    // #at: 159B
     instruction ( "JP   NZ,15B7",0x159E );
     if (( ! FlagZ ))
     {
@@ -28866,7 +28866,7 @@ Control prog_159B ()
 
 Control prog_159E ()
 {
-    at ( "159E" );
+    // #at: 159E
     instruction ( "LD   HL,3EA4",0x15A1 );
     advance ( 10 );
     H = 0x3E;
@@ -28876,7 +28876,7 @@ Control prog_159E ()
 
 Control prog_15A1 ()
 {
-    at ( "15A1" );
+    // #at: 15A1
     instruction ( "CALL 15C5",0x15A4 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -28895,7 +28895,7 @@ Control prog_15A1 ()
 
 Control prog_15A4 ()
 {
-    at ( "15A4" );
+    // #at: 15A4
     instruction ( "RET  NC",0x15A5 );
     if (( ! FlagCY ))
     {
@@ -28921,7 +28921,7 @@ Control prog_15A4 ()
 
 Control prog_15A5 ()
 {
-    at ( "15A5" );
+    // #at: 15A5
     instruction ( "LD   B,FE",0x15A7 );
     advance ( 7 );
     B = 0xFE;
@@ -28930,7 +28930,7 @@ Control prog_15A5 ()
 
 Control prog_15A7 ()
 {
-    at ( "15A7" );
+    // #at: 15A7
     instruction ( "LD   A,01",0x15A9 );
     advance ( 7 );
     A = 0x01;
@@ -28939,7 +28939,7 @@ Control prog_15A7 ()
 
 Control prog_15A9 ()
 {
-    at ( "15A9" );
+    // #at: 15A9
     instruction ( "LD   (200D),A",0x15AC );
     u8 a1 = A ;
     mem_write ( 0x200D,a1 );
@@ -28949,7 +28949,7 @@ Control prog_15A9 ()
 
 Control prog_15AC ()
 {
-    at ( "15AC" );
+    // #at: 15AC
     instruction ( "LD   A,B",0x15AD );
     u8 a1 = B ;
     advance ( 5 );
@@ -28959,7 +28959,7 @@ Control prog_15AC ()
 
 Control prog_15AD ()
 {
-    at ( "15AD" );
+    // #at: 15AD
     instruction ( "LD   (2008),A",0x15B0 );
     u8 a1 = A ;
     mem_write ( 0x2008,a1 );
@@ -28969,7 +28969,7 @@ Control prog_15AD ()
 
 Control prog_15B0 ()
 {
-    at ( "15B0" );
+    // #at: 15B0
     instruction ( "LD   A,(200E)",0x15B3 );
     u8 a1 = e8_read_mem ( 0x200E ) ;
     advance ( 13 );
@@ -28979,7 +28979,7 @@ Control prog_15B0 ()
 
 Control prog_15B3 ()
 {
-    at ( "15B3" );
+    // #at: 15B3
     instruction ( "LD   (2007),A",0x15B6 );
     u8 a1 = A ;
     mem_write ( 0x2007,a1 );
@@ -28989,7 +28989,7 @@ Control prog_15B3 ()
 
 Control prog_15B6 ()
 {
-    at ( "15B6" );
+    // #at: 15B6
     instruction ( "RET",0x15B7 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -29007,7 +29007,7 @@ Control prog_15B6 ()
 
 Control prog_15B7 ()
 {
-    at ( "15B7" );
+    // #at: 15B7
     instruction ( "LD   HL,2524",0x15BA );
     advance ( 10 );
     H = 0x25;
@@ -29017,7 +29017,7 @@ Control prog_15B7 ()
 
 Control prog_15BA ()
 {
-    at ( "15BA" );
+    // #at: 15BA
     instruction ( "CALL 15C5",0x15BD );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -29036,7 +29036,7 @@ Control prog_15BA ()
 
 Control prog_15BD ()
 {
-    at ( "15BD" );
+    // #at: 15BD
     instruction ( "RET  NC",0x15BE );
     if (( ! FlagCY ))
     {
@@ -29062,7 +29062,7 @@ Control prog_15BD ()
 
 Control prog_15BE ()
 {
-    at ( "15BE" );
+    // #at: 15BE
     instruction ( "CALL 18F1",0x15C1 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -29081,7 +29081,7 @@ Control prog_15BE ()
 
 Control prog_15C1 ()
 {
-    at ( "15C1" );
+    // #at: 15C1
     instruction ( "XOR  A",0x15C2 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -29098,7 +29098,7 @@ Control prog_15C1 ()
 
 Control prog_15C2 ()
 {
-    at ( "15C2" );
+    // #at: 15C2
     instruction ( "JP   15A9",0x15C5 );
     advance ( 10 );
     return jumpDirect ( 0x15A9,prog_15A9 );
@@ -29106,7 +29106,7 @@ Control prog_15C2 ()
 
 Control prog_15C5 ()
 {
-    at ( "15C5" );
+    // #at: 15C5
     instruction ( "LD   B,17",0x15C7 );
     advance ( 7 );
     B = 0x17;
@@ -29115,7 +29115,7 @@ Control prog_15C5 ()
 
 Control prog_15C7 ()
 {
-    at ( "15C7" );
+    // #at: 15C7
     instruction ( "LD   A,(HL)",0x15C8 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -29127,7 +29127,7 @@ Control prog_15C7 ()
 
 Control prog_15C8 ()
 {
-    at ( "15C8" );
+    // #at: 15C8
     instruction ( "AND  A",0x15C9 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -29145,7 +29145,7 @@ Control prog_15C8 ()
 
 Control prog_15C9 ()
 {
-    at ( "15C9" );
+    // #at: 15C9
     instruction ( "JP   NZ,166B",0x15CC );
     if (( ! FlagZ ))
     {
@@ -29161,7 +29161,7 @@ Control prog_15C9 ()
 
 Control prog_15CC ()
 {
-    at ( "15CC" );
+    // #at: 15CC
     instruction ( "INC  HL",0x15CD );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -29174,7 +29174,7 @@ Control prog_15CC ()
 
 Control prog_15CD ()
 {
-    at ( "15CD" );
+    // #at: 15CD
     instruction ( "DEC  B",0x15CE );
     u8 a1 = B ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -29192,7 +29192,7 @@ Control prog_15CD ()
 
 Control prog_15CE ()
 {
-    at ( "15CE" );
+    // #at: 15CE
     instruction ( "JP   NZ,15C7",0x15D1 );
     if (( ! FlagZ ))
     {
@@ -29208,7 +29208,7 @@ Control prog_15CE ()
 
 Control prog_15D1 ()
 {
-    at ( "15D1" );
+    // #at: 15D1
     instruction ( "RET",0x15D2 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -29226,7 +29226,7 @@ Control prog_15D1 ()
 
 Control prog_15D3 ()
 {
-    at ( "15D3" );
+    // #at: 15D3
     instruction ( "CALL 1474",0x15D6 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -29245,7 +29245,7 @@ Control prog_15D3 ()
 
 Control prog_15D6 ()
 {
-    at ( "15D6" );
+    // #at: 15D6
     instruction ( "PUSH HL",0x15D7 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -29265,7 +29265,7 @@ Control prog_15D6 ()
 
 Control prog_15D7 ()
 {
-    at ( "15D7" );
+    // #at: 15D7
     instruction ( "PUSH BC",0x15D8 );
     u8 a1 = B ;
     u8 a2 = C ;
@@ -29285,7 +29285,7 @@ Control prog_15D7 ()
 
 Control prog_15D8 ()
 {
-    at ( "15D8" );
+    // #at: 15D8
     instruction ( "PUSH HL",0x15D9 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -29305,7 +29305,7 @@ Control prog_15D8 ()
 
 Control prog_15D9 ()
 {
-    at ( "15D9" );
+    // #at: 15D9
     instruction ( "LD   A,(DE)",0x15DA );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -29317,7 +29317,7 @@ Control prog_15D9 ()
 
 Control prog_15DA ()
 {
-    at ( "15DA" );
+    // #at: 15DA
     instruction ( "OUT  04",0x15DC );
     u8 a1 = A ;
     advance ( 10 );
@@ -29328,7 +29328,7 @@ Control prog_15DA ()
 
 Control prog_15DC ()
 {
-    at ( "15DC" );
+    // #at: 15DC
     instruction ( "IN   03",0x15DE );
     u8 a1 = ( Shifter_OFF & 0x07 ) ;
     u8 a2 = ( ( ( u8 ) ( ~ Shifter_OFF ) ) & 0x07 ) ;
@@ -29340,7 +29340,7 @@ Control prog_15DC ()
 
 Control prog_15DE ()
 {
-    at ( "15DE" );
+    // #at: 15DE
     instruction ( "LD   (HL),A",0x15DF );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -29352,7 +29352,7 @@ Control prog_15DE ()
 
 Control prog_15DF ()
 {
-    at ( "15DF" );
+    // #at: 15DF
     instruction ( "INC  HL",0x15E0 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -29365,7 +29365,7 @@ Control prog_15DF ()
 
 Control prog_15E0 ()
 {
-    at ( "15E0" );
+    // #at: 15E0
     instruction ( "INC  DE",0x15E1 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -29378,7 +29378,7 @@ Control prog_15E0 ()
 
 Control prog_15E1 ()
 {
-    at ( "15E1" );
+    // #at: 15E1
     instruction ( "XOR  A",0x15E2 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -29395,7 +29395,7 @@ Control prog_15E1 ()
 
 Control prog_15E2 ()
 {
-    at ( "15E2" );
+    // #at: 15E2
     instruction ( "OUT  04",0x15E4 );
     u8 a1 = A ;
     advance ( 10 );
@@ -29406,7 +29406,7 @@ Control prog_15E2 ()
 
 Control prog_15E4 ()
 {
-    at ( "15E4" );
+    // #at: 15E4
     instruction ( "IN   03",0x15E6 );
     u8 a1 = ( Shifter_OFF & 0x07 ) ;
     u8 a2 = ( ( ( u8 ) ( ~ Shifter_OFF ) ) & 0x07 ) ;
@@ -29418,7 +29418,7 @@ Control prog_15E4 ()
 
 Control prog_15E6 ()
 {
-    at ( "15E6" );
+    // #at: 15E6
     instruction ( "LD   (HL),A",0x15E7 );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -29430,7 +29430,7 @@ Control prog_15E6 ()
 
 Control prog_15E7 ()
 {
-    at ( "15E7" );
+    // #at: 15E7
     instruction ( "POP  HL",0x15E8 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -29450,7 +29450,7 @@ Control prog_15E7 ()
 
 Control prog_15E8 ()
 {
-    at ( "15E8" );
+    // #at: 15E8
     instruction ( "LD   BC,0020",0x15EB );
     advance ( 10 );
     B = 0x00;
@@ -29460,7 +29460,7 @@ Control prog_15E8 ()
 
 Control prog_15EB ()
 {
-    at ( "15EB" );
+    // #at: 15EB
     instruction ( "ADD  HL,BC",0x15EC );
     u8 a1 = B ;
     u8 a2 = C ;
@@ -29476,7 +29476,7 @@ Control prog_15EB ()
 
 Control prog_15EC ()
 {
-    at ( "15EC" );
+    // #at: 15EC
     instruction ( "POP  BC",0x15ED );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -29496,7 +29496,7 @@ Control prog_15EC ()
 
 Control prog_15ED ()
 {
-    at ( "15ED" );
+    // #at: 15ED
     instruction ( "DEC  B",0x15EE );
     u8 a1 = B ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -29514,7 +29514,7 @@ Control prog_15ED ()
 
 Control prog_15EE ()
 {
-    at ( "15EE" );
+    // #at: 15EE
     instruction ( "JP   NZ,15D7",0x15F1 );
     if (( ! FlagZ ))
     {
@@ -29530,7 +29530,7 @@ Control prog_15EE ()
 
 Control prog_15F1 ()
 {
-    at ( "15F1" );
+    // #at: 15F1
     instruction ( "POP  HL",0x15F2 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -29550,7 +29550,7 @@ Control prog_15F1 ()
 
 Control prog_15F2 ()
 {
-    at ( "15F2" );
+    // #at: 15F2
     instruction ( "RET",0x15F3 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -29568,7 +29568,7 @@ Control prog_15F2 ()
 
 Control prog_15F3 ()
 {
-    at ( "15F3" );
+    // #at: 15F3
     instruction ( "CALL 1611",0x15F6 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -29587,7 +29587,7 @@ Control prog_15F3 ()
 
 Control prog_15F6 ()
 {
-    at ( "15F6" );
+    // #at: 15F6
     instruction ( "LD   BC,3700",0x15F9 );
     advance ( 10 );
     B = 0x37;
@@ -29597,7 +29597,7 @@ Control prog_15F6 ()
 
 Control prog_15F9 ()
 {
-    at ( "15F9" );
+    // #at: 15F9
     instruction ( "LD   A,(HL)",0x15FA );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -29609,7 +29609,7 @@ Control prog_15F9 ()
 
 Control prog_15FA ()
 {
-    at ( "15FA" );
+    // #at: 15FA
     instruction ( "AND  A",0x15FB );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -29627,7 +29627,7 @@ Control prog_15FA ()
 
 Control prog_15FB ()
 {
-    at ( "15FB" );
+    // #at: 15FB
     instruction ( "JP   Z,15FF",0x15FE );
     if (FlagZ)
     {
@@ -29643,7 +29643,7 @@ Control prog_15FB ()
 
 Control prog_15FE ()
 {
-    at ( "15FE" );
+    // #at: 15FE
     instruction ( "INC  C",0x15FF );
     u8 a1 = C ;
     u16 a2 = ( ( a1 + 0x00 ) + true ) ;
@@ -29661,7 +29661,7 @@ Control prog_15FE ()
 
 Control prog_15FF ()
 {
-    at ( "15FF" );
+    // #at: 15FF
     instruction ( "INC  HL",0x1600 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -29674,7 +29674,7 @@ Control prog_15FF ()
 
 Control prog_1600 ()
 {
-    at ( "1600" );
+    // #at: 1600
     instruction ( "DEC  B",0x1601 );
     u8 a1 = B ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -29692,7 +29692,7 @@ Control prog_1600 ()
 
 Control prog_1601 ()
 {
-    at ( "1601" );
+    // #at: 1601
     instruction ( "JP   NZ,15F9",0x1604 );
     if (( ! FlagZ ))
     {
@@ -29708,7 +29708,7 @@ Control prog_1601 ()
 
 Control prog_1604 ()
 {
-    at ( "1604" );
+    // #at: 1604
     instruction ( "LD   A,C",0x1605 );
     u8 a1 = C ;
     advance ( 5 );
@@ -29718,7 +29718,7 @@ Control prog_1604 ()
 
 Control prog_1605 ()
 {
-    at ( "1605" );
+    // #at: 1605
     instruction ( "LD   (2082),A",0x1608 );
     u8 a1 = A ;
     mem_write ( 0x2082,a1 );
@@ -29728,7 +29728,7 @@ Control prog_1605 ()
 
 Control prog_1608 ()
 {
-    at ( "1608" );
+    // #at: 1608
     instruction ( "CP   01",0x160A );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x01 ) ) ) + ( ! false ) ) ;
@@ -29746,7 +29746,7 @@ Control prog_1608 ()
 
 Control prog_160A ()
 {
-    at ( "160A" );
+    // #at: 160A
     instruction ( "RET  NZ",0x160B );
     if (( ! FlagZ ))
     {
@@ -29772,7 +29772,7 @@ Control prog_160A ()
 
 Control prog_160B ()
 {
-    at ( "160B" );
+    // #at: 160B
     instruction ( "LD   HL,206B",0x160E );
     advance ( 10 );
     H = 0x20;
@@ -29782,7 +29782,7 @@ Control prog_160B ()
 
 Control prog_160E ()
 {
-    at ( "160E" );
+    // #at: 160E
     instruction ( "LD   (HL),01",0x1610 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -29793,7 +29793,7 @@ Control prog_160E ()
 
 Control prog_1610 ()
 {
-    at ( "1610" );
+    // #at: 1610
     instruction ( "RET",0x1611 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -29811,7 +29811,7 @@ Control prog_1610 ()
 
 Control prog_1611 ()
 {
-    at ( "1611" );
+    // #at: 1611
     instruction ( "LD   L,00",0x1613 );
     advance ( 7 );
     L = 0x00;
@@ -29820,7 +29820,7 @@ Control prog_1611 ()
 
 Control prog_1613 ()
 {
-    at ( "1613" );
+    // #at: 1613
     instruction ( "LD   A,(2067)",0x1616 );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
@@ -29830,7 +29830,7 @@ Control prog_1613 ()
 
 Control prog_1616 ()
 {
-    at ( "1616" );
+    // #at: 1616
     instruction ( "LD   H,A",0x1617 );
     u8 a1 = A ;
     advance ( 5 );
@@ -29840,7 +29840,7 @@ Control prog_1616 ()
 
 Control prog_1617 ()
 {
-    at ( "1617" );
+    // #at: 1617
     instruction ( "RET",0x1618 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -29858,7 +29858,7 @@ Control prog_1617 ()
 
 Control prog_1618 ()
 {
-    at ( "1618" );
+    // #at: 1618
     instruction ( "LD   A,(2015)",0x161B );
     u8 a1 = e8_read_mem ( 0x2015 ) ;
     advance ( 13 );
@@ -29868,7 +29868,7 @@ Control prog_1618 ()
 
 Control prog_161B ()
 {
-    at ( "161B" );
+    // #at: 161B
     instruction ( "CP   FF",0x161D );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0xFF ) ) ) + ( ! false ) ) ;
@@ -29886,7 +29886,7 @@ Control prog_161B ()
 
 Control prog_161D ()
 {
-    at ( "161D" );
+    // #at: 161D
     instruction ( "RET  NZ",0x161E );
     if (( ! FlagZ ))
     {
@@ -29912,7 +29912,7 @@ Control prog_161D ()
 
 Control prog_161E ()
 {
-    at ( "161E" );
+    // #at: 161E
     instruction ( "LD   HL,2010",0x1621 );
     advance ( 10 );
     H = 0x20;
@@ -29922,7 +29922,7 @@ Control prog_161E ()
 
 Control prog_1621 ()
 {
-    at ( "1621" );
+    // #at: 1621
     instruction ( "LD   A,(HL)",0x1622 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -29934,7 +29934,7 @@ Control prog_1621 ()
 
 Control prog_1622 ()
 {
-    at ( "1622" );
+    // #at: 1622
     instruction ( "INC  HL",0x1623 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -29947,7 +29947,7 @@ Control prog_1622 ()
 
 Control prog_1623 ()
 {
-    at ( "1623" );
+    // #at: 1623
     instruction ( "LD   B,(HL)",0x1624 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -29959,7 +29959,7 @@ Control prog_1623 ()
 
 Control prog_1624 ()
 {
-    at ( "1624" );
+    // #at: 1624
     instruction ( "OR   B",0x1625 );
     u8 a1 = B ;
     u8 a2 = A ;
@@ -29976,7 +29976,7 @@ Control prog_1624 ()
 
 Control prog_1625 ()
 {
-    at ( "1625" );
+    // #at: 1625
     instruction ( "RET  NZ",0x1626 );
     if (( ! FlagZ ))
     {
@@ -30002,7 +30002,7 @@ Control prog_1625 ()
 
 Control prog_1626 ()
 {
-    at ( "1626" );
+    // #at: 1626
     instruction ( "LD   A,(2025)",0x1629 );
     u8 a1 = e8_read_mem ( 0x2025 ) ;
     advance ( 13 );
@@ -30012,7 +30012,7 @@ Control prog_1626 ()
 
 Control prog_1629 ()
 {
-    at ( "1629" );
+    // #at: 1629
     instruction ( "AND  A",0x162A );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -30030,7 +30030,7 @@ Control prog_1629 ()
 
 Control prog_162A ()
 {
-    at ( "162A" );
+    // #at: 162A
     instruction ( "RET  NZ",0x162B );
     if (( ! FlagZ ))
     {
@@ -30056,7 +30056,7 @@ Control prog_162A ()
 
 Control prog_162B ()
 {
-    at ( "162B" );
+    // #at: 162B
     instruction ( "LD   A,(20EF)",0x162E );
     u8 a1 = e8_read_mem ( 0x20EF ) ;
     advance ( 13 );
@@ -30066,7 +30066,7 @@ Control prog_162B ()
 
 Control prog_162E ()
 {
-    at ( "162E" );
+    // #at: 162E
     instruction ( "AND  A",0x162F );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -30084,7 +30084,7 @@ Control prog_162E ()
 
 Control prog_162F ()
 {
-    at ( "162F" );
+    // #at: 162F
     instruction ( "JP   Z,1652",0x1632 );
     if (FlagZ)
     {
@@ -30100,7 +30100,7 @@ Control prog_162F ()
 
 Control prog_1632 ()
 {
-    at ( "1632" );
+    // #at: 1632
     instruction ( "LD   A,(202D)",0x1635 );
     u8 a1 = e8_read_mem ( 0x202D ) ;
     advance ( 13 );
@@ -30110,7 +30110,7 @@ Control prog_1632 ()
 
 Control prog_1635 ()
 {
-    at ( "1635" );
+    // #at: 1635
     instruction ( "AND  A",0x1636 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -30128,7 +30128,7 @@ Control prog_1635 ()
 
 Control prog_1636 ()
 {
-    at ( "1636" );
+    // #at: 1636
     instruction ( "JP   NZ,1648",0x1639 );
     if (( ! FlagZ ))
     {
@@ -30144,7 +30144,7 @@ Control prog_1636 ()
 
 Control prog_1639 ()
 {
-    at ( "1639" );
+    // #at: 1639
     instruction ( "CALL 17C0",0x163C );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -30163,7 +30163,7 @@ Control prog_1639 ()
 
 Control prog_163C ()
 {
-    at ( "163C" );
+    // #at: 163C
     instruction ( "AND  10",0x163E );
     u8 a1 = A ;
     u8 a2 = ( 0x10 & a1 ) ;
@@ -30180,7 +30180,7 @@ Control prog_163C ()
 
 Control prog_163E ()
 {
-    at ( "163E" );
+    // #at: 163E
     instruction ( "RET  Z",0x163F );
     if (FlagZ)
     {
@@ -30206,7 +30206,7 @@ Control prog_163E ()
 
 Control prog_163F ()
 {
-    at ( "163F" );
+    // #at: 163F
     instruction ( "LD   A,01",0x1641 );
     advance ( 7 );
     A = 0x01;
@@ -30215,7 +30215,7 @@ Control prog_163F ()
 
 Control prog_1641 ()
 {
-    at ( "1641" );
+    // #at: 1641
     instruction ( "LD   (2025),A",0x1644 );
     u8 a1 = A ;
     mem_write ( 0x2025,a1 );
@@ -30225,7 +30225,7 @@ Control prog_1641 ()
 
 Control prog_1644 ()
 {
-    at ( "1644" );
+    // #at: 1644
     instruction ( "LD   (202D),A",0x1647 );
     u8 a1 = A ;
     mem_write ( 0x202D,a1 );
@@ -30235,7 +30235,7 @@ Control prog_1644 ()
 
 Control prog_1647 ()
 {
-    at ( "1647" );
+    // #at: 1647
     instruction ( "RET",0x1648 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -30253,7 +30253,7 @@ Control prog_1647 ()
 
 Control prog_1648 ()
 {
-    at ( "1648" );
+    // #at: 1648
     instruction ( "CALL 17C0",0x164B );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -30272,7 +30272,7 @@ Control prog_1648 ()
 
 Control prog_164B ()
 {
-    at ( "164B" );
+    // #at: 164B
     instruction ( "AND  10",0x164D );
     u8 a1 = A ;
     u8 a2 = ( 0x10 & a1 ) ;
@@ -30289,7 +30289,7 @@ Control prog_164B ()
 
 Control prog_164D ()
 {
-    at ( "164D" );
+    // #at: 164D
     instruction ( "RET  NZ",0x164E );
     if (( ! FlagZ ))
     {
@@ -30315,7 +30315,7 @@ Control prog_164D ()
 
 Control prog_164E ()
 {
-    at ( "164E" );
+    // #at: 164E
     instruction ( "LD   (202D),A",0x1651 );
     u8 a1 = A ;
     mem_write ( 0x202D,a1 );
@@ -30325,7 +30325,7 @@ Control prog_164E ()
 
 Control prog_1651 ()
 {
-    at ( "1651" );
+    // #at: 1651
     instruction ( "RET",0x1652 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -30343,7 +30343,7 @@ Control prog_1651 ()
 
 Control prog_1652 ()
 {
-    at ( "1652" );
+    // #at: 1652
     instruction ( "LD   HL,2025",0x1655 );
     advance ( 10 );
     H = 0x20;
@@ -30353,7 +30353,7 @@ Control prog_1652 ()
 
 Control prog_1655 ()
 {
-    at ( "1655" );
+    // #at: 1655
     instruction ( "LD   (HL),01",0x1657 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -30364,7 +30364,7 @@ Control prog_1655 ()
 
 Control prog_1657 ()
 {
-    at ( "1657" );
+    // #at: 1657
     instruction ( "LD   HL,(20ED)",0x165A );
     u8 a1 = e8_read_mem ( 0x20ED ) ;
     u8 a2 = e8_read_mem ( 0x20EE ) ;
@@ -30376,7 +30376,7 @@ Control prog_1657 ()
 
 Control prog_165A ()
 {
-    at ( "165A" );
+    // #at: 165A
     instruction ( "INC  HL",0x165B );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -30389,7 +30389,7 @@ Control prog_165A ()
 
 Control prog_165B ()
 {
-    at ( "165B" );
+    // #at: 165B
     instruction ( "LD   A,L",0x165C );
     u8 a1 = L ;
     advance ( 5 );
@@ -30399,7 +30399,7 @@ Control prog_165B ()
 
 Control prog_165C ()
 {
-    at ( "165C" );
+    // #at: 165C
     instruction ( "CP   7E",0x165E );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x7E ) ) ) + ( ! false ) ) ;
@@ -30417,7 +30417,7 @@ Control prog_165C ()
 
 Control prog_165E ()
 {
-    at ( "165E" );
+    // #at: 165E
     instruction ( "JP   CY,1663",0x1661 );
     if (FlagCY)
     {
@@ -30433,7 +30433,7 @@ Control prog_165E ()
 
 Control prog_1661 ()
 {
-    at ( "1661" );
+    // #at: 1661
     instruction ( "LD   L,74",0x1663 );
     advance ( 7 );
     L = 0x74;
@@ -30442,7 +30442,7 @@ Control prog_1661 ()
 
 Control prog_1663 ()
 {
-    at ( "1663" );
+    // #at: 1663
     instruction ( "LD   (20ED),HL",0x1666 );
     u8 a1 = L ;
     mem_write ( 0x20ED,a1 );
@@ -30454,7 +30454,7 @@ Control prog_1663 ()
 
 Control prog_1666 ()
 {
-    at ( "1666" );
+    // #at: 1666
     instruction ( "LD   A,(HL)",0x1667 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -30466,7 +30466,7 @@ Control prog_1666 ()
 
 Control prog_1667 ()
 {
-    at ( "1667" );
+    // #at: 1667
     instruction ( "LD   (201D),A",0x166A );
     u8 a1 = A ;
     mem_write ( 0x201D,a1 );
@@ -30476,7 +30476,7 @@ Control prog_1667 ()
 
 Control prog_166A ()
 {
-    at ( "166A" );
+    // #at: 166A
     instruction ( "RET",0x166B );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -30494,7 +30494,7 @@ Control prog_166A ()
 
 Control prog_166B ()
 {
-    at ( "166B" );
+    // #at: 166B
     instruction ( "SCF",0x166C );
     advance ( 4 );
     FlagCY = true;
@@ -30503,7 +30503,7 @@ Control prog_166B ()
 
 Control prog_166C ()
 {
-    at ( "166C" );
+    // #at: 166C
     instruction ( "RET",0x166D );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -30521,7 +30521,7 @@ Control prog_166C ()
 
 Control prog_166D ()
 {
-    at ( "166D" );
+    // #at: 166D
     instruction ( "XOR  A",0x166E );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -30538,7 +30538,7 @@ Control prog_166D ()
 
 Control prog_166E ()
 {
-    at ( "166E" );
+    // #at: 166E
     instruction ( "CALL 1A8B",0x1671 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -30557,7 +30557,7 @@ Control prog_166E ()
 
 Control prog_1671 ()
 {
-    at ( "1671" );
+    // #at: 1671
     instruction ( "CALL 1910",0x1674 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -30576,7 +30576,7 @@ Control prog_1671 ()
 
 Control prog_1674 ()
 {
-    at ( "1674" );
+    // #at: 1674
     instruction ( "LD   (HL),00",0x1676 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -30587,7 +30587,7 @@ Control prog_1674 ()
 
 Control prog_1676 ()
 {
-    at ( "1676" );
+    // #at: 1676
     instruction ( "CALL 09CA",0x1679 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -30606,7 +30606,7 @@ Control prog_1676 ()
 
 Control prog_1679 ()
 {
-    at ( "1679" );
+    // #at: 1679
     instruction ( "INC  HL",0x167A );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -30619,7 +30619,7 @@ Control prog_1679 ()
 
 Control prog_167A ()
 {
-    at ( "167A" );
+    // #at: 167A
     instruction ( "LD   DE,20F5",0x167D );
     advance ( 10 );
     D = 0x20;
@@ -30629,7 +30629,7 @@ Control prog_167A ()
 
 Control prog_167D ()
 {
-    at ( "167D" );
+    // #at: 167D
     instruction ( "LD   A,(DE)",0x167E );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -30641,7 +30641,7 @@ Control prog_167D ()
 
 Control prog_167E ()
 {
-    at ( "167E" );
+    // #at: 167E
     instruction ( "CP   (HL)",0x167F );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -30662,7 +30662,7 @@ Control prog_167E ()
 
 Control prog_167F ()
 {
-    at ( "167F" );
+    // #at: 167F
     instruction ( "DEC  DE",0x1680 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -30675,7 +30675,7 @@ Control prog_167F ()
 
 Control prog_1680 ()
 {
-    at ( "1680" );
+    // #at: 1680
     instruction ( "DEC  HL",0x1681 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -30688,7 +30688,7 @@ Control prog_1680 ()
 
 Control prog_1681 ()
 {
-    at ( "1681" );
+    // #at: 1681
     instruction ( "LD   A,(DE)",0x1682 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -30700,7 +30700,7 @@ Control prog_1681 ()
 
 Control prog_1682 ()
 {
-    at ( "1682" );
+    // #at: 1682
     instruction ( "JP   Z,168B",0x1685 );
     if (FlagZ)
     {
@@ -30716,7 +30716,7 @@ Control prog_1682 ()
 
 Control prog_1685 ()
 {
-    at ( "1685" );
+    // #at: 1685
     instruction ( "JP   NC,1698",0x1688 );
     if (( ! FlagCY ))
     {
@@ -30732,7 +30732,7 @@ Control prog_1685 ()
 
 Control prog_1688 ()
 {
-    at ( "1688" );
+    // #at: 1688
     instruction ( "JP   168F",0x168B );
     advance ( 10 );
     return jumpDirect ( 0x168F,prog_168F );
@@ -30740,7 +30740,7 @@ Control prog_1688 ()
 
 Control prog_168B ()
 {
-    at ( "168B" );
+    // #at: 168B
     instruction ( "CP   (HL)",0x168C );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -30761,7 +30761,7 @@ Control prog_168B ()
 
 Control prog_168C ()
 {
-    at ( "168C" );
+    // #at: 168C
     instruction ( "JP   NC,1698",0x168F );
     if (( ! FlagCY ))
     {
@@ -30777,7 +30777,7 @@ Control prog_168C ()
 
 Control prog_168F ()
 {
-    at ( "168F" );
+    // #at: 168F
     instruction ( "LD   A,(HL)",0x1690 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -30789,7 +30789,7 @@ Control prog_168F ()
 
 Control prog_1690 ()
 {
-    at ( "1690" );
+    // #at: 1690
     instruction ( "LD   (DE),A",0x1691 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -30801,7 +30801,7 @@ Control prog_1690 ()
 
 Control prog_1691 ()
 {
-    at ( "1691" );
+    // #at: 1691
     instruction ( "INC  DE",0x1692 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -30814,7 +30814,7 @@ Control prog_1691 ()
 
 Control prog_1692 ()
 {
-    at ( "1692" );
+    // #at: 1692
     instruction ( "INC  HL",0x1693 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -30827,7 +30827,7 @@ Control prog_1692 ()
 
 Control prog_1693 ()
 {
-    at ( "1693" );
+    // #at: 1693
     instruction ( "LD   A,(HL)",0x1694 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -30839,7 +30839,7 @@ Control prog_1693 ()
 
 Control prog_1694 ()
 {
-    at ( "1694" );
+    // #at: 1694
     instruction ( "LD   (DE),A",0x1695 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -30851,7 +30851,7 @@ Control prog_1694 ()
 
 Control prog_1695 ()
 {
-    at ( "1695" );
+    // #at: 1695
     instruction ( "CALL 1950",0x1698 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -30870,7 +30870,7 @@ Control prog_1695 ()
 
 Control prog_1698 ()
 {
-    at ( "1698" );
+    // #at: 1698
     instruction ( "LD   A,(20CE)",0x169B );
     u8 a1 = e8_read_mem ( 0x20CE ) ;
     advance ( 13 );
@@ -30880,7 +30880,7 @@ Control prog_1698 ()
 
 Control prog_169B ()
 {
-    at ( "169B" );
+    // #at: 169B
     instruction ( "AND  A",0x169C );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -30898,7 +30898,7 @@ Control prog_169B ()
 
 Control prog_169C ()
 {
-    at ( "169C" );
+    // #at: 169C
     instruction ( "JP   Z,16C9",0x169F );
     if (FlagZ)
     {
@@ -30914,7 +30914,7 @@ Control prog_169C ()
 
 Control prog_169F ()
 {
-    at ( "169F" );
+    // #at: 169F
     instruction ( "LD   HL,2803",0x16A2 );
     advance ( 10 );
     H = 0x28;
@@ -30924,7 +30924,7 @@ Control prog_169F ()
 
 Control prog_16A2 ()
 {
-    at ( "16A2" );
+    // #at: 16A2
     instruction ( "LD   DE,1AA6",0x16A5 );
     advance ( 10 );
     D = 0x1A;
@@ -30934,7 +30934,7 @@ Control prog_16A2 ()
 
 Control prog_16A5 ()
 {
-    at ( "16A5" );
+    // #at: 16A5
     instruction ( "LD   C,14",0x16A7 );
     advance ( 7 );
     C = 0x14;
@@ -30943,7 +30943,7 @@ Control prog_16A5 ()
 
 Control prog_16A7 ()
 {
-    at ( "16A7" );
+    // #at: 16A7
     instruction ( "CALL 0A93",0x16AA );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -30962,7 +30962,7 @@ Control prog_16A7 ()
 
 Control prog_16AA ()
 {
-    at ( "16AA" );
+    // #at: 16AA
     instruction ( "DEC  H",0x16AB );
     u8 a1 = H ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -30980,7 +30980,7 @@ Control prog_16AA ()
 
 Control prog_16AB ()
 {
-    at ( "16AB" );
+    // #at: 16AB
     instruction ( "DEC  H",0x16AC );
     u8 a1 = H ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -30998,7 +30998,7 @@ Control prog_16AB ()
 
 Control prog_16AC ()
 {
-    at ( "16AC" );
+    // #at: 16AC
     instruction ( "LD   B,1B",0x16AE );
     advance ( 7 );
     B = 0x1B;
@@ -31007,7 +31007,7 @@ Control prog_16AC ()
 
 Control prog_16AE ()
 {
-    at ( "16AE" );
+    // #at: 16AE
     instruction ( "LD   A,(2067)",0x16B1 );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
@@ -31017,7 +31017,7 @@ Control prog_16AE ()
 
 Control prog_16B1 ()
 {
-    at ( "16B1" );
+    // #at: 16B1
     instruction ( "RRCA",0x16B2 );
     u8 a1 = A ;
     advance ( 4 );
@@ -31028,7 +31028,7 @@ Control prog_16B1 ()
 
 Control prog_16B2 ()
 {
-    at ( "16B2" );
+    // #at: 16B2
     instruction ( "JP   CY,16B7",0x16B5 );
     if (FlagCY)
     {
@@ -31044,7 +31044,7 @@ Control prog_16B2 ()
 
 Control prog_16B5 ()
 {
-    at ( "16B5" );
+    // #at: 16B5
     instruction ( "LD   B,1C",0x16B7 );
     advance ( 7 );
     B = 0x1C;
@@ -31053,7 +31053,7 @@ Control prog_16B5 ()
 
 Control prog_16B7 ()
 {
-    at ( "16B7" );
+    // #at: 16B7
     instruction ( "LD   A,B",0x16B8 );
     u8 a1 = B ;
     advance ( 5 );
@@ -31063,7 +31063,7 @@ Control prog_16B7 ()
 
 Control prog_16B8 ()
 {
-    at ( "16B8" );
+    // #at: 16B8
     instruction ( "CALL 08FF",0x16BB );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -31082,7 +31082,7 @@ Control prog_16B8 ()
 
 Control prog_16BB ()
 {
-    at ( "16BB" );
+    // #at: 16BB
     instruction ( "CALL 0AB1",0x16BE );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -31101,7 +31101,7 @@ Control prog_16BB ()
 
 Control prog_16BE ()
 {
-    at ( "16BE" );
+    // #at: 16BE
     instruction ( "CALL 18E7",0x16C1 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -31120,7 +31120,7 @@ Control prog_16BE ()
 
 Control prog_16C1 ()
 {
-    at ( "16C1" );
+    // #at: 16C1
     instruction ( "LD   A,(HL)",0x16C2 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -31132,7 +31132,7 @@ Control prog_16C1 ()
 
 Control prog_16C2 ()
 {
-    at ( "16C2" );
+    // #at: 16C2
     instruction ( "AND  A",0x16C3 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -31150,7 +31150,7 @@ Control prog_16C2 ()
 
 Control prog_16C3 ()
 {
-    at ( "16C3" );
+    // #at: 16C3
     instruction ( "JP   Z,16C9",0x16C6 );
     if (FlagZ)
     {
@@ -31166,7 +31166,7 @@ Control prog_16C3 ()
 
 Control prog_16C6 ()
 {
-    at ( "16C6" );
+    // #at: 16C6
     instruction ( "JP   02ED",0x16C9 );
     advance ( 10 );
     return jumpDirect ( 0x02ED,prog_02ED );
@@ -31174,7 +31174,7 @@ Control prog_16C6 ()
 
 Control prog_16C9 ()
 {
-    at ( "16C9" );
+    // #at: 16C9
     instruction ( "LD   HL,2D18",0x16CC );
     advance ( 10 );
     H = 0x2D;
@@ -31184,7 +31184,7 @@ Control prog_16C9 ()
 
 Control prog_16CC ()
 {
-    at ( "16CC" );
+    // #at: 16CC
     instruction ( "LD   DE,1AA6",0x16CF );
     advance ( 10 );
     D = 0x1A;
@@ -31194,7 +31194,7 @@ Control prog_16CC ()
 
 Control prog_16CF ()
 {
-    at ( "16CF" );
+    // #at: 16CF
     instruction ( "LD   C,0A",0x16D1 );
     advance ( 7 );
     C = 0x0A;
@@ -31203,7 +31203,7 @@ Control prog_16CF ()
 
 Control prog_16D1 ()
 {
-    at ( "16D1" );
+    // #at: 16D1
     instruction ( "CALL 0A93",0x16D4 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -31222,7 +31222,7 @@ Control prog_16D1 ()
 
 Control prog_16D4 ()
 {
-    at ( "16D4" );
+    // #at: 16D4
     instruction ( "CALL 0AB6",0x16D7 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -31241,7 +31241,7 @@ Control prog_16D4 ()
 
 Control prog_16D7 ()
 {
-    at ( "16D7" );
+    // #at: 16D7
     instruction ( "CALL 09D6",0x16DA );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -31260,7 +31260,7 @@ Control prog_16D7 ()
 
 Control prog_16DA ()
 {
-    at ( "16DA" );
+    // #at: 16DA
     instruction ( "XOR  A",0x16DB );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -31277,7 +31277,7 @@ Control prog_16DA ()
 
 Control prog_16DB ()
 {
-    at ( "16DB" );
+    // #at: 16DB
     instruction ( "LD   (20EF),A",0x16DE );
     u8 a1 = A ;
     mem_write ( 0x20EF,a1 );
@@ -31287,7 +31287,7 @@ Control prog_16DB ()
 
 Control prog_16DE ()
 {
-    at ( "16DE" );
+    // #at: 16DE
     instruction ( "OUT  05",0x16E0 );
     u8 a1 = A ;
     sound_control ( "FleetMovement1",( ( a1 >> 0 ) & 0x01 ) );
@@ -31301,7 +31301,7 @@ Control prog_16DE ()
 
 Control prog_16E0 ()
 {
-    at ( "16E0" );
+    // #at: 16E0
     instruction ( "CALL 19D1",0x16E3 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -31320,7 +31320,7 @@ Control prog_16E0 ()
 
 Control prog_16E3 ()
 {
-    at ( "16E3" );
+    // #at: 16E3
     instruction ( "JP   0B89",0x16E6 );
     advance ( 10 );
     return jumpDirect ( 0x0B89,prog_0B89 );
@@ -31328,7 +31328,7 @@ Control prog_16E3 ()
 
 Control prog_16E6 ()
 {
-    at ( "16E6" );
+    // #at: 16E6
     instruction ( "LD   SP,2400",0x16E9 );
     advance ( 10 );
     SPH = 0x24;
@@ -31338,7 +31338,7 @@ Control prog_16E6 ()
 
 Control prog_16E9 ()
 {
-    at ( "16E9" );
+    // #at: 16E9
     instruction ( "EI",0x16EA );
     enable_interrupts (  );
     advance ( 4 );
@@ -31347,7 +31347,7 @@ Control prog_16E9 ()
 
 Control prog_16EA ()
 {
-    at ( "16EA" );
+    // #at: 16EA
     instruction ( "XOR  A",0x16EB );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -31364,7 +31364,7 @@ Control prog_16EA ()
 
 Control prog_16EB ()
 {
-    at ( "16EB" );
+    // #at: 16EB
     instruction ( "LD   (2015),A",0x16EE );
     u8 a1 = A ;
     mem_write ( 0x2015,a1 );
@@ -31374,7 +31374,7 @@ Control prog_16EB ()
 
 Control prog_16EE ()
 {
-    at ( "16EE" );
+    // #at: 16EE
     instruction ( "CALL 14D8",0x16F1 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -31393,7 +31393,7 @@ Control prog_16EE ()
 
 Control prog_16F1 ()
 {
-    at ( "16F1" );
+    // #at: 16F1
     instruction ( "LD   B,04",0x16F3 );
     advance ( 7 );
     B = 0x04;
@@ -31402,7 +31402,7 @@ Control prog_16F1 ()
 
 Control prog_16F3 ()
 {
-    at ( "16F3" );
+    // #at: 16F3
     instruction ( "CALL 18FA",0x16F6 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -31421,7 +31421,7 @@ Control prog_16F3 ()
 
 Control prog_16F6 ()
 {
-    at ( "16F6" );
+    // #at: 16F6
     instruction ( "CALL 0A59",0x16F9 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -31440,7 +31440,7 @@ Control prog_16F6 ()
 
 Control prog_16F9 ()
 {
-    at ( "16F9" );
+    // #at: 16F9
     instruction ( "JP   NZ,16EE",0x16FC );
     if (( ! FlagZ ))
     {
@@ -31456,7 +31456,7 @@ Control prog_16F9 ()
 
 Control prog_16FC ()
 {
-    at ( "16FC" );
+    // #at: 16FC
     instruction ( "CALL 19D7",0x16FF );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -31475,7 +31475,7 @@ Control prog_16FC ()
 
 Control prog_16FF ()
 {
-    at ( "16FF" );
+    // #at: 16FF
     instruction ( "LD   HL,2701",0x1702 );
     advance ( 10 );
     H = 0x27;
@@ -31485,7 +31485,7 @@ Control prog_16FF ()
 
 Control prog_1702 ()
 {
-    at ( "1702" );
+    // #at: 1702
     instruction ( "CALL 19FA",0x1705 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -31504,7 +31504,7 @@ Control prog_1702 ()
 
 Control prog_1705 ()
 {
-    at ( "1705" );
+    // #at: 1705
     instruction ( "XOR  A",0x1706 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -31521,7 +31521,7 @@ Control prog_1705 ()
 
 Control prog_1706 ()
 {
-    at ( "1706" );
+    // #at: 1706
     instruction ( "CALL 1A8B",0x1709 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -31540,7 +31540,7 @@ Control prog_1706 ()
 
 Control prog_1709 ()
 {
-    at ( "1709" );
+    // #at: 1709
     instruction ( "LD   B,FB",0x170B );
     advance ( 7 );
     B = 0xFB;
@@ -31549,7 +31549,7 @@ Control prog_1709 ()
 
 Control prog_170B ()
 {
-    at ( "170B" );
+    // #at: 170B
     instruction ( "JP   196B",0x170E );
     advance ( 10 );
     return jumpDirect ( 0x196B,prog_196B );
@@ -31557,7 +31557,7 @@ Control prog_170B ()
 
 Control prog_170E ()
 {
-    at ( "170E" );
+    // #at: 170E
     instruction ( "CALL 09CA",0x1711 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -31576,7 +31576,7 @@ Control prog_170E ()
 
 Control prog_1711 ()
 {
-    at ( "1711" );
+    // #at: 1711
     instruction ( "INC  HL",0x1712 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -31589,7 +31589,7 @@ Control prog_1711 ()
 
 Control prog_1712 ()
 {
-    at ( "1712" );
+    // #at: 1712
     instruction ( "LD   A,(HL)",0x1713 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -31601,7 +31601,7 @@ Control prog_1712 ()
 
 Control prog_1713 ()
 {
-    at ( "1713" );
+    // #at: 1713
     instruction ( "LD   DE,1CB8",0x1716 );
     advance ( 10 );
     D = 0x1C;
@@ -31611,7 +31611,7 @@ Control prog_1713 ()
 
 Control prog_1716 ()
 {
-    at ( "1716" );
+    // #at: 1716
     instruction ( "LD   HL,1AA1",0x1719 );
     advance ( 10 );
     H = 0x1A;
@@ -31621,7 +31621,7 @@ Control prog_1716 ()
 
 Control prog_1719 ()
 {
-    at ( "1719" );
+    // #at: 1719
     instruction ( "LD   C,04",0x171B );
     advance ( 7 );
     C = 0x04;
@@ -31630,7 +31630,7 @@ Control prog_1719 ()
 
 Control prog_171B ()
 {
-    at ( "171B" );
+    // #at: 171B
     instruction ( "LD   B,A",0x171C );
     u8 a1 = A ;
     advance ( 5 );
@@ -31640,7 +31640,7 @@ Control prog_171B ()
 
 Control prog_171C ()
 {
-    at ( "171C" );
+    // #at: 171C
     instruction ( "LD   A,(DE)",0x171D );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -31652,7 +31652,7 @@ Control prog_171C ()
 
 Control prog_171D ()
 {
-    at ( "171D" );
+    // #at: 171D
     instruction ( "CP   B",0x171E );
     u8 a1 = A ;
     u8 a2 = B ;
@@ -31671,7 +31671,7 @@ Control prog_171D ()
 
 Control prog_171E ()
 {
-    at ( "171E" );
+    // #at: 171E
     instruction ( "JP   NC,1727",0x1721 );
     if (( ! FlagCY ))
     {
@@ -31687,7 +31687,7 @@ Control prog_171E ()
 
 Control prog_1721 ()
 {
-    at ( "1721" );
+    // #at: 1721
     instruction ( "INC  HL",0x1722 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -31700,7 +31700,7 @@ Control prog_1721 ()
 
 Control prog_1722 ()
 {
-    at ( "1722" );
+    // #at: 1722
     instruction ( "INC  DE",0x1723 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -31713,7 +31713,7 @@ Control prog_1722 ()
 
 Control prog_1723 ()
 {
-    at ( "1723" );
+    // #at: 1723
     instruction ( "DEC  C",0x1724 );
     u8 a1 = C ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -31731,7 +31731,7 @@ Control prog_1723 ()
 
 Control prog_1724 ()
 {
-    at ( "1724" );
+    // #at: 1724
     instruction ( "JP   NZ,171C",0x1727 );
     if (( ! FlagZ ))
     {
@@ -31747,7 +31747,7 @@ Control prog_1724 ()
 
 Control prog_1727 ()
 {
-    at ( "1727" );
+    // #at: 1727
     instruction ( "LD   A,(HL)",0x1728 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -31759,7 +31759,7 @@ Control prog_1727 ()
 
 Control prog_1728 ()
 {
-    at ( "1728" );
+    // #at: 1728
     instruction ( "LD   (20CF),A",0x172B );
     u8 a1 = A ;
     mem_write ( 0x20CF,a1 );
@@ -31769,7 +31769,7 @@ Control prog_1728 ()
 
 Control prog_172B ()
 {
-    at ( "172B" );
+    // #at: 172B
     instruction ( "RET",0x172C );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -31787,7 +31787,7 @@ Control prog_172B ()
 
 Control prog_172C ()
 {
-    at ( "172C" );
+    // #at: 172C
     instruction ( "LD   A,(2025)",0x172F );
     u8 a1 = e8_read_mem ( 0x2025 ) ;
     advance ( 13 );
@@ -31797,7 +31797,7 @@ Control prog_172C ()
 
 Control prog_172F ()
 {
-    at ( "172F" );
+    // #at: 172F
     instruction ( "CP   00",0x1731 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! false ) ) ;
@@ -31815,7 +31815,7 @@ Control prog_172F ()
 
 Control prog_1731 ()
 {
-    at ( "1731" );
+    // #at: 1731
     instruction ( "JP   NZ,1739",0x1734 );
     if (( ! FlagZ ))
     {
@@ -31831,7 +31831,7 @@ Control prog_1731 ()
 
 Control prog_1734 ()
 {
-    at ( "1734" );
+    // #at: 1734
     instruction ( "LD   B,FD",0x1736 );
     advance ( 7 );
     B = 0xFD;
@@ -31840,7 +31840,7 @@ Control prog_1734 ()
 
 Control prog_1736 ()
 {
-    at ( "1736" );
+    // #at: 1736
     instruction ( "JP   19DC",0x1739 );
     advance ( 10 );
     return jumpDirect ( 0x19DC,prog_19DC );
@@ -31848,7 +31848,7 @@ Control prog_1736 ()
 
 Control prog_1739 ()
 {
-    at ( "1739" );
+    // #at: 1739
     instruction ( "LD   B,02",0x173B );
     advance ( 7 );
     B = 0x02;
@@ -31857,7 +31857,7 @@ Control prog_1739 ()
 
 Control prog_173B ()
 {
-    at ( "173B" );
+    // #at: 173B
     instruction ( "JP   18FA",0x173E );
     advance ( 10 );
     return jumpDirect ( 0x18FA,prog_18FA );
@@ -31865,7 +31865,7 @@ Control prog_173B ()
 
 Control prog_1740 ()
 {
-    at ( "1740" );
+    // #at: 1740
     instruction ( "LD   HL,209B",0x1743 );
     advance ( 10 );
     H = 0x20;
@@ -31875,7 +31875,7 @@ Control prog_1740 ()
 
 Control prog_1743 ()
 {
-    at ( "1743" );
+    // #at: 1743
     instruction ( "DEC  (HL)",0x1744 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -31897,7 +31897,7 @@ Control prog_1743 ()
 
 Control prog_1744 ()
 {
-    at ( "1744" );
+    // #at: 1744
     instruction ( "CALL Z,176D",0x1747 );
     if (FlagZ)
     {
@@ -31924,7 +31924,7 @@ Control prog_1744 ()
 
 Control prog_1747 ()
 {
-    at ( "1747" );
+    // #at: 1747
     instruction ( "LD   A,(2068)",0x174A );
     u8 a1 = e8_read_mem ( 0x2068 ) ;
     advance ( 13 );
@@ -31934,7 +31934,7 @@ Control prog_1747 ()
 
 Control prog_174A ()
 {
-    at ( "174A" );
+    // #at: 174A
     instruction ( "AND  A",0x174B );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -31952,7 +31952,7 @@ Control prog_174A ()
 
 Control prog_174B ()
 {
-    at ( "174B" );
+    // #at: 174B
     instruction ( "JP   Z,176D",0x174E );
     if (FlagZ)
     {
@@ -31968,7 +31968,7 @@ Control prog_174B ()
 
 Control prog_174E ()
 {
-    at ( "174E" );
+    // #at: 174E
     instruction ( "LD   HL,2096",0x1751 );
     advance ( 10 );
     H = 0x20;
@@ -31978,7 +31978,7 @@ Control prog_174E ()
 
 Control prog_1751 ()
 {
-    at ( "1751" );
+    // #at: 1751
     instruction ( "DEC  (HL)",0x1752 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -32000,7 +32000,7 @@ Control prog_1751 ()
 
 Control prog_1752 ()
 {
-    at ( "1752" );
+    // #at: 1752
     instruction ( "RET  NZ",0x1753 );
     if (( ! FlagZ ))
     {
@@ -32026,7 +32026,7 @@ Control prog_1752 ()
 
 Control prog_1753 ()
 {
-    at ( "1753" );
+    // #at: 1753
     instruction ( "LD   HL,2098",0x1756 );
     advance ( 10 );
     H = 0x20;
@@ -32036,7 +32036,7 @@ Control prog_1753 ()
 
 Control prog_1756 ()
 {
-    at ( "1756" );
+    // #at: 1756
     instruction ( "LD   A,(HL)",0x1757 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -32048,7 +32048,7 @@ Control prog_1756 ()
 
 Control prog_1757 ()
 {
-    at ( "1757" );
+    // #at: 1757
     instruction ( "OUT  05",0x1759 );
     u8 a1 = A ;
     sound_control ( "FleetMovement1",( ( a1 >> 0 ) & 0x01 ) );
@@ -32062,7 +32062,7 @@ Control prog_1757 ()
 
 Control prog_1759 ()
 {
-    at ( "1759" );
+    // #at: 1759
     instruction ( "LD   A,(2082)",0x175C );
     u8 a1 = e8_read_mem ( 0x2082 ) ;
     advance ( 13 );
@@ -32072,7 +32072,7 @@ Control prog_1759 ()
 
 Control prog_175C ()
 {
-    at ( "175C" );
+    // #at: 175C
     instruction ( "AND  A",0x175D );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -32090,7 +32090,7 @@ Control prog_175C ()
 
 Control prog_175D ()
 {
-    at ( "175D" );
+    // #at: 175D
     instruction ( "JP   Z,176D",0x1760 );
     if (FlagZ)
     {
@@ -32106,7 +32106,7 @@ Control prog_175D ()
 
 Control prog_1760 ()
 {
-    at ( "1760" );
+    // #at: 1760
     instruction ( "DEC  HL",0x1761 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -32119,7 +32119,7 @@ Control prog_1760 ()
 
 Control prog_1761 ()
 {
-    at ( "1761" );
+    // #at: 1761
     instruction ( "LD   A,(HL)",0x1762 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -32131,7 +32131,7 @@ Control prog_1761 ()
 
 Control prog_1762 ()
 {
-    at ( "1762" );
+    // #at: 1762
     instruction ( "DEC  HL",0x1763 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -32144,7 +32144,7 @@ Control prog_1762 ()
 
 Control prog_1763 ()
 {
-    at ( "1763" );
+    // #at: 1763
     instruction ( "LD   (HL),A",0x1764 );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -32156,7 +32156,7 @@ Control prog_1763 ()
 
 Control prog_1764 ()
 {
-    at ( "1764" );
+    // #at: 1764
     instruction ( "DEC  HL",0x1765 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -32169,7 +32169,7 @@ Control prog_1764 ()
 
 Control prog_1765 ()
 {
-    at ( "1765" );
+    // #at: 1765
     instruction ( "LD   (HL),01",0x1767 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -32180,7 +32180,7 @@ Control prog_1765 ()
 
 Control prog_1767 ()
 {
-    at ( "1767" );
+    // #at: 1767
     instruction ( "LD   A,04",0x1769 );
     advance ( 7 );
     A = 0x04;
@@ -32189,7 +32189,7 @@ Control prog_1767 ()
 
 Control prog_1769 ()
 {
-    at ( "1769" );
+    // #at: 1769
     instruction ( "LD   (209B),A",0x176C );
     u8 a1 = A ;
     mem_write ( 0x209B,a1 );
@@ -32199,7 +32199,7 @@ Control prog_1769 ()
 
 Control prog_176C ()
 {
-    at ( "176C" );
+    // #at: 176C
     instruction ( "RET",0x176D );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -32217,7 +32217,7 @@ Control prog_176C ()
 
 Control prog_176D ()
 {
-    at ( "176D" );
+    // #at: 176D
     instruction ( "LD   A,(2098)",0x1770 );
     u8 a1 = e8_read_mem ( 0x2098 ) ;
     advance ( 13 );
@@ -32227,7 +32227,7 @@ Control prog_176D ()
 
 Control prog_1770 ()
 {
-    at ( "1770" );
+    // #at: 1770
     instruction ( "AND  30",0x1772 );
     u8 a1 = A ;
     u8 a2 = ( 0x30 & a1 ) ;
@@ -32244,7 +32244,7 @@ Control prog_1770 ()
 
 Control prog_1772 ()
 {
-    at ( "1772" );
+    // #at: 1772
     instruction ( "OUT  05",0x1774 );
     u8 a1 = A ;
     sound_control ( "FleetMovement1",( ( a1 >> 0 ) & 0x01 ) );
@@ -32258,7 +32258,7 @@ Control prog_1772 ()
 
 Control prog_1774 ()
 {
-    at ( "1774" );
+    // #at: 1774
     instruction ( "RET",0x1775 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -32276,7 +32276,7 @@ Control prog_1774 ()
 
 Control prog_1775 ()
 {
-    at ( "1775" );
+    // #at: 1775
     instruction ( "LD   A,(2095)",0x1778 );
     u8 a1 = e8_read_mem ( 0x2095 ) ;
     advance ( 13 );
@@ -32286,7 +32286,7 @@ Control prog_1775 ()
 
 Control prog_1778 ()
 {
-    at ( "1778" );
+    // #at: 1778
     instruction ( "AND  A",0x1779 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -32304,7 +32304,7 @@ Control prog_1778 ()
 
 Control prog_1779 ()
 {
-    at ( "1779" );
+    // #at: 1779
     instruction ( "JP   Z,17AA",0x177C );
     if (FlagZ)
     {
@@ -32320,7 +32320,7 @@ Control prog_1779 ()
 
 Control prog_177C ()
 {
-    at ( "177C" );
+    // #at: 177C
     instruction ( "LD   HL,1A11",0x177F );
     advance ( 10 );
     H = 0x1A;
@@ -32330,7 +32330,7 @@ Control prog_177C ()
 
 Control prog_177F ()
 {
-    at ( "177F" );
+    // #at: 177F
     instruction ( "LD   DE,1A21",0x1782 );
     advance ( 10 );
     D = 0x1A;
@@ -32340,7 +32340,7 @@ Control prog_177F ()
 
 Control prog_1782 ()
 {
-    at ( "1782" );
+    // #at: 1782
     instruction ( "LD   A,(2082)",0x1785 );
     u8 a1 = e8_read_mem ( 0x2082 ) ;
     advance ( 13 );
@@ -32350,7 +32350,7 @@ Control prog_1782 ()
 
 Control prog_1785 ()
 {
-    at ( "1785" );
+    // #at: 1785
     instruction ( "CP   (HL)",0x1786 );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -32371,7 +32371,7 @@ Control prog_1785 ()
 
 Control prog_1786 ()
 {
-    at ( "1786" );
+    // #at: 1786
     instruction ( "JP   NC,178E",0x1789 );
     if (( ! FlagCY ))
     {
@@ -32387,7 +32387,7 @@ Control prog_1786 ()
 
 Control prog_1789 ()
 {
-    at ( "1789" );
+    // #at: 1789
     instruction ( "INC  HL",0x178A );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -32400,7 +32400,7 @@ Control prog_1789 ()
 
 Control prog_178A ()
 {
-    at ( "178A" );
+    // #at: 178A
     instruction ( "INC  DE",0x178B );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -32413,7 +32413,7 @@ Control prog_178A ()
 
 Control prog_178B ()
 {
-    at ( "178B" );
+    // #at: 178B
     instruction ( "JP   1785",0x178E );
     advance ( 10 );
     return jumpDirect ( 0x1785,prog_1785 );
@@ -32421,7 +32421,7 @@ Control prog_178B ()
 
 Control prog_178E ()
 {
-    at ( "178E" );
+    // #at: 178E
     instruction ( "LD   A,(DE)",0x178F );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -32433,7 +32433,7 @@ Control prog_178E ()
 
 Control prog_178F ()
 {
-    at ( "178F" );
+    // #at: 178F
     instruction ( "LD   (2097),A",0x1792 );
     u8 a1 = A ;
     mem_write ( 0x2097,a1 );
@@ -32443,7 +32443,7 @@ Control prog_178F ()
 
 Control prog_1792 ()
 {
-    at ( "1792" );
+    // #at: 1792
     instruction ( "LD   HL,2098",0x1795 );
     advance ( 10 );
     H = 0x20;
@@ -32453,7 +32453,7 @@ Control prog_1792 ()
 
 Control prog_1795 ()
 {
-    at ( "1795" );
+    // #at: 1795
     instruction ( "LD   A,(HL)",0x1796 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -32465,7 +32465,7 @@ Control prog_1795 ()
 
 Control prog_1796 ()
 {
-    at ( "1796" );
+    // #at: 1796
     instruction ( "AND  30",0x1798 );
     u8 a1 = A ;
     u8 a2 = ( 0x30 & a1 ) ;
@@ -32482,7 +32482,7 @@ Control prog_1796 ()
 
 Control prog_1798 ()
 {
-    at ( "1798" );
+    // #at: 1798
     instruction ( "LD   B,A",0x1799 );
     u8 a1 = A ;
     advance ( 5 );
@@ -32492,7 +32492,7 @@ Control prog_1798 ()
 
 Control prog_1799 ()
 {
-    at ( "1799" );
+    // #at: 1799
     instruction ( "LD   A,(HL)",0x179A );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -32504,7 +32504,7 @@ Control prog_1799 ()
 
 Control prog_179A ()
 {
-    at ( "179A" );
+    // #at: 179A
     instruction ( "AND  0F",0x179C );
     u8 a1 = A ;
     u8 a2 = ( 0x0F & a1 ) ;
@@ -32521,7 +32521,7 @@ Control prog_179A ()
 
 Control prog_179C ()
 {
-    at ( "179C" );
+    // #at: 179C
     instruction ( "RLCA",0x179D );
     u8 a1 = A ;
     advance ( 4 );
@@ -32532,7 +32532,7 @@ Control prog_179C ()
 
 Control prog_179D ()
 {
-    at ( "179D" );
+    // #at: 179D
     instruction ( "CP   10",0x179F );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x10 ) ) ) + ( ! false ) ) ;
@@ -32550,7 +32550,7 @@ Control prog_179D ()
 
 Control prog_179F ()
 {
-    at ( "179F" );
+    // #at: 179F
     instruction ( "JP   NZ,17A4",0x17A2 );
     if (( ! FlagZ ))
     {
@@ -32566,7 +32566,7 @@ Control prog_179F ()
 
 Control prog_17A2 ()
 {
-    at ( "17A2" );
+    // #at: 17A2
     instruction ( "LD   A,01",0x17A4 );
     advance ( 7 );
     A = 0x01;
@@ -32575,7 +32575,7 @@ Control prog_17A2 ()
 
 Control prog_17A4 ()
 {
-    at ( "17A4" );
+    // #at: 17A4
     instruction ( "OR   B",0x17A5 );
     u8 a1 = B ;
     u8 a2 = A ;
@@ -32592,7 +32592,7 @@ Control prog_17A4 ()
 
 Control prog_17A5 ()
 {
-    at ( "17A5" );
+    // #at: 17A5
     instruction ( "LD   (HL),A",0x17A6 );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -32604,7 +32604,7 @@ Control prog_17A5 ()
 
 Control prog_17A6 ()
 {
-    at ( "17A6" );
+    // #at: 17A6
     instruction ( "XOR  A",0x17A7 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -32621,7 +32621,7 @@ Control prog_17A6 ()
 
 Control prog_17A7 ()
 {
-    at ( "17A7" );
+    // #at: 17A7
     instruction ( "LD   (2095),A",0x17AA );
     u8 a1 = A ;
     mem_write ( 0x2095,a1 );
@@ -32631,7 +32631,7 @@ Control prog_17A7 ()
 
 Control prog_17AA ()
 {
-    at ( "17AA" );
+    // #at: 17AA
     instruction ( "LD   HL,2099",0x17AD );
     advance ( 10 );
     H = 0x20;
@@ -32641,7 +32641,7 @@ Control prog_17AA ()
 
 Control prog_17AD ()
 {
-    at ( "17AD" );
+    // #at: 17AD
     instruction ( "DEC  (HL)",0x17AE );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -32663,7 +32663,7 @@ Control prog_17AD ()
 
 Control prog_17AE ()
 {
-    at ( "17AE" );
+    // #at: 17AE
     instruction ( "RET  NZ",0x17AF );
     if (( ! FlagZ ))
     {
@@ -32689,7 +32689,7 @@ Control prog_17AE ()
 
 Control prog_17AF ()
 {
-    at ( "17AF" );
+    // #at: 17AF
     instruction ( "LD   B,EF",0x17B1 );
     advance ( 7 );
     B = 0xEF;
@@ -32698,7 +32698,7 @@ Control prog_17AF ()
 
 Control prog_17B1 ()
 {
-    at ( "17B1" );
+    // #at: 17B1
     instruction ( "JP   19DC",0x17B4 );
     advance ( 10 );
     return jumpDirect ( 0x19DC,prog_19DC );
@@ -32706,7 +32706,7 @@ Control prog_17B1 ()
 
 Control prog_17B4 ()
 {
-    at ( "17B4" );
+    // #at: 17B4
     instruction ( "LD   B,EF",0x17B6 );
     advance ( 7 );
     B = 0xEF;
@@ -32715,7 +32715,7 @@ Control prog_17B4 ()
 
 Control prog_17B6 ()
 {
-    at ( "17B6" );
+    // #at: 17B6
     instruction ( "LD   HL,2098",0x17B9 );
     advance ( 10 );
     H = 0x20;
@@ -32725,7 +32725,7 @@ Control prog_17B6 ()
 
 Control prog_17B9 ()
 {
-    at ( "17B9" );
+    // #at: 17B9
     instruction ( "LD   A,(HL)",0x17BA );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -32737,7 +32737,7 @@ Control prog_17B9 ()
 
 Control prog_17BA ()
 {
-    at ( "17BA" );
+    // #at: 17BA
     instruction ( "AND  B",0x17BB );
     u8 a1 = B ;
     u8 a2 = A ;
@@ -32755,7 +32755,7 @@ Control prog_17BA ()
 
 Control prog_17BB ()
 {
-    at ( "17BB" );
+    // #at: 17BB
     instruction ( "LD   (HL),A",0x17BC );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -32767,7 +32767,7 @@ Control prog_17BB ()
 
 Control prog_17BC ()
 {
-    at ( "17BC" );
+    // #at: 17BC
     instruction ( "OUT  05",0x17BE );
     u8 a1 = A ;
     sound_control ( "FleetMovement1",( ( a1 >> 0 ) & 0x01 ) );
@@ -32781,7 +32781,7 @@ Control prog_17BC ()
 
 Control prog_17BE ()
 {
-    at ( "17BE" );
+    // #at: 17BE
     instruction ( "RET",0x17BF );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -32799,7 +32799,7 @@ Control prog_17BE ()
 
 Control prog_17C0 ()
 {
-    at ( "17C0" );
+    // #at: 17C0
     instruction ( "LD   A,(2067)",0x17C3 );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
@@ -32809,7 +32809,7 @@ Control prog_17C0 ()
 
 Control prog_17C3 ()
 {
-    at ( "17C3" );
+    // #at: 17C3
     instruction ( "RRCA",0x17C4 );
     u8 a1 = A ;
     advance ( 4 );
@@ -32820,7 +32820,7 @@ Control prog_17C3 ()
 
 Control prog_17C4 ()
 {
-    at ( "17C4" );
+    // #at: 17C4
     instruction ( "JP   NC,17CA",0x17C7 );
     if (( ! FlagCY ))
     {
@@ -32836,7 +32836,7 @@ Control prog_17C4 ()
 
 Control prog_17C7 ()
 {
-    at ( "17C7" );
+    // #at: 17C7
     instruction ( "IN   01",0x17C9 );
     advance ( 10 );
     A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,( ! e1_is_pressed ( CoinEntry ) ) ),1,e1_is_pressed ( P2start ) ),2,e1_is_pressed ( P1start ) ),4,e1_is_pressed ( P1shoot ) ),5,e1_is_pressed ( P1left ) ),6,e1_is_pressed ( P1right ) );
@@ -32845,7 +32845,7 @@ Control prog_17C7 ()
 
 Control prog_17C9 ()
 {
-    at ( "17C9" );
+    // #at: 17C9
     instruction ( "RET",0x17CA );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -32863,7 +32863,7 @@ Control prog_17C9 ()
 
 Control prog_17CA ()
 {
-    at ( "17CA" );
+    // #at: 17CA
     instruction ( "IN   02",0x17CC );
     advance ( 10 );
     A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_is_pressed ( Dip3_livesLow ) ),1,e1_is_pressed ( Dip5_livesHigh ) ),2,e1_is_pressed ( Tilt ) ),3,e1_is_pressed ( Dip6_extraShipEarly ) ),4,e1_is_pressed ( P2shoot ) ),5,e1_is_pressed ( P2left ) ),6,e1_is_pressed ( P2right ) ),7,e1_is_pressed ( Dip7_coinInfoOff ) );
@@ -32872,7 +32872,7 @@ Control prog_17CA ()
 
 Control prog_17CC ()
 {
-    at ( "17CC" );
+    // #at: 17CC
     instruction ( "RET",0x17CD );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -32890,7 +32890,7 @@ Control prog_17CC ()
 
 Control prog_17CD ()
 {
-    at ( "17CD" );
+    // #at: 17CD
     instruction ( "IN   02",0x17CF );
     advance ( 10 );
     A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_is_pressed ( Dip3_livesLow ) ),1,e1_is_pressed ( Dip5_livesHigh ) ),2,e1_is_pressed ( Tilt ) ),3,e1_is_pressed ( Dip6_extraShipEarly ) ),4,e1_is_pressed ( P2shoot ) ),5,e1_is_pressed ( P2left ) ),6,e1_is_pressed ( P2right ) ),7,e1_is_pressed ( Dip7_coinInfoOff ) );
@@ -32899,7 +32899,7 @@ Control prog_17CD ()
 
 Control prog_17CF ()
 {
-    at ( "17CF" );
+    // #at: 17CF
     instruction ( "AND  04",0x17D1 );
     u8 a1 = A ;
     u8 a2 = ( 0x04 & a1 ) ;
@@ -32916,7 +32916,7 @@ Control prog_17CF ()
 
 Control prog_17D1 ()
 {
-    at ( "17D1" );
+    // #at: 17D1
     instruction ( "RET  Z",0x17D2 );
     if (FlagZ)
     {
@@ -32942,7 +32942,7 @@ Control prog_17D1 ()
 
 Control prog_17D2 ()
 {
-    at ( "17D2" );
+    // #at: 17D2
     instruction ( "LD   A,(209A)",0x17D5 );
     u8 a1 = e8_read_mem ( 0x209A ) ;
     advance ( 13 );
@@ -32952,7 +32952,7 @@ Control prog_17D2 ()
 
 Control prog_17D5 ()
 {
-    at ( "17D5" );
+    // #at: 17D5
     instruction ( "AND  A",0x17D6 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -32970,7 +32970,7 @@ Control prog_17D5 ()
 
 Control prog_17D6 ()
 {
-    at ( "17D6" );
+    // #at: 17D6
     instruction ( "RET  NZ",0x17D7 );
     if (( ! FlagZ ))
     {
@@ -32996,7 +32996,7 @@ Control prog_17D6 ()
 
 Control prog_17D7 ()
 {
-    at ( "17D7" );
+    // #at: 17D7
     instruction ( "LD   SP,2400",0x17DA );
     advance ( 10 );
     SPH = 0x24;
@@ -33006,7 +33006,7 @@ Control prog_17D7 ()
 
 Control prog_17DA ()
 {
-    at ( "17DA" );
+    // #at: 17DA
     instruction ( "LD   B,04",0x17DC );
     advance ( 7 );
     B = 0x04;
@@ -33015,7 +33015,7 @@ Control prog_17DA ()
 
 Control prog_17DC ()
 {
-    at ( "17DC" );
+    // #at: 17DC
     instruction ( "CALL 09D6",0x17DF );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -33034,7 +33034,7 @@ Control prog_17DC ()
 
 Control prog_17DF ()
 {
-    at ( "17DF" );
+    // #at: 17DF
     instruction ( "DEC  B",0x17E0 );
     u8 a1 = B ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -33052,7 +33052,7 @@ Control prog_17DF ()
 
 Control prog_17E0 ()
 {
-    at ( "17E0" );
+    // #at: 17E0
     instruction ( "JP   NZ,17DC",0x17E3 );
     if (( ! FlagZ ))
     {
@@ -33068,7 +33068,7 @@ Control prog_17E0 ()
 
 Control prog_17E3 ()
 {
-    at ( "17E3" );
+    // #at: 17E3
     instruction ( "LD   A,01",0x17E5 );
     advance ( 7 );
     A = 0x01;
@@ -33077,7 +33077,7 @@ Control prog_17E3 ()
 
 Control prog_17E5 ()
 {
-    at ( "17E5" );
+    // #at: 17E5
     instruction ( "LD   (209A),A",0x17E8 );
     u8 a1 = A ;
     mem_write ( 0x209A,a1 );
@@ -33087,7 +33087,7 @@ Control prog_17E5 ()
 
 Control prog_17E8 ()
 {
-    at ( "17E8" );
+    // #at: 17E8
     instruction ( "CALL 19D7",0x17EB );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -33106,7 +33106,7 @@ Control prog_17E8 ()
 
 Control prog_17EB ()
 {
-    at ( "17EB" );
+    // #at: 17EB
     instruction ( "EI",0x17EC );
     enable_interrupts (  );
     advance ( 4 );
@@ -33115,7 +33115,7 @@ Control prog_17EB ()
 
 Control prog_17EC ()
 {
-    at ( "17EC" );
+    // #at: 17EC
     instruction ( "LD   DE,1CBC",0x17EF );
     advance ( 10 );
     D = 0x1C;
@@ -33125,7 +33125,7 @@ Control prog_17EC ()
 
 Control prog_17EF ()
 {
-    at ( "17EF" );
+    // #at: 17EF
     instruction ( "LD   HL,3016",0x17F2 );
     advance ( 10 );
     H = 0x30;
@@ -33135,7 +33135,7 @@ Control prog_17EF ()
 
 Control prog_17F2 ()
 {
-    at ( "17F2" );
+    // #at: 17F2
     instruction ( "LD   C,04",0x17F4 );
     advance ( 7 );
     C = 0x04;
@@ -33144,7 +33144,7 @@ Control prog_17F2 ()
 
 Control prog_17F4 ()
 {
-    at ( "17F4" );
+    // #at: 17F4
     instruction ( "CALL 0A93",0x17F7 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -33163,7 +33163,7 @@ Control prog_17F4 ()
 
 Control prog_17F7 ()
 {
-    at ( "17F7" );
+    // #at: 17F7
     instruction ( "CALL 0AB1",0x17FA );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -33182,7 +33182,7 @@ Control prog_17F7 ()
 
 Control prog_17FA ()
 {
-    at ( "17FA" );
+    // #at: 17FA
     instruction ( "XOR  A",0x17FB );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -33199,7 +33199,7 @@ Control prog_17FA ()
 
 Control prog_17FB ()
 {
-    at ( "17FB" );
+    // #at: 17FB
     instruction ( "LD   (209A),A",0x17FE );
     u8 a1 = A ;
     mem_write ( 0x209A,a1 );
@@ -33209,7 +33209,7 @@ Control prog_17FB ()
 
 Control prog_17FE ()
 {
-    at ( "17FE" );
+    // #at: 17FE
     instruction ( "LD   (2093),A",0x1801 );
     u8 a1 = A ;
     mem_write ( 0x2093,a1 );
@@ -33219,7 +33219,7 @@ Control prog_17FE ()
 
 Control prog_1801 ()
 {
-    at ( "1801" );
+    // #at: 1801
     instruction ( "JP   16C9",0x1804 );
     advance ( 10 );
     return jumpDirect ( 0x16C9,prog_16C9 );
@@ -33227,7 +33227,7 @@ Control prog_1801 ()
 
 Control prog_1804 ()
 {
-    at ( "1804" );
+    // #at: 1804
     instruction ( "LD   HL,2084",0x1807 );
     advance ( 10 );
     H = 0x20;
@@ -33237,7 +33237,7 @@ Control prog_1804 ()
 
 Control prog_1807 ()
 {
-    at ( "1807" );
+    // #at: 1807
     instruction ( "LD   A,(HL)",0x1808 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -33249,7 +33249,7 @@ Control prog_1807 ()
 
 Control prog_1808 ()
 {
-    at ( "1808" );
+    // #at: 1808
     instruction ( "AND  A",0x1809 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -33267,7 +33267,7 @@ Control prog_1808 ()
 
 Control prog_1809 ()
 {
-    at ( "1809" );
+    // #at: 1809
     instruction ( "JP   Z,0707",0x180C );
     if (FlagZ)
     {
@@ -33283,7 +33283,7 @@ Control prog_1809 ()
 
 Control prog_180C ()
 {
-    at ( "180C" );
+    // #at: 180C
     instruction ( "INC  HL",0x180D );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -33296,7 +33296,7 @@ Control prog_180C ()
 
 Control prog_180D ()
 {
-    at ( "180D" );
+    // #at: 180D
     instruction ( "LD   A,(HL)",0x180E );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -33308,7 +33308,7 @@ Control prog_180D ()
 
 Control prog_180E ()
 {
-    at ( "180E" );
+    // #at: 180E
     instruction ( "AND  A",0x180F );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -33326,7 +33326,7 @@ Control prog_180E ()
 
 Control prog_180F ()
 {
-    at ( "180F" );
+    // #at: 180F
     instruction ( "RET  NZ",0x1810 );
     if (( ! FlagZ ))
     {
@@ -33352,7 +33352,7 @@ Control prog_180F ()
 
 Control prog_1810 ()
 {
-    at ( "1810" );
+    // #at: 1810
     instruction ( "LD   B,01",0x1812 );
     advance ( 7 );
     B = 0x01;
@@ -33361,7 +33361,7 @@ Control prog_1810 ()
 
 Control prog_1812 ()
 {
-    at ( "1812" );
+    // #at: 1812
     instruction ( "JP   18FA",0x1815 );
     advance ( 10 );
     return jumpDirect ( 0x18FA,prog_18FA );
@@ -33369,7 +33369,7 @@ Control prog_1812 ()
 
 Control prog_1815 ()
 {
-    at ( "1815" );
+    // #at: 1815
     instruction ( "LD   HL,2810",0x1818 );
     advance ( 10 );
     H = 0x28;
@@ -33379,7 +33379,7 @@ Control prog_1815 ()
 
 Control prog_1818 ()
 {
-    at ( "1818" );
+    // #at: 1818
     instruction ( "LD   DE,1CA3",0x181B );
     advance ( 10 );
     D = 0x1C;
@@ -33389,7 +33389,7 @@ Control prog_1818 ()
 
 Control prog_181B ()
 {
-    at ( "181B" );
+    // #at: 181B
     instruction ( "LD   C,15",0x181D );
     advance ( 7 );
     C = 0x15;
@@ -33398,7 +33398,7 @@ Control prog_181B ()
 
 Control prog_181D ()
 {
-    at ( "181D" );
+    // #at: 181D
     instruction ( "CALL 08F3",0x1820 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -33417,7 +33417,7 @@ Control prog_181D ()
 
 Control prog_1820 ()
 {
-    at ( "1820" );
+    // #at: 1820
     instruction ( "LD   A,0A",0x1822 );
     advance ( 7 );
     A = 0x0A;
@@ -33426,7 +33426,7 @@ Control prog_1820 ()
 
 Control prog_1822 ()
 {
-    at ( "1822" );
+    // #at: 1822
     instruction ( "LD   (206C),A",0x1825 );
     u8 a1 = A ;
     mem_write ( 0x206C,a1 );
@@ -33436,7 +33436,7 @@ Control prog_1822 ()
 
 Control prog_1825 ()
 {
-    at ( "1825" );
+    // #at: 1825
     instruction ( "LD   BC,1DBE",0x1828 );
     advance ( 10 );
     B = 0x1D;
@@ -33446,7 +33446,7 @@ Control prog_1825 ()
 
 Control prog_1828 ()
 {
-    at ( "1828" );
+    // #at: 1828
     instruction ( "CALL 1856",0x182B );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -33465,7 +33465,7 @@ Control prog_1828 ()
 
 Control prog_182B ()
 {
-    at ( "182B" );
+    // #at: 182B
     instruction ( "JP   CY,1837",0x182E );
     if (FlagCY)
     {
@@ -33481,7 +33481,7 @@ Control prog_182B ()
 
 Control prog_182E ()
 {
-    at ( "182E" );
+    // #at: 182E
     instruction ( "CALL 1844",0x1831 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -33500,7 +33500,7 @@ Control prog_182E ()
 
 Control prog_1831 ()
 {
-    at ( "1831" );
+    // #at: 1831
     instruction ( "JP   1828",0x1834 );
     advance ( 10 );
     return jumpDirect ( 0x1828,prog_1828 );
@@ -33508,7 +33508,7 @@ Control prog_1831 ()
 
 Control prog_1834 ()
 {
-    at ( "1834" );
+    // #at: 1834
     instruction ( "CALL 0AB1",0x1837 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -33527,7 +33527,7 @@ Control prog_1834 ()
 
 Control prog_1837 ()
 {
-    at ( "1837" );
+    // #at: 1837
     instruction ( "LD   BC,1DCF",0x183A );
     advance ( 10 );
     B = 0x1D;
@@ -33537,7 +33537,7 @@ Control prog_1837 ()
 
 Control prog_183A ()
 {
-    at ( "183A" );
+    // #at: 183A
     instruction ( "CALL 1856",0x183D );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -33556,7 +33556,7 @@ Control prog_183A ()
 
 Control prog_183D ()
 {
-    at ( "183D" );
+    // #at: 183D
     instruction ( "RET  CY",0x183E );
     if (FlagCY)
     {
@@ -33582,7 +33582,7 @@ Control prog_183D ()
 
 Control prog_183E ()
 {
-    at ( "183E" );
+    // #at: 183E
     instruction ( "CALL 184C",0x1841 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -33601,7 +33601,7 @@ Control prog_183E ()
 
 Control prog_1841 ()
 {
-    at ( "1841" );
+    // #at: 1841
     instruction ( "JP   183A",0x1844 );
     advance ( 10 );
     return jumpDirect ( 0x183A,prog_183A );
@@ -33609,7 +33609,7 @@ Control prog_1841 ()
 
 Control prog_1844 ()
 {
-    at ( "1844" );
+    // #at: 1844
     instruction ( "PUSH BC",0x1845 );
     u8 a1 = B ;
     u8 a2 = C ;
@@ -33629,7 +33629,7 @@ Control prog_1844 ()
 
 Control prog_1845 ()
 {
-    at ( "1845" );
+    // #at: 1845
     instruction ( "LD   B,10",0x1847 );
     advance ( 7 );
     B = 0x10;
@@ -33638,7 +33638,7 @@ Control prog_1845 ()
 
 Control prog_1847 ()
 {
-    at ( "1847" );
+    // #at: 1847
     instruction ( "CALL 1439",0x184A );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -33657,7 +33657,7 @@ Control prog_1847 ()
 
 Control prog_184A ()
 {
-    at ( "184A" );
+    // #at: 184A
     instruction ( "POP  BC",0x184B );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -33677,7 +33677,7 @@ Control prog_184A ()
 
 Control prog_184B ()
 {
-    at ( "184B" );
+    // #at: 184B
     instruction ( "RET",0x184C );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -33695,7 +33695,7 @@ Control prog_184B ()
 
 Control prog_184C ()
 {
-    at ( "184C" );
+    // #at: 184C
     instruction ( "PUSH BC",0x184D );
     u8 a1 = B ;
     u8 a2 = C ;
@@ -33715,7 +33715,7 @@ Control prog_184C ()
 
 Control prog_184D ()
 {
-    at ( "184D" );
+    // #at: 184D
     instruction ( "LD   A,(206C)",0x1850 );
     u8 a1 = e8_read_mem ( 0x206C ) ;
     advance ( 13 );
@@ -33725,7 +33725,7 @@ Control prog_184D ()
 
 Control prog_1850 ()
 {
-    at ( "1850" );
+    // #at: 1850
     instruction ( "LD   C,A",0x1851 );
     u8 a1 = A ;
     advance ( 5 );
@@ -33735,7 +33735,7 @@ Control prog_1850 ()
 
 Control prog_1851 ()
 {
-    at ( "1851" );
+    // #at: 1851
     instruction ( "CALL 0A93",0x1854 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -33754,7 +33754,7 @@ Control prog_1851 ()
 
 Control prog_1854 ()
 {
-    at ( "1854" );
+    // #at: 1854
     instruction ( "POP  BC",0x1855 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -33774,7 +33774,7 @@ Control prog_1854 ()
 
 Control prog_1855 ()
 {
-    at ( "1855" );
+    // #at: 1855
     instruction ( "RET",0x1856 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -33792,7 +33792,7 @@ Control prog_1855 ()
 
 Control prog_1856 ()
 {
-    at ( "1856" );
+    // #at: 1856
     instruction ( "LD   A,(BC)",0x1857 );
     u8 a1 = B ;
     u8 a2 = C ;
@@ -33804,7 +33804,7 @@ Control prog_1856 ()
 
 Control prog_1857 ()
 {
-    at ( "1857" );
+    // #at: 1857
     instruction ( "CP   FF",0x1859 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0xFF ) ) ) + ( ! false ) ) ;
@@ -33822,7 +33822,7 @@ Control prog_1857 ()
 
 Control prog_1859 ()
 {
-    at ( "1859" );
+    // #at: 1859
     instruction ( "SCF",0x185A );
     advance ( 4 );
     FlagCY = true;
@@ -33831,7 +33831,7 @@ Control prog_1859 ()
 
 Control prog_185A ()
 {
-    at ( "185A" );
+    // #at: 185A
     instruction ( "RET  Z",0x185B );
     if (FlagZ)
     {
@@ -33857,7 +33857,7 @@ Control prog_185A ()
 
 Control prog_185B ()
 {
-    at ( "185B" );
+    // #at: 185B
     instruction ( "LD   L,A",0x185C );
     u8 a1 = A ;
     advance ( 5 );
@@ -33867,7 +33867,7 @@ Control prog_185B ()
 
 Control prog_185C ()
 {
-    at ( "185C" );
+    // #at: 185C
     instruction ( "INC  BC",0x185D );
     u8 a1 = B ;
     u8 a2 = C ;
@@ -33880,7 +33880,7 @@ Control prog_185C ()
 
 Control prog_185D ()
 {
-    at ( "185D" );
+    // #at: 185D
     instruction ( "LD   A,(BC)",0x185E );
     u8 a1 = B ;
     u8 a2 = C ;
@@ -33892,7 +33892,7 @@ Control prog_185D ()
 
 Control prog_185E ()
 {
-    at ( "185E" );
+    // #at: 185E
     instruction ( "LD   H,A",0x185F );
     u8 a1 = A ;
     advance ( 5 );
@@ -33902,7 +33902,7 @@ Control prog_185E ()
 
 Control prog_185F ()
 {
-    at ( "185F" );
+    // #at: 185F
     instruction ( "INC  BC",0x1860 );
     u8 a1 = B ;
     u8 a2 = C ;
@@ -33915,7 +33915,7 @@ Control prog_185F ()
 
 Control prog_1860 ()
 {
-    at ( "1860" );
+    // #at: 1860
     instruction ( "LD   A,(BC)",0x1861 );
     u8 a1 = B ;
     u8 a2 = C ;
@@ -33927,7 +33927,7 @@ Control prog_1860 ()
 
 Control prog_1861 ()
 {
-    at ( "1861" );
+    // #at: 1861
     instruction ( "LD   E,A",0x1862 );
     u8 a1 = A ;
     advance ( 5 );
@@ -33937,7 +33937,7 @@ Control prog_1861 ()
 
 Control prog_1862 ()
 {
-    at ( "1862" );
+    // #at: 1862
     instruction ( "INC  BC",0x1863 );
     u8 a1 = B ;
     u8 a2 = C ;
@@ -33950,7 +33950,7 @@ Control prog_1862 ()
 
 Control prog_1863 ()
 {
-    at ( "1863" );
+    // #at: 1863
     instruction ( "LD   A,(BC)",0x1864 );
     u8 a1 = B ;
     u8 a2 = C ;
@@ -33962,7 +33962,7 @@ Control prog_1863 ()
 
 Control prog_1864 ()
 {
-    at ( "1864" );
+    // #at: 1864
     instruction ( "LD   D,A",0x1865 );
     u8 a1 = A ;
     advance ( 5 );
@@ -33972,7 +33972,7 @@ Control prog_1864 ()
 
 Control prog_1865 ()
 {
-    at ( "1865" );
+    // #at: 1865
     instruction ( "INC  BC",0x1866 );
     u8 a1 = B ;
     u8 a2 = C ;
@@ -33985,7 +33985,7 @@ Control prog_1865 ()
 
 Control prog_1866 ()
 {
-    at ( "1866" );
+    // #at: 1866
     instruction ( "AND  A",0x1867 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -34003,7 +34003,7 @@ Control prog_1866 ()
 
 Control prog_1867 ()
 {
-    at ( "1867" );
+    // #at: 1867
     instruction ( "RET",0x1868 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -34021,7 +34021,7 @@ Control prog_1867 ()
 
 Control prog_1868 ()
 {
-    at ( "1868" );
+    // #at: 1868
     instruction ( "LD   HL,20C2",0x186B );
     advance ( 10 );
     H = 0x20;
@@ -34031,7 +34031,7 @@ Control prog_1868 ()
 
 Control prog_186B ()
 {
-    at ( "186B" );
+    // #at: 186B
     instruction ( "INC  (HL)",0x186C );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -34053,7 +34053,7 @@ Control prog_186B ()
 
 Control prog_186C ()
 {
-    at ( "186C" );
+    // #at: 186C
     instruction ( "INC  HL",0x186D );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -34066,7 +34066,7 @@ Control prog_186C ()
 
 Control prog_186D ()
 {
-    at ( "186D" );
+    // #at: 186D
     instruction ( "LD   C,(HL)",0x186E );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -34078,7 +34078,7 @@ Control prog_186D ()
 
 Control prog_186E ()
 {
-    at ( "186E" );
+    // #at: 186E
     instruction ( "CALL 01D9",0x1871 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -34097,7 +34097,7 @@ Control prog_186E ()
 
 Control prog_1871 ()
 {
-    at ( "1871" );
+    // #at: 1871
     instruction ( "LD   B,A",0x1872 );
     u8 a1 = A ;
     advance ( 5 );
@@ -34107,7 +34107,7 @@ Control prog_1871 ()
 
 Control prog_1872 ()
 {
-    at ( "1872" );
+    // #at: 1872
     instruction ( "LD   A,(20CA)",0x1875 );
     u8 a1 = e8_read_mem ( 0x20CA ) ;
     advance ( 13 );
@@ -34117,7 +34117,7 @@ Control prog_1872 ()
 
 Control prog_1875 ()
 {
-    at ( "1875" );
+    // #at: 1875
     instruction ( "CP   B",0x1876 );
     u8 a1 = A ;
     u8 a2 = B ;
@@ -34136,7 +34136,7 @@ Control prog_1875 ()
 
 Control prog_1876 ()
 {
-    at ( "1876" );
+    // #at: 1876
     instruction ( "JP   Z,1898",0x1879 );
     if (FlagZ)
     {
@@ -34152,7 +34152,7 @@ Control prog_1876 ()
 
 Control prog_1879 ()
 {
-    at ( "1879" );
+    // #at: 1879
     instruction ( "LD   A,(20C2)",0x187C );
     u8 a1 = e8_read_mem ( 0x20C2 ) ;
     advance ( 13 );
@@ -34162,7 +34162,7 @@ Control prog_1879 ()
 
 Control prog_187C ()
 {
-    at ( "187C" );
+    // #at: 187C
     instruction ( "AND  04",0x187E );
     u8 a1 = A ;
     u8 a2 = ( 0x04 & a1 ) ;
@@ -34179,7 +34179,7 @@ Control prog_187C ()
 
 Control prog_187E ()
 {
-    at ( "187E" );
+    // #at: 187E
     instruction ( "LD   HL,(20CC)",0x1881 );
     u8 a1 = e8_read_mem ( 0x20CC ) ;
     u8 a2 = e8_read_mem ( 0x20CD ) ;
@@ -34191,7 +34191,7 @@ Control prog_187E ()
 
 Control prog_1881 ()
 {
-    at ( "1881" );
+    // #at: 1881
     instruction ( "JP   NZ,1888",0x1884 );
     if (( ! FlagZ ))
     {
@@ -34207,7 +34207,7 @@ Control prog_1881 ()
 
 Control prog_1884 ()
 {
-    at ( "1884" );
+    // #at: 1884
     instruction ( "LD   DE,0030",0x1887 );
     advance ( 10 );
     D = 0x00;
@@ -34217,7 +34217,7 @@ Control prog_1884 ()
 
 Control prog_1887 ()
 {
-    at ( "1887" );
+    // #at: 1887
     instruction ( "ADD  HL,DE",0x1888 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -34233,7 +34233,7 @@ Control prog_1887 ()
 
 Control prog_1888 ()
 {
-    at ( "1888" );
+    // #at: 1888
     instruction ( "LD   (20C7),HL",0x188B );
     u8 a1 = L ;
     mem_write ( 0x20C7,a1 );
@@ -34245,7 +34245,7 @@ Control prog_1888 ()
 
 Control prog_188B ()
 {
-    at ( "188B" );
+    // #at: 188B
     instruction ( "LD   HL,20C5",0x188E );
     advance ( 10 );
     H = 0x20;
@@ -34255,7 +34255,7 @@ Control prog_188B ()
 
 Control prog_188E ()
 {
-    at ( "188E" );
+    // #at: 188E
     instruction ( "CALL 1A3B",0x1891 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -34274,7 +34274,7 @@ Control prog_188E ()
 
 Control prog_1891 ()
 {
-    at ( "1891" );
+    // #at: 1891
     instruction ( "EX   DE,HL",0x1892 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -34290,7 +34290,7 @@ Control prog_1891 ()
 
 Control prog_1892 ()
 {
-    at ( "1892" );
+    // #at: 1892
     instruction ( "JP   15D3",0x1895 );
     advance ( 10 );
     return jumpDirect ( 0x15D3,prog_15D3 );
@@ -34298,7 +34298,7 @@ Control prog_1892 ()
 
 Control prog_1898 ()
 {
-    at ( "1898" );
+    // #at: 1898
     instruction ( "LD   A,01",0x189A );
     advance ( 7 );
     A = 0x01;
@@ -34307,7 +34307,7 @@ Control prog_1898 ()
 
 Control prog_189A ()
 {
-    at ( "189A" );
+    // #at: 189A
     instruction ( "LD   (20CB),A",0x189D );
     u8 a1 = A ;
     mem_write ( 0x20CB,a1 );
@@ -34317,7 +34317,7 @@ Control prog_189A ()
 
 Control prog_189D ()
 {
-    at ( "189D" );
+    // #at: 189D
     instruction ( "RET",0x189E );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -34335,7 +34335,7 @@ Control prog_189D ()
 
 Control prog_189E ()
 {
-    at ( "189E" );
+    // #at: 189E
     instruction ( "LD   HL,2050",0x18A1 );
     advance ( 10 );
     H = 0x20;
@@ -34345,7 +34345,7 @@ Control prog_189E ()
 
 Control prog_18A1 ()
 {
-    at ( "18A1" );
+    // #at: 18A1
     instruction ( "LD   DE,1BC0",0x18A4 );
     advance ( 10 );
     D = 0x1B;
@@ -34355,7 +34355,7 @@ Control prog_18A1 ()
 
 Control prog_18A4 ()
 {
-    at ( "18A4" );
+    // #at: 18A4
     instruction ( "LD   B,10",0x18A6 );
     advance ( 7 );
     B = 0x10;
@@ -34364,7 +34364,7 @@ Control prog_18A4 ()
 
 Control prog_18A6 ()
 {
-    at ( "18A6" );
+    // #at: 18A6
     instruction ( "CALL 1A32",0x18A9 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -34383,7 +34383,7 @@ Control prog_18A6 ()
 
 Control prog_18A9 ()
 {
-    at ( "18A9" );
+    // #at: 18A9
     instruction ( "LD   A,02",0x18AB );
     advance ( 7 );
     A = 0x02;
@@ -34392,7 +34392,7 @@ Control prog_18A9 ()
 
 Control prog_18AB ()
 {
-    at ( "18AB" );
+    // #at: 18AB
     instruction ( "LD   (2080),A",0x18AE );
     u8 a1 = A ;
     mem_write ( 0x2080,a1 );
@@ -34402,7 +34402,7 @@ Control prog_18AB ()
 
 Control prog_18AE ()
 {
-    at ( "18AE" );
+    // #at: 18AE
     instruction ( "LD   A,FF",0x18B0 );
     advance ( 7 );
     A = 0xFF;
@@ -34411,7 +34411,7 @@ Control prog_18AE ()
 
 Control prog_18B0 ()
 {
-    at ( "18B0" );
+    // #at: 18B0
     instruction ( "LD   (207E),A",0x18B3 );
     u8 a1 = A ;
     mem_write ( 0x207E,a1 );
@@ -34421,7 +34421,7 @@ Control prog_18B0 ()
 
 Control prog_18B3 ()
 {
-    at ( "18B3" );
+    // #at: 18B3
     instruction ( "LD   A,04",0x18B5 );
     advance ( 7 );
     A = 0x04;
@@ -34430,7 +34430,7 @@ Control prog_18B3 ()
 
 Control prog_18B5 ()
 {
-    at ( "18B5" );
+    // #at: 18B5
     instruction ( "LD   (20C1),A",0x18B8 );
     u8 a1 = A ;
     mem_write ( 0x20C1,a1 );
@@ -34440,7 +34440,7 @@ Control prog_18B5 ()
 
 Control prog_18B8 ()
 {
-    at ( "18B8" );
+    // #at: 18B8
     instruction ( "LD   A,(2055)",0x18BB );
     u8 a1 = e8_read_mem ( 0x2055 ) ;
     advance ( 13 );
@@ -34450,7 +34450,7 @@ Control prog_18B8 ()
 
 Control prog_18BB ()
 {
-    at ( "18BB" );
+    // #at: 18BB
     instruction ( "AND  01",0x18BD );
     u8 a1 = A ;
     u8 a2 = ( 0x01 & a1 ) ;
@@ -34467,7 +34467,7 @@ Control prog_18BB ()
 
 Control prog_18BD ()
 {
-    at ( "18BD" );
+    // #at: 18BD
     instruction ( "JP   Z,18B8",0x18C0 );
     if (FlagZ)
     {
@@ -34483,7 +34483,7 @@ Control prog_18BD ()
 
 Control prog_18C0 ()
 {
-    at ( "18C0" );
+    // #at: 18C0
     instruction ( "LD   A,(2055)",0x18C3 );
     u8 a1 = e8_read_mem ( 0x2055 ) ;
     advance ( 13 );
@@ -34493,7 +34493,7 @@ Control prog_18C0 ()
 
 Control prog_18C3 ()
 {
-    at ( "18C3" );
+    // #at: 18C3
     instruction ( "AND  01",0x18C5 );
     u8 a1 = A ;
     u8 a2 = ( 0x01 & a1 ) ;
@@ -34510,7 +34510,7 @@ Control prog_18C3 ()
 
 Control prog_18C5 ()
 {
-    at ( "18C5" );
+    // #at: 18C5
     instruction ( "JP   NZ,18C0",0x18C8 );
     if (( ! FlagZ ))
     {
@@ -34526,7 +34526,7 @@ Control prog_18C5 ()
 
 Control prog_18C8 ()
 {
-    at ( "18C8" );
+    // #at: 18C8
     instruction ( "LD   HL,3311",0x18CB );
     advance ( 10 );
     H = 0x33;
@@ -34536,7 +34536,7 @@ Control prog_18C8 ()
 
 Control prog_18CB ()
 {
-    at ( "18CB" );
+    // #at: 18CB
     instruction ( "LD   A,26",0x18CD );
     advance ( 7 );
     A = 0x26;
@@ -34545,7 +34545,7 @@ Control prog_18CB ()
 
 Control prog_18CD ()
 {
-    at ( "18CD" );
+    // #at: 18CD
     instruction ( "NOP",0x18CE );
     advance ( 4 );
     return jumpDirect ( 0x18CE,prog_18CE );
@@ -34553,7 +34553,7 @@ Control prog_18CD ()
 
 Control prog_18CE ()
 {
-    at ( "18CE" );
+    // #at: 18CE
     instruction ( "CALL 08FF",0x18D1 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -34572,7 +34572,7 @@ Control prog_18CE ()
 
 Control prog_18D1 ()
 {
-    at ( "18D1" );
+    // #at: 18D1
     instruction ( "JP   0AB6",0x18D4 );
     advance ( 10 );
     return jumpDirect ( 0x0AB6,prog_0AB6 );
@@ -34580,7 +34580,7 @@ Control prog_18D1 ()
 
 Control prog_18D4 ()
 {
-    at ( "18D4" );
+    // #at: 18D4
     instruction ( "LD   SP,2400",0x18D7 );
     advance ( 10 );
     SPH = 0x24;
@@ -34590,7 +34590,7 @@ Control prog_18D4 ()
 
 Control prog_18D7 ()
 {
-    at ( "18D7" );
+    // #at: 18D7
     instruction ( "LD   B,00",0x18D9 );
     advance ( 7 );
     B = 0x00;
@@ -34599,7 +34599,7 @@ Control prog_18D7 ()
 
 Control prog_18D9 ()
 {
-    at ( "18D9" );
+    // #at: 18D9
     instruction ( "CALL 01E6",0x18DC );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -34618,7 +34618,7 @@ Control prog_18D9 ()
 
 Control prog_18DC ()
 {
-    at ( "18DC" );
+    // #at: 18DC
     instruction ( "CALL 1956",0x18DF );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -34637,7 +34637,7 @@ Control prog_18DC ()
 
 Control prog_18DF ()
 {
-    at ( "18DF" );
+    // #at: 18DF
     instruction ( "LD   A,08",0x18E1 );
     advance ( 7 );
     A = 0x08;
@@ -34646,7 +34646,7 @@ Control prog_18DF ()
 
 Control prog_18E1 ()
 {
-    at ( "18E1" );
+    // #at: 18E1
     instruction ( "LD   (20CF),A",0x18E4 );
     u8 a1 = A ;
     mem_write ( 0x20CF,a1 );
@@ -34656,7 +34656,7 @@ Control prog_18E1 ()
 
 Control prog_18E4 ()
 {
-    at ( "18E4" );
+    // #at: 18E4
     instruction ( "JP   0AEA",0x18E7 );
     advance ( 10 );
     return jumpDirect ( 0x0AEA,prog_0AEA );
@@ -34664,7 +34664,7 @@ Control prog_18E4 ()
 
 Control prog_18E7 ()
 {
-    at ( "18E7" );
+    // #at: 18E7
     instruction ( "LD   A,(2067)",0x18EA );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
@@ -34674,7 +34674,7 @@ Control prog_18E7 ()
 
 Control prog_18EA ()
 {
-    at ( "18EA" );
+    // #at: 18EA
     instruction ( "LD   HL,20E7",0x18ED );
     advance ( 10 );
     H = 0x20;
@@ -34684,7 +34684,7 @@ Control prog_18EA ()
 
 Control prog_18ED ()
 {
-    at ( "18ED" );
+    // #at: 18ED
     instruction ( "RRCA",0x18EE );
     u8 a1 = A ;
     advance ( 4 );
@@ -34695,7 +34695,7 @@ Control prog_18ED ()
 
 Control prog_18EE ()
 {
-    at ( "18EE" );
+    // #at: 18EE
     instruction ( "RET  NC",0x18EF );
     if (( ! FlagCY ))
     {
@@ -34721,7 +34721,7 @@ Control prog_18EE ()
 
 Control prog_18EF ()
 {
-    at ( "18EF" );
+    // #at: 18EF
     instruction ( "INC  HL",0x18F0 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -34734,7 +34734,7 @@ Control prog_18EF ()
 
 Control prog_18F0 ()
 {
-    at ( "18F0" );
+    // #at: 18F0
     instruction ( "RET",0x18F1 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -34752,7 +34752,7 @@ Control prog_18F0 ()
 
 Control prog_18F1 ()
 {
-    at ( "18F1" );
+    // #at: 18F1
     instruction ( "LD   B,02",0x18F3 );
     advance ( 7 );
     B = 0x02;
@@ -34761,7 +34761,7 @@ Control prog_18F1 ()
 
 Control prog_18F3 ()
 {
-    at ( "18F3" );
+    // #at: 18F3
     instruction ( "LD   A,(2082)",0x18F6 );
     u8 a1 = e8_read_mem ( 0x2082 ) ;
     advance ( 13 );
@@ -34771,7 +34771,7 @@ Control prog_18F3 ()
 
 Control prog_18F6 ()
 {
-    at ( "18F6" );
+    // #at: 18F6
     instruction ( "DEC  A",0x18F7 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -34789,7 +34789,7 @@ Control prog_18F6 ()
 
 Control prog_18F7 ()
 {
-    at ( "18F7" );
+    // #at: 18F7
     instruction ( "RET  NZ",0x18F8 );
     if (( ! FlagZ ))
     {
@@ -34815,7 +34815,7 @@ Control prog_18F7 ()
 
 Control prog_18F8 ()
 {
-    at ( "18F8" );
+    // #at: 18F8
     instruction ( "INC  B",0x18F9 );
     u8 a1 = B ;
     u16 a2 = ( ( a1 + 0x00 ) + true ) ;
@@ -34833,7 +34833,7 @@ Control prog_18F8 ()
 
 Control prog_18F9 ()
 {
-    at ( "18F9" );
+    // #at: 18F9
     instruction ( "RET",0x18FA );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -34851,7 +34851,7 @@ Control prog_18F9 ()
 
 Control prog_18FA ()
 {
-    at ( "18FA" );
+    // #at: 18FA
     instruction ( "LD   A,(2094)",0x18FD );
     u8 a1 = e8_read_mem ( 0x2094 ) ;
     advance ( 13 );
@@ -34861,7 +34861,7 @@ Control prog_18FA ()
 
 Control prog_18FD ()
 {
-    at ( "18FD" );
+    // #at: 18FD
     instruction ( "OR   B",0x18FE );
     u8 a1 = B ;
     u8 a2 = A ;
@@ -34878,7 +34878,7 @@ Control prog_18FD ()
 
 Control prog_18FE ()
 {
-    at ( "18FE" );
+    // #at: 18FE
     instruction ( "LD   (2094),A",0x1901 );
     u8 a1 = A ;
     mem_write ( 0x2094,a1 );
@@ -34888,7 +34888,7 @@ Control prog_18FE ()
 
 Control prog_1901 ()
 {
-    at ( "1901" );
+    // #at: 1901
     instruction ( "OUT  03",0x1903 );
     u8 a1 = A ;
     sound_control ( "Ufo",( ( a1 >> 0 ) & 0x01 ) );
@@ -34902,7 +34902,7 @@ Control prog_1901 ()
 
 Control prog_1903 ()
 {
-    at ( "1903" );
+    // #at: 1903
     instruction ( "RET",0x1904 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -34920,7 +34920,7 @@ Control prog_1903 ()
 
 Control prog_1904 ()
 {
-    at ( "1904" );
+    // #at: 1904
     instruction ( "LD   HL,2200",0x1907 );
     advance ( 10 );
     H = 0x22;
@@ -34930,7 +34930,7 @@ Control prog_1904 ()
 
 Control prog_1907 ()
 {
-    at ( "1907" );
+    // #at: 1907
     instruction ( "JP   01C3",0x190A );
     advance ( 10 );
     return jumpDirect ( 0x01C3,prog_01C3 );
@@ -34938,7 +34938,7 @@ Control prog_1907 ()
 
 Control prog_190A ()
 {
-    at ( "190A" );
+    // #at: 190A
     instruction ( "CALL 14D8",0x190D );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -34957,7 +34957,7 @@ Control prog_190A ()
 
 Control prog_190D ()
 {
-    at ( "190D" );
+    // #at: 190D
     instruction ( "JP   1597",0x1910 );
     advance ( 10 );
     return jumpDirect ( 0x1597,prog_1597 );
@@ -34965,7 +34965,7 @@ Control prog_190D ()
 
 Control prog_1910 ()
 {
-    at ( "1910" );
+    // #at: 1910
     instruction ( "LD   HL,20E7",0x1913 );
     advance ( 10 );
     H = 0x20;
@@ -34975,7 +34975,7 @@ Control prog_1910 ()
 
 Control prog_1913 ()
 {
-    at ( "1913" );
+    // #at: 1913
     instruction ( "LD   A,(2067)",0x1916 );
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
@@ -34985,7 +34985,7 @@ Control prog_1913 ()
 
 Control prog_1916 ()
 {
-    at ( "1916" );
+    // #at: 1916
     instruction ( "RRCA",0x1917 );
     u8 a1 = A ;
     advance ( 4 );
@@ -34996,7 +34996,7 @@ Control prog_1916 ()
 
 Control prog_1917 ()
 {
-    at ( "1917" );
+    // #at: 1917
     instruction ( "RET  CY",0x1918 );
     if (FlagCY)
     {
@@ -35022,7 +35022,7 @@ Control prog_1917 ()
 
 Control prog_1918 ()
 {
-    at ( "1918" );
+    // #at: 1918
     instruction ( "INC  HL",0x1919 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -35035,7 +35035,7 @@ Control prog_1918 ()
 
 Control prog_1919 ()
 {
-    at ( "1919" );
+    // #at: 1919
     instruction ( "RET",0x191A );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -35053,7 +35053,7 @@ Control prog_1919 ()
 
 Control prog_191A ()
 {
-    at ( "191A" );
+    // #at: 191A
     instruction ( "LD   C,1C",0x191C );
     advance ( 7 );
     C = 0x1C;
@@ -35062,7 +35062,7 @@ Control prog_191A ()
 
 Control prog_191C ()
 {
-    at ( "191C" );
+    // #at: 191C
     instruction ( "LD   HL,241E",0x191F );
     advance ( 10 );
     H = 0x24;
@@ -35072,7 +35072,7 @@ Control prog_191C ()
 
 Control prog_191F ()
 {
-    at ( "191F" );
+    // #at: 191F
     instruction ( "LD   DE,1AE4",0x1922 );
     advance ( 10 );
     D = 0x1A;
@@ -35082,7 +35082,7 @@ Control prog_191F ()
 
 Control prog_1922 ()
 {
-    at ( "1922" );
+    // #at: 1922
     instruction ( "JP   08F3",0x1925 );
     advance ( 10 );
     return jumpDirect ( 0x08F3,prog_08F3 );
@@ -35090,7 +35090,7 @@ Control prog_1922 ()
 
 Control prog_1925 ()
 {
-    at ( "1925" );
+    // #at: 1925
     instruction ( "LD   HL,20F8",0x1928 );
     advance ( 10 );
     H = 0x20;
@@ -35100,7 +35100,7 @@ Control prog_1925 ()
 
 Control prog_1928 ()
 {
-    at ( "1928" );
+    // #at: 1928
     instruction ( "JP   1931",0x192B );
     advance ( 10 );
     return jumpDirect ( 0x1931,prog_1931 );
@@ -35108,7 +35108,7 @@ Control prog_1928 ()
 
 Control prog_192B ()
 {
-    at ( "192B" );
+    // #at: 192B
     instruction ( "LD   HL,20FC",0x192E );
     advance ( 10 );
     H = 0x20;
@@ -35118,7 +35118,7 @@ Control prog_192B ()
 
 Control prog_192E ()
 {
-    at ( "192E" );
+    // #at: 192E
     instruction ( "JP   1931",0x1931 );
     advance ( 10 );
     return jumpDirect ( 0x1931,prog_1931 );
@@ -35126,7 +35126,7 @@ Control prog_192E ()
 
 Control prog_1931 ()
 {
-    at ( "1931" );
+    // #at: 1931
     instruction ( "LD   E,(HL)",0x1932 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -35138,7 +35138,7 @@ Control prog_1931 ()
 
 Control prog_1932 ()
 {
-    at ( "1932" );
+    // #at: 1932
     instruction ( "INC  HL",0x1933 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -35151,7 +35151,7 @@ Control prog_1932 ()
 
 Control prog_1933 ()
 {
-    at ( "1933" );
+    // #at: 1933
     instruction ( "LD   D,(HL)",0x1934 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -35163,7 +35163,7 @@ Control prog_1933 ()
 
 Control prog_1934 ()
 {
-    at ( "1934" );
+    // #at: 1934
     instruction ( "INC  HL",0x1935 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -35176,7 +35176,7 @@ Control prog_1934 ()
 
 Control prog_1935 ()
 {
-    at ( "1935" );
+    // #at: 1935
     instruction ( "LD   A,(HL)",0x1936 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -35188,7 +35188,7 @@ Control prog_1935 ()
 
 Control prog_1936 ()
 {
-    at ( "1936" );
+    // #at: 1936
     instruction ( "INC  HL",0x1937 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -35201,7 +35201,7 @@ Control prog_1936 ()
 
 Control prog_1937 ()
 {
-    at ( "1937" );
+    // #at: 1937
     instruction ( "LD   H,(HL)",0x1938 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -35213,7 +35213,7 @@ Control prog_1937 ()
 
 Control prog_1938 ()
 {
-    at ( "1938" );
+    // #at: 1938
     instruction ( "LD   L,A",0x1939 );
     u8 a1 = A ;
     advance ( 5 );
@@ -35223,7 +35223,7 @@ Control prog_1938 ()
 
 Control prog_1939 ()
 {
-    at ( "1939" );
+    // #at: 1939
     instruction ( "JP   09AD",0x193C );
     advance ( 10 );
     return jumpDirect ( 0x09AD,prog_09AD );
@@ -35231,7 +35231,7 @@ Control prog_1939 ()
 
 Control prog_193C ()
 {
-    at ( "193C" );
+    // #at: 193C
     instruction ( "LD   C,07",0x193E );
     advance ( 7 );
     C = 0x07;
@@ -35240,7 +35240,7 @@ Control prog_193C ()
 
 Control prog_193E ()
 {
-    at ( "193E" );
+    // #at: 193E
     instruction ( "LD   HL,3501",0x1941 );
     advance ( 10 );
     H = 0x35;
@@ -35250,7 +35250,7 @@ Control prog_193E ()
 
 Control prog_1941 ()
 {
-    at ( "1941" );
+    // #at: 1941
     instruction ( "LD   DE,1FA9",0x1944 );
     advance ( 10 );
     D = 0x1F;
@@ -35260,7 +35260,7 @@ Control prog_1941 ()
 
 Control prog_1944 ()
 {
-    at ( "1944" );
+    // #at: 1944
     instruction ( "JP   08F3",0x1947 );
     advance ( 10 );
     return jumpDirect ( 0x08F3,prog_08F3 );
@@ -35268,7 +35268,7 @@ Control prog_1944 ()
 
 Control prog_1947 ()
 {
-    at ( "1947" );
+    // #at: 1947
     instruction ( "LD   A,(20EB)",0x194A );
     u8 a1 = e8_read_mem ( 0x20EB ) ;
     advance ( 13 );
@@ -35278,7 +35278,7 @@ Control prog_1947 ()
 
 Control prog_194A ()
 {
-    at ( "194A" );
+    // #at: 194A
     instruction ( "LD   HL,3C01",0x194D );
     advance ( 10 );
     H = 0x3C;
@@ -35288,7 +35288,7 @@ Control prog_194A ()
 
 Control prog_194D ()
 {
-    at ( "194D" );
+    // #at: 194D
     instruction ( "JP   09B2",0x1950 );
     advance ( 10 );
     return jumpDirect ( 0x09B2,prog_09B2 );
@@ -35296,7 +35296,7 @@ Control prog_194D ()
 
 Control prog_1950 ()
 {
-    at ( "1950" );
+    // #at: 1950
     instruction ( "LD   HL,20F4",0x1953 );
     advance ( 10 );
     H = 0x20;
@@ -35306,7 +35306,7 @@ Control prog_1950 ()
 
 Control prog_1953 ()
 {
-    at ( "1953" );
+    // #at: 1953
     instruction ( "JP   1931",0x1956 );
     advance ( 10 );
     return jumpDirect ( 0x1931,prog_1931 );
@@ -35314,7 +35314,7 @@ Control prog_1953 ()
 
 Control prog_1956 ()
 {
-    at ( "1956" );
+    // #at: 1956
     instruction ( "CALL 1A5C",0x1959 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -35333,7 +35333,7 @@ Control prog_1956 ()
 
 Control prog_1959 ()
 {
-    at ( "1959" );
+    // #at: 1959
     instruction ( "CALL 191A",0x195C );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -35352,7 +35352,7 @@ Control prog_1959 ()
 
 Control prog_195C ()
 {
-    at ( "195C" );
+    // #at: 195C
     instruction ( "CALL 1925",0x195F );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -35371,7 +35371,7 @@ Control prog_195C ()
 
 Control prog_195F ()
 {
-    at ( "195F" );
+    // #at: 195F
     instruction ( "CALL 192B",0x1962 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -35390,7 +35390,7 @@ Control prog_195F ()
 
 Control prog_1962 ()
 {
-    at ( "1962" );
+    // #at: 1962
     instruction ( "CALL 1950",0x1965 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -35409,7 +35409,7 @@ Control prog_1962 ()
 
 Control prog_1965 ()
 {
-    at ( "1965" );
+    // #at: 1965
     instruction ( "CALL 193C",0x1968 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -35428,7 +35428,7 @@ Control prog_1965 ()
 
 Control prog_1968 ()
 {
-    at ( "1968" );
+    // #at: 1968
     instruction ( "JP   1947",0x196B );
     advance ( 10 );
     return jumpDirect ( 0x1947,prog_1947 );
@@ -35436,7 +35436,7 @@ Control prog_1968 ()
 
 Control prog_196B ()
 {
-    at ( "196B" );
+    // #at: 196B
     instruction ( "CALL 19DC",0x196E );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -35455,7 +35455,7 @@ Control prog_196B ()
 
 Control prog_196E ()
 {
-    at ( "196E" );
+    // #at: 196E
     instruction ( "JP   1671",0x1971 );
     advance ( 10 );
     return jumpDirect ( 0x1671,prog_1671 );
@@ -35463,7 +35463,7 @@ Control prog_196E ()
 
 Control prog_1971 ()
 {
-    at ( "1971" );
+    // #at: 1971
     instruction ( "LD   A,01",0x1973 );
     advance ( 7 );
     A = 0x01;
@@ -35472,7 +35472,7 @@ Control prog_1971 ()
 
 Control prog_1973 ()
 {
-    at ( "1973" );
+    // #at: 1973
     instruction ( "LD   (206D),A",0x1976 );
     u8 a1 = A ;
     mem_write ( 0x206D,a1 );
@@ -35482,7 +35482,7 @@ Control prog_1973 ()
 
 Control prog_1976 ()
 {
-    at ( "1976" );
+    // #at: 1976
     instruction ( "JP   16E6",0x1979 );
     advance ( 10 );
     return jumpDirect ( 0x16E6,prog_16E6 );
@@ -35490,7 +35490,7 @@ Control prog_1976 ()
 
 Control prog_1979 ()
 {
-    at ( "1979" );
+    // #at: 1979
     instruction ( "CALL 19D7",0x197C );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -35509,7 +35509,7 @@ Control prog_1979 ()
 
 Control prog_197C ()
 {
-    at ( "197C" );
+    // #at: 197C
     instruction ( "CALL 1947",0x197F );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -35528,7 +35528,7 @@ Control prog_197C ()
 
 Control prog_197F ()
 {
-    at ( "197F" );
+    // #at: 197F
     instruction ( "JP   193C",0x1982 );
     advance ( 10 );
     return jumpDirect ( 0x193C,prog_193C );
@@ -35536,7 +35536,7 @@ Control prog_197F ()
 
 Control prog_1982 ()
 {
-    at ( "1982" );
+    // #at: 1982
     instruction ( "LD   (20C1),A",0x1985 );
     u8 a1 = A ;
     mem_write ( 0x20C1,a1 );
@@ -35546,7 +35546,7 @@ Control prog_1982 ()
 
 Control prog_1985 ()
 {
-    at ( "1985" );
+    // #at: 1985
     instruction ( "RET",0x1986 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -35564,7 +35564,7 @@ Control prog_1985 ()
 
 Control prog_1988 ()
 {
-    at ( "1988" );
+    // #at: 1988
     instruction ( "JP   09D6",0x198B );
     advance ( 10 );
     return jumpDirect ( 0x09D6,prog_09D6 );
@@ -35572,7 +35572,7 @@ Control prog_1988 ()
 
 Control prog_199A ()
 {
-    at ( "199A" );
+    // #at: 199A
     instruction ( "LD   A,(201E)",0x199D );
     u8 a1 = e8_read_mem ( 0x201E ) ;
     advance ( 13 );
@@ -35582,7 +35582,7 @@ Control prog_199A ()
 
 Control prog_199D ()
 {
-    at ( "199D" );
+    // #at: 199D
     instruction ( "AND  A",0x199E );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -35600,7 +35600,7 @@ Control prog_199D ()
 
 Control prog_199E ()
 {
-    at ( "199E" );
+    // #at: 199E
     instruction ( "JP   NZ,19AC",0x19A1 );
     if (( ! FlagZ ))
     {
@@ -35616,7 +35616,7 @@ Control prog_199E ()
 
 Control prog_19A1 ()
 {
-    at ( "19A1" );
+    // #at: 19A1
     instruction ( "IN   01",0x19A3 );
     advance ( 10 );
     A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,( ! e1_is_pressed ( CoinEntry ) ) ),1,e1_is_pressed ( P2start ) ),2,e1_is_pressed ( P1start ) ),4,e1_is_pressed ( P1shoot ) ),5,e1_is_pressed ( P1left ) ),6,e1_is_pressed ( P1right ) );
@@ -35625,7 +35625,7 @@ Control prog_19A1 ()
 
 Control prog_19A3 ()
 {
-    at ( "19A3" );
+    // #at: 19A3
     instruction ( "AND  76",0x19A5 );
     u8 a1 = A ;
     u8 a2 = ( 0x76 & a1 ) ;
@@ -35642,7 +35642,7 @@ Control prog_19A3 ()
 
 Control prog_19A5 ()
 {
-    at ( "19A5" );
+    // #at: 19A5
     instruction ( "SUB  72",0x19A7 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x72 ) ) ) + ( ! false ) ) ;
@@ -35661,7 +35661,7 @@ Control prog_19A5 ()
 
 Control prog_19A7 ()
 {
-    at ( "19A7" );
+    // #at: 19A7
     instruction ( "RET  NZ",0x19A8 );
     if (( ! FlagZ ))
     {
@@ -35687,7 +35687,7 @@ Control prog_19A7 ()
 
 Control prog_19A8 ()
 {
-    at ( "19A8" );
+    // #at: 19A8
     instruction ( "INC  A",0x19A9 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + 0x00 ) + true ) ;
@@ -35705,7 +35705,7 @@ Control prog_19A8 ()
 
 Control prog_19A9 ()
 {
-    at ( "19A9" );
+    // #at: 19A9
     instruction ( "LD   (201E),A",0x19AC );
     u8 a1 = A ;
     mem_write ( 0x201E,a1 );
@@ -35715,7 +35715,7 @@ Control prog_19A9 ()
 
 Control prog_19AC ()
 {
-    at ( "19AC" );
+    // #at: 19AC
     instruction ( "IN   01",0x19AE );
     advance ( 10 );
     A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,( ! e1_is_pressed ( CoinEntry ) ) ),1,e1_is_pressed ( P2start ) ),2,e1_is_pressed ( P1start ) ),4,e1_is_pressed ( P1shoot ) ),5,e1_is_pressed ( P1left ) ),6,e1_is_pressed ( P1right ) );
@@ -35724,7 +35724,7 @@ Control prog_19AC ()
 
 Control prog_19AE ()
 {
-    at ( "19AE" );
+    // #at: 19AE
     instruction ( "AND  76",0x19B0 );
     u8 a1 = A ;
     u8 a2 = ( 0x76 & a1 ) ;
@@ -35741,7 +35741,7 @@ Control prog_19AE ()
 
 Control prog_19B0 ()
 {
-    at ( "19B0" );
+    // #at: 19B0
     instruction ( "CP   34",0x19B2 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x34 ) ) ) + ( ! false ) ) ;
@@ -35759,7 +35759,7 @@ Control prog_19B0 ()
 
 Control prog_19B2 ()
 {
-    at ( "19B2" );
+    // #at: 19B2
     instruction ( "RET  NZ",0x19B3 );
     if (( ! FlagZ ))
     {
@@ -35785,7 +35785,7 @@ Control prog_19B2 ()
 
 Control prog_19B3 ()
 {
-    at ( "19B3" );
+    // #at: 19B3
     instruction ( "LD   HL,2E1B",0x19B6 );
     advance ( 10 );
     H = 0x2E;
@@ -35795,7 +35795,7 @@ Control prog_19B3 ()
 
 Control prog_19B6 ()
 {
-    at ( "19B6" );
+    // #at: 19B6
     instruction ( "LD   DE,0BF7",0x19B9 );
     advance ( 10 );
     D = 0x0B;
@@ -35805,7 +35805,7 @@ Control prog_19B6 ()
 
 Control prog_19B9 ()
 {
-    at ( "19B9" );
+    // #at: 19B9
     instruction ( "LD   C,09",0x19BB );
     advance ( 7 );
     C = 0x09;
@@ -35814,7 +35814,7 @@ Control prog_19B9 ()
 
 Control prog_19BB ()
 {
-    at ( "19BB" );
+    // #at: 19BB
     instruction ( "JP   08F3",0x19BE );
     advance ( 10 );
     return jumpDirect ( 0x08F3,prog_08F3 );
@@ -35822,7 +35822,7 @@ Control prog_19BB ()
 
 Control prog_19D1 ()
 {
-    at ( "19D1" );
+    // #at: 19D1
     instruction ( "LD   A,01",0x19D3 );
     advance ( 7 );
     A = 0x01;
@@ -35831,7 +35831,7 @@ Control prog_19D1 ()
 
 Control prog_19D3 ()
 {
-    at ( "19D3" );
+    // #at: 19D3
     instruction ( "LD   (20E9),A",0x19D6 );
     u8 a1 = A ;
     mem_write ( 0x20E9,a1 );
@@ -35841,7 +35841,7 @@ Control prog_19D3 ()
 
 Control prog_19D6 ()
 {
-    at ( "19D6" );
+    // #at: 19D6
     instruction ( "RET",0x19D7 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -35859,7 +35859,7 @@ Control prog_19D6 ()
 
 Control prog_19D7 ()
 {
-    at ( "19D7" );
+    // #at: 19D7
     instruction ( "XOR  A",0x19D8 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -35876,7 +35876,7 @@ Control prog_19D7 ()
 
 Control prog_19D8 ()
 {
-    at ( "19D8" );
+    // #at: 19D8
     instruction ( "JP   19D3",0x19DB );
     advance ( 10 );
     return jumpDirect ( 0x19D3,prog_19D3 );
@@ -35884,7 +35884,7 @@ Control prog_19D8 ()
 
 Control prog_19DC ()
 {
-    at ( "19DC" );
+    // #at: 19DC
     instruction ( "LD   A,(2094)",0x19DF );
     u8 a1 = e8_read_mem ( 0x2094 ) ;
     advance ( 13 );
@@ -35894,7 +35894,7 @@ Control prog_19DC ()
 
 Control prog_19DF ()
 {
-    at ( "19DF" );
+    // #at: 19DF
     instruction ( "AND  B",0x19E0 );
     u8 a1 = B ;
     u8 a2 = A ;
@@ -35912,7 +35912,7 @@ Control prog_19DF ()
 
 Control prog_19E0 ()
 {
-    at ( "19E0" );
+    // #at: 19E0
     instruction ( "LD   (2094),A",0x19E3 );
     u8 a1 = A ;
     mem_write ( 0x2094,a1 );
@@ -35922,7 +35922,7 @@ Control prog_19E0 ()
 
 Control prog_19E3 ()
 {
-    at ( "19E3" );
+    // #at: 19E3
     instruction ( "OUT  03",0x19E5 );
     u8 a1 = A ;
     sound_control ( "Ufo",( ( a1 >> 0 ) & 0x01 ) );
@@ -35936,7 +35936,7 @@ Control prog_19E3 ()
 
 Control prog_19E5 ()
 {
-    at ( "19E5" );
+    // #at: 19E5
     instruction ( "RET",0x19E6 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -35954,7 +35954,7 @@ Control prog_19E5 ()
 
 Control prog_19E6 ()
 {
-    at ( "19E6" );
+    // #at: 19E6
     instruction ( "LD   HL,2701",0x19E9 );
     advance ( 10 );
     H = 0x27;
@@ -35964,7 +35964,7 @@ Control prog_19E6 ()
 
 Control prog_19E9 ()
 {
-    at ( "19E9" );
+    // #at: 19E9
     instruction ( "JP   Z,19FA",0x19EC );
     if (FlagZ)
     {
@@ -35980,7 +35980,7 @@ Control prog_19E9 ()
 
 Control prog_19EC ()
 {
-    at ( "19EC" );
+    // #at: 19EC
     instruction ( "LD   DE,1C60",0x19EF );
     advance ( 10 );
     D = 0x1C;
@@ -35990,7 +35990,7 @@ Control prog_19EC ()
 
 Control prog_19EF ()
 {
-    at ( "19EF" );
+    // #at: 19EF
     instruction ( "LD   B,10",0x19F1 );
     advance ( 7 );
     B = 0x10;
@@ -35999,7 +35999,7 @@ Control prog_19EF ()
 
 Control prog_19F1 ()
 {
-    at ( "19F1" );
+    // #at: 19F1
     instruction ( "LD   C,A",0x19F2 );
     u8 a1 = A ;
     advance ( 5 );
@@ -36009,7 +36009,7 @@ Control prog_19F1 ()
 
 Control prog_19F2 ()
 {
-    at ( "19F2" );
+    // #at: 19F2
     instruction ( "CALL 1439",0x19F5 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -36028,7 +36028,7 @@ Control prog_19F2 ()
 
 Control prog_19F5 ()
 {
-    at ( "19F5" );
+    // #at: 19F5
     instruction ( "LD   A,C",0x19F6 );
     u8 a1 = C ;
     advance ( 5 );
@@ -36038,7 +36038,7 @@ Control prog_19F5 ()
 
 Control prog_19F6 ()
 {
-    at ( "19F6" );
+    // #at: 19F6
     instruction ( "DEC  A",0x19F7 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -36056,7 +36056,7 @@ Control prog_19F6 ()
 
 Control prog_19F7 ()
 {
-    at ( "19F7" );
+    // #at: 19F7
     instruction ( "JP   NZ,19EC",0x19FA );
     if (( ! FlagZ ))
     {
@@ -36072,7 +36072,7 @@ Control prog_19F7 ()
 
 Control prog_19FA ()
 {
-    at ( "19FA" );
+    // #at: 19FA
     instruction ( "LD   B,10",0x19FC );
     advance ( 7 );
     B = 0x10;
@@ -36081,7 +36081,7 @@ Control prog_19FA ()
 
 Control prog_19FC ()
 {
-    at ( "19FC" );
+    // #at: 19FC
     instruction ( "CALL 14CB",0x19FF );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -36100,7 +36100,7 @@ Control prog_19FC ()
 
 Control prog_19FF ()
 {
-    at ( "19FF" );
+    // #at: 19FF
     instruction ( "LD   A,H",0x1A00 );
     u8 a1 = H ;
     advance ( 5 );
@@ -36110,7 +36110,7 @@ Control prog_19FF ()
 
 Control prog_1A00 ()
 {
-    at ( "1A00" );
+    // #at: 1A00
     instruction ( "CP   35",0x1A02 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x35 ) ) ) + ( ! false ) ) ;
@@ -36128,7 +36128,7 @@ Control prog_1A00 ()
 
 Control prog_1A02 ()
 {
-    at ( "1A02" );
+    // #at: 1A02
     instruction ( "JP   NZ,19FA",0x1A05 );
     if (( ! FlagZ ))
     {
@@ -36144,7 +36144,7 @@ Control prog_1A02 ()
 
 Control prog_1A05 ()
 {
-    at ( "1A05" );
+    // #at: 1A05
     instruction ( "RET",0x1A06 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -36162,7 +36162,7 @@ Control prog_1A05 ()
 
 Control prog_1A06 ()
 {
-    at ( "1A06" );
+    // #at: 1A06
     instruction ( "LD   HL,2072",0x1A09 );
     advance ( 10 );
     H = 0x20;
@@ -36172,7 +36172,7 @@ Control prog_1A06 ()
 
 Control prog_1A09 ()
 {
-    at ( "1A09" );
+    // #at: 1A09
     instruction ( "LD   B,(HL)",0x1A0A );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -36184,7 +36184,7 @@ Control prog_1A09 ()
 
 Control prog_1A0A ()
 {
-    at ( "1A0A" );
+    // #at: 1A0A
     instruction ( "LD   A,(DE)",0x1A0B );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -36196,7 +36196,7 @@ Control prog_1A0A ()
 
 Control prog_1A0B ()
 {
-    at ( "1A0B" );
+    // #at: 1A0B
     instruction ( "AND  80",0x1A0D );
     u8 a1 = A ;
     u8 a2 = ( 0x80 & a1 ) ;
@@ -36213,7 +36213,7 @@ Control prog_1A0B ()
 
 Control prog_1A0D ()
 {
-    at ( "1A0D" );
+    // #at: 1A0D
     instruction ( "XOR  B",0x1A0E );
     u8 a1 = B ;
     u8 a2 = A ;
@@ -36230,7 +36230,7 @@ Control prog_1A0D ()
 
 Control prog_1A0E ()
 {
-    at ( "1A0E" );
+    // #at: 1A0E
     instruction ( "RET  NZ",0x1A0F );
     if (( ! FlagZ ))
     {
@@ -36256,7 +36256,7 @@ Control prog_1A0E ()
 
 Control prog_1A0F ()
 {
-    at ( "1A0F" );
+    // #at: 1A0F
     instruction ( "SCF",0x1A10 );
     advance ( 4 );
     FlagCY = true;
@@ -36265,7 +36265,7 @@ Control prog_1A0F ()
 
 Control prog_1A10 ()
 {
-    at ( "1A10" );
+    // #at: 1A10
     instruction ( "RET",0x1A11 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -36283,7 +36283,7 @@ Control prog_1A10 ()
 
 Control prog_1A32 ()
 {
-    at ( "1A32" );
+    // #at: 1A32
     instruction ( "LD   A,(DE)",0x1A33 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -36295,7 +36295,7 @@ Control prog_1A32 ()
 
 Control prog_1A33 ()
 {
-    at ( "1A33" );
+    // #at: 1A33
     instruction ( "LD   (HL),A",0x1A34 );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -36307,7 +36307,7 @@ Control prog_1A33 ()
 
 Control prog_1A34 ()
 {
-    at ( "1A34" );
+    // #at: 1A34
     instruction ( "INC  HL",0x1A35 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -36320,7 +36320,7 @@ Control prog_1A34 ()
 
 Control prog_1A35 ()
 {
-    at ( "1A35" );
+    // #at: 1A35
     instruction ( "INC  DE",0x1A36 );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -36333,7 +36333,7 @@ Control prog_1A35 ()
 
 Control prog_1A36 ()
 {
-    at ( "1A36" );
+    // #at: 1A36
     instruction ( "DEC  B",0x1A37 );
     u8 a1 = B ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -36351,7 +36351,7 @@ Control prog_1A36 ()
 
 Control prog_1A37 ()
 {
-    at ( "1A37" );
+    // #at: 1A37
     instruction ( "JP   NZ,1A32",0x1A3A );
     if (( ! FlagZ ))
     {
@@ -36367,7 +36367,7 @@ Control prog_1A37 ()
 
 Control prog_1A3A ()
 {
-    at ( "1A3A" );
+    // #at: 1A3A
     instruction ( "RET",0x1A3B );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -36385,7 +36385,7 @@ Control prog_1A3A ()
 
 Control prog_1A3B ()
 {
-    at ( "1A3B" );
+    // #at: 1A3B
     instruction ( "LD   E,(HL)",0x1A3C );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -36397,7 +36397,7 @@ Control prog_1A3B ()
 
 Control prog_1A3C ()
 {
-    at ( "1A3C" );
+    // #at: 1A3C
     instruction ( "INC  HL",0x1A3D );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -36410,7 +36410,7 @@ Control prog_1A3C ()
 
 Control prog_1A3D ()
 {
-    at ( "1A3D" );
+    // #at: 1A3D
     instruction ( "LD   D,(HL)",0x1A3E );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -36422,7 +36422,7 @@ Control prog_1A3D ()
 
 Control prog_1A3E ()
 {
-    at ( "1A3E" );
+    // #at: 1A3E
     instruction ( "INC  HL",0x1A3F );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -36435,7 +36435,7 @@ Control prog_1A3E ()
 
 Control prog_1A3F ()
 {
-    at ( "1A3F" );
+    // #at: 1A3F
     instruction ( "LD   A,(HL)",0x1A40 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -36447,7 +36447,7 @@ Control prog_1A3F ()
 
 Control prog_1A40 ()
 {
-    at ( "1A40" );
+    // #at: 1A40
     instruction ( "INC  HL",0x1A41 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -36460,7 +36460,7 @@ Control prog_1A40 ()
 
 Control prog_1A41 ()
 {
-    at ( "1A41" );
+    // #at: 1A41
     instruction ( "LD   C,(HL)",0x1A42 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -36472,7 +36472,7 @@ Control prog_1A41 ()
 
 Control prog_1A42 ()
 {
-    at ( "1A42" );
+    // #at: 1A42
     instruction ( "INC  HL",0x1A43 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -36485,7 +36485,7 @@ Control prog_1A42 ()
 
 Control prog_1A43 ()
 {
-    at ( "1A43" );
+    // #at: 1A43
     instruction ( "LD   B,(HL)",0x1A44 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -36497,7 +36497,7 @@ Control prog_1A43 ()
 
 Control prog_1A44 ()
 {
-    at ( "1A44" );
+    // #at: 1A44
     instruction ( "LD   H,C",0x1A45 );
     u8 a1 = C ;
     advance ( 5 );
@@ -36507,7 +36507,7 @@ Control prog_1A44 ()
 
 Control prog_1A45 ()
 {
-    at ( "1A45" );
+    // #at: 1A45
     instruction ( "LD   L,A",0x1A46 );
     u8 a1 = A ;
     advance ( 5 );
@@ -36517,7 +36517,7 @@ Control prog_1A45 ()
 
 Control prog_1A46 ()
 {
-    at ( "1A46" );
+    // #at: 1A46
     instruction ( "RET",0x1A47 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -36535,7 +36535,7 @@ Control prog_1A46 ()
 
 Control prog_1A47 ()
 {
-    at ( "1A47" );
+    // #at: 1A47
     instruction ( "PUSH BC",0x1A48 );
     u8 a1 = B ;
     u8 a2 = C ;
@@ -36555,7 +36555,7 @@ Control prog_1A47 ()
 
 Control prog_1A48 ()
 {
-    at ( "1A48" );
+    // #at: 1A48
     instruction ( "LD   B,03",0x1A4A );
     advance ( 7 );
     B = 0x03;
@@ -36564,7 +36564,7 @@ Control prog_1A48 ()
 
 Control prog_1A4A ()
 {
-    at ( "1A4A" );
+    // #at: 1A4A
     instruction ( "LD   A,H",0x1A4B );
     u8 a1 = H ;
     advance ( 5 );
@@ -36574,7 +36574,7 @@ Control prog_1A4A ()
 
 Control prog_1A4B ()
 {
-    at ( "1A4B" );
+    // #at: 1A4B
     instruction ( "RAR",0x1A4C );
     u8 a1 = A ;
     advance ( 4 );
@@ -36585,7 +36585,7 @@ Control prog_1A4B ()
 
 Control prog_1A4C ()
 {
-    at ( "1A4C" );
+    // #at: 1A4C
     instruction ( "LD   H,A",0x1A4D );
     u8 a1 = A ;
     advance ( 5 );
@@ -36595,7 +36595,7 @@ Control prog_1A4C ()
 
 Control prog_1A4D ()
 {
-    at ( "1A4D" );
+    // #at: 1A4D
     instruction ( "LD   A,L",0x1A4E );
     u8 a1 = L ;
     advance ( 5 );
@@ -36605,7 +36605,7 @@ Control prog_1A4D ()
 
 Control prog_1A4E ()
 {
-    at ( "1A4E" );
+    // #at: 1A4E
     instruction ( "RAR",0x1A4F );
     u8 a1 = A ;
     advance ( 4 );
@@ -36616,7 +36616,7 @@ Control prog_1A4E ()
 
 Control prog_1A4F ()
 {
-    at ( "1A4F" );
+    // #at: 1A4F
     instruction ( "LD   L,A",0x1A50 );
     u8 a1 = A ;
     advance ( 5 );
@@ -36626,7 +36626,7 @@ Control prog_1A4F ()
 
 Control prog_1A50 ()
 {
-    at ( "1A50" );
+    // #at: 1A50
     instruction ( "DEC  B",0x1A51 );
     u8 a1 = B ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -36644,7 +36644,7 @@ Control prog_1A50 ()
 
 Control prog_1A51 ()
 {
-    at ( "1A51" );
+    // #at: 1A51
     instruction ( "JP   NZ,1A4A",0x1A54 );
     if (( ! FlagZ ))
     {
@@ -36660,7 +36660,7 @@ Control prog_1A51 ()
 
 Control prog_1A54 ()
 {
-    at ( "1A54" );
+    // #at: 1A54
     instruction ( "LD   A,H",0x1A55 );
     u8 a1 = H ;
     advance ( 5 );
@@ -36670,7 +36670,7 @@ Control prog_1A54 ()
 
 Control prog_1A55 ()
 {
-    at ( "1A55" );
+    // #at: 1A55
     instruction ( "AND  3F",0x1A57 );
     u8 a1 = A ;
     u8 a2 = ( 0x3F & a1 ) ;
@@ -36687,7 +36687,7 @@ Control prog_1A55 ()
 
 Control prog_1A57 ()
 {
-    at ( "1A57" );
+    // #at: 1A57
     instruction ( "OR   20",0x1A59 );
     u8 a1 = A ;
     u8 a2 = ( 0x20 | a1 ) ;
@@ -36703,7 +36703,7 @@ Control prog_1A57 ()
 
 Control prog_1A59 ()
 {
-    at ( "1A59" );
+    // #at: 1A59
     instruction ( "LD   H,A",0x1A5A );
     u8 a1 = A ;
     advance ( 5 );
@@ -36713,7 +36713,7 @@ Control prog_1A59 ()
 
 Control prog_1A5A ()
 {
-    at ( "1A5A" );
+    // #at: 1A5A
     instruction ( "POP  BC",0x1A5B );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -36733,7 +36733,7 @@ Control prog_1A5A ()
 
 Control prog_1A5B ()
 {
-    at ( "1A5B" );
+    // #at: 1A5B
     instruction ( "RET",0x1A5C );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -36751,7 +36751,7 @@ Control prog_1A5B ()
 
 Control prog_1A5C ()
 {
-    at ( "1A5C" );
+    // #at: 1A5C
     instruction ( "LD   HL,2400",0x1A5F );
     advance ( 10 );
     H = 0x24;
@@ -36761,7 +36761,7 @@ Control prog_1A5C ()
 
 Control prog_1A5F ()
 {
-    at ( "1A5F" );
+    // #at: 1A5F
     instruction ( "LD   (HL),00",0x1A61 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -36772,7 +36772,7 @@ Control prog_1A5F ()
 
 Control prog_1A61 ()
 {
-    at ( "1A61" );
+    // #at: 1A61
     instruction ( "INC  HL",0x1A62 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -36785,7 +36785,7 @@ Control prog_1A61 ()
 
 Control prog_1A62 ()
 {
-    at ( "1A62" );
+    // #at: 1A62
     instruction ( "LD   A,H",0x1A63 );
     u8 a1 = H ;
     advance ( 5 );
@@ -36795,7 +36795,7 @@ Control prog_1A62 ()
 
 Control prog_1A63 ()
 {
-    at ( "1A63" );
+    // #at: 1A63
     instruction ( "CP   40",0x1A65 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x40 ) ) ) + ( ! false ) ) ;
@@ -36813,7 +36813,7 @@ Control prog_1A63 ()
 
 Control prog_1A65 ()
 {
-    at ( "1A65" );
+    // #at: 1A65
     instruction ( "JP   NZ,1A5F",0x1A68 );
     if (( ! FlagZ ))
     {
@@ -36829,7 +36829,7 @@ Control prog_1A65 ()
 
 Control prog_1A68 ()
 {
-    at ( "1A68" );
+    // #at: 1A68
     instruction ( "RET",0x1A69 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -36847,7 +36847,7 @@ Control prog_1A68 ()
 
 Control prog_1A69 ()
 {
-    at ( "1A69" );
+    // #at: 1A69
     instruction ( "PUSH BC",0x1A6A );
     u8 a1 = B ;
     u8 a2 = C ;
@@ -36867,7 +36867,7 @@ Control prog_1A69 ()
 
 Control prog_1A6A ()
 {
-    at ( "1A6A" );
+    // #at: 1A6A
     instruction ( "PUSH HL",0x1A6B );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -36887,7 +36887,7 @@ Control prog_1A6A ()
 
 Control prog_1A6B ()
 {
-    at ( "1A6B" );
+    // #at: 1A6B
     instruction ( "LD   A,(DE)",0x1A6C );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -36899,7 +36899,7 @@ Control prog_1A6B ()
 
 Control prog_1A6C ()
 {
-    at ( "1A6C" );
+    // #at: 1A6C
     instruction ( "OR   (HL)",0x1A6D );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -36918,7 +36918,7 @@ Control prog_1A6C ()
 
 Control prog_1A6D ()
 {
-    at ( "1A6D" );
+    // #at: 1A6D
     instruction ( "LD   (HL),A",0x1A6E );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -36930,7 +36930,7 @@ Control prog_1A6D ()
 
 Control prog_1A6E ()
 {
-    at ( "1A6E" );
+    // #at: 1A6E
     instruction ( "INC  DE",0x1A6F );
     u8 a1 = D ;
     u8 a2 = E ;
@@ -36943,7 +36943,7 @@ Control prog_1A6E ()
 
 Control prog_1A6F ()
 {
-    at ( "1A6F" );
+    // #at: 1A6F
     instruction ( "INC  HL",0x1A70 );
     u8 a1 = H ;
     u8 a2 = L ;
@@ -36956,7 +36956,7 @@ Control prog_1A6F ()
 
 Control prog_1A70 ()
 {
-    at ( "1A70" );
+    // #at: 1A70
     instruction ( "DEC  C",0x1A71 );
     u8 a1 = C ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -36974,7 +36974,7 @@ Control prog_1A70 ()
 
 Control prog_1A71 ()
 {
-    at ( "1A71" );
+    // #at: 1A71
     instruction ( "JP   NZ,1A6B",0x1A74 );
     if (( ! FlagZ ))
     {
@@ -36990,7 +36990,7 @@ Control prog_1A71 ()
 
 Control prog_1A74 ()
 {
-    at ( "1A74" );
+    // #at: 1A74
     instruction ( "POP  HL",0x1A75 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -37010,7 +37010,7 @@ Control prog_1A74 ()
 
 Control prog_1A75 ()
 {
-    at ( "1A75" );
+    // #at: 1A75
     instruction ( "LD   BC,0020",0x1A78 );
     advance ( 10 );
     B = 0x00;
@@ -37020,7 +37020,7 @@ Control prog_1A75 ()
 
 Control prog_1A78 ()
 {
-    at ( "1A78" );
+    // #at: 1A78
     instruction ( "ADD  HL,BC",0x1A79 );
     u8 a1 = B ;
     u8 a2 = C ;
@@ -37036,7 +37036,7 @@ Control prog_1A78 ()
 
 Control prog_1A79 ()
 {
-    at ( "1A79" );
+    // #at: 1A79
     instruction ( "POP  BC",0x1A7A );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -37056,7 +37056,7 @@ Control prog_1A79 ()
 
 Control prog_1A7A ()
 {
-    at ( "1A7A" );
+    // #at: 1A7A
     instruction ( "DEC  B",0x1A7B );
     u8 a1 = B ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -37074,7 +37074,7 @@ Control prog_1A7A ()
 
 Control prog_1A7B ()
 {
-    at ( "1A7B" );
+    // #at: 1A7B
     instruction ( "JP   NZ,1A69",0x1A7E );
     if (( ! FlagZ ))
     {
@@ -37090,7 +37090,7 @@ Control prog_1A7B ()
 
 Control prog_1A7E ()
 {
-    at ( "1A7E" );
+    // #at: 1A7E
     instruction ( "RET",0x1A7F );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -37108,7 +37108,7 @@ Control prog_1A7E ()
 
 Control prog_1A7F ()
 {
-    at ( "1A7F" );
+    // #at: 1A7F
     instruction ( "CALL 092E",0x1A82 );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -37127,7 +37127,7 @@ Control prog_1A7F ()
 
 Control prog_1A82 ()
 {
-    at ( "1A82" );
+    // #at: 1A82
     instruction ( "AND  A",0x1A83 );
     u8 a1 = A ;
     u8 a2 = A ;
@@ -37145,7 +37145,7 @@ Control prog_1A82 ()
 
 Control prog_1A83 ()
 {
-    at ( "1A83" );
+    // #at: 1A83
     instruction ( "RET  Z",0x1A84 );
     if (FlagZ)
     {
@@ -37171,7 +37171,7 @@ Control prog_1A83 ()
 
 Control prog_1A84 ()
 {
-    at ( "1A84" );
+    // #at: 1A84
     instruction ( "PUSH PSW",0x1A85 );
     u8 a1 = A ;
     u8 a2 = SPH ;
@@ -37190,7 +37190,7 @@ Control prog_1A84 ()
 
 Control prog_1A85 ()
 {
-    at ( "1A85" );
+    // #at: 1A85
     instruction ( "DEC  A",0x1A86 );
     u8 a1 = A ;
     u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
@@ -37208,7 +37208,7 @@ Control prog_1A85 ()
 
 Control prog_1A86 ()
 {
-    at ( "1A86" );
+    // #at: 1A86
     instruction ( "LD   (HL),A",0x1A87 );
     u8 a1 = A ;
     u8 a2 = H ;
@@ -37220,7 +37220,7 @@ Control prog_1A86 ()
 
 Control prog_1A87 ()
 {
-    at ( "1A87" );
+    // #at: 1A87
     instruction ( "CALL 19E6",0x1A8A );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -37239,7 +37239,7 @@ Control prog_1A87 ()
 
 Control prog_1A8A ()
 {
-    at ( "1A8A" );
+    // #at: 1A8A
     instruction ( "POP  PSW",0x1A8B );
     u8 a1 = SPH ;
     u8 a2 = SPL ;
@@ -37263,7 +37263,7 @@ Control prog_1A8A ()
 
 Control prog_1A8B ()
 {
-    at ( "1A8B" );
+    // #at: 1A8B
     instruction ( "LD   HL,2501",0x1A8E );
     advance ( 10 );
     H = 0x25;
@@ -37273,7 +37273,7 @@ Control prog_1A8B ()
 
 Control prog_1A8E ()
 {
-    at ( "1A8E" );
+    // #at: 1A8E
     instruction ( "AND  0F",0x1A90 );
     u8 a1 = A ;
     u8 a2 = ( 0x0F & a1 ) ;
@@ -37290,7 +37290,7 @@ Control prog_1A8E ()
 
 Control prog_1A90 ()
 {
-    at ( "1A90" );
+    // #at: 1A90
     instruction ( "JP   09C5",0x1A93 );
     advance ( 10 );
     return jumpDirect ( 0x09C5,prog_09C5 );

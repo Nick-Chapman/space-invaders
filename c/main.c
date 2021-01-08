@@ -32,6 +32,32 @@ int main (int argc, char* argv[]) {
   }
 }
 
+
+static bool dump_state_every_instruction = false;
+static int icount = 0;
+
+static void dump_state(const char* instruction, u16 pcAfterInstructionDecode) {
+  printf("%8d  [%08ld] "
+         "PC:%04X "
+         "A:%02X B:%02X C:%02X D:%02X E:%02X HL:%02X%02X SP:%02X%02X "
+         "SZAPY:%1d%1d%1d%1d%1d"
+         " : %s\n",
+         icount,
+         cycles,
+         pcAfterInstructionDecode, //odd, but matches existing traces!
+         A,B,C,D,E,H,L,SPH,SPL,
+         FlagS,FlagZ,FlagA,FlagP,FlagCY,
+         instruction
+         );
+}
+
+void f_instruction(const char* instruction, u16 pcAfterInstructionDecode) {
+  if (dump_state_every_instruction) {
+    dump_state(instruction,pcAfterInstructionDecode);
+  }
+  icount++;
+}
+
 int test1 () {
   dump_state_every_instruction = true;
   Func fn = prog_0000;

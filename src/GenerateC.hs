@@ -93,7 +93,7 @@ convertRom rom = do
 
 convertProgram :: Program  -> [CStat]
 convertProgram = \case
-  S_AtRef a next -> Expression (call "at" [LitS $ show a]) : convertProgram next
+  S_AtRef a next -> Comment ("#at: " ++ show a) : convertProgram next
   S_MarkReturnAddress a next -> Comment ("#mark-return: " ++ show a) : convertProgram next
   S_TraceInstruction _cpu i pcAfterDecode next ->
     Expression (call "instruction" [LitS $ show i, convert16 pcAfterDecode]) : convertProgram next

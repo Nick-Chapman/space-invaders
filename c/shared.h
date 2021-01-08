@@ -8,9 +8,7 @@ typedef void* (*Control)(void);
 typedef Control (*Func)();
 
 extern Control prog_0000 ();
-extern int icount;
 extern long cycles;
-extern bool dump_state_every_instruction;
 
 typedef bool u1;
 typedef uint8_t u8;
@@ -39,4 +37,31 @@ typedef enum ButtonE
     Dip7_coinInfoOff,
   } Button;
 
+u1 FlagS;
+u1 FlagZ;
+u1 FlagA;
+u1 FlagP;
+u1 FlagCY;
+
+u8 PCH;
+u8 PCL;
+
+u8 A;
+u8 B;
+u8 C;
+u8 D;
+u8 E;
+u8 H;
+u8 L;
+u8 SPH;
+u8 SPL;
+
+u8 Shifter_HI;
+u8 Shifter_LO;
+u8 Shifter_OFF;
+
 u1 e1_is_pressed(Button);
+
+#define instruction(x...) f_instruction(x)
+//#define instruction(x...) {}
+void f_instruction(const char*, u16);

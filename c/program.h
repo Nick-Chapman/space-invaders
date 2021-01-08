@@ -55,35 +55,10 @@ inline static void sound_control(const char*,u1);
 inline static void enable_interrupts(void);
 inline static void unknown_output(int,u8);
 
-inline static u1 e1_true(void);
-inline static u1 e1_false(void);
-inline static u1 e1_flip(u1);
-inline static u1 e1_is_zero(u8);
-inline static u1 e1_test_bit(u8,int);
-inline static u1 e1_or_bit(u1,u1);
-inline static u1 e1_and_bit(u1,u1);
-inline static u1 e1_hi_bit_of_17(u17);
 noinline static u1 e1_parity(u8);
 
-inline static u8 e8_hi(u16);
-inline static u8 e8_lo(u16);
 inline static u8 e8_update_bit(u8,int,u1);
-inline static u8 e8_complement(u8);
-inline static u8 e8_and(u8,u8);
-inline static u8 e8_or(u8,u8);
-inline static u8 e8_xor(u8,u8);
-inline static u8 e8_shiftR(u8,u8);
-inline static u8 e8_shiftL(u8,u8);
-noinline static u8 e8_ite(u1,u8,u8);
 inline static u8 e8_read_mem(u16);
-
-inline static u16 e16_hi_lo(u8,u8);
-inline static u16 e16_offset_addr(int,u16);
-inline static u16 e16_add_with_carry(u1,u8,u8);
-inline static u16 e16_drop_hi_bit_of_17(u17);
-
-inline static u17 e17_add(u16,u16);
-
 
 extern Control op_rst1();
 extern Control op_rst2();
@@ -131,26 +106,14 @@ void advance(int n) {
   credit -= n;
 }
 
-/*void info_interrupt() {
-  printf ("secs = %d, cycles = %ld, interrupt (%d), enabled = %s: %s\n",
-          interrupts / 120,
-          cycles,
-          interrupts,
-          interrupts_enabled ? "ENABLED" : "disabled",
-          half ? "rstHalf (RST 1)" : "rstVblank (RST 2)"
-          );
-}*/
-
-
 Control jumpInterrupt(u16 pc, Func f) {
   credit += HALF_FRAME_CYCLES;
   half ^= true;
   interrupts++;
-  //info_interrupt();
   if (interrupts_enabled) {
     interrupts_enabled = false;
-    PCH = e8_hi(pc);
-    PCL = e8_lo(pc);
+    PCH = pc >> 8;
+    PCL = pc & 0xFF;
     return (Control)(half ? op_rst1 : op_rst2);
   }
   return (Control)f;
@@ -162,7 +125,6 @@ Control jumpDirect(u16 pc, Func f) {
   }
   return (Control)f;
 }
-
 
 
 Control jump16(u16 a) {
@@ -209,22 +171,11 @@ void unknown_output(int p,u8 b) {
   //printf ("unknown_output: %d %02x\n",p,b);
 }
 
-u1 e1_true() { return 1; }
-u1 e1_false() { return 0; }
-u1 e1_flip(u1 x) { return !x; }
-u1 e1_is_zero(u8 e) { return (e == 0); }
-u1 e1_test_bit(u8 e,int n) { return (e>>n)&0x1; }
-u1 e1_or_bit(u1 x,u1 y) { return x||y; }
-u1 e1_and_bit(u1 x,u1 y) { return x&&y; }
-u1 e1_hi_bit_of_17(u17 x) { return (x>>16)&0x1; }
-
 u1 e1_parity(u8 e) {
   return (((e>>0)&0x1) + ((e>>1)&0x1) + ((e>>2)&0x1) + ((e>>3)&0x1)
           + ((e>>4)&0x1) + ((e>>5)&0x1) + ((e>>6)&0x1) + ((e>>7)&0x1)) % 2 == 0;
 }
 
-u8 e8_hi(u16 a) { return a>>8; }
-u8 e8_lo(u16 a) { return a & 0xFF; }
 u8 e8_update_bit(u8 e,int n,u1 p) {
   return
     p
@@ -232,13 +183,6 @@ u8 e8_update_bit(u8 e,int n,u1 p) {
     : e & ~(1<<n)
     ;
 }
-u8 e8_complement(u8 e) { return ~e; }
-u8 e8_and(u8 x,u8 y) { return x&y; }
-u8 e8_or(u8 x,u8 y) { return x|y; }
-u8 e8_xor(u8 x,u8 y) { return x^y; }
-u8 e8_shiftR(u8 x,u8 y) { return x>>y; }
-u8 e8_shiftL(u8 x,u8 y) { return x<<y; }
-u8 e8_ite(u1 i,u8 t,u8 e) { return i?t:e; } //TODO: think needed when insert coin
 
 u8 e8_read_mem(u16 a) {
   if (a>=MEM_SIZE) {
@@ -249,10 +193,3 @@ u8 e8_read_mem(u16 a) {
   //printf ("e8_read_mem: M[%04x] -> %02x\n",a,res);
   return res;
 }
-
-u16 e16_hi_lo(u8 hi,u8 lo) { return hi<<8 | lo; }
-u16 e16_offset_addr(int n,u16 x) { return x+n; }
-u16 e16_add_with_carry(u1 cin,u8 x,u8 y) { return cin+x+y; }
-u16 e16_drop_hi_bit_of_17(u17 x) { return x & 0xffff; }
-
-u17 e17_add(u16 x,u16 y) { return x+y; }

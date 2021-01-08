@@ -143,49 +143,59 @@ u17t = CType "u17"
 convert1 :: Exp1 -> CExp
 convert1 = \case
   E1_Flag flag -> Ident (convertFlag flag)
-  E1_True -> call "e1_true" []
-  E1_False -> call "e1_false" []
-  E1_Flip c -> call "e1_flip" [convert1 c]
-  E1_IsZero b -> call "e1_is_zero" [convert8 b]
-  E1_TestBit b i -> call "e1_test_bit" [convert8 b, LitI i]
-  E1_HiBitOf17 x -> call "e1_hi_bit_of_17" [convert17 x]
+  E1_True -> Ident (CName "true")
+  E1_False -> Ident (CName "false")
+  E1_Flip c -> UnOp "!" (convert1 c)
+  E1_IsZero b -> e1_is_zero (convert8 b)
+  E1_TestBit b i -> e1_test_bit (convert8 b) (LitI i)
+  E1_HiBitOf17 x -> e1_hi_bit_of_17 (convert17 x)
   E1_IsParity b -> call "e1_parity" [convert8 b]
-  E1_OrBit c1 c2 -> call "e1_or_bit" [convert1 c1, convert1 c2]
-  E1_AndBit c1 c2 -> call "e1_and_bit" [convert1 c1, convert1 c2]
+  E1_OrBit c1 c2 -> BinOp "||" (convert1 c1) (convert1 c2)
+  E1_AndBit c1 c2 -> BinOp "&&" (convert1 c1) (convert1 c2)
   E1_Button but -> call "e1_is_pressed" [Ident $ CName $ show but]
+  where
+    e1_is_zero = BinOp "==" (LitI 0)
+    e1_test_bit x y = BinOp "&" (BinOp ">>" x y) (LitB 1)
+    e1_hi_bit_of_17 x = BinOp "&" (BinOp ">>" x (LitI 16)) (LitB 1)
 
 convert8 :: Exp8 -> CExp
 convert8 = \case
   E8_Lit b -> LitB b
   E8_Reg reg -> Ident (convertReg reg)
   E8_ShifterReg reg -> Ident (convertShifterReg reg)
-  E8_Hi a -> call "e8_hi" [convert16 a]
-  E8_Lo a -> call "e8_lo" [convert16 a]
+  E8_Hi a -> e8_hi (convert16 a)
+  E8_Lo a -> e8_lo (convert16 a)
   E8_ReadMem a -> call "e8_read_mem" [convert16 a]
   E8_UpdateBit e i p -> call "e8_update_bit" [convert8 e, LitI i, convert1 p]
-  E8_Complement e -> call "e8_complement" [convert8 e]
-  E8_AndB e1 e2 -> call "e8_and" [convert8 e1, convert8 e2]
-  E8_OrB e1 e2 -> call "e8_or" [convert8 e1, convert8 e2]
-  E8_XorB e1 e2 -> call "e8_xor" [convert8 e1, convert8 e2]
-  E8_ShiftRight e1 e2 -> call "e8_shiftR" [convert8 e1, convert8 e2]
-  E8_ShiftLeft e1 e2 -> call "e8_shiftL" [convert8 e1, convert8 e2]
-  E8_Ite i t e -> call "e8_ite" [convert1 i, convert8 t, convert8 e]
+  E8_Complement e -> CastOp u8t (UnOp "~" (convert8 e))
+  E8_AndB e1 e2 -> BinOp "&" (convert8 e1) (convert8 e2)
+  E8_OrB e1 e2 -> BinOp "|" (convert8 e1) (convert8 e2)
+  E8_XorB e1 e2 -> BinOp "^" (convert8 e1) (convert8 e2)
+  E8_ShiftRight e1 e2 -> BinOp ">>" (convert8 e1) (convert8 e2)
+  E8_ShiftLeft e1 e2 -> BinOp "<<" (convert8 e1) (convert8 e2)
+  E8_Ite i t e -> IteOp (convert1 i) (convert8 t) (convert8 e)
   E8_Var v -> Ident (convertVar v)
   E8_UnknownInput{} -> undefined
+  where
+    e8_hi x = BinOp ">>" x (LitI 8)
+    e8_lo x = BinOp "&" x (LitB 0xFF)
 
 convert16 :: Exp16 -> CExp
 convert16 = \case
-  E16_HiLo HiLo{hi,lo} -> call "e16_hi_lo" [convert8 hi, convert8 lo]
-  E16_OffsetAdr n e -> call "e16_offset_addr" [LitI n, convert16 e]
+  E16_HiLo HiLo{hi,lo} -> e16_hi_lo (convert8 hi) (convert8 lo)
+  E16_OffsetAdr n e -> BinOp "+" (convert16 e) (LitI n)
   E16_Var v -> Ident (convertVar v)
-  E16_AddWithCarry cin e1 e2 -> call "e16_add_with_carry" [convert1 cin, convert8 e1, convert8 e2]
-  E16_DropHiBitOf17 e -> call "e16_drop_hi_bit_of_17" [convert17 e]
+  E16_AddWithCarry cin e1 e2 -> BinOp "+" (BinOp "+" (convert8 e1) (convert8 e2)) (convert1 cin)
+  E16_DropHiBitOf17 e -> BinOp "&" (convert17 e) (LitA 0xFFFF)
   E16_Lit x -> LitA x
+  where
+    e16_hi_lo x y = BinOp "|" (BinOp "<<" x (LitI 8)) y
+
 
 convert17 :: Exp17 -> CExp
 convert17 = \case
   E17_Var v -> Ident (convertVar v)
-  E17_Add a1 a2 -> call "e17_add" [convert16 a1, convert16 a2]
+  E17_Add a1 a2 -> BinOp "+" (convert16 a1) (convert16 a2)
 
 call :: String -> [CExp] -> CExp
 call s xs = Call (CName s) xs
@@ -246,6 +256,10 @@ data CExp
   | Ident CName
   | Call CName [CExp]
   | Assign CName CExp
+  | UnOp String CExp
+  | BinOp String CExp CExp
+  | IteOp CExp CExp CExp
+  | CastOp CType CExp
 
 instance Show CFile where
   show (CFile tops) = unlines (map show tops)
@@ -304,6 +318,10 @@ instance Show CExp where
     Ident s -> show s
     Call f args -> unwords [show f,"(",intercalate "," [ show e | e <- args],")"]
     Assign name exp -> unwords [show name, "=", show exp]
+    UnOp name exp -> unwords ["(",name,show exp,")"]
+    BinOp name e1 e2 -> unwords ["(",show e1,name,show e2,")"]
+    IteOp e1 e2 e3 -> unwords ["(",show e1,"?",show e2,":",show e3,")"]
+    CastOp ty exp -> unwords ["(","(",show ty,")",show exp,")"]
 
 brace :: Lay -> Lay
 brace x = vert [ lay "{", tab x, lay "}" ]

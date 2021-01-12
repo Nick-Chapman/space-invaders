@@ -10,8 +10,14 @@ test1: invaders.exe
 	./invaders.exe test1 > trace/test1.out
 	git diff trace/test1.out
 
+speed0: invaders.exe
+	./invaders.exe speed0
+
 speed: invaders.exe
 	./invaders.exe speed
+
+play0: invaders.exe
+	./invaders.exe play0
 
 play: invaders.exe
 	./invaders.exe play

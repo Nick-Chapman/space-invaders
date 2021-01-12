@@ -251,6 +251,8 @@ emulateProgram CB{traceI} buttons s = emu (emptyEnv buttons) s
       S_EnableInterrupts p -> emu q u { interruptsEnabled = True } p
       S_DisableInterrupts p -> emu q u { interruptsEnabled = False } p
       S_UnknownOutput 6 _ p -> emu q u p -- ignore watchdog
+      S_UnknownOutput 0 _ p -> emu q u p -- ignore output on port-0 for test0
+      S_UnknownOutput 1 _ p -> emu q u p -- ignore output on port-1 for test0
       S_UnknownOutput n b _ -> error $ "emulateProgram, unknown output: " ++ show (n,b)
       where
          -- compenstate for this u/s hack thing

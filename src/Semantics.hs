@@ -4,6 +4,7 @@
 module Semantics
   ( fetchDecodeExec
   , decodeExec
+  , execInstruction
   ) where
 
 import Prelude hiding (subtract)
@@ -11,7 +12,7 @@ import Prelude hiding (subtract)
 import Cpu (Flag(..),Reg(..))
 import Effect (Eff(..))
 import HiLo (HiLo(..))
-import InstructionSet (Op(..),Instruction(..),Op0(..),Op1(..),Op2(..),RegPairSpec(..),Condition(..),cycles)
+import InstructionSet (Op(..),Instruction(..),Op0(..),Op1(..),Op2(..),RegPairSpec(..),Condition(..),cycles,justOp)
 import Phase (Addr,Byte,Bit)
 import qualified InstructionSet as Instr (RegSpec(..))
 import qualified Ports (inputPort,outputPort)
@@ -27,13 +28,17 @@ decodeExec :: Byte p -> Eff p ()
 decodeExec byte = do
   op <- Decode byte
   instruction <- fetchImmediates op
+  execInstruction instruction
+
+execInstruction :: Instruction (Byte p) -> Eff p ()
+execInstruction instruction = do
   TraceInstruction instruction
   n <- execute instruction >>= \case
     Next -> do
-      return $ cycles False op
+      return $ cycles False (justOp instruction)
     Jump a -> do
       setPC a
-      return $ cycles True op
+      return $ cycles True (justOp instruction)
   Advance n
 
 fetch :: Eff p (Byte p) -- fetch byte at PC, and increment PC

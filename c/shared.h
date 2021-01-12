@@ -65,3 +65,22 @@ u1 e1_is_pressed(Button);
 #define instruction(x...) f_instruction(x)
 //#define instruction(x...) {}
 void f_instruction(const char*, u16);
+
+
+#define HALF_FRAME_CYCLES (2000000 / 120)
+
+extern int credit;
+
+extern Control jump16(u16);
+extern Control jumpInterrupt(u16 pc, Func f);
+extern Control jumpDirect(u16,Func);
+
+#define ROM_SIZE 0x2000
+
+Func prog [ROM_SIZE];
+Func ops_array [256];
+Func output_instruction_array [ 0x07 ];
+Func input_instruction_array [ 0x05 ];
+
+extern Control op_CF ();
+extern Control op_D7 ();

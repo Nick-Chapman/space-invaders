@@ -46,8 +46,6 @@ outputPort port byte = case port of
   3 -> soundFromPort port3 byte
   4 -> fillShifter byte
   5 -> soundFromPort port5 byte
-  0 -> return () -- ignore for tst
-  1 -> return () -- ignore for tst
   n -> UnknownOutput n byte
 
 soundFromPort :: (Int -> Sound) -> Byte p -> Eff p ()

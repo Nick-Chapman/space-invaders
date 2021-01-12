@@ -1,7 +1,7 @@
 
 module InstructionSet (
   Op(..),Op0(..),Op1(..),Op2(..), RegPairSpec(..), RegSpec(..), Condition(..),
-  Instruction(..),
+  Instruction(..), justOp,
   cycles,
   decode, encode,
   prettyInstructionBytes,

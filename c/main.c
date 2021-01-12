@@ -17,18 +17,22 @@ static u64 time() { //in micro-seconds
   return tv.tv_sec*(u64)1000000+tv.tv_usec;
 }
 
+static bool use_per_address_programs = true;
+
 int main (int argc, char* argv[]) {
   if (argc != 2) {
     printf("expected exactly one command line arg, got %d\n",argc-1);
-    die
+    die;
   }
   char* arg = argv[1];
   if (0 == strcmp(arg,"test1")) return test1();
+  else if (0 == strcmp(arg,"speed0")) { use_per_address_programs = false; return speed(); }
   else if (0 == strcmp(arg,"speed")) return speed();
+  else if (0 == strcmp(arg,"play0")) { use_per_address_programs = false; return play(); }
   else if (0 == strcmp(arg,"play")) return play();
   else {
     printf("unexpected command line arg: \"%s\"\n",arg);
-    die
+    die;
   }
 }
 
@@ -58,9 +62,17 @@ void f_instruction(const char* instruction, u16 pcAfterInstructionDecode) {
   icount++;
 }
 
+static Func initial_program() {
+  if (use_per_address_programs) {
+    return prog_0000;
+  } else {
+    return (Func)jump16(0x0);
+  }
+}
+
 int test1 () {
   dump_state_every_instruction = true;
-  Func fn = prog_0000;
+  Func fn = initial_program();
   while (fn) {
     fn = (Func)fn();
     if (icount>50000) break;
@@ -75,7 +87,7 @@ int test1 () {
 int speed () {
   dump_state_every_instruction = false;
   const int sim_seconds_to_run_for = 60;
-  Func fn = prog_0000;
+  Func fn = initial_program();
   u64 tic = time();
   cycles = 0;
   while (fn) {
@@ -154,7 +166,7 @@ int play () {
   SDL_Renderer* renderer =
     // Think something here causes fps to be limited to about 60 fps?
     SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-  Func fn = prog_0000;
+  Func fn = initial_program();
   long frame_count = 0;
   long frame_credit = cycles_between_frames;
   double speedup = 1.0;
@@ -260,4 +272,59 @@ static void input() {
     }
     keystate = (keystate & ~mask) | (-f & mask);
   }
+}
+
+
+
+Control jump16(u16 pc) {
+
+  if (use_per_address_programs) {
+
+    if (pc>=ROM_SIZE) {
+      printf ("jump16: (a>=ROM_SIZE) : a=%04x, ROM_SIZE=%04x\n",pc,ROM_SIZE);
+      die;
+    }
+    Func fn = prog[pc];
+    if (fn == 0) {
+      printf ("jump16: no program for target address: %04x\n",pc);
+      die;
+    }
+    return jumpDirect(pc,fn);
+  }
+
+  u8 byte = mem[pc];
+
+  if (byte==0xD3) { //OUT
+    u8 imm1 = mem[pc+1];
+    Func fn = output_instruction_array[imm1];
+    u16 pcAfterDecode = pc+2;
+    PCH = pcAfterDecode >> 8;
+    PCL = pcAfterDecode & 0xFF;
+    return jumpDirect(pc,fn);
+
+  } else if (byte==0xDB) { //IN
+
+    u8 imm1 = mem[pc+1];
+    Func fn = input_instruction_array[imm1];
+    u16 pcAfterDecode = pc+2;
+    PCH = pcAfterDecode >> 8;
+    PCL = pcAfterDecode & 0xFF;
+    return jumpDirect(pc,fn);
+
+  } else { //other op-code
+
+    Func fn = ops_array[byte];
+    u16 pcAfterDecode = pc+1;
+    PCH = pcAfterDecode >> 8;
+    PCL = pcAfterDecode & 0xFF;
+    return jumpDirect(pc,fn);
+  }
+
+}
+
+Control jumpDirect(u16 pc, Func f) {
+  if (credit <= 0) {
+    return jumpInterrupt(pc,f);
+  }
+  return (Control)f;
 }

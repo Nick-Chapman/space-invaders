@@ -7,19 +7,12 @@
 
 #define noinline __attribute__ ((noinline))
 
-#define ROM_SIZE 0x2000
-
-Func prog [ROM_SIZE];
-
 inline static void advance(int);
-
-noinline Control jumpInterrupt(u16 pc, Func f);
-inline static Control jumpDirect(u16,Func);
-inline static Control jump16(u16);
 
 noinline static void mem_write(u16,u8);
 inline static void sound_control(const char*,u1);
 inline static void enable_interrupts(void);
+inline static void disable_interrupts(void);
 inline static void unknown_output(int,u8);
 
 noinline static u1 e1_parity(u8);
@@ -27,14 +20,14 @@ noinline static u1 e1_parity(u8);
 inline static u8 e8_update_bit(u8,int,u1);
 inline static u8 e8_read_mem(u16);
 
+inline static u8 e8_unknown_input(int);
+
 extern Control op_rst1();
 extern Control op_rst2();
 
 long cycles = 0;
 
-#define HALF_FRAME_CYCLES (2000000 / 120)
-
-static int credit = HALF_FRAME_CYCLES;
+int credit = HALF_FRAME_CYCLES;
 
 static bool half = false;
 static int interrupts = 0;
@@ -54,31 +47,9 @@ Control jumpInterrupt(u16 pc, Func f) {
     interrupts_enabled = false;
     PCH = pc >> 8;
     PCL = pc & 0xFF;
-    return (Control)(half ? op_rst1 : op_rst2);
+    return (Control)(half ? op_CF : op_D7);
   }
   return (Control)f;
-}
-
-Control jumpDirect(u16 pc, Func f) {
-  if (credit <= 0) {
-    return jumpInterrupt(pc,f);
-  }
-  return (Control)f;
-}
-
-
-Control jump16(u16 a) {
-  //printf ("(%d) jump16: target address = %04x\n",icount,a);
-  if (a>=ROM_SIZE) {
-    printf ("jump16: (a>=ROM_SIZE) : a=%04x, ROM_SIZE=%04x\n",a,ROM_SIZE);
-    die
-  }
-  Func fn = prog[a];
-  if (fn == 0) {
-    printf ("jump16: no program for target address: %04x\n",a);
-    die
-  }
-  return jumpDirect(a,fn);
 }
 
 void mem_write(u16 a,u8 e) {
@@ -107,6 +78,11 @@ void enable_interrupts(void) {
   interrupts_enabled = true;
 }
 
+void disable_interrupts(void) {
+  //printf ("disable_interrupts\n");
+  interrupts_enabled = false;
+}
+
 void unknown_output(int p,u8 b) {
   //printf ("unknown_output: %d %02x\n",p,b);
 }
@@ -132,4 +108,9 @@ u8 e8_read_mem(u16 a) {
   u8 res = mem[a];
   //printf ("e8_read_mem: M[%04x] -> %02x\n",a,res);
   return res;
+}
+
+u8 e8_unknown_input(int p) {
+  printf ("unknown_input: %d\n",p);
+  die
 }

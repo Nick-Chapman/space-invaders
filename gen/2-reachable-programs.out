@@ -254,7 +254,7 @@
     #0020
     #instruction: IN   01
     advance (10)
-    A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(coin entry)),1,is_pressed(player2 start)),2,is_pressed(player1 start)),4,is_pressed(player1 shoot)),5,is_pressed(player1 left)),6,is_pressed(player1 right));
+    A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(CoinEntry)),1,is_pressed(P2start)),2,is_pressed(P1start)),4,is_pressed(P1shoot)),5,is_pressed(P1left)),6,is_pressed(P1right));
     jump (0022);
 
 0022:
@@ -12047,7 +12047,7 @@
     #0791
     #instruction: IN   01
     advance (10)
-    A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(coin entry)),1,is_pressed(player2 start)),2,is_pressed(player1 start)),4,is_pressed(player1 shoot)),5,is_pressed(player1 left)),6,is_pressed(player1 right));
+    A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(CoinEntry)),1,is_pressed(P2start)),2,is_pressed(P1start)),4,is_pressed(P1shoot)),5,is_pressed(P1left)),6,is_pressed(P1right));
     jump (0793);
 
 0793:
@@ -13110,7 +13110,7 @@
     #085F
     #instruction: IN   01
     advance (10)
-    A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(coin entry)),1,is_pressed(player2 start)),2,is_pressed(player1 start)),4,is_pressed(player1 shoot)),5,is_pressed(player1 left)),6,is_pressed(player1 right));
+    A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(CoinEntry)),1,is_pressed(P2start)),2,is_pressed(P1start)),4,is_pressed(P1shoot)),5,is_pressed(P1left)),6,is_pressed(P1right));
     jump (0861);
 
 0861:
@@ -13634,7 +13634,7 @@
     #08D1
     #instruction: IN   02
     advance (10)
-    A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed([dip3] lives (3,4,5,6) lsb)),1,is_pressed([dip5] lives (3,4,5,6) msb)),2,is_pressed(TILT)),3,is_pressed([dip6] extra ship at 1000)),4,is_pressed(player2 shoot)),5,is_pressed(player2 left)),6,is_pressed(player2 right)),7,is_pressed([dip7] coin info off));
+    A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed(Dip3_livesLow)),1,is_pressed(Dip5_livesHigh)),2,is_pressed(Tilt)),3,is_pressed(Dip6_extraShipEarly)),4,is_pressed(P2shoot)),5,is_pressed(P2left)),6,is_pressed(P2right)),7,is_pressed(Dip7_coinInfoOff));
     jump (08D3);
 
 08D3:
@@ -14459,7 +14459,7 @@
     #093F
     #instruction: IN   02
     advance (10)
-    A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed([dip3] lives (3,4,5,6) lsb)),1,is_pressed([dip5] lives (3,4,5,6) msb)),2,is_pressed(TILT)),3,is_pressed([dip6] extra ship at 1000)),4,is_pressed(player2 shoot)),5,is_pressed(player2 left)),6,is_pressed(player2 right)),7,is_pressed([dip7] coin info off));
+    A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed(Dip3_livesLow)),1,is_pressed(Dip5_livesHigh)),2,is_pressed(Tilt)),3,is_pressed(Dip6_extraShipEarly)),4,is_pressed(P2shoot)),5,is_pressed(P2left)),6,is_pressed(P2right)),7,is_pressed(Dip7_coinInfoOff));
     jump (0941);
 
 0941:
@@ -18455,7 +18455,7 @@
     #0BB7
     #instruction: IN   02
     advance (10)
-    A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed([dip3] lives (3,4,5,6) lsb)),1,is_pressed([dip5] lives (3,4,5,6) msb)),2,is_pressed(TILT)),3,is_pressed([dip6] extra ship at 1000)),4,is_pressed(player2 shoot)),5,is_pressed(player2 left)),6,is_pressed(player2 right)),7,is_pressed([dip7] coin info off));
+    A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed(Dip3_livesLow)),1,is_pressed(Dip5_livesHigh)),2,is_pressed(Tilt)),3,is_pressed(Dip6_extraShipEarly)),4,is_pressed(P2shoot)),5,is_pressed(P2left)),6,is_pressed(P2right)),7,is_pressed(Dip7_coinInfoOff));
     jump (0BB9);
 
 0BB9:
@@ -25655,7 +25655,7 @@
     #17C7
     #instruction: IN   01
     advance (10)
-    A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(coin entry)),1,is_pressed(player2 start)),2,is_pressed(player1 start)),4,is_pressed(player1 shoot)),5,is_pressed(player1 left)),6,is_pressed(player1 right));
+    A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(CoinEntry)),1,is_pressed(P2start)),2,is_pressed(P1start)),4,is_pressed(P1shoot)),5,is_pressed(P1left)),6,is_pressed(P1right));
     jump (17C9);
 
 17C9:
@@ -25680,7 +25680,7 @@
     #17CA
     #instruction: IN   02
     advance (10)
-    A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed([dip3] lives (3,4,5,6) lsb)),1,is_pressed([dip5] lives (3,4,5,6) msb)),2,is_pressed(TILT)),3,is_pressed([dip6] extra ship at 1000)),4,is_pressed(player2 shoot)),5,is_pressed(player2 left)),6,is_pressed(player2 right)),7,is_pressed([dip7] coin info off));
+    A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed(Dip3_livesLow)),1,is_pressed(Dip5_livesHigh)),2,is_pressed(Tilt)),3,is_pressed(Dip6_extraShipEarly)),4,is_pressed(P2shoot)),5,is_pressed(P2left)),6,is_pressed(P2right)),7,is_pressed(Dip7_coinInfoOff));
     jump (17CC);
 
 17CC:
@@ -25705,7 +25705,7 @@
     #17CD
     #instruction: IN   02
     advance (10)
-    A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed([dip3] lives (3,4,5,6) lsb)),1,is_pressed([dip5] lives (3,4,5,6) msb)),2,is_pressed(TILT)),3,is_pressed([dip6] extra ship at 1000)),4,is_pressed(player2 shoot)),5,is_pressed(player2 left)),6,is_pressed(player2 right)),7,is_pressed([dip7] coin info off));
+    A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed(Dip3_livesLow)),1,is_pressed(Dip5_livesHigh)),2,is_pressed(Tilt)),3,is_pressed(Dip6_extraShipEarly)),4,is_pressed(P2shoot)),5,is_pressed(P2left)),6,is_pressed(P2right)),7,is_pressed(Dip7_coinInfoOff));
     jump (17CF);
 
 17CF:
@@ -28179,7 +28179,7 @@
     #19A1
     #instruction: IN   01
     advance (10)
-    A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(coin entry)),1,is_pressed(player2 start)),2,is_pressed(player1 start)),4,is_pressed(player1 shoot)),5,is_pressed(player1 left)),6,is_pressed(player1 right));
+    A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(CoinEntry)),1,is_pressed(P2start)),2,is_pressed(P1start)),4,is_pressed(P1shoot)),5,is_pressed(P1left)),6,is_pressed(P1right));
     jump (19A3);
 
 19A3:
@@ -28269,7 +28269,7 @@
     #19AC
     #instruction: IN   01
     advance (10)
-    A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(coin entry)),1,is_pressed(player2 start)),2,is_pressed(player1 start)),4,is_pressed(player1 shoot)),5,is_pressed(player1 left)),6,is_pressed(player1 right));
+    A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(CoinEntry)),1,is_pressed(P2start)),2,is_pressed(P1start)),4,is_pressed(P1shoot)),5,is_pressed(P1left)),6,is_pressed(P1right));
     jump (19AE);
 
 19AE:

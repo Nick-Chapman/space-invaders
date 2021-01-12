@@ -1235,7 +1235,7 @@
     advance (10)
     #17CF
     #instruction: AND  04
-    let:8 a43 = updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed([dip3] lives (3,4,5,6) lsb)),1,is_pressed([dip5] lives (3,4,5,6) msb)),2,is_pressed(TILT)),3,is_pressed([dip6] extra ship at 1000)),4,is_pressed(player2 shoot)),5,is_pressed(player2 left)),6,is_pressed(player2 right)),7,is_pressed([dip7] coin info off)) in
+    let:8 a43 = updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed(Dip3_livesLow)),1,is_pressed(Dip5_livesHigh)),2,is_pressed(Tilt)),3,is_pressed(Dip6_extraShipEarly)),4,is_pressed(P2shoot)),5,is_pressed(P2left)),6,is_pressed(P2right)),7,is_pressed(Dip7_coinInfoOff)) in
     let:8 a44 = (04 & a43) in
     let:8 a45 = (04 | a43) in
     advance (7)
@@ -1460,7 +1460,7 @@
     advance (10)
     #0022
     #instruction: RRCA
-    let:8 a1 = updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(coin entry)),1,is_pressed(player2 start)),2,is_pressed(player1 start)),4,is_pressed(player1 shoot)),5,is_pressed(player1 left)),6,is_pressed(player1 right)) in
+    let:8 a1 = updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(CoinEntry)),1,is_pressed(P2start)),2,is_pressed(P1start)),4,is_pressed(P1shoot)),5,is_pressed(P1left)),6,is_pressed(P1right)) in
     advance (4)
     #0023
     #instruction: JP   CY,0067
@@ -9113,7 +9113,7 @@
             let:16 a46 = (1 + (a44,a45)) in
             let:8 a47 = M[(a44,a45)] in
             advance (10)
-            A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed([dip3] lives (3,4,5,6) lsb)),1,is_pressed([dip5] lives (3,4,5,6) msb)),2,is_pressed(TILT)),3,is_pressed([dip6] extra ship at 1000)),4,is_pressed(player2 shoot)),5,is_pressed(player2 left)),6,is_pressed(player2 right)),7,is_pressed([dip7] coin info off));
+            A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed(Dip3_livesLow)),1,is_pressed(Dip5_livesHigh)),2,is_pressed(Tilt)),3,is_pressed(Dip6_extraShipEarly)),4,is_pressed(P2shoot)),5,is_pressed(P2left)),6,is_pressed(P2right)),7,is_pressed(Dip7_coinInfoOff));
             B := a26;
             H := 20;
             L := 69;
@@ -9141,7 +9141,7 @@
             let:16 a54 = (1 + (a52,a53)) in
             let:8 a55 = M[(a52,a53)] in
             advance (10)
-            A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(coin entry)),1,is_pressed(player2 start)),2,is_pressed(player1 start)),4,is_pressed(player1 shoot)),5,is_pressed(player1 left)),6,is_pressed(player1 right));
+            A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(CoinEntry)),1,is_pressed(P2start)),2,is_pressed(P1start)),4,is_pressed(P1shoot)),5,is_pressed(P1left)),6,is_pressed(P1right));
             B := a26;
             H := 20;
             L := 69;
@@ -9740,7 +9740,7 @@
               let:16 a214 = (1 + (a212,a213)) in
               let:8 a215 = M[(a212,a213)] in
               advance (10)
-              A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed([dip3] lives (3,4,5,6) lsb)),1,is_pressed([dip5] lives (3,4,5,6) msb)),2,is_pressed(TILT)),3,is_pressed([dip6] extra ship at 1000)),4,is_pressed(player2 shoot)),5,is_pressed(player2 left)),6,is_pressed(player2 right)),7,is_pressed([dip7] coin info off));
+              A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed(Dip3_livesLow)),1,is_pressed(Dip5_livesHigh)),2,is_pressed(Tilt)),3,is_pressed(Dip6_extraShipEarly)),4,is_pressed(P2shoot)),5,is_pressed(P2left)),6,is_pressed(P2right)),7,is_pressed(Dip7_coinInfoOff));
               B := a194;
               H := 20;
               L := 6A;
@@ -9768,7 +9768,7 @@
               let:16 a222 = (1 + (a220,a221)) in
               let:8 a223 = M[(a220,a221)] in
               advance (10)
-              A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(coin entry)),1,is_pressed(player2 start)),2,is_pressed(player1 start)),4,is_pressed(player1 shoot)),5,is_pressed(player1 left)),6,is_pressed(player1 right));
+              A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(CoinEntry)),1,is_pressed(P2start)),2,is_pressed(P1start)),4,is_pressed(P1shoot)),5,is_pressed(P1left)),6,is_pressed(P1right));
               B := a194;
               H := 20;
               L := 6A;
@@ -10364,7 +10364,7 @@
               let:16 a377 = (1 + (a375,a376)) in
               let:8 a378 = M[(a375,a376)] in
               advance (10)
-              A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed([dip3] lives (3,4,5,6) lsb)),1,is_pressed([dip5] lives (3,4,5,6) msb)),2,is_pressed(TILT)),3,is_pressed([dip6] extra ship at 1000)),4,is_pressed(player2 shoot)),5,is_pressed(player2 left)),6,is_pressed(player2 right)),7,is_pressed([dip7] coin info off));
+              A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed(Dip3_livesLow)),1,is_pressed(Dip5_livesHigh)),2,is_pressed(Tilt)),3,is_pressed(Dip6_extraShipEarly)),4,is_pressed(P2shoot)),5,is_pressed(P2left)),6,is_pressed(P2right)),7,is_pressed(Dip7_coinInfoOff));
               B := a357;
               H := 20;
               L := 69;
@@ -10392,7 +10392,7 @@
               let:16 a385 = (1 + (a383,a384)) in
               let:8 a386 = M[(a383,a384)] in
               advance (10)
-              A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(coin entry)),1,is_pressed(player2 start)),2,is_pressed(player1 start)),4,is_pressed(player1 shoot)),5,is_pressed(player1 left)),6,is_pressed(player1 right));
+              A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(CoinEntry)),1,is_pressed(P2start)),2,is_pressed(P1start)),4,is_pressed(P1shoot)),5,is_pressed(P1left)),6,is_pressed(P1right));
               B := a357;
               H := 20;
               L := 69;
@@ -29562,7 +29562,7 @@
     advance (10)
     #0793
     #instruction: AND  04
-    let:8 a1 = updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(coin entry)),1,is_pressed(player2 start)),2,is_pressed(player1 start)),4,is_pressed(player1 shoot)),5,is_pressed(player1 left)),6,is_pressed(player1 right)) in
+    let:8 a1 = updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(CoinEntry)),1,is_pressed(P2start)),2,is_pressed(P1start)),4,is_pressed(P1shoot)),5,is_pressed(P1left)),6,is_pressed(P1right)) in
     let:8 a2 = (04 & a1) in
     let:8 a3 = (04 | a1) in
     advance (7)
@@ -30968,7 +30968,7 @@
     advance (10)
     #08D3
     #instruction: AND  03
-    let:8 a7 = updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed([dip3] lives (3,4,5,6) lsb)),1,is_pressed([dip5] lives (3,4,5,6) msb)),2,is_pressed(TILT)),3,is_pressed([dip6] extra ship at 1000)),4,is_pressed(player2 shoot)),5,is_pressed(player2 left)),6,is_pressed(player2 right)),7,is_pressed([dip7] coin info off)) in
+    let:8 a7 = updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed(Dip3_livesLow)),1,is_pressed(Dip5_livesHigh)),2,is_pressed(Tilt)),3,is_pressed(Dip6_extraShipEarly)),4,is_pressed(P2shoot)),5,is_pressed(P2left)),6,is_pressed(P2right)),7,is_pressed(Dip7_coinInfoOff)) in
     let:8 a8 = (03 & a7) in
     let:8 a9 = (03 | a7) in
     advance (7)
@@ -33477,7 +33477,7 @@
                 let:16 a108 = (1 + (a106,a107)) in
                 let:8 a109 = M[(a106,a107)] in
                 advance (10)
-                A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed([dip3] lives (3,4,5,6) lsb)),1,is_pressed([dip5] lives (3,4,5,6) msb)),2,is_pressed(TILT)),3,is_pressed([dip6] extra ship at 1000)),4,is_pressed(player2 shoot)),5,is_pressed(player2 left)),6,is_pressed(player2 right)),7,is_pressed([dip7] coin info off));
+                A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed(Dip3_livesLow)),1,is_pressed(Dip5_livesHigh)),2,is_pressed(Tilt)),3,is_pressed(Dip6_extraShipEarly)),4,is_pressed(P2shoot)),5,is_pressed(P2left)),6,is_pressed(P2right)),7,is_pressed(Dip7_coinInfoOff));
                 B := a22;
                 H := 20;
                 L := 11;
@@ -33505,7 +33505,7 @@
                 let:16 a116 = (1 + (a114,a115)) in
                 let:8 a117 = M[(a114,a115)] in
                 advance (10)
-                A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(coin entry)),1,is_pressed(player2 start)),2,is_pressed(player1 start)),4,is_pressed(player1 shoot)),5,is_pressed(player1 left)),6,is_pressed(player1 right));
+                A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(CoinEntry)),1,is_pressed(P2start)),2,is_pressed(P1start)),4,is_pressed(P1shoot)),5,is_pressed(P1left)),6,is_pressed(P1right));
                 B := a22;
                 H := 20;
                 L := 11;
@@ -33558,7 +33558,7 @@
                 let:16 a132 = (1 + (a130,a131)) in
                 let:8 a133 = M[(a130,a131)] in
                 advance (10)
-                A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed([dip3] lives (3,4,5,6) lsb)),1,is_pressed([dip5] lives (3,4,5,6) msb)),2,is_pressed(TILT)),3,is_pressed([dip6] extra ship at 1000)),4,is_pressed(player2 shoot)),5,is_pressed(player2 left)),6,is_pressed(player2 right)),7,is_pressed([dip7] coin info off));
+                A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed(Dip3_livesLow)),1,is_pressed(Dip5_livesHigh)),2,is_pressed(Tilt)),3,is_pressed(Dip6_extraShipEarly)),4,is_pressed(P2shoot)),5,is_pressed(P2left)),6,is_pressed(P2right)),7,is_pressed(Dip7_coinInfoOff));
                 B := a22;
                 H := 20;
                 L := 11;
@@ -33586,7 +33586,7 @@
                 let:16 a140 = (1 + (a138,a139)) in
                 let:8 a141 = M[(a138,a139)] in
                 advance (10)
-                A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(coin entry)),1,is_pressed(player2 start)),2,is_pressed(player1 start)),4,is_pressed(player1 shoot)),5,is_pressed(player1 left)),6,is_pressed(player1 right));
+                A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(CoinEntry)),1,is_pressed(P2start)),2,is_pressed(P1start)),4,is_pressed(P1shoot)),5,is_pressed(P1left)),6,is_pressed(P1right));
                 B := a22;
                 H := 20;
                 L := 11;
@@ -35590,7 +35590,7 @@
     advance (10)
     #0861
     #instruction: RRCA
-    let:8 a1 = updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(coin entry)),1,is_pressed(player2 start)),2,is_pressed(player1 start)),4,is_pressed(player1 shoot)),5,is_pressed(player1 left)),6,is_pressed(player1 right)) in
+    let:8 a1 = updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(CoinEntry)),1,is_pressed(P2start)),2,is_pressed(P1start)),4,is_pressed(P1shoot)),5,is_pressed(P1left)),6,is_pressed(P1right)) in
     advance (4)
     #0862
     #instruction: RRCA
@@ -38258,7 +38258,7 @@
       advance (10)
       #0941
       #instruction: AND  08
-      let:8 a22 = updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed([dip3] lives (3,4,5,6) lsb)),1,is_pressed([dip5] lives (3,4,5,6) msb)),2,is_pressed(TILT)),3,is_pressed([dip6] extra ship at 1000)),4,is_pressed(player2 shoot)),5,is_pressed(player2 left)),6,is_pressed(player2 right)),7,is_pressed([dip7] coin info off)) in
+      let:8 a22 = updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed(Dip3_livesLow)),1,is_pressed(Dip5_livesHigh)),2,is_pressed(Tilt)),3,is_pressed(Dip6_extraShipEarly)),4,is_pressed(P2shoot)),5,is_pressed(P2left)),6,is_pressed(P2right)),7,is_pressed(Dip7_coinInfoOff)) in
       let:8 a23 = (08 & a22) in
       let:8 a24 = (08 | a22) in
       advance (7)
@@ -44216,7 +44216,7 @@
       advance (10)
       #08D3
       #instruction: AND  03
-      let:8 a12 = updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed([dip3] lives (3,4,5,6) lsb)),1,is_pressed([dip5] lives (3,4,5,6) msb)),2,is_pressed(TILT)),3,is_pressed([dip6] extra ship at 1000)),4,is_pressed(player2 shoot)),5,is_pressed(player2 left)),6,is_pressed(player2 right)),7,is_pressed([dip7] coin info off)) in
+      let:8 a12 = updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed(Dip3_livesLow)),1,is_pressed(Dip5_livesHigh)),2,is_pressed(Tilt)),3,is_pressed(Dip6_extraShipEarly)),4,is_pressed(P2shoot)),5,is_pressed(P2left)),6,is_pressed(P2right)),7,is_pressed(Dip7_coinInfoOff)) in
       let:8 a13 = (03 & a12) in
       let:8 a14 = (03 | a12) in
       advance (7)
@@ -45461,7 +45461,7 @@
                 let:16 a108 = (1 + (a106,a107)) in
                 let:8 a109 = M[(a106,a107)] in
                 advance (10)
-                A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed([dip3] lives (3,4,5,6) lsb)),1,is_pressed([dip5] lives (3,4,5,6) msb)),2,is_pressed(TILT)),3,is_pressed([dip6] extra ship at 1000)),4,is_pressed(player2 shoot)),5,is_pressed(player2 left)),6,is_pressed(player2 right)),7,is_pressed([dip7] coin info off));
+                A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed(Dip3_livesLow)),1,is_pressed(Dip5_livesHigh)),2,is_pressed(Tilt)),3,is_pressed(Dip6_extraShipEarly)),4,is_pressed(P2shoot)),5,is_pressed(P2left)),6,is_pressed(P2right)),7,is_pressed(Dip7_coinInfoOff));
                 B := a22;
                 H := 20;
                 L := 11;
@@ -45489,7 +45489,7 @@
                 let:16 a116 = (1 + (a114,a115)) in
                 let:8 a117 = M[(a114,a115)] in
                 advance (10)
-                A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(coin entry)),1,is_pressed(player2 start)),2,is_pressed(player1 start)),4,is_pressed(player1 shoot)),5,is_pressed(player1 left)),6,is_pressed(player1 right));
+                A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(CoinEntry)),1,is_pressed(P2start)),2,is_pressed(P1start)),4,is_pressed(P1shoot)),5,is_pressed(P1left)),6,is_pressed(P1right));
                 B := a22;
                 H := 20;
                 L := 11;
@@ -45542,7 +45542,7 @@
                 let:16 a132 = (1 + (a130,a131)) in
                 let:8 a133 = M[(a130,a131)] in
                 advance (10)
-                A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed([dip3] lives (3,4,5,6) lsb)),1,is_pressed([dip5] lives (3,4,5,6) msb)),2,is_pressed(TILT)),3,is_pressed([dip6] extra ship at 1000)),4,is_pressed(player2 shoot)),5,is_pressed(player2 left)),6,is_pressed(player2 right)),7,is_pressed([dip7] coin info off));
+                A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed(Dip3_livesLow)),1,is_pressed(Dip5_livesHigh)),2,is_pressed(Tilt)),3,is_pressed(Dip6_extraShipEarly)),4,is_pressed(P2shoot)),5,is_pressed(P2left)),6,is_pressed(P2right)),7,is_pressed(Dip7_coinInfoOff));
                 B := a22;
                 H := 20;
                 L := 11;
@@ -45570,7 +45570,7 @@
                 let:16 a140 = (1 + (a138,a139)) in
                 let:8 a141 = M[(a138,a139)] in
                 advance (10)
-                A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(coin entry)),1,is_pressed(player2 start)),2,is_pressed(player1 start)),4,is_pressed(player1 shoot)),5,is_pressed(player1 left)),6,is_pressed(player1 right));
+                A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(CoinEntry)),1,is_pressed(P2start)),2,is_pressed(P1start)),4,is_pressed(P1shoot)),5,is_pressed(P1left)),6,is_pressed(P1right));
                 B := a22;
                 H := 20;
                 L := 11;
@@ -47515,7 +47515,7 @@
     advance (10)
     #0BB9
     #instruction: RLCA
-    let:8 a1 = updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed([dip3] lives (3,4,5,6) lsb)),1,is_pressed([dip5] lives (3,4,5,6) msb)),2,is_pressed(TILT)),3,is_pressed([dip6] extra ship at 1000)),4,is_pressed(player2 shoot)),5,is_pressed(player2 left)),6,is_pressed(player2 right)),7,is_pressed([dip7] coin info off)) in
+    let:8 a1 = updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed(Dip3_livesLow)),1,is_pressed(Dip5_livesHigh)),2,is_pressed(Tilt)),3,is_pressed(Dip6_extraShipEarly)),4,is_pressed(P2shoot)),5,is_pressed(P2left)),6,is_pressed(P2right)),7,is_pressed(Dip7_coinInfoOff)) in
     advance (4)
     #0BBA
     #instruction: JP   CY,0BC3
@@ -48492,7 +48492,7 @@
       advance (10)
       #19AE
       #instruction: AND  76
-      let:8 a6 = updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(coin entry)),1,is_pressed(player2 start)),2,is_pressed(player1 start)),4,is_pressed(player1 shoot)),5,is_pressed(player1 left)),6,is_pressed(player1 right)) in
+      let:8 a6 = updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(CoinEntry)),1,is_pressed(P2start)),2,is_pressed(P1start)),4,is_pressed(P1shoot)),5,is_pressed(P1left)),6,is_pressed(P1right)) in
       let:8 a7 = (76 & a6) in
       let:8 a8 = (76 | a6) in
       advance (7)
@@ -48751,7 +48751,7 @@
       advance (10)
       #19A3
       #instruction: AND  76
-      let:8 a103 = updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(coin entry)),1,is_pressed(player2 start)),2,is_pressed(player1 start)),4,is_pressed(player1 shoot)),5,is_pressed(player1 left)),6,is_pressed(player1 right)) in
+      let:8 a103 = updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(CoinEntry)),1,is_pressed(P2start)),2,is_pressed(P1start)),4,is_pressed(P1shoot)),5,is_pressed(P1left)),6,is_pressed(P1right)) in
       let:8 a104 = (76 & a103) in
       let:8 a105 = (76 | a103) in
       advance (7)
@@ -48804,7 +48804,7 @@
         advance (10)
         #19AE
         #instruction: AND  76
-        let:8 a125 = updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(coin entry)),1,is_pressed(player2 start)),2,is_pressed(player1 start)),4,is_pressed(player1 shoot)),5,is_pressed(player1 left)),6,is_pressed(player1 right)) in
+        let:8 a125 = updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(CoinEntry)),1,is_pressed(P2start)),2,is_pressed(P1start)),4,is_pressed(P1shoot)),5,is_pressed(P1left)),6,is_pressed(P1right)) in
         let:8 a126 = (76 & a125) in
         let:8 a127 = (76 | a125) in
         advance (7)

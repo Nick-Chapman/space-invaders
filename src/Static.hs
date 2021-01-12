@@ -114,6 +114,9 @@ startPoints =
   -- we compiler a version of the semantics which has the
   -- interrupt-logc made explicit.
   , 0x08, 0x10
+
+  -- , 0x18, 0x28 -- for RST 3/5
+
   -- game object handlers, from annotated dissasembly, mem usage
   -- any hope to detect this automatically?
   , 0x028E -- obj0 (player) handler

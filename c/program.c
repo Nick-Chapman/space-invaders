@@ -4579,6 +4579,4106 @@ Control prog_1A8E ();
 
 Control prog_1A90 ();
 
+Control op_00 ()
+{
+    instruction ( "NOP",( ( PCH << 8 ) | PCL ) );
+    advance ( 4 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_01 ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a5 = ( a4 >> 8 ) ;
+    u8 a6 = ( a4 & 0xFF ) ;
+    u8 a7 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    u16 a8 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    instruction ( "LD   BC,a7a3",a8 );
+    advance ( 10 );
+    B = a7;
+    C = a3;
+    return jump16 ( a8 );
+}
+
+Control op_02 ()
+{
+    instruction ( "LD   (BC),A",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = B ;
+    u8 a2 = C ;
+    u8 a3 = A ;
+    mem_write ( ( ( a1 << 8 ) | a2 ),a3 );
+    advance ( 7 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_03 ()
+{
+    instruction ( "INC  BC",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = B ;
+    u8 a2 = C ;
+    u16 a3 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    advance ( 5 );
+    B = ( a3 >> 8 );
+    C = ( a3 & 0xFF );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_04 ()
+{
+    instruction ( "INC  B",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = B ;
+    u16 a2 = ( ( a1 + 0x00 ) + true ) ;
+    u8 a3 = ( a1 & 0x0F ) ;
+    u8 a4 = ( 0x00 & 0x0F ) ;
+    u16 a5 = ( ( a3 + a4 ) + true ) ;
+    advance ( 5 );
+    B = ( a2 & 0xFF );
+    FlagS = ( ( ( a2 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a2 & 0xFF ) );
+    FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a2 & 0xFF ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_05 ()
+{
+    instruction ( "DEC  B",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = B ;
+    u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
+    u8 a3 = ( a1 & 0x0F ) ;
+    u8 a4 = ( ( ( u8 ) ( ~ 0x00 ) ) & 0x0F ) ;
+    u16 a5 = ( ( a3 + a4 ) + ( ! true ) ) ;
+    advance ( 5 );
+    B = ( a2 & 0xFF );
+    FlagS = ( ( ( a2 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a2 & 0xFF ) );
+    FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a2 & 0xFF ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_06 ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    instruction ( "LD   B,a3",a4 );
+    advance ( 7 );
+    B = a3;
+    return jump16 ( a4 );
+}
+
+Control op_07 ()
+{
+    instruction ( "RLCA",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    advance ( 4 );
+    A = e8_update_bit ( ( a1 << 0x01 ),0,( ( a1 >> 7 ) & 0x01 ) );
+    FlagCY = ( ( a1 >> 7 ) & 0x01 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_08 ()
+{
+    instruction ( "*NOP",( ( PCH << 8 ) | PCL ) );
+    advance ( 4 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_09 ()
+{
+    instruction ( "ADD  HL,BC",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = B ;
+    u8 a2 = C ;
+    u8 a3 = H ;
+    u8 a4 = L ;
+    u17 a5 = ( ( ( a1 << 8 ) | a2 ) + ( ( a3 << 8 ) | a4 ) ) ;
+    advance ( 10 );
+    H = ( ( a5 & 0xFFFF ) >> 8 );
+    L = ( ( a5 & 0xFFFF ) & 0xFF );
+    FlagCY = ( ( a5 >> 16 ) & 0x01 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_0A ()
+{
+    instruction ( "LD   A,(BC)",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = B ;
+    u8 a2 = C ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    advance ( 7 );
+    A = a3;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_0B ()
+{
+    instruction ( "DEC  BC",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = B ;
+    u8 a2 = C ;
+    u16 a3 = ( ( ( a1 << 8 ) | a2 ) + -1 ) ;
+    advance ( 5 );
+    B = ( a3 >> 8 );
+    C = ( a3 & 0xFF );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_0C ()
+{
+    instruction ( "INC  C",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = C ;
+    u16 a2 = ( ( a1 + 0x00 ) + true ) ;
+    u8 a3 = ( a1 & 0x0F ) ;
+    u8 a4 = ( 0x00 & 0x0F ) ;
+    u16 a5 = ( ( a3 + a4 ) + true ) ;
+    advance ( 5 );
+    C = ( a2 & 0xFF );
+    FlagS = ( ( ( a2 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a2 & 0xFF ) );
+    FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a2 & 0xFF ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_0D ()
+{
+    instruction ( "DEC  C",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = C ;
+    u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
+    u8 a3 = ( a1 & 0x0F ) ;
+    u8 a4 = ( ( ( u8 ) ( ~ 0x00 ) ) & 0x0F ) ;
+    u16 a5 = ( ( a3 + a4 ) + ( ! true ) ) ;
+    advance ( 5 );
+    C = ( a2 & 0xFF );
+    FlagS = ( ( ( a2 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a2 & 0xFF ) );
+    FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a2 & 0xFF ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_0E ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    instruction ( "LD   C,a3",a4 );
+    advance ( 7 );
+    C = a3;
+    return jump16 ( a4 );
+}
+
+Control op_0F ()
+{
+    instruction ( "RRCA",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    advance ( 4 );
+    A = e8_update_bit ( ( a1 >> 0x01 ),7,( ( a1 >> 0 ) & 0x01 ) );
+    FlagCY = ( ( a1 >> 0 ) & 0x01 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_10 ()
+{
+    instruction ( "*NOP",( ( PCH << 8 ) | PCL ) );
+    advance ( 4 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_11 ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a5 = ( a4 >> 8 ) ;
+    u8 a6 = ( a4 & 0xFF ) ;
+    u8 a7 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    u16 a8 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    instruction ( "LD   DE,a7a3",a8 );
+    advance ( 10 );
+    D = a7;
+    E = a3;
+    return jump16 ( a8 );
+}
+
+Control op_12 ()
+{
+    instruction ( "LD   (DE),A",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = D ;
+    u8 a2 = E ;
+    u8 a3 = A ;
+    mem_write ( ( ( a1 << 8 ) | a2 ),a3 );
+    advance ( 7 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_13 ()
+{
+    instruction ( "INC  DE",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = D ;
+    u8 a2 = E ;
+    u16 a3 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    advance ( 5 );
+    D = ( a3 >> 8 );
+    E = ( a3 & 0xFF );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_14 ()
+{
+    instruction ( "INC  D",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = D ;
+    u16 a2 = ( ( a1 + 0x00 ) + true ) ;
+    u8 a3 = ( a1 & 0x0F ) ;
+    u8 a4 = ( 0x00 & 0x0F ) ;
+    u16 a5 = ( ( a3 + a4 ) + true ) ;
+    advance ( 5 );
+    D = ( a2 & 0xFF );
+    FlagS = ( ( ( a2 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a2 & 0xFF ) );
+    FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a2 & 0xFF ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_15 ()
+{
+    instruction ( "DEC  D",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = D ;
+    u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
+    u8 a3 = ( a1 & 0x0F ) ;
+    u8 a4 = ( ( ( u8 ) ( ~ 0x00 ) ) & 0x0F ) ;
+    u16 a5 = ( ( a3 + a4 ) + ( ! true ) ) ;
+    advance ( 5 );
+    D = ( a2 & 0xFF );
+    FlagS = ( ( ( a2 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a2 & 0xFF ) );
+    FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a2 & 0xFF ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_16 ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    instruction ( "LD   D,a3",a4 );
+    advance ( 7 );
+    D = a3;
+    return jump16 ( a4 );
+}
+
+Control op_17 ()
+{
+    instruction ( "RAL",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    advance ( 4 );
+    A = e8_update_bit ( ( a1 << 0x01 ),0,FlagCY );
+    FlagCY = ( ( a1 >> 7 ) & 0x01 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_18 ()
+{
+    instruction ( "*NOP",( ( PCH << 8 ) | PCL ) );
+    advance ( 4 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_19 ()
+{
+    instruction ( "ADD  HL,DE",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = D ;
+    u8 a2 = E ;
+    u8 a3 = H ;
+    u8 a4 = L ;
+    u17 a5 = ( ( ( a1 << 8 ) | a2 ) + ( ( a3 << 8 ) | a4 ) ) ;
+    advance ( 10 );
+    H = ( ( a5 & 0xFFFF ) >> 8 );
+    L = ( ( a5 & 0xFFFF ) & 0xFF );
+    FlagCY = ( ( a5 >> 16 ) & 0x01 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_1A ()
+{
+    instruction ( "LD   A,(DE)",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = D ;
+    u8 a2 = E ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    advance ( 7 );
+    A = a3;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_1B ()
+{
+    instruction ( "DEC  DE",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = D ;
+    u8 a2 = E ;
+    u16 a3 = ( ( ( a1 << 8 ) | a2 ) + -1 ) ;
+    advance ( 5 );
+    D = ( a3 >> 8 );
+    E = ( a3 & 0xFF );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_1C ()
+{
+    instruction ( "INC  E",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = E ;
+    u16 a2 = ( ( a1 + 0x00 ) + true ) ;
+    u8 a3 = ( a1 & 0x0F ) ;
+    u8 a4 = ( 0x00 & 0x0F ) ;
+    u16 a5 = ( ( a3 + a4 ) + true ) ;
+    advance ( 5 );
+    E = ( a2 & 0xFF );
+    FlagS = ( ( ( a2 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a2 & 0xFF ) );
+    FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a2 & 0xFF ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_1D ()
+{
+    instruction ( "DEC  E",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = E ;
+    u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
+    u8 a3 = ( a1 & 0x0F ) ;
+    u8 a4 = ( ( ( u8 ) ( ~ 0x00 ) ) & 0x0F ) ;
+    u16 a5 = ( ( a3 + a4 ) + ( ! true ) ) ;
+    advance ( 5 );
+    E = ( a2 & 0xFF );
+    FlagS = ( ( ( a2 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a2 & 0xFF ) );
+    FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a2 & 0xFF ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_1E ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    instruction ( "LD   E,a3",a4 );
+    advance ( 7 );
+    E = a3;
+    return jump16 ( a4 );
+}
+
+Control op_1F ()
+{
+    instruction ( "RAR",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    advance ( 4 );
+    A = e8_update_bit ( ( a1 >> 0x01 ),7,FlagCY );
+    FlagCY = ( ( a1 >> 0 ) & 0x01 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_20 ()
+{
+    instruction ( "*NOP",( ( PCH << 8 ) | PCL ) );
+    advance ( 4 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_21 ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a5 = ( a4 >> 8 ) ;
+    u8 a6 = ( a4 & 0xFF ) ;
+    u8 a7 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    u16 a8 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    instruction ( "LD   HL,a7a3",a8 );
+    advance ( 10 );
+    H = a7;
+    L = a3;
+    return jump16 ( a8 );
+}
+
+Control op_22 ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a5 = ( a4 >> 8 ) ;
+    u8 a6 = ( a4 & 0xFF ) ;
+    u8 a7 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    u16 a8 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    instruction ( "LD   (a7a3),HL",a8 );
+    u8 a9 = L ;
+    mem_write ( ( ( a7 << 8 ) | a3 ),a9 );
+    u16 a10 = ( ( ( a7 << 8 ) | a3 ) + 1 ) ;
+    u8 a11 = H ;
+    mem_write ( a10,a11 );
+    advance ( 16 );
+    return jump16 ( a8 );
+}
+
+Control op_23 ()
+{
+    instruction ( "INC  HL",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    u8 a2 = L ;
+    u16 a3 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    advance ( 5 );
+    H = ( a3 >> 8 );
+    L = ( a3 & 0xFF );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_24 ()
+{
+    instruction ( "INC  H",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    u16 a2 = ( ( a1 + 0x00 ) + true ) ;
+    u8 a3 = ( a1 & 0x0F ) ;
+    u8 a4 = ( 0x00 & 0x0F ) ;
+    u16 a5 = ( ( a3 + a4 ) + true ) ;
+    advance ( 5 );
+    H = ( a2 & 0xFF );
+    FlagS = ( ( ( a2 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a2 & 0xFF ) );
+    FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a2 & 0xFF ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_25 ()
+{
+    instruction ( "DEC  H",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
+    u8 a3 = ( a1 & 0x0F ) ;
+    u8 a4 = ( ( ( u8 ) ( ~ 0x00 ) ) & 0x0F ) ;
+    u16 a5 = ( ( a3 + a4 ) + ( ! true ) ) ;
+    advance ( 5 );
+    H = ( a2 & 0xFF );
+    FlagS = ( ( ( a2 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a2 & 0xFF ) );
+    FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a2 & 0xFF ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_26 ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    instruction ( "LD   H,a3",a4 );
+    advance ( 7 );
+    H = a3;
+    return jump16 ( a4 );
+}
+
+Control op_27 ()
+{
+    instruction ( "DAA",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    u8 a2 = ( a1 & 0x0F ) ;
+    u16 a3 = ( ( a2 + 0x06 ) + false ) ;
+    u16 a4 = ( ( ( a1 >> 0x04 ) + 0x00 ) + ( ( ( ( ( ( ( ( a2 >> 1 ) & 0x01 ) || ( ( a2 >> 2 ) & 0x01 ) ) && ( ( a2 >> 3 ) & 0x01 ) ) || FlagA ) ? ( a3 & 0xFF ) : a2 ) >> 4 ) & 0x01 ) ) ;
+    u16 a5 = ( ( ( a4 & 0xFF ) + 0x06 ) + false ) ;
+    u8 a6 = ( ( ( ( ( ( ( a2 >> 1 ) & 0x01 ) || ( ( a2 >> 2 ) & 0x01 ) ) && ( ( a2 >> 3 ) & 0x01 ) ) || FlagA ) ? ( a3 & 0xFF ) : a2 ) & 0x0F ) ;
+    u8 a7 = ( ( ( ( ( ( ( ( ( a4 & 0xFF ) >> 1 ) & 0x01 ) || ( ( ( a4 & 0xFF ) >> 2 ) & 0x01 ) ) && ( ( ( a4 & 0xFF ) >> 3 ) & 0x01 ) ) || FlagCY ) ? ( a5 & 0xFF ) : ( a4 & 0xFF ) ) << 0x04 ) | a6 ) ;
+    advance ( 4 );
+    A = a7;
+    FlagS = ( ( a7 >> 7 ) & 0x01 );
+    FlagZ = ( 0 == a7 );
+    FlagA = ( ( ( ( ( ( ( ( a2 >> 1 ) & 0x01 ) || ( ( a2 >> 2 ) & 0x01 ) ) && ( ( a2 >> 3 ) & 0x01 ) ) || FlagA ) ? ( a3 & 0xFF ) : a2 ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( a7 );
+    FlagCY = ( ( ( ( ( ( ( ( ( ( a4 & 0xFF ) >> 1 ) & 0x01 ) || ( ( ( a4 & 0xFF ) >> 2 ) & 0x01 ) ) && ( ( ( a4 & 0xFF ) >> 3 ) & 0x01 ) ) || FlagCY ) ? ( a5 & 0xFF ) : ( a4 & 0xFF ) ) >> 4 ) & 0x01 ) || FlagCY );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_28 ()
+{
+    instruction ( "*NOP",( ( PCH << 8 ) | PCL ) );
+    advance ( 4 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_29 ()
+{
+    instruction ( "ADD  HL,HL",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    u8 a2 = L ;
+    u8 a3 = H ;
+    u8 a4 = L ;
+    u17 a5 = ( ( ( a1 << 8 ) | a2 ) + ( ( a3 << 8 ) | a4 ) ) ;
+    advance ( 10 );
+    H = ( ( a5 & 0xFFFF ) >> 8 );
+    L = ( ( a5 & 0xFFFF ) & 0xFF );
+    FlagCY = ( ( a5 >> 16 ) & 0x01 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_2A ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a5 = ( a4 >> 8 ) ;
+    u8 a6 = ( a4 & 0xFF ) ;
+    u8 a7 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    u16 a8 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    instruction ( "LD   HL,(a7a3)",a8 );
+    u8 a9 = e8_read_mem ( ( ( a7 << 8 ) | a3 ) ) ;
+    u16 a10 = ( ( ( a7 << 8 ) | a3 ) + 1 ) ;
+    u8 a11 = e8_read_mem ( a10 ) ;
+    advance ( 16 );
+    H = a11;
+    L = a9;
+    return jump16 ( a8 );
+}
+
+Control op_2B ()
+{
+    instruction ( "DEC  HL",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    u8 a2 = L ;
+    u16 a3 = ( ( ( a1 << 8 ) | a2 ) + -1 ) ;
+    advance ( 5 );
+    H = ( a3 >> 8 );
+    L = ( a3 & 0xFF );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_2C ()
+{
+    instruction ( "INC  L",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = L ;
+    u16 a2 = ( ( a1 + 0x00 ) + true ) ;
+    u8 a3 = ( a1 & 0x0F ) ;
+    u8 a4 = ( 0x00 & 0x0F ) ;
+    u16 a5 = ( ( a3 + a4 ) + true ) ;
+    advance ( 5 );
+    L = ( a2 & 0xFF );
+    FlagS = ( ( ( a2 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a2 & 0xFF ) );
+    FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a2 & 0xFF ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_2D ()
+{
+    instruction ( "DEC  L",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = L ;
+    u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
+    u8 a3 = ( a1 & 0x0F ) ;
+    u8 a4 = ( ( ( u8 ) ( ~ 0x00 ) ) & 0x0F ) ;
+    u16 a5 = ( ( a3 + a4 ) + ( ! true ) ) ;
+    advance ( 5 );
+    L = ( a2 & 0xFF );
+    FlagS = ( ( ( a2 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a2 & 0xFF ) );
+    FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a2 & 0xFF ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_2E ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    instruction ( "LD   L,a3",a4 );
+    advance ( 7 );
+    L = a3;
+    return jump16 ( a4 );
+}
+
+Control op_2F ()
+{
+    instruction ( "CPL",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    advance ( 4 );
+    A = ( ( u8 ) ( ~ a1 ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_30 ()
+{
+    instruction ( "*NOP",( ( PCH << 8 ) | PCL ) );
+    advance ( 4 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_31 ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a5 = ( a4 >> 8 ) ;
+    u8 a6 = ( a4 & 0xFF ) ;
+    u8 a7 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    u16 a8 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    instruction ( "LD   SP,a7a3",a8 );
+    advance ( 10 );
+    SPH = a7;
+    SPL = a3;
+    return jump16 ( a8 );
+}
+
+Control op_32 ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a5 = ( a4 >> 8 ) ;
+    u8 a6 = ( a4 & 0xFF ) ;
+    u8 a7 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    u16 a8 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    instruction ( "LD   (a7a3),A",a8 );
+    u8 a9 = A ;
+    mem_write ( ( ( a7 << 8 ) | a3 ),a9 );
+    advance ( 13 );
+    return jump16 ( a8 );
+}
+
+Control op_33 ()
+{
+    instruction ( "INC  SP",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = SPH ;
+    u8 a2 = SPL ;
+    u16 a3 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    advance ( 5 );
+    SPH = ( a3 >> 8 );
+    SPL = ( a3 & 0xFF );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_34 ()
+{
+    instruction ( "INC  (HL)",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    u8 a2 = L ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( a3 + 0x00 ) + true ) ;
+    u8 a5 = ( a3 & 0x0F ) ;
+    u8 a6 = ( 0x00 & 0x0F ) ;
+    u16 a7 = ( ( a5 + a6 ) + true ) ;
+    u8 a8 = H ;
+    u8 a9 = L ;
+    mem_write ( ( ( a8 << 8 ) | a9 ),( a4 & 0xFF ) );
+    advance ( 10 );
+    FlagS = ( ( ( a4 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a4 & 0xFF ) );
+    FlagA = ( ( ( a7 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a4 & 0xFF ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_35 ()
+{
+    instruction ( "DEC  (HL)",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    u8 a2 = L ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( a3 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
+    u8 a5 = ( a3 & 0x0F ) ;
+    u8 a6 = ( ( ( u8 ) ( ~ 0x00 ) ) & 0x0F ) ;
+    u16 a7 = ( ( a5 + a6 ) + ( ! true ) ) ;
+    u8 a8 = H ;
+    u8 a9 = L ;
+    mem_write ( ( ( a8 << 8 ) | a9 ),( a4 & 0xFF ) );
+    advance ( 10 );
+    FlagS = ( ( ( a4 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a4 & 0xFF ) );
+    FlagA = ( ( ( a7 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a4 & 0xFF ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_36 ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    instruction ( "LD   (HL),a3",a4 );
+    u8 a5 = H ;
+    u8 a6 = L ;
+    mem_write ( ( ( a5 << 8 ) | a6 ),a3 );
+    advance ( 10 );
+    return jump16 ( a4 );
+}
+
+Control op_37 ()
+{
+    instruction ( "SCF",( ( PCH << 8 ) | PCL ) );
+    advance ( 4 );
+    FlagCY = true;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_38 ()
+{
+    instruction ( "*NOP",( ( PCH << 8 ) | PCL ) );
+    advance ( 4 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_39 ()
+{
+    instruction ( "ADD  HL,SP",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = SPH ;
+    u8 a2 = SPL ;
+    u8 a3 = H ;
+    u8 a4 = L ;
+    u17 a5 = ( ( ( a1 << 8 ) | a2 ) + ( ( a3 << 8 ) | a4 ) ) ;
+    advance ( 10 );
+    H = ( ( a5 & 0xFFFF ) >> 8 );
+    L = ( ( a5 & 0xFFFF ) & 0xFF );
+    FlagCY = ( ( a5 >> 16 ) & 0x01 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_3A ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a5 = ( a4 >> 8 ) ;
+    u8 a6 = ( a4 & 0xFF ) ;
+    u8 a7 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    u16 a8 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    instruction ( "LD   A,(a7a3)",a8 );
+    u8 a9 = e8_read_mem ( ( ( a7 << 8 ) | a3 ) ) ;
+    advance ( 13 );
+    A = a9;
+    return jump16 ( a8 );
+}
+
+Control op_3B ()
+{
+    instruction ( "DEC  SP",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = SPH ;
+    u8 a2 = SPL ;
+    u16 a3 = ( ( ( a1 << 8 ) | a2 ) + -1 ) ;
+    advance ( 5 );
+    SPH = ( a3 >> 8 );
+    SPL = ( a3 & 0xFF );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_3C ()
+{
+    instruction ( "INC  A",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    u16 a2 = ( ( a1 + 0x00 ) + true ) ;
+    u8 a3 = ( a1 & 0x0F ) ;
+    u8 a4 = ( 0x00 & 0x0F ) ;
+    u16 a5 = ( ( a3 + a4 ) + true ) ;
+    advance ( 5 );
+    A = ( a2 & 0xFF );
+    FlagS = ( ( ( a2 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a2 & 0xFF ) );
+    FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a2 & 0xFF ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_3D ()
+{
+    instruction ( "DEC  A",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    u16 a2 = ( ( a1 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
+    u8 a3 = ( a1 & 0x0F ) ;
+    u8 a4 = ( ( ( u8 ) ( ~ 0x00 ) ) & 0x0F ) ;
+    u16 a5 = ( ( a3 + a4 ) + ( ! true ) ) ;
+    advance ( 5 );
+    A = ( a2 & 0xFF );
+    FlagS = ( ( ( a2 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a2 & 0xFF ) );
+    FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a2 & 0xFF ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_3E ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    instruction ( "LD   A,a3",a4 );
+    advance ( 7 );
+    A = a3;
+    return jump16 ( a4 );
+}
+
+Control op_3F ()
+{
+    instruction ( "CPC",( ( PCH << 8 ) | PCL ) );
+    advance ( 4 );
+    FlagCY = ( ! FlagCY );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_40 ()
+{
+    instruction ( "LD   B,B",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = B ;
+    advance ( 5 );
+    B = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_41 ()
+{
+    instruction ( "LD   B,C",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = C ;
+    advance ( 5 );
+    B = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_42 ()
+{
+    instruction ( "LD   B,D",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = D ;
+    advance ( 5 );
+    B = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_43 ()
+{
+    instruction ( "LD   B,E",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = E ;
+    advance ( 5 );
+    B = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_44 ()
+{
+    instruction ( "LD   B,H",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    advance ( 5 );
+    B = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_45 ()
+{
+    instruction ( "LD   B,L",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = L ;
+    advance ( 5 );
+    B = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_46 ()
+{
+    instruction ( "LD   B,(HL)",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    u8 a2 = L ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    advance ( 7 );
+    B = a3;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_47 ()
+{
+    instruction ( "LD   B,A",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    advance ( 5 );
+    B = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_48 ()
+{
+    instruction ( "LD   C,B",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = B ;
+    advance ( 5 );
+    C = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_49 ()
+{
+    instruction ( "LD   C,C",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = C ;
+    advance ( 5 );
+    C = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_4A ()
+{
+    instruction ( "LD   C,D",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = D ;
+    advance ( 5 );
+    C = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_4B ()
+{
+    instruction ( "LD   C,E",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = E ;
+    advance ( 5 );
+    C = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_4C ()
+{
+    instruction ( "LD   C,H",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    advance ( 5 );
+    C = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_4D ()
+{
+    instruction ( "LD   C,L",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = L ;
+    advance ( 5 );
+    C = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_4E ()
+{
+    instruction ( "LD   C,(HL)",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    u8 a2 = L ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    advance ( 7 );
+    C = a3;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_4F ()
+{
+    instruction ( "LD   C,A",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    advance ( 5 );
+    C = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_50 ()
+{
+    instruction ( "LD   D,B",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = B ;
+    advance ( 5 );
+    D = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_51 ()
+{
+    instruction ( "LD   D,C",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = C ;
+    advance ( 5 );
+    D = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_52 ()
+{
+    instruction ( "LD   D,D",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = D ;
+    advance ( 5 );
+    D = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_53 ()
+{
+    instruction ( "LD   D,E",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = E ;
+    advance ( 5 );
+    D = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_54 ()
+{
+    instruction ( "LD   D,H",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    advance ( 5 );
+    D = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_55 ()
+{
+    instruction ( "LD   D,L",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = L ;
+    advance ( 5 );
+    D = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_56 ()
+{
+    instruction ( "LD   D,(HL)",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    u8 a2 = L ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    advance ( 7 );
+    D = a3;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_57 ()
+{
+    instruction ( "LD   D,A",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    advance ( 5 );
+    D = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_58 ()
+{
+    instruction ( "LD   E,B",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = B ;
+    advance ( 5 );
+    E = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_59 ()
+{
+    instruction ( "LD   E,C",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = C ;
+    advance ( 5 );
+    E = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_5A ()
+{
+    instruction ( "LD   E,D",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = D ;
+    advance ( 5 );
+    E = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_5B ()
+{
+    instruction ( "LD   E,E",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = E ;
+    advance ( 5 );
+    E = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_5C ()
+{
+    instruction ( "LD   E,H",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    advance ( 5 );
+    E = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_5D ()
+{
+    instruction ( "LD   E,L",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = L ;
+    advance ( 5 );
+    E = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_5E ()
+{
+    instruction ( "LD   E,(HL)",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    u8 a2 = L ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    advance ( 7 );
+    E = a3;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_5F ()
+{
+    instruction ( "LD   E,A",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    advance ( 5 );
+    E = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_60 ()
+{
+    instruction ( "LD   H,B",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = B ;
+    advance ( 5 );
+    H = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_61 ()
+{
+    instruction ( "LD   H,C",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = C ;
+    advance ( 5 );
+    H = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_62 ()
+{
+    instruction ( "LD   H,D",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = D ;
+    advance ( 5 );
+    H = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_63 ()
+{
+    instruction ( "LD   H,E",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = E ;
+    advance ( 5 );
+    H = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_64 ()
+{
+    instruction ( "LD   H,H",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    advance ( 5 );
+    H = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_65 ()
+{
+    instruction ( "LD   H,L",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = L ;
+    advance ( 5 );
+    H = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_66 ()
+{
+    instruction ( "LD   H,(HL)",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    u8 a2 = L ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    advance ( 7 );
+    H = a3;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_67 ()
+{
+    instruction ( "LD   H,A",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    advance ( 5 );
+    H = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_68 ()
+{
+    instruction ( "LD   L,B",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = B ;
+    advance ( 5 );
+    L = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_69 ()
+{
+    instruction ( "LD   L,C",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = C ;
+    advance ( 5 );
+    L = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_6A ()
+{
+    instruction ( "LD   L,D",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = D ;
+    advance ( 5 );
+    L = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_6B ()
+{
+    instruction ( "LD   L,E",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = E ;
+    advance ( 5 );
+    L = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_6C ()
+{
+    instruction ( "LD   L,H",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    advance ( 5 );
+    L = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_6D ()
+{
+    instruction ( "LD   L,L",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = L ;
+    advance ( 5 );
+    L = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_6E ()
+{
+    instruction ( "LD   L,(HL)",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    u8 a2 = L ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    advance ( 7 );
+    L = a3;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_6F ()
+{
+    instruction ( "LD   L,A",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    advance ( 5 );
+    L = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_70 ()
+{
+    instruction ( "LD   (HL),B",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = B ;
+    u8 a2 = H ;
+    u8 a3 = L ;
+    mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
+    advance ( 7 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_71 ()
+{
+    instruction ( "LD   (HL),C",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = C ;
+    u8 a2 = H ;
+    u8 a3 = L ;
+    mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
+    advance ( 7 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_72 ()
+{
+    instruction ( "LD   (HL),D",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = D ;
+    u8 a2 = H ;
+    u8 a3 = L ;
+    mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
+    advance ( 7 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_73 ()
+{
+    instruction ( "LD   (HL),E",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = E ;
+    u8 a2 = H ;
+    u8 a3 = L ;
+    mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
+    advance ( 7 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_74 ()
+{
+    instruction ( "LD   (HL),H",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    u8 a2 = H ;
+    u8 a3 = L ;
+    mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
+    advance ( 7 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_75 ()
+{
+    instruction ( "LD   (HL),L",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = L ;
+    u8 a2 = H ;
+    u8 a3 = L ;
+    mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
+    advance ( 7 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_76 ()
+{
+    instruction ( "HLT",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u16 a3 = ( ( ( a1 << 8 ) | a2 ) + -1 ) ;
+    advance ( 7 );
+    return jump16 ( a3 );
+}
+
+Control op_77 ()
+{
+    instruction ( "LD   (HL),A",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    u8 a2 = H ;
+    u8 a3 = L ;
+    mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
+    advance ( 7 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_78 ()
+{
+    instruction ( "LD   A,B",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = B ;
+    advance ( 5 );
+    A = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_79 ()
+{
+    instruction ( "LD   A,C",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = C ;
+    advance ( 5 );
+    A = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_7A ()
+{
+    instruction ( "LD   A,D",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = D ;
+    advance ( 5 );
+    A = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_7B ()
+{
+    instruction ( "LD   A,E",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = E ;
+    advance ( 5 );
+    A = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_7C ()
+{
+    instruction ( "LD   A,H",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    advance ( 5 );
+    A = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_7D ()
+{
+    instruction ( "LD   A,L",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = L ;
+    advance ( 5 );
+    A = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_7E ()
+{
+    instruction ( "LD   A,(HL)",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    u8 a2 = L ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    advance ( 7 );
+    A = a3;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_7F ()
+{
+    instruction ( "LD   A,A",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    advance ( 5 );
+    A = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_80 ()
+{
+    instruction ( "ADD  B",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = B ;
+    u8 a2 = A ;
+    u16 a3 = ( ( a1 + a2 ) + false ) ;
+    u8 a4 = ( a1 & 0x0F ) ;
+    u8 a5 = ( a2 & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + false ) ;
+    advance ( 4 );
+    A = ( a3 & 0xFF );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ( ( a3 >> 8 ) >> 0 ) & 0x01 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_81 ()
+{
+    instruction ( "ADD  C",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = C ;
+    u8 a2 = A ;
+    u16 a3 = ( ( a1 + a2 ) + false ) ;
+    u8 a4 = ( a1 & 0x0F ) ;
+    u8 a5 = ( a2 & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + false ) ;
+    advance ( 4 );
+    A = ( a3 & 0xFF );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ( ( a3 >> 8 ) >> 0 ) & 0x01 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_82 ()
+{
+    instruction ( "ADD  D",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = D ;
+    u8 a2 = A ;
+    u16 a3 = ( ( a1 + a2 ) + false ) ;
+    u8 a4 = ( a1 & 0x0F ) ;
+    u8 a5 = ( a2 & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + false ) ;
+    advance ( 4 );
+    A = ( a3 & 0xFF );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ( ( a3 >> 8 ) >> 0 ) & 0x01 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_83 ()
+{
+    instruction ( "ADD  E",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = E ;
+    u8 a2 = A ;
+    u16 a3 = ( ( a1 + a2 ) + false ) ;
+    u8 a4 = ( a1 & 0x0F ) ;
+    u8 a5 = ( a2 & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + false ) ;
+    advance ( 4 );
+    A = ( a3 & 0xFF );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ( ( a3 >> 8 ) >> 0 ) & 0x01 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_84 ()
+{
+    instruction ( "ADD  H",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    u8 a2 = A ;
+    u16 a3 = ( ( a1 + a2 ) + false ) ;
+    u8 a4 = ( a1 & 0x0F ) ;
+    u8 a5 = ( a2 & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + false ) ;
+    advance ( 4 );
+    A = ( a3 & 0xFF );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ( ( a3 >> 8 ) >> 0 ) & 0x01 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_85 ()
+{
+    instruction ( "ADD  L",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = L ;
+    u8 a2 = A ;
+    u16 a3 = ( ( a1 + a2 ) + false ) ;
+    u8 a4 = ( a1 & 0x0F ) ;
+    u8 a5 = ( a2 & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + false ) ;
+    advance ( 4 );
+    A = ( a3 & 0xFF );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ( ( a3 >> 8 ) >> 0 ) & 0x01 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_86 ()
+{
+    instruction ( "ADD  (HL)",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    u8 a2 = L ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u8 a4 = A ;
+    u16 a5 = ( ( a3 + a4 ) + false ) ;
+    u8 a6 = ( a3 & 0x0F ) ;
+    u8 a7 = ( a4 & 0x0F ) ;
+    u16 a8 = ( ( a6 + a7 ) + false ) ;
+    advance ( 7 );
+    A = ( a5 & 0xFF );
+    FlagS = ( ( ( a5 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a5 & 0xFF ) );
+    FlagA = ( ( ( a8 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a5 & 0xFF ) );
+    FlagCY = ( ( ( a5 >> 8 ) >> 0 ) & 0x01 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_87 ()
+{
+    instruction ( "ADD  A",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    u8 a2 = A ;
+    u16 a3 = ( ( a1 + a2 ) + false ) ;
+    u8 a4 = ( a1 & 0x0F ) ;
+    u8 a5 = ( a2 & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + false ) ;
+    advance ( 4 );
+    A = ( a3 & 0xFF );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ( ( a3 >> 8 ) >> 0 ) & 0x01 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_88 ()
+{
+    instruction ( "ADC  B",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = B ;
+    u8 a2 = A ;
+    u16 a3 = ( ( a1 + a2 ) + FlagCY ) ;
+    u8 a4 = ( a1 & 0x0F ) ;
+    u8 a5 = ( a2 & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + FlagCY ) ;
+    advance ( 4 );
+    A = ( a3 & 0xFF );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ( ( a3 >> 8 ) >> 0 ) & 0x01 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_89 ()
+{
+    instruction ( "ADC  C",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = C ;
+    u8 a2 = A ;
+    u16 a3 = ( ( a1 + a2 ) + FlagCY ) ;
+    u8 a4 = ( a1 & 0x0F ) ;
+    u8 a5 = ( a2 & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + FlagCY ) ;
+    advance ( 4 );
+    A = ( a3 & 0xFF );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ( ( a3 >> 8 ) >> 0 ) & 0x01 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_8A ()
+{
+    instruction ( "ADC  D",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = D ;
+    u8 a2 = A ;
+    u16 a3 = ( ( a1 + a2 ) + FlagCY ) ;
+    u8 a4 = ( a1 & 0x0F ) ;
+    u8 a5 = ( a2 & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + FlagCY ) ;
+    advance ( 4 );
+    A = ( a3 & 0xFF );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ( ( a3 >> 8 ) >> 0 ) & 0x01 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_8B ()
+{
+    instruction ( "ADC  E",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = E ;
+    u8 a2 = A ;
+    u16 a3 = ( ( a1 + a2 ) + FlagCY ) ;
+    u8 a4 = ( a1 & 0x0F ) ;
+    u8 a5 = ( a2 & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + FlagCY ) ;
+    advance ( 4 );
+    A = ( a3 & 0xFF );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ( ( a3 >> 8 ) >> 0 ) & 0x01 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_8C ()
+{
+    instruction ( "ADC  H",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    u8 a2 = A ;
+    u16 a3 = ( ( a1 + a2 ) + FlagCY ) ;
+    u8 a4 = ( a1 & 0x0F ) ;
+    u8 a5 = ( a2 & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + FlagCY ) ;
+    advance ( 4 );
+    A = ( a3 & 0xFF );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ( ( a3 >> 8 ) >> 0 ) & 0x01 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_8D ()
+{
+    instruction ( "ADC  L",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = L ;
+    u8 a2 = A ;
+    u16 a3 = ( ( a1 + a2 ) + FlagCY ) ;
+    u8 a4 = ( a1 & 0x0F ) ;
+    u8 a5 = ( a2 & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + FlagCY ) ;
+    advance ( 4 );
+    A = ( a3 & 0xFF );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ( ( a3 >> 8 ) >> 0 ) & 0x01 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_8E ()
+{
+    instruction ( "ADC  (HL)",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    u8 a2 = L ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u8 a4 = A ;
+    u16 a5 = ( ( a3 + a4 ) + FlagCY ) ;
+    u8 a6 = ( a3 & 0x0F ) ;
+    u8 a7 = ( a4 & 0x0F ) ;
+    u16 a8 = ( ( a6 + a7 ) + FlagCY ) ;
+    advance ( 7 );
+    A = ( a5 & 0xFF );
+    FlagS = ( ( ( a5 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a5 & 0xFF ) );
+    FlagA = ( ( ( a8 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a5 & 0xFF ) );
+    FlagCY = ( ( ( a5 >> 8 ) >> 0 ) & 0x01 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_8F ()
+{
+    instruction ( "ADC  A",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    u8 a2 = A ;
+    u16 a3 = ( ( a1 + a2 ) + FlagCY ) ;
+    u8 a4 = ( a1 & 0x0F ) ;
+    u8 a5 = ( a2 & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + FlagCY ) ;
+    advance ( 4 );
+    A = ( a3 & 0xFF );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ( ( a3 >> 8 ) >> 0 ) & 0x01 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_90 ()
+{
+    instruction ( "SUB  B",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = B ;
+    u8 a2 = A ;
+    u16 a3 = ( ( a2 + ( ( u8 ) ( ~ a1 ) ) ) + ( ! false ) ) ;
+    u8 a4 = ( a2 & 0x0F ) ;
+    u8 a5 = ( ( ( u8 ) ( ~ a1 ) ) & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + ( ! false ) ) ;
+    advance ( 4 );
+    A = ( a3 & 0xFF );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_91 ()
+{
+    instruction ( "SUB  C",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = C ;
+    u8 a2 = A ;
+    u16 a3 = ( ( a2 + ( ( u8 ) ( ~ a1 ) ) ) + ( ! false ) ) ;
+    u8 a4 = ( a2 & 0x0F ) ;
+    u8 a5 = ( ( ( u8 ) ( ~ a1 ) ) & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + ( ! false ) ) ;
+    advance ( 4 );
+    A = ( a3 & 0xFF );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_92 ()
+{
+    instruction ( "SUB  D",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = D ;
+    u8 a2 = A ;
+    u16 a3 = ( ( a2 + ( ( u8 ) ( ~ a1 ) ) ) + ( ! false ) ) ;
+    u8 a4 = ( a2 & 0x0F ) ;
+    u8 a5 = ( ( ( u8 ) ( ~ a1 ) ) & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + ( ! false ) ) ;
+    advance ( 4 );
+    A = ( a3 & 0xFF );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_93 ()
+{
+    instruction ( "SUB  E",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = E ;
+    u8 a2 = A ;
+    u16 a3 = ( ( a2 + ( ( u8 ) ( ~ a1 ) ) ) + ( ! false ) ) ;
+    u8 a4 = ( a2 & 0x0F ) ;
+    u8 a5 = ( ( ( u8 ) ( ~ a1 ) ) & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + ( ! false ) ) ;
+    advance ( 4 );
+    A = ( a3 & 0xFF );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_94 ()
+{
+    instruction ( "SUB  H",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    u8 a2 = A ;
+    u16 a3 = ( ( a2 + ( ( u8 ) ( ~ a1 ) ) ) + ( ! false ) ) ;
+    u8 a4 = ( a2 & 0x0F ) ;
+    u8 a5 = ( ( ( u8 ) ( ~ a1 ) ) & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + ( ! false ) ) ;
+    advance ( 4 );
+    A = ( a3 & 0xFF );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_95 ()
+{
+    instruction ( "SUB  L",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = L ;
+    u8 a2 = A ;
+    u16 a3 = ( ( a2 + ( ( u8 ) ( ~ a1 ) ) ) + ( ! false ) ) ;
+    u8 a4 = ( a2 & 0x0F ) ;
+    u8 a5 = ( ( ( u8 ) ( ~ a1 ) ) & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + ( ! false ) ) ;
+    advance ( 4 );
+    A = ( a3 & 0xFF );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_96 ()
+{
+    instruction ( "SUB  (HL)",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    u8 a2 = L ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u8 a4 = A ;
+    u16 a5 = ( ( a4 + ( ( u8 ) ( ~ a3 ) ) ) + ( ! false ) ) ;
+    u8 a6 = ( a4 & 0x0F ) ;
+    u8 a7 = ( ( ( u8 ) ( ~ a3 ) ) & 0x0F ) ;
+    u16 a8 = ( ( a6 + a7 ) + ( ! false ) ) ;
+    advance ( 7 );
+    A = ( a5 & 0xFF );
+    FlagS = ( ( ( a5 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a5 & 0xFF ) );
+    FlagA = ( ( ( a8 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a5 & 0xFF ) );
+    FlagCY = ( ! ( ( ( a5 >> 8 ) >> 0 ) & 0x01 ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_97 ()
+{
+    instruction ( "SUB  A",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    u8 a2 = A ;
+    u16 a3 = ( ( a2 + ( ( u8 ) ( ~ a1 ) ) ) + ( ! false ) ) ;
+    u8 a4 = ( a2 & 0x0F ) ;
+    u8 a5 = ( ( ( u8 ) ( ~ a1 ) ) & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + ( ! false ) ) ;
+    advance ( 4 );
+    A = ( a3 & 0xFF );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_98 ()
+{
+    instruction ( "SBC  B",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = B ;
+    u8 a2 = A ;
+    u16 a3 = ( ( a2 + ( ( u8 ) ( ~ a1 ) ) ) + ( ! FlagCY ) ) ;
+    u8 a4 = ( a2 & 0x0F ) ;
+    u8 a5 = ( ( ( u8 ) ( ~ a1 ) ) & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + ( ! FlagCY ) ) ;
+    advance ( 4 );
+    A = ( a3 & 0xFF );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_99 ()
+{
+    instruction ( "SBC  C",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = C ;
+    u8 a2 = A ;
+    u16 a3 = ( ( a2 + ( ( u8 ) ( ~ a1 ) ) ) + ( ! FlagCY ) ) ;
+    u8 a4 = ( a2 & 0x0F ) ;
+    u8 a5 = ( ( ( u8 ) ( ~ a1 ) ) & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + ( ! FlagCY ) ) ;
+    advance ( 4 );
+    A = ( a3 & 0xFF );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_9A ()
+{
+    instruction ( "SBC  D",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = D ;
+    u8 a2 = A ;
+    u16 a3 = ( ( a2 + ( ( u8 ) ( ~ a1 ) ) ) + ( ! FlagCY ) ) ;
+    u8 a4 = ( a2 & 0x0F ) ;
+    u8 a5 = ( ( ( u8 ) ( ~ a1 ) ) & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + ( ! FlagCY ) ) ;
+    advance ( 4 );
+    A = ( a3 & 0xFF );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_9B ()
+{
+    instruction ( "SBC  E",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = E ;
+    u8 a2 = A ;
+    u16 a3 = ( ( a2 + ( ( u8 ) ( ~ a1 ) ) ) + ( ! FlagCY ) ) ;
+    u8 a4 = ( a2 & 0x0F ) ;
+    u8 a5 = ( ( ( u8 ) ( ~ a1 ) ) & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + ( ! FlagCY ) ) ;
+    advance ( 4 );
+    A = ( a3 & 0xFF );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_9C ()
+{
+    instruction ( "SBC  H",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    u8 a2 = A ;
+    u16 a3 = ( ( a2 + ( ( u8 ) ( ~ a1 ) ) ) + ( ! FlagCY ) ) ;
+    u8 a4 = ( a2 & 0x0F ) ;
+    u8 a5 = ( ( ( u8 ) ( ~ a1 ) ) & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + ( ! FlagCY ) ) ;
+    advance ( 4 );
+    A = ( a3 & 0xFF );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_9D ()
+{
+    instruction ( "SBC  L",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = L ;
+    u8 a2 = A ;
+    u16 a3 = ( ( a2 + ( ( u8 ) ( ~ a1 ) ) ) + ( ! FlagCY ) ) ;
+    u8 a4 = ( a2 & 0x0F ) ;
+    u8 a5 = ( ( ( u8 ) ( ~ a1 ) ) & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + ( ! FlagCY ) ) ;
+    advance ( 4 );
+    A = ( a3 & 0xFF );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_9E ()
+{
+    instruction ( "SBC  (HL)",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    u8 a2 = L ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u8 a4 = A ;
+    u16 a5 = ( ( a4 + ( ( u8 ) ( ~ a3 ) ) ) + ( ! FlagCY ) ) ;
+    u8 a6 = ( a4 & 0x0F ) ;
+    u8 a7 = ( ( ( u8 ) ( ~ a3 ) ) & 0x0F ) ;
+    u16 a8 = ( ( a6 + a7 ) + ( ! FlagCY ) ) ;
+    advance ( 7 );
+    A = ( a5 & 0xFF );
+    FlagS = ( ( ( a5 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a5 & 0xFF ) );
+    FlagA = ( ( ( a8 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a5 & 0xFF ) );
+    FlagCY = ( ! ( ( ( a5 >> 8 ) >> 0 ) & 0x01 ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_9F ()
+{
+    instruction ( "SBC  A",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    u8 a2 = A ;
+    u16 a3 = ( ( a2 + ( ( u8 ) ( ~ a1 ) ) ) + ( ! FlagCY ) ) ;
+    u8 a4 = ( a2 & 0x0F ) ;
+    u8 a5 = ( ( ( u8 ) ( ~ a1 ) ) & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + ( ! FlagCY ) ) ;
+    advance ( 4 );
+    A = ( a3 & 0xFF );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_A0 ()
+{
+    instruction ( "AND  B",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = B ;
+    u8 a2 = A ;
+    u8 a3 = ( a1 & a2 ) ;
+    u8 a4 = ( a1 | a2 ) ;
+    advance ( 4 );
+    A = a3;
+    FlagS = ( ( a3 >> 7 ) & 0x01 );
+    FlagZ = ( 0 == a3 );
+    FlagA = ( ( a4 >> 3 ) & 0x01 );
+    FlagP = e1_parity ( a3 );
+    FlagCY = false;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_A1 ()
+{
+    instruction ( "AND  C",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = C ;
+    u8 a2 = A ;
+    u8 a3 = ( a1 & a2 ) ;
+    u8 a4 = ( a1 | a2 ) ;
+    advance ( 4 );
+    A = a3;
+    FlagS = ( ( a3 >> 7 ) & 0x01 );
+    FlagZ = ( 0 == a3 );
+    FlagA = ( ( a4 >> 3 ) & 0x01 );
+    FlagP = e1_parity ( a3 );
+    FlagCY = false;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_A2 ()
+{
+    instruction ( "AND  D",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = D ;
+    u8 a2 = A ;
+    u8 a3 = ( a1 & a2 ) ;
+    u8 a4 = ( a1 | a2 ) ;
+    advance ( 4 );
+    A = a3;
+    FlagS = ( ( a3 >> 7 ) & 0x01 );
+    FlagZ = ( 0 == a3 );
+    FlagA = ( ( a4 >> 3 ) & 0x01 );
+    FlagP = e1_parity ( a3 );
+    FlagCY = false;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_A3 ()
+{
+    instruction ( "AND  E",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = E ;
+    u8 a2 = A ;
+    u8 a3 = ( a1 & a2 ) ;
+    u8 a4 = ( a1 | a2 ) ;
+    advance ( 4 );
+    A = a3;
+    FlagS = ( ( a3 >> 7 ) & 0x01 );
+    FlagZ = ( 0 == a3 );
+    FlagA = ( ( a4 >> 3 ) & 0x01 );
+    FlagP = e1_parity ( a3 );
+    FlagCY = false;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_A4 ()
+{
+    instruction ( "AND  H",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    u8 a2 = A ;
+    u8 a3 = ( a1 & a2 ) ;
+    u8 a4 = ( a1 | a2 ) ;
+    advance ( 4 );
+    A = a3;
+    FlagS = ( ( a3 >> 7 ) & 0x01 );
+    FlagZ = ( 0 == a3 );
+    FlagA = ( ( a4 >> 3 ) & 0x01 );
+    FlagP = e1_parity ( a3 );
+    FlagCY = false;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_A5 ()
+{
+    instruction ( "AND  L",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = L ;
+    u8 a2 = A ;
+    u8 a3 = ( a1 & a2 ) ;
+    u8 a4 = ( a1 | a2 ) ;
+    advance ( 4 );
+    A = a3;
+    FlagS = ( ( a3 >> 7 ) & 0x01 );
+    FlagZ = ( 0 == a3 );
+    FlagA = ( ( a4 >> 3 ) & 0x01 );
+    FlagP = e1_parity ( a3 );
+    FlagCY = false;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_A6 ()
+{
+    instruction ( "AND  (HL)",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    u8 a2 = L ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u8 a4 = A ;
+    u8 a5 = ( a3 & a4 ) ;
+    u8 a6 = ( a3 | a4 ) ;
+    advance ( 7 );
+    A = a5;
+    FlagS = ( ( a5 >> 7 ) & 0x01 );
+    FlagZ = ( 0 == a5 );
+    FlagA = ( ( a6 >> 3 ) & 0x01 );
+    FlagP = e1_parity ( a5 );
+    FlagCY = false;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_A7 ()
+{
+    instruction ( "AND  A",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    u8 a2 = A ;
+    u8 a3 = ( a1 & a2 ) ;
+    u8 a4 = ( a1 | a2 ) ;
+    advance ( 4 );
+    A = a3;
+    FlagS = ( ( a3 >> 7 ) & 0x01 );
+    FlagZ = ( 0 == a3 );
+    FlagA = ( ( a4 >> 3 ) & 0x01 );
+    FlagP = e1_parity ( a3 );
+    FlagCY = false;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_A8 ()
+{
+    instruction ( "XOR  B",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = B ;
+    u8 a2 = A ;
+    u8 a3 = ( a1 ^ a2 ) ;
+    advance ( 4 );
+    A = a3;
+    FlagS = ( ( a3 >> 7 ) & 0x01 );
+    FlagZ = ( 0 == a3 );
+    FlagA = false;
+    FlagP = e1_parity ( a3 );
+    FlagCY = false;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_A9 ()
+{
+    instruction ( "XOR  C",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = C ;
+    u8 a2 = A ;
+    u8 a3 = ( a1 ^ a2 ) ;
+    advance ( 4 );
+    A = a3;
+    FlagS = ( ( a3 >> 7 ) & 0x01 );
+    FlagZ = ( 0 == a3 );
+    FlagA = false;
+    FlagP = e1_parity ( a3 );
+    FlagCY = false;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_AA ()
+{
+    instruction ( "XOR  D",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = D ;
+    u8 a2 = A ;
+    u8 a3 = ( a1 ^ a2 ) ;
+    advance ( 4 );
+    A = a3;
+    FlagS = ( ( a3 >> 7 ) & 0x01 );
+    FlagZ = ( 0 == a3 );
+    FlagA = false;
+    FlagP = e1_parity ( a3 );
+    FlagCY = false;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_AB ()
+{
+    instruction ( "XOR  E",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = E ;
+    u8 a2 = A ;
+    u8 a3 = ( a1 ^ a2 ) ;
+    advance ( 4 );
+    A = a3;
+    FlagS = ( ( a3 >> 7 ) & 0x01 );
+    FlagZ = ( 0 == a3 );
+    FlagA = false;
+    FlagP = e1_parity ( a3 );
+    FlagCY = false;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_AC ()
+{
+    instruction ( "XOR  H",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    u8 a2 = A ;
+    u8 a3 = ( a1 ^ a2 ) ;
+    advance ( 4 );
+    A = a3;
+    FlagS = ( ( a3 >> 7 ) & 0x01 );
+    FlagZ = ( 0 == a3 );
+    FlagA = false;
+    FlagP = e1_parity ( a3 );
+    FlagCY = false;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_AD ()
+{
+    instruction ( "XOR  L",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = L ;
+    u8 a2 = A ;
+    u8 a3 = ( a1 ^ a2 ) ;
+    advance ( 4 );
+    A = a3;
+    FlagS = ( ( a3 >> 7 ) & 0x01 );
+    FlagZ = ( 0 == a3 );
+    FlagA = false;
+    FlagP = e1_parity ( a3 );
+    FlagCY = false;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_AE ()
+{
+    instruction ( "XOR  (HL)",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    u8 a2 = L ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u8 a4 = A ;
+    u8 a5 = ( a3 ^ a4 ) ;
+    advance ( 7 );
+    A = a5;
+    FlagS = ( ( a5 >> 7 ) & 0x01 );
+    FlagZ = ( 0 == a5 );
+    FlagA = false;
+    FlagP = e1_parity ( a5 );
+    FlagCY = false;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_AF ()
+{
+    instruction ( "XOR  A",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    u8 a2 = A ;
+    u8 a3 = ( a1 ^ a2 ) ;
+    advance ( 4 );
+    A = a3;
+    FlagS = ( ( a3 >> 7 ) & 0x01 );
+    FlagZ = ( 0 == a3 );
+    FlagA = false;
+    FlagP = e1_parity ( a3 );
+    FlagCY = false;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_B0 ()
+{
+    instruction ( "OR   B",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = B ;
+    u8 a2 = A ;
+    u8 a3 = ( a1 | a2 ) ;
+    advance ( 4 );
+    A = a3;
+    FlagS = ( ( a3 >> 7 ) & 0x01 );
+    FlagZ = ( 0 == a3 );
+    FlagA = false;
+    FlagP = e1_parity ( a3 );
+    FlagCY = false;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_B1 ()
+{
+    instruction ( "OR   C",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = C ;
+    u8 a2 = A ;
+    u8 a3 = ( a1 | a2 ) ;
+    advance ( 4 );
+    A = a3;
+    FlagS = ( ( a3 >> 7 ) & 0x01 );
+    FlagZ = ( 0 == a3 );
+    FlagA = false;
+    FlagP = e1_parity ( a3 );
+    FlagCY = false;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_B2 ()
+{
+    instruction ( "OR   D",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = D ;
+    u8 a2 = A ;
+    u8 a3 = ( a1 | a2 ) ;
+    advance ( 4 );
+    A = a3;
+    FlagS = ( ( a3 >> 7 ) & 0x01 );
+    FlagZ = ( 0 == a3 );
+    FlagA = false;
+    FlagP = e1_parity ( a3 );
+    FlagCY = false;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_B3 ()
+{
+    instruction ( "OR   E",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = E ;
+    u8 a2 = A ;
+    u8 a3 = ( a1 | a2 ) ;
+    advance ( 4 );
+    A = a3;
+    FlagS = ( ( a3 >> 7 ) & 0x01 );
+    FlagZ = ( 0 == a3 );
+    FlagA = false;
+    FlagP = e1_parity ( a3 );
+    FlagCY = false;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_B4 ()
+{
+    instruction ( "OR   H",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    u8 a2 = A ;
+    u8 a3 = ( a1 | a2 ) ;
+    advance ( 4 );
+    A = a3;
+    FlagS = ( ( a3 >> 7 ) & 0x01 );
+    FlagZ = ( 0 == a3 );
+    FlagA = false;
+    FlagP = e1_parity ( a3 );
+    FlagCY = false;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_B5 ()
+{
+    instruction ( "OR   L",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = L ;
+    u8 a2 = A ;
+    u8 a3 = ( a1 | a2 ) ;
+    advance ( 4 );
+    A = a3;
+    FlagS = ( ( a3 >> 7 ) & 0x01 );
+    FlagZ = ( 0 == a3 );
+    FlagA = false;
+    FlagP = e1_parity ( a3 );
+    FlagCY = false;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_B6 ()
+{
+    instruction ( "OR   (HL)",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    u8 a2 = L ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u8 a4 = A ;
+    u8 a5 = ( a3 | a4 ) ;
+    advance ( 7 );
+    A = a5;
+    FlagS = ( ( a5 >> 7 ) & 0x01 );
+    FlagZ = ( 0 == a5 );
+    FlagA = false;
+    FlagP = e1_parity ( a5 );
+    FlagCY = false;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_B7 ()
+{
+    instruction ( "OR   A",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    u8 a2 = A ;
+    u8 a3 = ( a1 | a2 ) ;
+    advance ( 4 );
+    A = a3;
+    FlagS = ( ( a3 >> 7 ) & 0x01 );
+    FlagZ = ( 0 == a3 );
+    FlagA = false;
+    FlagP = e1_parity ( a3 );
+    FlagCY = false;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_B8 ()
+{
+    instruction ( "CP   B",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    u8 a2 = B ;
+    u16 a3 = ( ( a1 + ( ( u8 ) ( ~ a2 ) ) ) + ( ! false ) ) ;
+    u8 a4 = ( a1 & 0x0F ) ;
+    u8 a5 = ( ( ( u8 ) ( ~ a2 ) ) & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + ( ! false ) ) ;
+    advance ( 4 );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_B9 ()
+{
+    instruction ( "CP   C",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    u8 a2 = C ;
+    u16 a3 = ( ( a1 + ( ( u8 ) ( ~ a2 ) ) ) + ( ! false ) ) ;
+    u8 a4 = ( a1 & 0x0F ) ;
+    u8 a5 = ( ( ( u8 ) ( ~ a2 ) ) & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + ( ! false ) ) ;
+    advance ( 4 );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_BA ()
+{
+    instruction ( "CP   D",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    u8 a2 = D ;
+    u16 a3 = ( ( a1 + ( ( u8 ) ( ~ a2 ) ) ) + ( ! false ) ) ;
+    u8 a4 = ( a1 & 0x0F ) ;
+    u8 a5 = ( ( ( u8 ) ( ~ a2 ) ) & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + ( ! false ) ) ;
+    advance ( 4 );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_BB ()
+{
+    instruction ( "CP   E",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    u8 a2 = E ;
+    u16 a3 = ( ( a1 + ( ( u8 ) ( ~ a2 ) ) ) + ( ! false ) ) ;
+    u8 a4 = ( a1 & 0x0F ) ;
+    u8 a5 = ( ( ( u8 ) ( ~ a2 ) ) & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + ( ! false ) ) ;
+    advance ( 4 );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_BC ()
+{
+    instruction ( "CP   H",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    u8 a2 = H ;
+    u16 a3 = ( ( a1 + ( ( u8 ) ( ~ a2 ) ) ) + ( ! false ) ) ;
+    u8 a4 = ( a1 & 0x0F ) ;
+    u8 a5 = ( ( ( u8 ) ( ~ a2 ) ) & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + ( ! false ) ) ;
+    advance ( 4 );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_BD ()
+{
+    instruction ( "CP   L",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    u8 a2 = L ;
+    u16 a3 = ( ( a1 + ( ( u8 ) ( ~ a2 ) ) ) + ( ! false ) ) ;
+    u8 a4 = ( a1 & 0x0F ) ;
+    u8 a5 = ( ( ( u8 ) ( ~ a2 ) ) & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + ( ! false ) ) ;
+    advance ( 4 );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_BE ()
+{
+    instruction ( "CP   (HL)",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    u8 a2 = H ;
+    u8 a3 = L ;
+    u8 a4 = e8_read_mem ( ( ( a2 << 8 ) | a3 ) ) ;
+    u16 a5 = ( ( a1 + ( ( u8 ) ( ~ a4 ) ) ) + ( ! false ) ) ;
+    u8 a6 = ( a1 & 0x0F ) ;
+    u8 a7 = ( ( ( u8 ) ( ~ a4 ) ) & 0x0F ) ;
+    u16 a8 = ( ( a6 + a7 ) + ( ! false ) ) ;
+    advance ( 7 );
+    FlagS = ( ( ( a5 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a5 & 0xFF ) );
+    FlagA = ( ( ( a8 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a5 & 0xFF ) );
+    FlagCY = ( ! ( ( ( a5 >> 8 ) >> 0 ) & 0x01 ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_BF ()
+{
+    instruction ( "CP   A",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    u8 a2 = A ;
+    u16 a3 = ( ( a1 + ( ( u8 ) ( ~ a2 ) ) ) + ( ! false ) ) ;
+    u8 a4 = ( a1 & 0x0F ) ;
+    u8 a5 = ( ( ( u8 ) ( ~ a2 ) ) & 0x0F ) ;
+    u16 a6 = ( ( a4 + a5 ) + ( ! false ) ) ;
+    advance ( 4 );
+    FlagS = ( ( ( a3 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a3 & 0xFF ) );
+    FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a3 & 0xFF ) );
+    FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_C0 ()
+{
+    instruction ( "RET  NZ",( ( PCH << 8 ) | PCL ) );
+    if (( ! FlagZ ))
+    {
+        u8 a1 = SPH ;
+        u8 a2 = SPL ;
+        u16 a3 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+        u8 a4 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+        u8 a5 = ( a3 >> 8 ) ;
+        u8 a6 = ( a3 & 0xFF ) ;
+        u16 a7 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+        u8 a8 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+        advance ( 11 );
+        SPH = ( a7 >> 8 );
+        SPL = ( a7 & 0xFF );
+        return jump16 ( ( ( a8 << 8 ) | a4 ) );
+    }
+    else
+    {
+        advance ( 5 );
+        return jump16 ( ( ( PCH << 8 ) | PCL ) );
+    }
+}
+
+Control op_C1 ()
+{
+    instruction ( "POP  BC",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = SPH ;
+    u8 a2 = SPL ;
+    u16 a3 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a4 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u8 a5 = ( a3 >> 8 ) ;
+    u8 a6 = ( a3 & 0xFF ) ;
+    u16 a7 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    u8 a8 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    advance ( 10 );
+    B = a8;
+    C = a4;
+    SPH = ( a7 >> 8 );
+    SPL = ( a7 & 0xFF );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_C2 ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a5 = ( a4 >> 8 ) ;
+    u8 a6 = ( a4 & 0xFF ) ;
+    u8 a7 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    u16 a8 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    instruction ( "JP   NZ,a7a3",a8 );
+    if (( ! FlagZ ))
+    {
+        advance ( 10 );
+        return jump16 ( ( ( a7 << 8 ) | a3 ) );
+    }
+    else
+    {
+        advance ( 10 );
+        return jump16 ( a8 );
+    }
+}
+
+Control op_C3 ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a5 = ( a4 >> 8 ) ;
+    u8 a6 = ( a4 & 0xFF ) ;
+    u8 a7 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    u16 a8 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    instruction ( "JP   a7a3",a8 );
+    advance ( 10 );
+    return jump16 ( ( ( a7 << 8 ) | a3 ) );
+}
+
+Control op_C4 ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a5 = ( a4 >> 8 ) ;
+    u8 a6 = ( a4 & 0xFF ) ;
+    u8 a7 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    u16 a8 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    instruction ( "CALL NZ,a7a3",a8 );
+    if (( ! FlagZ ))
+    {
+        u8 a9 = ( a8 >> 8 ) ;
+        u8 a10 = ( a8 & 0xFF ) ;
+        u8 a11 = SPH ;
+        u8 a12 = SPL ;
+        u16 a13 = ( ( ( a11 << 8 ) | a12 ) + -1 ) ;
+        mem_write ( a13,a9 );
+        u8 a14 = ( a13 >> 8 ) ;
+        u8 a15 = ( a13 & 0xFF ) ;
+        u16 a16 = ( ( ( a14 << 8 ) | a15 ) + -1 ) ;
+        mem_write ( a16,a10 );
+        // #mark-return: (a9,a10)
+        advance ( 17 );
+        SPH = ( a16 >> 8 );
+        SPL = ( a16 & 0xFF );
+        return jump16 ( ( ( a7 << 8 ) | a3 ) );
+    }
+    else
+    {
+        advance ( 11 );
+        return jump16 ( a8 );
+    }
+}
+
+Control op_C5 ()
+{
+    instruction ( "PUSH BC",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = B ;
+    u8 a2 = C ;
+    u8 a3 = SPH ;
+    u8 a4 = SPL ;
+    u16 a5 = ( ( ( a3 << 8 ) | a4 ) + -1 ) ;
+    mem_write ( a5,a1 );
+    u8 a6 = ( a5 >> 8 ) ;
+    u8 a7 = ( a5 & 0xFF ) ;
+    u16 a8 = ( ( ( a6 << 8 ) | a7 ) + -1 ) ;
+    mem_write ( a8,a2 );
+    advance ( 11 );
+    SPH = ( a8 >> 8 );
+    SPL = ( a8 & 0xFF );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_C6 ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    instruction ( "ADD  a3",a4 );
+    u8 a5 = A ;
+    u16 a6 = ( ( a3 + a5 ) + false ) ;
+    u8 a7 = ( a3 & 0x0F ) ;
+    u8 a8 = ( a5 & 0x0F ) ;
+    u16 a9 = ( ( a7 + a8 ) + false ) ;
+    advance ( 7 );
+    A = ( a6 & 0xFF );
+    FlagS = ( ( ( a6 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a6 & 0xFF ) );
+    FlagA = ( ( ( a9 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a6 & 0xFF ) );
+    FlagCY = ( ( ( a6 >> 8 ) >> 0 ) & 0x01 );
+    return jump16 ( a4 );
+}
+
+Control op_C7 ()
+{
+    instruction ( "RST  0",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = PCH ;
+    u8 a2 = SPH ;
+    u8 a3 = SPL ;
+    u16 a4 = ( ( ( a2 << 8 ) | a3 ) + -1 ) ;
+    mem_write ( a4,a1 );
+    u8 a5 = PCL ;
+    u8 a6 = ( a4 >> 8 ) ;
+    u8 a7 = ( a4 & 0xFF ) ;
+    u16 a8 = ( ( ( a6 << 8 ) | a7 ) + -1 ) ;
+    mem_write ( a8,a5 );
+    advance ( 4 );
+    SPH = ( a8 >> 8 );
+    SPL = ( a8 & 0xFF );
+    return jumpDirect ( 0x0000,prog_0000 );
+}
+
+Control op_C8 ()
+{
+    instruction ( "RET  Z",( ( PCH << 8 ) | PCL ) );
+    if (FlagZ)
+    {
+        u8 a1 = SPH ;
+        u8 a2 = SPL ;
+        u16 a3 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+        u8 a4 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+        u8 a5 = ( a3 >> 8 ) ;
+        u8 a6 = ( a3 & 0xFF ) ;
+        u16 a7 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+        u8 a8 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+        advance ( 11 );
+        SPH = ( a7 >> 8 );
+        SPL = ( a7 & 0xFF );
+        return jump16 ( ( ( a8 << 8 ) | a4 ) );
+    }
+    else
+    {
+        advance ( 5 );
+        return jump16 ( ( ( PCH << 8 ) | PCL ) );
+    }
+}
+
+Control op_C9 ()
+{
+    instruction ( "RET",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = SPH ;
+    u8 a2 = SPL ;
+    u16 a3 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a4 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u8 a5 = ( a3 >> 8 ) ;
+    u8 a6 = ( a3 & 0xFF ) ;
+    u16 a7 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    u8 a8 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    advance ( 10 );
+    SPH = ( a7 >> 8 );
+    SPL = ( a7 & 0xFF );
+    return jump16 ( ( ( a8 << 8 ) | a4 ) );
+}
+
+Control op_CA ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a5 = ( a4 >> 8 ) ;
+    u8 a6 = ( a4 & 0xFF ) ;
+    u8 a7 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    u16 a8 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    instruction ( "JP   Z,a7a3",a8 );
+    if (FlagZ)
+    {
+        advance ( 10 );
+        return jump16 ( ( ( a7 << 8 ) | a3 ) );
+    }
+    else
+    {
+        advance ( 10 );
+        return jump16 ( a8 );
+    }
+}
+
+Control op_CB ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a5 = ( a4 >> 8 ) ;
+    u8 a6 = ( a4 & 0xFF ) ;
+    u8 a7 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    u16 a8 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    instruction ( "*JP  a7a3",a8 );
+    advance ( 10 );
+    return jump16 ( ( ( a7 << 8 ) | a3 ) );
+}
+
+Control op_CC ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a5 = ( a4 >> 8 ) ;
+    u8 a6 = ( a4 & 0xFF ) ;
+    u8 a7 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    u16 a8 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    instruction ( "CALL Z,a7a3",a8 );
+    if (FlagZ)
+    {
+        u8 a9 = ( a8 >> 8 ) ;
+        u8 a10 = ( a8 & 0xFF ) ;
+        u8 a11 = SPH ;
+        u8 a12 = SPL ;
+        u16 a13 = ( ( ( a11 << 8 ) | a12 ) + -1 ) ;
+        mem_write ( a13,a9 );
+        u8 a14 = ( a13 >> 8 ) ;
+        u8 a15 = ( a13 & 0xFF ) ;
+        u16 a16 = ( ( ( a14 << 8 ) | a15 ) + -1 ) ;
+        mem_write ( a16,a10 );
+        // #mark-return: (a9,a10)
+        advance ( 17 );
+        SPH = ( a16 >> 8 );
+        SPL = ( a16 & 0xFF );
+        return jump16 ( ( ( a7 << 8 ) | a3 ) );
+    }
+    else
+    {
+        advance ( 11 );
+        return jump16 ( a8 );
+    }
+}
+
+Control op_CD ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a5 = ( a4 >> 8 ) ;
+    u8 a6 = ( a4 & 0xFF ) ;
+    u8 a7 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    u16 a8 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    instruction ( "CALL a7a3",a8 );
+    u8 a9 = ( a8 >> 8 ) ;
+    u8 a10 = ( a8 & 0xFF ) ;
+    u8 a11 = SPH ;
+    u8 a12 = SPL ;
+    u16 a13 = ( ( ( a11 << 8 ) | a12 ) + -1 ) ;
+    mem_write ( a13,a9 );
+    u8 a14 = ( a13 >> 8 ) ;
+    u8 a15 = ( a13 & 0xFF ) ;
+    u16 a16 = ( ( ( a14 << 8 ) | a15 ) + -1 ) ;
+    mem_write ( a16,a10 );
+    // #mark-return: (a9,a10)
+    advance ( 17 );
+    SPH = ( a16 >> 8 );
+    SPL = ( a16 & 0xFF );
+    return jump16 ( ( ( a7 << 8 ) | a3 ) );
+}
+
+Control op_CE ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    instruction ( "ADC  a3",a4 );
+    u8 a5 = A ;
+    u16 a6 = ( ( a3 + a5 ) + FlagCY ) ;
+    u8 a7 = ( a3 & 0x0F ) ;
+    u8 a8 = ( a5 & 0x0F ) ;
+    u16 a9 = ( ( a7 + a8 ) + FlagCY ) ;
+    advance ( 7 );
+    A = ( a6 & 0xFF );
+    FlagS = ( ( ( a6 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a6 & 0xFF ) );
+    FlagA = ( ( ( a9 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a6 & 0xFF ) );
+    FlagCY = ( ( ( a6 >> 8 ) >> 0 ) & 0x01 );
+    return jump16 ( a4 );
+}
+
+Control op_CF ()
+{
+    instruction ( "RST  1",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = PCH ;
+    u8 a2 = SPH ;
+    u8 a3 = SPL ;
+    u16 a4 = ( ( ( a2 << 8 ) | a3 ) + -1 ) ;
+    mem_write ( a4,a1 );
+    u8 a5 = PCL ;
+    u8 a6 = ( a4 >> 8 ) ;
+    u8 a7 = ( a4 & 0xFF ) ;
+    u16 a8 = ( ( ( a6 << 8 ) | a7 ) + -1 ) ;
+    mem_write ( a8,a5 );
+    advance ( 4 );
+    SPH = ( a8 >> 8 );
+    SPL = ( a8 & 0xFF );
+    return jumpDirect ( 0x0008,prog_0008 );
+}
+
+Control op_D0 ()
+{
+    instruction ( "RET  NC",( ( PCH << 8 ) | PCL ) );
+    if (( ! FlagCY ))
+    {
+        u8 a1 = SPH ;
+        u8 a2 = SPL ;
+        u16 a3 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+        u8 a4 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+        u8 a5 = ( a3 >> 8 ) ;
+        u8 a6 = ( a3 & 0xFF ) ;
+        u16 a7 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+        u8 a8 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+        advance ( 11 );
+        SPH = ( a7 >> 8 );
+        SPL = ( a7 & 0xFF );
+        return jump16 ( ( ( a8 << 8 ) | a4 ) );
+    }
+    else
+    {
+        advance ( 5 );
+        return jump16 ( ( ( PCH << 8 ) | PCL ) );
+    }
+}
+
+Control op_D1 ()
+{
+    instruction ( "POP  DE",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = SPH ;
+    u8 a2 = SPL ;
+    u16 a3 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a4 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u8 a5 = ( a3 >> 8 ) ;
+    u8 a6 = ( a3 & 0xFF ) ;
+    u16 a7 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    u8 a8 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    advance ( 10 );
+    D = a8;
+    E = a4;
+    SPH = ( a7 >> 8 );
+    SPL = ( a7 & 0xFF );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_D2 ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a5 = ( a4 >> 8 ) ;
+    u8 a6 = ( a4 & 0xFF ) ;
+    u8 a7 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    u16 a8 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    instruction ( "JP   NC,a7a3",a8 );
+    if (( ! FlagCY ))
+    {
+        advance ( 10 );
+        return jump16 ( ( ( a7 << 8 ) | a3 ) );
+    }
+    else
+    {
+        advance ( 10 );
+        return jump16 ( a8 );
+    }
+}
+
+Control op_D4 ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a5 = ( a4 >> 8 ) ;
+    u8 a6 = ( a4 & 0xFF ) ;
+    u8 a7 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    u16 a8 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    instruction ( "CALL NC,a7a3",a8 );
+    if (( ! FlagCY ))
+    {
+        u8 a9 = ( a8 >> 8 ) ;
+        u8 a10 = ( a8 & 0xFF ) ;
+        u8 a11 = SPH ;
+        u8 a12 = SPL ;
+        u16 a13 = ( ( ( a11 << 8 ) | a12 ) + -1 ) ;
+        mem_write ( a13,a9 );
+        u8 a14 = ( a13 >> 8 ) ;
+        u8 a15 = ( a13 & 0xFF ) ;
+        u16 a16 = ( ( ( a14 << 8 ) | a15 ) + -1 ) ;
+        mem_write ( a16,a10 );
+        // #mark-return: (a9,a10)
+        advance ( 17 );
+        SPH = ( a16 >> 8 );
+        SPL = ( a16 & 0xFF );
+        return jump16 ( ( ( a7 << 8 ) | a3 ) );
+    }
+    else
+    {
+        advance ( 11 );
+        return jump16 ( a8 );
+    }
+}
+
+Control op_D5 ()
+{
+    instruction ( "PUSH DE",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = D ;
+    u8 a2 = E ;
+    u8 a3 = SPH ;
+    u8 a4 = SPL ;
+    u16 a5 = ( ( ( a3 << 8 ) | a4 ) + -1 ) ;
+    mem_write ( a5,a1 );
+    u8 a6 = ( a5 >> 8 ) ;
+    u8 a7 = ( a5 & 0xFF ) ;
+    u16 a8 = ( ( ( a6 << 8 ) | a7 ) + -1 ) ;
+    mem_write ( a8,a2 );
+    advance ( 11 );
+    SPH = ( a8 >> 8 );
+    SPL = ( a8 & 0xFF );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_D6 ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    instruction ( "SUB  a3",a4 );
+    u8 a5 = A ;
+    u16 a6 = ( ( a5 + ( ( u8 ) ( ~ a3 ) ) ) + ( ! false ) ) ;
+    u8 a7 = ( a5 & 0x0F ) ;
+    u8 a8 = ( ( ( u8 ) ( ~ a3 ) ) & 0x0F ) ;
+    u16 a9 = ( ( a7 + a8 ) + ( ! false ) ) ;
+    advance ( 7 );
+    A = ( a6 & 0xFF );
+    FlagS = ( ( ( a6 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a6 & 0xFF ) );
+    FlagA = ( ( ( a9 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a6 & 0xFF ) );
+    FlagCY = ( ! ( ( ( a6 >> 8 ) >> 0 ) & 0x01 ) );
+    return jump16 ( a4 );
+}
+
+Control op_D7 ()
+{
+    instruction ( "RST  2",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = PCH ;
+    u8 a2 = SPH ;
+    u8 a3 = SPL ;
+    u16 a4 = ( ( ( a2 << 8 ) | a3 ) + -1 ) ;
+    mem_write ( a4,a1 );
+    u8 a5 = PCL ;
+    u8 a6 = ( a4 >> 8 ) ;
+    u8 a7 = ( a4 & 0xFF ) ;
+    u16 a8 = ( ( ( a6 << 8 ) | a7 ) + -1 ) ;
+    mem_write ( a8,a5 );
+    advance ( 4 );
+    SPH = ( a8 >> 8 );
+    SPL = ( a8 & 0xFF );
+    return jumpDirect ( 0x0010,prog_0010 );
+}
+
+Control op_D8 ()
+{
+    instruction ( "RET  CY",( ( PCH << 8 ) | PCL ) );
+    if (FlagCY)
+    {
+        u8 a1 = SPH ;
+        u8 a2 = SPL ;
+        u16 a3 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+        u8 a4 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+        u8 a5 = ( a3 >> 8 ) ;
+        u8 a6 = ( a3 & 0xFF ) ;
+        u16 a7 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+        u8 a8 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+        advance ( 11 );
+        SPH = ( a7 >> 8 );
+        SPL = ( a7 & 0xFF );
+        return jump16 ( ( ( a8 << 8 ) | a4 ) );
+    }
+    else
+    {
+        advance ( 5 );
+        return jump16 ( ( ( PCH << 8 ) | PCL ) );
+    }
+}
+
+Control op_D9 ()
+{
+    instruction ( "*RET",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = SPH ;
+    u8 a2 = SPL ;
+    u16 a3 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a4 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u8 a5 = ( a3 >> 8 ) ;
+    u8 a6 = ( a3 & 0xFF ) ;
+    u16 a7 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    u8 a8 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    advance ( 10 );
+    SPH = ( a7 >> 8 );
+    SPL = ( a7 & 0xFF );
+    return jump16 ( ( ( a8 << 8 ) | a4 ) );
+}
+
+Control op_DA ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a5 = ( a4 >> 8 ) ;
+    u8 a6 = ( a4 & 0xFF ) ;
+    u8 a7 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    u16 a8 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    instruction ( "JP   CY,a7a3",a8 );
+    if (FlagCY)
+    {
+        advance ( 10 );
+        return jump16 ( ( ( a7 << 8 ) | a3 ) );
+    }
+    else
+    {
+        advance ( 10 );
+        return jump16 ( a8 );
+    }
+}
+
+Control op_DC ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a5 = ( a4 >> 8 ) ;
+    u8 a6 = ( a4 & 0xFF ) ;
+    u8 a7 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    u16 a8 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    instruction ( "CALL CY,a7a3",a8 );
+    if (FlagCY)
+    {
+        u8 a9 = ( a8 >> 8 ) ;
+        u8 a10 = ( a8 & 0xFF ) ;
+        u8 a11 = SPH ;
+        u8 a12 = SPL ;
+        u16 a13 = ( ( ( a11 << 8 ) | a12 ) + -1 ) ;
+        mem_write ( a13,a9 );
+        u8 a14 = ( a13 >> 8 ) ;
+        u8 a15 = ( a13 & 0xFF ) ;
+        u16 a16 = ( ( ( a14 << 8 ) | a15 ) + -1 ) ;
+        mem_write ( a16,a10 );
+        // #mark-return: (a9,a10)
+        advance ( 17 );
+        SPH = ( a16 >> 8 );
+        SPL = ( a16 & 0xFF );
+        return jump16 ( ( ( a7 << 8 ) | a3 ) );
+    }
+    else
+    {
+        advance ( 11 );
+        return jump16 ( a8 );
+    }
+}
+
+Control op_DD ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a5 = ( a4 >> 8 ) ;
+    u8 a6 = ( a4 & 0xFF ) ;
+    u8 a7 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    u16 a8 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    instruction ( "*CAL a7a3",a8 );
+    u8 a9 = ( a8 >> 8 ) ;
+    u8 a10 = ( a8 & 0xFF ) ;
+    u8 a11 = SPH ;
+    u8 a12 = SPL ;
+    u16 a13 = ( ( ( a11 << 8 ) | a12 ) + -1 ) ;
+    mem_write ( a13,a9 );
+    u8 a14 = ( a13 >> 8 ) ;
+    u8 a15 = ( a13 & 0xFF ) ;
+    u16 a16 = ( ( ( a14 << 8 ) | a15 ) + -1 ) ;
+    mem_write ( a16,a10 );
+    // #mark-return: (a9,a10)
+    advance ( 17 );
+    SPH = ( a16 >> 8 );
+    SPL = ( a16 & 0xFF );
+    return jump16 ( ( ( a7 << 8 ) | a3 ) );
+}
+
+Control op_DE ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    instruction ( "SBC  a3",a4 );
+    u8 a5 = A ;
+    u16 a6 = ( ( a5 + ( ( u8 ) ( ~ a3 ) ) ) + ( ! FlagCY ) ) ;
+    u8 a7 = ( a5 & 0x0F ) ;
+    u8 a8 = ( ( ( u8 ) ( ~ a3 ) ) & 0x0F ) ;
+    u16 a9 = ( ( a7 + a8 ) + ( ! FlagCY ) ) ;
+    advance ( 7 );
+    A = ( a6 & 0xFF );
+    FlagS = ( ( ( a6 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a6 & 0xFF ) );
+    FlagA = ( ( ( a9 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a6 & 0xFF ) );
+    FlagCY = ( ! ( ( ( a6 >> 8 ) >> 0 ) & 0x01 ) );
+    return jump16 ( a4 );
+}
+
+Control op_E0 ()
+{
+    instruction ( "RET  PO",( ( PCH << 8 ) | PCL ) );
+    if (( ! FlagP ))
+    {
+        u8 a1 = SPH ;
+        u8 a2 = SPL ;
+        u16 a3 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+        u8 a4 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+        u8 a5 = ( a3 >> 8 ) ;
+        u8 a6 = ( a3 & 0xFF ) ;
+        u16 a7 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+        u8 a8 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+        advance ( 11 );
+        SPH = ( a7 >> 8 );
+        SPL = ( a7 & 0xFF );
+        return jump16 ( ( ( a8 << 8 ) | a4 ) );
+    }
+    else
+    {
+        advance ( 5 );
+        return jump16 ( ( ( PCH << 8 ) | PCL ) );
+    }
+}
+
+Control op_E1 ()
+{
+    instruction ( "POP  HL",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = SPH ;
+    u8 a2 = SPL ;
+    u16 a3 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a4 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u8 a5 = ( a3 >> 8 ) ;
+    u8 a6 = ( a3 & 0xFF ) ;
+    u16 a7 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    u8 a8 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    advance ( 10 );
+    H = a8;
+    L = a4;
+    SPH = ( a7 >> 8 );
+    SPL = ( a7 & 0xFF );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_E2 ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a5 = ( a4 >> 8 ) ;
+    u8 a6 = ( a4 & 0xFF ) ;
+    u8 a7 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    u16 a8 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    instruction ( "JP   PO,a7a3",a8 );
+    if (( ! FlagP ))
+    {
+        advance ( 10 );
+        return jump16 ( ( ( a7 << 8 ) | a3 ) );
+    }
+    else
+    {
+        advance ( 10 );
+        return jump16 ( a8 );
+    }
+}
+
+Control op_E3 ()
+{
+    instruction ( "EX   (SP),HL",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = SPH ;
+    u8 a2 = SPL ;
+    u16 a3 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a4 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u8 a5 = e8_read_mem ( a3 ) ;
+    u8 a6 = L ;
+    u8 a7 = H ;
+    mem_write ( ( ( a1 << 8 ) | a2 ),a6 );
+    mem_write ( a3,a7 );
+    advance ( 18 );
+    H = a5;
+    L = a4;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_E4 ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a5 = ( a4 >> 8 ) ;
+    u8 a6 = ( a4 & 0xFF ) ;
+    u8 a7 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    u16 a8 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    instruction ( "CALL PO,a7a3",a8 );
+    if (( ! FlagP ))
+    {
+        u8 a9 = ( a8 >> 8 ) ;
+        u8 a10 = ( a8 & 0xFF ) ;
+        u8 a11 = SPH ;
+        u8 a12 = SPL ;
+        u16 a13 = ( ( ( a11 << 8 ) | a12 ) + -1 ) ;
+        mem_write ( a13,a9 );
+        u8 a14 = ( a13 >> 8 ) ;
+        u8 a15 = ( a13 & 0xFF ) ;
+        u16 a16 = ( ( ( a14 << 8 ) | a15 ) + -1 ) ;
+        mem_write ( a16,a10 );
+        // #mark-return: (a9,a10)
+        advance ( 17 );
+        SPH = ( a16 >> 8 );
+        SPL = ( a16 & 0xFF );
+        return jump16 ( ( ( a7 << 8 ) | a3 ) );
+    }
+    else
+    {
+        advance ( 11 );
+        return jump16 ( a8 );
+    }
+}
+
+Control op_E5 ()
+{
+    instruction ( "PUSH HL",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    u8 a2 = L ;
+    u8 a3 = SPH ;
+    u8 a4 = SPL ;
+    u16 a5 = ( ( ( a3 << 8 ) | a4 ) + -1 ) ;
+    mem_write ( a5,a1 );
+    u8 a6 = ( a5 >> 8 ) ;
+    u8 a7 = ( a5 & 0xFF ) ;
+    u16 a8 = ( ( ( a6 << 8 ) | a7 ) + -1 ) ;
+    mem_write ( a8,a2 );
+    advance ( 11 );
+    SPH = ( a8 >> 8 );
+    SPL = ( a8 & 0xFF );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_E6 ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    instruction ( "AND  a3",a4 );
+    u8 a5 = A ;
+    u8 a6 = ( a3 & a5 ) ;
+    u8 a7 = ( a3 | a5 ) ;
+    advance ( 7 );
+    A = a6;
+    FlagS = ( ( a6 >> 7 ) & 0x01 );
+    FlagZ = ( 0 == a6 );
+    FlagA = ( ( a7 >> 3 ) & 0x01 );
+    FlagP = e1_parity ( a6 );
+    FlagCY = false;
+    return jump16 ( a4 );
+}
+
+Control op_E7 ()
+{
+    instruction ( "RST  4",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = PCH ;
+    u8 a2 = SPH ;
+    u8 a3 = SPL ;
+    u16 a4 = ( ( ( a2 << 8 ) | a3 ) + -1 ) ;
+    mem_write ( a4,a1 );
+    u8 a5 = PCL ;
+    u8 a6 = ( a4 >> 8 ) ;
+    u8 a7 = ( a4 & 0xFF ) ;
+    u16 a8 = ( ( ( a6 << 8 ) | a7 ) + -1 ) ;
+    mem_write ( a8,a5 );
+    advance ( 4 );
+    SPH = ( a8 >> 8 );
+    SPL = ( a8 & 0xFF );
+    return jumpDirect ( 0x0020,prog_0020 );
+}
+
+Control op_E8 ()
+{
+    instruction ( "RET  PE",( ( PCH << 8 ) | PCL ) );
+    if (FlagP)
+    {
+        u8 a1 = SPH ;
+        u8 a2 = SPL ;
+        u16 a3 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+        u8 a4 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+        u8 a5 = ( a3 >> 8 ) ;
+        u8 a6 = ( a3 & 0xFF ) ;
+        u16 a7 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+        u8 a8 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+        advance ( 11 );
+        SPH = ( a7 >> 8 );
+        SPL = ( a7 & 0xFF );
+        return jump16 ( ( ( a8 << 8 ) | a4 ) );
+    }
+    else
+    {
+        advance ( 5 );
+        return jump16 ( ( ( PCH << 8 ) | PCL ) );
+    }
+}
+
+Control op_E9 ()
+{
+    instruction ( "JP   (HL)",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    u8 a2 = L ;
+    advance ( 5 );
+    return jump16 ( ( ( a1 << 8 ) | a2 ) );
+}
+
+Control op_EA ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a5 = ( a4 >> 8 ) ;
+    u8 a6 = ( a4 & 0xFF ) ;
+    u8 a7 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    u16 a8 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    instruction ( "JP   PE,a7a3",a8 );
+    if (FlagP)
+    {
+        advance ( 10 );
+        return jump16 ( ( ( a7 << 8 ) | a3 ) );
+    }
+    else
+    {
+        advance ( 10 );
+        return jump16 ( a8 );
+    }
+}
+
+Control op_EB ()
+{
+    instruction ( "EX   DE,HL",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = D ;
+    u8 a2 = E ;
+    u8 a3 = H ;
+    u8 a4 = L ;
+    advance ( 4 );
+    D = a3;
+    E = a4;
+    H = a1;
+    L = a2;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_EC ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a5 = ( a4 >> 8 ) ;
+    u8 a6 = ( a4 & 0xFF ) ;
+    u8 a7 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    u16 a8 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    instruction ( "CALL PE,a7a3",a8 );
+    if (FlagP)
+    {
+        u8 a9 = ( a8 >> 8 ) ;
+        u8 a10 = ( a8 & 0xFF ) ;
+        u8 a11 = SPH ;
+        u8 a12 = SPL ;
+        u16 a13 = ( ( ( a11 << 8 ) | a12 ) + -1 ) ;
+        mem_write ( a13,a9 );
+        u8 a14 = ( a13 >> 8 ) ;
+        u8 a15 = ( a13 & 0xFF ) ;
+        u16 a16 = ( ( ( a14 << 8 ) | a15 ) + -1 ) ;
+        mem_write ( a16,a10 );
+        // #mark-return: (a9,a10)
+        advance ( 17 );
+        SPH = ( a16 >> 8 );
+        SPL = ( a16 & 0xFF );
+        return jump16 ( ( ( a7 << 8 ) | a3 ) );
+    }
+    else
+    {
+        advance ( 11 );
+        return jump16 ( a8 );
+    }
+}
+
+Control op_ED ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a5 = ( a4 >> 8 ) ;
+    u8 a6 = ( a4 & 0xFF ) ;
+    u8 a7 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    u16 a8 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    instruction ( "*CAL a7a3",a8 );
+    u8 a9 = ( a8 >> 8 ) ;
+    u8 a10 = ( a8 & 0xFF ) ;
+    u8 a11 = SPH ;
+    u8 a12 = SPL ;
+    u16 a13 = ( ( ( a11 << 8 ) | a12 ) + -1 ) ;
+    mem_write ( a13,a9 );
+    u8 a14 = ( a13 >> 8 ) ;
+    u8 a15 = ( a13 & 0xFF ) ;
+    u16 a16 = ( ( ( a14 << 8 ) | a15 ) + -1 ) ;
+    mem_write ( a16,a10 );
+    // #mark-return: (a9,a10)
+    advance ( 17 );
+    SPH = ( a16 >> 8 );
+    SPL = ( a16 & 0xFF );
+    return jump16 ( ( ( a7 << 8 ) | a3 ) );
+}
+
+Control op_EE ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    instruction ( "XOR  a3",a4 );
+    u8 a5 = A ;
+    u8 a6 = ( a3 ^ a5 ) ;
+    advance ( 7 );
+    A = a6;
+    FlagS = ( ( a6 >> 7 ) & 0x01 );
+    FlagZ = ( 0 == a6 );
+    FlagA = false;
+    FlagP = e1_parity ( a6 );
+    FlagCY = false;
+    return jump16 ( a4 );
+}
+
+Control op_F0 ()
+{
+    instruction ( "RET  P",( ( PCH << 8 ) | PCL ) );
+    if (( ! FlagS ))
+    {
+        u8 a1 = SPH ;
+        u8 a2 = SPL ;
+        u16 a3 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+        u8 a4 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+        u8 a5 = ( a3 >> 8 ) ;
+        u8 a6 = ( a3 & 0xFF ) ;
+        u16 a7 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+        u8 a8 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+        advance ( 11 );
+        SPH = ( a7 >> 8 );
+        SPL = ( a7 & 0xFF );
+        return jump16 ( ( ( a8 << 8 ) | a4 ) );
+    }
+    else
+    {
+        advance ( 5 );
+        return jump16 ( ( ( PCH << 8 ) | PCL ) );
+    }
+}
+
+Control op_F1 ()
+{
+    instruction ( "POP  PSW",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = SPH ;
+    u8 a2 = SPL ;
+    u16 a3 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a4 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u8 a5 = ( a3 >> 8 ) ;
+    u8 a6 = ( a3 & 0xFF ) ;
+    u16 a7 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    u8 a8 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    advance ( 10 );
+    A = a8;
+    SPH = ( a7 >> 8 );
+    SPL = ( a7 & 0xFF );
+    FlagS = ( ( a4 >> 7 ) & 0x01 );
+    FlagZ = ( ( a4 >> 6 ) & 0x01 );
+    FlagA = ( ( a4 >> 4 ) & 0x01 );
+    FlagP = ( ( a4 >> 2 ) & 0x01 );
+    FlagCY = ( ( a4 >> 0 ) & 0x01 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_F2 ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a5 = ( a4 >> 8 ) ;
+    u8 a6 = ( a4 & 0xFF ) ;
+    u8 a7 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    u16 a8 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    instruction ( "JP   P,a7a3",a8 );
+    if (( ! FlagS ))
+    {
+        advance ( 10 );
+        return jump16 ( ( ( a7 << 8 ) | a3 ) );
+    }
+    else
+    {
+        advance ( 10 );
+        return jump16 ( a8 );
+    }
+}
+
+Control op_F3 ()
+{
+    instruction ( "DI",( ( PCH << 8 ) | PCL ) );
+    disable_interrupts (  );
+    advance ( 4 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_F4 ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a5 = ( a4 >> 8 ) ;
+    u8 a6 = ( a4 & 0xFF ) ;
+    u8 a7 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    u16 a8 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    instruction ( "CALL P,a7a3",a8 );
+    if (( ! FlagS ))
+    {
+        u8 a9 = ( a8 >> 8 ) ;
+        u8 a10 = ( a8 & 0xFF ) ;
+        u8 a11 = SPH ;
+        u8 a12 = SPL ;
+        u16 a13 = ( ( ( a11 << 8 ) | a12 ) + -1 ) ;
+        mem_write ( a13,a9 );
+        u8 a14 = ( a13 >> 8 ) ;
+        u8 a15 = ( a13 & 0xFF ) ;
+        u16 a16 = ( ( ( a14 << 8 ) | a15 ) + -1 ) ;
+        mem_write ( a16,a10 );
+        // #mark-return: (a9,a10)
+        advance ( 17 );
+        SPH = ( a16 >> 8 );
+        SPL = ( a16 & 0xFF );
+        return jump16 ( ( ( a7 << 8 ) | a3 ) );
+    }
+    else
+    {
+        advance ( 11 );
+        return jump16 ( a8 );
+    }
+}
+
+Control op_F5 ()
+{
+    instruction ( "PUSH PSW",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    u8 a2 = SPH ;
+    u8 a3 = SPL ;
+    u16 a4 = ( ( ( a2 << 8 ) | a3 ) + -1 ) ;
+    mem_write ( a4,a1 );
+    u8 a5 = ( a4 >> 8 ) ;
+    u8 a6 = ( a4 & 0xFF ) ;
+    u16 a7 = ( ( ( a5 << 8 ) | a6 ) + -1 ) ;
+    mem_write ( a7,e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x02,7,FlagS ),6,FlagZ ),4,FlagA ),2,FlagP ),0,FlagCY ) );
+    advance ( 11 );
+    SPH = ( a7 >> 8 );
+    SPL = ( a7 & 0xFF );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_F6 ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    instruction ( "OR   a3",a4 );
+    u8 a5 = A ;
+    u8 a6 = ( a3 | a5 ) ;
+    advance ( 7 );
+    A = a6;
+    FlagS = ( ( a6 >> 7 ) & 0x01 );
+    FlagZ = ( 0 == a6 );
+    FlagA = false;
+    FlagP = e1_parity ( a6 );
+    FlagCY = false;
+    return jump16 ( a4 );
+}
+
+Control op_F7 ()
+{
+    instruction ( "RST  6",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = PCH ;
+    u8 a2 = SPH ;
+    u8 a3 = SPL ;
+    u16 a4 = ( ( ( a2 << 8 ) | a3 ) + -1 ) ;
+    mem_write ( a4,a1 );
+    u8 a5 = PCL ;
+    u8 a6 = ( a4 >> 8 ) ;
+    u8 a7 = ( a4 & 0xFF ) ;
+    u16 a8 = ( ( ( a6 << 8 ) | a7 ) + -1 ) ;
+    mem_write ( a8,a5 );
+    advance ( 4 );
+    SPH = ( a8 >> 8 );
+    SPL = ( a8 & 0xFF );
+    return jumpDirect ( 0x0030,prog_0030 );
+}
+
+Control op_F8 ()
+{
+    instruction ( "RET  MI",( ( PCH << 8 ) | PCL ) );
+    if (FlagS)
+    {
+        u8 a1 = SPH ;
+        u8 a2 = SPL ;
+        u16 a3 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+        u8 a4 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+        u8 a5 = ( a3 >> 8 ) ;
+        u8 a6 = ( a3 & 0xFF ) ;
+        u16 a7 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+        u8 a8 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+        advance ( 11 );
+        SPH = ( a7 >> 8 );
+        SPL = ( a7 & 0xFF );
+        return jump16 ( ( ( a8 << 8 ) | a4 ) );
+    }
+    else
+    {
+        advance ( 5 );
+        return jump16 ( ( ( PCH << 8 ) | PCL ) );
+    }
+}
+
+Control op_F9 ()
+{
+    instruction ( "LD   SP,HL",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = H ;
+    u8 a2 = L ;
+    advance ( 5 );
+    SPH = a1;
+    SPL = a2;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_FA ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a5 = ( a4 >> 8 ) ;
+    u8 a6 = ( a4 & 0xFF ) ;
+    u8 a7 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    u16 a8 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    instruction ( "JP   MI,a7a3",a8 );
+    if (FlagS)
+    {
+        advance ( 10 );
+        return jump16 ( ( ( a7 << 8 ) | a3 ) );
+    }
+    else
+    {
+        advance ( 10 );
+        return jump16 ( a8 );
+    }
+}
+
+Control op_FB ()
+{
+    instruction ( "EI",( ( PCH << 8 ) | PCL ) );
+    enable_interrupts (  );
+    advance ( 4 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control op_FC ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a5 = ( a4 >> 8 ) ;
+    u8 a6 = ( a4 & 0xFF ) ;
+    u8 a7 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    u16 a8 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    instruction ( "CALL MI,a7a3",a8 );
+    if (FlagS)
+    {
+        u8 a9 = ( a8 >> 8 ) ;
+        u8 a10 = ( a8 & 0xFF ) ;
+        u8 a11 = SPH ;
+        u8 a12 = SPL ;
+        u16 a13 = ( ( ( a11 << 8 ) | a12 ) + -1 ) ;
+        mem_write ( a13,a9 );
+        u8 a14 = ( a13 >> 8 ) ;
+        u8 a15 = ( a13 & 0xFF ) ;
+        u16 a16 = ( ( ( a14 << 8 ) | a15 ) + -1 ) ;
+        mem_write ( a16,a10 );
+        // #mark-return: (a9,a10)
+        advance ( 17 );
+        SPH = ( a16 >> 8 );
+        SPL = ( a16 & 0xFF );
+        return jump16 ( ( ( a7 << 8 ) | a3 ) );
+    }
+    else
+    {
+        advance ( 11 );
+        return jump16 ( a8 );
+    }
+}
+
+Control op_FD ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    u8 a5 = ( a4 >> 8 ) ;
+    u8 a6 = ( a4 & 0xFF ) ;
+    u8 a7 = e8_read_mem ( ( ( a5 << 8 ) | a6 ) ) ;
+    u16 a8 = ( ( ( a5 << 8 ) | a6 ) + 1 ) ;
+    instruction ( "*CAL a7a3",a8 );
+    u8 a9 = ( a8 >> 8 ) ;
+    u8 a10 = ( a8 & 0xFF ) ;
+    u8 a11 = SPH ;
+    u8 a12 = SPL ;
+    u16 a13 = ( ( ( a11 << 8 ) | a12 ) + -1 ) ;
+    mem_write ( a13,a9 );
+    u8 a14 = ( a13 >> 8 ) ;
+    u8 a15 = ( a13 & 0xFF ) ;
+    u16 a16 = ( ( ( a14 << 8 ) | a15 ) + -1 ) ;
+    mem_write ( a16,a10 );
+    // #mark-return: (a9,a10)
+    advance ( 17 );
+    SPH = ( a16 >> 8 );
+    SPL = ( a16 & 0xFF );
+    return jump16 ( ( ( a7 << 8 ) | a3 ) );
+}
+
+Control op_FE ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    instruction ( "CP   a3",a4 );
+    u8 a5 = A ;
+    u16 a6 = ( ( a5 + ( ( u8 ) ( ~ a3 ) ) ) + ( ! false ) ) ;
+    u8 a7 = ( a5 & 0x0F ) ;
+    u8 a8 = ( ( ( u8 ) ( ~ a3 ) ) & 0x0F ) ;
+    u16 a9 = ( ( a7 + a8 ) + ( ! false ) ) ;
+    advance ( 7 );
+    FlagS = ( ( ( a6 & 0xFF ) >> 7 ) & 0x01 );
+    FlagZ = ( 0 == ( a6 & 0xFF ) );
+    FlagA = ( ( ( a9 & 0xFF ) >> 4 ) & 0x01 );
+    FlagP = e1_parity ( ( a6 & 0xFF ) );
+    FlagCY = ( ! ( ( ( a6 >> 8 ) >> 0 ) & 0x01 ) );
+    return jump16 ( a4 );
+}
+
+Control op_FF ()
+{
+    instruction ( "RST  7",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = PCH ;
+    u8 a2 = SPH ;
+    u8 a3 = SPL ;
+    u16 a4 = ( ( ( a2 << 8 ) | a3 ) + -1 ) ;
+    mem_write ( a4,a1 );
+    u8 a5 = PCL ;
+    u8 a6 = ( a4 >> 8 ) ;
+    u8 a7 = ( a4 & 0xFF ) ;
+    u16 a8 = ( ( ( a6 << 8 ) | a7 ) + -1 ) ;
+    mem_write ( a8,a5 );
+    advance ( 4 );
+    SPH = ( a8 >> 8 );
+    SPL = ( a8 & 0xFF );
+    return jumpDirect ( 0x0038,prog_0038 );
+}
+
+Func ops_array [ 256 ] = { op_00,op_01,op_02,op_03,op_04,op_05,op_06,op_07,op_08,op_09,op_0A,op_0B,op_0C,op_0D,op_0E,op_0F,op_10,op_11,op_12,op_13,op_14,op_15,op_16,op_17,op_18,op_19,op_1A,op_1B,op_1C,op_1D,op_1E,op_1F,op_20,op_21,op_22,op_23,op_24,op_25,op_26,op_27,op_28,op_29,op_2A,op_2B,op_2C,op_2D,op_2E,op_2F,op_30,op_31,op_32,op_33,op_34,op_35,op_36,op_37,op_38,op_39,op_3A,op_3B,op_3C,op_3D,op_3E,op_3F,op_40,op_41,op_42,op_43,op_44,op_45,op_46,op_47,op_48,op_49,op_4A,op_4B,op_4C,op_4D,op_4E,op_4F,op_50,op_51,op_52,op_53,op_54,op_55,op_56,op_57,op_58,op_59,op_5A,op_5B,op_5C,op_5D,op_5E,op_5F,op_60,op_61,op_62,op_63,op_64,op_65,op_66,op_67,op_68,op_69,op_6A,op_6B,op_6C,op_6D,op_6E,op_6F,op_70,op_71,op_72,op_73,op_74,op_75,op_76,op_77,op_78,op_79,op_7A,op_7B,op_7C,op_7D,op_7E,op_7F,op_80,op_81,op_82,op_83,op_84,op_85,op_86,op_87,op_88,op_89,op_8A,op_8B,op_8C,op_8D,op_8E,op_8F,op_90,op_91,op_92,op_93,op_94,op_95,op_96,op_97,op_98,op_99,op_9A,op_9B,op_9C,op_9D,op_9E,op_9F,op_A0,op_A1,op_A2,op_A3,op_A4,op_A5,op_A6,op_A7,op_A8,op_A9,op_AA,op_AB,op_AC,op_AD,op_AE,op_AF,op_B0,op_B1,op_B2,op_B3,op_B4,op_B5,op_B6,op_B7,op_B8,op_B9,op_BA,op_BB,op_BC,op_BD,op_BE,op_BF,op_C0,op_C1,op_C2,op_C3,op_C4,op_C5,op_C6,op_C7,op_C8,op_C9,op_CA,op_CB,op_CC,op_CD,op_CE,op_CF,op_D0,op_D1,op_D2,0,op_D4,op_D5,op_D6,op_D7,op_D8,op_D9,op_DA,0,op_DC,op_DD,op_DE,0,op_E0,op_E1,op_E2,op_E3,op_E4,op_E5,op_E6,op_E7,op_E8,op_E9,op_EA,op_EB,op_EC,op_ED,op_EE,0,op_F0,op_F1,op_F2,op_F3,op_F4,op_F5,op_F6,op_F7,op_F8,op_F9,op_FA,op_FB,op_FC,op_FD,op_FE,op_FF };
+
+Control output_00 ()
+{
+    instruction ( "OUT  00",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    unknown_output ( 0,a1 );
+    advance ( 10 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control output_01 ()
+{
+    instruction ( "OUT  01",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    unknown_output ( 1,a1 );
+    advance ( 10 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control output_02 ()
+{
+    instruction ( "OUT  02",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    advance ( 10 );
+    Shifter_OFF = a1;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control output_03 ()
+{
+    instruction ( "OUT  03",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    sound_control ( "Ufo",( ( a1 >> 0 ) & 0x01 ) );
+    sound_control ( "Shot",( ( a1 >> 1 ) & 0x01 ) );
+    sound_control ( "PlayerDie",( ( a1 >> 2 ) & 0x01 ) );
+    sound_control ( "InvaderDie",( ( a1 >> 3 ) & 0x01 ) );
+    sound_control ( "ExtraLife",( ( a1 >> 4 ) & 0x01 ) );
+    advance ( 10 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control output_04 ()
+{
+    instruction ( "OUT  04",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    advance ( 10 );
+    Shifter_HI = a1;
+    Shifter_LO = Shifter_HI;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control output_05 ()
+{
+    instruction ( "OUT  05",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    sound_control ( "FleetMovement1",( ( a1 >> 0 ) & 0x01 ) );
+    sound_control ( "FleetMovement2",( ( a1 >> 1 ) & 0x01 ) );
+    sound_control ( "FleetMovement3",( ( a1 >> 2 ) & 0x01 ) );
+    sound_control ( "FleetMovement4",( ( a1 >> 3 ) & 0x01 ) );
+    sound_control ( "UfoHit",( ( a1 >> 4 ) & 0x01 ) );
+    advance ( 10 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control output_06 ()
+{
+    instruction ( "OUT  06",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = A ;
+    unknown_output ( 6,a1 );
+    advance ( 10 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Func output_instruction_array [ 0x07 ] = { output_00,output_01,output_02,output_03,output_04,output_05,output_06 };
+
+Control input_00 ()
+{
+    instruction ( "IN   00",( ( PCH << 8 ) | PCL ) );
+    advance ( 10 );
+    A = e8_unknown_input ( 0 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control input_01 ()
+{
+    instruction ( "IN   01",( ( PCH << 8 ) | PCL ) );
+    advance ( 10 );
+    A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,( ! e1_is_pressed ( CoinEntry ) ) ),1,e1_is_pressed ( P2start ) ),2,e1_is_pressed ( P1start ) ),4,e1_is_pressed ( P1shoot ) ),5,e1_is_pressed ( P1left ) ),6,e1_is_pressed ( P1right ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control input_02 ()
+{
+    instruction ( "IN   02",( ( PCH << 8 ) | PCL ) );
+    advance ( 10 );
+    A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_is_pressed ( Dip3_livesLow ) ),1,e1_is_pressed ( Dip5_livesHigh ) ),2,e1_is_pressed ( Tilt ) ),3,e1_is_pressed ( Dip6_extraShipEarly ) ),4,e1_is_pressed ( P2shoot ) ),5,e1_is_pressed ( P2left ) ),6,e1_is_pressed ( P2right ) ),7,e1_is_pressed ( Dip7_coinInfoOff ) );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control input_03 ()
+{
+    instruction ( "IN   03",( ( PCH << 8 ) | PCL ) );
+    u8 a1 = ( Shifter_OFF & 0x07 ) ;
+    u8 a2 = ( ( ( u8 ) ( ~ Shifter_OFF ) ) & 0x07 ) ;
+    u8 a3 = ( ( Shifter_HI << a1 ) | ( ( Shifter_LO >> a2 ) >> 0x01 ) ) ;
+    advance ( 10 );
+    A = a3;
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Control input_04 ()
+{
+    instruction ( "IN   04",( ( PCH << 8 ) | PCL ) );
+    advance ( 10 );
+    A = e8_unknown_input ( 4 );
+    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+}
+
+Func input_instruction_array [ 0x05 ] = { input_00,input_01,input_02,input_03,input_04 };
+
 Control prog_0000 ()
 {
     // #at: 0000
@@ -37294,44 +41394,6 @@ Control prog_1A90 ()
     instruction ( "JP   09C5",0x1A93 );
     advance ( 10 );
     return jumpDirect ( 0x09C5,prog_09C5 );
-}
-
-Control op_rst1 ()
-{
-    instruction ( "RST  1",( ( PCH << 8 ) | PCL ) );
-    u8 a1 = PCH ;
-    u8 a2 = SPH ;
-    u8 a3 = SPL ;
-    u16 a4 = ( ( ( a2 << 8 ) | a3 ) + -1 ) ;
-    mem_write ( a4,a1 );
-    u8 a5 = PCL ;
-    u8 a6 = ( a4 >> 8 ) ;
-    u8 a7 = ( a4 & 0xFF ) ;
-    u16 a8 = ( ( ( a6 << 8 ) | a7 ) + -1 ) ;
-    mem_write ( a8,a5 );
-    advance ( 4 );
-    SPH = ( a8 >> 8 );
-    SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x0008,prog_0008 );
-}
-
-Control op_rst2 ()
-{
-    instruction ( "RST  2",( ( PCH << 8 ) | PCL ) );
-    u8 a1 = PCH ;
-    u8 a2 = SPH ;
-    u8 a3 = SPL ;
-    u16 a4 = ( ( ( a2 << 8 ) | a3 ) + -1 ) ;
-    mem_write ( a4,a1 );
-    u8 a5 = PCL ;
-    u8 a6 = ( a4 >> 8 ) ;
-    u8 a7 = ( a4 & 0xFF ) ;
-    u16 a8 = ( ( ( a6 << 8 ) | a7 ) + -1 ) ;
-    mem_write ( a8,a5 );
-    advance ( 4 );
-    SPH = ( a8 >> 8 );
-    SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x0010,prog_0010 );
 }
 
 Func prog [ ROM_SIZE ] = { prog_0000,prog_0001,prog_0002,prog_0003,0,0,0,0,prog_0008,prog_0009,prog_000A,prog_000B,prog_000C,0,0,0,prog_0010,prog_0011,prog_0012,prog_0013,prog_0014,0,prog_0016,0,0,prog_0019,0,0,prog_001C,prog_001D,0,0,prog_0020,0,prog_0022,prog_0023,0,0,prog_0026,0,0,prog_0029,prog_002A,0,0,prog_002D,0,0,prog_0030,0,prog_0032,0,0,prog_0035,0,prog_0037,prog_0038,0,0,prog_003B,0,0,prog_003E,prog_003F,0,0,prog_0042,0,0,prog_0045,prog_0046,0,0,prog_0049,0,0,prog_004C,prog_004D,0,0,prog_0050,0,0,prog_0053,prog_0054,0,0,prog_0057,0,0,prog_005A,0,0,prog_005D,0,0,prog_0060,prog_0061,0,0,prog_0064,0,0,prog_0067,0,prog_0069,0,0,prog_006C,0,0,prog_006F,0,0,prog_0072,0,0,prog_0075,0,0,prog_0078,0,0,prog_007B,0,0,prog_007E,0,0,prog_0081,prog_0082,prog_0083,prog_0084,prog_0085,prog_0086,prog_0087,0,0,0,0,prog_008C,prog_008D,0,0,prog_0090,0,0,prog_0093,prog_0094,0,0,prog_0097,0,0,prog_009A,prog_009B,0,0,prog_009E,0,0,prog_00A1,prog_00A2,0,0,prog_00A5,0,0,prog_00A8,0,0,prog_00AB,0,0,prog_00AE,0,0,prog_00B1,0,0,prog_00B4,prog_00B5,prog_00B6,prog_00B7,prog_00B8,prog_00B9,0,0,prog_00BC,0,0,prog_00BF,prog_00C0,prog_00C1,prog_00C2,0,prog_00C4,0,0,prog_00C7,prog_00C8,0,0,prog_00CB,0,prog_00CD,0,prog_00CF,0,0,prog_00D2,prog_00D3,0,0,prog_00D6,prog_00D7,0,prog_00D9,0,0,prog_00DC,0,0,prog_00DF,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,prog_0100,0,0,prog_0103,prog_0104,prog_0105,0,0,prog_0108,prog_0109,0,0,prog_010C,prog_010D,0,0,prog_0110,prog_0111,prog_0112,prog_0113,prog_0114,0,0,prog_0117,prog_0118,prog_0119,prog_011A,prog_011B,prog_011C,0,prog_011E,prog_011F,prog_0120,prog_0121,prog_0122,0,prog_0124,0,0,prog_0127,prog_0128,prog_0129,prog_012A,prog_012B,0,0,prog_012E,0,0,prog_0131,0,prog_0133,0,0,prog_0136,prog_0137,0,0,prog_013A,prog_013B,0,0,prog_013E,prog_013F,prog_0140,prog_0141,0,0,prog_0144,prog_0145,prog_0146,0,0,prog_0149,prog_014A,prog_014B,0,0,prog_014E,prog_014F,0,0,prog_0152,0,prog_0154,prog_0155,0,prog_0157,0,0,prog_015A,prog_015B,prog_015C,prog_015D,0,0,prog_0160,0,0,prog_0163,0,0,prog_0166,prog_0167,0,0,prog_016A,prog_016B,0,prog_016D,0,0,prog_0170,prog_0171,0,0,prog_0174,0,prog_0176,0,0,prog_0179,prog_017A,0,prog_017C,prog_017D,0,0,prog_0180,prog_0181,prog_0182,prog_0183,0,prog_0185,0,0,prog_0188,0,prog_018A,prog_018B,prog_018C,0,prog_018E,prog_018F,prog_0190,prog_0191,0,0,prog_0194,prog_0195,prog_0196,prog_0197,prog_0198,prog_0199,0,prog_019B,prog_019C,prog_019D,prog_019E,0,0,prog_01A1,prog_01A2,0,0,prog_01A5,0,0,prog_01A8,0,prog_01AA,prog_01AB,prog_01AC,0,prog_01AE,0,0,prog_01B1,0,0,prog_01B4,prog_01B5,prog_01B6,0,prog_01B8,prog_01B9,prog_01BA,0,0,prog_01BD,prog_01BE,0,prog_01C0,0,0,prog_01C3,0,prog_01C5,0,prog_01C7,prog_01C8,prog_01C9,0,0,prog_01CC,prog_01CD,prog_01CE,prog_01CF,0,prog_01D1,0,prog_01D3,0,0,prog_01D6,0,0,prog_01D9,prog_01DA,prog_01DB,prog_01DC,prog_01DD,prog_01DE,prog_01DF,prog_01E0,prog_01E1,prog_01E2,prog_01E3,prog_01E4,0,prog_01E6,0,0,prog_01E9,0,0,prog_01EC,0,0,prog_01EF,0,0,prog_01F2,0,0,prog_01F5,0,0,prog_01F8,0,prog_01FA,0,0,prog_01FD,prog_01FE,0,prog_0200,0,0,prog_0203,prog_0204,prog_0205,0,0,prog_0208,prog_0209,0,prog_020B,0,0,prog_020E,0,prog_0210,0,0,prog_0213,prog_0214,0,0,prog_0217,0,0,prog_021A,prog_021B,0,0,prog_021E,0,0,prog_0221,0,0,prog_0224,0,0,prog_0227,0,prog_0229,prog_022A,prog_022B,0,0,prog_022E,prog_022F,0,0,prog_0232,0,0,prog_0235,prog_0236,prog_0237,prog_0238,prog_0239,prog_023A,0,0,prog_023D,prog_023E,prog_023F,0,0,prog_0242,0,0,prog_0245,0,0,prog_0248,0,0,prog_024B,prog_024C,0,prog_024E,prog_024F,0,prog_0251,0,0,prog_0254,prog_0255,prog_0256,prog_0257,prog_0258,prog_0259,0,0,prog_025C,prog_025D,prog_025E,prog_025F,0,0,prog_0262,prog_0263,prog_0264,prog_0265,prog_0266,prog_0267,prog_0268,prog_0269,0,0,prog_026C,prog_026D,prog_026E,prog_026F,prog_0270,0,0,prog_0273,prog_0274,0,0,prog_0277,prog_0278,prog_0279,0,0,prog_027C,prog_027D,prog_027E,prog_027F,prog_0280,prog_0281,0,0,prog_0284,prog_0285,0,0,prog_0288,prog_0289,prog_028A,prog_028B,0,0,prog_028E,prog_028F,prog_0290,prog_0291,0,prog_0293,0,0,prog_0296,prog_0297,prog_0298,prog_0299,prog_029A,prog_029B,0,0,prog_029E,0,0,prog_02A1,0,prog_02A3,0,0,prog_02A6,prog_02A7,0,prog_02A9,prog_02AA,prog_02AB,0,0,prog_02AE,0,0,prog_02B1,0,prog_02B3,0,0,prog_02B6,0,0,prog_02B9,0,0,prog_02BC,0,prog_02BE,0,0,prog_02C1,0,prog_02C3,0,0,prog_02C6,0,0,prog_02C9,prog_02CA,prog_02CB,0,0,prog_02CE,prog_02CF,prog_02D0,0,0,prog_02D3,prog_02D4,0,0,prog_02D7,0,0,prog_02DA,prog_02DB,0,0,prog_02DE,0,0,prog_02E1,prog_02E2,prog_02E3,0,0,prog_02E6,0,0,prog_02E9,prog_02EA,0,0,prog_02ED,0,0,prog_02F0,prog_02F1,prog_02F2,0,0,prog_02F5,0,0,prog_02F8,0,0,prog_02FB,prog_02FC,prog_02FD,prog_02FE,prog_02FF,prog_0300,prog_0301,prog_0302,0,0,prog_0305,prog_0306,prog_0307,0,prog_0309,0,prog_030B,0,0,prog_030E,0,prog_0310,0,prog_0312,0,0,prog_0315,0,0,prog_0318,prog_0319,0,0,prog_031C,prog_031D,0,prog_031F,prog_0320,0,0,prog_0323,0,0,prog_0326,0,0,prog_0329,0,0,prog_032C,0,0,prog_032F,0,0,prog_0332,0,0,prog_0335,0,0,0,0,0,prog_033B,0,0,prog_033E,0,prog_0340,prog_0341,prog_0342,prog_0343,0,0,prog_0346,prog_0347,prog_0348,0,prog_034A,0,0,prog_034D,prog_034E,0,0,prog_0351,prog_0352,0,0,prog_0355,0,0,prog_0358,prog_0359,0,0,prog_035C,prog_035D,0,0,prog_0360,0,0,prog_0363,0,0,prog_0366,prog_0367,prog_0368,0,0,prog_036B,prog_036C,0,0,prog_036F,0,0,prog_0372,0,0,prog_0375,0,0,prog_0378,0,0,prog_037B,0,prog_037D,0,0,prog_0380,prog_0381,prog_0382,0,prog_0384,0,0,prog_0387,prog_0388,0,0,prog_038B,0,0,prog_038E,prog_038F,0,prog_0391,0,0,prog_0394,prog_0395,0,0,prog_0398,0,0,prog_039B,prog_039C,0,prog_039E,0,0,prog_03A1,prog_03A2,prog_03A3,prog_03A4,prog_03A5,0,0,prog_03A8,prog_03A9,prog_03AA,0,0,prog_03AD,0,0,prog_03B0,0,0,prog_03B3,prog_03B4,prog_03B5,0,0,prog_03B8,0,0,prog_03BB,0,0,prog_03BE,0,0,prog_03C1,prog_03C2,prog_03C3,prog_03C4,prog_03C5,prog_03C6,prog_03C7,0,prog_03C9,0,0,prog_03CC,0,prog_03CE,0,0,prog_03D1,prog_03D2,0,prog_03D4,0,0,prog_03D7,prog_03D8,0,0,prog_03DB,prog_03DC,0,prog_03DE,prog_03DF,prog_03E0,0,0,prog_03E3,0,0,prog_03E6,prog_03E7,prog_03E8,prog_03E9,prog_03EA,prog_03EB,prog_03EC,prog_03ED,prog_03EE,prog_03EF,prog_03F0,prog_03F1,prog_03F2,0,prog_03F4,0,0,prog_03F7,0,0,prog_03FA,prog_03FB,prog_03FC,0,0,prog_03FF,0,prog_0401,0,0,prog_0404,0,0,prog_0407,0,0,prog_040A,0,0,prog_040D,prog_040E,prog_040F,prog_0410,0,0,prog_0413,prog_0414,prog_0415,prog_0416,0,0,prog_0419,prog_041A,prog_041B,0,0,prog_041E,0,0,prog_0421,0,0,prog_0424,prog_0425,prog_0426,0,0,prog_0429,prog_042A,0,prog_042C,prog_042D,0,0,prog_0430,0,0,prog_0433,0,0,prog_0436,0,0,prog_0439,0,0,prog_043C,0,0,prog_043F,0,0,prog_0442,0,prog_0444,0,0,prog_0447,0,0,prog_044A,prog_044B,prog_044C,0,prog_044E,0,0,prog_0451,0,prog_0453,0,0,prog_0456,0,0,prog_0459,prog_045A,0,0,prog_045D,0,0,prog_0460,prog_0461,prog_0462,prog_0463,0,prog_0465,0,0,prog_0468,0,0,prog_046B,0,0,prog_046E,0,0,prog_0471,prog_0472,prog_0473,prog_0474,prog_0475,prog_0476,prog_0477,0,0,prog_047A,0,0,prog_047D,0,0,prog_0480,prog_0481,prog_0482,0,0,prog_0485,prog_0486,0,0,prog_0489,prog_048A,0,0,prog_048D,0,prog_048F,0,0,prog_0492,0,0,prog_0495,0,0,prog_0498,0,0,prog_049B,0,0,prog_049E,0,0,prog_04A1,0,0,prog_04A4,prog_04A5,0,0,prog_04A8,0,0,prog_04AB,0,0,prog_04AE,0,0,prog_04B1,0,prog_04B3,0,0,prog_04B6,prog_04B7,0,0,prog_04BA,prog_04BB,prog_04BC,0,0,prog_04BF,0,prog_04C1,prog_04C2,0,0,prog_04C5,0,prog_04C7,0,0,prog_04CA,0,0,prog_04CD,0,0,prog_04D0,0,0,prog_04D3,0,0,prog_04D6,0,0,prog_04D9,0,0,prog_04DC,0,prog_04DE,0,0,prog_04E1,0,0,prog_04E4,0,0,prog_04E7,0,0,prog_04EA,prog_04EB,0,0,prog_04EE,0,0,prog_04F1,0,0,prog_04F4,0,0,prog_04F7,0,prog_04F9,0,0,prog_04FC,0,0,prog_04FF,prog_0500,0,0,prog_0503,0,prog_0505,0,0,prog_0508,0,0,prog_050B,0,0,prog_050E,prog_050F,0,0,prog_0512,0,prog_0514,0,0,prog_0517,0,0,prog_051A,0,0,prog_051D,0,0,prog_0520,0,0,prog_0523,0,0,prog_0526,0,0,prog_0529,0,prog_052B,0,0,prog_052E,0,0,prog_0531,0,0,prog_0534,0,0,prog_0537,prog_0538,0,0,prog_053B,0,0,prog_053E,0,0,prog_0541,0,0,prog_0544,0,prog_0546,0,0,prog_0549,0,0,prog_054C,0,0,prog_054F,prog_0550,0,0,prog_0553,0,0,prog_0556,0,prog_0558,0,0,prog_055B,0,0,prog_055E,0,prog_0560,0,0,prog_0563,0,0,prog_0566,prog_0567,0,prog_0569,0,0,prog_056C,0,0,prog_056F,0,prog_0571,0,0,prog_0574,0,0,prog_0577,prog_0578,prog_0579,prog_057A,0,prog_057C,0,0,prog_057F,prog_0580,0,0,prog_0583,prog_0584,0,0,prog_0587,prog_0588,prog_0589,0,0,prog_058C,prog_058D,0,0,prog_0590,prog_0591,0,0,prog_0594,prog_0595,prog_0596,prog_0597,prog_0598,prog_0599,0,0,prog_059C,0,0,prog_059F,prog_05A0,prog_05A1,prog_05A2,0,0,prog_05A5,0,0,prog_05A8,prog_05A9,0,0,prog_05AC,prog_05AD,0,prog_05AF,prog_05B0,prog_05B1,0,prog_05B3,prog_05B4,0,0,prog_05B7,0,0,prog_05BA,prog_05BB,0,prog_05BD,prog_05BE,prog_05BF,prog_05C0,prog_05C1,0,0,prog_05C4,0,0,prog_05C7,prog_05C8,prog_05C9,prog_05CA,0,prog_05CC,0,0,prog_05CF,prog_05D0,prog_05D1,0,0,prog_05D4,0,0,prog_05D7,0,prog_05D9,0,0,prog_05DC,prog_05DD,0,0,prog_05E0,0,prog_05E2,0,0,prog_05E5,0,0,prog_05E8,prog_05E9,0,0,prog_05EC,prog_05ED,0,0,prog_05F0,0,0,prog_05F3,0,0,prog_05F6,0,prog_05F8,0,0,prog_05FB,0,0,prog_05FE,prog_05FF,prog_0600,0,0,prog_0603,0,prog_0605,0,0,prog_0608,0,prog_060A,prog_060B,0,0,prog_060E,prog_060F,0,0,prog_0612,0,0,prog_0615,0,prog_0617,0,0,prog_061A,prog_061B,0,0,prog_061E,0,prog_0620,prog_0621,0,0,prog_0624,prog_0625,0,prog_0627,0,0,prog_062A,0,prog_062C,0,0,prog_062F,prog_0630,0,0,prog_0633,prog_0634,prog_0635,0,prog_0637,prog_0638,prog_0639,prog_063A,prog_063B,prog_063C,0,prog_063E,prog_063F,prog_0640,0,0,prog_0643,prog_0644,0,0,prog_0647,prog_0648,prog_0649,0,prog_064B,0,0,prog_064E,0,0,prog_0651,0,0,prog_0654,0,0,prog_0657,0,0,prog_065A,prog_065B,prog_065C,prog_065D,prog_065E,prog_065F,0,prog_0661,0,0,prog_0664,0,0,prog_0667,prog_0668,prog_0669,0,0,prog_066C,0,0,prog_066F,0,0,prog_0672,0,0,prog_0675,0,0,prog_0678,0,0,prog_067B,0,0,prog_067E,0,0,prog_0681,prog_0682,prog_0683,0,0,prog_0686,0,prog_0688,prog_0689,0,0,prog_068C,prog_068D,prog_068E,0,0,prog_0691,0,0,prog_0694,prog_0695,0,0,prog_0698,prog_0699,prog_069A,prog_069B,0,0,prog_069E,0,0,prog_06A1,0,prog_06A3,0,0,prog_06A6,0,prog_06A8,0,0,prog_06AB,0,0,prog_06AE,0,0,prog_06B1,prog_06B2,0,0,prog_06B5,prog_06B6,prog_06B7,0,0,prog_06BA,0,0,prog_06BD,prog_06BE,prog_06BF,prog_06C0,prog_06C1,0,0,prog_06C4,0,0,prog_06C7,0,0,prog_06CA,prog_06CB,0,prog_06CD,0,0,prog_06D0,0,prog_06D2,0,0,prog_06D5,prog_06D6,0,prog_06D8,0,0,prog_06DB,prog_06DC,prog_06DD,prog_06DE,0,prog_06E0,0,0,prog_06E3,0,prog_06E5,0,0,prog_06E8,prog_06E9,prog_06EA,0,prog_06EC,0,0,prog_06EF,prog_06F0,prog_06F1,prog_06F2,0,prog_06F4,0,prog_06F6,prog_06F7,prog_06F8,prog_06F9,0,0,prog_06FC,0,0,prog_06FF,0,0,prog_0702,0,prog_0704,0,0,prog_0707,0,prog_0709,0,0,prog_070C,0,prog_070E,0,0,prog_0711,0,0,prog_0714,prog_0715,0,prog_0717,0,0,prog_071A,0,0,prog_071D,prog_071E,prog_071F,0,0,prog_0722,prog_0723,prog_0724,prog_0725,0,0,prog_0728,prog_0729,0,0,prog_072C,0,prog_072E,prog_072F,prog_0730,prog_0731,prog_0732,prog_0733,0,0,prog_0736,0,0,prog_0739,0,0,prog_073C,0,0,prog_073F,0,0,prog_0742,0,0,prog_0745,0,0,prog_0748,0,0,prog_074B,0,prog_074D,0,0,prog_0750,prog_0751,prog_0752,prog_0753,0,0,prog_0756,0,0,prog_0759,0,0,prog_075C,0,0,prog_075F,0,0,prog_0762,0,0,prog_0765,0,prog_0767,0,0,prog_076A,0,0,prog_076D,prog_076E,0,0,prog_0771,0,0,prog_0774,0,0,prog_0777,0,0,prog_077A,0,prog_077C,0,0,prog_077F,0,0,prog_0782,prog_0783,0,0,prog_0786,0,prog_0788,0,0,prog_078B,0,0,prog_078E,0,0,prog_0791,0,prog_0793,0,prog_0795,0,0,prog_0798,0,prog_079A,prog_079B,0,0,prog_079E,0,0,prog_07A1,prog_07A2,prog_07A3,0,0,prog_07A6,0,0,prog_07A9,0,0,prog_07AC,0,0,prog_07AF,0,0,prog_07B2,0,0,prog_07B5,0,0,prog_07B8,0,0,prog_07BB,0,0,prog_07BE,prog_07BF,0,0,prog_07C2,0,0,prog_07C5,0,0,prog_07C8,0,0,prog_07CB,0,0,prog_07CE,0,0,prog_07D1,0,0,prog_07D4,0,0,prog_07D7,0,0,prog_07DA,0,0,prog_07DD,prog_07DE,0,0,prog_07E1,0,0,prog_07E4,0,0,prog_07E7,0,0,prog_07EA,0,0,prog_07ED,0,0,prog_07F0,0,0,prog_07F3,0,0,prog_07F6,0,0,prog_07F9,0,0,prog_07FC,0,0,prog_07FF,prog_0800,prog_0801,0,0,prog_0804,0,0,prog_0807,0,0,prog_080A,prog_080B,0,0,prog_080E,0,0,prog_0811,0,0,prog_0814,0,0,prog_0817,0,0,prog_081A,0,prog_081C,0,0,prog_081F,0,0,prog_0822,0,0,prog_0825,0,0,prog_0828,0,0,prog_082B,0,0,prog_082E,prog_082F,0,0,prog_0832,0,0,prog_0835,0,0,prog_0838,0,0,prog_083B,0,0,prog_083E,0,0,prog_0841,0,0,prog_0844,0,prog_0846,0,0,prog_0849,0,0,prog_084C,0,prog_084E,0,0,prog_0851,0,0,0,0,0,prog_0857,0,0,prog_085A,0,0,prog_085D,0,prog_085F,0,prog_0861,prog_0862,prog_0863,0,0,prog_0866,prog_0867,0,0,prog_086A,0,0,prog_086D,0,prog_086F,0,0,prog_0872,0,0,prog_0875,0,0,prog_0878,0,0,prog_087B,prog_087C,0,0,prog_087F,prog_0880,0,0,0,0,0,prog_0886,0,0,prog_0889,prog_088A,0,prog_088C,prog_088D,0,0,prog_0890,0,0,prog_0893,0,prog_0895,0,0,prog_0898,0,0,prog_089B,prog_089C,0,prog_089E,0,0,prog_08A1,0,0,prog_08A4,0,prog_08A6,0,0,prog_08A9,0,0,prog_08AC,prog_08AD,prog_08AE,0,prog_08B0,0,0,prog_08B3,0,0,prog_08B6,0,0,prog_08B9,0,0,prog_08BC,0,prog_08BE,0,0,prog_08C1,0,0,prog_08C4,prog_08C5,0,0,prog_08C8,0,0,prog_08CB,0,0,prog_08CE,0,0,prog_08D1,0,prog_08D3,0,prog_08D5,0,prog_08D7,prog_08D8,0,0,prog_08DB,0,prog_08DD,prog_08DE,0,prog_08E0,0,0,prog_08E3,prog_08E4,0,0,prog_08E7,prog_08E8,prog_08E9,0,0,prog_08EC,0,prog_08EE,0,0,prog_08F1,0,prog_08F3,prog_08F4,prog_08F5,0,0,prog_08F8,prog_08F9,prog_08FA,prog_08FB,0,0,prog_08FE,prog_08FF,0,0,prog_0902,prog_0903,0,prog_0905,prog_0906,prog_0907,prog_0908,prog_0909,prog_090A,prog_090B,prog_090C,0,prog_090E,0,prog_0910,0,0,prog_0913,0,0,prog_0916,0,prog_0918,prog_0919,0,0,prog_091C,prog_091D,prog_091E,0,0,prog_0921,0,0,prog_0924,0,prog_0926,0,0,prog_0929,prog_092A,0,0,prog_092D,prog_092E,0,0,prog_0931,0,prog_0933,prog_0934,prog_0935,0,0,prog_0938,prog_0939,prog_093A,prog_093B,prog_093C,prog_093D,0,prog_093F,0,prog_0941,0,prog_0943,0,0,prog_0946,0,prog_0948,0,0,prog_094B,prog_094C,prog_094D,prog_094E,prog_094F,0,0,prog_0952,prog_0953,prog_0954,prog_0955,0,0,prog_0958,prog_0959,prog_095A,prog_095B,0,0,prog_095E,0,prog_0960,0,0,prog_0963,0,0,prog_0966,prog_0967,prog_0968,0,0,prog_096B,0,0,prog_096E,prog_096F,prog_0970,0,prog_0972,0,prog_0974,0,0,prog_0977,0,prog_0979,0,0,prog_097C,0,0,prog_097F,0,prog_0981,prog_0982,prog_0983,0,prog_0985,prog_0986,prog_0987,prog_0988,0,0,prog_098B,0,0,prog_098E,prog_098F,prog_0990,prog_0991,0,0,prog_0994,prog_0995,0,0,prog_0998,prog_0999,prog_099A,prog_099B,prog_099C,prog_099D,prog_099E,prog_099F,prog_09A0,prog_09A1,prog_09A2,prog_09A3,prog_09A4,prog_09A5,prog_09A6,prog_09A7,prog_09A8,prog_09A9,prog_09AA,0,0,prog_09AD,prog_09AE,0,0,prog_09B1,prog_09B2,prog_09B3,prog_09B4,prog_09B5,prog_09B6,prog_09B7,prog_09B8,0,prog_09BA,0,0,prog_09BD,prog_09BE,0,prog_09C0,0,0,prog_09C3,prog_09C4,prog_09C5,0,prog_09C7,0,0,prog_09CA,0,0,prog_09CD,prog_09CE,0,0,prog_09D1,prog_09D2,0,0,prog_09D5,prog_09D6,0,0,prog_09D9,0,prog_09DB,prog_09DC,prog_09DD,0,prog_09DF,0,prog_09E1,0,0,prog_09E4,0,0,prog_09E7,prog_09E8,prog_09E9,0,prog_09EB,0,0,prog_09EE,prog_09EF,0,0,prog_09F2,prog_09F3,0,0,prog_09F6,0,0,prog_09F9,0,0,prog_09FC,prog_09FD,0,0,prog_0A00,prog_0A01,0,0,prog_0A04,0,0,prog_0A07,prog_0A08,prog_0A09,0,prog_0A0B,prog_0A0C,0,prog_0A0E,prog_0A0F,prog_0A10,0,0,prog_0A13,prog_0A14,prog_0A15,0,0,prog_0A18,prog_0A19,prog_0A1A,0,prog_0A1C,prog_0A1D,prog_0A1E,0,prog_0A20,prog_0A21,prog_0A22,0,0,prog_0A25,0,prog_0A27,0,0,prog_0A2A,0,0,prog_0A2D,0,0,prog_0A30,0,0,prog_0A33,0,0,prog_0A36,0,0,prog_0A39,0,0,prog_0A3C,0,0,prog_0A3F,0,0,prog_0A42,0,prog_0A44,0,0,prog_0A47,0,0,prog_0A4A,prog_0A4B,prog_0A4C,0,0,prog_0A4F,0,0,prog_0A52,0,0,prog_0A55,0,0,prog_0A58,prog_0A59,0,0,prog_0A5C,0,prog_0A5E,prog_0A5F,0,0,prog_0A62,prog_0A63,0,0,prog_0A66,prog_0A67,0,prog_0A69,0,0,prog_0A6C,prog_0A6D,prog_0A6E,0,0,prog_0A71,prog_0A72,0,0,prog_0A75,0,prog_0A77,prog_0A78,prog_0A79,prog_0A7A,0,prog_0A7C,0,0,prog_0A7F,prog_0A80,0,prog_0A82,0,0,prog_0A85,0,prog_0A87,0,0,prog_0A8A,prog_0A8B,0,0,prog_0A8E,prog_0A8F,0,0,prog_0A92,prog_0A93,prog_0A94,prog_0A95,0,0,prog_0A98,prog_0A99,0,prog_0A9B,0,0,prog_0A9E,0,0,prog_0AA1,prog_0AA2,0,0,prog_0AA5,prog_0AA6,prog_0AA7,0,0,prog_0AAA,prog_0AAB,0,0,prog_0AAE,0,0,prog_0AB1,0,prog_0AB3,0,0,prog_0AB6,0,prog_0AB8,0,0,prog_0ABB,prog_0ABC,0,0,prog_0ABF,0,0,prog_0AC2,prog_0AC3,0,0,prog_0AC6,prog_0AC7,0,0,prog_0ACA,prog_0ACB,0,0,prog_0ACE,prog_0ACF,0,0,prog_0AD2,0,prog_0AD4,0,0,prog_0AD7,0,0,prog_0ADA,0,0,prog_0ADD,prog_0ADE,0,0,prog_0AE1,prog_0AE2,0,0,prog_0AE5,0,prog_0AE7,0,0,prog_0AEA,prog_0AEB,0,prog_0AED,0,prog_0AEF,0,0,prog_0AF2,prog_0AF3,0,0,prog_0AF6,0,0,prog_0AF9,prog_0AFA,0,0,prog_0AFD,0,prog_0AFF,0,0,prog_0B02,0,0,prog_0B05,0,0,prog_0B08,0,0,prog_0B0B,0,0,prog_0B0E,0,0,prog_0B11,0,0,prog_0B14,0,0,prog_0B17,0,0,prog_0B1A,prog_0B1B,0,0,prog_0B1E,0,0,prog_0B21,0,0,prog_0B24,0,0,prog_0B27,0,0,prog_0B2A,0,0,prog_0B2D,0,0,prog_0B30,0,0,prog_0B33,0,0,prog_0B36,0,0,prog_0B39,0,0,prog_0B3C,0,0,prog_0B3F,0,0,prog_0B42,0,prog_0B44,0,0,prog_0B47,0,0,prog_0B4A,0,0,prog_0B4D,0,0,prog_0B50,prog_0B51,0,0,prog_0B54,0,0,prog_0B57,0,0,prog_0B5A,0,0,prog_0B5D,0,0,prog_0B60,0,0,prog_0B63,0,0,prog_0B66,0,0,prog_0B69,0,prog_0B6B,0,0,prog_0B6E,0,0,prog_0B71,0,0,prog_0B74,0,0,prog_0B77,0,prog_0B79,0,0,prog_0B7C,0,0,prog_0B7F,prog_0B80,0,0,prog_0B83,0,0,prog_0B86,0,0,prog_0B89,prog_0B8A,0,0,prog_0B8D,0,0,prog_0B90,0,0,prog_0B93,0,prog_0B95,0,0,prog_0B98,0,0,prog_0B9B,0,0,prog_0B9E,0,0,prog_0BA1,0,prog_0BA3,0,0,prog_0BA6,0,0,prog_0BA9,0,prog_0BAB,0,0,prog_0BAE,0,0,prog_0BB1,0,0,prog_0BB4,0,0,prog_0BB7,0,prog_0BB9,prog_0BBA,0,0,prog_0BBD,0,0,prog_0BC0,0,0,prog_0BC3,0,0,prog_0BC6,0,0,prog_0BC9,0,prog_0BCB,0,0,prog_0BCE,0,0,prog_0BD1,0,0,prog_0BD4,0,0,prog_0BD7,0,0,prog_0BDA,0,0,prog_0BDD,prog_0BDE,prog_0BDF,0,prog_0BE1,prog_0BE2,0,0,prog_0BE5,0,0,prog_0BE8,0,0,prog_0BEB,0,0,prog_0BEE,0,0,prog_0BF1,0,0,prog_0BF4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,prog_1400,prog_1401,0,0,prog_1404,prog_1405,prog_1406,prog_1407,prog_1408,0,prog_140A,0,prog_140C,prog_140D,prog_140E,prog_140F,prog_1410,prog_1411,0,prog_1413,0,prog_1415,prog_1416,prog_1417,prog_1418,0,0,prog_141B,prog_141C,prog_141D,prog_141E,0,0,prog_1421,0,0,prog_1424,0,0,prog_1427,prog_1428,prog_1429,prog_142A,prog_142B,prog_142C,prog_142D,prog_142E,prog_142F,0,0,prog_1432,prog_1433,prog_1434,prog_1435,0,0,prog_1438,prog_1439,prog_143A,prog_143B,prog_143C,prog_143D,0,0,prog_1440,prog_1441,prog_1442,prog_1443,0,0,prog_1446,0,0,0,0,0,0,0,0,0,0,0,prog_1452,0,0,prog_1455,prog_1456,prog_1457,prog_1458,0,prog_145A,0,prog_145C,prog_145D,prog_145E,prog_145F,prog_1460,prog_1461,prog_1462,0,prog_1464,0,prog_1466,prog_1467,prog_1468,prog_1469,prog_146A,0,0,prog_146D,prog_146E,prog_146F,prog_1470,0,0,prog_1473,prog_1474,prog_1475,0,prog_1477,0,prog_1479,0,0,prog_147C,prog_147D,prog_147E,prog_147F,prog_1480,prog_1481,prog_1482,prog_1483,0,0,prog_1486,prog_1487,0,0,prog_148A,prog_148B,prog_148C,prog_148D,0,0,prog_1490,prog_1491,0,0,prog_1494,prog_1495,0,0,prog_1498,prog_1499,prog_149A,prog_149B,0,prog_149D,0,prog_149F,prog_14A0,prog_14A1,0,0,prog_14A4,0,prog_14A6,0,0,prog_14A9,prog_14AA,prog_14AB,prog_14AC,prog_14AD,prog_14AE,prog_14AF,0,prog_14B1,0,prog_14B3,prog_14B4,prog_14B5,0,0,prog_14B8,0,prog_14BA,0,0,prog_14BD,prog_14BE,prog_14BF,prog_14C0,prog_14C1,0,0,prog_14C4,prog_14C5,prog_14C6,prog_14C7,0,0,prog_14CA,prog_14CB,prog_14CC,prog_14CD,prog_14CE,0,0,prog_14D1,prog_14D2,prog_14D3,prog_14D4,0,0,prog_14D7,prog_14D8,0,0,prog_14DB,0,prog_14DD,prog_14DE,0,prog_14E0,prog_14E1,0,0,prog_14E4,0,prog_14E6,prog_14E7,0,0,prog_14EA,0,0,prog_14ED,prog_14EE,prog_14EF,prog_14F0,0,prog_14F2,0,0,prog_14F5,0,prog_14F7,prog_14F8,0,0,prog_14FB,0,prog_14FD,0,0,prog_1500,prog_1501,0,0,prog_1504,prog_1505,0,0,prog_1508,0,0,prog_150B,prog_150C,0,0,prog_150F,0,0,prog_1512,0,prog_1514,0,0,prog_1517,0,0,prog_151A,prog_151B,prog_151C,0,0,prog_151F,0,prog_1521,0,0,prog_1524,0,0,prog_1527,0,0,prog_152A,0,prog_152C,0,0,prog_152F,prog_1530,0,prog_1532,0,0,prog_1535,0,0,prog_1538,0,0,prog_153B,prog_153C,prog_153D,0,0,prog_1540,0,prog_1542,0,0,prog_1545,0,prog_1547,0,0,prog_154A,prog_154B,0,0,prog_154E,0,prog_1550,0,0,0,prog_1554,0,prog_1556,prog_1557,0,0,prog_155A,prog_155B,prog_155C,0,prog_155E,prog_155F,0,0,prog_1562,0,0,prog_1565,prog_1566,0,0,prog_1569,prog_156A,prog_156B,0,prog_156D,prog_156E,prog_156F,0,0,prog_1572,0,0,prog_1575,0,prog_1577,prog_1578,prog_1579,0,prog_157B,0,0,prog_157E,0,0,prog_1581,prog_1582,prog_1583,prog_1584,prog_1585,prog_1586,prog_1587,prog_1588,prog_1589,prog_158A,prog_158B,0,0,prog_158E,prog_158F,prog_1590,prog_1591,0,prog_1593,0,0,prog_1596,prog_1597,0,0,prog_159A,prog_159B,0,0,prog_159E,0,0,prog_15A1,0,0,prog_15A4,prog_15A5,0,prog_15A7,0,prog_15A9,0,0,prog_15AC,prog_15AD,0,0,prog_15B0,0,0,prog_15B3,0,0,prog_15B6,prog_15B7,0,0,prog_15BA,0,0,prog_15BD,prog_15BE,0,0,prog_15C1,prog_15C2,0,0,prog_15C5,0,prog_15C7,prog_15C8,prog_15C9,0,0,prog_15CC,prog_15CD,prog_15CE,0,0,prog_15D1,0,prog_15D3,0,0,prog_15D6,prog_15D7,prog_15D8,prog_15D9,prog_15DA,0,prog_15DC,0,prog_15DE,prog_15DF,prog_15E0,prog_15E1,prog_15E2,0,prog_15E4,0,prog_15E6,prog_15E7,prog_15E8,0,0,prog_15EB,prog_15EC,prog_15ED,prog_15EE,0,0,prog_15F1,prog_15F2,prog_15F3,0,0,prog_15F6,0,0,prog_15F9,prog_15FA,prog_15FB,0,0,prog_15FE,prog_15FF,prog_1600,prog_1601,0,0,prog_1604,prog_1605,0,0,prog_1608,0,prog_160A,prog_160B,0,0,prog_160E,0,prog_1610,prog_1611,0,prog_1613,0,0,prog_1616,prog_1617,prog_1618,0,0,prog_161B,0,prog_161D,prog_161E,0,0,prog_1621,prog_1622,prog_1623,prog_1624,prog_1625,prog_1626,0,0,prog_1629,prog_162A,prog_162B,0,0,prog_162E,prog_162F,0,0,prog_1632,0,0,prog_1635,prog_1636,0,0,prog_1639,0,0,prog_163C,0,prog_163E,prog_163F,0,prog_1641,0,0,prog_1644,0,0,prog_1647,prog_1648,0,0,prog_164B,0,prog_164D,prog_164E,0,0,prog_1651,prog_1652,0,0,prog_1655,0,prog_1657,0,0,prog_165A,prog_165B,prog_165C,0,prog_165E,0,0,prog_1661,0,prog_1663,0,0,prog_1666,prog_1667,0,0,prog_166A,prog_166B,prog_166C,prog_166D,prog_166E,0,0,prog_1671,0,0,prog_1674,0,prog_1676,0,0,prog_1679,prog_167A,0,0,prog_167D,prog_167E,prog_167F,prog_1680,prog_1681,prog_1682,0,0,prog_1685,0,0,prog_1688,0,0,prog_168B,prog_168C,0,0,prog_168F,prog_1690,prog_1691,prog_1692,prog_1693,prog_1694,prog_1695,0,0,prog_1698,0,0,prog_169B,prog_169C,0,0,prog_169F,0,0,prog_16A2,0,0,prog_16A5,0,prog_16A7,0,0,prog_16AA,prog_16AB,prog_16AC,0,prog_16AE,0,0,prog_16B1,prog_16B2,0,0,prog_16B5,0,prog_16B7,prog_16B8,0,0,prog_16BB,0,0,prog_16BE,0,0,prog_16C1,prog_16C2,prog_16C3,0,0,prog_16C6,0,0,prog_16C9,0,0,prog_16CC,0,0,prog_16CF,0,prog_16D1,0,0,prog_16D4,0,0,prog_16D7,0,0,prog_16DA,prog_16DB,0,0,prog_16DE,0,prog_16E0,0,0,prog_16E3,0,0,prog_16E6,0,0,prog_16E9,prog_16EA,prog_16EB,0,0,prog_16EE,0,0,prog_16F1,0,prog_16F3,0,0,prog_16F6,0,0,prog_16F9,0,0,prog_16FC,0,0,prog_16FF,0,0,prog_1702,0,0,prog_1705,prog_1706,0,0,prog_1709,0,prog_170B,0,0,prog_170E,0,0,prog_1711,prog_1712,prog_1713,0,0,prog_1716,0,0,prog_1719,0,prog_171B,prog_171C,prog_171D,prog_171E,0,0,prog_1721,prog_1722,prog_1723,prog_1724,0,0,prog_1727,prog_1728,0,0,prog_172B,prog_172C,0,0,prog_172F,0,prog_1731,0,0,prog_1734,0,prog_1736,0,0,prog_1739,0,prog_173B,0,0,0,0,prog_1740,0,0,prog_1743,prog_1744,0,0,prog_1747,0,0,prog_174A,prog_174B,0,0,prog_174E,0,0,prog_1751,prog_1752,prog_1753,0,0,prog_1756,prog_1757,0,prog_1759,0,0,prog_175C,prog_175D,0,0,prog_1760,prog_1761,prog_1762,prog_1763,prog_1764,prog_1765,0,prog_1767,0,prog_1769,0,0,prog_176C,prog_176D,0,0,prog_1770,0,prog_1772,0,prog_1774,prog_1775,0,0,prog_1778,prog_1779,0,0,prog_177C,0,0,prog_177F,0,0,prog_1782,0,0,prog_1785,prog_1786,0,0,prog_1789,prog_178A,prog_178B,0,0,prog_178E,prog_178F,0,0,prog_1792,0,0,prog_1795,prog_1796,0,prog_1798,prog_1799,prog_179A,0,prog_179C,prog_179D,0,prog_179F,0,0,prog_17A2,0,prog_17A4,prog_17A5,prog_17A6,prog_17A7,0,0,prog_17AA,0,0,prog_17AD,prog_17AE,prog_17AF,0,prog_17B1,0,0,prog_17B4,0,prog_17B6,0,0,prog_17B9,prog_17BA,prog_17BB,prog_17BC,0,prog_17BE,0,prog_17C0,0,0,prog_17C3,prog_17C4,0,0,prog_17C7,0,prog_17C9,prog_17CA,0,prog_17CC,prog_17CD,0,prog_17CF,0,prog_17D1,prog_17D2,0,0,prog_17D5,prog_17D6,prog_17D7,0,0,prog_17DA,0,prog_17DC,0,0,prog_17DF,prog_17E0,0,0,prog_17E3,0,prog_17E5,0,0,prog_17E8,0,0,prog_17EB,prog_17EC,0,0,prog_17EF,0,0,prog_17F2,0,prog_17F4,0,0,prog_17F7,0,0,prog_17FA,prog_17FB,0,0,prog_17FE,0,0,prog_1801,0,0,prog_1804,0,0,prog_1807,prog_1808,prog_1809,0,0,prog_180C,prog_180D,prog_180E,prog_180F,prog_1810,0,prog_1812,0,0,prog_1815,0,0,prog_1818,0,0,prog_181B,0,prog_181D,0,0,prog_1820,0,prog_1822,0,0,prog_1825,0,0,prog_1828,0,0,prog_182B,0,0,prog_182E,0,0,prog_1831,0,0,prog_1834,0,0,prog_1837,0,0,prog_183A,0,0,prog_183D,prog_183E,0,0,prog_1841,0,0,prog_1844,prog_1845,0,prog_1847,0,0,prog_184A,prog_184B,prog_184C,prog_184D,0,0,prog_1850,prog_1851,0,0,prog_1854,prog_1855,prog_1856,prog_1857,0,prog_1859,prog_185A,prog_185B,prog_185C,prog_185D,prog_185E,prog_185F,prog_1860,prog_1861,prog_1862,prog_1863,prog_1864,prog_1865,prog_1866,prog_1867,prog_1868,0,0,prog_186B,prog_186C,prog_186D,prog_186E,0,0,prog_1871,prog_1872,0,0,prog_1875,prog_1876,0,0,prog_1879,0,0,prog_187C,0,prog_187E,0,0,prog_1881,0,0,prog_1884,0,0,prog_1887,prog_1888,0,0,prog_188B,0,0,prog_188E,0,0,prog_1891,prog_1892,0,0,0,0,0,prog_1898,0,prog_189A,0,0,prog_189D,prog_189E,0,0,prog_18A1,0,0,prog_18A4,0,prog_18A6,0,0,prog_18A9,0,prog_18AB,0,0,prog_18AE,0,prog_18B0,0,0,prog_18B3,0,prog_18B5,0,0,prog_18B8,0,0,prog_18BB,0,prog_18BD,0,0,prog_18C0,0,0,prog_18C3,0,prog_18C5,0,0,prog_18C8,0,0,prog_18CB,0,prog_18CD,prog_18CE,0,0,prog_18D1,0,0,prog_18D4,0,0,prog_18D7,0,prog_18D9,0,0,prog_18DC,0,0,prog_18DF,0,prog_18E1,0,0,prog_18E4,0,0,prog_18E7,0,0,prog_18EA,0,0,prog_18ED,prog_18EE,prog_18EF,prog_18F0,prog_18F1,0,prog_18F3,0,0,prog_18F6,prog_18F7,prog_18F8,prog_18F9,prog_18FA,0,0,prog_18FD,prog_18FE,0,0,prog_1901,0,prog_1903,prog_1904,0,0,prog_1907,0,0,prog_190A,0,0,prog_190D,0,0,prog_1910,0,0,prog_1913,0,0,prog_1916,prog_1917,prog_1918,prog_1919,prog_191A,0,prog_191C,0,0,prog_191F,0,0,prog_1922,0,0,prog_1925,0,0,prog_1928,0,0,prog_192B,0,0,prog_192E,0,0,prog_1931,prog_1932,prog_1933,prog_1934,prog_1935,prog_1936,prog_1937,prog_1938,prog_1939,0,0,prog_193C,0,prog_193E,0,0,prog_1941,0,0,prog_1944,0,0,prog_1947,0,0,prog_194A,0,0,prog_194D,0,0,prog_1950,0,0,prog_1953,0,0,prog_1956,0,0,prog_1959,0,0,prog_195C,0,0,prog_195F,0,0,prog_1962,0,0,prog_1965,0,0,prog_1968,0,0,prog_196B,0,0,prog_196E,0,0,prog_1971,0,prog_1973,0,0,prog_1976,0,0,prog_1979,0,0,prog_197C,0,0,prog_197F,0,0,prog_1982,0,0,prog_1985,0,0,prog_1988,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,prog_199A,0,0,prog_199D,prog_199E,0,0,prog_19A1,0,prog_19A3,0,prog_19A5,0,prog_19A7,prog_19A8,prog_19A9,0,0,prog_19AC,0,prog_19AE,0,prog_19B0,0,prog_19B2,prog_19B3,0,0,prog_19B6,0,0,prog_19B9,0,prog_19BB,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,prog_19D1,0,prog_19D3,0,0,prog_19D6,prog_19D7,prog_19D8,0,0,0,prog_19DC,0,0,prog_19DF,prog_19E0,0,0,prog_19E3,0,prog_19E5,prog_19E6,0,0,prog_19E9,0,0,prog_19EC,0,0,prog_19EF,0,prog_19F1,prog_19F2,0,0,prog_19F5,prog_19F6,prog_19F7,0,0,prog_19FA,0,prog_19FC,0,0,prog_19FF,prog_1A00,0,prog_1A02,0,0,prog_1A05,prog_1A06,0,0,prog_1A09,prog_1A0A,prog_1A0B,0,prog_1A0D,prog_1A0E,prog_1A0F,prog_1A10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,prog_1A32,prog_1A33,prog_1A34,prog_1A35,prog_1A36,prog_1A37,0,0,prog_1A3A,prog_1A3B,prog_1A3C,prog_1A3D,prog_1A3E,prog_1A3F,prog_1A40,prog_1A41,prog_1A42,prog_1A43,prog_1A44,prog_1A45,prog_1A46,prog_1A47,prog_1A48,0,prog_1A4A,prog_1A4B,prog_1A4C,prog_1A4D,prog_1A4E,prog_1A4F,prog_1A50,prog_1A51,0,0,prog_1A54,prog_1A55,0,prog_1A57,0,prog_1A59,prog_1A5A,prog_1A5B,prog_1A5C,0,0,prog_1A5F,0,prog_1A61,prog_1A62,prog_1A63,0,prog_1A65,0,0,prog_1A68,prog_1A69,prog_1A6A,prog_1A6B,prog_1A6C,prog_1A6D,prog_1A6E,prog_1A6F,prog_1A70,prog_1A71,0,0,prog_1A74,prog_1A75,0,0,prog_1A78,prog_1A79,prog_1A7A,prog_1A7B,0,0,prog_1A7E,prog_1A7F,0,0,prog_1A82,prog_1A83,prog_1A84,prog_1A85,prog_1A86,prog_1A87,0,0,prog_1A8A,prog_1A8B,0,0,prog_1A8E,0,prog_1A90,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };

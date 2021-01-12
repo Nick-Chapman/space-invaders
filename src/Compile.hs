@@ -1,5 +1,5 @@
 
-module Compile (opPrograms,compileOp,compileAt) where
+module Compile (opPrograms,compileOp,compileInstruction,compileAt) where
 
 import Addr (Addr)
 import Byte (Byte(..))
@@ -8,7 +8,7 @@ import Cpu (Cpu(..),Reg(..),Flag(..))
 import Data.Set (Set)
 import Effect (Eff)
 import HiLo (HiLo(..))
-import InstructionSet (Op(..),Op1(..),decode,encode)
+import InstructionSet (Op(..),Op1(..),decode,encode,Instruction(..))
 import Rom (Rom)
 import Residual (CompTime,Exp1(..),Exp8(..),Exp16(..),Exp17(..),Program(..),AVar(..))
 import Shifter (Shifter(..))
@@ -17,7 +17,7 @@ import qualified Cpu (get,set,getFlag,setFlag)
 import qualified Data.Set as Set
 import qualified Effect as E (Eff(..))
 import qualified Rom (lookup)
-import qualified Semantics (fetchDecodeExec,decodeExec)
+import qualified Semantics (fetchDecodeExec,decodeExec,execInstruction)
 import qualified Shifter (Reg(..),get,set,allRegs)
 
 
@@ -29,10 +29,18 @@ opPrograms rom = do
 
 
 compileOp :: Rom -> Op -> Program
-compileOp rom op  = do
+compileOp rom op = do
   let cpu = initCpu HiLo {hi = E8_Reg PCH, lo = E8_Reg PCL }
   let state = initState rom cpu  -- TODO: shouldn't need rom here
   let semantics = Semantics.decodeExec (E8_Lit (InstructionSet.encode op))
+  runGen $ compileThen semantics state (return . programFromState)
+
+
+compileInstruction :: Rom -> Instruction Exp8 -> Program
+compileInstruction rom instruction = do
+  let cpu = initCpu HiLo {hi = E8_Reg PCH, lo = E8_Reg PCL }
+  let state = initState rom cpu  -- TODO: shouldn't need rom here
+  let semantics = Semantics.execInstruction instruction
   runGen $ compileThen semantics state (return . programFromState)
 
 

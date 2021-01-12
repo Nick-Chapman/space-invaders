@@ -5,13 +5,13 @@ import Prelude hiding (init)
 
 import Addr (Addr)
 import Byte (Byte)
-import Compile (compileOp,compileAt)
+import Compile (compileOp,compileAt,compileInstruction)
 import Cpu (Reg(..),Flag(..))
 import Data.List (intercalate)
 import Data.Map (Map)
 import Data.Maybe (fromJust)
 import HiLo (HiLo(..))
-import InstructionSet (Op(Op0),Op0(RST))
+import InstructionSet (Op(Op0,Op1),Op0(RST),Op1(IN,OUT),Instruction(Ins1),decode)
 import Residual (Exp1(..),Exp8(..),Exp16(..),Exp17(..),Program(..),AVar,Lay,vert,lay,tab)
 import Rom (Rom,lookup)
 import Static (oneStepReach,searchReach,startPoints)
@@ -58,38 +58,123 @@ convertRom rom = do
     forwards =
       [FunDec $ CFunDec
         { typ = CType "Control"
-        , name = nameOfAddr addr
+        , name = nameOfProgDef addr
         }
       | (addr,_) <- reachablePrograms ]
-  let
-    defs =
+
+    progs =
       [ FunDef $ CFunDef
         { typ = CType "Control"
-        , name = nameOfAddr addr
+        , name = nameOfProgDef addr
         , body = Block (convertProgram program)
         }
       | (addr,program) <- reachablePrograms ]
-  let
-    op_rst n = FunDef $ CFunDef
-        { typ = CType "Control"
-        , name = CName ("op_rst" ++ show n)
-        , body = Block (convertProgram $ compileOp rom (Op0 (RST n)))
-        }
 
-  let
-    progs =
+    progs_array =
       ArrDef (CArrDef
                { typ  = CType "Func"
-               , name = CName "prog"
+               , name = CName "prog" -- "progs_array"
                , size = Ident (CName "ROM_SIZE")
                , init = [ if a `elem` reachSet
-                          then Ident (nameOfAddr a)
+                          then Ident (nameOfProgDef a)
                           else LitI 0
                         | a <- take 0x2000 [0..] ]
                })
+  let
+    skippedOps =
+      [
+        -- We skip generating programs for op-codes IN/OUT, because we can only cope
+        -- when the port to which the IN/OUT refers is known at generation time
+        -- This is not the case for general IN/OUT opcodes, as the port is an immeidate byte.
+
+        -- Instead we generate a family of programs for IN/OUT instructions, for the small
+        -- range of ports which are expected. IN: 0..3, OUT: 0..6
+        Op1 IN, Op1 OUT
+
+        -- Reset instruction do a jumpDirect to specific addresses. For some of these
+        -- address we have no generated code. We could regard these address as additional
+        -- start points. But ntead we just skip the gernation of programs for certain
+        -- reset instructions. This is ok because we know these instructions are never
+        -- used by the space-invaders program,
+      , Op0 (RST 3), Op0 (RST 5)
+      ]
+    op_defs =
+      [ FunDef $ CFunDef
+        { typ = CType "Control"
+        , name = CName ("op_" ++ show byte)
+        , body = Block (convertProgram program)
+        }
+      | byte :: Byte <- [0..0xFF]
+      , let op = decode byte
+      , op `notElem` skippedOps
+      , let program = compileOp rom op
+      ]
+
+    ops_array =
+      ArrDef (CArrDef
+               { typ  = CType "Func"
+               , name = CName "ops_array"
+               , size = LitI 256
+               , init = [ if decode b `notElem` skippedOps
+                          then Ident (nameOfOpDef b)
+                          else LitI 0
+                        | b <- take 256 [0..] ]
+               })
+  let
+    max_output = 6
+    output_defs =
+      [ FunDef $ CFunDef
+        { typ = CType "Control"
+        , name = CName ("output_" ++ show byte)
+        , body = Block (convertProgram program)
+        }
+      | byte :: Byte <- [0..max_output]
+      , let i = Ins1 OUT (E8_Lit byte)
+      , let program = compileInstruction rom i
+      ]
+
+    output_array =
+      ArrDef (CArrDef
+               { typ  = CType "Func"
+               , name = CName "output_instruction_array"
+               , size = LitB (max_output + 1)
+               , init = [Ident (CName ("output_" ++ show n))
+                        | n <- [0..max_output]
+                        ]
+               })
+
+  let
+    max_input = 4
+    input_defs =
+      [ FunDef $ CFunDef
+        { typ = CType "Control"
+        , name = CName ("input_" ++ show byte)
+        , body = Block (convertProgram program)
+        }
+      | byte :: Byte <- [0..max_input]
+      , let i = Ins1 IN (E8_Lit byte)
+      , let program = compileInstruction rom i
+      ]
+
+    input_array =
+      ArrDef (CArrDef
+               { typ  = CType "Func"
+               , name = CName "input_instruction_array"
+               , size = LitB (max_input + 1)
+               , init = [Ident (CName ("input_" ++ show n))
+                        | n <- [0..max_input]
+                        ]
+               })
+
+  let defs =
+        forwards
+        ++ op_defs ++ [ops_array]
+        ++ output_defs ++ [output_array]
+        ++ input_defs ++ [input_array]
+        ++ progs ++ [progs_array]
 
   return $ CFile $ [ Include "\"program.h\""
-                   ] ++ [mem] ++ forwards ++ defs ++ [op_rst 1, op_rst 2] ++ [progs]
+                   ] ++ [mem] ++ defs
 
 convertProgram :: Program  -> [CStat]
 convertProgram = \case
@@ -111,22 +196,24 @@ convertProgram = \case
   S_SoundControl sound bool next ->
     Expression (call "sound_control" [LitS $ show sound, convert1 bool]) : convertProgram next
   S_EnableInterrupts next -> Expression (call "enable_interrupts" []) : convertProgram next
-  S_DisableInterrupts{} -> undefined --todo "S_DisableInterrupts"
+  S_DisableInterrupts next -> Expression (call "disable_interrupts" []) : convertProgram next
   S_UnknownOutput port byte next ->
     Expression (call "unknown_output" [LitI (fromIntegral port), convert8 byte]) : convertProgram next
 
 convertJump :: Exp16 -> CExp
 convertJump = \case
-  E16_Lit a ->
-    call "jumpDirect" [LitA a, Ident $ nameOfAddr a]
+  E16_Lit a | optimizeJumpDirect ->
+    call "jumpDirect" [LitA a, Ident $ nameOfProgDef a]
   e ->
     call "jump16" [convert16 e]
+  where
+    optimizeJumpDirect = True
 
-nameOfAddr :: Addr -> CName
-nameOfAddr a = CName ("prog_" ++ show a)
+nameOfProgDef :: Addr -> CName
+nameOfProgDef a = CName ("prog_" ++ show a)
 
---todo :: String -> [CStat]
---todo s = [Expression $ call "todo" [LitS s], Die]
+nameOfOpDef :: Byte -> CName
+nameOfOpDef b = CName ("op_" ++ show b)
 
 convertVar :: AVar -> CName
 convertVar v = CName (show v)
@@ -175,7 +262,7 @@ convert8 = \case
   E8_ShiftLeft e1 e2 -> BinOp "<<" (convert8 e1) (convert8 e2)
   E8_Ite i t e -> IteOp (convert1 i) (convert8 t) (convert8 e)
   E8_Var v -> Ident (convertVar v)
-  E8_UnknownInput{} -> undefined
+  E8_UnknownInput e -> call "e8_unknown_input" [LitI (fromIntegral e)]
   where
     e8_hi x = BinOp ">>" x (LitI 8)
     e8_lo x = BinOp "&" x (LitB 0xFF)

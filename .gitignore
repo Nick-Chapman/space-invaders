@@ -4,4 +4,4 @@
 stack.yaml.lock
 .markdown-preview.html
 c/*.o
-invaders.exe
+*.exe

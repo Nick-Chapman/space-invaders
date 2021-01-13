@@ -102,16 +102,16 @@ int speed () {
   int speedup = mhz/2;
   printf("sim-time(secs)=%d, "
          "cycles=%ld, "
-         "duration(us)=%ld, "
+         //"duration(us)=%ld, "
          "duration(s)=%.3g, "
-         "mhz=%d, "
+         //"mhz=%d, "
          "speedup=x%d"
          "\n",
          secs,
          cycles,
-         duration_us,
+         //duration_us,
          duration_s,
-         mhz,
+         //mhz,
          speedup
          );
   return 0;

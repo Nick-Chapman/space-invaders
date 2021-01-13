@@ -10,17 +10,25 @@
 #define noinline __attribute__ ((noinline))
 
 
+#ifdef TRACE
 #define instruction(x...) f_instruction(x)
-//#define instruction(x...) {}
+#else
+#define instruction(x...) {}
+#endif
+
 void f_instruction(const char*, u16);
 
 #define HALF_FRAME_CYCLES (2000000 / 120)
 int credit = HALF_FRAME_CYCLES;
 extern int credit;
 
+long icount = 0;
+long cycles = 0;
+
 inline static void advance(int n) {
   cycles += n;
   credit -= n;
+  icount++;
 }
 
 
@@ -63,8 +71,6 @@ inline static u8 e8_read_mem(u16 a) {
 
 static bool half = false;
 static int interrupts = 0;
-
-long cycles = 0;
 
 static Control op_CF (); // defined in generated code
 static Control op_D7 (); // defined in generated code

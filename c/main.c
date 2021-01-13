@@ -51,10 +51,9 @@ static char* version() {
 }
 
 static bool dump_state_every_instruction = false;
-static int icount = 0;
 
 static void dump_state(const char* instruction, u16 pcAfterInstructionDecode) {
-  printf("%8d  [%08ld] "
+  printf("%8ld  [%08ld] "
          "PC:%04X "
          "A:%02X B:%02X C:%02X D:%02X E:%02X HL:%02X%02X SP:%02X%02X "
          "SZAPY:%1d%1d%1d%1d%1d"
@@ -72,7 +71,6 @@ void f_instruction(const char* instruction, u16 pcAfterInstructionDecode) {
   if (dump_state_every_instruction) {
     dump_state(instruction,pcAfterInstructionDecode);
   }
-  icount++;
 }
 
 static Func initial_program() {
@@ -95,7 +93,7 @@ int test1 () {
 
 int speed () {
   dump_state_every_instruction = false;
-  const int sim_seconds_to_run_for = 60;
+  const int sim_seconds_to_run_for = 120; //2 minutes
   Func fn = initial_program();
   u64 tic = time();
   cycles = 0;

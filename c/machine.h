@@ -39,6 +39,7 @@ u8 PCH,PCL;
 u8 A,B,C,D,E,H,L,SPH,SPL;
 u8 Shifter_HI,Shifter_LO,Shifter_OFF;
 
+long icount;
 long cycles;
 bool use_per_address_programs;
 bool use_fast_programs;

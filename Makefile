@@ -3,7 +3,7 @@ top: test
 
 all: invaders-opt0.exe invaders-opt2.exe
 
-speed: speedA0 speedB0 speedC0 speedA2 speedB2 speedC2
+speed: speedA0 speedA1 speedA2 speedB0 speedB1 speedB2 speedC0 speedC1 speedC2
 test: testB0
 play: playC0
 
@@ -11,6 +11,9 @@ play: playC0
 
 # check speed: mode(%)=A/B/C, opt=0/2
 speed%0: invaders-opt0.exe
+	@ ./$< speed$*
+
+speed%1: invaders-opt1.exe
 	@ ./$< speed$*
 
 speed%2: invaders-opt2.exe

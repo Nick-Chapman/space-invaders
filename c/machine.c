@@ -38,7 +38,7 @@ inline static void disable_interrupts(void) {
   interrupts_enabled = false;
 }
 
-inline static void unknown_output(int p,u8 b) { //watchdog
+noinline static void unknown_output(int p,u8 b) { //watchdog
   //printf ("unknown_output: %d %02x\n",p,b);
 }
 
@@ -72,7 +72,7 @@ static Control op_D7 (); // defined in generated code
 
 //extern Control jumpInterrupt(u16 pc, Func f);
 
-Control jumpInterrupt(u16 pc, Func f) {
+noinline Control jumpInterrupt(u16 pc, Func f) {
   credit += HALF_FRAME_CYCLES;
   half ^= true;
   interrupts++;
@@ -113,7 +113,7 @@ inline static u1 e1_parity(u8 e) {
            ^ ((e>>4)&0x1) ^ ((e>>5)&0x1) ^ ((e>>6)&0x1) ^ ((e>>7)&0x1));
 }
 
-inline static u8 e8_unknown_input(int p) {
+noinline static u8 e8_unknown_input(int p) {
   //printf ("unknown_input: %d\n",p);
   die
 }

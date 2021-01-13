@@ -1,7 +1,7 @@
 
 top: test
 
-#OPT = -O2 # uncomment this for speedup: x280 -> x800 (at the cost of slower compiles)
+#OPT = -O2
 
 CFLAGS = -Wall -Werror -Winline $(OPT) -I /usr/include/SDL2
 LDFLAGS = -lSDL2

@@ -6,7 +6,7 @@ import Prelude hiding (init)
 import Addr (Addr)
 import Byte (Byte)
 import Compile (compileOp,compileAt,compileInstruction)
-import Cpu (Reg(..),Flag(..))
+import Cpu (Reg(..),Flag(..),get,getFlag)
 import Data.List (intercalate)
 import Data.Map (Map)
 import Data.Maybe (fromJust)
@@ -259,23 +259,22 @@ fastProgramsOfRom rom = do
 data PatMarker = PatMarker
 instance Show PatMarker where show PatMarker = "%02X"
 
-convertI :: Instruction a -> CExp
-convertI i = LitS $ show (fmap (const PatMarker) i)
-
 convertProgram :: (Addr -> CName) -> Program  -> [CStat]
 convertProgram nameOfDef = convert
   where
     convert = \case
       S_AtRef a next -> Comment ("#at: " ++ show a) : convert next
       S_MarkReturnAddress a next -> Comment ("#mark-return: " ++ show a) : convert next
-      S_TraceInstruction _cpu i pcAfterDecode next ->
-        case i of
-          Ins0 _ ->
-            Expression (call "instruction0" [convertI i, convert16 pcAfterDecode]) : convert next
-          Ins1 _ b1 ->
-            Expression (call "instruction1" [convertI i, convert8 b1, convert16 pcAfterDecode]) : convert next
-          Ins2 _ b1 b2 ->
-            Expression (call "instruction2" [convertI i, convert8 b2, convert8 b1, convert16 pcAfterDecode]) : convert next
+      S_TraceInstruction cpu i next -> do
+        Expression (call ("instruction" ++ show n)
+                    $ [ convert8 (Cpu.get cpu reg) | reg <- [PCH,PCL,A,B,C,D,E,H,L,SPH,SPL]] ++
+                      [ convert1 (Cpu.getFlag cpu flag) | flag <- [FlagS,FlagZ,FlagA,FlagP,FlagCY]] ++
+                      [ LitS $ show (fmap (const PatMarker) i)] ++ extra) : convert next
+          where
+            (n::Int,extra) = case i of
+              Ins0 _ -> (0,[])
+              Ins1 _ b1 -> (1,[convert8 b1])
+              Ins2 _ b1 b2 -> (2,[convert8 b2, convert8 b1]) -- b2 first!
 
       S_Advance n next -> Expression (call "advance" [LitI n]) : convert next
       S_Jump a -> [Return $ convertJump a]

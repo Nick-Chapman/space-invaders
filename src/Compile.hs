@@ -204,7 +204,7 @@ compileThen semantics state k =
           E8_Lit byte -> k s (decode byte)
           _ -> error $ "Decode, non-literal: " <> show e
       E.MarkReturnAddress a -> S_MarkReturnAddress a <$> k s ()
-      E.TraceInstruction i -> S_TraceInstruction cpu i (getPC cpu) <$> k s ()
+      E.TraceInstruction i -> S_TraceInstruction cpu i <$> k s ()
       E.Advance n -> S_Advance n <$> k s ()
 
       E.MakeBit bool -> k s (if bool then E1_True else E1_False)

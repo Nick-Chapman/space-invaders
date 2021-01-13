@@ -225,7 +225,7 @@ emulateProgram CB{traceI} buttons s = emu (emptyEnv buttons) s
     emu q u@EmuState{mem,playing} = \case
       S_AtRef _ p -> emu q u p
       S_MarkReturnAddress _ p -> emu q u p
-      S_TraceInstruction cpu i _ p -> do
+      S_TraceInstruction cpu i p -> do
         case traceI of
           Nothing -> return ()
           Just tr -> tr u { cpu = Cpu.kindOfMap fByte fBit cpu } (getLitInstruction i)

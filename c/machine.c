@@ -10,66 +10,60 @@
 #define noinline __attribute__ ((noinline))
 
 
-void dump_state ( const char* instruction,
-                  u16 pcAfterInstructionDecode,
-                  u8 A, u8 B, u8 C, u8 D, u8 E, u8 H, u8 L, u8 SPH, u8 SPL,
-                  u1 FlagS, u1 FlagZ, u1 FlagA, u1 FlagP, u1 FlagCY
-                  ) {
+void dump_state (const char* instruction,
+                 u8 PCH, u8 PCL, u8 A, u8 B, u8 C, u8 D, u8 E, u8 H, u8 L, u8 SPH, u8 SPL,
+                 u1 FlagS, u1 FlagZ, u1 FlagA, u1 FlagP, u1 FlagCY
+                 ) {
   printf("%8ld  [%08ld] "
-         "PC:%04X "
+         "PC:%02X%02X "
          "A:%02X B:%02X C:%02X D:%02X E:%02X HL:%02X%02X SP:%02X%02X "
          "SZAPY:%1d%1d%1d%1d%1d"
          " : %s\n",
          icount,
          cycles,
-         pcAfterInstructionDecode, //odd, but matches existing traces!
+         PCH,PCL,
          A,B,C,D,E,H,L,SPH,SPL,
          FlagS,FlagZ,FlagA,FlagP,FlagCY,
          instruction
          );
 }
 
-u1 FlagS,FlagZ,FlagA,FlagP,FlagCY;
-u8 PCH,PCL;
-u8 A,B,C,D,E,H,L,SPH,SPL;
-u8 Shifter_HI,Shifter_LO,Shifter_OFF;
-
-void f_instruction0(const char* ipat, u16 pcAfterInstructionDecode) {
+void f_instruction0 (u8 PCH, u8 PCL, u8 A, u8 B, u8 C, u8 D, u8 E, u8 H, u8 L, u8 SPH, u8 SPL,
+                     u1 FlagS, u1 FlagZ, u1 FlagA, u1 FlagP, u1 FlagCY,
+                     const char* ipat) {
   dump_state(ipat,
-             pcAfterInstructionDecode,
-             A,B,C,D,E,H,L,SPH,SPL,
+             PCH,PCL,A,B,C,D,E,H,L,SPH,SPL,
              FlagS,FlagZ,FlagA,FlagP,FlagCY
              );
 }
 
-void f_instruction1(const char* ipat, u8 b1, u16 pcAfterInstructionDecode) {
+void f_instruction1 (u8 PCH, u8 PCL, u8 A, u8 B, u8 C, u8 D, u8 E, u8 H, u8 L, u8 SPH, u8 SPL,
+                     u1 FlagS, u1 FlagZ, u1 FlagA, u1 FlagP, u1 FlagCY,
+                     const char* ipat, u8 b1) {
   static char instruction[256];
   sprintf(instruction,ipat,b1);
   dump_state(instruction,
-              pcAfterInstructionDecode,
-              A,B,C,D,E,H,L,SPH,SPL,
-              FlagS,FlagZ,FlagA,FlagP,FlagCY
-              );
-}
-
-void f_instruction2(const char* ipat, u8 b2, u8 b1, u16 pcAfterInstructionDecode) {
-  static char instruction[256];
-  sprintf(instruction,ipat,b2,b1);
-  dump_state(instruction,
-             pcAfterInstructionDecode,
-             A,B,C,D,E,H,L,SPH,SPL,
+             PCH,PCL,A,B,C,D,E,H,L,SPH,SPL,
              FlagS,FlagZ,FlagA,FlagP,FlagCY
              );
 }
 
+void f_instruction2 (u8 PCH, u8 PCL, u8 A, u8 B, u8 C, u8 D, u8 E, u8 H, u8 L, u8 SPH, u8 SPL,
+                     u1 FlagS, u1 FlagZ, u1 FlagA, u1 FlagP, u1 FlagCY,
+                     const char* ipat, u8 b2, u8 b1) {
+  static char instruction[256];
+  sprintf(instruction,ipat,b2,b1);
+  dump_state(instruction,
+             PCH,PCL,A,B,C,D,E,H,L,SPH,SPL,
+             FlagS,FlagZ,FlagA,FlagP,FlagCY
+             );
+}
 
 #ifdef TRACE
-//#define instruction(x...) f_instruction(x)
 #define instruction0(x...) f_instruction0(x)
 #define instruction1(x...) f_instruction1(x)
 #define instruction2(x...) f_instruction2(x)
 #else
-//#define instruction(x...) {}
 #define instruction0(x...) {}
 #define instruction1(x...) {}
 #define instruction2(x...) {}
@@ -89,7 +83,6 @@ inline static void advance(int n) {
   icount++;
 #endif
 }
-
 
 inline static void sound_control(const char* sound,u1 b) {
   //printf ("sound_control: %s = %s\n", sound, b?"on":"off");
@@ -133,6 +126,9 @@ static int interrupts = 0;
 
 static Control op_CF (); // defined in generated code
 static Control op_D7 (); // defined in generated code
+
+
+u8 PCH,PCL; // program counter; high/low byte
 
 
 noinline Control jumpInterrupt(u16 pc, Func f) {
@@ -238,3 +234,9 @@ Control jump16(u16 pc) {
   }
 
 }
+
+// rest of the registers visible to the generated code
+
+u8 A,B,C,D,E,H,L,SPH,SPL;
+u1 FlagS,FlagZ,FlagA,FlagP,FlagCY;
+u8 Shifter_HI,Shifter_LO,Shifter_OFF;

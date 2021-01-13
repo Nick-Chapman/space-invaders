@@ -41,7 +41,7 @@ data Program
   | S_Let17 AVar Exp17 Program
   | S_AtRef Addr Program
   | S_MarkReturnAddress Exp16 Program
-  | S_TraceInstruction (Cpu CompTime) (Instruction Exp8) Exp16 Program
+  | S_TraceInstruction (Cpu CompTime) (Instruction Exp8) Program
   | S_Advance Int Program
   | S_UnknownOutput Word8 Exp8 Program
   | S_SoundControl Sound Exp1 Program
@@ -150,7 +150,7 @@ layProgram = \case
     vert [ lay ("#return-to: " ++ show a)
          , layProgram next
          ]
-  S_TraceInstruction _cpu i _pcAfterDecode next ->
+  S_TraceInstruction _cpu i next ->
     vert [ lay ("#instruction: " ++ show i)
          , layProgram next
          ]

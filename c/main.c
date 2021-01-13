@@ -17,6 +17,9 @@ static u64 time() { //in micro-seconds
   return tv.tv_sec*(u64)1000000+tv.tv_usec;
 }
 
+static int opt = OPT;
+static char mode = 'B';
+
 int main (int argc, char* argv[]) {
   if (argc != 2) {
     printf("expected exactly one command line arg, got %d\n",argc-1);
@@ -24,21 +27,27 @@ int main (int argc, char* argv[]) {
   }
   char* arg = argv[1];
 
-  if (0 == strcmp(arg,"testA")) { use_per_address_programs = false; return test1(); }
+  if (0 == strcmp(arg,"testA")) { mode = 'A'; use_per_address_programs = false; return test1(); }
   else if (0 == strcmp(arg,"testB")) return test1();
-  else if (0 == strcmp(arg,"testC")) { use_fast_programs = true; return test1(); }
+  else if (0 == strcmp(arg,"testC")) { mode = 'C'; use_fast_programs = true; return test1(); }
 
-  else if (0 == strcmp(arg,"speedA")) { use_per_address_programs = false; return speed(); }
+  else if (0 == strcmp(arg,"speedA")) { mode = 'A'; use_per_address_programs = false; return speed(); }
   else if (0 == strcmp(arg,"speedB")) return speed();
-  else if (0 == strcmp(arg,"speedC")) { use_fast_programs = true; return speed(); }
+  else if (0 == strcmp(arg,"speedC")) { mode = 'C'; use_fast_programs = true; return speed(); }
 
-  else if (0 == strcmp(arg,"playA")) { use_per_address_programs = false; return play(); }
+  else if (0 == strcmp(arg,"playA")) { mode = 'A'; use_per_address_programs = false; return play(); }
   else if (0 == strcmp(arg,"playB")) return play();
-  else if (0 == strcmp(arg,"playC")) { use_fast_programs = true; return play(); }
+  else if (0 == strcmp(arg,"playC")) { mode = 'C'; use_fast_programs = true; return play(); }
   else {
     printf("unexpected command line arg: \"%s\"\n",arg);
     die;
   }
+}
+
+static char* version() {
+  static char buf[256];
+  sprintf(buf,"mode=%c,opt=%d",mode,opt);
+  return buf;
 }
 
 static bool dump_state_every_instruction = false;
@@ -100,13 +109,15 @@ int speed () {
   int mhz = cycles/duration_us;
   int secs = cycles/TWO_MEG;
   int speedup = mhz/2;
-  printf("sim-time(secs)=%d, "
+  printf("version=%s, "
+         "sim-time(secs)=%d, "
          "cycles=%ld, "
          //"duration(us)=%ld, "
          "duration(s)=%.3g, "
          //"mhz=%d, "
          "speedup=x%d"
          "\n",
+         version(),
          secs,
          cycles,
          //duration_us,
@@ -158,6 +169,7 @@ static const int renderscale = 3;
 const long cycles_between_frames = (TWO_MEG / 60);
 
 int play () {
+  printf("Running space-invaders. Version = %s\n", version());
   SDL_Init(SDL_INIT_EVERYTHING);
   SDL_Window* window =
     SDL_CreateWindow("space-invaders", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,

@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <string.h>
-#include "shared.h"
-#include "SDL.h"
 #include <sys/time.h>
+#include "SDL.h"
+#include "machine.h"
 
 static int test1 ();
 static int speed ();
@@ -16,9 +16,6 @@ static u64 time() { //in micro-seconds
   gettimeofday(&tv,NULL);
   return tv.tv_sec*(u64)1000000+tv.tv_usec;
 }
-
-static bool use_per_address_programs = true;
-static bool use_fast_programs = false;
 
 int main (int argc, char* argv[]) {
   if (argc != 2) {
@@ -70,15 +67,7 @@ void f_instruction(const char* instruction, u16 pcAfterInstructionDecode) {
 }
 
 static Func initial_program() {
-  if (use_per_address_programs) {
-    if (use_fast_programs) {
-      return fast_0000;
-    } else {
-      return slow_0000;
-    }
-  } else {
-    return (Func)jump16(0x0);
-  }
+  return (Func)jump16(0x0);
 }
 
 int test1 () {
@@ -283,56 +272,4 @@ static void input() {
     }
     keystate = (keystate & ~mask) | (-f & mask);
   }
-}
-
-
-
-Control jump16(u16 pc) {
-
-  if (use_per_address_programs) {
-
-    if (pc>=ROM_SIZE) {
-      printf ("jump16: (a>=ROM_SIZE) : a=%04x, ROM_SIZE=%04x\n",pc,ROM_SIZE);
-      die;
-    }
-    Func fn =
-      use_fast_programs
-      ? fast_progs_array[pc]
-      : slow_progs_array[pc];
-
-    if (fn == 0) {
-      printf ("jump16: no program for target address: %04x\n",pc);
-      die;
-    }
-    return jumpDirect(pc,fn);
-  }
-
-  u8 byte = mem[pc];
-
-  if (byte==0xD3) { //OUT
-    u8 imm1 = mem[pc+1];
-    Func fn = output_instruction_array[imm1];
-    u16 pcAfterDecode = pc+2;
-    PCH = pcAfterDecode >> 8;
-    PCL = pcAfterDecode & 0xFF;
-    return jumpDirect(pc,fn);
-
-  } else if (byte==0xDB) { //IN
-
-    u8 imm1 = mem[pc+1];
-    Func fn = input_instruction_array[imm1];
-    u16 pcAfterDecode = pc+2;
-    PCH = pcAfterDecode >> 8;
-    PCL = pcAfterDecode & 0xFF;
-    return jumpDirect(pc,fn);
-
-  } else { //other op-code
-
-    Func fn = ops_array[byte];
-    u16 pcAfterDecode = pc+1;
-    PCH = pcAfterDecode >> 8;
-    PCL = pcAfterDecode & 0xFF;
-    return jumpDirect(pc,fn);
-  }
-
 }

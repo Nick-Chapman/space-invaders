@@ -183,7 +183,7 @@ convertRom rom = do
                         | a <- take 0x2000 [0..] ]
                })
   let defs =
-        [ Include "\"program.h\"" ]
+        [ Include "\"machine.c\"" ]
         ++ [mem]
         ++ slow_forwards
         ++ fast_forwards

@@ -45,13 +45,13 @@ playC: invaders.exe
 	./invaders.exe playC
 
 
-invaders.exe: c/program.o c/main.o
+invaders.exe: c/main.o c/program.o
 	gcc $^ -o $@ $(LDFLAGS)
 
-c/program.o: c/program.c c/program.h c/shared.h Makefile
+c/program.o: c/program.c c/machine.h c/machine.c Makefile
 	gcc $(CFLAGS) -c $< -o $@ -Wno-unused-variable
 
-c/main.o: c/main.c c/shared.h Makefile
+c/main.o: c/main.c c/machine.h Makefile
 	gcc $(CFLAGS) -c $< -o $@
 
 c/program.c: src/*.hs

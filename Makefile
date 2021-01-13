@@ -1,10 +1,12 @@
 
-top: testB
+top: test
 
 #OPT = -O2 # uncomment this for speedup: x280 -> x800 (at the cost of slower compiles)
 
 CFLAGS = -Wall -Werror -Winline $(OPT) -I /usr/include/SDL2
 LDFLAGS = -lSDL2
+
+test: testB
 
 testA: invaders.exe
 	./invaders.exe testA > trace/test1.out
@@ -18,6 +20,7 @@ testC: invaders.exe
 	./invaders.exe testC > trace/test1.out
 	git diff trace/test1.out
 
+
 speed: speedA speedB speedC
 
 speedA: invaders.exe
@@ -29,11 +32,18 @@ speedB: invaders.exe
 speedC: invaders.exe
 	./invaders.exe speedC
 
-play0: invaders.exe
-	./invaders.exe play0
 
-play: invaders.exe
-	./invaders.exe play
+play: playC
+
+playA: invaders.exe
+	./invaders.exe playA
+
+playB: invaders.exe
+	./invaders.exe playB
+
+playC: invaders.exe
+	./invaders.exe playC
+
 
 invaders.exe: c/program.o c/main.o
 	gcc $^ -o $@ $(LDFLAGS)

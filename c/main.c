@@ -35,8 +35,9 @@ int main (int argc, char* argv[]) {
   else if (0 == strcmp(arg,"speedB")) return speed();
   else if (0 == strcmp(arg,"speedC")) { use_fast_programs = true; return speed(); }
 
-  else if (0 == strcmp(arg,"play0")) { use_per_address_programs = false; return play(); }
-  else if (0 == strcmp(arg,"play")) return play();
+  else if (0 == strcmp(arg,"playA")) { use_per_address_programs = false; return play(); }
+  else if (0 == strcmp(arg,"playB")) return play();
+  else if (0 == strcmp(arg,"playC")) { use_fast_programs = true; return play(); }
   else {
     printf("unexpected command line arg: \"%s\"\n",arg);
     die;

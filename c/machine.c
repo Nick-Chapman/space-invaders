@@ -26,9 +26,11 @@ long icount = 0;
 long cycles = 0;
 
 inline static void advance(int n) {
-  cycles += n;
   credit -= n;
+  cycles += n;
+#ifdef TRACE
   icount++;
+#endif
 }
 
 
@@ -75,8 +77,6 @@ static int interrupts = 0;
 static Control op_CF (); // defined in generated code
 static Control op_D7 (); // defined in generated code
 
-
-//extern Control jumpInterrupt(u16 pc, Func f);
 
 noinline Control jumpInterrupt(u16 pc, Func f) {
   credit += HALF_FRAME_CYCLES;

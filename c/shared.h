@@ -7,7 +7,8 @@
 typedef void* (*Control)(void);
 typedef Control (*Func)();
 
-extern Control prog_0000 ();
+extern Control slow_0000 ();
+extern Control fast_0000 ();
 extern long cycles;
 
 typedef bool u1;
@@ -73,14 +74,23 @@ extern int credit;
 
 extern Control jump16(u16);
 extern Control jumpInterrupt(u16 pc, Func f);
-extern Control jumpDirect(u16,Func);
+
+static inline Control jumpDirect(u16,Func);
 
 #define ROM_SIZE 0x2000
 
-Func prog [ROM_SIZE];
-Func ops_array [256];
-Func output_instruction_array [ 0x07 ];
-Func input_instruction_array [ 0x05 ];
+extern Func slow_progs_array [];
+extern Func fast_progs_array [];
+extern Func ops_array [];
+extern Func output_instruction_array [];
+extern Func input_instruction_array [];
 
 extern Control op_CF ();
 extern Control op_D7 ();
+
+Control jumpDirect(u16 pc, Func f) {
+  if (credit <= 0) {
+    return jumpInterrupt(pc,f);
+  }
+  return (Control)f;
+}

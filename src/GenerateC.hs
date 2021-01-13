@@ -13,11 +13,12 @@ import Data.Maybe (fromJust)
 import HiLo (HiLo(..))
 import InstructionSet (Op(Op0,Op1),Op0(RST),Op1(IN,OUT),Instruction(Ins1),decode)
 import Residual (Exp1(..),Exp8(..),Exp16(..),Exp17(..),Program(..),AVar,Lay,vert,lay,tab)
-import Rom (Rom,lookup)
-import Static (oneStepReach,searchReach,startPoints)
+import Rom (Rom)
+import Static (oneStepReach,searchReach,startPoints,returnAddresses)
 import qualified Data.Map.Strict as Map
-import qualified Rom (loadInvaders)
+import qualified Rom (loadInvaders,lookup,size)
 import qualified Shifter (Reg)
+import qualified Data.Set as Set
 
 main :: IO ()
 main = do
@@ -30,21 +31,7 @@ main = do
 
 convertRom :: Rom -> IO CFile
 convertRom rom = do
-  let
-    programsForEveryAddress =
-      [ (addr,program)
-      | addr <- [0..0x1FFF]
-      , let program = compileAt (\_ -> False) rom addr ]
 
-  let step :: Addr -> [Addr]
-      step a = Map.findWithDefault (error $ "step: " <> show a) a stepMap
-        where
-          stepMap :: Map Addr [Addr]
-          stepMap = Map.fromList [ (a, oneStepReach p) | (a,p) <- programsForEveryAddress ]
-
-  reachSet <- searchReach step startPoints
-
-  let reachablePrograms = [ (a,p) | (a,p) <- programsForEveryAddress, a `elem` reachSet ]
   let
     mem =
       ArrDef (CArrDef
@@ -54,32 +41,7 @@ convertRom rom = do
                , init = [ LitB $ fromJust $ Rom.lookup rom a
                         | a <- take 0x2000 [0..] ]
                })
-  let
-    forwards =
-      [FunDec $ CFunDec
-        { typ = CType "Control"
-        , name = nameOfProgDef addr
-        }
-      | (addr,_) <- reachablePrograms ]
 
-    progs =
-      [ FunDef $ CFunDef
-        { typ = CType "Control"
-        , name = nameOfProgDef addr
-        , body = Block (convertProgram program)
-        }
-      | (addr,program) <- reachablePrograms ]
-
-    progs_array =
-      ArrDef (CArrDef
-               { typ  = CType "Func"
-               , name = CName "prog" -- "progs_array"
-               , size = Ident (CName "ROM_SIZE")
-               , init = [ if a `elem` reachSet
-                          then Ident (nameOfProgDef a)
-                          else LitI 0
-                        | a <- take 0x2000 [0..] ]
-               })
   let
     skippedOps =
       [
@@ -96,20 +58,19 @@ convertRom rom = do
         -- start points. But ntead we just skip the gernation of programs for certain
         -- reset instructions. This is ok because we know these instructions are never
         -- used by the space-invaders program,
-      , Op0 (RST 3), Op0 (RST 5)
+      , Op0 (RST 3), Op0 (RST 5), Op0 (RST 6), Op0 (RST 7)
       ]
     op_defs =
       [ FunDef $ CFunDef
         { typ = CType "Control"
         , name = CName ("op_" ++ show byte)
-        , body = Block (convertProgram program)
+        , body = Block (convertProgram nameOfSlowDef program)
         }
       | byte :: Byte <- [0..0xFF]
       , let op = decode byte
       , op `notElem` skippedOps
       , let program = compileOp rom op
       ]
-
     ops_array =
       ArrDef (CArrDef
                { typ  = CType "Func"
@@ -126,13 +87,12 @@ convertRom rom = do
       [ FunDef $ CFunDef
         { typ = CType "Control"
         , name = CName ("output_" ++ show byte)
-        , body = Block (convertProgram program)
+        , body = Block (convertProgram nameOfSlowDef program)
         }
       | byte :: Byte <- [0..max_output]
       , let i = Ins1 OUT (E8_Lit byte)
       , let program = compileInstruction rom i
       ]
-
     output_array =
       ArrDef (CArrDef
                { typ  = CType "Func"
@@ -149,13 +109,12 @@ convertRom rom = do
       [ FunDef $ CFunDef
         { typ = CType "Control"
         , name = CName ("input_" ++ show byte)
-        , body = Block (convertProgram program)
+        , body = Block (convertProgram nameOfSlowDef program)
         }
       | byte :: Byte <- [0..max_input]
       , let i = Ins1 IN (E8_Lit byte)
       , let program = compileInstruction rom i
       ]
-
     input_array =
       ArrDef (CArrDef
                { typ  = CType "Func"
@@ -166,51 +125,176 @@ convertRom rom = do
                         ]
                })
 
+  slowProgs <- slowProgramsOfRom rom
+  let
+    slow_forwards =
+      [FunDec $ CFunDec
+        { typ = CType "Control"
+        , name = nameOfSlowDef addr
+        }
+      | (addr,_) <- slowProgs
+      ]
+    slow_defs =
+      [ FunDef $ CFunDef
+        { typ = CType "Control"
+        , name = nameOfSlowDef addr
+        , body = Block (convertProgram nameOfSlowDef program)
+        }
+      | (addr,program) <- slowProgs
+      ]
+    slowReachSet = Set.fromList (map fst slowProgs)
+    slow_progs_array =
+      ArrDef (CArrDef
+               { typ  = CType "Func"
+               , name = CName "slow_progs_array"
+               , size = Ident (CName "ROM_SIZE")
+               , init = [ if a `elem` slowReachSet
+                          then Ident (nameOfSlowDef a)
+                          else LitI 0
+                        | a <- take 0x2000 [0..] ]
+               })
+
+  fastProgs <- fastProgramsOfRom rom
+  let
+    fast_forwards =
+      [FunDec $ CFunDec
+        { typ = CType "Control"
+        , name = nameOfFastDef addr
+        }
+      | (addr,_) <- fastProgs
+      ]
+    fast_defs =
+      [ FunDef $ CFunDef
+        { typ = CType "Control"
+        , name = nameOfFastDef addr
+        , body = Block (convertProgram nameOfFastDef program)
+        }
+      | (addr,program) <- fastProgs
+      ]
+    fastReachSet = Set.fromList (map fst fastProgs)
+    fast_progs_array =
+      ArrDef (CArrDef
+               { typ  = CType "Func"
+               , name = CName "fast_progs_array"
+               , size = Ident (CName "ROM_SIZE")
+               , init = [ if a `elem` fastReachSet
+                          then Ident (nameOfFastDef a)
+                          else LitI 0
+                        | a <- take 0x2000 [0..] ]
+               })
   let defs =
-        forwards
+        [ Include "\"program.h\"" ]
+        ++ [mem]
+        ++ slow_forwards
+        ++ fast_forwards
         ++ op_defs ++ [ops_array]
         ++ output_defs ++ [output_array]
         ++ input_defs ++ [input_array]
-        ++ progs ++ [progs_array]
+        ++ slow_defs ++ [slow_progs_array]
+        ++ fast_defs ++ [fast_progs_array]
 
-  return $ CFile $ [ Include "\"program.h\""
-                   ] ++ [mem] ++ defs
+  return $ CFile defs
 
-convertProgram :: Program  -> [CStat]
-convertProgram = \case
-  S_AtRef a next -> Comment ("#at: " ++ show a) : convertProgram next
-  S_MarkReturnAddress a next -> Comment ("#mark-return: " ++ show a) : convertProgram next
-  S_TraceInstruction _cpu i pcAfterDecode next ->
-    Expression (call "instruction" [LitS $ show i, convert16 pcAfterDecode]) : convertProgram next
-  S_Advance n next -> Expression (call "advance" [LitI n]) : convertProgram next
-  S_Jump a -> [Return $ convertJump a]
-  S_If i t e -> [If (convert1 i) (Block (convertProgram t)) (Block (convertProgram e))]
-  S_AssignReg reg exp next -> Expression (Assign (convertReg reg) (convert8 exp)) : convertProgram next
-  S_AssignFlag flag exp next -> Expression (Assign (convertFlag flag) (convert1 exp)) : convertProgram next
-  S_AssignShifterReg reg exp next ->
-    Expression (Assign (convertShifterReg reg) (convert8 exp)) : convertProgram next
-  S_MemWrite i e next -> Expression (call "mem_write" [convert16 i, convert8 e]) : convertProgram next
-  S_Let17 v e next -> Declare u17t (convertVar v) (convert17 e) : convertProgram next
-  S_Let16 v e next -> Declare u16t (convertVar v) (convert16 e) : convertProgram next
-  S_Let8 v e next -> Declare u8t (convertVar v) (convert8 e) : convertProgram next
-  S_SoundControl sound bool next ->
-    Expression (call "sound_control" [LitS $ show sound, convert1 bool]) : convertProgram next
-  S_EnableInterrupts next -> Expression (call "enable_interrupts" []) : convertProgram next
-  S_DisableInterrupts next -> Expression (call "disable_interrupts" []) : convertProgram next
-  S_UnknownOutput port byte next ->
-    Expression (call "unknown_output" [LitI (fromIntegral port), convert8 byte]) : convertProgram next
 
-convertJump :: Exp16 -> CExp
-convertJump = \case
-  E16_Lit a | optimizeJumpDirect ->
-    call "jumpDirect" [LitA a, Ident $ nameOfProgDef a]
-  e ->
-    call "jump16" [convert16 e]
+slowProgramsOfRom :: Rom -> IO [(Addr,Program)]
+slowProgramsOfRom rom = do
+  let
+    programsForEveryAddress =
+      [ (addr,program)
+      | addr <- [0.. Rom.size rom - 1]
+      , let program = compileAt (\_ -> False) rom addr ]
+
+  let step :: Addr -> [Addr]
+      step a = Map.findWithDefault (error $ "step: " <> show a) a stepMap
+        where
+          stepMap :: Map Addr [Addr]
+          stepMap = Map.fromList [ (a, oneStepReach p) | (a,p) <- programsForEveryAddress ]
+
+  reachSet <- searchReach step startPoints
+  let slowProgs = [ (a,p) | (a,p) <- programsForEveryAddress, a `elem` reachSet ]
+  pure slowProgs
+
+fastProgramsOfRom :: Rom -> IO [(Addr,Program)]
+fastProgramsOfRom rom = do
+  let
+    programsForEveryAddress =
+      [ (addr,program)
+      | addr <- [0.. Rom.size rom - 1]
+      , let program = compileAt (\_ -> False) rom addr ]
+
+    step :: Addr -> [Addr]
+    --step a = Map.findWithDefault (error $ "step: " <> show a) a stepMap
+    step a = Map.findWithDefault [] a stepMap
+        where
+          stepMap :: Map Addr [Addr]
+          stepMap = Map.fromList [ (a, oneStepReach p) | (a,p) <- programsForEveryAddress ]
+
+  reachSet <- searchReach step startPoints
+
+  let
+    joinPoints = [ b | (b,as) <- collate backward, length as > 1 ]
+      where
+        backward = [ (b,a) | a <- Set.toList reachSet, b <- step a ]
+
+        collate :: Ord a => [(a,b)] -> [(a,[b])]
+        collate pairs = Map.toList $ Map.fromListWith (++) [ (a,[b]) | (a,b) <- pairs ]
+
+    returnPoints =
+      [ r
+      | (a,p) <- programsForEveryAddress
+      , a `elem` reachSet
+      , r <- returnAddresses p
+      ]
+
+    inlinedSharingJoins =
+      [ (addr,program)
+      | addr <- Set.toList labels
+      , let program = compileAt (`notElem` labels) rom addr ]
+      where
+        labels = Set.fromList (startPoints ++ returnPoints ++ joinPoints)
+
+  return inlinedSharingJoins
+
+
+
+convertProgram :: (Addr -> CName) -> Program  -> [CStat]
+convertProgram nameOfDef = convert
   where
-    optimizeJumpDirect = True
+    convert = \case
+      S_AtRef a next -> Comment ("#at: " ++ show a) : convert next
+      S_MarkReturnAddress a next -> Comment ("#mark-return: " ++ show a) : convert next
+      S_TraceInstruction _cpu i pcAfterDecode next ->
+        Expression (call "instruction" [LitS $ show i, convert16 pcAfterDecode]) : convert next
+      S_Advance n next -> Expression (call "advance" [LitI n]) : convert next
+      S_Jump a -> [Return $ convertJump a]
+      S_If i t e -> [If (convert1 i) (Block (convert t)) (Block (convert e))]
+      S_AssignReg reg exp next -> Expression (Assign (convertReg reg) (convert8 exp)) : convert next
+      S_AssignFlag flag exp next -> Expression (Assign (convertFlag flag) (convert1 exp)) : convert next
+      S_AssignShifterReg reg exp next ->
+        Expression (Assign (convertShifterReg reg) (convert8 exp)) : convert next
+      S_MemWrite i e next -> Expression (call "mem_write" [convert16 i, convert8 e]) : convert next
+      S_Let17 v e next -> Declare u17t (convertVar v) (convert17 e) : convert next
+      S_Let16 v e next -> Declare u16t (convertVar v) (convert16 e) : convert next
+      S_Let8 v e next -> Declare u8t (convertVar v) (convert8 e) : convert next
+      S_SoundControl sound bool next ->
+        Expression (call "sound_control" [LitS $ show sound, convert1 bool]) : convert next
+      S_EnableInterrupts next -> Expression (call "enable_interrupts" []) : convert next
+      S_DisableInterrupts next -> Expression (call "disable_interrupts" []) : convert next
+      S_UnknownOutput port byte next ->
+        Expression (call "unknown_output" [LitI (fromIntegral port), convert8 byte]) : convert next
 
-nameOfProgDef :: Addr -> CName
-nameOfProgDef a = CName ("prog_" ++ show a)
+    convertJump :: Exp16 -> CExp
+    convertJump = \case
+          E16_Lit a ->
+            call "jumpDirect" [LitA a, Ident $ nameOfDef a]
+          e ->
+            call "jump16" [convert16 e]
+
+nameOfSlowDef :: Addr -> CName
+nameOfSlowDef a = CName ("slow_" ++ show a)
+
+nameOfFastDef :: Addr -> CName
+nameOfFastDef a = CName ("fast_" ++ show a)
 
 nameOfOpDef :: Byte -> CName
 nameOfOpDef b = CName ("op_" ++ show b)

@@ -18,6 +18,7 @@ static u64 time() { //in micro-seconds
 }
 
 static bool use_per_address_programs = true;
+static bool use_fast_programs = false;
 
 int main (int argc, char* argv[]) {
   if (argc != 2) {
@@ -26,8 +27,9 @@ int main (int argc, char* argv[]) {
   }
   char* arg = argv[1];
   if (0 == strcmp(arg,"test1")) return test1();
-  else if (0 == strcmp(arg,"speed0")) { use_per_address_programs = false; return speed(); }
-  else if (0 == strcmp(arg,"speed")) return speed();
+  else if (0 == strcmp(arg,"speedA")) { use_per_address_programs = false; return speed(); }
+  else if (0 == strcmp(arg,"speedB")) return speed();
+  else if (0 == strcmp(arg,"speedC")) { use_fast_programs = true; return speed(); }
   else if (0 == strcmp(arg,"play0")) { use_per_address_programs = false; return play(); }
   else if (0 == strcmp(arg,"play")) return play();
   else {
@@ -35,7 +37,6 @@ int main (int argc, char* argv[]) {
     die;
   }
 }
-
 
 static bool dump_state_every_instruction = false;
 static int icount = 0;
@@ -64,7 +65,11 @@ void f_instruction(const char* instruction, u16 pcAfterInstructionDecode) {
 
 static Func initial_program() {
   if (use_per_address_programs) {
-    return prog_0000;
+    if (use_fast_programs) {
+      return fast_0000;
+    } else {
+      return slow_0000;
+    }
   } else {
     return (Func)jump16(0x0);
   }
@@ -284,7 +289,11 @@ Control jump16(u16 pc) {
       printf ("jump16: (a>=ROM_SIZE) : a=%04x, ROM_SIZE=%04x\n",pc,ROM_SIZE);
       die;
     }
-    Func fn = prog[pc];
+    Func fn =
+      use_fast_programs
+      ? fast_progs_array[pc]
+      : slow_progs_array[pc];
+
     if (fn == 0) {
       printf ("jump16: no program for target address: %04x\n",pc);
       die;
@@ -320,11 +329,4 @@ Control jump16(u16 pc) {
     return jumpDirect(pc,fn);
   }
 
-}
-
-Control jumpDirect(u16 pc, Func f) {
-  if (credit <= 0) {
-    return jumpInterrupt(pc,f);
-  }
-  return (Control)f;
 }

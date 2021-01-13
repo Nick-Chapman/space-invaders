@@ -20,7 +20,7 @@ noinline static u1 e1_parity(u8);
 inline static u8 e8_update_bit(u8,int,u1);
 inline static u8 e8_read_mem(u16);
 
-inline static u8 e8_unknown_input(int);
+noinline static u8 e8_unknown_input(int);
 
 extern Control op_rst1();
 extern Control op_rst2();
@@ -111,6 +111,6 @@ u8 e8_read_mem(u16 a) {
 }
 
 u8 e8_unknown_input(int p) {
-  printf ("unknown_input: %d\n",p);
+  //printf ("unknown_input: %d\n",p);
   die
 }

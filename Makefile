@@ -10,11 +10,16 @@ test1: invaders.exe
 	./invaders.exe test1 > trace/test1.out
 	git diff trace/test1.out
 
-speed0: invaders.exe
-	./invaders.exe speed0
+speed: speedA speedB speedC
 
-speed: invaders.exe
-	./invaders.exe speed
+speedA: invaders.exe
+	./invaders.exe speedA
+
+speedB: invaders.exe
+	./invaders.exe speedB
+
+speedC: invaders.exe
+	./invaders.exe speedC
 
 play0: invaders.exe
 	./invaders.exe play0
@@ -26,7 +31,7 @@ invaders.exe: c/program.o c/main.o
 	gcc $^ -o $@ $(LDFLAGS)
 
 c/program.o: c/program.c c/program.h c/shared.h Makefile
-	gcc $(CFLAGS) -c $< -o $@
+	gcc $(CFLAGS) -c $< -o $@ -Wno-unused-variable
 
 c/main.o: c/main.c c/shared.h Makefile
 	gcc $(CFLAGS) -c $< -o $@

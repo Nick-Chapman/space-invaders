@@ -14,6 +14,12 @@ void dump_state (const char* instruction,
                  u8 PCH, u8 PCL, u8 A, u8 B, u8 C, u8 D, u8 E, u8 H, u8 L, u8 SPH, u8 SPL,
                  u1 FlagS, u1 FlagZ, u1 FlagA, u1 FlagP, u1 FlagCY
                  ) {
+
+  if (icount>50000) {
+    printf("STOP\n");
+    exit(0);
+  }
+
   printf("%8ld  [%08ld] "
          "PC:%02X%02X "
          "A:%02X B:%02X C:%02X D:%02X E:%02X HL:%02X%02X SP:%02X%02X "
@@ -144,13 +150,6 @@ noinline Control jumpInterrupt(u16 pc, Func f) {
   return (Control)f;
 }
 
-inline static Control jumpDirect(u16 pc, Func f) {
-  if (credit <= 0) {
-    return jumpInterrupt(pc,f);
-  }
-  return (Control)f;
-}
-
 noinline static void mem_write(u16 a,u8 e) {
   if (a>=MEM_SIZE) {
     //printf ("mem_write: (a>=MEM_SIZE) : a=%04x, MEM_SIZE=%04x\n",a,MEM_SIZE);
@@ -186,6 +185,20 @@ extern Func input_instruction_array [];
 extern Func slow_progs_array [];
 extern Func fast_progs_array [];
 
+
+inline static Control jumpDirect(u16 pc, Func slow, Func fast) {
+  if (credit > 300) { //longest fast program has size 296
+    if (use_fast_programs && fast) {
+      return (Control)fast;
+    }
+    return (Control)slow;
+  }
+  if (credit <= 0) {
+    return jumpInterrupt(pc,slow);
+  }
+  return (Control)slow;
+}
+
 Control jump16(u16 pc) {
   if (use_per_address_programs) {
 
@@ -193,16 +206,32 @@ Control jump16(u16 pc) {
       printf ("jump16: (a>=ROM_SIZE) : a=%04x, ROM_SIZE=%04x\n",pc,ROM_SIZE);
       die;
     }
-    Func fn =
-      use_fast_programs
-      ? fast_progs_array[pc]
-      : slow_progs_array[pc];
 
-    if (fn == 0) {
-      printf ("jump16: no program for target address: %04x\n",pc);
-      die;
+    if (use_fast_programs) {
+
+      Func slow = slow_progs_array[pc];
+      if (slow == 0) {
+        printf ("jump16 (mode C) : no slow program for target address: %04x\n",pc);
+        die;
+      }
+      Func fast = fast_progs_array[pc];
+      fast = fast ? fast : slow;
+      if (fast == 0) {
+        printf ("jump16 (mode C) : no fast program for target address: %04x\n",pc);
+        die;
+      }
+      return jumpDirect(pc,slow,fast);
+
+    } else {
+
+      Func fn = slow_progs_array[pc];
+      if (fn == 0) {
+        printf ("jump16 (mode B) : no program for target address: %04x\n",pc);
+        die;
+      }
+      return jumpDirect(pc,fn,fn);
     }
-    return jumpDirect(pc,fn);
+
   }
 
   u8 byte = mem[pc];
@@ -213,7 +242,7 @@ Control jump16(u16 pc) {
     u16 pcAfterDecode = pc+2;
     PCH = pcAfterDecode >> 8;
     PCL = pcAfterDecode & 0xFF;
-    return jumpDirect(pc,fn);
+    return jumpDirect(pc,fn,fn);
 
   } else if (byte==0xDB) { //IN
 
@@ -222,7 +251,7 @@ Control jump16(u16 pc) {
     u16 pcAfterDecode = pc+2;
     PCH = pcAfterDecode >> 8;
     PCL = pcAfterDecode & 0xFF;
-    return jumpDirect(pc,fn);
+    return jumpDirect(pc,fn,fn);
 
   } else { //other op-code
 
@@ -230,7 +259,7 @@ Control jump16(u16 pc) {
     u16 pcAfterDecode = pc+1;
     PCH = pcAfterDecode >> 8;
     PCL = pcAfterDecode & 0xFF;
-    return jumpDirect(pc,fn);
+    return jumpDirect(pc,fn,fn);
   }
 
 }

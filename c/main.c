@@ -58,10 +58,9 @@ int test1 () {
   Func fn = initial_program();
   while (fn) {
     fn = (Func)fn();
-    if (icount>50000) break;
   }
-  printf("STOP\n");
-  return 0;
+  printf("test1, fn==0\n");
+  die;
 }
 
 #define MEG 1000000
@@ -177,6 +176,7 @@ int play () {
       }
     }
   }
+  printf("STOP\n");
   SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow(window);
   return 0;

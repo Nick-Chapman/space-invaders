@@ -14,7 +14,7 @@ import HiLo (HiLo(..))
 import InstructionSet (Op(Op0,Op1),Op0(RST),Op1(IN,OUT),Instruction(..),decode)
 import Residual (Exp1(..),Exp8(..),Exp16(..),Exp17(..),Program(..),AVar,Lay,vert,lay,tab)
 import Rom (Rom)
-import Static (oneStepReach,searchReach,startPoints,returnAddresses)
+import Static (oneStepReach,searchReach,startPoints,returnAddresses,programLength)
 import qualified Data.Map.Strict as Map
 import qualified Rom (loadInvaders,lookup,size)
 import qualified Shifter (Reg)
@@ -42,6 +42,35 @@ convertRom rom = do
                         | a <- take 0x2000 [0..] ]
                })
 
+  slowProgs <- slowProgramsOfRom rom
+  fastProgs <- fastProgramsOfRom rom
+
+  let
+    slowReachSet = Set.fromList (map fst slowProgs)
+    fastReachSet = Set.fromList (map fst fastProgs)
+
+  print ("max program length", maximum [ programLength prog | (_,prog) <- fastProgs ])
+
+  let
+    nameOfSlowDef,nameOfFastDef :: Addr -> CName
+    nameOfSlowDef a = CName ("slow_" ++ show a)
+    nameOfFastDef a = CName ("fast_" ++ show a)
+
+    slowRef,fastRef :: Addr -> CExp
+    slowRef a =
+      if a `elem` slowReachSet
+      then Ident (nameOfSlowDef a)
+      else LitI 0
+
+    fastRef a =
+      if a `elem` fastReachSet
+      then Ident (nameOfFastDef a)
+      else LitI 0
+
+  let
+    convertProg :: Program  -> [CStat]
+    convertProg = convertProgram slowRef fastRef
+
   let
     skippedOps =
       [
@@ -64,7 +93,7 @@ convertRom rom = do
       [ FunDef $ CFunDef
         { typ = CType "Control"
         , name = CName ("op_" ++ show byte)
-        , body = Block (convertProgram nameOfSlowDef program)
+        , body = Block (convertProg program)
         }
       | byte :: Byte <- [0..0xFF]
       , let op = decode byte
@@ -87,7 +116,7 @@ convertRom rom = do
       [ FunDef $ CFunDef
         { typ = CType "Control"
         , name = CName ("output_" ++ show byte)
-        , body = Block (convertProgram nameOfSlowDef program)
+        , body = Block (convertProg program)
         }
       | byte :: Byte <- [0..max_output]
       , let i = Ins1 OUT (E8_Lit byte)
@@ -109,7 +138,7 @@ convertRom rom = do
       [ FunDef $ CFunDef
         { typ = CType "Control"
         , name = CName ("input_" ++ show byte)
-        , body = Block (convertProgram nameOfSlowDef program)
+        , body = Block (convertProg program)
         }
       | byte :: Byte <- [0..max_input]
       , let i = Ins1 IN (E8_Lit byte)
@@ -125,7 +154,6 @@ convertRom rom = do
                         ]
                })
 
-  slowProgs <- slowProgramsOfRom rom
   let
     slow_forwards =
       [FunDec $ CFunDec
@@ -138,23 +166,18 @@ convertRom rom = do
       [ FunDef $ CFunDef
         { typ = CType "Control"
         , name = nameOfSlowDef addr
-        , body = Block (convertProgram nameOfSlowDef program)
+        , body = Block (convertProg program)
         }
       | (addr,program) <- slowProgs
       ]
-    slowReachSet = Set.fromList (map fst slowProgs)
     slow_progs_array =
       ArrDef (CArrDef
                { typ  = CType "Func"
                , name = CName "slow_progs_array"
                , size = Ident (CName "ROM_SIZE")
-               , init = [ if a `elem` slowReachSet
-                          then Ident (nameOfSlowDef a)
-                          else LitI 0
-                        | a <- take 0x2000 [0..] ]
+               , init = [ slowRef a | a <- take 0x2000 [0..] ]
                })
 
-  fastProgs <- fastProgramsOfRom rom
   let
     fast_forwards =
       [FunDec $ CFunDec
@@ -167,20 +190,16 @@ convertRom rom = do
       [ FunDef $ CFunDef
         { typ = CType "Control"
         , name = nameOfFastDef addr
-        , body = Block (convertProgram nameOfFastDef program)
+        , body = Block (convertProg program)
         }
       | (addr,program) <- fastProgs
       ]
-    fastReachSet = Set.fromList (map fst fastProgs)
     fast_progs_array =
       ArrDef (CArrDef
                { typ  = CType "Func"
                , name = CName "fast_progs_array"
                , size = Ident (CName "ROM_SIZE")
-               , init = [ if a `elem` fastReachSet
-                          then Ident (nameOfFastDef a)
-                          else LitI 0
-                        | a <- take 0x2000 [0..] ]
+               , init = [ fastRef a | a <- take 0x2000 [0..] ]
                })
   let defs =
         [ Include "\"machine.c\"" ]
@@ -259,8 +278,8 @@ fastProgramsOfRom rom = do
 data PatMarker = PatMarker
 instance Show PatMarker where show PatMarker = "%02X"
 
-convertProgram :: (Addr -> CName) -> Program  -> [CStat]
-convertProgram nameOfDef = convert
+convertProgram :: (Addr -> CExp) -> (Addr -> CExp) -> Program  -> [CStat]
+convertProgram slowRef fastRef = convert
   where
     convert = \case
       S_AtRef a next -> Comment ("#at: " ++ show a) : convert next
@@ -297,15 +316,10 @@ convertProgram nameOfDef = convert
     convertJump :: Exp16 -> CExp
     convertJump = \case
           E16_Lit a ->
-            call "jumpDirect" [LitA a, Ident $ nameOfDef a]
+            call "jumpDirect" [LitA a, slowRef a, fastRef a]
           e ->
             call "jump16" [convert16 e]
 
-nameOfSlowDef :: Addr -> CName
-nameOfSlowDef a = CName ("slow_" ++ show a)
-
-nameOfFastDef :: Addr -> CName
-nameOfFastDef a = CName ("fast_" ++ show a)
 
 nameOfOpDef :: Byte -> CName
 nameOfOpDef b = CName ("op_" ++ show b)

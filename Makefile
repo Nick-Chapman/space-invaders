@@ -1,11 +1,11 @@
 
 top: test
 
-all: invaders-opt0.exe invaders-opt2.exe
+all: invaders-opt0.exe invaders-opt1.exe invaders-opt2.exe
 
 speed: speedA0 speedA1 speedA2 speedB0 speedB1 speedB2 speedC0 speedC1 speedC2
-test: testB0
-play: playC0
+test: testC0
+play: playC1
 
 .PRECIOUS: invaders-opt%.exe invaders-opt%-TRACE.exe
 
@@ -30,7 +30,7 @@ test%0: invaders-opt0-TRACE.exe
 play%0: invaders-opt0.exe
 	./$< play$*
 
-play%2: invaders-opt2.exe
+play%1: invaders-opt1.exe
 	./$< play$*
 
 

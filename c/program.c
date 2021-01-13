@@ -8280,7 +8280,7 @@ Control op_C7 ()
     advance ( 4 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x0000,slow_0000 );
+    return jumpDirect ( 0x0000,slow_0000,fast_0000 );
 }
 
 Control op_C8 ()
@@ -8465,7 +8465,7 @@ Control op_CF ()
     advance ( 4 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x0008,slow_0008 );
+    return jumpDirect ( 0x0008,slow_0008,fast_0008 );
 }
 
 Control op_D0 ()
@@ -8628,7 +8628,7 @@ Control op_D7 ()
     advance ( 4 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x0010,slow_0010 );
+    return jumpDirect ( 0x0010,slow_0010,fast_0010 );
 }
 
 Control op_D8 ()
@@ -8958,7 +8958,7 @@ Control op_E7 ()
     advance ( 4 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x0020,slow_0020 );
+    return jumpDirect ( 0x0020,slow_0020,fast_0020 );
 }
 
 Control op_E8 ()
@@ -9546,7 +9546,7 @@ Control slow_0000 ()
     // #at: 0000
     instruction0 ( 0x00,0x01,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"NOP" );
     advance ( 4 );
-    return jumpDirect ( 0x0001,slow_0001 );
+    return jumpDirect ( 0x0001,slow_0001,0 );
 }
 
 Control slow_0001 ()
@@ -9554,7 +9554,7 @@ Control slow_0001 ()
     // #at: 0001
     instruction0 ( 0x00,0x02,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"NOP" );
     advance ( 4 );
-    return jumpDirect ( 0x0002,slow_0002 );
+    return jumpDirect ( 0x0002,slow_0002,0 );
 }
 
 Control slow_0002 ()
@@ -9562,7 +9562,7 @@ Control slow_0002 ()
     // #at: 0002
     instruction0 ( 0x00,0x03,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"NOP" );
     advance ( 4 );
-    return jumpDirect ( 0x0003,slow_0003 );
+    return jumpDirect ( 0x0003,slow_0003,0 );
 }
 
 Control slow_0003 ()
@@ -9570,7 +9570,7 @@ Control slow_0003 ()
     // #at: 0003
     instruction2 ( 0x00,0x06,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x18,0xD4 );
     advance ( 10 );
-    return jumpDirect ( 0x18D4,slow_18D4 );
+    return jumpDirect ( 0x18D4,slow_18D4,0 );
 }
 
 Control slow_0008 ()
@@ -9589,7 +9589,7 @@ Control slow_0008 ()
     advance ( 11 );
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x0009,slow_0009 );
+    return jumpDirect ( 0x0009,slow_0009,0 );
 }
 
 Control slow_0009 ()
@@ -9609,7 +9609,7 @@ Control slow_0009 ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x000A,slow_000A );
+    return jumpDirect ( 0x000A,slow_000A,0 );
 }
 
 Control slow_000A ()
@@ -9629,7 +9629,7 @@ Control slow_000A ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x000B,slow_000B );
+    return jumpDirect ( 0x000B,slow_000B,0 );
 }
 
 Control slow_000B ()
@@ -9649,7 +9649,7 @@ Control slow_000B ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x000C,slow_000C );
+    return jumpDirect ( 0x000C,slow_000C,0 );
 }
 
 Control slow_000C ()
@@ -9657,7 +9657,7 @@ Control slow_000C ()
     // #at: 000C
     instruction2 ( 0x00,0x0F,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x00,0x8C );
     advance ( 10 );
-    return jumpDirect ( 0x008C,slow_008C );
+    return jumpDirect ( 0x008C,slow_008C,0 );
 }
 
 Control slow_0010 ()
@@ -9676,7 +9676,7 @@ Control slow_0010 ()
     advance ( 11 );
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x0011,slow_0011 );
+    return jumpDirect ( 0x0011,slow_0011,0 );
 }
 
 Control slow_0011 ()
@@ -9696,7 +9696,7 @@ Control slow_0011 ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x0012,slow_0012 );
+    return jumpDirect ( 0x0012,slow_0012,0 );
 }
 
 Control slow_0012 ()
@@ -9716,7 +9716,7 @@ Control slow_0012 ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x0013,slow_0013 );
+    return jumpDirect ( 0x0013,slow_0013,0 );
 }
 
 Control slow_0013 ()
@@ -9736,7 +9736,7 @@ Control slow_0013 ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x0014,slow_0014 );
+    return jumpDirect ( 0x0014,slow_0014,0 );
 }
 
 Control slow_0014 ()
@@ -9745,7 +9745,7 @@ Control slow_0014 ()
     instruction1 ( 0x00,0x16,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x80 );
     advance ( 7 );
     A = 0x80;
-    return jumpDirect ( 0x0016,slow_0016 );
+    return jumpDirect ( 0x0016,slow_0016,0 );
 }
 
 Control slow_0016 ()
@@ -9755,7 +9755,7 @@ Control slow_0016 ()
     u8 a1 = A ;
     mem_write ( 0x2072,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0019,slow_0019 );
+    return jumpDirect ( 0x0019,slow_0019,0 );
 }
 
 Control slow_0019 ()
@@ -9765,7 +9765,7 @@ Control slow_0019 ()
     advance ( 10 );
     H = 0x20;
     L = 0xC0;
-    return jumpDirect ( 0x001C,slow_001C );
+    return jumpDirect ( 0x001C,slow_001C,0 );
 }
 
 Control slow_001C ()
@@ -9787,7 +9787,7 @@ Control slow_001C ()
     FlagZ = ( 0 == ( a4 & 0xFF ) );
     FlagA = ( ( ( a7 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a4 & 0xFF ) );
-    return jumpDirect ( 0x001D,slow_001D );
+    return jumpDirect ( 0x001D,slow_001D,0 );
 }
 
 Control slow_001D ()
@@ -9806,7 +9806,7 @@ Control slow_001D ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x17CD,slow_17CD );
+    return jumpDirect ( 0x17CD,slow_17CD,0 );
 }
 
 Control slow_0020 ()
@@ -9815,7 +9815,7 @@ Control slow_0020 ()
     instruction1 ( 0x00,0x22,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"IN   %02X",0x01 );
     advance ( 10 );
     A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,( ! e1_is_pressed ( CoinEntry ) ) ),1,e1_is_pressed ( P2start ) ),2,e1_is_pressed ( P1start ) ),4,e1_is_pressed ( P1shoot ) ),5,e1_is_pressed ( P1left ) ),6,e1_is_pressed ( P1right ) );
-    return jumpDirect ( 0x0022,slow_0022 );
+    return jumpDirect ( 0x0022,slow_0022,0 );
 }
 
 Control slow_0022 ()
@@ -9826,7 +9826,7 @@ Control slow_0022 ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 >> 0x01 ),7,( ( a1 >> 0 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x0023,slow_0023 );
+    return jumpDirect ( 0x0023,slow_0023,0 );
 }
 
 Control slow_0023 ()
@@ -9836,12 +9836,12 @@ Control slow_0023 ()
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0067,slow_0067 );
+        return jumpDirect ( 0x0067,slow_0067,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0026,slow_0026 );
+        return jumpDirect ( 0x0026,slow_0026,0 );
     }
 }
 
@@ -9852,7 +9852,7 @@ Control slow_0026 ()
     u8 a1 = e8_read_mem ( 0x20EA ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0029,slow_0029 );
+    return jumpDirect ( 0x0029,slow_0029,0 );
 }
 
 Control slow_0029 ()
@@ -9870,7 +9870,7 @@ Control slow_0029 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x002A,slow_002A );
+    return jumpDirect ( 0x002A,slow_002A,0 );
 }
 
 Control slow_002A ()
@@ -9880,12 +9880,12 @@ Control slow_002A ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0042,slow_0042 );
+        return jumpDirect ( 0x0042,slow_0042,fast_0042 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x002D,slow_002D );
+        return jumpDirect ( 0x002D,slow_002D,0 );
     }
 }
 
@@ -9896,7 +9896,7 @@ Control slow_002D ()
     u8 a1 = e8_read_mem ( 0x20EB ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0030,slow_0030 );
+    return jumpDirect ( 0x0030,slow_0030,0 );
 }
 
 Control slow_0030 ()
@@ -9914,7 +9914,7 @@ Control slow_0030 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x0032,slow_0032 );
+    return jumpDirect ( 0x0032,slow_0032,0 );
 }
 
 Control slow_0032 ()
@@ -9924,12 +9924,12 @@ Control slow_0032 ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x003E,slow_003E );
+        return jumpDirect ( 0x003E,slow_003E,fast_003E );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0035,slow_0035 );
+        return jumpDirect ( 0x0035,slow_0035,0 );
     }
 }
 
@@ -9949,7 +9949,7 @@ Control slow_0035 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ( ( a2 >> 8 ) >> 0 ) & 0x01 );
-    return jumpDirect ( 0x0037,slow_0037 );
+    return jumpDirect ( 0x0037,slow_0037,0 );
 }
 
 Control slow_0037 ()
@@ -9970,7 +9970,7 @@ Control slow_0037 ()
     FlagA = ( ( ( ( ( ( ( ( a2 >> 1 ) & 0x01 ) || ( ( a2 >> 2 ) & 0x01 ) ) && ( ( a2 >> 3 ) & 0x01 ) ) || FlagA ) ? ( a3 & 0xFF ) : a2 ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( a7 );
     FlagCY = ( ( ( ( ( ( ( ( ( ( a4 & 0xFF ) >> 1 ) & 0x01 ) || ( ( ( a4 & 0xFF ) >> 2 ) & 0x01 ) ) && ( ( ( a4 & 0xFF ) >> 3 ) & 0x01 ) ) || FlagCY ) ? ( a5 & 0xFF ) : ( a4 & 0xFF ) ) >> 4 ) & 0x01 ) || FlagCY );
-    return jumpDirect ( 0x0038,slow_0038 );
+    return jumpDirect ( 0x0038,slow_0038,0 );
 }
 
 Control slow_0038 ()
@@ -9980,7 +9980,7 @@ Control slow_0038 ()
     u8 a1 = A ;
     mem_write ( 0x20EB,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x003B,slow_003B );
+    return jumpDirect ( 0x003B,slow_003B,0 );
 }
 
 Control slow_003B ()
@@ -9999,7 +9999,7 @@ Control slow_003B ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1947,slow_1947 );
+    return jumpDirect ( 0x1947,slow_1947,fast_1947 );
 }
 
 Control slow_003E ()
@@ -10016,7 +10016,7 @@ Control slow_003E ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x003F,slow_003F );
+    return jumpDirect ( 0x003F,slow_003F,fast_003F );
 }
 
 Control slow_003F ()
@@ -10026,7 +10026,7 @@ Control slow_003F ()
     u8 a1 = A ;
     mem_write ( 0x20EA,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0042,slow_0042 );
+    return jumpDirect ( 0x0042,slow_0042,fast_0042 );
 }
 
 Control slow_0042 ()
@@ -10036,7 +10036,7 @@ Control slow_0042 ()
     u8 a1 = e8_read_mem ( 0x20E9 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0045,slow_0045 );
+    return jumpDirect ( 0x0045,slow_0045,0 );
 }
 
 Control slow_0045 ()
@@ -10054,7 +10054,7 @@ Control slow_0045 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0046,slow_0046 );
+    return jumpDirect ( 0x0046,slow_0046,0 );
 }
 
 Control slow_0046 ()
@@ -10064,12 +10064,12 @@ Control slow_0046 ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0082,slow_0082 );
+        return jumpDirect ( 0x0082,slow_0082,fast_0082 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0049,slow_0049 );
+        return jumpDirect ( 0x0049,slow_0049,0 );
     }
 }
 
@@ -10080,7 +10080,7 @@ Control slow_0049 ()
     u8 a1 = e8_read_mem ( 0x20EF ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x004C,slow_004C );
+    return jumpDirect ( 0x004C,slow_004C,0 );
 }
 
 Control slow_004C ()
@@ -10098,7 +10098,7 @@ Control slow_004C ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x004D,slow_004D );
+    return jumpDirect ( 0x004D,slow_004D,0 );
 }
 
 Control slow_004D ()
@@ -10108,12 +10108,12 @@ Control slow_004D ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x006F,slow_006F );
+        return jumpDirect ( 0x006F,slow_006F,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0050,slow_0050 );
+        return jumpDirect ( 0x0050,slow_0050,0 );
     }
 }
 
@@ -10124,7 +10124,7 @@ Control slow_0050 ()
     u8 a1 = e8_read_mem ( 0x20EB ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0053,slow_0053 );
+    return jumpDirect ( 0x0053,slow_0053,0 );
 }
 
 Control slow_0053 ()
@@ -10142,7 +10142,7 @@ Control slow_0053 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0054,slow_0054 );
+    return jumpDirect ( 0x0054,slow_0054,0 );
 }
 
 Control slow_0054 ()
@@ -10152,12 +10152,12 @@ Control slow_0054 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x005D,slow_005D );
+        return jumpDirect ( 0x005D,slow_005D,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0057,slow_0057 );
+        return jumpDirect ( 0x0057,slow_0057,0 );
     }
 }
 
@@ -10177,7 +10177,7 @@ Control slow_0057 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0ABF,slow_0ABF );
+    return jumpDirect ( 0x0ABF,slow_0ABF,0 );
 }
 
 Control slow_005A ()
@@ -10185,7 +10185,7 @@ Control slow_005A ()
     // #at: 005A
     instruction2 ( 0x00,0x5D,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x00,0x82 );
     advance ( 10 );
-    return jumpDirect ( 0x0082,slow_0082 );
+    return jumpDirect ( 0x0082,slow_0082,fast_0082 );
 }
 
 Control slow_005D ()
@@ -10195,7 +10195,7 @@ Control slow_005D ()
     u8 a1 = e8_read_mem ( 0x2093 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0060,slow_0060 );
+    return jumpDirect ( 0x0060,slow_0060,0 );
 }
 
 Control slow_0060 ()
@@ -10213,7 +10213,7 @@ Control slow_0060 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0061,slow_0061 );
+    return jumpDirect ( 0x0061,slow_0061,0 );
 }
 
 Control slow_0061 ()
@@ -10223,12 +10223,12 @@ Control slow_0061 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x0082,slow_0082 );
+        return jumpDirect ( 0x0082,slow_0082,fast_0082 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0064,slow_0064 );
+        return jumpDirect ( 0x0064,slow_0064,0 );
     }
 }
 
@@ -10237,7 +10237,7 @@ Control slow_0064 ()
     // #at: 0064
     instruction2 ( 0x00,0x67,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x07,0x65 );
     advance ( 10 );
-    return jumpDirect ( 0x0765,slow_0765 );
+    return jumpDirect ( 0x0765,slow_0765,0 );
 }
 
 Control slow_0067 ()
@@ -10246,7 +10246,7 @@ Control slow_0067 ()
     instruction1 ( 0x00,0x69,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x01 );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( 0x0069,slow_0069 );
+    return jumpDirect ( 0x0069,slow_0069,0 );
 }
 
 Control slow_0069 ()
@@ -10256,7 +10256,7 @@ Control slow_0069 ()
     u8 a1 = A ;
     mem_write ( 0x20EA,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x006C,slow_006C );
+    return jumpDirect ( 0x006C,slow_006C,0 );
 }
 
 Control slow_006C ()
@@ -10264,7 +10264,7 @@ Control slow_006C ()
     // #at: 006C
     instruction2 ( 0x00,0x6F,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x00,0x3F );
     advance ( 10 );
-    return jumpDirect ( 0x003F,slow_003F );
+    return jumpDirect ( 0x003F,slow_003F,fast_003F );
 }
 
 Control slow_006F ()
@@ -10283,7 +10283,7 @@ Control slow_006F ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1740,slow_1740 );
+    return jumpDirect ( 0x1740,slow_1740,0 );
 }
 
 Control slow_0072 ()
@@ -10293,7 +10293,7 @@ Control slow_0072 ()
     u8 a1 = e8_read_mem ( 0x2032 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0075,slow_0075 );
+    return jumpDirect ( 0x0075,slow_0075,0 );
 }
 
 Control slow_0075 ()
@@ -10303,7 +10303,7 @@ Control slow_0075 ()
     u8 a1 = A ;
     mem_write ( 0x2080,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0078,slow_0078 );
+    return jumpDirect ( 0x0078,slow_0078,0 );
 }
 
 Control slow_0078 ()
@@ -10322,7 +10322,7 @@ Control slow_0078 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0100,slow_0100 );
+    return jumpDirect ( 0x0100,slow_0100,0 );
 }
 
 Control slow_007B ()
@@ -10341,7 +10341,7 @@ Control slow_007B ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0248,slow_0248 );
+    return jumpDirect ( 0x0248,slow_0248,0 );
 }
 
 Control slow_007E ()
@@ -10360,7 +10360,7 @@ Control slow_007E ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0913,slow_0913 );
+    return jumpDirect ( 0x0913,slow_0913,0 );
 }
 
 Control slow_0081 ()
@@ -10368,7 +10368,7 @@ Control slow_0081 ()
     // #at: 0081
     instruction0 ( 0x00,0x82,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"NOP" );
     advance ( 4 );
-    return jumpDirect ( 0x0082,slow_0082 );
+    return jumpDirect ( 0x0082,slow_0082,fast_0082 );
 }
 
 Control slow_0082 ()
@@ -10388,7 +10388,7 @@ Control slow_0082 ()
     L = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x0083,slow_0083 );
+    return jumpDirect ( 0x0083,slow_0083,0 );
 }
 
 Control slow_0083 ()
@@ -10408,7 +10408,7 @@ Control slow_0083 ()
     E = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x0084,slow_0084 );
+    return jumpDirect ( 0x0084,slow_0084,0 );
 }
 
 Control slow_0084 ()
@@ -10428,7 +10428,7 @@ Control slow_0084 ()
     C = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x0085,slow_0085 );
+    return jumpDirect ( 0x0085,slow_0085,0 );
 }
 
 Control slow_0085 ()
@@ -10452,7 +10452,7 @@ Control slow_0085 ()
     FlagA = ( ( a4 >> 4 ) & 0x01 );
     FlagP = ( ( a4 >> 2 ) & 0x01 );
     FlagCY = ( ( a4 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x0086,slow_0086 );
+    return jumpDirect ( 0x0086,slow_0086,0 );
 }
 
 Control slow_0086 ()
@@ -10461,7 +10461,7 @@ Control slow_0086 ()
     instruction0 ( 0x00,0x87,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"EI" );
     enable_interrupts (  );
     advance ( 4 );
-    return jumpDirect ( 0x0087,slow_0087 );
+    return jumpDirect ( 0x0087,slow_0087,0 );
 }
 
 Control slow_0087 ()
@@ -10496,7 +10496,7 @@ Control slow_008C ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x008D,slow_008D );
+    return jumpDirect ( 0x008D,slow_008D,0 );
 }
 
 Control slow_008D ()
@@ -10506,7 +10506,7 @@ Control slow_008D ()
     u8 a1 = A ;
     mem_write ( 0x2072,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0090,slow_0090 );
+    return jumpDirect ( 0x0090,slow_0090,0 );
 }
 
 Control slow_0090 ()
@@ -10516,7 +10516,7 @@ Control slow_0090 ()
     u8 a1 = e8_read_mem ( 0x20E9 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0093,slow_0093 );
+    return jumpDirect ( 0x0093,slow_0093,0 );
 }
 
 Control slow_0093 ()
@@ -10534,7 +10534,7 @@ Control slow_0093 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0094,slow_0094 );
+    return jumpDirect ( 0x0094,slow_0094,0 );
 }
 
 Control slow_0094 ()
@@ -10544,12 +10544,12 @@ Control slow_0094 ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0082,slow_0082 );
+        return jumpDirect ( 0x0082,slow_0082,fast_0082 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0097,slow_0097 );
+        return jumpDirect ( 0x0097,slow_0097,0 );
     }
 }
 
@@ -10560,7 +10560,7 @@ Control slow_0097 ()
     u8 a1 = e8_read_mem ( 0x20EF ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x009A,slow_009A );
+    return jumpDirect ( 0x009A,slow_009A,0 );
 }
 
 Control slow_009A ()
@@ -10578,7 +10578,7 @@ Control slow_009A ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x009B,slow_009B );
+    return jumpDirect ( 0x009B,slow_009B,0 );
 }
 
 Control slow_009B ()
@@ -10588,12 +10588,12 @@ Control slow_009B ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x00A5,slow_00A5 );
+        return jumpDirect ( 0x00A5,slow_00A5,fast_00A5 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x009E,slow_009E );
+        return jumpDirect ( 0x009E,slow_009E,0 );
     }
 }
 
@@ -10604,7 +10604,7 @@ Control slow_009E ()
     u8 a1 = e8_read_mem ( 0x20C1 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x00A1,slow_00A1 );
+    return jumpDirect ( 0x00A1,slow_00A1,0 );
 }
 
 Control slow_00A1 ()
@@ -10615,7 +10615,7 @@ Control slow_00A1 ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 >> 0x01 ),7,( ( a1 >> 0 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x00A2,slow_00A2 );
+    return jumpDirect ( 0x00A2,slow_00A2,0 );
 }
 
 Control slow_00A2 ()
@@ -10625,12 +10625,12 @@ Control slow_00A2 ()
     if (( ! FlagCY ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x0082,slow_0082 );
+        return jumpDirect ( 0x0082,slow_0082,fast_0082 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x00A5,slow_00A5 );
+        return jumpDirect ( 0x00A5,slow_00A5,fast_00A5 );
     }
 }
 
@@ -10641,7 +10641,7 @@ Control slow_00A5 ()
     advance ( 10 );
     H = 0x20;
     L = 0x20;
-    return jumpDirect ( 0x00A8,slow_00A8 );
+    return jumpDirect ( 0x00A8,slow_00A8,0 );
 }
 
 Control slow_00A8 ()
@@ -10660,7 +10660,7 @@ Control slow_00A8 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x024B,slow_024B );
+    return jumpDirect ( 0x024B,slow_024B,fast_024B );
 }
 
 Control slow_00AB ()
@@ -10679,7 +10679,7 @@ Control slow_00AB ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0141,slow_0141 );
+    return jumpDirect ( 0x0141,slow_0141,0 );
 }
 
 Control slow_00AE ()
@@ -10687,7 +10687,7 @@ Control slow_00AE ()
     // #at: 00AE
     instruction2 ( 0x00,0xB1,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x00,0x82 );
     advance ( 10 );
-    return jumpDirect ( 0x0082,slow_0082 );
+    return jumpDirect ( 0x0082,slow_0082,fast_0082 );
 }
 
 Control slow_00B1 ()
@@ -10706,7 +10706,7 @@ Control slow_00B1 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0886,slow_0886 );
+    return jumpDirect ( 0x0886,slow_0886,fast_0886 );
 }
 
 Control slow_00B4 ()
@@ -10726,7 +10726,7 @@ Control slow_00B4 ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x00B5,slow_00B5 );
+    return jumpDirect ( 0x00B5,slow_00B5,0 );
 }
 
 Control slow_00B5 ()
@@ -10738,7 +10738,7 @@ Control slow_00B5 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x00B6,slow_00B6 );
+    return jumpDirect ( 0x00B6,slow_00B6,0 );
 }
 
 Control slow_00B6 ()
@@ -10751,7 +10751,7 @@ Control slow_00B6 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x00B7,slow_00B7 );
+    return jumpDirect ( 0x00B7,slow_00B7,0 );
 }
 
 Control slow_00B7 ()
@@ -10763,7 +10763,7 @@ Control slow_00B7 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     H = a3;
-    return jumpDirect ( 0x00B8,slow_00B8 );
+    return jumpDirect ( 0x00B8,slow_00B8,0 );
 }
 
 Control slow_00B8 ()
@@ -10773,7 +10773,7 @@ Control slow_00B8 ()
     u8 a1 = A ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( 0x00B9,slow_00B9 );
+    return jumpDirect ( 0x00B9,slow_00B9,0 );
 }
 
 Control slow_00B9 ()
@@ -10785,7 +10785,7 @@ Control slow_00B9 ()
     u8 a2 = H ;
     mem_write ( 0x200A,a2 );
     advance ( 16 );
-    return jumpDirect ( 0x00BC,slow_00BC );
+    return jumpDirect ( 0x00BC,slow_00BC,0 );
 }
 
 Control slow_00BC ()
@@ -10797,7 +10797,7 @@ Control slow_00BC ()
     u8 a2 = H ;
     mem_write ( 0x200C,a2 );
     advance ( 16 );
-    return jumpDirect ( 0x00BF,slow_00BF );
+    return jumpDirect ( 0x00BF,slow_00BF,0 );
 }
 
 Control slow_00BF ()
@@ -10817,7 +10817,7 @@ Control slow_00BF ()
     L = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x00C0,slow_00C0 );
+    return jumpDirect ( 0x00C0,slow_00C0,0 );
 }
 
 Control slow_00C0 ()
@@ -10830,7 +10830,7 @@ Control slow_00C0 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x00C1,slow_00C1 );
+    return jumpDirect ( 0x00C1,slow_00C1,0 );
 }
 
 Control slow_00C1 ()
@@ -10842,7 +10842,7 @@ Control slow_00C1 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x00C2,slow_00C2 );
+    return jumpDirect ( 0x00C2,slow_00C2,0 );
 }
 
 Control slow_00C2 ()
@@ -10860,7 +10860,7 @@ Control slow_00C2 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x00C4,slow_00C4 );
+    return jumpDirect ( 0x00C4,slow_00C4,0 );
 }
 
 Control slow_00C4 ()
@@ -10870,12 +10870,12 @@ Control slow_00C4 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x00C8,slow_00C8 );
+        return jumpDirect ( 0x00C8,slow_00C8,fast_00C8 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x00C7,slow_00C7 );
+        return jumpDirect ( 0x00C7,slow_00C7,0 );
     }
 }
 
@@ -10894,7 +10894,7 @@ Control slow_00C7 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x00C8,slow_00C8 );
+    return jumpDirect ( 0x00C8,slow_00C8,fast_00C8 );
 }
 
 Control slow_00C8 ()
@@ -10904,7 +10904,7 @@ Control slow_00C8 ()
     u8 a1 = A ;
     mem_write ( 0x2008,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x00CB,slow_00CB );
+    return jumpDirect ( 0x00CB,slow_00CB,0 );
 }
 
 Control slow_00CB ()
@@ -10922,7 +10922,7 @@ Control slow_00CB ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x00CD,slow_00CD );
+    return jumpDirect ( 0x00CD,slow_00CD,0 );
 }
 
 Control slow_00CD ()
@@ -10931,7 +10931,7 @@ Control slow_00CD ()
     instruction1 ( 0x00,0xCF,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x00 );
     advance ( 7 );
     A = 0x00;
-    return jumpDirect ( 0x00CF,slow_00CF );
+    return jumpDirect ( 0x00CF,slow_00CF,0 );
 }
 
 Control slow_00CF ()
@@ -10941,12 +10941,12 @@ Control slow_00CF ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x00D3,slow_00D3 );
+        return jumpDirect ( 0x00D3,slow_00D3,fast_00D3 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x00D2,slow_00D2 );
+        return jumpDirect ( 0x00D2,slow_00D2,0 );
     }
 }
 
@@ -10965,7 +10965,7 @@ Control slow_00D2 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x00D3,slow_00D3 );
+    return jumpDirect ( 0x00D3,slow_00D3,fast_00D3 );
 }
 
 Control slow_00D3 ()
@@ -10975,7 +10975,7 @@ Control slow_00D3 ()
     u8 a1 = A ;
     mem_write ( 0x200D,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x00D6,slow_00D6 );
+    return jumpDirect ( 0x00D6,slow_00D6,0 );
 }
 
 Control slow_00D6 ()
@@ -11002,7 +11002,7 @@ Control slow_00D7 ()
     instruction1 ( 0x00,0xD9,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x02 );
     advance ( 7 );
     A = 0x02;
-    return jumpDirect ( 0x00D9,slow_00D9 );
+    return jumpDirect ( 0x00D9,slow_00D9,0 );
 }
 
 Control slow_00D9 ()
@@ -11012,7 +11012,7 @@ Control slow_00D9 ()
     u8 a1 = A ;
     mem_write ( 0x21FB,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x00DC,slow_00DC );
+    return jumpDirect ( 0x00DC,slow_00DC,0 );
 }
 
 Control slow_00DC ()
@@ -11022,7 +11022,7 @@ Control slow_00DC ()
     u8 a1 = A ;
     mem_write ( 0x22FB,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x00DF,slow_00DF );
+    return jumpDirect ( 0x00DF,slow_00DF,0 );
 }
 
 Control slow_00DF ()
@@ -11030,7 +11030,7 @@ Control slow_00DF ()
     // #at: 00DF
     instruction2 ( 0x00,0xE2,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x08,0xE4 );
     advance ( 10 );
-    return jumpDirect ( 0x08E4,slow_08E4 );
+    return jumpDirect ( 0x08E4,slow_08E4,0 );
 }
 
 Control slow_0100 ()
@@ -11040,7 +11040,7 @@ Control slow_0100 ()
     advance ( 10 );
     H = 0x20;
     L = 0x02;
-    return jumpDirect ( 0x0103,slow_0103 );
+    return jumpDirect ( 0x0103,slow_0103,0 );
 }
 
 Control slow_0103 ()
@@ -11052,7 +11052,7 @@ Control slow_0103 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x0104,slow_0104 );
+    return jumpDirect ( 0x0104,slow_0104,0 );
 }
 
 Control slow_0104 ()
@@ -11070,7 +11070,7 @@ Control slow_0104 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0105,slow_0105 );
+    return jumpDirect ( 0x0105,slow_0105,0 );
 }
 
 Control slow_0105 ()
@@ -11080,12 +11080,12 @@ Control slow_0105 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x1538,slow_1538 );
+        return jumpDirect ( 0x1538,slow_1538,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0108,slow_0108 );
+        return jumpDirect ( 0x0108,slow_0108,0 );
     }
 }
 
@@ -11106,7 +11106,7 @@ Control slow_0108 ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x0109,slow_0109 );
+    return jumpDirect ( 0x0109,slow_0109,0 );
 }
 
 Control slow_0109 ()
@@ -11116,7 +11116,7 @@ Control slow_0109 ()
     u8 a1 = e8_read_mem ( 0x2006 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x010C,slow_010C );
+    return jumpDirect ( 0x010C,slow_010C,0 );
 }
 
 Control slow_010C ()
@@ -11126,7 +11126,7 @@ Control slow_010C ()
     u8 a1 = A ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( 0x010D,slow_010D );
+    return jumpDirect ( 0x010D,slow_010D,0 );
 }
 
 Control slow_010D ()
@@ -11136,7 +11136,7 @@ Control slow_010D ()
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0110,slow_0110 );
+    return jumpDirect ( 0x0110,slow_0110,0 );
 }
 
 Control slow_0110 ()
@@ -11146,7 +11146,7 @@ Control slow_0110 ()
     u8 a1 = A ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( 0x0111,slow_0111 );
+    return jumpDirect ( 0x0111,slow_0111,0 );
 }
 
 Control slow_0111 ()
@@ -11158,7 +11158,7 @@ Control slow_0111 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x0112,slow_0112 );
+    return jumpDirect ( 0x0112,slow_0112,0 );
 }
 
 Control slow_0112 ()
@@ -11176,7 +11176,7 @@ Control slow_0112 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0113,slow_0113 );
+    return jumpDirect ( 0x0113,slow_0113,0 );
 }
 
 Control slow_0113 ()
@@ -11196,7 +11196,7 @@ Control slow_0113 ()
     L = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x0114,slow_0114 );
+    return jumpDirect ( 0x0114,slow_0114,0 );
 }
 
 Control slow_0114 ()
@@ -11206,12 +11206,12 @@ Control slow_0114 ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0136,slow_0136 );
+        return jumpDirect ( 0x0136,slow_0136,fast_0136 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0117,slow_0117 );
+        return jumpDirect ( 0x0117,slow_0117,0 );
     }
 }
 
@@ -11225,7 +11225,7 @@ Control slow_0117 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x0118,slow_0118 );
+    return jumpDirect ( 0x0118,slow_0118,0 );
 }
 
 Control slow_0118 ()
@@ -11238,7 +11238,7 @@ Control slow_0118 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x0119,slow_0119 );
+    return jumpDirect ( 0x0119,slow_0119,0 );
 }
 
 Control slow_0119 ()
@@ -11250,7 +11250,7 @@ Control slow_0119 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x011A,slow_011A );
+    return jumpDirect ( 0x011A,slow_011A,0 );
 }
 
 Control slow_011A ()
@@ -11263,7 +11263,7 @@ Control slow_011A ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x011B,slow_011B );
+    return jumpDirect ( 0x011B,slow_011B,0 );
 }
 
 Control slow_011B ()
@@ -11275,7 +11275,7 @@ Control slow_011B ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     B = a3;
-    return jumpDirect ( 0x011C,slow_011C );
+    return jumpDirect ( 0x011C,slow_011C,0 );
 }
 
 Control slow_011C ()
@@ -11292,7 +11292,7 @@ Control slow_011C ()
     FlagA = ( ( a3 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x011E,slow_011E );
+    return jumpDirect ( 0x011E,slow_011E,0 );
 }
 
 Control slow_011E ()
@@ -11303,7 +11303,7 @@ Control slow_011E ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 << 0x01 ),0,( ( a1 >> 7 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 7 ) & 0x01 );
-    return jumpDirect ( 0x011F,slow_011F );
+    return jumpDirect ( 0x011F,slow_011F,0 );
 }
 
 Control slow_011F ()
@@ -11314,7 +11314,7 @@ Control slow_011F ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 << 0x01 ),0,( ( a1 >> 7 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 7 ) & 0x01 );
-    return jumpDirect ( 0x0120,slow_0120 );
+    return jumpDirect ( 0x0120,slow_0120,0 );
 }
 
 Control slow_0120 ()
@@ -11325,7 +11325,7 @@ Control slow_0120 ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 << 0x01 ),0,( ( a1 >> 7 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 7 ) & 0x01 );
-    return jumpDirect ( 0x0121,slow_0121 );
+    return jumpDirect ( 0x0121,slow_0121,0 );
 }
 
 Control slow_0121 ()
@@ -11335,7 +11335,7 @@ Control slow_0121 ()
     u8 a1 = A ;
     advance ( 5 );
     E = a1;
-    return jumpDirect ( 0x0122,slow_0122 );
+    return jumpDirect ( 0x0122,slow_0122,0 );
 }
 
 Control slow_0122 ()
@@ -11344,7 +11344,7 @@ Control slow_0122 ()
     instruction1 ( 0x01,0x24,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   D,%02X",0x00 );
     advance ( 7 );
     D = 0x00;
-    return jumpDirect ( 0x0124,slow_0124 );
+    return jumpDirect ( 0x0124,slow_0124,0 );
 }
 
 Control slow_0124 ()
@@ -11354,7 +11354,7 @@ Control slow_0124 ()
     advance ( 10 );
     H = 0x1C;
     L = 0x00;
-    return jumpDirect ( 0x0127,slow_0127 );
+    return jumpDirect ( 0x0127,slow_0127,0 );
 }
 
 Control slow_0127 ()
@@ -11370,7 +11370,7 @@ Control slow_0127 ()
     H = ( ( a5 & 0xFFFF ) >> 8 );
     L = ( ( a5 & 0xFFFF ) & 0xFF );
     FlagCY = ( ( a5 >> 16 ) & 0x01 );
-    return jumpDirect ( 0x0128,slow_0128 );
+    return jumpDirect ( 0x0128,slow_0128,0 );
 }
 
 Control slow_0128 ()
@@ -11386,7 +11386,7 @@ Control slow_0128 ()
     E = a4;
     H = a1;
     L = a2;
-    return jumpDirect ( 0x0129,slow_0129 );
+    return jumpDirect ( 0x0129,slow_0129,0 );
 }
 
 Control slow_0129 ()
@@ -11396,7 +11396,7 @@ Control slow_0129 ()
     u8 a1 = B ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x012A,slow_012A );
+    return jumpDirect ( 0x012A,slow_012A,0 );
 }
 
 Control slow_012A ()
@@ -11414,7 +11414,7 @@ Control slow_012A ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x012B,slow_012B );
+    return jumpDirect ( 0x012B,slow_012B,0 );
 }
 
 Control slow_012B ()
@@ -11435,12 +11435,12 @@ Control slow_012B ()
         advance ( 17 );
         SPH = ( a6 >> 8 );
         SPL = ( a6 & 0xFF );
-        return jumpDirect ( 0x013B,slow_013B );
+        return jumpDirect ( 0x013B,slow_013B,0 );
     }
     else
     {
         advance ( 11 );
-        return jumpDirect ( 0x012E,slow_012E );
+        return jumpDirect ( 0x012E,slow_012E,fast_012E );
     }
 }
 
@@ -11453,7 +11453,7 @@ Control slow_012E ()
     advance ( 16 );
     H = a2;
     L = a1;
-    return jumpDirect ( 0x0131,slow_0131 );
+    return jumpDirect ( 0x0131,slow_0131,0 );
 }
 
 Control slow_0131 ()
@@ -11462,7 +11462,7 @@ Control slow_0131 ()
     instruction1 ( 0x01,0x33,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x10 );
     advance ( 7 );
     B = 0x10;
-    return jumpDirect ( 0x0133,slow_0133 );
+    return jumpDirect ( 0x0133,slow_0133,0 );
 }
 
 Control slow_0133 ()
@@ -11481,7 +11481,7 @@ Control slow_0133 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x15D3,slow_15D3 );
+    return jumpDirect ( 0x15D3,slow_15D3,fast_15D3 );
 }
 
 Control slow_0136 ()
@@ -11498,7 +11498,7 @@ Control slow_0136 ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0137,slow_0137 );
+    return jumpDirect ( 0x0137,slow_0137,0 );
 }
 
 Control slow_0137 ()
@@ -11508,7 +11508,7 @@ Control slow_0137 ()
     u8 a1 = A ;
     mem_write ( 0x2000,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x013A,slow_013A );
+    return jumpDirect ( 0x013A,slow_013A,0 );
 }
 
 Control slow_013A ()
@@ -11536,7 +11536,7 @@ Control slow_013B ()
     advance ( 10 );
     H = 0x00;
     L = 0x30;
-    return jumpDirect ( 0x013E,slow_013E );
+    return jumpDirect ( 0x013E,slow_013E,0 );
 }
 
 Control slow_013E ()
@@ -11552,7 +11552,7 @@ Control slow_013E ()
     H = ( ( a5 & 0xFFFF ) >> 8 );
     L = ( ( a5 & 0xFFFF ) & 0xFF );
     FlagCY = ( ( a5 >> 16 ) & 0x01 );
-    return jumpDirect ( 0x013F,slow_013F );
+    return jumpDirect ( 0x013F,slow_013F,0 );
 }
 
 Control slow_013F ()
@@ -11568,7 +11568,7 @@ Control slow_013F ()
     E = a4;
     H = a1;
     L = a2;
-    return jumpDirect ( 0x0140,slow_0140 );
+    return jumpDirect ( 0x0140,slow_0140,0 );
 }
 
 Control slow_0140 ()
@@ -11596,7 +11596,7 @@ Control slow_0141 ()
     u8 a1 = e8_read_mem ( 0x2068 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0144,slow_0144 );
+    return jumpDirect ( 0x0144,slow_0144,0 );
 }
 
 Control slow_0144 ()
@@ -11614,7 +11614,7 @@ Control slow_0144 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0145,slow_0145 );
+    return jumpDirect ( 0x0145,slow_0145,0 );
 }
 
 Control slow_0145 ()
@@ -11639,7 +11639,7 @@ Control slow_0145 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x0146,slow_0146 );
+        return jumpDirect ( 0x0146,slow_0146,0 );
     }
 }
 
@@ -11650,7 +11650,7 @@ Control slow_0146 ()
     u8 a1 = e8_read_mem ( 0x2000 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0149,slow_0149 );
+    return jumpDirect ( 0x0149,slow_0149,0 );
 }
 
 Control slow_0149 ()
@@ -11668,7 +11668,7 @@ Control slow_0149 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x014A,slow_014A );
+    return jumpDirect ( 0x014A,slow_014A,0 );
 }
 
 Control slow_014A ()
@@ -11693,7 +11693,7 @@ Control slow_014A ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x014B,slow_014B );
+        return jumpDirect ( 0x014B,slow_014B,0 );
     }
 }
 
@@ -11704,7 +11704,7 @@ Control slow_014B ()
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x014E,slow_014E );
+    return jumpDirect ( 0x014E,slow_014E,0 );
 }
 
 Control slow_014E ()
@@ -11714,7 +11714,7 @@ Control slow_014E ()
     u8 a1 = A ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( 0x014F,slow_014F );
+    return jumpDirect ( 0x014F,slow_014F,0 );
 }
 
 Control slow_014F ()
@@ -11724,7 +11724,7 @@ Control slow_014F ()
     u8 a1 = e8_read_mem ( 0x2006 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0152,slow_0152 );
+    return jumpDirect ( 0x0152,slow_0152,0 );
 }
 
 Control slow_0152 ()
@@ -11733,7 +11733,7 @@ Control slow_0152 ()
     instruction1 ( 0x01,0x54,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   D,%02X",0x02 );
     advance ( 7 );
     D = 0x02;
-    return jumpDirect ( 0x0154,slow_0154 );
+    return jumpDirect ( 0x0154,slow_0154,fast_0154 );
 }
 
 Control slow_0154 ()
@@ -11751,7 +11751,7 @@ Control slow_0154 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x0155,slow_0155 );
+    return jumpDirect ( 0x0155,slow_0155,0 );
 }
 
 Control slow_0155 ()
@@ -11769,7 +11769,7 @@ Control slow_0155 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x0157,slow_0157 );
+    return jumpDirect ( 0x0157,slow_0157,0 );
 }
 
 Control slow_0157 ()
@@ -11790,12 +11790,12 @@ Control slow_0157 ()
         advance ( 17 );
         SPH = ( a6 >> 8 );
         SPL = ( a6 & 0xFF );
-        return jumpDirect ( 0x01A1,slow_01A1 );
+        return jumpDirect ( 0x01A1,slow_01A1,0 );
     }
     else
     {
         advance ( 11 );
-        return jumpDirect ( 0x015A,slow_015A );
+        return jumpDirect ( 0x015A,slow_015A,fast_015A );
     }
 }
 
@@ -11806,7 +11806,7 @@ Control slow_015A ()
     u8 a1 = A ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( 0x015B,slow_015B );
+    return jumpDirect ( 0x015B,slow_015B,0 );
 }
 
 Control slow_015B ()
@@ -11818,7 +11818,7 @@ Control slow_015B ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     B = a3;
-    return jumpDirect ( 0x015C,slow_015C );
+    return jumpDirect ( 0x015C,slow_015C,0 );
 }
 
 Control slow_015C ()
@@ -11836,7 +11836,7 @@ Control slow_015C ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x015D,slow_015D );
+    return jumpDirect ( 0x015D,slow_015D,0 );
 }
 
 Control slow_015D ()
@@ -11846,12 +11846,12 @@ Control slow_015D ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x0154,slow_0154 );
+        return jumpDirect ( 0x0154,slow_0154,fast_0154 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0160,slow_0160 );
+        return jumpDirect ( 0x0160,slow_0160,0 );
     }
 }
 
@@ -11862,7 +11862,7 @@ Control slow_0160 ()
     u8 a1 = A ;
     mem_write ( 0x2006,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0163,slow_0163 );
+    return jumpDirect ( 0x0163,slow_0163,0 );
 }
 
 Control slow_0163 ()
@@ -11881,7 +11881,7 @@ Control slow_0163 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x017A,slow_017A );
+    return jumpDirect ( 0x017A,slow_017A,fast_017A );
 }
 
 Control slow_0166 ()
@@ -11891,7 +11891,7 @@ Control slow_0166 ()
     u8 a1 = C ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( 0x0167,slow_0167 );
+    return jumpDirect ( 0x0167,slow_0167,0 );
 }
 
 Control slow_0167 ()
@@ -11903,7 +11903,7 @@ Control slow_0167 ()
     u8 a2 = H ;
     mem_write ( 0x200C,a2 );
     advance ( 16 );
-    return jumpDirect ( 0x016A,slow_016A );
+    return jumpDirect ( 0x016A,slow_016A,0 );
 }
 
 Control slow_016A ()
@@ -11913,7 +11913,7 @@ Control slow_016A ()
     u8 a1 = L ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x016B,slow_016B );
+    return jumpDirect ( 0x016B,slow_016B,0 );
 }
 
 Control slow_016B ()
@@ -11931,7 +11931,7 @@ Control slow_016B ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x016D,slow_016D );
+    return jumpDirect ( 0x016D,slow_016D,0 );
 }
 
 Control slow_016D ()
@@ -11941,12 +11941,12 @@ Control slow_016D ()
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( 0x1971,slow_1971 );
+        return jumpDirect ( 0x1971,slow_1971,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0170,slow_0170 );
+        return jumpDirect ( 0x0170,slow_0170,0 );
     }
 }
 
@@ -11957,7 +11957,7 @@ Control slow_0170 ()
     u8 a1 = D ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x0171,slow_0171 );
+    return jumpDirect ( 0x0171,slow_0171,0 );
 }
 
 Control slow_0171 ()
@@ -11967,7 +11967,7 @@ Control slow_0171 ()
     u8 a1 = A ;
     mem_write ( 0x2004,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0174,slow_0174 );
+    return jumpDirect ( 0x0174,slow_0174,0 );
 }
 
 Control slow_0174 ()
@@ -11976,7 +11976,7 @@ Control slow_0174 ()
     instruction1 ( 0x01,0x76,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x01 );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( 0x0176,slow_0176 );
+    return jumpDirect ( 0x0176,slow_0176,0 );
 }
 
 Control slow_0176 ()
@@ -11986,7 +11986,7 @@ Control slow_0176 ()
     u8 a1 = A ;
     mem_write ( 0x2000,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0179,slow_0179 );
+    return jumpDirect ( 0x0179,slow_0179,0 );
 }
 
 Control slow_0179 ()
@@ -12013,7 +12013,7 @@ Control slow_017A ()
     instruction1 ( 0x01,0x7C,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   D,%02X",0x00 );
     advance ( 7 );
     D = 0x00;
-    return jumpDirect ( 0x017C,slow_017C );
+    return jumpDirect ( 0x017C,slow_017C,0 );
 }
 
 Control slow_017C ()
@@ -12023,7 +12023,7 @@ Control slow_017C ()
     u8 a1 = L ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x017D,slow_017D );
+    return jumpDirect ( 0x017D,slow_017D,0 );
 }
 
 Control slow_017D ()
@@ -12033,7 +12033,7 @@ Control slow_017D ()
     advance ( 10 );
     H = 0x20;
     L = 0x09;
-    return jumpDirect ( 0x0180,slow_0180 );
+    return jumpDirect ( 0x0180,slow_0180,0 );
 }
 
 Control slow_0180 ()
@@ -12045,7 +12045,7 @@ Control slow_0180 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     B = a3;
-    return jumpDirect ( 0x0181,slow_0181 );
+    return jumpDirect ( 0x0181,slow_0181,0 );
 }
 
 Control slow_0181 ()
@@ -12058,7 +12058,7 @@ Control slow_0181 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x0182,slow_0182 );
+    return jumpDirect ( 0x0182,slow_0182,0 );
 }
 
 Control slow_0182 ()
@@ -12070,7 +12070,7 @@ Control slow_0182 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     C = a3;
-    return jumpDirect ( 0x0183,slow_0183 );
+    return jumpDirect ( 0x0183,slow_0183,fast_0183 );
 }
 
 Control slow_0183 ()
@@ -12088,7 +12088,7 @@ Control slow_0183 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x0185,slow_0185 );
+    return jumpDirect ( 0x0185,slow_0185,0 );
 }
 
 Control slow_0185 ()
@@ -12098,12 +12098,12 @@ Control slow_0185 ()
     if (FlagS)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0194,slow_0194 );
+        return jumpDirect ( 0x0194,slow_0194,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0188,slow_0188 );
+        return jumpDirect ( 0x0188,slow_0188,0 );
     }
 }
 
@@ -12123,7 +12123,7 @@ Control slow_0188 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x018A,slow_018A );
+    return jumpDirect ( 0x018A,slow_018A,0 );
 }
 
 Control slow_018A ()
@@ -12133,7 +12133,7 @@ Control slow_018A ()
     u8 a1 = A ;
     advance ( 5 );
     E = a1;
-    return jumpDirect ( 0x018B,slow_018B );
+    return jumpDirect ( 0x018B,slow_018B,0 );
 }
 
 Control slow_018B ()
@@ -12143,7 +12143,7 @@ Control slow_018B ()
     u8 a1 = B ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x018C,slow_018C );
+    return jumpDirect ( 0x018C,slow_018C,0 );
 }
 
 Control slow_018C ()
@@ -12162,7 +12162,7 @@ Control slow_018C ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ( ( a2 >> 8 ) >> 0 ) & 0x01 );
-    return jumpDirect ( 0x018E,slow_018E );
+    return jumpDirect ( 0x018E,slow_018E,0 );
 }
 
 Control slow_018E ()
@@ -12172,7 +12172,7 @@ Control slow_018E ()
     u8 a1 = A ;
     advance ( 5 );
     B = a1;
-    return jumpDirect ( 0x018F,slow_018F );
+    return jumpDirect ( 0x018F,slow_018F,0 );
 }
 
 Control slow_018F ()
@@ -12182,7 +12182,7 @@ Control slow_018F ()
     u8 a1 = E ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x0190,slow_0190 );
+    return jumpDirect ( 0x0190,slow_0190,0 );
 }
 
 Control slow_0190 ()
@@ -12200,7 +12200,7 @@ Control slow_0190 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x0191,slow_0191 );
+    return jumpDirect ( 0x0191,slow_0191,0 );
 }
 
 Control slow_0191 ()
@@ -12208,7 +12208,7 @@ Control slow_0191 ()
     // #at: 0191
     instruction2 ( 0x01,0x94,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x01,0x83 );
     advance ( 10 );
-    return jumpDirect ( 0x0183,slow_0183 );
+    return jumpDirect ( 0x0183,slow_0183,fast_0183 );
 }
 
 Control slow_0194 ()
@@ -12218,7 +12218,7 @@ Control slow_0194 ()
     u8 a1 = B ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( 0x0195,slow_0195 );
+    return jumpDirect ( 0x0195,slow_0195,fast_0195 );
 }
 
 Control slow_0195 ()
@@ -12236,7 +12236,7 @@ Control slow_0195 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0196,slow_0196 );
+    return jumpDirect ( 0x0196,slow_0196,0 );
 }
 
 Control slow_0196 ()
@@ -12261,7 +12261,7 @@ Control slow_0196 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x0197,slow_0197 );
+        return jumpDirect ( 0x0197,slow_0197,0 );
     }
 }
 
@@ -12272,7 +12272,7 @@ Control slow_0197 ()
     u8 a1 = A ;
     advance ( 5 );
     E = a1;
-    return jumpDirect ( 0x0198,slow_0198 );
+    return jumpDirect ( 0x0198,slow_0198,0 );
 }
 
 Control slow_0198 ()
@@ -12282,7 +12282,7 @@ Control slow_0198 ()
     u8 a1 = C ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x0199,slow_0199 );
+    return jumpDirect ( 0x0199,slow_0199,0 );
 }
 
 Control slow_0199 ()
@@ -12301,7 +12301,7 @@ Control slow_0199 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ( ( a2 >> 8 ) >> 0 ) & 0x01 );
-    return jumpDirect ( 0x019B,slow_019B );
+    return jumpDirect ( 0x019B,slow_019B,0 );
 }
 
 Control slow_019B ()
@@ -12311,7 +12311,7 @@ Control slow_019B ()
     u8 a1 = A ;
     advance ( 5 );
     C = a1;
-    return jumpDirect ( 0x019C,slow_019C );
+    return jumpDirect ( 0x019C,slow_019C,0 );
 }
 
 Control slow_019C ()
@@ -12321,7 +12321,7 @@ Control slow_019C ()
     u8 a1 = E ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x019D,slow_019D );
+    return jumpDirect ( 0x019D,slow_019D,0 );
 }
 
 Control slow_019D ()
@@ -12339,7 +12339,7 @@ Control slow_019D ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x019E,slow_019E );
+    return jumpDirect ( 0x019E,slow_019E,0 );
 }
 
 Control slow_019E ()
@@ -12347,7 +12347,7 @@ Control slow_019E ()
     // #at: 019E
     instruction2 ( 0x01,0xA1,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x01,0x95 );
     advance ( 10 );
-    return jumpDirect ( 0x0195,slow_0195 );
+    return jumpDirect ( 0x0195,slow_0195,fast_0195 );
 }
 
 Control slow_01A1 ()
@@ -12365,7 +12365,7 @@ Control slow_01A1 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x01A2,slow_01A2 );
+    return jumpDirect ( 0x01A2,slow_01A2,0 );
 }
 
 Control slow_01A2 ()
@@ -12375,12 +12375,12 @@ Control slow_01A2 ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x01CD,slow_01CD );
+        return jumpDirect ( 0x01CD,slow_01CD,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x01A5,slow_01A5 );
+        return jumpDirect ( 0x01A5,slow_01A5,0 );
     }
 }
 
@@ -12391,7 +12391,7 @@ Control slow_01A5 ()
     advance ( 10 );
     H = 0x20;
     L = 0x06;
-    return jumpDirect ( 0x01A8,slow_01A8 );
+    return jumpDirect ( 0x01A8,slow_01A8,0 );
 }
 
 Control slow_01A8 ()
@@ -12402,7 +12402,7 @@ Control slow_01A8 ()
     u8 a2 = L ;
     mem_write ( ( ( a1 << 8 ) | a2 ),0x00 );
     advance ( 10 );
-    return jumpDirect ( 0x01AA,slow_01AA );
+    return jumpDirect ( 0x01AA,slow_01AA,0 );
 }
 
 Control slow_01AA ()
@@ -12415,7 +12415,7 @@ Control slow_01AA ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x01AB,slow_01AB );
+    return jumpDirect ( 0x01AB,slow_01AB,0 );
 }
 
 Control slow_01AB ()
@@ -12427,7 +12427,7 @@ Control slow_01AB ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     C = a3;
-    return jumpDirect ( 0x01AC,slow_01AC );
+    return jumpDirect ( 0x01AC,slow_01AC,0 );
 }
 
 Control slow_01AC ()
@@ -12438,7 +12438,7 @@ Control slow_01AC ()
     u8 a2 = L ;
     mem_write ( ( ( a1 << 8 ) | a2 ),0x00 );
     advance ( 10 );
-    return jumpDirect ( 0x01AE,slow_01AE );
+    return jumpDirect ( 0x01AE,slow_01AE,0 );
 }
 
 Control slow_01AE ()
@@ -12457,7 +12457,7 @@ Control slow_01AE ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x01D9,slow_01D9 );
+    return jumpDirect ( 0x01D9,slow_01D9,fast_01D9 );
 }
 
 Control slow_01B1 ()
@@ -12467,7 +12467,7 @@ Control slow_01B1 ()
     advance ( 10 );
     H = 0x20;
     L = 0x05;
-    return jumpDirect ( 0x01B4,slow_01B4 );
+    return jumpDirect ( 0x01B4,slow_01B4,0 );
 }
 
 Control slow_01B4 ()
@@ -12479,7 +12479,7 @@ Control slow_01B4 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x01B5,slow_01B5 );
+    return jumpDirect ( 0x01B5,slow_01B5,0 );
 }
 
 Control slow_01B5 ()
@@ -12497,7 +12497,7 @@ Control slow_01B5 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x01B6,slow_01B6 );
+    return jumpDirect ( 0x01B6,slow_01B6,0 );
 }
 
 Control slow_01B6 ()
@@ -12514,7 +12514,7 @@ Control slow_01B6 ()
     FlagA = ( ( a3 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x01B8,slow_01B8 );
+    return jumpDirect ( 0x01B8,slow_01B8,0 );
 }
 
 Control slow_01B8 ()
@@ -12526,7 +12526,7 @@ Control slow_01B8 ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x01B9,slow_01B9 );
+    return jumpDirect ( 0x01B9,slow_01B9,0 );
 }
 
 Control slow_01B9 ()
@@ -12543,7 +12543,7 @@ Control slow_01B9 ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x01BA,slow_01BA );
+    return jumpDirect ( 0x01BA,slow_01BA,0 );
 }
 
 Control slow_01BA ()
@@ -12553,7 +12553,7 @@ Control slow_01BA ()
     advance ( 10 );
     H = 0x20;
     L = 0x67;
-    return jumpDirect ( 0x01BD,slow_01BD );
+    return jumpDirect ( 0x01BD,slow_01BD,0 );
 }
 
 Control slow_01BD ()
@@ -12565,7 +12565,7 @@ Control slow_01BD ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     H = a3;
-    return jumpDirect ( 0x01BE,slow_01BE );
+    return jumpDirect ( 0x01BE,slow_01BE,0 );
 }
 
 Control slow_01BE ()
@@ -12593,7 +12593,7 @@ Control slow_01C0 ()
     advance ( 10 );
     H = 0x21;
     L = 0x00;
-    return jumpDirect ( 0x01C3,slow_01C3 );
+    return jumpDirect ( 0x01C3,slow_01C3,fast_01C3 );
 }
 
 Control slow_01C3 ()
@@ -12602,7 +12602,7 @@ Control slow_01C3 ()
     instruction1 ( 0x01,0xC5,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x37 );
     advance ( 7 );
     B = 0x37;
-    return jumpDirect ( 0x01C5,slow_01C5 );
+    return jumpDirect ( 0x01C5,slow_01C5,fast_01C5 );
 }
 
 Control slow_01C5 ()
@@ -12613,7 +12613,7 @@ Control slow_01C5 ()
     u8 a2 = L ;
     mem_write ( ( ( a1 << 8 ) | a2 ),0x01 );
     advance ( 10 );
-    return jumpDirect ( 0x01C7,slow_01C7 );
+    return jumpDirect ( 0x01C7,slow_01C7,0 );
 }
 
 Control slow_01C7 ()
@@ -12626,7 +12626,7 @@ Control slow_01C7 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x01C8,slow_01C8 );
+    return jumpDirect ( 0x01C8,slow_01C8,0 );
 }
 
 Control slow_01C8 ()
@@ -12644,7 +12644,7 @@ Control slow_01C8 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x01C9,slow_01C9 );
+    return jumpDirect ( 0x01C9,slow_01C9,0 );
 }
 
 Control slow_01C9 ()
@@ -12654,12 +12654,12 @@ Control slow_01C9 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x01C5,slow_01C5 );
+        return jumpDirect ( 0x01C5,slow_01C5,fast_01C5 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x01CC,slow_01CC );
+        return jumpDirect ( 0x01CC,slow_01CC,0 );
     }
 }
 
@@ -12698,7 +12698,7 @@ Control slow_01CD ()
     L = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x01CE,slow_01CE );
+    return jumpDirect ( 0x01CE,slow_01CE,0 );
 }
 
 Control slow_01CE ()
@@ -12725,7 +12725,7 @@ Control slow_01CF ()
     instruction1 ( 0x01,0xD1,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x01 );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( 0x01D1,slow_01D1 );
+    return jumpDirect ( 0x01D1,slow_01D1,0 );
 }
 
 Control slow_01D1 ()
@@ -12734,7 +12734,7 @@ Control slow_01D1 ()
     instruction1 ( 0x01,0xD3,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0xE0 );
     advance ( 7 );
     B = 0xE0;
-    return jumpDirect ( 0x01D3,slow_01D3 );
+    return jumpDirect ( 0x01D3,slow_01D3,0 );
 }
 
 Control slow_01D3 ()
@@ -12744,7 +12744,7 @@ Control slow_01D3 ()
     advance ( 10 );
     H = 0x24;
     L = 0x02;
-    return jumpDirect ( 0x01D6,slow_01D6 );
+    return jumpDirect ( 0x01D6,slow_01D6,0 );
 }
 
 Control slow_01D6 ()
@@ -12752,7 +12752,7 @@ Control slow_01D6 ()
     // #at: 01D6
     instruction2 ( 0x01,0xD9,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x14,0xCC );
     advance ( 10 );
-    return jumpDirect ( 0x14CC,slow_14CC );
+    return jumpDirect ( 0x14CC,slow_14CC,fast_14CC );
 }
 
 Control slow_01D9 ()
@@ -12765,7 +12765,7 @@ Control slow_01D9 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x01DA,slow_01DA );
+    return jumpDirect ( 0x01DA,slow_01DA,0 );
 }
 
 Control slow_01DA ()
@@ -12777,7 +12777,7 @@ Control slow_01DA ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     B = a3;
-    return jumpDirect ( 0x01DB,slow_01DB );
+    return jumpDirect ( 0x01DB,slow_01DB,0 );
 }
 
 Control slow_01DB ()
@@ -12790,7 +12790,7 @@ Control slow_01DB ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x01DC,slow_01DC );
+    return jumpDirect ( 0x01DC,slow_01DC,0 );
 }
 
 Control slow_01DC ()
@@ -12800,7 +12800,7 @@ Control slow_01DC ()
     u8 a1 = C ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x01DD,slow_01DD );
+    return jumpDirect ( 0x01DD,slow_01DD,0 );
 }
 
 Control slow_01DD ()
@@ -12822,7 +12822,7 @@ Control slow_01DD ()
     FlagA = ( ( ( a8 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a5 & 0xFF ) );
     FlagCY = ( ( ( a5 >> 8 ) >> 0 ) & 0x01 );
-    return jumpDirect ( 0x01DE,slow_01DE );
+    return jumpDirect ( 0x01DE,slow_01DE,0 );
 }
 
 Control slow_01DE ()
@@ -12834,7 +12834,7 @@ Control slow_01DE ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x01DF,slow_01DF );
+    return jumpDirect ( 0x01DF,slow_01DF,0 );
 }
 
 Control slow_01DF ()
@@ -12847,7 +12847,7 @@ Control slow_01DF ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x01E0,slow_01E0 );
+    return jumpDirect ( 0x01E0,slow_01E0,0 );
 }
 
 Control slow_01E0 ()
@@ -12857,7 +12857,7 @@ Control slow_01E0 ()
     u8 a1 = B ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x01E1,slow_01E1 );
+    return jumpDirect ( 0x01E1,slow_01E1,0 );
 }
 
 Control slow_01E1 ()
@@ -12879,7 +12879,7 @@ Control slow_01E1 ()
     FlagA = ( ( ( a8 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a5 & 0xFF ) );
     FlagCY = ( ( ( a5 >> 8 ) >> 0 ) & 0x01 );
-    return jumpDirect ( 0x01E2,slow_01E2 );
+    return jumpDirect ( 0x01E2,slow_01E2,0 );
 }
 
 Control slow_01E2 ()
@@ -12891,7 +12891,7 @@ Control slow_01E2 ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x01E3,slow_01E3 );
+    return jumpDirect ( 0x01E3,slow_01E3,0 );
 }
 
 Control slow_01E3 ()
@@ -12918,7 +12918,7 @@ Control slow_01E4 ()
     instruction1 ( 0x01,0xE6,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0xC0 );
     advance ( 7 );
     B = 0xC0;
-    return jumpDirect ( 0x01E6,slow_01E6 );
+    return jumpDirect ( 0x01E6,slow_01E6,fast_01E6 );
 }
 
 Control slow_01E6 ()
@@ -12928,7 +12928,7 @@ Control slow_01E6 ()
     advance ( 10 );
     D = 0x1B;
     E = 0x00;
-    return jumpDirect ( 0x01E9,slow_01E9 );
+    return jumpDirect ( 0x01E9,slow_01E9,0 );
 }
 
 Control slow_01E9 ()
@@ -12938,7 +12938,7 @@ Control slow_01E9 ()
     advance ( 10 );
     H = 0x20;
     L = 0x00;
-    return jumpDirect ( 0x01EC,slow_01EC );
+    return jumpDirect ( 0x01EC,slow_01EC,0 );
 }
 
 Control slow_01EC ()
@@ -12946,7 +12946,7 @@ Control slow_01EC ()
     // #at: 01EC
     instruction2 ( 0x01,0xEF,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x1A,0x32 );
     advance ( 10 );
-    return jumpDirect ( 0x1A32,slow_1A32 );
+    return jumpDirect ( 0x1A32,slow_1A32,fast_1A32 );
 }
 
 Control slow_01EF ()
@@ -12956,7 +12956,7 @@ Control slow_01EF ()
     advance ( 10 );
     H = 0x21;
     L = 0x42;
-    return jumpDirect ( 0x01F2,slow_01F2 );
+    return jumpDirect ( 0x01F2,slow_01F2,0 );
 }
 
 Control slow_01F2 ()
@@ -12964,7 +12964,7 @@ Control slow_01F2 ()
     // #at: 01F2
     instruction2 ( 0x01,0xF5,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x01,0xF8 );
     advance ( 10 );
-    return jumpDirect ( 0x01F8,slow_01F8 );
+    return jumpDirect ( 0x01F8,slow_01F8,fast_01F8 );
 }
 
 Control slow_01F5 ()
@@ -12974,7 +12974,7 @@ Control slow_01F5 ()
     advance ( 10 );
     H = 0x22;
     L = 0x42;
-    return jumpDirect ( 0x01F8,slow_01F8 );
+    return jumpDirect ( 0x01F8,slow_01F8,fast_01F8 );
 }
 
 Control slow_01F8 ()
@@ -12983,7 +12983,7 @@ Control slow_01F8 ()
     instruction1 ( 0x01,0xFA,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   C,%02X",0x04 );
     advance ( 7 );
     C = 0x04;
-    return jumpDirect ( 0x01FA,slow_01FA );
+    return jumpDirect ( 0x01FA,slow_01FA,0 );
 }
 
 Control slow_01FA ()
@@ -12993,7 +12993,7 @@ Control slow_01FA ()
     advance ( 10 );
     D = 0x1D;
     E = 0x20;
-    return jumpDirect ( 0x01FD,slow_01FD );
+    return jumpDirect ( 0x01FD,slow_01FD,fast_01FD );
 }
 
 Control slow_01FD ()
@@ -13013,7 +13013,7 @@ Control slow_01FD ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x01FE,slow_01FE );
+    return jumpDirect ( 0x01FE,slow_01FE,0 );
 }
 
 Control slow_01FE ()
@@ -13022,7 +13022,7 @@ Control slow_01FE ()
     instruction1 ( 0x02,0x00,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x2C );
     advance ( 7 );
     B = 0x2C;
-    return jumpDirect ( 0x0200,slow_0200 );
+    return jumpDirect ( 0x0200,slow_0200,0 );
 }
 
 Control slow_0200 ()
@@ -13041,7 +13041,7 @@ Control slow_0200 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A32,slow_1A32 );
+    return jumpDirect ( 0x1A32,slow_1A32,fast_1A32 );
 }
 
 Control slow_0203 ()
@@ -13061,7 +13061,7 @@ Control slow_0203 ()
     E = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x0204,slow_0204 );
+    return jumpDirect ( 0x0204,slow_0204,0 );
 }
 
 Control slow_0204 ()
@@ -13079,7 +13079,7 @@ Control slow_0204 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x0205,slow_0205 );
+    return jumpDirect ( 0x0205,slow_0205,0 );
 }
 
 Control slow_0205 ()
@@ -13089,12 +13089,12 @@ Control slow_0205 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x01FD,slow_01FD );
+        return jumpDirect ( 0x01FD,slow_01FD,fast_01FD );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0208,slow_0208 );
+        return jumpDirect ( 0x0208,slow_0208,0 );
     }
 }
 
@@ -13122,7 +13122,7 @@ Control slow_0209 ()
     instruction1 ( 0x02,0x0B,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x01 );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( 0x020B,slow_020B );
+    return jumpDirect ( 0x020B,slow_020B,0 );
 }
 
 Control slow_020B ()
@@ -13130,7 +13130,7 @@ Control slow_020B ()
     // #at: 020B
     instruction2 ( 0x02,0x0E,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x02,0x1B );
     advance ( 10 );
-    return jumpDirect ( 0x021B,slow_021B );
+    return jumpDirect ( 0x021B,slow_021B,fast_021B );
 }
 
 Control slow_020E ()
@@ -13139,7 +13139,7 @@ Control slow_020E ()
     instruction1 ( 0x02,0x10,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x01 );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( 0x0210,slow_0210 );
+    return jumpDirect ( 0x0210,slow_0210,0 );
 }
 
 Control slow_0210 ()
@@ -13147,7 +13147,7 @@ Control slow_0210 ()
     // #at: 0210
     instruction2 ( 0x02,0x13,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x02,0x14 );
     advance ( 10 );
-    return jumpDirect ( 0x0214,slow_0214 );
+    return jumpDirect ( 0x0214,slow_0214,fast_0214 );
 }
 
 Control slow_0213 ()
@@ -13164,7 +13164,7 @@ Control slow_0213 ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0214,slow_0214 );
+    return jumpDirect ( 0x0214,slow_0214,fast_0214 );
 }
 
 Control slow_0214 ()
@@ -13174,7 +13174,7 @@ Control slow_0214 ()
     advance ( 10 );
     D = 0x22;
     E = 0x42;
-    return jumpDirect ( 0x0217,slow_0217 );
+    return jumpDirect ( 0x0217,slow_0217,0 );
 }
 
 Control slow_0217 ()
@@ -13182,7 +13182,7 @@ Control slow_0217 ()
     // #at: 0217
     instruction2 ( 0x02,0x1A,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x02,0x1E );
     advance ( 10 );
-    return jumpDirect ( 0x021E,slow_021E );
+    return jumpDirect ( 0x021E,slow_021E,fast_021E );
 }
 
 Control slow_021A ()
@@ -13199,7 +13199,7 @@ Control slow_021A ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x021B,slow_021B );
+    return jumpDirect ( 0x021B,slow_021B,fast_021B );
 }
 
 Control slow_021B ()
@@ -13209,7 +13209,7 @@ Control slow_021B ()
     advance ( 10 );
     D = 0x21;
     E = 0x42;
-    return jumpDirect ( 0x021E,slow_021E );
+    return jumpDirect ( 0x021E,slow_021E,fast_021E );
 }
 
 Control slow_021E ()
@@ -13219,7 +13219,7 @@ Control slow_021E ()
     u8 a1 = A ;
     mem_write ( 0x2081,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0221,slow_0221 );
+    return jumpDirect ( 0x0221,slow_0221,0 );
 }
 
 Control slow_0221 ()
@@ -13229,7 +13229,7 @@ Control slow_0221 ()
     advance ( 10 );
     B = 0x16;
     C = 0x02;
-    return jumpDirect ( 0x0224,slow_0224 );
+    return jumpDirect ( 0x0224,slow_0224,0 );
 }
 
 Control slow_0224 ()
@@ -13239,7 +13239,7 @@ Control slow_0224 ()
     advance ( 10 );
     H = 0x28;
     L = 0x06;
-    return jumpDirect ( 0x0227,slow_0227 );
+    return jumpDirect ( 0x0227,slow_0227,0 );
 }
 
 Control slow_0227 ()
@@ -13248,7 +13248,7 @@ Control slow_0227 ()
     instruction1 ( 0x02,0x29,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x04 );
     advance ( 7 );
     A = 0x04;
-    return jumpDirect ( 0x0229,slow_0229 );
+    return jumpDirect ( 0x0229,slow_0229,fast_0229 );
 }
 
 Control slow_0229 ()
@@ -13267,7 +13267,7 @@ Control slow_0229 ()
     advance ( 11 );
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x022A,slow_022A );
+    return jumpDirect ( 0x022A,slow_022A,0 );
 }
 
 Control slow_022A ()
@@ -13287,7 +13287,7 @@ Control slow_022A ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x022B,slow_022B );
+    return jumpDirect ( 0x022B,slow_022B,0 );
 }
 
 Control slow_022B ()
@@ -13297,7 +13297,7 @@ Control slow_022B ()
     u8 a1 = e8_read_mem ( 0x2081 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x022E,slow_022E );
+    return jumpDirect ( 0x022E,slow_022E,0 );
 }
 
 Control slow_022E ()
@@ -13315,7 +13315,7 @@ Control slow_022E ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x022F,slow_022F );
+    return jumpDirect ( 0x022F,slow_022F,0 );
 }
 
 Control slow_022F ()
@@ -13325,12 +13325,12 @@ Control slow_022F ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x0242,slow_0242 );
+        return jumpDirect ( 0x0242,slow_0242,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0232,slow_0232 );
+        return jumpDirect ( 0x0232,slow_0232,0 );
     }
 }
 
@@ -13350,7 +13350,7 @@ Control slow_0232 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A69,slow_1A69 );
+    return jumpDirect ( 0x1A69,slow_1A69,fast_1A69 );
 }
 
 Control slow_0235 ()
@@ -13370,7 +13370,7 @@ Control slow_0235 ()
     C = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x0236,slow_0236 );
+    return jumpDirect ( 0x0236,slow_0236,0 );
 }
 
 Control slow_0236 ()
@@ -13394,7 +13394,7 @@ Control slow_0236 ()
     FlagA = ( ( a4 >> 4 ) & 0x01 );
     FlagP = ( ( a4 >> 2 ) & 0x01 );
     FlagCY = ( ( a4 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x0237,slow_0237 );
+    return jumpDirect ( 0x0237,slow_0237,0 );
 }
 
 Control slow_0237 ()
@@ -13412,7 +13412,7 @@ Control slow_0237 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x0238,slow_0238 );
+    return jumpDirect ( 0x0238,slow_0238,0 );
 }
 
 Control slow_0238 ()
@@ -13437,7 +13437,7 @@ Control slow_0238 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x0239,slow_0239 );
+        return jumpDirect ( 0x0239,slow_0239,0 );
     }
 }
 
@@ -13458,7 +13458,7 @@ Control slow_0239 ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x023A,slow_023A );
+    return jumpDirect ( 0x023A,slow_023A,0 );
 }
 
 Control slow_023A ()
@@ -13468,7 +13468,7 @@ Control slow_023A ()
     advance ( 10 );
     D = 0x02;
     E = 0xE0;
-    return jumpDirect ( 0x023D,slow_023D );
+    return jumpDirect ( 0x023D,slow_023D,0 );
 }
 
 Control slow_023D ()
@@ -13484,7 +13484,7 @@ Control slow_023D ()
     H = ( ( a5 & 0xFFFF ) >> 8 );
     L = ( ( a5 & 0xFFFF ) & 0xFF );
     FlagCY = ( ( a5 >> 16 ) & 0x01 );
-    return jumpDirect ( 0x023E,slow_023E );
+    return jumpDirect ( 0x023E,slow_023E,0 );
 }
 
 Control slow_023E ()
@@ -13504,7 +13504,7 @@ Control slow_023E ()
     E = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x023F,slow_023F );
+    return jumpDirect ( 0x023F,slow_023F,0 );
 }
 
 Control slow_023F ()
@@ -13512,7 +13512,7 @@ Control slow_023F ()
     // #at: 023F
     instruction2 ( 0x02,0x42,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x02,0x29 );
     advance ( 10 );
-    return jumpDirect ( 0x0229,slow_0229 );
+    return jumpDirect ( 0x0229,slow_0229,fast_0229 );
 }
 
 Control slow_0242 ()
@@ -13531,7 +13531,7 @@ Control slow_0242 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x147C,slow_147C );
+    return jumpDirect ( 0x147C,slow_147C,fast_147C );
 }
 
 Control slow_0245 ()
@@ -13539,7 +13539,7 @@ Control slow_0245 ()
     // #at: 0245
     instruction2 ( 0x02,0x48,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x02,0x35 );
     advance ( 10 );
-    return jumpDirect ( 0x0235,slow_0235 );
+    return jumpDirect ( 0x0235,slow_0235,fast_0235 );
 }
 
 Control slow_0248 ()
@@ -13549,7 +13549,7 @@ Control slow_0248 ()
     advance ( 10 );
     H = 0x20;
     L = 0x10;
-    return jumpDirect ( 0x024B,slow_024B );
+    return jumpDirect ( 0x024B,slow_024B,fast_024B );
 }
 
 Control slow_024B ()
@@ -13561,7 +13561,7 @@ Control slow_024B ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x024C,slow_024C );
+    return jumpDirect ( 0x024C,slow_024C,0 );
 }
 
 Control slow_024C ()
@@ -13579,7 +13579,7 @@ Control slow_024C ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x024E,slow_024E );
+    return jumpDirect ( 0x024E,slow_024E,0 );
 }
 
 Control slow_024E ()
@@ -13604,7 +13604,7 @@ Control slow_024E ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x024F,slow_024F );
+        return jumpDirect ( 0x024F,slow_024F,0 );
     }
 }
 
@@ -13623,7 +13623,7 @@ Control slow_024F ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x0251,slow_0251 );
+    return jumpDirect ( 0x0251,slow_0251,0 );
 }
 
 Control slow_0251 ()
@@ -13633,12 +13633,12 @@ Control slow_0251 ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0281,slow_0281 );
+        return jumpDirect ( 0x0281,slow_0281,fast_0281 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0254,slow_0254 );
+        return jumpDirect ( 0x0254,slow_0254,0 );
     }
 }
 
@@ -13652,7 +13652,7 @@ Control slow_0254 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x0255,slow_0255 );
+    return jumpDirect ( 0x0255,slow_0255,0 );
 }
 
 Control slow_0255 ()
@@ -13664,7 +13664,7 @@ Control slow_0255 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     B = a3;
-    return jumpDirect ( 0x0256,slow_0256 );
+    return jumpDirect ( 0x0256,slow_0256,0 );
 }
 
 Control slow_0256 ()
@@ -13674,7 +13674,7 @@ Control slow_0256 ()
     u8 a1 = A ;
     advance ( 5 );
     C = a1;
-    return jumpDirect ( 0x0257,slow_0257 );
+    return jumpDirect ( 0x0257,slow_0257,0 );
 }
 
 Control slow_0257 ()
@@ -13691,7 +13691,7 @@ Control slow_0257 ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0258,slow_0258 );
+    return jumpDirect ( 0x0258,slow_0258,0 );
 }
 
 Control slow_0258 ()
@@ -13701,7 +13701,7 @@ Control slow_0258 ()
     u8 a1 = C ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x0259,slow_0259 );
+    return jumpDirect ( 0x0259,slow_0259,0 );
 }
 
 Control slow_0259 ()
@@ -13711,12 +13711,12 @@ Control slow_0259 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x0277,slow_0277 );
+        return jumpDirect ( 0x0277,slow_0277,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x025C,slow_025C );
+        return jumpDirect ( 0x025C,slow_025C,0 );
     }
 }
 
@@ -13730,7 +13730,7 @@ Control slow_025C ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x025D,slow_025D );
+    return jumpDirect ( 0x025D,slow_025D,0 );
 }
 
 Control slow_025D ()
@@ -13742,7 +13742,7 @@ Control slow_025D ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x025E,slow_025E );
+    return jumpDirect ( 0x025E,slow_025E,0 );
 }
 
 Control slow_025E ()
@@ -13760,7 +13760,7 @@ Control slow_025E ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x025F,slow_025F );
+    return jumpDirect ( 0x025F,slow_025F,0 );
 }
 
 Control slow_025F ()
@@ -13770,12 +13770,12 @@ Control slow_025F ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x0288,slow_0288 );
+        return jumpDirect ( 0x0288,slow_0288,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0262,slow_0262 );
+        return jumpDirect ( 0x0262,slow_0262,0 );
     }
 }
 
@@ -13789,7 +13789,7 @@ Control slow_0262 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x0263,slow_0263 );
+    return jumpDirect ( 0x0263,slow_0263,0 );
 }
 
 Control slow_0263 ()
@@ -13801,7 +13801,7 @@ Control slow_0263 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     E = a3;
-    return jumpDirect ( 0x0264,slow_0264 );
+    return jumpDirect ( 0x0264,slow_0264,0 );
 }
 
 Control slow_0264 ()
@@ -13814,7 +13814,7 @@ Control slow_0264 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x0265,slow_0265 );
+    return jumpDirect ( 0x0265,slow_0265,0 );
 }
 
 Control slow_0265 ()
@@ -13826,7 +13826,7 @@ Control slow_0265 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     D = a3;
-    return jumpDirect ( 0x0266,slow_0266 );
+    return jumpDirect ( 0x0266,slow_0266,0 );
 }
 
 Control slow_0266 ()
@@ -13846,7 +13846,7 @@ Control slow_0266 ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x0267,slow_0267 );
+    return jumpDirect ( 0x0267,slow_0267,0 );
 }
 
 Control slow_0267 ()
@@ -13862,7 +13862,7 @@ Control slow_0267 ()
     E = a4;
     H = a1;
     L = a2;
-    return jumpDirect ( 0x0268,slow_0268 );
+    return jumpDirect ( 0x0268,slow_0268,0 );
 }
 
 Control slow_0268 ()
@@ -13882,7 +13882,7 @@ Control slow_0268 ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x0269,slow_0269 );
+    return jumpDirect ( 0x0269,slow_0269,0 );
 }
 
 Control slow_0269 ()
@@ -13892,7 +13892,7 @@ Control slow_0269 ()
     advance ( 10 );
     H = 0x02;
     L = 0x6F;
-    return jumpDirect ( 0x026C,slow_026C );
+    return jumpDirect ( 0x026C,slow_026C,0 );
 }
 
 Control slow_026C ()
@@ -13911,7 +13911,7 @@ Control slow_026C ()
     advance ( 18 );
     H = a5;
     L = a4;
-    return jumpDirect ( 0x026D,slow_026D );
+    return jumpDirect ( 0x026D,slow_026D,0 );
 }
 
 Control slow_026D ()
@@ -13931,7 +13931,7 @@ Control slow_026D ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x026E,slow_026E );
+    return jumpDirect ( 0x026E,slow_026E,0 );
 }
 
 Control slow_026E ()
@@ -13961,7 +13961,7 @@ Control slow_026F ()
     L = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x0270,slow_0270 );
+    return jumpDirect ( 0x0270,slow_0270,0 );
 }
 
 Control slow_0270 ()
@@ -13971,7 +13971,7 @@ Control slow_0270 ()
     advance ( 10 );
     D = 0x00;
     E = 0x0C;
-    return jumpDirect ( 0x0273,slow_0273 );
+    return jumpDirect ( 0x0273,slow_0273,0 );
 }
 
 Control slow_0273 ()
@@ -13987,7 +13987,7 @@ Control slow_0273 ()
     H = ( ( a5 & 0xFFFF ) >> 8 );
     L = ( ( a5 & 0xFFFF ) & 0xFF );
     FlagCY = ( ( a5 >> 16 ) & 0x01 );
-    return jumpDirect ( 0x0274,slow_0274 );
+    return jumpDirect ( 0x0274,slow_0274,0 );
 }
 
 Control slow_0274 ()
@@ -13995,7 +13995,7 @@ Control slow_0274 ()
     // #at: 0274
     instruction2 ( 0x02,0x77,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x02,0x4B );
     advance ( 10 );
-    return jumpDirect ( 0x024B,slow_024B );
+    return jumpDirect ( 0x024B,slow_024B,fast_024B );
 }
 
 Control slow_0277 ()
@@ -14013,7 +14013,7 @@ Control slow_0277 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x0278,slow_0278 );
+    return jumpDirect ( 0x0278,slow_0278,0 );
 }
 
 Control slow_0278 ()
@@ -14031,7 +14031,7 @@ Control slow_0278 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x0279,slow_0279 );
+    return jumpDirect ( 0x0279,slow_0279,0 );
 }
 
 Control slow_0279 ()
@@ -14041,12 +14041,12 @@ Control slow_0279 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x027D,slow_027D );
+        return jumpDirect ( 0x027D,slow_027D,fast_027D );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x027C,slow_027C );
+        return jumpDirect ( 0x027C,slow_027C,0 );
     }
 }
 
@@ -14065,7 +14065,7 @@ Control slow_027C ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x027D,slow_027D );
+    return jumpDirect ( 0x027D,slow_027D,fast_027D );
 }
 
 Control slow_027D ()
@@ -14083,7 +14083,7 @@ Control slow_027D ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x027E,slow_027E );
+    return jumpDirect ( 0x027E,slow_027E,0 );
 }
 
 Control slow_027E ()
@@ -14095,7 +14095,7 @@ Control slow_027E ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x027F,slow_027F );
+    return jumpDirect ( 0x027F,slow_027F,0 );
 }
 
 Control slow_027F ()
@@ -14108,7 +14108,7 @@ Control slow_027F ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x0280,slow_0280 );
+    return jumpDirect ( 0x0280,slow_0280,0 );
 }
 
 Control slow_0280 ()
@@ -14120,7 +14120,7 @@ Control slow_0280 ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x0281,slow_0281 );
+    return jumpDirect ( 0x0281,slow_0281,fast_0281 );
 }
 
 Control slow_0281 ()
@@ -14130,7 +14130,7 @@ Control slow_0281 ()
     advance ( 10 );
     D = 0x00;
     E = 0x10;
-    return jumpDirect ( 0x0284,slow_0284 );
+    return jumpDirect ( 0x0284,slow_0284,0 );
 }
 
 Control slow_0284 ()
@@ -14146,7 +14146,7 @@ Control slow_0284 ()
     H = ( ( a5 & 0xFFFF ) >> 8 );
     L = ( ( a5 & 0xFFFF ) & 0xFF );
     FlagCY = ( ( a5 >> 16 ) & 0x01 );
-    return jumpDirect ( 0x0285,slow_0285 );
+    return jumpDirect ( 0x0285,slow_0285,0 );
 }
 
 Control slow_0285 ()
@@ -14154,7 +14154,7 @@ Control slow_0285 ()
     // #at: 0285
     instruction2 ( 0x02,0x88,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x02,0x4B );
     advance ( 10 );
-    return jumpDirect ( 0x024B,slow_024B );
+    return jumpDirect ( 0x024B,slow_024B,fast_024B );
 }
 
 Control slow_0288 ()
@@ -14176,7 +14176,7 @@ Control slow_0288 ()
     FlagZ = ( 0 == ( a4 & 0xFF ) );
     FlagA = ( ( ( a7 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a4 & 0xFF ) );
-    return jumpDirect ( 0x0289,slow_0289 );
+    return jumpDirect ( 0x0289,slow_0289,0 );
 }
 
 Control slow_0289 ()
@@ -14189,7 +14189,7 @@ Control slow_0289 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x028A,slow_028A );
+    return jumpDirect ( 0x028A,slow_028A,0 );
 }
 
 Control slow_028A ()
@@ -14202,7 +14202,7 @@ Control slow_028A ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x028B,slow_028B );
+    return jumpDirect ( 0x028B,slow_028B,0 );
 }
 
 Control slow_028B ()
@@ -14210,7 +14210,7 @@ Control slow_028B ()
     // #at: 028B
     instruction2 ( 0x02,0x8E,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x02,0x81 );
     advance ( 10 );
-    return jumpDirect ( 0x0281,slow_0281 );
+    return jumpDirect ( 0x0281,slow_0281,fast_0281 );
 }
 
 Control slow_028E ()
@@ -14230,7 +14230,7 @@ Control slow_028E ()
     L = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x028F,slow_028F );
+    return jumpDirect ( 0x028F,slow_028F,0 );
 }
 
 Control slow_028F ()
@@ -14243,7 +14243,7 @@ Control slow_028F ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x0290,slow_0290 );
+    return jumpDirect ( 0x0290,slow_0290,0 );
 }
 
 Control slow_0290 ()
@@ -14255,7 +14255,7 @@ Control slow_0290 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x0291,slow_0291 );
+    return jumpDirect ( 0x0291,slow_0291,0 );
 }
 
 Control slow_0291 ()
@@ -14273,7 +14273,7 @@ Control slow_0291 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x0293,slow_0293 );
+    return jumpDirect ( 0x0293,slow_0293,0 );
 }
 
 Control slow_0293 ()
@@ -14283,12 +14283,12 @@ Control slow_0293 ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x033B,slow_033B );
+        return jumpDirect ( 0x033B,slow_033B,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0296,slow_0296 );
+        return jumpDirect ( 0x0296,slow_0296,0 );
     }
 }
 
@@ -14302,7 +14302,7 @@ Control slow_0296 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x0297,slow_0297 );
+    return jumpDirect ( 0x0297,slow_0297,0 );
 }
 
 Control slow_0297 ()
@@ -14324,7 +14324,7 @@ Control slow_0297 ()
     FlagZ = ( 0 == ( a4 & 0xFF ) );
     FlagA = ( ( ( a7 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a4 & 0xFF ) );
-    return jumpDirect ( 0x0298,slow_0298 );
+    return jumpDirect ( 0x0298,slow_0298,0 );
 }
 
 Control slow_0298 ()
@@ -14349,7 +14349,7 @@ Control slow_0298 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x0299,slow_0299 );
+        return jumpDirect ( 0x0299,slow_0299,0 );
     }
 }
 
@@ -14360,7 +14360,7 @@ Control slow_0299 ()
     u8 a1 = A ;
     advance ( 5 );
     B = a1;
-    return jumpDirect ( 0x029A,slow_029A );
+    return jumpDirect ( 0x029A,slow_029A,0 );
 }
 
 Control slow_029A ()
@@ -14377,7 +14377,7 @@ Control slow_029A ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x029B,slow_029B );
+    return jumpDirect ( 0x029B,slow_029B,0 );
 }
 
 Control slow_029B ()
@@ -14387,7 +14387,7 @@ Control slow_029B ()
     u8 a1 = A ;
     mem_write ( 0x2068,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x029E,slow_029E );
+    return jumpDirect ( 0x029E,slow_029E,0 );
 }
 
 Control slow_029E ()
@@ -14397,7 +14397,7 @@ Control slow_029E ()
     u8 a1 = A ;
     mem_write ( 0x2069,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x02A1,slow_02A1 );
+    return jumpDirect ( 0x02A1,slow_02A1,0 );
 }
 
 Control slow_02A1 ()
@@ -14406,7 +14406,7 @@ Control slow_02A1 ()
     instruction1 ( 0x02,0xA3,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x30 );
     advance ( 7 );
     A = 0x30;
-    return jumpDirect ( 0x02A3,slow_02A3 );
+    return jumpDirect ( 0x02A3,slow_02A3,0 );
 }
 
 Control slow_02A3 ()
@@ -14416,7 +14416,7 @@ Control slow_02A3 ()
     u8 a1 = A ;
     mem_write ( 0x206A,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x02A6,slow_02A6 );
+    return jumpDirect ( 0x02A6,slow_02A6,0 );
 }
 
 Control slow_02A6 ()
@@ -14426,7 +14426,7 @@ Control slow_02A6 ()
     u8 a1 = B ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x02A7,slow_02A7 );
+    return jumpDirect ( 0x02A7,slow_02A7,0 );
 }
 
 Control slow_02A7 ()
@@ -14437,7 +14437,7 @@ Control slow_02A7 ()
     u8 a2 = L ;
     mem_write ( ( ( a1 << 8 ) | a2 ),0x05 );
     advance ( 10 );
-    return jumpDirect ( 0x02A9,slow_02A9 );
+    return jumpDirect ( 0x02A9,slow_02A9,0 );
 }
 
 Control slow_02A9 ()
@@ -14450,7 +14450,7 @@ Control slow_02A9 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x02AA,slow_02AA );
+    return jumpDirect ( 0x02AA,slow_02AA,0 );
 }
 
 Control slow_02AA ()
@@ -14472,7 +14472,7 @@ Control slow_02AA ()
     FlagZ = ( 0 == ( a4 & 0xFF ) );
     FlagA = ( ( ( a7 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a4 & 0xFF ) );
-    return jumpDirect ( 0x02AB,slow_02AB );
+    return jumpDirect ( 0x02AB,slow_02AB,0 );
 }
 
 Control slow_02AB ()
@@ -14482,12 +14482,12 @@ Control slow_02AB ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x039B,slow_039B );
+        return jumpDirect ( 0x039B,slow_039B,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x02AE,slow_02AE );
+        return jumpDirect ( 0x02AE,slow_02AE,0 );
     }
 }
 
@@ -14500,7 +14500,7 @@ Control slow_02AE ()
     advance ( 16 );
     H = a2;
     L = a1;
-    return jumpDirect ( 0x02B1,slow_02B1 );
+    return jumpDirect ( 0x02B1,slow_02B1,0 );
 }
 
 Control slow_02B1 ()
@@ -14509,7 +14509,7 @@ Control slow_02B1 ()
     instruction1 ( 0x02,0xB3,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x10 );
     advance ( 7 );
     B = 0x10;
-    return jumpDirect ( 0x02B3,slow_02B3 );
+    return jumpDirect ( 0x02B3,slow_02B3,0 );
 }
 
 Control slow_02B3 ()
@@ -14528,7 +14528,7 @@ Control slow_02B3 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1424,slow_1424 );
+    return jumpDirect ( 0x1424,slow_1424,fast_1424 );
 }
 
 Control slow_02B6 ()
@@ -14538,7 +14538,7 @@ Control slow_02B6 ()
     advance ( 10 );
     H = 0x20;
     L = 0x10;
-    return jumpDirect ( 0x02B9,slow_02B9 );
+    return jumpDirect ( 0x02B9,slow_02B9,0 );
 }
 
 Control slow_02B9 ()
@@ -14548,7 +14548,7 @@ Control slow_02B9 ()
     advance ( 10 );
     D = 0x1B;
     E = 0x10;
-    return jumpDirect ( 0x02BC,slow_02BC );
+    return jumpDirect ( 0x02BC,slow_02BC,0 );
 }
 
 Control slow_02BC ()
@@ -14557,7 +14557,7 @@ Control slow_02BC ()
     instruction1 ( 0x02,0xBE,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x10 );
     advance ( 7 );
     B = 0x10;
-    return jumpDirect ( 0x02BE,slow_02BE );
+    return jumpDirect ( 0x02BE,slow_02BE,0 );
 }
 
 Control slow_02BE ()
@@ -14576,7 +14576,7 @@ Control slow_02BE ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A32,slow_1A32 );
+    return jumpDirect ( 0x1A32,slow_1A32,fast_1A32 );
 }
 
 Control slow_02C1 ()
@@ -14585,7 +14585,7 @@ Control slow_02C1 ()
     instruction1 ( 0x02,0xC3,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x00 );
     advance ( 7 );
     B = 0x00;
-    return jumpDirect ( 0x02C3,slow_02C3 );
+    return jumpDirect ( 0x02C3,slow_02C3,0 );
 }
 
 Control slow_02C3 ()
@@ -14604,7 +14604,7 @@ Control slow_02C3 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x19DC,slow_19DC );
+    return jumpDirect ( 0x19DC,slow_19DC,fast_19DC );
 }
 
 Control slow_02C6 ()
@@ -14614,7 +14614,7 @@ Control slow_02C6 ()
     u8 a1 = e8_read_mem ( 0x206D ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x02C9,slow_02C9 );
+    return jumpDirect ( 0x02C9,slow_02C9,0 );
 }
 
 Control slow_02C9 ()
@@ -14632,7 +14632,7 @@ Control slow_02C9 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x02CA,slow_02CA );
+    return jumpDirect ( 0x02CA,slow_02CA,0 );
 }
 
 Control slow_02CA ()
@@ -14657,7 +14657,7 @@ Control slow_02CA ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x02CB,slow_02CB );
+        return jumpDirect ( 0x02CB,slow_02CB,0 );
     }
 }
 
@@ -14668,7 +14668,7 @@ Control slow_02CB ()
     u8 a1 = e8_read_mem ( 0x20EF ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x02CE,slow_02CE );
+    return jumpDirect ( 0x02CE,slow_02CE,0 );
 }
 
 Control slow_02CE ()
@@ -14686,7 +14686,7 @@ Control slow_02CE ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x02CF,slow_02CF );
+    return jumpDirect ( 0x02CF,slow_02CF,0 );
 }
 
 Control slow_02CF ()
@@ -14711,7 +14711,7 @@ Control slow_02CF ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x02D0,slow_02D0 );
+        return jumpDirect ( 0x02D0,slow_02D0,0 );
     }
 }
 
@@ -14722,7 +14722,7 @@ Control slow_02D0 ()
     advance ( 10 );
     SPH = 0x24;
     SPL = 0x00;
-    return jumpDirect ( 0x02D3,slow_02D3 );
+    return jumpDirect ( 0x02D3,slow_02D3,0 );
 }
 
 Control slow_02D3 ()
@@ -14731,7 +14731,7 @@ Control slow_02D3 ()
     instruction0 ( 0x02,0xD4,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"EI" );
     enable_interrupts (  );
     advance ( 4 );
-    return jumpDirect ( 0x02D4,slow_02D4 );
+    return jumpDirect ( 0x02D4,slow_02D4,0 );
 }
 
 Control slow_02D4 ()
@@ -14750,7 +14750,7 @@ Control slow_02D4 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x19D7,slow_19D7 );
+    return jumpDirect ( 0x19D7,slow_19D7,fast_19D7 );
 }
 
 Control slow_02D7 ()
@@ -14769,7 +14769,7 @@ Control slow_02D7 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x092E,slow_092E );
+    return jumpDirect ( 0x092E,slow_092E,fast_092E );
 }
 
 Control slow_02DA ()
@@ -14787,7 +14787,7 @@ Control slow_02DA ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x02DB,slow_02DB );
+    return jumpDirect ( 0x02DB,slow_02DB,0 );
 }
 
 Control slow_02DB ()
@@ -14797,12 +14797,12 @@ Control slow_02DB ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x166D,slow_166D );
+        return jumpDirect ( 0x166D,slow_166D,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x02DE,slow_02DE );
+        return jumpDirect ( 0x02DE,slow_02DE,0 );
     }
 }
 
@@ -14822,7 +14822,7 @@ Control slow_02DE ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x18E7,slow_18E7 );
+    return jumpDirect ( 0x18E7,slow_18E7,fast_18E7 );
 }
 
 Control slow_02E1 ()
@@ -14834,7 +14834,7 @@ Control slow_02E1 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x02E2,slow_02E2 );
+    return jumpDirect ( 0x02E2,slow_02E2,0 );
 }
 
 Control slow_02E2 ()
@@ -14852,7 +14852,7 @@ Control slow_02E2 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x02E3,slow_02E3 );
+    return jumpDirect ( 0x02E3,slow_02E3,0 );
 }
 
 Control slow_02E3 ()
@@ -14862,12 +14862,12 @@ Control slow_02E3 ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x032C,slow_032C );
+        return jumpDirect ( 0x032C,slow_032C,fast_032C );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x02E6,slow_02E6 );
+        return jumpDirect ( 0x02E6,slow_02E6,0 );
     }
 }
 
@@ -14878,7 +14878,7 @@ Control slow_02E6 ()
     u8 a1 = e8_read_mem ( 0x20CE ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x02E9,slow_02E9 );
+    return jumpDirect ( 0x02E9,slow_02E9,0 );
 }
 
 Control slow_02E9 ()
@@ -14896,7 +14896,7 @@ Control slow_02E9 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x02EA,slow_02EA );
+    return jumpDirect ( 0x02EA,slow_02EA,0 );
 }
 
 Control slow_02EA ()
@@ -14906,12 +14906,12 @@ Control slow_02EA ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x032C,slow_032C );
+        return jumpDirect ( 0x032C,slow_032C,fast_032C );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x02ED,slow_02ED );
+        return jumpDirect ( 0x02ED,slow_02ED,fast_02ED );
     }
 }
 
@@ -14922,7 +14922,7 @@ Control slow_02ED ()
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x02F0,slow_02F0 );
+    return jumpDirect ( 0x02F0,slow_02F0,0 );
 }
 
 Control slow_02F0 ()
@@ -14941,7 +14941,7 @@ Control slow_02F0 ()
     advance ( 11 );
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x02F1,slow_02F1 );
+    return jumpDirect ( 0x02F1,slow_02F1,0 );
 }
 
 Control slow_02F1 ()
@@ -14952,7 +14952,7 @@ Control slow_02F1 ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 >> 0x01 ),7,( ( a1 >> 0 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x02F2,slow_02F2 );
+    return jumpDirect ( 0x02F2,slow_02F2,0 );
 }
 
 Control slow_02F2 ()
@@ -14962,12 +14962,12 @@ Control slow_02F2 ()
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0332,slow_0332 );
+        return jumpDirect ( 0x0332,slow_0332,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x02F5,slow_02F5 );
+        return jumpDirect ( 0x02F5,slow_02F5,0 );
     }
 }
 
@@ -14987,7 +14987,7 @@ Control slow_02F5 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x020E,slow_020E );
+    return jumpDirect ( 0x020E,slow_020E,0 );
 }
 
 Control slow_02F8 ()
@@ -15006,7 +15006,7 @@ Control slow_02F8 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0878,slow_0878 );
+    return jumpDirect ( 0x0878,slow_0878,0 );
 }
 
 Control slow_02FB ()
@@ -15018,7 +15018,7 @@ Control slow_02FB ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x02FC,slow_02FC );
+    return jumpDirect ( 0x02FC,slow_02FC,0 );
 }
 
 Control slow_02FC ()
@@ -15031,7 +15031,7 @@ Control slow_02FC ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x02FD,slow_02FD );
+    return jumpDirect ( 0x02FD,slow_02FD,0 );
 }
 
 Control slow_02FD ()
@@ -15043,7 +15043,7 @@ Control slow_02FD ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x02FE,slow_02FE );
+    return jumpDirect ( 0x02FE,slow_02FE,0 );
 }
 
 Control slow_02FE ()
@@ -15056,7 +15056,7 @@ Control slow_02FE ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x02FF,slow_02FF );
+    return jumpDirect ( 0x02FF,slow_02FF,0 );
 }
 
 Control slow_02FF ()
@@ -15069,7 +15069,7 @@ Control slow_02FF ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x0300,slow_0300 );
+    return jumpDirect ( 0x0300,slow_0300,0 );
 }
 
 Control slow_0300 ()
@@ -15081,7 +15081,7 @@ Control slow_0300 ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x0301,slow_0301 );
+    return jumpDirect ( 0x0301,slow_0301,0 );
 }
 
 Control slow_0301 ()
@@ -15089,7 +15089,7 @@ Control slow_0301 ()
     // #at: 0301
     instruction0 ( 0x03,0x02,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"NOP" );
     advance ( 4 );
-    return jumpDirect ( 0x0302,slow_0302 );
+    return jumpDirect ( 0x0302,slow_0302,0 );
 }
 
 Control slow_0302 ()
@@ -15108,7 +15108,7 @@ Control slow_0302 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x01E4,slow_01E4 );
+    return jumpDirect ( 0x01E4,slow_01E4,fast_01E4 );
 }
 
 Control slow_0305 ()
@@ -15132,7 +15132,7 @@ Control slow_0305 ()
     FlagA = ( ( a4 >> 4 ) & 0x01 );
     FlagP = ( ( a4 >> 2 ) & 0x01 );
     FlagCY = ( ( a4 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x0306,slow_0306 );
+    return jumpDirect ( 0x0306,slow_0306,0 );
 }
 
 Control slow_0306 ()
@@ -15143,7 +15143,7 @@ Control slow_0306 ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 >> 0x01 ),7,( ( a1 >> 0 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x0307,slow_0307 );
+    return jumpDirect ( 0x0307,slow_0307,0 );
 }
 
 Control slow_0307 ()
@@ -15152,7 +15152,7 @@ Control slow_0307 ()
     instruction1 ( 0x03,0x09,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x21 );
     advance ( 7 );
     A = 0x21;
-    return jumpDirect ( 0x0309,slow_0309 );
+    return jumpDirect ( 0x0309,slow_0309,0 );
 }
 
 Control slow_0309 ()
@@ -15161,7 +15161,7 @@ Control slow_0309 ()
     instruction1 ( 0x03,0x0B,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x00 );
     advance ( 7 );
     B = 0x00;
-    return jumpDirect ( 0x030B,slow_030B );
+    return jumpDirect ( 0x030B,slow_030B,0 );
 }
 
 Control slow_030B ()
@@ -15171,12 +15171,12 @@ Control slow_030B ()
     if (( ! FlagCY ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x0312,slow_0312 );
+        return jumpDirect ( 0x0312,slow_0312,fast_0312 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x030E,slow_030E );
+        return jumpDirect ( 0x030E,slow_030E,0 );
     }
 }
 
@@ -15186,7 +15186,7 @@ Control slow_030E ()
     instruction1 ( 0x03,0x10,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x20 );
     advance ( 7 );
     B = 0x20;
-    return jumpDirect ( 0x0310,slow_0310 );
+    return jumpDirect ( 0x0310,slow_0310,0 );
 }
 
 Control slow_0310 ()
@@ -15195,7 +15195,7 @@ Control slow_0310 ()
     instruction1 ( 0x03,0x12,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x22 );
     advance ( 7 );
     A = 0x22;
-    return jumpDirect ( 0x0312,slow_0312 );
+    return jumpDirect ( 0x0312,slow_0312,fast_0312 );
 }
 
 Control slow_0312 ()
@@ -15205,7 +15205,7 @@ Control slow_0312 ()
     u8 a1 = A ;
     mem_write ( 0x2067,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0315,slow_0315 );
+    return jumpDirect ( 0x0315,slow_0315,0 );
 }
 
 Control slow_0315 ()
@@ -15224,7 +15224,7 @@ Control slow_0315 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0AB6,slow_0AB6 );
+    return jumpDirect ( 0x0AB6,slow_0AB6,fast_0AB6 );
 }
 
 Control slow_0318 ()
@@ -15241,7 +15241,7 @@ Control slow_0318 ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0319,slow_0319 );
+    return jumpDirect ( 0x0319,slow_0319,0 );
 }
 
 Control slow_0319 ()
@@ -15251,7 +15251,7 @@ Control slow_0319 ()
     u8 a1 = A ;
     mem_write ( 0x2011,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x031C,slow_031C );
+    return jumpDirect ( 0x031C,slow_031C,0 );
 }
 
 Control slow_031C ()
@@ -15261,7 +15261,7 @@ Control slow_031C ()
     u8 a1 = B ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x031D,slow_031D );
+    return jumpDirect ( 0x031D,slow_031D,0 );
 }
 
 Control slow_031D ()
@@ -15275,7 +15275,7 @@ Control slow_031D ()
     sound_control ( "FleetMovement4",( ( a1 >> 3 ) & 0x01 ) );
     sound_control ( "UfoHit",( ( a1 >> 4 ) & 0x01 ) );
     advance ( 10 );
-    return jumpDirect ( 0x031F,slow_031F );
+    return jumpDirect ( 0x031F,slow_031F,0 );
 }
 
 Control slow_031F ()
@@ -15293,7 +15293,7 @@ Control slow_031F ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x0320,slow_0320 );
+    return jumpDirect ( 0x0320,slow_0320,0 );
 }
 
 Control slow_0320 ()
@@ -15303,7 +15303,7 @@ Control slow_0320 ()
     u8 a1 = A ;
     mem_write ( 0x2098,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0323,slow_0323 );
+    return jumpDirect ( 0x0323,slow_0323,0 );
 }
 
 Control slow_0323 ()
@@ -15322,7 +15322,7 @@ Control slow_0323 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x09D6,slow_09D6 );
+    return jumpDirect ( 0x09D6,slow_09D6,fast_09D6 );
 }
 
 Control slow_0326 ()
@@ -15341,7 +15341,7 @@ Control slow_0326 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A7F,slow_1A7F );
+    return jumpDirect ( 0x1A7F,slow_1A7F,fast_1A7F );
 }
 
 Control slow_0329 ()
@@ -15349,7 +15349,7 @@ Control slow_0329 ()
     // #at: 0329
     instruction2 ( 0x03,0x2C,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x07,0xF9 );
     advance ( 10 );
-    return jumpDirect ( 0x07F9,slow_07F9 );
+    return jumpDirect ( 0x07F9,slow_07F9,fast_07F9 );
 }
 
 Control slow_032C ()
@@ -15368,7 +15368,7 @@ Control slow_032C ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A7F,slow_1A7F );
+    return jumpDirect ( 0x1A7F,slow_1A7F,fast_1A7F );
 }
 
 Control slow_032F ()
@@ -15376,7 +15376,7 @@ Control slow_032F ()
     // #at: 032F
     instruction2 ( 0x03,0x32,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x08,0x17 );
     advance ( 10 );
-    return jumpDirect ( 0x0817,slow_0817 );
+    return jumpDirect ( 0x0817,slow_0817,fast_0817 );
 }
 
 Control slow_0332 ()
@@ -15395,7 +15395,7 @@ Control slow_0332 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0209,slow_0209 );
+    return jumpDirect ( 0x0209,slow_0209,0 );
 }
 
 Control slow_0335 ()
@@ -15403,7 +15403,7 @@ Control slow_0335 ()
     // #at: 0335
     instruction2 ( 0x03,0x38,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x02,0xF8 );
     advance ( 10 );
-    return jumpDirect ( 0x02F8,slow_02F8 );
+    return jumpDirect ( 0x02F8,slow_02F8,fast_02F8 );
 }
 
 Control slow_033B ()
@@ -15413,7 +15413,7 @@ Control slow_033B ()
     advance ( 10 );
     H = 0x20;
     L = 0x68;
-    return jumpDirect ( 0x033E,slow_033E );
+    return jumpDirect ( 0x033E,slow_033E,0 );
 }
 
 Control slow_033E ()
@@ -15424,7 +15424,7 @@ Control slow_033E ()
     u8 a2 = L ;
     mem_write ( ( ( a1 << 8 ) | a2 ),0x01 );
     advance ( 10 );
-    return jumpDirect ( 0x0340,slow_0340 );
+    return jumpDirect ( 0x0340,slow_0340,0 );
 }
 
 Control slow_0340 ()
@@ -15437,7 +15437,7 @@ Control slow_0340 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x0341,slow_0341 );
+    return jumpDirect ( 0x0341,slow_0341,0 );
 }
 
 Control slow_0341 ()
@@ -15449,7 +15449,7 @@ Control slow_0341 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x0342,slow_0342 );
+    return jumpDirect ( 0x0342,slow_0342,0 );
 }
 
 Control slow_0342 ()
@@ -15467,7 +15467,7 @@ Control slow_0342 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0343,slow_0343 );
+    return jumpDirect ( 0x0343,slow_0343,0 );
 }
 
 Control slow_0343 ()
@@ -15475,7 +15475,7 @@ Control slow_0343 ()
     // #at: 0343
     instruction2 ( 0x03,0x46,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x03,0xB0 );
     advance ( 10 );
-    return jumpDirect ( 0x03B0,slow_03B0 );
+    return jumpDirect ( 0x03B0,slow_03B0,0 );
 }
 
 Control slow_0346 ()
@@ -15483,7 +15483,7 @@ Control slow_0346 ()
     // #at: 0346
     instruction0 ( 0x03,0x47,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"NOP" );
     advance ( 4 );
-    return jumpDirect ( 0x0347,slow_0347 );
+    return jumpDirect ( 0x0347,slow_0347,0 );
 }
 
 Control slow_0347 ()
@@ -15496,7 +15496,7 @@ Control slow_0347 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x0348,slow_0348 );
+    return jumpDirect ( 0x0348,slow_0348,0 );
 }
 
 Control slow_0348 ()
@@ -15507,7 +15507,7 @@ Control slow_0348 ()
     u8 a2 = L ;
     mem_write ( ( ( a1 << 8 ) | a2 ),0x01 );
     advance ( 10 );
-    return jumpDirect ( 0x034A,slow_034A );
+    return jumpDirect ( 0x034A,slow_034A,fast_034A );
 }
 
 Control slow_034A ()
@@ -15517,7 +15517,7 @@ Control slow_034A ()
     u8 a1 = e8_read_mem ( 0x201B ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x034D,slow_034D );
+    return jumpDirect ( 0x034D,slow_034D,0 );
 }
 
 Control slow_034D ()
@@ -15527,7 +15527,7 @@ Control slow_034D ()
     u8 a1 = A ;
     advance ( 5 );
     B = a1;
-    return jumpDirect ( 0x034E,slow_034E );
+    return jumpDirect ( 0x034E,slow_034E,0 );
 }
 
 Control slow_034E ()
@@ -15537,7 +15537,7 @@ Control slow_034E ()
     u8 a1 = e8_read_mem ( 0x20EF ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0351,slow_0351 );
+    return jumpDirect ( 0x0351,slow_0351,0 );
 }
 
 Control slow_0351 ()
@@ -15555,7 +15555,7 @@ Control slow_0351 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0352,slow_0352 );
+    return jumpDirect ( 0x0352,slow_0352,0 );
 }
 
 Control slow_0352 ()
@@ -15565,12 +15565,12 @@ Control slow_0352 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x0363,slow_0363 );
+        return jumpDirect ( 0x0363,slow_0363,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0355,slow_0355 );
+        return jumpDirect ( 0x0355,slow_0355,0 );
     }
 }
 
@@ -15581,7 +15581,7 @@ Control slow_0355 ()
     u8 a1 = e8_read_mem ( 0x201D ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0358,slow_0358 );
+    return jumpDirect ( 0x0358,slow_0358,0 );
 }
 
 Control slow_0358 ()
@@ -15592,7 +15592,7 @@ Control slow_0358 ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 >> 0x01 ),7,( ( a1 >> 0 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x0359,slow_0359 );
+    return jumpDirect ( 0x0359,slow_0359,0 );
 }
 
 Control slow_0359 ()
@@ -15602,12 +15602,12 @@ Control slow_0359 ()
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0381,slow_0381 );
+        return jumpDirect ( 0x0381,slow_0381,fast_0381 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x035C,slow_035C );
+        return jumpDirect ( 0x035C,slow_035C,0 );
     }
 }
 
@@ -15619,7 +15619,7 @@ Control slow_035C ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 >> 0x01 ),7,( ( a1 >> 0 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x035D,slow_035D );
+    return jumpDirect ( 0x035D,slow_035D,0 );
 }
 
 Control slow_035D ()
@@ -15629,12 +15629,12 @@ Control slow_035D ()
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( 0x038E,slow_038E );
+        return jumpDirect ( 0x038E,slow_038E,fast_038E );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0360,slow_0360 );
+        return jumpDirect ( 0x0360,slow_0360,0 );
     }
 }
 
@@ -15643,7 +15643,7 @@ Control slow_0360 ()
     // #at: 0360
     instruction2 ( 0x03,0x63,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x03,0x6F );
     advance ( 10 );
-    return jumpDirect ( 0x036F,slow_036F );
+    return jumpDirect ( 0x036F,slow_036F,fast_036F );
 }
 
 Control slow_0363 ()
@@ -15662,7 +15662,7 @@ Control slow_0363 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x17C0,slow_17C0 );
+    return jumpDirect ( 0x17C0,slow_17C0,fast_17C0 );
 }
 
 Control slow_0366 ()
@@ -15673,7 +15673,7 @@ Control slow_0366 ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 << 0x01 ),0,( ( a1 >> 7 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 7 ) & 0x01 );
-    return jumpDirect ( 0x0367,slow_0367 );
+    return jumpDirect ( 0x0367,slow_0367,0 );
 }
 
 Control slow_0367 ()
@@ -15684,7 +15684,7 @@ Control slow_0367 ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 << 0x01 ),0,( ( a1 >> 7 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 7 ) & 0x01 );
-    return jumpDirect ( 0x0368,slow_0368 );
+    return jumpDirect ( 0x0368,slow_0368,0 );
 }
 
 Control slow_0368 ()
@@ -15694,12 +15694,12 @@ Control slow_0368 ()
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0381,slow_0381 );
+        return jumpDirect ( 0x0381,slow_0381,fast_0381 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x036B,slow_036B );
+        return jumpDirect ( 0x036B,slow_036B,0 );
     }
 }
 
@@ -15711,7 +15711,7 @@ Control slow_036B ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 << 0x01 ),0,( ( a1 >> 7 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 7 ) & 0x01 );
-    return jumpDirect ( 0x036C,slow_036C );
+    return jumpDirect ( 0x036C,slow_036C,0 );
 }
 
 Control slow_036C ()
@@ -15721,12 +15721,12 @@ Control slow_036C ()
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( 0x038E,slow_038E );
+        return jumpDirect ( 0x038E,slow_038E,fast_038E );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x036F,slow_036F );
+        return jumpDirect ( 0x036F,slow_036F,fast_036F );
     }
 }
 
@@ -15737,7 +15737,7 @@ Control slow_036F ()
     advance ( 10 );
     H = 0x20;
     L = 0x18;
-    return jumpDirect ( 0x0372,slow_0372 );
+    return jumpDirect ( 0x0372,slow_0372,0 );
 }
 
 Control slow_0372 ()
@@ -15756,7 +15756,7 @@ Control slow_0372 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A3B,slow_1A3B );
+    return jumpDirect ( 0x1A3B,slow_1A3B,fast_1A3B );
 }
 
 Control slow_0375 ()
@@ -15775,7 +15775,7 @@ Control slow_0375 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A47,slow_1A47 );
+    return jumpDirect ( 0x1A47,slow_1A47,fast_1A47 );
 }
 
 Control slow_0378 ()
@@ -15794,7 +15794,7 @@ Control slow_0378 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1439,slow_1439 );
+    return jumpDirect ( 0x1439,slow_1439,fast_1439 );
 }
 
 Control slow_037B ()
@@ -15803,7 +15803,7 @@ Control slow_037B ()
     instruction1 ( 0x03,0x7D,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x00 );
     advance ( 7 );
     A = 0x00;
-    return jumpDirect ( 0x037D,slow_037D );
+    return jumpDirect ( 0x037D,slow_037D,0 );
 }
 
 Control slow_037D ()
@@ -15813,7 +15813,7 @@ Control slow_037D ()
     u8 a1 = A ;
     mem_write ( 0x2012,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0380,slow_0380 );
+    return jumpDirect ( 0x0380,slow_0380,0 );
 }
 
 Control slow_0380 ()
@@ -15841,7 +15841,7 @@ Control slow_0381 ()
     u8 a1 = B ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x0382,slow_0382 );
+    return jumpDirect ( 0x0382,slow_0382,0 );
 }
 
 Control slow_0382 ()
@@ -15859,7 +15859,7 @@ Control slow_0382 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x0384,slow_0384 );
+    return jumpDirect ( 0x0384,slow_0384,0 );
 }
 
 Control slow_0384 ()
@@ -15869,12 +15869,12 @@ Control slow_0384 ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x036F,slow_036F );
+        return jumpDirect ( 0x036F,slow_036F,fast_036F );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0387,slow_0387 );
+        return jumpDirect ( 0x0387,slow_0387,0 );
     }
 }
 
@@ -15893,7 +15893,7 @@ Control slow_0387 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x0388,slow_0388 );
+    return jumpDirect ( 0x0388,slow_0388,0 );
 }
 
 Control slow_0388 ()
@@ -15903,7 +15903,7 @@ Control slow_0388 ()
     u8 a1 = A ;
     mem_write ( 0x201B,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x038B,slow_038B );
+    return jumpDirect ( 0x038B,slow_038B,0 );
 }
 
 Control slow_038B ()
@@ -15911,7 +15911,7 @@ Control slow_038B ()
     // #at: 038B
     instruction2 ( 0x03,0x8E,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x03,0x6F );
     advance ( 10 );
-    return jumpDirect ( 0x036F,slow_036F );
+    return jumpDirect ( 0x036F,slow_036F,fast_036F );
 }
 
 Control slow_038E ()
@@ -15921,7 +15921,7 @@ Control slow_038E ()
     u8 a1 = B ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x038F,slow_038F );
+    return jumpDirect ( 0x038F,slow_038F,0 );
 }
 
 Control slow_038F ()
@@ -15939,7 +15939,7 @@ Control slow_038F ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x0391,slow_0391 );
+    return jumpDirect ( 0x0391,slow_0391,0 );
 }
 
 Control slow_0391 ()
@@ -15949,12 +15949,12 @@ Control slow_0391 ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x036F,slow_036F );
+        return jumpDirect ( 0x036F,slow_036F,fast_036F );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0394,slow_0394 );
+        return jumpDirect ( 0x0394,slow_0394,0 );
     }
 }
 
@@ -15973,7 +15973,7 @@ Control slow_0394 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x0395,slow_0395 );
+    return jumpDirect ( 0x0395,slow_0395,0 );
 }
 
 Control slow_0395 ()
@@ -15983,7 +15983,7 @@ Control slow_0395 ()
     u8 a1 = A ;
     mem_write ( 0x201B,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0398,slow_0398 );
+    return jumpDirect ( 0x0398,slow_0398,0 );
 }
 
 Control slow_0398 ()
@@ -15991,7 +15991,7 @@ Control slow_0398 ()
     // #at: 0398
     instruction2 ( 0x03,0x9B,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x03,0x6F );
     advance ( 10 );
-    return jumpDirect ( 0x036F,slow_036F );
+    return jumpDirect ( 0x036F,slow_036F,fast_036F );
 }
 
 Control slow_039B ()
@@ -16009,7 +16009,7 @@ Control slow_039B ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x039C,slow_039C );
+    return jumpDirect ( 0x039C,slow_039C,0 );
 }
 
 Control slow_039C ()
@@ -16026,7 +16026,7 @@ Control slow_039C ()
     FlagA = ( ( a3 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x039E,slow_039E );
+    return jumpDirect ( 0x039E,slow_039E,0 );
 }
 
 Control slow_039E ()
@@ -16036,7 +16036,7 @@ Control slow_039E ()
     u8 a1 = A ;
     mem_write ( 0x2015,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x03A1,slow_03A1 );
+    return jumpDirect ( 0x03A1,slow_03A1,0 );
 }
 
 Control slow_03A1 ()
@@ -16047,7 +16047,7 @@ Control slow_03A1 ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 << 0x01 ),0,( ( a1 >> 7 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 7 ) & 0x01 );
-    return jumpDirect ( 0x03A2,slow_03A2 );
+    return jumpDirect ( 0x03A2,slow_03A2,0 );
 }
 
 Control slow_03A2 ()
@@ -16058,7 +16058,7 @@ Control slow_03A2 ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 << 0x01 ),0,( ( a1 >> 7 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 7 ) & 0x01 );
-    return jumpDirect ( 0x03A3,slow_03A3 );
+    return jumpDirect ( 0x03A3,slow_03A3,0 );
 }
 
 Control slow_03A3 ()
@@ -16069,7 +16069,7 @@ Control slow_03A3 ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 << 0x01 ),0,( ( a1 >> 7 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 7 ) & 0x01 );
-    return jumpDirect ( 0x03A4,slow_03A4 );
+    return jumpDirect ( 0x03A4,slow_03A4,0 );
 }
 
 Control slow_03A4 ()
@@ -16080,7 +16080,7 @@ Control slow_03A4 ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 << 0x01 ),0,( ( a1 >> 7 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 7 ) & 0x01 );
-    return jumpDirect ( 0x03A5,slow_03A5 );
+    return jumpDirect ( 0x03A5,slow_03A5,0 );
 }
 
 Control slow_03A5 ()
@@ -16090,7 +16090,7 @@ Control slow_03A5 ()
     advance ( 10 );
     H = 0x1C;
     L = 0x70;
-    return jumpDirect ( 0x03A8,slow_03A8 );
+    return jumpDirect ( 0x03A8,slow_03A8,0 );
 }
 
 Control slow_03A8 ()
@@ -16110,7 +16110,7 @@ Control slow_03A8 ()
     FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a3 & 0xFF ) );
     FlagCY = ( ( ( a3 >> 8 ) >> 0 ) & 0x01 );
-    return jumpDirect ( 0x03A9,slow_03A9 );
+    return jumpDirect ( 0x03A9,slow_03A9,0 );
 }
 
 Control slow_03A9 ()
@@ -16120,7 +16120,7 @@ Control slow_03A9 ()
     u8 a1 = A ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( 0x03AA,slow_03AA );
+    return jumpDirect ( 0x03AA,slow_03AA,0 );
 }
 
 Control slow_03AA ()
@@ -16132,7 +16132,7 @@ Control slow_03AA ()
     u8 a2 = H ;
     mem_write ( 0x2019,a2 );
     advance ( 16 );
-    return jumpDirect ( 0x03AD,slow_03AD );
+    return jumpDirect ( 0x03AD,slow_03AD,0 );
 }
 
 Control slow_03AD ()
@@ -16140,7 +16140,7 @@ Control slow_03AD ()
     // #at: 03AD
     instruction2 ( 0x03,0xB0,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x03,0x6F );
     advance ( 10 );
-    return jumpDirect ( 0x036F,slow_036F );
+    return jumpDirect ( 0x036F,slow_036F,fast_036F );
 }
 
 Control slow_03B0 ()
@@ -16150,12 +16150,12 @@ Control slow_03B0 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x034A,slow_034A );
+        return jumpDirect ( 0x034A,slow_034A,fast_034A );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x03B3,slow_03B3 );
+        return jumpDirect ( 0x03B3,slow_03B3,0 );
     }
 }
 
@@ -16169,7 +16169,7 @@ Control slow_03B3 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x03B4,slow_03B4 );
+    return jumpDirect ( 0x03B4,slow_03B4,0 );
 }
 
 Control slow_03B4 ()
@@ -16191,7 +16191,7 @@ Control slow_03B4 ()
     FlagZ = ( 0 == ( a4 & 0xFF ) );
     FlagA = ( ( ( a7 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a4 & 0xFF ) );
-    return jumpDirect ( 0x03B5,slow_03B5 );
+    return jumpDirect ( 0x03B5,slow_03B5,0 );
 }
 
 Control slow_03B5 ()
@@ -16201,12 +16201,12 @@ Control slow_03B5 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x034A,slow_034A );
+        return jumpDirect ( 0x034A,slow_034A,fast_034A );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x03B8,slow_03B8 );
+        return jumpDirect ( 0x03B8,slow_03B8,0 );
     }
 }
 
@@ -16215,7 +16215,7 @@ Control slow_03B8 ()
     // #at: 03B8
     instruction2 ( 0x03,0xBB,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x03,0x46 );
     advance ( 10 );
-    return jumpDirect ( 0x0346,slow_0346 );
+    return jumpDirect ( 0x0346,slow_0346,0 );
 }
 
 Control slow_03BB ()
@@ -16225,7 +16225,7 @@ Control slow_03BB ()
     advance ( 10 );
     D = 0x20;
     E = 0x2A;
-    return jumpDirect ( 0x03BE,slow_03BE );
+    return jumpDirect ( 0x03BE,slow_03BE,0 );
 }
 
 Control slow_03BE ()
@@ -16244,7 +16244,7 @@ Control slow_03BE ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A06,slow_1A06 );
+    return jumpDirect ( 0x1A06,slow_1A06,fast_1A06 );
 }
 
 Control slow_03C1 ()
@@ -16264,7 +16264,7 @@ Control slow_03C1 ()
     L = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x03C2,slow_03C2 );
+    return jumpDirect ( 0x03C2,slow_03C2,0 );
 }
 
 Control slow_03C2 ()
@@ -16289,7 +16289,7 @@ Control slow_03C2 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x03C3,slow_03C3 );
+        return jumpDirect ( 0x03C3,slow_03C3,0 );
     }
 }
 
@@ -16303,7 +16303,7 @@ Control slow_03C3 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x03C4,slow_03C4 );
+    return jumpDirect ( 0x03C4,slow_03C4,0 );
 }
 
 Control slow_03C4 ()
@@ -16315,7 +16315,7 @@ Control slow_03C4 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x03C5,slow_03C5 );
+    return jumpDirect ( 0x03C5,slow_03C5,0 );
 }
 
 Control slow_03C5 ()
@@ -16333,7 +16333,7 @@ Control slow_03C5 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x03C6,slow_03C6 );
+    return jumpDirect ( 0x03C6,slow_03C6,0 );
 }
 
 Control slow_03C6 ()
@@ -16358,7 +16358,7 @@ Control slow_03C6 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x03C7,slow_03C7 );
+        return jumpDirect ( 0x03C7,slow_03C7,0 );
     }
 }
 
@@ -16377,7 +16377,7 @@ Control slow_03C7 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x03C9,slow_03C9 );
+    return jumpDirect ( 0x03C9,slow_03C9,0 );
 }
 
 Control slow_03C9 ()
@@ -16387,12 +16387,12 @@ Control slow_03C9 ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x03FA,slow_03FA );
+        return jumpDirect ( 0x03FA,slow_03FA,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x03CC,slow_03CC );
+        return jumpDirect ( 0x03CC,slow_03CC,0 );
     }
 }
 
@@ -16411,7 +16411,7 @@ Control slow_03CC ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x03CE,slow_03CE );
+    return jumpDirect ( 0x03CE,slow_03CE,0 );
 }
 
 Control slow_03CE ()
@@ -16421,12 +16421,12 @@ Control slow_03CE ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x040A,slow_040A );
+        return jumpDirect ( 0x040A,slow_040A,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x03D1,slow_03D1 );
+        return jumpDirect ( 0x03D1,slow_03D1,0 );
     }
 }
 
@@ -16440,7 +16440,7 @@ Control slow_03D1 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x03D2,slow_03D2 );
+    return jumpDirect ( 0x03D2,slow_03D2,0 );
 }
 
 Control slow_03D2 ()
@@ -16458,7 +16458,7 @@ Control slow_03D2 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x03D4,slow_03D4 );
+    return jumpDirect ( 0x03D4,slow_03D4,0 );
 }
 
 Control slow_03D4 ()
@@ -16468,12 +16468,12 @@ Control slow_03D4 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x042A,slow_042A );
+        return jumpDirect ( 0x042A,slow_042A,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x03D7,slow_03D7 );
+        return jumpDirect ( 0x03D7,slow_03D7,0 );
     }
 }
 
@@ -16496,7 +16496,7 @@ Control slow_03D7 ()
     FlagZ = ( 0 == ( a4 & 0xFF ) );
     FlagA = ( ( ( a7 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a4 & 0xFF ) );
-    return jumpDirect ( 0x03D8,slow_03D8 );
+    return jumpDirect ( 0x03D8,slow_03D8,0 );
 }
 
 Control slow_03D8 ()
@@ -16506,12 +16506,12 @@ Control slow_03D8 ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0436,slow_0436 );
+        return jumpDirect ( 0x0436,slow_0436,fast_0436 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x03DB,slow_03DB );
+        return jumpDirect ( 0x03DB,slow_03DB,0 );
     }
 }
 
@@ -16524,7 +16524,7 @@ Control slow_03DB ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x03DC,slow_03DC );
+    return jumpDirect ( 0x03DC,slow_03DC,0 );
 }
 
 Control slow_03DC ()
@@ -16542,7 +16542,7 @@ Control slow_03DC ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x03DE,slow_03DE );
+    return jumpDirect ( 0x03DE,slow_03DE,0 );
 }
 
 Control slow_03DE ()
@@ -16567,7 +16567,7 @@ Control slow_03DE ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x03DF,slow_03DF );
+        return jumpDirect ( 0x03DF,slow_03DF,0 );
     }
 }
 
@@ -16588,7 +16588,7 @@ Control slow_03DF ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x03E0,slow_03E0 );
+    return jumpDirect ( 0x03E0,slow_03E0,0 );
 }
 
 Control slow_03E0 ()
@@ -16607,7 +16607,7 @@ Control slow_03E0 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0430,slow_0430 );
+    return jumpDirect ( 0x0430,slow_0430,fast_0430 );
 }
 
 Control slow_03E3 ()
@@ -16626,7 +16626,7 @@ Control slow_03E3 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1452,slow_1452 );
+    return jumpDirect ( 0x1452,slow_1452,fast_1452 );
 }
 
 Control slow_03E6 ()
@@ -16646,7 +16646,7 @@ Control slow_03E6 ()
     L = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x03E7,slow_03E7 );
+    return jumpDirect ( 0x03E7,slow_03E7,0 );
 }
 
 Control slow_03E7 ()
@@ -16659,7 +16659,7 @@ Control slow_03E7 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x03E8,slow_03E8 );
+    return jumpDirect ( 0x03E8,slow_03E8,0 );
 }
 
 Control slow_03E8 ()
@@ -16681,7 +16681,7 @@ Control slow_03E8 ()
     FlagZ = ( 0 == ( a4 & 0xFF ) );
     FlagA = ( ( ( a7 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a4 & 0xFF ) );
-    return jumpDirect ( 0x03E9,slow_03E9 );
+    return jumpDirect ( 0x03E9,slow_03E9,0 );
 }
 
 Control slow_03E9 ()
@@ -16694,7 +16694,7 @@ Control slow_03E9 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x03EA,slow_03EA );
+    return jumpDirect ( 0x03EA,slow_03EA,0 );
 }
 
 Control slow_03EA ()
@@ -16707,7 +16707,7 @@ Control slow_03EA ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x03EB,slow_03EB );
+    return jumpDirect ( 0x03EB,slow_03EB,0 );
 }
 
 Control slow_03EB ()
@@ -16729,7 +16729,7 @@ Control slow_03EB ()
     FlagZ = ( 0 == ( a4 & 0xFF ) );
     FlagA = ( ( ( a7 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a4 & 0xFF ) );
-    return jumpDirect ( 0x03EC,slow_03EC );
+    return jumpDirect ( 0x03EC,slow_03EC,0 );
 }
 
 Control slow_03EC ()
@@ -16751,7 +16751,7 @@ Control slow_03EC ()
     FlagZ = ( 0 == ( a4 & 0xFF ) );
     FlagA = ( ( ( a7 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a4 & 0xFF ) );
-    return jumpDirect ( 0x03ED,slow_03ED );
+    return jumpDirect ( 0x03ED,slow_03ED,0 );
 }
 
 Control slow_03ED ()
@@ -16764,7 +16764,7 @@ Control slow_03ED ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x03EE,slow_03EE );
+    return jumpDirect ( 0x03EE,slow_03EE,0 );
 }
 
 Control slow_03EE ()
@@ -16786,7 +16786,7 @@ Control slow_03EE ()
     FlagZ = ( 0 == ( a4 & 0xFF ) );
     FlagA = ( ( ( a7 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a4 & 0xFF ) );
-    return jumpDirect ( 0x03EF,slow_03EF );
+    return jumpDirect ( 0x03EF,slow_03EF,0 );
 }
 
 Control slow_03EF ()
@@ -16808,7 +16808,7 @@ Control slow_03EF ()
     FlagZ = ( 0 == ( a4 & 0xFF ) );
     FlagA = ( ( ( a7 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a4 & 0xFF ) );
-    return jumpDirect ( 0x03F0,slow_03F0 );
+    return jumpDirect ( 0x03F0,slow_03F0,0 );
 }
 
 Control slow_03F0 ()
@@ -16830,7 +16830,7 @@ Control slow_03F0 ()
     FlagZ = ( 0 == ( a4 & 0xFF ) );
     FlagA = ( ( ( a7 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a4 & 0xFF ) );
-    return jumpDirect ( 0x03F1,slow_03F1 );
+    return jumpDirect ( 0x03F1,slow_03F1,0 );
 }
 
 Control slow_03F1 ()
@@ -16843,7 +16843,7 @@ Control slow_03F1 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x03F2,slow_03F2 );
+    return jumpDirect ( 0x03F2,slow_03F2,0 );
 }
 
 Control slow_03F2 ()
@@ -16854,7 +16854,7 @@ Control slow_03F2 ()
     u8 a2 = L ;
     mem_write ( ( ( a1 << 8 ) | a2 ),0x08 );
     advance ( 10 );
-    return jumpDirect ( 0x03F4,slow_03F4 );
+    return jumpDirect ( 0x03F4,slow_03F4,0 );
 }
 
 Control slow_03F4 ()
@@ -16873,7 +16873,7 @@ Control slow_03F4 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0430,slow_0430 );
+    return jumpDirect ( 0x0430,slow_0430,fast_0430 );
 }
 
 Control slow_03F7 ()
@@ -16881,7 +16881,7 @@ Control slow_03F7 ()
     // #at: 03F7
     instruction2 ( 0x03,0xFA,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x14,0x00 );
     advance ( 10 );
-    return jumpDirect ( 0x1400,slow_1400 );
+    return jumpDirect ( 0x1400,slow_1400,fast_1400 );
 }
 
 Control slow_03FA ()
@@ -16899,7 +16899,7 @@ Control slow_03FA ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x03FB,slow_03FB );
+    return jumpDirect ( 0x03FB,slow_03FB,0 );
 }
 
 Control slow_03FB ()
@@ -16911,7 +16911,7 @@ Control slow_03FB ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x03FC,slow_03FC );
+    return jumpDirect ( 0x03FC,slow_03FC,0 );
 }
 
 Control slow_03FC ()
@@ -16921,7 +16921,7 @@ Control slow_03FC ()
     u8 a1 = e8_read_mem ( 0x201B ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x03FF,slow_03FF );
+    return jumpDirect ( 0x03FF,slow_03FF,0 );
 }
 
 Control slow_03FF ()
@@ -16940,7 +16940,7 @@ Control slow_03FF ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ( ( a2 >> 8 ) >> 0 ) & 0x01 );
-    return jumpDirect ( 0x0401,slow_0401 );
+    return jumpDirect ( 0x0401,slow_0401,0 );
 }
 
 Control slow_0401 ()
@@ -16950,7 +16950,7 @@ Control slow_0401 ()
     u8 a1 = A ;
     mem_write ( 0x202A,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0404,slow_0404 );
+    return jumpDirect ( 0x0404,slow_0404,0 );
 }
 
 Control slow_0404 ()
@@ -16969,7 +16969,7 @@ Control slow_0404 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0430,slow_0430 );
+    return jumpDirect ( 0x0430,slow_0430,fast_0430 );
 }
 
 Control slow_0407 ()
@@ -16977,7 +16977,7 @@ Control slow_0407 ()
     // #at: 0407
     instruction2 ( 0x04,0x0A,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x14,0x00 );
     advance ( 10 );
-    return jumpDirect ( 0x1400,slow_1400 );
+    return jumpDirect ( 0x1400,slow_1400,fast_1400 );
 }
 
 Control slow_040A ()
@@ -16996,7 +16996,7 @@ Control slow_040A ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0430,slow_0430 );
+    return jumpDirect ( 0x0430,slow_0430,fast_0430 );
 }
 
 Control slow_040D ()
@@ -17016,7 +17016,7 @@ Control slow_040D ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x040E,slow_040E );
+    return jumpDirect ( 0x040E,slow_040E,0 );
 }
 
 Control slow_040E ()
@@ -17036,7 +17036,7 @@ Control slow_040E ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x040F,slow_040F );
+    return jumpDirect ( 0x040F,slow_040F,0 );
 }
 
 Control slow_040F ()
@@ -17056,7 +17056,7 @@ Control slow_040F ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x0410,slow_0410 );
+    return jumpDirect ( 0x0410,slow_0410,0 );
 }
 
 Control slow_0410 ()
@@ -17075,7 +17075,7 @@ Control slow_0410 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1452,slow_1452 );
+    return jumpDirect ( 0x1452,slow_1452,fast_1452 );
 }
 
 Control slow_0413 ()
@@ -17095,7 +17095,7 @@ Control slow_0413 ()
     C = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x0414,slow_0414 );
+    return jumpDirect ( 0x0414,slow_0414,0 );
 }
 
 Control slow_0414 ()
@@ -17115,7 +17115,7 @@ Control slow_0414 ()
     L = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x0415,slow_0415 );
+    return jumpDirect ( 0x0415,slow_0415,0 );
 }
 
 Control slow_0415 ()
@@ -17135,7 +17135,7 @@ Control slow_0415 ()
     E = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x0416,slow_0416 );
+    return jumpDirect ( 0x0416,slow_0416,0 );
 }
 
 Control slow_0416 ()
@@ -17145,7 +17145,7 @@ Control slow_0416 ()
     u8 a1 = e8_read_mem ( 0x202C ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0419,slow_0419 );
+    return jumpDirect ( 0x0419,slow_0419,0 );
 }
 
 Control slow_0419 ()
@@ -17165,7 +17165,7 @@ Control slow_0419 ()
     FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a3 & 0xFF ) );
     FlagCY = ( ( ( a3 >> 8 ) >> 0 ) & 0x01 );
-    return jumpDirect ( 0x041A,slow_041A );
+    return jumpDirect ( 0x041A,slow_041A,0 );
 }
 
 Control slow_041A ()
@@ -17175,7 +17175,7 @@ Control slow_041A ()
     u8 a1 = A ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( 0x041B,slow_041B );
+    return jumpDirect ( 0x041B,slow_041B,0 );
 }
 
 Control slow_041B ()
@@ -17185,7 +17185,7 @@ Control slow_041B ()
     u8 a1 = A ;
     mem_write ( 0x2029,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x041E,slow_041E );
+    return jumpDirect ( 0x041E,slow_041E,0 );
 }
 
 Control slow_041E ()
@@ -17204,7 +17204,7 @@ Control slow_041E ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1491,slow_1491 );
+    return jumpDirect ( 0x1491,slow_1491,fast_1491 );
 }
 
 Control slow_0421 ()
@@ -17214,7 +17214,7 @@ Control slow_0421 ()
     u8 a1 = e8_read_mem ( 0x2061 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0424,slow_0424 );
+    return jumpDirect ( 0x0424,slow_0424,0 );
 }
 
 Control slow_0424 ()
@@ -17232,7 +17232,7 @@ Control slow_0424 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0425,slow_0425 );
+    return jumpDirect ( 0x0425,slow_0425,0 );
 }
 
 Control slow_0425 ()
@@ -17257,7 +17257,7 @@ Control slow_0425 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x0426,slow_0426 );
+        return jumpDirect ( 0x0426,slow_0426,0 );
     }
 }
 
@@ -17268,7 +17268,7 @@ Control slow_0426 ()
     u8 a1 = A ;
     mem_write ( 0x2002,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0429,slow_0429 );
+    return jumpDirect ( 0x0429,slow_0429,0 );
 }
 
 Control slow_0429 ()
@@ -17304,7 +17304,7 @@ Control slow_042A ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x042C,slow_042C );
+    return jumpDirect ( 0x042C,slow_042C,0 );
 }
 
 Control slow_042C ()
@@ -17329,7 +17329,7 @@ Control slow_042C ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x042D,slow_042D );
+        return jumpDirect ( 0x042D,slow_042D,0 );
     }
 }
 
@@ -17338,7 +17338,7 @@ Control slow_042D ()
     // #at: 042D
     instruction2 ( 0x04,0x30,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x04,0x36 );
     advance ( 10 );
-    return jumpDirect ( 0x0436,slow_0436 );
+    return jumpDirect ( 0x0436,slow_0436,fast_0436 );
 }
 
 Control slow_0430 ()
@@ -17348,7 +17348,7 @@ Control slow_0430 ()
     advance ( 10 );
     H = 0x20;
     L = 0x27;
-    return jumpDirect ( 0x0433,slow_0433 );
+    return jumpDirect ( 0x0433,slow_0433,0 );
 }
 
 Control slow_0433 ()
@@ -17356,7 +17356,7 @@ Control slow_0433 ()
     // #at: 0433
     instruction2 ( 0x04,0x36,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x1A,0x3B );
     advance ( 10 );
-    return jumpDirect ( 0x1A3B,slow_1A3B );
+    return jumpDirect ( 0x1A3B,slow_1A3B,fast_1A3B );
 }
 
 Control slow_0436 ()
@@ -17375,7 +17375,7 @@ Control slow_0436 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0430,slow_0430 );
+    return jumpDirect ( 0x0430,slow_0430,fast_0430 );
 }
 
 Control slow_0439 ()
@@ -17394,7 +17394,7 @@ Control slow_0439 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1452,slow_1452 );
+    return jumpDirect ( 0x1452,slow_1452,fast_1452 );
 }
 
 Control slow_043C ()
@@ -17404,7 +17404,7 @@ Control slow_043C ()
     advance ( 10 );
     H = 0x20;
     L = 0x25;
-    return jumpDirect ( 0x043F,slow_043F );
+    return jumpDirect ( 0x043F,slow_043F,0 );
 }
 
 Control slow_043F ()
@@ -17414,7 +17414,7 @@ Control slow_043F ()
     advance ( 10 );
     D = 0x1B;
     E = 0x25;
-    return jumpDirect ( 0x0442,slow_0442 );
+    return jumpDirect ( 0x0442,slow_0442,0 );
 }
 
 Control slow_0442 ()
@@ -17423,7 +17423,7 @@ Control slow_0442 ()
     instruction1 ( 0x04,0x44,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x07 );
     advance ( 7 );
     B = 0x07;
-    return jumpDirect ( 0x0444,slow_0444 );
+    return jumpDirect ( 0x0444,slow_0444,0 );
 }
 
 Control slow_0444 ()
@@ -17442,7 +17442,7 @@ Control slow_0444 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A32,slow_1A32 );
+    return jumpDirect ( 0x1A32,slow_1A32,fast_1A32 );
 }
 
 Control slow_0447 ()
@@ -17454,7 +17454,7 @@ Control slow_0447 ()
     advance ( 16 );
     H = a2;
     L = a1;
-    return jumpDirect ( 0x044A,slow_044A );
+    return jumpDirect ( 0x044A,slow_044A,0 );
 }
 
 Control slow_044A ()
@@ -17472,7 +17472,7 @@ Control slow_044A ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x044B,slow_044B );
+    return jumpDirect ( 0x044B,slow_044B,0 );
 }
 
 Control slow_044B ()
@@ -17482,7 +17482,7 @@ Control slow_044B ()
     u8 a1 = L ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x044C,slow_044C );
+    return jumpDirect ( 0x044C,slow_044C,0 );
 }
 
 Control slow_044C ()
@@ -17500,7 +17500,7 @@ Control slow_044C ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x044E,slow_044E );
+    return jumpDirect ( 0x044E,slow_044E,0 );
 }
 
 Control slow_044E ()
@@ -17510,12 +17510,12 @@ Control slow_044E ()
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0453,slow_0453 );
+        return jumpDirect ( 0x0453,slow_0453,fast_0453 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0451,slow_0451 );
+        return jumpDirect ( 0x0451,slow_0451,0 );
     }
 }
 
@@ -17525,7 +17525,7 @@ Control slow_0451 ()
     instruction1 ( 0x04,0x53,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   L,%02X",0x54 );
     advance ( 7 );
     L = 0x54;
-    return jumpDirect ( 0x0453,slow_0453 );
+    return jumpDirect ( 0x0453,slow_0453,fast_0453 );
 }
 
 Control slow_0453 ()
@@ -17537,7 +17537,7 @@ Control slow_0453 ()
     u8 a2 = H ;
     mem_write ( 0x208E,a2 );
     advance ( 16 );
-    return jumpDirect ( 0x0456,slow_0456 );
+    return jumpDirect ( 0x0456,slow_0456,0 );
 }
 
 Control slow_0456 ()
@@ -17549,7 +17549,7 @@ Control slow_0456 ()
     advance ( 16 );
     H = a2;
     L = a1;
-    return jumpDirect ( 0x0459,slow_0459 );
+    return jumpDirect ( 0x0459,slow_0459,0 );
 }
 
 Control slow_0459 ()
@@ -17567,7 +17567,7 @@ Control slow_0459 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x045A,slow_045A );
+    return jumpDirect ( 0x045A,slow_045A,0 );
 }
 
 Control slow_045A ()
@@ -17579,7 +17579,7 @@ Control slow_045A ()
     u8 a2 = H ;
     mem_write ( 0x2090,a2 );
     advance ( 16 );
-    return jumpDirect ( 0x045D,slow_045D );
+    return jumpDirect ( 0x045D,slow_045D,0 );
 }
 
 Control slow_045D ()
@@ -17589,7 +17589,7 @@ Control slow_045D ()
     u8 a1 = e8_read_mem ( 0x2084 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0460,slow_0460 );
+    return jumpDirect ( 0x0460,slow_0460,0 );
 }
 
 Control slow_0460 ()
@@ -17607,7 +17607,7 @@ Control slow_0460 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0461,slow_0461 );
+    return jumpDirect ( 0x0461,slow_0461,0 );
 }
 
 Control slow_0461 ()
@@ -17632,7 +17632,7 @@ Control slow_0461 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x0462,slow_0462 );
+        return jumpDirect ( 0x0462,slow_0462,0 );
     }
 }
 
@@ -17645,7 +17645,7 @@ Control slow_0462 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x0463,slow_0463 );
+    return jumpDirect ( 0x0463,slow_0463,0 );
 }
 
 Control slow_0463 ()
@@ -17662,7 +17662,7 @@ Control slow_0463 ()
     FlagA = ( ( a3 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x0465,slow_0465 );
+    return jumpDirect ( 0x0465,slow_0465,0 );
 }
 
 Control slow_0465 ()
@@ -17672,7 +17672,7 @@ Control slow_0465 ()
     advance ( 10 );
     B = 0x02;
     C = 0x29;
-    return jumpDirect ( 0x0468,slow_0468 );
+    return jumpDirect ( 0x0468,slow_0468,0 );
 }
 
 Control slow_0468 ()
@@ -17682,12 +17682,12 @@ Control slow_0468 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x046E,slow_046E );
+        return jumpDirect ( 0x046E,slow_046E,fast_046E );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x046B,slow_046B );
+        return jumpDirect ( 0x046B,slow_046B,0 );
     }
 }
 
@@ -17698,7 +17698,7 @@ Control slow_046B ()
     advance ( 10 );
     B = 0xFE;
     C = 0xE0;
-    return jumpDirect ( 0x046E,slow_046E );
+    return jumpDirect ( 0x046E,slow_046E,fast_046E );
 }
 
 Control slow_046E ()
@@ -17708,7 +17708,7 @@ Control slow_046E ()
     advance ( 10 );
     H = 0x20;
     L = 0x8A;
-    return jumpDirect ( 0x0471,slow_0471 );
+    return jumpDirect ( 0x0471,slow_0471,0 );
 }
 
 Control slow_0471 ()
@@ -17720,7 +17720,7 @@ Control slow_0471 ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x0472,slow_0472 );
+    return jumpDirect ( 0x0472,slow_0472,0 );
 }
 
 Control slow_0472 ()
@@ -17733,7 +17733,7 @@ Control slow_0472 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x0473,slow_0473 );
+    return jumpDirect ( 0x0473,slow_0473,0 );
 }
 
 Control slow_0473 ()
@@ -17746,7 +17746,7 @@ Control slow_0473 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x0474,slow_0474 );
+    return jumpDirect ( 0x0474,slow_0474,0 );
 }
 
 Control slow_0474 ()
@@ -17758,7 +17758,7 @@ Control slow_0474 ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x0475,slow_0475 );
+    return jumpDirect ( 0x0475,slow_0475,0 );
 }
 
 Control slow_0475 ()
@@ -17796,7 +17796,7 @@ Control slow_0476 ()
     L = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x0477,slow_0477 );
+    return jumpDirect ( 0x0477,slow_0477,0 );
 }
 
 Control slow_0477 ()
@@ -17805,7 +17805,7 @@ Control slow_0477 ()
     instruction2 ( 0x04,0x7A,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,(%02X%02X)",0x1B,0x32 );
     advance ( 13 );
     A = 0x02;
-    return jumpDirect ( 0x047A,slow_047A );
+    return jumpDirect ( 0x047A,slow_047A,0 );
 }
 
 Control slow_047A ()
@@ -17815,7 +17815,7 @@ Control slow_047A ()
     u8 a1 = A ;
     mem_write ( 0x2032,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x047D,slow_047D );
+    return jumpDirect ( 0x047D,slow_047D,0 );
 }
 
 Control slow_047D ()
@@ -17827,7 +17827,7 @@ Control slow_047D ()
     advance ( 16 );
     H = a2;
     L = a1;
-    return jumpDirect ( 0x0480,slow_0480 );
+    return jumpDirect ( 0x0480,slow_0480,0 );
 }
 
 Control slow_0480 ()
@@ -17837,7 +17837,7 @@ Control slow_0480 ()
     u8 a1 = L ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x0481,slow_0481 );
+    return jumpDirect ( 0x0481,slow_0481,0 );
 }
 
 Control slow_0481 ()
@@ -17854,7 +17854,7 @@ Control slow_0481 ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0482,slow_0482 );
+    return jumpDirect ( 0x0482,slow_0482,0 );
 }
 
 Control slow_0482 ()
@@ -17864,12 +17864,12 @@ Control slow_0482 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x048A,slow_048A );
+        return jumpDirect ( 0x048A,slow_048A,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0485,slow_0485 );
+        return jumpDirect ( 0x0485,slow_0485,0 );
     }
 }
 
@@ -17883,7 +17883,7 @@ Control slow_0485 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x0486,slow_0486 );
+    return jumpDirect ( 0x0486,slow_0486,0 );
 }
 
 Control slow_0486 ()
@@ -17895,7 +17895,7 @@ Control slow_0486 ()
     u8 a2 = H ;
     mem_write ( 0x2039,a2 );
     advance ( 16 );
-    return jumpDirect ( 0x0489,slow_0489 );
+    return jumpDirect ( 0x0489,slow_0489,0 );
 }
 
 Control slow_0489 ()
@@ -17923,7 +17923,7 @@ Control slow_048A ()
     advance ( 10 );
     D = 0x20;
     E = 0x35;
-    return jumpDirect ( 0x048D,slow_048D );
+    return jumpDirect ( 0x048D,slow_048D,0 );
 }
 
 Control slow_048D ()
@@ -17932,7 +17932,7 @@ Control slow_048D ()
     instruction1 ( 0x04,0x8F,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0xF9 );
     advance ( 7 );
     A = 0xF9;
-    return jumpDirect ( 0x048F,slow_048F );
+    return jumpDirect ( 0x048F,slow_048F,0 );
 }
 
 Control slow_048F ()
@@ -17951,7 +17951,7 @@ Control slow_048F ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0550,slow_0550 );
+    return jumpDirect ( 0x0550,slow_0550,fast_0550 );
 }
 
 Control slow_0492 ()
@@ -17961,7 +17961,7 @@ Control slow_0492 ()
     u8 a1 = e8_read_mem ( 0x2046 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0495,slow_0495 );
+    return jumpDirect ( 0x0495,slow_0495,0 );
 }
 
 Control slow_0495 ()
@@ -17971,7 +17971,7 @@ Control slow_0495 ()
     u8 a1 = A ;
     mem_write ( 0x2070,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0498,slow_0498 );
+    return jumpDirect ( 0x0498,slow_0498,0 );
 }
 
 Control slow_0498 ()
@@ -17981,7 +17981,7 @@ Control slow_0498 ()
     u8 a1 = e8_read_mem ( 0x2056 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x049B,slow_049B );
+    return jumpDirect ( 0x049B,slow_049B,0 );
 }
 
 Control slow_049B ()
@@ -17991,7 +17991,7 @@ Control slow_049B ()
     u8 a1 = A ;
     mem_write ( 0x2071,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x049E,slow_049E );
+    return jumpDirect ( 0x049E,slow_049E,0 );
 }
 
 Control slow_049E ()
@@ -18010,7 +18010,7 @@ Control slow_049E ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0563,slow_0563 );
+    return jumpDirect ( 0x0563,slow_0563,fast_0563 );
 }
 
 Control slow_04A1 ()
@@ -18020,7 +18020,7 @@ Control slow_04A1 ()
     u8 a1 = e8_read_mem ( 0x2078 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x04A4,slow_04A4 );
+    return jumpDirect ( 0x04A4,slow_04A4,0 );
 }
 
 Control slow_04A4 ()
@@ -18038,7 +18038,7 @@ Control slow_04A4 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x04A5,slow_04A5 );
+    return jumpDirect ( 0x04A5,slow_04A5,0 );
 }
 
 Control slow_04A5 ()
@@ -18048,7 +18048,7 @@ Control slow_04A5 ()
     advance ( 10 );
     H = 0x20;
     L = 0x35;
-    return jumpDirect ( 0x04A8,slow_04A8 );
+    return jumpDirect ( 0x04A8,slow_04A8,0 );
 }
 
 Control slow_04A8 ()
@@ -18058,12 +18058,12 @@ Control slow_04A8 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x055B,slow_055B );
+        return jumpDirect ( 0x055B,slow_055B,fast_055B );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x04AB,slow_04AB );
+        return jumpDirect ( 0x04AB,slow_04AB,0 );
     }
 }
 
@@ -18074,7 +18074,7 @@ Control slow_04AB ()
     advance ( 10 );
     D = 0x1B;
     E = 0x30;
-    return jumpDirect ( 0x04AE,slow_04AE );
+    return jumpDirect ( 0x04AE,slow_04AE,0 );
 }
 
 Control slow_04AE ()
@@ -18084,7 +18084,7 @@ Control slow_04AE ()
     advance ( 10 );
     H = 0x20;
     L = 0x30;
-    return jumpDirect ( 0x04B1,slow_04B1 );
+    return jumpDirect ( 0x04B1,slow_04B1,0 );
 }
 
 Control slow_04B1 ()
@@ -18093,7 +18093,7 @@ Control slow_04B1 ()
     instruction1 ( 0x04,0xB3,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x10 );
     advance ( 7 );
     B = 0x10;
-    return jumpDirect ( 0x04B3,slow_04B3 );
+    return jumpDirect ( 0x04B3,slow_04B3,0 );
 }
 
 Control slow_04B3 ()
@@ -18101,7 +18101,7 @@ Control slow_04B3 ()
     // #at: 04B3
     instruction2 ( 0x04,0xB6,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x1A,0x32 );
     advance ( 10 );
-    return jumpDirect ( 0x1A32,slow_1A32 );
+    return jumpDirect ( 0x1A32,slow_1A32,fast_1A32 );
 }
 
 Control slow_04B6 ()
@@ -18121,7 +18121,7 @@ Control slow_04B6 ()
     L = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x04B7,slow_04B7 );
+    return jumpDirect ( 0x04B7,slow_04B7,0 );
 }
 
 Control slow_04B7 ()
@@ -18131,7 +18131,7 @@ Control slow_04B7 ()
     u8 a1 = e8_read_mem ( 0x206E ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x04BA,slow_04BA );
+    return jumpDirect ( 0x04BA,slow_04BA,0 );
 }
 
 Control slow_04BA ()
@@ -18149,7 +18149,7 @@ Control slow_04BA ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x04BB,slow_04BB );
+    return jumpDirect ( 0x04BB,slow_04BB,0 );
 }
 
 Control slow_04BB ()
@@ -18174,7 +18174,7 @@ Control slow_04BB ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x04BC,slow_04BC );
+        return jumpDirect ( 0x04BC,slow_04BC,0 );
     }
 }
 
@@ -18185,7 +18185,7 @@ Control slow_04BC ()
     u8 a1 = e8_read_mem ( 0x2080 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x04BF,slow_04BF );
+    return jumpDirect ( 0x04BF,slow_04BF,0 );
 }
 
 Control slow_04BF ()
@@ -18203,7 +18203,7 @@ Control slow_04BF ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x04C1,slow_04C1 );
+    return jumpDirect ( 0x04C1,slow_04C1,0 );
 }
 
 Control slow_04C1 ()
@@ -18228,7 +18228,7 @@ Control slow_04C1 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x04C2,slow_04C2 );
+        return jumpDirect ( 0x04C2,slow_04C2,0 );
     }
 }
 
@@ -18239,7 +18239,7 @@ Control slow_04C2 ()
     advance ( 10 );
     D = 0x20;
     E = 0x45;
-    return jumpDirect ( 0x04C5,slow_04C5 );
+    return jumpDirect ( 0x04C5,slow_04C5,0 );
 }
 
 Control slow_04C5 ()
@@ -18248,7 +18248,7 @@ Control slow_04C5 ()
     instruction1 ( 0x04,0xC7,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0xED );
     advance ( 7 );
     A = 0xED;
-    return jumpDirect ( 0x04C7,slow_04C7 );
+    return jumpDirect ( 0x04C7,slow_04C7,0 );
 }
 
 Control slow_04C7 ()
@@ -18267,7 +18267,7 @@ Control slow_04C7 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0550,slow_0550 );
+    return jumpDirect ( 0x0550,slow_0550,fast_0550 );
 }
 
 Control slow_04CA ()
@@ -18277,7 +18277,7 @@ Control slow_04CA ()
     u8 a1 = e8_read_mem ( 0x2036 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x04CD,slow_04CD );
+    return jumpDirect ( 0x04CD,slow_04CD,0 );
 }
 
 Control slow_04CD ()
@@ -18287,7 +18287,7 @@ Control slow_04CD ()
     u8 a1 = A ;
     mem_write ( 0x2070,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x04D0,slow_04D0 );
+    return jumpDirect ( 0x04D0,slow_04D0,0 );
 }
 
 Control slow_04D0 ()
@@ -18297,7 +18297,7 @@ Control slow_04D0 ()
     u8 a1 = e8_read_mem ( 0x2056 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x04D3,slow_04D3 );
+    return jumpDirect ( 0x04D3,slow_04D3,0 );
 }
 
 Control slow_04D3 ()
@@ -18307,7 +18307,7 @@ Control slow_04D3 ()
     u8 a1 = A ;
     mem_write ( 0x2071,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x04D6,slow_04D6 );
+    return jumpDirect ( 0x04D6,slow_04D6,0 );
 }
 
 Control slow_04D6 ()
@@ -18326,7 +18326,7 @@ Control slow_04D6 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0563,slow_0563 );
+    return jumpDirect ( 0x0563,slow_0563,fast_0563 );
 }
 
 Control slow_04D9 ()
@@ -18336,7 +18336,7 @@ Control slow_04D9 ()
     u8 a1 = e8_read_mem ( 0x2076 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x04DC,slow_04DC );
+    return jumpDirect ( 0x04DC,slow_04DC,0 );
 }
 
 Control slow_04DC ()
@@ -18354,7 +18354,7 @@ Control slow_04DC ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x04DE,slow_04DE );
+    return jumpDirect ( 0x04DE,slow_04DE,0 );
 }
 
 Control slow_04DE ()
@@ -18364,12 +18364,12 @@ Control slow_04DE ()
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( 0x04E7,slow_04E7 );
+        return jumpDirect ( 0x04E7,slow_04E7,fast_04E7 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x04E1,slow_04E1 );
+        return jumpDirect ( 0x04E1,slow_04E1,0 );
     }
 }
 
@@ -18379,7 +18379,7 @@ Control slow_04E1 ()
     instruction2 ( 0x04,0xE4,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,(%02X%02X)",0x1B,0x48 );
     advance ( 13 );
     A = 0x00;
-    return jumpDirect ( 0x04E4,slow_04E4 );
+    return jumpDirect ( 0x04E4,slow_04E4,0 );
 }
 
 Control slow_04E4 ()
@@ -18389,7 +18389,7 @@ Control slow_04E4 ()
     u8 a1 = A ;
     mem_write ( 0x2076,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x04E7,slow_04E7 );
+    return jumpDirect ( 0x04E7,slow_04E7,fast_04E7 );
 }
 
 Control slow_04E7 ()
@@ -18399,7 +18399,7 @@ Control slow_04E7 ()
     u8 a1 = e8_read_mem ( 0x2078 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x04EA,slow_04EA );
+    return jumpDirect ( 0x04EA,slow_04EA,0 );
 }
 
 Control slow_04EA ()
@@ -18417,7 +18417,7 @@ Control slow_04EA ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x04EB,slow_04EB );
+    return jumpDirect ( 0x04EB,slow_04EB,0 );
 }
 
 Control slow_04EB ()
@@ -18427,7 +18427,7 @@ Control slow_04EB ()
     advance ( 10 );
     H = 0x20;
     L = 0x45;
-    return jumpDirect ( 0x04EE,slow_04EE );
+    return jumpDirect ( 0x04EE,slow_04EE,0 );
 }
 
 Control slow_04EE ()
@@ -18437,12 +18437,12 @@ Control slow_04EE ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x055B,slow_055B );
+        return jumpDirect ( 0x055B,slow_055B,fast_055B );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x04F1,slow_04F1 );
+        return jumpDirect ( 0x04F1,slow_04F1,0 );
     }
 }
 
@@ -18453,7 +18453,7 @@ Control slow_04F1 ()
     advance ( 10 );
     D = 0x1B;
     E = 0x40;
-    return jumpDirect ( 0x04F4,slow_04F4 );
+    return jumpDirect ( 0x04F4,slow_04F4,0 );
 }
 
 Control slow_04F4 ()
@@ -18463,7 +18463,7 @@ Control slow_04F4 ()
     advance ( 10 );
     H = 0x20;
     L = 0x40;
-    return jumpDirect ( 0x04F7,slow_04F7 );
+    return jumpDirect ( 0x04F7,slow_04F7,0 );
 }
 
 Control slow_04F7 ()
@@ -18472,7 +18472,7 @@ Control slow_04F7 ()
     instruction1 ( 0x04,0xF9,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x10 );
     advance ( 7 );
     B = 0x10;
-    return jumpDirect ( 0x04F9,slow_04F9 );
+    return jumpDirect ( 0x04F9,slow_04F9,0 );
 }
 
 Control slow_04F9 ()
@@ -18491,7 +18491,7 @@ Control slow_04F9 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A32,slow_1A32 );
+    return jumpDirect ( 0x1A32,slow_1A32,fast_1A32 );
 }
 
 Control slow_04FC ()
@@ -18501,7 +18501,7 @@ Control slow_04FC ()
     u8 a1 = e8_read_mem ( 0x2082 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x04FF,slow_04FF );
+    return jumpDirect ( 0x04FF,slow_04FF,0 );
 }
 
 Control slow_04FF ()
@@ -18519,7 +18519,7 @@ Control slow_04FF ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x0500,slow_0500 );
+    return jumpDirect ( 0x0500,slow_0500,0 );
 }
 
 Control slow_0500 ()
@@ -18529,12 +18529,12 @@ Control slow_0500 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x0508,slow_0508 );
+        return jumpDirect ( 0x0508,slow_0508,fast_0508 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0503,slow_0503 );
+        return jumpDirect ( 0x0503,slow_0503,0 );
     }
 }
 
@@ -18544,7 +18544,7 @@ Control slow_0503 ()
     instruction1 ( 0x05,0x05,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x01 );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( 0x0505,slow_0505 );
+    return jumpDirect ( 0x0505,slow_0505,0 );
 }
 
 Control slow_0505 ()
@@ -18554,7 +18554,7 @@ Control slow_0505 ()
     u8 a1 = A ;
     mem_write ( 0x206E,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0508,slow_0508 );
+    return jumpDirect ( 0x0508,slow_0508,fast_0508 );
 }
 
 Control slow_0508 ()
@@ -18566,7 +18566,7 @@ Control slow_0508 ()
     advance ( 16 );
     H = a2;
     L = a1;
-    return jumpDirect ( 0x050B,slow_050B );
+    return jumpDirect ( 0x050B,slow_050B,0 );
 }
 
 Control slow_050B ()
@@ -18574,7 +18574,7 @@ Control slow_050B ()
     // #at: 050B
     instruction2 ( 0x05,0x0E,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x06,0x7E );
     advance ( 10 );
-    return jumpDirect ( 0x067E,slow_067E );
+    return jumpDirect ( 0x067E,slow_067E,0 );
 }
 
 Control slow_050E ()
@@ -18594,7 +18594,7 @@ Control slow_050E ()
     L = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x050F,slow_050F );
+    return jumpDirect ( 0x050F,slow_050F,fast_050F );
 }
 
 Control slow_050F ()
@@ -18604,7 +18604,7 @@ Control slow_050F ()
     advance ( 10 );
     D = 0x20;
     E = 0x55;
-    return jumpDirect ( 0x0512,slow_0512 );
+    return jumpDirect ( 0x0512,slow_0512,0 );
 }
 
 Control slow_0512 ()
@@ -18613,7 +18613,7 @@ Control slow_0512 ()
     instruction1 ( 0x05,0x14,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0xDB );
     advance ( 7 );
     A = 0xDB;
-    return jumpDirect ( 0x0514,slow_0514 );
+    return jumpDirect ( 0x0514,slow_0514,0 );
 }
 
 Control slow_0514 ()
@@ -18632,7 +18632,7 @@ Control slow_0514 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0550,slow_0550 );
+    return jumpDirect ( 0x0550,slow_0550,fast_0550 );
 }
 
 Control slow_0517 ()
@@ -18642,7 +18642,7 @@ Control slow_0517 ()
     u8 a1 = e8_read_mem ( 0x2046 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x051A,slow_051A );
+    return jumpDirect ( 0x051A,slow_051A,0 );
 }
 
 Control slow_051A ()
@@ -18652,7 +18652,7 @@ Control slow_051A ()
     u8 a1 = A ;
     mem_write ( 0x2070,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x051D,slow_051D );
+    return jumpDirect ( 0x051D,slow_051D,0 );
 }
 
 Control slow_051D ()
@@ -18662,7 +18662,7 @@ Control slow_051D ()
     u8 a1 = e8_read_mem ( 0x2036 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0520,slow_0520 );
+    return jumpDirect ( 0x0520,slow_0520,0 );
 }
 
 Control slow_0520 ()
@@ -18672,7 +18672,7 @@ Control slow_0520 ()
     u8 a1 = A ;
     mem_write ( 0x2071,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0523,slow_0523 );
+    return jumpDirect ( 0x0523,slow_0523,0 );
 }
 
 Control slow_0523 ()
@@ -18691,7 +18691,7 @@ Control slow_0523 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0563,slow_0563 );
+    return jumpDirect ( 0x0563,slow_0563,fast_0563 );
 }
 
 Control slow_0526 ()
@@ -18701,7 +18701,7 @@ Control slow_0526 ()
     u8 a1 = e8_read_mem ( 0x2076 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0529,slow_0529 );
+    return jumpDirect ( 0x0529,slow_0529,0 );
 }
 
 Control slow_0529 ()
@@ -18719,7 +18719,7 @@ Control slow_0529 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x052B,slow_052B );
+    return jumpDirect ( 0x052B,slow_052B,0 );
 }
 
 Control slow_052B ()
@@ -18729,12 +18729,12 @@ Control slow_052B ()
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0534,slow_0534 );
+        return jumpDirect ( 0x0534,slow_0534,fast_0534 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x052E,slow_052E );
+        return jumpDirect ( 0x052E,slow_052E,0 );
     }
 }
 
@@ -18744,7 +18744,7 @@ Control slow_052E ()
     instruction2 ( 0x05,0x31,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,(%02X%02X)",0x1B,0x58 );
     advance ( 13 );
     A = 0x06;
-    return jumpDirect ( 0x0531,slow_0531 );
+    return jumpDirect ( 0x0531,slow_0531,0 );
 }
 
 Control slow_0531 ()
@@ -18754,7 +18754,7 @@ Control slow_0531 ()
     u8 a1 = A ;
     mem_write ( 0x2076,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0534,slow_0534 );
+    return jumpDirect ( 0x0534,slow_0534,fast_0534 );
 }
 
 Control slow_0534 ()
@@ -18764,7 +18764,7 @@ Control slow_0534 ()
     u8 a1 = e8_read_mem ( 0x2078 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0537,slow_0537 );
+    return jumpDirect ( 0x0537,slow_0537,0 );
 }
 
 Control slow_0537 ()
@@ -18782,7 +18782,7 @@ Control slow_0537 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0538,slow_0538 );
+    return jumpDirect ( 0x0538,slow_0538,0 );
 }
 
 Control slow_0538 ()
@@ -18792,7 +18792,7 @@ Control slow_0538 ()
     advance ( 10 );
     H = 0x20;
     L = 0x55;
-    return jumpDirect ( 0x053B,slow_053B );
+    return jumpDirect ( 0x053B,slow_053B,0 );
 }
 
 Control slow_053B ()
@@ -18802,12 +18802,12 @@ Control slow_053B ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x055B,slow_055B );
+        return jumpDirect ( 0x055B,slow_055B,fast_055B );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x053E,slow_053E );
+        return jumpDirect ( 0x053E,slow_053E,0 );
     }
 }
 
@@ -18818,7 +18818,7 @@ Control slow_053E ()
     advance ( 10 );
     D = 0x1B;
     E = 0x50;
-    return jumpDirect ( 0x0541,slow_0541 );
+    return jumpDirect ( 0x0541,slow_0541,0 );
 }
 
 Control slow_0541 ()
@@ -18828,7 +18828,7 @@ Control slow_0541 ()
     advance ( 10 );
     H = 0x20;
     L = 0x50;
-    return jumpDirect ( 0x0544,slow_0544 );
+    return jumpDirect ( 0x0544,slow_0544,0 );
 }
 
 Control slow_0544 ()
@@ -18837,7 +18837,7 @@ Control slow_0544 ()
     instruction1 ( 0x05,0x46,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x10 );
     advance ( 7 );
     B = 0x10;
-    return jumpDirect ( 0x0546,slow_0546 );
+    return jumpDirect ( 0x0546,slow_0546,0 );
 }
 
 Control slow_0546 ()
@@ -18856,7 +18856,7 @@ Control slow_0546 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A32,slow_1A32 );
+    return jumpDirect ( 0x1A32,slow_1A32,fast_1A32 );
 }
 
 Control slow_0549 ()
@@ -18868,7 +18868,7 @@ Control slow_0549 ()
     advance ( 16 );
     H = a2;
     L = a1;
-    return jumpDirect ( 0x054C,slow_054C );
+    return jumpDirect ( 0x054C,slow_054C,0 );
 }
 
 Control slow_054C ()
@@ -18880,7 +18880,7 @@ Control slow_054C ()
     u8 a2 = H ;
     mem_write ( 0x2059,a2 );
     advance ( 16 );
-    return jumpDirect ( 0x054F,slow_054F );
+    return jumpDirect ( 0x054F,slow_054F,0 );
 }
 
 Control slow_054F ()
@@ -18908,7 +18908,7 @@ Control slow_0550 ()
     u8 a1 = A ;
     mem_write ( 0x207F,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0553,slow_0553 );
+    return jumpDirect ( 0x0553,slow_0553,0 );
 }
 
 Control slow_0553 ()
@@ -18918,7 +18918,7 @@ Control slow_0553 ()
     advance ( 10 );
     H = 0x20;
     L = 0x73;
-    return jumpDirect ( 0x0556,slow_0556 );
+    return jumpDirect ( 0x0556,slow_0556,0 );
 }
 
 Control slow_0556 ()
@@ -18927,7 +18927,7 @@ Control slow_0556 ()
     instruction1 ( 0x05,0x58,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x0B );
     advance ( 7 );
     B = 0x0B;
-    return jumpDirect ( 0x0558,slow_0558 );
+    return jumpDirect ( 0x0558,slow_0558,0 );
 }
 
 Control slow_0558 ()
@@ -18935,7 +18935,7 @@ Control slow_0558 ()
     // #at: 0558
     instruction2 ( 0x05,0x5B,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x1A,0x32 );
     advance ( 10 );
-    return jumpDirect ( 0x1A32,slow_1A32 );
+    return jumpDirect ( 0x1A32,slow_1A32,fast_1A32 );
 }
 
 Control slow_055B ()
@@ -18945,7 +18945,7 @@ Control slow_055B ()
     advance ( 10 );
     D = 0x20;
     E = 0x73;
-    return jumpDirect ( 0x055E,slow_055E );
+    return jumpDirect ( 0x055E,slow_055E,0 );
 }
 
 Control slow_055E ()
@@ -18954,7 +18954,7 @@ Control slow_055E ()
     instruction1 ( 0x05,0x60,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x0B );
     advance ( 7 );
     B = 0x0B;
-    return jumpDirect ( 0x0560,slow_0560 );
+    return jumpDirect ( 0x0560,slow_0560,0 );
 }
 
 Control slow_0560 ()
@@ -18962,7 +18962,7 @@ Control slow_0560 ()
     // #at: 0560
     instruction2 ( 0x05,0x63,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x1A,0x32 );
     advance ( 10 );
-    return jumpDirect ( 0x1A32,slow_1A32 );
+    return jumpDirect ( 0x1A32,slow_1A32,fast_1A32 );
 }
 
 Control slow_0563 ()
@@ -18972,7 +18972,7 @@ Control slow_0563 ()
     advance ( 10 );
     H = 0x20;
     L = 0x73;
-    return jumpDirect ( 0x0566,slow_0566 );
+    return jumpDirect ( 0x0566,slow_0566,0 );
 }
 
 Control slow_0566 ()
@@ -18984,7 +18984,7 @@ Control slow_0566 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x0567,slow_0567 );
+    return jumpDirect ( 0x0567,slow_0567,0 );
 }
 
 Control slow_0567 ()
@@ -19001,7 +19001,7 @@ Control slow_0567 ()
     FlagA = ( ( a3 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x0569,slow_0569 );
+    return jumpDirect ( 0x0569,slow_0569,0 );
 }
 
 Control slow_0569 ()
@@ -19011,12 +19011,12 @@ Control slow_0569 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x05C1,slow_05C1 );
+        return jumpDirect ( 0x05C1,slow_05C1,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x056C,slow_056C );
+        return jumpDirect ( 0x056C,slow_056C,0 );
     }
 }
 
@@ -19027,7 +19027,7 @@ Control slow_056C ()
     u8 a1 = e8_read_mem ( 0x20C1 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x056F,slow_056F );
+    return jumpDirect ( 0x056F,slow_056F,0 );
 }
 
 Control slow_056F ()
@@ -19045,7 +19045,7 @@ Control slow_056F ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x0571,slow_0571 );
+    return jumpDirect ( 0x0571,slow_0571,0 );
 }
 
 Control slow_0571 ()
@@ -19055,7 +19055,7 @@ Control slow_0571 ()
     u8 a1 = e8_read_mem ( 0x2069 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0574,slow_0574 );
+    return jumpDirect ( 0x0574,slow_0574,0 );
 }
 
 Control slow_0574 ()
@@ -19065,12 +19065,12 @@ Control slow_0574 ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x05B7,slow_05B7 );
+        return jumpDirect ( 0x05B7,slow_05B7,fast_05B7 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0577,slow_0577 );
+        return jumpDirect ( 0x0577,slow_0577,0 );
     }
 }
 
@@ -19089,7 +19089,7 @@ Control slow_0577 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0578,slow_0578 );
+    return jumpDirect ( 0x0578,slow_0578,0 );
 }
 
 Control slow_0578 ()
@@ -19114,7 +19114,7 @@ Control slow_0578 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x0579,slow_0579 );
+        return jumpDirect ( 0x0579,slow_0579,0 );
     }
 }
 
@@ -19128,7 +19128,7 @@ Control slow_0579 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x057A,slow_057A );
+    return jumpDirect ( 0x057A,slow_057A,0 );
 }
 
 Control slow_057A ()
@@ -19139,7 +19139,7 @@ Control slow_057A ()
     u8 a2 = L ;
     mem_write ( ( ( a1 << 8 ) | a2 ),0x00 );
     advance ( 10 );
-    return jumpDirect ( 0x057C,slow_057C );
+    return jumpDirect ( 0x057C,slow_057C,0 );
 }
 
 Control slow_057C ()
@@ -19149,7 +19149,7 @@ Control slow_057C ()
     u8 a1 = e8_read_mem ( 0x2070 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x057F,slow_057F );
+    return jumpDirect ( 0x057F,slow_057F,0 );
 }
 
 Control slow_057F ()
@@ -19167,7 +19167,7 @@ Control slow_057F ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0580,slow_0580 );
+    return jumpDirect ( 0x0580,slow_0580,0 );
 }
 
 Control slow_0580 ()
@@ -19177,12 +19177,12 @@ Control slow_0580 ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0589,slow_0589 );
+        return jumpDirect ( 0x0589,slow_0589,fast_0589 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0583,slow_0583 );
+        return jumpDirect ( 0x0583,slow_0583,0 );
     }
 }
 
@@ -19193,7 +19193,7 @@ Control slow_0583 ()
     u8 a1 = A ;
     advance ( 5 );
     B = a1;
-    return jumpDirect ( 0x0584,slow_0584 );
+    return jumpDirect ( 0x0584,slow_0584,0 );
 }
 
 Control slow_0584 ()
@@ -19203,7 +19203,7 @@ Control slow_0584 ()
     u8 a1 = e8_read_mem ( 0x20CF ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0587,slow_0587 );
+    return jumpDirect ( 0x0587,slow_0587,0 );
 }
 
 Control slow_0587 ()
@@ -19222,7 +19222,7 @@ Control slow_0587 ()
     FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a3 & 0xFF ) );
     FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x0588,slow_0588 );
+    return jumpDirect ( 0x0588,slow_0588,0 );
 }
 
 Control slow_0588 ()
@@ -19247,7 +19247,7 @@ Control slow_0588 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x0589,slow_0589 );
+        return jumpDirect ( 0x0589,slow_0589,fast_0589 );
     }
 }
 
@@ -19258,7 +19258,7 @@ Control slow_0589 ()
     u8 a1 = e8_read_mem ( 0x2071 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x058C,slow_058C );
+    return jumpDirect ( 0x058C,slow_058C,0 );
 }
 
 Control slow_058C ()
@@ -19276,7 +19276,7 @@ Control slow_058C ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x058D,slow_058D );
+    return jumpDirect ( 0x058D,slow_058D,0 );
 }
 
 Control slow_058D ()
@@ -19286,12 +19286,12 @@ Control slow_058D ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0596,slow_0596 );
+        return jumpDirect ( 0x0596,slow_0596,fast_0596 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0590,slow_0590 );
+        return jumpDirect ( 0x0590,slow_0590,0 );
     }
 }
 
@@ -19302,7 +19302,7 @@ Control slow_0590 ()
     u8 a1 = A ;
     advance ( 5 );
     B = a1;
-    return jumpDirect ( 0x0591,slow_0591 );
+    return jumpDirect ( 0x0591,slow_0591,0 );
 }
 
 Control slow_0591 ()
@@ -19312,7 +19312,7 @@ Control slow_0591 ()
     u8 a1 = e8_read_mem ( 0x20CF ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0594,slow_0594 );
+    return jumpDirect ( 0x0594,slow_0594,0 );
 }
 
 Control slow_0594 ()
@@ -19331,7 +19331,7 @@ Control slow_0594 ()
     FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a3 & 0xFF ) );
     FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x0595,slow_0595 );
+    return jumpDirect ( 0x0595,slow_0595,0 );
 }
 
 Control slow_0595 ()
@@ -19356,7 +19356,7 @@ Control slow_0595 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x0596,slow_0596 );
+        return jumpDirect ( 0x0596,slow_0596,fast_0596 );
     }
 }
 
@@ -19370,7 +19370,7 @@ Control slow_0596 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x0597,slow_0597 );
+    return jumpDirect ( 0x0597,slow_0597,0 );
 }
 
 Control slow_0597 ()
@@ -19382,7 +19382,7 @@ Control slow_0597 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x0598,slow_0598 );
+    return jumpDirect ( 0x0598,slow_0598,0 );
 }
 
 Control slow_0598 ()
@@ -19400,7 +19400,7 @@ Control slow_0598 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0599,slow_0599 );
+    return jumpDirect ( 0x0599,slow_0599,0 );
 }
 
 Control slow_0599 ()
@@ -19410,12 +19410,12 @@ Control slow_0599 ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x061B,slow_061B );
+        return jumpDirect ( 0x061B,slow_061B,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x059C,slow_059C );
+        return jumpDirect ( 0x059C,slow_059C,0 );
     }
 }
 
@@ -19428,7 +19428,7 @@ Control slow_059C ()
     advance ( 16 );
     H = a2;
     L = a1;
-    return jumpDirect ( 0x059F,slow_059F );
+    return jumpDirect ( 0x059F,slow_059F,0 );
 }
 
 Control slow_059F ()
@@ -19440,7 +19440,7 @@ Control slow_059F ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     C = a3;
-    return jumpDirect ( 0x05A0,slow_05A0 );
+    return jumpDirect ( 0x05A0,slow_05A0,0 );
 }
 
 Control slow_05A0 ()
@@ -19453,7 +19453,7 @@ Control slow_05A0 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x05A1,slow_05A1 );
+    return jumpDirect ( 0x05A1,slow_05A1,0 );
 }
 
 Control slow_05A1 ()
@@ -19461,7 +19461,7 @@ Control slow_05A1 ()
     // #at: 05A1
     instruction0 ( 0x05,0xA2,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"NOP" );
     advance ( 4 );
-    return jumpDirect ( 0x05A2,slow_05A2 );
+    return jumpDirect ( 0x05A2,slow_05A2,0 );
 }
 
 Control slow_05A2 ()
@@ -19473,7 +19473,7 @@ Control slow_05A2 ()
     u8 a2 = H ;
     mem_write ( 0x2077,a2 );
     advance ( 16 );
-    return jumpDirect ( 0x05A5,slow_05A5 );
+    return jumpDirect ( 0x05A5,slow_05A5,fast_05A5 );
 }
 
 Control slow_05A5 ()
@@ -19492,7 +19492,7 @@ Control slow_05A5 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x062F,slow_062F );
+    return jumpDirect ( 0x062F,slow_062F,0 );
 }
 
 Control slow_05A8 ()
@@ -19517,7 +19517,7 @@ Control slow_05A8 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x05A9,slow_05A9 );
+        return jumpDirect ( 0x05A9,slow_05A9,0 );
     }
 }
 
@@ -19537,7 +19537,7 @@ Control slow_05A9 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x017A,slow_017A );
+    return jumpDirect ( 0x017A,slow_017A,fast_017A );
 }
 
 Control slow_05AC ()
@@ -19547,7 +19547,7 @@ Control slow_05AC ()
     u8 a1 = C ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x05AD,slow_05AD );
+    return jumpDirect ( 0x05AD,slow_05AD,0 );
 }
 
 Control slow_05AD ()
@@ -19566,7 +19566,7 @@ Control slow_05AD ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ( ( a2 >> 8 ) >> 0 ) & 0x01 );
-    return jumpDirect ( 0x05AF,slow_05AF );
+    return jumpDirect ( 0x05AF,slow_05AF,0 );
 }
 
 Control slow_05AF ()
@@ -19576,7 +19576,7 @@ Control slow_05AF ()
     u8 a1 = A ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( 0x05B0,slow_05B0 );
+    return jumpDirect ( 0x05B0,slow_05B0,0 );
 }
 
 Control slow_05B0 ()
@@ -19586,7 +19586,7 @@ Control slow_05B0 ()
     u8 a1 = L ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x05B1,slow_05B1 );
+    return jumpDirect ( 0x05B1,slow_05B1,0 );
 }
 
 Control slow_05B1 ()
@@ -19605,7 +19605,7 @@ Control slow_05B1 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x05B3,slow_05B3 );
+    return jumpDirect ( 0x05B3,slow_05B3,0 );
 }
 
 Control slow_05B3 ()
@@ -19615,7 +19615,7 @@ Control slow_05B3 ()
     u8 a1 = A ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( 0x05B4,slow_05B4 );
+    return jumpDirect ( 0x05B4,slow_05B4,0 );
 }
 
 Control slow_05B4 ()
@@ -19627,7 +19627,7 @@ Control slow_05B4 ()
     u8 a2 = H ;
     mem_write ( 0x207C,a2 );
     advance ( 16 );
-    return jumpDirect ( 0x05B7,slow_05B7 );
+    return jumpDirect ( 0x05B7,slow_05B7,fast_05B7 );
 }
 
 Control slow_05B7 ()
@@ -19637,7 +19637,7 @@ Control slow_05B7 ()
     advance ( 10 );
     H = 0x20;
     L = 0x73;
-    return jumpDirect ( 0x05BA,slow_05BA );
+    return jumpDirect ( 0x05BA,slow_05BA,0 );
 }
 
 Control slow_05BA ()
@@ -19649,7 +19649,7 @@ Control slow_05BA ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x05BB,slow_05BB );
+    return jumpDirect ( 0x05BB,slow_05BB,0 );
 }
 
 Control slow_05BB ()
@@ -19665,7 +19665,7 @@ Control slow_05BB ()
     FlagA = false;
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x05BD,slow_05BD );
+    return jumpDirect ( 0x05BD,slow_05BD,0 );
 }
 
 Control slow_05BD ()
@@ -19677,7 +19677,7 @@ Control slow_05BD ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x05BE,slow_05BE );
+    return jumpDirect ( 0x05BE,slow_05BE,0 );
 }
 
 Control slow_05BE ()
@@ -19690,7 +19690,7 @@ Control slow_05BE ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x05BF,slow_05BF );
+    return jumpDirect ( 0x05BF,slow_05BF,0 );
 }
 
 Control slow_05BF ()
@@ -19712,7 +19712,7 @@ Control slow_05BF ()
     FlagZ = ( 0 == ( a4 & 0xFF ) );
     FlagA = ( ( ( a7 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a4 & 0xFF ) );
-    return jumpDirect ( 0x05C0,slow_05C0 );
+    return jumpDirect ( 0x05C0,slow_05C0,0 );
 }
 
 Control slow_05C0 ()
@@ -19740,7 +19740,7 @@ Control slow_05C1 ()
     advance ( 10 );
     D = 0x20;
     E = 0x7C;
-    return jumpDirect ( 0x05C4,slow_05C4 );
+    return jumpDirect ( 0x05C4,slow_05C4,0 );
 }
 
 Control slow_05C4 ()
@@ -19759,7 +19759,7 @@ Control slow_05C4 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A06,slow_1A06 );
+    return jumpDirect ( 0x1A06,slow_1A06,fast_1A06 );
 }
 
 Control slow_05C7 ()
@@ -19784,7 +19784,7 @@ Control slow_05C7 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x05C8,slow_05C8 );
+        return jumpDirect ( 0x05C8,slow_05C8,0 );
     }
 }
 
@@ -19798,7 +19798,7 @@ Control slow_05C8 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x05C9,slow_05C9 );
+    return jumpDirect ( 0x05C9,slow_05C9,0 );
 }
 
 Control slow_05C9 ()
@@ -19810,7 +19810,7 @@ Control slow_05C9 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x05CA,slow_05CA );
+    return jumpDirect ( 0x05CA,slow_05CA,0 );
 }
 
 Control slow_05CA ()
@@ -19827,7 +19827,7 @@ Control slow_05CA ()
     FlagA = ( ( a3 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x05CC,slow_05CC );
+    return jumpDirect ( 0x05CC,slow_05CC,0 );
 }
 
 Control slow_05CC ()
@@ -19837,12 +19837,12 @@ Control slow_05CC ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x0644,slow_0644 );
+        return jumpDirect ( 0x0644,slow_0644,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x05CF,slow_05CF );
+        return jumpDirect ( 0x05CF,slow_05CF,0 );
     }
 }
 
@@ -19856,7 +19856,7 @@ Control slow_05CF ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x05D0,slow_05D0 );
+    return jumpDirect ( 0x05D0,slow_05D0,0 );
 }
 
 Control slow_05D0 ()
@@ -19878,7 +19878,7 @@ Control slow_05D0 ()
     FlagZ = ( 0 == ( a4 & 0xFF ) );
     FlagA = ( ( ( a7 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a4 & 0xFF ) );
-    return jumpDirect ( 0x05D1,slow_05D1 );
+    return jumpDirect ( 0x05D1,slow_05D1,0 );
 }
 
 Control slow_05D1 ()
@@ -19897,7 +19897,7 @@ Control slow_05D1 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0675,slow_0675 );
+    return jumpDirect ( 0x0675,slow_0675,fast_0675 );
 }
 
 Control slow_05D4 ()
@@ -19907,7 +19907,7 @@ Control slow_05D4 ()
     u8 a1 = e8_read_mem ( 0x2079 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x05D7,slow_05D7 );
+    return jumpDirect ( 0x05D7,slow_05D7,0 );
 }
 
 Control slow_05D7 ()
@@ -19926,7 +19926,7 @@ Control slow_05D7 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ( ( a2 >> 8 ) >> 0 ) & 0x01 );
-    return jumpDirect ( 0x05D9,slow_05D9 );
+    return jumpDirect ( 0x05D9,slow_05D9,0 );
 }
 
 Control slow_05D9 ()
@@ -19936,7 +19936,7 @@ Control slow_05D9 ()
     advance ( 10 );
     H = 0x20;
     L = 0x7F;
-    return jumpDirect ( 0x05DC,slow_05DC );
+    return jumpDirect ( 0x05DC,slow_05DC,0 );
 }
 
 Control slow_05DC ()
@@ -19957,7 +19957,7 @@ Control slow_05DC ()
     FlagA = ( ( ( a8 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a5 & 0xFF ) );
     FlagCY = ( ! ( ( ( a5 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x05DD,slow_05DD );
+    return jumpDirect ( 0x05DD,slow_05DD,0 );
 }
 
 Control slow_05DD ()
@@ -19967,12 +19967,12 @@ Control slow_05DD ()
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( 0x05E2,slow_05E2 );
+        return jumpDirect ( 0x05E2,slow_05E2,fast_05E2 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x05E0,slow_05E0 );
+        return jumpDirect ( 0x05E0,slow_05E0,0 );
     }
 }
 
@@ -19992,7 +19992,7 @@ Control slow_05E0 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x05E2,slow_05E2 );
+    return jumpDirect ( 0x05E2,slow_05E2,fast_05E2 );
 }
 
 Control slow_05E2 ()
@@ -20002,7 +20002,7 @@ Control slow_05E2 ()
     u8 a1 = A ;
     mem_write ( 0x2079,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x05E5,slow_05E5 );
+    return jumpDirect ( 0x05E5,slow_05E5,0 );
 }
 
 Control slow_05E5 ()
@@ -20012,7 +20012,7 @@ Control slow_05E5 ()
     u8 a1 = e8_read_mem ( 0x207B ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x05E8,slow_05E8 );
+    return jumpDirect ( 0x05E8,slow_05E8,0 );
 }
 
 Control slow_05E8 ()
@@ -20022,7 +20022,7 @@ Control slow_05E8 ()
     u8 a1 = A ;
     advance ( 5 );
     B = a1;
-    return jumpDirect ( 0x05E9,slow_05E9 );
+    return jumpDirect ( 0x05E9,slow_05E9,0 );
 }
 
 Control slow_05E9 ()
@@ -20032,7 +20032,7 @@ Control slow_05E9 ()
     u8 a1 = e8_read_mem ( 0x207E ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x05EC,slow_05EC );
+    return jumpDirect ( 0x05EC,slow_05EC,0 );
 }
 
 Control slow_05EC ()
@@ -20052,7 +20052,7 @@ Control slow_05EC ()
     FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a3 & 0xFF ) );
     FlagCY = ( ( ( a3 >> 8 ) >> 0 ) & 0x01 );
-    return jumpDirect ( 0x05ED,slow_05ED );
+    return jumpDirect ( 0x05ED,slow_05ED,0 );
 }
 
 Control slow_05ED ()
@@ -20062,7 +20062,7 @@ Control slow_05ED ()
     u8 a1 = A ;
     mem_write ( 0x207B,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x05F0,slow_05F0 );
+    return jumpDirect ( 0x05F0,slow_05F0,0 );
 }
 
 Control slow_05F0 ()
@@ -20081,7 +20081,7 @@ Control slow_05F0 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x066C,slow_066C );
+    return jumpDirect ( 0x066C,slow_066C,fast_066C );
 }
 
 Control slow_05F3 ()
@@ -20091,7 +20091,7 @@ Control slow_05F3 ()
     u8 a1 = e8_read_mem ( 0x207B ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x05F6,slow_05F6 );
+    return jumpDirect ( 0x05F6,slow_05F6,0 );
 }
 
 Control slow_05F6 ()
@@ -20109,7 +20109,7 @@ Control slow_05F6 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x05F8,slow_05F8 );
+    return jumpDirect ( 0x05F8,slow_05F8,0 );
 }
 
 Control slow_05F8 ()
@@ -20119,12 +20119,12 @@ Control slow_05F8 ()
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0612,slow_0612 );
+        return jumpDirect ( 0x0612,slow_0612,fast_0612 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x05FB,slow_05FB );
+        return jumpDirect ( 0x05FB,slow_05FB,0 );
     }
 }
 
@@ -20135,7 +20135,7 @@ Control slow_05FB ()
     u8 a1 = e8_read_mem ( 0x2061 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x05FE,slow_05FE );
+    return jumpDirect ( 0x05FE,slow_05FE,0 );
 }
 
 Control slow_05FE ()
@@ -20153,7 +20153,7 @@ Control slow_05FE ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x05FF,slow_05FF );
+    return jumpDirect ( 0x05FF,slow_05FF,0 );
 }
 
 Control slow_05FF ()
@@ -20178,7 +20178,7 @@ Control slow_05FF ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x0600,slow_0600 );
+        return jumpDirect ( 0x0600,slow_0600,0 );
     }
 }
 
@@ -20189,7 +20189,7 @@ Control slow_0600 ()
     u8 a1 = e8_read_mem ( 0x207B ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0603,slow_0603 );
+    return jumpDirect ( 0x0603,slow_0603,0 );
 }
 
 Control slow_0603 ()
@@ -20207,7 +20207,7 @@ Control slow_0603 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x0605,slow_0605 );
+    return jumpDirect ( 0x0605,slow_0605,0 );
 }
 
 Control slow_0605 ()
@@ -20217,12 +20217,12 @@ Control slow_0605 ()
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0612,slow_0612 );
+        return jumpDirect ( 0x0612,slow_0612,fast_0612 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0608,slow_0608 );
+        return jumpDirect ( 0x0608,slow_0608,0 );
     }
 }
 
@@ -20241,7 +20241,7 @@ Control slow_0608 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x060A,slow_060A );
+    return jumpDirect ( 0x060A,slow_060A,0 );
 }
 
 Control slow_060A ()
@@ -20249,7 +20249,7 @@ Control slow_060A ()
     // #at: 060A
     instruction0 ( 0x06,0x0B,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"NOP" );
     advance ( 4 );
-    return jumpDirect ( 0x060B,slow_060B );
+    return jumpDirect ( 0x060B,slow_060B,0 );
 }
 
 Control slow_060B ()
@@ -20259,12 +20259,12 @@ Control slow_060B ()
     if (( ! FlagCY ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x0612,slow_0612 );
+        return jumpDirect ( 0x0612,slow_0612,fast_0612 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x060E,slow_060E );
+        return jumpDirect ( 0x060E,slow_060E,0 );
     }
 }
 
@@ -20285,7 +20285,7 @@ Control slow_060E ()
     FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a3 & 0xFF ) );
     FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x060F,slow_060F );
+    return jumpDirect ( 0x060F,slow_060F,0 );
 }
 
 Control slow_060F ()
@@ -20295,7 +20295,7 @@ Control slow_060F ()
     u8 a1 = A ;
     mem_write ( 0x2015,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0612,slow_0612 );
+    return jumpDirect ( 0x0612,slow_0612,fast_0612 );
 }
 
 Control slow_0612 ()
@@ -20305,7 +20305,7 @@ Control slow_0612 ()
     u8 a1 = e8_read_mem ( 0x2073 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0615,slow_0615 );
+    return jumpDirect ( 0x0615,slow_0615,0 );
 }
 
 Control slow_0615 ()
@@ -20321,7 +20321,7 @@ Control slow_0615 ()
     FlagA = false;
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x0617,slow_0617 );
+    return jumpDirect ( 0x0617,slow_0617,0 );
 }
 
 Control slow_0617 ()
@@ -20331,7 +20331,7 @@ Control slow_0617 ()
     u8 a1 = A ;
     mem_write ( 0x2073,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x061A,slow_061A );
+    return jumpDirect ( 0x061A,slow_061A,0 );
 }
 
 Control slow_061A ()
@@ -20359,7 +20359,7 @@ Control slow_061B ()
     u8 a1 = e8_read_mem ( 0x201B ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x061E,slow_061E );
+    return jumpDirect ( 0x061E,slow_061E,0 );
 }
 
 Control slow_061E ()
@@ -20378,7 +20378,7 @@ Control slow_061E ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ( ( a2 >> 8 ) >> 0 ) & 0x01 );
-    return jumpDirect ( 0x0620,slow_0620 );
+    return jumpDirect ( 0x0620,slow_0620,0 );
 }
 
 Control slow_0620 ()
@@ -20388,7 +20388,7 @@ Control slow_0620 ()
     u8 a1 = A ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( 0x0621,slow_0621 );
+    return jumpDirect ( 0x0621,slow_0621,0 );
 }
 
 Control slow_0621 ()
@@ -20407,7 +20407,7 @@ Control slow_0621 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x156F,slow_156F );
+    return jumpDirect ( 0x156F,slow_156F,fast_156F );
 }
 
 Control slow_0624 ()
@@ -20417,7 +20417,7 @@ Control slow_0624 ()
     u8 a1 = C ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x0625,slow_0625 );
+    return jumpDirect ( 0x0625,slow_0625,0 );
 }
 
 Control slow_0625 ()
@@ -20435,7 +20435,7 @@ Control slow_0625 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x0627,slow_0627 );
+    return jumpDirect ( 0x0627,slow_0627,0 );
 }
 
 Control slow_0627 ()
@@ -20445,12 +20445,12 @@ Control slow_0627 ()
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( 0x05A5,slow_05A5 );
+        return jumpDirect ( 0x05A5,slow_05A5,fast_05A5 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x062A,slow_062A );
+        return jumpDirect ( 0x062A,slow_062A,0 );
     }
 }
 
@@ -20460,7 +20460,7 @@ Control slow_062A ()
     instruction1 ( 0x06,0x2C,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   C,%02X",0x0B );
     advance ( 7 );
     C = 0x0B;
-    return jumpDirect ( 0x062C,slow_062C );
+    return jumpDirect ( 0x062C,slow_062C,0 );
 }
 
 Control slow_062C ()
@@ -20468,7 +20468,7 @@ Control slow_062C ()
     // #at: 062C
     instruction2 ( 0x06,0x2F,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x05,0xA5 );
     advance ( 10 );
-    return jumpDirect ( 0x05A5,slow_05A5 );
+    return jumpDirect ( 0x05A5,slow_05A5,fast_05A5 );
 }
 
 Control slow_062F ()
@@ -20486,7 +20486,7 @@ Control slow_062F ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x0630,slow_0630 );
+    return jumpDirect ( 0x0630,slow_0630,0 );
 }
 
 Control slow_0630 ()
@@ -20496,7 +20496,7 @@ Control slow_0630 ()
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0633,slow_0633 );
+    return jumpDirect ( 0x0633,slow_0633,0 );
 }
 
 Control slow_0633 ()
@@ -20506,7 +20506,7 @@ Control slow_0633 ()
     u8 a1 = A ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( 0x0634,slow_0634 );
+    return jumpDirect ( 0x0634,slow_0634,0 );
 }
 
 Control slow_0634 ()
@@ -20516,7 +20516,7 @@ Control slow_0634 ()
     u8 a1 = C ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( 0x0635,slow_0635 );
+    return jumpDirect ( 0x0635,slow_0635,0 );
 }
 
 Control slow_0635 ()
@@ -20525,7 +20525,7 @@ Control slow_0635 ()
     instruction1 ( 0x06,0x37,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   D,%02X",0x05 );
     advance ( 7 );
     D = 0x05;
-    return jumpDirect ( 0x0637,slow_0637 );
+    return jumpDirect ( 0x0637,slow_0637,fast_0637 );
 }
 
 Control slow_0637 ()
@@ -20537,7 +20537,7 @@ Control slow_0637 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x0638,slow_0638 );
+    return jumpDirect ( 0x0638,slow_0638,0 );
 }
 
 Control slow_0638 ()
@@ -20555,7 +20555,7 @@ Control slow_0638 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0639,slow_0639 );
+    return jumpDirect ( 0x0639,slow_0639,0 );
 }
 
 Control slow_0639 ()
@@ -20564,7 +20564,7 @@ Control slow_0639 ()
     instruction0 ( 0x06,0x3A,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"SCF" );
     advance ( 4 );
     FlagCY = true;
-    return jumpDirect ( 0x063A,slow_063A );
+    return jumpDirect ( 0x063A,slow_063A,0 );
 }
 
 Control slow_063A ()
@@ -20589,7 +20589,7 @@ Control slow_063A ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x063B,slow_063B );
+        return jumpDirect ( 0x063B,slow_063B,0 );
     }
 }
 
@@ -20600,7 +20600,7 @@ Control slow_063B ()
     u8 a1 = L ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x063C,slow_063C );
+    return jumpDirect ( 0x063C,slow_063C,0 );
 }
 
 Control slow_063C ()
@@ -20619,7 +20619,7 @@ Control slow_063C ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ( ( a2 >> 8 ) >> 0 ) & 0x01 );
-    return jumpDirect ( 0x063E,slow_063E );
+    return jumpDirect ( 0x063E,slow_063E,0 );
 }
 
 Control slow_063E ()
@@ -20629,7 +20629,7 @@ Control slow_063E ()
     u8 a1 = A ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( 0x063F,slow_063F );
+    return jumpDirect ( 0x063F,slow_063F,0 );
 }
 
 Control slow_063F ()
@@ -20647,7 +20647,7 @@ Control slow_063F ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x0640,slow_0640 );
+    return jumpDirect ( 0x0640,slow_0640,0 );
 }
 
 Control slow_0640 ()
@@ -20657,12 +20657,12 @@ Control slow_0640 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x0637,slow_0637 );
+        return jumpDirect ( 0x0637,slow_0637,fast_0637 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0643,slow_0643 );
+        return jumpDirect ( 0x0643,slow_0643,0 );
     }
 }
 
@@ -20691,7 +20691,7 @@ Control slow_0644 ()
     advance ( 10 );
     H = 0x20;
     L = 0x78;
-    return jumpDirect ( 0x0647,slow_0647 );
+    return jumpDirect ( 0x0647,slow_0647,0 );
 }
 
 Control slow_0647 ()
@@ -20713,7 +20713,7 @@ Control slow_0647 ()
     FlagZ = ( 0 == ( a4 & 0xFF ) );
     FlagA = ( ( ( a7 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a4 & 0xFF ) );
-    return jumpDirect ( 0x0648,slow_0648 );
+    return jumpDirect ( 0x0648,slow_0648,0 );
 }
 
 Control slow_0648 ()
@@ -20725,7 +20725,7 @@ Control slow_0648 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x0649,slow_0649 );
+    return jumpDirect ( 0x0649,slow_0649,0 );
 }
 
 Control slow_0649 ()
@@ -20743,7 +20743,7 @@ Control slow_0649 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x064B,slow_064B );
+    return jumpDirect ( 0x064B,slow_064B,0 );
 }
 
 Control slow_064B ()
@@ -20753,12 +20753,12 @@ Control slow_064B ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x0667,slow_0667 );
+        return jumpDirect ( 0x0667,slow_0667,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x064E,slow_064E );
+        return jumpDirect ( 0x064E,slow_064E,0 );
     }
 }
 
@@ -20778,7 +20778,7 @@ Control slow_064E ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0675,slow_0675 );
+    return jumpDirect ( 0x0675,slow_0675,fast_0675 );
 }
 
 Control slow_0651 ()
@@ -20788,7 +20788,7 @@ Control slow_0651 ()
     advance ( 10 );
     H = 0x1C;
     L = 0xDC;
-    return jumpDirect ( 0x0654,slow_0654 );
+    return jumpDirect ( 0x0654,slow_0654,0 );
 }
 
 Control slow_0654 ()
@@ -20800,7 +20800,7 @@ Control slow_0654 ()
     u8 a2 = H ;
     mem_write ( 0x207A,a2 );
     advance ( 16 );
-    return jumpDirect ( 0x0657,slow_0657 );
+    return jumpDirect ( 0x0657,slow_0657,0 );
 }
 
 Control slow_0657 ()
@@ -20810,7 +20810,7 @@ Control slow_0657 ()
     advance ( 10 );
     H = 0x20;
     L = 0x7C;
-    return jumpDirect ( 0x065A,slow_065A );
+    return jumpDirect ( 0x065A,slow_065A,0 );
 }
 
 Control slow_065A ()
@@ -20832,7 +20832,7 @@ Control slow_065A ()
     FlagZ = ( 0 == ( a4 & 0xFF ) );
     FlagA = ( ( ( a7 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a4 & 0xFF ) );
-    return jumpDirect ( 0x065B,slow_065B );
+    return jumpDirect ( 0x065B,slow_065B,0 );
 }
 
 Control slow_065B ()
@@ -20854,7 +20854,7 @@ Control slow_065B ()
     FlagZ = ( 0 == ( a4 & 0xFF ) );
     FlagA = ( ( ( a7 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a4 & 0xFF ) );
-    return jumpDirect ( 0x065C,slow_065C );
+    return jumpDirect ( 0x065C,slow_065C,0 );
 }
 
 Control slow_065C ()
@@ -20867,7 +20867,7 @@ Control slow_065C ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x065D,slow_065D );
+    return jumpDirect ( 0x065D,slow_065D,0 );
 }
 
 Control slow_065D ()
@@ -20889,7 +20889,7 @@ Control slow_065D ()
     FlagZ = ( 0 == ( a4 & 0xFF ) );
     FlagA = ( ( ( a7 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a4 & 0xFF ) );
-    return jumpDirect ( 0x065E,slow_065E );
+    return jumpDirect ( 0x065E,slow_065E,0 );
 }
 
 Control slow_065E ()
@@ -20911,7 +20911,7 @@ Control slow_065E ()
     FlagZ = ( 0 == ( a4 & 0xFF ) );
     FlagA = ( ( ( a7 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a4 & 0xFF ) );
-    return jumpDirect ( 0x065F,slow_065F );
+    return jumpDirect ( 0x065F,slow_065F,0 );
 }
 
 Control slow_065F ()
@@ -20920,7 +20920,7 @@ Control slow_065F ()
     instruction1 ( 0x06,0x61,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x06 );
     advance ( 7 );
     A = 0x06;
-    return jumpDirect ( 0x0661,slow_0661 );
+    return jumpDirect ( 0x0661,slow_0661,0 );
 }
 
 Control slow_0661 ()
@@ -20930,7 +20930,7 @@ Control slow_0661 ()
     u8 a1 = A ;
     mem_write ( 0x207D,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0664,slow_0664 );
+    return jumpDirect ( 0x0664,slow_0664,0 );
 }
 
 Control slow_0664 ()
@@ -20938,7 +20938,7 @@ Control slow_0664 ()
     // #at: 0664
     instruction2 ( 0x06,0x67,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x06,0x6C );
     advance ( 10 );
-    return jumpDirect ( 0x066C,slow_066C );
+    return jumpDirect ( 0x066C,slow_066C,fast_066C );
 }
 
 Control slow_0667 ()
@@ -20956,7 +20956,7 @@ Control slow_0667 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0668,slow_0668 );
+    return jumpDirect ( 0x0668,slow_0668,0 );
 }
 
 Control slow_0668 ()
@@ -20981,7 +20981,7 @@ Control slow_0668 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x0669,slow_0669 );
+        return jumpDirect ( 0x0669,slow_0669,0 );
     }
 }
 
@@ -20990,7 +20990,7 @@ Control slow_0669 ()
     // #at: 0669
     instruction2 ( 0x06,0x6C,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x06,0x75 );
     advance ( 10 );
-    return jumpDirect ( 0x0675,slow_0675 );
+    return jumpDirect ( 0x0675,slow_0675,fast_0675 );
 }
 
 Control slow_066C ()
@@ -21000,7 +21000,7 @@ Control slow_066C ()
     advance ( 10 );
     H = 0x20;
     L = 0x79;
-    return jumpDirect ( 0x066F,slow_066F );
+    return jumpDirect ( 0x066F,slow_066F,0 );
 }
 
 Control slow_066F ()
@@ -21019,7 +21019,7 @@ Control slow_066F ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A3B,slow_1A3B );
+    return jumpDirect ( 0x1A3B,slow_1A3B,fast_1A3B );
 }
 
 Control slow_0672 ()
@@ -21027,7 +21027,7 @@ Control slow_0672 ()
     // #at: 0672
     instruction2 ( 0x06,0x75,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x14,0x91 );
     advance ( 10 );
-    return jumpDirect ( 0x1491,slow_1491 );
+    return jumpDirect ( 0x1491,slow_1491,fast_1491 );
 }
 
 Control slow_0675 ()
@@ -21037,7 +21037,7 @@ Control slow_0675 ()
     advance ( 10 );
     H = 0x20;
     L = 0x79;
-    return jumpDirect ( 0x0678,slow_0678 );
+    return jumpDirect ( 0x0678,slow_0678,0 );
 }
 
 Control slow_0678 ()
@@ -21056,7 +21056,7 @@ Control slow_0678 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A3B,slow_1A3B );
+    return jumpDirect ( 0x1A3B,slow_1A3B,fast_1A3B );
 }
 
 Control slow_067B ()
@@ -21064,7 +21064,7 @@ Control slow_067B ()
     // #at: 067B
     instruction2 ( 0x06,0x7E,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x14,0x52 );
     advance ( 10 );
-    return jumpDirect ( 0x1452,slow_1452 );
+    return jumpDirect ( 0x1452,slow_1452,fast_1452 );
 }
 
 Control slow_067E ()
@@ -21076,7 +21076,7 @@ Control slow_067E ()
     u8 a2 = H ;
     mem_write ( 0x2049,a2 );
     advance ( 16 );
-    return jumpDirect ( 0x0681,slow_0681 );
+    return jumpDirect ( 0x0681,slow_0681,0 );
 }
 
 Control slow_0681 ()
@@ -21114,7 +21114,7 @@ Control slow_0682 ()
     L = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x0683,slow_0683 );
+    return jumpDirect ( 0x0683,slow_0683,0 );
 }
 
 Control slow_0683 ()
@@ -21124,7 +21124,7 @@ Control slow_0683 ()
     u8 a1 = e8_read_mem ( 0x2080 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0686,slow_0686 );
+    return jumpDirect ( 0x0686,slow_0686,0 );
 }
 
 Control slow_0686 ()
@@ -21142,7 +21142,7 @@ Control slow_0686 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x0688,slow_0688 );
+    return jumpDirect ( 0x0688,slow_0688,0 );
 }
 
 Control slow_0688 ()
@@ -21167,7 +21167,7 @@ Control slow_0688 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x0689,slow_0689 );
+        return jumpDirect ( 0x0689,slow_0689,0 );
     }
 }
 
@@ -21178,7 +21178,7 @@ Control slow_0689 ()
     advance ( 10 );
     H = 0x20;
     L = 0x83;
-    return jumpDirect ( 0x068C,slow_068C );
+    return jumpDirect ( 0x068C,slow_068C,0 );
 }
 
 Control slow_068C ()
@@ -21190,7 +21190,7 @@ Control slow_068C ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x068D,slow_068D );
+    return jumpDirect ( 0x068D,slow_068D,0 );
 }
 
 Control slow_068D ()
@@ -21208,7 +21208,7 @@ Control slow_068D ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x068E,slow_068E );
+    return jumpDirect ( 0x068E,slow_068E,0 );
 }
 
 Control slow_068E ()
@@ -21218,12 +21218,12 @@ Control slow_068E ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x050F,slow_050F );
+        return jumpDirect ( 0x050F,slow_050F,fast_050F );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0691,slow_0691 );
+        return jumpDirect ( 0x0691,slow_0691,0 );
     }
 }
 
@@ -21234,7 +21234,7 @@ Control slow_0691 ()
     u8 a1 = e8_read_mem ( 0x2056 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0694,slow_0694 );
+    return jumpDirect ( 0x0694,slow_0694,0 );
 }
 
 Control slow_0694 ()
@@ -21252,7 +21252,7 @@ Control slow_0694 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0695,slow_0695 );
+    return jumpDirect ( 0x0695,slow_0695,0 );
 }
 
 Control slow_0695 ()
@@ -21262,12 +21262,12 @@ Control slow_0695 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x050F,slow_050F );
+        return jumpDirect ( 0x050F,slow_050F,fast_050F );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0698,slow_0698 );
+        return jumpDirect ( 0x0698,slow_0698,0 );
     }
 }
 
@@ -21281,7 +21281,7 @@ Control slow_0698 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x0699,slow_0699 );
+    return jumpDirect ( 0x0699,slow_0699,0 );
 }
 
 Control slow_0699 ()
@@ -21293,7 +21293,7 @@ Control slow_0699 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x069A,slow_069A );
+    return jumpDirect ( 0x069A,slow_069A,0 );
 }
 
 Control slow_069A ()
@@ -21311,7 +21311,7 @@ Control slow_069A ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x069B,slow_069B );
+    return jumpDirect ( 0x069B,slow_069B,0 );
 }
 
 Control slow_069B ()
@@ -21321,12 +21321,12 @@ Control slow_069B ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x06AB,slow_06AB );
+        return jumpDirect ( 0x06AB,slow_06AB,fast_06AB );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x069E,slow_069E );
+        return jumpDirect ( 0x069E,slow_069E,0 );
     }
 }
 
@@ -21337,7 +21337,7 @@ Control slow_069E ()
     u8 a1 = e8_read_mem ( 0x2082 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x06A1,slow_06A1 );
+    return jumpDirect ( 0x06A1,slow_06A1,0 );
 }
 
 Control slow_06A1 ()
@@ -21355,7 +21355,7 @@ Control slow_06A1 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x06A3,slow_06A3 );
+    return jumpDirect ( 0x06A3,slow_06A3,0 );
 }
 
 Control slow_06A3 ()
@@ -21365,12 +21365,12 @@ Control slow_06A3 ()
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( 0x050F,slow_050F );
+        return jumpDirect ( 0x050F,slow_050F,fast_050F );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x06A6,slow_06A6 );
+        return jumpDirect ( 0x06A6,slow_06A6,0 );
     }
 }
 
@@ -21382,7 +21382,7 @@ Control slow_06A6 ()
     u8 a2 = L ;
     mem_write ( ( ( a1 << 8 ) | a2 ),0x01 );
     advance ( 10 );
-    return jumpDirect ( 0x06A8,slow_06A8 );
+    return jumpDirect ( 0x06A8,slow_06A8,0 );
 }
 
 Control slow_06A8 ()
@@ -21401,7 +21401,7 @@ Control slow_06A8 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x073C,slow_073C );
+    return jumpDirect ( 0x073C,slow_073C,fast_073C );
 }
 
 Control slow_06AB ()
@@ -21411,7 +21411,7 @@ Control slow_06AB ()
     advance ( 10 );
     D = 0x20;
     E = 0x8A;
-    return jumpDirect ( 0x06AE,slow_06AE );
+    return jumpDirect ( 0x06AE,slow_06AE,0 );
 }
 
 Control slow_06AE ()
@@ -21430,7 +21430,7 @@ Control slow_06AE ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A06,slow_1A06 );
+    return jumpDirect ( 0x1A06,slow_1A06,fast_1A06 );
 }
 
 Control slow_06B1 ()
@@ -21455,7 +21455,7 @@ Control slow_06B1 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x06B2,slow_06B2 );
+        return jumpDirect ( 0x06B2,slow_06B2,0 );
     }
 }
 
@@ -21466,7 +21466,7 @@ Control slow_06B2 ()
     advance ( 10 );
     H = 0x20;
     L = 0x85;
-    return jumpDirect ( 0x06B5,slow_06B5 );
+    return jumpDirect ( 0x06B5,slow_06B5,0 );
 }
 
 Control slow_06B5 ()
@@ -21478,7 +21478,7 @@ Control slow_06B5 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x06B6,slow_06B6 );
+    return jumpDirect ( 0x06B6,slow_06B6,0 );
 }
 
 Control slow_06B6 ()
@@ -21496,7 +21496,7 @@ Control slow_06B6 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x06B7,slow_06B7 );
+    return jumpDirect ( 0x06B7,slow_06B7,0 );
 }
 
 Control slow_06B7 ()
@@ -21506,12 +21506,12 @@ Control slow_06B7 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x06D6,slow_06D6 );
+        return jumpDirect ( 0x06D6,slow_06D6,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x06BA,slow_06BA );
+        return jumpDirect ( 0x06BA,slow_06BA,0 );
     }
 }
 
@@ -21522,7 +21522,7 @@ Control slow_06BA ()
     advance ( 10 );
     H = 0x20;
     L = 0x8A;
-    return jumpDirect ( 0x06BD,slow_06BD );
+    return jumpDirect ( 0x06BD,slow_06BD,0 );
 }
 
 Control slow_06BD ()
@@ -21534,7 +21534,7 @@ Control slow_06BD ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x06BE,slow_06BE );
+    return jumpDirect ( 0x06BE,slow_06BE,0 );
 }
 
 Control slow_06BE ()
@@ -21547,7 +21547,7 @@ Control slow_06BE ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x06BF,slow_06BF );
+    return jumpDirect ( 0x06BF,slow_06BF,0 );
 }
 
 Control slow_06BF ()
@@ -21560,7 +21560,7 @@ Control slow_06BF ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x06C0,slow_06C0 );
+    return jumpDirect ( 0x06C0,slow_06C0,0 );
 }
 
 Control slow_06C0 ()
@@ -21582,7 +21582,7 @@ Control slow_06C0 ()
     FlagA = ( ( ( a8 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a5 & 0xFF ) );
     FlagCY = ( ( ( a5 >> 8 ) >> 0 ) & 0x01 );
-    return jumpDirect ( 0x06C1,slow_06C1 );
+    return jumpDirect ( 0x06C1,slow_06C1,0 );
 }
 
 Control slow_06C1 ()
@@ -21592,7 +21592,7 @@ Control slow_06C1 ()
     u8 a1 = A ;
     mem_write ( 0x208A,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x06C4,slow_06C4 );
+    return jumpDirect ( 0x06C4,slow_06C4,0 );
 }
 
 Control slow_06C4 ()
@@ -21611,7 +21611,7 @@ Control slow_06C4 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x073C,slow_073C );
+    return jumpDirect ( 0x073C,slow_073C,fast_073C );
 }
 
 Control slow_06C7 ()
@@ -21621,7 +21621,7 @@ Control slow_06C7 ()
     advance ( 10 );
     H = 0x20;
     L = 0x8A;
-    return jumpDirect ( 0x06CA,slow_06CA );
+    return jumpDirect ( 0x06CA,slow_06CA,0 );
 }
 
 Control slow_06CA ()
@@ -21633,7 +21633,7 @@ Control slow_06CA ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x06CB,slow_06CB );
+    return jumpDirect ( 0x06CB,slow_06CB,0 );
 }
 
 Control slow_06CB ()
@@ -21651,7 +21651,7 @@ Control slow_06CB ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x06CD,slow_06CD );
+    return jumpDirect ( 0x06CD,slow_06CD,0 );
 }
 
 Control slow_06CD ()
@@ -21661,12 +21661,12 @@ Control slow_06CD ()
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( 0x06F9,slow_06F9 );
+        return jumpDirect ( 0x06F9,slow_06F9,fast_06F9 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x06D0,slow_06D0 );
+        return jumpDirect ( 0x06D0,slow_06D0,0 );
     }
 }
 
@@ -21685,7 +21685,7 @@ Control slow_06D0 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x06D2,slow_06D2 );
+    return jumpDirect ( 0x06D2,slow_06D2,0 );
 }
 
 Control slow_06D2 ()
@@ -21695,12 +21695,12 @@ Control slow_06D2 ()
     if (( ! FlagCY ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x06F9,slow_06F9 );
+        return jumpDirect ( 0x06F9,slow_06F9,fast_06F9 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x06D5,slow_06D5 );
+        return jumpDirect ( 0x06D5,slow_06D5,0 );
     }
 }
 
@@ -21728,7 +21728,7 @@ Control slow_06D6 ()
     instruction1 ( 0x06,0xD8,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0xFE );
     advance ( 7 );
     B = 0xFE;
-    return jumpDirect ( 0x06D8,slow_06D8 );
+    return jumpDirect ( 0x06D8,slow_06D8,0 );
 }
 
 Control slow_06D8 ()
@@ -21747,7 +21747,7 @@ Control slow_06D8 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x19DC,slow_19DC );
+    return jumpDirect ( 0x19DC,slow_19DC,fast_19DC );
 }
 
 Control slow_06DB ()
@@ -21760,7 +21760,7 @@ Control slow_06DB ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x06DC,slow_06DC );
+    return jumpDirect ( 0x06DC,slow_06DC,0 );
 }
 
 Control slow_06DC ()
@@ -21782,7 +21782,7 @@ Control slow_06DC ()
     FlagZ = ( 0 == ( a4 & 0xFF ) );
     FlagA = ( ( ( a7 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a4 & 0xFF ) );
-    return jumpDirect ( 0x06DD,slow_06DD );
+    return jumpDirect ( 0x06DD,slow_06DD,0 );
 }
 
 Control slow_06DD ()
@@ -21794,7 +21794,7 @@ Control slow_06DD ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x06DE,slow_06DE );
+    return jumpDirect ( 0x06DE,slow_06DE,0 );
 }
 
 Control slow_06DE ()
@@ -21812,7 +21812,7 @@ Control slow_06DE ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x06E0,slow_06E0 );
+    return jumpDirect ( 0x06E0,slow_06E0,0 );
 }
 
 Control slow_06E0 ()
@@ -21822,12 +21822,12 @@ Control slow_06E0 ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x074B,slow_074B );
+        return jumpDirect ( 0x074B,slow_074B,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x06E3,slow_06E3 );
+        return jumpDirect ( 0x06E3,slow_06E3,0 );
     }
 }
 
@@ -21846,7 +21846,7 @@ Control slow_06E3 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x06E5,slow_06E5 );
+    return jumpDirect ( 0x06E5,slow_06E5,0 );
 }
 
 Control slow_06E5 ()
@@ -21856,12 +21856,12 @@ Control slow_06E5 ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x070C,slow_070C );
+        return jumpDirect ( 0x070C,slow_070C,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x06E8,slow_06E8 );
+        return jumpDirect ( 0x06E8,slow_06E8,0 );
     }
 }
 
@@ -21880,7 +21880,7 @@ Control slow_06E8 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x06E9,slow_06E9 );
+    return jumpDirect ( 0x06E9,slow_06E9,0 );
 }
 
 Control slow_06E9 ()
@@ -21905,7 +21905,7 @@ Control slow_06E9 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x06EA,slow_06EA );
+        return jumpDirect ( 0x06EA,slow_06EA,0 );
     }
 }
 
@@ -21915,7 +21915,7 @@ Control slow_06EA ()
     instruction1 ( 0x06,0xEC,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0xEF );
     advance ( 7 );
     B = 0xEF;
-    return jumpDirect ( 0x06EC,slow_06EC );
+    return jumpDirect ( 0x06EC,slow_06EC,0 );
 }
 
 Control slow_06EC ()
@@ -21925,7 +21925,7 @@ Control slow_06EC ()
     advance ( 10 );
     H = 0x20;
     L = 0x98;
-    return jumpDirect ( 0x06EF,slow_06EF );
+    return jumpDirect ( 0x06EF,slow_06EF,0 );
 }
 
 Control slow_06EF ()
@@ -21937,7 +21937,7 @@ Control slow_06EF ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x06F0,slow_06F0 );
+    return jumpDirect ( 0x06F0,slow_06F0,0 );
 }
 
 Control slow_06F0 ()
@@ -21955,7 +21955,7 @@ Control slow_06F0 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x06F1,slow_06F1 );
+    return jumpDirect ( 0x06F1,slow_06F1,0 );
 }
 
 Control slow_06F1 ()
@@ -21967,7 +21967,7 @@ Control slow_06F1 ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x06F2,slow_06F2 );
+    return jumpDirect ( 0x06F2,slow_06F2,0 );
 }
 
 Control slow_06F2 ()
@@ -21984,7 +21984,7 @@ Control slow_06F2 ()
     FlagA = ( ( a3 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x06F4,slow_06F4 );
+    return jumpDirect ( 0x06F4,slow_06F4,0 );
 }
 
 Control slow_06F4 ()
@@ -21998,7 +21998,7 @@ Control slow_06F4 ()
     sound_control ( "FleetMovement4",( ( a1 >> 3 ) & 0x01 ) );
     sound_control ( "UfoHit",( ( a1 >> 4 ) & 0x01 ) );
     advance ( 10 );
-    return jumpDirect ( 0x06F6,slow_06F6 );
+    return jumpDirect ( 0x06F6,slow_06F6,0 );
 }
 
 Control slow_06F6 ()
@@ -22006,7 +22006,7 @@ Control slow_06F6 ()
     // #at: 06F6
     instruction0 ( 0x06,0xF7,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"NOP" );
     advance ( 4 );
-    return jumpDirect ( 0x06F7,slow_06F7 );
+    return jumpDirect ( 0x06F7,slow_06F7,0 );
 }
 
 Control slow_06F7 ()
@@ -22014,7 +22014,7 @@ Control slow_06F7 ()
     // #at: 06F7
     instruction0 ( 0x06,0xF8,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"NOP" );
     advance ( 4 );
-    return jumpDirect ( 0x06F8,slow_06F8 );
+    return jumpDirect ( 0x06F8,slow_06F8,0 );
 }
 
 Control slow_06F8 ()
@@ -22022,7 +22022,7 @@ Control slow_06F8 ()
     // #at: 06F8
     instruction0 ( 0x06,0xF9,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"NOP" );
     advance ( 4 );
-    return jumpDirect ( 0x06F9,slow_06F9 );
+    return jumpDirect ( 0x06F9,slow_06F9,fast_06F9 );
 }
 
 Control slow_06F9 ()
@@ -22041,7 +22041,7 @@ Control slow_06F9 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0742,slow_0742 );
+    return jumpDirect ( 0x0742,slow_0742,fast_0742 );
 }
 
 Control slow_06FC ()
@@ -22060,7 +22060,7 @@ Control slow_06FC ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x14CB,slow_14CB );
+    return jumpDirect ( 0x14CB,slow_14CB,fast_14CB );
 }
 
 Control slow_06FF ()
@@ -22070,7 +22070,7 @@ Control slow_06FF ()
     advance ( 10 );
     H = 0x20;
     L = 0x83;
-    return jumpDirect ( 0x0702,slow_0702 );
+    return jumpDirect ( 0x0702,slow_0702,0 );
 }
 
 Control slow_0702 ()
@@ -22079,7 +22079,7 @@ Control slow_0702 ()
     instruction1 ( 0x07,0x04,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x0A );
     advance ( 7 );
     B = 0x0A;
-    return jumpDirect ( 0x0704,slow_0704 );
+    return jumpDirect ( 0x0704,slow_0704,0 );
 }
 
 Control slow_0704 ()
@@ -22098,7 +22098,7 @@ Control slow_0704 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x075F,slow_075F );
+    return jumpDirect ( 0x075F,slow_075F,0 );
 }
 
 Control slow_0707 ()
@@ -22107,7 +22107,7 @@ Control slow_0707 ()
     instruction1 ( 0x07,0x09,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0xFE );
     advance ( 7 );
     B = 0xFE;
-    return jumpDirect ( 0x0709,slow_0709 );
+    return jumpDirect ( 0x0709,slow_0709,0 );
 }
 
 Control slow_0709 ()
@@ -22115,7 +22115,7 @@ Control slow_0709 ()
     // #at: 0709
     instruction2 ( 0x07,0x0C,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x19,0xDC );
     advance ( 10 );
-    return jumpDirect ( 0x19DC,slow_19DC );
+    return jumpDirect ( 0x19DC,slow_19DC,fast_19DC );
 }
 
 Control slow_070C ()
@@ -22124,7 +22124,7 @@ Control slow_070C ()
     instruction1 ( 0x07,0x0E,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x01 );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( 0x070E,slow_070E );
+    return jumpDirect ( 0x070E,slow_070E,0 );
 }
 
 Control slow_070E ()
@@ -22134,7 +22134,7 @@ Control slow_070E ()
     u8 a1 = A ;
     mem_write ( 0x20F1,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0711,slow_0711 );
+    return jumpDirect ( 0x0711,slow_0711,0 );
 }
 
 Control slow_0711 ()
@@ -22146,7 +22146,7 @@ Control slow_0711 ()
     advance ( 16 );
     H = a2;
     L = a1;
-    return jumpDirect ( 0x0714,slow_0714 );
+    return jumpDirect ( 0x0714,slow_0714,0 );
 }
 
 Control slow_0714 ()
@@ -22158,7 +22158,7 @@ Control slow_0714 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     B = a3;
-    return jumpDirect ( 0x0715,slow_0715 );
+    return jumpDirect ( 0x0715,slow_0715,0 );
 }
 
 Control slow_0715 ()
@@ -22167,7 +22167,7 @@ Control slow_0715 ()
     instruction1 ( 0x07,0x17,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   C,%02X",0x04 );
     advance ( 7 );
     C = 0x04;
-    return jumpDirect ( 0x0717,slow_0717 );
+    return jumpDirect ( 0x0717,slow_0717,0 );
 }
 
 Control slow_0717 ()
@@ -22177,7 +22177,7 @@ Control slow_0717 ()
     advance ( 10 );
     H = 0x1D;
     L = 0x50;
-    return jumpDirect ( 0x071A,slow_071A );
+    return jumpDirect ( 0x071A,slow_071A,0 );
 }
 
 Control slow_071A ()
@@ -22187,7 +22187,7 @@ Control slow_071A ()
     advance ( 10 );
     D = 0x1D;
     E = 0x4C;
-    return jumpDirect ( 0x071D,slow_071D );
+    return jumpDirect ( 0x071D,slow_071D,fast_071D );
 }
 
 Control slow_071D ()
@@ -22199,7 +22199,7 @@ Control slow_071D ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x071E,slow_071E );
+    return jumpDirect ( 0x071E,slow_071E,0 );
 }
 
 Control slow_071E ()
@@ -22218,7 +22218,7 @@ Control slow_071E ()
     FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a3 & 0xFF ) );
     FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x071F,slow_071F );
+    return jumpDirect ( 0x071F,slow_071F,0 );
 }
 
 Control slow_071F ()
@@ -22228,12 +22228,12 @@ Control slow_071F ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0728,slow_0728 );
+        return jumpDirect ( 0x0728,slow_0728,fast_0728 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0722,slow_0722 );
+        return jumpDirect ( 0x0722,slow_0722,0 );
     }
 }
 
@@ -22247,7 +22247,7 @@ Control slow_0722 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x0723,slow_0723 );
+    return jumpDirect ( 0x0723,slow_0723,0 );
 }
 
 Control slow_0723 ()
@@ -22260,7 +22260,7 @@ Control slow_0723 ()
     advance ( 5 );
     D = ( a3 >> 8 );
     E = ( a3 & 0xFF );
-    return jumpDirect ( 0x0724,slow_0724 );
+    return jumpDirect ( 0x0724,slow_0724,0 );
 }
 
 Control slow_0724 ()
@@ -22278,7 +22278,7 @@ Control slow_0724 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x0725,slow_0725 );
+    return jumpDirect ( 0x0725,slow_0725,0 );
 }
 
 Control slow_0725 ()
@@ -22288,12 +22288,12 @@ Control slow_0725 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x071D,slow_071D );
+        return jumpDirect ( 0x071D,slow_071D,fast_071D );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0728,slow_0728 );
+        return jumpDirect ( 0x0728,slow_0728,fast_0728 );
     }
 }
 
@@ -22306,7 +22306,7 @@ Control slow_0728 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x0729,slow_0729 );
+    return jumpDirect ( 0x0729,slow_0729,0 );
 }
 
 Control slow_0729 ()
@@ -22316,7 +22316,7 @@ Control slow_0729 ()
     u8 a1 = A ;
     mem_write ( 0x2087,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x072C,slow_072C );
+    return jumpDirect ( 0x072C,slow_072C,0 );
 }
 
 Control slow_072C ()
@@ -22325,7 +22325,7 @@ Control slow_072C ()
     instruction1 ( 0x07,0x2E,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   H,%02X",0x00 );
     advance ( 7 );
     H = 0x00;
-    return jumpDirect ( 0x072E,slow_072E );
+    return jumpDirect ( 0x072E,slow_072E,0 );
 }
 
 Control slow_072E ()
@@ -22335,7 +22335,7 @@ Control slow_072E ()
     u8 a1 = B ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( 0x072F,slow_072F );
+    return jumpDirect ( 0x072F,slow_072F,0 );
 }
 
 Control slow_072F ()
@@ -22351,7 +22351,7 @@ Control slow_072F ()
     H = ( ( a5 & 0xFFFF ) >> 8 );
     L = ( ( a5 & 0xFFFF ) & 0xFF );
     FlagCY = ( ( a5 >> 16 ) & 0x01 );
-    return jumpDirect ( 0x0730,slow_0730 );
+    return jumpDirect ( 0x0730,slow_0730,0 );
 }
 
 Control slow_0730 ()
@@ -22367,7 +22367,7 @@ Control slow_0730 ()
     H = ( ( a5 & 0xFFFF ) >> 8 );
     L = ( ( a5 & 0xFFFF ) & 0xFF );
     FlagCY = ( ( a5 >> 16 ) & 0x01 );
-    return jumpDirect ( 0x0731,slow_0731 );
+    return jumpDirect ( 0x0731,slow_0731,0 );
 }
 
 Control slow_0731 ()
@@ -22383,7 +22383,7 @@ Control slow_0731 ()
     H = ( ( a5 & 0xFFFF ) >> 8 );
     L = ( ( a5 & 0xFFFF ) & 0xFF );
     FlagCY = ( ( a5 >> 16 ) & 0x01 );
-    return jumpDirect ( 0x0732,slow_0732 );
+    return jumpDirect ( 0x0732,slow_0732,0 );
 }
 
 Control slow_0732 ()
@@ -22399,7 +22399,7 @@ Control slow_0732 ()
     H = ( ( a5 & 0xFFFF ) >> 8 );
     L = ( ( a5 & 0xFFFF ) & 0xFF );
     FlagCY = ( ( a5 >> 16 ) & 0x01 );
-    return jumpDirect ( 0x0733,slow_0733 );
+    return jumpDirect ( 0x0733,slow_0733,0 );
 }
 
 Control slow_0733 ()
@@ -22411,7 +22411,7 @@ Control slow_0733 ()
     u8 a2 = H ;
     mem_write ( 0x20F3,a2 );
     advance ( 16 );
-    return jumpDirect ( 0x0736,slow_0736 );
+    return jumpDirect ( 0x0736,slow_0736,0 );
 }
 
 Control slow_0736 ()
@@ -22430,7 +22430,7 @@ Control slow_0736 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0742,slow_0742 );
+    return jumpDirect ( 0x0742,slow_0742,fast_0742 );
 }
 
 Control slow_0739 ()
@@ -22438,7 +22438,7 @@ Control slow_0739 ()
     // #at: 0739
     instruction2 ( 0x07,0x3C,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x08,0xF1 );
     advance ( 10 );
-    return jumpDirect ( 0x08F1,slow_08F1 );
+    return jumpDirect ( 0x08F1,slow_08F1,0 );
 }
 
 Control slow_073C ()
@@ -22457,7 +22457,7 @@ Control slow_073C ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0742,slow_0742 );
+    return jumpDirect ( 0x0742,slow_0742,fast_0742 );
 }
 
 Control slow_073F ()
@@ -22465,7 +22465,7 @@ Control slow_073F ()
     // #at: 073F
     instruction2 ( 0x07,0x42,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x14,0x39 );
     advance ( 10 );
-    return jumpDirect ( 0x1439,slow_1439 );
+    return jumpDirect ( 0x1439,slow_1439,fast_1439 );
 }
 
 Control slow_0742 ()
@@ -22475,7 +22475,7 @@ Control slow_0742 ()
     advance ( 10 );
     H = 0x20;
     L = 0x87;
-    return jumpDirect ( 0x0745,slow_0745 );
+    return jumpDirect ( 0x0745,slow_0745,0 );
 }
 
 Control slow_0745 ()
@@ -22494,7 +22494,7 @@ Control slow_0745 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A3B,slow_1A3B );
+    return jumpDirect ( 0x1A3B,slow_1A3B,fast_1A3B );
 }
 
 Control slow_0748 ()
@@ -22502,7 +22502,7 @@ Control slow_0748 ()
     // #at: 0748
     instruction2 ( 0x07,0x4B,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x1A,0x47 );
     advance ( 10 );
-    return jumpDirect ( 0x1A47,slow_1A47 );
+    return jumpDirect ( 0x1A47,slow_1A47,fast_1A47 );
 }
 
 Control slow_074B ()
@@ -22511,7 +22511,7 @@ Control slow_074B ()
     instruction1 ( 0x07,0x4D,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x10 );
     advance ( 7 );
     B = 0x10;
-    return jumpDirect ( 0x074D,slow_074D );
+    return jumpDirect ( 0x074D,slow_074D,0 );
 }
 
 Control slow_074D ()
@@ -22521,7 +22521,7 @@ Control slow_074D ()
     advance ( 10 );
     H = 0x20;
     L = 0x98;
-    return jumpDirect ( 0x0750,slow_0750 );
+    return jumpDirect ( 0x0750,slow_0750,0 );
 }
 
 Control slow_0750 ()
@@ -22533,7 +22533,7 @@ Control slow_0750 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x0751,slow_0751 );
+    return jumpDirect ( 0x0751,slow_0751,0 );
 }
 
 Control slow_0751 ()
@@ -22550,7 +22550,7 @@ Control slow_0751 ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0752,slow_0752 );
+    return jumpDirect ( 0x0752,slow_0752,0 );
 }
 
 Control slow_0752 ()
@@ -22562,7 +22562,7 @@ Control slow_0752 ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x0753,slow_0753 );
+    return jumpDirect ( 0x0753,slow_0753,0 );
 }
 
 Control slow_0753 ()
@@ -22581,7 +22581,7 @@ Control slow_0753 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1770,slow_1770 );
+    return jumpDirect ( 0x1770,slow_1770,fast_1770 );
 }
 
 Control slow_0756 ()
@@ -22591,7 +22591,7 @@ Control slow_0756 ()
     advance ( 10 );
     H = 0x1D;
     L = 0x7C;
-    return jumpDirect ( 0x0759,slow_0759 );
+    return jumpDirect ( 0x0759,slow_0759,0 );
 }
 
 Control slow_0759 ()
@@ -22603,7 +22603,7 @@ Control slow_0759 ()
     u8 a2 = H ;
     mem_write ( 0x2088,a2 );
     advance ( 16 );
-    return jumpDirect ( 0x075C,slow_075C );
+    return jumpDirect ( 0x075C,slow_075C,0 );
 }
 
 Control slow_075C ()
@@ -22611,7 +22611,7 @@ Control slow_075C ()
     // #at: 075C
     instruction2 ( 0x07,0x5F,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x07,0x3C );
     advance ( 10 );
-    return jumpDirect ( 0x073C,slow_073C );
+    return jumpDirect ( 0x073C,slow_073C,fast_073C );
 }
 
 Control slow_075F ()
@@ -22621,7 +22621,7 @@ Control slow_075F ()
     advance ( 10 );
     D = 0x1B;
     E = 0x83;
-    return jumpDirect ( 0x0762,slow_0762 );
+    return jumpDirect ( 0x0762,slow_0762,0 );
 }
 
 Control slow_0762 ()
@@ -22629,7 +22629,7 @@ Control slow_0762 ()
     // #at: 0762
     instruction2 ( 0x07,0x65,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x1A,0x32 );
     advance ( 10 );
-    return jumpDirect ( 0x1A32,slow_1A32 );
+    return jumpDirect ( 0x1A32,slow_1A32,fast_1A32 );
 }
 
 Control slow_0765 ()
@@ -22638,7 +22638,7 @@ Control slow_0765 ()
     instruction1 ( 0x07,0x67,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x01 );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( 0x0767,slow_0767 );
+    return jumpDirect ( 0x0767,slow_0767,0 );
 }
 
 Control slow_0767 ()
@@ -22648,7 +22648,7 @@ Control slow_0767 ()
     u8 a1 = A ;
     mem_write ( 0x2093,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x076A,slow_076A );
+    return jumpDirect ( 0x076A,slow_076A,0 );
 }
 
 Control slow_076A ()
@@ -22658,7 +22658,7 @@ Control slow_076A ()
     advance ( 10 );
     SPH = 0x24;
     SPL = 0x00;
-    return jumpDirect ( 0x076D,slow_076D );
+    return jumpDirect ( 0x076D,slow_076D,0 );
 }
 
 Control slow_076D ()
@@ -22667,7 +22667,7 @@ Control slow_076D ()
     instruction0 ( 0x07,0x6E,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"EI" );
     enable_interrupts (  );
     advance ( 4 );
-    return jumpDirect ( 0x076E,slow_076E );
+    return jumpDirect ( 0x076E,slow_076E,0 );
 }
 
 Control slow_076E ()
@@ -22686,7 +22686,7 @@ Control slow_076E ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1979,slow_1979 );
+    return jumpDirect ( 0x1979,slow_1979,0 );
 }
 
 Control slow_0771 ()
@@ -22705,7 +22705,7 @@ Control slow_0771 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x09D6,slow_09D6 );
+    return jumpDirect ( 0x09D6,slow_09D6,fast_09D6 );
 }
 
 Control slow_0774 ()
@@ -22715,7 +22715,7 @@ Control slow_0774 ()
     advance ( 10 );
     H = 0x30;
     L = 0x13;
-    return jumpDirect ( 0x0777,slow_0777 );
+    return jumpDirect ( 0x0777,slow_0777,0 );
 }
 
 Control slow_0777 ()
@@ -22725,7 +22725,7 @@ Control slow_0777 ()
     advance ( 10 );
     D = 0x1F;
     E = 0xF3;
-    return jumpDirect ( 0x077A,slow_077A );
+    return jumpDirect ( 0x077A,slow_077A,0 );
 }
 
 Control slow_077A ()
@@ -22734,7 +22734,7 @@ Control slow_077A ()
     instruction1 ( 0x07,0x7C,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   C,%02X",0x04 );
     advance ( 7 );
     C = 0x04;
-    return jumpDirect ( 0x077C,slow_077C );
+    return jumpDirect ( 0x077C,slow_077C,0 );
 }
 
 Control slow_077C ()
@@ -22753,7 +22753,7 @@ Control slow_077C ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x08F3,slow_08F3 );
+    return jumpDirect ( 0x08F3,slow_08F3,fast_08F3 );
 }
 
 Control slow_077F ()
@@ -22763,7 +22763,7 @@ Control slow_077F ()
     u8 a1 = e8_read_mem ( 0x20EB ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0782,slow_0782 );
+    return jumpDirect ( 0x0782,slow_0782,0 );
 }
 
 Control slow_0782 ()
@@ -22781,7 +22781,7 @@ Control slow_0782 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x0783,slow_0783 );
+    return jumpDirect ( 0x0783,slow_0783,0 );
 }
 
 Control slow_0783 ()
@@ -22791,7 +22791,7 @@ Control slow_0783 ()
     advance ( 10 );
     H = 0x28;
     L = 0x10;
-    return jumpDirect ( 0x0786,slow_0786 );
+    return jumpDirect ( 0x0786,slow_0786,0 );
 }
 
 Control slow_0786 ()
@@ -22800,7 +22800,7 @@ Control slow_0786 ()
     instruction1 ( 0x07,0x88,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   C,%02X",0x14 );
     advance ( 7 );
     C = 0x14;
-    return jumpDirect ( 0x0788,slow_0788 );
+    return jumpDirect ( 0x0788,slow_0788,0 );
 }
 
 Control slow_0788 ()
@@ -22810,12 +22810,12 @@ Control slow_0788 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x0857,slow_0857 );
+        return jumpDirect ( 0x0857,slow_0857,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x078B,slow_078B );
+        return jumpDirect ( 0x078B,slow_078B,0 );
     }
 }
 
@@ -22826,7 +22826,7 @@ Control slow_078B ()
     advance ( 10 );
     D = 0x1A;
     E = 0xCF;
-    return jumpDirect ( 0x078E,slow_078E );
+    return jumpDirect ( 0x078E,slow_078E,0 );
 }
 
 Control slow_078E ()
@@ -22845,7 +22845,7 @@ Control slow_078E ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x08F3,slow_08F3 );
+    return jumpDirect ( 0x08F3,slow_08F3,fast_08F3 );
 }
 
 Control slow_0791 ()
@@ -22854,7 +22854,7 @@ Control slow_0791 ()
     instruction1 ( 0x07,0x93,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"IN   %02X",0x01 );
     advance ( 10 );
     A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,( ! e1_is_pressed ( CoinEntry ) ) ),1,e1_is_pressed ( P2start ) ),2,e1_is_pressed ( P1start ) ),4,e1_is_pressed ( P1shoot ) ),5,e1_is_pressed ( P1left ) ),6,e1_is_pressed ( P1right ) );
-    return jumpDirect ( 0x0793,slow_0793 );
+    return jumpDirect ( 0x0793,slow_0793,0 );
 }
 
 Control slow_0793 ()
@@ -22871,7 +22871,7 @@ Control slow_0793 ()
     FlagA = ( ( a3 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x0795,slow_0795 );
+    return jumpDirect ( 0x0795,slow_0795,0 );
 }
 
 Control slow_0795 ()
@@ -22881,12 +22881,12 @@ Control slow_0795 ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x077F,slow_077F );
+        return jumpDirect ( 0x077F,slow_077F,fast_077F );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0798,slow_0798 );
+        return jumpDirect ( 0x0798,slow_0798,fast_0798 );
     }
 }
 
@@ -22896,7 +22896,7 @@ Control slow_0798 ()
     instruction1 ( 0x07,0x9A,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x99 );
     advance ( 7 );
     B = 0x99;
-    return jumpDirect ( 0x079A,slow_079A );
+    return jumpDirect ( 0x079A,slow_079A,0 );
 }
 
 Control slow_079A ()
@@ -22913,7 +22913,7 @@ Control slow_079A ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x079B,slow_079B );
+    return jumpDirect ( 0x079B,slow_079B,fast_079B );
 }
 
 Control slow_079B ()
@@ -22923,7 +22923,7 @@ Control slow_079B ()
     u8 a1 = A ;
     mem_write ( 0x20CE,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x079E,slow_079E );
+    return jumpDirect ( 0x079E,slow_079E,0 );
 }
 
 Control slow_079E ()
@@ -22933,7 +22933,7 @@ Control slow_079E ()
     u8 a1 = e8_read_mem ( 0x20EB ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x07A1,slow_07A1 );
+    return jumpDirect ( 0x07A1,slow_07A1,0 );
 }
 
 Control slow_07A1 ()
@@ -22953,7 +22953,7 @@ Control slow_07A1 ()
     FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a3 & 0xFF ) );
     FlagCY = ( ( ( a3 >> 8 ) >> 0 ) & 0x01 );
-    return jumpDirect ( 0x07A2,slow_07A2 );
+    return jumpDirect ( 0x07A2,slow_07A2,0 );
 }
 
 Control slow_07A2 ()
@@ -22974,7 +22974,7 @@ Control slow_07A2 ()
     FlagA = ( ( ( ( ( ( ( ( a2 >> 1 ) & 0x01 ) || ( ( a2 >> 2 ) & 0x01 ) ) && ( ( a2 >> 3 ) & 0x01 ) ) || FlagA ) ? ( a3 & 0xFF ) : a2 ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( a7 );
     FlagCY = ( ( ( ( ( ( ( ( ( ( a4 & 0xFF ) >> 1 ) & 0x01 ) || ( ( ( a4 & 0xFF ) >> 2 ) & 0x01 ) ) && ( ( ( a4 & 0xFF ) >> 3 ) & 0x01 ) ) || FlagCY ) ? ( a5 & 0xFF ) : ( a4 & 0xFF ) ) >> 4 ) & 0x01 ) || FlagCY );
-    return jumpDirect ( 0x07A3,slow_07A3 );
+    return jumpDirect ( 0x07A3,slow_07A3,0 );
 }
 
 Control slow_07A3 ()
@@ -22984,7 +22984,7 @@ Control slow_07A3 ()
     u8 a1 = A ;
     mem_write ( 0x20EB,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x07A6,slow_07A6 );
+    return jumpDirect ( 0x07A6,slow_07A6,0 );
 }
 
 Control slow_07A6 ()
@@ -23003,7 +23003,7 @@ Control slow_07A6 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1947,slow_1947 );
+    return jumpDirect ( 0x1947,slow_1947,fast_1947 );
 }
 
 Control slow_07A9 ()
@@ -23013,7 +23013,7 @@ Control slow_07A9 ()
     advance ( 10 );
     H = 0x00;
     L = 0x00;
-    return jumpDirect ( 0x07AC,slow_07AC );
+    return jumpDirect ( 0x07AC,slow_07AC,0 );
 }
 
 Control slow_07AC ()
@@ -23025,7 +23025,7 @@ Control slow_07AC ()
     u8 a2 = H ;
     mem_write ( 0x20F9,a2 );
     advance ( 16 );
-    return jumpDirect ( 0x07AF,slow_07AF );
+    return jumpDirect ( 0x07AF,slow_07AF,0 );
 }
 
 Control slow_07AF ()
@@ -23037,7 +23037,7 @@ Control slow_07AF ()
     u8 a2 = H ;
     mem_write ( 0x20FD,a2 );
     advance ( 16 );
-    return jumpDirect ( 0x07B2,slow_07B2 );
+    return jumpDirect ( 0x07B2,slow_07B2,0 );
 }
 
 Control slow_07B2 ()
@@ -23056,7 +23056,7 @@ Control slow_07B2 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1925,slow_1925 );
+    return jumpDirect ( 0x1925,slow_1925,fast_1925 );
 }
 
 Control slow_07B5 ()
@@ -23075,7 +23075,7 @@ Control slow_07B5 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x192B,slow_192B );
+    return jumpDirect ( 0x192B,slow_192B,fast_192B );
 }
 
 Control slow_07B8 ()
@@ -23094,7 +23094,7 @@ Control slow_07B8 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x19D7,slow_19D7 );
+    return jumpDirect ( 0x19D7,slow_19D7,fast_19D7 );
 }
 
 Control slow_07BB ()
@@ -23104,7 +23104,7 @@ Control slow_07BB ()
     advance ( 10 );
     H = 0x01;
     L = 0x01;
-    return jumpDirect ( 0x07BE,slow_07BE );
+    return jumpDirect ( 0x07BE,slow_07BE,0 );
 }
 
 Control slow_07BE ()
@@ -23114,7 +23114,7 @@ Control slow_07BE ()
     u8 a1 = H ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x07BF,slow_07BF );
+    return jumpDirect ( 0x07BF,slow_07BF,0 );
 }
 
 Control slow_07BF ()
@@ -23124,7 +23124,7 @@ Control slow_07BF ()
     u8 a1 = A ;
     mem_write ( 0x20EF,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x07C2,slow_07C2 );
+    return jumpDirect ( 0x07C2,slow_07C2,0 );
 }
 
 Control slow_07C2 ()
@@ -23136,7 +23136,7 @@ Control slow_07C2 ()
     u8 a2 = H ;
     mem_write ( 0x20E8,a2 );
     advance ( 16 );
-    return jumpDirect ( 0x07C5,slow_07C5 );
+    return jumpDirect ( 0x07C5,slow_07C5,0 );
 }
 
 Control slow_07C5 ()
@@ -23148,7 +23148,7 @@ Control slow_07C5 ()
     u8 a2 = H ;
     mem_write ( 0x20E6,a2 );
     advance ( 16 );
-    return jumpDirect ( 0x07C8,slow_07C8 );
+    return jumpDirect ( 0x07C8,slow_07C8,0 );
 }
 
 Control slow_07C8 ()
@@ -23167,7 +23167,7 @@ Control slow_07C8 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1956,slow_1956 );
+    return jumpDirect ( 0x1956,slow_1956,fast_1956 );
 }
 
 Control slow_07CB ()
@@ -23186,7 +23186,7 @@ Control slow_07CB ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x01EF,slow_01EF );
+    return jumpDirect ( 0x01EF,slow_01EF,fast_01EF );
 }
 
 Control slow_07CE ()
@@ -23205,7 +23205,7 @@ Control slow_07CE ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x01F5,slow_01F5 );
+    return jumpDirect ( 0x01F5,slow_01F5,fast_01F5 );
 }
 
 Control slow_07D1 ()
@@ -23224,7 +23224,7 @@ Control slow_07D1 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x08D1,slow_08D1 );
+    return jumpDirect ( 0x08D1,slow_08D1,fast_08D1 );
 }
 
 Control slow_07D4 ()
@@ -23234,7 +23234,7 @@ Control slow_07D4 ()
     u8 a1 = A ;
     mem_write ( 0x21FF,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x07D7,slow_07D7 );
+    return jumpDirect ( 0x07D7,slow_07D7,0 );
 }
 
 Control slow_07D7 ()
@@ -23244,7 +23244,7 @@ Control slow_07D7 ()
     u8 a1 = A ;
     mem_write ( 0x22FF,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x07DA,slow_07DA );
+    return jumpDirect ( 0x07DA,slow_07DA,0 );
 }
 
 Control slow_07DA ()
@@ -23263,7 +23263,7 @@ Control slow_07DA ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x00D7,slow_00D7 );
+    return jumpDirect ( 0x00D7,slow_00D7,0 );
 }
 
 Control slow_07DD ()
@@ -23280,7 +23280,7 @@ Control slow_07DD ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x07DE,slow_07DE );
+    return jumpDirect ( 0x07DE,slow_07DE,0 );
 }
 
 Control slow_07DE ()
@@ -23290,7 +23290,7 @@ Control slow_07DE ()
     u8 a1 = A ;
     mem_write ( 0x21FE,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x07E1,slow_07E1 );
+    return jumpDirect ( 0x07E1,slow_07E1,0 );
 }
 
 Control slow_07E1 ()
@@ -23300,7 +23300,7 @@ Control slow_07E1 ()
     u8 a1 = A ;
     mem_write ( 0x22FE,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x07E4,slow_07E4 );
+    return jumpDirect ( 0x07E4,slow_07E4,0 );
 }
 
 Control slow_07E4 ()
@@ -23319,7 +23319,7 @@ Control slow_07E4 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x01C0,slow_01C0 );
+    return jumpDirect ( 0x01C0,slow_01C0,fast_01C0 );
 }
 
 Control slow_07E7 ()
@@ -23338,7 +23338,7 @@ Control slow_07E7 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1904,slow_1904 );
+    return jumpDirect ( 0x1904,slow_1904,fast_1904 );
 }
 
 Control slow_07EA ()
@@ -23348,7 +23348,7 @@ Control slow_07EA ()
     advance ( 10 );
     H = 0x38;
     L = 0x78;
-    return jumpDirect ( 0x07ED,slow_07ED );
+    return jumpDirect ( 0x07ED,slow_07ED,0 );
 }
 
 Control slow_07ED ()
@@ -23360,7 +23360,7 @@ Control slow_07ED ()
     u8 a2 = H ;
     mem_write ( 0x21FD,a2 );
     advance ( 16 );
-    return jumpDirect ( 0x07F0,slow_07F0 );
+    return jumpDirect ( 0x07F0,slow_07F0,0 );
 }
 
 Control slow_07F0 ()
@@ -23372,7 +23372,7 @@ Control slow_07F0 ()
     u8 a2 = H ;
     mem_write ( 0x22FD,a2 );
     advance ( 16 );
-    return jumpDirect ( 0x07F3,slow_07F3 );
+    return jumpDirect ( 0x07F3,slow_07F3,0 );
 }
 
 Control slow_07F3 ()
@@ -23391,7 +23391,7 @@ Control slow_07F3 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x01E4,slow_01E4 );
+    return jumpDirect ( 0x01E4,slow_01E4,fast_01E4 );
 }
 
 Control slow_07F6 ()
@@ -23410,7 +23410,7 @@ Control slow_07F6 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A7F,slow_1A7F );
+    return jumpDirect ( 0x1A7F,slow_1A7F,fast_1A7F );
 }
 
 Control slow_07F9 ()
@@ -23429,7 +23429,7 @@ Control slow_07F9 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x088D,slow_088D );
+    return jumpDirect ( 0x088D,slow_088D,0 );
 }
 
 Control slow_07FC ()
@@ -23448,7 +23448,7 @@ Control slow_07FC ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x09D6,slow_09D6 );
+    return jumpDirect ( 0x09D6,slow_09D6,fast_09D6 );
 }
 
 Control slow_07FF ()
@@ -23456,7 +23456,7 @@ Control slow_07FF ()
     // #at: 07FF
     instruction0 ( 0x08,0x00,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"NOP" );
     advance ( 4 );
-    return jumpDirect ( 0x0800,slow_0800 );
+    return jumpDirect ( 0x0800,slow_0800,0 );
 }
 
 Control slow_0800 ()
@@ -23473,7 +23473,7 @@ Control slow_0800 ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0801,slow_0801 );
+    return jumpDirect ( 0x0801,slow_0801,0 );
 }
 
 Control slow_0801 ()
@@ -23483,7 +23483,7 @@ Control slow_0801 ()
     u8 a1 = A ;
     mem_write ( 0x20C1,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0804,slow_0804 );
+    return jumpDirect ( 0x0804,slow_0804,fast_0804 );
 }
 
 Control slow_0804 ()
@@ -23502,7 +23502,7 @@ Control slow_0804 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x01CF,slow_01CF );
+    return jumpDirect ( 0x01CF,slow_01CF,fast_01CF );
 }
 
 Control slow_0807 ()
@@ -23512,7 +23512,7 @@ Control slow_0807 ()
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x080A,slow_080A );
+    return jumpDirect ( 0x080A,slow_080A,0 );
 }
 
 Control slow_080A ()
@@ -23523,7 +23523,7 @@ Control slow_080A ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 >> 0x01 ),7,( ( a1 >> 0 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x080B,slow_080B );
+    return jumpDirect ( 0x080B,slow_080B,0 );
 }
 
 Control slow_080B ()
@@ -23533,12 +23533,12 @@ Control slow_080B ()
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0872,slow_0872 );
+        return jumpDirect ( 0x0872,slow_0872,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x080E,slow_080E );
+        return jumpDirect ( 0x080E,slow_080E,0 );
     }
 }
 
@@ -23558,7 +23558,7 @@ Control slow_080E ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0213,slow_0213 );
+    return jumpDirect ( 0x0213,slow_0213,0 );
 }
 
 Control slow_0811 ()
@@ -23577,7 +23577,7 @@ Control slow_0811 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x01CF,slow_01CF );
+    return jumpDirect ( 0x01CF,slow_01CF,fast_01CF );
 }
 
 Control slow_0814 ()
@@ -23596,7 +23596,7 @@ Control slow_0814 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x00B1,slow_00B1 );
+    return jumpDirect ( 0x00B1,slow_00B1,0 );
 }
 
 Control slow_0817 ()
@@ -23615,7 +23615,7 @@ Control slow_0817 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x19D1,slow_19D1 );
+    return jumpDirect ( 0x19D1,slow_19D1,fast_19D1 );
 }
 
 Control slow_081A ()
@@ -23624,7 +23624,7 @@ Control slow_081A ()
     instruction1 ( 0x08,0x1C,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x20 );
     advance ( 7 );
     B = 0x20;
-    return jumpDirect ( 0x081C,slow_081C );
+    return jumpDirect ( 0x081C,slow_081C,0 );
 }
 
 Control slow_081C ()
@@ -23643,7 +23643,7 @@ Control slow_081C ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x18FA,slow_18FA );
+    return jumpDirect ( 0x18FA,slow_18FA,fast_18FA );
 }
 
 Control slow_081F ()
@@ -23662,7 +23662,7 @@ Control slow_081F ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1618,slow_1618 );
+    return jumpDirect ( 0x1618,slow_1618,fast_1618 );
 }
 
 Control slow_0822 ()
@@ -23681,7 +23681,7 @@ Control slow_0822 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x190A,slow_190A );
+    return jumpDirect ( 0x190A,slow_190A,fast_190A );
 }
 
 Control slow_0825 ()
@@ -23700,7 +23700,7 @@ Control slow_0825 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x15F3,slow_15F3 );
+    return jumpDirect ( 0x15F3,slow_15F3,0 );
 }
 
 Control slow_0828 ()
@@ -23719,7 +23719,7 @@ Control slow_0828 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0988,slow_0988 );
+    return jumpDirect ( 0x0988,slow_0988,0 );
 }
 
 Control slow_082B ()
@@ -23729,7 +23729,7 @@ Control slow_082B ()
     u8 a1 = e8_read_mem ( 0x2082 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x082E,slow_082E );
+    return jumpDirect ( 0x082E,slow_082E,0 );
 }
 
 Control slow_082E ()
@@ -23747,7 +23747,7 @@ Control slow_082E ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x082F,slow_082F );
+    return jumpDirect ( 0x082F,slow_082F,0 );
 }
 
 Control slow_082F ()
@@ -23757,12 +23757,12 @@ Control slow_082F ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x09EF,slow_09EF );
+        return jumpDirect ( 0x09EF,slow_09EF,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0832,slow_0832 );
+        return jumpDirect ( 0x0832,slow_0832,0 );
     }
 }
 
@@ -23782,7 +23782,7 @@ Control slow_0832 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x170E,slow_170E );
+    return jumpDirect ( 0x170E,slow_170E,0 );
 }
 
 Control slow_0835 ()
@@ -23801,7 +23801,7 @@ Control slow_0835 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0935,slow_0935 );
+    return jumpDirect ( 0x0935,slow_0935,0 );
 }
 
 Control slow_0838 ()
@@ -23820,7 +23820,7 @@ Control slow_0838 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x08D8,slow_08D8 );
+    return jumpDirect ( 0x08D8,slow_08D8,0 );
 }
 
 Control slow_083B ()
@@ -23839,7 +23839,7 @@ Control slow_083B ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x172C,slow_172C );
+    return jumpDirect ( 0x172C,slow_172C,0 );
 }
 
 Control slow_083E ()
@@ -23858,7 +23858,7 @@ Control slow_083E ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0A59,slow_0A59 );
+    return jumpDirect ( 0x0A59,slow_0A59,fast_0A59 );
 }
 
 Control slow_0841 ()
@@ -23868,12 +23868,12 @@ Control slow_0841 ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0849,slow_0849 );
+        return jumpDirect ( 0x0849,slow_0849,fast_0849 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0844,slow_0844 );
+        return jumpDirect ( 0x0844,slow_0844,0 );
     }
 }
 
@@ -23883,7 +23883,7 @@ Control slow_0844 ()
     instruction1 ( 0x08,0x46,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x04 );
     advance ( 7 );
     B = 0x04;
-    return jumpDirect ( 0x0846,slow_0846 );
+    return jumpDirect ( 0x0846,slow_0846,0 );
 }
 
 Control slow_0846 ()
@@ -23902,7 +23902,7 @@ Control slow_0846 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x18FA,slow_18FA );
+    return jumpDirect ( 0x18FA,slow_18FA,fast_18FA );
 }
 
 Control slow_0849 ()
@@ -23921,7 +23921,7 @@ Control slow_0849 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1775,slow_1775 );
+    return jumpDirect ( 0x1775,slow_1775,0 );
 }
 
 Control slow_084C ()
@@ -23931,7 +23931,7 @@ Control slow_084C ()
     u8 a1 = A ;
     unknown_output ( 6,a1 );
     advance ( 10 );
-    return jumpDirect ( 0x084E,slow_084E );
+    return jumpDirect ( 0x084E,slow_084E,0 );
 }
 
 Control slow_084E ()
@@ -23950,7 +23950,7 @@ Control slow_084E ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1804,slow_1804 );
+    return jumpDirect ( 0x1804,slow_1804,0 );
 }
 
 Control slow_0851 ()
@@ -23958,7 +23958,7 @@ Control slow_0851 ()
     // #at: 0851
     instruction2 ( 0x08,0x54,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x08,0x1F );
     advance ( 10 );
-    return jumpDirect ( 0x081F,slow_081F );
+    return jumpDirect ( 0x081F,slow_081F,fast_081F );
 }
 
 Control slow_0857 ()
@@ -23968,7 +23968,7 @@ Control slow_0857 ()
     advance ( 10 );
     D = 0x1A;
     E = 0xBA;
-    return jumpDirect ( 0x085A,slow_085A );
+    return jumpDirect ( 0x085A,slow_085A,0 );
 }
 
 Control slow_085A ()
@@ -23987,7 +23987,7 @@ Control slow_085A ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x08F3,slow_08F3 );
+    return jumpDirect ( 0x08F3,slow_08F3,fast_08F3 );
 }
 
 Control slow_085D ()
@@ -23996,7 +23996,7 @@ Control slow_085D ()
     instruction1 ( 0x08,0x5F,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x98 );
     advance ( 7 );
     B = 0x98;
-    return jumpDirect ( 0x085F,slow_085F );
+    return jumpDirect ( 0x085F,slow_085F,0 );
 }
 
 Control slow_085F ()
@@ -24005,7 +24005,7 @@ Control slow_085F ()
     instruction1 ( 0x08,0x61,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"IN   %02X",0x01 );
     advance ( 10 );
     A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,( ! e1_is_pressed ( CoinEntry ) ) ),1,e1_is_pressed ( P2start ) ),2,e1_is_pressed ( P1start ) ),4,e1_is_pressed ( P1shoot ) ),5,e1_is_pressed ( P1left ) ),6,e1_is_pressed ( P1right ) );
-    return jumpDirect ( 0x0861,slow_0861 );
+    return jumpDirect ( 0x0861,slow_0861,0 );
 }
 
 Control slow_0861 ()
@@ -24016,7 +24016,7 @@ Control slow_0861 ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 >> 0x01 ),7,( ( a1 >> 0 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x0862,slow_0862 );
+    return jumpDirect ( 0x0862,slow_0862,0 );
 }
 
 Control slow_0862 ()
@@ -24027,7 +24027,7 @@ Control slow_0862 ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 >> 0x01 ),7,( ( a1 >> 0 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x0863,slow_0863 );
+    return jumpDirect ( 0x0863,slow_0863,0 );
 }
 
 Control slow_0863 ()
@@ -24037,12 +24037,12 @@ Control slow_0863 ()
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( 0x086D,slow_086D );
+        return jumpDirect ( 0x086D,slow_086D,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0866,slow_0866 );
+        return jumpDirect ( 0x0866,slow_0866,0 );
     }
 }
 
@@ -24054,7 +24054,7 @@ Control slow_0866 ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 >> 0x01 ),7,( ( a1 >> 0 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x0867,slow_0867 );
+    return jumpDirect ( 0x0867,slow_0867,0 );
 }
 
 Control slow_0867 ()
@@ -24064,12 +24064,12 @@ Control slow_0867 ()
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0798,slow_0798 );
+        return jumpDirect ( 0x0798,slow_0798,fast_0798 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x086A,slow_086A );
+        return jumpDirect ( 0x086A,slow_086A,0 );
     }
 }
 
@@ -24078,7 +24078,7 @@ Control slow_086A ()
     // #at: 086A
     instruction2 ( 0x08,0x6D,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x07,0x7F );
     advance ( 10 );
-    return jumpDirect ( 0x077F,slow_077F );
+    return jumpDirect ( 0x077F,slow_077F,fast_077F );
 }
 
 Control slow_086D ()
@@ -24087,7 +24087,7 @@ Control slow_086D ()
     instruction1 ( 0x08,0x6F,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x01 );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( 0x086F,slow_086F );
+    return jumpDirect ( 0x086F,slow_086F,0 );
 }
 
 Control slow_086F ()
@@ -24095,7 +24095,7 @@ Control slow_086F ()
     // #at: 086F
     instruction2 ( 0x08,0x72,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x07,0x9B );
     advance ( 10 );
-    return jumpDirect ( 0x079B,slow_079B );
+    return jumpDirect ( 0x079B,slow_079B,fast_079B );
 }
 
 Control slow_0872 ()
@@ -24114,7 +24114,7 @@ Control slow_0872 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x021A,slow_021A );
+    return jumpDirect ( 0x021A,slow_021A,fast_021A );
 }
 
 Control slow_0875 ()
@@ -24122,7 +24122,7 @@ Control slow_0875 ()
     // #at: 0875
     instruction2 ( 0x08,0x78,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x08,0x14 );
     advance ( 10 );
-    return jumpDirect ( 0x0814,slow_0814 );
+    return jumpDirect ( 0x0814,slow_0814,fast_0814 );
 }
 
 Control slow_0878 ()
@@ -24132,7 +24132,7 @@ Control slow_0878 ()
     u8 a1 = e8_read_mem ( 0x2008 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x087B,slow_087B );
+    return jumpDirect ( 0x087B,slow_087B,0 );
 }
 
 Control slow_087B ()
@@ -24142,7 +24142,7 @@ Control slow_087B ()
     u8 a1 = A ;
     advance ( 5 );
     B = a1;
-    return jumpDirect ( 0x087C,slow_087C );
+    return jumpDirect ( 0x087C,slow_087C,0 );
 }
 
 Control slow_087C ()
@@ -24154,7 +24154,7 @@ Control slow_087C ()
     advance ( 16 );
     H = a2;
     L = a1;
-    return jumpDirect ( 0x087F,slow_087F );
+    return jumpDirect ( 0x087F,slow_087F,0 );
 }
 
 Control slow_087F ()
@@ -24170,7 +24170,7 @@ Control slow_087F ()
     E = a4;
     H = a1;
     L = a2;
-    return jumpDirect ( 0x0880,slow_0880 );
+    return jumpDirect ( 0x0880,slow_0880,0 );
 }
 
 Control slow_0880 ()
@@ -24178,7 +24178,7 @@ Control slow_0880 ()
     // #at: 0880
     instruction2 ( 0x08,0x83,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x08,0x86 );
     advance ( 10 );
-    return jumpDirect ( 0x0886,slow_0886 );
+    return jumpDirect ( 0x0886,slow_0886,fast_0886 );
 }
 
 Control slow_0886 ()
@@ -24188,7 +24188,7 @@ Control slow_0886 ()
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0889,slow_0889 );
+    return jumpDirect ( 0x0889,slow_0889,0 );
 }
 
 Control slow_0889 ()
@@ -24198,7 +24198,7 @@ Control slow_0889 ()
     u8 a1 = A ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( 0x088A,slow_088A );
+    return jumpDirect ( 0x088A,slow_088A,0 );
 }
 
 Control slow_088A ()
@@ -24207,7 +24207,7 @@ Control slow_088A ()
     instruction1 ( 0x08,0x8C,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   L,%02X",0xFC );
     advance ( 7 );
     L = 0xFC;
-    return jumpDirect ( 0x088C,slow_088C );
+    return jumpDirect ( 0x088C,slow_088C,0 );
 }
 
 Control slow_088C ()
@@ -24235,7 +24235,7 @@ Control slow_088D ()
     advance ( 10 );
     H = 0x2B;
     L = 0x11;
-    return jumpDirect ( 0x0890,slow_0890 );
+    return jumpDirect ( 0x0890,slow_0890,0 );
 }
 
 Control slow_0890 ()
@@ -24245,7 +24245,7 @@ Control slow_0890 ()
     advance ( 10 );
     D = 0x1B;
     E = 0x70;
-    return jumpDirect ( 0x0893,slow_0893 );
+    return jumpDirect ( 0x0893,slow_0893,0 );
 }
 
 Control slow_0893 ()
@@ -24254,7 +24254,7 @@ Control slow_0893 ()
     instruction1 ( 0x08,0x95,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   C,%02X",0x0E );
     advance ( 7 );
     C = 0x0E;
-    return jumpDirect ( 0x0895,slow_0895 );
+    return jumpDirect ( 0x0895,slow_0895,0 );
 }
 
 Control slow_0895 ()
@@ -24273,7 +24273,7 @@ Control slow_0895 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x08F3,slow_08F3 );
+    return jumpDirect ( 0x08F3,slow_08F3,fast_08F3 );
 }
 
 Control slow_0898 ()
@@ -24283,7 +24283,7 @@ Control slow_0898 ()
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x089B,slow_089B );
+    return jumpDirect ( 0x089B,slow_089B,0 );
 }
 
 Control slow_089B ()
@@ -24294,7 +24294,7 @@ Control slow_089B ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 >> 0x01 ),7,( ( a1 >> 0 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x089C,slow_089C );
+    return jumpDirect ( 0x089C,slow_089C,0 );
 }
 
 Control slow_089C ()
@@ -24303,7 +24303,7 @@ Control slow_089C ()
     instruction1 ( 0x08,0x9E,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x1C );
     advance ( 7 );
     A = 0x1C;
-    return jumpDirect ( 0x089E,slow_089E );
+    return jumpDirect ( 0x089E,slow_089E,0 );
 }
 
 Control slow_089E ()
@@ -24313,7 +24313,7 @@ Control slow_089E ()
     advance ( 10 );
     H = 0x37;
     L = 0x11;
-    return jumpDirect ( 0x08A1,slow_08A1 );
+    return jumpDirect ( 0x08A1,slow_08A1,0 );
 }
 
 Control slow_08A1 ()
@@ -24334,12 +24334,12 @@ Control slow_08A1 ()
         advance ( 17 );
         SPH = ( a6 >> 8 );
         SPL = ( a6 & 0xFF );
-        return jumpDirect ( 0x08FF,slow_08FF );
+        return jumpDirect ( 0x08FF,slow_08FF,fast_08FF );
     }
     else
     {
         advance ( 11 );
-        return jumpDirect ( 0x08A4,slow_08A4 );
+        return jumpDirect ( 0x08A4,slow_08A4,fast_08A4 );
     }
 }
 
@@ -24349,7 +24349,7 @@ Control slow_08A4 ()
     instruction1 ( 0x08,0xA6,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0xB0 );
     advance ( 7 );
     A = 0xB0;
-    return jumpDirect ( 0x08A6,slow_08A6 );
+    return jumpDirect ( 0x08A6,slow_08A6,0 );
 }
 
 Control slow_08A6 ()
@@ -24359,7 +24359,7 @@ Control slow_08A6 ()
     u8 a1 = A ;
     mem_write ( 0x20C0,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x08A9,slow_08A9 );
+    return jumpDirect ( 0x08A9,slow_08A9,fast_08A9 );
 }
 
 Control slow_08A9 ()
@@ -24369,7 +24369,7 @@ Control slow_08A9 ()
     u8 a1 = e8_read_mem ( 0x20C0 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x08AC,slow_08AC );
+    return jumpDirect ( 0x08AC,slow_08AC,0 );
 }
 
 Control slow_08AC ()
@@ -24387,7 +24387,7 @@ Control slow_08AC ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x08AD,slow_08AD );
+    return jumpDirect ( 0x08AD,slow_08AD,0 );
 }
 
 Control slow_08AD ()
@@ -24412,7 +24412,7 @@ Control slow_08AD ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x08AE,slow_08AE );
+        return jumpDirect ( 0x08AE,slow_08AE,0 );
     }
 }
 
@@ -24430,7 +24430,7 @@ Control slow_08AE ()
     FlagA = ( ( a3 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x08B0,slow_08B0 );
+    return jumpDirect ( 0x08B0,slow_08B0,0 );
 }
 
 Control slow_08B0 ()
@@ -24440,12 +24440,12 @@ Control slow_08B0 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x08BC,slow_08BC );
+        return jumpDirect ( 0x08BC,slow_08BC,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x08B3,slow_08B3 );
+        return jumpDirect ( 0x08B3,slow_08B3,0 );
     }
 }
 
@@ -24465,7 +24465,7 @@ Control slow_08B3 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x09CA,slow_09CA );
+    return jumpDirect ( 0x09CA,slow_09CA,fast_09CA );
 }
 
 Control slow_08B6 ()
@@ -24484,7 +24484,7 @@ Control slow_08B6 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1931,slow_1931 );
+    return jumpDirect ( 0x1931,slow_1931,fast_1931 );
 }
 
 Control slow_08B9 ()
@@ -24492,7 +24492,7 @@ Control slow_08B9 ()
     // #at: 08B9
     instruction2 ( 0x08,0xBC,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x08,0xA9 );
     advance ( 10 );
-    return jumpDirect ( 0x08A9,slow_08A9 );
+    return jumpDirect ( 0x08A9,slow_08A9,fast_08A9 );
 }
 
 Control slow_08BC ()
@@ -24501,7 +24501,7 @@ Control slow_08BC ()
     instruction1 ( 0x08,0xBE,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x20 );
     advance ( 7 );
     B = 0x20;
-    return jumpDirect ( 0x08BE,slow_08BE );
+    return jumpDirect ( 0x08BE,slow_08BE,0 );
 }
 
 Control slow_08BE ()
@@ -24511,7 +24511,7 @@ Control slow_08BE ()
     advance ( 10 );
     H = 0x27;
     L = 0x1C;
-    return jumpDirect ( 0x08C1,slow_08C1 );
+    return jumpDirect ( 0x08C1,slow_08C1,0 );
 }
 
 Control slow_08C1 ()
@@ -24521,7 +24521,7 @@ Control slow_08C1 ()
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x08C4,slow_08C4 );
+    return jumpDirect ( 0x08C4,slow_08C4,0 );
 }
 
 Control slow_08C4 ()
@@ -24532,7 +24532,7 @@ Control slow_08C4 ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 >> 0x01 ),7,( ( a1 >> 0 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x08C5,slow_08C5 );
+    return jumpDirect ( 0x08C5,slow_08C5,0 );
 }
 
 Control slow_08C5 ()
@@ -24542,12 +24542,12 @@ Control slow_08C5 ()
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( 0x08CB,slow_08CB );
+        return jumpDirect ( 0x08CB,slow_08CB,fast_08CB );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x08C8,slow_08C8 );
+        return jumpDirect ( 0x08C8,slow_08C8,0 );
     }
 }
 
@@ -24558,7 +24558,7 @@ Control slow_08C8 ()
     advance ( 10 );
     H = 0x39;
     L = 0x1C;
-    return jumpDirect ( 0x08CB,slow_08CB );
+    return jumpDirect ( 0x08CB,slow_08CB,fast_08CB );
 }
 
 Control slow_08CB ()
@@ -24577,7 +24577,7 @@ Control slow_08CB ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x14CB,slow_14CB );
+    return jumpDirect ( 0x14CB,slow_14CB,fast_14CB );
 }
 
 Control slow_08CE ()
@@ -24585,7 +24585,7 @@ Control slow_08CE ()
     // #at: 08CE
     instruction2 ( 0x08,0xD1,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x08,0xA9 );
     advance ( 10 );
-    return jumpDirect ( 0x08A9,slow_08A9 );
+    return jumpDirect ( 0x08A9,slow_08A9,fast_08A9 );
 }
 
 Control slow_08D1 ()
@@ -24594,7 +24594,7 @@ Control slow_08D1 ()
     instruction1 ( 0x08,0xD3,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"IN   %02X",0x02 );
     advance ( 10 );
     A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_is_pressed ( Dip3_livesLow ) ),1,e1_is_pressed ( Dip5_livesHigh ) ),2,e1_is_pressed ( Tilt ) ),3,e1_is_pressed ( Dip6_extraShipEarly ) ),4,e1_is_pressed ( P2shoot ) ),5,e1_is_pressed ( P2left ) ),6,e1_is_pressed ( P2right ) ),7,e1_is_pressed ( Dip7_coinInfoOff ) );
-    return jumpDirect ( 0x08D3,slow_08D3 );
+    return jumpDirect ( 0x08D3,slow_08D3,0 );
 }
 
 Control slow_08D3 ()
@@ -24611,7 +24611,7 @@ Control slow_08D3 ()
     FlagA = ( ( a3 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x08D5,slow_08D5 );
+    return jumpDirect ( 0x08D5,slow_08D5,0 );
 }
 
 Control slow_08D5 ()
@@ -24630,7 +24630,7 @@ Control slow_08D5 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ( ( a2 >> 8 ) >> 0 ) & 0x01 );
-    return jumpDirect ( 0x08D7,slow_08D7 );
+    return jumpDirect ( 0x08D7,slow_08D7,0 );
 }
 
 Control slow_08D7 ()
@@ -24658,7 +24658,7 @@ Control slow_08D8 ()
     u8 a1 = e8_read_mem ( 0x2082 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x08DB,slow_08DB );
+    return jumpDirect ( 0x08DB,slow_08DB,0 );
 }
 
 Control slow_08DB ()
@@ -24676,7 +24676,7 @@ Control slow_08DB ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x08DD,slow_08DD );
+    return jumpDirect ( 0x08DD,slow_08DD,0 );
 }
 
 Control slow_08DD ()
@@ -24701,7 +24701,7 @@ Control slow_08DD ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x08DE,slow_08DE );
+        return jumpDirect ( 0x08DE,slow_08DE,0 );
     }
 }
 
@@ -24711,7 +24711,7 @@ Control slow_08DE ()
     instruction1 ( 0x08,0xE0,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0xFB );
     advance ( 7 );
     A = 0xFB;
-    return jumpDirect ( 0x08E0,slow_08E0 );
+    return jumpDirect ( 0x08E0,slow_08E0,0 );
 }
 
 Control slow_08E0 ()
@@ -24721,7 +24721,7 @@ Control slow_08E0 ()
     u8 a1 = A ;
     mem_write ( 0x207E,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x08E3,slow_08E3 );
+    return jumpDirect ( 0x08E3,slow_08E3,0 );
 }
 
 Control slow_08E3 ()
@@ -24749,7 +24749,7 @@ Control slow_08E4 ()
     u8 a1 = e8_read_mem ( 0x20CE ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x08E7,slow_08E7 );
+    return jumpDirect ( 0x08E7,slow_08E7,0 );
 }
 
 Control slow_08E7 ()
@@ -24767,7 +24767,7 @@ Control slow_08E7 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x08E8,slow_08E8 );
+    return jumpDirect ( 0x08E8,slow_08E8,0 );
 }
 
 Control slow_08E8 ()
@@ -24792,7 +24792,7 @@ Control slow_08E8 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x08E9,slow_08E9 );
+        return jumpDirect ( 0x08E9,slow_08E9,0 );
     }
 }
 
@@ -24803,7 +24803,7 @@ Control slow_08E9 ()
     advance ( 10 );
     H = 0x39;
     L = 0x1C;
-    return jumpDirect ( 0x08EC,slow_08EC );
+    return jumpDirect ( 0x08EC,slow_08EC,0 );
 }
 
 Control slow_08EC ()
@@ -24812,7 +24812,7 @@ Control slow_08EC ()
     instruction1 ( 0x08,0xEE,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x20 );
     advance ( 7 );
     B = 0x20;
-    return jumpDirect ( 0x08EE,slow_08EE );
+    return jumpDirect ( 0x08EE,slow_08EE,0 );
 }
 
 Control slow_08EE ()
@@ -24820,7 +24820,7 @@ Control slow_08EE ()
     // #at: 08EE
     instruction2 ( 0x08,0xF1,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x14,0xCB );
     advance ( 10 );
-    return jumpDirect ( 0x14CB,slow_14CB );
+    return jumpDirect ( 0x14CB,slow_14CB,fast_14CB );
 }
 
 Control slow_08F1 ()
@@ -24829,7 +24829,7 @@ Control slow_08F1 ()
     instruction1 ( 0x08,0xF3,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   C,%02X",0x03 );
     advance ( 7 );
     C = 0x03;
-    return jumpDirect ( 0x08F3,slow_08F3 );
+    return jumpDirect ( 0x08F3,slow_08F3,fast_08F3 );
 }
 
 Control slow_08F3 ()
@@ -24841,7 +24841,7 @@ Control slow_08F3 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x08F4,slow_08F4 );
+    return jumpDirect ( 0x08F4,slow_08F4,0 );
 }
 
 Control slow_08F4 ()
@@ -24861,7 +24861,7 @@ Control slow_08F4 ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x08F5,slow_08F5 );
+    return jumpDirect ( 0x08F5,slow_08F5,0 );
 }
 
 Control slow_08F5 ()
@@ -24880,7 +24880,7 @@ Control slow_08F5 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x08FF,slow_08FF );
+    return jumpDirect ( 0x08FF,slow_08FF,fast_08FF );
 }
 
 Control slow_08F8 ()
@@ -24900,7 +24900,7 @@ Control slow_08F8 ()
     E = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x08F9,slow_08F9 );
+    return jumpDirect ( 0x08F9,slow_08F9,0 );
 }
 
 Control slow_08F9 ()
@@ -24913,7 +24913,7 @@ Control slow_08F9 ()
     advance ( 5 );
     D = ( a3 >> 8 );
     E = ( a3 & 0xFF );
-    return jumpDirect ( 0x08FA,slow_08FA );
+    return jumpDirect ( 0x08FA,slow_08FA,0 );
 }
 
 Control slow_08FA ()
@@ -24931,7 +24931,7 @@ Control slow_08FA ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x08FB,slow_08FB );
+    return jumpDirect ( 0x08FB,slow_08FB,0 );
 }
 
 Control slow_08FB ()
@@ -24941,12 +24941,12 @@ Control slow_08FB ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x08F3,slow_08F3 );
+        return jumpDirect ( 0x08F3,slow_08F3,fast_08F3 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x08FE,slow_08FE );
+        return jumpDirect ( 0x08FE,slow_08FE,0 );
     }
 }
 
@@ -24975,7 +24975,7 @@ Control slow_08FF ()
     advance ( 10 );
     D = 0x1E;
     E = 0x00;
-    return jumpDirect ( 0x0902,slow_0902 );
+    return jumpDirect ( 0x0902,slow_0902,0 );
 }
 
 Control slow_0902 ()
@@ -24995,7 +24995,7 @@ Control slow_0902 ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x0903,slow_0903 );
+    return jumpDirect ( 0x0903,slow_0903,0 );
 }
 
 Control slow_0903 ()
@@ -25004,7 +25004,7 @@ Control slow_0903 ()
     instruction1 ( 0x09,0x05,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   H,%02X",0x00 );
     advance ( 7 );
     H = 0x00;
-    return jumpDirect ( 0x0905,slow_0905 );
+    return jumpDirect ( 0x0905,slow_0905,0 );
 }
 
 Control slow_0905 ()
@@ -25014,7 +25014,7 @@ Control slow_0905 ()
     u8 a1 = A ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( 0x0906,slow_0906 );
+    return jumpDirect ( 0x0906,slow_0906,0 );
 }
 
 Control slow_0906 ()
@@ -25030,7 +25030,7 @@ Control slow_0906 ()
     H = ( ( a5 & 0xFFFF ) >> 8 );
     L = ( ( a5 & 0xFFFF ) & 0xFF );
     FlagCY = ( ( a5 >> 16 ) & 0x01 );
-    return jumpDirect ( 0x0907,slow_0907 );
+    return jumpDirect ( 0x0907,slow_0907,0 );
 }
 
 Control slow_0907 ()
@@ -25046,7 +25046,7 @@ Control slow_0907 ()
     H = ( ( a5 & 0xFFFF ) >> 8 );
     L = ( ( a5 & 0xFFFF ) & 0xFF );
     FlagCY = ( ( a5 >> 16 ) & 0x01 );
-    return jumpDirect ( 0x0908,slow_0908 );
+    return jumpDirect ( 0x0908,slow_0908,0 );
 }
 
 Control slow_0908 ()
@@ -25062,7 +25062,7 @@ Control slow_0908 ()
     H = ( ( a5 & 0xFFFF ) >> 8 );
     L = ( ( a5 & 0xFFFF ) & 0xFF );
     FlagCY = ( ( a5 >> 16 ) & 0x01 );
-    return jumpDirect ( 0x0909,slow_0909 );
+    return jumpDirect ( 0x0909,slow_0909,0 );
 }
 
 Control slow_0909 ()
@@ -25078,7 +25078,7 @@ Control slow_0909 ()
     H = ( ( a5 & 0xFFFF ) >> 8 );
     L = ( ( a5 & 0xFFFF ) & 0xFF );
     FlagCY = ( ( a5 >> 16 ) & 0x01 );
-    return jumpDirect ( 0x090A,slow_090A );
+    return jumpDirect ( 0x090A,slow_090A,0 );
 }
 
 Control slow_090A ()
@@ -25094,7 +25094,7 @@ Control slow_090A ()
     E = a4;
     H = a1;
     L = a2;
-    return jumpDirect ( 0x090B,slow_090B );
+    return jumpDirect ( 0x090B,slow_090B,0 );
 }
 
 Control slow_090B ()
@@ -25114,7 +25114,7 @@ Control slow_090B ()
     L = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x090C,slow_090C );
+    return jumpDirect ( 0x090C,slow_090C,0 );
 }
 
 Control slow_090C ()
@@ -25123,7 +25123,7 @@ Control slow_090C ()
     instruction1 ( 0x09,0x0E,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x08 );
     advance ( 7 );
     B = 0x08;
-    return jumpDirect ( 0x090E,slow_090E );
+    return jumpDirect ( 0x090E,slow_090E,0 );
 }
 
 Control slow_090E ()
@@ -25133,7 +25133,7 @@ Control slow_090E ()
     u8 a1 = A ;
     unknown_output ( 6,a1 );
     advance ( 10 );
-    return jumpDirect ( 0x0910,slow_0910 );
+    return jumpDirect ( 0x0910,slow_0910,0 );
 }
 
 Control slow_0910 ()
@@ -25141,7 +25141,7 @@ Control slow_0910 ()
     // #at: 0910
     instruction2 ( 0x09,0x13,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x14,0x39 );
     advance ( 10 );
-    return jumpDirect ( 0x1439,slow_1439 );
+    return jumpDirect ( 0x1439,slow_1439,fast_1439 );
 }
 
 Control slow_0913 ()
@@ -25151,7 +25151,7 @@ Control slow_0913 ()
     u8 a1 = e8_read_mem ( 0x2009 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0916,slow_0916 );
+    return jumpDirect ( 0x0916,slow_0916,0 );
 }
 
 Control slow_0916 ()
@@ -25169,7 +25169,7 @@ Control slow_0916 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x0918,slow_0918 );
+    return jumpDirect ( 0x0918,slow_0918,0 );
 }
 
 Control slow_0918 ()
@@ -25194,7 +25194,7 @@ Control slow_0918 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x0919,slow_0919 );
+        return jumpDirect ( 0x0919,slow_0919,0 );
     }
 }
 
@@ -25207,7 +25207,7 @@ Control slow_0919 ()
     advance ( 16 );
     H = a2;
     L = a1;
-    return jumpDirect ( 0x091C,slow_091C );
+    return jumpDirect ( 0x091C,slow_091C,0 );
 }
 
 Control slow_091C ()
@@ -25217,7 +25217,7 @@ Control slow_091C ()
     u8 a1 = L ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x091D,slow_091D );
+    return jumpDirect ( 0x091D,slow_091D,0 );
 }
 
 Control slow_091D ()
@@ -25234,7 +25234,7 @@ Control slow_091D ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x091E,slow_091E );
+    return jumpDirect ( 0x091E,slow_091E,0 );
 }
 
 Control slow_091E ()
@@ -25244,12 +25244,12 @@ Control slow_091E ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x0929,slow_0929 );
+        return jumpDirect ( 0x0929,slow_0929,fast_0929 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0921,slow_0921 );
+        return jumpDirect ( 0x0921,slow_0921,0 );
     }
 }
 
@@ -25260,7 +25260,7 @@ Control slow_0921 ()
     advance ( 10 );
     H = 0x06;
     L = 0x00;
-    return jumpDirect ( 0x0924,slow_0924 );
+    return jumpDirect ( 0x0924,slow_0924,0 );
 }
 
 Control slow_0924 ()
@@ -25269,7 +25269,7 @@ Control slow_0924 ()
     instruction1 ( 0x09,0x26,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x01 );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( 0x0926,slow_0926 );
+    return jumpDirect ( 0x0926,slow_0926,0 );
 }
 
 Control slow_0926 ()
@@ -25279,7 +25279,7 @@ Control slow_0926 ()
     u8 a1 = A ;
     mem_write ( 0x2083,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0929,slow_0929 );
+    return jumpDirect ( 0x0929,slow_0929,fast_0929 );
 }
 
 Control slow_0929 ()
@@ -25292,7 +25292,7 @@ Control slow_0929 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x092A,slow_092A );
+    return jumpDirect ( 0x092A,slow_092A,0 );
 }
 
 Control slow_092A ()
@@ -25304,7 +25304,7 @@ Control slow_092A ()
     u8 a2 = H ;
     mem_write ( 0x2092,a2 );
     advance ( 16 );
-    return jumpDirect ( 0x092D,slow_092D );
+    return jumpDirect ( 0x092D,slow_092D,0 );
 }
 
 Control slow_092D ()
@@ -25341,7 +25341,7 @@ Control slow_092E ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1611,slow_1611 );
+    return jumpDirect ( 0x1611,slow_1611,fast_1611 );
 }
 
 Control slow_0931 ()
@@ -25350,7 +25350,7 @@ Control slow_0931 ()
     instruction1 ( 0x09,0x33,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   L,%02X",0xFF );
     advance ( 7 );
     L = 0xFF;
-    return jumpDirect ( 0x0933,slow_0933 );
+    return jumpDirect ( 0x0933,slow_0933,0 );
 }
 
 Control slow_0933 ()
@@ -25362,7 +25362,7 @@ Control slow_0933 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x0934,slow_0934 );
+    return jumpDirect ( 0x0934,slow_0934,0 );
 }
 
 Control slow_0934 ()
@@ -25399,7 +25399,7 @@ Control slow_0935 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1910,slow_1910 );
+    return jumpDirect ( 0x1910,slow_1910,fast_1910 );
 }
 
 Control slow_0938 ()
@@ -25412,7 +25412,7 @@ Control slow_0938 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x0939,slow_0939 );
+    return jumpDirect ( 0x0939,slow_0939,0 );
 }
 
 Control slow_0939 ()
@@ -25425,7 +25425,7 @@ Control slow_0939 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x093A,slow_093A );
+    return jumpDirect ( 0x093A,slow_093A,0 );
 }
 
 Control slow_093A ()
@@ -25437,7 +25437,7 @@ Control slow_093A ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x093B,slow_093B );
+    return jumpDirect ( 0x093B,slow_093B,0 );
 }
 
 Control slow_093B ()
@@ -25455,7 +25455,7 @@ Control slow_093B ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x093C,slow_093C );
+    return jumpDirect ( 0x093C,slow_093C,0 );
 }
 
 Control slow_093C ()
@@ -25480,7 +25480,7 @@ Control slow_093C ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x093D,slow_093D );
+        return jumpDirect ( 0x093D,slow_093D,0 );
     }
 }
 
@@ -25490,7 +25490,7 @@ Control slow_093D ()
     instruction1 ( 0x09,0x3F,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x15 );
     advance ( 7 );
     B = 0x15;
-    return jumpDirect ( 0x093F,slow_093F );
+    return jumpDirect ( 0x093F,slow_093F,0 );
 }
 
 Control slow_093F ()
@@ -25499,7 +25499,7 @@ Control slow_093F ()
     instruction1 ( 0x09,0x41,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"IN   %02X",0x02 );
     advance ( 10 );
     A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_is_pressed ( Dip3_livesLow ) ),1,e1_is_pressed ( Dip5_livesHigh ) ),2,e1_is_pressed ( Tilt ) ),3,e1_is_pressed ( Dip6_extraShipEarly ) ),4,e1_is_pressed ( P2shoot ) ),5,e1_is_pressed ( P2left ) ),6,e1_is_pressed ( P2right ) ),7,e1_is_pressed ( Dip7_coinInfoOff ) );
-    return jumpDirect ( 0x0941,slow_0941 );
+    return jumpDirect ( 0x0941,slow_0941,0 );
 }
 
 Control slow_0941 ()
@@ -25516,7 +25516,7 @@ Control slow_0941 ()
     FlagA = ( ( a3 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x0943,slow_0943 );
+    return jumpDirect ( 0x0943,slow_0943,0 );
 }
 
 Control slow_0943 ()
@@ -25526,12 +25526,12 @@ Control slow_0943 ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0948,slow_0948 );
+        return jumpDirect ( 0x0948,slow_0948,fast_0948 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0946,slow_0946 );
+        return jumpDirect ( 0x0946,slow_0946,0 );
     }
 }
 
@@ -25541,7 +25541,7 @@ Control slow_0946 ()
     instruction1 ( 0x09,0x48,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x10 );
     advance ( 7 );
     B = 0x10;
-    return jumpDirect ( 0x0948,slow_0948 );
+    return jumpDirect ( 0x0948,slow_0948,fast_0948 );
 }
 
 Control slow_0948 ()
@@ -25560,7 +25560,7 @@ Control slow_0948 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x09CA,slow_09CA );
+    return jumpDirect ( 0x09CA,slow_09CA,fast_09CA );
 }
 
 Control slow_094B ()
@@ -25573,7 +25573,7 @@ Control slow_094B ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x094C,slow_094C );
+    return jumpDirect ( 0x094C,slow_094C,0 );
 }
 
 Control slow_094C ()
@@ -25585,7 +25585,7 @@ Control slow_094C ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x094D,slow_094D );
+    return jumpDirect ( 0x094D,slow_094D,0 );
 }
 
 Control slow_094D ()
@@ -25604,7 +25604,7 @@ Control slow_094D ()
     FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a3 & 0xFF ) );
     FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x094E,slow_094E );
+    return jumpDirect ( 0x094E,slow_094E,0 );
 }
 
 Control slow_094E ()
@@ -25629,7 +25629,7 @@ Control slow_094E ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x094F,slow_094F );
+        return jumpDirect ( 0x094F,slow_094F,0 );
     }
 }
 
@@ -25649,7 +25649,7 @@ Control slow_094F ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x092E,slow_092E );
+    return jumpDirect ( 0x092E,slow_092E,fast_092E );
 }
 
 Control slow_0952 ()
@@ -25671,7 +25671,7 @@ Control slow_0952 ()
     FlagZ = ( 0 == ( a4 & 0xFF ) );
     FlagA = ( ( ( a7 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a4 & 0xFF ) );
-    return jumpDirect ( 0x0953,slow_0953 );
+    return jumpDirect ( 0x0953,slow_0953,0 );
 }
 
 Control slow_0953 ()
@@ -25683,7 +25683,7 @@ Control slow_0953 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x0954,slow_0954 );
+    return jumpDirect ( 0x0954,slow_0954,0 );
 }
 
 Control slow_0954 ()
@@ -25702,7 +25702,7 @@ Control slow_0954 ()
     advance ( 11 );
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x0955,slow_0955 );
+    return jumpDirect ( 0x0955,slow_0955,0 );
 }
 
 Control slow_0955 ()
@@ -25712,7 +25712,7 @@ Control slow_0955 ()
     advance ( 10 );
     H = 0x25;
     L = 0x01;
-    return jumpDirect ( 0x0958,slow_0958 );
+    return jumpDirect ( 0x0958,slow_0958,fast_0958 );
 }
 
 Control slow_0958 ()
@@ -25730,7 +25730,7 @@ Control slow_0958 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x0959,slow_0959 );
+    return jumpDirect ( 0x0959,slow_0959,0 );
 }
 
 Control slow_0959 ()
@@ -25748,7 +25748,7 @@ Control slow_0959 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x095A,slow_095A );
+    return jumpDirect ( 0x095A,slow_095A,0 );
 }
 
 Control slow_095A ()
@@ -25766,7 +25766,7 @@ Control slow_095A ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x095B,slow_095B );
+    return jumpDirect ( 0x095B,slow_095B,0 );
 }
 
 Control slow_095B ()
@@ -25776,12 +25776,12 @@ Control slow_095B ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x0958,slow_0958 );
+        return jumpDirect ( 0x0958,slow_0958,fast_0958 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x095E,slow_095E );
+        return jumpDirect ( 0x095E,slow_095E,0 );
     }
 }
 
@@ -25791,7 +25791,7 @@ Control slow_095E ()
     instruction1 ( 0x09,0x60,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x10 );
     advance ( 7 );
     B = 0x10;
-    return jumpDirect ( 0x0960,slow_0960 );
+    return jumpDirect ( 0x0960,slow_0960,0 );
 }
 
 Control slow_0960 ()
@@ -25801,7 +25801,7 @@ Control slow_0960 ()
     advance ( 10 );
     D = 0x1C;
     E = 0x60;
-    return jumpDirect ( 0x0963,slow_0963 );
+    return jumpDirect ( 0x0963,slow_0963,0 );
 }
 
 Control slow_0963 ()
@@ -25820,7 +25820,7 @@ Control slow_0963 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1439,slow_1439 );
+    return jumpDirect ( 0x1439,slow_1439,fast_1439 );
 }
 
 Control slow_0966 ()
@@ -25844,7 +25844,7 @@ Control slow_0966 ()
     FlagA = ( ( a4 >> 4 ) & 0x01 );
     FlagP = ( ( a4 >> 2 ) & 0x01 );
     FlagCY = ( ( a4 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x0967,slow_0967 );
+    return jumpDirect ( 0x0967,slow_0967,0 );
 }
 
 Control slow_0967 ()
@@ -25862,7 +25862,7 @@ Control slow_0967 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x0968,slow_0968 );
+    return jumpDirect ( 0x0968,slow_0968,0 );
 }
 
 Control slow_0968 ()
@@ -25881,7 +25881,7 @@ Control slow_0968 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A8B,slow_1A8B );
+    return jumpDirect ( 0x1A8B,slow_1A8B,fast_1A8B );
 }
 
 Control slow_096B ()
@@ -25900,7 +25900,7 @@ Control slow_096B ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1910,slow_1910 );
+    return jumpDirect ( 0x1910,slow_1910,fast_1910 );
 }
 
 Control slow_096E ()
@@ -25913,7 +25913,7 @@ Control slow_096E ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x096F,slow_096F );
+    return jumpDirect ( 0x096F,slow_096F,0 );
 }
 
 Control slow_096F ()
@@ -25926,7 +25926,7 @@ Control slow_096F ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x0970,slow_0970 );
+    return jumpDirect ( 0x0970,slow_0970,0 );
 }
 
 Control slow_0970 ()
@@ -25937,7 +25937,7 @@ Control slow_0970 ()
     u8 a2 = L ;
     mem_write ( ( ( a1 << 8 ) | a2 ),0x00 );
     advance ( 10 );
-    return jumpDirect ( 0x0972,slow_0972 );
+    return jumpDirect ( 0x0972,slow_0972,0 );
 }
 
 Control slow_0972 ()
@@ -25946,7 +25946,7 @@ Control slow_0972 ()
     instruction1 ( 0x09,0x74,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0xFF );
     advance ( 7 );
     A = 0xFF;
-    return jumpDirect ( 0x0974,slow_0974 );
+    return jumpDirect ( 0x0974,slow_0974,0 );
 }
 
 Control slow_0974 ()
@@ -25956,7 +25956,7 @@ Control slow_0974 ()
     u8 a1 = A ;
     mem_write ( 0x2099,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0977,slow_0977 );
+    return jumpDirect ( 0x0977,slow_0977,0 );
 }
 
 Control slow_0977 ()
@@ -25965,7 +25965,7 @@ Control slow_0977 ()
     instruction1 ( 0x09,0x79,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x10 );
     advance ( 7 );
     B = 0x10;
-    return jumpDirect ( 0x0979,slow_0979 );
+    return jumpDirect ( 0x0979,slow_0979,0 );
 }
 
 Control slow_0979 ()
@@ -25973,7 +25973,7 @@ Control slow_0979 ()
     // #at: 0979
     instruction2 ( 0x09,0x7C,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x18,0xFA );
     advance ( 10 );
-    return jumpDirect ( 0x18FA,slow_18FA );
+    return jumpDirect ( 0x18FA,slow_18FA,fast_18FA );
 }
 
 Control slow_097C ()
@@ -25983,7 +25983,7 @@ Control slow_097C ()
     advance ( 10 );
     H = 0x1D;
     L = 0xA0;
-    return jumpDirect ( 0x097F,slow_097F );
+    return jumpDirect ( 0x097F,slow_097F,0 );
 }
 
 Control slow_097F ()
@@ -26001,7 +26001,7 @@ Control slow_097F ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x0981,slow_0981 );
+    return jumpDirect ( 0x0981,slow_0981,0 );
 }
 
 Control slow_0981 ()
@@ -26026,7 +26026,7 @@ Control slow_0981 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x0982,slow_0982 );
+        return jumpDirect ( 0x0982,slow_0982,0 );
     }
 }
 
@@ -26040,7 +26040,7 @@ Control slow_0982 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x0983,slow_0983 );
+    return jumpDirect ( 0x0983,slow_0983,0 );
 }
 
 Control slow_0983 ()
@@ -26058,7 +26058,7 @@ Control slow_0983 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x0985,slow_0985 );
+    return jumpDirect ( 0x0985,slow_0985,0 );
 }
 
 Control slow_0985 ()
@@ -26083,7 +26083,7 @@ Control slow_0985 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x0986,slow_0986 );
+        return jumpDirect ( 0x0986,slow_0986,0 );
     }
 }
 
@@ -26097,7 +26097,7 @@ Control slow_0986 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x0987,slow_0987 );
+    return jumpDirect ( 0x0987,slow_0987,0 );
 }
 
 Control slow_0987 ()
@@ -26134,7 +26134,7 @@ Control slow_0988 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x09CA,slow_09CA );
+    return jumpDirect ( 0x09CA,slow_09CA,fast_09CA );
 }
 
 Control slow_098B ()
@@ -26144,7 +26144,7 @@ Control slow_098B ()
     u8 a1 = e8_read_mem ( 0x20F1 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x098E,slow_098E );
+    return jumpDirect ( 0x098E,slow_098E,0 );
 }
 
 Control slow_098E ()
@@ -26162,7 +26162,7 @@ Control slow_098E ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x098F,slow_098F );
+    return jumpDirect ( 0x098F,slow_098F,0 );
 }
 
 Control slow_098F ()
@@ -26187,7 +26187,7 @@ Control slow_098F ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x0990,slow_0990 );
+        return jumpDirect ( 0x0990,slow_0990,0 );
     }
 }
 
@@ -26205,7 +26205,7 @@ Control slow_0990 ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0991,slow_0991 );
+    return jumpDirect ( 0x0991,slow_0991,0 );
 }
 
 Control slow_0991 ()
@@ -26215,7 +26215,7 @@ Control slow_0991 ()
     u8 a1 = A ;
     mem_write ( 0x20F1,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0994,slow_0994 );
+    return jumpDirect ( 0x0994,slow_0994,0 );
 }
 
 Control slow_0994 ()
@@ -26235,7 +26235,7 @@ Control slow_0994 ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x0995,slow_0995 );
+    return jumpDirect ( 0x0995,slow_0995,0 );
 }
 
 Control slow_0995 ()
@@ -26247,7 +26247,7 @@ Control slow_0995 ()
     advance ( 16 );
     H = a2;
     L = a1;
-    return jumpDirect ( 0x0998,slow_0998 );
+    return jumpDirect ( 0x0998,slow_0998,0 );
 }
 
 Control slow_0998 ()
@@ -26263,7 +26263,7 @@ Control slow_0998 ()
     E = a4;
     H = a1;
     L = a2;
-    return jumpDirect ( 0x0999,slow_0999 );
+    return jumpDirect ( 0x0999,slow_0999,0 );
 }
 
 Control slow_0999 ()
@@ -26283,7 +26283,7 @@ Control slow_0999 ()
     L = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x099A,slow_099A );
+    return jumpDirect ( 0x099A,slow_099A,0 );
 }
 
 Control slow_099A ()
@@ -26295,7 +26295,7 @@ Control slow_099A ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x099B,slow_099B );
+    return jumpDirect ( 0x099B,slow_099B,0 );
 }
 
 Control slow_099B ()
@@ -26315,7 +26315,7 @@ Control slow_099B ()
     FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a3 & 0xFF ) );
     FlagCY = ( ( ( a3 >> 8 ) >> 0 ) & 0x01 );
-    return jumpDirect ( 0x099C,slow_099C );
+    return jumpDirect ( 0x099C,slow_099C,0 );
 }
 
 Control slow_099C ()
@@ -26336,7 +26336,7 @@ Control slow_099C ()
     FlagA = ( ( ( ( ( ( ( ( a2 >> 1 ) & 0x01 ) || ( ( a2 >> 2 ) & 0x01 ) ) && ( ( a2 >> 3 ) & 0x01 ) ) || FlagA ) ? ( a3 & 0xFF ) : a2 ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( a7 );
     FlagCY = ( ( ( ( ( ( ( ( ( ( a4 & 0xFF ) >> 1 ) & 0x01 ) || ( ( ( a4 & 0xFF ) >> 2 ) & 0x01 ) ) && ( ( ( a4 & 0xFF ) >> 3 ) & 0x01 ) ) || FlagCY ) ? ( a5 & 0xFF ) : ( a4 & 0xFF ) ) >> 4 ) & 0x01 ) || FlagCY );
-    return jumpDirect ( 0x099D,slow_099D );
+    return jumpDirect ( 0x099D,slow_099D,0 );
 }
 
 Control slow_099D ()
@@ -26348,7 +26348,7 @@ Control slow_099D ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x099E,slow_099E );
+    return jumpDirect ( 0x099E,slow_099E,0 );
 }
 
 Control slow_099E ()
@@ -26358,7 +26358,7 @@ Control slow_099E ()
     u8 a1 = A ;
     advance ( 5 );
     E = a1;
-    return jumpDirect ( 0x099F,slow_099F );
+    return jumpDirect ( 0x099F,slow_099F,0 );
 }
 
 Control slow_099F ()
@@ -26371,7 +26371,7 @@ Control slow_099F ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x09A0,slow_09A0 );
+    return jumpDirect ( 0x09A0,slow_09A0,0 );
 }
 
 Control slow_09A0 ()
@@ -26383,7 +26383,7 @@ Control slow_09A0 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x09A1,slow_09A1 );
+    return jumpDirect ( 0x09A1,slow_09A1,0 );
 }
 
 Control slow_09A1 ()
@@ -26403,7 +26403,7 @@ Control slow_09A1 ()
     FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a3 & 0xFF ) );
     FlagCY = ( ( ( a3 >> 8 ) >> 0 ) & 0x01 );
-    return jumpDirect ( 0x09A2,slow_09A2 );
+    return jumpDirect ( 0x09A2,slow_09A2,0 );
 }
 
 Control slow_09A2 ()
@@ -26424,7 +26424,7 @@ Control slow_09A2 ()
     FlagA = ( ( ( ( ( ( ( ( a2 >> 1 ) & 0x01 ) || ( ( a2 >> 2 ) & 0x01 ) ) && ( ( a2 >> 3 ) & 0x01 ) ) || FlagA ) ? ( a3 & 0xFF ) : a2 ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( a7 );
     FlagCY = ( ( ( ( ( ( ( ( ( ( a4 & 0xFF ) >> 1 ) & 0x01 ) || ( ( ( a4 & 0xFF ) >> 2 ) & 0x01 ) ) && ( ( ( a4 & 0xFF ) >> 3 ) & 0x01 ) ) || FlagCY ) ? ( a5 & 0xFF ) : ( a4 & 0xFF ) ) >> 4 ) & 0x01 ) || FlagCY );
-    return jumpDirect ( 0x09A3,slow_09A3 );
+    return jumpDirect ( 0x09A3,slow_09A3,0 );
 }
 
 Control slow_09A3 ()
@@ -26436,7 +26436,7 @@ Control slow_09A3 ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x09A4,slow_09A4 );
+    return jumpDirect ( 0x09A4,slow_09A4,0 );
 }
 
 Control slow_09A4 ()
@@ -26446,7 +26446,7 @@ Control slow_09A4 ()
     u8 a1 = A ;
     advance ( 5 );
     D = a1;
-    return jumpDirect ( 0x09A5,slow_09A5 );
+    return jumpDirect ( 0x09A5,slow_09A5,0 );
 }
 
 Control slow_09A5 ()
@@ -26459,7 +26459,7 @@ Control slow_09A5 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x09A6,slow_09A6 );
+    return jumpDirect ( 0x09A6,slow_09A6,0 );
 }
 
 Control slow_09A6 ()
@@ -26471,7 +26471,7 @@ Control slow_09A6 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x09A7,slow_09A7 );
+    return jumpDirect ( 0x09A7,slow_09A7,0 );
 }
 
 Control slow_09A7 ()
@@ -26484,7 +26484,7 @@ Control slow_09A7 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x09A8,slow_09A8 );
+    return jumpDirect ( 0x09A8,slow_09A8,0 );
 }
 
 Control slow_09A8 ()
@@ -26496,7 +26496,7 @@ Control slow_09A8 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     H = a3;
-    return jumpDirect ( 0x09A9,slow_09A9 );
+    return jumpDirect ( 0x09A9,slow_09A9,0 );
 }
 
 Control slow_09A9 ()
@@ -26506,7 +26506,7 @@ Control slow_09A9 ()
     u8 a1 = A ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( 0x09AA,slow_09AA );
+    return jumpDirect ( 0x09AA,slow_09AA,0 );
 }
 
 Control slow_09AA ()
@@ -26514,7 +26514,7 @@ Control slow_09AA ()
     // #at: 09AA
     instruction2 ( 0x09,0xAD,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x09,0xAD );
     advance ( 10 );
-    return jumpDirect ( 0x09AD,slow_09AD );
+    return jumpDirect ( 0x09AD,slow_09AD,fast_09AD );
 }
 
 Control slow_09AD ()
@@ -26524,7 +26524,7 @@ Control slow_09AD ()
     u8 a1 = D ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x09AE,slow_09AE );
+    return jumpDirect ( 0x09AE,slow_09AE,0 );
 }
 
 Control slow_09AE ()
@@ -26543,7 +26543,7 @@ Control slow_09AE ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x09B2,slow_09B2 );
+    return jumpDirect ( 0x09B2,slow_09B2,fast_09B2 );
 }
 
 Control slow_09B1 ()
@@ -26553,7 +26553,7 @@ Control slow_09B1 ()
     u8 a1 = E ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x09B2,slow_09B2 );
+    return jumpDirect ( 0x09B2,slow_09B2,fast_09B2 );
 }
 
 Control slow_09B2 ()
@@ -26573,7 +26573,7 @@ Control slow_09B2 ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x09B3,slow_09B3 );
+    return jumpDirect ( 0x09B3,slow_09B3,0 );
 }
 
 Control slow_09B3 ()
@@ -26592,7 +26592,7 @@ Control slow_09B3 ()
     advance ( 11 );
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x09B4,slow_09B4 );
+    return jumpDirect ( 0x09B4,slow_09B4,0 );
 }
 
 Control slow_09B4 ()
@@ -26603,7 +26603,7 @@ Control slow_09B4 ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 >> 0x01 ),7,( ( a1 >> 0 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x09B5,slow_09B5 );
+    return jumpDirect ( 0x09B5,slow_09B5,0 );
 }
 
 Control slow_09B5 ()
@@ -26614,7 +26614,7 @@ Control slow_09B5 ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 >> 0x01 ),7,( ( a1 >> 0 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x09B6,slow_09B6 );
+    return jumpDirect ( 0x09B6,slow_09B6,0 );
 }
 
 Control slow_09B6 ()
@@ -26625,7 +26625,7 @@ Control slow_09B6 ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 >> 0x01 ),7,( ( a1 >> 0 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x09B7,slow_09B7 );
+    return jumpDirect ( 0x09B7,slow_09B7,0 );
 }
 
 Control slow_09B7 ()
@@ -26636,7 +26636,7 @@ Control slow_09B7 ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 >> 0x01 ),7,( ( a1 >> 0 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x09B8,slow_09B8 );
+    return jumpDirect ( 0x09B8,slow_09B8,0 );
 }
 
 Control slow_09B8 ()
@@ -26653,7 +26653,7 @@ Control slow_09B8 ()
     FlagA = ( ( a3 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x09BA,slow_09BA );
+    return jumpDirect ( 0x09BA,slow_09BA,0 );
 }
 
 Control slow_09BA ()
@@ -26672,7 +26672,7 @@ Control slow_09BA ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x09C5,slow_09C5 );
+    return jumpDirect ( 0x09C5,slow_09C5,fast_09C5 );
 }
 
 Control slow_09BD ()
@@ -26696,7 +26696,7 @@ Control slow_09BD ()
     FlagA = ( ( a4 >> 4 ) & 0x01 );
     FlagP = ( ( a4 >> 2 ) & 0x01 );
     FlagCY = ( ( a4 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x09BE,slow_09BE );
+    return jumpDirect ( 0x09BE,slow_09BE,0 );
 }
 
 Control slow_09BE ()
@@ -26713,7 +26713,7 @@ Control slow_09BE ()
     FlagA = ( ( a3 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x09C0,slow_09C0 );
+    return jumpDirect ( 0x09C0,slow_09C0,0 );
 }
 
 Control slow_09C0 ()
@@ -26732,7 +26732,7 @@ Control slow_09C0 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x09C5,slow_09C5 );
+    return jumpDirect ( 0x09C5,slow_09C5,fast_09C5 );
 }
 
 Control slow_09C3 ()
@@ -26752,7 +26752,7 @@ Control slow_09C3 ()
     E = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x09C4,slow_09C4 );
+    return jumpDirect ( 0x09C4,slow_09C4,0 );
 }
 
 Control slow_09C4 ()
@@ -26789,7 +26789,7 @@ Control slow_09C5 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ( ( a2 >> 8 ) >> 0 ) & 0x01 );
-    return jumpDirect ( 0x09C7,slow_09C7 );
+    return jumpDirect ( 0x09C7,slow_09C7,0 );
 }
 
 Control slow_09C7 ()
@@ -26797,7 +26797,7 @@ Control slow_09C7 ()
     // #at: 09C7
     instruction2 ( 0x09,0xCA,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x08,0xFF );
     advance ( 10 );
-    return jumpDirect ( 0x08FF,slow_08FF );
+    return jumpDirect ( 0x08FF,slow_08FF,fast_08FF );
 }
 
 Control slow_09CA ()
@@ -26807,7 +26807,7 @@ Control slow_09CA ()
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x09CD,slow_09CD );
+    return jumpDirect ( 0x09CD,slow_09CD,0 );
 }
 
 Control slow_09CD ()
@@ -26818,7 +26818,7 @@ Control slow_09CD ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 >> 0x01 ),7,( ( a1 >> 0 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x09CE,slow_09CE );
+    return jumpDirect ( 0x09CE,slow_09CE,0 );
 }
 
 Control slow_09CE ()
@@ -26828,7 +26828,7 @@ Control slow_09CE ()
     advance ( 10 );
     H = 0x20;
     L = 0xF8;
-    return jumpDirect ( 0x09D1,slow_09D1 );
+    return jumpDirect ( 0x09D1,slow_09D1,0 );
 }
 
 Control slow_09D1 ()
@@ -26853,7 +26853,7 @@ Control slow_09D1 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x09D2,slow_09D2 );
+        return jumpDirect ( 0x09D2,slow_09D2,0 );
     }
 }
 
@@ -26864,7 +26864,7 @@ Control slow_09D2 ()
     advance ( 10 );
     H = 0x20;
     L = 0xFC;
-    return jumpDirect ( 0x09D5,slow_09D5 );
+    return jumpDirect ( 0x09D5,slow_09D5,0 );
 }
 
 Control slow_09D5 ()
@@ -26892,7 +26892,7 @@ Control slow_09D6 ()
     advance ( 10 );
     H = 0x24;
     L = 0x02;
-    return jumpDirect ( 0x09D9,slow_09D9 );
+    return jumpDirect ( 0x09D9,slow_09D9,fast_09D9 );
 }
 
 Control slow_09D9 ()
@@ -26903,7 +26903,7 @@ Control slow_09D9 ()
     u8 a2 = L ;
     mem_write ( ( ( a1 << 8 ) | a2 ),0x00 );
     advance ( 10 );
-    return jumpDirect ( 0x09DB,slow_09DB );
+    return jumpDirect ( 0x09DB,slow_09DB,0 );
 }
 
 Control slow_09DB ()
@@ -26916,7 +26916,7 @@ Control slow_09DB ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x09DC,slow_09DC );
+    return jumpDirect ( 0x09DC,slow_09DC,0 );
 }
 
 Control slow_09DC ()
@@ -26926,7 +26926,7 @@ Control slow_09DC ()
     u8 a1 = L ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x09DD,slow_09DD );
+    return jumpDirect ( 0x09DD,slow_09DD,0 );
 }
 
 Control slow_09DD ()
@@ -26943,7 +26943,7 @@ Control slow_09DD ()
     FlagA = ( ( a3 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x09DF,slow_09DF );
+    return jumpDirect ( 0x09DF,slow_09DF,0 );
 }
 
 Control slow_09DF ()
@@ -26961,7 +26961,7 @@ Control slow_09DF ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x09E1,slow_09E1 );
+    return jumpDirect ( 0x09E1,slow_09E1,0 );
 }
 
 Control slow_09E1 ()
@@ -26971,12 +26971,12 @@ Control slow_09E1 ()
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( 0x09E8,slow_09E8 );
+        return jumpDirect ( 0x09E8,slow_09E8,fast_09E8 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x09E4,slow_09E4 );
+        return jumpDirect ( 0x09E4,slow_09E4,0 );
     }
 }
 
@@ -26987,7 +26987,7 @@ Control slow_09E4 ()
     advance ( 10 );
     D = 0x00;
     E = 0x06;
-    return jumpDirect ( 0x09E7,slow_09E7 );
+    return jumpDirect ( 0x09E7,slow_09E7,0 );
 }
 
 Control slow_09E7 ()
@@ -27003,7 +27003,7 @@ Control slow_09E7 ()
     H = ( ( a5 & 0xFFFF ) >> 8 );
     L = ( ( a5 & 0xFFFF ) & 0xFF );
     FlagCY = ( ( a5 >> 16 ) & 0x01 );
-    return jumpDirect ( 0x09E8,slow_09E8 );
+    return jumpDirect ( 0x09E8,slow_09E8,fast_09E8 );
 }
 
 Control slow_09E8 ()
@@ -27013,7 +27013,7 @@ Control slow_09E8 ()
     u8 a1 = H ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x09E9,slow_09E9 );
+    return jumpDirect ( 0x09E9,slow_09E9,0 );
 }
 
 Control slow_09E9 ()
@@ -27031,7 +27031,7 @@ Control slow_09E9 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x09EB,slow_09EB );
+    return jumpDirect ( 0x09EB,slow_09EB,0 );
 }
 
 Control slow_09EB ()
@@ -27041,12 +27041,12 @@ Control slow_09EB ()
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( 0x09D9,slow_09D9 );
+        return jumpDirect ( 0x09D9,slow_09D9,fast_09D9 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x09EE,slow_09EE );
+        return jumpDirect ( 0x09EE,slow_09EE,0 );
     }
 }
 
@@ -27084,7 +27084,7 @@ Control slow_09EF ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0A3C,slow_0A3C );
+    return jumpDirect ( 0x0A3C,slow_0A3C,0 );
 }
 
 Control slow_09F2 ()
@@ -27101,7 +27101,7 @@ Control slow_09F2 ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x09F3,slow_09F3 );
+    return jumpDirect ( 0x09F3,slow_09F3,0 );
 }
 
 Control slow_09F3 ()
@@ -27111,7 +27111,7 @@ Control slow_09F3 ()
     u8 a1 = A ;
     mem_write ( 0x20E9,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x09F6,slow_09F6 );
+    return jumpDirect ( 0x09F6,slow_09F6,0 );
 }
 
 Control slow_09F6 ()
@@ -27130,7 +27130,7 @@ Control slow_09F6 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x09D6,slow_09D6 );
+    return jumpDirect ( 0x09D6,slow_09D6,fast_09D6 );
 }
 
 Control slow_09F9 ()
@@ -27140,7 +27140,7 @@ Control slow_09F9 ()
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x09FC,slow_09FC );
+    return jumpDirect ( 0x09FC,slow_09FC,0 );
 }
 
 Control slow_09FC ()
@@ -27159,7 +27159,7 @@ Control slow_09FC ()
     advance ( 11 );
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x09FD,slow_09FD );
+    return jumpDirect ( 0x09FD,slow_09FD,0 );
 }
 
 Control slow_09FD ()
@@ -27178,7 +27178,7 @@ Control slow_09FD ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x01E4,slow_01E4 );
+    return jumpDirect ( 0x01E4,slow_01E4,fast_01E4 );
 }
 
 Control slow_0A00 ()
@@ -27202,7 +27202,7 @@ Control slow_0A00 ()
     FlagA = ( ( a4 >> 4 ) & 0x01 );
     FlagP = ( ( a4 >> 2 ) & 0x01 );
     FlagCY = ( ( a4 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x0A01,slow_0A01 );
+    return jumpDirect ( 0x0A01,slow_0A01,0 );
 }
 
 Control slow_0A01 ()
@@ -27212,7 +27212,7 @@ Control slow_0A01 ()
     u8 a1 = A ;
     mem_write ( 0x2067,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0A04,slow_0A04 );
+    return jumpDirect ( 0x0A04,slow_0A04,0 );
 }
 
 Control slow_0A04 ()
@@ -27222,7 +27222,7 @@ Control slow_0A04 ()
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0A07,slow_0A07 );
+    return jumpDirect ( 0x0A07,slow_0A07,0 );
 }
 
 Control slow_0A07 ()
@@ -27232,7 +27232,7 @@ Control slow_0A07 ()
     u8 a1 = A ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( 0x0A08,slow_0A08 );
+    return jumpDirect ( 0x0A08,slow_0A08,0 );
 }
 
 Control slow_0A08 ()
@@ -27252,7 +27252,7 @@ Control slow_0A08 ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x0A09,slow_0A09 );
+    return jumpDirect ( 0x0A09,slow_0A09,0 );
 }
 
 Control slow_0A09 ()
@@ -27261,7 +27261,7 @@ Control slow_0A09 ()
     instruction1 ( 0x0A,0x0B,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   L,%02X",0xFE );
     advance ( 7 );
     L = 0xFE;
-    return jumpDirect ( 0x0A0B,slow_0A0B );
+    return jumpDirect ( 0x0A0B,slow_0A0B,0 );
 }
 
 Control slow_0A0B ()
@@ -27273,7 +27273,7 @@ Control slow_0A0B ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x0A0C,slow_0A0C );
+    return jumpDirect ( 0x0A0C,slow_0A0C,0 );
 }
 
 Control slow_0A0C ()
@@ -27290,7 +27290,7 @@ Control slow_0A0C ()
     FlagA = ( ( a3 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x0A0E,slow_0A0E );
+    return jumpDirect ( 0x0A0E,slow_0A0E,0 );
 }
 
 Control slow_0A0E ()
@@ -27308,7 +27308,7 @@ Control slow_0A0E ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x0A0F,slow_0A0F );
+    return jumpDirect ( 0x0A0F,slow_0A0F,0 );
 }
 
 Control slow_0A0F ()
@@ -27320,7 +27320,7 @@ Control slow_0A0F ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x0A10,slow_0A10 );
+    return jumpDirect ( 0x0A10,slow_0A10,0 );
 }
 
 Control slow_0A10 ()
@@ -27330,7 +27330,7 @@ Control slow_0A10 ()
     advance ( 10 );
     H = 0x1D;
     L = 0xA2;
-    return jumpDirect ( 0x0A13,slow_0A13 );
+    return jumpDirect ( 0x0A13,slow_0A13,fast_0A13 );
 }
 
 Control slow_0A13 ()
@@ -27343,7 +27343,7 @@ Control slow_0A13 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x0A14,slow_0A14 );
+    return jumpDirect ( 0x0A14,slow_0A14,0 );
 }
 
 Control slow_0A14 ()
@@ -27361,7 +27361,7 @@ Control slow_0A14 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x0A15,slow_0A15 );
+    return jumpDirect ( 0x0A15,slow_0A15,0 );
 }
 
 Control slow_0A15 ()
@@ -27371,12 +27371,12 @@ Control slow_0A15 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x0A13,slow_0A13 );
+        return jumpDirect ( 0x0A13,slow_0A13,fast_0A13 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0A18,slow_0A18 );
+        return jumpDirect ( 0x0A18,slow_0A18,0 );
     }
 }
 
@@ -27389,7 +27389,7 @@ Control slow_0A18 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x0A19,slow_0A19 );
+    return jumpDirect ( 0x0A19,slow_0A19,0 );
 }
 
 Control slow_0A19 ()
@@ -27409,7 +27409,7 @@ Control slow_0A19 ()
     L = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x0A1A,slow_0A1A );
+    return jumpDirect ( 0x0A1A,slow_0A1A,0 );
 }
 
 Control slow_0A1A ()
@@ -27418,7 +27418,7 @@ Control slow_0A1A ()
     instruction1 ( 0x0A,0x1C,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   L,%02X",0xFC );
     advance ( 7 );
     L = 0xFC;
-    return jumpDirect ( 0x0A1C,slow_0A1C );
+    return jumpDirect ( 0x0A1C,slow_0A1C,0 );
 }
 
 Control slow_0A1C ()
@@ -27430,7 +27430,7 @@ Control slow_0A1C ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x0A1D,slow_0A1D );
+    return jumpDirect ( 0x0A1D,slow_0A1D,0 );
 }
 
 Control slow_0A1D ()
@@ -27443,7 +27443,7 @@ Control slow_0A1D ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x0A1E,slow_0A1E );
+    return jumpDirect ( 0x0A1E,slow_0A1E,0 );
 }
 
 Control slow_0A1E ()
@@ -27454,7 +27454,7 @@ Control slow_0A1E ()
     u8 a2 = L ;
     mem_write ( ( ( a1 << 8 ) | a2 ),0x38 );
     advance ( 10 );
-    return jumpDirect ( 0x0A20,slow_0A20 );
+    return jumpDirect ( 0x0A20,slow_0A20,0 );
 }
 
 Control slow_0A20 ()
@@ -27464,7 +27464,7 @@ Control slow_0A20 ()
     u8 a1 = H ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x0A21,slow_0A21 );
+    return jumpDirect ( 0x0A21,slow_0A21,0 );
 }
 
 Control slow_0A21 ()
@@ -27475,7 +27475,7 @@ Control slow_0A21 ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 >> 0x01 ),7,( ( a1 >> 0 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x0A22,slow_0A22 );
+    return jumpDirect ( 0x0A22,slow_0A22,0 );
 }
 
 Control slow_0A22 ()
@@ -27485,12 +27485,12 @@ Control slow_0A22 ()
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0A33,slow_0A33 );
+        return jumpDirect ( 0x0A33,slow_0A33,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0A25,slow_0A25 );
+        return jumpDirect ( 0x0A25,slow_0A25,0 );
     }
 }
 
@@ -27500,7 +27500,7 @@ Control slow_0A25 ()
     instruction1 ( 0x0A,0x27,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x21 );
     advance ( 7 );
     A = 0x21;
-    return jumpDirect ( 0x0A27,slow_0A27 );
+    return jumpDirect ( 0x0A27,slow_0A27,0 );
 }
 
 Control slow_0A27 ()
@@ -27510,7 +27510,7 @@ Control slow_0A27 ()
     u8 a1 = A ;
     mem_write ( 0x2098,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0A2A,slow_0A2A );
+    return jumpDirect ( 0x0A2A,slow_0A2A,0 );
 }
 
 Control slow_0A2A ()
@@ -27529,7 +27529,7 @@ Control slow_0A2A ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x01F5,slow_01F5 );
+    return jumpDirect ( 0x01F5,slow_01F5,fast_01F5 );
 }
 
 Control slow_0A2D ()
@@ -27548,7 +27548,7 @@ Control slow_0A2D ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1904,slow_1904 );
+    return jumpDirect ( 0x1904,slow_1904,fast_1904 );
 }
 
 Control slow_0A30 ()
@@ -27556,7 +27556,7 @@ Control slow_0A30 ()
     // #at: 0A30
     instruction2 ( 0x0A,0x33,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x08,0x04 );
     advance ( 10 );
-    return jumpDirect ( 0x0804,slow_0804 );
+    return jumpDirect ( 0x0804,slow_0804,fast_0804 );
 }
 
 Control slow_0A33 ()
@@ -27575,7 +27575,7 @@ Control slow_0A33 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x01EF,slow_01EF );
+    return jumpDirect ( 0x01EF,slow_01EF,fast_01EF );
 }
 
 Control slow_0A36 ()
@@ -27594,7 +27594,7 @@ Control slow_0A36 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x01C0,slow_01C0 );
+    return jumpDirect ( 0x01C0,slow_01C0,fast_01C0 );
 }
 
 Control slow_0A39 ()
@@ -27602,7 +27602,7 @@ Control slow_0A39 ()
     // #at: 0A39
     instruction2 ( 0x0A,0x3C,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x08,0x04 );
     advance ( 10 );
-    return jumpDirect ( 0x0804,slow_0804 );
+    return jumpDirect ( 0x0804,slow_0804,fast_0804 );
 }
 
 Control slow_0A3C ()
@@ -27621,7 +27621,7 @@ Control slow_0A3C ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0A59,slow_0A59 );
+    return jumpDirect ( 0x0A59,slow_0A59,fast_0A59 );
 }
 
 Control slow_0A3F ()
@@ -27631,12 +27631,12 @@ Control slow_0A3F ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x0A52,slow_0A52 );
+        return jumpDirect ( 0x0A52,slow_0A52,fast_0A52 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0A42,slow_0A42 );
+        return jumpDirect ( 0x0A42,slow_0A42,0 );
     }
 }
 
@@ -27646,7 +27646,7 @@ Control slow_0A42 ()
     instruction1 ( 0x0A,0x44,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x30 );
     advance ( 7 );
     A = 0x30;
-    return jumpDirect ( 0x0A44,slow_0A44 );
+    return jumpDirect ( 0x0A44,slow_0A44,0 );
 }
 
 Control slow_0A44 ()
@@ -27656,7 +27656,7 @@ Control slow_0A44 ()
     u8 a1 = A ;
     mem_write ( 0x20C0,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0A47,slow_0A47 );
+    return jumpDirect ( 0x0A47,slow_0A47,fast_0A47 );
 }
 
 Control slow_0A47 ()
@@ -27666,7 +27666,7 @@ Control slow_0A47 ()
     u8 a1 = e8_read_mem ( 0x20C0 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0A4A,slow_0A4A );
+    return jumpDirect ( 0x0A4A,slow_0A4A,0 );
 }
 
 Control slow_0A4A ()
@@ -27684,7 +27684,7 @@ Control slow_0A4A ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0A4B,slow_0A4B );
+    return jumpDirect ( 0x0A4B,slow_0A4B,0 );
 }
 
 Control slow_0A4B ()
@@ -27709,7 +27709,7 @@ Control slow_0A4B ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x0A4C,slow_0A4C );
+        return jumpDirect ( 0x0A4C,slow_0A4C,0 );
     }
 }
 
@@ -27729,7 +27729,7 @@ Control slow_0A4C ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0A59,slow_0A59 );
+    return jumpDirect ( 0x0A59,slow_0A59,fast_0A59 );
 }
 
 Control slow_0A4F ()
@@ -27739,12 +27739,12 @@ Control slow_0A4F ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0A47,slow_0A47 );
+        return jumpDirect ( 0x0A47,slow_0A47,fast_0A47 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0A52,slow_0A52 );
+        return jumpDirect ( 0x0A52,slow_0A52,fast_0A52 );
     }
 }
 
@@ -27764,7 +27764,7 @@ Control slow_0A52 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0A59,slow_0A59 );
+    return jumpDirect ( 0x0A59,slow_0A59,fast_0A59 );
 }
 
 Control slow_0A55 ()
@@ -27774,12 +27774,12 @@ Control slow_0A55 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x0A52,slow_0A52 );
+        return jumpDirect ( 0x0A52,slow_0A52,fast_0A52 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0A58,slow_0A58 );
+        return jumpDirect ( 0x0A58,slow_0A58,0 );
     }
 }
 
@@ -27808,7 +27808,7 @@ Control slow_0A59 ()
     u8 a1 = e8_read_mem ( 0x2015 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0A5C,slow_0A5C );
+    return jumpDirect ( 0x0A5C,slow_0A5C,0 );
 }
 
 Control slow_0A5C ()
@@ -27826,7 +27826,7 @@ Control slow_0A5C ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x0A5E,slow_0A5E );
+    return jumpDirect ( 0x0A5E,slow_0A5E,0 );
 }
 
 Control slow_0A5E ()
@@ -27854,7 +27854,7 @@ Control slow_0A5F ()
     u8 a1 = e8_read_mem ( 0x20EF ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0A62,slow_0A62 );
+    return jumpDirect ( 0x0A62,slow_0A62,0 );
 }
 
 Control slow_0A62 ()
@@ -27872,7 +27872,7 @@ Control slow_0A62 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0A63,slow_0A63 );
+    return jumpDirect ( 0x0A63,slow_0A63,0 );
 }
 
 Control slow_0A63 ()
@@ -27882,12 +27882,12 @@ Control slow_0A63 ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0A7C,slow_0A7C );
+        return jumpDirect ( 0x0A7C,slow_0A7C,fast_0A7C );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0A66,slow_0A66 );
+        return jumpDirect ( 0x0A66,slow_0A66,0 );
     }
 }
 
@@ -27898,7 +27898,7 @@ Control slow_0A66 ()
     u8 a1 = B ;
     advance ( 5 );
     C = a1;
-    return jumpDirect ( 0x0A67,slow_0A67 );
+    return jumpDirect ( 0x0A67,slow_0A67,0 );
 }
 
 Control slow_0A67 ()
@@ -27907,7 +27907,7 @@ Control slow_0A67 ()
     instruction1 ( 0x0A,0x69,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x08 );
     advance ( 7 );
     B = 0x08;
-    return jumpDirect ( 0x0A69,slow_0A69 );
+    return jumpDirect ( 0x0A69,slow_0A69,0 );
 }
 
 Control slow_0A69 ()
@@ -27926,7 +27926,7 @@ Control slow_0A69 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x18FA,slow_18FA );
+    return jumpDirect ( 0x18FA,slow_18FA,fast_18FA );
 }
 
 Control slow_0A6C ()
@@ -27936,7 +27936,7 @@ Control slow_0A6C ()
     u8 a1 = C ;
     advance ( 5 );
     B = a1;
-    return jumpDirect ( 0x0A6D,slow_0A6D );
+    return jumpDirect ( 0x0A6D,slow_0A6D,0 );
 }
 
 Control slow_0A6D ()
@@ -27946,7 +27946,7 @@ Control slow_0A6D ()
     u8 a1 = B ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x0A6E,slow_0A6E );
+    return jumpDirect ( 0x0A6E,slow_0A6E,0 );
 }
 
 Control slow_0A6E ()
@@ -27965,7 +27965,7 @@ Control slow_0A6E ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x097C,slow_097C );
+    return jumpDirect ( 0x097C,slow_097C,0 );
 }
 
 Control slow_0A71 ()
@@ -27977,7 +27977,7 @@ Control slow_0A71 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x0A72,slow_0A72 );
+    return jumpDirect ( 0x0A72,slow_0A72,0 );
 }
 
 Control slow_0A72 ()
@@ -27987,7 +27987,7 @@ Control slow_0A72 ()
     advance ( 10 );
     H = 0x20;
     L = 0xF3;
-    return jumpDirect ( 0x0A75,slow_0A75 );
+    return jumpDirect ( 0x0A75,slow_0A75,0 );
 }
 
 Control slow_0A75 ()
@@ -27998,7 +27998,7 @@ Control slow_0A75 ()
     u8 a2 = L ;
     mem_write ( ( ( a1 << 8 ) | a2 ),0x00 );
     advance ( 10 );
-    return jumpDirect ( 0x0A77,slow_0A77 );
+    return jumpDirect ( 0x0A77,slow_0A77,0 );
 }
 
 Control slow_0A77 ()
@@ -28011,7 +28011,7 @@ Control slow_0A77 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x0A78,slow_0A78 );
+    return jumpDirect ( 0x0A78,slow_0A78,0 );
 }
 
 Control slow_0A78 ()
@@ -28023,7 +28023,7 @@ Control slow_0A78 ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x0A79,slow_0A79 );
+    return jumpDirect ( 0x0A79,slow_0A79,0 );
 }
 
 Control slow_0A79 ()
@@ -28036,7 +28036,7 @@ Control slow_0A79 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x0A7A,slow_0A7A );
+    return jumpDirect ( 0x0A7A,slow_0A7A,0 );
 }
 
 Control slow_0A7A ()
@@ -28047,7 +28047,7 @@ Control slow_0A7A ()
     u8 a2 = L ;
     mem_write ( ( ( a1 << 8 ) | a2 ),0x01 );
     advance ( 10 );
-    return jumpDirect ( 0x0A7C,slow_0A7C );
+    return jumpDirect ( 0x0A7C,slow_0A7C,fast_0A7C );
 }
 
 Control slow_0A7C ()
@@ -28057,7 +28057,7 @@ Control slow_0A7C ()
     advance ( 10 );
     H = 0x20;
     L = 0x62;
-    return jumpDirect ( 0x0A7F,slow_0A7F );
+    return jumpDirect ( 0x0A7F,slow_0A7F,0 );
 }
 
 Control slow_0A7F ()
@@ -28084,7 +28084,7 @@ Control slow_0A80 ()
     instruction1 ( 0x0A,0x82,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x02 );
     advance ( 7 );
     A = 0x02;
-    return jumpDirect ( 0x0A82,slow_0A82 );
+    return jumpDirect ( 0x0A82,slow_0A82,0 );
 }
 
 Control slow_0A82 ()
@@ -28094,7 +28094,7 @@ Control slow_0A82 ()
     u8 a1 = A ;
     mem_write ( 0x20C1,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0A85,slow_0A85 );
+    return jumpDirect ( 0x0A85,slow_0A85,fast_0A85 );
 }
 
 Control slow_0A85 ()
@@ -28104,7 +28104,7 @@ Control slow_0A85 ()
     u8 a1 = A ;
     unknown_output ( 6,a1 );
     advance ( 10 );
-    return jumpDirect ( 0x0A87,slow_0A87 );
+    return jumpDirect ( 0x0A87,slow_0A87,0 );
 }
 
 Control slow_0A87 ()
@@ -28114,7 +28114,7 @@ Control slow_0A87 ()
     u8 a1 = e8_read_mem ( 0x20CB ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0A8A,slow_0A8A );
+    return jumpDirect ( 0x0A8A,slow_0A8A,0 );
 }
 
 Control slow_0A8A ()
@@ -28132,7 +28132,7 @@ Control slow_0A8A ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0A8B,slow_0A8B );
+    return jumpDirect ( 0x0A8B,slow_0A8B,0 );
 }
 
 Control slow_0A8B ()
@@ -28142,12 +28142,12 @@ Control slow_0A8B ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0A85,slow_0A85 );
+        return jumpDirect ( 0x0A85,slow_0A85,fast_0A85 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0A8E,slow_0A8E );
+        return jumpDirect ( 0x0A8E,slow_0A8E,0 );
     }
 }
 
@@ -28165,7 +28165,7 @@ Control slow_0A8E ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0A8F,slow_0A8F );
+    return jumpDirect ( 0x0A8F,slow_0A8F,0 );
 }
 
 Control slow_0A8F ()
@@ -28175,7 +28175,7 @@ Control slow_0A8F ()
     u8 a1 = A ;
     mem_write ( 0x20C1,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0A92,slow_0A92 );
+    return jumpDirect ( 0x0A92,slow_0A92,0 );
 }
 
 Control slow_0A92 ()
@@ -28213,7 +28213,7 @@ Control slow_0A93 ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x0A94,slow_0A94 );
+    return jumpDirect ( 0x0A94,slow_0A94,0 );
 }
 
 Control slow_0A94 ()
@@ -28225,7 +28225,7 @@ Control slow_0A94 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x0A95,slow_0A95 );
+    return jumpDirect ( 0x0A95,slow_0A95,0 );
 }
 
 Control slow_0A95 ()
@@ -28244,7 +28244,7 @@ Control slow_0A95 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x08FF,slow_08FF );
+    return jumpDirect ( 0x08FF,slow_08FF,fast_08FF );
 }
 
 Control slow_0A98 ()
@@ -28264,7 +28264,7 @@ Control slow_0A98 ()
     E = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x0A99,slow_0A99 );
+    return jumpDirect ( 0x0A99,slow_0A99,0 );
 }
 
 Control slow_0A99 ()
@@ -28273,7 +28273,7 @@ Control slow_0A99 ()
     instruction1 ( 0x0A,0x9B,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x07 );
     advance ( 7 );
     A = 0x07;
-    return jumpDirect ( 0x0A9B,slow_0A9B );
+    return jumpDirect ( 0x0A9B,slow_0A9B,0 );
 }
 
 Control slow_0A9B ()
@@ -28283,7 +28283,7 @@ Control slow_0A9B ()
     u8 a1 = A ;
     mem_write ( 0x20C0,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0A9E,slow_0A9E );
+    return jumpDirect ( 0x0A9E,slow_0A9E,fast_0A9E );
 }
 
 Control slow_0A9E ()
@@ -28293,7 +28293,7 @@ Control slow_0A9E ()
     u8 a1 = e8_read_mem ( 0x20C0 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0AA1,slow_0AA1 );
+    return jumpDirect ( 0x0AA1,slow_0AA1,0 );
 }
 
 Control slow_0AA1 ()
@@ -28311,7 +28311,7 @@ Control slow_0AA1 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x0AA2,slow_0AA2 );
+    return jumpDirect ( 0x0AA2,slow_0AA2,0 );
 }
 
 Control slow_0AA2 ()
@@ -28321,12 +28321,12 @@ Control slow_0AA2 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x0A9E,slow_0A9E );
+        return jumpDirect ( 0x0A9E,slow_0A9E,fast_0A9E );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0AA5,slow_0AA5 );
+        return jumpDirect ( 0x0AA5,slow_0AA5,0 );
     }
 }
 
@@ -28340,7 +28340,7 @@ Control slow_0AA5 ()
     advance ( 5 );
     D = ( a3 >> 8 );
     E = ( a3 & 0xFF );
-    return jumpDirect ( 0x0AA6,slow_0AA6 );
+    return jumpDirect ( 0x0AA6,slow_0AA6,0 );
 }
 
 Control slow_0AA6 ()
@@ -28358,7 +28358,7 @@ Control slow_0AA6 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x0AA7,slow_0AA7 );
+    return jumpDirect ( 0x0AA7,slow_0AA7,0 );
 }
 
 Control slow_0AA7 ()
@@ -28368,12 +28368,12 @@ Control slow_0AA7 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x0A93,slow_0A93 );
+        return jumpDirect ( 0x0A93,slow_0A93,fast_0A93 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0AAA,slow_0AAA );
+        return jumpDirect ( 0x0AAA,slow_0AAA,0 );
     }
 }
 
@@ -28402,7 +28402,7 @@ Control slow_0AAB ()
     advance ( 10 );
     H = 0x20;
     L = 0x50;
-    return jumpDirect ( 0x0AAE,slow_0AAE );
+    return jumpDirect ( 0x0AAE,slow_0AAE,0 );
 }
 
 Control slow_0AAE ()
@@ -28410,7 +28410,7 @@ Control slow_0AAE ()
     // #at: 0AAE
     instruction2 ( 0x0A,0xB1,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x02,0x4B );
     advance ( 10 );
-    return jumpDirect ( 0x024B,slow_024B );
+    return jumpDirect ( 0x024B,slow_024B,fast_024B );
 }
 
 Control slow_0AB1 ()
@@ -28419,7 +28419,7 @@ Control slow_0AB1 ()
     instruction1 ( 0x0A,0xB3,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x40 );
     advance ( 7 );
     A = 0x40;
-    return jumpDirect ( 0x0AB3,slow_0AB3 );
+    return jumpDirect ( 0x0AB3,slow_0AB3,0 );
 }
 
 Control slow_0AB3 ()
@@ -28427,7 +28427,7 @@ Control slow_0AB3 ()
     // #at: 0AB3
     instruction2 ( 0x0A,0xB6,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x0A,0xD7 );
     advance ( 10 );
-    return jumpDirect ( 0x0AD7,slow_0AD7 );
+    return jumpDirect ( 0x0AD7,slow_0AD7,fast_0AD7 );
 }
 
 Control slow_0AB6 ()
@@ -28436,7 +28436,7 @@ Control slow_0AB6 ()
     instruction1 ( 0x0A,0xB8,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x80 );
     advance ( 7 );
     A = 0x80;
-    return jumpDirect ( 0x0AB8,slow_0AB8 );
+    return jumpDirect ( 0x0AB8,slow_0AB8,0 );
 }
 
 Control slow_0AB8 ()
@@ -28444,7 +28444,7 @@ Control slow_0AB8 ()
     // #at: 0AB8
     instruction2 ( 0x0A,0xBB,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x0A,0xD7 );
     advance ( 10 );
-    return jumpDirect ( 0x0AD7,slow_0AD7 );
+    return jumpDirect ( 0x0AD7,slow_0AD7,fast_0AD7 );
 }
 
 Control slow_0ABB ()
@@ -28464,7 +28464,7 @@ Control slow_0ABB ()
     L = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x0ABC,slow_0ABC );
+    return jumpDirect ( 0x0ABC,slow_0ABC,0 );
 }
 
 Control slow_0ABC ()
@@ -28472,7 +28472,7 @@ Control slow_0ABC ()
     // #at: 0ABC
     instruction2 ( 0x0A,0xBF,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x00,0x72 );
     advance ( 10 );
-    return jumpDirect ( 0x0072,slow_0072 );
+    return jumpDirect ( 0x0072,slow_0072,fast_0072 );
 }
 
 Control slow_0ABF ()
@@ -28482,7 +28482,7 @@ Control slow_0ABF ()
     u8 a1 = e8_read_mem ( 0x20C1 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0AC2,slow_0AC2 );
+    return jumpDirect ( 0x0AC2,slow_0AC2,0 );
 }
 
 Control slow_0AC2 ()
@@ -28493,7 +28493,7 @@ Control slow_0AC2 ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 >> 0x01 ),7,( ( a1 >> 0 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x0AC3,slow_0AC3 );
+    return jumpDirect ( 0x0AC3,slow_0AC3,0 );
 }
 
 Control slow_0AC3 ()
@@ -28503,12 +28503,12 @@ Control slow_0AC3 ()
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0ABB,slow_0ABB );
+        return jumpDirect ( 0x0ABB,slow_0ABB,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0AC6,slow_0AC6 );
+        return jumpDirect ( 0x0AC6,slow_0AC6,0 );
     }
 }
 
@@ -28520,7 +28520,7 @@ Control slow_0AC6 ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 >> 0x01 ),7,( ( a1 >> 0 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x0AC7,slow_0AC7 );
+    return jumpDirect ( 0x0AC7,slow_0AC7,0 );
 }
 
 Control slow_0AC7 ()
@@ -28530,12 +28530,12 @@ Control slow_0AC7 ()
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( 0x1868,slow_1868 );
+        return jumpDirect ( 0x1868,slow_1868,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0ACA,slow_0ACA );
+        return jumpDirect ( 0x0ACA,slow_0ACA,0 );
     }
 }
 
@@ -28547,7 +28547,7 @@ Control slow_0ACA ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 >> 0x01 ),7,( ( a1 >> 0 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x0ACB,slow_0ACB );
+    return jumpDirect ( 0x0ACB,slow_0ACB,0 );
 }
 
 Control slow_0ACB ()
@@ -28557,12 +28557,12 @@ Control slow_0ACB ()
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0AAB,slow_0AAB );
+        return jumpDirect ( 0x0AAB,slow_0AAB,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0ACE,slow_0ACE );
+        return jumpDirect ( 0x0ACE,slow_0ACE,0 );
     }
 }
 
@@ -28591,7 +28591,7 @@ Control slow_0ACF ()
     advance ( 10 );
     H = 0x2B;
     L = 0x14;
-    return jumpDirect ( 0x0AD2,slow_0AD2 );
+    return jumpDirect ( 0x0AD2,slow_0AD2,0 );
 }
 
 Control slow_0AD2 ()
@@ -28600,7 +28600,7 @@ Control slow_0AD2 ()
     instruction1 ( 0x0A,0xD4,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   C,%02X",0x0F );
     advance ( 7 );
     C = 0x0F;
-    return jumpDirect ( 0x0AD4,slow_0AD4 );
+    return jumpDirect ( 0x0AD4,slow_0AD4,0 );
 }
 
 Control slow_0AD4 ()
@@ -28608,7 +28608,7 @@ Control slow_0AD4 ()
     // #at: 0AD4
     instruction2 ( 0x0A,0xD7,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x0A,0x93 );
     advance ( 10 );
-    return jumpDirect ( 0x0A93,slow_0A93 );
+    return jumpDirect ( 0x0A93,slow_0A93,fast_0A93 );
 }
 
 Control slow_0AD7 ()
@@ -28618,7 +28618,7 @@ Control slow_0AD7 ()
     u8 a1 = A ;
     mem_write ( 0x20C0,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0ADA,slow_0ADA );
+    return jumpDirect ( 0x0ADA,slow_0ADA,fast_0ADA );
 }
 
 Control slow_0ADA ()
@@ -28628,7 +28628,7 @@ Control slow_0ADA ()
     u8 a1 = e8_read_mem ( 0x20C0 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0ADD,slow_0ADD );
+    return jumpDirect ( 0x0ADD,slow_0ADD,0 );
 }
 
 Control slow_0ADD ()
@@ -28646,7 +28646,7 @@ Control slow_0ADD ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0ADE,slow_0ADE );
+    return jumpDirect ( 0x0ADE,slow_0ADE,0 );
 }
 
 Control slow_0ADE ()
@@ -28656,12 +28656,12 @@ Control slow_0ADE ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x0ADA,slow_0ADA );
+        return jumpDirect ( 0x0ADA,slow_0ADA,fast_0ADA );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0AE1,slow_0AE1 );
+        return jumpDirect ( 0x0AE1,slow_0AE1,0 );
     }
 }
 
@@ -28690,7 +28690,7 @@ Control slow_0AE2 ()
     advance ( 10 );
     H = 0x20;
     L = 0xC2;
-    return jumpDirect ( 0x0AE5,slow_0AE5 );
+    return jumpDirect ( 0x0AE5,slow_0AE5,0 );
 }
 
 Control slow_0AE5 ()
@@ -28699,7 +28699,7 @@ Control slow_0AE5 ()
     instruction1 ( 0x0A,0xE7,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x0C );
     advance ( 7 );
     B = 0x0C;
-    return jumpDirect ( 0x0AE7,slow_0AE7 );
+    return jumpDirect ( 0x0AE7,slow_0AE7,0 );
 }
 
 Control slow_0AE7 ()
@@ -28707,7 +28707,7 @@ Control slow_0AE7 ()
     // #at: 0AE7
     instruction2 ( 0x0A,0xEA,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x1A,0x32 );
     advance ( 10 );
-    return jumpDirect ( 0x1A32,slow_1A32 );
+    return jumpDirect ( 0x1A32,slow_1A32,fast_1A32 );
 }
 
 Control slow_0AEA ()
@@ -28724,7 +28724,7 @@ Control slow_0AEA ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0AEB,slow_0AEB );
+    return jumpDirect ( 0x0AEB,slow_0AEB,0 );
 }
 
 Control slow_0AEB ()
@@ -28738,7 +28738,7 @@ Control slow_0AEB ()
     sound_control ( "InvaderDie",( ( a1 >> 3 ) & 0x01 ) );
     sound_control ( "ExtraLife",( ( a1 >> 4 ) & 0x01 ) );
     advance ( 10 );
-    return jumpDirect ( 0x0AED,slow_0AED );
+    return jumpDirect ( 0x0AED,slow_0AED,0 );
 }
 
 Control slow_0AED ()
@@ -28752,7 +28752,7 @@ Control slow_0AED ()
     sound_control ( "FleetMovement4",( ( a1 >> 3 ) & 0x01 ) );
     sound_control ( "UfoHit",( ( a1 >> 4 ) & 0x01 ) );
     advance ( 10 );
-    return jumpDirect ( 0x0AEF,slow_0AEF );
+    return jumpDirect ( 0x0AEF,slow_0AEF,0 );
 }
 
 Control slow_0AEF ()
@@ -28771,7 +28771,7 @@ Control slow_0AEF ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1982,slow_1982 );
+    return jumpDirect ( 0x1982,slow_1982,0 );
 }
 
 Control slow_0AF2 ()
@@ -28780,7 +28780,7 @@ Control slow_0AF2 ()
     instruction0 ( 0x0A,0xF3,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"EI" );
     enable_interrupts (  );
     advance ( 4 );
-    return jumpDirect ( 0x0AF3,slow_0AF3 );
+    return jumpDirect ( 0x0AF3,slow_0AF3,0 );
 }
 
 Control slow_0AF3 ()
@@ -28799,7 +28799,7 @@ Control slow_0AF3 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0AB1,slow_0AB1 );
+    return jumpDirect ( 0x0AB1,slow_0AB1,fast_0AB1 );
 }
 
 Control slow_0AF6 ()
@@ -28809,7 +28809,7 @@ Control slow_0AF6 ()
     u8 a1 = e8_read_mem ( 0x20EC ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0AF9,slow_0AF9 );
+    return jumpDirect ( 0x0AF9,slow_0AF9,0 );
 }
 
 Control slow_0AF9 ()
@@ -28827,7 +28827,7 @@ Control slow_0AF9 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0AFA,slow_0AFA );
+    return jumpDirect ( 0x0AFA,slow_0AFA,0 );
 }
 
 Control slow_0AFA ()
@@ -28837,7 +28837,7 @@ Control slow_0AFA ()
     advance ( 10 );
     H = 0x30;
     L = 0x17;
-    return jumpDirect ( 0x0AFD,slow_0AFD );
+    return jumpDirect ( 0x0AFD,slow_0AFD,0 );
 }
 
 Control slow_0AFD ()
@@ -28846,7 +28846,7 @@ Control slow_0AFD ()
     instruction1 ( 0x0A,0xFF,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   C,%02X",0x04 );
     advance ( 7 );
     C = 0x04;
-    return jumpDirect ( 0x0AFF,slow_0AFF );
+    return jumpDirect ( 0x0AFF,slow_0AFF,0 );
 }
 
 Control slow_0AFF ()
@@ -28856,12 +28856,12 @@ Control slow_0AFF ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x0BE8,slow_0BE8 );
+        return jumpDirect ( 0x0BE8,slow_0BE8,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0B02,slow_0B02 );
+        return jumpDirect ( 0x0B02,slow_0B02,0 );
     }
 }
 
@@ -28872,7 +28872,7 @@ Control slow_0B02 ()
     advance ( 10 );
     D = 0x1C;
     E = 0xFA;
-    return jumpDirect ( 0x0B05,slow_0B05 );
+    return jumpDirect ( 0x0B05,slow_0B05,0 );
 }
 
 Control slow_0B05 ()
@@ -28891,7 +28891,7 @@ Control slow_0B05 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0A93,slow_0A93 );
+    return jumpDirect ( 0x0A93,slow_0A93,fast_0A93 );
 }
 
 Control slow_0B08 ()
@@ -28901,7 +28901,7 @@ Control slow_0B08 ()
     advance ( 10 );
     D = 0x1D;
     E = 0xAF;
-    return jumpDirect ( 0x0B0B,slow_0B0B );
+    return jumpDirect ( 0x0B0B,slow_0B0B,fast_0B0B );
 }
 
 Control slow_0B0B ()
@@ -28920,7 +28920,7 @@ Control slow_0B0B ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0ACF,slow_0ACF );
+    return jumpDirect ( 0x0ACF,slow_0ACF,0 );
 }
 
 Control slow_0B0E ()
@@ -28939,7 +28939,7 @@ Control slow_0B0E ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0AB1,slow_0AB1 );
+    return jumpDirect ( 0x0AB1,slow_0AB1,fast_0AB1 );
 }
 
 Control slow_0B11 ()
@@ -28958,7 +28958,7 @@ Control slow_0B11 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1815,slow_1815 );
+    return jumpDirect ( 0x1815,slow_1815,0 );
 }
 
 Control slow_0B14 ()
@@ -28977,7 +28977,7 @@ Control slow_0B14 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0AB6,slow_0AB6 );
+    return jumpDirect ( 0x0AB6,slow_0AB6,fast_0AB6 );
 }
 
 Control slow_0B17 ()
@@ -28987,7 +28987,7 @@ Control slow_0B17 ()
     u8 a1 = e8_read_mem ( 0x20EC ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0B1A,slow_0B1A );
+    return jumpDirect ( 0x0B1A,slow_0B1A,0 );
 }
 
 Control slow_0B1A ()
@@ -29005,7 +29005,7 @@ Control slow_0B1A ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0B1B,slow_0B1B );
+    return jumpDirect ( 0x0B1B,slow_0B1B,0 );
 }
 
 Control slow_0B1B ()
@@ -29015,12 +29015,12 @@ Control slow_0B1B ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x0B4A,slow_0B4A );
+        return jumpDirect ( 0x0B4A,slow_0B4A,fast_0B4A );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0B1E,slow_0B1E );
+        return jumpDirect ( 0x0B1E,slow_0B1E,0 );
     }
 }
 
@@ -29031,7 +29031,7 @@ Control slow_0B1E ()
     advance ( 10 );
     D = 0x1A;
     E = 0x95;
-    return jumpDirect ( 0x0B21,slow_0B21 );
+    return jumpDirect ( 0x0B21,slow_0B21,0 );
 }
 
 Control slow_0B21 ()
@@ -29050,7 +29050,7 @@ Control slow_0B21 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0AE2,slow_0AE2 );
+    return jumpDirect ( 0x0AE2,slow_0AE2,fast_0AE2 );
 }
 
 Control slow_0B24 ()
@@ -29069,7 +29069,7 @@ Control slow_0B24 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0A80,slow_0A80 );
+    return jumpDirect ( 0x0A80,slow_0A80,fast_0A80 );
 }
 
 Control slow_0B27 ()
@@ -29079,7 +29079,7 @@ Control slow_0B27 ()
     advance ( 10 );
     D = 0x1B;
     E = 0xB0;
-    return jumpDirect ( 0x0B2A,slow_0B2A );
+    return jumpDirect ( 0x0B2A,slow_0B2A,0 );
 }
 
 Control slow_0B2A ()
@@ -29098,7 +29098,7 @@ Control slow_0B2A ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0AE2,slow_0AE2 );
+    return jumpDirect ( 0x0AE2,slow_0AE2,fast_0AE2 );
 }
 
 Control slow_0B2D ()
@@ -29117,7 +29117,7 @@ Control slow_0B2D ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0A80,slow_0A80 );
+    return jumpDirect ( 0x0A80,slow_0A80,fast_0A80 );
 }
 
 Control slow_0B30 ()
@@ -29136,7 +29136,7 @@ Control slow_0B30 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0AB1,slow_0AB1 );
+    return jumpDirect ( 0x0AB1,slow_0AB1,fast_0AB1 );
 }
 
 Control slow_0B33 ()
@@ -29146,7 +29146,7 @@ Control slow_0B33 ()
     advance ( 10 );
     D = 0x1F;
     E = 0xC9;
-    return jumpDirect ( 0x0B36,slow_0B36 );
+    return jumpDirect ( 0x0B36,slow_0B36,0 );
 }
 
 Control slow_0B36 ()
@@ -29165,7 +29165,7 @@ Control slow_0B36 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0AE2,slow_0AE2 );
+    return jumpDirect ( 0x0AE2,slow_0AE2,fast_0AE2 );
 }
 
 Control slow_0B39 ()
@@ -29184,7 +29184,7 @@ Control slow_0B39 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0A80,slow_0A80 );
+    return jumpDirect ( 0x0A80,slow_0A80,fast_0A80 );
 }
 
 Control slow_0B3C ()
@@ -29203,7 +29203,7 @@ Control slow_0B3C ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0AB1,slow_0AB1 );
+    return jumpDirect ( 0x0AB1,slow_0AB1,fast_0AB1 );
 }
 
 Control slow_0B3F ()
@@ -29213,7 +29213,7 @@ Control slow_0B3F ()
     advance ( 10 );
     H = 0x33;
     L = 0xB7;
-    return jumpDirect ( 0x0B42,slow_0B42 );
+    return jumpDirect ( 0x0B42,slow_0B42,0 );
 }
 
 Control slow_0B42 ()
@@ -29222,7 +29222,7 @@ Control slow_0B42 ()
     instruction1 ( 0x0B,0x44,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x0A );
     advance ( 7 );
     B = 0x0A;
-    return jumpDirect ( 0x0B44,slow_0B44 );
+    return jumpDirect ( 0x0B44,slow_0B44,0 );
 }
 
 Control slow_0B44 ()
@@ -29241,7 +29241,7 @@ Control slow_0B44 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x14CB,slow_14CB );
+    return jumpDirect ( 0x14CB,slow_14CB,fast_14CB );
 }
 
 Control slow_0B47 ()
@@ -29260,7 +29260,7 @@ Control slow_0B47 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0AB6,slow_0AB6 );
+    return jumpDirect ( 0x0AB6,slow_0AB6,fast_0AB6 );
 }
 
 Control slow_0B4A ()
@@ -29279,7 +29279,7 @@ Control slow_0B4A ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x09D6,slow_09D6 );
+    return jumpDirect ( 0x09D6,slow_09D6,fast_09D6 );
 }
 
 Control slow_0B4D ()
@@ -29289,7 +29289,7 @@ Control slow_0B4D ()
     u8 a1 = e8_read_mem ( 0x21FF ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0B50,slow_0B50 );
+    return jumpDirect ( 0x0B50,slow_0B50,0 );
 }
 
 Control slow_0B50 ()
@@ -29307,7 +29307,7 @@ Control slow_0B50 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0B51,slow_0B51 );
+    return jumpDirect ( 0x0B51,slow_0B51,0 );
 }
 
 Control slow_0B51 ()
@@ -29317,12 +29317,12 @@ Control slow_0B51 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x0B5D,slow_0B5D );
+        return jumpDirect ( 0x0B5D,slow_0B5D,fast_0B5D );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0B54,slow_0B54 );
+        return jumpDirect ( 0x0B54,slow_0B54,0 );
     }
 }
 
@@ -29342,7 +29342,7 @@ Control slow_0B54 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x08D1,slow_08D1 );
+    return jumpDirect ( 0x08D1,slow_08D1,fast_08D1 );
 }
 
 Control slow_0B57 ()
@@ -29352,7 +29352,7 @@ Control slow_0B57 ()
     u8 a1 = A ;
     mem_write ( 0x21FF,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0B5A,slow_0B5A );
+    return jumpDirect ( 0x0B5A,slow_0B5A,0 );
 }
 
 Control slow_0B5A ()
@@ -29371,7 +29371,7 @@ Control slow_0B5A ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A7F,slow_1A7F );
+    return jumpDirect ( 0x1A7F,slow_1A7F,fast_1A7F );
 }
 
 Control slow_0B5D ()
@@ -29390,7 +29390,7 @@ Control slow_0B5D ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x01E4,slow_01E4 );
+    return jumpDirect ( 0x01E4,slow_01E4,fast_01E4 );
 }
 
 Control slow_0B60 ()
@@ -29409,7 +29409,7 @@ Control slow_0B60 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x01C0,slow_01C0 );
+    return jumpDirect ( 0x01C0,slow_01C0,fast_01C0 );
 }
 
 Control slow_0B63 ()
@@ -29428,7 +29428,7 @@ Control slow_0B63 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x01EF,slow_01EF );
+    return jumpDirect ( 0x01EF,slow_01EF,fast_01EF );
 }
 
 Control slow_0B66 ()
@@ -29447,7 +29447,7 @@ Control slow_0B66 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x021A,slow_021A );
+    return jumpDirect ( 0x021A,slow_021A,fast_021A );
 }
 
 Control slow_0B69 ()
@@ -29456,7 +29456,7 @@ Control slow_0B69 ()
     instruction1 ( 0x0B,0x6B,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x01 );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( 0x0B6B,slow_0B6B );
+    return jumpDirect ( 0x0B6B,slow_0B6B,0 );
 }
 
 Control slow_0B6B ()
@@ -29466,7 +29466,7 @@ Control slow_0B6B ()
     u8 a1 = A ;
     mem_write ( 0x20C1,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0B6E,slow_0B6E );
+    return jumpDirect ( 0x0B6E,slow_0B6E,0 );
 }
 
 Control slow_0B6E ()
@@ -29485,7 +29485,7 @@ Control slow_0B6E ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x01CF,slow_01CF );
+    return jumpDirect ( 0x01CF,slow_01CF,fast_01CF );
 }
 
 Control slow_0B71 ()
@@ -29504,7 +29504,7 @@ Control slow_0B71 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1618,slow_1618 );
+    return jumpDirect ( 0x1618,slow_1618,fast_1618 );
 }
 
 Control slow_0B74 ()
@@ -29523,7 +29523,7 @@ Control slow_0B74 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0BF1,slow_0BF1 );
+    return jumpDirect ( 0x0BF1,slow_0BF1,0 );
 }
 
 Control slow_0B77 ()
@@ -29533,7 +29533,7 @@ Control slow_0B77 ()
     u8 a1 = A ;
     unknown_output ( 6,a1 );
     advance ( 10 );
-    return jumpDirect ( 0x0B79,slow_0B79 );
+    return jumpDirect ( 0x0B79,slow_0B79,0 );
 }
 
 Control slow_0B79 ()
@@ -29552,7 +29552,7 @@ Control slow_0B79 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0A59,slow_0A59 );
+    return jumpDirect ( 0x0A59,slow_0A59,fast_0A59 );
 }
 
 Control slow_0B7C ()
@@ -29562,12 +29562,12 @@ Control slow_0B7C ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0B71,slow_0B71 );
+        return jumpDirect ( 0x0B71,slow_0B71,fast_0B71 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0B7F,slow_0B7F );
+        return jumpDirect ( 0x0B7F,slow_0B7F,0 );
     }
 }
 
@@ -29585,7 +29585,7 @@ Control slow_0B7F ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0B80,slow_0B80 );
+    return jumpDirect ( 0x0B80,slow_0B80,0 );
 }
 
 Control slow_0B80 ()
@@ -29595,7 +29595,7 @@ Control slow_0B80 ()
     u8 a1 = A ;
     mem_write ( 0x2025,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0B83,slow_0B83 );
+    return jumpDirect ( 0x0B83,slow_0B83,fast_0B83 );
 }
 
 Control slow_0B83 ()
@@ -29614,7 +29614,7 @@ Control slow_0B83 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0A59,slow_0A59 );
+    return jumpDirect ( 0x0A59,slow_0A59,fast_0A59 );
 }
 
 Control slow_0B86 ()
@@ -29624,12 +29624,12 @@ Control slow_0B86 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x0B83,slow_0B83 );
+        return jumpDirect ( 0x0B83,slow_0B83,fast_0B83 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0B89,slow_0B89 );
+        return jumpDirect ( 0x0B89,slow_0B89,fast_0B89 );
     }
 }
 
@@ -29647,7 +29647,7 @@ Control slow_0B89 ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0B8A,slow_0B8A );
+    return jumpDirect ( 0x0B8A,slow_0B8A,0 );
 }
 
 Control slow_0B8A ()
@@ -29657,7 +29657,7 @@ Control slow_0B8A ()
     u8 a1 = A ;
     mem_write ( 0x20C1,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0B8D,slow_0B8D );
+    return jumpDirect ( 0x0B8D,slow_0B8D,0 );
 }
 
 Control slow_0B8D ()
@@ -29676,7 +29676,7 @@ Control slow_0B8D ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0AB1,slow_0AB1 );
+    return jumpDirect ( 0x0AB1,slow_0AB1,fast_0AB1 );
 }
 
 Control slow_0B90 ()
@@ -29695,7 +29695,7 @@ Control slow_0B90 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1988,slow_1988 );
+    return jumpDirect ( 0x1988,slow_1988,0 );
 }
 
 Control slow_0B93 ()
@@ -29704,7 +29704,7 @@ Control slow_0B93 ()
     instruction1 ( 0x0B,0x95,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   C,%02X",0x0C );
     advance ( 7 );
     C = 0x0C;
-    return jumpDirect ( 0x0B95,slow_0B95 );
+    return jumpDirect ( 0x0B95,slow_0B95,0 );
 }
 
 Control slow_0B95 ()
@@ -29714,7 +29714,7 @@ Control slow_0B95 ()
     advance ( 10 );
     H = 0x2C;
     L = 0x11;
-    return jumpDirect ( 0x0B98,slow_0B98 );
+    return jumpDirect ( 0x0B98,slow_0B98,0 );
 }
 
 Control slow_0B98 ()
@@ -29724,7 +29724,7 @@ Control slow_0B98 ()
     advance ( 10 );
     D = 0x1F;
     E = 0x90;
-    return jumpDirect ( 0x0B9B,slow_0B9B );
+    return jumpDirect ( 0x0B9B,slow_0B9B,0 );
 }
 
 Control slow_0B9B ()
@@ -29743,7 +29743,7 @@ Control slow_0B9B ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x08F3,slow_08F3 );
+    return jumpDirect ( 0x08F3,slow_08F3,fast_08F3 );
 }
 
 Control slow_0B9E ()
@@ -29753,7 +29753,7 @@ Control slow_0B9E ()
     u8 a1 = e8_read_mem ( 0x20EC ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0BA1,slow_0BA1 );
+    return jumpDirect ( 0x0BA1,slow_0BA1,0 );
 }
 
 Control slow_0BA1 ()
@@ -29771,7 +29771,7 @@ Control slow_0BA1 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x0BA3,slow_0BA3 );
+    return jumpDirect ( 0x0BA3,slow_0BA3,0 );
 }
 
 Control slow_0BA3 ()
@@ -29781,12 +29781,12 @@ Control slow_0BA3 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x0BAE,slow_0BAE );
+        return jumpDirect ( 0x0BAE,slow_0BAE,fast_0BAE );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0BA6,slow_0BA6 );
+        return jumpDirect ( 0x0BA6,slow_0BA6,0 );
     }
 }
 
@@ -29797,7 +29797,7 @@ Control slow_0BA6 ()
     advance ( 10 );
     H = 0x33;
     L = 0x11;
-    return jumpDirect ( 0x0BA9,slow_0BA9 );
+    return jumpDirect ( 0x0BA9,slow_0BA9,0 );
 }
 
 Control slow_0BA9 ()
@@ -29806,7 +29806,7 @@ Control slow_0BA9 ()
     instruction1 ( 0x0B,0xAB,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x02 );
     advance ( 7 );
     A = 0x02;
-    return jumpDirect ( 0x0BAB,slow_0BAB );
+    return jumpDirect ( 0x0BAB,slow_0BAB,0 );
 }
 
 Control slow_0BAB ()
@@ -29825,7 +29825,7 @@ Control slow_0BAB ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x08FF,slow_08FF );
+    return jumpDirect ( 0x08FF,slow_08FF,fast_08FF );
 }
 
 Control slow_0BAE ()
@@ -29835,7 +29835,7 @@ Control slow_0BAE ()
     advance ( 10 );
     B = 0x1F;
     C = 0x9C;
-    return jumpDirect ( 0x0BB1,slow_0BB1 );
+    return jumpDirect ( 0x0BB1,slow_0BB1,0 );
 }
 
 Control slow_0BB1 ()
@@ -29854,7 +29854,7 @@ Control slow_0BB1 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1856,slow_1856 );
+    return jumpDirect ( 0x1856,slow_1856,fast_1856 );
 }
 
 Control slow_0BB4 ()
@@ -29873,7 +29873,7 @@ Control slow_0BB4 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x184C,slow_184C );
+    return jumpDirect ( 0x184C,slow_184C,fast_184C );
 }
 
 Control slow_0BB7 ()
@@ -29882,7 +29882,7 @@ Control slow_0BB7 ()
     instruction1 ( 0x0B,0xB9,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"IN   %02X",0x02 );
     advance ( 10 );
     A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_is_pressed ( Dip3_livesLow ) ),1,e1_is_pressed ( Dip5_livesHigh ) ),2,e1_is_pressed ( Tilt ) ),3,e1_is_pressed ( Dip6_extraShipEarly ) ),4,e1_is_pressed ( P2shoot ) ),5,e1_is_pressed ( P2left ) ),6,e1_is_pressed ( P2right ) ),7,e1_is_pressed ( Dip7_coinInfoOff ) );
-    return jumpDirect ( 0x0BB9,slow_0BB9 );
+    return jumpDirect ( 0x0BB9,slow_0BB9,0 );
 }
 
 Control slow_0BB9 ()
@@ -29893,7 +29893,7 @@ Control slow_0BB9 ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 << 0x01 ),0,( ( a1 >> 7 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 7 ) & 0x01 );
-    return jumpDirect ( 0x0BBA,slow_0BBA );
+    return jumpDirect ( 0x0BBA,slow_0BBA,0 );
 }
 
 Control slow_0BBA ()
@@ -29903,12 +29903,12 @@ Control slow_0BBA ()
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0BC3,slow_0BC3 );
+        return jumpDirect ( 0x0BC3,slow_0BC3,fast_0BC3 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0BBD,slow_0BBD );
+        return jumpDirect ( 0x0BBD,slow_0BBD,0 );
     }
 }
 
@@ -29919,7 +29919,7 @@ Control slow_0BBD ()
     advance ( 10 );
     B = 0x1F;
     C = 0xA0;
-    return jumpDirect ( 0x0BC0,slow_0BC0 );
+    return jumpDirect ( 0x0BC0,slow_0BC0,0 );
 }
 
 Control slow_0BC0 ()
@@ -29938,7 +29938,7 @@ Control slow_0BC0 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x183A,slow_183A );
+    return jumpDirect ( 0x183A,slow_183A,fast_183A );
 }
 
 Control slow_0BC3 ()
@@ -29957,7 +29957,7 @@ Control slow_0BC3 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0AB6,slow_0AB6 );
+    return jumpDirect ( 0x0AB6,slow_0AB6,fast_0AB6 );
 }
 
 Control slow_0BC6 ()
@@ -29967,7 +29967,7 @@ Control slow_0BC6 ()
     u8 a1 = e8_read_mem ( 0x20EC ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x0BC9,slow_0BC9 );
+    return jumpDirect ( 0x0BC9,slow_0BC9,0 );
 }
 
 Control slow_0BC9 ()
@@ -29985,7 +29985,7 @@ Control slow_0BC9 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x0BCB,slow_0BCB );
+    return jumpDirect ( 0x0BCB,slow_0BCB,0 );
 }
 
 Control slow_0BCB ()
@@ -29995,12 +29995,12 @@ Control slow_0BCB ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x0BDA,slow_0BDA );
+        return jumpDirect ( 0x0BDA,slow_0BDA,fast_0BDA );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0BCE,slow_0BCE );
+        return jumpDirect ( 0x0BCE,slow_0BCE,0 );
     }
 }
 
@@ -30011,7 +30011,7 @@ Control slow_0BCE ()
     advance ( 10 );
     D = 0x1F;
     E = 0xD5;
-    return jumpDirect ( 0x0BD1,slow_0BD1 );
+    return jumpDirect ( 0x0BD1,slow_0BD1,0 );
 }
 
 Control slow_0BD1 ()
@@ -30030,7 +30030,7 @@ Control slow_0BD1 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0AE2,slow_0AE2 );
+    return jumpDirect ( 0x0AE2,slow_0AE2,fast_0AE2 );
 }
 
 Control slow_0BD4 ()
@@ -30049,7 +30049,7 @@ Control slow_0BD4 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0A80,slow_0A80 );
+    return jumpDirect ( 0x0A80,slow_0A80,fast_0A80 );
 }
 
 Control slow_0BD7 ()
@@ -30068,7 +30068,7 @@ Control slow_0BD7 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x189E,slow_189E );
+    return jumpDirect ( 0x189E,slow_189E,0 );
 }
 
 Control slow_0BDA ()
@@ -30078,7 +30078,7 @@ Control slow_0BDA ()
     advance ( 10 );
     H = 0x20;
     L = 0xEC;
-    return jumpDirect ( 0x0BDD,slow_0BDD );
+    return jumpDirect ( 0x0BDD,slow_0BDD,0 );
 }
 
 Control slow_0BDD ()
@@ -30090,7 +30090,7 @@ Control slow_0BDD ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x0BDE,slow_0BDE );
+    return jumpDirect ( 0x0BDE,slow_0BDE,0 );
 }
 
 Control slow_0BDE ()
@@ -30108,7 +30108,7 @@ Control slow_0BDE ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x0BDF,slow_0BDF );
+    return jumpDirect ( 0x0BDF,slow_0BDF,0 );
 }
 
 Control slow_0BDF ()
@@ -30125,7 +30125,7 @@ Control slow_0BDF ()
     FlagA = ( ( a3 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x0BE1,slow_0BE1 );
+    return jumpDirect ( 0x0BE1,slow_0BE1,0 );
 }
 
 Control slow_0BE1 ()
@@ -30137,7 +30137,7 @@ Control slow_0BE1 ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x0BE2,slow_0BE2 );
+    return jumpDirect ( 0x0BE2,slow_0BE2,0 );
 }
 
 Control slow_0BE2 ()
@@ -30156,7 +30156,7 @@ Control slow_0BE2 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x09D6,slow_09D6 );
+    return jumpDirect ( 0x09D6,slow_09D6,fast_09D6 );
 }
 
 Control slow_0BE5 ()
@@ -30164,7 +30164,7 @@ Control slow_0BE5 ()
     // #at: 0BE5
     instruction2 ( 0x0B,0xE8,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x18,0xDF );
     advance ( 10 );
-    return jumpDirect ( 0x18DF,slow_18DF );
+    return jumpDirect ( 0x18DF,slow_18DF,fast_18DF );
 }
 
 Control slow_0BE8 ()
@@ -30174,7 +30174,7 @@ Control slow_0BE8 ()
     advance ( 10 );
     D = 0x1D;
     E = 0xAB;
-    return jumpDirect ( 0x0BEB,slow_0BEB );
+    return jumpDirect ( 0x0BEB,slow_0BEB,0 );
 }
 
 Control slow_0BEB ()
@@ -30193,7 +30193,7 @@ Control slow_0BEB ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0A93,slow_0A93 );
+    return jumpDirect ( 0x0A93,slow_0A93,fast_0A93 );
 }
 
 Control slow_0BEE ()
@@ -30201,7 +30201,7 @@ Control slow_0BEE ()
     // #at: 0BEE
     instruction2 ( 0x0B,0xF1,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x0B,0x0B );
     advance ( 10 );
-    return jumpDirect ( 0x0B0B,slow_0B0B );
+    return jumpDirect ( 0x0B0B,slow_0B0B,fast_0B0B );
 }
 
 Control slow_0BF1 ()
@@ -30220,7 +30220,7 @@ Control slow_0BF1 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x190A,slow_190A );
+    return jumpDirect ( 0x190A,slow_190A,fast_190A );
 }
 
 Control slow_0BF4 ()
@@ -30228,7 +30228,7 @@ Control slow_0BF4 ()
     // #at: 0BF4
     instruction2 ( 0x0B,0xF7,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x19,0x9A );
     advance ( 10 );
-    return jumpDirect ( 0x199A,slow_199A );
+    return jumpDirect ( 0x199A,slow_199A,0 );
 }
 
 Control slow_1400 ()
@@ -30236,7 +30236,7 @@ Control slow_1400 ()
     // #at: 1400
     instruction0 ( 0x14,0x01,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"NOP" );
     advance ( 4 );
-    return jumpDirect ( 0x1401,slow_1401 );
+    return jumpDirect ( 0x1401,slow_1401,0 );
 }
 
 Control slow_1401 ()
@@ -30255,7 +30255,7 @@ Control slow_1401 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1474,slow_1474 );
+    return jumpDirect ( 0x1474,slow_1474,fast_1474 );
 }
 
 Control slow_1404 ()
@@ -30263,7 +30263,7 @@ Control slow_1404 ()
     // #at: 1404
     instruction0 ( 0x14,0x05,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"NOP" );
     advance ( 4 );
-    return jumpDirect ( 0x1405,slow_1405 );
+    return jumpDirect ( 0x1405,slow_1405,fast_1405 );
 }
 
 Control slow_1405 ()
@@ -30283,7 +30283,7 @@ Control slow_1405 ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x1406,slow_1406 );
+    return jumpDirect ( 0x1406,slow_1406,0 );
 }
 
 Control slow_1406 ()
@@ -30303,7 +30303,7 @@ Control slow_1406 ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x1407,slow_1407 );
+    return jumpDirect ( 0x1407,slow_1407,0 );
 }
 
 Control slow_1407 ()
@@ -30315,7 +30315,7 @@ Control slow_1407 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x1408,slow_1408 );
+    return jumpDirect ( 0x1408,slow_1408,0 );
 }
 
 Control slow_1408 ()
@@ -30326,7 +30326,7 @@ Control slow_1408 ()
     advance ( 10 );
     Shifter_HI = a1;
     Shifter_LO = Shifter_HI;
-    return jumpDirect ( 0x140A,slow_140A );
+    return jumpDirect ( 0x140A,slow_140A,0 );
 }
 
 Control slow_140A ()
@@ -30338,7 +30338,7 @@ Control slow_140A ()
     u8 a3 = ( ( Shifter_HI << a1 ) | ( ( Shifter_LO >> a2 ) >> 0x01 ) ) ;
     advance ( 10 );
     A = a3;
-    return jumpDirect ( 0x140C,slow_140C );
+    return jumpDirect ( 0x140C,slow_140C,0 );
 }
 
 Control slow_140C ()
@@ -30357,7 +30357,7 @@ Control slow_140C ()
     FlagA = false;
     FlagP = e1_parity ( a5 );
     FlagCY = false;
-    return jumpDirect ( 0x140D,slow_140D );
+    return jumpDirect ( 0x140D,slow_140D,0 );
 }
 
 Control slow_140D ()
@@ -30369,7 +30369,7 @@ Control slow_140D ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x140E,slow_140E );
+    return jumpDirect ( 0x140E,slow_140E,0 );
 }
 
 Control slow_140E ()
@@ -30382,7 +30382,7 @@ Control slow_140E ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x140F,slow_140F );
+    return jumpDirect ( 0x140F,slow_140F,0 );
 }
 
 Control slow_140F ()
@@ -30395,7 +30395,7 @@ Control slow_140F ()
     advance ( 5 );
     D = ( a3 >> 8 );
     E = ( a3 & 0xFF );
-    return jumpDirect ( 0x1410,slow_1410 );
+    return jumpDirect ( 0x1410,slow_1410,0 );
 }
 
 Control slow_1410 ()
@@ -30412,7 +30412,7 @@ Control slow_1410 ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x1411,slow_1411 );
+    return jumpDirect ( 0x1411,slow_1411,0 );
 }
 
 Control slow_1411 ()
@@ -30423,7 +30423,7 @@ Control slow_1411 ()
     advance ( 10 );
     Shifter_HI = a1;
     Shifter_LO = Shifter_HI;
-    return jumpDirect ( 0x1413,slow_1413 );
+    return jumpDirect ( 0x1413,slow_1413,0 );
 }
 
 Control slow_1413 ()
@@ -30435,7 +30435,7 @@ Control slow_1413 ()
     u8 a3 = ( ( Shifter_HI << a1 ) | ( ( Shifter_LO >> a2 ) >> 0x01 ) ) ;
     advance ( 10 );
     A = a3;
-    return jumpDirect ( 0x1415,slow_1415 );
+    return jumpDirect ( 0x1415,slow_1415,0 );
 }
 
 Control slow_1415 ()
@@ -30454,7 +30454,7 @@ Control slow_1415 ()
     FlagA = false;
     FlagP = e1_parity ( a5 );
     FlagCY = false;
-    return jumpDirect ( 0x1416,slow_1416 );
+    return jumpDirect ( 0x1416,slow_1416,0 );
 }
 
 Control slow_1416 ()
@@ -30466,7 +30466,7 @@ Control slow_1416 ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x1417,slow_1417 );
+    return jumpDirect ( 0x1417,slow_1417,0 );
 }
 
 Control slow_1417 ()
@@ -30486,7 +30486,7 @@ Control slow_1417 ()
     L = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x1418,slow_1418 );
+    return jumpDirect ( 0x1418,slow_1418,0 );
 }
 
 Control slow_1418 ()
@@ -30496,7 +30496,7 @@ Control slow_1418 ()
     advance ( 10 );
     B = 0x00;
     C = 0x20;
-    return jumpDirect ( 0x141B,slow_141B );
+    return jumpDirect ( 0x141B,slow_141B,0 );
 }
 
 Control slow_141B ()
@@ -30512,7 +30512,7 @@ Control slow_141B ()
     H = ( ( a5 & 0xFFFF ) >> 8 );
     L = ( ( a5 & 0xFFFF ) & 0xFF );
     FlagCY = ( ( a5 >> 16 ) & 0x01 );
-    return jumpDirect ( 0x141C,slow_141C );
+    return jumpDirect ( 0x141C,slow_141C,0 );
 }
 
 Control slow_141C ()
@@ -30532,7 +30532,7 @@ Control slow_141C ()
     C = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x141D,slow_141D );
+    return jumpDirect ( 0x141D,slow_141D,0 );
 }
 
 Control slow_141D ()
@@ -30550,7 +30550,7 @@ Control slow_141D ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x141E,slow_141E );
+    return jumpDirect ( 0x141E,slow_141E,0 );
 }
 
 Control slow_141E ()
@@ -30560,12 +30560,12 @@ Control slow_141E ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x1405,slow_1405 );
+        return jumpDirect ( 0x1405,slow_1405,fast_1405 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x1421,slow_1421 );
+        return jumpDirect ( 0x1421,slow_1421,0 );
     }
 }
 
@@ -30603,7 +30603,7 @@ Control slow_1424 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1474,slow_1474 );
+    return jumpDirect ( 0x1474,slow_1474,fast_1474 );
 }
 
 Control slow_1427 ()
@@ -30623,7 +30623,7 @@ Control slow_1427 ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x1428,slow_1428 );
+    return jumpDirect ( 0x1428,slow_1428,0 );
 }
 
 Control slow_1428 ()
@@ -30643,7 +30643,7 @@ Control slow_1428 ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x1429,slow_1429 );
+    return jumpDirect ( 0x1429,slow_1429,0 );
 }
 
 Control slow_1429 ()
@@ -30660,7 +30660,7 @@ Control slow_1429 ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x142A,slow_142A );
+    return jumpDirect ( 0x142A,slow_142A,0 );
 }
 
 Control slow_142A ()
@@ -30672,7 +30672,7 @@ Control slow_142A ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x142B,slow_142B );
+    return jumpDirect ( 0x142B,slow_142B,0 );
 }
 
 Control slow_142B ()
@@ -30685,7 +30685,7 @@ Control slow_142B ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x142C,slow_142C );
+    return jumpDirect ( 0x142C,slow_142C,0 );
 }
 
 Control slow_142C ()
@@ -30697,7 +30697,7 @@ Control slow_142C ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x142D,slow_142D );
+    return jumpDirect ( 0x142D,slow_142D,0 );
 }
 
 Control slow_142D ()
@@ -30710,7 +30710,7 @@ Control slow_142D ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x142E,slow_142E );
+    return jumpDirect ( 0x142E,slow_142E,0 );
 }
 
 Control slow_142E ()
@@ -30730,7 +30730,7 @@ Control slow_142E ()
     L = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x142F,slow_142F );
+    return jumpDirect ( 0x142F,slow_142F,0 );
 }
 
 Control slow_142F ()
@@ -30740,7 +30740,7 @@ Control slow_142F ()
     advance ( 10 );
     B = 0x00;
     C = 0x20;
-    return jumpDirect ( 0x1432,slow_1432 );
+    return jumpDirect ( 0x1432,slow_1432,0 );
 }
 
 Control slow_1432 ()
@@ -30756,7 +30756,7 @@ Control slow_1432 ()
     H = ( ( a5 & 0xFFFF ) >> 8 );
     L = ( ( a5 & 0xFFFF ) & 0xFF );
     FlagCY = ( ( a5 >> 16 ) & 0x01 );
-    return jumpDirect ( 0x1433,slow_1433 );
+    return jumpDirect ( 0x1433,slow_1433,0 );
 }
 
 Control slow_1433 ()
@@ -30776,7 +30776,7 @@ Control slow_1433 ()
     C = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x1434,slow_1434 );
+    return jumpDirect ( 0x1434,slow_1434,0 );
 }
 
 Control slow_1434 ()
@@ -30794,7 +30794,7 @@ Control slow_1434 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x1435,slow_1435 );
+    return jumpDirect ( 0x1435,slow_1435,0 );
 }
 
 Control slow_1435 ()
@@ -30804,12 +30804,12 @@ Control slow_1435 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x1427,slow_1427 );
+        return jumpDirect ( 0x1427,slow_1427,fast_1427 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x1438,slow_1438 );
+        return jumpDirect ( 0x1438,slow_1438,0 );
     }
 }
 
@@ -30848,7 +30848,7 @@ Control slow_1439 ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x143A,slow_143A );
+    return jumpDirect ( 0x143A,slow_143A,0 );
 }
 
 Control slow_143A ()
@@ -30860,7 +30860,7 @@ Control slow_143A ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x143B,slow_143B );
+    return jumpDirect ( 0x143B,slow_143B,0 );
 }
 
 Control slow_143B ()
@@ -30872,7 +30872,7 @@ Control slow_143B ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x143C,slow_143C );
+    return jumpDirect ( 0x143C,slow_143C,0 );
 }
 
 Control slow_143C ()
@@ -30885,7 +30885,7 @@ Control slow_143C ()
     advance ( 5 );
     D = ( a3 >> 8 );
     E = ( a3 & 0xFF );
-    return jumpDirect ( 0x143D,slow_143D );
+    return jumpDirect ( 0x143D,slow_143D,0 );
 }
 
 Control slow_143D ()
@@ -30895,7 +30895,7 @@ Control slow_143D ()
     advance ( 10 );
     B = 0x00;
     C = 0x20;
-    return jumpDirect ( 0x1440,slow_1440 );
+    return jumpDirect ( 0x1440,slow_1440,0 );
 }
 
 Control slow_1440 ()
@@ -30911,7 +30911,7 @@ Control slow_1440 ()
     H = ( ( a5 & 0xFFFF ) >> 8 );
     L = ( ( a5 & 0xFFFF ) & 0xFF );
     FlagCY = ( ( a5 >> 16 ) & 0x01 );
-    return jumpDirect ( 0x1441,slow_1441 );
+    return jumpDirect ( 0x1441,slow_1441,0 );
 }
 
 Control slow_1441 ()
@@ -30931,7 +30931,7 @@ Control slow_1441 ()
     C = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x1442,slow_1442 );
+    return jumpDirect ( 0x1442,slow_1442,0 );
 }
 
 Control slow_1442 ()
@@ -30949,7 +30949,7 @@ Control slow_1442 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x1443,slow_1443 );
+    return jumpDirect ( 0x1443,slow_1443,0 );
 }
 
 Control slow_1443 ()
@@ -30959,12 +30959,12 @@ Control slow_1443 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x1439,slow_1439 );
+        return jumpDirect ( 0x1439,slow_1439,fast_1439 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x1446,slow_1446 );
+        return jumpDirect ( 0x1446,slow_1446,0 );
     }
 }
 
@@ -31002,7 +31002,7 @@ Control slow_1452 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1474,slow_1474 );
+    return jumpDirect ( 0x1474,slow_1474,fast_1474 );
 }
 
 Control slow_1455 ()
@@ -31022,7 +31022,7 @@ Control slow_1455 ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x1456,slow_1456 );
+    return jumpDirect ( 0x1456,slow_1456,0 );
 }
 
 Control slow_1456 ()
@@ -31042,7 +31042,7 @@ Control slow_1456 ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x1457,slow_1457 );
+    return jumpDirect ( 0x1457,slow_1457,0 );
 }
 
 Control slow_1457 ()
@@ -31054,7 +31054,7 @@ Control slow_1457 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x1458,slow_1458 );
+    return jumpDirect ( 0x1458,slow_1458,0 );
 }
 
 Control slow_1458 ()
@@ -31065,7 +31065,7 @@ Control slow_1458 ()
     advance ( 10 );
     Shifter_HI = a1;
     Shifter_LO = Shifter_HI;
-    return jumpDirect ( 0x145A,slow_145A );
+    return jumpDirect ( 0x145A,slow_145A,0 );
 }
 
 Control slow_145A ()
@@ -31077,7 +31077,7 @@ Control slow_145A ()
     u8 a3 = ( ( Shifter_HI << a1 ) | ( ( Shifter_LO >> a2 ) >> 0x01 ) ) ;
     advance ( 10 );
     A = a3;
-    return jumpDirect ( 0x145C,slow_145C );
+    return jumpDirect ( 0x145C,slow_145C,0 );
 }
 
 Control slow_145C ()
@@ -31087,7 +31087,7 @@ Control slow_145C ()
     u8 a1 = A ;
     advance ( 4 );
     A = ( ( u8 ) ( ~ a1 ) );
-    return jumpDirect ( 0x145D,slow_145D );
+    return jumpDirect ( 0x145D,slow_145D,0 );
 }
 
 Control slow_145D ()
@@ -31107,7 +31107,7 @@ Control slow_145D ()
     FlagA = ( ( a6 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a5 );
     FlagCY = false;
-    return jumpDirect ( 0x145E,slow_145E );
+    return jumpDirect ( 0x145E,slow_145E,0 );
 }
 
 Control slow_145E ()
@@ -31119,7 +31119,7 @@ Control slow_145E ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x145F,slow_145F );
+    return jumpDirect ( 0x145F,slow_145F,0 );
 }
 
 Control slow_145F ()
@@ -31132,7 +31132,7 @@ Control slow_145F ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x1460,slow_1460 );
+    return jumpDirect ( 0x1460,slow_1460,0 );
 }
 
 Control slow_1460 ()
@@ -31145,7 +31145,7 @@ Control slow_1460 ()
     advance ( 5 );
     D = ( a3 >> 8 );
     E = ( a3 & 0xFF );
-    return jumpDirect ( 0x1461,slow_1461 );
+    return jumpDirect ( 0x1461,slow_1461,0 );
 }
 
 Control slow_1461 ()
@@ -31162,7 +31162,7 @@ Control slow_1461 ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x1462,slow_1462 );
+    return jumpDirect ( 0x1462,slow_1462,0 );
 }
 
 Control slow_1462 ()
@@ -31173,7 +31173,7 @@ Control slow_1462 ()
     advance ( 10 );
     Shifter_HI = a1;
     Shifter_LO = Shifter_HI;
-    return jumpDirect ( 0x1464,slow_1464 );
+    return jumpDirect ( 0x1464,slow_1464,0 );
 }
 
 Control slow_1464 ()
@@ -31185,7 +31185,7 @@ Control slow_1464 ()
     u8 a3 = ( ( Shifter_HI << a1 ) | ( ( Shifter_LO >> a2 ) >> 0x01 ) ) ;
     advance ( 10 );
     A = a3;
-    return jumpDirect ( 0x1466,slow_1466 );
+    return jumpDirect ( 0x1466,slow_1466,0 );
 }
 
 Control slow_1466 ()
@@ -31195,7 +31195,7 @@ Control slow_1466 ()
     u8 a1 = A ;
     advance ( 4 );
     A = ( ( u8 ) ( ~ a1 ) );
-    return jumpDirect ( 0x1467,slow_1467 );
+    return jumpDirect ( 0x1467,slow_1467,0 );
 }
 
 Control slow_1467 ()
@@ -31215,7 +31215,7 @@ Control slow_1467 ()
     FlagA = ( ( a6 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a5 );
     FlagCY = false;
-    return jumpDirect ( 0x1468,slow_1468 );
+    return jumpDirect ( 0x1468,slow_1468,0 );
 }
 
 Control slow_1468 ()
@@ -31227,7 +31227,7 @@ Control slow_1468 ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x1469,slow_1469 );
+    return jumpDirect ( 0x1469,slow_1469,0 );
 }
 
 Control slow_1469 ()
@@ -31247,7 +31247,7 @@ Control slow_1469 ()
     L = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x146A,slow_146A );
+    return jumpDirect ( 0x146A,slow_146A,0 );
 }
 
 Control slow_146A ()
@@ -31257,7 +31257,7 @@ Control slow_146A ()
     advance ( 10 );
     B = 0x00;
     C = 0x20;
-    return jumpDirect ( 0x146D,slow_146D );
+    return jumpDirect ( 0x146D,slow_146D,0 );
 }
 
 Control slow_146D ()
@@ -31273,7 +31273,7 @@ Control slow_146D ()
     H = ( ( a5 & 0xFFFF ) >> 8 );
     L = ( ( a5 & 0xFFFF ) & 0xFF );
     FlagCY = ( ( a5 >> 16 ) & 0x01 );
-    return jumpDirect ( 0x146E,slow_146E );
+    return jumpDirect ( 0x146E,slow_146E,0 );
 }
 
 Control slow_146E ()
@@ -31293,7 +31293,7 @@ Control slow_146E ()
     C = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x146F,slow_146F );
+    return jumpDirect ( 0x146F,slow_146F,0 );
 }
 
 Control slow_146F ()
@@ -31311,7 +31311,7 @@ Control slow_146F ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x1470,slow_1470 );
+    return jumpDirect ( 0x1470,slow_1470,0 );
 }
 
 Control slow_1470 ()
@@ -31321,12 +31321,12 @@ Control slow_1470 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x1455,slow_1455 );
+        return jumpDirect ( 0x1455,slow_1455,fast_1455 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x1473,slow_1473 );
+        return jumpDirect ( 0x1473,slow_1473,0 );
     }
 }
 
@@ -31355,7 +31355,7 @@ Control slow_1474 ()
     u8 a1 = L ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x1475,slow_1475 );
+    return jumpDirect ( 0x1475,slow_1475,0 );
 }
 
 Control slow_1475 ()
@@ -31372,7 +31372,7 @@ Control slow_1475 ()
     FlagA = ( ( a3 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x1477,slow_1477 );
+    return jumpDirect ( 0x1477,slow_1477,0 );
 }
 
 Control slow_1477 ()
@@ -31382,7 +31382,7 @@ Control slow_1477 ()
     u8 a1 = A ;
     advance ( 10 );
     Shifter_OFF = a1;
-    return jumpDirect ( 0x1479,slow_1479 );
+    return jumpDirect ( 0x1479,slow_1479,0 );
 }
 
 Control slow_1479 ()
@@ -31390,7 +31390,7 @@ Control slow_1479 ()
     // #at: 1479
     instruction2 ( 0x14,0x7C,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x1A,0x47 );
     advance ( 10 );
-    return jumpDirect ( 0x1A47,slow_1A47 );
+    return jumpDirect ( 0x1A47,slow_1A47,fast_1A47 );
 }
 
 Control slow_147C ()
@@ -31410,7 +31410,7 @@ Control slow_147C ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x147D,slow_147D );
+    return jumpDirect ( 0x147D,slow_147D,0 );
 }
 
 Control slow_147D ()
@@ -31430,7 +31430,7 @@ Control slow_147D ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x147E,slow_147E );
+    return jumpDirect ( 0x147E,slow_147E,fast_147E );
 }
 
 Control slow_147E ()
@@ -31442,7 +31442,7 @@ Control slow_147E ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x147F,slow_147F );
+    return jumpDirect ( 0x147F,slow_147F,0 );
 }
 
 Control slow_147F ()
@@ -31454,7 +31454,7 @@ Control slow_147F ()
     u8 a3 = A ;
     mem_write ( ( ( a1 << 8 ) | a2 ),a3 );
     advance ( 7 );
-    return jumpDirect ( 0x1480,slow_1480 );
+    return jumpDirect ( 0x1480,slow_1480,0 );
 }
 
 Control slow_1480 ()
@@ -31467,7 +31467,7 @@ Control slow_1480 ()
     advance ( 5 );
     D = ( a3 >> 8 );
     E = ( a3 & 0xFF );
-    return jumpDirect ( 0x1481,slow_1481 );
+    return jumpDirect ( 0x1481,slow_1481,0 );
 }
 
 Control slow_1481 ()
@@ -31480,7 +31480,7 @@ Control slow_1481 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x1482,slow_1482 );
+    return jumpDirect ( 0x1482,slow_1482,0 );
 }
 
 Control slow_1482 ()
@@ -31498,7 +31498,7 @@ Control slow_1482 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x1483,slow_1483 );
+    return jumpDirect ( 0x1483,slow_1483,0 );
 }
 
 Control slow_1483 ()
@@ -31508,12 +31508,12 @@ Control slow_1483 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x147E,slow_147E );
+        return jumpDirect ( 0x147E,slow_147E,fast_147E );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x1486,slow_1486 );
+        return jumpDirect ( 0x1486,slow_1486,0 );
     }
 }
 
@@ -31534,7 +31534,7 @@ Control slow_1486 ()
     L = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x1487,slow_1487 );
+    return jumpDirect ( 0x1487,slow_1487,0 );
 }
 
 Control slow_1487 ()
@@ -31544,7 +31544,7 @@ Control slow_1487 ()
     advance ( 10 );
     B = 0x00;
     C = 0x20;
-    return jumpDirect ( 0x148A,slow_148A );
+    return jumpDirect ( 0x148A,slow_148A,0 );
 }
 
 Control slow_148A ()
@@ -31560,7 +31560,7 @@ Control slow_148A ()
     H = ( ( a5 & 0xFFFF ) >> 8 );
     L = ( ( a5 & 0xFFFF ) & 0xFF );
     FlagCY = ( ( a5 >> 16 ) & 0x01 );
-    return jumpDirect ( 0x148B,slow_148B );
+    return jumpDirect ( 0x148B,slow_148B,0 );
 }
 
 Control slow_148B ()
@@ -31580,7 +31580,7 @@ Control slow_148B ()
     C = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x148C,slow_148C );
+    return jumpDirect ( 0x148C,slow_148C,0 );
 }
 
 Control slow_148C ()
@@ -31598,7 +31598,7 @@ Control slow_148C ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x148D,slow_148D );
+    return jumpDirect ( 0x148D,slow_148D,0 );
 }
 
 Control slow_148D ()
@@ -31608,12 +31608,12 @@ Control slow_148D ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x147C,slow_147C );
+        return jumpDirect ( 0x147C,slow_147C,fast_147C );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x1490,slow_1490 );
+        return jumpDirect ( 0x1490,slow_1490,0 );
     }
 }
 
@@ -31651,7 +31651,7 @@ Control slow_1491 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1474,slow_1474 );
+    return jumpDirect ( 0x1474,slow_1474,fast_1474 );
 }
 
 Control slow_1494 ()
@@ -31668,7 +31668,7 @@ Control slow_1494 ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x1495,slow_1495 );
+    return jumpDirect ( 0x1495,slow_1495,0 );
 }
 
 Control slow_1495 ()
@@ -31678,7 +31678,7 @@ Control slow_1495 ()
     u8 a1 = A ;
     mem_write ( 0x2061,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x1498,slow_1498 );
+    return jumpDirect ( 0x1498,slow_1498,fast_1498 );
 }
 
 Control slow_1498 ()
@@ -31698,7 +31698,7 @@ Control slow_1498 ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x1499,slow_1499 );
+    return jumpDirect ( 0x1499,slow_1499,0 );
 }
 
 Control slow_1499 ()
@@ -31718,7 +31718,7 @@ Control slow_1499 ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x149A,slow_149A );
+    return jumpDirect ( 0x149A,slow_149A,0 );
 }
 
 Control slow_149A ()
@@ -31730,7 +31730,7 @@ Control slow_149A ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x149B,slow_149B );
+    return jumpDirect ( 0x149B,slow_149B,0 );
 }
 
 Control slow_149B ()
@@ -31741,7 +31741,7 @@ Control slow_149B ()
     advance ( 10 );
     Shifter_HI = a1;
     Shifter_LO = Shifter_HI;
-    return jumpDirect ( 0x149D,slow_149D );
+    return jumpDirect ( 0x149D,slow_149D,0 );
 }
 
 Control slow_149D ()
@@ -31753,7 +31753,7 @@ Control slow_149D ()
     u8 a3 = ( ( Shifter_HI << a1 ) | ( ( Shifter_LO >> a2 ) >> 0x01 ) ) ;
     advance ( 10 );
     A = a3;
-    return jumpDirect ( 0x149F,slow_149F );
+    return jumpDirect ( 0x149F,slow_149F,0 );
 }
 
 Control slow_149F ()
@@ -31772,7 +31772,7 @@ Control slow_149F ()
     advance ( 11 );
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x14A0,slow_14A0 );
+    return jumpDirect ( 0x14A0,slow_14A0,0 );
 }
 
 Control slow_14A0 ()
@@ -31792,7 +31792,7 @@ Control slow_14A0 ()
     FlagA = ( ( a6 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a5 );
     FlagCY = false;
-    return jumpDirect ( 0x14A1,slow_14A1 );
+    return jumpDirect ( 0x14A1,slow_14A1,0 );
 }
 
 Control slow_14A1 ()
@@ -31802,12 +31802,12 @@ Control slow_14A1 ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x14A9,slow_14A9 );
+        return jumpDirect ( 0x14A9,slow_14A9,fast_14A9 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x14A4,slow_14A4 );
+        return jumpDirect ( 0x14A4,slow_14A4,0 );
     }
 }
 
@@ -31817,7 +31817,7 @@ Control slow_14A4 ()
     instruction1 ( 0x14,0xA6,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x01 );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( 0x14A6,slow_14A6 );
+    return jumpDirect ( 0x14A6,slow_14A6,0 );
 }
 
 Control slow_14A6 ()
@@ -31827,7 +31827,7 @@ Control slow_14A6 ()
     u8 a1 = A ;
     mem_write ( 0x2061,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x14A9,slow_14A9 );
+    return jumpDirect ( 0x14A9,slow_14A9,fast_14A9 );
 }
 
 Control slow_14A9 ()
@@ -31851,7 +31851,7 @@ Control slow_14A9 ()
     FlagA = ( ( a4 >> 4 ) & 0x01 );
     FlagP = ( ( a4 >> 2 ) & 0x01 );
     FlagCY = ( ( a4 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x14AA,slow_14AA );
+    return jumpDirect ( 0x14AA,slow_14AA,0 );
 }
 
 Control slow_14AA ()
@@ -31870,7 +31870,7 @@ Control slow_14AA ()
     FlagA = false;
     FlagP = e1_parity ( a5 );
     FlagCY = false;
-    return jumpDirect ( 0x14AB,slow_14AB );
+    return jumpDirect ( 0x14AB,slow_14AB,0 );
 }
 
 Control slow_14AB ()
@@ -31882,7 +31882,7 @@ Control slow_14AB ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x14AC,slow_14AC );
+    return jumpDirect ( 0x14AC,slow_14AC,0 );
 }
 
 Control slow_14AC ()
@@ -31895,7 +31895,7 @@ Control slow_14AC ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x14AD,slow_14AD );
+    return jumpDirect ( 0x14AD,slow_14AD,0 );
 }
 
 Control slow_14AD ()
@@ -31908,7 +31908,7 @@ Control slow_14AD ()
     advance ( 5 );
     D = ( a3 >> 8 );
     E = ( a3 & 0xFF );
-    return jumpDirect ( 0x14AE,slow_14AE );
+    return jumpDirect ( 0x14AE,slow_14AE,0 );
 }
 
 Control slow_14AE ()
@@ -31925,7 +31925,7 @@ Control slow_14AE ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x14AF,slow_14AF );
+    return jumpDirect ( 0x14AF,slow_14AF,0 );
 }
 
 Control slow_14AF ()
@@ -31936,7 +31936,7 @@ Control slow_14AF ()
     advance ( 10 );
     Shifter_HI = a1;
     Shifter_LO = Shifter_HI;
-    return jumpDirect ( 0x14B1,slow_14B1 );
+    return jumpDirect ( 0x14B1,slow_14B1,0 );
 }
 
 Control slow_14B1 ()
@@ -31948,7 +31948,7 @@ Control slow_14B1 ()
     u8 a3 = ( ( Shifter_HI << a1 ) | ( ( Shifter_LO >> a2 ) >> 0x01 ) ) ;
     advance ( 10 );
     A = a3;
-    return jumpDirect ( 0x14B3,slow_14B3 );
+    return jumpDirect ( 0x14B3,slow_14B3,0 );
 }
 
 Control slow_14B3 ()
@@ -31967,7 +31967,7 @@ Control slow_14B3 ()
     advance ( 11 );
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x14B4,slow_14B4 );
+    return jumpDirect ( 0x14B4,slow_14B4,0 );
 }
 
 Control slow_14B4 ()
@@ -31987,7 +31987,7 @@ Control slow_14B4 ()
     FlagA = ( ( a6 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a5 );
     FlagCY = false;
-    return jumpDirect ( 0x14B5,slow_14B5 );
+    return jumpDirect ( 0x14B5,slow_14B5,0 );
 }
 
 Control slow_14B5 ()
@@ -31997,12 +31997,12 @@ Control slow_14B5 ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x14BD,slow_14BD );
+        return jumpDirect ( 0x14BD,slow_14BD,fast_14BD );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x14B8,slow_14B8 );
+        return jumpDirect ( 0x14B8,slow_14B8,0 );
     }
 }
 
@@ -32012,7 +32012,7 @@ Control slow_14B8 ()
     instruction1 ( 0x14,0xBA,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x01 );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( 0x14BA,slow_14BA );
+    return jumpDirect ( 0x14BA,slow_14BA,0 );
 }
 
 Control slow_14BA ()
@@ -32022,7 +32022,7 @@ Control slow_14BA ()
     u8 a1 = A ;
     mem_write ( 0x2061,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x14BD,slow_14BD );
+    return jumpDirect ( 0x14BD,slow_14BD,fast_14BD );
 }
 
 Control slow_14BD ()
@@ -32046,7 +32046,7 @@ Control slow_14BD ()
     FlagA = ( ( a4 >> 4 ) & 0x01 );
     FlagP = ( ( a4 >> 2 ) & 0x01 );
     FlagCY = ( ( a4 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x14BE,slow_14BE );
+    return jumpDirect ( 0x14BE,slow_14BE,0 );
 }
 
 Control slow_14BE ()
@@ -32065,7 +32065,7 @@ Control slow_14BE ()
     FlagA = false;
     FlagP = e1_parity ( a5 );
     FlagCY = false;
-    return jumpDirect ( 0x14BF,slow_14BF );
+    return jumpDirect ( 0x14BF,slow_14BF,0 );
 }
 
 Control slow_14BF ()
@@ -32077,7 +32077,7 @@ Control slow_14BF ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x14C0,slow_14C0 );
+    return jumpDirect ( 0x14C0,slow_14C0,0 );
 }
 
 Control slow_14C0 ()
@@ -32097,7 +32097,7 @@ Control slow_14C0 ()
     L = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x14C1,slow_14C1 );
+    return jumpDirect ( 0x14C1,slow_14C1,0 );
 }
 
 Control slow_14C1 ()
@@ -32107,7 +32107,7 @@ Control slow_14C1 ()
     advance ( 10 );
     B = 0x00;
     C = 0x20;
-    return jumpDirect ( 0x14C4,slow_14C4 );
+    return jumpDirect ( 0x14C4,slow_14C4,0 );
 }
 
 Control slow_14C4 ()
@@ -32123,7 +32123,7 @@ Control slow_14C4 ()
     H = ( ( a5 & 0xFFFF ) >> 8 );
     L = ( ( a5 & 0xFFFF ) & 0xFF );
     FlagCY = ( ( a5 >> 16 ) & 0x01 );
-    return jumpDirect ( 0x14C5,slow_14C5 );
+    return jumpDirect ( 0x14C5,slow_14C5,0 );
 }
 
 Control slow_14C5 ()
@@ -32143,7 +32143,7 @@ Control slow_14C5 ()
     C = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x14C6,slow_14C6 );
+    return jumpDirect ( 0x14C6,slow_14C6,0 );
 }
 
 Control slow_14C6 ()
@@ -32161,7 +32161,7 @@ Control slow_14C6 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x14C7,slow_14C7 );
+    return jumpDirect ( 0x14C7,slow_14C7,0 );
 }
 
 Control slow_14C7 ()
@@ -32171,12 +32171,12 @@ Control slow_14C7 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x1498,slow_1498 );
+        return jumpDirect ( 0x1498,slow_1498,fast_1498 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x14CA,slow_14CA );
+        return jumpDirect ( 0x14CA,slow_14CA,0 );
     }
 }
 
@@ -32212,7 +32212,7 @@ Control slow_14CB ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x14CC,slow_14CC );
+    return jumpDirect ( 0x14CC,slow_14CC,fast_14CC );
 }
 
 Control slow_14CC ()
@@ -32232,7 +32232,7 @@ Control slow_14CC ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x14CD,slow_14CD );
+    return jumpDirect ( 0x14CD,slow_14CD,0 );
 }
 
 Control slow_14CD ()
@@ -32244,7 +32244,7 @@ Control slow_14CD ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x14CE,slow_14CE );
+    return jumpDirect ( 0x14CE,slow_14CE,0 );
 }
 
 Control slow_14CE ()
@@ -32254,7 +32254,7 @@ Control slow_14CE ()
     advance ( 10 );
     B = 0x00;
     C = 0x20;
-    return jumpDirect ( 0x14D1,slow_14D1 );
+    return jumpDirect ( 0x14D1,slow_14D1,0 );
 }
 
 Control slow_14D1 ()
@@ -32270,7 +32270,7 @@ Control slow_14D1 ()
     H = ( ( a5 & 0xFFFF ) >> 8 );
     L = ( ( a5 & 0xFFFF ) & 0xFF );
     FlagCY = ( ( a5 >> 16 ) & 0x01 );
-    return jumpDirect ( 0x14D2,slow_14D2 );
+    return jumpDirect ( 0x14D2,slow_14D2,0 );
 }
 
 Control slow_14D2 ()
@@ -32290,7 +32290,7 @@ Control slow_14D2 ()
     C = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x14D3,slow_14D3 );
+    return jumpDirect ( 0x14D3,slow_14D3,0 );
 }
 
 Control slow_14D3 ()
@@ -32308,7 +32308,7 @@ Control slow_14D3 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x14D4,slow_14D4 );
+    return jumpDirect ( 0x14D4,slow_14D4,0 );
 }
 
 Control slow_14D4 ()
@@ -32318,12 +32318,12 @@ Control slow_14D4 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x14CC,slow_14CC );
+        return jumpDirect ( 0x14CC,slow_14CC,fast_14CC );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x14D7,slow_14D7 );
+        return jumpDirect ( 0x14D7,slow_14D7,0 );
     }
 }
 
@@ -32352,7 +32352,7 @@ Control slow_14D8 ()
     u8 a1 = e8_read_mem ( 0x2025 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x14DB,slow_14DB );
+    return jumpDirect ( 0x14DB,slow_14DB,0 );
 }
 
 Control slow_14DB ()
@@ -32370,7 +32370,7 @@ Control slow_14DB ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x14DD,slow_14DD );
+    return jumpDirect ( 0x14DD,slow_14DD,0 );
 }
 
 Control slow_14DD ()
@@ -32395,7 +32395,7 @@ Control slow_14DD ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x14DE,slow_14DE );
+        return jumpDirect ( 0x14DE,slow_14DE,0 );
     }
 }
 
@@ -32414,7 +32414,7 @@ Control slow_14DE ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x14E0,slow_14E0 );
+    return jumpDirect ( 0x14E0,slow_14E0,0 );
 }
 
 Control slow_14E0 ()
@@ -32439,7 +32439,7 @@ Control slow_14E0 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x14E1,slow_14E1 );
+        return jumpDirect ( 0x14E1,slow_14E1,0 );
     }
 }
 
@@ -32450,7 +32450,7 @@ Control slow_14E1 ()
     u8 a1 = e8_read_mem ( 0x2029 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x14E4,slow_14E4 );
+    return jumpDirect ( 0x14E4,slow_14E4,0 );
 }
 
 Control slow_14E4 ()
@@ -32468,7 +32468,7 @@ Control slow_14E4 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x14E6,slow_14E6 );
+    return jumpDirect ( 0x14E6,slow_14E6,0 );
 }
 
 Control slow_14E6 ()
@@ -32478,7 +32478,7 @@ Control slow_14E6 ()
     u8 a1 = A ;
     advance ( 5 );
     B = a1;
-    return jumpDirect ( 0x14E7,slow_14E7 );
+    return jumpDirect ( 0x14E7,slow_14E7,0 );
 }
 
 Control slow_14E7 ()
@@ -32488,12 +32488,12 @@ Control slow_14E7 ()
     if (( ! FlagCY ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x1530,slow_1530 );
+        return jumpDirect ( 0x1530,slow_1530,fast_1530 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x14EA,slow_14EA );
+        return jumpDirect ( 0x14EA,slow_14EA,0 );
     }
 }
 
@@ -32504,7 +32504,7 @@ Control slow_14EA ()
     u8 a1 = e8_read_mem ( 0x2002 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x14ED,slow_14ED );
+    return jumpDirect ( 0x14ED,slow_14ED,0 );
 }
 
 Control slow_14ED ()
@@ -32522,7 +32522,7 @@ Control slow_14ED ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x14EE,slow_14EE );
+    return jumpDirect ( 0x14EE,slow_14EE,0 );
 }
 
 Control slow_14EE ()
@@ -32547,7 +32547,7 @@ Control slow_14EE ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x14EF,slow_14EF );
+        return jumpDirect ( 0x14EF,slow_14EF,0 );
     }
 }
 
@@ -32558,7 +32558,7 @@ Control slow_14EF ()
     u8 a1 = B ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x14F0,slow_14F0 );
+    return jumpDirect ( 0x14F0,slow_14F0,0 );
 }
 
 Control slow_14F0 ()
@@ -32576,7 +32576,7 @@ Control slow_14F0 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x14F2,slow_14F2 );
+    return jumpDirect ( 0x14F2,slow_14F2,0 );
 }
 
 Control slow_14F2 ()
@@ -32586,12 +32586,12 @@ Control slow_14F2 ()
     if (( ! FlagCY ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x1579,slow_1579 );
+        return jumpDirect ( 0x1579,slow_1579,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x14F5,slow_14F5 );
+        return jumpDirect ( 0x14F5,slow_14F5,0 );
     }
 }
 
@@ -32611,7 +32611,7 @@ Control slow_14F5 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ( ( a2 >> 8 ) >> 0 ) & 0x01 );
-    return jumpDirect ( 0x14F7,slow_14F7 );
+    return jumpDirect ( 0x14F7,slow_14F7,0 );
 }
 
 Control slow_14F7 ()
@@ -32621,7 +32621,7 @@ Control slow_14F7 ()
     u8 a1 = A ;
     advance ( 5 );
     B = a1;
-    return jumpDirect ( 0x14F8,slow_14F8 );
+    return jumpDirect ( 0x14F8,slow_14F8,0 );
 }
 
 Control slow_14F8 ()
@@ -32631,7 +32631,7 @@ Control slow_14F8 ()
     u8 a1 = e8_read_mem ( 0x2009 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x14FB,slow_14FB );
+    return jumpDirect ( 0x14FB,slow_14FB,0 );
 }
 
 Control slow_14FB ()
@@ -32649,7 +32649,7 @@ Control slow_14FB ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x14FD,slow_14FD );
+    return jumpDirect ( 0x14FD,slow_14FD,0 );
 }
 
 Control slow_14FD ()
@@ -32659,12 +32659,12 @@ Control slow_14FD ()
     if (( ! FlagCY ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x1504,slow_1504 );
+        return jumpDirect ( 0x1504,slow_1504,fast_1504 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x1500,slow_1500 );
+        return jumpDirect ( 0x1500,slow_1500,0 );
     }
 }
 
@@ -32684,7 +32684,7 @@ Control slow_1500 ()
     FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a3 & 0xFF ) );
     FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x1501,slow_1501 );
+    return jumpDirect ( 0x1501,slow_1501,0 );
 }
 
 Control slow_1501 ()
@@ -32694,12 +32694,12 @@ Control slow_1501 ()
     if (( ! FlagCY ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x1530,slow_1530 );
+        return jumpDirect ( 0x1530,slow_1530,fast_1530 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x1504,slow_1504 );
+        return jumpDirect ( 0x1504,slow_1504,fast_1504 );
     }
 }
 
@@ -32710,7 +32710,7 @@ Control slow_1504 ()
     u8 a1 = B ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( 0x1505,slow_1505 );
+    return jumpDirect ( 0x1505,slow_1505,0 );
 }
 
 Control slow_1505 ()
@@ -32729,7 +32729,7 @@ Control slow_1505 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1562,slow_1562 );
+    return jumpDirect ( 0x1562,slow_1562,0 );
 }
 
 Control slow_1508 ()
@@ -32739,7 +32739,7 @@ Control slow_1508 ()
     u8 a1 = e8_read_mem ( 0x202A ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x150B,slow_150B );
+    return jumpDirect ( 0x150B,slow_150B,0 );
 }
 
 Control slow_150B ()
@@ -32749,7 +32749,7 @@ Control slow_150B ()
     u8 a1 = A ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( 0x150C,slow_150C );
+    return jumpDirect ( 0x150C,slow_150C,0 );
 }
 
 Control slow_150C ()
@@ -32768,7 +32768,7 @@ Control slow_150C ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x156F,slow_156F );
+    return jumpDirect ( 0x156F,slow_156F,fast_156F );
 }
 
 Control slow_150F ()
@@ -32780,7 +32780,7 @@ Control slow_150F ()
     u8 a2 = H ;
     mem_write ( 0x2065,a2 );
     advance ( 16 );
-    return jumpDirect ( 0x1512,slow_1512 );
+    return jumpDirect ( 0x1512,slow_1512,0 );
 }
 
 Control slow_1512 ()
@@ -32789,7 +32789,7 @@ Control slow_1512 ()
     instruction1 ( 0x15,0x14,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x05 );
     advance ( 7 );
     A = 0x05;
-    return jumpDirect ( 0x1514,slow_1514 );
+    return jumpDirect ( 0x1514,slow_1514,0 );
 }
 
 Control slow_1514 ()
@@ -32799,7 +32799,7 @@ Control slow_1514 ()
     u8 a1 = A ;
     mem_write ( 0x2025,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x1517,slow_1517 );
+    return jumpDirect ( 0x1517,slow_1517,0 );
 }
 
 Control slow_1517 ()
@@ -32818,7 +32818,7 @@ Control slow_1517 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1581,slow_1581 );
+    return jumpDirect ( 0x1581,slow_1581,0 );
 }
 
 Control slow_151A ()
@@ -32830,7 +32830,7 @@ Control slow_151A ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x151B,slow_151B );
+    return jumpDirect ( 0x151B,slow_151B,0 );
 }
 
 Control slow_151B ()
@@ -32848,7 +32848,7 @@ Control slow_151B ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x151C,slow_151C );
+    return jumpDirect ( 0x151C,slow_151C,0 );
 }
 
 Control slow_151C ()
@@ -32858,12 +32858,12 @@ Control slow_151C ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x1530,slow_1530 );
+        return jumpDirect ( 0x1530,slow_1530,fast_1530 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x151F,slow_151F );
+        return jumpDirect ( 0x151F,slow_151F,0 );
     }
 }
 
@@ -32875,7 +32875,7 @@ Control slow_151F ()
     u8 a2 = L ;
     mem_write ( ( ( a1 << 8 ) | a2 ),0x00 );
     advance ( 10 );
-    return jumpDirect ( 0x1521,slow_1521 );
+    return jumpDirect ( 0x1521,slow_1521,0 );
 }
 
 Control slow_1521 ()
@@ -32894,7 +32894,7 @@ Control slow_1521 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0A5F,slow_0A5F );
+    return jumpDirect ( 0x0A5F,slow_0A5F,0 );
 }
 
 Control slow_1524 ()
@@ -32913,7 +32913,7 @@ Control slow_1524 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A3B,slow_1A3B );
+    return jumpDirect ( 0x1A3B,slow_1A3B,fast_1A3B );
 }
 
 Control slow_1527 ()
@@ -32932,7 +32932,7 @@ Control slow_1527 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x15D3,slow_15D3 );
+    return jumpDirect ( 0x15D3,slow_15D3,fast_15D3 );
 }
 
 Control slow_152A ()
@@ -32941,7 +32941,7 @@ Control slow_152A ()
     instruction1 ( 0x15,0x2C,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x10 );
     advance ( 7 );
     A = 0x10;
-    return jumpDirect ( 0x152C,slow_152C );
+    return jumpDirect ( 0x152C,slow_152C,0 );
 }
 
 Control slow_152C ()
@@ -32951,7 +32951,7 @@ Control slow_152C ()
     u8 a1 = A ;
     mem_write ( 0x2003,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x152F,slow_152F );
+    return jumpDirect ( 0x152F,slow_152F,0 );
 }
 
 Control slow_152F ()
@@ -32978,7 +32978,7 @@ Control slow_1530 ()
     instruction1 ( 0x15,0x32,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x03 );
     advance ( 7 );
     A = 0x03;
-    return jumpDirect ( 0x1532,slow_1532 );
+    return jumpDirect ( 0x1532,slow_1532,0 );
 }
 
 Control slow_1532 ()
@@ -32988,7 +32988,7 @@ Control slow_1532 ()
     u8 a1 = A ;
     mem_write ( 0x2025,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x1535,slow_1535 );
+    return jumpDirect ( 0x1535,slow_1535,0 );
 }
 
 Control slow_1535 ()
@@ -32996,7 +32996,7 @@ Control slow_1535 ()
     // #at: 1535
     instruction2 ( 0x15,0x38,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x15,0x4A );
     advance ( 10 );
-    return jumpDirect ( 0x154A,slow_154A );
+    return jumpDirect ( 0x154A,slow_154A,fast_154A );
 }
 
 Control slow_1538 ()
@@ -33006,7 +33006,7 @@ Control slow_1538 ()
     advance ( 10 );
     H = 0x20;
     L = 0x03;
-    return jumpDirect ( 0x153B,slow_153B );
+    return jumpDirect ( 0x153B,slow_153B,0 );
 }
 
 Control slow_153B ()
@@ -33028,7 +33028,7 @@ Control slow_153B ()
     FlagZ = ( 0 == ( a4 & 0xFF ) );
     FlagA = ( ( ( a7 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a4 & 0xFF ) );
-    return jumpDirect ( 0x153C,slow_153C );
+    return jumpDirect ( 0x153C,slow_153C,0 );
 }
 
 Control slow_153C ()
@@ -33053,7 +33053,7 @@ Control slow_153C ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x153D,slow_153D );
+        return jumpDirect ( 0x153D,slow_153D,0 );
     }
 }
 
@@ -33066,7 +33066,7 @@ Control slow_153D ()
     advance ( 16 );
     H = a2;
     L = a1;
-    return jumpDirect ( 0x1540,slow_1540 );
+    return jumpDirect ( 0x1540,slow_1540,0 );
 }
 
 Control slow_1540 ()
@@ -33075,7 +33075,7 @@ Control slow_1540 ()
     instruction1 ( 0x15,0x42,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x10 );
     advance ( 7 );
     B = 0x10;
-    return jumpDirect ( 0x1542,slow_1542 );
+    return jumpDirect ( 0x1542,slow_1542,0 );
 }
 
 Control slow_1542 ()
@@ -33094,7 +33094,7 @@ Control slow_1542 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1424,slow_1424 );
+    return jumpDirect ( 0x1424,slow_1424,fast_1424 );
 }
 
 Control slow_1545 ()
@@ -33103,7 +33103,7 @@ Control slow_1545 ()
     instruction1 ( 0x15,0x47,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x04 );
     advance ( 7 );
     A = 0x04;
-    return jumpDirect ( 0x1547,slow_1547 );
+    return jumpDirect ( 0x1547,slow_1547,0 );
 }
 
 Control slow_1547 ()
@@ -33113,7 +33113,7 @@ Control slow_1547 ()
     u8 a1 = A ;
     mem_write ( 0x2025,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x154A,slow_154A );
+    return jumpDirect ( 0x154A,slow_154A,fast_154A );
 }
 
 Control slow_154A ()
@@ -33130,7 +33130,7 @@ Control slow_154A ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x154B,slow_154B );
+    return jumpDirect ( 0x154B,slow_154B,0 );
 }
 
 Control slow_154B ()
@@ -33140,7 +33140,7 @@ Control slow_154B ()
     u8 a1 = A ;
     mem_write ( 0x2002,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x154E,slow_154E );
+    return jumpDirect ( 0x154E,slow_154E,0 );
 }
 
 Control slow_154E ()
@@ -33149,7 +33149,7 @@ Control slow_154E ()
     instruction1 ( 0x15,0x50,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0xF7 );
     advance ( 7 );
     B = 0xF7;
-    return jumpDirect ( 0x1550,slow_1550 );
+    return jumpDirect ( 0x1550,slow_1550,0 );
 }
 
 Control slow_1550 ()
@@ -33157,7 +33157,7 @@ Control slow_1550 ()
     // #at: 1550
     instruction2 ( 0x15,0x53,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x19,0xDC );
     advance ( 10 );
-    return jumpDirect ( 0x19DC,slow_19DC );
+    return jumpDirect ( 0x19DC,slow_19DC,fast_19DC );
 }
 
 Control slow_1554 ()
@@ -33166,7 +33166,7 @@ Control slow_1554 ()
     instruction1 ( 0x15,0x56,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   C,%02X",0x00 );
     advance ( 7 );
     C = 0x00;
-    return jumpDirect ( 0x1556,slow_1556 );
+    return jumpDirect ( 0x1556,slow_1556,0 );
 }
 
 Control slow_1556 ()
@@ -33185,7 +33185,7 @@ Control slow_1556 ()
     FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a3 & 0xFF ) );
     FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x1557,slow_1557 );
+    return jumpDirect ( 0x1557,slow_1557,0 );
 }
 
 Control slow_1557 ()
@@ -33206,12 +33206,12 @@ Control slow_1557 ()
         advance ( 17 );
         SPH = ( a6 >> 8 );
         SPL = ( a6 & 0xFF );
-        return jumpDirect ( 0x1590,slow_1590 );
+        return jumpDirect ( 0x1590,slow_1590,fast_1590 );
     }
     else
     {
         advance ( 11 );
-        return jumpDirect ( 0x155A,slow_155A );
+        return jumpDirect ( 0x155A,slow_155A,fast_155A );
     }
 }
 
@@ -33231,7 +33231,7 @@ Control slow_155A ()
     FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a3 & 0xFF ) );
     FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x155B,slow_155B );
+    return jumpDirect ( 0x155B,slow_155B,0 );
 }
 
 Control slow_155B ()
@@ -33256,7 +33256,7 @@ Control slow_155B ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x155C,slow_155C );
+        return jumpDirect ( 0x155C,slow_155C,0 );
     }
 }
 
@@ -33276,7 +33276,7 @@ Control slow_155C ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ( ( a2 >> 8 ) >> 0 ) & 0x01 );
-    return jumpDirect ( 0x155E,slow_155E );
+    return jumpDirect ( 0x155E,slow_155E,0 );
 }
 
 Control slow_155E ()
@@ -33294,7 +33294,7 @@ Control slow_155E ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x155F,slow_155F );
+    return jumpDirect ( 0x155F,slow_155F,0 );
 }
 
 Control slow_155F ()
@@ -33302,7 +33302,7 @@ Control slow_155F ()
     // #at: 155F
     instruction2 ( 0x15,0x62,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x15,0x5A );
     advance ( 10 );
-    return jumpDirect ( 0x155A,slow_155A );
+    return jumpDirect ( 0x155A,slow_155A,fast_155A );
 }
 
 Control slow_1562 ()
@@ -33312,7 +33312,7 @@ Control slow_1562 ()
     u8 a1 = e8_read_mem ( 0x2009 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x1565,slow_1565 );
+    return jumpDirect ( 0x1565,slow_1565,0 );
 }
 
 Control slow_1565 ()
@@ -33322,7 +33322,7 @@ Control slow_1565 ()
     u8 a1 = L ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( 0x1566,slow_1566 );
+    return jumpDirect ( 0x1566,slow_1566,0 );
 }
 
 Control slow_1566 ()
@@ -33341,7 +33341,7 @@ Control slow_1566 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1554,slow_1554 );
+    return jumpDirect ( 0x1554,slow_1554,fast_1554 );
 }
 
 Control slow_1569 ()
@@ -33351,7 +33351,7 @@ Control slow_1569 ()
     u8 a1 = C ;
     advance ( 5 );
     B = a1;
-    return jumpDirect ( 0x156A,slow_156A );
+    return jumpDirect ( 0x156A,slow_156A,0 );
 }
 
 Control slow_156A ()
@@ -33369,7 +33369,7 @@ Control slow_156A ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x156B,slow_156B );
+    return jumpDirect ( 0x156B,slow_156B,0 );
 }
 
 Control slow_156B ()
@@ -33388,7 +33388,7 @@ Control slow_156B ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x156D,slow_156D );
+    return jumpDirect ( 0x156D,slow_156D,0 );
 }
 
 Control slow_156D ()
@@ -33398,7 +33398,7 @@ Control slow_156D ()
     u8 a1 = A ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( 0x156E,slow_156E );
+    return jumpDirect ( 0x156E,slow_156E,0 );
 }
 
 Control slow_156E ()
@@ -33426,7 +33426,7 @@ Control slow_156F ()
     u8 a1 = e8_read_mem ( 0x200A ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x1572,slow_1572 );
+    return jumpDirect ( 0x1572,slow_1572,0 );
 }
 
 Control slow_1572 ()
@@ -33445,7 +33445,7 @@ Control slow_1572 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1554,slow_1554 );
+    return jumpDirect ( 0x1554,slow_1554,fast_1554 );
 }
 
 Control slow_1575 ()
@@ -33464,7 +33464,7 @@ Control slow_1575 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x1577,slow_1577 );
+    return jumpDirect ( 0x1577,slow_1577,0 );
 }
 
 Control slow_1577 ()
@@ -33474,7 +33474,7 @@ Control slow_1577 ()
     u8 a1 = A ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( 0x1578,slow_1578 );
+    return jumpDirect ( 0x1578,slow_1578,0 );
 }
 
 Control slow_1578 ()
@@ -33501,7 +33501,7 @@ Control slow_1579 ()
     instruction1 ( 0x15,0x7B,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x01 );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( 0x157B,slow_157B );
+    return jumpDirect ( 0x157B,slow_157B,0 );
 }
 
 Control slow_157B ()
@@ -33511,7 +33511,7 @@ Control slow_157B ()
     u8 a1 = A ;
     mem_write ( 0x2085,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x157E,slow_157E );
+    return jumpDirect ( 0x157E,slow_157E,0 );
 }
 
 Control slow_157E ()
@@ -33519,7 +33519,7 @@ Control slow_157E ()
     // #at: 157E
     instruction2 ( 0x15,0x81,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x15,0x45 );
     advance ( 10 );
-    return jumpDirect ( 0x1545,slow_1545 );
+    return jumpDirect ( 0x1545,slow_1545,fast_1545 );
 }
 
 Control slow_1581 ()
@@ -33529,7 +33529,7 @@ Control slow_1581 ()
     u8 a1 = B ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x1582,slow_1582 );
+    return jumpDirect ( 0x1582,slow_1582,0 );
 }
 
 Control slow_1582 ()
@@ -33540,7 +33540,7 @@ Control slow_1582 ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 << 0x01 ),0,( ( a1 >> 7 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 7 ) & 0x01 );
-    return jumpDirect ( 0x1583,slow_1583 );
+    return jumpDirect ( 0x1583,slow_1583,0 );
 }
 
 Control slow_1583 ()
@@ -33551,7 +33551,7 @@ Control slow_1583 ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 << 0x01 ),0,( ( a1 >> 7 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 7 ) & 0x01 );
-    return jumpDirect ( 0x1584,slow_1584 );
+    return jumpDirect ( 0x1584,slow_1584,0 );
 }
 
 Control slow_1584 ()
@@ -33562,7 +33562,7 @@ Control slow_1584 ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 << 0x01 ),0,( ( a1 >> 7 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 7 ) & 0x01 );
-    return jumpDirect ( 0x1585,slow_1585 );
+    return jumpDirect ( 0x1585,slow_1585,0 );
 }
 
 Control slow_1585 ()
@@ -33582,7 +33582,7 @@ Control slow_1585 ()
     FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a3 & 0xFF ) );
     FlagCY = ( ( ( a3 >> 8 ) >> 0 ) & 0x01 );
-    return jumpDirect ( 0x1586,slow_1586 );
+    return jumpDirect ( 0x1586,slow_1586,0 );
 }
 
 Control slow_1586 ()
@@ -33602,7 +33602,7 @@ Control slow_1586 ()
     FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a3 & 0xFF ) );
     FlagCY = ( ( ( a3 >> 8 ) >> 0 ) & 0x01 );
-    return jumpDirect ( 0x1587,slow_1587 );
+    return jumpDirect ( 0x1587,slow_1587,0 );
 }
 
 Control slow_1587 ()
@@ -33622,7 +33622,7 @@ Control slow_1587 ()
     FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a3 & 0xFF ) );
     FlagCY = ( ( ( a3 >> 8 ) >> 0 ) & 0x01 );
-    return jumpDirect ( 0x1588,slow_1588 );
+    return jumpDirect ( 0x1588,slow_1588,0 );
 }
 
 Control slow_1588 ()
@@ -33642,7 +33642,7 @@ Control slow_1588 ()
     FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a3 & 0xFF ) );
     FlagCY = ( ( ( a3 >> 8 ) >> 0 ) & 0x01 );
-    return jumpDirect ( 0x1589,slow_1589 );
+    return jumpDirect ( 0x1589,slow_1589,0 );
 }
 
 Control slow_1589 ()
@@ -33660,7 +33660,7 @@ Control slow_1589 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x158A,slow_158A );
+    return jumpDirect ( 0x158A,slow_158A,0 );
 }
 
 Control slow_158A ()
@@ -33670,7 +33670,7 @@ Control slow_158A ()
     u8 a1 = A ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( 0x158B,slow_158B );
+    return jumpDirect ( 0x158B,slow_158B,0 );
 }
 
 Control slow_158B ()
@@ -33680,7 +33680,7 @@ Control slow_158B ()
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x158E,slow_158E );
+    return jumpDirect ( 0x158E,slow_158E,0 );
 }
 
 Control slow_158E ()
@@ -33690,7 +33690,7 @@ Control slow_158E ()
     u8 a1 = A ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( 0x158F,slow_158F );
+    return jumpDirect ( 0x158F,slow_158F,0 );
 }
 
 Control slow_158F ()
@@ -33726,7 +33726,7 @@ Control slow_1590 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x1591,slow_1591 );
+    return jumpDirect ( 0x1591,slow_1591,0 );
 }
 
 Control slow_1591 ()
@@ -33745,7 +33745,7 @@ Control slow_1591 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ( ( a2 >> 8 ) >> 0 ) & 0x01 );
-    return jumpDirect ( 0x1593,slow_1593 );
+    return jumpDirect ( 0x1593,slow_1593,0 );
 }
 
 Control slow_1593 ()
@@ -33755,12 +33755,12 @@ Control slow_1593 ()
     if (FlagS)
     {
         advance ( 10 );
-        return jumpDirect ( 0x1590,slow_1590 );
+        return jumpDirect ( 0x1590,slow_1590,fast_1590 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x1596,slow_1596 );
+        return jumpDirect ( 0x1596,slow_1596,0 );
     }
 }
 
@@ -33789,7 +33789,7 @@ Control slow_1597 ()
     u8 a1 = e8_read_mem ( 0x200D ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x159A,slow_159A );
+    return jumpDirect ( 0x159A,slow_159A,0 );
 }
 
 Control slow_159A ()
@@ -33807,7 +33807,7 @@ Control slow_159A ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x159B,slow_159B );
+    return jumpDirect ( 0x159B,slow_159B,0 );
 }
 
 Control slow_159B ()
@@ -33817,12 +33817,12 @@ Control slow_159B ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x15B7,slow_15B7 );
+        return jumpDirect ( 0x15B7,slow_15B7,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x159E,slow_159E );
+        return jumpDirect ( 0x159E,slow_159E,0 );
     }
 }
 
@@ -33833,7 +33833,7 @@ Control slow_159E ()
     advance ( 10 );
     H = 0x3E;
     L = 0xA4;
-    return jumpDirect ( 0x15A1,slow_15A1 );
+    return jumpDirect ( 0x15A1,slow_15A1,0 );
 }
 
 Control slow_15A1 ()
@@ -33852,7 +33852,7 @@ Control slow_15A1 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x15C5,slow_15C5 );
+    return jumpDirect ( 0x15C5,slow_15C5,fast_15C5 );
 }
 
 Control slow_15A4 ()
@@ -33877,7 +33877,7 @@ Control slow_15A4 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x15A5,slow_15A5 );
+        return jumpDirect ( 0x15A5,slow_15A5,0 );
     }
 }
 
@@ -33887,7 +33887,7 @@ Control slow_15A5 ()
     instruction1 ( 0x15,0xA7,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0xFE );
     advance ( 7 );
     B = 0xFE;
-    return jumpDirect ( 0x15A7,slow_15A7 );
+    return jumpDirect ( 0x15A7,slow_15A7,0 );
 }
 
 Control slow_15A7 ()
@@ -33896,7 +33896,7 @@ Control slow_15A7 ()
     instruction1 ( 0x15,0xA9,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x01 );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( 0x15A9,slow_15A9 );
+    return jumpDirect ( 0x15A9,slow_15A9,fast_15A9 );
 }
 
 Control slow_15A9 ()
@@ -33906,7 +33906,7 @@ Control slow_15A9 ()
     u8 a1 = A ;
     mem_write ( 0x200D,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x15AC,slow_15AC );
+    return jumpDirect ( 0x15AC,slow_15AC,0 );
 }
 
 Control slow_15AC ()
@@ -33916,7 +33916,7 @@ Control slow_15AC ()
     u8 a1 = B ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x15AD,slow_15AD );
+    return jumpDirect ( 0x15AD,slow_15AD,0 );
 }
 
 Control slow_15AD ()
@@ -33926,7 +33926,7 @@ Control slow_15AD ()
     u8 a1 = A ;
     mem_write ( 0x2008,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x15B0,slow_15B0 );
+    return jumpDirect ( 0x15B0,slow_15B0,0 );
 }
 
 Control slow_15B0 ()
@@ -33936,7 +33936,7 @@ Control slow_15B0 ()
     u8 a1 = e8_read_mem ( 0x200E ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x15B3,slow_15B3 );
+    return jumpDirect ( 0x15B3,slow_15B3,0 );
 }
 
 Control slow_15B3 ()
@@ -33946,7 +33946,7 @@ Control slow_15B3 ()
     u8 a1 = A ;
     mem_write ( 0x2007,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x15B6,slow_15B6 );
+    return jumpDirect ( 0x15B6,slow_15B6,0 );
 }
 
 Control slow_15B6 ()
@@ -33974,7 +33974,7 @@ Control slow_15B7 ()
     advance ( 10 );
     H = 0x25;
     L = 0x24;
-    return jumpDirect ( 0x15BA,slow_15BA );
+    return jumpDirect ( 0x15BA,slow_15BA,0 );
 }
 
 Control slow_15BA ()
@@ -33993,7 +33993,7 @@ Control slow_15BA ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x15C5,slow_15C5 );
+    return jumpDirect ( 0x15C5,slow_15C5,fast_15C5 );
 }
 
 Control slow_15BD ()
@@ -34018,7 +34018,7 @@ Control slow_15BD ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x15BE,slow_15BE );
+        return jumpDirect ( 0x15BE,slow_15BE,0 );
     }
 }
 
@@ -34038,7 +34038,7 @@ Control slow_15BE ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x18F1,slow_18F1 );
+    return jumpDirect ( 0x18F1,slow_18F1,0 );
 }
 
 Control slow_15C1 ()
@@ -34055,7 +34055,7 @@ Control slow_15C1 ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x15C2,slow_15C2 );
+    return jumpDirect ( 0x15C2,slow_15C2,0 );
 }
 
 Control slow_15C2 ()
@@ -34063,7 +34063,7 @@ Control slow_15C2 ()
     // #at: 15C2
     instruction2 ( 0x15,0xC5,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x15,0xA9 );
     advance ( 10 );
-    return jumpDirect ( 0x15A9,slow_15A9 );
+    return jumpDirect ( 0x15A9,slow_15A9,fast_15A9 );
 }
 
 Control slow_15C5 ()
@@ -34072,7 +34072,7 @@ Control slow_15C5 ()
     instruction1 ( 0x15,0xC7,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x17 );
     advance ( 7 );
     B = 0x17;
-    return jumpDirect ( 0x15C7,slow_15C7 );
+    return jumpDirect ( 0x15C7,slow_15C7,fast_15C7 );
 }
 
 Control slow_15C7 ()
@@ -34084,7 +34084,7 @@ Control slow_15C7 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x15C8,slow_15C8 );
+    return jumpDirect ( 0x15C8,slow_15C8,0 );
 }
 
 Control slow_15C8 ()
@@ -34102,7 +34102,7 @@ Control slow_15C8 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x15C9,slow_15C9 );
+    return jumpDirect ( 0x15C9,slow_15C9,0 );
 }
 
 Control slow_15C9 ()
@@ -34112,12 +34112,12 @@ Control slow_15C9 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x166B,slow_166B );
+        return jumpDirect ( 0x166B,slow_166B,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x15CC,slow_15CC );
+        return jumpDirect ( 0x15CC,slow_15CC,0 );
     }
 }
 
@@ -34131,7 +34131,7 @@ Control slow_15CC ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x15CD,slow_15CD );
+    return jumpDirect ( 0x15CD,slow_15CD,0 );
 }
 
 Control slow_15CD ()
@@ -34149,7 +34149,7 @@ Control slow_15CD ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x15CE,slow_15CE );
+    return jumpDirect ( 0x15CE,slow_15CE,0 );
 }
 
 Control slow_15CE ()
@@ -34159,12 +34159,12 @@ Control slow_15CE ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x15C7,slow_15C7 );
+        return jumpDirect ( 0x15C7,slow_15C7,fast_15C7 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x15D1,slow_15D1 );
+        return jumpDirect ( 0x15D1,slow_15D1,0 );
     }
 }
 
@@ -34202,7 +34202,7 @@ Control slow_15D3 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1474,slow_1474 );
+    return jumpDirect ( 0x1474,slow_1474,fast_1474 );
 }
 
 Control slow_15D6 ()
@@ -34222,7 +34222,7 @@ Control slow_15D6 ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x15D7,slow_15D7 );
+    return jumpDirect ( 0x15D7,slow_15D7,fast_15D7 );
 }
 
 Control slow_15D7 ()
@@ -34242,7 +34242,7 @@ Control slow_15D7 ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x15D8,slow_15D8 );
+    return jumpDirect ( 0x15D8,slow_15D8,0 );
 }
 
 Control slow_15D8 ()
@@ -34262,7 +34262,7 @@ Control slow_15D8 ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x15D9,slow_15D9 );
+    return jumpDirect ( 0x15D9,slow_15D9,0 );
 }
 
 Control slow_15D9 ()
@@ -34274,7 +34274,7 @@ Control slow_15D9 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x15DA,slow_15DA );
+    return jumpDirect ( 0x15DA,slow_15DA,0 );
 }
 
 Control slow_15DA ()
@@ -34285,7 +34285,7 @@ Control slow_15DA ()
     advance ( 10 );
     Shifter_HI = a1;
     Shifter_LO = Shifter_HI;
-    return jumpDirect ( 0x15DC,slow_15DC );
+    return jumpDirect ( 0x15DC,slow_15DC,0 );
 }
 
 Control slow_15DC ()
@@ -34297,7 +34297,7 @@ Control slow_15DC ()
     u8 a3 = ( ( Shifter_HI << a1 ) | ( ( Shifter_LO >> a2 ) >> 0x01 ) ) ;
     advance ( 10 );
     A = a3;
-    return jumpDirect ( 0x15DE,slow_15DE );
+    return jumpDirect ( 0x15DE,slow_15DE,0 );
 }
 
 Control slow_15DE ()
@@ -34309,7 +34309,7 @@ Control slow_15DE ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x15DF,slow_15DF );
+    return jumpDirect ( 0x15DF,slow_15DF,0 );
 }
 
 Control slow_15DF ()
@@ -34322,7 +34322,7 @@ Control slow_15DF ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x15E0,slow_15E0 );
+    return jumpDirect ( 0x15E0,slow_15E0,0 );
 }
 
 Control slow_15E0 ()
@@ -34335,7 +34335,7 @@ Control slow_15E0 ()
     advance ( 5 );
     D = ( a3 >> 8 );
     E = ( a3 & 0xFF );
-    return jumpDirect ( 0x15E1,slow_15E1 );
+    return jumpDirect ( 0x15E1,slow_15E1,0 );
 }
 
 Control slow_15E1 ()
@@ -34352,7 +34352,7 @@ Control slow_15E1 ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x15E2,slow_15E2 );
+    return jumpDirect ( 0x15E2,slow_15E2,0 );
 }
 
 Control slow_15E2 ()
@@ -34363,7 +34363,7 @@ Control slow_15E2 ()
     advance ( 10 );
     Shifter_HI = a1;
     Shifter_LO = Shifter_HI;
-    return jumpDirect ( 0x15E4,slow_15E4 );
+    return jumpDirect ( 0x15E4,slow_15E4,0 );
 }
 
 Control slow_15E4 ()
@@ -34375,7 +34375,7 @@ Control slow_15E4 ()
     u8 a3 = ( ( Shifter_HI << a1 ) | ( ( Shifter_LO >> a2 ) >> 0x01 ) ) ;
     advance ( 10 );
     A = a3;
-    return jumpDirect ( 0x15E6,slow_15E6 );
+    return jumpDirect ( 0x15E6,slow_15E6,0 );
 }
 
 Control slow_15E6 ()
@@ -34387,7 +34387,7 @@ Control slow_15E6 ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x15E7,slow_15E7 );
+    return jumpDirect ( 0x15E7,slow_15E7,0 );
 }
 
 Control slow_15E7 ()
@@ -34407,7 +34407,7 @@ Control slow_15E7 ()
     L = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x15E8,slow_15E8 );
+    return jumpDirect ( 0x15E8,slow_15E8,0 );
 }
 
 Control slow_15E8 ()
@@ -34417,7 +34417,7 @@ Control slow_15E8 ()
     advance ( 10 );
     B = 0x00;
     C = 0x20;
-    return jumpDirect ( 0x15EB,slow_15EB );
+    return jumpDirect ( 0x15EB,slow_15EB,0 );
 }
 
 Control slow_15EB ()
@@ -34433,7 +34433,7 @@ Control slow_15EB ()
     H = ( ( a5 & 0xFFFF ) >> 8 );
     L = ( ( a5 & 0xFFFF ) & 0xFF );
     FlagCY = ( ( a5 >> 16 ) & 0x01 );
-    return jumpDirect ( 0x15EC,slow_15EC );
+    return jumpDirect ( 0x15EC,slow_15EC,0 );
 }
 
 Control slow_15EC ()
@@ -34453,7 +34453,7 @@ Control slow_15EC ()
     C = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x15ED,slow_15ED );
+    return jumpDirect ( 0x15ED,slow_15ED,0 );
 }
 
 Control slow_15ED ()
@@ -34471,7 +34471,7 @@ Control slow_15ED ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x15EE,slow_15EE );
+    return jumpDirect ( 0x15EE,slow_15EE,0 );
 }
 
 Control slow_15EE ()
@@ -34481,12 +34481,12 @@ Control slow_15EE ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x15D7,slow_15D7 );
+        return jumpDirect ( 0x15D7,slow_15D7,fast_15D7 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x15F1,slow_15F1 );
+        return jumpDirect ( 0x15F1,slow_15F1,0 );
     }
 }
 
@@ -34507,7 +34507,7 @@ Control slow_15F1 ()
     L = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x15F2,slow_15F2 );
+    return jumpDirect ( 0x15F2,slow_15F2,0 );
 }
 
 Control slow_15F2 ()
@@ -34544,7 +34544,7 @@ Control slow_15F3 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1611,slow_1611 );
+    return jumpDirect ( 0x1611,slow_1611,fast_1611 );
 }
 
 Control slow_15F6 ()
@@ -34554,7 +34554,7 @@ Control slow_15F6 ()
     advance ( 10 );
     B = 0x37;
     C = 0x00;
-    return jumpDirect ( 0x15F9,slow_15F9 );
+    return jumpDirect ( 0x15F9,slow_15F9,fast_15F9 );
 }
 
 Control slow_15F9 ()
@@ -34566,7 +34566,7 @@ Control slow_15F9 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x15FA,slow_15FA );
+    return jumpDirect ( 0x15FA,slow_15FA,0 );
 }
 
 Control slow_15FA ()
@@ -34584,7 +34584,7 @@ Control slow_15FA ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x15FB,slow_15FB );
+    return jumpDirect ( 0x15FB,slow_15FB,0 );
 }
 
 Control slow_15FB ()
@@ -34594,12 +34594,12 @@ Control slow_15FB ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x15FF,slow_15FF );
+        return jumpDirect ( 0x15FF,slow_15FF,fast_15FF );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x15FE,slow_15FE );
+        return jumpDirect ( 0x15FE,slow_15FE,0 );
     }
 }
 
@@ -34618,7 +34618,7 @@ Control slow_15FE ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x15FF,slow_15FF );
+    return jumpDirect ( 0x15FF,slow_15FF,fast_15FF );
 }
 
 Control slow_15FF ()
@@ -34631,7 +34631,7 @@ Control slow_15FF ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x1600,slow_1600 );
+    return jumpDirect ( 0x1600,slow_1600,0 );
 }
 
 Control slow_1600 ()
@@ -34649,7 +34649,7 @@ Control slow_1600 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x1601,slow_1601 );
+    return jumpDirect ( 0x1601,slow_1601,0 );
 }
 
 Control slow_1601 ()
@@ -34659,12 +34659,12 @@ Control slow_1601 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x15F9,slow_15F9 );
+        return jumpDirect ( 0x15F9,slow_15F9,fast_15F9 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x1604,slow_1604 );
+        return jumpDirect ( 0x1604,slow_1604,0 );
     }
 }
 
@@ -34675,7 +34675,7 @@ Control slow_1604 ()
     u8 a1 = C ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x1605,slow_1605 );
+    return jumpDirect ( 0x1605,slow_1605,0 );
 }
 
 Control slow_1605 ()
@@ -34685,7 +34685,7 @@ Control slow_1605 ()
     u8 a1 = A ;
     mem_write ( 0x2082,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x1608,slow_1608 );
+    return jumpDirect ( 0x1608,slow_1608,0 );
 }
 
 Control slow_1608 ()
@@ -34703,7 +34703,7 @@ Control slow_1608 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x160A,slow_160A );
+    return jumpDirect ( 0x160A,slow_160A,0 );
 }
 
 Control slow_160A ()
@@ -34728,7 +34728,7 @@ Control slow_160A ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x160B,slow_160B );
+        return jumpDirect ( 0x160B,slow_160B,0 );
     }
 }
 
@@ -34739,7 +34739,7 @@ Control slow_160B ()
     advance ( 10 );
     H = 0x20;
     L = 0x6B;
-    return jumpDirect ( 0x160E,slow_160E );
+    return jumpDirect ( 0x160E,slow_160E,0 );
 }
 
 Control slow_160E ()
@@ -34750,7 +34750,7 @@ Control slow_160E ()
     u8 a2 = L ;
     mem_write ( ( ( a1 << 8 ) | a2 ),0x01 );
     advance ( 10 );
-    return jumpDirect ( 0x1610,slow_1610 );
+    return jumpDirect ( 0x1610,slow_1610,0 );
 }
 
 Control slow_1610 ()
@@ -34777,7 +34777,7 @@ Control slow_1611 ()
     instruction1 ( 0x16,0x13,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   L,%02X",0x00 );
     advance ( 7 );
     L = 0x00;
-    return jumpDirect ( 0x1613,slow_1613 );
+    return jumpDirect ( 0x1613,slow_1613,0 );
 }
 
 Control slow_1613 ()
@@ -34787,7 +34787,7 @@ Control slow_1613 ()
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x1616,slow_1616 );
+    return jumpDirect ( 0x1616,slow_1616,0 );
 }
 
 Control slow_1616 ()
@@ -34797,7 +34797,7 @@ Control slow_1616 ()
     u8 a1 = A ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( 0x1617,slow_1617 );
+    return jumpDirect ( 0x1617,slow_1617,0 );
 }
 
 Control slow_1617 ()
@@ -34825,7 +34825,7 @@ Control slow_1618 ()
     u8 a1 = e8_read_mem ( 0x2015 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x161B,slow_161B );
+    return jumpDirect ( 0x161B,slow_161B,0 );
 }
 
 Control slow_161B ()
@@ -34843,7 +34843,7 @@ Control slow_161B ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x161D,slow_161D );
+    return jumpDirect ( 0x161D,slow_161D,0 );
 }
 
 Control slow_161D ()
@@ -34868,7 +34868,7 @@ Control slow_161D ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x161E,slow_161E );
+        return jumpDirect ( 0x161E,slow_161E,0 );
     }
 }
 
@@ -34879,7 +34879,7 @@ Control slow_161E ()
     advance ( 10 );
     H = 0x20;
     L = 0x10;
-    return jumpDirect ( 0x1621,slow_1621 );
+    return jumpDirect ( 0x1621,slow_1621,0 );
 }
 
 Control slow_1621 ()
@@ -34891,7 +34891,7 @@ Control slow_1621 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x1622,slow_1622 );
+    return jumpDirect ( 0x1622,slow_1622,0 );
 }
 
 Control slow_1622 ()
@@ -34904,7 +34904,7 @@ Control slow_1622 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x1623,slow_1623 );
+    return jumpDirect ( 0x1623,slow_1623,0 );
 }
 
 Control slow_1623 ()
@@ -34916,7 +34916,7 @@ Control slow_1623 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     B = a3;
-    return jumpDirect ( 0x1624,slow_1624 );
+    return jumpDirect ( 0x1624,slow_1624,0 );
 }
 
 Control slow_1624 ()
@@ -34933,7 +34933,7 @@ Control slow_1624 ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x1625,slow_1625 );
+    return jumpDirect ( 0x1625,slow_1625,0 );
 }
 
 Control slow_1625 ()
@@ -34958,7 +34958,7 @@ Control slow_1625 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x1626,slow_1626 );
+        return jumpDirect ( 0x1626,slow_1626,0 );
     }
 }
 
@@ -34969,7 +34969,7 @@ Control slow_1626 ()
     u8 a1 = e8_read_mem ( 0x2025 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x1629,slow_1629 );
+    return jumpDirect ( 0x1629,slow_1629,0 );
 }
 
 Control slow_1629 ()
@@ -34987,7 +34987,7 @@ Control slow_1629 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x162A,slow_162A );
+    return jumpDirect ( 0x162A,slow_162A,0 );
 }
 
 Control slow_162A ()
@@ -35012,7 +35012,7 @@ Control slow_162A ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x162B,slow_162B );
+        return jumpDirect ( 0x162B,slow_162B,0 );
     }
 }
 
@@ -35023,7 +35023,7 @@ Control slow_162B ()
     u8 a1 = e8_read_mem ( 0x20EF ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x162E,slow_162E );
+    return jumpDirect ( 0x162E,slow_162E,0 );
 }
 
 Control slow_162E ()
@@ -35041,7 +35041,7 @@ Control slow_162E ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x162F,slow_162F );
+    return jumpDirect ( 0x162F,slow_162F,0 );
 }
 
 Control slow_162F ()
@@ -35051,12 +35051,12 @@ Control slow_162F ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x1652,slow_1652 );
+        return jumpDirect ( 0x1652,slow_1652,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x1632,slow_1632 );
+        return jumpDirect ( 0x1632,slow_1632,0 );
     }
 }
 
@@ -35067,7 +35067,7 @@ Control slow_1632 ()
     u8 a1 = e8_read_mem ( 0x202D ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x1635,slow_1635 );
+    return jumpDirect ( 0x1635,slow_1635,0 );
 }
 
 Control slow_1635 ()
@@ -35085,7 +35085,7 @@ Control slow_1635 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x1636,slow_1636 );
+    return jumpDirect ( 0x1636,slow_1636,0 );
 }
 
 Control slow_1636 ()
@@ -35095,12 +35095,12 @@ Control slow_1636 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x1648,slow_1648 );
+        return jumpDirect ( 0x1648,slow_1648,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x1639,slow_1639 );
+        return jumpDirect ( 0x1639,slow_1639,0 );
     }
 }
 
@@ -35120,7 +35120,7 @@ Control slow_1639 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x17C0,slow_17C0 );
+    return jumpDirect ( 0x17C0,slow_17C0,fast_17C0 );
 }
 
 Control slow_163C ()
@@ -35137,7 +35137,7 @@ Control slow_163C ()
     FlagA = ( ( a3 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x163E,slow_163E );
+    return jumpDirect ( 0x163E,slow_163E,0 );
 }
 
 Control slow_163E ()
@@ -35162,7 +35162,7 @@ Control slow_163E ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x163F,slow_163F );
+        return jumpDirect ( 0x163F,slow_163F,0 );
     }
 }
 
@@ -35172,7 +35172,7 @@ Control slow_163F ()
     instruction1 ( 0x16,0x41,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x01 );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( 0x1641,slow_1641 );
+    return jumpDirect ( 0x1641,slow_1641,0 );
 }
 
 Control slow_1641 ()
@@ -35182,7 +35182,7 @@ Control slow_1641 ()
     u8 a1 = A ;
     mem_write ( 0x2025,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x1644,slow_1644 );
+    return jumpDirect ( 0x1644,slow_1644,0 );
 }
 
 Control slow_1644 ()
@@ -35192,7 +35192,7 @@ Control slow_1644 ()
     u8 a1 = A ;
     mem_write ( 0x202D,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x1647,slow_1647 );
+    return jumpDirect ( 0x1647,slow_1647,0 );
 }
 
 Control slow_1647 ()
@@ -35229,7 +35229,7 @@ Control slow_1648 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x17C0,slow_17C0 );
+    return jumpDirect ( 0x17C0,slow_17C0,fast_17C0 );
 }
 
 Control slow_164B ()
@@ -35246,7 +35246,7 @@ Control slow_164B ()
     FlagA = ( ( a3 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x164D,slow_164D );
+    return jumpDirect ( 0x164D,slow_164D,0 );
 }
 
 Control slow_164D ()
@@ -35271,7 +35271,7 @@ Control slow_164D ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x164E,slow_164E );
+        return jumpDirect ( 0x164E,slow_164E,0 );
     }
 }
 
@@ -35282,7 +35282,7 @@ Control slow_164E ()
     u8 a1 = A ;
     mem_write ( 0x202D,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x1651,slow_1651 );
+    return jumpDirect ( 0x1651,slow_1651,0 );
 }
 
 Control slow_1651 ()
@@ -35310,7 +35310,7 @@ Control slow_1652 ()
     advance ( 10 );
     H = 0x20;
     L = 0x25;
-    return jumpDirect ( 0x1655,slow_1655 );
+    return jumpDirect ( 0x1655,slow_1655,0 );
 }
 
 Control slow_1655 ()
@@ -35321,7 +35321,7 @@ Control slow_1655 ()
     u8 a2 = L ;
     mem_write ( ( ( a1 << 8 ) | a2 ),0x01 );
     advance ( 10 );
-    return jumpDirect ( 0x1657,slow_1657 );
+    return jumpDirect ( 0x1657,slow_1657,0 );
 }
 
 Control slow_1657 ()
@@ -35333,7 +35333,7 @@ Control slow_1657 ()
     advance ( 16 );
     H = a2;
     L = a1;
-    return jumpDirect ( 0x165A,slow_165A );
+    return jumpDirect ( 0x165A,slow_165A,0 );
 }
 
 Control slow_165A ()
@@ -35346,7 +35346,7 @@ Control slow_165A ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x165B,slow_165B );
+    return jumpDirect ( 0x165B,slow_165B,0 );
 }
 
 Control slow_165B ()
@@ -35356,7 +35356,7 @@ Control slow_165B ()
     u8 a1 = L ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x165C,slow_165C );
+    return jumpDirect ( 0x165C,slow_165C,0 );
 }
 
 Control slow_165C ()
@@ -35374,7 +35374,7 @@ Control slow_165C ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x165E,slow_165E );
+    return jumpDirect ( 0x165E,slow_165E,0 );
 }
 
 Control slow_165E ()
@@ -35384,12 +35384,12 @@ Control slow_165E ()
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( 0x1663,slow_1663 );
+        return jumpDirect ( 0x1663,slow_1663,fast_1663 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x1661,slow_1661 );
+        return jumpDirect ( 0x1661,slow_1661,0 );
     }
 }
 
@@ -35399,7 +35399,7 @@ Control slow_1661 ()
     instruction1 ( 0x16,0x63,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   L,%02X",0x74 );
     advance ( 7 );
     L = 0x74;
-    return jumpDirect ( 0x1663,slow_1663 );
+    return jumpDirect ( 0x1663,slow_1663,fast_1663 );
 }
 
 Control slow_1663 ()
@@ -35411,7 +35411,7 @@ Control slow_1663 ()
     u8 a2 = H ;
     mem_write ( 0x20EE,a2 );
     advance ( 16 );
-    return jumpDirect ( 0x1666,slow_1666 );
+    return jumpDirect ( 0x1666,slow_1666,0 );
 }
 
 Control slow_1666 ()
@@ -35423,7 +35423,7 @@ Control slow_1666 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x1667,slow_1667 );
+    return jumpDirect ( 0x1667,slow_1667,0 );
 }
 
 Control slow_1667 ()
@@ -35433,7 +35433,7 @@ Control slow_1667 ()
     u8 a1 = A ;
     mem_write ( 0x201D,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x166A,slow_166A );
+    return jumpDirect ( 0x166A,slow_166A,0 );
 }
 
 Control slow_166A ()
@@ -35460,7 +35460,7 @@ Control slow_166B ()
     instruction0 ( 0x16,0x6C,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"SCF" );
     advance ( 4 );
     FlagCY = true;
-    return jumpDirect ( 0x166C,slow_166C );
+    return jumpDirect ( 0x166C,slow_166C,0 );
 }
 
 Control slow_166C ()
@@ -35495,7 +35495,7 @@ Control slow_166D ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x166E,slow_166E );
+    return jumpDirect ( 0x166E,slow_166E,0 );
 }
 
 Control slow_166E ()
@@ -35514,7 +35514,7 @@ Control slow_166E ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A8B,slow_1A8B );
+    return jumpDirect ( 0x1A8B,slow_1A8B,fast_1A8B );
 }
 
 Control slow_1671 ()
@@ -35533,7 +35533,7 @@ Control slow_1671 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1910,slow_1910 );
+    return jumpDirect ( 0x1910,slow_1910,fast_1910 );
 }
 
 Control slow_1674 ()
@@ -35544,7 +35544,7 @@ Control slow_1674 ()
     u8 a2 = L ;
     mem_write ( ( ( a1 << 8 ) | a2 ),0x00 );
     advance ( 10 );
-    return jumpDirect ( 0x1676,slow_1676 );
+    return jumpDirect ( 0x1676,slow_1676,0 );
 }
 
 Control slow_1676 ()
@@ -35563,7 +35563,7 @@ Control slow_1676 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x09CA,slow_09CA );
+    return jumpDirect ( 0x09CA,slow_09CA,fast_09CA );
 }
 
 Control slow_1679 ()
@@ -35576,7 +35576,7 @@ Control slow_1679 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x167A,slow_167A );
+    return jumpDirect ( 0x167A,slow_167A,0 );
 }
 
 Control slow_167A ()
@@ -35586,7 +35586,7 @@ Control slow_167A ()
     advance ( 10 );
     D = 0x20;
     E = 0xF5;
-    return jumpDirect ( 0x167D,slow_167D );
+    return jumpDirect ( 0x167D,slow_167D,0 );
 }
 
 Control slow_167D ()
@@ -35598,7 +35598,7 @@ Control slow_167D ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x167E,slow_167E );
+    return jumpDirect ( 0x167E,slow_167E,0 );
 }
 
 Control slow_167E ()
@@ -35619,7 +35619,7 @@ Control slow_167E ()
     FlagA = ( ( ( a8 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a5 & 0xFF ) );
     FlagCY = ( ! ( ( ( a5 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x167F,slow_167F );
+    return jumpDirect ( 0x167F,slow_167F,0 );
 }
 
 Control slow_167F ()
@@ -35632,7 +35632,7 @@ Control slow_167F ()
     advance ( 5 );
     D = ( a3 >> 8 );
     E = ( a3 & 0xFF );
-    return jumpDirect ( 0x1680,slow_1680 );
+    return jumpDirect ( 0x1680,slow_1680,0 );
 }
 
 Control slow_1680 ()
@@ -35645,7 +35645,7 @@ Control slow_1680 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x1681,slow_1681 );
+    return jumpDirect ( 0x1681,slow_1681,0 );
 }
 
 Control slow_1681 ()
@@ -35657,7 +35657,7 @@ Control slow_1681 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x1682,slow_1682 );
+    return jumpDirect ( 0x1682,slow_1682,0 );
 }
 
 Control slow_1682 ()
@@ -35667,12 +35667,12 @@ Control slow_1682 ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x168B,slow_168B );
+        return jumpDirect ( 0x168B,slow_168B,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x1685,slow_1685 );
+        return jumpDirect ( 0x1685,slow_1685,0 );
     }
 }
 
@@ -35683,12 +35683,12 @@ Control slow_1685 ()
     if (( ! FlagCY ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x1698,slow_1698 );
+        return jumpDirect ( 0x1698,slow_1698,fast_1698 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x1688,slow_1688 );
+        return jumpDirect ( 0x1688,slow_1688,0 );
     }
 }
 
@@ -35697,7 +35697,7 @@ Control slow_1688 ()
     // #at: 1688
     instruction2 ( 0x16,0x8B,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x16,0x8F );
     advance ( 10 );
-    return jumpDirect ( 0x168F,slow_168F );
+    return jumpDirect ( 0x168F,slow_168F,fast_168F );
 }
 
 Control slow_168B ()
@@ -35718,7 +35718,7 @@ Control slow_168B ()
     FlagA = ( ( ( a8 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a5 & 0xFF ) );
     FlagCY = ( ! ( ( ( a5 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x168C,slow_168C );
+    return jumpDirect ( 0x168C,slow_168C,0 );
 }
 
 Control slow_168C ()
@@ -35728,12 +35728,12 @@ Control slow_168C ()
     if (( ! FlagCY ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x1698,slow_1698 );
+        return jumpDirect ( 0x1698,slow_1698,fast_1698 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x168F,slow_168F );
+        return jumpDirect ( 0x168F,slow_168F,fast_168F );
     }
 }
 
@@ -35746,7 +35746,7 @@ Control slow_168F ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x1690,slow_1690 );
+    return jumpDirect ( 0x1690,slow_1690,0 );
 }
 
 Control slow_1690 ()
@@ -35758,7 +35758,7 @@ Control slow_1690 ()
     u8 a3 = A ;
     mem_write ( ( ( a1 << 8 ) | a2 ),a3 );
     advance ( 7 );
-    return jumpDirect ( 0x1691,slow_1691 );
+    return jumpDirect ( 0x1691,slow_1691,0 );
 }
 
 Control slow_1691 ()
@@ -35771,7 +35771,7 @@ Control slow_1691 ()
     advance ( 5 );
     D = ( a3 >> 8 );
     E = ( a3 & 0xFF );
-    return jumpDirect ( 0x1692,slow_1692 );
+    return jumpDirect ( 0x1692,slow_1692,0 );
 }
 
 Control slow_1692 ()
@@ -35784,7 +35784,7 @@ Control slow_1692 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x1693,slow_1693 );
+    return jumpDirect ( 0x1693,slow_1693,0 );
 }
 
 Control slow_1693 ()
@@ -35796,7 +35796,7 @@ Control slow_1693 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x1694,slow_1694 );
+    return jumpDirect ( 0x1694,slow_1694,0 );
 }
 
 Control slow_1694 ()
@@ -35808,7 +35808,7 @@ Control slow_1694 ()
     u8 a3 = A ;
     mem_write ( ( ( a1 << 8 ) | a2 ),a3 );
     advance ( 7 );
-    return jumpDirect ( 0x1695,slow_1695 );
+    return jumpDirect ( 0x1695,slow_1695,0 );
 }
 
 Control slow_1695 ()
@@ -35827,7 +35827,7 @@ Control slow_1695 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1950,slow_1950 );
+    return jumpDirect ( 0x1950,slow_1950,fast_1950 );
 }
 
 Control slow_1698 ()
@@ -35837,7 +35837,7 @@ Control slow_1698 ()
     u8 a1 = e8_read_mem ( 0x20CE ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x169B,slow_169B );
+    return jumpDirect ( 0x169B,slow_169B,0 );
 }
 
 Control slow_169B ()
@@ -35855,7 +35855,7 @@ Control slow_169B ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x169C,slow_169C );
+    return jumpDirect ( 0x169C,slow_169C,0 );
 }
 
 Control slow_169C ()
@@ -35865,12 +35865,12 @@ Control slow_169C ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x16C9,slow_16C9 );
+        return jumpDirect ( 0x16C9,slow_16C9,fast_16C9 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x169F,slow_169F );
+        return jumpDirect ( 0x169F,slow_169F,0 );
     }
 }
 
@@ -35881,7 +35881,7 @@ Control slow_169F ()
     advance ( 10 );
     H = 0x28;
     L = 0x03;
-    return jumpDirect ( 0x16A2,slow_16A2 );
+    return jumpDirect ( 0x16A2,slow_16A2,0 );
 }
 
 Control slow_16A2 ()
@@ -35891,7 +35891,7 @@ Control slow_16A2 ()
     advance ( 10 );
     D = 0x1A;
     E = 0xA6;
-    return jumpDirect ( 0x16A5,slow_16A5 );
+    return jumpDirect ( 0x16A5,slow_16A5,0 );
 }
 
 Control slow_16A5 ()
@@ -35900,7 +35900,7 @@ Control slow_16A5 ()
     instruction1 ( 0x16,0xA7,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   C,%02X",0x14 );
     advance ( 7 );
     C = 0x14;
-    return jumpDirect ( 0x16A7,slow_16A7 );
+    return jumpDirect ( 0x16A7,slow_16A7,0 );
 }
 
 Control slow_16A7 ()
@@ -35919,7 +35919,7 @@ Control slow_16A7 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0A93,slow_0A93 );
+    return jumpDirect ( 0x0A93,slow_0A93,fast_0A93 );
 }
 
 Control slow_16AA ()
@@ -35937,7 +35937,7 @@ Control slow_16AA ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x16AB,slow_16AB );
+    return jumpDirect ( 0x16AB,slow_16AB,0 );
 }
 
 Control slow_16AB ()
@@ -35955,7 +35955,7 @@ Control slow_16AB ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x16AC,slow_16AC );
+    return jumpDirect ( 0x16AC,slow_16AC,0 );
 }
 
 Control slow_16AC ()
@@ -35964,7 +35964,7 @@ Control slow_16AC ()
     instruction1 ( 0x16,0xAE,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x1B );
     advance ( 7 );
     B = 0x1B;
-    return jumpDirect ( 0x16AE,slow_16AE );
+    return jumpDirect ( 0x16AE,slow_16AE,0 );
 }
 
 Control slow_16AE ()
@@ -35974,7 +35974,7 @@ Control slow_16AE ()
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x16B1,slow_16B1 );
+    return jumpDirect ( 0x16B1,slow_16B1,0 );
 }
 
 Control slow_16B1 ()
@@ -35985,7 +35985,7 @@ Control slow_16B1 ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 >> 0x01 ),7,( ( a1 >> 0 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x16B2,slow_16B2 );
+    return jumpDirect ( 0x16B2,slow_16B2,0 );
 }
 
 Control slow_16B2 ()
@@ -35995,12 +35995,12 @@ Control slow_16B2 ()
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( 0x16B7,slow_16B7 );
+        return jumpDirect ( 0x16B7,slow_16B7,fast_16B7 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x16B5,slow_16B5 );
+        return jumpDirect ( 0x16B5,slow_16B5,0 );
     }
 }
 
@@ -36010,7 +36010,7 @@ Control slow_16B5 ()
     instruction1 ( 0x16,0xB7,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x1C );
     advance ( 7 );
     B = 0x1C;
-    return jumpDirect ( 0x16B7,slow_16B7 );
+    return jumpDirect ( 0x16B7,slow_16B7,fast_16B7 );
 }
 
 Control slow_16B7 ()
@@ -36020,7 +36020,7 @@ Control slow_16B7 ()
     u8 a1 = B ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x16B8,slow_16B8 );
+    return jumpDirect ( 0x16B8,slow_16B8,0 );
 }
 
 Control slow_16B8 ()
@@ -36039,7 +36039,7 @@ Control slow_16B8 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x08FF,slow_08FF );
+    return jumpDirect ( 0x08FF,slow_08FF,fast_08FF );
 }
 
 Control slow_16BB ()
@@ -36058,7 +36058,7 @@ Control slow_16BB ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0AB1,slow_0AB1 );
+    return jumpDirect ( 0x0AB1,slow_0AB1,fast_0AB1 );
 }
 
 Control slow_16BE ()
@@ -36077,7 +36077,7 @@ Control slow_16BE ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x18E7,slow_18E7 );
+    return jumpDirect ( 0x18E7,slow_18E7,fast_18E7 );
 }
 
 Control slow_16C1 ()
@@ -36089,7 +36089,7 @@ Control slow_16C1 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x16C2,slow_16C2 );
+    return jumpDirect ( 0x16C2,slow_16C2,0 );
 }
 
 Control slow_16C2 ()
@@ -36107,7 +36107,7 @@ Control slow_16C2 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x16C3,slow_16C3 );
+    return jumpDirect ( 0x16C3,slow_16C3,0 );
 }
 
 Control slow_16C3 ()
@@ -36117,12 +36117,12 @@ Control slow_16C3 ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x16C9,slow_16C9 );
+        return jumpDirect ( 0x16C9,slow_16C9,fast_16C9 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x16C6,slow_16C6 );
+        return jumpDirect ( 0x16C6,slow_16C6,0 );
     }
 }
 
@@ -36131,7 +36131,7 @@ Control slow_16C6 ()
     // #at: 16C6
     instruction2 ( 0x16,0xC9,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x02,0xED );
     advance ( 10 );
-    return jumpDirect ( 0x02ED,slow_02ED );
+    return jumpDirect ( 0x02ED,slow_02ED,fast_02ED );
 }
 
 Control slow_16C9 ()
@@ -36141,7 +36141,7 @@ Control slow_16C9 ()
     advance ( 10 );
     H = 0x2D;
     L = 0x18;
-    return jumpDirect ( 0x16CC,slow_16CC );
+    return jumpDirect ( 0x16CC,slow_16CC,0 );
 }
 
 Control slow_16CC ()
@@ -36151,7 +36151,7 @@ Control slow_16CC ()
     advance ( 10 );
     D = 0x1A;
     E = 0xA6;
-    return jumpDirect ( 0x16CF,slow_16CF );
+    return jumpDirect ( 0x16CF,slow_16CF,0 );
 }
 
 Control slow_16CF ()
@@ -36160,7 +36160,7 @@ Control slow_16CF ()
     instruction1 ( 0x16,0xD1,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   C,%02X",0x0A );
     advance ( 7 );
     C = 0x0A;
-    return jumpDirect ( 0x16D1,slow_16D1 );
+    return jumpDirect ( 0x16D1,slow_16D1,0 );
 }
 
 Control slow_16D1 ()
@@ -36179,7 +36179,7 @@ Control slow_16D1 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0A93,slow_0A93 );
+    return jumpDirect ( 0x0A93,slow_0A93,fast_0A93 );
 }
 
 Control slow_16D4 ()
@@ -36198,7 +36198,7 @@ Control slow_16D4 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0AB6,slow_0AB6 );
+    return jumpDirect ( 0x0AB6,slow_0AB6,fast_0AB6 );
 }
 
 Control slow_16D7 ()
@@ -36217,7 +36217,7 @@ Control slow_16D7 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x09D6,slow_09D6 );
+    return jumpDirect ( 0x09D6,slow_09D6,fast_09D6 );
 }
 
 Control slow_16DA ()
@@ -36234,7 +36234,7 @@ Control slow_16DA ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x16DB,slow_16DB );
+    return jumpDirect ( 0x16DB,slow_16DB,0 );
 }
 
 Control slow_16DB ()
@@ -36244,7 +36244,7 @@ Control slow_16DB ()
     u8 a1 = A ;
     mem_write ( 0x20EF,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x16DE,slow_16DE );
+    return jumpDirect ( 0x16DE,slow_16DE,0 );
 }
 
 Control slow_16DE ()
@@ -36258,7 +36258,7 @@ Control slow_16DE ()
     sound_control ( "FleetMovement4",( ( a1 >> 3 ) & 0x01 ) );
     sound_control ( "UfoHit",( ( a1 >> 4 ) & 0x01 ) );
     advance ( 10 );
-    return jumpDirect ( 0x16E0,slow_16E0 );
+    return jumpDirect ( 0x16E0,slow_16E0,0 );
 }
 
 Control slow_16E0 ()
@@ -36277,7 +36277,7 @@ Control slow_16E0 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x19D1,slow_19D1 );
+    return jumpDirect ( 0x19D1,slow_19D1,fast_19D1 );
 }
 
 Control slow_16E3 ()
@@ -36285,7 +36285,7 @@ Control slow_16E3 ()
     // #at: 16E3
     instruction2 ( 0x16,0xE6,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x0B,0x89 );
     advance ( 10 );
-    return jumpDirect ( 0x0B89,slow_0B89 );
+    return jumpDirect ( 0x0B89,slow_0B89,fast_0B89 );
 }
 
 Control slow_16E6 ()
@@ -36295,7 +36295,7 @@ Control slow_16E6 ()
     advance ( 10 );
     SPH = 0x24;
     SPL = 0x00;
-    return jumpDirect ( 0x16E9,slow_16E9 );
+    return jumpDirect ( 0x16E9,slow_16E9,0 );
 }
 
 Control slow_16E9 ()
@@ -36304,7 +36304,7 @@ Control slow_16E9 ()
     instruction0 ( 0x16,0xEA,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"EI" );
     enable_interrupts (  );
     advance ( 4 );
-    return jumpDirect ( 0x16EA,slow_16EA );
+    return jumpDirect ( 0x16EA,slow_16EA,0 );
 }
 
 Control slow_16EA ()
@@ -36321,7 +36321,7 @@ Control slow_16EA ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x16EB,slow_16EB );
+    return jumpDirect ( 0x16EB,slow_16EB,0 );
 }
 
 Control slow_16EB ()
@@ -36331,7 +36331,7 @@ Control slow_16EB ()
     u8 a1 = A ;
     mem_write ( 0x2015,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x16EE,slow_16EE );
+    return jumpDirect ( 0x16EE,slow_16EE,fast_16EE );
 }
 
 Control slow_16EE ()
@@ -36350,7 +36350,7 @@ Control slow_16EE ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x14D8,slow_14D8 );
+    return jumpDirect ( 0x14D8,slow_14D8,fast_14D8 );
 }
 
 Control slow_16F1 ()
@@ -36359,7 +36359,7 @@ Control slow_16F1 ()
     instruction1 ( 0x16,0xF3,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x04 );
     advance ( 7 );
     B = 0x04;
-    return jumpDirect ( 0x16F3,slow_16F3 );
+    return jumpDirect ( 0x16F3,slow_16F3,0 );
 }
 
 Control slow_16F3 ()
@@ -36378,7 +36378,7 @@ Control slow_16F3 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x18FA,slow_18FA );
+    return jumpDirect ( 0x18FA,slow_18FA,fast_18FA );
 }
 
 Control slow_16F6 ()
@@ -36397,7 +36397,7 @@ Control slow_16F6 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0A59,slow_0A59 );
+    return jumpDirect ( 0x0A59,slow_0A59,fast_0A59 );
 }
 
 Control slow_16F9 ()
@@ -36407,12 +36407,12 @@ Control slow_16F9 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x16EE,slow_16EE );
+        return jumpDirect ( 0x16EE,slow_16EE,fast_16EE );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x16FC,slow_16FC );
+        return jumpDirect ( 0x16FC,slow_16FC,0 );
     }
 }
 
@@ -36432,7 +36432,7 @@ Control slow_16FC ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x19D7,slow_19D7 );
+    return jumpDirect ( 0x19D7,slow_19D7,fast_19D7 );
 }
 
 Control slow_16FF ()
@@ -36442,7 +36442,7 @@ Control slow_16FF ()
     advance ( 10 );
     H = 0x27;
     L = 0x01;
-    return jumpDirect ( 0x1702,slow_1702 );
+    return jumpDirect ( 0x1702,slow_1702,0 );
 }
 
 Control slow_1702 ()
@@ -36461,7 +36461,7 @@ Control slow_1702 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x19FA,slow_19FA );
+    return jumpDirect ( 0x19FA,slow_19FA,fast_19FA );
 }
 
 Control slow_1705 ()
@@ -36478,7 +36478,7 @@ Control slow_1705 ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x1706,slow_1706 );
+    return jumpDirect ( 0x1706,slow_1706,0 );
 }
 
 Control slow_1706 ()
@@ -36497,7 +36497,7 @@ Control slow_1706 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A8B,slow_1A8B );
+    return jumpDirect ( 0x1A8B,slow_1A8B,fast_1A8B );
 }
 
 Control slow_1709 ()
@@ -36506,7 +36506,7 @@ Control slow_1709 ()
     instruction1 ( 0x17,0x0B,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0xFB );
     advance ( 7 );
     B = 0xFB;
-    return jumpDirect ( 0x170B,slow_170B );
+    return jumpDirect ( 0x170B,slow_170B,0 );
 }
 
 Control slow_170B ()
@@ -36514,7 +36514,7 @@ Control slow_170B ()
     // #at: 170B
     instruction2 ( 0x17,0x0E,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x19,0x6B );
     advance ( 10 );
-    return jumpDirect ( 0x196B,slow_196B );
+    return jumpDirect ( 0x196B,slow_196B,0 );
 }
 
 Control slow_170E ()
@@ -36533,7 +36533,7 @@ Control slow_170E ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x09CA,slow_09CA );
+    return jumpDirect ( 0x09CA,slow_09CA,fast_09CA );
 }
 
 Control slow_1711 ()
@@ -36546,7 +36546,7 @@ Control slow_1711 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x1712,slow_1712 );
+    return jumpDirect ( 0x1712,slow_1712,0 );
 }
 
 Control slow_1712 ()
@@ -36558,7 +36558,7 @@ Control slow_1712 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x1713,slow_1713 );
+    return jumpDirect ( 0x1713,slow_1713,0 );
 }
 
 Control slow_1713 ()
@@ -36568,7 +36568,7 @@ Control slow_1713 ()
     advance ( 10 );
     D = 0x1C;
     E = 0xB8;
-    return jumpDirect ( 0x1716,slow_1716 );
+    return jumpDirect ( 0x1716,slow_1716,0 );
 }
 
 Control slow_1716 ()
@@ -36578,7 +36578,7 @@ Control slow_1716 ()
     advance ( 10 );
     H = 0x1A;
     L = 0xA1;
-    return jumpDirect ( 0x1719,slow_1719 );
+    return jumpDirect ( 0x1719,slow_1719,0 );
 }
 
 Control slow_1719 ()
@@ -36587,7 +36587,7 @@ Control slow_1719 ()
     instruction1 ( 0x17,0x1B,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   C,%02X",0x04 );
     advance ( 7 );
     C = 0x04;
-    return jumpDirect ( 0x171B,slow_171B );
+    return jumpDirect ( 0x171B,slow_171B,0 );
 }
 
 Control slow_171B ()
@@ -36597,7 +36597,7 @@ Control slow_171B ()
     u8 a1 = A ;
     advance ( 5 );
     B = a1;
-    return jumpDirect ( 0x171C,slow_171C );
+    return jumpDirect ( 0x171C,slow_171C,fast_171C );
 }
 
 Control slow_171C ()
@@ -36609,7 +36609,7 @@ Control slow_171C ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x171D,slow_171D );
+    return jumpDirect ( 0x171D,slow_171D,0 );
 }
 
 Control slow_171D ()
@@ -36628,7 +36628,7 @@ Control slow_171D ()
     FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a3 & 0xFF ) );
     FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x171E,slow_171E );
+    return jumpDirect ( 0x171E,slow_171E,0 );
 }
 
 Control slow_171E ()
@@ -36638,12 +36638,12 @@ Control slow_171E ()
     if (( ! FlagCY ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x1727,slow_1727 );
+        return jumpDirect ( 0x1727,slow_1727,fast_1727 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x1721,slow_1721 );
+        return jumpDirect ( 0x1721,slow_1721,0 );
     }
 }
 
@@ -36657,7 +36657,7 @@ Control slow_1721 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x1722,slow_1722 );
+    return jumpDirect ( 0x1722,slow_1722,0 );
 }
 
 Control slow_1722 ()
@@ -36670,7 +36670,7 @@ Control slow_1722 ()
     advance ( 5 );
     D = ( a3 >> 8 );
     E = ( a3 & 0xFF );
-    return jumpDirect ( 0x1723,slow_1723 );
+    return jumpDirect ( 0x1723,slow_1723,0 );
 }
 
 Control slow_1723 ()
@@ -36688,7 +36688,7 @@ Control slow_1723 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x1724,slow_1724 );
+    return jumpDirect ( 0x1724,slow_1724,0 );
 }
 
 Control slow_1724 ()
@@ -36698,12 +36698,12 @@ Control slow_1724 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x171C,slow_171C );
+        return jumpDirect ( 0x171C,slow_171C,fast_171C );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x1727,slow_1727 );
+        return jumpDirect ( 0x1727,slow_1727,fast_1727 );
     }
 }
 
@@ -36716,7 +36716,7 @@ Control slow_1727 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x1728,slow_1728 );
+    return jumpDirect ( 0x1728,slow_1728,0 );
 }
 
 Control slow_1728 ()
@@ -36726,7 +36726,7 @@ Control slow_1728 ()
     u8 a1 = A ;
     mem_write ( 0x20CF,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x172B,slow_172B );
+    return jumpDirect ( 0x172B,slow_172B,0 );
 }
 
 Control slow_172B ()
@@ -36754,7 +36754,7 @@ Control slow_172C ()
     u8 a1 = e8_read_mem ( 0x2025 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x172F,slow_172F );
+    return jumpDirect ( 0x172F,slow_172F,0 );
 }
 
 Control slow_172F ()
@@ -36772,7 +36772,7 @@ Control slow_172F ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x1731,slow_1731 );
+    return jumpDirect ( 0x1731,slow_1731,0 );
 }
 
 Control slow_1731 ()
@@ -36782,12 +36782,12 @@ Control slow_1731 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x1739,slow_1739 );
+        return jumpDirect ( 0x1739,slow_1739,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x1734,slow_1734 );
+        return jumpDirect ( 0x1734,slow_1734,0 );
     }
 }
 
@@ -36797,7 +36797,7 @@ Control slow_1734 ()
     instruction1 ( 0x17,0x36,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0xFD );
     advance ( 7 );
     B = 0xFD;
-    return jumpDirect ( 0x1736,slow_1736 );
+    return jumpDirect ( 0x1736,slow_1736,0 );
 }
 
 Control slow_1736 ()
@@ -36805,7 +36805,7 @@ Control slow_1736 ()
     // #at: 1736
     instruction2 ( 0x17,0x39,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x19,0xDC );
     advance ( 10 );
-    return jumpDirect ( 0x19DC,slow_19DC );
+    return jumpDirect ( 0x19DC,slow_19DC,fast_19DC );
 }
 
 Control slow_1739 ()
@@ -36814,7 +36814,7 @@ Control slow_1739 ()
     instruction1 ( 0x17,0x3B,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x02 );
     advance ( 7 );
     B = 0x02;
-    return jumpDirect ( 0x173B,slow_173B );
+    return jumpDirect ( 0x173B,slow_173B,0 );
 }
 
 Control slow_173B ()
@@ -36822,7 +36822,7 @@ Control slow_173B ()
     // #at: 173B
     instruction2 ( 0x17,0x3E,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x18,0xFA );
     advance ( 10 );
-    return jumpDirect ( 0x18FA,slow_18FA );
+    return jumpDirect ( 0x18FA,slow_18FA,fast_18FA );
 }
 
 Control slow_1740 ()
@@ -36832,7 +36832,7 @@ Control slow_1740 ()
     advance ( 10 );
     H = 0x20;
     L = 0x9B;
-    return jumpDirect ( 0x1743,slow_1743 );
+    return jumpDirect ( 0x1743,slow_1743,0 );
 }
 
 Control slow_1743 ()
@@ -36854,7 +36854,7 @@ Control slow_1743 ()
     FlagZ = ( 0 == ( a4 & 0xFF ) );
     FlagA = ( ( ( a7 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a4 & 0xFF ) );
-    return jumpDirect ( 0x1744,slow_1744 );
+    return jumpDirect ( 0x1744,slow_1744,0 );
 }
 
 Control slow_1744 ()
@@ -36875,12 +36875,12 @@ Control slow_1744 ()
         advance ( 17 );
         SPH = ( a6 >> 8 );
         SPL = ( a6 & 0xFF );
-        return jumpDirect ( 0x176D,slow_176D );
+        return jumpDirect ( 0x176D,slow_176D,fast_176D );
     }
     else
     {
         advance ( 11 );
-        return jumpDirect ( 0x1747,slow_1747 );
+        return jumpDirect ( 0x1747,slow_1747,fast_1747 );
     }
 }
 
@@ -36891,7 +36891,7 @@ Control slow_1747 ()
     u8 a1 = e8_read_mem ( 0x2068 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x174A,slow_174A );
+    return jumpDirect ( 0x174A,slow_174A,0 );
 }
 
 Control slow_174A ()
@@ -36909,7 +36909,7 @@ Control slow_174A ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x174B,slow_174B );
+    return jumpDirect ( 0x174B,slow_174B,0 );
 }
 
 Control slow_174B ()
@@ -36919,12 +36919,12 @@ Control slow_174B ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x176D,slow_176D );
+        return jumpDirect ( 0x176D,slow_176D,fast_176D );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x174E,slow_174E );
+        return jumpDirect ( 0x174E,slow_174E,0 );
     }
 }
 
@@ -36935,7 +36935,7 @@ Control slow_174E ()
     advance ( 10 );
     H = 0x20;
     L = 0x96;
-    return jumpDirect ( 0x1751,slow_1751 );
+    return jumpDirect ( 0x1751,slow_1751,0 );
 }
 
 Control slow_1751 ()
@@ -36957,7 +36957,7 @@ Control slow_1751 ()
     FlagZ = ( 0 == ( a4 & 0xFF ) );
     FlagA = ( ( ( a7 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a4 & 0xFF ) );
-    return jumpDirect ( 0x1752,slow_1752 );
+    return jumpDirect ( 0x1752,slow_1752,0 );
 }
 
 Control slow_1752 ()
@@ -36982,7 +36982,7 @@ Control slow_1752 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x1753,slow_1753 );
+        return jumpDirect ( 0x1753,slow_1753,0 );
     }
 }
 
@@ -36993,7 +36993,7 @@ Control slow_1753 ()
     advance ( 10 );
     H = 0x20;
     L = 0x98;
-    return jumpDirect ( 0x1756,slow_1756 );
+    return jumpDirect ( 0x1756,slow_1756,0 );
 }
 
 Control slow_1756 ()
@@ -37005,7 +37005,7 @@ Control slow_1756 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x1757,slow_1757 );
+    return jumpDirect ( 0x1757,slow_1757,0 );
 }
 
 Control slow_1757 ()
@@ -37019,7 +37019,7 @@ Control slow_1757 ()
     sound_control ( "FleetMovement4",( ( a1 >> 3 ) & 0x01 ) );
     sound_control ( "UfoHit",( ( a1 >> 4 ) & 0x01 ) );
     advance ( 10 );
-    return jumpDirect ( 0x1759,slow_1759 );
+    return jumpDirect ( 0x1759,slow_1759,0 );
 }
 
 Control slow_1759 ()
@@ -37029,7 +37029,7 @@ Control slow_1759 ()
     u8 a1 = e8_read_mem ( 0x2082 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x175C,slow_175C );
+    return jumpDirect ( 0x175C,slow_175C,0 );
 }
 
 Control slow_175C ()
@@ -37047,7 +37047,7 @@ Control slow_175C ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x175D,slow_175D );
+    return jumpDirect ( 0x175D,slow_175D,0 );
 }
 
 Control slow_175D ()
@@ -37057,12 +37057,12 @@ Control slow_175D ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x176D,slow_176D );
+        return jumpDirect ( 0x176D,slow_176D,fast_176D );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x1760,slow_1760 );
+        return jumpDirect ( 0x1760,slow_1760,0 );
     }
 }
 
@@ -37076,7 +37076,7 @@ Control slow_1760 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x1761,slow_1761 );
+    return jumpDirect ( 0x1761,slow_1761,0 );
 }
 
 Control slow_1761 ()
@@ -37088,7 +37088,7 @@ Control slow_1761 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x1762,slow_1762 );
+    return jumpDirect ( 0x1762,slow_1762,0 );
 }
 
 Control slow_1762 ()
@@ -37101,7 +37101,7 @@ Control slow_1762 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x1763,slow_1763 );
+    return jumpDirect ( 0x1763,slow_1763,0 );
 }
 
 Control slow_1763 ()
@@ -37113,7 +37113,7 @@ Control slow_1763 ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x1764,slow_1764 );
+    return jumpDirect ( 0x1764,slow_1764,0 );
 }
 
 Control slow_1764 ()
@@ -37126,7 +37126,7 @@ Control slow_1764 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x1765,slow_1765 );
+    return jumpDirect ( 0x1765,slow_1765,0 );
 }
 
 Control slow_1765 ()
@@ -37137,7 +37137,7 @@ Control slow_1765 ()
     u8 a2 = L ;
     mem_write ( ( ( a1 << 8 ) | a2 ),0x01 );
     advance ( 10 );
-    return jumpDirect ( 0x1767,slow_1767 );
+    return jumpDirect ( 0x1767,slow_1767,0 );
 }
 
 Control slow_1767 ()
@@ -37146,7 +37146,7 @@ Control slow_1767 ()
     instruction1 ( 0x17,0x69,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x04 );
     advance ( 7 );
     A = 0x04;
-    return jumpDirect ( 0x1769,slow_1769 );
+    return jumpDirect ( 0x1769,slow_1769,0 );
 }
 
 Control slow_1769 ()
@@ -37156,7 +37156,7 @@ Control slow_1769 ()
     u8 a1 = A ;
     mem_write ( 0x209B,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x176C,slow_176C );
+    return jumpDirect ( 0x176C,slow_176C,0 );
 }
 
 Control slow_176C ()
@@ -37184,7 +37184,7 @@ Control slow_176D ()
     u8 a1 = e8_read_mem ( 0x2098 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x1770,slow_1770 );
+    return jumpDirect ( 0x1770,slow_1770,fast_1770 );
 }
 
 Control slow_1770 ()
@@ -37201,7 +37201,7 @@ Control slow_1770 ()
     FlagA = ( ( a3 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x1772,slow_1772 );
+    return jumpDirect ( 0x1772,slow_1772,0 );
 }
 
 Control slow_1772 ()
@@ -37215,7 +37215,7 @@ Control slow_1772 ()
     sound_control ( "FleetMovement4",( ( a1 >> 3 ) & 0x01 ) );
     sound_control ( "UfoHit",( ( a1 >> 4 ) & 0x01 ) );
     advance ( 10 );
-    return jumpDirect ( 0x1774,slow_1774 );
+    return jumpDirect ( 0x1774,slow_1774,0 );
 }
 
 Control slow_1774 ()
@@ -37243,7 +37243,7 @@ Control slow_1775 ()
     u8 a1 = e8_read_mem ( 0x2095 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x1778,slow_1778 );
+    return jumpDirect ( 0x1778,slow_1778,0 );
 }
 
 Control slow_1778 ()
@@ -37261,7 +37261,7 @@ Control slow_1778 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x1779,slow_1779 );
+    return jumpDirect ( 0x1779,slow_1779,0 );
 }
 
 Control slow_1779 ()
@@ -37271,12 +37271,12 @@ Control slow_1779 ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x17AA,slow_17AA );
+        return jumpDirect ( 0x17AA,slow_17AA,fast_17AA );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x177C,slow_177C );
+        return jumpDirect ( 0x177C,slow_177C,0 );
     }
 }
 
@@ -37287,7 +37287,7 @@ Control slow_177C ()
     advance ( 10 );
     H = 0x1A;
     L = 0x11;
-    return jumpDirect ( 0x177F,slow_177F );
+    return jumpDirect ( 0x177F,slow_177F,0 );
 }
 
 Control slow_177F ()
@@ -37297,7 +37297,7 @@ Control slow_177F ()
     advance ( 10 );
     D = 0x1A;
     E = 0x21;
-    return jumpDirect ( 0x1782,slow_1782 );
+    return jumpDirect ( 0x1782,slow_1782,0 );
 }
 
 Control slow_1782 ()
@@ -37307,7 +37307,7 @@ Control slow_1782 ()
     u8 a1 = e8_read_mem ( 0x2082 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x1785,slow_1785 );
+    return jumpDirect ( 0x1785,slow_1785,fast_1785 );
 }
 
 Control slow_1785 ()
@@ -37328,7 +37328,7 @@ Control slow_1785 ()
     FlagA = ( ( ( a8 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a5 & 0xFF ) );
     FlagCY = ( ! ( ( ( a5 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x1786,slow_1786 );
+    return jumpDirect ( 0x1786,slow_1786,0 );
 }
 
 Control slow_1786 ()
@@ -37338,12 +37338,12 @@ Control slow_1786 ()
     if (( ! FlagCY ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x178E,slow_178E );
+        return jumpDirect ( 0x178E,slow_178E,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x1789,slow_1789 );
+        return jumpDirect ( 0x1789,slow_1789,0 );
     }
 }
 
@@ -37357,7 +37357,7 @@ Control slow_1789 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x178A,slow_178A );
+    return jumpDirect ( 0x178A,slow_178A,0 );
 }
 
 Control slow_178A ()
@@ -37370,7 +37370,7 @@ Control slow_178A ()
     advance ( 5 );
     D = ( a3 >> 8 );
     E = ( a3 & 0xFF );
-    return jumpDirect ( 0x178B,slow_178B );
+    return jumpDirect ( 0x178B,slow_178B,0 );
 }
 
 Control slow_178B ()
@@ -37378,7 +37378,7 @@ Control slow_178B ()
     // #at: 178B
     instruction2 ( 0x17,0x8E,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x17,0x85 );
     advance ( 10 );
-    return jumpDirect ( 0x1785,slow_1785 );
+    return jumpDirect ( 0x1785,slow_1785,fast_1785 );
 }
 
 Control slow_178E ()
@@ -37390,7 +37390,7 @@ Control slow_178E ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x178F,slow_178F );
+    return jumpDirect ( 0x178F,slow_178F,0 );
 }
 
 Control slow_178F ()
@@ -37400,7 +37400,7 @@ Control slow_178F ()
     u8 a1 = A ;
     mem_write ( 0x2097,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x1792,slow_1792 );
+    return jumpDirect ( 0x1792,slow_1792,0 );
 }
 
 Control slow_1792 ()
@@ -37410,7 +37410,7 @@ Control slow_1792 ()
     advance ( 10 );
     H = 0x20;
     L = 0x98;
-    return jumpDirect ( 0x1795,slow_1795 );
+    return jumpDirect ( 0x1795,slow_1795,0 );
 }
 
 Control slow_1795 ()
@@ -37422,7 +37422,7 @@ Control slow_1795 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x1796,slow_1796 );
+    return jumpDirect ( 0x1796,slow_1796,0 );
 }
 
 Control slow_1796 ()
@@ -37439,7 +37439,7 @@ Control slow_1796 ()
     FlagA = ( ( a3 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x1798,slow_1798 );
+    return jumpDirect ( 0x1798,slow_1798,0 );
 }
 
 Control slow_1798 ()
@@ -37449,7 +37449,7 @@ Control slow_1798 ()
     u8 a1 = A ;
     advance ( 5 );
     B = a1;
-    return jumpDirect ( 0x1799,slow_1799 );
+    return jumpDirect ( 0x1799,slow_1799,0 );
 }
 
 Control slow_1799 ()
@@ -37461,7 +37461,7 @@ Control slow_1799 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x179A,slow_179A );
+    return jumpDirect ( 0x179A,slow_179A,0 );
 }
 
 Control slow_179A ()
@@ -37478,7 +37478,7 @@ Control slow_179A ()
     FlagA = ( ( a3 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x179C,slow_179C );
+    return jumpDirect ( 0x179C,slow_179C,0 );
 }
 
 Control slow_179C ()
@@ -37489,7 +37489,7 @@ Control slow_179C ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 << 0x01 ),0,( ( a1 >> 7 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 7 ) & 0x01 );
-    return jumpDirect ( 0x179D,slow_179D );
+    return jumpDirect ( 0x179D,slow_179D,0 );
 }
 
 Control slow_179D ()
@@ -37507,7 +37507,7 @@ Control slow_179D ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x179F,slow_179F );
+    return jumpDirect ( 0x179F,slow_179F,0 );
 }
 
 Control slow_179F ()
@@ -37517,12 +37517,12 @@ Control slow_179F ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x17A4,slow_17A4 );
+        return jumpDirect ( 0x17A4,slow_17A4,fast_17A4 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x17A2,slow_17A2 );
+        return jumpDirect ( 0x17A2,slow_17A2,0 );
     }
 }
 
@@ -37532,7 +37532,7 @@ Control slow_17A2 ()
     instruction1 ( 0x17,0xA4,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x01 );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( 0x17A4,slow_17A4 );
+    return jumpDirect ( 0x17A4,slow_17A4,fast_17A4 );
 }
 
 Control slow_17A4 ()
@@ -37549,7 +37549,7 @@ Control slow_17A4 ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x17A5,slow_17A5 );
+    return jumpDirect ( 0x17A5,slow_17A5,0 );
 }
 
 Control slow_17A5 ()
@@ -37561,7 +37561,7 @@ Control slow_17A5 ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x17A6,slow_17A6 );
+    return jumpDirect ( 0x17A6,slow_17A6,0 );
 }
 
 Control slow_17A6 ()
@@ -37578,7 +37578,7 @@ Control slow_17A6 ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x17A7,slow_17A7 );
+    return jumpDirect ( 0x17A7,slow_17A7,0 );
 }
 
 Control slow_17A7 ()
@@ -37588,7 +37588,7 @@ Control slow_17A7 ()
     u8 a1 = A ;
     mem_write ( 0x2095,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x17AA,slow_17AA );
+    return jumpDirect ( 0x17AA,slow_17AA,fast_17AA );
 }
 
 Control slow_17AA ()
@@ -37598,7 +37598,7 @@ Control slow_17AA ()
     advance ( 10 );
     H = 0x20;
     L = 0x99;
-    return jumpDirect ( 0x17AD,slow_17AD );
+    return jumpDirect ( 0x17AD,slow_17AD,0 );
 }
 
 Control slow_17AD ()
@@ -37620,7 +37620,7 @@ Control slow_17AD ()
     FlagZ = ( 0 == ( a4 & 0xFF ) );
     FlagA = ( ( ( a7 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a4 & 0xFF ) );
-    return jumpDirect ( 0x17AE,slow_17AE );
+    return jumpDirect ( 0x17AE,slow_17AE,0 );
 }
 
 Control slow_17AE ()
@@ -37645,7 +37645,7 @@ Control slow_17AE ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x17AF,slow_17AF );
+        return jumpDirect ( 0x17AF,slow_17AF,0 );
     }
 }
 
@@ -37655,7 +37655,7 @@ Control slow_17AF ()
     instruction1 ( 0x17,0xB1,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0xEF );
     advance ( 7 );
     B = 0xEF;
-    return jumpDirect ( 0x17B1,slow_17B1 );
+    return jumpDirect ( 0x17B1,slow_17B1,0 );
 }
 
 Control slow_17B1 ()
@@ -37663,7 +37663,7 @@ Control slow_17B1 ()
     // #at: 17B1
     instruction2 ( 0x17,0xB4,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x19,0xDC );
     advance ( 10 );
-    return jumpDirect ( 0x19DC,slow_19DC );
+    return jumpDirect ( 0x19DC,slow_19DC,fast_19DC );
 }
 
 Control slow_17B4 ()
@@ -37672,7 +37672,7 @@ Control slow_17B4 ()
     instruction1 ( 0x17,0xB6,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0xEF );
     advance ( 7 );
     B = 0xEF;
-    return jumpDirect ( 0x17B6,slow_17B6 );
+    return jumpDirect ( 0x17B6,slow_17B6,0 );
 }
 
 Control slow_17B6 ()
@@ -37682,7 +37682,7 @@ Control slow_17B6 ()
     advance ( 10 );
     H = 0x20;
     L = 0x98;
-    return jumpDirect ( 0x17B9,slow_17B9 );
+    return jumpDirect ( 0x17B9,slow_17B9,0 );
 }
 
 Control slow_17B9 ()
@@ -37694,7 +37694,7 @@ Control slow_17B9 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x17BA,slow_17BA );
+    return jumpDirect ( 0x17BA,slow_17BA,0 );
 }
 
 Control slow_17BA ()
@@ -37712,7 +37712,7 @@ Control slow_17BA ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x17BB,slow_17BB );
+    return jumpDirect ( 0x17BB,slow_17BB,0 );
 }
 
 Control slow_17BB ()
@@ -37724,7 +37724,7 @@ Control slow_17BB ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x17BC,slow_17BC );
+    return jumpDirect ( 0x17BC,slow_17BC,0 );
 }
 
 Control slow_17BC ()
@@ -37738,7 +37738,7 @@ Control slow_17BC ()
     sound_control ( "FleetMovement4",( ( a1 >> 3 ) & 0x01 ) );
     sound_control ( "UfoHit",( ( a1 >> 4 ) & 0x01 ) );
     advance ( 10 );
-    return jumpDirect ( 0x17BE,slow_17BE );
+    return jumpDirect ( 0x17BE,slow_17BE,0 );
 }
 
 Control slow_17BE ()
@@ -37766,7 +37766,7 @@ Control slow_17C0 ()
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x17C3,slow_17C3 );
+    return jumpDirect ( 0x17C3,slow_17C3,0 );
 }
 
 Control slow_17C3 ()
@@ -37777,7 +37777,7 @@ Control slow_17C3 ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 >> 0x01 ),7,( ( a1 >> 0 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x17C4,slow_17C4 );
+    return jumpDirect ( 0x17C4,slow_17C4,0 );
 }
 
 Control slow_17C4 ()
@@ -37787,12 +37787,12 @@ Control slow_17C4 ()
     if (( ! FlagCY ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x17CA,slow_17CA );
+        return jumpDirect ( 0x17CA,slow_17CA,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x17C7,slow_17C7 );
+        return jumpDirect ( 0x17C7,slow_17C7,0 );
     }
 }
 
@@ -37802,7 +37802,7 @@ Control slow_17C7 ()
     instruction1 ( 0x17,0xC9,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"IN   %02X",0x01 );
     advance ( 10 );
     A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,( ! e1_is_pressed ( CoinEntry ) ) ),1,e1_is_pressed ( P2start ) ),2,e1_is_pressed ( P1start ) ),4,e1_is_pressed ( P1shoot ) ),5,e1_is_pressed ( P1left ) ),6,e1_is_pressed ( P1right ) );
-    return jumpDirect ( 0x17C9,slow_17C9 );
+    return jumpDirect ( 0x17C9,slow_17C9,0 );
 }
 
 Control slow_17C9 ()
@@ -37829,7 +37829,7 @@ Control slow_17CA ()
     instruction1 ( 0x17,0xCC,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"IN   %02X",0x02 );
     advance ( 10 );
     A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_is_pressed ( Dip3_livesLow ) ),1,e1_is_pressed ( Dip5_livesHigh ) ),2,e1_is_pressed ( Tilt ) ),3,e1_is_pressed ( Dip6_extraShipEarly ) ),4,e1_is_pressed ( P2shoot ) ),5,e1_is_pressed ( P2left ) ),6,e1_is_pressed ( P2right ) ),7,e1_is_pressed ( Dip7_coinInfoOff ) );
-    return jumpDirect ( 0x17CC,slow_17CC );
+    return jumpDirect ( 0x17CC,slow_17CC,0 );
 }
 
 Control slow_17CC ()
@@ -37856,7 +37856,7 @@ Control slow_17CD ()
     instruction1 ( 0x17,0xCF,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"IN   %02X",0x02 );
     advance ( 10 );
     A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_is_pressed ( Dip3_livesLow ) ),1,e1_is_pressed ( Dip5_livesHigh ) ),2,e1_is_pressed ( Tilt ) ),3,e1_is_pressed ( Dip6_extraShipEarly ) ),4,e1_is_pressed ( P2shoot ) ),5,e1_is_pressed ( P2left ) ),6,e1_is_pressed ( P2right ) ),7,e1_is_pressed ( Dip7_coinInfoOff ) );
-    return jumpDirect ( 0x17CF,slow_17CF );
+    return jumpDirect ( 0x17CF,slow_17CF,0 );
 }
 
 Control slow_17CF ()
@@ -37873,7 +37873,7 @@ Control slow_17CF ()
     FlagA = ( ( a3 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x17D1,slow_17D1 );
+    return jumpDirect ( 0x17D1,slow_17D1,0 );
 }
 
 Control slow_17D1 ()
@@ -37898,7 +37898,7 @@ Control slow_17D1 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x17D2,slow_17D2 );
+        return jumpDirect ( 0x17D2,slow_17D2,0 );
     }
 }
 
@@ -37909,7 +37909,7 @@ Control slow_17D2 ()
     u8 a1 = e8_read_mem ( 0x209A ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x17D5,slow_17D5 );
+    return jumpDirect ( 0x17D5,slow_17D5,0 );
 }
 
 Control slow_17D5 ()
@@ -37927,7 +37927,7 @@ Control slow_17D5 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x17D6,slow_17D6 );
+    return jumpDirect ( 0x17D6,slow_17D6,0 );
 }
 
 Control slow_17D6 ()
@@ -37952,7 +37952,7 @@ Control slow_17D6 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x17D7,slow_17D7 );
+        return jumpDirect ( 0x17D7,slow_17D7,0 );
     }
 }
 
@@ -37963,7 +37963,7 @@ Control slow_17D7 ()
     advance ( 10 );
     SPH = 0x24;
     SPL = 0x00;
-    return jumpDirect ( 0x17DA,slow_17DA );
+    return jumpDirect ( 0x17DA,slow_17DA,0 );
 }
 
 Control slow_17DA ()
@@ -37972,7 +37972,7 @@ Control slow_17DA ()
     instruction1 ( 0x17,0xDC,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x04 );
     advance ( 7 );
     B = 0x04;
-    return jumpDirect ( 0x17DC,slow_17DC );
+    return jumpDirect ( 0x17DC,slow_17DC,fast_17DC );
 }
 
 Control slow_17DC ()
@@ -37991,7 +37991,7 @@ Control slow_17DC ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x09D6,slow_09D6 );
+    return jumpDirect ( 0x09D6,slow_09D6,fast_09D6 );
 }
 
 Control slow_17DF ()
@@ -38009,7 +38009,7 @@ Control slow_17DF ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x17E0,slow_17E0 );
+    return jumpDirect ( 0x17E0,slow_17E0,0 );
 }
 
 Control slow_17E0 ()
@@ -38019,12 +38019,12 @@ Control slow_17E0 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x17DC,slow_17DC );
+        return jumpDirect ( 0x17DC,slow_17DC,fast_17DC );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x17E3,slow_17E3 );
+        return jumpDirect ( 0x17E3,slow_17E3,0 );
     }
 }
 
@@ -38034,7 +38034,7 @@ Control slow_17E3 ()
     instruction1 ( 0x17,0xE5,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x01 );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( 0x17E5,slow_17E5 );
+    return jumpDirect ( 0x17E5,slow_17E5,0 );
 }
 
 Control slow_17E5 ()
@@ -38044,7 +38044,7 @@ Control slow_17E5 ()
     u8 a1 = A ;
     mem_write ( 0x209A,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x17E8,slow_17E8 );
+    return jumpDirect ( 0x17E8,slow_17E8,0 );
 }
 
 Control slow_17E8 ()
@@ -38063,7 +38063,7 @@ Control slow_17E8 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x19D7,slow_19D7 );
+    return jumpDirect ( 0x19D7,slow_19D7,fast_19D7 );
 }
 
 Control slow_17EB ()
@@ -38072,7 +38072,7 @@ Control slow_17EB ()
     instruction0 ( 0x17,0xEC,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"EI" );
     enable_interrupts (  );
     advance ( 4 );
-    return jumpDirect ( 0x17EC,slow_17EC );
+    return jumpDirect ( 0x17EC,slow_17EC,0 );
 }
 
 Control slow_17EC ()
@@ -38082,7 +38082,7 @@ Control slow_17EC ()
     advance ( 10 );
     D = 0x1C;
     E = 0xBC;
-    return jumpDirect ( 0x17EF,slow_17EF );
+    return jumpDirect ( 0x17EF,slow_17EF,0 );
 }
 
 Control slow_17EF ()
@@ -38092,7 +38092,7 @@ Control slow_17EF ()
     advance ( 10 );
     H = 0x30;
     L = 0x16;
-    return jumpDirect ( 0x17F2,slow_17F2 );
+    return jumpDirect ( 0x17F2,slow_17F2,0 );
 }
 
 Control slow_17F2 ()
@@ -38101,7 +38101,7 @@ Control slow_17F2 ()
     instruction1 ( 0x17,0xF4,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   C,%02X",0x04 );
     advance ( 7 );
     C = 0x04;
-    return jumpDirect ( 0x17F4,slow_17F4 );
+    return jumpDirect ( 0x17F4,slow_17F4,0 );
 }
 
 Control slow_17F4 ()
@@ -38120,7 +38120,7 @@ Control slow_17F4 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0A93,slow_0A93 );
+    return jumpDirect ( 0x0A93,slow_0A93,fast_0A93 );
 }
 
 Control slow_17F7 ()
@@ -38139,7 +38139,7 @@ Control slow_17F7 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0AB1,slow_0AB1 );
+    return jumpDirect ( 0x0AB1,slow_0AB1,fast_0AB1 );
 }
 
 Control slow_17FA ()
@@ -38156,7 +38156,7 @@ Control slow_17FA ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x17FB,slow_17FB );
+    return jumpDirect ( 0x17FB,slow_17FB,0 );
 }
 
 Control slow_17FB ()
@@ -38166,7 +38166,7 @@ Control slow_17FB ()
     u8 a1 = A ;
     mem_write ( 0x209A,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x17FE,slow_17FE );
+    return jumpDirect ( 0x17FE,slow_17FE,0 );
 }
 
 Control slow_17FE ()
@@ -38176,7 +38176,7 @@ Control slow_17FE ()
     u8 a1 = A ;
     mem_write ( 0x2093,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x1801,slow_1801 );
+    return jumpDirect ( 0x1801,slow_1801,0 );
 }
 
 Control slow_1801 ()
@@ -38184,7 +38184,7 @@ Control slow_1801 ()
     // #at: 1801
     instruction2 ( 0x18,0x04,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x16,0xC9 );
     advance ( 10 );
-    return jumpDirect ( 0x16C9,slow_16C9 );
+    return jumpDirect ( 0x16C9,slow_16C9,fast_16C9 );
 }
 
 Control slow_1804 ()
@@ -38194,7 +38194,7 @@ Control slow_1804 ()
     advance ( 10 );
     H = 0x20;
     L = 0x84;
-    return jumpDirect ( 0x1807,slow_1807 );
+    return jumpDirect ( 0x1807,slow_1807,0 );
 }
 
 Control slow_1807 ()
@@ -38206,7 +38206,7 @@ Control slow_1807 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x1808,slow_1808 );
+    return jumpDirect ( 0x1808,slow_1808,0 );
 }
 
 Control slow_1808 ()
@@ -38224,7 +38224,7 @@ Control slow_1808 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x1809,slow_1809 );
+    return jumpDirect ( 0x1809,slow_1809,0 );
 }
 
 Control slow_1809 ()
@@ -38234,12 +38234,12 @@ Control slow_1809 ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0707,slow_0707 );
+        return jumpDirect ( 0x0707,slow_0707,fast_0707 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x180C,slow_180C );
+        return jumpDirect ( 0x180C,slow_180C,0 );
     }
 }
 
@@ -38253,7 +38253,7 @@ Control slow_180C ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x180D,slow_180D );
+    return jumpDirect ( 0x180D,slow_180D,0 );
 }
 
 Control slow_180D ()
@@ -38265,7 +38265,7 @@ Control slow_180D ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x180E,slow_180E );
+    return jumpDirect ( 0x180E,slow_180E,0 );
 }
 
 Control slow_180E ()
@@ -38283,7 +38283,7 @@ Control slow_180E ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x180F,slow_180F );
+    return jumpDirect ( 0x180F,slow_180F,0 );
 }
 
 Control slow_180F ()
@@ -38308,7 +38308,7 @@ Control slow_180F ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x1810,slow_1810 );
+        return jumpDirect ( 0x1810,slow_1810,0 );
     }
 }
 
@@ -38318,7 +38318,7 @@ Control slow_1810 ()
     instruction1 ( 0x18,0x12,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x01 );
     advance ( 7 );
     B = 0x01;
-    return jumpDirect ( 0x1812,slow_1812 );
+    return jumpDirect ( 0x1812,slow_1812,0 );
 }
 
 Control slow_1812 ()
@@ -38326,7 +38326,7 @@ Control slow_1812 ()
     // #at: 1812
     instruction2 ( 0x18,0x15,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x18,0xFA );
     advance ( 10 );
-    return jumpDirect ( 0x18FA,slow_18FA );
+    return jumpDirect ( 0x18FA,slow_18FA,fast_18FA );
 }
 
 Control slow_1815 ()
@@ -38336,7 +38336,7 @@ Control slow_1815 ()
     advance ( 10 );
     H = 0x28;
     L = 0x10;
-    return jumpDirect ( 0x1818,slow_1818 );
+    return jumpDirect ( 0x1818,slow_1818,0 );
 }
 
 Control slow_1818 ()
@@ -38346,7 +38346,7 @@ Control slow_1818 ()
     advance ( 10 );
     D = 0x1C;
     E = 0xA3;
-    return jumpDirect ( 0x181B,slow_181B );
+    return jumpDirect ( 0x181B,slow_181B,0 );
 }
 
 Control slow_181B ()
@@ -38355,7 +38355,7 @@ Control slow_181B ()
     instruction1 ( 0x18,0x1D,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   C,%02X",0x15 );
     advance ( 7 );
     C = 0x15;
-    return jumpDirect ( 0x181D,slow_181D );
+    return jumpDirect ( 0x181D,slow_181D,0 );
 }
 
 Control slow_181D ()
@@ -38374,7 +38374,7 @@ Control slow_181D ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x08F3,slow_08F3 );
+    return jumpDirect ( 0x08F3,slow_08F3,fast_08F3 );
 }
 
 Control slow_1820 ()
@@ -38383,7 +38383,7 @@ Control slow_1820 ()
     instruction1 ( 0x18,0x22,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x0A );
     advance ( 7 );
     A = 0x0A;
-    return jumpDirect ( 0x1822,slow_1822 );
+    return jumpDirect ( 0x1822,slow_1822,0 );
 }
 
 Control slow_1822 ()
@@ -38393,7 +38393,7 @@ Control slow_1822 ()
     u8 a1 = A ;
     mem_write ( 0x206C,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x1825,slow_1825 );
+    return jumpDirect ( 0x1825,slow_1825,0 );
 }
 
 Control slow_1825 ()
@@ -38403,7 +38403,7 @@ Control slow_1825 ()
     advance ( 10 );
     B = 0x1D;
     C = 0xBE;
-    return jumpDirect ( 0x1828,slow_1828 );
+    return jumpDirect ( 0x1828,slow_1828,fast_1828 );
 }
 
 Control slow_1828 ()
@@ -38422,7 +38422,7 @@ Control slow_1828 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1856,slow_1856 );
+    return jumpDirect ( 0x1856,slow_1856,fast_1856 );
 }
 
 Control slow_182B ()
@@ -38432,12 +38432,12 @@ Control slow_182B ()
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( 0x1837,slow_1837 );
+        return jumpDirect ( 0x1837,slow_1837,fast_1837 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x182E,slow_182E );
+        return jumpDirect ( 0x182E,slow_182E,0 );
     }
 }
 
@@ -38457,7 +38457,7 @@ Control slow_182E ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1844,slow_1844 );
+    return jumpDirect ( 0x1844,slow_1844,0 );
 }
 
 Control slow_1831 ()
@@ -38465,7 +38465,7 @@ Control slow_1831 ()
     // #at: 1831
     instruction2 ( 0x18,0x34,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x18,0x28 );
     advance ( 10 );
-    return jumpDirect ( 0x1828,slow_1828 );
+    return jumpDirect ( 0x1828,slow_1828,fast_1828 );
 }
 
 Control slow_1834 ()
@@ -38484,7 +38484,7 @@ Control slow_1834 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0AB1,slow_0AB1 );
+    return jumpDirect ( 0x0AB1,slow_0AB1,fast_0AB1 );
 }
 
 Control slow_1837 ()
@@ -38494,7 +38494,7 @@ Control slow_1837 ()
     advance ( 10 );
     B = 0x1D;
     C = 0xCF;
-    return jumpDirect ( 0x183A,slow_183A );
+    return jumpDirect ( 0x183A,slow_183A,fast_183A );
 }
 
 Control slow_183A ()
@@ -38513,7 +38513,7 @@ Control slow_183A ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1856,slow_1856 );
+    return jumpDirect ( 0x1856,slow_1856,fast_1856 );
 }
 
 Control slow_183D ()
@@ -38538,7 +38538,7 @@ Control slow_183D ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x183E,slow_183E );
+        return jumpDirect ( 0x183E,slow_183E,0 );
     }
 }
 
@@ -38558,7 +38558,7 @@ Control slow_183E ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x184C,slow_184C );
+    return jumpDirect ( 0x184C,slow_184C,fast_184C );
 }
 
 Control slow_1841 ()
@@ -38566,7 +38566,7 @@ Control slow_1841 ()
     // #at: 1841
     instruction2 ( 0x18,0x44,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x18,0x3A );
     advance ( 10 );
-    return jumpDirect ( 0x183A,slow_183A );
+    return jumpDirect ( 0x183A,slow_183A,fast_183A );
 }
 
 Control slow_1844 ()
@@ -38586,7 +38586,7 @@ Control slow_1844 ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x1845,slow_1845 );
+    return jumpDirect ( 0x1845,slow_1845,0 );
 }
 
 Control slow_1845 ()
@@ -38595,7 +38595,7 @@ Control slow_1845 ()
     instruction1 ( 0x18,0x47,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x10 );
     advance ( 7 );
     B = 0x10;
-    return jumpDirect ( 0x1847,slow_1847 );
+    return jumpDirect ( 0x1847,slow_1847,0 );
 }
 
 Control slow_1847 ()
@@ -38614,7 +38614,7 @@ Control slow_1847 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1439,slow_1439 );
+    return jumpDirect ( 0x1439,slow_1439,fast_1439 );
 }
 
 Control slow_184A ()
@@ -38634,7 +38634,7 @@ Control slow_184A ()
     C = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x184B,slow_184B );
+    return jumpDirect ( 0x184B,slow_184B,0 );
 }
 
 Control slow_184B ()
@@ -38672,7 +38672,7 @@ Control slow_184C ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x184D,slow_184D );
+    return jumpDirect ( 0x184D,slow_184D,0 );
 }
 
 Control slow_184D ()
@@ -38682,7 +38682,7 @@ Control slow_184D ()
     u8 a1 = e8_read_mem ( 0x206C ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x1850,slow_1850 );
+    return jumpDirect ( 0x1850,slow_1850,0 );
 }
 
 Control slow_1850 ()
@@ -38692,7 +38692,7 @@ Control slow_1850 ()
     u8 a1 = A ;
     advance ( 5 );
     C = a1;
-    return jumpDirect ( 0x1851,slow_1851 );
+    return jumpDirect ( 0x1851,slow_1851,0 );
 }
 
 Control slow_1851 ()
@@ -38711,7 +38711,7 @@ Control slow_1851 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0A93,slow_0A93 );
+    return jumpDirect ( 0x0A93,slow_0A93,fast_0A93 );
 }
 
 Control slow_1854 ()
@@ -38731,7 +38731,7 @@ Control slow_1854 ()
     C = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x1855,slow_1855 );
+    return jumpDirect ( 0x1855,slow_1855,0 );
 }
 
 Control slow_1855 ()
@@ -38761,7 +38761,7 @@ Control slow_1856 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x1857,slow_1857 );
+    return jumpDirect ( 0x1857,slow_1857,0 );
 }
 
 Control slow_1857 ()
@@ -38779,7 +38779,7 @@ Control slow_1857 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x1859,slow_1859 );
+    return jumpDirect ( 0x1859,slow_1859,0 );
 }
 
 Control slow_1859 ()
@@ -38788,7 +38788,7 @@ Control slow_1859 ()
     instruction0 ( 0x18,0x5A,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"SCF" );
     advance ( 4 );
     FlagCY = true;
-    return jumpDirect ( 0x185A,slow_185A );
+    return jumpDirect ( 0x185A,slow_185A,0 );
 }
 
 Control slow_185A ()
@@ -38813,7 +38813,7 @@ Control slow_185A ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x185B,slow_185B );
+        return jumpDirect ( 0x185B,slow_185B,0 );
     }
 }
 
@@ -38824,7 +38824,7 @@ Control slow_185B ()
     u8 a1 = A ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( 0x185C,slow_185C );
+    return jumpDirect ( 0x185C,slow_185C,0 );
 }
 
 Control slow_185C ()
@@ -38837,7 +38837,7 @@ Control slow_185C ()
     advance ( 5 );
     B = ( a3 >> 8 );
     C = ( a3 & 0xFF );
-    return jumpDirect ( 0x185D,slow_185D );
+    return jumpDirect ( 0x185D,slow_185D,0 );
 }
 
 Control slow_185D ()
@@ -38849,7 +38849,7 @@ Control slow_185D ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x185E,slow_185E );
+    return jumpDirect ( 0x185E,slow_185E,0 );
 }
 
 Control slow_185E ()
@@ -38859,7 +38859,7 @@ Control slow_185E ()
     u8 a1 = A ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( 0x185F,slow_185F );
+    return jumpDirect ( 0x185F,slow_185F,0 );
 }
 
 Control slow_185F ()
@@ -38872,7 +38872,7 @@ Control slow_185F ()
     advance ( 5 );
     B = ( a3 >> 8 );
     C = ( a3 & 0xFF );
-    return jumpDirect ( 0x1860,slow_1860 );
+    return jumpDirect ( 0x1860,slow_1860,0 );
 }
 
 Control slow_1860 ()
@@ -38884,7 +38884,7 @@ Control slow_1860 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x1861,slow_1861 );
+    return jumpDirect ( 0x1861,slow_1861,0 );
 }
 
 Control slow_1861 ()
@@ -38894,7 +38894,7 @@ Control slow_1861 ()
     u8 a1 = A ;
     advance ( 5 );
     E = a1;
-    return jumpDirect ( 0x1862,slow_1862 );
+    return jumpDirect ( 0x1862,slow_1862,0 );
 }
 
 Control slow_1862 ()
@@ -38907,7 +38907,7 @@ Control slow_1862 ()
     advance ( 5 );
     B = ( a3 >> 8 );
     C = ( a3 & 0xFF );
-    return jumpDirect ( 0x1863,slow_1863 );
+    return jumpDirect ( 0x1863,slow_1863,0 );
 }
 
 Control slow_1863 ()
@@ -38919,7 +38919,7 @@ Control slow_1863 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x1864,slow_1864 );
+    return jumpDirect ( 0x1864,slow_1864,0 );
 }
 
 Control slow_1864 ()
@@ -38929,7 +38929,7 @@ Control slow_1864 ()
     u8 a1 = A ;
     advance ( 5 );
     D = a1;
-    return jumpDirect ( 0x1865,slow_1865 );
+    return jumpDirect ( 0x1865,slow_1865,0 );
 }
 
 Control slow_1865 ()
@@ -38942,7 +38942,7 @@ Control slow_1865 ()
     advance ( 5 );
     B = ( a3 >> 8 );
     C = ( a3 & 0xFF );
-    return jumpDirect ( 0x1866,slow_1866 );
+    return jumpDirect ( 0x1866,slow_1866,0 );
 }
 
 Control slow_1866 ()
@@ -38960,7 +38960,7 @@ Control slow_1866 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x1867,slow_1867 );
+    return jumpDirect ( 0x1867,slow_1867,0 );
 }
 
 Control slow_1867 ()
@@ -38988,7 +38988,7 @@ Control slow_1868 ()
     advance ( 10 );
     H = 0x20;
     L = 0xC2;
-    return jumpDirect ( 0x186B,slow_186B );
+    return jumpDirect ( 0x186B,slow_186B,0 );
 }
 
 Control slow_186B ()
@@ -39010,7 +39010,7 @@ Control slow_186B ()
     FlagZ = ( 0 == ( a4 & 0xFF ) );
     FlagA = ( ( ( a7 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a4 & 0xFF ) );
-    return jumpDirect ( 0x186C,slow_186C );
+    return jumpDirect ( 0x186C,slow_186C,0 );
 }
 
 Control slow_186C ()
@@ -39023,7 +39023,7 @@ Control slow_186C ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x186D,slow_186D );
+    return jumpDirect ( 0x186D,slow_186D,0 );
 }
 
 Control slow_186D ()
@@ -39035,7 +39035,7 @@ Control slow_186D ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     C = a3;
-    return jumpDirect ( 0x186E,slow_186E );
+    return jumpDirect ( 0x186E,slow_186E,0 );
 }
 
 Control slow_186E ()
@@ -39054,7 +39054,7 @@ Control slow_186E ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x01D9,slow_01D9 );
+    return jumpDirect ( 0x01D9,slow_01D9,fast_01D9 );
 }
 
 Control slow_1871 ()
@@ -39064,7 +39064,7 @@ Control slow_1871 ()
     u8 a1 = A ;
     advance ( 5 );
     B = a1;
-    return jumpDirect ( 0x1872,slow_1872 );
+    return jumpDirect ( 0x1872,slow_1872,0 );
 }
 
 Control slow_1872 ()
@@ -39074,7 +39074,7 @@ Control slow_1872 ()
     u8 a1 = e8_read_mem ( 0x20CA ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x1875,slow_1875 );
+    return jumpDirect ( 0x1875,slow_1875,0 );
 }
 
 Control slow_1875 ()
@@ -39093,7 +39093,7 @@ Control slow_1875 ()
     FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a3 & 0xFF ) );
     FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x1876,slow_1876 );
+    return jumpDirect ( 0x1876,slow_1876,0 );
 }
 
 Control slow_1876 ()
@@ -39103,12 +39103,12 @@ Control slow_1876 ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x1898,slow_1898 );
+        return jumpDirect ( 0x1898,slow_1898,0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x1879,slow_1879 );
+        return jumpDirect ( 0x1879,slow_1879,0 );
     }
 }
 
@@ -39119,7 +39119,7 @@ Control slow_1879 ()
     u8 a1 = e8_read_mem ( 0x20C2 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x187C,slow_187C );
+    return jumpDirect ( 0x187C,slow_187C,0 );
 }
 
 Control slow_187C ()
@@ -39136,7 +39136,7 @@ Control slow_187C ()
     FlagA = ( ( a3 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x187E,slow_187E );
+    return jumpDirect ( 0x187E,slow_187E,0 );
 }
 
 Control slow_187E ()
@@ -39148,7 +39148,7 @@ Control slow_187E ()
     advance ( 16 );
     H = a2;
     L = a1;
-    return jumpDirect ( 0x1881,slow_1881 );
+    return jumpDirect ( 0x1881,slow_1881,0 );
 }
 
 Control slow_1881 ()
@@ -39158,12 +39158,12 @@ Control slow_1881 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x1888,slow_1888 );
+        return jumpDirect ( 0x1888,slow_1888,fast_1888 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x1884,slow_1884 );
+        return jumpDirect ( 0x1884,slow_1884,0 );
     }
 }
 
@@ -39174,7 +39174,7 @@ Control slow_1884 ()
     advance ( 10 );
     D = 0x00;
     E = 0x30;
-    return jumpDirect ( 0x1887,slow_1887 );
+    return jumpDirect ( 0x1887,slow_1887,0 );
 }
 
 Control slow_1887 ()
@@ -39190,7 +39190,7 @@ Control slow_1887 ()
     H = ( ( a5 & 0xFFFF ) >> 8 );
     L = ( ( a5 & 0xFFFF ) & 0xFF );
     FlagCY = ( ( a5 >> 16 ) & 0x01 );
-    return jumpDirect ( 0x1888,slow_1888 );
+    return jumpDirect ( 0x1888,slow_1888,fast_1888 );
 }
 
 Control slow_1888 ()
@@ -39202,7 +39202,7 @@ Control slow_1888 ()
     u8 a2 = H ;
     mem_write ( 0x20C8,a2 );
     advance ( 16 );
-    return jumpDirect ( 0x188B,slow_188B );
+    return jumpDirect ( 0x188B,slow_188B,0 );
 }
 
 Control slow_188B ()
@@ -39212,7 +39212,7 @@ Control slow_188B ()
     advance ( 10 );
     H = 0x20;
     L = 0xC5;
-    return jumpDirect ( 0x188E,slow_188E );
+    return jumpDirect ( 0x188E,slow_188E,0 );
 }
 
 Control slow_188E ()
@@ -39231,7 +39231,7 @@ Control slow_188E ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A3B,slow_1A3B );
+    return jumpDirect ( 0x1A3B,slow_1A3B,fast_1A3B );
 }
 
 Control slow_1891 ()
@@ -39247,7 +39247,7 @@ Control slow_1891 ()
     E = a4;
     H = a1;
     L = a2;
-    return jumpDirect ( 0x1892,slow_1892 );
+    return jumpDirect ( 0x1892,slow_1892,0 );
 }
 
 Control slow_1892 ()
@@ -39255,7 +39255,7 @@ Control slow_1892 ()
     // #at: 1892
     instruction2 ( 0x18,0x95,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x15,0xD3 );
     advance ( 10 );
-    return jumpDirect ( 0x15D3,slow_15D3 );
+    return jumpDirect ( 0x15D3,slow_15D3,fast_15D3 );
 }
 
 Control slow_1898 ()
@@ -39264,7 +39264,7 @@ Control slow_1898 ()
     instruction1 ( 0x18,0x9A,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x01 );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( 0x189A,slow_189A );
+    return jumpDirect ( 0x189A,slow_189A,0 );
 }
 
 Control slow_189A ()
@@ -39274,7 +39274,7 @@ Control slow_189A ()
     u8 a1 = A ;
     mem_write ( 0x20CB,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x189D,slow_189D );
+    return jumpDirect ( 0x189D,slow_189D,0 );
 }
 
 Control slow_189D ()
@@ -39302,7 +39302,7 @@ Control slow_189E ()
     advance ( 10 );
     H = 0x20;
     L = 0x50;
-    return jumpDirect ( 0x18A1,slow_18A1 );
+    return jumpDirect ( 0x18A1,slow_18A1,0 );
 }
 
 Control slow_18A1 ()
@@ -39312,7 +39312,7 @@ Control slow_18A1 ()
     advance ( 10 );
     D = 0x1B;
     E = 0xC0;
-    return jumpDirect ( 0x18A4,slow_18A4 );
+    return jumpDirect ( 0x18A4,slow_18A4,0 );
 }
 
 Control slow_18A4 ()
@@ -39321,7 +39321,7 @@ Control slow_18A4 ()
     instruction1 ( 0x18,0xA6,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x10 );
     advance ( 7 );
     B = 0x10;
-    return jumpDirect ( 0x18A6,slow_18A6 );
+    return jumpDirect ( 0x18A6,slow_18A6,0 );
 }
 
 Control slow_18A6 ()
@@ -39340,7 +39340,7 @@ Control slow_18A6 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A32,slow_1A32 );
+    return jumpDirect ( 0x1A32,slow_1A32,fast_1A32 );
 }
 
 Control slow_18A9 ()
@@ -39349,7 +39349,7 @@ Control slow_18A9 ()
     instruction1 ( 0x18,0xAB,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x02 );
     advance ( 7 );
     A = 0x02;
-    return jumpDirect ( 0x18AB,slow_18AB );
+    return jumpDirect ( 0x18AB,slow_18AB,0 );
 }
 
 Control slow_18AB ()
@@ -39359,7 +39359,7 @@ Control slow_18AB ()
     u8 a1 = A ;
     mem_write ( 0x2080,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x18AE,slow_18AE );
+    return jumpDirect ( 0x18AE,slow_18AE,0 );
 }
 
 Control slow_18AE ()
@@ -39368,7 +39368,7 @@ Control slow_18AE ()
     instruction1 ( 0x18,0xB0,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0xFF );
     advance ( 7 );
     A = 0xFF;
-    return jumpDirect ( 0x18B0,slow_18B0 );
+    return jumpDirect ( 0x18B0,slow_18B0,0 );
 }
 
 Control slow_18B0 ()
@@ -39378,7 +39378,7 @@ Control slow_18B0 ()
     u8 a1 = A ;
     mem_write ( 0x207E,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x18B3,slow_18B3 );
+    return jumpDirect ( 0x18B3,slow_18B3,0 );
 }
 
 Control slow_18B3 ()
@@ -39387,7 +39387,7 @@ Control slow_18B3 ()
     instruction1 ( 0x18,0xB5,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x04 );
     advance ( 7 );
     A = 0x04;
-    return jumpDirect ( 0x18B5,slow_18B5 );
+    return jumpDirect ( 0x18B5,slow_18B5,0 );
 }
 
 Control slow_18B5 ()
@@ -39397,7 +39397,7 @@ Control slow_18B5 ()
     u8 a1 = A ;
     mem_write ( 0x20C1,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x18B8,slow_18B8 );
+    return jumpDirect ( 0x18B8,slow_18B8,fast_18B8 );
 }
 
 Control slow_18B8 ()
@@ -39407,7 +39407,7 @@ Control slow_18B8 ()
     u8 a1 = e8_read_mem ( 0x2055 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x18BB,slow_18BB );
+    return jumpDirect ( 0x18BB,slow_18BB,0 );
 }
 
 Control slow_18BB ()
@@ -39424,7 +39424,7 @@ Control slow_18BB ()
     FlagA = ( ( a3 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x18BD,slow_18BD );
+    return jumpDirect ( 0x18BD,slow_18BD,0 );
 }
 
 Control slow_18BD ()
@@ -39434,12 +39434,12 @@ Control slow_18BD ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x18B8,slow_18B8 );
+        return jumpDirect ( 0x18B8,slow_18B8,fast_18B8 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x18C0,slow_18C0 );
+        return jumpDirect ( 0x18C0,slow_18C0,fast_18C0 );
     }
 }
 
@@ -39450,7 +39450,7 @@ Control slow_18C0 ()
     u8 a1 = e8_read_mem ( 0x2055 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x18C3,slow_18C3 );
+    return jumpDirect ( 0x18C3,slow_18C3,0 );
 }
 
 Control slow_18C3 ()
@@ -39467,7 +39467,7 @@ Control slow_18C3 ()
     FlagA = ( ( a3 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x18C5,slow_18C5 );
+    return jumpDirect ( 0x18C5,slow_18C5,0 );
 }
 
 Control slow_18C5 ()
@@ -39477,12 +39477,12 @@ Control slow_18C5 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x18C0,slow_18C0 );
+        return jumpDirect ( 0x18C0,slow_18C0,fast_18C0 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x18C8,slow_18C8 );
+        return jumpDirect ( 0x18C8,slow_18C8,0 );
     }
 }
 
@@ -39493,7 +39493,7 @@ Control slow_18C8 ()
     advance ( 10 );
     H = 0x33;
     L = 0x11;
-    return jumpDirect ( 0x18CB,slow_18CB );
+    return jumpDirect ( 0x18CB,slow_18CB,0 );
 }
 
 Control slow_18CB ()
@@ -39502,7 +39502,7 @@ Control slow_18CB ()
     instruction1 ( 0x18,0xCD,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x26 );
     advance ( 7 );
     A = 0x26;
-    return jumpDirect ( 0x18CD,slow_18CD );
+    return jumpDirect ( 0x18CD,slow_18CD,0 );
 }
 
 Control slow_18CD ()
@@ -39510,7 +39510,7 @@ Control slow_18CD ()
     // #at: 18CD
     instruction0 ( 0x18,0xCE,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"NOP" );
     advance ( 4 );
-    return jumpDirect ( 0x18CE,slow_18CE );
+    return jumpDirect ( 0x18CE,slow_18CE,0 );
 }
 
 Control slow_18CE ()
@@ -39529,7 +39529,7 @@ Control slow_18CE ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x08FF,slow_08FF );
+    return jumpDirect ( 0x08FF,slow_08FF,fast_08FF );
 }
 
 Control slow_18D1 ()
@@ -39537,7 +39537,7 @@ Control slow_18D1 ()
     // #at: 18D1
     instruction2 ( 0x18,0xD4,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x0A,0xB6 );
     advance ( 10 );
-    return jumpDirect ( 0x0AB6,slow_0AB6 );
+    return jumpDirect ( 0x0AB6,slow_0AB6,fast_0AB6 );
 }
 
 Control slow_18D4 ()
@@ -39547,7 +39547,7 @@ Control slow_18D4 ()
     advance ( 10 );
     SPH = 0x24;
     SPL = 0x00;
-    return jumpDirect ( 0x18D7,slow_18D7 );
+    return jumpDirect ( 0x18D7,slow_18D7,0 );
 }
 
 Control slow_18D7 ()
@@ -39556,7 +39556,7 @@ Control slow_18D7 ()
     instruction1 ( 0x18,0xD9,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x00 );
     advance ( 7 );
     B = 0x00;
-    return jumpDirect ( 0x18D9,slow_18D9 );
+    return jumpDirect ( 0x18D9,slow_18D9,0 );
 }
 
 Control slow_18D9 ()
@@ -39575,7 +39575,7 @@ Control slow_18D9 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x01E6,slow_01E6 );
+    return jumpDirect ( 0x01E6,slow_01E6,fast_01E6 );
 }
 
 Control slow_18DC ()
@@ -39594,7 +39594,7 @@ Control slow_18DC ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1956,slow_1956 );
+    return jumpDirect ( 0x1956,slow_1956,fast_1956 );
 }
 
 Control slow_18DF ()
@@ -39603,7 +39603,7 @@ Control slow_18DF ()
     instruction1 ( 0x18,0xE1,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x08 );
     advance ( 7 );
     A = 0x08;
-    return jumpDirect ( 0x18E1,slow_18E1 );
+    return jumpDirect ( 0x18E1,slow_18E1,0 );
 }
 
 Control slow_18E1 ()
@@ -39613,7 +39613,7 @@ Control slow_18E1 ()
     u8 a1 = A ;
     mem_write ( 0x20CF,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x18E4,slow_18E4 );
+    return jumpDirect ( 0x18E4,slow_18E4,0 );
 }
 
 Control slow_18E4 ()
@@ -39621,7 +39621,7 @@ Control slow_18E4 ()
     // #at: 18E4
     instruction2 ( 0x18,0xE7,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x0A,0xEA );
     advance ( 10 );
-    return jumpDirect ( 0x0AEA,slow_0AEA );
+    return jumpDirect ( 0x0AEA,slow_0AEA,0 );
 }
 
 Control slow_18E7 ()
@@ -39631,7 +39631,7 @@ Control slow_18E7 ()
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x18EA,slow_18EA );
+    return jumpDirect ( 0x18EA,slow_18EA,0 );
 }
 
 Control slow_18EA ()
@@ -39641,7 +39641,7 @@ Control slow_18EA ()
     advance ( 10 );
     H = 0x20;
     L = 0xE7;
-    return jumpDirect ( 0x18ED,slow_18ED );
+    return jumpDirect ( 0x18ED,slow_18ED,0 );
 }
 
 Control slow_18ED ()
@@ -39652,7 +39652,7 @@ Control slow_18ED ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 >> 0x01 ),7,( ( a1 >> 0 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x18EE,slow_18EE );
+    return jumpDirect ( 0x18EE,slow_18EE,0 );
 }
 
 Control slow_18EE ()
@@ -39677,7 +39677,7 @@ Control slow_18EE ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x18EF,slow_18EF );
+        return jumpDirect ( 0x18EF,slow_18EF,0 );
     }
 }
 
@@ -39691,7 +39691,7 @@ Control slow_18EF ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x18F0,slow_18F0 );
+    return jumpDirect ( 0x18F0,slow_18F0,0 );
 }
 
 Control slow_18F0 ()
@@ -39718,7 +39718,7 @@ Control slow_18F1 ()
     instruction1 ( 0x18,0xF3,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x02 );
     advance ( 7 );
     B = 0x02;
-    return jumpDirect ( 0x18F3,slow_18F3 );
+    return jumpDirect ( 0x18F3,slow_18F3,0 );
 }
 
 Control slow_18F3 ()
@@ -39728,7 +39728,7 @@ Control slow_18F3 ()
     u8 a1 = e8_read_mem ( 0x2082 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x18F6,slow_18F6 );
+    return jumpDirect ( 0x18F6,slow_18F6,0 );
 }
 
 Control slow_18F6 ()
@@ -39746,7 +39746,7 @@ Control slow_18F6 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x18F7,slow_18F7 );
+    return jumpDirect ( 0x18F7,slow_18F7,0 );
 }
 
 Control slow_18F7 ()
@@ -39771,7 +39771,7 @@ Control slow_18F7 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x18F8,slow_18F8 );
+        return jumpDirect ( 0x18F8,slow_18F8,0 );
     }
 }
 
@@ -39790,7 +39790,7 @@ Control slow_18F8 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x18F9,slow_18F9 );
+    return jumpDirect ( 0x18F9,slow_18F9,0 );
 }
 
 Control slow_18F9 ()
@@ -39818,7 +39818,7 @@ Control slow_18FA ()
     u8 a1 = e8_read_mem ( 0x2094 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x18FD,slow_18FD );
+    return jumpDirect ( 0x18FD,slow_18FD,0 );
 }
 
 Control slow_18FD ()
@@ -39835,7 +39835,7 @@ Control slow_18FD ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x18FE,slow_18FE );
+    return jumpDirect ( 0x18FE,slow_18FE,0 );
 }
 
 Control slow_18FE ()
@@ -39845,7 +39845,7 @@ Control slow_18FE ()
     u8 a1 = A ;
     mem_write ( 0x2094,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x1901,slow_1901 );
+    return jumpDirect ( 0x1901,slow_1901,0 );
 }
 
 Control slow_1901 ()
@@ -39859,7 +39859,7 @@ Control slow_1901 ()
     sound_control ( "InvaderDie",( ( a1 >> 3 ) & 0x01 ) );
     sound_control ( "ExtraLife",( ( a1 >> 4 ) & 0x01 ) );
     advance ( 10 );
-    return jumpDirect ( 0x1903,slow_1903 );
+    return jumpDirect ( 0x1903,slow_1903,0 );
 }
 
 Control slow_1903 ()
@@ -39887,7 +39887,7 @@ Control slow_1904 ()
     advance ( 10 );
     H = 0x22;
     L = 0x00;
-    return jumpDirect ( 0x1907,slow_1907 );
+    return jumpDirect ( 0x1907,slow_1907,0 );
 }
 
 Control slow_1907 ()
@@ -39895,7 +39895,7 @@ Control slow_1907 ()
     // #at: 1907
     instruction2 ( 0x19,0x0A,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x01,0xC3 );
     advance ( 10 );
-    return jumpDirect ( 0x01C3,slow_01C3 );
+    return jumpDirect ( 0x01C3,slow_01C3,fast_01C3 );
 }
 
 Control slow_190A ()
@@ -39914,7 +39914,7 @@ Control slow_190A ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x14D8,slow_14D8 );
+    return jumpDirect ( 0x14D8,slow_14D8,fast_14D8 );
 }
 
 Control slow_190D ()
@@ -39922,7 +39922,7 @@ Control slow_190D ()
     // #at: 190D
     instruction2 ( 0x19,0x10,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x15,0x97 );
     advance ( 10 );
-    return jumpDirect ( 0x1597,slow_1597 );
+    return jumpDirect ( 0x1597,slow_1597,0 );
 }
 
 Control slow_1910 ()
@@ -39932,7 +39932,7 @@ Control slow_1910 ()
     advance ( 10 );
     H = 0x20;
     L = 0xE7;
-    return jumpDirect ( 0x1913,slow_1913 );
+    return jumpDirect ( 0x1913,slow_1913,0 );
 }
 
 Control slow_1913 ()
@@ -39942,7 +39942,7 @@ Control slow_1913 ()
     u8 a1 = e8_read_mem ( 0x2067 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x1916,slow_1916 );
+    return jumpDirect ( 0x1916,slow_1916,0 );
 }
 
 Control slow_1916 ()
@@ -39953,7 +39953,7 @@ Control slow_1916 ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 >> 0x01 ),7,( ( a1 >> 0 ) & 0x01 ) );
     FlagCY = ( ( a1 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x1917,slow_1917 );
+    return jumpDirect ( 0x1917,slow_1917,0 );
 }
 
 Control slow_1917 ()
@@ -39978,7 +39978,7 @@ Control slow_1917 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x1918,slow_1918 );
+        return jumpDirect ( 0x1918,slow_1918,0 );
     }
 }
 
@@ -39992,7 +39992,7 @@ Control slow_1918 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x1919,slow_1919 );
+    return jumpDirect ( 0x1919,slow_1919,0 );
 }
 
 Control slow_1919 ()
@@ -40019,7 +40019,7 @@ Control slow_191A ()
     instruction1 ( 0x19,0x1C,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   C,%02X",0x1C );
     advance ( 7 );
     C = 0x1C;
-    return jumpDirect ( 0x191C,slow_191C );
+    return jumpDirect ( 0x191C,slow_191C,0 );
 }
 
 Control slow_191C ()
@@ -40029,7 +40029,7 @@ Control slow_191C ()
     advance ( 10 );
     H = 0x24;
     L = 0x1E;
-    return jumpDirect ( 0x191F,slow_191F );
+    return jumpDirect ( 0x191F,slow_191F,0 );
 }
 
 Control slow_191F ()
@@ -40039,7 +40039,7 @@ Control slow_191F ()
     advance ( 10 );
     D = 0x1A;
     E = 0xE4;
-    return jumpDirect ( 0x1922,slow_1922 );
+    return jumpDirect ( 0x1922,slow_1922,0 );
 }
 
 Control slow_1922 ()
@@ -40047,7 +40047,7 @@ Control slow_1922 ()
     // #at: 1922
     instruction2 ( 0x19,0x25,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x08,0xF3 );
     advance ( 10 );
-    return jumpDirect ( 0x08F3,slow_08F3 );
+    return jumpDirect ( 0x08F3,slow_08F3,fast_08F3 );
 }
 
 Control slow_1925 ()
@@ -40057,7 +40057,7 @@ Control slow_1925 ()
     advance ( 10 );
     H = 0x20;
     L = 0xF8;
-    return jumpDirect ( 0x1928,slow_1928 );
+    return jumpDirect ( 0x1928,slow_1928,0 );
 }
 
 Control slow_1928 ()
@@ -40065,7 +40065,7 @@ Control slow_1928 ()
     // #at: 1928
     instruction2 ( 0x19,0x2B,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x19,0x31 );
     advance ( 10 );
-    return jumpDirect ( 0x1931,slow_1931 );
+    return jumpDirect ( 0x1931,slow_1931,fast_1931 );
 }
 
 Control slow_192B ()
@@ -40075,7 +40075,7 @@ Control slow_192B ()
     advance ( 10 );
     H = 0x20;
     L = 0xFC;
-    return jumpDirect ( 0x192E,slow_192E );
+    return jumpDirect ( 0x192E,slow_192E,0 );
 }
 
 Control slow_192E ()
@@ -40083,7 +40083,7 @@ Control slow_192E ()
     // #at: 192E
     instruction2 ( 0x19,0x31,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x19,0x31 );
     advance ( 10 );
-    return jumpDirect ( 0x1931,slow_1931 );
+    return jumpDirect ( 0x1931,slow_1931,fast_1931 );
 }
 
 Control slow_1931 ()
@@ -40095,7 +40095,7 @@ Control slow_1931 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     E = a3;
-    return jumpDirect ( 0x1932,slow_1932 );
+    return jumpDirect ( 0x1932,slow_1932,0 );
 }
 
 Control slow_1932 ()
@@ -40108,7 +40108,7 @@ Control slow_1932 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x1933,slow_1933 );
+    return jumpDirect ( 0x1933,slow_1933,0 );
 }
 
 Control slow_1933 ()
@@ -40120,7 +40120,7 @@ Control slow_1933 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     D = a3;
-    return jumpDirect ( 0x1934,slow_1934 );
+    return jumpDirect ( 0x1934,slow_1934,0 );
 }
 
 Control slow_1934 ()
@@ -40133,7 +40133,7 @@ Control slow_1934 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x1935,slow_1935 );
+    return jumpDirect ( 0x1935,slow_1935,0 );
 }
 
 Control slow_1935 ()
@@ -40145,7 +40145,7 @@ Control slow_1935 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x1936,slow_1936 );
+    return jumpDirect ( 0x1936,slow_1936,0 );
 }
 
 Control slow_1936 ()
@@ -40158,7 +40158,7 @@ Control slow_1936 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x1937,slow_1937 );
+    return jumpDirect ( 0x1937,slow_1937,0 );
 }
 
 Control slow_1937 ()
@@ -40170,7 +40170,7 @@ Control slow_1937 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     H = a3;
-    return jumpDirect ( 0x1938,slow_1938 );
+    return jumpDirect ( 0x1938,slow_1938,0 );
 }
 
 Control slow_1938 ()
@@ -40180,7 +40180,7 @@ Control slow_1938 ()
     u8 a1 = A ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( 0x1939,slow_1939 );
+    return jumpDirect ( 0x1939,slow_1939,0 );
 }
 
 Control slow_1939 ()
@@ -40188,7 +40188,7 @@ Control slow_1939 ()
     // #at: 1939
     instruction2 ( 0x19,0x3C,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x09,0xAD );
     advance ( 10 );
-    return jumpDirect ( 0x09AD,slow_09AD );
+    return jumpDirect ( 0x09AD,slow_09AD,fast_09AD );
 }
 
 Control slow_193C ()
@@ -40197,7 +40197,7 @@ Control slow_193C ()
     instruction1 ( 0x19,0x3E,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   C,%02X",0x07 );
     advance ( 7 );
     C = 0x07;
-    return jumpDirect ( 0x193E,slow_193E );
+    return jumpDirect ( 0x193E,slow_193E,0 );
 }
 
 Control slow_193E ()
@@ -40207,7 +40207,7 @@ Control slow_193E ()
     advance ( 10 );
     H = 0x35;
     L = 0x01;
-    return jumpDirect ( 0x1941,slow_1941 );
+    return jumpDirect ( 0x1941,slow_1941,0 );
 }
 
 Control slow_1941 ()
@@ -40217,7 +40217,7 @@ Control slow_1941 ()
     advance ( 10 );
     D = 0x1F;
     E = 0xA9;
-    return jumpDirect ( 0x1944,slow_1944 );
+    return jumpDirect ( 0x1944,slow_1944,0 );
 }
 
 Control slow_1944 ()
@@ -40225,7 +40225,7 @@ Control slow_1944 ()
     // #at: 1944
     instruction2 ( 0x19,0x47,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x08,0xF3 );
     advance ( 10 );
-    return jumpDirect ( 0x08F3,slow_08F3 );
+    return jumpDirect ( 0x08F3,slow_08F3,fast_08F3 );
 }
 
 Control slow_1947 ()
@@ -40235,7 +40235,7 @@ Control slow_1947 ()
     u8 a1 = e8_read_mem ( 0x20EB ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x194A,slow_194A );
+    return jumpDirect ( 0x194A,slow_194A,0 );
 }
 
 Control slow_194A ()
@@ -40245,7 +40245,7 @@ Control slow_194A ()
     advance ( 10 );
     H = 0x3C;
     L = 0x01;
-    return jumpDirect ( 0x194D,slow_194D );
+    return jumpDirect ( 0x194D,slow_194D,0 );
 }
 
 Control slow_194D ()
@@ -40253,7 +40253,7 @@ Control slow_194D ()
     // #at: 194D
     instruction2 ( 0x19,0x50,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x09,0xB2 );
     advance ( 10 );
-    return jumpDirect ( 0x09B2,slow_09B2 );
+    return jumpDirect ( 0x09B2,slow_09B2,fast_09B2 );
 }
 
 Control slow_1950 ()
@@ -40263,7 +40263,7 @@ Control slow_1950 ()
     advance ( 10 );
     H = 0x20;
     L = 0xF4;
-    return jumpDirect ( 0x1953,slow_1953 );
+    return jumpDirect ( 0x1953,slow_1953,0 );
 }
 
 Control slow_1953 ()
@@ -40271,7 +40271,7 @@ Control slow_1953 ()
     // #at: 1953
     instruction2 ( 0x19,0x56,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x19,0x31 );
     advance ( 10 );
-    return jumpDirect ( 0x1931,slow_1931 );
+    return jumpDirect ( 0x1931,slow_1931,fast_1931 );
 }
 
 Control slow_1956 ()
@@ -40290,7 +40290,7 @@ Control slow_1956 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A5C,slow_1A5C );
+    return jumpDirect ( 0x1A5C,slow_1A5C,0 );
 }
 
 Control slow_1959 ()
@@ -40309,7 +40309,7 @@ Control slow_1959 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x191A,slow_191A );
+    return jumpDirect ( 0x191A,slow_191A,0 );
 }
 
 Control slow_195C ()
@@ -40328,7 +40328,7 @@ Control slow_195C ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1925,slow_1925 );
+    return jumpDirect ( 0x1925,slow_1925,fast_1925 );
 }
 
 Control slow_195F ()
@@ -40347,7 +40347,7 @@ Control slow_195F ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x192B,slow_192B );
+    return jumpDirect ( 0x192B,slow_192B,fast_192B );
 }
 
 Control slow_1962 ()
@@ -40366,7 +40366,7 @@ Control slow_1962 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1950,slow_1950 );
+    return jumpDirect ( 0x1950,slow_1950,fast_1950 );
 }
 
 Control slow_1965 ()
@@ -40385,7 +40385,7 @@ Control slow_1965 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x193C,slow_193C );
+    return jumpDirect ( 0x193C,slow_193C,fast_193C );
 }
 
 Control slow_1968 ()
@@ -40393,7 +40393,7 @@ Control slow_1968 ()
     // #at: 1968
     instruction2 ( 0x19,0x6B,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x19,0x47 );
     advance ( 10 );
-    return jumpDirect ( 0x1947,slow_1947 );
+    return jumpDirect ( 0x1947,slow_1947,fast_1947 );
 }
 
 Control slow_196B ()
@@ -40412,7 +40412,7 @@ Control slow_196B ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x19DC,slow_19DC );
+    return jumpDirect ( 0x19DC,slow_19DC,fast_19DC );
 }
 
 Control slow_196E ()
@@ -40420,7 +40420,7 @@ Control slow_196E ()
     // #at: 196E
     instruction2 ( 0x19,0x71,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x16,0x71 );
     advance ( 10 );
-    return jumpDirect ( 0x1671,slow_1671 );
+    return jumpDirect ( 0x1671,slow_1671,fast_1671 );
 }
 
 Control slow_1971 ()
@@ -40429,7 +40429,7 @@ Control slow_1971 ()
     instruction1 ( 0x19,0x73,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x01 );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( 0x1973,slow_1973 );
+    return jumpDirect ( 0x1973,slow_1973,0 );
 }
 
 Control slow_1973 ()
@@ -40439,7 +40439,7 @@ Control slow_1973 ()
     u8 a1 = A ;
     mem_write ( 0x206D,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x1976,slow_1976 );
+    return jumpDirect ( 0x1976,slow_1976,0 );
 }
 
 Control slow_1976 ()
@@ -40447,7 +40447,7 @@ Control slow_1976 ()
     // #at: 1976
     instruction2 ( 0x19,0x79,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x16,0xE6 );
     advance ( 10 );
-    return jumpDirect ( 0x16E6,slow_16E6 );
+    return jumpDirect ( 0x16E6,slow_16E6,0 );
 }
 
 Control slow_1979 ()
@@ -40466,7 +40466,7 @@ Control slow_1979 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x19D7,slow_19D7 );
+    return jumpDirect ( 0x19D7,slow_19D7,fast_19D7 );
 }
 
 Control slow_197C ()
@@ -40485,7 +40485,7 @@ Control slow_197C ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1947,slow_1947 );
+    return jumpDirect ( 0x1947,slow_1947,fast_1947 );
 }
 
 Control slow_197F ()
@@ -40493,7 +40493,7 @@ Control slow_197F ()
     // #at: 197F
     instruction2 ( 0x19,0x82,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x19,0x3C );
     advance ( 10 );
-    return jumpDirect ( 0x193C,slow_193C );
+    return jumpDirect ( 0x193C,slow_193C,fast_193C );
 }
 
 Control slow_1982 ()
@@ -40503,7 +40503,7 @@ Control slow_1982 ()
     u8 a1 = A ;
     mem_write ( 0x20C1,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x1985,slow_1985 );
+    return jumpDirect ( 0x1985,slow_1985,0 );
 }
 
 Control slow_1985 ()
@@ -40529,7 +40529,7 @@ Control slow_1988 ()
     // #at: 1988
     instruction2 ( 0x19,0x8B,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x09,0xD6 );
     advance ( 10 );
-    return jumpDirect ( 0x09D6,slow_09D6 );
+    return jumpDirect ( 0x09D6,slow_09D6,fast_09D6 );
 }
 
 Control slow_199A ()
@@ -40539,7 +40539,7 @@ Control slow_199A ()
     u8 a1 = e8_read_mem ( 0x201E ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x199D,slow_199D );
+    return jumpDirect ( 0x199D,slow_199D,0 );
 }
 
 Control slow_199D ()
@@ -40557,7 +40557,7 @@ Control slow_199D ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x199E,slow_199E );
+    return jumpDirect ( 0x199E,slow_199E,0 );
 }
 
 Control slow_199E ()
@@ -40567,12 +40567,12 @@ Control slow_199E ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x19AC,slow_19AC );
+        return jumpDirect ( 0x19AC,slow_19AC,fast_19AC );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x19A1,slow_19A1 );
+        return jumpDirect ( 0x19A1,slow_19A1,0 );
     }
 }
 
@@ -40582,7 +40582,7 @@ Control slow_19A1 ()
     instruction1 ( 0x19,0xA3,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"IN   %02X",0x01 );
     advance ( 10 );
     A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,( ! e1_is_pressed ( CoinEntry ) ) ),1,e1_is_pressed ( P2start ) ),2,e1_is_pressed ( P1start ) ),4,e1_is_pressed ( P1shoot ) ),5,e1_is_pressed ( P1left ) ),6,e1_is_pressed ( P1right ) );
-    return jumpDirect ( 0x19A3,slow_19A3 );
+    return jumpDirect ( 0x19A3,slow_19A3,0 );
 }
 
 Control slow_19A3 ()
@@ -40599,7 +40599,7 @@ Control slow_19A3 ()
     FlagA = ( ( a3 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x19A5,slow_19A5 );
+    return jumpDirect ( 0x19A5,slow_19A5,0 );
 }
 
 Control slow_19A5 ()
@@ -40618,7 +40618,7 @@ Control slow_19A5 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x19A7,slow_19A7 );
+    return jumpDirect ( 0x19A7,slow_19A7,0 );
 }
 
 Control slow_19A7 ()
@@ -40643,7 +40643,7 @@ Control slow_19A7 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x19A8,slow_19A8 );
+        return jumpDirect ( 0x19A8,slow_19A8,0 );
     }
 }
 
@@ -40662,7 +40662,7 @@ Control slow_19A8 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x19A9,slow_19A9 );
+    return jumpDirect ( 0x19A9,slow_19A9,0 );
 }
 
 Control slow_19A9 ()
@@ -40672,7 +40672,7 @@ Control slow_19A9 ()
     u8 a1 = A ;
     mem_write ( 0x201E,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x19AC,slow_19AC );
+    return jumpDirect ( 0x19AC,slow_19AC,fast_19AC );
 }
 
 Control slow_19AC ()
@@ -40681,7 +40681,7 @@ Control slow_19AC ()
     instruction1 ( 0x19,0xAE,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"IN   %02X",0x01 );
     advance ( 10 );
     A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,( ! e1_is_pressed ( CoinEntry ) ) ),1,e1_is_pressed ( P2start ) ),2,e1_is_pressed ( P1start ) ),4,e1_is_pressed ( P1shoot ) ),5,e1_is_pressed ( P1left ) ),6,e1_is_pressed ( P1right ) );
-    return jumpDirect ( 0x19AE,slow_19AE );
+    return jumpDirect ( 0x19AE,slow_19AE,0 );
 }
 
 Control slow_19AE ()
@@ -40698,7 +40698,7 @@ Control slow_19AE ()
     FlagA = ( ( a3 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x19B0,slow_19B0 );
+    return jumpDirect ( 0x19B0,slow_19B0,0 );
 }
 
 Control slow_19B0 ()
@@ -40716,7 +40716,7 @@ Control slow_19B0 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x19B2,slow_19B2 );
+    return jumpDirect ( 0x19B2,slow_19B2,0 );
 }
 
 Control slow_19B2 ()
@@ -40741,7 +40741,7 @@ Control slow_19B2 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x19B3,slow_19B3 );
+        return jumpDirect ( 0x19B3,slow_19B3,0 );
     }
 }
 
@@ -40752,7 +40752,7 @@ Control slow_19B3 ()
     advance ( 10 );
     H = 0x2E;
     L = 0x1B;
-    return jumpDirect ( 0x19B6,slow_19B6 );
+    return jumpDirect ( 0x19B6,slow_19B6,0 );
 }
 
 Control slow_19B6 ()
@@ -40762,7 +40762,7 @@ Control slow_19B6 ()
     advance ( 10 );
     D = 0x0B;
     E = 0xF7;
-    return jumpDirect ( 0x19B9,slow_19B9 );
+    return jumpDirect ( 0x19B9,slow_19B9,0 );
 }
 
 Control slow_19B9 ()
@@ -40771,7 +40771,7 @@ Control slow_19B9 ()
     instruction1 ( 0x19,0xBB,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   C,%02X",0x09 );
     advance ( 7 );
     C = 0x09;
-    return jumpDirect ( 0x19BB,slow_19BB );
+    return jumpDirect ( 0x19BB,slow_19BB,0 );
 }
 
 Control slow_19BB ()
@@ -40779,7 +40779,7 @@ Control slow_19BB ()
     // #at: 19BB
     instruction2 ( 0x19,0xBE,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x08,0xF3 );
     advance ( 10 );
-    return jumpDirect ( 0x08F3,slow_08F3 );
+    return jumpDirect ( 0x08F3,slow_08F3,fast_08F3 );
 }
 
 Control slow_19D1 ()
@@ -40788,7 +40788,7 @@ Control slow_19D1 ()
     instruction1 ( 0x19,0xD3,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x01 );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( 0x19D3,slow_19D3 );
+    return jumpDirect ( 0x19D3,slow_19D3,fast_19D3 );
 }
 
 Control slow_19D3 ()
@@ -40798,7 +40798,7 @@ Control slow_19D3 ()
     u8 a1 = A ;
     mem_write ( 0x20E9,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x19D6,slow_19D6 );
+    return jumpDirect ( 0x19D6,slow_19D6,0 );
 }
 
 Control slow_19D6 ()
@@ -40833,7 +40833,7 @@ Control slow_19D7 ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x19D8,slow_19D8 );
+    return jumpDirect ( 0x19D8,slow_19D8,0 );
 }
 
 Control slow_19D8 ()
@@ -40841,7 +40841,7 @@ Control slow_19D8 ()
     // #at: 19D8
     instruction2 ( 0x19,0xDB,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x19,0xD3 );
     advance ( 10 );
-    return jumpDirect ( 0x19D3,slow_19D3 );
+    return jumpDirect ( 0x19D3,slow_19D3,fast_19D3 );
 }
 
 Control slow_19DC ()
@@ -40851,7 +40851,7 @@ Control slow_19DC ()
     u8 a1 = e8_read_mem ( 0x2094 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x19DF,slow_19DF );
+    return jumpDirect ( 0x19DF,slow_19DF,0 );
 }
 
 Control slow_19DF ()
@@ -40869,7 +40869,7 @@ Control slow_19DF ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x19E0,slow_19E0 );
+    return jumpDirect ( 0x19E0,slow_19E0,0 );
 }
 
 Control slow_19E0 ()
@@ -40879,7 +40879,7 @@ Control slow_19E0 ()
     u8 a1 = A ;
     mem_write ( 0x2094,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x19E3,slow_19E3 );
+    return jumpDirect ( 0x19E3,slow_19E3,0 );
 }
 
 Control slow_19E3 ()
@@ -40893,7 +40893,7 @@ Control slow_19E3 ()
     sound_control ( "InvaderDie",( ( a1 >> 3 ) & 0x01 ) );
     sound_control ( "ExtraLife",( ( a1 >> 4 ) & 0x01 ) );
     advance ( 10 );
-    return jumpDirect ( 0x19E5,slow_19E5 );
+    return jumpDirect ( 0x19E5,slow_19E5,0 );
 }
 
 Control slow_19E5 ()
@@ -40921,7 +40921,7 @@ Control slow_19E6 ()
     advance ( 10 );
     H = 0x27;
     L = 0x01;
-    return jumpDirect ( 0x19E9,slow_19E9 );
+    return jumpDirect ( 0x19E9,slow_19E9,0 );
 }
 
 Control slow_19E9 ()
@@ -40931,12 +40931,12 @@ Control slow_19E9 ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x19FA,slow_19FA );
+        return jumpDirect ( 0x19FA,slow_19FA,fast_19FA );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x19EC,slow_19EC );
+        return jumpDirect ( 0x19EC,slow_19EC,fast_19EC );
     }
 }
 
@@ -40947,7 +40947,7 @@ Control slow_19EC ()
     advance ( 10 );
     D = 0x1C;
     E = 0x60;
-    return jumpDirect ( 0x19EF,slow_19EF );
+    return jumpDirect ( 0x19EF,slow_19EF,0 );
 }
 
 Control slow_19EF ()
@@ -40956,7 +40956,7 @@ Control slow_19EF ()
     instruction1 ( 0x19,0xF1,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x10 );
     advance ( 7 );
     B = 0x10;
-    return jumpDirect ( 0x19F1,slow_19F1 );
+    return jumpDirect ( 0x19F1,slow_19F1,0 );
 }
 
 Control slow_19F1 ()
@@ -40966,7 +40966,7 @@ Control slow_19F1 ()
     u8 a1 = A ;
     advance ( 5 );
     C = a1;
-    return jumpDirect ( 0x19F2,slow_19F2 );
+    return jumpDirect ( 0x19F2,slow_19F2,0 );
 }
 
 Control slow_19F2 ()
@@ -40985,7 +40985,7 @@ Control slow_19F2 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1439,slow_1439 );
+    return jumpDirect ( 0x1439,slow_1439,fast_1439 );
 }
 
 Control slow_19F5 ()
@@ -40995,7 +40995,7 @@ Control slow_19F5 ()
     u8 a1 = C ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x19F6,slow_19F6 );
+    return jumpDirect ( 0x19F6,slow_19F6,0 );
 }
 
 Control slow_19F6 ()
@@ -41013,7 +41013,7 @@ Control slow_19F6 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x19F7,slow_19F7 );
+    return jumpDirect ( 0x19F7,slow_19F7,0 );
 }
 
 Control slow_19F7 ()
@@ -41023,12 +41023,12 @@ Control slow_19F7 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x19EC,slow_19EC );
+        return jumpDirect ( 0x19EC,slow_19EC,fast_19EC );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x19FA,slow_19FA );
+        return jumpDirect ( 0x19FA,slow_19FA,fast_19FA );
     }
 }
 
@@ -41038,7 +41038,7 @@ Control slow_19FA ()
     instruction1 ( 0x19,0xFC,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x10 );
     advance ( 7 );
     B = 0x10;
-    return jumpDirect ( 0x19FC,slow_19FC );
+    return jumpDirect ( 0x19FC,slow_19FC,0 );
 }
 
 Control slow_19FC ()
@@ -41057,7 +41057,7 @@ Control slow_19FC ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x14CB,slow_14CB );
+    return jumpDirect ( 0x14CB,slow_14CB,fast_14CB );
 }
 
 Control slow_19FF ()
@@ -41067,7 +41067,7 @@ Control slow_19FF ()
     u8 a1 = H ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x1A00,slow_1A00 );
+    return jumpDirect ( 0x1A00,slow_1A00,0 );
 }
 
 Control slow_1A00 ()
@@ -41085,7 +41085,7 @@ Control slow_1A00 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x1A02,slow_1A02 );
+    return jumpDirect ( 0x1A02,slow_1A02,0 );
 }
 
 Control slow_1A02 ()
@@ -41095,12 +41095,12 @@ Control slow_1A02 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x19FA,slow_19FA );
+        return jumpDirect ( 0x19FA,slow_19FA,fast_19FA );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x1A05,slow_1A05 );
+        return jumpDirect ( 0x1A05,slow_1A05,0 );
     }
 }
 
@@ -41129,7 +41129,7 @@ Control slow_1A06 ()
     advance ( 10 );
     H = 0x20;
     L = 0x72;
-    return jumpDirect ( 0x1A09,slow_1A09 );
+    return jumpDirect ( 0x1A09,slow_1A09,0 );
 }
 
 Control slow_1A09 ()
@@ -41141,7 +41141,7 @@ Control slow_1A09 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     B = a3;
-    return jumpDirect ( 0x1A0A,slow_1A0A );
+    return jumpDirect ( 0x1A0A,slow_1A0A,0 );
 }
 
 Control slow_1A0A ()
@@ -41153,7 +41153,7 @@ Control slow_1A0A ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x1A0B,slow_1A0B );
+    return jumpDirect ( 0x1A0B,slow_1A0B,0 );
 }
 
 Control slow_1A0B ()
@@ -41170,7 +41170,7 @@ Control slow_1A0B ()
     FlagA = ( ( a3 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x1A0D,slow_1A0D );
+    return jumpDirect ( 0x1A0D,slow_1A0D,0 );
 }
 
 Control slow_1A0D ()
@@ -41187,7 +41187,7 @@ Control slow_1A0D ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x1A0E,slow_1A0E );
+    return jumpDirect ( 0x1A0E,slow_1A0E,0 );
 }
 
 Control slow_1A0E ()
@@ -41212,7 +41212,7 @@ Control slow_1A0E ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x1A0F,slow_1A0F );
+        return jumpDirect ( 0x1A0F,slow_1A0F,0 );
     }
 }
 
@@ -41222,7 +41222,7 @@ Control slow_1A0F ()
     instruction0 ( 0x1A,0x10,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"SCF" );
     advance ( 4 );
     FlagCY = true;
-    return jumpDirect ( 0x1A10,slow_1A10 );
+    return jumpDirect ( 0x1A10,slow_1A10,0 );
 }
 
 Control slow_1A10 ()
@@ -41252,7 +41252,7 @@ Control slow_1A32 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x1A33,slow_1A33 );
+    return jumpDirect ( 0x1A33,slow_1A33,0 );
 }
 
 Control slow_1A33 ()
@@ -41264,7 +41264,7 @@ Control slow_1A33 ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x1A34,slow_1A34 );
+    return jumpDirect ( 0x1A34,slow_1A34,0 );
 }
 
 Control slow_1A34 ()
@@ -41277,7 +41277,7 @@ Control slow_1A34 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x1A35,slow_1A35 );
+    return jumpDirect ( 0x1A35,slow_1A35,0 );
 }
 
 Control slow_1A35 ()
@@ -41290,7 +41290,7 @@ Control slow_1A35 ()
     advance ( 5 );
     D = ( a3 >> 8 );
     E = ( a3 & 0xFF );
-    return jumpDirect ( 0x1A36,slow_1A36 );
+    return jumpDirect ( 0x1A36,slow_1A36,0 );
 }
 
 Control slow_1A36 ()
@@ -41308,7 +41308,7 @@ Control slow_1A36 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x1A37,slow_1A37 );
+    return jumpDirect ( 0x1A37,slow_1A37,0 );
 }
 
 Control slow_1A37 ()
@@ -41318,12 +41318,12 @@ Control slow_1A37 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x1A32,slow_1A32 );
+        return jumpDirect ( 0x1A32,slow_1A32,fast_1A32 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x1A3A,slow_1A3A );
+        return jumpDirect ( 0x1A3A,slow_1A3A,0 );
     }
 }
 
@@ -41354,7 +41354,7 @@ Control slow_1A3B ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     E = a3;
-    return jumpDirect ( 0x1A3C,slow_1A3C );
+    return jumpDirect ( 0x1A3C,slow_1A3C,0 );
 }
 
 Control slow_1A3C ()
@@ -41367,7 +41367,7 @@ Control slow_1A3C ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x1A3D,slow_1A3D );
+    return jumpDirect ( 0x1A3D,slow_1A3D,0 );
 }
 
 Control slow_1A3D ()
@@ -41379,7 +41379,7 @@ Control slow_1A3D ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     D = a3;
-    return jumpDirect ( 0x1A3E,slow_1A3E );
+    return jumpDirect ( 0x1A3E,slow_1A3E,0 );
 }
 
 Control slow_1A3E ()
@@ -41392,7 +41392,7 @@ Control slow_1A3E ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x1A3F,slow_1A3F );
+    return jumpDirect ( 0x1A3F,slow_1A3F,0 );
 }
 
 Control slow_1A3F ()
@@ -41404,7 +41404,7 @@ Control slow_1A3F ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x1A40,slow_1A40 );
+    return jumpDirect ( 0x1A40,slow_1A40,0 );
 }
 
 Control slow_1A40 ()
@@ -41417,7 +41417,7 @@ Control slow_1A40 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x1A41,slow_1A41 );
+    return jumpDirect ( 0x1A41,slow_1A41,0 );
 }
 
 Control slow_1A41 ()
@@ -41429,7 +41429,7 @@ Control slow_1A41 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     C = a3;
-    return jumpDirect ( 0x1A42,slow_1A42 );
+    return jumpDirect ( 0x1A42,slow_1A42,0 );
 }
 
 Control slow_1A42 ()
@@ -41442,7 +41442,7 @@ Control slow_1A42 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x1A43,slow_1A43 );
+    return jumpDirect ( 0x1A43,slow_1A43,0 );
 }
 
 Control slow_1A43 ()
@@ -41454,7 +41454,7 @@ Control slow_1A43 ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     B = a3;
-    return jumpDirect ( 0x1A44,slow_1A44 );
+    return jumpDirect ( 0x1A44,slow_1A44,0 );
 }
 
 Control slow_1A44 ()
@@ -41464,7 +41464,7 @@ Control slow_1A44 ()
     u8 a1 = C ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( 0x1A45,slow_1A45 );
+    return jumpDirect ( 0x1A45,slow_1A45,0 );
 }
 
 Control slow_1A45 ()
@@ -41474,7 +41474,7 @@ Control slow_1A45 ()
     u8 a1 = A ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( 0x1A46,slow_1A46 );
+    return jumpDirect ( 0x1A46,slow_1A46,0 );
 }
 
 Control slow_1A46 ()
@@ -41512,7 +41512,7 @@ Control slow_1A47 ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x1A48,slow_1A48 );
+    return jumpDirect ( 0x1A48,slow_1A48,0 );
 }
 
 Control slow_1A48 ()
@@ -41521,7 +41521,7 @@ Control slow_1A48 ()
     instruction1 ( 0x1A,0x4A,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x03 );
     advance ( 7 );
     B = 0x03;
-    return jumpDirect ( 0x1A4A,slow_1A4A );
+    return jumpDirect ( 0x1A4A,slow_1A4A,fast_1A4A );
 }
 
 Control slow_1A4A ()
@@ -41531,7 +41531,7 @@ Control slow_1A4A ()
     u8 a1 = H ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x1A4B,slow_1A4B );
+    return jumpDirect ( 0x1A4B,slow_1A4B,0 );
 }
 
 Control slow_1A4B ()
@@ -41542,7 +41542,7 @@ Control slow_1A4B ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 >> 0x01 ),7,FlagCY );
     FlagCY = ( ( a1 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x1A4C,slow_1A4C );
+    return jumpDirect ( 0x1A4C,slow_1A4C,0 );
 }
 
 Control slow_1A4C ()
@@ -41552,7 +41552,7 @@ Control slow_1A4C ()
     u8 a1 = A ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( 0x1A4D,slow_1A4D );
+    return jumpDirect ( 0x1A4D,slow_1A4D,0 );
 }
 
 Control slow_1A4D ()
@@ -41562,7 +41562,7 @@ Control slow_1A4D ()
     u8 a1 = L ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x1A4E,slow_1A4E );
+    return jumpDirect ( 0x1A4E,slow_1A4E,0 );
 }
 
 Control slow_1A4E ()
@@ -41573,7 +41573,7 @@ Control slow_1A4E ()
     advance ( 4 );
     A = e8_update_bit ( ( a1 >> 0x01 ),7,FlagCY );
     FlagCY = ( ( a1 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x1A4F,slow_1A4F );
+    return jumpDirect ( 0x1A4F,slow_1A4F,0 );
 }
 
 Control slow_1A4F ()
@@ -41583,7 +41583,7 @@ Control slow_1A4F ()
     u8 a1 = A ;
     advance ( 5 );
     L = a1;
-    return jumpDirect ( 0x1A50,slow_1A50 );
+    return jumpDirect ( 0x1A50,slow_1A50,0 );
 }
 
 Control slow_1A50 ()
@@ -41601,7 +41601,7 @@ Control slow_1A50 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x1A51,slow_1A51 );
+    return jumpDirect ( 0x1A51,slow_1A51,0 );
 }
 
 Control slow_1A51 ()
@@ -41611,12 +41611,12 @@ Control slow_1A51 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x1A4A,slow_1A4A );
+        return jumpDirect ( 0x1A4A,slow_1A4A,fast_1A4A );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x1A54,slow_1A54 );
+        return jumpDirect ( 0x1A54,slow_1A54,0 );
     }
 }
 
@@ -41627,7 +41627,7 @@ Control slow_1A54 ()
     u8 a1 = H ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x1A55,slow_1A55 );
+    return jumpDirect ( 0x1A55,slow_1A55,0 );
 }
 
 Control slow_1A55 ()
@@ -41644,7 +41644,7 @@ Control slow_1A55 ()
     FlagA = ( ( a3 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x1A57,slow_1A57 );
+    return jumpDirect ( 0x1A57,slow_1A57,0 );
 }
 
 Control slow_1A57 ()
@@ -41660,7 +41660,7 @@ Control slow_1A57 ()
     FlagA = false;
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x1A59,slow_1A59 );
+    return jumpDirect ( 0x1A59,slow_1A59,0 );
 }
 
 Control slow_1A59 ()
@@ -41670,7 +41670,7 @@ Control slow_1A59 ()
     u8 a1 = A ;
     advance ( 5 );
     H = a1;
-    return jumpDirect ( 0x1A5A,slow_1A5A );
+    return jumpDirect ( 0x1A5A,slow_1A5A,0 );
 }
 
 Control slow_1A5A ()
@@ -41690,7 +41690,7 @@ Control slow_1A5A ()
     C = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x1A5B,slow_1A5B );
+    return jumpDirect ( 0x1A5B,slow_1A5B,0 );
 }
 
 Control slow_1A5B ()
@@ -41718,7 +41718,7 @@ Control slow_1A5C ()
     advance ( 10 );
     H = 0x24;
     L = 0x00;
-    return jumpDirect ( 0x1A5F,slow_1A5F );
+    return jumpDirect ( 0x1A5F,slow_1A5F,fast_1A5F );
 }
 
 Control slow_1A5F ()
@@ -41729,7 +41729,7 @@ Control slow_1A5F ()
     u8 a2 = L ;
     mem_write ( ( ( a1 << 8 ) | a2 ),0x00 );
     advance ( 10 );
-    return jumpDirect ( 0x1A61,slow_1A61 );
+    return jumpDirect ( 0x1A61,slow_1A61,0 );
 }
 
 Control slow_1A61 ()
@@ -41742,7 +41742,7 @@ Control slow_1A61 ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x1A62,slow_1A62 );
+    return jumpDirect ( 0x1A62,slow_1A62,0 );
 }
 
 Control slow_1A62 ()
@@ -41752,7 +41752,7 @@ Control slow_1A62 ()
     u8 a1 = H ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x1A63,slow_1A63 );
+    return jumpDirect ( 0x1A63,slow_1A63,0 );
 }
 
 Control slow_1A63 ()
@@ -41770,7 +41770,7 @@ Control slow_1A63 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x1A65,slow_1A65 );
+    return jumpDirect ( 0x1A65,slow_1A65,0 );
 }
 
 Control slow_1A65 ()
@@ -41780,12 +41780,12 @@ Control slow_1A65 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x1A5F,slow_1A5F );
+        return jumpDirect ( 0x1A5F,slow_1A5F,fast_1A5F );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x1A68,slow_1A68 );
+        return jumpDirect ( 0x1A68,slow_1A68,0 );
     }
 }
 
@@ -41824,7 +41824,7 @@ Control slow_1A69 ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x1A6A,slow_1A6A );
+    return jumpDirect ( 0x1A6A,slow_1A6A,0 );
 }
 
 Control slow_1A6A ()
@@ -41844,7 +41844,7 @@ Control slow_1A6A ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x1A6B,slow_1A6B );
+    return jumpDirect ( 0x1A6B,slow_1A6B,fast_1A6B );
 }
 
 Control slow_1A6B ()
@@ -41856,7 +41856,7 @@ Control slow_1A6B ()
     u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
     advance ( 7 );
     A = a3;
-    return jumpDirect ( 0x1A6C,slow_1A6C );
+    return jumpDirect ( 0x1A6C,slow_1A6C,0 );
 }
 
 Control slow_1A6C ()
@@ -41875,7 +41875,7 @@ Control slow_1A6C ()
     FlagA = false;
     FlagP = e1_parity ( a5 );
     FlagCY = false;
-    return jumpDirect ( 0x1A6D,slow_1A6D );
+    return jumpDirect ( 0x1A6D,slow_1A6D,0 );
 }
 
 Control slow_1A6D ()
@@ -41887,7 +41887,7 @@ Control slow_1A6D ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x1A6E,slow_1A6E );
+    return jumpDirect ( 0x1A6E,slow_1A6E,0 );
 }
 
 Control slow_1A6E ()
@@ -41900,7 +41900,7 @@ Control slow_1A6E ()
     advance ( 5 );
     D = ( a3 >> 8 );
     E = ( a3 & 0xFF );
-    return jumpDirect ( 0x1A6F,slow_1A6F );
+    return jumpDirect ( 0x1A6F,slow_1A6F,0 );
 }
 
 Control slow_1A6F ()
@@ -41913,7 +41913,7 @@ Control slow_1A6F ()
     advance ( 5 );
     H = ( a3 >> 8 );
     L = ( a3 & 0xFF );
-    return jumpDirect ( 0x1A70,slow_1A70 );
+    return jumpDirect ( 0x1A70,slow_1A70,0 );
 }
 
 Control slow_1A70 ()
@@ -41931,7 +41931,7 @@ Control slow_1A70 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x1A71,slow_1A71 );
+    return jumpDirect ( 0x1A71,slow_1A71,0 );
 }
 
 Control slow_1A71 ()
@@ -41941,12 +41941,12 @@ Control slow_1A71 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x1A6B,slow_1A6B );
+        return jumpDirect ( 0x1A6B,slow_1A6B,fast_1A6B );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x1A74,slow_1A74 );
+        return jumpDirect ( 0x1A74,slow_1A74,0 );
     }
 }
 
@@ -41967,7 +41967,7 @@ Control slow_1A74 ()
     L = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x1A75,slow_1A75 );
+    return jumpDirect ( 0x1A75,slow_1A75,0 );
 }
 
 Control slow_1A75 ()
@@ -41977,7 +41977,7 @@ Control slow_1A75 ()
     advance ( 10 );
     B = 0x00;
     C = 0x20;
-    return jumpDirect ( 0x1A78,slow_1A78 );
+    return jumpDirect ( 0x1A78,slow_1A78,0 );
 }
 
 Control slow_1A78 ()
@@ -41993,7 +41993,7 @@ Control slow_1A78 ()
     H = ( ( a5 & 0xFFFF ) >> 8 );
     L = ( ( a5 & 0xFFFF ) & 0xFF );
     FlagCY = ( ( a5 >> 16 ) & 0x01 );
-    return jumpDirect ( 0x1A79,slow_1A79 );
+    return jumpDirect ( 0x1A79,slow_1A79,0 );
 }
 
 Control slow_1A79 ()
@@ -42013,7 +42013,7 @@ Control slow_1A79 ()
     C = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x1A7A,slow_1A7A );
+    return jumpDirect ( 0x1A7A,slow_1A7A,0 );
 }
 
 Control slow_1A7A ()
@@ -42031,7 +42031,7 @@ Control slow_1A7A ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x1A7B,slow_1A7B );
+    return jumpDirect ( 0x1A7B,slow_1A7B,0 );
 }
 
 Control slow_1A7B ()
@@ -42041,12 +42041,12 @@ Control slow_1A7B ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x1A69,slow_1A69 );
+        return jumpDirect ( 0x1A69,slow_1A69,fast_1A69 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x1A7E,slow_1A7E );
+        return jumpDirect ( 0x1A7E,slow_1A7E,0 );
     }
 }
 
@@ -42084,7 +42084,7 @@ Control slow_1A7F ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x092E,slow_092E );
+    return jumpDirect ( 0x092E,slow_092E,fast_092E );
 }
 
 Control slow_1A82 ()
@@ -42102,7 +42102,7 @@ Control slow_1A82 ()
     FlagA = ( ( a4 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x1A83,slow_1A83 );
+    return jumpDirect ( 0x1A83,slow_1A83,0 );
 }
 
 Control slow_1A83 ()
@@ -42127,7 +42127,7 @@ Control slow_1A83 ()
     else
     {
         advance ( 5 );
-        return jumpDirect ( 0x1A84,slow_1A84 );
+        return jumpDirect ( 0x1A84,slow_1A84,0 );
     }
 }
 
@@ -42147,7 +42147,7 @@ Control slow_1A84 ()
     advance ( 11 );
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x1A85,slow_1A85 );
+    return jumpDirect ( 0x1A85,slow_1A85,0 );
 }
 
 Control slow_1A85 ()
@@ -42165,7 +42165,7 @@ Control slow_1A85 ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x1A86,slow_1A86 );
+    return jumpDirect ( 0x1A86,slow_1A86,0 );
 }
 
 Control slow_1A86 ()
@@ -42177,7 +42177,7 @@ Control slow_1A86 ()
     u8 a3 = L ;
     mem_write ( ( ( a2 << 8 ) | a3 ),a1 );
     advance ( 7 );
-    return jumpDirect ( 0x1A87,slow_1A87 );
+    return jumpDirect ( 0x1A87,slow_1A87,0 );
 }
 
 Control slow_1A87 ()
@@ -42196,7 +42196,7 @@ Control slow_1A87 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x19E6,slow_19E6 );
+    return jumpDirect ( 0x19E6,slow_19E6,0 );
 }
 
 Control slow_1A8A ()
@@ -42220,7 +42220,7 @@ Control slow_1A8A ()
     FlagA = ( ( a4 >> 4 ) & 0x01 );
     FlagP = ( ( a4 >> 2 ) & 0x01 );
     FlagCY = ( ( a4 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x1A8B,slow_1A8B );
+    return jumpDirect ( 0x1A8B,slow_1A8B,fast_1A8B );
 }
 
 Control slow_1A8B ()
@@ -42230,7 +42230,7 @@ Control slow_1A8B ()
     advance ( 10 );
     H = 0x25;
     L = 0x01;
-    return jumpDirect ( 0x1A8E,slow_1A8E );
+    return jumpDirect ( 0x1A8E,slow_1A8E,0 );
 }
 
 Control slow_1A8E ()
@@ -42247,7 +42247,7 @@ Control slow_1A8E ()
     FlagA = ( ( a3 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x1A90,slow_1A90 );
+    return jumpDirect ( 0x1A90,slow_1A90,0 );
 }
 
 Control slow_1A90 ()
@@ -42255,7 +42255,7 @@ Control slow_1A90 ()
     // #at: 1A90
     instruction2 ( 0x1A,0x93,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x09,0xC5 );
     advance ( 10 );
-    return jumpDirect ( 0x09C5,slow_09C5 );
+    return jumpDirect ( 0x09C5,slow_09C5,fast_09C5 );
 }
 
 Func slow_progs_array [ ROM_SIZE ] = { slow_0000,slow_0001,slow_0002,slow_0003,0,0,0,0,slow_0008,slow_0009,slow_000A,slow_000B,slow_000C,0,0,0,slow_0010,slow_0011,slow_0012,slow_0013,slow_0014,0,slow_0016,0,0,slow_0019,0,0,slow_001C,slow_001D,0,0,slow_0020,0,slow_0022,slow_0023,0,0,slow_0026,0,0,slow_0029,slow_002A,0,0,slow_002D,0,0,slow_0030,0,slow_0032,0,0,slow_0035,0,slow_0037,slow_0038,0,0,slow_003B,0,0,slow_003E,slow_003F,0,0,slow_0042,0,0,slow_0045,slow_0046,0,0,slow_0049,0,0,slow_004C,slow_004D,0,0,slow_0050,0,0,slow_0053,slow_0054,0,0,slow_0057,0,0,slow_005A,0,0,slow_005D,0,0,slow_0060,slow_0061,0,0,slow_0064,0,0,slow_0067,0,slow_0069,0,0,slow_006C,0,0,slow_006F,0,0,slow_0072,0,0,slow_0075,0,0,slow_0078,0,0,slow_007B,0,0,slow_007E,0,0,slow_0081,slow_0082,slow_0083,slow_0084,slow_0085,slow_0086,slow_0087,0,0,0,0,slow_008C,slow_008D,0,0,slow_0090,0,0,slow_0093,slow_0094,0,0,slow_0097,0,0,slow_009A,slow_009B,0,0,slow_009E,0,0,slow_00A1,slow_00A2,0,0,slow_00A5,0,0,slow_00A8,0,0,slow_00AB,0,0,slow_00AE,0,0,slow_00B1,0,0,slow_00B4,slow_00B5,slow_00B6,slow_00B7,slow_00B8,slow_00B9,0,0,slow_00BC,0,0,slow_00BF,slow_00C0,slow_00C1,slow_00C2,0,slow_00C4,0,0,slow_00C7,slow_00C8,0,0,slow_00CB,0,slow_00CD,0,slow_00CF,0,0,slow_00D2,slow_00D3,0,0,slow_00D6,slow_00D7,0,slow_00D9,0,0,slow_00DC,0,0,slow_00DF,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,slow_0100,0,0,slow_0103,slow_0104,slow_0105,0,0,slow_0108,slow_0109,0,0,slow_010C,slow_010D,0,0,slow_0110,slow_0111,slow_0112,slow_0113,slow_0114,0,0,slow_0117,slow_0118,slow_0119,slow_011A,slow_011B,slow_011C,0,slow_011E,slow_011F,slow_0120,slow_0121,slow_0122,0,slow_0124,0,0,slow_0127,slow_0128,slow_0129,slow_012A,slow_012B,0,0,slow_012E,0,0,slow_0131,0,slow_0133,0,0,slow_0136,slow_0137,0,0,slow_013A,slow_013B,0,0,slow_013E,slow_013F,slow_0140,slow_0141,0,0,slow_0144,slow_0145,slow_0146,0,0,slow_0149,slow_014A,slow_014B,0,0,slow_014E,slow_014F,0,0,slow_0152,0,slow_0154,slow_0155,0,slow_0157,0,0,slow_015A,slow_015B,slow_015C,slow_015D,0,0,slow_0160,0,0,slow_0163,0,0,slow_0166,slow_0167,0,0,slow_016A,slow_016B,0,slow_016D,0,0,slow_0170,slow_0171,0,0,slow_0174,0,slow_0176,0,0,slow_0179,slow_017A,0,slow_017C,slow_017D,0,0,slow_0180,slow_0181,slow_0182,slow_0183,0,slow_0185,0,0,slow_0188,0,slow_018A,slow_018B,slow_018C,0,slow_018E,slow_018F,slow_0190,slow_0191,0,0,slow_0194,slow_0195,slow_0196,slow_0197,slow_0198,slow_0199,0,slow_019B,slow_019C,slow_019D,slow_019E,0,0,slow_01A1,slow_01A2,0,0,slow_01A5,0,0,slow_01A8,0,slow_01AA,slow_01AB,slow_01AC,0,slow_01AE,0,0,slow_01B1,0,0,slow_01B4,slow_01B5,slow_01B6,0,slow_01B8,slow_01B9,slow_01BA,0,0,slow_01BD,slow_01BE,0,slow_01C0,0,0,slow_01C3,0,slow_01C5,0,slow_01C7,slow_01C8,slow_01C9,0,0,slow_01CC,slow_01CD,slow_01CE,slow_01CF,0,slow_01D1,0,slow_01D3,0,0,slow_01D6,0,0,slow_01D9,slow_01DA,slow_01DB,slow_01DC,slow_01DD,slow_01DE,slow_01DF,slow_01E0,slow_01E1,slow_01E2,slow_01E3,slow_01E4,0,slow_01E6,0,0,slow_01E9,0,0,slow_01EC,0,0,slow_01EF,0,0,slow_01F2,0,0,slow_01F5,0,0,slow_01F8,0,slow_01FA,0,0,slow_01FD,slow_01FE,0,slow_0200,0,0,slow_0203,slow_0204,slow_0205,0,0,slow_0208,slow_0209,0,slow_020B,0,0,slow_020E,0,slow_0210,0,0,slow_0213,slow_0214,0,0,slow_0217,0,0,slow_021A,slow_021B,0,0,slow_021E,0,0,slow_0221,0,0,slow_0224,0,0,slow_0227,0,slow_0229,slow_022A,slow_022B,0,0,slow_022E,slow_022F,0,0,slow_0232,0,0,slow_0235,slow_0236,slow_0237,slow_0238,slow_0239,slow_023A,0,0,slow_023D,slow_023E,slow_023F,0,0,slow_0242,0,0,slow_0245,0,0,slow_0248,0,0,slow_024B,slow_024C,0,slow_024E,slow_024F,0,slow_0251,0,0,slow_0254,slow_0255,slow_0256,slow_0257,slow_0258,slow_0259,0,0,slow_025C,slow_025D,slow_025E,slow_025F,0,0,slow_0262,slow_0263,slow_0264,slow_0265,slow_0266,slow_0267,slow_0268,slow_0269,0,0,slow_026C,slow_026D,slow_026E,slow_026F,slow_0270,0,0,slow_0273,slow_0274,0,0,slow_0277,slow_0278,slow_0279,0,0,slow_027C,slow_027D,slow_027E,slow_027F,slow_0280,slow_0281,0,0,slow_0284,slow_0285,0,0,slow_0288,slow_0289,slow_028A,slow_028B,0,0,slow_028E,slow_028F,slow_0290,slow_0291,0,slow_0293,0,0,slow_0296,slow_0297,slow_0298,slow_0299,slow_029A,slow_029B,0,0,slow_029E,0,0,slow_02A1,0,slow_02A3,0,0,slow_02A6,slow_02A7,0,slow_02A9,slow_02AA,slow_02AB,0,0,slow_02AE,0,0,slow_02B1,0,slow_02B3,0,0,slow_02B6,0,0,slow_02B9,0,0,slow_02BC,0,slow_02BE,0,0,slow_02C1,0,slow_02C3,0,0,slow_02C6,0,0,slow_02C9,slow_02CA,slow_02CB,0,0,slow_02CE,slow_02CF,slow_02D0,0,0,slow_02D3,slow_02D4,0,0,slow_02D7,0,0,slow_02DA,slow_02DB,0,0,slow_02DE,0,0,slow_02E1,slow_02E2,slow_02E3,0,0,slow_02E6,0,0,slow_02E9,slow_02EA,0,0,slow_02ED,0,0,slow_02F0,slow_02F1,slow_02F2,0,0,slow_02F5,0,0,slow_02F8,0,0,slow_02FB,slow_02FC,slow_02FD,slow_02FE,slow_02FF,slow_0300,slow_0301,slow_0302,0,0,slow_0305,slow_0306,slow_0307,0,slow_0309,0,slow_030B,0,0,slow_030E,0,slow_0310,0,slow_0312,0,0,slow_0315,0,0,slow_0318,slow_0319,0,0,slow_031C,slow_031D,0,slow_031F,slow_0320,0,0,slow_0323,0,0,slow_0326,0,0,slow_0329,0,0,slow_032C,0,0,slow_032F,0,0,slow_0332,0,0,slow_0335,0,0,0,0,0,slow_033B,0,0,slow_033E,0,slow_0340,slow_0341,slow_0342,slow_0343,0,0,slow_0346,slow_0347,slow_0348,0,slow_034A,0,0,slow_034D,slow_034E,0,0,slow_0351,slow_0352,0,0,slow_0355,0,0,slow_0358,slow_0359,0,0,slow_035C,slow_035D,0,0,slow_0360,0,0,slow_0363,0,0,slow_0366,slow_0367,slow_0368,0,0,slow_036B,slow_036C,0,0,slow_036F,0,0,slow_0372,0,0,slow_0375,0,0,slow_0378,0,0,slow_037B,0,slow_037D,0,0,slow_0380,slow_0381,slow_0382,0,slow_0384,0,0,slow_0387,slow_0388,0,0,slow_038B,0,0,slow_038E,slow_038F,0,slow_0391,0,0,slow_0394,slow_0395,0,0,slow_0398,0,0,slow_039B,slow_039C,0,slow_039E,0,0,slow_03A1,slow_03A2,slow_03A3,slow_03A4,slow_03A5,0,0,slow_03A8,slow_03A9,slow_03AA,0,0,slow_03AD,0,0,slow_03B0,0,0,slow_03B3,slow_03B4,slow_03B5,0,0,slow_03B8,0,0,slow_03BB,0,0,slow_03BE,0,0,slow_03C1,slow_03C2,slow_03C3,slow_03C4,slow_03C5,slow_03C6,slow_03C7,0,slow_03C9,0,0,slow_03CC,0,slow_03CE,0,0,slow_03D1,slow_03D2,0,slow_03D4,0,0,slow_03D7,slow_03D8,0,0,slow_03DB,slow_03DC,0,slow_03DE,slow_03DF,slow_03E0,0,0,slow_03E3,0,0,slow_03E6,slow_03E7,slow_03E8,slow_03E9,slow_03EA,slow_03EB,slow_03EC,slow_03ED,slow_03EE,slow_03EF,slow_03F0,slow_03F1,slow_03F2,0,slow_03F4,0,0,slow_03F7,0,0,slow_03FA,slow_03FB,slow_03FC,0,0,slow_03FF,0,slow_0401,0,0,slow_0404,0,0,slow_0407,0,0,slow_040A,0,0,slow_040D,slow_040E,slow_040F,slow_0410,0,0,slow_0413,slow_0414,slow_0415,slow_0416,0,0,slow_0419,slow_041A,slow_041B,0,0,slow_041E,0,0,slow_0421,0,0,slow_0424,slow_0425,slow_0426,0,0,slow_0429,slow_042A,0,slow_042C,slow_042D,0,0,slow_0430,0,0,slow_0433,0,0,slow_0436,0,0,slow_0439,0,0,slow_043C,0,0,slow_043F,0,0,slow_0442,0,slow_0444,0,0,slow_0447,0,0,slow_044A,slow_044B,slow_044C,0,slow_044E,0,0,slow_0451,0,slow_0453,0,0,slow_0456,0,0,slow_0459,slow_045A,0,0,slow_045D,0,0,slow_0460,slow_0461,slow_0462,slow_0463,0,slow_0465,0,0,slow_0468,0,0,slow_046B,0,0,slow_046E,0,0,slow_0471,slow_0472,slow_0473,slow_0474,slow_0475,slow_0476,slow_0477,0,0,slow_047A,0,0,slow_047D,0,0,slow_0480,slow_0481,slow_0482,0,0,slow_0485,slow_0486,0,0,slow_0489,slow_048A,0,0,slow_048D,0,slow_048F,0,0,slow_0492,0,0,slow_0495,0,0,slow_0498,0,0,slow_049B,0,0,slow_049E,0,0,slow_04A1,0,0,slow_04A4,slow_04A5,0,0,slow_04A8,0,0,slow_04AB,0,0,slow_04AE,0,0,slow_04B1,0,slow_04B3,0,0,slow_04B6,slow_04B7,0,0,slow_04BA,slow_04BB,slow_04BC,0,0,slow_04BF,0,slow_04C1,slow_04C2,0,0,slow_04C5,0,slow_04C7,0,0,slow_04CA,0,0,slow_04CD,0,0,slow_04D0,0,0,slow_04D3,0,0,slow_04D6,0,0,slow_04D9,0,0,slow_04DC,0,slow_04DE,0,0,slow_04E1,0,0,slow_04E4,0,0,slow_04E7,0,0,slow_04EA,slow_04EB,0,0,slow_04EE,0,0,slow_04F1,0,0,slow_04F4,0,0,slow_04F7,0,slow_04F9,0,0,slow_04FC,0,0,slow_04FF,slow_0500,0,0,slow_0503,0,slow_0505,0,0,slow_0508,0,0,slow_050B,0,0,slow_050E,slow_050F,0,0,slow_0512,0,slow_0514,0,0,slow_0517,0,0,slow_051A,0,0,slow_051D,0,0,slow_0520,0,0,slow_0523,0,0,slow_0526,0,0,slow_0529,0,slow_052B,0,0,slow_052E,0,0,slow_0531,0,0,slow_0534,0,0,slow_0537,slow_0538,0,0,slow_053B,0,0,slow_053E,0,0,slow_0541,0,0,slow_0544,0,slow_0546,0,0,slow_0549,0,0,slow_054C,0,0,slow_054F,slow_0550,0,0,slow_0553,0,0,slow_0556,0,slow_0558,0,0,slow_055B,0,0,slow_055E,0,slow_0560,0,0,slow_0563,0,0,slow_0566,slow_0567,0,slow_0569,0,0,slow_056C,0,0,slow_056F,0,slow_0571,0,0,slow_0574,0,0,slow_0577,slow_0578,slow_0579,slow_057A,0,slow_057C,0,0,slow_057F,slow_0580,0,0,slow_0583,slow_0584,0,0,slow_0587,slow_0588,slow_0589,0,0,slow_058C,slow_058D,0,0,slow_0590,slow_0591,0,0,slow_0594,slow_0595,slow_0596,slow_0597,slow_0598,slow_0599,0,0,slow_059C,0,0,slow_059F,slow_05A0,slow_05A1,slow_05A2,0,0,slow_05A5,0,0,slow_05A8,slow_05A9,0,0,slow_05AC,slow_05AD,0,slow_05AF,slow_05B0,slow_05B1,0,slow_05B3,slow_05B4,0,0,slow_05B7,0,0,slow_05BA,slow_05BB,0,slow_05BD,slow_05BE,slow_05BF,slow_05C0,slow_05C1,0,0,slow_05C4,0,0,slow_05C7,slow_05C8,slow_05C9,slow_05CA,0,slow_05CC,0,0,slow_05CF,slow_05D0,slow_05D1,0,0,slow_05D4,0,0,slow_05D7,0,slow_05D9,0,0,slow_05DC,slow_05DD,0,0,slow_05E0,0,slow_05E2,0,0,slow_05E5,0,0,slow_05E8,slow_05E9,0,0,slow_05EC,slow_05ED,0,0,slow_05F0,0,0,slow_05F3,0,0,slow_05F6,0,slow_05F8,0,0,slow_05FB,0,0,slow_05FE,slow_05FF,slow_0600,0,0,slow_0603,0,slow_0605,0,0,slow_0608,0,slow_060A,slow_060B,0,0,slow_060E,slow_060F,0,0,slow_0612,0,0,slow_0615,0,slow_0617,0,0,slow_061A,slow_061B,0,0,slow_061E,0,slow_0620,slow_0621,0,0,slow_0624,slow_0625,0,slow_0627,0,0,slow_062A,0,slow_062C,0,0,slow_062F,slow_0630,0,0,slow_0633,slow_0634,slow_0635,0,slow_0637,slow_0638,slow_0639,slow_063A,slow_063B,slow_063C,0,slow_063E,slow_063F,slow_0640,0,0,slow_0643,slow_0644,0,0,slow_0647,slow_0648,slow_0649,0,slow_064B,0,0,slow_064E,0,0,slow_0651,0,0,slow_0654,0,0,slow_0657,0,0,slow_065A,slow_065B,slow_065C,slow_065D,slow_065E,slow_065F,0,slow_0661,0,0,slow_0664,0,0,slow_0667,slow_0668,slow_0669,0,0,slow_066C,0,0,slow_066F,0,0,slow_0672,0,0,slow_0675,0,0,slow_0678,0,0,slow_067B,0,0,slow_067E,0,0,slow_0681,slow_0682,slow_0683,0,0,slow_0686,0,slow_0688,slow_0689,0,0,slow_068C,slow_068D,slow_068E,0,0,slow_0691,0,0,slow_0694,slow_0695,0,0,slow_0698,slow_0699,slow_069A,slow_069B,0,0,slow_069E,0,0,slow_06A1,0,slow_06A3,0,0,slow_06A6,0,slow_06A8,0,0,slow_06AB,0,0,slow_06AE,0,0,slow_06B1,slow_06B2,0,0,slow_06B5,slow_06B6,slow_06B7,0,0,slow_06BA,0,0,slow_06BD,slow_06BE,slow_06BF,slow_06C0,slow_06C1,0,0,slow_06C4,0,0,slow_06C7,0,0,slow_06CA,slow_06CB,0,slow_06CD,0,0,slow_06D0,0,slow_06D2,0,0,slow_06D5,slow_06D6,0,slow_06D8,0,0,slow_06DB,slow_06DC,slow_06DD,slow_06DE,0,slow_06E0,0,0,slow_06E3,0,slow_06E5,0,0,slow_06E8,slow_06E9,slow_06EA,0,slow_06EC,0,0,slow_06EF,slow_06F0,slow_06F1,slow_06F2,0,slow_06F4,0,slow_06F6,slow_06F7,slow_06F8,slow_06F9,0,0,slow_06FC,0,0,slow_06FF,0,0,slow_0702,0,slow_0704,0,0,slow_0707,0,slow_0709,0,0,slow_070C,0,slow_070E,0,0,slow_0711,0,0,slow_0714,slow_0715,0,slow_0717,0,0,slow_071A,0,0,slow_071D,slow_071E,slow_071F,0,0,slow_0722,slow_0723,slow_0724,slow_0725,0,0,slow_0728,slow_0729,0,0,slow_072C,0,slow_072E,slow_072F,slow_0730,slow_0731,slow_0732,slow_0733,0,0,slow_0736,0,0,slow_0739,0,0,slow_073C,0,0,slow_073F,0,0,slow_0742,0,0,slow_0745,0,0,slow_0748,0,0,slow_074B,0,slow_074D,0,0,slow_0750,slow_0751,slow_0752,slow_0753,0,0,slow_0756,0,0,slow_0759,0,0,slow_075C,0,0,slow_075F,0,0,slow_0762,0,0,slow_0765,0,slow_0767,0,0,slow_076A,0,0,slow_076D,slow_076E,0,0,slow_0771,0,0,slow_0774,0,0,slow_0777,0,0,slow_077A,0,slow_077C,0,0,slow_077F,0,0,slow_0782,slow_0783,0,0,slow_0786,0,slow_0788,0,0,slow_078B,0,0,slow_078E,0,0,slow_0791,0,slow_0793,0,slow_0795,0,0,slow_0798,0,slow_079A,slow_079B,0,0,slow_079E,0,0,slow_07A1,slow_07A2,slow_07A3,0,0,slow_07A6,0,0,slow_07A9,0,0,slow_07AC,0,0,slow_07AF,0,0,slow_07B2,0,0,slow_07B5,0,0,slow_07B8,0,0,slow_07BB,0,0,slow_07BE,slow_07BF,0,0,slow_07C2,0,0,slow_07C5,0,0,slow_07C8,0,0,slow_07CB,0,0,slow_07CE,0,0,slow_07D1,0,0,slow_07D4,0,0,slow_07D7,0,0,slow_07DA,0,0,slow_07DD,slow_07DE,0,0,slow_07E1,0,0,slow_07E4,0,0,slow_07E7,0,0,slow_07EA,0,0,slow_07ED,0,0,slow_07F0,0,0,slow_07F3,0,0,slow_07F6,0,0,slow_07F9,0,0,slow_07FC,0,0,slow_07FF,slow_0800,slow_0801,0,0,slow_0804,0,0,slow_0807,0,0,slow_080A,slow_080B,0,0,slow_080E,0,0,slow_0811,0,0,slow_0814,0,0,slow_0817,0,0,slow_081A,0,slow_081C,0,0,slow_081F,0,0,slow_0822,0,0,slow_0825,0,0,slow_0828,0,0,slow_082B,0,0,slow_082E,slow_082F,0,0,slow_0832,0,0,slow_0835,0,0,slow_0838,0,0,slow_083B,0,0,slow_083E,0,0,slow_0841,0,0,slow_0844,0,slow_0846,0,0,slow_0849,0,0,slow_084C,0,slow_084E,0,0,slow_0851,0,0,0,0,0,slow_0857,0,0,slow_085A,0,0,slow_085D,0,slow_085F,0,slow_0861,slow_0862,slow_0863,0,0,slow_0866,slow_0867,0,0,slow_086A,0,0,slow_086D,0,slow_086F,0,0,slow_0872,0,0,slow_0875,0,0,slow_0878,0,0,slow_087B,slow_087C,0,0,slow_087F,slow_0880,0,0,0,0,0,slow_0886,0,0,slow_0889,slow_088A,0,slow_088C,slow_088D,0,0,slow_0890,0,0,slow_0893,0,slow_0895,0,0,slow_0898,0,0,slow_089B,slow_089C,0,slow_089E,0,0,slow_08A1,0,0,slow_08A4,0,slow_08A6,0,0,slow_08A9,0,0,slow_08AC,slow_08AD,slow_08AE,0,slow_08B0,0,0,slow_08B3,0,0,slow_08B6,0,0,slow_08B9,0,0,slow_08BC,0,slow_08BE,0,0,slow_08C1,0,0,slow_08C4,slow_08C5,0,0,slow_08C8,0,0,slow_08CB,0,0,slow_08CE,0,0,slow_08D1,0,slow_08D3,0,slow_08D5,0,slow_08D7,slow_08D8,0,0,slow_08DB,0,slow_08DD,slow_08DE,0,slow_08E0,0,0,slow_08E3,slow_08E4,0,0,slow_08E7,slow_08E8,slow_08E9,0,0,slow_08EC,0,slow_08EE,0,0,slow_08F1,0,slow_08F3,slow_08F4,slow_08F5,0,0,slow_08F8,slow_08F9,slow_08FA,slow_08FB,0,0,slow_08FE,slow_08FF,0,0,slow_0902,slow_0903,0,slow_0905,slow_0906,slow_0907,slow_0908,slow_0909,slow_090A,slow_090B,slow_090C,0,slow_090E,0,slow_0910,0,0,slow_0913,0,0,slow_0916,0,slow_0918,slow_0919,0,0,slow_091C,slow_091D,slow_091E,0,0,slow_0921,0,0,slow_0924,0,slow_0926,0,0,slow_0929,slow_092A,0,0,slow_092D,slow_092E,0,0,slow_0931,0,slow_0933,slow_0934,slow_0935,0,0,slow_0938,slow_0939,slow_093A,slow_093B,slow_093C,slow_093D,0,slow_093F,0,slow_0941,0,slow_0943,0,0,slow_0946,0,slow_0948,0,0,slow_094B,slow_094C,slow_094D,slow_094E,slow_094F,0,0,slow_0952,slow_0953,slow_0954,slow_0955,0,0,slow_0958,slow_0959,slow_095A,slow_095B,0,0,slow_095E,0,slow_0960,0,0,slow_0963,0,0,slow_0966,slow_0967,slow_0968,0,0,slow_096B,0,0,slow_096E,slow_096F,slow_0970,0,slow_0972,0,slow_0974,0,0,slow_0977,0,slow_0979,0,0,slow_097C,0,0,slow_097F,0,slow_0981,slow_0982,slow_0983,0,slow_0985,slow_0986,slow_0987,slow_0988,0,0,slow_098B,0,0,slow_098E,slow_098F,slow_0990,slow_0991,0,0,slow_0994,slow_0995,0,0,slow_0998,slow_0999,slow_099A,slow_099B,slow_099C,slow_099D,slow_099E,slow_099F,slow_09A0,slow_09A1,slow_09A2,slow_09A3,slow_09A4,slow_09A5,slow_09A6,slow_09A7,slow_09A8,slow_09A9,slow_09AA,0,0,slow_09AD,slow_09AE,0,0,slow_09B1,slow_09B2,slow_09B3,slow_09B4,slow_09B5,slow_09B6,slow_09B7,slow_09B8,0,slow_09BA,0,0,slow_09BD,slow_09BE,0,slow_09C0,0,0,slow_09C3,slow_09C4,slow_09C5,0,slow_09C7,0,0,slow_09CA,0,0,slow_09CD,slow_09CE,0,0,slow_09D1,slow_09D2,0,0,slow_09D5,slow_09D6,0,0,slow_09D9,0,slow_09DB,slow_09DC,slow_09DD,0,slow_09DF,0,slow_09E1,0,0,slow_09E4,0,0,slow_09E7,slow_09E8,slow_09E9,0,slow_09EB,0,0,slow_09EE,slow_09EF,0,0,slow_09F2,slow_09F3,0,0,slow_09F6,0,0,slow_09F9,0,0,slow_09FC,slow_09FD,0,0,slow_0A00,slow_0A01,0,0,slow_0A04,0,0,slow_0A07,slow_0A08,slow_0A09,0,slow_0A0B,slow_0A0C,0,slow_0A0E,slow_0A0F,slow_0A10,0,0,slow_0A13,slow_0A14,slow_0A15,0,0,slow_0A18,slow_0A19,slow_0A1A,0,slow_0A1C,slow_0A1D,slow_0A1E,0,slow_0A20,slow_0A21,slow_0A22,0,0,slow_0A25,0,slow_0A27,0,0,slow_0A2A,0,0,slow_0A2D,0,0,slow_0A30,0,0,slow_0A33,0,0,slow_0A36,0,0,slow_0A39,0,0,slow_0A3C,0,0,slow_0A3F,0,0,slow_0A42,0,slow_0A44,0,0,slow_0A47,0,0,slow_0A4A,slow_0A4B,slow_0A4C,0,0,slow_0A4F,0,0,slow_0A52,0,0,slow_0A55,0,0,slow_0A58,slow_0A59,0,0,slow_0A5C,0,slow_0A5E,slow_0A5F,0,0,slow_0A62,slow_0A63,0,0,slow_0A66,slow_0A67,0,slow_0A69,0,0,slow_0A6C,slow_0A6D,slow_0A6E,0,0,slow_0A71,slow_0A72,0,0,slow_0A75,0,slow_0A77,slow_0A78,slow_0A79,slow_0A7A,0,slow_0A7C,0,0,slow_0A7F,slow_0A80,0,slow_0A82,0,0,slow_0A85,0,slow_0A87,0,0,slow_0A8A,slow_0A8B,0,0,slow_0A8E,slow_0A8F,0,0,slow_0A92,slow_0A93,slow_0A94,slow_0A95,0,0,slow_0A98,slow_0A99,0,slow_0A9B,0,0,slow_0A9E,0,0,slow_0AA1,slow_0AA2,0,0,slow_0AA5,slow_0AA6,slow_0AA7,0,0,slow_0AAA,slow_0AAB,0,0,slow_0AAE,0,0,slow_0AB1,0,slow_0AB3,0,0,slow_0AB6,0,slow_0AB8,0,0,slow_0ABB,slow_0ABC,0,0,slow_0ABF,0,0,slow_0AC2,slow_0AC3,0,0,slow_0AC6,slow_0AC7,0,0,slow_0ACA,slow_0ACB,0,0,slow_0ACE,slow_0ACF,0,0,slow_0AD2,0,slow_0AD4,0,0,slow_0AD7,0,0,slow_0ADA,0,0,slow_0ADD,slow_0ADE,0,0,slow_0AE1,slow_0AE2,0,0,slow_0AE5,0,slow_0AE7,0,0,slow_0AEA,slow_0AEB,0,slow_0AED,0,slow_0AEF,0,0,slow_0AF2,slow_0AF3,0,0,slow_0AF6,0,0,slow_0AF9,slow_0AFA,0,0,slow_0AFD,0,slow_0AFF,0,0,slow_0B02,0,0,slow_0B05,0,0,slow_0B08,0,0,slow_0B0B,0,0,slow_0B0E,0,0,slow_0B11,0,0,slow_0B14,0,0,slow_0B17,0,0,slow_0B1A,slow_0B1B,0,0,slow_0B1E,0,0,slow_0B21,0,0,slow_0B24,0,0,slow_0B27,0,0,slow_0B2A,0,0,slow_0B2D,0,0,slow_0B30,0,0,slow_0B33,0,0,slow_0B36,0,0,slow_0B39,0,0,slow_0B3C,0,0,slow_0B3F,0,0,slow_0B42,0,slow_0B44,0,0,slow_0B47,0,0,slow_0B4A,0,0,slow_0B4D,0,0,slow_0B50,slow_0B51,0,0,slow_0B54,0,0,slow_0B57,0,0,slow_0B5A,0,0,slow_0B5D,0,0,slow_0B60,0,0,slow_0B63,0,0,slow_0B66,0,0,slow_0B69,0,slow_0B6B,0,0,slow_0B6E,0,0,slow_0B71,0,0,slow_0B74,0,0,slow_0B77,0,slow_0B79,0,0,slow_0B7C,0,0,slow_0B7F,slow_0B80,0,0,slow_0B83,0,0,slow_0B86,0,0,slow_0B89,slow_0B8A,0,0,slow_0B8D,0,0,slow_0B90,0,0,slow_0B93,0,slow_0B95,0,0,slow_0B98,0,0,slow_0B9B,0,0,slow_0B9E,0,0,slow_0BA1,0,slow_0BA3,0,0,slow_0BA6,0,0,slow_0BA9,0,slow_0BAB,0,0,slow_0BAE,0,0,slow_0BB1,0,0,slow_0BB4,0,0,slow_0BB7,0,slow_0BB9,slow_0BBA,0,0,slow_0BBD,0,0,slow_0BC0,0,0,slow_0BC3,0,0,slow_0BC6,0,0,slow_0BC9,0,slow_0BCB,0,0,slow_0BCE,0,0,slow_0BD1,0,0,slow_0BD4,0,0,slow_0BD7,0,0,slow_0BDA,0,0,slow_0BDD,slow_0BDE,slow_0BDF,0,slow_0BE1,slow_0BE2,0,0,slow_0BE5,0,0,slow_0BE8,0,0,slow_0BEB,0,0,slow_0BEE,0,0,slow_0BF1,0,0,slow_0BF4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,slow_1400,slow_1401,0,0,slow_1404,slow_1405,slow_1406,slow_1407,slow_1408,0,slow_140A,0,slow_140C,slow_140D,slow_140E,slow_140F,slow_1410,slow_1411,0,slow_1413,0,slow_1415,slow_1416,slow_1417,slow_1418,0,0,slow_141B,slow_141C,slow_141D,slow_141E,0,0,slow_1421,0,0,slow_1424,0,0,slow_1427,slow_1428,slow_1429,slow_142A,slow_142B,slow_142C,slow_142D,slow_142E,slow_142F,0,0,slow_1432,slow_1433,slow_1434,slow_1435,0,0,slow_1438,slow_1439,slow_143A,slow_143B,slow_143C,slow_143D,0,0,slow_1440,slow_1441,slow_1442,slow_1443,0,0,slow_1446,0,0,0,0,0,0,0,0,0,0,0,slow_1452,0,0,slow_1455,slow_1456,slow_1457,slow_1458,0,slow_145A,0,slow_145C,slow_145D,slow_145E,slow_145F,slow_1460,slow_1461,slow_1462,0,slow_1464,0,slow_1466,slow_1467,slow_1468,slow_1469,slow_146A,0,0,slow_146D,slow_146E,slow_146F,slow_1470,0,0,slow_1473,slow_1474,slow_1475,0,slow_1477,0,slow_1479,0,0,slow_147C,slow_147D,slow_147E,slow_147F,slow_1480,slow_1481,slow_1482,slow_1483,0,0,slow_1486,slow_1487,0,0,slow_148A,slow_148B,slow_148C,slow_148D,0,0,slow_1490,slow_1491,0,0,slow_1494,slow_1495,0,0,slow_1498,slow_1499,slow_149A,slow_149B,0,slow_149D,0,slow_149F,slow_14A0,slow_14A1,0,0,slow_14A4,0,slow_14A6,0,0,slow_14A9,slow_14AA,slow_14AB,slow_14AC,slow_14AD,slow_14AE,slow_14AF,0,slow_14B1,0,slow_14B3,slow_14B4,slow_14B5,0,0,slow_14B8,0,slow_14BA,0,0,slow_14BD,slow_14BE,slow_14BF,slow_14C0,slow_14C1,0,0,slow_14C4,slow_14C5,slow_14C6,slow_14C7,0,0,slow_14CA,slow_14CB,slow_14CC,slow_14CD,slow_14CE,0,0,slow_14D1,slow_14D2,slow_14D3,slow_14D4,0,0,slow_14D7,slow_14D8,0,0,slow_14DB,0,slow_14DD,slow_14DE,0,slow_14E0,slow_14E1,0,0,slow_14E4,0,slow_14E6,slow_14E7,0,0,slow_14EA,0,0,slow_14ED,slow_14EE,slow_14EF,slow_14F0,0,slow_14F2,0,0,slow_14F5,0,slow_14F7,slow_14F8,0,0,slow_14FB,0,slow_14FD,0,0,slow_1500,slow_1501,0,0,slow_1504,slow_1505,0,0,slow_1508,0,0,slow_150B,slow_150C,0,0,slow_150F,0,0,slow_1512,0,slow_1514,0,0,slow_1517,0,0,slow_151A,slow_151B,slow_151C,0,0,slow_151F,0,slow_1521,0,0,slow_1524,0,0,slow_1527,0,0,slow_152A,0,slow_152C,0,0,slow_152F,slow_1530,0,slow_1532,0,0,slow_1535,0,0,slow_1538,0,0,slow_153B,slow_153C,slow_153D,0,0,slow_1540,0,slow_1542,0,0,slow_1545,0,slow_1547,0,0,slow_154A,slow_154B,0,0,slow_154E,0,slow_1550,0,0,0,slow_1554,0,slow_1556,slow_1557,0,0,slow_155A,slow_155B,slow_155C,0,slow_155E,slow_155F,0,0,slow_1562,0,0,slow_1565,slow_1566,0,0,slow_1569,slow_156A,slow_156B,0,slow_156D,slow_156E,slow_156F,0,0,slow_1572,0,0,slow_1575,0,slow_1577,slow_1578,slow_1579,0,slow_157B,0,0,slow_157E,0,0,slow_1581,slow_1582,slow_1583,slow_1584,slow_1585,slow_1586,slow_1587,slow_1588,slow_1589,slow_158A,slow_158B,0,0,slow_158E,slow_158F,slow_1590,slow_1591,0,slow_1593,0,0,slow_1596,slow_1597,0,0,slow_159A,slow_159B,0,0,slow_159E,0,0,slow_15A1,0,0,slow_15A4,slow_15A5,0,slow_15A7,0,slow_15A9,0,0,slow_15AC,slow_15AD,0,0,slow_15B0,0,0,slow_15B3,0,0,slow_15B6,slow_15B7,0,0,slow_15BA,0,0,slow_15BD,slow_15BE,0,0,slow_15C1,slow_15C2,0,0,slow_15C5,0,slow_15C7,slow_15C8,slow_15C9,0,0,slow_15CC,slow_15CD,slow_15CE,0,0,slow_15D1,0,slow_15D3,0,0,slow_15D6,slow_15D7,slow_15D8,slow_15D9,slow_15DA,0,slow_15DC,0,slow_15DE,slow_15DF,slow_15E0,slow_15E1,slow_15E2,0,slow_15E4,0,slow_15E6,slow_15E7,slow_15E8,0,0,slow_15EB,slow_15EC,slow_15ED,slow_15EE,0,0,slow_15F1,slow_15F2,slow_15F3,0,0,slow_15F6,0,0,slow_15F9,slow_15FA,slow_15FB,0,0,slow_15FE,slow_15FF,slow_1600,slow_1601,0,0,slow_1604,slow_1605,0,0,slow_1608,0,slow_160A,slow_160B,0,0,slow_160E,0,slow_1610,slow_1611,0,slow_1613,0,0,slow_1616,slow_1617,slow_1618,0,0,slow_161B,0,slow_161D,slow_161E,0,0,slow_1621,slow_1622,slow_1623,slow_1624,slow_1625,slow_1626,0,0,slow_1629,slow_162A,slow_162B,0,0,slow_162E,slow_162F,0,0,slow_1632,0,0,slow_1635,slow_1636,0,0,slow_1639,0,0,slow_163C,0,slow_163E,slow_163F,0,slow_1641,0,0,slow_1644,0,0,slow_1647,slow_1648,0,0,slow_164B,0,slow_164D,slow_164E,0,0,slow_1651,slow_1652,0,0,slow_1655,0,slow_1657,0,0,slow_165A,slow_165B,slow_165C,0,slow_165E,0,0,slow_1661,0,slow_1663,0,0,slow_1666,slow_1667,0,0,slow_166A,slow_166B,slow_166C,slow_166D,slow_166E,0,0,slow_1671,0,0,slow_1674,0,slow_1676,0,0,slow_1679,slow_167A,0,0,slow_167D,slow_167E,slow_167F,slow_1680,slow_1681,slow_1682,0,0,slow_1685,0,0,slow_1688,0,0,slow_168B,slow_168C,0,0,slow_168F,slow_1690,slow_1691,slow_1692,slow_1693,slow_1694,slow_1695,0,0,slow_1698,0,0,slow_169B,slow_169C,0,0,slow_169F,0,0,slow_16A2,0,0,slow_16A5,0,slow_16A7,0,0,slow_16AA,slow_16AB,slow_16AC,0,slow_16AE,0,0,slow_16B1,slow_16B2,0,0,slow_16B5,0,slow_16B7,slow_16B8,0,0,slow_16BB,0,0,slow_16BE,0,0,slow_16C1,slow_16C2,slow_16C3,0,0,slow_16C6,0,0,slow_16C9,0,0,slow_16CC,0,0,slow_16CF,0,slow_16D1,0,0,slow_16D4,0,0,slow_16D7,0,0,slow_16DA,slow_16DB,0,0,slow_16DE,0,slow_16E0,0,0,slow_16E3,0,0,slow_16E6,0,0,slow_16E9,slow_16EA,slow_16EB,0,0,slow_16EE,0,0,slow_16F1,0,slow_16F3,0,0,slow_16F6,0,0,slow_16F9,0,0,slow_16FC,0,0,slow_16FF,0,0,slow_1702,0,0,slow_1705,slow_1706,0,0,slow_1709,0,slow_170B,0,0,slow_170E,0,0,slow_1711,slow_1712,slow_1713,0,0,slow_1716,0,0,slow_1719,0,slow_171B,slow_171C,slow_171D,slow_171E,0,0,slow_1721,slow_1722,slow_1723,slow_1724,0,0,slow_1727,slow_1728,0,0,slow_172B,slow_172C,0,0,slow_172F,0,slow_1731,0,0,slow_1734,0,slow_1736,0,0,slow_1739,0,slow_173B,0,0,0,0,slow_1740,0,0,slow_1743,slow_1744,0,0,slow_1747,0,0,slow_174A,slow_174B,0,0,slow_174E,0,0,slow_1751,slow_1752,slow_1753,0,0,slow_1756,slow_1757,0,slow_1759,0,0,slow_175C,slow_175D,0,0,slow_1760,slow_1761,slow_1762,slow_1763,slow_1764,slow_1765,0,slow_1767,0,slow_1769,0,0,slow_176C,slow_176D,0,0,slow_1770,0,slow_1772,0,slow_1774,slow_1775,0,0,slow_1778,slow_1779,0,0,slow_177C,0,0,slow_177F,0,0,slow_1782,0,0,slow_1785,slow_1786,0,0,slow_1789,slow_178A,slow_178B,0,0,slow_178E,slow_178F,0,0,slow_1792,0,0,slow_1795,slow_1796,0,slow_1798,slow_1799,slow_179A,0,slow_179C,slow_179D,0,slow_179F,0,0,slow_17A2,0,slow_17A4,slow_17A5,slow_17A6,slow_17A7,0,0,slow_17AA,0,0,slow_17AD,slow_17AE,slow_17AF,0,slow_17B1,0,0,slow_17B4,0,slow_17B6,0,0,slow_17B9,slow_17BA,slow_17BB,slow_17BC,0,slow_17BE,0,slow_17C0,0,0,slow_17C3,slow_17C4,0,0,slow_17C7,0,slow_17C9,slow_17CA,0,slow_17CC,slow_17CD,0,slow_17CF,0,slow_17D1,slow_17D2,0,0,slow_17D5,slow_17D6,slow_17D7,0,0,slow_17DA,0,slow_17DC,0,0,slow_17DF,slow_17E0,0,0,slow_17E3,0,slow_17E5,0,0,slow_17E8,0,0,slow_17EB,slow_17EC,0,0,slow_17EF,0,0,slow_17F2,0,slow_17F4,0,0,slow_17F7,0,0,slow_17FA,slow_17FB,0,0,slow_17FE,0,0,slow_1801,0,0,slow_1804,0,0,slow_1807,slow_1808,slow_1809,0,0,slow_180C,slow_180D,slow_180E,slow_180F,slow_1810,0,slow_1812,0,0,slow_1815,0,0,slow_1818,0,0,slow_181B,0,slow_181D,0,0,slow_1820,0,slow_1822,0,0,slow_1825,0,0,slow_1828,0,0,slow_182B,0,0,slow_182E,0,0,slow_1831,0,0,slow_1834,0,0,slow_1837,0,0,slow_183A,0,0,slow_183D,slow_183E,0,0,slow_1841,0,0,slow_1844,slow_1845,0,slow_1847,0,0,slow_184A,slow_184B,slow_184C,slow_184D,0,0,slow_1850,slow_1851,0,0,slow_1854,slow_1855,slow_1856,slow_1857,0,slow_1859,slow_185A,slow_185B,slow_185C,slow_185D,slow_185E,slow_185F,slow_1860,slow_1861,slow_1862,slow_1863,slow_1864,slow_1865,slow_1866,slow_1867,slow_1868,0,0,slow_186B,slow_186C,slow_186D,slow_186E,0,0,slow_1871,slow_1872,0,0,slow_1875,slow_1876,0,0,slow_1879,0,0,slow_187C,0,slow_187E,0,0,slow_1881,0,0,slow_1884,0,0,slow_1887,slow_1888,0,0,slow_188B,0,0,slow_188E,0,0,slow_1891,slow_1892,0,0,0,0,0,slow_1898,0,slow_189A,0,0,slow_189D,slow_189E,0,0,slow_18A1,0,0,slow_18A4,0,slow_18A6,0,0,slow_18A9,0,slow_18AB,0,0,slow_18AE,0,slow_18B0,0,0,slow_18B3,0,slow_18B5,0,0,slow_18B8,0,0,slow_18BB,0,slow_18BD,0,0,slow_18C0,0,0,slow_18C3,0,slow_18C5,0,0,slow_18C8,0,0,slow_18CB,0,slow_18CD,slow_18CE,0,0,slow_18D1,0,0,slow_18D4,0,0,slow_18D7,0,slow_18D9,0,0,slow_18DC,0,0,slow_18DF,0,slow_18E1,0,0,slow_18E4,0,0,slow_18E7,0,0,slow_18EA,0,0,slow_18ED,slow_18EE,slow_18EF,slow_18F0,slow_18F1,0,slow_18F3,0,0,slow_18F6,slow_18F7,slow_18F8,slow_18F9,slow_18FA,0,0,slow_18FD,slow_18FE,0,0,slow_1901,0,slow_1903,slow_1904,0,0,slow_1907,0,0,slow_190A,0,0,slow_190D,0,0,slow_1910,0,0,slow_1913,0,0,slow_1916,slow_1917,slow_1918,slow_1919,slow_191A,0,slow_191C,0,0,slow_191F,0,0,slow_1922,0,0,slow_1925,0,0,slow_1928,0,0,slow_192B,0,0,slow_192E,0,0,slow_1931,slow_1932,slow_1933,slow_1934,slow_1935,slow_1936,slow_1937,slow_1938,slow_1939,0,0,slow_193C,0,slow_193E,0,0,slow_1941,0,0,slow_1944,0,0,slow_1947,0,0,slow_194A,0,0,slow_194D,0,0,slow_1950,0,0,slow_1953,0,0,slow_1956,0,0,slow_1959,0,0,slow_195C,0,0,slow_195F,0,0,slow_1962,0,0,slow_1965,0,0,slow_1968,0,0,slow_196B,0,0,slow_196E,0,0,slow_1971,0,slow_1973,0,0,slow_1976,0,0,slow_1979,0,0,slow_197C,0,0,slow_197F,0,0,slow_1982,0,0,slow_1985,0,0,slow_1988,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,slow_199A,0,0,slow_199D,slow_199E,0,0,slow_19A1,0,slow_19A3,0,slow_19A5,0,slow_19A7,slow_19A8,slow_19A9,0,0,slow_19AC,0,slow_19AE,0,slow_19B0,0,slow_19B2,slow_19B3,0,0,slow_19B6,0,0,slow_19B9,0,slow_19BB,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,slow_19D1,0,slow_19D3,0,0,slow_19D6,slow_19D7,slow_19D8,0,0,0,slow_19DC,0,0,slow_19DF,slow_19E0,0,0,slow_19E3,0,slow_19E5,slow_19E6,0,0,slow_19E9,0,0,slow_19EC,0,0,slow_19EF,0,slow_19F1,slow_19F2,0,0,slow_19F5,slow_19F6,slow_19F7,0,0,slow_19FA,0,slow_19FC,0,0,slow_19FF,slow_1A00,0,slow_1A02,0,0,slow_1A05,slow_1A06,0,0,slow_1A09,slow_1A0A,slow_1A0B,0,slow_1A0D,slow_1A0E,slow_1A0F,slow_1A10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,slow_1A32,slow_1A33,slow_1A34,slow_1A35,slow_1A36,slow_1A37,0,0,slow_1A3A,slow_1A3B,slow_1A3C,slow_1A3D,slow_1A3E,slow_1A3F,slow_1A40,slow_1A41,slow_1A42,slow_1A43,slow_1A44,slow_1A45,slow_1A46,slow_1A47,slow_1A48,0,slow_1A4A,slow_1A4B,slow_1A4C,slow_1A4D,slow_1A4E,slow_1A4F,slow_1A50,slow_1A51,0,0,slow_1A54,slow_1A55,0,slow_1A57,0,slow_1A59,slow_1A5A,slow_1A5B,slow_1A5C,0,0,slow_1A5F,0,slow_1A61,slow_1A62,slow_1A63,0,slow_1A65,0,0,slow_1A68,slow_1A69,slow_1A6A,slow_1A6B,slow_1A6C,slow_1A6D,slow_1A6E,slow_1A6F,slow_1A70,slow_1A71,0,0,slow_1A74,slow_1A75,0,0,slow_1A78,slow_1A79,slow_1A7A,slow_1A7B,0,0,slow_1A7E,slow_1A7F,0,0,slow_1A82,slow_1A83,slow_1A84,slow_1A85,slow_1A86,slow_1A87,0,0,slow_1A8A,slow_1A8B,0,0,slow_1A8E,0,slow_1A90,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
@@ -42289,7 +42289,7 @@ Control fast_0000 ()
     B = 0x00;
     SPH = 0x23;
     SPL = 0xFE;
-    return jumpDirect ( 0x01E6,fast_01E6 );
+    return jumpDirect ( 0x01E6,slow_01E6,fast_01E6 );
 }
 
 Control fast_0008 ()
@@ -42383,7 +42383,7 @@ Control fast_0008 ()
         FlagA = ( ( a40 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a39 );
         FlagCY = false;
-        return jumpDirect ( 0x0082,fast_0082 );
+        return jumpDirect ( 0x0082,slow_0082,fast_0082 );
     }
     else
     {
@@ -42412,7 +42412,7 @@ Control fast_0008 ()
             FlagA = ( ( a45 >> 3 ) & 0x01 );
             FlagP = e1_parity ( a44 );
             FlagCY = false;
-            return jumpDirect ( 0x00A5,fast_00A5 );
+            return jumpDirect ( 0x00A5,slow_00A5,fast_00A5 );
         }
         else
         {
@@ -42438,7 +42438,7 @@ Control fast_0008 ()
                 FlagA = ( ( a45 >> 3 ) & 0x01 );
                 FlagP = e1_parity ( a44 );
                 FlagCY = ( ( a47 >> 0 ) & 0x01 );
-                return jumpDirect ( 0x0082,fast_0082 );
+                return jumpDirect ( 0x0082,slow_0082,fast_0082 );
             }
             else
             {
@@ -42451,7 +42451,7 @@ Control fast_0008 ()
                 FlagA = ( ( a45 >> 3 ) & 0x01 );
                 FlagP = e1_parity ( a44 );
                 FlagCY = ( ( a47 >> 0 ) & 0x01 );
-                return jumpDirect ( 0x00A5,fast_00A5 );
+                return jumpDirect ( 0x00A5,slow_00A5,fast_00A5 );
             }
         }
     }
@@ -42634,7 +42634,7 @@ Control fast_0010 ()
             FlagA = ( ( a58 >> 3 ) & 0x01 );
             FlagP = e1_parity ( a57 );
             FlagCY = false;
-            return jumpDirect ( 0x17DC,fast_17DC );
+            return jumpDirect ( 0x17DC,slow_17DC,fast_17DC );
         }
     }
 }
@@ -42665,7 +42665,7 @@ Control fast_0020 ()
         advance ( 10 );
         A = 0x01;
         FlagCY = ( ( a1 >> 0 ) & 0x01 );
-        return jumpDirect ( 0x003F,fast_003F );
+        return jumpDirect ( 0x003F,slow_003F,fast_003F );
     }
     else
     {
@@ -42692,7 +42692,7 @@ Control fast_0020 ()
             FlagA = ( ( a6 >> 3 ) & 0x01 );
             FlagP = e1_parity ( a5 );
             FlagCY = false;
-            return jumpDirect ( 0x0042,fast_0042 );
+            return jumpDirect ( 0x0042,slow_0042,fast_0042 );
         }
         else
         {
@@ -42720,7 +42720,7 @@ Control fast_0020 ()
                 FlagA = ( ( ( a12 & 0xFF ) >> 4 ) & 0x01 );
                 FlagP = e1_parity ( ( a9 & 0xFF ) );
                 FlagCY = ( ! ( ( ( a9 >> 8 ) >> 0 ) & 0x01 ) );
-                return jumpDirect ( 0x003E,fast_003E );
+                return jumpDirect ( 0x003E,slow_003E,fast_003E );
             }
             else
             {
@@ -42768,7 +42768,7 @@ Control fast_0020 ()
                 FlagA = ( ( ( ( ( ( ( ( a19 >> 1 ) & 0x01 ) || ( ( a19 >> 2 ) & 0x01 ) ) && ( ( a19 >> 3 ) & 0x01 ) ) || ( ( ( a17 & 0xFF ) >> 4 ) & 0x01 ) ) ? ( a20 & 0xFF ) : a19 ) >> 4 ) & 0x01 );
                 FlagP = e1_parity ( a24 );
                 FlagCY = ( ( ( ( ( ( ( ( ( ( a21 & 0xFF ) >> 1 ) & 0x01 ) || ( ( ( a21 & 0xFF ) >> 2 ) & 0x01 ) ) && ( ( ( a21 & 0xFF ) >> 3 ) & 0x01 ) ) || ( ( ( a14 >> 8 ) >> 0 ) & 0x01 ) ) ? ( a22 & 0xFF ) : ( a21 & 0xFF ) ) >> 4 ) & 0x01 ) || ( ( ( a14 >> 8 ) >> 0 ) & 0x01 ) );
-                return jumpDirect ( 0x1947,fast_1947 );
+                return jumpDirect ( 0x1947,slow_1947,fast_1947 );
             }
         }
     }
@@ -42788,7 +42788,7 @@ Control fast_003E ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x003F,fast_003F );
+    return jumpDirect ( 0x003F,slow_003F,fast_003F );
 }
 
 Control fast_003F ()
@@ -42798,7 +42798,7 @@ Control fast_003F ()
     u8 a1 = A ;
     mem_write ( 0x20EA,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0042,fast_0042 );
+    return jumpDirect ( 0x0042,slow_0042,fast_0042 );
 }
 
 Control fast_0042 ()
@@ -42825,7 +42825,7 @@ Control fast_0042 ()
         FlagA = ( ( a5 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a4 );
         FlagCY = false;
-        return jumpDirect ( 0x0082,fast_0082 );
+        return jumpDirect ( 0x0082,slow_0082,fast_0082 );
     }
     else
     {
@@ -42894,7 +42894,7 @@ Control fast_0042 ()
                 FlagA = ( ( ( a21 & 0xFF ) >> 4 ) & 0x01 );
                 FlagP = e1_parity ( ( a18 & 0xFF ) );
                 FlagCY = false;
-                return jumpDirect ( 0x176D,fast_176D );
+                return jumpDirect ( 0x176D,slow_176D,fast_176D );
             }
             else
             {
@@ -42909,7 +42909,7 @@ Control fast_0042 ()
                 FlagA = ( ( ( a21 & 0xFF ) >> 4 ) & 0x01 );
                 FlagP = e1_parity ( ( a18 & 0xFF ) );
                 FlagCY = false;
-                return jumpDirect ( 0x1747,fast_1747 );
+                return jumpDirect ( 0x1747,slow_1747,fast_1747 );
             }
         }
         else
@@ -42953,7 +42953,7 @@ Control fast_0042 ()
                     FlagA = ( ( a37 >> 3 ) & 0x01 );
                     FlagP = e1_parity ( a36 );
                     FlagCY = false;
-                    return jumpDirect ( 0x0082,fast_0082 );
+                    return jumpDirect ( 0x0082,slow_0082,fast_0082 );
                 }
                 else
                 {
@@ -42995,7 +42995,7 @@ Control fast_0042 ()
                     FlagA = ( ( a37 >> 3 ) & 0x01 );
                     FlagP = e1_parity ( a36 );
                     FlagCY = false;
-                    return jumpDirect ( 0x19D7,fast_19D7 );
+                    return jumpDirect ( 0x19D7,slow_19D7,fast_19D7 );
                 }
             }
             else
@@ -43050,7 +43050,7 @@ Control fast_0042 ()
                     FlagA = ( ( a32 >> 3 ) & 0x01 );
                     FlagP = e1_parity ( a31 );
                     FlagCY = ( ( a45 >> 0 ) & 0x01 );
-                    return jumpDirect ( 0x0072,fast_0072 );
+                    return jumpDirect ( 0x0072,slow_0072,fast_0072 );
                 }
                 else
                 {
@@ -43106,7 +43106,7 @@ Control fast_0042 ()
                         FlagA = ( ( ( a59 & 0xFF ) >> 4 ) & 0x01 );
                         FlagP = e1_parity ( ( a56 & 0xFF ) );
                         FlagCY = ( ( a54 >> 0 ) & 0x01 );
-                        return jumpDirect ( 0x01D9,fast_01D9 );
+                        return jumpDirect ( 0x01D9,slow_01D9,fast_01D9 );
                     }
                     else
                     {
@@ -43136,7 +43136,7 @@ Control fast_0042 ()
                             FlagA = ( ( a32 >> 3 ) & 0x01 );
                             FlagP = e1_parity ( a31 );
                             FlagCY = ( ( a67 >> 0 ) & 0x01 );
-                            return jumpDirect ( 0x024B,fast_024B );
+                            return jumpDirect ( 0x024B,slow_024B,fast_024B );
                         }
                         else
                         {
@@ -43174,7 +43174,7 @@ Control fast_005A ()
     // #at: 005A
     instruction2 ( 0x00,0x5D,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x00,0x82 );
     advance ( 10 );
-    return jumpDirect ( 0x0082,fast_0082 );
+    return jumpDirect ( 0x0082,slow_0082,fast_0082 );
 }
 
 Control fast_0072 ()
@@ -43290,7 +43290,7 @@ Control fast_0072 ()
             FlagA = ( ( ( a18 & 0xFF ) >> 4 ) & 0x01 );
             FlagP = e1_parity ( ( a15 & 0xFF ) );
             FlagCY = false;
-            return jumpDirect ( 0x1424,fast_1424 );
+            return jumpDirect ( 0x1424,slow_1424,fast_1424 );
         }
     }
     else
@@ -43362,7 +43362,7 @@ Control fast_0072 ()
             FlagA = ( ( a51 >> 3 ) & 0x01 );
             FlagP = e1_parity ( a50 );
             FlagCY = false;
-            return jumpDirect ( 0x0136,fast_0136 );
+            return jumpDirect ( 0x0136,slow_0136,fast_0136 );
         }
         else
         {
@@ -43519,7 +43519,7 @@ Control fast_0072 ()
                 FlagA = ( ( a91 >> 3 ) & 0x01 );
                 FlagP = e1_parity ( a90 );
                 FlagCY = false;
-                return jumpDirect ( 0x012E,fast_012E );
+                return jumpDirect ( 0x012E,slow_012E,fast_012E );
             }
         }
     }
@@ -43546,7 +43546,7 @@ Control fast_007B ()
     L = 0x10;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x024B,fast_024B );
+    return jumpDirect ( 0x024B,slow_024B,fast_024B );
 }
 
 Control fast_007E ()
@@ -43631,7 +43631,7 @@ Control fast_007E ()
             FlagA = false;
             FlagP = e1_parity ( a26 );
             FlagCY = false;
-            return jumpDirect ( 0x0929,fast_0929 );
+            return jumpDirect ( 0x0929,slow_0929,fast_0929 );
         }
         else
         {
@@ -43656,7 +43656,7 @@ Control fast_007E ()
             FlagA = false;
             FlagP = e1_parity ( a26 );
             FlagCY = false;
-            return jumpDirect ( 0x0929,fast_0929 );
+            return jumpDirect ( 0x0929,slow_0929,fast_0929 );
         }
     }
 }
@@ -43666,7 +43666,7 @@ Control fast_0081 ()
     // #at: 0081
     instruction0 ( 0x00,0x82,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"NOP" );
     advance ( 4 );
-    return jumpDirect ( 0x0082,fast_0082 );
+    return jumpDirect ( 0x0082,slow_0082,fast_0082 );
 }
 
 Control fast_0082 ()
@@ -43768,7 +43768,7 @@ Control fast_00A5 ()
     L = 0x20;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x024B,fast_024B );
+    return jumpDirect ( 0x024B,slow_024B,fast_024B );
 }
 
 Control fast_00AB ()
@@ -43884,7 +43884,7 @@ Control fast_00AB ()
             FlagA = ( ( a24 >> 3 ) & 0x01 );
             FlagP = e1_parity ( a23 );
             FlagCY = false;
-            return jumpDirect ( 0x0154,fast_0154 );
+            return jumpDirect ( 0x0154,slow_0154,fast_0154 );
         }
     }
 }
@@ -43894,7 +43894,7 @@ Control fast_00AE ()
     // #at: 00AE
     instruction2 ( 0x00,0xB1,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x00,0x82 );
     advance ( 10 );
-    return jumpDirect ( 0x0082,fast_0082 );
+    return jumpDirect ( 0x0082,slow_0082,fast_0082 );
 }
 
 Control fast_00B4 ()
@@ -43994,7 +43994,7 @@ Control fast_00B4 ()
         FlagA = ( ( ( a41 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a38 & 0xFF ) );
         FlagCY = ( ! ( ( ( a38 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x00C8,fast_00C8 );
+        return jumpDirect ( 0x00C8,slow_00C8,fast_00C8 );
     }
     else
     {
@@ -44017,7 +44017,7 @@ Control fast_00B4 ()
         FlagA = ( ( ( a46 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a43 & 0xFF ) );
         FlagCY = ( ! ( ( ( a38 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x00C8,fast_00C8 );
+        return jumpDirect ( 0x00C8,slow_00C8,fast_00C8 );
     }
 }
 
@@ -44050,7 +44050,7 @@ Control fast_00C8 ()
         FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a3 & 0xFF ) );
         FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x00D3,fast_00D3 );
+        return jumpDirect ( 0x00D3,slow_00D3,fast_00D3 );
     }
     else
     {
@@ -44068,7 +44068,7 @@ Control fast_00C8 ()
         FlagA = ( ( ( a10 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a7 & 0xFF ) );
         FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x00D3,fast_00D3 );
+        return jumpDirect ( 0x00D3,slow_00D3,fast_00D3 );
     }
 }
 
@@ -44122,7 +44122,7 @@ Control fast_012E ()
     L = a1;
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x15D3,fast_15D3 );
+    return jumpDirect ( 0x15D3,slow_15D3,fast_15D3 );
 }
 
 Control fast_0136 ()
@@ -44285,7 +44285,7 @@ Control fast_0154 ()
             FlagA = ( ( ( a21 & 0xFF ) >> 4 ) & 0x01 );
             FlagP = e1_parity ( ( a18 & 0xFF ) );
             FlagCY = ( ! ( ( ( a7 >> 8 ) >> 0 ) & 0x01 ) );
-            return jumpDirect ( 0x01D9,fast_01D9 );
+            return jumpDirect ( 0x01D9,slow_01D9,fast_01D9 );
         }
     }
     else
@@ -44297,7 +44297,7 @@ Control fast_0154 ()
         FlagA = ( ( ( a10 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a7 & 0xFF ) );
         FlagCY = ( ! ( ( ( a7 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x015A,fast_015A );
+        return jumpDirect ( 0x015A,slow_015A,fast_015A );
     }
 }
 
@@ -44332,7 +44332,7 @@ Control fast_015A ()
         FlagZ = ( 0 == ( a6 & 0xFF ) );
         FlagA = ( ( ( a9 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a6 & 0xFF ) );
-        return jumpDirect ( 0x0154,fast_0154 );
+        return jumpDirect ( 0x0154,slow_0154,fast_0154 );
     }
     else
     {
@@ -44362,7 +44362,7 @@ Control fast_015A ()
         FlagZ = ( 0 == ( a6 & 0xFF ) );
         FlagA = ( ( ( a9 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a6 & 0xFF ) );
-        return jumpDirect ( 0x017A,fast_017A );
+        return jumpDirect ( 0x017A,slow_017A,fast_017A );
     }
 }
 
@@ -44431,7 +44431,7 @@ Control fast_0166 ()
         FlagA = false;
         FlagP = e1_parity ( a10 );
         FlagCY = false;
-        return jumpDirect ( 0x16EE,fast_16EE );
+        return jumpDirect ( 0x16EE,slow_16EE,fast_16EE );
     }
     else
     {
@@ -44505,7 +44505,7 @@ Control fast_017A ()
     D = 0x00;
     H = 0x20;
     L = 0x0A;
-    return jumpDirect ( 0x0183,fast_0183 );
+    return jumpDirect ( 0x0183,slow_0183,fast_0183 );
 }
 
 Control fast_0183 ()
@@ -44533,7 +44533,7 @@ Control fast_0183 ()
         FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a2 & 0xFF ) );
         FlagCY = ( ! ( ( ( a2 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x0195,fast_0195 );
+        return jumpDirect ( 0x0195,slow_0195,fast_0195 );
     }
     else
     {
@@ -44590,7 +44590,7 @@ Control fast_0183 ()
         FlagA = ( ( ( a25 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a22 & 0xFF ) );
         FlagCY = ( ( ( a15 >> 8 ) >> 0 ) & 0x01 );
-        return jumpDirect ( 0x0183,fast_0183 );
+        return jumpDirect ( 0x0183,slow_0183,fast_0183 );
     }
 }
 
@@ -44672,7 +44672,7 @@ Control fast_0195 ()
         FlagA = ( ( ( a26 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a23 & 0xFF ) );
         FlagCY = ( ( ( a16 >> 8 ) >> 0 ) & 0x01 );
-        return jumpDirect ( 0x0195,fast_0195 );
+        return jumpDirect ( 0x0195,slow_0195,fast_0195 );
     }
 }
 
@@ -44748,7 +44748,7 @@ Control fast_01C0 ()
     advance ( 10 );
     H = 0x21;
     L = 0x00;
-    return jumpDirect ( 0x01C3,fast_01C3 );
+    return jumpDirect ( 0x01C3,slow_01C3,fast_01C3 );
 }
 
 Control fast_01C3 ()
@@ -44757,7 +44757,7 @@ Control fast_01C3 ()
     instruction1 ( 0x01,0xC5,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x37 );
     advance ( 7 );
     B = 0x37;
-    return jumpDirect ( 0x01C5,fast_01C5 );
+    return jumpDirect ( 0x01C5,slow_01C5,fast_01C5 );
 }
 
 Control fast_01C5 ()
@@ -44794,7 +44794,7 @@ Control fast_01C5 ()
         FlagZ = ( 0 == ( a7 & 0xFF ) );
         FlagA = ( ( ( a10 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a7 & 0xFF ) );
-        return jumpDirect ( 0x01C5,fast_01C5 );
+        return jumpDirect ( 0x01C5,slow_01C5,fast_01C5 );
     }
     else
     {
@@ -44841,7 +44841,7 @@ Control fast_01CF ()
     B = 0xE0;
     H = 0x24;
     L = 0x02;
-    return jumpDirect ( 0x14CC,fast_14CC );
+    return jumpDirect ( 0x14CC,slow_14CC,fast_14CC );
 }
 
 Control fast_01D9 ()
@@ -44945,7 +44945,7 @@ Control fast_01E4 ()
     instruction1 ( 0x01,0xE6,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0xC0 );
     advance ( 7 );
     B = 0xC0;
-    return jumpDirect ( 0x01E6,fast_01E6 );
+    return jumpDirect ( 0x01E6,slow_01E6,fast_01E6 );
 }
 
 Control fast_01E6 ()
@@ -44963,7 +44963,7 @@ Control fast_01E6 ()
     E = 0x00;
     H = 0x20;
     L = 0x00;
-    return jumpDirect ( 0x1A32,fast_1A32 );
+    return jumpDirect ( 0x1A32,slow_1A32,fast_1A32 );
 }
 
 Control fast_01EF ()
@@ -44976,7 +44976,7 @@ Control fast_01EF ()
     advance ( 10 );
     H = 0x21;
     L = 0x42;
-    return jumpDirect ( 0x01F8,fast_01F8 );
+    return jumpDirect ( 0x01F8,slow_01F8,fast_01F8 );
 }
 
 Control fast_01F5 ()
@@ -44986,7 +44986,7 @@ Control fast_01F5 ()
     advance ( 10 );
     H = 0x22;
     L = 0x42;
-    return jumpDirect ( 0x01F8,fast_01F8 );
+    return jumpDirect ( 0x01F8,slow_01F8,fast_01F8 );
 }
 
 Control fast_01F8 ()
@@ -45000,7 +45000,7 @@ Control fast_01F8 ()
     C = 0x04;
     D = 0x1D;
     E = 0x20;
-    return jumpDirect ( 0x01FD,fast_01FD );
+    return jumpDirect ( 0x01FD,slow_01FD,fast_01FD );
 }
 
 Control fast_01FD ()
@@ -45036,7 +45036,7 @@ Control fast_01FD ()
     B = 0x2C;
     SPH = ( a14 >> 8 );
     SPL = ( a14 & 0xFF );
-    return jumpDirect ( 0x1A32,fast_1A32 );
+    return jumpDirect ( 0x1A32,slow_1A32,fast_1A32 );
 }
 
 Control fast_0203 ()
@@ -45074,7 +45074,7 @@ Control fast_0203 ()
         FlagZ = ( 0 == ( a10 & 0xFF ) );
         FlagA = ( ( ( a13 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a10 & 0xFF ) );
-        return jumpDirect ( 0x01FD,fast_01FD );
+        return jumpDirect ( 0x01FD,slow_01FD,fast_01FD );
     }
     else
     {
@@ -45113,7 +45113,7 @@ Control fast_0214 ()
     advance ( 10 );
     D = 0x22;
     E = 0x42;
-    return jumpDirect ( 0x021E,fast_021E );
+    return jumpDirect ( 0x021E,slow_021E,fast_021E );
 }
 
 Control fast_021A ()
@@ -45130,7 +45130,7 @@ Control fast_021A ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x021B,fast_021B );
+    return jumpDirect ( 0x021B,slow_021B,fast_021B );
 }
 
 Control fast_021B ()
@@ -45140,7 +45140,7 @@ Control fast_021B ()
     advance ( 10 );
     D = 0x21;
     E = 0x42;
-    return jumpDirect ( 0x021E,fast_021E );
+    return jumpDirect ( 0x021E,slow_021E,fast_021E );
 }
 
 Control fast_021E ()
@@ -45164,7 +45164,7 @@ Control fast_021E ()
     C = 0x02;
     H = 0x28;
     L = 0x06;
-    return jumpDirect ( 0x0229,fast_0229 );
+    return jumpDirect ( 0x0229,slow_0229,fast_0229 );
 }
 
 Control fast_0229 ()
@@ -45230,7 +45230,7 @@ Control fast_0229 ()
         FlagA = ( ( a20 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a19 );
         FlagCY = false;
-        return jumpDirect ( 0x147C,fast_147C );
+        return jumpDirect ( 0x147C,slow_147C,fast_147C );
     }
     else
     {
@@ -45255,7 +45255,7 @@ Control fast_0229 ()
         FlagA = ( ( a20 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a19 );
         FlagCY = false;
-        return jumpDirect ( 0x1A69,fast_1A69 );
+        return jumpDirect ( 0x1A69,slow_1A69,fast_1A69 );
     }
 }
 
@@ -45369,7 +45369,7 @@ Control fast_0235 ()
         FlagA = ( ( ( a21 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a18 & 0xFF ) );
         FlagCY = ( ( a40 >> 16 ) & 0x01 );
-        return jumpDirect ( 0x0229,fast_0229 );
+        return jumpDirect ( 0x0229,slow_0229,fast_0229 );
     }
 }
 
@@ -45378,7 +45378,7 @@ Control fast_0245 ()
     // #at: 0245
     instruction2 ( 0x02,0x48,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x02,0x35 );
     advance ( 10 );
-    return jumpDirect ( 0x0235,fast_0235 );
+    return jumpDirect ( 0x0235,slow_0235,fast_0235 );
 }
 
 Control fast_024B ()
@@ -45442,7 +45442,7 @@ Control fast_024B ()
             FlagA = ( ( ( a21 & 0xFF ) >> 4 ) & 0x01 );
             FlagP = e1_parity ( ( a18 & 0xFF ) );
             FlagCY = ( ! ( ( ( a18 >> 8 ) >> 0 ) & 0x01 ) );
-            return jumpDirect ( 0x0281,fast_0281 );
+            return jumpDirect ( 0x0281,slow_0281,fast_0281 );
         }
         else
         {
@@ -45509,7 +45509,7 @@ Control fast_024B ()
                     FlagA = ( ( ( a42 & 0xFF ) >> 4 ) & 0x01 );
                     FlagP = e1_parity ( ( a39 & 0xFF ) );
                     FlagCY = false;
-                    return jumpDirect ( 0x027D,fast_027D );
+                    return jumpDirect ( 0x027D,slow_027D,fast_027D );
                 }
                 else
                 {
@@ -45532,7 +45532,7 @@ Control fast_024B ()
                     FlagA = ( ( ( a47 & 0xFF ) >> 4 ) & 0x01 );
                     FlagP = e1_parity ( ( a44 & 0xFF ) );
                     FlagCY = false;
-                    return jumpDirect ( 0x027D,fast_027D );
+                    return jumpDirect ( 0x027D,slow_027D,fast_027D );
                 }
             }
             else
@@ -45600,7 +45600,7 @@ Control fast_024B ()
                     FlagA = ( ( ( a64 & 0xFF ) >> 4 ) & 0x01 );
                     FlagP = e1_parity ( ( a61 & 0xFF ) );
                     FlagCY = false;
-                    return jumpDirect ( 0x0281,fast_0281 );
+                    return jumpDirect ( 0x0281,slow_0281,fast_0281 );
                 }
                 else
                 {
@@ -45746,7 +45746,7 @@ Control fast_026F ()
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
     FlagCY = ( ( a11 >> 16 ) & 0x01 );
-    return jumpDirect ( 0x024B,fast_024B );
+    return jumpDirect ( 0x024B,slow_024B,fast_024B );
 }
 
 Control fast_027D ()
@@ -45786,7 +45786,7 @@ Control fast_027D ()
     FlagZ = ( 0 == ( a2 & 0xFF ) );
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
-    return jumpDirect ( 0x0281,fast_0281 );
+    return jumpDirect ( 0x0281,slow_0281,fast_0281 );
 }
 
 Control fast_0281 ()
@@ -45808,7 +45808,7 @@ Control fast_0281 ()
     H = ( ( a3 & 0xFFFF ) >> 8 );
     L = ( ( a3 & 0xFFFF ) & 0xFF );
     FlagCY = ( ( a3 >> 16 ) & 0x01 );
-    return jumpDirect ( 0x024B,fast_024B );
+    return jumpDirect ( 0x024B,slow_024B,fast_024B );
 }
 
 Control fast_028E ()
@@ -45888,7 +45888,7 @@ Control fast_028E ()
             FlagA = ( ( a24 >> 3 ) & 0x01 );
             FlagP = e1_parity ( a23 );
             FlagCY = false;
-            return jumpDirect ( 0x034A,fast_034A );
+            return jumpDirect ( 0x034A,slow_034A,fast_034A );
         }
         else
         {
@@ -45920,7 +45920,7 @@ Control fast_028E ()
                 FlagA = ( ( ( a29 & 0xFF ) >> 4 ) & 0x01 );
                 FlagP = e1_parity ( ( a26 & 0xFF ) );
                 FlagCY = false;
-                return jumpDirect ( 0x034A,fast_034A );
+                return jumpDirect ( 0x034A,slow_034A,fast_034A );
             }
             else
             {
@@ -45948,7 +45948,7 @@ Control fast_028E ()
                 FlagA = ( ( ( a29 & 0xFF ) >> 4 ) & 0x01 );
                 FlagP = e1_parity ( ( a26 & 0xFF ) );
                 FlagCY = false;
-                return jumpDirect ( 0x034A,fast_034A );
+                return jumpDirect ( 0x034A,slow_034A,fast_034A );
             }
         }
     }
@@ -46133,7 +46133,7 @@ Control fast_028E ()
                 FlagA = ( ( ( a88 & 0xFF ) >> 4 ) & 0x01 );
                 FlagP = e1_parity ( ( a85 & 0xFF ) );
                 FlagCY = ( ( ( a85 >> 8 ) >> 0 ) & 0x01 );
-                return jumpDirect ( 0x036F,fast_036F );
+                return jumpDirect ( 0x036F,slow_036F,fast_036F );
             }
             else
             {
@@ -46169,7 +46169,7 @@ Control fast_028E ()
                 FlagA = ( ( ( a68 & 0xFF ) >> 4 ) & 0x01 );
                 FlagP = e1_parity ( ( a65 & 0xFF ) );
                 FlagCY = false;
-                return jumpDirect ( 0x1424,fast_1424 );
+                return jumpDirect ( 0x1424,slow_1424,fast_1424 );
             }
         }
     }
@@ -46205,7 +46205,7 @@ Control fast_02B6 ()
     L = 0x10;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A32,fast_1A32 );
+    return jumpDirect ( 0x1A32,slow_1A32,fast_1A32 );
 }
 
 Control fast_02C1 ()
@@ -46228,7 +46228,7 @@ Control fast_02C1 ()
     B = 0x00;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x19DC,fast_19DC );
+    return jumpDirect ( 0x19DC,slow_19DC,fast_19DC );
 }
 
 Control fast_02C6 ()
@@ -46328,7 +46328,7 @@ Control fast_02C6 ()
             FlagA = ( ( a18 >> 3 ) & 0x01 );
             FlagP = e1_parity ( a17 );
             FlagCY = false;
-            return jumpDirect ( 0x19D7,fast_19D7 );
+            return jumpDirect ( 0x19D7,slow_19D7,fast_19D7 );
         }
     }
 }
@@ -46349,7 +46349,7 @@ Control fast_02D7 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x092E,fast_092E );
+    return jumpDirect ( 0x092E,slow_092E,fast_092E );
 }
 
 Control fast_02DA ()
@@ -46392,7 +46392,7 @@ Control fast_02DA ()
         FlagA = false;
         FlagP = e1_parity ( a7 );
         FlagCY = false;
-        return jumpDirect ( 0x1A8B,fast_1A8B );
+        return jumpDirect ( 0x1A8B,slow_1A8B,fast_1A8B );
     }
     else
     {
@@ -46417,7 +46417,7 @@ Control fast_02DA ()
         FlagA = ( ( a4 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a3 );
         FlagCY = false;
-        return jumpDirect ( 0x18E7,fast_18E7 );
+        return jumpDirect ( 0x18E7,slow_18E7,fast_18E7 );
     }
 }
 
@@ -46447,7 +46447,7 @@ Control fast_02E1 ()
         FlagA = ( ( a7 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a6 );
         FlagCY = false;
-        return jumpDirect ( 0x032C,fast_032C );
+        return jumpDirect ( 0x032C,slow_032C,fast_032C );
     }
     else
     {
@@ -46474,7 +46474,7 @@ Control fast_02E1 ()
             FlagA = ( ( a12 >> 3 ) & 0x01 );
             FlagP = e1_parity ( a11 );
             FlagCY = false;
-            return jumpDirect ( 0x032C,fast_032C );
+            return jumpDirect ( 0x032C,slow_032C,fast_032C );
         }
         else
         {
@@ -46485,7 +46485,7 @@ Control fast_02E1 ()
             FlagA = ( ( a12 >> 3 ) & 0x01 );
             FlagP = e1_parity ( a11 );
             FlagCY = false;
-            return jumpDirect ( 0x02ED,fast_02ED );
+            return jumpDirect ( 0x02ED,slow_02ED,fast_02ED );
         }
     }
 }
@@ -46539,7 +46539,7 @@ Control fast_02ED ()
         SPH = ( a15 >> 8 );
         SPL = ( a15 & 0xFF );
         FlagCY = ( ( a9 >> 0 ) & 0x01 );
-        return jumpDirect ( 0x021B,fast_021B );
+        return jumpDirect ( 0x021B,slow_021B,fast_021B );
     }
     else
     {
@@ -46566,7 +46566,7 @@ Control fast_02ED ()
         SPH = ( a21 >> 8 );
         SPL = ( a21 & 0xFF );
         FlagCY = ( ( a9 >> 0 ) & 0x01 );
-        return jumpDirect ( 0x0214,fast_0214 );
+        return jumpDirect ( 0x0214,slow_0214,fast_0214 );
     }
 }
 
@@ -46615,7 +46615,7 @@ Control fast_02F8 ()
     L = a12;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0886,fast_0886 );
+    return jumpDirect ( 0x0886,slow_0886,fast_0886 );
 }
 
 Control fast_02FB ()
@@ -46678,7 +46678,7 @@ Control fast_02FB ()
     L = ( a15 & 0xFF );
     SPH = ( a24 >> 8 );
     SPL = ( a24 & 0xFF );
-    return jumpDirect ( 0x01E4,fast_01E4 );
+    return jumpDirect ( 0x01E4,slow_01E4,fast_01E4 );
 }
 
 Control fast_0305 ()
@@ -46718,7 +46718,7 @@ Control fast_0305 ()
         FlagA = ( ( a4 >> 4 ) & 0x01 );
         FlagP = ( ( a4 >> 2 ) & 0x01 );
         FlagCY = ( ( a9 >> 0 ) & 0x01 );
-        return jumpDirect ( 0x0312,fast_0312 );
+        return jumpDirect ( 0x0312,slow_0312,fast_0312 );
     }
     else
     {
@@ -46738,7 +46738,7 @@ Control fast_0305 ()
         FlagA = ( ( a4 >> 4 ) & 0x01 );
         FlagP = ( ( a4 >> 2 ) & 0x01 );
         FlagCY = ( ( a9 >> 0 ) & 0x01 );
-        return jumpDirect ( 0x0312,fast_0312 );
+        return jumpDirect ( 0x0312,slow_0312,fast_0312 );
     }
 }
 
@@ -46763,7 +46763,7 @@ Control fast_0312 ()
     advance ( 17 );
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x0AB6,fast_0AB6 );
+    return jumpDirect ( 0x0AB6,slow_0AB6,fast_0AB6 );
 }
 
 Control fast_0318 ()
@@ -46825,7 +46825,7 @@ Control fast_0318 ()
     FlagA = ( ( ( a11 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a8 & 0xFF ) );
     FlagCY = false;
-    return jumpDirect ( 0x09D6,fast_09D6 );
+    return jumpDirect ( 0x09D6,slow_09D6,fast_09D6 );
 }
 
 Control fast_0326 ()
@@ -46844,7 +46844,7 @@ Control fast_0326 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A7F,fast_1A7F );
+    return jumpDirect ( 0x1A7F,slow_1A7F,fast_1A7F );
 }
 
 Control fast_0329 ()
@@ -46852,7 +46852,7 @@ Control fast_0329 ()
     // #at: 0329
     instruction2 ( 0x03,0x2C,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x07,0xF9 );
     advance ( 10 );
-    return jumpDirect ( 0x07F9,fast_07F9 );
+    return jumpDirect ( 0x07F9,slow_07F9,fast_07F9 );
 }
 
 Control fast_032C ()
@@ -46871,7 +46871,7 @@ Control fast_032C ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A7F,fast_1A7F );
+    return jumpDirect ( 0x1A7F,slow_1A7F,fast_1A7F );
 }
 
 Control fast_032F ()
@@ -46879,7 +46879,7 @@ Control fast_032F ()
     // #at: 032F
     instruction2 ( 0x03,0x32,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x08,0x17 );
     advance ( 10 );
-    return jumpDirect ( 0x0817,fast_0817 );
+    return jumpDirect ( 0x0817,slow_0817,fast_0817 );
 }
 
 Control fast_0335 ()
@@ -46887,7 +46887,7 @@ Control fast_0335 ()
     // #at: 0335
     instruction2 ( 0x03,0x38,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x02,0xF8 );
     advance ( 10 );
-    return jumpDirect ( 0x02F8,fast_02F8 );
+    return jumpDirect ( 0x02F8,slow_02F8,fast_02F8 );
 }
 
 Control fast_034A ()
@@ -46937,7 +46937,7 @@ Control fast_034A ()
         FlagA = ( ( a7 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a6 );
         FlagCY = false;
-        return jumpDirect ( 0x17C0,fast_17C0 );
+        return jumpDirect ( 0x17C0,slow_17C0,fast_17C0 );
     }
     else
     {
@@ -46962,7 +46962,7 @@ Control fast_034A ()
             FlagA = ( ( a7 >> 3 ) & 0x01 );
             FlagP = e1_parity ( a6 );
             FlagCY = ( ( a15 >> 0 ) & 0x01 );
-            return jumpDirect ( 0x0381,fast_0381 );
+            return jumpDirect ( 0x0381,slow_0381,fast_0381 );
         }
         else
         {
@@ -46983,7 +46983,7 @@ Control fast_034A ()
                 FlagA = ( ( a7 >> 3 ) & 0x01 );
                 FlagP = e1_parity ( a6 );
                 FlagCY = ( ( a16 >> 0 ) & 0x01 );
-                return jumpDirect ( 0x038E,fast_038E );
+                return jumpDirect ( 0x038E,slow_038E,fast_038E );
             }
             else
             {
@@ -46998,7 +46998,7 @@ Control fast_034A ()
                 FlagA = ( ( a7 >> 3 ) & 0x01 );
                 FlagP = e1_parity ( a6 );
                 FlagCY = ( ( a16 >> 0 ) & 0x01 );
-                return jumpDirect ( 0x036F,fast_036F );
+                return jumpDirect ( 0x036F,slow_036F,fast_036F );
             }
         }
     }
@@ -47021,7 +47021,7 @@ Control fast_0366 ()
         advance ( 10 );
         A = e8_update_bit ( ( a2 << 0x01 ),0,( ( a2 >> 7 ) & 0x01 ) );
         FlagCY = ( ( a2 >> 7 ) & 0x01 );
-        return jumpDirect ( 0x0381,fast_0381 );
+        return jumpDirect ( 0x0381,slow_0381,fast_0381 );
     }
     else
     {
@@ -47037,14 +47037,14 @@ Control fast_0366 ()
             advance ( 10 );
             A = e8_update_bit ( ( a3 << 0x01 ),0,( ( a3 >> 7 ) & 0x01 ) );
             FlagCY = ( ( a3 >> 7 ) & 0x01 );
-            return jumpDirect ( 0x038E,fast_038E );
+            return jumpDirect ( 0x038E,slow_038E,fast_038E );
         }
         else
         {
             advance ( 10 );
             A = e8_update_bit ( ( a3 << 0x01 ),0,( ( a3 >> 7 ) & 0x01 ) );
             FlagCY = ( ( a3 >> 7 ) & 0x01 );
-            return jumpDirect ( 0x036F,fast_036F );
+            return jumpDirect ( 0x036F,slow_036F,fast_036F );
         }
     }
 }
@@ -47070,7 +47070,7 @@ Control fast_036F ()
     L = 0x18;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A3B,fast_1A3B );
+    return jumpDirect ( 0x1A3B,slow_1A3B,fast_1A3B );
 }
 
 Control fast_0375 ()
@@ -47089,7 +47089,7 @@ Control fast_0375 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A47,fast_1A47 );
+    return jumpDirect ( 0x1A47,slow_1A47,fast_1A47 );
 }
 
 Control fast_0378 ()
@@ -47108,7 +47108,7 @@ Control fast_0378 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1439,fast_1439 );
+    return jumpDirect ( 0x1439,slow_1439,fast_1439 );
 }
 
 Control fast_037B ()
@@ -47162,7 +47162,7 @@ Control fast_0381 ()
         FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a3 & 0xFF ) );
         FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x036F,fast_036F );
+        return jumpDirect ( 0x036F,slow_036F,fast_036F );
     }
     else
     {
@@ -47189,7 +47189,7 @@ Control fast_0381 ()
         FlagA = ( ( ( a11 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a8 & 0xFF ) );
         FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x036F,fast_036F );
+        return jumpDirect ( 0x036F,slow_036F,fast_036F );
     }
 }
 
@@ -47218,7 +47218,7 @@ Control fast_038E ()
         FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a3 & 0xFF ) );
         FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x036F,fast_036F );
+        return jumpDirect ( 0x036F,slow_036F,fast_036F );
     }
     else
     {
@@ -47245,7 +47245,7 @@ Control fast_038E ()
         FlagA = ( ( ( a11 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a8 & 0xFF ) );
         FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x036F,fast_036F );
+        return jumpDirect ( 0x036F,slow_036F,fast_036F );
     }
 }
 
@@ -47270,7 +47270,7 @@ Control fast_03BB ()
     E = 0x2A;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A06,fast_1A06 );
+    return jumpDirect ( 0x1A06,slow_1A06,fast_1A06 );
 }
 
 Control fast_03C1 ()
@@ -47422,7 +47422,7 @@ Control fast_03C1 ()
                 FlagA = ( ( ( a53 & 0xFF ) >> 4 ) & 0x01 );
                 FlagP = e1_parity ( ( a50 & 0xFF ) );
                 FlagCY = ( ( ( a50 >> 8 ) >> 0 ) & 0x01 );
-                return jumpDirect ( 0x0430,fast_0430 );
+                return jumpDirect ( 0x0430,slow_0430,fast_0430 );
             }
             else
             {
@@ -47462,7 +47462,7 @@ Control fast_03C1 ()
                     FlagA = ( ( ( a65 & 0xFF ) >> 4 ) & 0x01 );
                     FlagP = e1_parity ( ( a62 & 0xFF ) );
                     FlagCY = ( ! ( ( ( a62 >> 8 ) >> 0 ) & 0x01 ) );
-                    return jumpDirect ( 0x0430,fast_0430 );
+                    return jumpDirect ( 0x0430,slow_0430,fast_0430 );
                 }
                 else
                 {
@@ -47535,7 +47535,7 @@ Control fast_03C1 ()
                             FlagA = ( ( ( a84 & 0xFF ) >> 4 ) & 0x01 );
                             FlagP = e1_parity ( ( a81 & 0xFF ) );
                             FlagCY = ( ! ( ( ( a81 >> 8 ) >> 0 ) & 0x01 ) );
-                            return jumpDirect ( 0x0436,fast_0436 );
+                            return jumpDirect ( 0x0436,slow_0436,fast_0436 );
                         }
                     }
                     else
@@ -47569,7 +47569,7 @@ Control fast_03C1 ()
                             FlagA = ( ( ( a99 & 0xFF ) >> 4 ) & 0x01 );
                             FlagP = e1_parity ( ( a96 & 0xFF ) );
                             FlagCY = ( ! ( ( ( a76 >> 8 ) >> 0 ) & 0x01 ) );
-                            return jumpDirect ( 0x0436,fast_0436 );
+                            return jumpDirect ( 0x0436,slow_0436,fast_0436 );
                         }
                         else
                         {
@@ -47651,7 +47651,7 @@ Control fast_03C1 ()
                                 FlagA = ( ( ( a109 & 0xFF ) >> 4 ) & 0x01 );
                                 FlagP = e1_parity ( ( a106 & 0xFF ) );
                                 FlagCY = ( ! ( ( ( a106 >> 8 ) >> 0 ) & 0x01 ) );
-                                return jumpDirect ( 0x0430,fast_0430 );
+                                return jumpDirect ( 0x0430,slow_0430,fast_0430 );
                             }
                         }
                     }
@@ -47677,7 +47677,7 @@ Control fast_03E3 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1452,fast_1452 );
+    return jumpDirect ( 0x1452,slow_1452,fast_1452 );
 }
 
 Control fast_03E6 ()
@@ -47827,7 +47827,7 @@ Control fast_03E6 ()
     FlagZ = ( 0 == ( a69 & 0xFF ) );
     FlagA = ( ( ( a72 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a69 & 0xFF ) );
-    return jumpDirect ( 0x0430,fast_0430 );
+    return jumpDirect ( 0x0430,slow_0430,fast_0430 );
 }
 
 Control fast_03F7 ()
@@ -47835,7 +47835,7 @@ Control fast_03F7 ()
     // #at: 03F7
     instruction2 ( 0x03,0xFA,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x14,0x00 );
     advance ( 10 );
-    return jumpDirect ( 0x1400,fast_1400 );
+    return jumpDirect ( 0x1400,slow_1400,fast_1400 );
 }
 
 Control fast_0407 ()
@@ -47843,7 +47843,7 @@ Control fast_0407 ()
     // #at: 0407
     instruction2 ( 0x04,0x0A,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x14,0x00 );
     advance ( 10 );
-    return jumpDirect ( 0x1400,fast_1400 );
+    return jumpDirect ( 0x1400,slow_1400,fast_1400 );
 }
 
 Control fast_040D ()
@@ -47901,7 +47901,7 @@ Control fast_040D ()
     advance ( 17 );
     SPH = ( a30 >> 8 );
     SPL = ( a30 & 0xFF );
-    return jumpDirect ( 0x1452,fast_1452 );
+    return jumpDirect ( 0x1452,slow_1452,fast_1452 );
 }
 
 Control fast_0413 ()
@@ -47987,7 +47987,7 @@ Control fast_0413 ()
     FlagA = ( ( ( a31 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a28 & 0xFF ) );
     FlagCY = ( ( ( a28 >> 8 ) >> 0 ) & 0x01 );
-    return jumpDirect ( 0x1491,fast_1491 );
+    return jumpDirect ( 0x1491,slow_1491,fast_1491 );
 }
 
 Control fast_0421 ()
@@ -48067,7 +48067,7 @@ Control fast_0430 ()
     advance ( 10 );
     H = 0x20;
     L = 0x27;
-    return jumpDirect ( 0x1A3B,fast_1A3B );
+    return jumpDirect ( 0x1A3B,slow_1A3B,fast_1A3B );
 }
 
 Control fast_0436 ()
@@ -48086,7 +48086,7 @@ Control fast_0436 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0430,fast_0430 );
+    return jumpDirect ( 0x0430,slow_0430,fast_0430 );
 }
 
 Control fast_0439 ()
@@ -48105,7 +48105,7 @@ Control fast_0439 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1452,fast_1452 );
+    return jumpDirect ( 0x1452,slow_1452,fast_1452 );
 }
 
 Control fast_043C ()
@@ -48138,7 +48138,7 @@ Control fast_043C ()
     L = 0x25;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A32,fast_1A32 );
+    return jumpDirect ( 0x1A32,slow_1A32,fast_1A32 );
 }
 
 Control fast_0447 ()
@@ -48181,7 +48181,7 @@ Control fast_0447 ()
         FlagA = ( ( ( a13 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a10 & 0xFF ) );
         FlagCY = ( ! ( ( ( a10 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x0453,fast_0453 );
+        return jumpDirect ( 0x0453,slow_0453,fast_0453 );
     }
     else
     {
@@ -48197,7 +48197,7 @@ Control fast_0447 ()
         FlagA = ( ( ( a13 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a10 & 0xFF ) );
         FlagCY = ( ! ( ( ( a10 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x0453,fast_0453 );
+        return jumpDirect ( 0x0453,slow_0453,fast_0453 );
     }
 }
 
@@ -48299,7 +48299,7 @@ Control fast_0453 ()
             FlagA = ( ( a30 >> 3 ) & 0x01 );
             FlagP = e1_parity ( a29 );
             FlagCY = false;
-            return jumpDirect ( 0x046E,fast_046E );
+            return jumpDirect ( 0x046E,slow_046E,fast_046E );
         }
         else
         {
@@ -48317,7 +48317,7 @@ Control fast_0453 ()
             FlagA = ( ( a30 >> 3 ) & 0x01 );
             FlagP = e1_parity ( a29 );
             FlagCY = false;
-            return jumpDirect ( 0x046E,fast_046E );
+            return jumpDirect ( 0x046E,slow_046E,fast_046E );
         }
     }
 }
@@ -48431,7 +48431,7 @@ Control fast_0476 ()
         FlagA = false;
         FlagP = e1_parity ( a14 );
         FlagCY = false;
-        return jumpDirect ( 0x0550,fast_0550 );
+        return jumpDirect ( 0x0550,slow_0550,fast_0550 );
     }
     else
     {
@@ -48509,7 +48509,7 @@ Control fast_0492 ()
     A = a3;
     SPH = ( a10 >> 8 );
     SPL = ( a10 & 0xFF );
-    return jumpDirect ( 0x0563,fast_0563 );
+    return jumpDirect ( 0x0563,slow_0563,fast_0563 );
 }
 
 Control fast_04A1 ()
@@ -48541,7 +48541,7 @@ Control fast_04A1 ()
         FlagA = ( ( a5 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a4 );
         FlagCY = false;
-        return jumpDirect ( 0x055B,fast_055B );
+        return jumpDirect ( 0x055B,slow_055B,fast_055B );
     }
     else
     {
@@ -48569,7 +48569,7 @@ Control fast_04A1 ()
         FlagA = ( ( a5 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a4 );
         FlagCY = false;
-        return jumpDirect ( 0x1A32,fast_1A32 );
+        return jumpDirect ( 0x1A32,slow_1A32,fast_1A32 );
     }
 }
 
@@ -48695,7 +48695,7 @@ Control fast_04B6 ()
             FlagA = ( ( ( a27 & 0xFF ) >> 4 ) & 0x01 );
             FlagP = e1_parity ( ( a24 & 0xFF ) );
             FlagCY = ( ! ( ( ( a24 >> 8 ) >> 0 ) & 0x01 ) );
-            return jumpDirect ( 0x0550,fast_0550 );
+            return jumpDirect ( 0x0550,slow_0550,fast_0550 );
         }
     }
 }
@@ -48735,7 +48735,7 @@ Control fast_04CA ()
     A = a3;
     SPH = ( a10 >> 8 );
     SPL = ( a10 & 0xFF );
-    return jumpDirect ( 0x0563,fast_0563 );
+    return jumpDirect ( 0x0563,slow_0563,fast_0563 );
 }
 
 Control fast_04D9 ()
@@ -48763,7 +48763,7 @@ Control fast_04D9 ()
         FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a3 & 0xFF ) );
         FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x04E7,fast_04E7 );
+        return jumpDirect ( 0x04E7,slow_04E7,fast_04E7 );
     }
     else
     {
@@ -48781,7 +48781,7 @@ Control fast_04D9 ()
         FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a3 & 0xFF ) );
         FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x04E7,fast_04E7 );
+        return jumpDirect ( 0x04E7,slow_04E7,fast_04E7 );
     }
 }
 
@@ -48814,7 +48814,7 @@ Control fast_04E7 ()
         FlagA = ( ( a5 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a4 );
         FlagCY = false;
-        return jumpDirect ( 0x055B,fast_055B );
+        return jumpDirect ( 0x055B,slow_055B,fast_055B );
     }
     else
     {
@@ -48853,7 +48853,7 @@ Control fast_04E7 ()
         FlagA = ( ( a5 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a4 );
         FlagCY = false;
-        return jumpDirect ( 0x1A32,fast_1A32 );
+        return jumpDirect ( 0x1A32,slow_1A32,fast_1A32 );
     }
 }
 
@@ -48881,7 +48881,7 @@ Control fast_04FC ()
         FlagZ = ( 0 == ( a3 & 0xFF ) );
         FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a3 & 0xFF ) );
-        return jumpDirect ( 0x0508,fast_0508 );
+        return jumpDirect ( 0x0508,slow_0508,fast_0508 );
     }
     else
     {
@@ -48898,7 +48898,7 @@ Control fast_04FC ()
         FlagZ = ( 0 == ( a3 & 0xFF ) );
         FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a3 & 0xFF ) );
-        return jumpDirect ( 0x0508,fast_0508 );
+        return jumpDirect ( 0x0508,slow_0508,fast_0508 );
     }
 }
 
@@ -48954,7 +48954,7 @@ Control fast_050E ()
     L = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x050F,fast_050F );
+    return jumpDirect ( 0x050F,slow_050F,fast_050F );
 }
 
 Control fast_050F ()
@@ -48982,7 +48982,7 @@ Control fast_050F ()
     E = 0x55;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0550,fast_0550 );
+    return jumpDirect ( 0x0550,slow_0550,fast_0550 );
 }
 
 Control fast_0517 ()
@@ -49020,7 +49020,7 @@ Control fast_0517 ()
     A = a3;
     SPH = ( a10 >> 8 );
     SPL = ( a10 & 0xFF );
-    return jumpDirect ( 0x0563,fast_0563 );
+    return jumpDirect ( 0x0563,slow_0563,fast_0563 );
 }
 
 Control fast_0526 ()
@@ -49048,7 +49048,7 @@ Control fast_0526 ()
         FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a3 & 0xFF ) );
         FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x0534,fast_0534 );
+        return jumpDirect ( 0x0534,slow_0534,fast_0534 );
     }
     else
     {
@@ -49066,7 +49066,7 @@ Control fast_0526 ()
         FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a3 & 0xFF ) );
         FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x0534,fast_0534 );
+        return jumpDirect ( 0x0534,slow_0534,fast_0534 );
     }
 }
 
@@ -49099,7 +49099,7 @@ Control fast_0534 ()
         FlagA = ( ( a5 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a4 );
         FlagCY = false;
-        return jumpDirect ( 0x055B,fast_055B );
+        return jumpDirect ( 0x055B,slow_055B,fast_055B );
     }
     else
     {
@@ -49138,7 +49138,7 @@ Control fast_0534 ()
         FlagA = ( ( a5 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a4 );
         FlagCY = false;
-        return jumpDirect ( 0x1A32,fast_1A32 );
+        return jumpDirect ( 0x1A32,slow_1A32,fast_1A32 );
     }
 }
 
@@ -49193,7 +49193,7 @@ Control fast_0550 ()
     B = 0x0B;
     H = 0x20;
     L = 0x73;
-    return jumpDirect ( 0x1A32,fast_1A32 );
+    return jumpDirect ( 0x1A32,slow_1A32,fast_1A32 );
 }
 
 Control fast_055B ()
@@ -49210,7 +49210,7 @@ Control fast_055B ()
     B = 0x0B;
     D = 0x20;
     E = 0x73;
-    return jumpDirect ( 0x1A32,fast_1A32 );
+    return jumpDirect ( 0x1A32,slow_1A32,fast_1A32 );
 }
 
 Control fast_0563 ()
@@ -49260,7 +49260,7 @@ Control fast_0563 ()
         FlagA = ( ( a4 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a3 );
         FlagCY = false;
-        return jumpDirect ( 0x1A06,fast_1A06 );
+        return jumpDirect ( 0x1A06,slow_1A06,fast_1A06 );
     }
     else
     {
@@ -49294,7 +49294,7 @@ Control fast_0563 ()
             FlagA = ( ( ( a16 & 0xFF ) >> 4 ) & 0x01 );
             FlagP = e1_parity ( ( a13 & 0xFF ) );
             FlagCY = ( ! ( ( ( a13 >> 8 ) >> 0 ) & 0x01 ) );
-            return jumpDirect ( 0x05B7,fast_05B7 );
+            return jumpDirect ( 0x05B7,slow_05B7,fast_05B7 );
         }
         else
         {
@@ -49365,7 +49365,7 @@ Control fast_0563 ()
                     FlagA = ( ( a34 >> 3 ) & 0x01 );
                     FlagP = e1_parity ( a33 );
                     FlagCY = false;
-                    return jumpDirect ( 0x0589,fast_0589 );
+                    return jumpDirect ( 0x0589,slow_0589,fast_0589 );
                 }
                 else
                 {
@@ -49425,7 +49425,7 @@ Control fast_0563 ()
                         FlagA = ( ( ( a42 & 0xFF ) >> 4 ) & 0x01 );
                         FlagP = e1_parity ( ( a39 & 0xFF ) );
                         FlagCY = ( ! ( ( ( a39 >> 8 ) >> 0 ) & 0x01 ) );
-                        return jumpDirect ( 0x0589,fast_0589 );
+                        return jumpDirect ( 0x0589,slow_0589,fast_0589 );
                     }
                 }
             }
@@ -49457,7 +49457,7 @@ Control fast_0589 ()
         FlagA = ( ( a5 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a4 );
         FlagCY = false;
-        return jumpDirect ( 0x0596,fast_0596 );
+        return jumpDirect ( 0x0596,slow_0596,fast_0596 );
     }
     else
     {
@@ -49513,7 +49513,7 @@ Control fast_0589 ()
             FlagA = ( ( ( a13 & 0xFF ) >> 4 ) & 0x01 );
             FlagP = e1_parity ( ( a10 & 0xFF ) );
             FlagCY = ( ! ( ( ( a10 >> 8 ) >> 0 ) & 0x01 ) );
-            return jumpDirect ( 0x0596,fast_0596 );
+            return jumpDirect ( 0x0596,slow_0596,fast_0596 );
         }
     }
 }
@@ -49582,7 +49582,7 @@ Control fast_0596 ()
         FlagA = ( ( ( a16 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a13 & 0xFF ) );
         FlagCY = ( ( ( a13 >> 8 ) >> 0 ) & 0x01 );
-        return jumpDirect ( 0x156F,fast_156F );
+        return jumpDirect ( 0x156F,slow_156F,fast_156F );
     }
     else
     {
@@ -49623,7 +49623,7 @@ Control fast_0596 ()
         FlagA = ( ( a10 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a9 );
         FlagCY = false;
-        return jumpDirect ( 0x05A5,fast_05A5 );
+        return jumpDirect ( 0x05A5,slow_05A5,fast_05A5 );
     }
 }
 
@@ -49675,7 +49675,7 @@ Control fast_05A5 ()
     FlagZ = ( 0 == ( a8 & 0xFF ) );
     FlagA = ( ( ( a11 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a8 & 0xFF ) );
-    return jumpDirect ( 0x0637,fast_0637 );
+    return jumpDirect ( 0x0637,slow_0637,fast_0637 );
 }
 
 Control fast_05A8 ()
@@ -49714,7 +49714,7 @@ Control fast_05A8 ()
         advance ( 17 );
         SPH = ( a14 >> 8 );
         SPL = ( a14 & 0xFF );
-        return jumpDirect ( 0x017A,fast_017A );
+        return jumpDirect ( 0x017A,slow_017A,fast_017A );
     }
 }
 
@@ -49767,7 +49767,7 @@ Control fast_05AC ()
     FlagA = ( ( ( a13 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a10 & 0xFF ) );
     FlagCY = ( ! ( ( ( a10 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x05B7,fast_05B7 );
+    return jumpDirect ( 0x05B7,slow_05B7,fast_05B7 );
 }
 
 Control fast_05B7 ()
@@ -49945,7 +49945,7 @@ Control fast_05C7 ()
                     FlagA = ( ( a32 >> 3 ) & 0x01 );
                     FlagP = e1_parity ( a31 );
                     FlagCY = false;
-                    return jumpDirect ( 0x0675,fast_0675 );
+                    return jumpDirect ( 0x0675,slow_0675,fast_0675 );
                 }
             }
             else
@@ -49973,7 +49973,7 @@ Control fast_05C7 ()
                 FlagA = ( ( ( a28 & 0xFF ) >> 4 ) & 0x01 );
                 FlagP = e1_parity ( ( a25 & 0xFF ) );
                 FlagCY = ( ! ( ( ( a25 >> 8 ) >> 0 ) & 0x01 ) );
-                return jumpDirect ( 0x0675,fast_0675 );
+                return jumpDirect ( 0x0675,slow_0675,fast_0675 );
             }
         }
         else
@@ -50020,7 +50020,7 @@ Control fast_05C7 ()
             FlagA = ( ( ( a56 & 0xFF ) >> 4 ) & 0x01 );
             FlagP = e1_parity ( ( a53 & 0xFF ) );
             FlagCY = false;
-            return jumpDirect ( 0x0675,fast_0675 );
+            return jumpDirect ( 0x0675,slow_0675,fast_0675 );
         }
     }
 }
@@ -50064,7 +50064,7 @@ Control fast_05D4 ()
         FlagA = ( ( ( a12 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a9 & 0xFF ) );
         FlagCY = ( ! ( ( ( a9 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x05E2,fast_05E2 );
+        return jumpDirect ( 0x05E2,slow_05E2,fast_05E2 );
     }
     else
     {
@@ -50085,7 +50085,7 @@ Control fast_05D4 ()
         FlagA = ( ( ( a17 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a14 & 0xFF ) );
         FlagCY = ( ! ( ( ( a14 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x05E2,fast_05E2 );
+        return jumpDirect ( 0x05E2,slow_05E2,fast_05E2 );
     }
 }
 
@@ -50143,7 +50143,7 @@ Control fast_05E2 ()
     FlagA = ( ( ( a10 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a7 & 0xFF ) );
     FlagCY = ( ( ( a7 >> 8 ) >> 0 ) & 0x01 );
-    return jumpDirect ( 0x066C,fast_066C );
+    return jumpDirect ( 0x066C,slow_066C,fast_066C );
 }
 
 Control fast_05F3 ()
@@ -50171,7 +50171,7 @@ Control fast_05F3 ()
         FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a3 & 0xFF ) );
         FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x0612,fast_0612 );
+        return jumpDirect ( 0x0612,slow_0612,fast_0612 );
     }
     else
     {
@@ -50236,7 +50236,7 @@ Control fast_05F3 ()
                 FlagA = ( ( ( a25 & 0xFF ) >> 4 ) & 0x01 );
                 FlagP = e1_parity ( ( a22 & 0xFF ) );
                 FlagCY = ( ! ( ( ( a22 >> 8 ) >> 0 ) & 0x01 ) );
-                return jumpDirect ( 0x0612,fast_0612 );
+                return jumpDirect ( 0x0612,slow_0612,fast_0612 );
             }
             else
             {
@@ -50263,7 +50263,7 @@ Control fast_05F3 ()
                     FlagA = ( ( ( a30 & 0xFF ) >> 4 ) & 0x01 );
                     FlagP = e1_parity ( ( a27 & 0xFF ) );
                     FlagCY = ( ! ( ( ( a27 >> 8 ) >> 0 ) & 0x01 ) );
-                    return jumpDirect ( 0x0612,fast_0612 );
+                    return jumpDirect ( 0x0612,slow_0612,fast_0612 );
                 }
                 else
                 {
@@ -50288,7 +50288,7 @@ Control fast_05F3 ()
                     FlagA = ( ( ( a36 & 0xFF ) >> 4 ) & 0x01 );
                     FlagP = e1_parity ( ( a33 & 0xFF ) );
                     FlagCY = ( ! ( ( ( a33 >> 8 ) >> 0 ) & 0x01 ) );
-                    return jumpDirect ( 0x0612,fast_0612 );
+                    return jumpDirect ( 0x0612,slow_0612,fast_0612 );
                 }
             }
         }
@@ -50358,7 +50358,7 @@ Control fast_0624 ()
         FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a3 & 0xFF ) );
         FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x05A5,fast_05A5 );
+        return jumpDirect ( 0x05A5,slow_05A5,fast_05A5 );
     }
     else
     {
@@ -50376,7 +50376,7 @@ Control fast_0624 ()
         FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a3 & 0xFF ) );
         FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x05A5,fast_05A5 );
+        return jumpDirect ( 0x05A5,slow_05A5,fast_05A5 );
     }
 }
 
@@ -50461,7 +50461,7 @@ Control fast_0637 ()
             FlagA = ( ( ( a27 & 0xFF ) >> 4 ) & 0x01 );
             FlagP = e1_parity ( ( a24 & 0xFF ) );
             FlagCY = ( ( ( a18 >> 8 ) >> 0 ) & 0x01 );
-            return jumpDirect ( 0x0637,fast_0637 );
+            return jumpDirect ( 0x0637,slow_0637,fast_0637 );
         }
         else
         {
@@ -50561,7 +50561,7 @@ Control fast_0651 ()
     FlagZ = ( 0 == ( a17 & 0xFF ) );
     FlagA = ( ( ( a20 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a17 & 0xFF ) );
-    return jumpDirect ( 0x066C,fast_066C );
+    return jumpDirect ( 0x066C,slow_066C,fast_066C );
 }
 
 Control fast_066C ()
@@ -50585,7 +50585,7 @@ Control fast_066C ()
     L = 0x79;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A3B,fast_1A3B );
+    return jumpDirect ( 0x1A3B,slow_1A3B,fast_1A3B );
 }
 
 Control fast_0672 ()
@@ -50593,7 +50593,7 @@ Control fast_0672 ()
     // #at: 0672
     instruction2 ( 0x06,0x75,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x14,0x91 );
     advance ( 10 );
-    return jumpDirect ( 0x1491,fast_1491 );
+    return jumpDirect ( 0x1491,slow_1491,fast_1491 );
 }
 
 Control fast_0675 ()
@@ -50617,7 +50617,7 @@ Control fast_0675 ()
     L = 0x79;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A3B,fast_1A3B );
+    return jumpDirect ( 0x1A3B,slow_1A3B,fast_1A3B );
 }
 
 Control fast_067B ()
@@ -50625,7 +50625,7 @@ Control fast_067B ()
     // #at: 067B
     instruction2 ( 0x06,0x7E,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x14,0x52 );
     advance ( 10 );
-    return jumpDirect ( 0x1452,fast_1452 );
+    return jumpDirect ( 0x1452,slow_1452,fast_1452 );
 }
 
 Control fast_0682 ()
@@ -50710,7 +50710,7 @@ Control fast_0682 ()
             FlagA = ( ( a27 >> 3 ) & 0x01 );
             FlagP = e1_parity ( a26 );
             FlagCY = false;
-            return jumpDirect ( 0x050F,fast_050F );
+            return jumpDirect ( 0x050F,slow_050F,fast_050F );
         }
         else
         {
@@ -50741,7 +50741,7 @@ Control fast_0682 ()
                 FlagA = ( ( a32 >> 3 ) & 0x01 );
                 FlagP = e1_parity ( a31 );
                 FlagCY = false;
-                return jumpDirect ( 0x050F,fast_050F );
+                return jumpDirect ( 0x050F,slow_050F,fast_050F );
             }
             else
             {
@@ -50775,7 +50775,7 @@ Control fast_0682 ()
                     FlagA = ( ( a37 >> 3 ) & 0x01 );
                     FlagP = e1_parity ( a36 );
                     FlagCY = false;
-                    return jumpDirect ( 0x06AB,fast_06AB );
+                    return jumpDirect ( 0x06AB,slow_06AB,fast_06AB );
                 }
                 else
                 {
@@ -50807,7 +50807,7 @@ Control fast_0682 ()
                         FlagA = ( ( ( a43 & 0xFF ) >> 4 ) & 0x01 );
                         FlagP = e1_parity ( ( a40 & 0xFF ) );
                         FlagCY = ( ! ( ( ( a40 >> 8 ) >> 0 ) & 0x01 ) );
-                        return jumpDirect ( 0x050F,fast_050F );
+                        return jumpDirect ( 0x050F,slow_050F,fast_050F );
                     }
                     else
                     {
@@ -50838,7 +50838,7 @@ Control fast_0682 ()
                         FlagA = ( ( ( a43 & 0xFF ) >> 4 ) & 0x01 );
                         FlagP = e1_parity ( ( a40 & 0xFF ) );
                         FlagCY = ( ! ( ( ( a40 >> 8 ) >> 0 ) & 0x01 ) );
-                        return jumpDirect ( 0x073C,fast_073C );
+                        return jumpDirect ( 0x073C,slow_073C,fast_073C );
                     }
                 }
             }
@@ -50867,7 +50867,7 @@ Control fast_06AB ()
     E = 0x8A;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A06,fast_1A06 );
+    return jumpDirect ( 0x1A06,slow_1A06,fast_1A06 );
 }
 
 Control fast_06B1 ()
@@ -50937,7 +50937,7 @@ Control fast_06B1 ()
             FlagA = ( ( a13 >> 3 ) & 0x01 );
             FlagP = e1_parity ( a12 );
             FlagCY = false;
-            return jumpDirect ( 0x19DC,fast_19DC );
+            return jumpDirect ( 0x19DC,slow_19DC,fast_19DC );
         }
         else
         {
@@ -50991,7 +50991,7 @@ Control fast_06B1 ()
             FlagA = ( ( ( a26 & 0xFF ) >> 4 ) & 0x01 );
             FlagP = e1_parity ( ( a23 & 0xFF ) );
             FlagCY = ( ( ( a23 >> 8 ) >> 0 ) & 0x01 );
-            return jumpDirect ( 0x073C,fast_073C );
+            return jumpDirect ( 0x073C,slow_073C,fast_073C );
         }
     }
 }
@@ -51026,7 +51026,7 @@ Control fast_06C7 ()
         FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a3 & 0xFF ) );
         FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x06F9,fast_06F9 );
+        return jumpDirect ( 0x06F9,slow_06F9,fast_06F9 );
     }
     else
     {
@@ -51052,7 +51052,7 @@ Control fast_06C7 ()
             FlagA = ( ( ( a11 & 0xFF ) >> 4 ) & 0x01 );
             FlagP = e1_parity ( ( a8 & 0xFF ) );
             FlagCY = ( ! ( ( ( a8 >> 8 ) >> 0 ) & 0x01 ) );
-            return jumpDirect ( 0x06F9,fast_06F9 );
+            return jumpDirect ( 0x06F9,slow_06F9,fast_06F9 );
         }
         else
         {
@@ -51166,7 +51166,7 @@ Control fast_06DB ()
         FlagA = false;
         FlagP = e1_parity ( a23 );
         FlagCY = false;
-        return jumpDirect ( 0x1770,fast_1770 );
+        return jumpDirect ( 0x1770,slow_1770,fast_1770 );
     }
     else
     {
@@ -51223,7 +51223,7 @@ Control fast_06DB ()
             FlagA = ( ( ( a35 & 0xFF ) >> 4 ) & 0x01 );
             FlagP = e1_parity ( ( a32 & 0xFF ) );
             FlagCY = ( ! ( ( ( a32 >> 8 ) >> 0 ) & 0x01 ) );
-            return jumpDirect ( 0x071D,fast_071D );
+            return jumpDirect ( 0x071D,slow_071D,fast_071D );
         }
         else
         {
@@ -51317,7 +51317,7 @@ Control fast_06DB ()
                 FlagA = ( ( a60 >> 3 ) & 0x01 );
                 FlagP = e1_parity ( a59 );
                 FlagCY = false;
-                return jumpDirect ( 0x06F9,fast_06F9 );
+                return jumpDirect ( 0x06F9,slow_06F9,fast_06F9 );
             }
         }
     }
@@ -51339,7 +51339,7 @@ Control fast_06F9 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0742,fast_0742 );
+    return jumpDirect ( 0x0742,slow_0742,fast_0742 );
 }
 
 Control fast_06FC ()
@@ -51358,7 +51358,7 @@ Control fast_06FC ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x14CB,fast_14CB );
+    return jumpDirect ( 0x14CB,slow_14CB,fast_14CB );
 }
 
 Control fast_06FF ()
@@ -51394,7 +51394,7 @@ Control fast_06FF ()
     L = 0x83;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A32,fast_1A32 );
+    return jumpDirect ( 0x1A32,slow_1A32,fast_1A32 );
 }
 
 Control fast_0707 ()
@@ -51406,7 +51406,7 @@ Control fast_0707 ()
     instruction2 ( 0x07,0x0C,A,0xFE,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x19,0xDC );
     advance ( 10 );
     B = 0xFE;
-    return jumpDirect ( 0x19DC,fast_19DC );
+    return jumpDirect ( 0x19DC,slow_19DC,fast_19DC );
 }
 
 Control fast_071D ()
@@ -51437,7 +51437,7 @@ Control fast_071D ()
         FlagA = ( ( ( a9 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a6 & 0xFF ) );
         FlagCY = ( ! ( ( ( a6 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x0728,fast_0728 );
+        return jumpDirect ( 0x0728,slow_0728,fast_0728 );
     }
     else
     {
@@ -51478,7 +51478,7 @@ Control fast_071D ()
             FlagA = ( ( ( a20 & 0xFF ) >> 4 ) & 0x01 );
             FlagP = e1_parity ( ( a17 & 0xFF ) );
             FlagCY = ( ! ( ( ( a6 >> 8 ) >> 0 ) & 0x01 ) );
-            return jumpDirect ( 0x071D,fast_071D );
+            return jumpDirect ( 0x071D,slow_071D,fast_071D );
         }
         else
         {
@@ -51494,7 +51494,7 @@ Control fast_071D ()
             FlagA = ( ( ( a20 & 0xFF ) >> 4 ) & 0x01 );
             FlagP = e1_parity ( ( a17 & 0xFF ) );
             FlagCY = ( ! ( ( ( a6 >> 8 ) >> 0 ) & 0x01 ) );
-            return jumpDirect ( 0x0728,fast_0728 );
+            return jumpDirect ( 0x0728,slow_0728,fast_0728 );
         }
     }
 }
@@ -51574,7 +51574,7 @@ Control fast_0728 ()
     SPH = ( a31 >> 8 );
     SPL = ( a31 & 0xFF );
     FlagCY = ( ( a23 >> 16 ) & 0x01 );
-    return jumpDirect ( 0x0742,fast_0742 );
+    return jumpDirect ( 0x0742,slow_0742,fast_0742 );
 }
 
 Control fast_0739 ()
@@ -51586,7 +51586,7 @@ Control fast_0739 ()
     instruction1 ( 0x08,0xF3,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   C,%02X",0x03 );
     advance ( 7 );
     C = 0x03;
-    return jumpDirect ( 0x08F3,fast_08F3 );
+    return jumpDirect ( 0x08F3,slow_08F3,fast_08F3 );
 }
 
 Control fast_073C ()
@@ -51605,7 +51605,7 @@ Control fast_073C ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0742,fast_0742 );
+    return jumpDirect ( 0x0742,slow_0742,fast_0742 );
 }
 
 Control fast_073F ()
@@ -51613,7 +51613,7 @@ Control fast_073F ()
     // #at: 073F
     instruction2 ( 0x07,0x42,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x14,0x39 );
     advance ( 10 );
-    return jumpDirect ( 0x1439,fast_1439 );
+    return jumpDirect ( 0x1439,slow_1439,fast_1439 );
 }
 
 Control fast_0742 ()
@@ -51637,7 +51637,7 @@ Control fast_0742 ()
     L = 0x87;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A3B,fast_1A3B );
+    return jumpDirect ( 0x1A3B,slow_1A3B,fast_1A3B );
 }
 
 Control fast_0748 ()
@@ -51645,7 +51645,7 @@ Control fast_0748 ()
     // #at: 0748
     instruction2 ( 0x07,0x4B,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x1A,0x47 );
     advance ( 10 );
-    return jumpDirect ( 0x1A47,fast_1A47 );
+    return jumpDirect ( 0x1A47,slow_1A47,fast_1A47 );
 }
 
 Control fast_0756 ()
@@ -51663,7 +51663,7 @@ Control fast_0756 ()
     advance ( 10 );
     H = 0x1D;
     L = 0x7C;
-    return jumpDirect ( 0x073C,fast_073C );
+    return jumpDirect ( 0x073C,slow_073C,fast_073C );
 }
 
 Control fast_0771 ()
@@ -51682,7 +51682,7 @@ Control fast_0771 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x09D6,fast_09D6 );
+    return jumpDirect ( 0x09D6,slow_09D6,fast_09D6 );
 }
 
 Control fast_0774 ()
@@ -51715,7 +51715,7 @@ Control fast_0774 ()
     L = 0x13;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x08F3,fast_08F3 );
+    return jumpDirect ( 0x08F3,slow_08F3,fast_08F3 );
 }
 
 Control fast_077F ()
@@ -51770,7 +51770,7 @@ Control fast_077F ()
         FlagZ = ( 0 == ( a3 & 0xFF ) );
         FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a3 & 0xFF ) );
-        return jumpDirect ( 0x08F3,fast_08F3 );
+        return jumpDirect ( 0x08F3,slow_08F3,fast_08F3 );
     }
     else
     {
@@ -51802,7 +51802,7 @@ Control fast_077F ()
         FlagZ = ( 0 == ( a3 & 0xFF ) );
         FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a3 & 0xFF ) );
-        return jumpDirect ( 0x08F3,fast_08F3 );
+        return jumpDirect ( 0x08F3,slow_08F3,fast_08F3 );
     }
 }
 
@@ -51828,7 +51828,7 @@ Control fast_0791 ()
         FlagA = ( ( a3 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a2 );
         FlagCY = false;
-        return jumpDirect ( 0x077F,fast_077F );
+        return jumpDirect ( 0x077F,slow_077F,fast_077F );
     }
     else
     {
@@ -51839,7 +51839,7 @@ Control fast_0791 ()
         FlagA = ( ( a3 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a2 );
         FlagCY = false;
-        return jumpDirect ( 0x0798,fast_0798 );
+        return jumpDirect ( 0x0798,slow_0798,fast_0798 );
     }
 }
 
@@ -51861,7 +51861,7 @@ Control fast_0798 ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x079B,fast_079B );
+    return jumpDirect ( 0x079B,slow_079B,fast_079B );
 }
 
 Control fast_079B ()
@@ -51919,7 +51919,7 @@ Control fast_079B ()
     FlagA = ( ( ( ( ( ( ( ( a10 >> 1 ) & 0x01 ) || ( ( a10 >> 2 ) & 0x01 ) ) && ( ( a10 >> 3 ) & 0x01 ) ) || ( ( ( a8 & 0xFF ) >> 4 ) & 0x01 ) ) ? ( a11 & 0xFF ) : a10 ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( a15 );
     FlagCY = ( ( ( ( ( ( ( ( ( ( a12 & 0xFF ) >> 1 ) & 0x01 ) || ( ( ( a12 & 0xFF ) >> 2 ) & 0x01 ) ) && ( ( ( a12 & 0xFF ) >> 3 ) & 0x01 ) ) || ( ( ( a5 >> 8 ) >> 0 ) & 0x01 ) ) ? ( a13 & 0xFF ) : ( a12 & 0xFF ) ) >> 4 ) & 0x01 ) || ( ( ( a5 >> 8 ) >> 0 ) & 0x01 ) );
-    return jumpDirect ( 0x1947,fast_1947 );
+    return jumpDirect ( 0x1947,slow_1947,fast_1947 );
 }
 
 Control fast_07A9 ()
@@ -51953,7 +51953,7 @@ Control fast_07A9 ()
     L = 0x00;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1925,fast_1925 );
+    return jumpDirect ( 0x1925,slow_1925,fast_1925 );
 }
 
 Control fast_07B5 ()
@@ -51972,7 +51972,7 @@ Control fast_07B5 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x192B,fast_192B );
+    return jumpDirect ( 0x192B,slow_192B,fast_192B );
 }
 
 Control fast_07B8 ()
@@ -51991,7 +51991,7 @@ Control fast_07B8 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x19D7,fast_19D7 );
+    return jumpDirect ( 0x19D7,slow_19D7,fast_19D7 );
 }
 
 Control fast_07BB ()
@@ -52033,7 +52033,7 @@ Control fast_07BB ()
     L = 0x01;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1956,fast_1956 );
+    return jumpDirect ( 0x1956,slow_1956,fast_1956 );
 }
 
 Control fast_07CB ()
@@ -52052,7 +52052,7 @@ Control fast_07CB ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x01EF,fast_01EF );
+    return jumpDirect ( 0x01EF,slow_01EF,fast_01EF );
 }
 
 Control fast_07CE ()
@@ -52071,7 +52071,7 @@ Control fast_07CE ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x01F5,fast_01F5 );
+    return jumpDirect ( 0x01F5,slow_01F5,fast_01F5 );
 }
 
 Control fast_07D1 ()
@@ -52090,7 +52090,7 @@ Control fast_07D1 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x08D1,fast_08D1 );
+    return jumpDirect ( 0x08D1,slow_08D1,fast_08D1 );
 }
 
 Control fast_07D4 ()
@@ -52188,7 +52188,7 @@ Control fast_07D4 ()
         FlagA = ( ( a13 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a12 );
         FlagCY = false;
-        return jumpDirect ( 0x14CB,fast_14CB );
+        return jumpDirect ( 0x14CB,slow_14CB,fast_14CB );
     }
 }
 
@@ -52230,7 +52230,7 @@ Control fast_07DD ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x01C0,fast_01C0 );
+    return jumpDirect ( 0x01C0,slow_01C0,fast_01C0 );
 }
 
 Control fast_07E7 ()
@@ -52249,7 +52249,7 @@ Control fast_07E7 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1904,fast_1904 );
+    return jumpDirect ( 0x1904,slow_1904,fast_1904 );
 }
 
 Control fast_07EA ()
@@ -52283,7 +52283,7 @@ Control fast_07EA ()
     L = 0x78;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x01E4,fast_01E4 );
+    return jumpDirect ( 0x01E4,slow_01E4,fast_01E4 );
 }
 
 Control fast_07F6 ()
@@ -52302,7 +52302,7 @@ Control fast_07F6 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A7F,fast_1A7F );
+    return jumpDirect ( 0x1A7F,slow_1A7F,fast_1A7F );
 }
 
 Control fast_07F9 ()
@@ -52347,7 +52347,7 @@ Control fast_07F9 ()
     L = 0x11;
     SPH = ( a12 >> 8 );
     SPL = ( a12 & 0xFF );
-    return jumpDirect ( 0x08F3,fast_08F3 );
+    return jumpDirect ( 0x08F3,slow_08F3,fast_08F3 );
 }
 
 Control fast_07FC ()
@@ -52366,7 +52366,7 @@ Control fast_07FC ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x09D6,fast_09D6 );
+    return jumpDirect ( 0x09D6,slow_09D6,fast_09D6 );
 }
 
 Control fast_07FF ()
@@ -52391,7 +52391,7 @@ Control fast_07FF ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0804,fast_0804 );
+    return jumpDirect ( 0x0804,slow_0804,fast_0804 );
 }
 
 Control fast_0804 ()
@@ -52410,7 +52410,7 @@ Control fast_0804 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x01CF,fast_01CF );
+    return jumpDirect ( 0x01CF,slow_01CF,fast_01CF );
 }
 
 Control fast_0807 ()
@@ -52444,7 +52444,7 @@ Control fast_0807 ()
         SPH = ( a8 >> 8 );
         SPL = ( a8 & 0xFF );
         FlagCY = ( ( a2 >> 0 ) & 0x01 );
-        return jumpDirect ( 0x021A,fast_021A );
+        return jumpDirect ( 0x021A,slow_021A,fast_021A );
     }
     else
     {
@@ -52475,7 +52475,7 @@ Control fast_0807 ()
         FlagA = false;
         FlagP = e1_parity ( a17 );
         FlagCY = false;
-        return jumpDirect ( 0x0214,fast_0214 );
+        return jumpDirect ( 0x0214,slow_0214,fast_0214 );
     }
 }
 
@@ -52495,7 +52495,7 @@ Control fast_0811 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x01CF,fast_01CF );
+    return jumpDirect ( 0x01CF,slow_01CF,fast_01CF );
 }
 
 Control fast_0814 ()
@@ -52526,7 +52526,7 @@ Control fast_0814 ()
     advance ( 17 );
     SPH = ( a12 >> 8 );
     SPL = ( a12 & 0xFF );
-    return jumpDirect ( 0x0886,fast_0886 );
+    return jumpDirect ( 0x0886,slow_0886,fast_0886 );
 }
 
 Control fast_0817 ()
@@ -52545,7 +52545,7 @@ Control fast_0817 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x19D1,fast_19D1 );
+    return jumpDirect ( 0x19D1,slow_19D1,fast_19D1 );
 }
 
 Control fast_081A ()
@@ -52568,7 +52568,7 @@ Control fast_081A ()
     B = 0x20;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x18FA,fast_18FA );
+    return jumpDirect ( 0x18FA,slow_18FA,fast_18FA );
 }
 
 Control fast_081F ()
@@ -52587,7 +52587,7 @@ Control fast_081F ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1618,fast_1618 );
+    return jumpDirect ( 0x1618,slow_1618,fast_1618 );
 }
 
 Control fast_0822 ()
@@ -52606,7 +52606,7 @@ Control fast_0822 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x190A,fast_190A );
+    return jumpDirect ( 0x190A,slow_190A,fast_190A );
 }
 
 Control fast_0825 ()
@@ -52637,7 +52637,7 @@ Control fast_0825 ()
     advance ( 17 );
     SPH = ( a12 >> 8 );
     SPL = ( a12 & 0xFF );
-    return jumpDirect ( 0x1611,fast_1611 );
+    return jumpDirect ( 0x1611,slow_1611,fast_1611 );
 }
 
 Control fast_0828 ()
@@ -52668,7 +52668,7 @@ Control fast_0828 ()
     advance ( 17 );
     SPH = ( a12 >> 8 );
     SPL = ( a12 & 0xFF );
-    return jumpDirect ( 0x09CA,fast_09CA );
+    return jumpDirect ( 0x09CA,slow_09CA,fast_09CA );
 }
 
 Control fast_082B ()
@@ -52721,7 +52721,7 @@ Control fast_082B ()
         FlagA = ( ( a5 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a4 );
         FlagCY = false;
-        return jumpDirect ( 0x0A59,fast_0A59 );
+        return jumpDirect ( 0x0A59,slow_0A59,fast_0A59 );
     }
     else
     {
@@ -52758,7 +52758,7 @@ Control fast_082B ()
         FlagA = ( ( a5 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a4 );
         FlagCY = false;
-        return jumpDirect ( 0x09CA,fast_09CA );
+        return jumpDirect ( 0x09CA,slow_09CA,fast_09CA );
     }
 }
 
@@ -52790,7 +52790,7 @@ Control fast_0835 ()
     advance ( 17 );
     SPH = ( a12 >> 8 );
     SPL = ( a12 & 0xFF );
-    return jumpDirect ( 0x1910,fast_1910 );
+    return jumpDirect ( 0x1910,slow_1910,fast_1910 );
 }
 
 Control fast_0838 ()
@@ -52921,7 +52921,7 @@ Control fast_083B ()
         FlagA = ( ( ( a12 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a9 & 0xFF ) );
         FlagCY = ( ! ( ( ( a9 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x18FA,fast_18FA );
+        return jumpDirect ( 0x18FA,slow_18FA,fast_18FA );
     }
     else
     {
@@ -52941,7 +52941,7 @@ Control fast_083B ()
         FlagA = ( ( ( a12 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a9 & 0xFF ) );
         FlagCY = ( ! ( ( ( a9 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x19DC,fast_19DC );
+        return jumpDirect ( 0x19DC,slow_19DC,fast_19DC );
     }
 }
 
@@ -52961,7 +52961,7 @@ Control fast_083E ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0A59,fast_0A59 );
+    return jumpDirect ( 0x0A59,slow_0A59,fast_0A59 );
 }
 
 Control fast_0841 ()
@@ -52971,7 +52971,7 @@ Control fast_0841 ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0849,fast_0849 );
+        return jumpDirect ( 0x0849,slow_0849,fast_0849 );
     }
     else
     {
@@ -52994,7 +52994,7 @@ Control fast_0841 ()
         B = 0x04;
         SPH = ( a6 >> 8 );
         SPL = ( a6 & 0xFF );
-        return jumpDirect ( 0x18FA,fast_18FA );
+        return jumpDirect ( 0x18FA,slow_18FA,fast_18FA );
     }
 }
 
@@ -53036,7 +53036,7 @@ Control fast_0849 ()
         FlagA = ( ( a11 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a10 );
         FlagCY = false;
-        return jumpDirect ( 0x17AA,fast_17AA );
+        return jumpDirect ( 0x17AA,slow_17AA,fast_17AA );
     }
     else
     {
@@ -53063,7 +53063,7 @@ Control fast_0849 ()
         FlagA = ( ( a11 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a10 );
         FlagCY = false;
-        return jumpDirect ( 0x1785,fast_1785 );
+        return jumpDirect ( 0x1785,slow_1785,fast_1785 );
     }
 }
 
@@ -53115,7 +53115,7 @@ Control fast_084C ()
         FlagA = ( ( a12 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a11 );
         FlagCY = false;
-        return jumpDirect ( 0x0707,fast_0707 );
+        return jumpDirect ( 0x0707,slow_0707,fast_0707 );
     }
     else
     {
@@ -53179,7 +53179,7 @@ Control fast_084C ()
             FlagA = ( ( a17 >> 3 ) & 0x01 );
             FlagP = e1_parity ( a16 );
             FlagCY = false;
-            return jumpDirect ( 0x18FA,fast_18FA );
+            return jumpDirect ( 0x18FA,slow_18FA,fast_18FA );
         }
     }
 }
@@ -53189,7 +53189,7 @@ Control fast_0851 ()
     // #at: 0851
     instruction2 ( 0x08,0x54,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x08,0x1F );
     advance ( 10 );
-    return jumpDirect ( 0x081F,fast_081F );
+    return jumpDirect ( 0x081F,slow_081F,fast_081F );
 }
 
 Control fast_085D ()
@@ -53222,7 +53222,7 @@ Control fast_085D ()
         A = 0x01;
         B = 0x98;
         FlagCY = ( ( a2 >> 0 ) & 0x01 );
-        return jumpDirect ( 0x079B,fast_079B );
+        return jumpDirect ( 0x079B,slow_079B,fast_079B );
     }
     else
     {
@@ -53239,7 +53239,7 @@ Control fast_085D ()
             A = e8_update_bit ( ( a3 >> 0x01 ),7,( ( a3 >> 0 ) & 0x01 ) );
             B = 0x98;
             FlagCY = ( ( a3 >> 0 ) & 0x01 );
-            return jumpDirect ( 0x0798,fast_0798 );
+            return jumpDirect ( 0x0798,slow_0798,fast_0798 );
         }
         else
         {
@@ -53250,7 +53250,7 @@ Control fast_085D ()
             A = e8_update_bit ( ( a3 >> 0x01 ),7,( ( a3 >> 0 ) & 0x01 ) );
             B = 0x98;
             FlagCY = ( ( a3 >> 0 ) & 0x01 );
-            return jumpDirect ( 0x077F,fast_077F );
+            return jumpDirect ( 0x077F,slow_077F,fast_077F );
         }
     }
 }
@@ -53260,7 +53260,7 @@ Control fast_0875 ()
     // #at: 0875
     instruction2 ( 0x08,0x78,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x08,0x14 );
     advance ( 10 );
-    return jumpDirect ( 0x0814,fast_0814 );
+    return jumpDirect ( 0x0814,slow_0814,fast_0814 );
 }
 
 Control fast_0886 ()
@@ -53331,7 +53331,7 @@ Control fast_0898 ()
         SPH = ( a8 >> 8 );
         SPL = ( a8 & 0xFF );
         FlagCY = ( ( a2 >> 0 ) & 0x01 );
-        return jumpDirect ( 0x08FF,fast_08FF );
+        return jumpDirect ( 0x08FF,slow_08FF,fast_08FF );
     }
     else
     {
@@ -53340,7 +53340,7 @@ Control fast_0898 ()
         H = 0x37;
         L = 0x11;
         FlagCY = ( ( a2 >> 0 ) & 0x01 );
-        return jumpDirect ( 0x08A4,fast_08A4 );
+        return jumpDirect ( 0x08A4,slow_08A4,fast_08A4 );
     }
 }
 
@@ -53354,7 +53354,7 @@ Control fast_08A4 ()
     mem_write ( 0x20C0,0xB0 );
     advance ( 13 );
     A = 0xB0;
-    return jumpDirect ( 0x08A9,fast_08A9 );
+    return jumpDirect ( 0x08A9,slow_08A9,fast_08A9 );
 }
 
 Control fast_08A9 ()
@@ -53435,7 +53435,7 @@ Control fast_08A9 ()
                 FlagA = ( ( a16 >> 3 ) & 0x01 );
                 FlagP = e1_parity ( a15 );
                 FlagCY = ( ( a18 >> 0 ) & 0x01 );
-                return jumpDirect ( 0x08CB,fast_08CB );
+                return jumpDirect ( 0x08CB,slow_08CB,fast_08CB );
             }
             else
             {
@@ -53452,7 +53452,7 @@ Control fast_08A9 ()
                 FlagA = ( ( a16 >> 3 ) & 0x01 );
                 FlagP = e1_parity ( a15 );
                 FlagCY = ( ( a18 >> 0 ) & 0x01 );
-                return jumpDirect ( 0x08CB,fast_08CB );
+                return jumpDirect ( 0x08CB,slow_08CB,fast_08CB );
             }
         }
         else
@@ -53478,7 +53478,7 @@ Control fast_08A9 ()
             FlagA = ( ( a16 >> 3 ) & 0x01 );
             FlagP = e1_parity ( a15 );
             FlagCY = false;
-            return jumpDirect ( 0x09CA,fast_09CA );
+            return jumpDirect ( 0x09CA,slow_09CA,fast_09CA );
         }
     }
 }
@@ -53499,7 +53499,7 @@ Control fast_08B6 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1931,fast_1931 );
+    return jumpDirect ( 0x1931,slow_1931,fast_1931 );
 }
 
 Control fast_08B9 ()
@@ -53507,7 +53507,7 @@ Control fast_08B9 ()
     // #at: 08B9
     instruction2 ( 0x08,0xBC,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x08,0xA9 );
     advance ( 10 );
-    return jumpDirect ( 0x08A9,fast_08A9 );
+    return jumpDirect ( 0x08A9,slow_08A9,fast_08A9 );
 }
 
 Control fast_08CB ()
@@ -53526,7 +53526,7 @@ Control fast_08CB ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x14CB,fast_14CB );
+    return jumpDirect ( 0x14CB,slow_14CB,fast_14CB );
 }
 
 Control fast_08CE ()
@@ -53534,7 +53534,7 @@ Control fast_08CE ()
     // #at: 08CE
     instruction2 ( 0x08,0xD1,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x08,0xA9 );
     advance ( 10 );
-    return jumpDirect ( 0x08A9,fast_08A9 );
+    return jumpDirect ( 0x08A9,slow_08A9,fast_08A9 );
 }
 
 Control fast_08D1 ()
@@ -53614,7 +53614,7 @@ Control fast_08F3 ()
     A = a3;
     SPH = ( a17 >> 8 );
     SPL = ( a17 & 0xFF );
-    return jumpDirect ( 0x08FF,fast_08FF );
+    return jumpDirect ( 0x08FF,slow_08FF,fast_08FF );
 }
 
 Control fast_08F8 ()
@@ -53658,7 +53658,7 @@ Control fast_08F8 ()
         FlagZ = ( 0 == ( a13 & 0xFF ) );
         FlagA = ( ( ( a16 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a13 & 0xFF ) );
-        return jumpDirect ( 0x08F3,fast_08F3 );
+        return jumpDirect ( 0x08F3,slow_08F3,fast_08F3 );
     }
     else
     {
@@ -53775,7 +53775,7 @@ Control fast_08FF ()
     SPH = ( a34 >> 8 );
     SPL = ( a34 & 0xFF );
     FlagCY = ( ( a25 >> 16 ) & 0x01 );
-    return jumpDirect ( 0x1439,fast_1439 );
+    return jumpDirect ( 0x1439,slow_1439,fast_1439 );
 }
 
 Control fast_0929 ()
@@ -53827,7 +53827,7 @@ Control fast_092E ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1611,fast_1611 );
+    return jumpDirect ( 0x1611,slow_1611,fast_1611 );
 }
 
 Control fast_0931 ()
@@ -53939,7 +53939,7 @@ Control fast_0938 ()
             FlagA = ( ( a24 >> 3 ) & 0x01 );
             FlagP = e1_parity ( a23 );
             FlagCY = false;
-            return jumpDirect ( 0x0948,fast_0948 );
+            return jumpDirect ( 0x0948,slow_0948,fast_0948 );
         }
         else
         {
@@ -53956,7 +53956,7 @@ Control fast_0938 ()
             FlagA = ( ( a24 >> 3 ) & 0x01 );
             FlagP = e1_parity ( a23 );
             FlagCY = false;
-            return jumpDirect ( 0x0948,fast_0948 );
+            return jumpDirect ( 0x0948,slow_0948,fast_0948 );
         }
     }
 }
@@ -53977,7 +53977,7 @@ Control fast_0948 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x09CA,fast_09CA );
+    return jumpDirect ( 0x09CA,slow_09CA,fast_09CA );
 }
 
 Control fast_094B ()
@@ -54053,7 +54053,7 @@ Control fast_094B ()
         FlagA = ( ( ( a12 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a9 & 0xFF ) );
         FlagCY = ( ! ( ( ( a9 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x092E,fast_092E );
+        return jumpDirect ( 0x092E,slow_092E,fast_092E );
     }
 }
 
@@ -54102,7 +54102,7 @@ Control fast_0952 ()
     FlagZ = ( 0 == ( a4 & 0xFF ) );
     FlagA = ( ( ( a7 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a4 & 0xFF ) );
-    return jumpDirect ( 0x0958,fast_0958 );
+    return jumpDirect ( 0x0958,slow_0958,fast_0958 );
 }
 
 Control fast_0958 ()
@@ -54142,7 +54142,7 @@ Control fast_0958 ()
         FlagZ = ( 0 == ( a12 & 0xFF ) );
         FlagA = ( ( ( a15 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a12 & 0xFF ) );
-        return jumpDirect ( 0x0958,fast_0958 );
+        return jumpDirect ( 0x0958,slow_0958,fast_0958 );
     }
     else
     {
@@ -54176,7 +54176,7 @@ Control fast_0958 ()
         FlagZ = ( 0 == ( a12 & 0xFF ) );
         FlagA = ( ( ( a15 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a12 & 0xFF ) );
-        return jumpDirect ( 0x1439,fast_1439 );
+        return jumpDirect ( 0x1439,slow_1439,fast_1439 );
     }
 }
 
@@ -54221,7 +54221,7 @@ Control fast_0966 ()
     FlagA = ( ( ( a13 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a10 & 0xFF ) );
     FlagCY = ( ( a4 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x1A8B,fast_1A8B );
+    return jumpDirect ( 0x1A8B,slow_1A8B,fast_1A8B );
 }
 
 Control fast_096B ()
@@ -54240,7 +54240,7 @@ Control fast_096B ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1910,fast_1910 );
+    return jumpDirect ( 0x1910,slow_1910,fast_1910 );
 }
 
 Control fast_096E ()
@@ -54280,7 +54280,7 @@ Control fast_096E ()
     B = 0x10;
     H = ( a6 >> 8 );
     L = ( a6 & 0xFF );
-    return jumpDirect ( 0x18FA,fast_18FA );
+    return jumpDirect ( 0x18FA,slow_18FA,fast_18FA );
 }
 
 Control fast_098B ()
@@ -54490,7 +54490,7 @@ Control fast_098B ()
         FlagA = ( ( ( ( ( ( ( ( a73 >> 1 ) & 0x01 ) || ( ( a73 >> 2 ) & 0x01 ) ) && ( ( a73 >> 3 ) & 0x01 ) ) || ( ( ( a71 & 0xFF ) >> 4 ) & 0x01 ) ) ? ( a74 & 0xFF ) : a73 ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( a78 );
         FlagCY = ( ( ( ( ( ( ( ( ( ( a75 & 0xFF ) >> 1 ) & 0x01 ) || ( ( ( a75 & 0xFF ) >> 2 ) & 0x01 ) ) && ( ( ( a75 & 0xFF ) >> 3 ) & 0x01 ) ) || ( ( ( a68 >> 8 ) >> 0 ) & 0x01 ) ) ? ( a76 & 0xFF ) : ( a75 & 0xFF ) ) >> 4 ) & 0x01 ) || ( ( ( a68 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x09AD,fast_09AD );
+        return jumpDirect ( 0x09AD,slow_09AD,fast_09AD );
     }
 }
 
@@ -54515,7 +54515,7 @@ Control fast_09AD ()
     A = a1;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x09B2,fast_09B2 );
+    return jumpDirect ( 0x09B2,slow_09B2,fast_09B2 );
 }
 
 Control fast_09B1 ()
@@ -54525,7 +54525,7 @@ Control fast_09B1 ()
     u8 a1 = E ;
     advance ( 5 );
     A = a1;
-    return jumpDirect ( 0x09B2,fast_09B2 );
+    return jumpDirect ( 0x09B2,slow_09B2,fast_09B2 );
 }
 
 Control fast_09B2 ()
@@ -54597,7 +54597,7 @@ Control fast_09B2 ()
     FlagA = ( ( a22 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a21 );
     FlagCY = false;
-    return jumpDirect ( 0x09C5,fast_09C5 );
+    return jumpDirect ( 0x09C5,slow_09C5,fast_09C5 );
 }
 
 Control fast_09BD ()
@@ -54639,7 +54639,7 @@ Control fast_09BD ()
     FlagA = ( ( a11 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a10 );
     FlagCY = false;
-    return jumpDirect ( 0x09C5,fast_09C5 );
+    return jumpDirect ( 0x09C5,slow_09C5,fast_09C5 );
 }
 
 Control fast_09C3 ()
@@ -54692,7 +54692,7 @@ Control fast_09C5 ()
     FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a2 & 0xFF ) );
     FlagCY = ( ( ( a2 >> 8 ) >> 0 ) & 0x01 );
-    return jumpDirect ( 0x08FF,fast_08FF );
+    return jumpDirect ( 0x08FF,slow_08FF,fast_08FF );
 }
 
 Control fast_09CA ()
@@ -54763,7 +54763,7 @@ Control fast_09D6 ()
     advance ( 10 );
     H = 0x24;
     L = 0x02;
-    return jumpDirect ( 0x09D9,fast_09D9 );
+    return jumpDirect ( 0x09D9,slow_09D9,fast_09D9 );
 }
 
 Control fast_09D9 ()
@@ -54811,7 +54811,7 @@ Control fast_09D9 ()
         FlagA = ( ( ( a14 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a11 & 0xFF ) );
         FlagCY = ( ! ( ( ( a11 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x09E8,fast_09E8 );
+        return jumpDirect ( 0x09E8,slow_09E8,fast_09E8 );
     }
     else
     {
@@ -54835,7 +54835,7 @@ Control fast_09D9 ()
         FlagA = ( ( ( a14 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a11 & 0xFF ) );
         FlagCY = ( ( a17 >> 16 ) & 0x01 );
-        return jumpDirect ( 0x09E8,fast_09E8 );
+        return jumpDirect ( 0x09E8,slow_09E8,fast_09E8 );
     }
 }
 
@@ -54864,7 +54864,7 @@ Control fast_09E8 ()
         FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a3 & 0xFF ) );
         FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x09D9,fast_09D9 );
+        return jumpDirect ( 0x09D9,slow_09D9,fast_09D9 );
     }
     else
     {
@@ -54925,7 +54925,7 @@ Control fast_09F2 ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x09D6,fast_09D6 );
+    return jumpDirect ( 0x09D6,slow_09D6,fast_09D6 );
 }
 
 Control fast_09F9 ()
@@ -54961,7 +54961,7 @@ Control fast_09F9 ()
     A = a1;
     SPH = ( a14 >> 8 );
     SPL = ( a14 & 0xFF );
-    return jumpDirect ( 0x01E4,fast_01E4 );
+    return jumpDirect ( 0x01E4,slow_01E4,fast_01E4 );
 }
 
 Control fast_0A00 ()
@@ -55044,7 +55044,7 @@ Control fast_0A00 ()
     FlagA = ( ( ( a29 & 0xFF ) >> 4 ) & 0x01 );
     FlagP = e1_parity ( ( a26 & 0xFF ) );
     FlagCY = false;
-    return jumpDirect ( 0x0A13,fast_0A13 );
+    return jumpDirect ( 0x0A13,slow_0A13,fast_0A13 );
 }
 
 Control fast_0A13 ()
@@ -55075,7 +55075,7 @@ Control fast_0A13 ()
         FlagZ = ( 0 == ( a5 & 0xFF ) );
         FlagA = ( ( ( a8 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a5 & 0xFF ) );
-        return jumpDirect ( 0x0A13,fast_0A13 );
+        return jumpDirect ( 0x0A13,slow_0A13,fast_0A13 );
     }
     else
     {
@@ -55152,7 +55152,7 @@ Control fast_0A13 ()
             FlagA = ( ( ( a8 & 0xFF ) >> 4 ) & 0x01 );
             FlagP = e1_parity ( ( a5 & 0xFF ) );
             FlagCY = ( ( a27 >> 0 ) & 0x01 );
-            return jumpDirect ( 0x01EF,fast_01EF );
+            return jumpDirect ( 0x01EF,slow_01EF,fast_01EF );
         }
         else
         {
@@ -55186,7 +55186,7 @@ Control fast_0A13 ()
             FlagA = ( ( ( a8 & 0xFF ) >> 4 ) & 0x01 );
             FlagP = e1_parity ( ( a5 & 0xFF ) );
             FlagCY = ( ( a27 >> 0 ) & 0x01 );
-            return jumpDirect ( 0x01F5,fast_01F5 );
+            return jumpDirect ( 0x01F5,slow_01F5,fast_01F5 );
         }
     }
 }
@@ -55207,7 +55207,7 @@ Control fast_0A2D ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1904,fast_1904 );
+    return jumpDirect ( 0x1904,slow_1904,fast_1904 );
 }
 
 Control fast_0A30 ()
@@ -55215,7 +55215,7 @@ Control fast_0A30 ()
     // #at: 0A30
     instruction2 ( 0x0A,0x33,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x08,0x04 );
     advance ( 10 );
-    return jumpDirect ( 0x0804,fast_0804 );
+    return jumpDirect ( 0x0804,slow_0804,fast_0804 );
 }
 
 Control fast_0A36 ()
@@ -55234,7 +55234,7 @@ Control fast_0A36 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x01C0,fast_01C0 );
+    return jumpDirect ( 0x01C0,slow_01C0,fast_01C0 );
 }
 
 Control fast_0A39 ()
@@ -55242,7 +55242,7 @@ Control fast_0A39 ()
     // #at: 0A39
     instruction2 ( 0x0A,0x3C,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x08,0x04 );
     advance ( 10 );
-    return jumpDirect ( 0x0804,fast_0804 );
+    return jumpDirect ( 0x0804,slow_0804,fast_0804 );
 }
 
 Control fast_0A3F ()
@@ -55252,7 +55252,7 @@ Control fast_0A3F ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x0A52,fast_0A52 );
+        return jumpDirect ( 0x0A52,slow_0A52,fast_0A52 );
     }
     else
     {
@@ -55265,7 +55265,7 @@ Control fast_0A3F ()
         mem_write ( 0x20C0,0x30 );
         advance ( 13 );
         A = 0x30;
-        return jumpDirect ( 0x0A47,fast_0A47 );
+        return jumpDirect ( 0x0A47,slow_0A47,fast_0A47 );
     }
 }
 
@@ -55328,7 +55328,7 @@ Control fast_0A47 ()
         FlagA = ( ( a5 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a4 );
         FlagCY = false;
-        return jumpDirect ( 0x0A59,fast_0A59 );
+        return jumpDirect ( 0x0A59,slow_0A59,fast_0A59 );
     }
 }
 
@@ -55339,12 +55339,12 @@ Control fast_0A4F ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0A47,fast_0A47 );
+        return jumpDirect ( 0x0A47,slow_0A47,fast_0A47 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0A52,fast_0A52 );
+        return jumpDirect ( 0x0A52,slow_0A52,fast_0A52 );
     }
 }
 
@@ -55364,7 +55364,7 @@ Control fast_0A52 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0A59,fast_0A59 );
+    return jumpDirect ( 0x0A59,slow_0A59,fast_0A59 );
 }
 
 Control fast_0A55 ()
@@ -55374,7 +55374,7 @@ Control fast_0A55 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x0A52,fast_0A52 );
+        return jumpDirect ( 0x0A52,slow_0A52,fast_0A52 );
     }
     else
     {
@@ -55597,7 +55597,7 @@ Control fast_0A71 ()
     A = a3;
     H = 0x20;
     L = 0xF1;
-    return jumpDirect ( 0x0A7C,fast_0A7C );
+    return jumpDirect ( 0x0A7C,slow_0A7C,fast_0A7C );
 }
 
 Control fast_0A7C ()
@@ -55633,7 +55633,7 @@ Control fast_0A80 ()
     mem_write ( 0x20C1,0x02 );
     advance ( 13 );
     A = 0x02;
-    return jumpDirect ( 0x0A85,fast_0A85 );
+    return jumpDirect ( 0x0A85,slow_0A85,fast_0A85 );
 }
 
 Control fast_0A85 ()
@@ -55665,7 +55665,7 @@ Control fast_0A85 ()
         FlagA = ( ( a6 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a5 );
         FlagCY = false;
-        return jumpDirect ( 0x0A85,fast_0A85 );
+        return jumpDirect ( 0x0A85,slow_0A85,fast_0A85 );
     }
     else
     {
@@ -55740,7 +55740,7 @@ Control fast_0A93 ()
     A = a11;
     SPH = ( a17 >> 8 );
     SPL = ( a17 & 0xFF );
-    return jumpDirect ( 0x08FF,fast_08FF );
+    return jumpDirect ( 0x08FF,slow_08FF,fast_08FF );
 }
 
 Control fast_0A98 ()
@@ -55768,7 +55768,7 @@ Control fast_0A98 ()
     E = a4;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x0A9E,fast_0A9E );
+    return jumpDirect ( 0x0A9E,slow_0A9E,fast_0A9E );
 }
 
 Control fast_0A9E ()
@@ -55795,7 +55795,7 @@ Control fast_0A9E ()
         FlagZ = ( 0 == ( a3 & 0xFF ) );
         FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a3 & 0xFF ) );
-        return jumpDirect ( 0x0A9E,fast_0A9E );
+        return jumpDirect ( 0x0A9E,slow_0A9E,fast_0A9E );
     }
     else
     {
@@ -55827,7 +55827,7 @@ Control fast_0A9E ()
             FlagZ = ( 0 == ( a11 & 0xFF ) );
             FlagA = ( ( ( a14 & 0xFF ) >> 4 ) & 0x01 );
             FlagP = e1_parity ( ( a11 & 0xFF ) );
-            return jumpDirect ( 0x0A93,fast_0A93 );
+            return jumpDirect ( 0x0A93,slow_0A93,fast_0A93 );
         }
         else
         {
@@ -55867,7 +55867,7 @@ Control fast_0AB1 ()
     instruction2 ( 0x0A,0xB6,0x40,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x0A,0xD7 );
     advance ( 10 );
     A = 0x40;
-    return jumpDirect ( 0x0AD7,fast_0AD7 );
+    return jumpDirect ( 0x0AD7,slow_0AD7,fast_0AD7 );
 }
 
 Control fast_0AB6 ()
@@ -55879,7 +55879,7 @@ Control fast_0AB6 ()
     instruction2 ( 0x0A,0xBB,0x80,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x0A,0xD7 );
     advance ( 10 );
     A = 0x80;
-    return jumpDirect ( 0x0AD7,fast_0AD7 );
+    return jumpDirect ( 0x0AD7,slow_0AD7,fast_0AD7 );
 }
 
 Control fast_0AD7 ()
@@ -55889,7 +55889,7 @@ Control fast_0AD7 ()
     u8 a1 = A ;
     mem_write ( 0x20C0,a1 );
     advance ( 13 );
-    return jumpDirect ( 0x0ADA,fast_0ADA );
+    return jumpDirect ( 0x0ADA,slow_0ADA,fast_0ADA );
 }
 
 Control fast_0ADA ()
@@ -55916,7 +55916,7 @@ Control fast_0ADA ()
         FlagA = ( ( a5 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a4 );
         FlagCY = false;
-        return jumpDirect ( 0x0ADA,fast_0ADA );
+        return jumpDirect ( 0x0ADA,slow_0ADA,fast_0ADA );
     }
     else
     {
@@ -55958,7 +55958,7 @@ Control fast_0AE2 ()
     B = 0x0C;
     H = 0x20;
     L = 0xC2;
-    return jumpDirect ( 0x1A32,fast_1A32 );
+    return jumpDirect ( 0x1A32,slow_1A32,fast_1A32 );
 }
 
 Control fast_0AF2 ()
@@ -55981,7 +55981,7 @@ Control fast_0AF2 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0AB1,fast_0AB1 );
+    return jumpDirect ( 0x0AB1,slow_0AB1,fast_0AB1 );
 }
 
 Control fast_0AF6 ()
@@ -56036,7 +56036,7 @@ Control fast_0AF6 ()
         FlagA = ( ( a5 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a4 );
         FlagCY = false;
-        return jumpDirect ( 0x0A93,fast_0A93 );
+        return jumpDirect ( 0x0A93,slow_0A93,fast_0A93 );
     }
     else
     {
@@ -56069,7 +56069,7 @@ Control fast_0AF6 ()
         FlagA = ( ( a5 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a4 );
         FlagCY = false;
-        return jumpDirect ( 0x0A93,fast_0A93 );
+        return jumpDirect ( 0x0A93,slow_0A93,fast_0A93 );
     }
 }
 
@@ -56080,7 +56080,7 @@ Control fast_0B08 ()
     advance ( 10 );
     D = 0x1D;
     E = 0xAF;
-    return jumpDirect ( 0x0B0B,fast_0B0B );
+    return jumpDirect ( 0x0B0B,slow_0B0B,fast_0B0B );
 }
 
 Control fast_0B0B ()
@@ -56111,7 +56111,7 @@ Control fast_0B0B ()
     L = 0x14;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0A93,fast_0A93 );
+    return jumpDirect ( 0x0A93,slow_0A93,fast_0A93 );
 }
 
 Control fast_0B0E ()
@@ -56130,7 +56130,7 @@ Control fast_0B0E ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0AB1,fast_0AB1 );
+    return jumpDirect ( 0x0AB1,slow_0AB1,fast_0AB1 );
 }
 
 Control fast_0B11 ()
@@ -56175,7 +56175,7 @@ Control fast_0B11 ()
     L = 0x10;
     SPH = ( a12 >> 8 );
     SPL = ( a12 & 0xFF );
-    return jumpDirect ( 0x08F3,fast_08F3 );
+    return jumpDirect ( 0x08F3,slow_08F3,fast_08F3 );
 }
 
 Control fast_0B14 ()
@@ -56194,7 +56194,7 @@ Control fast_0B14 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0AB6,fast_0AB6 );
+    return jumpDirect ( 0x0AB6,slow_0AB6,fast_0AB6 );
 }
 
 Control fast_0B17 ()
@@ -56221,7 +56221,7 @@ Control fast_0B17 ()
         FlagA = ( ( a5 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a4 );
         FlagCY = false;
-        return jumpDirect ( 0x0B4A,fast_0B4A );
+        return jumpDirect ( 0x0B4A,slow_0B4A,fast_0B4A );
     }
     else
     {
@@ -56251,7 +56251,7 @@ Control fast_0B17 ()
         FlagA = ( ( a5 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a4 );
         FlagCY = false;
-        return jumpDirect ( 0x0AE2,fast_0AE2 );
+        return jumpDirect ( 0x0AE2,slow_0AE2,fast_0AE2 );
     }
 }
 
@@ -56271,7 +56271,7 @@ Control fast_0B24 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0A80,fast_0A80 );
+    return jumpDirect ( 0x0A80,slow_0A80,fast_0A80 );
 }
 
 Control fast_0B27 ()
@@ -56295,7 +56295,7 @@ Control fast_0B27 ()
     E = 0xB0;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0AE2,fast_0AE2 );
+    return jumpDirect ( 0x0AE2,slow_0AE2,fast_0AE2 );
 }
 
 Control fast_0B2D ()
@@ -56314,7 +56314,7 @@ Control fast_0B2D ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0A80,fast_0A80 );
+    return jumpDirect ( 0x0A80,slow_0A80,fast_0A80 );
 }
 
 Control fast_0B30 ()
@@ -56333,7 +56333,7 @@ Control fast_0B30 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0AB1,fast_0AB1 );
+    return jumpDirect ( 0x0AB1,slow_0AB1,fast_0AB1 );
 }
 
 Control fast_0B33 ()
@@ -56357,7 +56357,7 @@ Control fast_0B33 ()
     E = 0xC9;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0AE2,fast_0AE2 );
+    return jumpDirect ( 0x0AE2,slow_0AE2,fast_0AE2 );
 }
 
 Control fast_0B39 ()
@@ -56376,7 +56376,7 @@ Control fast_0B39 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0A80,fast_0A80 );
+    return jumpDirect ( 0x0A80,slow_0A80,fast_0A80 );
 }
 
 Control fast_0B3C ()
@@ -56395,7 +56395,7 @@ Control fast_0B3C ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0AB1,fast_0AB1 );
+    return jumpDirect ( 0x0AB1,slow_0AB1,fast_0AB1 );
 }
 
 Control fast_0B3F ()
@@ -56423,7 +56423,7 @@ Control fast_0B3F ()
     L = 0xB7;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x14CB,fast_14CB );
+    return jumpDirect ( 0x14CB,slow_14CB,fast_14CB );
 }
 
 Control fast_0B47 ()
@@ -56442,7 +56442,7 @@ Control fast_0B47 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0AB6,fast_0AB6 );
+    return jumpDirect ( 0x0AB6,slow_0AB6,fast_0AB6 );
 }
 
 Control fast_0B4A ()
@@ -56461,7 +56461,7 @@ Control fast_0B4A ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x09D6,fast_09D6 );
+    return jumpDirect ( 0x09D6,slow_09D6,fast_09D6 );
 }
 
 Control fast_0B4D ()
@@ -56488,7 +56488,7 @@ Control fast_0B4D ()
         FlagA = ( ( a5 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a4 );
         FlagCY = false;
-        return jumpDirect ( 0x0B5D,fast_0B5D );
+        return jumpDirect ( 0x0B5D,slow_0B5D,fast_0B5D );
     }
     else
     {
@@ -56513,7 +56513,7 @@ Control fast_0B4D ()
         FlagA = ( ( a5 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a4 );
         FlagCY = false;
-        return jumpDirect ( 0x08D1,fast_08D1 );
+        return jumpDirect ( 0x08D1,slow_08D1,fast_08D1 );
     }
 }
 
@@ -56538,7 +56538,7 @@ Control fast_0B57 ()
     advance ( 17 );
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x1A7F,fast_1A7F );
+    return jumpDirect ( 0x1A7F,slow_1A7F,fast_1A7F );
 }
 
 Control fast_0B5D ()
@@ -56557,7 +56557,7 @@ Control fast_0B5D ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x01E4,fast_01E4 );
+    return jumpDirect ( 0x01E4,slow_01E4,fast_01E4 );
 }
 
 Control fast_0B60 ()
@@ -56576,7 +56576,7 @@ Control fast_0B60 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x01C0,fast_01C0 );
+    return jumpDirect ( 0x01C0,slow_01C0,fast_01C0 );
 }
 
 Control fast_0B63 ()
@@ -56595,7 +56595,7 @@ Control fast_0B63 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x01EF,fast_01EF );
+    return jumpDirect ( 0x01EF,slow_01EF,fast_01EF );
 }
 
 Control fast_0B66 ()
@@ -56614,7 +56614,7 @@ Control fast_0B66 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x021A,fast_021A );
+    return jumpDirect ( 0x021A,slow_021A,fast_021A );
 }
 
 Control fast_0B69 ()
@@ -56641,7 +56641,7 @@ Control fast_0B69 ()
     A = 0x01;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x01CF,fast_01CF );
+    return jumpDirect ( 0x01CF,slow_01CF,fast_01CF );
 }
 
 Control fast_0B71 ()
@@ -56660,7 +56660,7 @@ Control fast_0B71 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1618,fast_1618 );
+    return jumpDirect ( 0x1618,slow_1618,fast_1618 );
 }
 
 Control fast_0B74 ()
@@ -56691,7 +56691,7 @@ Control fast_0B74 ()
     advance ( 17 );
     SPH = ( a12 >> 8 );
     SPL = ( a12 & 0xFF );
-    return jumpDirect ( 0x190A,fast_190A );
+    return jumpDirect ( 0x190A,slow_190A,fast_190A );
 }
 
 Control fast_0B77 ()
@@ -56715,7 +56715,7 @@ Control fast_0B77 ()
     advance ( 17 );
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x0A59,fast_0A59 );
+    return jumpDirect ( 0x0A59,slow_0A59,fast_0A59 );
 }
 
 Control fast_0B7C ()
@@ -56725,7 +56725,7 @@ Control fast_0B7C ()
     if (FlagZ)
     {
         advance ( 10 );
-        return jumpDirect ( 0x0B71,fast_0B71 );
+        return jumpDirect ( 0x0B71,slow_0B71,fast_0B71 );
     }
     else
     {
@@ -56747,7 +56747,7 @@ Control fast_0B7C ()
         FlagA = false;
         FlagP = e1_parity ( a3 );
         FlagCY = false;
-        return jumpDirect ( 0x0B83,fast_0B83 );
+        return jumpDirect ( 0x0B83,slow_0B83,fast_0B83 );
     }
 }
 
@@ -56767,7 +56767,7 @@ Control fast_0B83 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0A59,fast_0A59 );
+    return jumpDirect ( 0x0A59,slow_0A59,fast_0A59 );
 }
 
 Control fast_0B86 ()
@@ -56777,12 +56777,12 @@ Control fast_0B86 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x0B83,fast_0B83 );
+        return jumpDirect ( 0x0B83,slow_0B83,fast_0B83 );
     }
     else
     {
         advance ( 10 );
-        return jumpDirect ( 0x0B89,fast_0B89 );
+        return jumpDirect ( 0x0B89,slow_0B89,fast_0B89 );
     }
 }
 
@@ -56819,7 +56819,7 @@ Control fast_0B89 ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x0AB1,fast_0AB1 );
+    return jumpDirect ( 0x0AB1,slow_0AB1,fast_0AB1 );
 }
 
 Control fast_0B90 ()
@@ -56841,7 +56841,7 @@ Control fast_0B90 ()
     advance ( 10 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x09D6,fast_09D6 );
+    return jumpDirect ( 0x09D6,slow_09D6,fast_09D6 );
 }
 
 Control fast_0B93 ()
@@ -56874,7 +56874,7 @@ Control fast_0B93 ()
     L = 0x11;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x08F3,fast_08F3 );
+    return jumpDirect ( 0x08F3,slow_08F3,fast_08F3 );
 }
 
 Control fast_0B9E ()
@@ -56902,7 +56902,7 @@ Control fast_0B9E ()
         FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a3 & 0xFF ) );
         FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x0BAE,fast_0BAE );
+        return jumpDirect ( 0x0BAE,slow_0BAE,fast_0BAE );
     }
     else
     {
@@ -56935,7 +56935,7 @@ Control fast_0B9E ()
         FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a3 & 0xFF ) );
         FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x08FF,fast_08FF );
+        return jumpDirect ( 0x08FF,slow_08FF,fast_08FF );
     }
 }
 
@@ -56960,7 +56960,7 @@ Control fast_0BAE ()
     C = 0x9C;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1856,fast_1856 );
+    return jumpDirect ( 0x1856,slow_1856,fast_1856 );
 }
 
 Control fast_0BB4 ()
@@ -56979,7 +56979,7 @@ Control fast_0BB4 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x184C,fast_184C );
+    return jumpDirect ( 0x184C,slow_184C,fast_184C );
 }
 
 Control fast_0BB7 ()
@@ -56998,7 +56998,7 @@ Control fast_0BB7 ()
         advance ( 10 );
         A = e8_update_bit ( ( a1 << 0x01 ),0,( ( a1 >> 7 ) & 0x01 ) );
         FlagCY = ( ( a1 >> 7 ) & 0x01 );
-        return jumpDirect ( 0x0BC3,fast_0BC3 );
+        return jumpDirect ( 0x0BC3,slow_0BC3,fast_0BC3 );
     }
     else
     {
@@ -57024,7 +57024,7 @@ Control fast_0BB7 ()
         SPH = ( a7 >> 8 );
         SPL = ( a7 & 0xFF );
         FlagCY = ( ( a1 >> 7 ) & 0x01 );
-        return jumpDirect ( 0x183A,fast_183A );
+        return jumpDirect ( 0x183A,slow_183A,fast_183A );
     }
 }
 
@@ -57044,7 +57044,7 @@ Control fast_0BC3 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0AB6,fast_0AB6 );
+    return jumpDirect ( 0x0AB6,slow_0AB6,fast_0AB6 );
 }
 
 Control fast_0BC6 ()
@@ -57072,7 +57072,7 @@ Control fast_0BC6 ()
         FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a3 & 0xFF ) );
         FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x0BDA,fast_0BDA );
+        return jumpDirect ( 0x0BDA,slow_0BDA,fast_0BDA );
     }
     else
     {
@@ -57102,7 +57102,7 @@ Control fast_0BC6 ()
         FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a3 & 0xFF ) );
         FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x0AE2,fast_0AE2 );
+        return jumpDirect ( 0x0AE2,slow_0AE2,fast_0AE2 );
     }
 }
 
@@ -57122,7 +57122,7 @@ Control fast_0BD4 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0A80,fast_0A80 );
+    return jumpDirect ( 0x0A80,slow_0A80,fast_0A80 );
 }
 
 Control fast_0BD7 ()
@@ -57167,7 +57167,7 @@ Control fast_0BD7 ()
     L = 0x50;
     SPH = ( a12 >> 8 );
     SPL = ( a12 & 0xFF );
-    return jumpDirect ( 0x1A32,fast_1A32 );
+    return jumpDirect ( 0x1A32,slow_1A32,fast_1A32 );
 }
 
 Control fast_0BDA ()
@@ -57220,7 +57220,7 @@ Control fast_0BDA ()
     FlagA = ( ( a9 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a8 );
     FlagCY = false;
-    return jumpDirect ( 0x09D6,fast_09D6 );
+    return jumpDirect ( 0x09D6,slow_09D6,fast_09D6 );
 }
 
 Control fast_0BE5 ()
@@ -57228,7 +57228,7 @@ Control fast_0BE5 ()
     // #at: 0BE5
     instruction2 ( 0x0B,0xE8,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x18,0xDF );
     advance ( 10 );
-    return jumpDirect ( 0x18DF,fast_18DF );
+    return jumpDirect ( 0x18DF,slow_18DF,fast_18DF );
 }
 
 Control fast_0BEE ()
@@ -57236,7 +57236,7 @@ Control fast_0BEE ()
     // #at: 0BEE
     instruction2 ( 0x0B,0xF1,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x0B,0x0B );
     advance ( 10 );
-    return jumpDirect ( 0x0B0B,fast_0B0B );
+    return jumpDirect ( 0x0B0B,slow_0B0B,fast_0B0B );
 }
 
 Control fast_0BF4 ()
@@ -57266,7 +57266,7 @@ Control fast_0BF4 ()
         FlagA = ( ( a5 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a4 );
         FlagCY = false;
-        return jumpDirect ( 0x19AC,fast_19AC );
+        return jumpDirect ( 0x19AC,slow_19AC,fast_19AC );
     }
     else
     {
@@ -57333,7 +57333,7 @@ Control fast_0BF4 ()
             FlagA = ( ( ( a26 & 0xFF ) >> 4 ) & 0x01 );
             FlagP = e1_parity ( ( a23 & 0xFF ) );
             FlagCY = ( ! ( ( ( a10 >> 8 ) >> 0 ) & 0x01 ) );
-            return jumpDirect ( 0x19AC,fast_19AC );
+            return jumpDirect ( 0x19AC,slow_19AC,fast_19AC );
         }
     }
 }
@@ -57357,7 +57357,7 @@ Control fast_1400 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1474,fast_1474 );
+    return jumpDirect ( 0x1474,slow_1474,fast_1474 );
 }
 
 Control fast_1404 ()
@@ -57365,7 +57365,7 @@ Control fast_1404 ()
     // #at: 1404
     instruction0 ( 0x14,0x05,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"NOP" );
     advance ( 4 );
-    return jumpDirect ( 0x1405,fast_1405 );
+    return jumpDirect ( 0x1405,slow_1405,fast_1405 );
 }
 
 Control fast_1405 ()
@@ -57530,7 +57530,7 @@ Control fast_1405 ()
         FlagCY = ( ( a63 >> 16 ) & 0x01 );
         Shifter_HI = a41;
         Shifter_LO = a20;
-        return jumpDirect ( 0x1405,fast_1405 );
+        return jumpDirect ( 0x1405,slow_1405,fast_1405 );
     }
     else
     {
@@ -57582,7 +57582,7 @@ Control fast_1424 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1474,fast_1474 );
+    return jumpDirect ( 0x1474,slow_1474,fast_1474 );
 }
 
 Control fast_1427 ()
@@ -57701,7 +57701,7 @@ Control fast_1427 ()
         FlagA = ( ( ( a55 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a52 & 0xFF ) );
         FlagCY = ( ( a42 >> 16 ) & 0x01 );
-        return jumpDirect ( 0x1427,fast_1427 );
+        return jumpDirect ( 0x1427,slow_1427,fast_1427 );
     }
     else
     {
@@ -57814,7 +57814,7 @@ Control fast_1439 ()
         FlagA = ( ( ( a33 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a30 & 0xFF ) );
         FlagCY = ( ( a20 >> 16 ) & 0x01 );
-        return jumpDirect ( 0x1439,fast_1439 );
+        return jumpDirect ( 0x1439,slow_1439,fast_1439 );
     }
     else
     {
@@ -57864,7 +57864,7 @@ Control fast_1452 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1474,fast_1474 );
+    return jumpDirect ( 0x1474,slow_1474,fast_1474 );
 }
 
 Control fast_1455 ()
@@ -58039,7 +58039,7 @@ Control fast_1455 ()
         FlagCY = ( ( a67 >> 16 ) & 0x01 );
         Shifter_HI = a43;
         Shifter_LO = a20;
-        return jumpDirect ( 0x1455,fast_1455 );
+        return jumpDirect ( 0x1455,slow_1455,fast_1455 );
     }
     else
     {
@@ -58101,7 +58101,7 @@ Control fast_1474 ()
     FlagP = e1_parity ( a3 );
     FlagCY = false;
     Shifter_OFF = a5;
-    return jumpDirect ( 0x1A47,fast_1A47 );
+    return jumpDirect ( 0x1A47,slow_1A47,fast_1A47 );
 }
 
 Control fast_147C ()
@@ -58134,7 +58134,7 @@ Control fast_147C ()
     advance ( 11 );
     SPH = ( a16 >> 8 );
     SPL = ( a16 & 0xFF );
-    return jumpDirect ( 0x147E,fast_147E );
+    return jumpDirect ( 0x147E,slow_147E,fast_147E );
 }
 
 Control fast_147E ()
@@ -58187,7 +58187,7 @@ Control fast_147E ()
         FlagZ = ( 0 == ( a14 & 0xFF ) );
         FlagA = ( ( ( a17 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a14 & 0xFF ) );
-        return jumpDirect ( 0x147E,fast_147E );
+        return jumpDirect ( 0x147E,slow_147E,fast_147E );
     }
     else
     {
@@ -58250,7 +58250,7 @@ Control fast_147E ()
             FlagA = ( ( ( a41 & 0xFF ) >> 4 ) & 0x01 );
             FlagP = e1_parity ( ( a38 & 0xFF ) );
             FlagCY = ( ( a28 >> 16 ) & 0x01 );
-            return jumpDirect ( 0x147C,fast_147C );
+            return jumpDirect ( 0x147C,slow_147C,fast_147C );
         }
         else
         {
@@ -58301,7 +58301,7 @@ Control fast_1491 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1474,fast_1474 );
+    return jumpDirect ( 0x1474,slow_1474,fast_1474 );
 }
 
 Control fast_1494 ()
@@ -58323,7 +58323,7 @@ Control fast_1494 ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x1498,fast_1498 );
+    return jumpDirect ( 0x1498,slow_1498,fast_1498 );
 }
 
 Control fast_1498 ()
@@ -58406,7 +58406,7 @@ Control fast_1498 ()
         FlagCY = false;
         Shifter_HI = a20;
         Shifter_LO = Shifter_HI;
-        return jumpDirect ( 0x14A9,fast_14A9 );
+        return jumpDirect ( 0x14A9,slow_14A9,fast_14A9 );
     }
     else
     {
@@ -58428,7 +58428,7 @@ Control fast_1498 ()
         FlagCY = false;
         Shifter_HI = a20;
         Shifter_LO = Shifter_HI;
-        return jumpDirect ( 0x14A9,fast_14A9 );
+        return jumpDirect ( 0x14A9,slow_14A9,fast_14A9 );
     }
 }
 
@@ -58528,7 +58528,7 @@ Control fast_14A9 ()
         FlagCY = false;
         Shifter_HI = a26;
         Shifter_LO = Shifter_HI;
-        return jumpDirect ( 0x14BD,fast_14BD );
+        return jumpDirect ( 0x14BD,slow_14BD,fast_14BD );
     }
     else
     {
@@ -58554,7 +58554,7 @@ Control fast_14A9 ()
         FlagCY = false;
         Shifter_HI = a26;
         Shifter_LO = Shifter_HI;
-        return jumpDirect ( 0x14BD,fast_14BD );
+        return jumpDirect ( 0x14BD,slow_14BD,fast_14BD );
     }
 }
 
@@ -58642,7 +58642,7 @@ Control fast_14BD ()
         FlagA = ( ( ( a40 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a37 & 0xFF ) );
         FlagCY = ( ( a27 >> 16 ) & 0x01 );
-        return jumpDirect ( 0x1498,fast_1498 );
+        return jumpDirect ( 0x1498,slow_1498,fast_1498 );
     }
     else
     {
@@ -58688,7 +58688,7 @@ Control fast_14CB ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x14CC,fast_14CC );
+    return jumpDirect ( 0x14CC,slow_14CC,fast_14CC );
 }
 
 Control fast_14CC ()
@@ -58757,7 +58757,7 @@ Control fast_14CC ()
         FlagA = ( ( ( a27 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a24 & 0xFF ) );
         FlagCY = ( ( a14 >> 16 ) & 0x01 );
-        return jumpDirect ( 0x14CC,fast_14CC );
+        return jumpDirect ( 0x14CC,slow_14CC,fast_14CC );
     }
     else
     {
@@ -58890,7 +58890,7 @@ Control fast_14D8 ()
                 FlagA = ( ( ( a33 & 0xFF ) >> 4 ) & 0x01 );
                 FlagP = e1_parity ( ( a30 & 0xFF ) );
                 FlagCY = ( ! ( ( ( a30 >> 8 ) >> 0 ) & 0x01 ) );
-                return jumpDirect ( 0x1530,fast_1530 );
+                return jumpDirect ( 0x1530,slow_1530,fast_1530 );
             }
             else
             {
@@ -58967,7 +58967,7 @@ Control fast_14D8 ()
                         FlagA = ( ( ( a53 & 0xFF ) >> 4 ) & 0x01 );
                         FlagP = e1_parity ( ( a50 & 0xFF ) );
                         FlagCY = ( ! ( ( ( a50 >> 8 ) >> 0 ) & 0x01 ) );
-                        return jumpDirect ( 0x1545,fast_1545 );
+                        return jumpDirect ( 0x1545,slow_1545,fast_1545 );
                     }
                     else
                     {
@@ -59008,7 +59008,7 @@ Control fast_14D8 ()
                             FlagA = ( ( ( a65 & 0xFF ) >> 4 ) & 0x01 );
                             FlagP = e1_parity ( ( a62 & 0xFF ) );
                             FlagCY = ( ! ( ( ( a62 >> 8 ) >> 0 ) & 0x01 ) );
-                            return jumpDirect ( 0x1504,fast_1504 );
+                            return jumpDirect ( 0x1504,slow_1504,fast_1504 );
                         }
                         else
                         {
@@ -59034,7 +59034,7 @@ Control fast_14D8 ()
                                 FlagA = ( ( ( a71 & 0xFF ) >> 4 ) & 0x01 );
                                 FlagP = e1_parity ( ( a68 & 0xFF ) );
                                 FlagCY = ( ! ( ( ( a68 >> 8 ) >> 0 ) & 0x01 ) );
-                                return jumpDirect ( 0x1530,fast_1530 );
+                                return jumpDirect ( 0x1530,slow_1530,fast_1530 );
                             }
                             else
                             {
@@ -59046,7 +59046,7 @@ Control fast_14D8 ()
                                 FlagA = ( ( ( a71 & 0xFF ) >> 4 ) & 0x01 );
                                 FlagP = e1_parity ( ( a68 & 0xFF ) );
                                 FlagCY = ( ! ( ( ( a68 >> 8 ) >> 0 ) & 0x01 ) );
-                                return jumpDirect ( 0x1504,fast_1504 );
+                                return jumpDirect ( 0x1504,slow_1504,fast_1504 );
                             }
                         }
                     }
@@ -59099,7 +59099,7 @@ Control fast_1504 ()
     L = a1;
     SPH = ( a15 >> 8 );
     SPL = ( a15 & 0xFF );
-    return jumpDirect ( 0x1554,fast_1554 );
+    return jumpDirect ( 0x1554,slow_1554,fast_1554 );
 }
 
 Control fast_1508 ()
@@ -59128,7 +59128,7 @@ Control fast_1508 ()
     H = a2;
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x156F,fast_156F );
+    return jumpDirect ( 0x156F,slow_156F,fast_156F );
 }
 
 Control fast_150F ()
@@ -59281,7 +59281,7 @@ Control fast_151A ()
         FlagA = ( ( a7 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a6 );
         FlagCY = false;
-        return jumpDirect ( 0x1530,fast_1530 );
+        return jumpDirect ( 0x1530,slow_1530,fast_1530 );
     }
     else
     {
@@ -59328,7 +59328,7 @@ Control fast_151A ()
             FlagA = ( ( a20 >> 3 ) & 0x01 );
             FlagP = e1_parity ( a19 );
             FlagCY = false;
-            return jumpDirect ( 0x0A7C,fast_0A7C );
+            return jumpDirect ( 0x0A7C,slow_0A7C,fast_0A7C );
         }
         else
         {
@@ -59362,7 +59362,7 @@ Control fast_151A ()
             FlagA = ( ( a20 >> 3 ) & 0x01 );
             FlagP = e1_parity ( a19 );
             FlagCY = false;
-            return jumpDirect ( 0x18FA,fast_18FA );
+            return jumpDirect ( 0x18FA,slow_18FA,fast_18FA );
         }
     }
 }
@@ -59383,7 +59383,7 @@ Control fast_1524 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A3B,fast_1A3B );
+    return jumpDirect ( 0x1A3B,slow_1A3B,fast_1A3B );
 }
 
 Control fast_1527 ()
@@ -59402,7 +59402,7 @@ Control fast_1527 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x15D3,fast_15D3 );
+    return jumpDirect ( 0x15D3,slow_15D3,fast_15D3 );
 }
 
 Control fast_152A ()
@@ -59444,7 +59444,7 @@ Control fast_1530 ()
     instruction2 ( 0x15,0x38,0x03,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x15,0x4A );
     advance ( 10 );
     A = 0x03;
-    return jumpDirect ( 0x154A,fast_154A );
+    return jumpDirect ( 0x154A,slow_154A,fast_154A );
 }
 
 Control fast_1545 ()
@@ -59457,7 +59457,7 @@ Control fast_1545 ()
     mem_write ( 0x2025,0x04 );
     advance ( 13 );
     A = 0x04;
-    return jumpDirect ( 0x154A,fast_154A );
+    return jumpDirect ( 0x154A,slow_154A,fast_154A );
 }
 
 Control fast_154A ()
@@ -59486,7 +59486,7 @@ Control fast_154A ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x19DC,fast_19DC );
+    return jumpDirect ( 0x19DC,slow_19DC,fast_19DC );
 }
 
 Control fast_1554 ()
@@ -59525,7 +59525,7 @@ Control fast_1554 ()
         FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a3 & 0xFF ) );
         FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x1590,fast_1590 );
+        return jumpDirect ( 0x1590,slow_1590,fast_1590 );
     }
     else
     {
@@ -59536,7 +59536,7 @@ Control fast_1554 ()
         FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a3 & 0xFF ) );
         FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x155A,fast_155A );
+        return jumpDirect ( 0x155A,slow_155A,fast_155A );
     }
 }
 
@@ -59602,7 +59602,7 @@ Control fast_155A ()
         FlagA = ( ( ( a24 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a21 & 0xFF ) );
         FlagCY = ( ( ( a16 >> 8 ) >> 0 ) & 0x01 );
-        return jumpDirect ( 0x155A,fast_155A );
+        return jumpDirect ( 0x155A,slow_155A,fast_155A );
     }
 }
 
@@ -59677,7 +59677,7 @@ Control fast_156F ()
     A = a1;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x1554,fast_1554 );
+    return jumpDirect ( 0x1554,slow_1554,fast_1554 );
 }
 
 Control fast_1575 ()
@@ -59747,7 +59747,7 @@ Control fast_1590 ()
         FlagA = ( ( ( a10 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a7 & 0xFF ) );
         FlagCY = ( ( ( a7 >> 8 ) >> 0 ) & 0x01 );
-        return jumpDirect ( 0x1590,fast_1590 );
+        return jumpDirect ( 0x1590,slow_1590,fast_1590 );
     }
     else
     {
@@ -59806,7 +59806,7 @@ Control fast_15A4 ()
         advance ( 7 );
         A = 0x01;
         B = 0xFE;
-        return jumpDirect ( 0x15A9,fast_15A9 );
+        return jumpDirect ( 0x15A9,slow_15A9,fast_15A9 );
     }
 }
 
@@ -59975,7 +59975,7 @@ Control fast_15C1 ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x15A9,fast_15A9 );
+    return jumpDirect ( 0x15A9,slow_15A9,fast_15A9 );
 }
 
 Control fast_15C5 ()
@@ -59984,7 +59984,7 @@ Control fast_15C5 ()
     instruction1 ( 0x15,0xC7,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   B,%02X",0x17 );
     advance ( 7 );
     B = 0x17;
-    return jumpDirect ( 0x15C7,fast_15C7 );
+    return jumpDirect ( 0x15C7,slow_15C7,fast_15C7 );
 }
 
 Control fast_15C7 ()
@@ -60062,7 +60062,7 @@ Control fast_15C7 ()
             FlagA = ( ( ( a23 & 0xFF ) >> 4 ) & 0x01 );
             FlagP = e1_parity ( ( a20 & 0xFF ) );
             FlagCY = false;
-            return jumpDirect ( 0x15C7,fast_15C7 );
+            return jumpDirect ( 0x15C7,slow_15C7,fast_15C7 );
         }
         else
         {
@@ -60110,7 +60110,7 @@ Control fast_15D3 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1474,fast_1474 );
+    return jumpDirect ( 0x1474,slow_1474,fast_1474 );
 }
 
 Control fast_15D6 ()
@@ -60130,7 +60130,7 @@ Control fast_15D6 ()
     advance ( 11 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x15D7,fast_15D7 );
+    return jumpDirect ( 0x15D7,slow_15D7,fast_15D7 );
 }
 
 Control fast_15D7 ()
@@ -60279,7 +60279,7 @@ Control fast_15D7 ()
         FlagCY = ( ( a53 >> 16 ) & 0x01 );
         Shifter_HI = a36;
         Shifter_LO = a20;
-        return jumpDirect ( 0x15D7,fast_15D7 );
+        return jumpDirect ( 0x15D7,slow_15D7,fast_15D7 );
     }
     else
     {
@@ -60333,7 +60333,7 @@ Control fast_15F6 ()
     advance ( 10 );
     B = 0x37;
     C = 0x00;
-    return jumpDirect ( 0x15F9,fast_15F9 );
+    return jumpDirect ( 0x15F9,slow_15F9,fast_15F9 );
 }
 
 Control fast_15F9 ()
@@ -60362,7 +60362,7 @@ Control fast_15F9 ()
         FlagA = ( ( a7 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a6 );
         FlagCY = false;
-        return jumpDirect ( 0x15FF,fast_15FF );
+        return jumpDirect ( 0x15FF,slow_15FF,fast_15FF );
     }
     else
     {
@@ -60382,7 +60382,7 @@ Control fast_15F9 ()
         FlagA = ( ( ( a12 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a9 & 0xFF ) );
         FlagCY = false;
-        return jumpDirect ( 0x15FF,fast_15FF );
+        return jumpDirect ( 0x15FF,slow_15FF,fast_15FF );
     }
 }
 
@@ -60414,7 +60414,7 @@ Control fast_15FF ()
         FlagZ = ( 0 == ( a5 & 0xFF ) );
         FlagA = ( ( ( a8 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a5 & 0xFF ) );
-        return jumpDirect ( 0x15F9,fast_15F9 );
+        return jumpDirect ( 0x15F9,slow_15F9,fast_15F9 );
     }
     else
     {
@@ -60720,7 +60720,7 @@ Control fast_1618 ()
                         FlagA = ( ( ( a56 & 0xFF ) >> 4 ) & 0x01 );
                         FlagP = e1_parity ( ( a53 & 0xFF ) );
                         FlagCY = ( ! ( ( ( a53 >> 8 ) >> 0 ) & 0x01 ) );
-                        return jumpDirect ( 0x1663,fast_1663 );
+                        return jumpDirect ( 0x1663,slow_1663,fast_1663 );
                     }
                     else
                     {
@@ -60737,7 +60737,7 @@ Control fast_1618 ()
                         FlagA = ( ( ( a56 & 0xFF ) >> 4 ) & 0x01 );
                         FlagP = e1_parity ( ( a53 & 0xFF ) );
                         FlagCY = ( ! ( ( ( a53 >> 8 ) >> 0 ) & 0x01 ) );
-                        return jumpDirect ( 0x1663,fast_1663 );
+                        return jumpDirect ( 0x1663,slow_1663,fast_1663 );
                     }
                 }
                 else
@@ -60782,7 +60782,7 @@ Control fast_1618 ()
                         FlagA = ( ( a61 >> 3 ) & 0x01 );
                         FlagP = e1_parity ( a60 );
                         FlagCY = false;
-                        return jumpDirect ( 0x17C0,fast_17C0 );
+                        return jumpDirect ( 0x17C0,slow_17C0,fast_17C0 );
                     }
                     else
                     {
@@ -60810,7 +60810,7 @@ Control fast_1618 ()
                         FlagA = ( ( a61 >> 3 ) & 0x01 );
                         FlagP = e1_parity ( a60 );
                         FlagCY = false;
-                        return jumpDirect ( 0x17C0,fast_17C0 );
+                        return jumpDirect ( 0x17C0,slow_17C0,fast_17C0 );
                     }
                 }
             }
@@ -61001,7 +61001,7 @@ Control fast_1671 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1910,fast_1910 );
+    return jumpDirect ( 0x1910,slow_1910,fast_1910 );
 }
 
 Control fast_1674 ()
@@ -61026,7 +61026,7 @@ Control fast_1674 ()
     advance ( 17 );
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x09CA,fast_09CA );
+    return jumpDirect ( 0x09CA,slow_09CA,fast_09CA );
 }
 
 Control fast_1679 ()
@@ -61099,7 +61099,7 @@ Control fast_1679 ()
             FlagA = ( ( ( a24 & 0xFF ) >> 4 ) & 0x01 );
             FlagP = e1_parity ( ( a21 & 0xFF ) );
             FlagCY = ( ! ( ( ( a21 >> 8 ) >> 0 ) & 0x01 ) );
-            return jumpDirect ( 0x1698,fast_1698 );
+            return jumpDirect ( 0x1698,slow_1698,fast_1698 );
         }
         else
         {
@@ -61114,7 +61114,7 @@ Control fast_1679 ()
             FlagA = ( ( ( a24 & 0xFF ) >> 4 ) & 0x01 );
             FlagP = e1_parity ( ( a21 & 0xFF ) );
             FlagCY = ( ! ( ( ( a21 >> 8 ) >> 0 ) & 0x01 ) );
-            return jumpDirect ( 0x168F,fast_168F );
+            return jumpDirect ( 0x168F,slow_168F,fast_168F );
         }
     }
     else
@@ -61135,7 +61135,7 @@ Control fast_1679 ()
             FlagA = ( ( ( a12 & 0xFF ) >> 4 ) & 0x01 );
             FlagP = e1_parity ( ( a9 & 0xFF ) );
             FlagCY = ( ! ( ( ( a9 >> 8 ) >> 0 ) & 0x01 ) );
-            return jumpDirect ( 0x1698,fast_1698 );
+            return jumpDirect ( 0x1698,slow_1698,fast_1698 );
         }
         else
         {
@@ -61153,7 +61153,7 @@ Control fast_1679 ()
             FlagA = ( ( ( a12 & 0xFF ) >> 4 ) & 0x01 );
             FlagP = e1_parity ( ( a9 & 0xFF ) );
             FlagCY = ( ! ( ( ( a9 >> 8 ) >> 0 ) & 0x01 ) );
-            return jumpDirect ( 0x168F,fast_168F );
+            return jumpDirect ( 0x168F,slow_168F,fast_168F );
         }
     }
 }
@@ -61217,7 +61217,7 @@ Control fast_168F ()
     L = ( a12 & 0xFF );
     SPH = ( a24 >> 8 );
     SPL = ( a24 & 0xFF );
-    return jumpDirect ( 0x1950,fast_1950 );
+    return jumpDirect ( 0x1950,slow_1950,fast_1950 );
 }
 
 Control fast_1698 ()
@@ -61244,7 +61244,7 @@ Control fast_1698 ()
         FlagA = ( ( a5 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a4 );
         FlagCY = false;
-        return jumpDirect ( 0x16C9,fast_16C9 );
+        return jumpDirect ( 0x16C9,slow_16C9,fast_16C9 );
     }
     else
     {
@@ -61283,7 +61283,7 @@ Control fast_1698 ()
         FlagA = ( ( a5 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a4 );
         FlagCY = false;
-        return jumpDirect ( 0x0A93,fast_0A93 );
+        return jumpDirect ( 0x0A93,slow_0A93,fast_0A93 );
     }
 }
 
@@ -61329,7 +61329,7 @@ Control fast_16AA ()
         FlagA = ( ( ( a10 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a7 & 0xFF ) );
         FlagCY = ( ( a12 >> 0 ) & 0x01 );
-        return jumpDirect ( 0x16B7,fast_16B7 );
+        return jumpDirect ( 0x16B7,slow_16B7,fast_16B7 );
     }
     else
     {
@@ -61345,7 +61345,7 @@ Control fast_16AA ()
         FlagA = ( ( ( a10 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a7 & 0xFF ) );
         FlagCY = ( ( a12 >> 0 ) & 0x01 );
-        return jumpDirect ( 0x16B7,fast_16B7 );
+        return jumpDirect ( 0x16B7,slow_16B7,fast_16B7 );
     }
 }
 
@@ -61370,7 +61370,7 @@ Control fast_16B7 ()
     A = a1;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x08FF,fast_08FF );
+    return jumpDirect ( 0x08FF,slow_08FF,fast_08FF );
 }
 
 Control fast_16BB ()
@@ -61389,7 +61389,7 @@ Control fast_16BB ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0AB1,fast_0AB1 );
+    return jumpDirect ( 0x0AB1,slow_0AB1,fast_0AB1 );
 }
 
 Control fast_16BE ()
@@ -61408,7 +61408,7 @@ Control fast_16BE ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x18E7,fast_18E7 );
+    return jumpDirect ( 0x18E7,slow_18E7,fast_18E7 );
 }
 
 Control fast_16C1 ()
@@ -61437,7 +61437,7 @@ Control fast_16C1 ()
         FlagA = ( ( a7 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a6 );
         FlagCY = false;
-        return jumpDirect ( 0x16C9,fast_16C9 );
+        return jumpDirect ( 0x16C9,slow_16C9,fast_16C9 );
     }
     else
     {
@@ -61451,7 +61451,7 @@ Control fast_16C1 ()
         FlagA = ( ( a7 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a6 );
         FlagCY = false;
-        return jumpDirect ( 0x02ED,fast_02ED );
+        return jumpDirect ( 0x02ED,slow_02ED,fast_02ED );
     }
 }
 
@@ -61485,7 +61485,7 @@ Control fast_16C9 ()
     L = 0x18;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0A93,fast_0A93 );
+    return jumpDirect ( 0x0A93,slow_0A93,fast_0A93 );
 }
 
 Control fast_16D4 ()
@@ -61504,7 +61504,7 @@ Control fast_16D4 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0AB6,fast_0AB6 );
+    return jumpDirect ( 0x0AB6,slow_0AB6,fast_0AB6 );
 }
 
 Control fast_16D7 ()
@@ -61523,7 +61523,7 @@ Control fast_16D7 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x09D6,fast_09D6 );
+    return jumpDirect ( 0x09D6,slow_09D6,fast_09D6 );
 }
 
 Control fast_16DA ()
@@ -61568,7 +61568,7 @@ Control fast_16DA ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x19D1,fast_19D1 );
+    return jumpDirect ( 0x19D1,slow_19D1,fast_19D1 );
 }
 
 Control fast_16E3 ()
@@ -61576,7 +61576,7 @@ Control fast_16E3 ()
     // #at: 16E3
     instruction2 ( 0x16,0xE6,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x0B,0x89 );
     advance ( 10 );
-    return jumpDirect ( 0x0B89,fast_0B89 );
+    return jumpDirect ( 0x0B89,slow_0B89,fast_0B89 );
 }
 
 Control fast_16EE ()
@@ -61595,7 +61595,7 @@ Control fast_16EE ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x14D8,fast_14D8 );
+    return jumpDirect ( 0x14D8,slow_14D8,fast_14D8 );
 }
 
 Control fast_16F1 ()
@@ -61618,7 +61618,7 @@ Control fast_16F1 ()
     B = 0x04;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x18FA,fast_18FA );
+    return jumpDirect ( 0x18FA,slow_18FA,fast_18FA );
 }
 
 Control fast_16F6 ()
@@ -61637,7 +61637,7 @@ Control fast_16F6 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0A59,fast_0A59 );
+    return jumpDirect ( 0x0A59,slow_0A59,fast_0A59 );
 }
 
 Control fast_16F9 ()
@@ -61647,7 +61647,7 @@ Control fast_16F9 ()
     if (( ! FlagZ ))
     {
         advance ( 10 );
-        return jumpDirect ( 0x16EE,fast_16EE );
+        return jumpDirect ( 0x16EE,slow_16EE,fast_16EE );
     }
     else
     {
@@ -61666,7 +61666,7 @@ Control fast_16F9 ()
         advance ( 17 );
         SPH = ( a6 >> 8 );
         SPL = ( a6 & 0xFF );
-        return jumpDirect ( 0x19D7,fast_19D7 );
+        return jumpDirect ( 0x19D7,slow_19D7,fast_19D7 );
     }
 }
 
@@ -61691,7 +61691,7 @@ Control fast_16FF ()
     L = 0x01;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x19FA,fast_19FA );
+    return jumpDirect ( 0x19FA,slow_19FA,fast_19FA );
 }
 
 Control fast_1705 ()
@@ -61722,7 +61722,7 @@ Control fast_1705 ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x1A8B,fast_1A8B );
+    return jumpDirect ( 0x1A8B,slow_1A8B,fast_1A8B );
 }
 
 Control fast_1709 ()
@@ -61748,7 +61748,7 @@ Control fast_1709 ()
     B = 0xFB;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x19DC,fast_19DC );
+    return jumpDirect ( 0x19DC,slow_19DC,fast_19DC );
 }
 
 Control fast_1711 ()
@@ -61785,7 +61785,7 @@ Control fast_1711 ()
     E = 0xB8;
     H = 0x1A;
     L = 0xA1;
-    return jumpDirect ( 0x171C,fast_171C );
+    return jumpDirect ( 0x171C,slow_171C,fast_171C );
 }
 
 Control fast_171C ()
@@ -61816,7 +61816,7 @@ Control fast_171C ()
         FlagA = ( ( ( a9 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a6 & 0xFF ) );
         FlagCY = ( ! ( ( ( a6 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x1727,fast_1727 );
+        return jumpDirect ( 0x1727,slow_1727,fast_1727 );
     }
     else
     {
@@ -61857,7 +61857,7 @@ Control fast_171C ()
             FlagA = ( ( ( a20 & 0xFF ) >> 4 ) & 0x01 );
             FlagP = e1_parity ( ( a17 & 0xFF ) );
             FlagCY = ( ! ( ( ( a6 >> 8 ) >> 0 ) & 0x01 ) );
-            return jumpDirect ( 0x171C,fast_171C );
+            return jumpDirect ( 0x171C,slow_171C,fast_171C );
         }
         else
         {
@@ -61873,7 +61873,7 @@ Control fast_171C ()
             FlagA = ( ( ( a20 & 0xFF ) >> 4 ) & 0x01 );
             FlagP = e1_parity ( ( a17 & 0xFF ) );
             FlagCY = ( ! ( ( ( a6 >> 8 ) >> 0 ) & 0x01 ) );
-            return jumpDirect ( 0x1727,fast_1727 );
+            return jumpDirect ( 0x1727,slow_1727,fast_1727 );
         }
     }
 }
@@ -61932,7 +61932,7 @@ Control fast_1747 ()
         FlagA = ( ( a5 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a4 );
         FlagCY = false;
-        return jumpDirect ( 0x176D,fast_176D );
+        return jumpDirect ( 0x176D,slow_176D,fast_176D );
     }
     else
     {
@@ -62017,7 +62017,7 @@ Control fast_1747 ()
                 FlagA = ( ( a25 >> 3 ) & 0x01 );
                 FlagP = e1_parity ( a24 );
                 FlagCY = false;
-                return jumpDirect ( 0x176D,fast_176D );
+                return jumpDirect ( 0x176D,slow_176D,fast_176D );
             }
             else
             {
@@ -62085,7 +62085,7 @@ Control fast_176D ()
     u8 a1 = e8_read_mem ( 0x2098 ) ;
     advance ( 13 );
     A = a1;
-    return jumpDirect ( 0x1770,fast_1770 );
+    return jumpDirect ( 0x1770,slow_1770,fast_1770 );
 }
 
 Control fast_1770 ()
@@ -62209,7 +62209,7 @@ Control fast_1785 ()
             FlagA = ( ( ( a27 & 0xFF ) >> 4 ) & 0x01 );
             FlagP = e1_parity ( ( a24 & 0xFF ) );
             FlagCY = ( ! ( ( ( a24 >> 8 ) >> 0 ) & 0x01 ) );
-            return jumpDirect ( 0x17A4,fast_17A4 );
+            return jumpDirect ( 0x17A4,slow_17A4,fast_17A4 );
         }
         else
         {
@@ -62226,7 +62226,7 @@ Control fast_1785 ()
             FlagA = ( ( ( a27 & 0xFF ) >> 4 ) & 0x01 );
             FlagP = e1_parity ( ( a24 & 0xFF ) );
             FlagCY = ( ! ( ( ( a24 >> 8 ) >> 0 ) & 0x01 ) );
-            return jumpDirect ( 0x17A4,fast_17A4 );
+            return jumpDirect ( 0x17A4,slow_17A4,fast_17A4 );
         }
     }
     else
@@ -62256,7 +62256,7 @@ Control fast_1785 ()
         FlagA = ( ( ( a8 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a5 & 0xFF ) );
         FlagCY = ( ! ( ( ( a5 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x1785,fast_1785 );
+        return jumpDirect ( 0x1785,slow_1785,fast_1785 );
     }
 }
 
@@ -62292,7 +62292,7 @@ Control fast_17A4 ()
     FlagA = false;
     FlagP = e1_parity ( a9 );
     FlagCY = false;
-    return jumpDirect ( 0x17AA,fast_17AA );
+    return jumpDirect ( 0x17AA,slow_17AA,fast_17AA );
 }
 
 Control fast_17AA ()
@@ -62348,7 +62348,7 @@ Control fast_17AA ()
         FlagZ = ( 0 == ( a2 & 0xFF ) );
         FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a2 & 0xFF ) );
-        return jumpDirect ( 0x19DC,fast_19DC );
+        return jumpDirect ( 0x19DC,slow_19DC,fast_19DC );
     }
 }
 
@@ -62485,7 +62485,7 @@ Control fast_17DC ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x09D6,fast_09D6 );
+    return jumpDirect ( 0x09D6,slow_09D6,fast_09D6 );
 }
 
 Control fast_17DF ()
@@ -62508,7 +62508,7 @@ Control fast_17DF ()
         FlagZ = ( 0 == ( a2 & 0xFF ) );
         FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a2 & 0xFF ) );
-        return jumpDirect ( 0x17DC,fast_17DC );
+        return jumpDirect ( 0x17DC,slow_17DC,fast_17DC );
     }
     else
     {
@@ -62540,7 +62540,7 @@ Control fast_17DF ()
         FlagZ = ( 0 == ( a2 & 0xFF ) );
         FlagA = ( ( ( a5 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a2 & 0xFF ) );
-        return jumpDirect ( 0x19D7,fast_19D7 );
+        return jumpDirect ( 0x19D7,slow_19D7,fast_19D7 );
     }
 }
 
@@ -62578,7 +62578,7 @@ Control fast_17EB ()
     L = 0x16;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0A93,fast_0A93 );
+    return jumpDirect ( 0x0A93,slow_0A93,fast_0A93 );
 }
 
 Control fast_17F7 ()
@@ -62597,7 +62597,7 @@ Control fast_17F7 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0AB1,fast_0AB1 );
+    return jumpDirect ( 0x0AB1,slow_0AB1,fast_0AB1 );
 }
 
 Control fast_17FA ()
@@ -62627,7 +62627,7 @@ Control fast_17FA ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x16C9,fast_16C9 );
+    return jumpDirect ( 0x16C9,slow_16C9,fast_16C9 );
 }
 
 Control fast_1820 ()
@@ -62645,7 +62645,7 @@ Control fast_1820 ()
     A = 0x0A;
     B = 0x1D;
     C = 0xBE;
-    return jumpDirect ( 0x1828,fast_1828 );
+    return jumpDirect ( 0x1828,slow_1828,fast_1828 );
 }
 
 Control fast_1828 ()
@@ -62664,7 +62664,7 @@ Control fast_1828 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1856,fast_1856 );
+    return jumpDirect ( 0x1856,slow_1856,fast_1856 );
 }
 
 Control fast_182B ()
@@ -62674,7 +62674,7 @@ Control fast_182B ()
     if (FlagCY)
     {
         advance ( 10 );
-        return jumpDirect ( 0x1837,fast_1837 );
+        return jumpDirect ( 0x1837,slow_1837,fast_1837 );
     }
     else
     {
@@ -62722,7 +62722,7 @@ Control fast_182B ()
         B = 0x10;
         SPH = ( a20 >> 8 );
         SPL = ( a20 & 0xFF );
-        return jumpDirect ( 0x1439,fast_1439 );
+        return jumpDirect ( 0x1439,slow_1439,fast_1439 );
     }
 }
 
@@ -62731,7 +62731,7 @@ Control fast_1831 ()
     // #at: 1831
     instruction2 ( 0x18,0x34,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x18,0x28 );
     advance ( 10 );
-    return jumpDirect ( 0x1828,fast_1828 );
+    return jumpDirect ( 0x1828,slow_1828,fast_1828 );
 }
 
 Control fast_1834 ()
@@ -62750,7 +62750,7 @@ Control fast_1834 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x0AB1,fast_0AB1 );
+    return jumpDirect ( 0x0AB1,slow_0AB1,fast_0AB1 );
 }
 
 Control fast_1837 ()
@@ -62760,7 +62760,7 @@ Control fast_1837 ()
     advance ( 10 );
     B = 0x1D;
     C = 0xCF;
-    return jumpDirect ( 0x183A,fast_183A );
+    return jumpDirect ( 0x183A,slow_183A,fast_183A );
 }
 
 Control fast_183A ()
@@ -62779,7 +62779,7 @@ Control fast_183A ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1856,fast_1856 );
+    return jumpDirect ( 0x1856,slow_1856,fast_1856 );
 }
 
 Control fast_183D ()
@@ -62818,7 +62818,7 @@ Control fast_183D ()
         advance ( 17 );
         SPH = ( a14 >> 8 );
         SPL = ( a14 & 0xFF );
-        return jumpDirect ( 0x184C,fast_184C );
+        return jumpDirect ( 0x184C,slow_184C,fast_184C );
     }
 }
 
@@ -62827,7 +62827,7 @@ Control fast_1841 ()
     // #at: 1841
     instruction2 ( 0x18,0x44,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x18,0x3A );
     advance ( 10 );
-    return jumpDirect ( 0x183A,fast_183A );
+    return jumpDirect ( 0x183A,slow_183A,fast_183A );
 }
 
 Control fast_184A ()
@@ -62900,7 +62900,7 @@ Control fast_184C ()
     C = a10;
     SPH = ( a16 >> 8 );
     SPL = ( a16 & 0xFF );
-    return jumpDirect ( 0x0A93,fast_0A93 );
+    return jumpDirect ( 0x0A93,slow_0A93,fast_0A93 );
 }
 
 Control fast_1854 ()
@@ -63158,7 +63158,7 @@ Control fast_1871 ()
             FlagA = ( ( a20 >> 3 ) & 0x01 );
             FlagP = e1_parity ( a19 );
             FlagCY = false;
-            return jumpDirect ( 0x1888,fast_1888 );
+            return jumpDirect ( 0x1888,slow_1888,fast_1888 );
         }
         else
         {
@@ -63183,7 +63183,7 @@ Control fast_1871 ()
             FlagA = ( ( a20 >> 3 ) & 0x01 );
             FlagP = e1_parity ( a19 );
             FlagCY = ( ( a25 >> 16 ) & 0x01 );
-            return jumpDirect ( 0x1888,fast_1888 );
+            return jumpDirect ( 0x1888,slow_1888,fast_1888 );
         }
     }
 }
@@ -63216,7 +63216,7 @@ Control fast_1888 ()
     L = 0xC5;
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x1A3B,fast_1A3B );
+    return jumpDirect ( 0x1A3B,slow_1A3B,fast_1A3B );
 }
 
 Control fast_1891 ()
@@ -63235,7 +63235,7 @@ Control fast_1891 ()
     E = a4;
     H = a1;
     L = a2;
-    return jumpDirect ( 0x15D3,fast_15D3 );
+    return jumpDirect ( 0x15D3,slow_15D3,fast_15D3 );
 }
 
 Control fast_18A9 ()
@@ -63262,7 +63262,7 @@ Control fast_18A9 ()
     mem_write ( 0x20C1,0x04 );
     advance ( 13 );
     A = 0x04;
-    return jumpDirect ( 0x18B8,fast_18B8 );
+    return jumpDirect ( 0x18B8,slow_18B8,fast_18B8 );
 }
 
 Control fast_18B8 ()
@@ -63288,7 +63288,7 @@ Control fast_18B8 ()
         FlagA = ( ( a4 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a3 );
         FlagCY = false;
-        return jumpDirect ( 0x18B8,fast_18B8 );
+        return jumpDirect ( 0x18B8,slow_18B8,fast_18B8 );
     }
     else
     {
@@ -63299,7 +63299,7 @@ Control fast_18B8 ()
         FlagA = ( ( a4 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a3 );
         FlagCY = false;
-        return jumpDirect ( 0x18C0,fast_18C0 );
+        return jumpDirect ( 0x18C0,slow_18C0,fast_18C0 );
     }
 }
 
@@ -63326,7 +63326,7 @@ Control fast_18C0 ()
         FlagA = ( ( a4 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a3 );
         FlagCY = false;
-        return jumpDirect ( 0x18C0,fast_18C0 );
+        return jumpDirect ( 0x18C0,slow_18C0,fast_18C0 );
     }
     else
     {
@@ -63362,7 +63362,7 @@ Control fast_18C0 ()
         FlagA = ( ( a4 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a3 );
         FlagCY = false;
-        return jumpDirect ( 0x08FF,fast_08FF );
+        return jumpDirect ( 0x08FF,slow_08FF,fast_08FF );
     }
 }
 
@@ -63371,7 +63371,7 @@ Control fast_18D1 ()
     // #at: 18D1
     instruction2 ( 0x18,0xD4,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x0A,0xB6 );
     advance ( 10 );
-    return jumpDirect ( 0x0AB6,fast_0AB6 );
+    return jumpDirect ( 0x0AB6,slow_0AB6,fast_0AB6 );
 }
 
 Control fast_18DC ()
@@ -63390,7 +63390,7 @@ Control fast_18DC ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1956,fast_1956 );
+    return jumpDirect ( 0x1956,slow_1956,fast_1956 );
 }
 
 Control fast_18DF ()
@@ -63585,7 +63585,7 @@ Control fast_1904 ()
     advance ( 10 );
     H = 0x22;
     L = 0x00;
-    return jumpDirect ( 0x01C3,fast_01C3 );
+    return jumpDirect ( 0x01C3,slow_01C3,fast_01C3 );
 }
 
 Control fast_190A ()
@@ -63604,7 +63604,7 @@ Control fast_190A ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x14D8,fast_14D8 );
+    return jumpDirect ( 0x14D8,slow_14D8,fast_14D8 );
 }
 
 Control fast_190D ()
@@ -63653,7 +63653,7 @@ Control fast_190D ()
         FlagA = ( ( a5 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a4 );
         FlagCY = false;
-        return jumpDirect ( 0x15C5,fast_15C5 );
+        return jumpDirect ( 0x15C5,slow_15C5,fast_15C5 );
     }
     else
     {
@@ -63683,7 +63683,7 @@ Control fast_190D ()
         FlagA = ( ( a5 >> 3 ) & 0x01 );
         FlagP = e1_parity ( a4 );
         FlagCY = false;
-        return jumpDirect ( 0x15C5,fast_15C5 );
+        return jumpDirect ( 0x15C5,slow_15C5,fast_15C5 );
     }
 }
 
@@ -63758,7 +63758,7 @@ Control fast_1925 ()
     advance ( 10 );
     H = 0x20;
     L = 0xF8;
-    return jumpDirect ( 0x1931,fast_1931 );
+    return jumpDirect ( 0x1931,slow_1931,fast_1931 );
 }
 
 Control fast_192B ()
@@ -63771,7 +63771,7 @@ Control fast_192B ()
     advance ( 10 );
     H = 0x20;
     L = 0xFC;
-    return jumpDirect ( 0x1931,fast_1931 );
+    return jumpDirect ( 0x1931,slow_1931,fast_1931 );
 }
 
 Control fast_1931 ()
@@ -63830,7 +63830,7 @@ Control fast_1931 ()
     E = a3;
     H = a21;
     L = a22;
-    return jumpDirect ( 0x09AD,fast_09AD );
+    return jumpDirect ( 0x09AD,slow_09AD,fast_09AD );
 }
 
 Control fast_193C ()
@@ -63852,7 +63852,7 @@ Control fast_193C ()
     E = 0xA9;
     H = 0x35;
     L = 0x01;
-    return jumpDirect ( 0x08F3,fast_08F3 );
+    return jumpDirect ( 0x08F3,slow_08F3,fast_08F3 );
 }
 
 Control fast_1947 ()
@@ -63870,7 +63870,7 @@ Control fast_1947 ()
     A = a1;
     H = 0x3C;
     L = 0x01;
-    return jumpDirect ( 0x09B2,fast_09B2 );
+    return jumpDirect ( 0x09B2,slow_09B2,fast_09B2 );
 }
 
 Control fast_1950 ()
@@ -63883,7 +63883,7 @@ Control fast_1950 ()
     advance ( 10 );
     H = 0x20;
     L = 0xF4;
-    return jumpDirect ( 0x1931,fast_1931 );
+    return jumpDirect ( 0x1931,slow_1931,fast_1931 );
 }
 
 Control fast_1956 ()
@@ -63907,7 +63907,7 @@ Control fast_1956 ()
     L = 0x00;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1A5F,fast_1A5F );
+    return jumpDirect ( 0x1A5F,slow_1A5F,fast_1A5F );
 }
 
 Control fast_1959 ()
@@ -63943,7 +63943,7 @@ Control fast_1959 ()
     L = 0x1E;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x08F3,fast_08F3 );
+    return jumpDirect ( 0x08F3,slow_08F3,fast_08F3 );
 }
 
 Control fast_195C ()
@@ -63962,7 +63962,7 @@ Control fast_195C ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1925,fast_1925 );
+    return jumpDirect ( 0x1925,slow_1925,fast_1925 );
 }
 
 Control fast_195F ()
@@ -63981,7 +63981,7 @@ Control fast_195F ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x192B,fast_192B );
+    return jumpDirect ( 0x192B,slow_192B,fast_192B );
 }
 
 Control fast_1962 ()
@@ -64000,7 +64000,7 @@ Control fast_1962 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1950,fast_1950 );
+    return jumpDirect ( 0x1950,slow_1950,fast_1950 );
 }
 
 Control fast_1965 ()
@@ -64019,7 +64019,7 @@ Control fast_1965 ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x193C,fast_193C );
+    return jumpDirect ( 0x193C,slow_193C,fast_193C );
 }
 
 Control fast_1968 ()
@@ -64027,7 +64027,7 @@ Control fast_1968 ()
     // #at: 1968
     instruction2 ( 0x19,0x6B,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x19,0x47 );
     advance ( 10 );
-    return jumpDirect ( 0x1947,fast_1947 );
+    return jumpDirect ( 0x1947,slow_1947,fast_1947 );
 }
 
 Control fast_196E ()
@@ -64035,7 +64035,7 @@ Control fast_196E ()
     // #at: 196E
     instruction2 ( 0x19,0x71,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x16,0x71 );
     advance ( 10 );
-    return jumpDirect ( 0x1671,fast_1671 );
+    return jumpDirect ( 0x1671,slow_1671,fast_1671 );
 }
 
 Control fast_197C ()
@@ -64054,7 +64054,7 @@ Control fast_197C ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x1947,fast_1947 );
+    return jumpDirect ( 0x1947,slow_1947,fast_1947 );
 }
 
 Control fast_197F ()
@@ -64062,7 +64062,7 @@ Control fast_197F ()
     // #at: 197F
     instruction2 ( 0x19,0x82,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"JP   %02X%02X",0x19,0x3C );
     advance ( 10 );
-    return jumpDirect ( 0x193C,fast_193C );
+    return jumpDirect ( 0x193C,slow_193C,fast_193C );
 }
 
 Control fast_19AC ()
@@ -64133,7 +64133,7 @@ Control fast_19AC ()
         FlagA = ( ( ( a8 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a5 & 0xFF ) );
         FlagCY = ( ! ( ( ( a5 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x08F3,fast_08F3 );
+        return jumpDirect ( 0x08F3,slow_08F3,fast_08F3 );
     }
 }
 
@@ -64143,7 +64143,7 @@ Control fast_19D1 ()
     instruction1 ( 0x19,0xD3,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   A,%02X",0x01 );
     advance ( 7 );
     A = 0x01;
-    return jumpDirect ( 0x19D3,fast_19D3 );
+    return jumpDirect ( 0x19D3,slow_19D3,fast_19D3 );
 }
 
 Control fast_19D3 ()
@@ -64186,7 +64186,7 @@ Control fast_19D7 ()
     FlagA = false;
     FlagP = e1_parity ( a3 );
     FlagCY = false;
-    return jumpDirect ( 0x19D3,fast_19D3 );
+    return jumpDirect ( 0x19D3,slow_19D3,fast_19D3 );
 }
 
 Control fast_19DC ()
@@ -64268,7 +64268,7 @@ Control fast_19EC ()
     E = 0x60;
     SPH = ( a7 >> 8 );
     SPL = ( a7 & 0xFF );
-    return jumpDirect ( 0x1439,fast_1439 );
+    return jumpDirect ( 0x1439,slow_1439,fast_1439 );
 }
 
 Control fast_19F5 ()
@@ -64295,7 +64295,7 @@ Control fast_19F5 ()
         FlagZ = ( 0 == ( a3 & 0xFF ) );
         FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a3 & 0xFF ) );
-        return jumpDirect ( 0x19EC,fast_19EC );
+        return jumpDirect ( 0x19EC,slow_19EC,fast_19EC );
     }
     else
     {
@@ -64305,7 +64305,7 @@ Control fast_19F5 ()
         FlagZ = ( 0 == ( a3 & 0xFF ) );
         FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a3 & 0xFF ) );
-        return jumpDirect ( 0x19FA,fast_19FA );
+        return jumpDirect ( 0x19FA,slow_19FA,fast_19FA );
     }
 }
 
@@ -64329,7 +64329,7 @@ Control fast_19FA ()
     B = 0x10;
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x14CB,fast_14CB );
+    return jumpDirect ( 0x14CB,slow_14CB,fast_14CB );
 }
 
 Control fast_19FF ()
@@ -64357,7 +64357,7 @@ Control fast_19FF ()
         FlagA = ( ( ( a6 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a3 & 0xFF ) );
         FlagCY = ( ! ( ( ( a3 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x19FA,fast_19FA );
+        return jumpDirect ( 0x19FA,slow_19FA,fast_19FA );
     }
     else
     {
@@ -64520,7 +64520,7 @@ Control fast_1A32 ()
         FlagZ = ( 0 == ( a14 & 0xFF ) );
         FlagA = ( ( ( a17 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a14 & 0xFF ) );
-        return jumpDirect ( 0x1A32,fast_1A32 );
+        return jumpDirect ( 0x1A32,slow_1A32,fast_1A32 );
     }
     else
     {
@@ -64660,7 +64660,7 @@ Control fast_1A47 ()
     B = 0x03;
     SPH = ( a8 >> 8 );
     SPL = ( a8 & 0xFF );
-    return jumpDirect ( 0x1A4A,fast_1A4A );
+    return jumpDirect ( 0x1A4A,slow_1A4A,fast_1A4A );
 }
 
 Control fast_1A4A ()
@@ -64711,7 +64711,7 @@ Control fast_1A4A ()
         FlagA = ( ( ( a11 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a8 & 0xFF ) );
         FlagCY = ( ( a5 >> 0 ) & 0x01 );
-        return jumpDirect ( 0x1A4A,fast_1A4A );
+        return jumpDirect ( 0x1A4A,slow_1A4A,fast_1A4A );
     }
     else
     {
@@ -64812,7 +64812,7 @@ Control fast_1A5F ()
         FlagA = ( ( ( a11 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a8 & 0xFF ) );
         FlagCY = ( ! ( ( ( a8 >> 8 ) >> 0 ) & 0x01 ) );
-        return jumpDirect ( 0x1A5F,fast_1A5F );
+        return jumpDirect ( 0x1A5F,slow_1A5F,fast_1A5F );
     }
     else
     {
@@ -64872,7 +64872,7 @@ Control fast_1A69 ()
     advance ( 11 );
     SPH = ( a16 >> 8 );
     SPL = ( a16 & 0xFF );
-    return jumpDirect ( 0x1A6B,fast_1A6B );
+    return jumpDirect ( 0x1A6B,slow_1A6B,fast_1A6B );
 }
 
 Control fast_1A6B ()
@@ -64934,7 +64934,7 @@ Control fast_1A6B ()
         FlagA = ( ( ( a22 & 0xFF ) >> 4 ) & 0x01 );
         FlagP = e1_parity ( ( a19 & 0xFF ) );
         FlagCY = false;
-        return jumpDirect ( 0x1A6B,fast_1A6B );
+        return jumpDirect ( 0x1A6B,slow_1A6B,fast_1A6B );
     }
     else
     {
@@ -64997,7 +64997,7 @@ Control fast_1A6B ()
             FlagA = ( ( ( a46 & 0xFF ) >> 4 ) & 0x01 );
             FlagP = e1_parity ( ( a43 & 0xFF ) );
             FlagCY = ( ( a33 >> 16 ) & 0x01 );
-            return jumpDirect ( 0x1A69,fast_1A69 );
+            return jumpDirect ( 0x1A69,slow_1A69,fast_1A69 );
         }
         else
         {
@@ -65048,7 +65048,7 @@ Control fast_1A7F ()
     advance ( 17 );
     SPH = ( a6 >> 8 );
     SPL = ( a6 & 0xFF );
-    return jumpDirect ( 0x092E,fast_092E );
+    return jumpDirect ( 0x092E,slow_092E,fast_092E );
 }
 
 Control fast_1A82 ()
@@ -65143,7 +65143,7 @@ Control fast_1A82 ()
             FlagA = ( ( ( a24 & 0xFF ) >> 4 ) & 0x01 );
             FlagP = e1_parity ( ( a21 & 0xFF ) );
             FlagCY = false;
-            return jumpDirect ( 0x19FA,fast_19FA );
+            return jumpDirect ( 0x19FA,slow_19FA,fast_19FA );
         }
         else
         {
@@ -65158,7 +65158,7 @@ Control fast_1A82 ()
             FlagA = ( ( ( a24 & 0xFF ) >> 4 ) & 0x01 );
             FlagP = e1_parity ( ( a21 & 0xFF ) );
             FlagCY = false;
-            return jumpDirect ( 0x19EC,fast_19EC );
+            return jumpDirect ( 0x19EC,slow_19EC,fast_19EC );
         }
     }
 }
@@ -65184,7 +65184,7 @@ Control fast_1A8A ()
     FlagA = ( ( a4 >> 4 ) & 0x01 );
     FlagP = ( ( a4 >> 2 ) & 0x01 );
     FlagCY = ( ( a4 >> 0 ) & 0x01 );
-    return jumpDirect ( 0x1A8B,fast_1A8B );
+    return jumpDirect ( 0x1A8B,slow_1A8B,fast_1A8B );
 }
 
 Control fast_1A8B ()
@@ -65209,7 +65209,7 @@ Control fast_1A8B ()
     FlagA = ( ( a3 >> 3 ) & 0x01 );
     FlagP = e1_parity ( a2 );
     FlagCY = false;
-    return jumpDirect ( 0x09C5,fast_09C5 );
+    return jumpDirect ( 0x09C5,slow_09C5,fast_09C5 );
 }
 
 Func fast_progs_array [ ROM_SIZE ] = { fast_0000,0,0,0,0,0,0,0,fast_0008,0,0,0,0,0,0,0,fast_0010,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0020,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_003E,fast_003F,0,0,fast_0042,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_005A,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0072,0,0,0,0,0,0,0,0,fast_007B,0,0,fast_007E,0,0,fast_0081,fast_0082,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_00A5,0,0,0,0,0,fast_00AB,0,0,fast_00AE,0,0,0,0,0,fast_00B4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_00C8,0,0,0,0,0,0,0,0,0,0,fast_00D3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_012E,0,0,0,0,0,0,0,fast_0136,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0154,0,0,0,0,0,fast_015A,0,0,0,0,0,0,0,0,0,0,0,fast_0166,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_017A,0,0,0,0,0,0,0,0,fast_0183,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0195,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_01B1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_01C0,0,0,fast_01C3,0,fast_01C5,0,0,0,0,0,0,0,0,0,fast_01CF,0,0,0,0,0,0,0,0,0,fast_01D9,0,0,0,0,0,0,0,0,0,0,fast_01E4,0,fast_01E6,0,0,0,0,0,0,0,0,fast_01EF,0,0,0,0,0,fast_01F5,0,0,fast_01F8,0,0,0,0,fast_01FD,0,0,0,0,0,fast_0203,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0214,0,0,0,0,0,fast_021A,fast_021B,0,0,fast_021E,0,0,0,0,0,0,0,0,0,0,fast_0229,0,0,0,0,0,0,0,0,0,0,0,fast_0235,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0245,0,0,0,0,0,fast_024B,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_026F,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_027D,0,0,0,fast_0281,0,0,0,0,0,0,0,0,0,0,0,0,fast_028E,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_02B6,0,0,0,0,0,0,0,0,0,0,fast_02C1,0,0,0,0,fast_02C6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_02D7,0,0,fast_02DA,0,0,0,0,0,0,fast_02E1,0,0,0,0,0,0,0,0,0,0,0,fast_02ED,0,0,0,0,0,0,0,0,0,0,fast_02F8,0,0,fast_02FB,0,0,0,0,0,0,0,0,0,fast_0305,0,0,0,0,0,0,0,0,0,0,0,0,fast_0312,0,0,0,0,0,fast_0318,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0326,0,0,fast_0329,0,0,fast_032C,0,0,fast_032F,0,0,0,0,0,fast_0335,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_034A,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0366,0,0,0,0,0,0,0,0,fast_036F,0,0,0,0,0,fast_0375,0,0,fast_0378,0,0,fast_037B,0,0,0,0,0,fast_0381,0,0,0,0,0,0,0,0,0,0,0,0,fast_038E,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_03BB,0,0,0,0,0,fast_03C1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_03E3,0,0,fast_03E6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_03F7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0407,0,0,0,0,0,fast_040D,0,0,0,0,0,fast_0413,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0421,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0430,0,0,0,0,0,fast_0436,0,0,fast_0439,0,0,fast_043C,0,0,0,0,0,0,0,0,0,0,fast_0447,0,0,0,0,0,0,0,0,0,0,0,fast_0453,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_046E,0,0,0,0,0,0,0,fast_0476,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0492,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_04A1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_04B6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_04CA,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_04D9,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_04E7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_04FC,0,0,0,0,0,0,0,0,0,0,0,fast_0508,0,0,0,0,0,fast_050E,fast_050F,0,0,0,0,0,0,0,fast_0517,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0526,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0534,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0549,0,0,0,0,0,0,fast_0550,0,0,0,0,0,0,0,0,0,0,fast_055B,0,0,0,0,0,0,0,fast_0563,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0589,0,0,0,0,0,0,0,0,0,0,0,0,fast_0596,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_05A5,0,0,fast_05A8,0,0,0,fast_05AC,0,0,0,0,0,0,0,0,0,0,fast_05B7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_05C7,0,0,0,0,0,0,0,0,0,0,0,0,fast_05D4,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_05E2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_05F3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0612,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0624,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0637,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0651,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_066C,0,0,0,0,0,fast_0672,0,0,fast_0675,0,0,0,0,0,fast_067B,0,0,0,0,0,0,fast_0682,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_06AB,0,0,0,0,0,fast_06B1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_06C7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_06DB,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_06F9,0,0,fast_06FC,0,0,fast_06FF,0,0,0,0,0,0,0,fast_0707,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_071D,0,0,0,0,0,0,0,0,0,0,fast_0728,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0739,0,0,fast_073C,0,0,fast_073F,0,0,fast_0742,0,0,0,0,0,fast_0748,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0756,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0771,0,0,fast_0774,0,0,0,0,0,0,0,0,0,0,fast_077F,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0791,0,0,0,0,0,0,fast_0798,0,0,fast_079B,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_07A9,0,0,0,0,0,0,0,0,0,0,0,fast_07B5,0,0,fast_07B8,0,0,fast_07BB,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_07CB,0,0,fast_07CE,0,0,fast_07D1,0,0,fast_07D4,0,0,0,0,0,0,0,0,fast_07DD,0,0,0,0,0,0,0,0,0,fast_07E7,0,0,fast_07EA,0,0,0,0,0,0,0,0,0,0,0,fast_07F6,0,0,fast_07F9,0,0,fast_07FC,0,0,fast_07FF,0,0,0,0,fast_0804,0,0,fast_0807,0,0,0,0,0,0,0,0,0,fast_0811,0,0,fast_0814,0,0,fast_0817,0,0,fast_081A,0,0,0,0,fast_081F,0,0,fast_0822,0,0,fast_0825,0,0,fast_0828,0,0,fast_082B,0,0,0,0,0,0,0,0,0,fast_0835,0,0,fast_0838,0,0,fast_083B,0,0,fast_083E,0,0,fast_0841,0,0,0,0,0,0,0,fast_0849,0,0,fast_084C,0,0,0,0,fast_0851,0,0,0,0,0,0,0,0,0,0,0,fast_085D,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0875,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0886,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0898,0,0,0,0,0,0,0,0,0,0,0,fast_08A4,0,0,0,0,fast_08A9,0,0,0,0,0,0,0,0,0,0,0,0,fast_08B6,0,0,fast_08B9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_08CB,0,0,fast_08CE,0,0,fast_08D1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_08F3,0,0,0,0,fast_08F8,0,0,0,0,0,0,fast_08FF,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0929,0,0,0,0,fast_092E,0,0,fast_0931,0,0,0,0,0,0,fast_0938,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0948,0,0,fast_094B,0,0,0,0,0,0,fast_0952,0,0,0,0,0,fast_0958,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0966,0,0,0,0,fast_096B,0,0,fast_096E,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_098B,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_09AD,0,0,0,fast_09B1,fast_09B2,0,0,0,0,0,0,0,0,0,0,fast_09BD,0,0,0,0,0,fast_09C3,0,fast_09C5,0,0,0,0,fast_09CA,0,0,0,0,0,0,0,0,0,0,0,fast_09D6,0,0,fast_09D9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_09E8,0,0,0,0,0,0,0,0,0,fast_09F2,0,0,0,0,0,0,fast_09F9,0,0,0,0,0,0,fast_0A00,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0A13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0A2D,0,0,fast_0A30,0,0,0,0,0,fast_0A36,0,0,fast_0A39,0,0,0,0,0,fast_0A3F,0,0,0,0,0,0,0,fast_0A47,0,0,0,0,0,0,0,fast_0A4F,0,0,fast_0A52,0,0,fast_0A55,0,0,0,fast_0A59,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0A6C,0,0,0,0,fast_0A71,0,0,0,0,0,0,0,0,0,0,fast_0A7C,0,0,0,fast_0A80,0,0,0,0,fast_0A85,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0A93,0,0,0,0,fast_0A98,0,0,0,0,0,fast_0A9E,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0AB1,0,0,0,0,fast_0AB6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0AD7,0,0,fast_0ADA,0,0,0,0,0,0,0,fast_0AE2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0AF2,0,0,0,fast_0AF6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0B08,0,0,fast_0B0B,0,0,fast_0B0E,0,0,fast_0B11,0,0,fast_0B14,0,0,fast_0B17,0,0,0,0,0,0,0,0,0,0,0,0,fast_0B24,0,0,fast_0B27,0,0,0,0,0,fast_0B2D,0,0,fast_0B30,0,0,fast_0B33,0,0,0,0,0,fast_0B39,0,0,fast_0B3C,0,0,fast_0B3F,0,0,0,0,0,0,0,fast_0B47,0,0,fast_0B4A,0,0,fast_0B4D,0,0,0,0,0,0,0,0,0,fast_0B57,0,0,0,0,0,fast_0B5D,0,0,fast_0B60,0,0,fast_0B63,0,0,fast_0B66,0,0,fast_0B69,0,0,0,0,0,0,0,fast_0B71,0,0,fast_0B74,0,0,fast_0B77,0,0,0,0,fast_0B7C,0,0,0,0,0,0,fast_0B83,0,0,fast_0B86,0,0,fast_0B89,0,0,0,0,0,0,fast_0B90,0,0,fast_0B93,0,0,0,0,0,0,0,0,0,0,fast_0B9E,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0BAE,0,0,0,0,0,fast_0BB4,0,0,fast_0BB7,0,0,0,0,0,0,0,0,0,0,0,fast_0BC3,0,0,fast_0BC6,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_0BD4,0,0,fast_0BD7,0,0,fast_0BDA,0,0,0,0,0,0,0,0,0,0,fast_0BE5,0,0,0,0,0,0,0,0,fast_0BEE,0,0,0,0,0,fast_0BF4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_1400,0,0,0,fast_1404,fast_1405,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_1424,0,0,fast_1427,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_1439,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_1452,0,0,fast_1455,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_1474,0,0,0,0,0,0,0,fast_147C,0,fast_147E,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_1491,0,0,fast_1494,0,0,0,fast_1498,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_14A9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_14BD,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_14CB,fast_14CC,0,0,0,0,0,0,0,0,0,0,0,fast_14D8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_1504,0,0,0,fast_1508,0,0,0,0,0,0,fast_150F,0,0,0,0,0,0,0,0,0,0,fast_151A,0,0,0,0,0,0,0,0,0,fast_1524,0,0,fast_1527,0,0,fast_152A,0,0,0,0,0,fast_1530,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_1545,0,0,0,0,fast_154A,0,0,0,0,0,0,0,0,0,fast_1554,0,0,0,0,0,fast_155A,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_1569,0,0,0,0,0,fast_156F,0,0,0,0,0,fast_1575,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_1590,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_15A4,0,0,0,0,fast_15A9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_15BD,0,0,0,fast_15C1,0,0,0,fast_15C5,0,fast_15C7,0,0,0,0,0,0,0,0,0,0,0,fast_15D3,0,0,fast_15D6,fast_15D7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_15F6,0,0,fast_15F9,0,0,0,0,0,fast_15FF,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_1611,0,0,0,0,0,0,fast_1618,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_163C,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_164B,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_1663,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_1671,0,0,fast_1674,0,0,0,0,fast_1679,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_168F,0,0,0,0,0,0,0,0,fast_1698,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_16AA,0,0,0,0,0,0,0,0,0,0,0,0,fast_16B7,0,0,0,fast_16BB,0,0,fast_16BE,0,0,fast_16C1,0,0,0,0,0,0,0,fast_16C9,0,0,0,0,0,0,0,0,0,0,fast_16D4,0,0,fast_16D7,0,0,fast_16DA,0,0,0,0,0,0,0,0,fast_16E3,0,0,0,0,0,0,0,0,0,0,fast_16EE,0,0,fast_16F1,0,0,0,0,fast_16F6,0,0,fast_16F9,0,0,0,0,0,fast_16FF,0,0,0,0,0,fast_1705,0,0,0,fast_1709,0,0,0,0,0,0,0,fast_1711,0,0,0,0,0,0,0,0,0,0,fast_171C,0,0,0,0,0,0,0,0,0,0,fast_1727,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_1747,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_176D,0,0,fast_1770,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_1785,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_17A4,0,0,0,0,0,fast_17AA,0,0,0,0,0,0,0,0,0,fast_17B4,0,0,0,0,0,0,0,0,0,0,0,fast_17C0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_17DC,0,0,fast_17DF,0,0,0,0,0,0,0,0,0,0,0,fast_17EB,0,0,0,0,0,0,0,0,0,0,0,fast_17F7,0,0,fast_17FA,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_1820,0,0,0,0,0,0,0,fast_1828,0,0,fast_182B,0,0,0,0,0,fast_1831,0,0,fast_1834,0,0,fast_1837,0,0,fast_183A,0,0,fast_183D,0,0,0,fast_1841,0,0,0,0,0,0,0,0,fast_184A,0,fast_184C,0,0,0,0,0,0,0,fast_1854,0,fast_1856,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_1871,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_1888,0,0,0,0,0,0,0,0,fast_1891,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_18A9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_18B8,0,0,0,0,0,0,0,fast_18C0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_18D1,0,0,0,0,0,0,0,0,0,0,fast_18DC,0,0,fast_18DF,0,0,0,0,0,0,0,fast_18E7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_18FA,0,0,0,0,0,0,0,0,0,fast_1904,0,0,0,0,0,fast_190A,0,0,fast_190D,0,0,fast_1910,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_1925,0,0,0,0,0,fast_192B,0,0,0,0,0,fast_1931,0,0,0,0,0,0,0,0,0,0,fast_193C,0,0,0,0,0,0,0,0,0,0,fast_1947,0,0,0,0,0,0,0,0,fast_1950,0,0,0,0,0,fast_1956,0,0,fast_1959,0,0,fast_195C,0,0,fast_195F,0,0,fast_1962,0,0,fast_1965,0,0,fast_1968,0,0,0,0,0,fast_196E,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_197C,0,0,fast_197F,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_19AC,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_19D1,0,fast_19D3,0,0,0,fast_19D7,0,0,0,0,fast_19DC,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_19EC,0,0,0,0,0,0,0,0,fast_19F5,0,0,0,0,fast_19FA,0,0,0,0,fast_19FF,0,0,0,0,0,0,fast_1A06,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_1A32,0,0,0,0,0,0,0,0,fast_1A3B,0,0,0,0,0,0,0,0,0,0,0,fast_1A47,0,0,fast_1A4A,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_1A5F,0,0,0,0,0,0,0,0,0,fast_1A69,0,fast_1A6B,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,fast_1A7F,0,0,fast_1A82,0,0,0,0,0,0,0,fast_1A8A,fast_1A8B,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };

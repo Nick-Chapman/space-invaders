@@ -203,6 +203,7 @@ data Instruction b -- op+args
   = Ins0 Op0
   | Ins1 Op1 b
   | Ins2 Op2 b b
+  deriving (Functor)
 
 instance Show b => Show (Instruction b) where
   show i = prettyInstruction i

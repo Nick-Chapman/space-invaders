@@ -50,35 +50,11 @@ static char* version() {
   return buf;
 }
 
-static bool dump_state_every_instruction = false;
-
-static void dump_state(const char* instruction, u16 pcAfterInstructionDecode) {
-  printf("%8ld  [%08ld] "
-         "PC:%04X "
-         "A:%02X B:%02X C:%02X D:%02X E:%02X HL:%02X%02X SP:%02X%02X "
-         "SZAPY:%1d%1d%1d%1d%1d"
-         " : %s\n",
-         icount,
-         cycles,
-         pcAfterInstructionDecode, //odd, but matches existing traces!
-         A,B,C,D,E,H,L,SPH,SPL,
-         FlagS,FlagZ,FlagA,FlagP,FlagCY,
-         instruction
-         );
-}
-
-void f_instruction(const char* instruction, u16 pcAfterInstructionDecode) {
-  if (dump_state_every_instruction) {
-    dump_state(instruction,pcAfterInstructionDecode);
-  }
-}
-
 static Func initial_program() {
   return (Func)jump16(0x0);
 }
 
 int test1 () {
-  dump_state_every_instruction = true;
   Func fn = initial_program();
   while (fn) {
     fn = (Func)fn();
@@ -92,7 +68,6 @@ int test1 () {
 #define TWO_MEG 2000000
 
 int speed () {
-  dump_state_every_instruction = false;
   const int sim_seconds_to_run_for = 120; //2 minutes
   Func fn = initial_program();
   u64 tic = time();

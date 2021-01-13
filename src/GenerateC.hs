@@ -11,7 +11,7 @@ import Data.List (intercalate)
 import Data.Map (Map)
 import Data.Maybe (fromJust)
 import HiLo (HiLo(..))
-import InstructionSet (Op(Op0,Op1),Op0(RST),Op1(IN,OUT),Instruction(Ins1),decode)
+import InstructionSet (Op(Op0,Op1),Op0(RST),Op1(IN,OUT),Instruction(..),decode)
 import Residual (Exp1(..),Exp8(..),Exp16(..),Exp17(..),Program(..),AVar,Lay,vert,lay,tab)
 import Rom (Rom)
 import Static (oneStepReach,searchReach,startPoints,returnAddresses)
@@ -256,6 +256,11 @@ fastProgramsOfRom rom = do
   return inlinedSharingJoins
 
 
+data PatMarker = PatMarker
+instance Show PatMarker where show PatMarker = "%02X"
+
+convertI :: Instruction a -> CExp
+convertI i = LitS $ show (fmap (const PatMarker) i)
 
 convertProgram :: (Addr -> CName) -> Program  -> [CStat]
 convertProgram nameOfDef = convert
@@ -264,7 +269,14 @@ convertProgram nameOfDef = convert
       S_AtRef a next -> Comment ("#at: " ++ show a) : convert next
       S_MarkReturnAddress a next -> Comment ("#mark-return: " ++ show a) : convert next
       S_TraceInstruction _cpu i pcAfterDecode next ->
-        Expression (call "instruction" [LitS $ show i, convert16 pcAfterDecode]) : convert next
+        case i of
+          Ins0 _ ->
+            Expression (call "instruction0" [convertI i, convert16 pcAfterDecode]) : convert next
+          Ins1 _ b1 ->
+            Expression (call "instruction1" [convertI i, convert8 b1, convert16 pcAfterDecode]) : convert next
+          Ins2 _ b1 b2 ->
+            Expression (call "instruction2" [convertI i, convert8 b2, convert8 b1, convert16 pcAfterDecode]) : convert next
+
       S_Advance n next -> Expression (call "advance" [LitI n]) : convert next
       S_Jump a -> [Return $ convertJump a]
       S_If i t e -> [If (convert1 i) (Block (convert t)) (Block (convert e))]

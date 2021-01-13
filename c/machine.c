@@ -10,13 +10,70 @@
 #define noinline __attribute__ ((noinline))
 
 
-#ifdef TRACE
-#define instruction(x...) f_instruction(x)
-#else
-#define instruction(x...) {}
-#endif
+void dump_state ( const char* instruction,
+                  u16 pcAfterInstructionDecode,
+                  u8 A, u8 B, u8 C, u8 D, u8 E, u8 H, u8 L, u8 SPH, u8 SPL,
+                  u1 FlagS, u1 FlagZ, u1 FlagA, u1 FlagP, u1 FlagCY
+                  ) {
+  printf("%8ld  [%08ld] "
+         "PC:%04X "
+         "A:%02X B:%02X C:%02X D:%02X E:%02X HL:%02X%02X SP:%02X%02X "
+         "SZAPY:%1d%1d%1d%1d%1d"
+         " : %s\n",
+         icount,
+         cycles,
+         pcAfterInstructionDecode, //odd, but matches existing traces!
+         A,B,C,D,E,H,L,SPH,SPL,
+         FlagS,FlagZ,FlagA,FlagP,FlagCY,
+         instruction
+         );
+}
 
-void f_instruction(const char*, u16);
+u1 FlagS,FlagZ,FlagA,FlagP,FlagCY;
+u8 PCH,PCL;
+u8 A,B,C,D,E,H,L,SPH,SPL;
+u8 Shifter_HI,Shifter_LO,Shifter_OFF;
+
+void f_instruction0(const char* ipat, u16 pcAfterInstructionDecode) {
+  dump_state(ipat,
+             pcAfterInstructionDecode,
+             A,B,C,D,E,H,L,SPH,SPL,
+             FlagS,FlagZ,FlagA,FlagP,FlagCY
+             );
+}
+
+void f_instruction1(const char* ipat, u8 b1, u16 pcAfterInstructionDecode) {
+  static char instruction[256];
+  sprintf(instruction,ipat,b1);
+  dump_state(instruction,
+              pcAfterInstructionDecode,
+              A,B,C,D,E,H,L,SPH,SPL,
+              FlagS,FlagZ,FlagA,FlagP,FlagCY
+              );
+}
+
+void f_instruction2(const char* ipat, u8 b2, u8 b1, u16 pcAfterInstructionDecode) {
+  static char instruction[256];
+  sprintf(instruction,ipat,b2,b1);
+  dump_state(instruction,
+             pcAfterInstructionDecode,
+             A,B,C,D,E,H,L,SPH,SPL,
+             FlagS,FlagZ,FlagA,FlagP,FlagCY
+             );
+}
+
+
+#ifdef TRACE
+//#define instruction(x...) f_instruction(x)
+#define instruction0(x...) f_instruction0(x)
+#define instruction1(x...) f_instruction1(x)
+#define instruction2(x...) f_instruction2(x)
+#else
+//#define instruction(x...) {}
+#define instruction0(x...) {}
+#define instruction1(x...) {}
+#define instruction2(x...) {}
+#endif
 
 #define HALF_FRAME_CYCLES (2000000 / 120)
 int credit = HALF_FRAME_CYCLES;

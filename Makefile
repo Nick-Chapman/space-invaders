@@ -1,13 +1,21 @@
 
-top: test1
+top: testB
 
 #OPT = -O2 # uncomment this for speedup: x280 -> x800 (at the cost of slower compiles)
 
 CFLAGS = -Wall -Werror -Winline $(OPT) -I /usr/include/SDL2
 LDFLAGS = -lSDL2
 
-test1: invaders.exe
-	./invaders.exe test1 > trace/test1.out
+testA: invaders.exe
+	./invaders.exe testA > trace/test1.out
+	git diff trace/test1.out
+
+testB: invaders.exe
+	./invaders.exe testB > trace/test1.out
+	git diff trace/test1.out
+
+testC: invaders.exe
+	./invaders.exe testC > trace/test1.out
 	git diff trace/test1.out
 
 speed: speedA speedB speedC

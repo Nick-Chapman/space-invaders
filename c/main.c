@@ -26,10 +26,15 @@ int main (int argc, char* argv[]) {
     die;
   }
   char* arg = argv[1];
-  if (0 == strcmp(arg,"test1")) return test1();
+
+  if (0 == strcmp(arg,"testA")) { use_per_address_programs = false; return test1(); }
+  else if (0 == strcmp(arg,"testB")) return test1();
+  else if (0 == strcmp(arg,"testC")) { use_fast_programs = true; return test1(); }
+
   else if (0 == strcmp(arg,"speedA")) { use_per_address_programs = false; return speed(); }
   else if (0 == strcmp(arg,"speedB")) return speed();
   else if (0 == strcmp(arg,"speedC")) { use_fast_programs = true; return speed(); }
+
   else if (0 == strcmp(arg,"play0")) { use_per_address_programs = false; return play(); }
   else if (0 == strcmp(arg,"play")) return play();
   else {

@@ -1,9 +1,9 @@
 
 top: test
 
-all: invaders-opt0.exe invaders-opt1.exe invaders-opt2.exe
+all: invaders-opt0.exe invaders-opt1.exe
 
-speed: speedA0 speedA1 speedA2 speedB0 speedB1 speedB2 speedC0 speedC1 speedC2
+speed: speedA0 speedA1 speedB0 speedB1 speedC0 speedC1
 test: testC0
 play: playC1
 
@@ -16,9 +16,6 @@ speed%0: invaders-opt0.exe
 speed%1: invaders-opt1.exe
 	@ ./$< speed$*
 
-speed%2: invaders-opt2.exe
-	@ ./$< speed$*
-
 
 # run test & diff against expected output: mode(%)=A/B/C, opt=0, needs TRACE
 test%0: invaders-opt0-TRACE.exe
@@ -26,7 +23,7 @@ test%0: invaders-opt0-TRACE.exe
 	git diff trace/test1.out
 
 
-# play: mode(%)=A/B/C, opt=0/2
+# play: mode(%)=A/B/C, opt=0/1
 play%0: invaders-opt0.exe
 	./$< play$*
 
@@ -34,7 +31,7 @@ play%1: invaders-opt1.exe
 	./$< play$*
 
 
-# compile/link: opt(%)=0/2, with/without TRACE
+# compile/link: opt(%)=0/1/2/3, with/without TRACE
 invaders-opt%.exe: c/main-opt%.o c/program-opt%.o
 	gcc $^ -o $@ -lSDL2
 

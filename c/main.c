@@ -83,18 +83,18 @@ int speed () {
   int speedup = mhz/2;
   printf("version=%s, "
          "sim-time(secs)=%d, "
-         "cycles=%ld, "
+         //"cycles=%ld, "
          //"duration(us)=%ld, "
          "duration(s)=%.3g, "
-         //"mhz=%d, "
-         "speedup=x%d"
+         "mhz(effective)=%d, "
+         "speedup(over 2Mhz)=x%d"
          "\n",
          version(),
          secs,
-         cycles,
+         //cycles,
          //duration_us,
          duration_s,
-         //mhz,
+         mhz,
          speedup
          );
   return 0;

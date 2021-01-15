@@ -128,7 +128,6 @@ inline static u8 e8_read_mem(u16 a) {
 }
 
 static bool half = false;
-static int interrupts = 0;
 
 static Control op_CF (); // defined in generated code
 static Control op_D7 (); // defined in generated code
@@ -174,17 +173,16 @@ extern Func fast_progs_array [];
 #ifdef MODE_A
 char mode[] = "A";
 
-noinline Control jumpInterrupt(u16 pc, Func f) {
+noinline Control jumpInterrupt(u16 pc, Func prog) {
   credit += HALF_FRAME_CYCLES;
   half ^= true;
-  interrupts++;
   if (interrupts_enabled) {
     interrupts_enabled = false;
     PCH = pc >> 8;
     PCL = pc & 0xFF;
     return (Control)(half ? op_CF : op_D7);
   }
-  return (Control)f;
+  return (Control)prog;
 }
 
 noinline Control jump16(u16 pc) {
@@ -193,15 +191,12 @@ noinline Control jump16(u16 pc) {
   if (byte==0xD3) { //OUT
     u8 imm1 = mem[pc+1];
     Func prog = output_instruction_array[imm1];
+    u16 pcAfterDecode = pc+2;
+    PCH = pcAfterDecode >> 8;
+    PCL = pcAfterDecode & 0xFF;
     if (credit <= 0) {
-      u16 pcAfterDecode = pc+2;
-      PCH = pcAfterDecode >> 8;
-      PCL = pcAfterDecode & 0xFF;
       return jumpInterrupt(pc,prog);
     } else {
-      u16 pcAfterDecode = pc+2;
-      PCH = pcAfterDecode >> 8;
-      PCL = pcAfterDecode & 0xFF;
       return (Control)prog;
     }
 
@@ -209,31 +204,24 @@ noinline Control jump16(u16 pc) {
 
     u8 imm1 = mem[pc+1];
     Func prog = input_instruction_array[imm1];
+    u16 pcAfterDecode = pc+2;
+    PCH = pcAfterDecode >> 8;
+    PCL = pcAfterDecode & 0xFF;
     if (credit <= 0) {
-      u16 pcAfterDecode = pc+2;
-      PCH = pcAfterDecode >> 8;
-      PCL = pcAfterDecode & 0xFF;
       return jumpInterrupt(pc,prog);
     } else {
-      u16 pcAfterDecode = pc+2;
-      PCH = pcAfterDecode >> 8;
-      PCL = pcAfterDecode & 0xFF;
       return (Control)prog;
     }
 
   } else { //other op-code
 
     Func prog = ops_array[byte];
-
+    u16 pcAfterDecode = pc+1;
+    PCH = pcAfterDecode >> 8;
+    PCL = pcAfterDecode & 0xFF;
     if (credit <= 0) {
-      u16 pcAfterDecode = pc+1;
-      PCH = pcAfterDecode >> 8;
-      PCL = pcAfterDecode & 0xFF;
       return jumpInterrupt(pc,prog);
     } else {
-      u16 pcAfterDecode = pc+1;
-      PCH = pcAfterDecode >> 8;
-      PCL = pcAfterDecode & 0xFF;
       return (Control)prog;
     }
   }
@@ -253,7 +241,6 @@ char mode[] = "B";
 noinline Control jumpInterrupt(u16 pc, Func f) {
   credit += HALF_FRAME_CYCLES;
   half ^= true;
-  interrupts++;
   if (interrupts_enabled) {
     interrupts_enabled = false;
     PCH = pc >> 8;
@@ -292,7 +279,6 @@ char mode[] = "C";
 noinline Control jumpInterrupt(u16 pc, Func f) {
   credit += HALF_FRAME_CYCLES;
   half ^= true;
-  interrupts++;
   if (interrupts_enabled) {
     interrupts_enabled = false;
     PCH = pc >> 8;

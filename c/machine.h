@@ -36,11 +36,11 @@ typedef enum ButtonE
 
 long icount;
 long cycles;
-bool use_per_address_programs;
-bool use_fast_programs;
 
 extern u8 mem [];
 
 Control jump16 (u16); // provided in machine.c ; used in generated code & main.c
 
 u1 e1_is_pressed(Button); // provided in main.c ; used by generated code
+
+extern char mode [];

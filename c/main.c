@@ -18,7 +18,6 @@ static u64 time() { //in micro-seconds
 }
 
 static int opt = OPT;
-static char mode = 'B';
 
 int main (int argc, char* argv[]) {
   if (argc != 2) {
@@ -27,17 +26,9 @@ int main (int argc, char* argv[]) {
   }
   char* arg = argv[1];
 
-  if (0 == strcmp(arg,"testA")) { mode = 'A'; use_per_address_programs = false; return test1(); }
-  else if (0 == strcmp(arg,"testB")) return test1();
-  else if (0 == strcmp(arg,"testC")) { mode = 'C'; use_fast_programs = true; return test1(); }
-
-  else if (0 == strcmp(arg,"speedA")) { mode = 'A'; use_per_address_programs = false; return speed(); }
-  else if (0 == strcmp(arg,"speedB")) return speed();
-  else if (0 == strcmp(arg,"speedC")) { mode = 'C'; use_fast_programs = true; return speed(); }
-
-  else if (0 == strcmp(arg,"playA")) { mode = 'A'; use_per_address_programs = false; return play(); }
-  else if (0 == strcmp(arg,"playB")) return play();
-  else if (0 == strcmp(arg,"playC")) { mode = 'C'; use_fast_programs = true; return play(); }
+  if (0 == strcmp(arg,"test")) return test1();
+  else if (0 == strcmp(arg,"speed")) return speed();
+  else if (0 == strcmp(arg,"play")) return play();
   else {
     printf("unexpected command line arg: \"%s\"\n",arg);
     die;
@@ -46,7 +37,7 @@ int main (int argc, char* argv[]) {
 
 static char* version() {
   static char buf[256];
-  sprintf(buf,"mode=%c,opt=%d",mode,opt);
+  sprintf(buf,"mode=%s,opt=%d",mode,opt);
   return buf;
 }
 
@@ -67,34 +58,25 @@ int test1 () {
 #define TWO_MEG 2000000
 
 int speed () {
-  const int sim_seconds_to_run_for = 120; //2 minutes
+  const int sim_seconds_to_run_for = 600; //10 minutes
   Func fn = initial_program();
-  u64 tic = time();
+  u64 toc = time();
   cycles = 0;
   while (fn) {
     fn = (Func)fn();
     if (cycles > TWO_MEG * sim_seconds_to_run_for) break;
   }
-  u64 toc = time();
-  clock_t duration_us = toc - tic;
+  u64 tic = time();
+  clock_t duration_us = tic - toc;
   double duration_s = duration_us / (double)MEG;
   int mhz = cycles/duration_us;
-  int secs = cycles/TWO_MEG;
   int speedup = mhz/2;
   printf("version=%s, "
-         "sim-time(secs)=%d, "
-         //"cycles=%ld, "
-         //"duration(us)=%ld, "
          "duration(s)=%.3g, "
-         "mhz(effective)=%d, "
-         "speedup(over 2Mhz)=x%d"
+         "speedup=x%d"
          "\n",
          version(),
-         secs,
-         //cycles,
-         //duration_us,
          duration_s,
-         mhz,
          speedup
          );
   return 0;

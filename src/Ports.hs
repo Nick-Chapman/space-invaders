@@ -5,16 +5,16 @@ import Control.Monad (forM_)
 import Buttons (But(..))
 import Effect (Eff(..))
 import Phase (Byte)
-import Data.Word8 (Word8)
 import Sounds (Sound(..))
 import qualified Shifter
 
-inputPort :: Word8 -> Eff p (Byte p)
-inputPort = \case
-  1 -> inputPort1
-  2 -> inputPort2
-  3 -> getShifterAtOffset
-  n -> UnknownInput n
+inputPort :: Byte p -> Eff p (Byte p)
+inputPort b = do
+  CaseByte b [1,2,3] >>= \case
+    1 -> inputPort1
+    2 -> inputPort2
+    3 -> getShifterAtOffset
+    n -> UnknownInput n
 
 inputPort1 :: Eff p (Byte p)
 inputPort1 = do
@@ -40,13 +40,14 @@ inputPort2 = do
   x <- GetButton Dip7_coinInfoOff >>= UpdateBit x 7
   return x
 
-outputPort :: Word8 -> Byte p -> Eff p ()
-outputPort port byte = case port of
-  2 -> SetShifterReg Shifter.OFF byte
-  3 -> soundFromPort port3 byte
-  4 -> fillShifter byte
-  5 -> soundFromPort port5 byte
-  n -> UnknownOutput n byte
+outputPort :: Byte p -> Byte p -> Eff p ()
+outputPort port byte = do
+  CaseByte port [2,3,4,5,6] >>= \case
+    2 -> SetShifterReg Shifter.OFF byte
+    3 -> soundFromPort port3 byte
+    4 -> fillShifter byte
+    5 -> soundFromPort port5 byte
+    n -> UnknownOutput n byte
 
 soundFromPort :: (Int -> Sound) -> Byte p -> Eff p ()
 soundFromPort soundOfPortBit byte = do

@@ -200,6 +200,7 @@ afterProgram :: Program -> [Program]
 afterProgram = \case
   S_Jump{} -> []
   S_If _ p1 p2 -> [p1,p2]
+  S_Switch8 _ branches -> [p | (_,p) <- branches ]
   S_AssignReg _ _ p -> [p]
   S_AssignShifterReg _ _ p -> [p]
   S_AssignFlag _ _ p -> [p]
@@ -225,6 +226,7 @@ programLength = z
     z = \case
       S_Jump{} -> 0
       S_If _ p1 p2 -> max (z p1) (z p2)
+      S_Switch8 _ branches -> maximum ( 0 : [ z p | (_,p) <- branches ] )
       S_AssignReg _ _ p -> z p
       S_AssignShifterReg _ _ p -> z p
       S_AssignFlag _ _ p -> z p

@@ -8535,6 +8535,58 @@ Control op_D2 ()
     }
 }
 
+Control op_D3 ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    instruction1 ( ( a4 >> 8 ),( a4 & 0xFF ),A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"OUT  %02X",a3 );
+    u8 a5 = A ;
+    switch (a3) {
+      case 2 :
+      {
+          advance ( 10 );
+          Shifter_OFF = a5;
+          return jump16 ( a4 );
+      }
+      case 3 :
+      {
+          sound_control ( "Ufo",( ( a5 >> 0 ) & 0x01 ) );
+          sound_control ( "Shot",( ( a5 >> 1 ) & 0x01 ) );
+          sound_control ( "PlayerDie",( ( a5 >> 2 ) & 0x01 ) );
+          sound_control ( "InvaderDie",( ( a5 >> 3 ) & 0x01 ) );
+          sound_control ( "ExtraLife",( ( a5 >> 4 ) & 0x01 ) );
+          advance ( 10 );
+          return jump16 ( a4 );
+      }
+      case 4 :
+      {
+          advance ( 10 );
+          Shifter_HI = a5;
+          Shifter_LO = Shifter_HI;
+          return jump16 ( a4 );
+      }
+      case 5 :
+      {
+          sound_control ( "FleetMovement1",( ( a5 >> 0 ) & 0x01 ) );
+          sound_control ( "FleetMovement2",( ( a5 >> 1 ) & 0x01 ) );
+          sound_control ( "FleetMovement3",( ( a5 >> 2 ) & 0x01 ) );
+          sound_control ( "FleetMovement4",( ( a5 >> 3 ) & 0x01 ) );
+          sound_control ( "UfoHit",( ( a5 >> 4 ) & 0x01 ) );
+          advance ( 10 );
+          return jump16 ( a4 );
+      }
+      case 6 :
+      {
+          unknown_output ( 6,a5 );
+          advance ( 10 );
+          return jump16 ( a4 );
+      }
+      default: { printf("unexpected switch value: %d\n",a3); die; }
+    }
+}
+
 Control op_D4 ()
 {
     u8 a1 = PCH ;
@@ -8696,6 +8748,39 @@ Control op_DA ()
     }
 }
 
+Control op_DB ()
+{
+    u8 a1 = PCH ;
+    u8 a2 = PCL ;
+    u8 a3 = e8_read_mem ( ( ( a1 << 8 ) | a2 ) ) ;
+    u16 a4 = ( ( ( a1 << 8 ) | a2 ) + 1 ) ;
+    instruction1 ( ( a4 >> 8 ),( a4 & 0xFF ),A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"IN   %02X",a3 );
+    switch (a3) {
+      case 1 :
+      {
+          advance ( 10 );
+          A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,( ! e1_is_pressed ( CoinEntry ) ) ),1,e1_is_pressed ( P2start ) ),2,e1_is_pressed ( P1start ) ),4,e1_is_pressed ( P1shoot ) ),5,e1_is_pressed ( P1left ) ),6,e1_is_pressed ( P1right ) );
+          return jump16 ( a4 );
+      }
+      case 2 :
+      {
+          advance ( 10 );
+          A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_is_pressed ( Dip3_livesLow ) ),1,e1_is_pressed ( Dip5_livesHigh ) ),2,e1_is_pressed ( Tilt ) ),3,e1_is_pressed ( Dip6_extraShipEarly ) ),4,e1_is_pressed ( P2shoot ) ),5,e1_is_pressed ( P2left ) ),6,e1_is_pressed ( P2right ) ),7,e1_is_pressed ( Dip7_coinInfoOff ) );
+          return jump16 ( a4 );
+      }
+      case 3 :
+      {
+          u8 a5 = ( Shifter_OFF & 0x07 ) ;
+          u8 a6 = ( ( ( u8 ) ( ~ Shifter_OFF ) ) & 0x07 ) ;
+          u8 a7 = ( ( Shifter_HI << a5 ) | ( ( Shifter_LO >> a6 ) >> 0x01 ) ) ;
+          advance ( 10 );
+          A = a7;
+          return jump16 ( a4 );
+      }
+      default: { printf("unexpected switch value: %d\n",a3); die; }
+    }
+}
+
 Control op_DC ()
 {
     u8 a1 = PCH ;
@@ -8780,6 +8865,25 @@ Control op_DE ()
     FlagP = e1_parity ( ( a6 & 0xFF ) );
     FlagCY = ( ! ( ( ( a6 >> 8 ) >> 0 ) & 0x01 ) );
     return jump16 ( a4 );
+}
+
+Control op_DF ()
+{
+    instruction0 ( PCH,PCL,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"RST  3" );
+    u8 a1 = PCH ;
+    u8 a2 = SPH ;
+    u8 a3 = SPL ;
+    u16 a4 = ( ( ( a2 << 8 ) | a3 ) + -1 ) ;
+    mem_write ( a4,a1 );
+    u8 a5 = PCL ;
+    u8 a6 = ( a4 >> 8 ) ;
+    u8 a7 = ( a4 & 0xFF ) ;
+    u16 a8 = ( ( ( a6 << 8 ) | a7 ) + -1 ) ;
+    mem_write ( a8,a5 );
+    advance ( 4 );
+    SPH = ( a8 >> 8 );
+    SPL = ( a8 & 0xFF );
+    return jumpDirect ( 0x0018,0,0 );
 }
 
 Control op_E0 ()
@@ -9116,6 +9220,25 @@ Control op_EE ()
     return jump16 ( a4 );
 }
 
+Control op_EF ()
+{
+    instruction0 ( PCH,PCL,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"RST  5" );
+    u8 a1 = PCH ;
+    u8 a2 = SPH ;
+    u8 a3 = SPL ;
+    u16 a4 = ( ( ( a2 << 8 ) | a3 ) + -1 ) ;
+    mem_write ( a4,a1 );
+    u8 a5 = PCL ;
+    u8 a6 = ( a4 >> 8 ) ;
+    u8 a7 = ( a4 & 0xFF ) ;
+    u16 a8 = ( ( ( a6 << 8 ) | a7 ) + -1 ) ;
+    mem_write ( a8,a5 );
+    advance ( 4 );
+    SPH = ( a8 >> 8 );
+    SPL = ( a8 & 0xFF );
+    return jumpDirect ( 0x0028,0,0 );
+}
+
 Control op_F0 ()
 {
     instruction0 ( PCH,PCL,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"RET  P" );
@@ -9266,6 +9389,25 @@ Control op_F6 ()
     FlagP = e1_parity ( a6 );
     FlagCY = false;
     return jump16 ( a4 );
+}
+
+Control op_F7 ()
+{
+    instruction0 ( PCH,PCL,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"RST  6" );
+    u8 a1 = PCH ;
+    u8 a2 = SPH ;
+    u8 a3 = SPL ;
+    u16 a4 = ( ( ( a2 << 8 ) | a3 ) + -1 ) ;
+    mem_write ( a4,a1 );
+    u8 a5 = PCL ;
+    u8 a6 = ( a4 >> 8 ) ;
+    u8 a7 = ( a4 & 0xFF ) ;
+    u16 a8 = ( ( ( a6 << 8 ) | a7 ) + -1 ) ;
+    mem_write ( a8,a5 );
+    advance ( 4 );
+    SPH = ( a8 >> 8 );
+    SPL = ( a8 & 0xFF );
+    return jumpDirect ( 0x0030,slow_0030,0 );
 }
 
 Control op_F8 ()
@@ -9420,126 +9562,26 @@ Control op_FE ()
     return jump16 ( a4 );
 }
 
-Func ops_array [ 256 ] = { op_00,op_01,op_02,op_03,op_04,op_05,op_06,op_07,op_08,op_09,op_0A,op_0B,op_0C,op_0D,op_0E,op_0F,op_10,op_11,op_12,op_13,op_14,op_15,op_16,op_17,op_18,op_19,op_1A,op_1B,op_1C,op_1D,op_1E,op_1F,op_20,op_21,op_22,op_23,op_24,op_25,op_26,op_27,op_28,op_29,op_2A,op_2B,op_2C,op_2D,op_2E,op_2F,op_30,op_31,op_32,op_33,op_34,op_35,op_36,op_37,op_38,op_39,op_3A,op_3B,op_3C,op_3D,op_3E,op_3F,op_40,op_41,op_42,op_43,op_44,op_45,op_46,op_47,op_48,op_49,op_4A,op_4B,op_4C,op_4D,op_4E,op_4F,op_50,op_51,op_52,op_53,op_54,op_55,op_56,op_57,op_58,op_59,op_5A,op_5B,op_5C,op_5D,op_5E,op_5F,op_60,op_61,op_62,op_63,op_64,op_65,op_66,op_67,op_68,op_69,op_6A,op_6B,op_6C,op_6D,op_6E,op_6F,op_70,op_71,op_72,op_73,op_74,op_75,op_76,op_77,op_78,op_79,op_7A,op_7B,op_7C,op_7D,op_7E,op_7F,op_80,op_81,op_82,op_83,op_84,op_85,op_86,op_87,op_88,op_89,op_8A,op_8B,op_8C,op_8D,op_8E,op_8F,op_90,op_91,op_92,op_93,op_94,op_95,op_96,op_97,op_98,op_99,op_9A,op_9B,op_9C,op_9D,op_9E,op_9F,op_A0,op_A1,op_A2,op_A3,op_A4,op_A5,op_A6,op_A7,op_A8,op_A9,op_AA,op_AB,op_AC,op_AD,op_AE,op_AF,op_B0,op_B1,op_B2,op_B3,op_B4,op_B5,op_B6,op_B7,op_B8,op_B9,op_BA,op_BB,op_BC,op_BD,op_BE,op_BF,op_C0,op_C1,op_C2,op_C3,op_C4,op_C5,op_C6,op_C7,op_C8,op_C9,op_CA,op_CB,op_CC,op_CD,op_CE,op_CF,op_D0,op_D1,op_D2,0,op_D4,op_D5,op_D6,op_D7,op_D8,op_D9,op_DA,0,op_DC,op_DD,op_DE,0,op_E0,op_E1,op_E2,op_E3,op_E4,op_E5,op_E6,op_E7,op_E8,op_E9,op_EA,op_EB,op_EC,op_ED,op_EE,0,op_F0,op_F1,op_F2,op_F3,op_F4,op_F5,op_F6,0,op_F8,op_F9,op_FA,op_FB,op_FC,op_FD,op_FE,0 };
-
-Control output_00 ()
+Control op_FF ()
 {
-    instruction1 ( PCH,PCL,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"OUT  %02X",0x00 );
-    u8 a1 = A ;
-    unknown_output ( 0,a1 );
-    advance ( 10 );
-    return jump16 ( ( ( PCH << 8 ) | PCL ) );
+    instruction0 ( PCH,PCL,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"RST  7" );
+    u8 a1 = PCH ;
+    u8 a2 = SPH ;
+    u8 a3 = SPL ;
+    u16 a4 = ( ( ( a2 << 8 ) | a3 ) + -1 ) ;
+    mem_write ( a4,a1 );
+    u8 a5 = PCL ;
+    u8 a6 = ( a4 >> 8 ) ;
+    u8 a7 = ( a4 & 0xFF ) ;
+    u16 a8 = ( ( ( a6 << 8 ) | a7 ) + -1 ) ;
+    mem_write ( a8,a5 );
+    advance ( 4 );
+    SPH = ( a8 >> 8 );
+    SPL = ( a8 & 0xFF );
+    return jumpDirect ( 0x0038,slow_0038,0 );
 }
 
-Control output_01 ()
-{
-    instruction1 ( PCH,PCL,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"OUT  %02X",0x01 );
-    u8 a1 = A ;
-    unknown_output ( 1,a1 );
-    advance ( 10 );
-    return jump16 ( ( ( PCH << 8 ) | PCL ) );
-}
-
-Control output_02 ()
-{
-    instruction1 ( PCH,PCL,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"OUT  %02X",0x02 );
-    u8 a1 = A ;
-    advance ( 10 );
-    Shifter_OFF = a1;
-    return jump16 ( ( ( PCH << 8 ) | PCL ) );
-}
-
-Control output_03 ()
-{
-    instruction1 ( PCH,PCL,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"OUT  %02X",0x03 );
-    u8 a1 = A ;
-    sound_control ( "Ufo",( ( a1 >> 0 ) & 0x01 ) );
-    sound_control ( "Shot",( ( a1 >> 1 ) & 0x01 ) );
-    sound_control ( "PlayerDie",( ( a1 >> 2 ) & 0x01 ) );
-    sound_control ( "InvaderDie",( ( a1 >> 3 ) & 0x01 ) );
-    sound_control ( "ExtraLife",( ( a1 >> 4 ) & 0x01 ) );
-    advance ( 10 );
-    return jump16 ( ( ( PCH << 8 ) | PCL ) );
-}
-
-Control output_04 ()
-{
-    instruction1 ( PCH,PCL,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"OUT  %02X",0x04 );
-    u8 a1 = A ;
-    advance ( 10 );
-    Shifter_HI = a1;
-    Shifter_LO = Shifter_HI;
-    return jump16 ( ( ( PCH << 8 ) | PCL ) );
-}
-
-Control output_05 ()
-{
-    instruction1 ( PCH,PCL,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"OUT  %02X",0x05 );
-    u8 a1 = A ;
-    sound_control ( "FleetMovement1",( ( a1 >> 0 ) & 0x01 ) );
-    sound_control ( "FleetMovement2",( ( a1 >> 1 ) & 0x01 ) );
-    sound_control ( "FleetMovement3",( ( a1 >> 2 ) & 0x01 ) );
-    sound_control ( "FleetMovement4",( ( a1 >> 3 ) & 0x01 ) );
-    sound_control ( "UfoHit",( ( a1 >> 4 ) & 0x01 ) );
-    advance ( 10 );
-    return jump16 ( ( ( PCH << 8 ) | PCL ) );
-}
-
-Control output_06 ()
-{
-    instruction1 ( PCH,PCL,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"OUT  %02X",0x06 );
-    u8 a1 = A ;
-    unknown_output ( 6,a1 );
-    advance ( 10 );
-    return jump16 ( ( ( PCH << 8 ) | PCL ) );
-}
-
-Func output_instruction_array [ 0x07 ] = { output_00,output_01,output_02,output_03,output_04,output_05,output_06 };
-
-Control input_00 ()
-{
-    instruction1 ( PCH,PCL,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"IN   %02X",0x00 );
-    advance ( 10 );
-    A = e8_unknown_input ( 0 );
-    return jump16 ( ( ( PCH << 8 ) | PCL ) );
-}
-
-Control input_01 ()
-{
-    instruction1 ( PCH,PCL,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"IN   %02X",0x01 );
-    advance ( 10 );
-    A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,( ! e1_is_pressed ( CoinEntry ) ) ),1,e1_is_pressed ( P2start ) ),2,e1_is_pressed ( P1start ) ),4,e1_is_pressed ( P1shoot ) ),5,e1_is_pressed ( P1left ) ),6,e1_is_pressed ( P1right ) );
-    return jump16 ( ( ( PCH << 8 ) | PCL ) );
-}
-
-Control input_02 ()
-{
-    instruction1 ( PCH,PCL,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"IN   %02X",0x02 );
-    advance ( 10 );
-    A = e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x00,0,e1_is_pressed ( Dip3_livesLow ) ),1,e1_is_pressed ( Dip5_livesHigh ) ),2,e1_is_pressed ( Tilt ) ),3,e1_is_pressed ( Dip6_extraShipEarly ) ),4,e1_is_pressed ( P2shoot ) ),5,e1_is_pressed ( P2left ) ),6,e1_is_pressed ( P2right ) ),7,e1_is_pressed ( Dip7_coinInfoOff ) );
-    return jump16 ( ( ( PCH << 8 ) | PCL ) );
-}
-
-Control input_03 ()
-{
-    instruction1 ( PCH,PCL,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"IN   %02X",0x03 );
-    u8 a1 = ( Shifter_OFF & 0x07 ) ;
-    u8 a2 = ( ( ( u8 ) ( ~ Shifter_OFF ) ) & 0x07 ) ;
-    u8 a3 = ( ( Shifter_HI << a1 ) | ( ( Shifter_LO >> a2 ) >> 0x01 ) ) ;
-    advance ( 10 );
-    A = a3;
-    return jump16 ( ( ( PCH << 8 ) | PCL ) );
-}
-
-Control input_04 ()
-{
-    instruction1 ( PCH,PCL,A,B,C,D,E,H,L,SPH,SPL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"IN   %02X",0x04 );
-    advance ( 10 );
-    A = e8_unknown_input ( 4 );
-    return jump16 ( ( ( PCH << 8 ) | PCL ) );
-}
-
-Func input_instruction_array [ 0x05 ] = { input_00,input_01,input_02,input_03,input_04 };
+Func ops_array [ 256 ] = { op_00,op_01,op_02,op_03,op_04,op_05,op_06,op_07,op_08,op_09,op_0A,op_0B,op_0C,op_0D,op_0E,op_0F,op_10,op_11,op_12,op_13,op_14,op_15,op_16,op_17,op_18,op_19,op_1A,op_1B,op_1C,op_1D,op_1E,op_1F,op_20,op_21,op_22,op_23,op_24,op_25,op_26,op_27,op_28,op_29,op_2A,op_2B,op_2C,op_2D,op_2E,op_2F,op_30,op_31,op_32,op_33,op_34,op_35,op_36,op_37,op_38,op_39,op_3A,op_3B,op_3C,op_3D,op_3E,op_3F,op_40,op_41,op_42,op_43,op_44,op_45,op_46,op_47,op_48,op_49,op_4A,op_4B,op_4C,op_4D,op_4E,op_4F,op_50,op_51,op_52,op_53,op_54,op_55,op_56,op_57,op_58,op_59,op_5A,op_5B,op_5C,op_5D,op_5E,op_5F,op_60,op_61,op_62,op_63,op_64,op_65,op_66,op_67,op_68,op_69,op_6A,op_6B,op_6C,op_6D,op_6E,op_6F,op_70,op_71,op_72,op_73,op_74,op_75,op_76,op_77,op_78,op_79,op_7A,op_7B,op_7C,op_7D,op_7E,op_7F,op_80,op_81,op_82,op_83,op_84,op_85,op_86,op_87,op_88,op_89,op_8A,op_8B,op_8C,op_8D,op_8E,op_8F,op_90,op_91,op_92,op_93,op_94,op_95,op_96,op_97,op_98,op_99,op_9A,op_9B,op_9C,op_9D,op_9E,op_9F,op_A0,op_A1,op_A2,op_A3,op_A4,op_A5,op_A6,op_A7,op_A8,op_A9,op_AA,op_AB,op_AC,op_AD,op_AE,op_AF,op_B0,op_B1,op_B2,op_B3,op_B4,op_B5,op_B6,op_B7,op_B8,op_B9,op_BA,op_BB,op_BC,op_BD,op_BE,op_BF,op_C0,op_C1,op_C2,op_C3,op_C4,op_C5,op_C6,op_C7,op_C8,op_C9,op_CA,op_CB,op_CC,op_CD,op_CE,op_CF,op_D0,op_D1,op_D2,op_D3,op_D4,op_D5,op_D6,op_D7,op_D8,op_D9,op_DA,op_DB,op_DC,op_DD,op_DE,op_DF,op_E0,op_E1,op_E2,op_E3,op_E4,op_E5,op_E6,op_E7,op_E8,op_E9,op_EA,op_EB,op_EC,op_ED,op_EE,op_EF,op_F0,op_F1,op_F2,op_F3,op_F4,op_F5,op_F6,op_F7,op_F8,op_F9,op_FA,op_FB,op_FC,op_FD,op_FE,op_FF };
 
 Control slow_0000 ()
 {

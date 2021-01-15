@@ -5,13 +5,13 @@ import Prelude hiding (init)
 
 import Addr (Addr)
 import Byte (Byte)
-import Compile (compileOp,compileAt,compileInstruction)
+import Compile (compileOp,compileAt)
 import Cpu (Reg(..),Flag(..),get,getFlag)
 import Data.List (intercalate)
 import Data.Map (Map)
 import Data.Maybe (fromJust)
 import HiLo (HiLo(..))
-import InstructionSet (Op(Op0,Op1),Op0(RST),Op1(IN,OUT),Instruction(..),decode)
+import InstructionSet (Instruction(..),decode)
 import Residual (Exp1(..),Exp8(..),Exp16(..),Exp17(..),Program(..),AVar,Lay,vert,lay,tab)
 import Rom (Rom)
 import Static (oneStepReach,searchReach,startPoints,returnAddresses,programLength)
@@ -72,23 +72,6 @@ convertRom rom = do
     convertProg = convertProgram slowRef fastRef
 
   let
-    skippedOps =
-      [
-        -- We skip generating programs for op-codes IN/OUT, because we can only cope
-        -- when the port to which the IN/OUT refers is known at generation time
-        -- This is not the case for general IN/OUT opcodes, as the port is an immeidate byte.
-
-        -- Instead we generate a family of programs for IN/OUT instructions, for the small
-        -- range of ports which are expected. IN: 0..3, OUT: 0..6
-        Op1 IN, Op1 OUT
-
-        -- Reset instruction do a jumpDirect to specific addresses. For some of these
-        -- address we have no generated code. We could regard these address as additional
-        -- start points. But ntead we just skip the gernation of programs for certain
-        -- reset instructions. This is ok because we know these instructions are never
-        -- used by the space-invaders program,
-      , Op0 (RST 3), Op0 (RST 5), Op0 (RST 6), Op0 (RST 7)
-      ]
     op_defs =
       [ FunDef $ CFunDef
         { typ = CType "Control"
@@ -97,7 +80,6 @@ convertRom rom = do
         }
       | byte :: Byte <- [0..0xFF]
       , let op = decode byte
-      , op `notElem` skippedOps
       , let program = compileOp rom op
       ]
     ops_array =
@@ -105,53 +87,7 @@ convertRom rom = do
                { typ  = CType "Func"
                , name = CName "ops_array"
                , size = LitI 256
-               , init = [ if decode b `notElem` skippedOps
-                          then Ident (nameOfOpDef b)
-                          else LitI 0
-                        | b <- take 256 [0..] ]
-               })
-  let
-    max_output = 6
-    output_defs =
-      [ FunDef $ CFunDef
-        { typ = CType "Control"
-        , name = CName ("output_" ++ show byte)
-        , body = Block (convertProg program)
-        }
-      | byte :: Byte <- [0..max_output]
-      , let i = Ins1 OUT (E8_Lit byte)
-      , let program = compileInstruction rom i
-      ]
-    output_array =
-      ArrDef (CArrDef
-               { typ  = CType "Func"
-               , name = CName "output_instruction_array"
-               , size = LitB (max_output + 1)
-               , init = [Ident (CName ("output_" ++ show n))
-                        | n <- [0..max_output]
-                        ]
-               })
-
-  let
-    max_input = 4
-    input_defs =
-      [ FunDef $ CFunDef
-        { typ = CType "Control"
-        , name = CName ("input_" ++ show byte)
-        , body = Block (convertProg program)
-        }
-      | byte :: Byte <- [0..max_input]
-      , let i = Ins1 IN (E8_Lit byte)
-      , let program = compileInstruction rom i
-      ]
-    input_array =
-      ArrDef (CArrDef
-               { typ  = CType "Func"
-               , name = CName "input_instruction_array"
-               , size = LitB (max_input + 1)
-               , init = [Ident (CName ("input_" ++ show n))
-                        | n <- [0..max_input]
-                        ]
+               , init = [ Ident (nameOfOpDef b) | b <- take 256 [0..] ]
                })
 
   let
@@ -207,8 +143,6 @@ convertRom rom = do
         ++ slow_forwards
         ++ fast_forwards
         ++ op_defs ++ [ops_array]
-        ++ output_defs ++ [output_array]
-        ++ input_defs ++ [input_array]
         ++ slow_defs ++ [slow_progs_array]
         ++ fast_defs ++ [fast_progs_array]
 
@@ -298,6 +232,7 @@ convertProgram slowRef fastRef = convert
       S_Advance n next -> Expression (call "advance" [LitI n]) : convert next
       S_Jump a -> [Return $ convertJump a]
       S_If i t e -> [If (convert1 i) (Block (convert t)) (Block (convert e))]
+      S_Switch8 e branches -> [Switch (convert8 e) [ (fromIntegral n,Block(convert p)) | (n,p) <- branches ]]
       S_AssignReg reg exp next -> Expression (Assign (convertReg reg) (convert8 exp)) : convert next
       S_AssignFlag flag exp next -> Expression (Assign (convertFlag flag) (convert1 exp)) : convert next
       S_AssignShifterReg reg exp next ->
@@ -443,6 +378,7 @@ data CStat
   | Declare CType CName CExp
   | Die
   | If CExp CStat CStat
+  | Switch CExp [(Int,CStat)]
 
 data CExp
   = LitI Int
@@ -503,6 +439,16 @@ layCStat = \case
          , layCStat t
          , lay "else"
          , layCStat e
+         ]
+  Switch exp branches ->
+    vert [ lay ("switch (" ++ show exp ++ ") {")
+         , tab (vert ([ vert [ lay ("case " ++ show v ++ " :")
+                             , layCStat p
+                             ]
+                      | (v,p) <- branches
+                      ] ++ [ lay ("default: { printf(\"unexpected switch value: %d\\n\","
+                                  ++ show exp ++ "); die; }")]))
+         , lay "}"
          ]
 
 instance Show CExp where

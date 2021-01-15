@@ -239,6 +239,13 @@ emulateProgram CB{traceI} buttons s = emu (emptyEnv buttons) s
       S_Advance n p -> emu q (advance n u) p
       S_Jump a -> return $ setPC (ev16 a) u
       S_If c p1 p2 -> if (ev1 c) then emu q u p1 else emu q u p2
+
+      S_Switch8 e branches -> do
+        let w = unByte (ev8 e)
+        case [ p | (v,p) <- branches, v == w ] of
+          [] -> error $ "emulateProgram, switch8, no match: " ++ show w
+          p:_ -> emu q u p
+
       S_AssignReg r e p -> emu q (setReg r (ev8 e) u) p
       S_AssignFlag f e p -> emu q (setFlag f (ev1 e) u) p
       S_AssignShifterReg r e p -> emu q (setShifterReg r (ev8 e) u) p

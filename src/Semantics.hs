@@ -390,9 +390,8 @@ execute1 op1 b1 = case op1 of
     save dest b1
     return Next
   OUT -> do
-    port <- CaseByte b1
     value <- GetReg A
-    Ports.outputPort port value
+    Ports.outputPort b1 value
     return Next
   ADI -> do
     cin <- MakeBit False
@@ -405,8 +404,7 @@ execute1 op1 b1 = case op1 of
   ORI ->
     binop OrB b1
   IN -> do
-    port <- CaseByte b1
-    value <- Ports.inputPort port
+    value <- Ports.inputPort b1
     SetReg A value
     return Next
   ACI -> do

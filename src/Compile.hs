@@ -8,7 +8,7 @@ import Cpu (Cpu(..),Reg(..),Flag(..))
 import Data.Set (Set)
 import Effect (Eff)
 import HiLo (HiLo(..))
-import InstructionSet (Op(..),Op1(..),decode,encode,Instruction(..))
+import InstructionSet (Op(..),decode,encode,Instruction(..))
 import Rom (Rom)
 import Residual (CompTime,Exp1(..),Exp8(..),Exp16(..),Exp17(..),Program(..),AVar(..))
 import Shifter (Shifter(..))
@@ -23,8 +23,7 @@ import qualified Shifter (Reg(..),get,set,allRegs)
 
 opPrograms :: Rom -> [(Op,Program)]
 opPrograms rom = do
-  let skipOps = [Op1 IN, Op1 OUT]
-  let ops = [ op | b <- [0..0xFF], let op = decode b, op `notElem` skipOps ]
+  let ops = [ op | b <- [0..0xFF], let op = decode b ]
   [ (op, compileOp rom op) | op <- ops ]
 
 
@@ -234,10 +233,16 @@ compileThen semantics state k =
       E.IsParity e -> k s (E1_IsParity e)
       E.TestBit e i -> k s (E1_TestBit e i)
       E.UpdateBit e i p -> k s (E8_UpdateBit e i p)
-      E.CaseByte e ->
+
+      E.CaseByte e choices ->
         case e of
           E8_Lit (Byte w8) -> k s w8
-          _ -> error $ "CaseByte, non-literal " ++ show e
+          _ ->
+            S_Switch8 e <$> sequence [ do
+                                         prog <- k s choice
+                                         pure (choice,prog)
+                                     | choice <- choices
+                                     ]
 
       E.MakeAddr hilo -> k s (make_E16_HiLo hilo)
       E.SplitAddr a ->

@@ -32,6 +32,7 @@ instance Phase CompTime where
 data Program
   = S_Jump Exp16
   | S_If Exp1 Program Program
+  | S_Switch8 Exp8 [(Word8,Program)]
   | S_AssignReg Reg Exp8 Program
   | S_AssignShifterReg Shifter.Reg Exp8 Program
   | S_AssignFlag Flag Exp1 Program
@@ -114,6 +115,17 @@ layProgram = \case
          , tab (layProgram s2)
          , lay "}"
          ]
+  S_Switch8 exp branches ->
+    vert [ lay ("switch " ++ parenthesize (show exp) ++ " {")
+         , tab (vert [ vert [ lay ("case " ++ show v ++ " : {")
+                            , tab (layProgram p)
+                            , lay "}"
+                            ]
+                     | (v,p) <- branches
+                     ])
+         , lay "}"
+         ]
+
   S_AssignReg reg exp next ->
     vert [ lay (show reg ++ " := " ++ show exp ++ ";")
          , layProgram next

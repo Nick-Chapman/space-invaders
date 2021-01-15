@@ -158,11 +158,6 @@ inline static u1 e1_parity(u8 e) {
            ^ ((e>>4)&0x1) ^ ((e>>5)&0x1) ^ ((e>>6)&0x1) ^ ((e>>7)&0x1));
 }
 
-noinline static u8 e8_unknown_input(int p) {
-  //printf ("unknown_input: %d\n",p);
-  die
-}
-
 extern Func ops_array [];
 extern Func output_instruction_array [];
 extern Func input_instruction_array [];
@@ -187,45 +182,19 @@ noinline Control jumpInterrupt(u16 pc, Func prog) {
 
 noinline Control jump16(u16 pc) {
   u8 byte = mem[pc];
-
-  if (byte==0xD3) { //OUT
-    u8 imm1 = mem[pc+1];
-    Func prog = output_instruction_array[imm1];
-    u16 pcAfterDecode = pc+2;
-    PCH = pcAfterDecode >> 8;
-    PCL = pcAfterDecode & 0xFF;
-    if (credit <= 0) {
-      return jumpInterrupt(pc,prog);
-    } else {
-      return (Control)prog;
-    }
-
-  } else if (byte==0xDB) { //IN
-
-    u8 imm1 = mem[pc+1];
-    Func prog = input_instruction_array[imm1];
-    u16 pcAfterDecode = pc+2;
-    PCH = pcAfterDecode >> 8;
-    PCL = pcAfterDecode & 0xFF;
-    if (credit <= 0) {
-      return jumpInterrupt(pc,prog);
-    } else {
-      return (Control)prog;
-    }
-
-  } else { //other op-code
-
-    Func prog = ops_array[byte];
-    u16 pcAfterDecode = pc+1;
-    PCH = pcAfterDecode >> 8;
-    PCL = pcAfterDecode & 0xFF;
-    if (credit <= 0) {
-      return jumpInterrupt(pc,prog);
-    } else {
-      return (Control)prog;
-    }
+  Func prog = ops_array[byte];
+  if (prog == 0) {
+    printf ("jump16/A : no program for op-code: %02x\n",byte);
+    die;
   }
-
+  u16 pcAfterDecode = pc+1;
+  PCH = pcAfterDecode >> 8;
+  PCL = pcAfterDecode & 0xFF;
+  if (credit <= 0) {
+    return jumpInterrupt(pc,prog);
+  } else {
+    return (Control)prog;
+  }
 }
 
 inline static Control jumpDirect(u16 pc, Func slow, Func fast) {
@@ -323,11 +292,8 @@ Control jump16(u16 pc) {
 #endif
 
 
-
-
 // rest of the registers visible to the generated code
 
 u8 A,B,C,D,E,H,L,SPH,SPL;
 u1 FlagS,FlagZ,FlagA,FlagP,FlagCY;
 u8 Shifter_HI,Shifter_LO,Shifter_OFF;
-

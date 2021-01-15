@@ -2820,6 +2820,37 @@ D2 --> Op2 (JCond NC)
       jump (a8);
     }
 
+D3 --> Op1 OUT
+
+    let:8 a1 = PCH in
+    let:8 a2 = PCL in
+    let:8 a3 = M[(a1,a2)] in
+    let:16 a4 = (1 + (a1,a2)) in
+    #instruction: OUT  a3
+    let:8 a5 = A in
+    switch (a3) {
+      case 2 : {
+        advance (10)
+        Shifter_OFF := a5;
+        jump (a4);
+      }
+      case 3 : {
+        sound_control(Ufo,a5[0]);
+        sound_control(Shot,a5[1]);
+        sound_control(PlayerDie,a5[2]);
+        sound_control(InvaderDie,a5[3]);
+        sound_control(ExtraLife,a5[4]);
+        advance (10)
+        jump (a4);
+      }
+      case 4 : {
+        advance (10)
+        Shifter_HI := a5;
+        Shifter_LO := Shifter_HI;
+        jump (a4);
+      }
+    }
+
 D4 --> Op2 (CCond NC)
 
     let:8 a1 = PCH in
@@ -2963,6 +2994,34 @@ DA --> Op2 (JCond CY)
     } else {
       advance (10)
       jump (a8);
+    }
+
+DB --> Op1 IN
+
+    let:8 a1 = PCH in
+    let:8 a2 = PCL in
+    let:8 a3 = M[(a1,a2)] in
+    let:16 a4 = (1 + (a1,a2)) in
+    #instruction: IN   a3
+    switch (a3) {
+      case 1 : {
+        advance (10)
+        A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,!is_pressed(CoinEntry)),1,is_pressed(P2start)),2,is_pressed(P1start)),4,is_pressed(P1shoot)),5,is_pressed(P1left)),6,is_pressed(P1right));
+        jump (a4);
+      }
+      case 2 : {
+        advance (10)
+        A := updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(updateBit(00,0,is_pressed(Dip3_livesLow)),1,is_pressed(Dip5_livesHigh)),2,is_pressed(Tilt)),3,is_pressed(Dip6_extraShipEarly)),4,is_pressed(P2shoot)),5,is_pressed(P2left)),6,is_pressed(P2right)),7,is_pressed(Dip7_coinInfoOff));
+        jump (a4);
+      }
+      case 3 : {
+        let:8 a5 = (Shifter_OFF & 07) in
+        let:8 a6 = (~Shifter_OFF & 07) in
+        let:8 a7 = ((Shifter_HI << a5) | ((Shifter_LO >> a6) >> 01)) in
+        advance (10)
+        A := a7;
+        jump (a4);
+      }
     }
 
 DC --> Op2 (CCond CY)

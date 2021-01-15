@@ -57,7 +57,7 @@ data Eff p a where
   IsParity :: Byte p -> Eff p (Bit p)
   TestBit :: Byte p -> Int -> Eff p (Bit p)
   UpdateBit :: Byte p -> Int -> Bit p -> Eff p (Byte p)
-  CaseByte :: Byte p -> Eff p Word8
+  CaseByte :: Byte p -> [Word8] -> Eff p Word8
 
   MakeAddr :: HiLo (Byte p) -> Eff p (Addr p)
   SplitAddr :: Addr p -> Eff p (HiLo (Byte p))

@@ -162,7 +162,7 @@ emulateS CB{traceI} semantics buttons s0 = do
       IsParity byte -> do k s (Bit (parity  byte))
       TestBit byte i -> k s (Bit (byte `testBit` i))
       UpdateBit byte i (Bit bool) -> k s ((if bool then setBit else clearBit) byte i)
-      CaseByte (Byte word) -> k s word
+      CaseByte (Byte word) _choices -> k s word
 
       MakeAddr hilo -> k s (Addr.fromHiLo hilo)
       SplitAddr a -> k s (Addr.toHiLo a)

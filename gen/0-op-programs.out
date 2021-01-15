@@ -2849,6 +2849,20 @@ D3 --> Op1 OUT
         Shifter_LO := Shifter_HI;
         jump (a4);
       }
+      case 5 : {
+        sound_control(FleetMovement1,a5[0]);
+        sound_control(FleetMovement2,a5[1]);
+        sound_control(FleetMovement3,a5[2]);
+        sound_control(FleetMovement4,a5[3]);
+        sound_control(UfoHit,a5[4]);
+        advance (10)
+        jump (a4);
+      }
+      case 6 : {
+        unknown_output(6,a5);
+        advance (10)
+        jump (a4);
+      }
     }
 
 D4 --> Op2 (CCond NC)

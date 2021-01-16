@@ -6,7 +6,7 @@ import Prelude hiding (init)
 import Addr (Addr)
 import Byte (Byte)
 import Compile (compileOp,compileAt)
-import Cpu (Reg(..),Flag(..),get,getFlag)
+import Cpu (Reg16(..),Reg(..),Flag(..),get16,get,getFlag)
 import Data.List (intercalate)
 import Data.Map (Map)
 import Data.Maybe (fromJust)
@@ -220,7 +220,8 @@ convertProgram slowRef fastRef = convert
       S_MarkReturnAddress a next -> Comment ("#mark-return: " ++ show a) : convert next
       S_TraceInstruction cpu i next -> do
         Expression (call ("instruction" ++ show n)
-                    $ [ convert8 (Cpu.get cpu reg) | reg <- [PCH,PCL,A,B,C,D,E,H,L,SPH,SPL]] ++
+                    $ [ convert8 (Cpu.get cpu reg) | reg <- [PCH,PCL,A,B,C,D,E]] ++
+                      [ convert16 (Cpu.get16 cpu r) | r <- [SP,HL]] ++
                       [ convert1 (Cpu.getFlag cpu flag) | flag <- [FlagS,FlagZ,FlagA,FlagP,FlagCY]] ++
                       [ LitS $ show (fmap (const PatMarker) i)] ++ extra) : convert next
           where
@@ -233,6 +234,7 @@ convertProgram slowRef fastRef = convert
       S_Jump a -> [Return $ convertJump a]
       S_If i t e -> [If (convert1 i) (Block (convert t)) (Block (convert e))]
       S_Switch8 e branches -> [Switch (convert8 e) [ (fromIntegral n,Block(convert p)) | (n,p) <- branches ]]
+      S_AssignReg16 reg exp next -> Expression (Assign (convertReg16 reg) (convert16 exp)) : convert next
       S_AssignReg reg exp next -> Expression (Assign (convertReg reg) (convert8 exp)) : convert next
       S_AssignFlag flag exp next -> Expression (Assign (convertFlag flag) (convert1 exp)) : convert next
       S_AssignShifterReg reg exp next ->
@@ -316,6 +318,7 @@ convert16 = \case
   E16_HiLo HiLo{hi,lo} -> e16_hi_lo (convert8 hi) (convert8 lo)
   E16_OffsetAdr n e -> BinOp "+" (convert16 e) (LitI n)
   E16_Var v -> Ident (convertVar v)
+  E16_Reg r -> Ident (convertReg16 r)
   E16_AddWithCarry cin e1 e2 -> BinOp "+" (BinOp "+" (convert8 e1) (convert8 e2)) (convert1 cin)
   E16_DropHiBitOf17 e -> BinOp "&" (convert17 e) (LitA 0xFFFF)
   E16_Lit x -> LitA x
@@ -333,6 +336,9 @@ call s xs = Call (CName s) xs
 
 convertShifterReg :: Shifter.Reg -> CName
 convertShifterReg reg = CName (show reg)
+
+convertReg16 :: Reg16 -> CName
+convertReg16 reg = CName (show reg)
 
 convertReg :: Reg -> CName
 convertReg reg = CName (show reg)

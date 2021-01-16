@@ -33,6 +33,7 @@ data Program
   = S_Jump Exp16
   | S_If Exp1 Program Program
   | S_Switch8 Exp8 [(Word8,Program)]
+  | S_AssignReg16 Reg16 Exp16 Program
   | S_AssignReg Reg Exp8 Program
   | S_AssignShifterReg Shifter.Reg Exp8 Program
   | S_AssignFlag Flag Exp1 Program
@@ -92,6 +93,7 @@ data Exp8
 data Exp16
   = E16_HiLo (HiLo Exp8)
   | E16_OffsetAdr Int Exp16
+  | E16_Reg Reg16
   | E16_Var AVar
   | E16_AddWithCarry Exp1 Exp8 Exp8 -- TODO: This should construct E9
   | E16_DropHiBitOf17 Exp17
@@ -126,6 +128,10 @@ layProgram = \case
          , lay "}"
          ]
 
+  S_AssignReg16 reg exp next ->
+    vert [ lay (show reg ++ " := " ++ show exp ++ ";")
+         , layProgram next
+         ]
   S_AssignReg reg exp next ->
     vert [ lay (show reg ++ " := " ++ show exp ++ ";")
          , layProgram next
@@ -227,6 +233,8 @@ instance Show Exp16 where
     E16_OffsetAdr n e ->
       parenthesize (show n ++ " + " ++ show e)
     E16_Var v ->
+      show v
+    E16_Reg v ->
       show v
     E16_AddWithCarry cin e1 e2 ->
       "addWithCarry" ++ show (cin,e1,e2)

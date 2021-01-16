@@ -4,7 +4,7 @@ module Compile (opPrograms,compileOp,compileInstruction,compileAt) where
 import Addr (Addr)
 import Byte (Byte(..))
 import Control.Monad (ap,liftM)
-import Cpu (Cpu(..),Reg(..),Flag(..))
+import Cpu (Cpu(..),Reg16(..),Reg(..),Flag(..))
 import Data.Set (Set)
 import Effect (Eff)
 import HiLo (HiLo(..))
@@ -13,7 +13,7 @@ import Rom (Rom)
 import Residual (CompTime,Exp1(..),Exp8(..),Exp16(..),Exp17(..),Program(..),AVar(..))
 import Shifter (Shifter(..))
 import qualified Addr as Addr (toHiLo,fromHiLo,bump)
-import qualified Cpu (get,set,getFlag,setFlag)
+import qualified Cpu (get16,set16,get,set,getFlag,setFlag)
 import qualified Data.Set as Set
 import qualified Effect as E (Eff(..))
 import qualified Rom (lookup)
@@ -58,13 +58,13 @@ compileAt inline rom addr = do
 initCpu :: HiLo Exp8 -> Cpu CompTime
 initCpu HiLo{hi=pch,lo=pcl} = do
   Cpu { pch, pcl
-      , sph = e SPH, spl = e SPL
-      , regA = e A, regB = e B, regC = e C, regD = e D
-      , regE = e E, regH = e H, regL = e L
+      , sp = a SP, hl = a HL
+      , regA = e A, regB = e B, regC = e C, regD = e D, regE = e E
       , flagS = b FlagS, flagZ = b FlagZ, flagA = b FlagA
       , flagP = b FlagP, flagCY = b FlagCY
       }
   where
+    a = E16_Reg
     e = E8_Reg
     b = E1_Flag
 
@@ -134,8 +134,14 @@ initShifter = Shifter
 
 programFromState :: State -> Program
 programFromState State{cpu,shifter} = do
-  sequence (regUpdates ++ flagUpdates ++ shifterUpdates) finish
+  sequence (reg16Updates ++ regUpdates ++ flagUpdates ++ shifterUpdates) finish
     where
+      reg16Updates =
+        [ S_AssignReg16 rr v
+        | rr <- allReg16s
+        , let v = Cpu.get16 cpu rr
+        , not (v == E16_Reg rr)
+        ]
       regUpdates =
         [ S_AssignReg reg v
         | reg <- allRegs
@@ -155,9 +161,8 @@ programFromState State{cpu,shifter} = do
         , not (v == E8_ShifterReg reg)
         ]
 
-      allRegs = [A,B,C,D,E,H,L
-                -- ,PCH,PCL
-                ,SPH,SPL]
+      allReg16s = [SP,HL]
+      allRegs = [A,B,C,D,E]
       allFlags = [FlagS,FlagZ,FlagA,FlagP,FlagCY]
 
       sequence xs = foldr (.) id xs
@@ -181,6 +186,8 @@ compileThen semantics state k =
       E.Ret x -> k s x
       E.Bind eff f -> run s eff $ \s a -> run s (f a) k
 
+      E.GetReg16 rr -> share16 (k s) (Cpu.get16 cpu rr)
+      E.SetReg16 rr a -> k s { cpu = Cpu.set16 cpu rr a } ()
       E.GetReg r -> share8 (k s) (Cpu.get cpu r)
       E.SetReg r b -> k s { cpu = Cpu.set cpu r b } ()
       E.GetFlag flag -> k s (Cpu.getFlag cpu flag)
@@ -316,9 +323,24 @@ share8 k exp =
 
 atomic8 :: Exp8 -> Bool
 atomic8 = \case
+  E8_Var{} -> True
   E8_Lit{} -> True
   _ -> False
 
+share16 :: (Exp16 -> Gen Program) -> (Exp16 -> Gen Program)
+share16 k exp =
+  if atomic16 exp
+  then k exp
+  else do
+    var <- NewAVar
+    body <- k (E16_Var var)
+    return $ S_Let16 var exp body
+
+atomic16 :: Exp16 -> Bool
+atomic16 = \case
+  E16_Var{} -> True
+  E16_Lit{} -> True
+  _ -> False
 
 data Gen a where
   Ret :: a -> Gen a

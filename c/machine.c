@@ -9,60 +9,45 @@
 
 #define noinline __attribute__ ((noinline))
 
+#define REGS_FORMAL                                     \
+  u8 PCH, u8 PCL,                                       \
+    u8 A, u8 B, u8 C, u8 D, u8 E,                       \
+    u16 SP, u16 HL,                                     \
+    u1 FlagS, u1 FlagZ, u1 FlagA, u1 FlagP, u1 FlagCY
 
-void dump_state (const char* instruction,
-                 u8 PCH, u8 PCL, u8 A, u8 B, u8 C, u8 D, u8 E, u8 H, u8 L, u8 SPH, u8 SPL,
-                 u1 FlagS, u1 FlagZ, u1 FlagA, u1 FlagP, u1 FlagCY
-                 ) {
+#define REGS_ACTUAL PCH,PCL, A,B,C,D,E, SP,HL, FlagS,FlagZ,FlagA,FlagP,FlagCY
 
+void dump_state (REGS_FORMAL, const char* instr) {
   if (icount>50000) {
     printf("STOP\n");
     exit(0);
   }
-
   printf("%8ld  [%08ld] "
          "PC:%02X%02X "
-         "A:%02X B:%02X C:%02X D:%02X E:%02X HL:%02X%02X SP:%02X%02X "
+         "A:%02X B:%02X C:%02X D:%02X E:%02X HL:%04X SP:%04X "
          "SZAPY:%1d%1d%1d%1d%1d"
          " : %s\n",
-         icount,
-         cycles,
+         icount, cycles,
          PCH,PCL,
-         A,B,C,D,E,H,L,SPH,SPL,
+         A,B,C,D,E, HL,SP,
          FlagS,FlagZ,FlagA,FlagP,FlagCY,
-         instruction
-         );
+         instr);
 }
 
-void f_instruction0 (u8 PCH, u8 PCL, u8 A, u8 B, u8 C, u8 D, u8 E, u8 H, u8 L, u8 SPH, u8 SPL,
-                     u1 FlagS, u1 FlagZ, u1 FlagA, u1 FlagP, u1 FlagCY,
-                     const char* ipat) {
-  dump_state(ipat,
-             PCH,PCL,A,B,C,D,E,H,L,SPH,SPL,
-             FlagS,FlagZ,FlagA,FlagP,FlagCY
-             );
+void f_instruction0 (REGS_FORMAL,const char* instr) {
+  dump_state (REGS_ACTUAL, instr);
 }
 
-void f_instruction1 (u8 PCH, u8 PCL, u8 A, u8 B, u8 C, u8 D, u8 E, u8 H, u8 L, u8 SPH, u8 SPL,
-                     u1 FlagS, u1 FlagZ, u1 FlagA, u1 FlagP, u1 FlagCY,
-                     const char* ipat, u8 b1) {
-  static char instruction[256];
-  sprintf(instruction,ipat,b1);
-  dump_state(instruction,
-             PCH,PCL,A,B,C,D,E,H,L,SPH,SPL,
-             FlagS,FlagZ,FlagA,FlagP,FlagCY
-             );
+void f_instruction1 (REGS_FORMAL, const char* ipat, u8 b1) {
+  static char instr[256];
+  sprintf (instr, ipat, b1);
+  dump_state (REGS_ACTUAL, instr);
 }
 
-void f_instruction2 (u8 PCH, u8 PCL, u8 A, u8 B, u8 C, u8 D, u8 E, u8 H, u8 L, u8 SPH, u8 SPL,
-                     u1 FlagS, u1 FlagZ, u1 FlagA, u1 FlagP, u1 FlagCY,
-                     const char* ipat, u8 b2, u8 b1) {
-  static char instruction[256];
-  sprintf(instruction,ipat,b2,b1);
-  dump_state(instruction,
-             PCH,PCL,A,B,C,D,E,H,L,SPH,SPL,
-             FlagS,FlagZ,FlagA,FlagP,FlagCY
-             );
+void f_instruction2 (REGS_FORMAL, const char* ipat, u8 b2, u8 b1) {
+  static char instr[256];
+  sprintf (instr, ipat, b2, b1);
+  dump_state (REGS_ACTUAL, instr);
 }
 
 #ifdef TRACE
@@ -294,6 +279,7 @@ Control jump16(u16 pc) {
 
 // rest of the registers visible to the generated code
 
-u8 A,B,C,D,E,H,L,SPH,SPL;
+u16 HL,SP;
+u8 A,B,C,D,E;
 u1 FlagS,FlagZ,FlagA,FlagP,FlagCY;
 u8 Shifter_HI,Shifter_LO,Shifter_OFF;

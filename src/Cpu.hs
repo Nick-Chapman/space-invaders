@@ -1,17 +1,22 @@
 
 module Cpu (
-  Cpu(..),Reg(..),Flag(..),
+  Cpu(..),Reg16(..),Reg(..),Flag(..),
   init,
+  get16,set16,
   get,set,
   getFlag,setFlag,
   kindOfMap,
   ) where
 
 import Prelude hiding (init)
-import Phase (Byte,Bit)
+import Phase (Addr,Byte,Bit)
 
-data Reg = PCH | PCL | SPH | SPL | A | B | C | D | E | H | L | Flags
+data Reg = PCH | PCL | A | B | C | D | E
+  | Flags
   deriving (Eq,Ord,Show)
+
+data Reg16 = SP | HL
+  deriving (Eq,Show)
 
 data Flag = FlagS | FlagZ | FlagA | FlagP | FlagCY
   deriving (Eq,Show)
@@ -19,15 +24,13 @@ data Flag = FlagS | FlagZ | FlagA | FlagP | FlagCY
 data Cpu p = Cpu
   { pch :: Byte p
   , pcl :: Byte p
-  , sph :: Byte p
-  , spl :: Byte p
+  , sp :: Addr p
+  , hl :: Addr p
   , regA :: Byte p
   , regB :: Byte p
   , regC :: Byte p
   , regD :: Byte p
   , regE :: Byte p
-  , regH :: Byte p
-  , regL :: Byte p
   , flagS :: Bit p
   , flagZ :: Bit p
   , flagA :: Bit p
@@ -35,8 +38,10 @@ data Cpu p = Cpu
   , flagCY :: Bit p
   }
 
-instance (Show (Bit p), Show (Byte p)) => Show (Cpu p) where
-  show Cpu{pch,pcl,sph,spl,regA,regB,regC,regD,regE,regH,regL
+instance (Show (Addr p), Show (Bit p), Show (Byte p)) => Show (Cpu p) where
+  show Cpu{pch,pcl
+          ,sp,hl
+          ,regA,regB,regC,regD,regE
           ,flagS,flagZ,flagA,flagP,flagCY} = unwords
     [ name <> ":" <> v
     | (name,v) <-
@@ -46,17 +51,19 @@ instance (Show (Bit p), Show (Byte p)) => Show (Cpu p) where
       , ("C", show regC)
       , ("D", show regD)
       , ("E", show regE)
-      , ("HL", show regH <> show regL)
-      , ("SP", show sph <> show spl)
+      , ("HL", show hl)
+      , ("SP", show sp)
       , ("SZAPY", show flagS <> show flagZ <> show flagA <> show flagP <> show flagCY)
       ]
     ]
 
 
-init :: Byte p -> Bit p -> Cpu p
-init b bit0 =
-  Cpu { pch = b, pcl = b, sph = b, spl = b
-      , regA = b, regB = b, regC = b, regD = b, regE = b, regH = b, regL = b
+init :: Addr p -> Byte p -> Bit p -> Cpu p
+init addr0 b bit0 =
+  Cpu { pch = b, pcl = b
+      , sp = addr0
+      , hl = addr0
+      , regA = b, regB = b, regC = b, regD = b, regE = b
       , flagS = bit0, flagZ = bit0, flagA = bit0, flagP = bit0, flagCY = bit0
       }
 
@@ -79,51 +86,54 @@ setFlag cpu flag x = case flag of
 
 
 get :: Cpu p -> Reg -> Byte p
-get Cpu{pch,pcl,sph,spl,regA,regB,regC,regD,regE,regH,regL} = \case
+get Cpu{pch,pcl,regA,regB,regC,regD,regE} = \case
   PCH -> pch
   PCL -> pcl
-  SPH -> sph
-  SPL -> spl
   A -> regA
   B -> regB
   C -> regC
   D -> regD
   E -> regE
-  H -> regH
-  L -> regL
   Flags -> error "Cpu.get Flags"
 
 set :: Cpu p -> Reg -> Byte p -> Cpu p
 set cpu r x = case r of
   PCH -> cpu { pch = x}
   PCL -> cpu { pcl = x }
-  SPH -> cpu { sph = x}
-  SPL -> cpu { spl = x }
   A -> cpu { regA = x }
   B -> cpu { regB = x }
   C -> cpu { regC = x }
   D -> cpu { regD = x }
   E -> cpu { regE = x }
-  H -> cpu { regH = x }
-  L -> cpu { regL = x }
   Flags -> error "Cpu.set Flags"
 
 
-kindOfMap :: (Byte a -> Byte b) -> (Bit a -> Bit b) -> Cpu a -> Cpu b
-kindOfMap f g = \case
-  Cpu{pch,pcl,sph,spl,regA,regB,regC,regD,regE,regH,regL
+get16 :: Cpu p -> Reg16 -> Addr p
+get16 Cpu{sp,hl} = \case
+  SP -> sp
+  HL -> hl
+
+set16 :: Cpu p -> Reg16 -> Addr p -> Cpu p
+set16 cpu rr a = case rr of
+  SP -> cpu { sp = a }
+  HL -> cpu { hl = a }
+
+
+kindOfMap :: (Addr a -> Addr b) -> (Byte a -> Byte b) -> (Bit a -> Bit b) -> Cpu a -> Cpu b
+kindOfMap af f g = \case
+  Cpu{pch,pcl
+     ,sp,hl
+     ,regA,regB,regC,regD,regE
      ,flagS,flagZ,flagA,flagP,flagCY} ->
     Cpu { pch = f pch
         , pcl = f pcl
-        , sph = f sph
-        , spl = f spl
+        , sp = af sp
+        , hl = af hl
         , regA = f regA
         , regB = f regB
         , regC = f regC
         , regD = f regD
         , regE = f regE
-        , regH = f regH
-        , regL = f regL
         , flagS = g flagS
         , flagZ = g flagZ
         , flagA = g flagA

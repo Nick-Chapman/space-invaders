@@ -9,13 +9,14 @@ module Semantics
 
 import Prelude hiding (subtract)
 
-import Cpu (Flag(..),Reg(..))
+import Cpu (Reg16,Reg)
 import Effect (Eff(..))
 import HiLo (HiLo(..))
 import InstructionSet (Op(..),Instruction(..),Op0(..),Op1(..),Op2(..),RegPairSpec(..),Condition(..),cycles,justOp)
 import Phase (Addr,Byte,Bit)
-import qualified InstructionSet as Instr (RegSpec(..))
+import qualified Cpu
 import qualified Ports (inputPort,outputPort)
+import InstructionSet (RegSpec(..))
 
 -- | Semantics are defined to be Phase generic
 
@@ -76,14 +77,14 @@ execute0 = \case
   NOPx{} -> do
     return Next
   STAX rp -> do
-    a <- getRegPair rp
-    b <- GetReg A
+    a <- load16 rp
+    b <- load A
     WriteMem a b
     return Next
   INX rp -> do
-    a <- getRegPair rp
+    a <- load16 rp
     a' <- OffsetAddr 1 a
-    setRegPair rp a'
+    save16 rp a'
     return Next
   INR reg -> do
     v0 <- load reg
@@ -91,7 +92,7 @@ execute0 = \case
     zero <- MakeByte 0
     (v,_coutIgnored) <- AddWithCarry cin v0 zero
     aux <- addForAuxCarry cin v0 zero
-    SetFlag FlagA aux
+    SetFlag Cpu.FlagA aux
     saveAndSetFlagsFrom reg v
     return Next
   DCR reg -> do
@@ -102,83 +103,83 @@ execute0 = \case
     saveAndSetFlagsFrom reg v
     return Next
   RLC -> do
-    byte <- GetReg A
+    byte <- load A
     one <- MakeByte 1
     shunted <- byte `TestBit` 7
     shifted <- byte `ShiftLeft` one
     rotated <- UpdateBit shifted 0 shunted
-    SetFlag FlagCY shunted
-    SetReg A rotated
+    SetFlag Cpu.FlagCY shunted
+    save A rotated
     return Next
   RAL -> do
-    byte <- GetReg A
+    byte <- load A
     one <- MakeByte 1
     shunted <- byte `TestBit` 7
     shifted <- byte `ShiftLeft` one
-    cin <- GetFlag FlagCY
+    cin <- GetFlag Cpu.FlagCY
     rotated <- UpdateBit shifted 0 cin
-    SetFlag FlagCY shunted
-    SetReg A rotated
+    SetFlag Cpu.FlagCY shunted
+    save A rotated
     return Next
   DAA -> do
-    byteIn <- GetReg A
-    auxIn <- GetFlag FlagA
-    cin <- GetFlag FlagCY
+    byteIn <- load A
+    auxIn <- GetFlag Cpu.FlagA
+    cin <- GetFlag Cpu.FlagCY
     (byteOut,auxOut,cout) <- decimalAdjust auxIn cin byteIn
-    SetFlag FlagA auxOut
-    SetFlag FlagCY cout
-    SetReg A byteOut
+    SetFlag Cpu.FlagA auxOut
+    SetFlag Cpu.FlagCY cout
+    save A byteOut
     setFlagsFrom byteOut
     return Next
   STC -> do
     bit <- MakeBit True
-    SetFlag FlagCY bit
+    SetFlag Cpu.FlagCY bit
     return Next
   DAD rp -> do
-    w1 <- getRegPair rp
-    w2 <- getRegPair HL
+    w1 <- load16 rp
+    w2 <- load16 HL
     (w,cout) <- Add16 w1 w2
-    setRegPair HL w
-    SetFlag FlagCY cout
+    save16 HL w
+    SetFlag Cpu.FlagCY cout
     return Next
   LDAX rp -> do
-    a <- getRegPair rp
+    a <- load16 rp
     b <- ReadMem a
-    SetReg A b
+    save A b
     return Next
   DCX rp -> do
-    a <- getRegPair rp
+    a <- load16 rp
     a' <- OffsetAddr (-1) a
-    setRegPair rp a'
+    save16 rp a'
     return Next
   RRC -> do
-    byte <- GetReg A
+    byte <- load A
     one <- MakeByte 1
     shunted <- byte `TestBit` 0
     shifted <- byte `ShiftRight` one
     rotated <- UpdateBit shifted 7 shunted
-    SetFlag FlagCY shunted
-    SetReg A rotated
+    SetFlag Cpu.FlagCY shunted
+    save A rotated
     return Next
   RAR -> do
-    byte <- GetReg A
+    byte <- load A
     one <- MakeByte 1
     shunted <- byte `TestBit` 0
     shifted <- byte `ShiftRight` one
-    cin <- GetFlag FlagCY
+    cin <- GetFlag Cpu.FlagCY
     rotated <- UpdateBit shifted 7 cin
-    SetFlag FlagCY shunted
-    SetReg A rotated
+    SetFlag Cpu.FlagCY shunted
+    save A rotated
     return Next
   CMA -> do
-    v0 <- GetReg A
+    v0 <- load A
     v <- Complement v0
-    SetReg A v
+    save A v
     return Next
   CMC -> do -- untested
-    bit <- GetFlag FlagCY
+    bit <- GetFlag Cpu.FlagCY
     bit' <- Flip bit
-    SetFlag FlagCY bit'
+    SetFlag Cpu.FlagCY bit'
     return Next
   MOV {dest,src} -> do
     b <- load src
@@ -195,7 +196,7 @@ execute0 = \case
     addToAccWithCarry cin v1
   ADC reg -> do
     v1 <- load reg
-    cin <- GetFlag FlagCY
+    cin <- GetFlag Cpu.FlagCY
     addToAccWithCarry cin v1
   SUB reg -> do
     v1 <- load reg
@@ -203,7 +204,7 @@ execute0 = \case
     subToAccWithCarry cin v1
   SBB reg -> do
     v1 <- load reg
-    cin <- GetFlag FlagCY
+    cin <- GetFlag Cpu.FlagCY
     subToAccWithCarry cin v1
   ANA reg -> do
     v1 <- load reg
@@ -215,11 +216,11 @@ execute0 = \case
     v1 <- load reg
     binop OrB v1
   CMP reg -> do
-    v1 <- GetReg A
+    v1 <- load A
     v2 <- load reg
     (v,borrow) <- subtract v1 v2
     setFlagsFrom v
-    SetFlag FlagCY borrow
+    SetFlag Cpu.FlagCY borrow
     return Next
   RCond cond -> do
     executeCond cond >>= CaseBit >>= \case
@@ -232,35 +233,45 @@ execute0 = \case
   POP rp -> do
     lo <- popStack
     hi <- popStack
-    let HiLo{hi=rh, lo=rl} = expandRegPair rp
-    setRegOrFlags rh hi
-    setRegOrFlags rl lo
+    case expandRegPair rp of
+      Right rr -> do
+        a <- MakeAddr $ HiLo{hi,lo}
+        SetReg16 rr a
+      Left (HiLo{hi=rh, lo=rl}) -> do
+        setRegOrFlags rh hi
+        setRegOrFlags rl lo
     return Next
   XTHL -> do
-    sp0 <- getRegPair SP
+    sp0 <- load16 SP
     sp1 <- OffsetAddr 1 sp0
     stack0 <- ReadMem sp0
     stack1 <- ReadMem sp1
-    l <- GetReg L
-    h <- GetReg H
+    l <- load L
+    h <- load H
     WriteMem sp0 l
     WriteMem sp1 h
-    SetReg L stack0
-    SetReg H stack1
+    save L stack0
+    save H stack1
     return Next
   DI -> do
     DisableInterrupts
     return Next
   PUSH rp -> do
-    let HiLo{hi=rh, lo=rl} = expandRegPair rp
-    hi <- getRegOrFlags rh
-    lo <- getRegOrFlags rl
+    HiLo{hi,lo} <-
+      case expandRegPair rp of
+        Right rr -> do
+          a <- GetReg16 rr
+          SplitAddr a
+        Left (HiLo{hi=rh, lo=rl}) -> do
+          hi <- getRegOrFlags rh
+          lo <- getRegOrFlags rl
+          pure $ HiLo{hi,lo}
     pushStack hi
     pushStack lo
     return Next
   RST w -> do
-    GetReg PCH >>= pushStack
-    GetReg PCL >>= pushStack
+    GetReg Cpu.PCH >>= pushStack
+    GetReg Cpu.PCL >>= pushStack
     hi <- MakeByte 0
     lo <- MakeByte (8*w)
     dest <- MakeAddr $ HiLo{hi,lo}
@@ -276,21 +287,21 @@ execute0 = \case
     dest <- MakeAddr $ HiLo{hi,lo}
     return (Jump dest)
   PCHL -> do
-    dest <- getRegPair HL
+    dest <- load16 HL
     return (Jump dest)
   SPHL -> do
-    word <- getRegPair HL
-    setRegPair SP word
+    word <- load16 HL
+    save16 SP word
     return Next
-  XCHG -> do
-    d <- GetReg D
-    e <- GetReg E
-    h <- GetReg H
-    l <- GetReg L
-    SetReg D h
-    SetReg E l
-    SetReg H d
-    SetReg L e
+  XCHG -> do  -- maybe use load16/save16? (if DE becomes a reg16)
+    d <- load D
+    e <- load E
+    h <- load H
+    l <- load L
+    save D h
+    save E l
+    save H d
+    save L e
     return Next
   EI -> do
     EnableInterrupts
@@ -351,38 +362,49 @@ add6 v = do
 
 executeCond :: Condition -> Eff p (Bit p)
 executeCond = \case
-  NZ -> GetFlag FlagZ >>= Flip
-  Z -> GetFlag FlagZ
-  NC -> GetFlag FlagCY >>= Flip
-  CY -> GetFlag FlagCY
-  PO -> GetFlag FlagP >>= Flip
-  PE -> GetFlag FlagP
-  P -> GetFlag FlagS >>= Flip
-  MI -> GetFlag FlagS
+  NZ -> GetFlag Cpu.FlagZ >>= Flip
+  Z -> GetFlag Cpu.FlagZ
+  NC -> GetFlag Cpu.FlagCY >>= Flip
+  CY -> GetFlag Cpu.FlagCY
+  PO -> GetFlag Cpu.FlagP >>= Flip
+  PE -> GetFlag Cpu.FlagP
+  P -> GetFlag Cpu.FlagS >>= Flip
+  MI -> GetFlag Cpu.FlagS
 
-load :: Instr.RegSpec -> Eff p (Byte p)
+
+load :: RegSpec -> Eff p (Byte p)
 load = \case
-  Instr.A -> GetReg A
-  Instr.B -> GetReg B
-  Instr.C -> GetReg C
-  Instr.D -> GetReg D
-  Instr.E -> GetReg E
-  Instr.H -> GetReg H
-  Instr.L -> GetReg L
-  Instr.M -> getRegPair HL >>= ReadMem
+  A -> GetReg Cpu.A
+  B -> GetReg Cpu.B
+  C -> GetReg Cpu.C
+  D -> GetReg Cpu.D
+  E -> GetReg Cpu.E
+  H -> load16hi HL
+  L -> load16lo HL
+  M -> load16 HL >>= ReadMem
 
+load16hi :: RegPairSpec -> Eff p (Byte p)
+load16hi rr = do
+  a <- load16 rr
+  HiLo{hi} <- SplitAddr a
+  pure hi
 
-save :: Instr.RegSpec -> Byte p -> Eff p ()
+load16lo :: RegPairSpec -> Eff p (Byte p)
+load16lo rr = do
+  a <- load16 rr
+  HiLo{lo} <- SplitAddr a
+  pure lo
+
+save :: RegSpec -> Byte p -> Eff p ()
 save = \case
-  Instr.A -> SetReg A
-  Instr.B -> SetReg B
-  Instr.C -> SetReg C
-  Instr.D -> SetReg D
-  Instr.E -> SetReg E
-  Instr.H -> SetReg H
-  Instr.L -> SetReg L
-  Instr.M -> \b -> do a <- getRegPair HL; WriteMem a b
-
+  A -> SetReg Cpu.A
+  B -> SetReg Cpu.B
+  C -> SetReg Cpu.C
+  D -> SetReg Cpu.D
+  E -> SetReg Cpu.E
+  H -> save16hi HL
+  L -> save16lo HL
+  M -> \b -> do a <- load16 HL; WriteMem a b
 
 execute1 :: Op1 -> Byte p -> Eff p (Flow p)
 execute1 op1 b1 = case op1 of
@@ -390,7 +412,7 @@ execute1 op1 b1 = case op1 of
     save dest b1
     return Next
   OUT -> do
-    value <- GetReg A
+    value <- load A
     Ports.outputPort b1 value
     return Next
   ADI -> do
@@ -405,21 +427,21 @@ execute1 op1 b1 = case op1 of
     binop OrB b1
   IN -> do
     value <- Ports.inputPort b1
-    SetReg A value
+    save A value
     return Next
   ACI -> do
-    cin <- GetFlag FlagCY
+    cin <- GetFlag Cpu.FlagCY
     addToAccWithCarry cin b1
   SBI -> do
-    cin <- GetFlag FlagCY
+    cin <- GetFlag Cpu.FlagCY
     subToAccWithCarry cin b1
   XRI -> do
     binop XorB b1
   CPI -> do
-    b <- GetReg A
+    b <- load A
     (v,borrow) <- subtract b b1
     setFlagsFrom v
-    SetFlag FlagCY borrow
+    SetFlag Cpu.FlagCY borrow
     return Next
 
 
@@ -428,9 +450,9 @@ binop
   -> Byte p
   -> Eff p (Flow p)
 binop f b1 = do
-  v0 <- GetReg A
+  v0 <- load A
   v <- f b1 v0
-  saveAndSetFlagsFrom Instr.A v
+  saveAndSetFlagsFrom A v
   resetCarry
   resetAux
   return Next
@@ -439,52 +461,52 @@ andA
   :: Byte p
   -> Eff p (Flow p)
 andA b1 = do
-  v0 <- GetReg A
+  v0 <- load A
   v <- AndB b1 v0
-  saveAndSetFlagsFrom Instr.A v
+  saveAndSetFlagsFrom A v
   resetCarry
   w <- OrB b1 v0
   aux <- TestBit w 3
-  SetFlag FlagA aux
+  SetFlag Cpu.FlagA aux
   return Next
 
 resetCarry :: Eff p ()
 resetCarry = do
   c <- MakeBit False
-  SetFlag FlagCY c
+  SetFlag Cpu.FlagCY c
 
 resetAux :: Eff p ()
 resetAux = do
   a <- MakeBit False
-  SetFlag FlagA a
+  SetFlag Cpu.FlagA a
 
 
 execute2 :: Op2 -> Addr p -> Eff p (Flow p)
 execute2 op2 a = case op2 of
   LXI rp -> do
-    setRegPair rp a
+    save16 rp a
     return Next
   SHLD -> do
-    b <- GetReg L
+    b <- load L
     WriteMem a b
     a' <- OffsetAddr 1 a
-    b' <- GetReg H
+    b' <- load H
     WriteMem a' b'
     return Next
   STA -> do
-    b  <- GetReg A
+    b  <- load A
     WriteMem a b
     return Next
   LHLD -> do
     b <- ReadMem a
-    SetReg L b
+    save L b
     a' <- OffsetAddr 1 a
     b' <- ReadMem a'
-    SetReg H b'
+    save H b'
     return Next
   LDA -> do
     b <- ReadMem a
-    SetReg A b
+    save A b
     return Next
   JCond cond -> do
     executeCond cond >>= CaseBit >>= \case
@@ -506,21 +528,21 @@ execute2 op2 a = case op2 of
 
 addToAccWithCarry :: Bit p -> Byte p -> Eff p (Flow p)
 addToAccWithCarry cin v1 = do
-  v2 <- GetReg A
+  v2 <- load A
   (v,cout) <- AddWithCarry cin v1 v2
   aux <- addForAuxCarry cin v1 v2
-  SetFlag FlagA aux
-  SetFlag FlagCY cout
-  saveAndSetFlagsFrom Instr.A v
+  SetFlag Cpu.FlagA aux
+  SetFlag Cpu.FlagCY cout
+  saveAndSetFlagsFrom A v
   return Next
 
 
 subToAccWithCarry :: Bit p -> Byte p -> Eff p (Flow p)
 subToAccWithCarry cin v2 = do
-  v1 <- GetReg A
+  v1 <- load A
   (v,cout) <- subWithCarry cin v1 v2
-  SetFlag FlagCY cout
-  saveAndSetFlagsFrom Instr.A v
+  SetFlag Cpu.FlagCY cout
+  saveAndSetFlagsFrom A v
   return Next
 
 
@@ -535,7 +557,7 @@ subWithCarry cin v1 v2 = do
   v2comp <- Complement v2
   (v,cout) <- AddWithCarry cin' v1 v2comp
   aux <- addForAuxCarry cin' v1 v2comp
-  SetFlag FlagA aux
+  SetFlag Cpu.FlagA aux
   borrow <- Flip cout
   return (v, borrow)
 
@@ -551,8 +573,8 @@ addForAuxCarry cin v1 v2 = do
 
 call :: Addr p -> Eff p (Flow p)
 call a = do
-  hi <- GetReg PCH
-  lo <- GetReg PCL
+  hi <- GetReg Cpu.PCH
+  lo <- GetReg Cpu.PCL
   pushStack hi
   pushStack lo
   returnAddr <- MakeAddr $ HiLo{hi,lo}
@@ -560,7 +582,7 @@ call a = do
   return (Jump a)
 
 
-saveAndSetFlagsFrom :: Instr.RegSpec -> Byte p -> Eff p ()
+saveAndSetFlagsFrom :: RegSpec -> Byte p -> Eff p ()
 saveAndSetFlagsFrom reg v = do
   save reg v
   setFlagsFrom v
@@ -570,79 +592,106 @@ setFlagsFrom value = do
   s <- IsSigned value
   z <- IsZero value
   p <- IsParity value
-  SetFlag FlagS s
-  SetFlag FlagZ z
-  SetFlag FlagP p
+  SetFlag Cpu.FlagS s
+  SetFlag Cpu.FlagZ z
+  SetFlag Cpu.FlagP p
 
 
 pushStack :: Byte p -> Eff p ()
 pushStack b = do
-  sp0 <- getRegPair SP
+  sp0 <- load16 SP
   sp1 <- OffsetAddr (-1) sp0
-  setRegPair SP sp1
+  save16 SP sp1
   WriteMem sp1 b
 
 popStack :: Eff p (Byte p)
 popStack = do
-  sp0 <- getRegPair SP
+  sp0 <- load16 SP
   sp1 <- OffsetAddr 1 sp0
-  setRegPair SP sp1
+  save16 SP sp1
   ReadMem sp0
 
 getPC :: Eff p (Addr p)
 getPC = do
-  hi <- GetReg PCH
-  lo <- GetReg PCL
+  hi <- GetReg Cpu.PCH
+  lo <- GetReg Cpu.PCL
   MakeAddr $ HiLo{hi,lo}
 
 setPC :: Addr p -> Eff p ()
 setPC a = do
   HiLo{hi,lo} <- SplitAddr a
-  SetReg PCL lo
-  SetReg PCH hi
+  SetReg Cpu.PCL lo
+  SetReg Cpu.PCH hi
 
-getRegPair :: RegPairSpec -> Eff p (Addr p)
-getRegPair rp = do
-  let HiLo{hi=rh, lo=rl} = expandRegPair rp
-  hi <- GetReg rh
-  lo <- GetReg rl
-  MakeAddr $ HiLo{hi,lo}
+load16 :: RegPairSpec -> Eff p (Addr p)
+load16 rp = do
+  case expandRegPair rp of
+    Right rr -> GetReg16 rr
+    Left (HiLo{hi=rh, lo=rl}) -> do
+      hi <- GetReg rh
+      lo <- GetReg rl
+      MakeAddr $ HiLo{hi,lo}
 
-setRegPair :: RegPairSpec -> Addr p -> Eff p ()
-setRegPair rp a = do
-  let HiLo{hi=rh, lo=rl} = expandRegPair rp
-  HiLo{hi,lo} <- SplitAddr a
-  SetReg rh hi
-  SetReg rl lo
+save16 :: RegPairSpec -> Addr p -> Eff p ()
+save16 rp a = do
+  case expandRegPair rp of
+    Right rr -> SetReg16 rr a
+    Left (HiLo{hi=rh, lo=rl}) -> do
+      HiLo{hi,lo} <- SplitAddr a
+      SetReg rh hi
+      SetReg rl lo
 
-expandRegPair :: RegPairSpec -> HiLo Reg
+save16hi :: RegPairSpec -> Byte p -> Eff p ()
+save16hi rp hi = do
+  case expandRegPair rp of
+    Right rr -> do
+      a <- GetReg16 rr
+      HiLo{lo} <- SplitAddr a
+      a' <- MakeAddr $ HiLo{hi,lo}
+      SetReg16 rr a'
+    Left (HiLo{hi=rh}) -> do
+      SetReg rh hi
+
+save16lo :: RegPairSpec -> Byte p -> Eff p ()
+save16lo rp lo = do
+  case expandRegPair rp of
+    Right rr -> do
+      a <- GetReg16 rr
+      HiLo{hi} <- SplitAddr a
+      a' <- MakeAddr $ HiLo{hi,lo}
+      SetReg16 rr a'
+    Left (HiLo{lo=rl}) -> do
+      SetReg rl lo
+
+
+expandRegPair :: RegPairSpec -> Either (HiLo Reg) Reg16
 expandRegPair = \case
-  BC -> HiLo {hi = B, lo = C}
-  DE -> HiLo {hi = D, lo = E}
-  HL -> HiLo {hi = H, lo = L}
-  SP -> HiLo {hi = SPH, lo = SPL}
-  PSW -> HiLo {hi = A, lo = Flags}
+  BC -> Left $ HiLo {hi = Cpu.B, lo = Cpu.C}
+  DE -> Left $ HiLo {hi = Cpu.D, lo = Cpu.E}
+  HL -> Right Cpu.HL
+  SP -> Right Cpu.SP
+  PSW -> Left $ HiLo {hi = Cpu.A, lo = Cpu.Flags}
 
 setRegOrFlags :: Reg -> Byte p -> Eff p ()
 setRegOrFlags r v = case r of
-  Flags -> do
-    TestBit v 7 >>= SetFlag FlagS
-    TestBit v 6 >>= SetFlag FlagZ
-    TestBit v 4 >>= SetFlag FlagA
-    TestBit v 2 >>= SetFlag FlagP
-    TestBit v 0 >>= SetFlag FlagCY
+  Cpu.Flags -> do
+    TestBit v 7 >>= SetFlag Cpu.FlagS
+    TestBit v 6 >>= SetFlag Cpu.FlagZ
+    TestBit v 4 >>= SetFlag Cpu.FlagA
+    TestBit v 2 >>= SetFlag Cpu.FlagP
+    TestBit v 0 >>= SetFlag Cpu.FlagCY
   reg ->
     SetReg reg v
 
 getRegOrFlags :: Reg -> Eff p (Byte p)
 getRegOrFlags = \case
-  Flags -> do
+  Cpu.Flags -> do
     x <- MakeByte 0x2
-    x <- GetFlag FlagS >>= UpdateBit x 7
-    x <- GetFlag FlagZ >>= UpdateBit x 6
-    x <- GetFlag FlagA >>= UpdateBit x 4
-    x <- GetFlag FlagP >>= UpdateBit x 2
-    x <- GetFlag FlagCY >>= UpdateBit x 0
+    x <- GetFlag Cpu.FlagS >>= UpdateBit x 7
+    x <- GetFlag Cpu.FlagZ >>= UpdateBit x 6
+    x <- GetFlag Cpu.FlagA >>= UpdateBit x 4
+    x <- GetFlag Cpu.FlagP >>= UpdateBit x 2
+    x <- GetFlag Cpu.FlagCY >>= UpdateBit x 0
     return x
   reg ->
     GetReg reg

@@ -61,7 +61,7 @@ trace handle = loop
 
 
 seeState :: EmuState -> String
-seeState EmuState{cpu=Cpu{pch,pcl,sph,spl,regA,regB,regC,regD,regE,regH,regL
+seeState EmuState{cpu=Cpu{pch,pcl,hl,sp,regA,regB,regC,regD,regE
                          ,flagS,flagZ,flagA,flagP,flagCY
                          },ticks} = do
   intercalate ", "
@@ -71,8 +71,8 @@ seeState EmuState{cpu=Cpu{pch,pcl,sph,spl,regA,regB,regC,regD,regE,regH,regL
       , ("AF", show regA <> show regF)
       , ("BC", show regB <> show regC)
       , ("DE", show regD <> show regE)
-      , ("HL", show regH <> show regL)
-      , ("SP", show sph <> show spl)
+      , ("HL", show hl)
+      , ("SP", show sp)
       , ("CYC", show (unTicks ticks))
       ]
     ]

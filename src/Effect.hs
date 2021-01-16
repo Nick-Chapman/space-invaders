@@ -5,7 +5,7 @@ import Control.Monad (ap,liftM)
 import Data.Word8 (Word8)
 
 import Buttons (But)
-import Cpu (Reg,Flag)
+import Cpu (Reg16,Reg,Flag)
 import HiLo (HiLo(..))
 import InstructionSet (Op,Instruction)
 import Phase (Byte,Addr,Bit)
@@ -18,6 +18,8 @@ data Eff p a where
   Ret :: a -> Eff p a
   Bind :: Eff p a -> (a -> Eff p b) -> Eff p b
 
+  GetReg16 :: Reg16 -> Eff p (Addr p)
+  SetReg16 :: Reg16 -> Addr p -> Eff p ()
   GetReg :: Reg -> Eff p (Byte p)
   SetReg :: Reg -> Byte p -> Eff p ()
   GetFlag :: Flag -> Eff p (Bit p)

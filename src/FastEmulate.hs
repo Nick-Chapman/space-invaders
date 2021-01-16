@@ -10,11 +10,11 @@ module FastEmulate (
   Bit(..),
   ) where
 
-import Addr (Addr)
+import Addr (Addr(..))
 import Buttons (Buttons)
 import Byte (Byte(..))
 import Compile (compileOp,compileAt)
-import Cpu (Cpu,Reg(..),Flag(..),kindOfMap)
+import Cpu (Cpu,Reg16,Reg(PCH,PCL),Flag(..),kindOfMap)
 import Data.Bits (complement,(.&.),(.|.),xor,shiftL,shiftR,testBit,setBit,clearBit)
 import Data.Map (Map)
 import HiLo (HiLo(..))
@@ -29,7 +29,7 @@ import Text.Printf (printf)
 import qualified Addr (toHiLo,fromHiLo,bump,addCarryOut)
 import qualified Buttons
 import qualified Byte (addWithCarry,toUnsigned)
-import qualified Cpu (init,get,set,getFlag,setFlag)
+import qualified Cpu (init,get16,set16,get,set,getFlag,setFlag)
 import qualified Data.Map.Strict as Map (empty,lookup,findWithDefault,fromList,insert)
 import qualified Mem (init,read,write)
 import qualified Phase (Byte,Addr,Bit)
@@ -104,7 +104,7 @@ initState rom = do
     , togo = halfFrameTicks
     , half = False
     , icount = 0
-    , cpu = Cpu.init (Byte 0) (Bit False)
+    , cpu = Cpu.init (Addr 0) (Byte 0) (Bit False)
     , shifter = Shifter.init (Byte 0)
     , mem = Mem.init rom
     , interruptsEnabled = False
@@ -228,9 +228,11 @@ emulateProgram CB{traceI} buttons s = emu (emptyEnv buttons) s
       S_TraceInstruction cpu i p -> do
         case traceI of
           Nothing -> return ()
-          Just tr -> tr u { cpu = Cpu.kindOfMap fByte fBit cpu } (getLitInstruction i)
+          Just tr -> tr u { cpu = Cpu.kindOfMap fAddr fByte fBit cpu } (getLitInstruction i)
         emu q u p
           where
+            fAddr :: Exp16 -> Addr
+            fAddr = ev16
             fByte :: Exp8 -> Byte
             fByte = ev8
             fBit :: Exp1 -> Bit
@@ -246,6 +248,7 @@ emulateProgram CB{traceI} buttons s = emu (emptyEnv buttons) s
           [] -> error $ "emulateProgram, switch8, no match: " ++ show w
           p:_ -> emu q u p
 
+      S_AssignReg16 r e p -> emu q (setReg16 r (ev16 e) u) p
       S_AssignReg r e p -> emu q (setReg r (ev8 e) u) p
       S_AssignFlag f e p -> emu q (setFlag f (ev1 e) u) p
       S_AssignShifterReg r e p -> emu q (setShifterReg r (ev8 e) u) p
@@ -316,9 +319,10 @@ eval8 q s@EmuState{cpu,shifter,mem} = \case
   E8_UnknownInput x -> error $ "eval8: unknown input" <> show x
 
 eval16 :: Env -> EmuState -> Exp16 -> Addr
-eval16 q s = \case
+eval16 q s@EmuState{cpu} = \case
   E16_Lit a -> a
   E16_Var v -> look16 q v
+  E16_Reg rr -> Cpu.get16 cpu rr
   E16_HiLo HiLo{hi,lo} -> Addr.fromHiLo HiLo {hi = eval8 q s hi, lo = eval8 q s lo}
   E16_OffsetAdr i a -> Addr.bump (eval16 q s a) i
   E16_AddWithCarry cin b1 b2 -> do
@@ -343,6 +347,10 @@ setPC addr = do
 setShifterReg :: Shifter.Reg -> Byte -> EmuState -> EmuState
 setShifterReg reg byte state@EmuState{shifter} = do
   state { shifter = Shifter.set shifter reg byte }
+
+setReg16 :: Reg16 -> Addr -> EmuState -> EmuState
+setReg16 reg v state@EmuState{cpu} = do
+  state { cpu = Cpu.set16 cpu reg v }
 
 setReg :: Reg -> Byte -> EmuState -> EmuState
 setReg reg byte state@EmuState{cpu} = do

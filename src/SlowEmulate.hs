@@ -25,7 +25,7 @@ import Text.Printf (printf)
 import qualified Addr (fromHiLo,toHiLo,bump)
 import qualified Buttons (get)
 import qualified Byte (toUnsigned)
-import qualified Cpu (init,get,set,getFlag,setFlag)
+import qualified Cpu (init,get16,set16,get,set,getFlag,setFlag)
 import qualified Mem (init,read,write)
 import qualified Phase (Byte,Addr,Bit)
 import qualified Semantics (fetchDecodeExec,decodeExec)
@@ -67,7 +67,7 @@ initState :: Rom -> IO EmuState
 initState rom = return $ EmuState
   { ticks = 0
   , icount = 0
-  , cpu = Cpu.init (Byte 0) (Bit False)
+  , cpu = Cpu.init (Addr 0) (Byte 0) (Bit False)
   , mem = Mem.init rom
   , interrupts_enabled = False
 
@@ -116,6 +116,8 @@ emulateS CB{traceI} semantics buttons s0 = do
       Ret x -> k s x
       Bind eff f -> run s eff $ \s a -> run s (f a) k
 
+      GetReg16 rr -> k s (Cpu.get16 cpu rr)
+      SetReg16 rr a -> k s { cpu = Cpu.set16 cpu rr a} ()
       GetReg r -> k s (Cpu.get cpu r)
       SetReg r b -> k s { cpu = Cpu.set cpu r b} ()
       GetFlag flag -> k s (Cpu.getFlag cpu flag)

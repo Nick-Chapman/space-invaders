@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include <sys/time.h>
+#include <sys/time.h> // for gettimeofday()
 #include "SDL.h"
 #include "machine.h"
 
@@ -11,7 +11,7 @@ static int play ();
 static void render(SDL_Renderer*);
 static void input();
 
-static u64 time() { //in micro-seconds
+static u64 wallclock_time() { //in micro-seconds
   struct timeval tv;
   gettimeofday(&tv,NULL);
   return tv.tv_sec*(u64)1000000+tv.tv_usec;
@@ -60,13 +60,13 @@ int test1 () {
 int speed () {
   const int sim_seconds_to_run_for = 600; //10 minutes
   Func fn = initial_program();
-  u64 toc = time();
+  u64 toc = wallclock_time();
   cycles = 0;
   while (fn) {
     fn = (Func)fn();
     if (cycles > TWO_MEG * sim_seconds_to_run_for) break;
   }
-  u64 tic = time();
+  u64 tic = wallclock_time();
   clock_t duration_us = tic - toc;
   double duration_s = duration_us / (double)MEG;
   int mhz = cycles/duration_us;
@@ -168,10 +168,10 @@ static void measure_fps() {
   static int frames = 0;
   static u64 last = 0;
   if (last == 0) {
-    last = time();
+    last = wallclock_time();
   } else {
     frames++;
-    u64 now = time();
+    u64 now = wallclock_time();
     u64 elapsed = now - last;
     if (elapsed >= MEG) {
       printf("fps = %d\n",frames);

@@ -24,13 +24,21 @@ main :: IO ()
 main = do
   putStrLn "*GenerateC*"
   rom <- Rom.loadInvaders
-  cfile <- convertRom rom
-  let fp = "c/program.c"
+  sequence_ [ convert mode rom | mode <- modesToGenerate ]
+    where modesToGenerate = [ModeA,ModeB,ModeC]
+
+convert :: GenMode -> Rom -> IO ()
+convert mode rom = do
+  cfile <- convertRom mode rom
+  let fp = "c/program-" <> show mode <> ".c"
   putStrLn $ "Writing file: " <> fp
   writeFile fp (show cfile)
 
-convertRom :: Rom -> IO CFile
-convertRom rom = do
+data GenMode = ModeA | ModeB | ModeC
+  deriving Show
+
+convertRom :: GenMode -> Rom -> IO CFile
+convertRom mode rom = do
 
   let
     mem =
@@ -137,7 +145,7 @@ convertRom rom = do
                , size = Ident (CName "ROM_SIZE")
                , init = [ fastRef a | a <- take 0x2000 [0..] ]
                })
-  let defs =
+  let defs1 =
         [ Include "\"machine.c\"" ]
         ++ [mem]
         ++ slow_forwards
@@ -145,6 +153,12 @@ convertRom rom = do
         ++ op_defs ++ [ops_array]
         ++ slow_defs ++ [slow_progs_array]
         ++ fast_defs ++ [fast_progs_array]
+
+  let defs =
+        case mode of
+          ModeA -> defs1
+          ModeB -> defs1
+          ModeC -> defs1
 
   return $ CFile defs
 

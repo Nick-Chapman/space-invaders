@@ -57,16 +57,16 @@ c/main-opt%.o: c/main.c c/machine.h #Makefile
 
 # compile generated program: mode(%)=A/B/C, opt=0/1, opt-0 with/out TRACE
 
-c/program-%-opt0-TRACE.o: c/program.c c/machine.h c/machine.c #Makefile
+c/program-%-opt0-TRACE.o: c/program-Mode%.c c/machine.h c/machine.c #Makefile
 	gcc -O0 -DOPT=0 -DMODE_$* -DTRACE $(CFLAGS) -c $< -o $@ -Wno-unused-variable
 
-c/program-%-opt0.o: c/program.c c/machine.h c/machine.c #Makefile
+c/program-%-opt0.o: c/program-Mode%.c c/machine.h c/machine.c #Makefile
 	gcc -O0 -DOPT=0 -DMODE_$* $(CFLAGS) -c $< -o $@ -Wno-unused-variable
 
-c/program-%-opt1.o: c/program.c c/machine.h c/machine.c #Makefile
+c/program-%-opt1.o: c/program-Mode%.c c/machine.h c/machine.c #Makefile
 	gcc -O1 -DOPT=1 -DMODE_$* $(CFLAGS) -c $< -o $@ -Wno-unused-variable
 
 
 # generate c code...
-c/program.c: src/*.hs
-	stack run c
+c/program-Mode%.c: src/*.hs
+	stack run genc

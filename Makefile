@@ -58,7 +58,7 @@ obj/main-opt%.o: c/main.c c/machine.h .obj
 # compile generated program: mode(%)=A/B/C, opt=0/1, opt-0 with/out TRACE
 
 obj/prog-%-opt0-TRACE.o: c/prog-Mode%.c genc/Mode%.c c/machine.h c/machine.c .obj
-	gcc -O0 -DOPT=0 -DMODE_$* -DTRACE $(CFLAGS) -c $< -o $@ -Wno-unused-variable
+	gcc -O0 -DOPT=0 -DTRACE $(CFLAGS) -c $< -o $@ -Wno-unused-variable
 
 obj/prog-%-opt0.o: c/prog-Mode%.c genc/Mode%.c c/machine.h c/machine.c .obj
 	gcc -O0 -DOPT=0 -DMODE_$* $(CFLAGS) -c $< -o $@ -Wno-unused-variable

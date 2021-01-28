@@ -3,5 +3,5 @@
 *~
 stack.yaml.lock
 .markdown-preview.html
-c/*.o
-*.exe
+obj/*.o
+obj/*.exe

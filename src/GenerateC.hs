@@ -30,7 +30,7 @@ main = do
 convert :: GenMode -> Rom -> IO ()
 convert mode rom = do
   cfile <- convertRom mode rom
-  let fp = "c/program-" <> show mode <> ".c"
+  let fp = "genc/" <> show mode <> ".c"
   putStrLn $ "Writing file: " <> fp
   writeFile fp (show cfile)
 
@@ -146,8 +146,7 @@ convertRom mode rom = do
                , init = [ fastRef a | a <- take 0x2000 [0..] ]
                })
   let defs1 =
-        [ Include "\"machine.c\"" ]
-        ++ [mem]
+        [mem]
         ++ slow_forwards
         ++ fast_forwards
         ++ op_defs ++ [ops_array]

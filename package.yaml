@@ -4,7 +4,7 @@ description:         Emulator for Space Invaders, running on Intel 8080
 license:             BSD3
 author:              Nick Chapman
 maintainer:          nic@amadido.co.uk
-github:              https://github.com/Nick-Chapman/space-invaders.git
+github:              Nick-Chapman/space-invaders.git
 
 extra-source-files:
 - README.md

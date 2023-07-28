@@ -45,9 +45,7 @@ ghc-options:
 - -Werror
 - -Wall
 - -Wno-name-shadowing
-- -threaded
-- -rtsopts
-- -with-rtsopts=-N
+- -O2
 
 library:
   source-dirs: src

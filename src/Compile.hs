@@ -348,8 +348,8 @@ data Gen a where
   NewAVar :: Gen AVar
 
 instance Functor Gen where fmap = liftM
-instance Applicative Gen where pure = return; (<*>) = ap
-instance Monad Gen where return = Ret; (>>=) = Bind
+instance Applicative Gen where pure = Ret; (<*>) = ap
+instance Monad Gen where (>>=) = Bind
 
 runGen :: Gen a -> a
 runGen g = fst $ loop GenState{u=1} g where

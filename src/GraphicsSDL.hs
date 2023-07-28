@@ -34,7 +34,7 @@ main Conf{scaleFactor,fpsLimit,showControls} = do
 
   let sf = fromIntegral scaleFactor
 
-  let! _ = keyMapTable
+  -- let! _ = keyMapTable
   SDL.initializeAll
   Font.initialize
 

@@ -23,6 +23,11 @@
 
 ### Step 1. Emulation (TODO: rewrite)
 
+Dependencies:
+```
+sudo apt-get install libsdl2-dev libsdl2-ttf-dev libsdl2-mixer-dev
+```
+
 Build/run emulation with SDL visualization:
 
 - `stack run`

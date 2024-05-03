@@ -34,8 +34,8 @@ typedef enum ButtonE
     Dip7_coinInfoOff,
   } Button;
 
-long icount;
-long cycles;
+extern long icount;
+extern long cycles;
 
 extern u8 mem [];
 

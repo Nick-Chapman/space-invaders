@@ -201,3 +201,14 @@ version=mode=B,opt=1, duration(s)=0.626, speedup=x959
 version=mode=C,opt=0, duration(s)=1.07, speedup=x558
 version=mode=C,opt=1, duration(s)=0.267, speedup=x2245
 ```
+
+New laptop...
+```
+nic@Mosh:~/code/space-invaders$ make speed
+version=mode=A,opt=0, duration(s)=1.04, speedup=x579
+version=mode=A,opt=1, duration(s)=0.427, speedup=x1403
+version=mode=B,opt=0, duration(s)=0.584, speedup=x1028
+version=mode=B,opt=1, duration(s)=0.231, speedup=x2598
+version=mode=C,opt=0, duration(s)=0.371, speedup=x1615
+version=mode=C,opt=1, duration(s)=0.105, speedup=x5720
+```

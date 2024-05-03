@@ -188,3 +188,16 @@ Running `make play` runs the Mode-C code, compiled with `-O1` optimization. This
 Above a factor of x3 the game becomes rather unplayable. But at x10 it is still quite nice to watch the attract screens wiz by. We can go faster still... until we reach a factor of x2000 or so. Here we will notice that the fps reported starts to drop below 60 fps. This shows that we are unable to emulate the number of cycles attempted (200000/60 * speedup-factor) within the allotted 1/60s and leaving enough time to actually do the graphics render!
 
 So for example, at x10000 speedup, I see a reported fps of 12. (And my laptop fan starts to spin wildly). So 1/5 of the 60 fps it should be. So showing we cannot do better than the x2000 speedup which the `make speed` numbers told us to expect.
+
+### Update 2024
+
+Old laptop...
+```
+nic@luna:~/code/space-invaders$ make speed
+version=mode=A,opt=0, duration(s)=3.61, speedup=x166
+version=mode=A,opt=1, duration(s)=1.21, speedup=x495
+version=mode=B,opt=0, duration(s)=1.68, speedup=x356
+version=mode=B,opt=1, duration(s)=0.626, speedup=x959
+version=mode=C,opt=0, duration(s)=1.07, speedup=x558
+version=mode=C,opt=1, duration(s)=0.267, speedup=x2245
+```

@@ -12282,129 +12282,132 @@
     advance (7)
     #1408
     #instruction: OUT  04
+    let:8 a12 = Shifter_HI in
     advance (10)
     #140A
     #instruction: IN   03
-    let:8 a12 = (Shifter_OFF & 07) in
-    let:8 a13 = (~Shifter_OFF & 07) in
-    let:8 a14 = ((a11 << a12) | ((Shifter_HI >> a13) >> 01)) in
+    let:8 a13 = Shifter_OFF in
+    let:8 a14 = (a13 & 07) in
+    let:8 a15 = (~a13 & 07) in
+    let:8 a16 = ((a11 << a14) | ((a12 >> a15) >> 01)) in
     advance (10)
     #140C
     #instruction: OR   (HL)
-    let:16 a15 = HL in
-    let:8 a16 = M[a15] in
-    let:8 a17 = (a16 | a14) in
+    let:16 a17 = HL in
+    let:8 a18 = M[a17] in
+    let:8 a19 = (a18 | a16) in
     advance (7)
     #140D
     #instruction: LD   (HL),A
-    let:16 a18 = HL in
-    M[a18] := a17;
+    let:16 a20 = HL in
+    M[a20] := a19;
     advance (7)
     #140E
     #instruction: INC  HL
-    let:16 a19 = HL in
-    let:16 a20 = (1 + a19) in
+    let:16 a21 = HL in
+    let:16 a22 = (1 + a21) in
     advance (5)
     #140F
     #instruction: INC  DE
-    let:8 a21 = D in
-    let:8 a22 = E in
-    let:16 a23 = (1 + (a21,a22)) in
+    let:8 a23 = D in
+    let:8 a24 = E in
+    let:16 a25 = (1 + (a23,a24)) in
     advance (5)
     #1410
     #instruction: XOR  A
-    let:8 a24 = (a17 ^ a17) in
+    let:8 a26 = (a19 ^ a19) in
     advance (4)
     #1411
     #instruction: OUT  04
     advance (10)
     #1413
     #instruction: IN   03
-    let:8 a25 = (Shifter_OFF & 07) in
-    let:8 a26 = (~Shifter_OFF & 07) in
-    let:8 a27 = ((a24 << a25) | ((a11 >> a26) >> 01)) in
+    let:8 a27 = Shifter_OFF in
+    let:8 a28 = (a27 & 07) in
+    let:8 a29 = (~a27 & 07) in
+    let:8 a30 = ((a26 << a28) | ((a11 >> a29) >> 01)) in
     advance (10)
     #1415
     #instruction: OR   (HL)
-    let:8 a28 = M[a20] in
-    let:8 a29 = (a28 | a27) in
+    let:8 a31 = M[a22] in
+    let:8 a32 = (a31 | a30) in
     advance (7)
     #1416
     #instruction: LD   (HL),A
-    M[a20] := a29;
+    M[a22] := a32;
     advance (7)
     #1417
     #instruction: POP  HL
-    let:16 a30 = (1 + a8) in
-    let:8 a31 = M[a8] in
-    let:16 a32 = (1 + a30) in
-    let:8 a33 = M[a30] in
+    let:16 a33 = (1 + a8) in
+    let:8 a34 = M[a8] in
+    let:16 a35 = (1 + a33) in
+    let:8 a36 = M[a33] in
     advance (10)
     #1418
     #instruction: LD   BC,0020
     advance (10)
     #141B
     #instruction: ADD  HL,BC
-    let:16 a34 = (a33,a31) in
-    let:17 a35 = add17(0020,a34) in
+    let:16 a37 = (a36,a34) in
+    let:17 a38 = add17(0020,a37) in
     advance (10)
     #141C
     #instruction: POP  BC
-    let:16 a36 = (1 + a32) in
-    let:8 a37 = M[a32] in
-    let:16 a38 = (1 + a36) in
-    let:8 a39 = M[a36] in
+    let:16 a39 = (1 + a35) in
+    let:8 a40 = M[a35] in
+    let:16 a41 = (1 + a39) in
+    let:8 a42 = M[a39] in
     advance (10)
     #141D
     #instruction: DEC  B
-    let:16 a40 = addWithCarry(!true,a39,~00) in
-    let:8 a41 = (a39 & 0F) in
-    let:8 a42 = (~00 & 0F) in
-    let:16 a43 = addWithCarry(!true,a41,a42) in
+    let:16 a43 = addWithCarry(!true,a42,~00) in
+    let:8 a44 = (a42 & 0F) in
+    let:8 a45 = (~00 & 0F) in
+    let:16 a46 = addWithCarry(!true,a44,a45) in
     advance (5)
     #141E
     #instruction: JP   NZ,1405
-    if (!is_zero(a40[7:0])) {
+    if (!is_zero(a43[7:0])) {
       advance (10)
-      SP := a38;
-      HL := a35[15:0];
-      A := a29;
-      B := a40[7:0];
-      C := a37;
-      D := a23[15:8];
-      E := a23[7:0];
-      FlagS := a40[7:0][7];
-      FlagZ := is_zero(a40[7:0]);
-      FlagA := a43[7:0][4];
-      FlagP := parity(a40[7:0]);
-      FlagCY := a35[16];
-      Shifter_HI := a24;
+      SP := a41;
+      HL := a38[15:0];
+      A := a32;
+      B := a43[7:0];
+      C := a40;
+      D := a25[15:8];
+      E := a25[7:0];
+      FlagS := a43[7:0][7];
+      FlagZ := is_zero(a43[7:0]);
+      FlagA := a46[7:0][4];
+      FlagP := parity(a43[7:0]);
+      FlagCY := a38[16];
+      Shifter_HI := a26;
       Shifter_LO := a11;
       jump (1405);
     } else {
       advance (10)
       #1421
       #instruction: RET
-      let:16 a44 = (1 + a38) in
-      let:8 a45 = M[a38] in
-      let:16 a46 = (1 + a44) in
-      let:8 a47 = M[a44] in
+      let:16 a47 = (1 + a41) in
+      let:8 a48 = M[a41] in
+      let:16 a49 = (1 + a47) in
+      let:8 a50 = M[a47] in
       advance (10)
-      SP := a46;
-      HL := a35[15:0];
-      A := a29;
-      B := a40[7:0];
-      C := a37;
-      D := a23[15:8];
-      E := a23[7:0];
-      FlagS := a40[7:0][7];
-      FlagZ := is_zero(a40[7:0]);
-      FlagA := a43[7:0][4];
-      FlagP := parity(a40[7:0]);
-      FlagCY := a35[16];
-      Shifter_HI := a24;
+      SP := a49;
+      HL := a38[15:0];
+      A := a32;
+      B := a43[7:0];
+      C := a40;
+      D := a25[15:8];
+      E := a25[7:0];
+      FlagS := a43[7:0][7];
+      FlagZ := is_zero(a43[7:0]);
+      FlagA := a46[7:0][4];
+      FlagP := parity(a43[7:0]);
+      FlagCY := a38[16];
+      Shifter_HI := a26;
       Shifter_LO := a11;
-      jump ((a47,a45));
+      jump ((a50,a48));
     }
 
 1424:
@@ -12665,139 +12668,142 @@
     advance (7)
     #1458
     #instruction: OUT  04
+    let:8 a12 = Shifter_HI in
     advance (10)
     #145A
     #instruction: IN   03
-    let:8 a12 = (Shifter_OFF & 07) in
-    let:8 a13 = (~Shifter_OFF & 07) in
-    let:8 a14 = ((a11 << a12) | ((Shifter_HI >> a13) >> 01)) in
+    let:8 a13 = Shifter_OFF in
+    let:8 a14 = (a13 & 07) in
+    let:8 a15 = (~a13 & 07) in
+    let:8 a16 = ((a11 << a14) | ((a12 >> a15) >> 01)) in
     advance (10)
     #145C
     #instruction: CPL
     advance (4)
     #145D
     #instruction: AND  (HL)
-    let:16 a15 = HL in
-    let:8 a16 = M[a15] in
-    let:8 a17 = ~a14 in
-    let:8 a18 = (a16 & a17) in
-    let:8 a19 = (a16 | a17) in
+    let:16 a17 = HL in
+    let:8 a18 = M[a17] in
+    let:8 a19 = ~a16 in
+    let:8 a20 = (a18 & a19) in
+    let:8 a21 = (a18 | a19) in
     advance (7)
     #145E
     #instruction: LD   (HL),A
-    let:16 a20 = HL in
-    M[a20] := a18;
+    let:16 a22 = HL in
+    M[a22] := a20;
     advance (7)
     #145F
     #instruction: INC  HL
-    let:16 a21 = HL in
-    let:16 a22 = (1 + a21) in
+    let:16 a23 = HL in
+    let:16 a24 = (1 + a23) in
     advance (5)
     #1460
     #instruction: INC  DE
-    let:8 a23 = D in
-    let:8 a24 = E in
-    let:16 a25 = (1 + (a23,a24)) in
+    let:8 a25 = D in
+    let:8 a26 = E in
+    let:16 a27 = (1 + (a25,a26)) in
     advance (5)
     #1461
     #instruction: XOR  A
-    let:8 a26 = (a18 ^ a18) in
+    let:8 a28 = (a20 ^ a20) in
     advance (4)
     #1462
     #instruction: OUT  04
     advance (10)
     #1464
     #instruction: IN   03
-    let:8 a27 = (Shifter_OFF & 07) in
-    let:8 a28 = (~Shifter_OFF & 07) in
-    let:8 a29 = ((a26 << a27) | ((a11 >> a28) >> 01)) in
+    let:8 a29 = Shifter_OFF in
+    let:8 a30 = (a29 & 07) in
+    let:8 a31 = (~a29 & 07) in
+    let:8 a32 = ((a28 << a30) | ((a11 >> a31) >> 01)) in
     advance (10)
     #1466
     #instruction: CPL
     advance (4)
     #1467
     #instruction: AND  (HL)
-    let:8 a30 = M[a22] in
-    let:8 a31 = ~a29 in
-    let:8 a32 = (a30 & a31) in
-    let:8 a33 = (a30 | a31) in
+    let:8 a33 = M[a24] in
+    let:8 a34 = ~a32 in
+    let:8 a35 = (a33 & a34) in
+    let:8 a36 = (a33 | a34) in
     advance (7)
     #1468
     #instruction: LD   (HL),A
-    M[a22] := a32;
+    M[a24] := a35;
     advance (7)
     #1469
     #instruction: POP  HL
-    let:16 a34 = (1 + a8) in
-    let:8 a35 = M[a8] in
-    let:16 a36 = (1 + a34) in
-    let:8 a37 = M[a34] in
+    let:16 a37 = (1 + a8) in
+    let:8 a38 = M[a8] in
+    let:16 a39 = (1 + a37) in
+    let:8 a40 = M[a37] in
     advance (10)
     #146A
     #instruction: LD   BC,0020
     advance (10)
     #146D
     #instruction: ADD  HL,BC
-    let:16 a38 = (a37,a35) in
-    let:17 a39 = add17(0020,a38) in
+    let:16 a41 = (a40,a38) in
+    let:17 a42 = add17(0020,a41) in
     advance (10)
     #146E
     #instruction: POP  BC
-    let:16 a40 = (1 + a36) in
-    let:8 a41 = M[a36] in
-    let:16 a42 = (1 + a40) in
-    let:8 a43 = M[a40] in
+    let:16 a43 = (1 + a39) in
+    let:8 a44 = M[a39] in
+    let:16 a45 = (1 + a43) in
+    let:8 a46 = M[a43] in
     advance (10)
     #146F
     #instruction: DEC  B
-    let:16 a44 = addWithCarry(!true,a43,~00) in
-    let:8 a45 = (a43 & 0F) in
-    let:8 a46 = (~00 & 0F) in
-    let:16 a47 = addWithCarry(!true,a45,a46) in
+    let:16 a47 = addWithCarry(!true,a46,~00) in
+    let:8 a48 = (a46 & 0F) in
+    let:8 a49 = (~00 & 0F) in
+    let:16 a50 = addWithCarry(!true,a48,a49) in
     advance (5)
     #1470
     #instruction: JP   NZ,1455
-    if (!is_zero(a44[7:0])) {
+    if (!is_zero(a47[7:0])) {
       advance (10)
-      SP := a42;
-      HL := a39[15:0];
-      A := a32;
-      B := a44[7:0];
-      C := a41;
-      D := a25[15:8];
-      E := a25[7:0];
-      FlagS := a44[7:0][7];
-      FlagZ := is_zero(a44[7:0]);
-      FlagA := a47[7:0][4];
-      FlagP := parity(a44[7:0]);
-      FlagCY := a39[16];
-      Shifter_HI := a26;
+      SP := a45;
+      HL := a42[15:0];
+      A := a35;
+      B := a47[7:0];
+      C := a44;
+      D := a27[15:8];
+      E := a27[7:0];
+      FlagS := a47[7:0][7];
+      FlagZ := is_zero(a47[7:0]);
+      FlagA := a50[7:0][4];
+      FlagP := parity(a47[7:0]);
+      FlagCY := a42[16];
+      Shifter_HI := a28;
       Shifter_LO := a11;
       jump (1455);
     } else {
       advance (10)
       #1473
       #instruction: RET
-      let:16 a48 = (1 + a42) in
-      let:8 a49 = M[a42] in
-      let:16 a50 = (1 + a48) in
-      let:8 a51 = M[a48] in
+      let:16 a51 = (1 + a45) in
+      let:8 a52 = M[a45] in
+      let:16 a53 = (1 + a51) in
+      let:8 a54 = M[a51] in
       advance (10)
-      SP := a50;
-      HL := a39[15:0];
-      A := a32;
-      B := a44[7:0];
-      C := a41;
-      D := a25[15:8];
-      E := a25[7:0];
-      FlagS := a44[7:0][7];
-      FlagZ := is_zero(a44[7:0]);
-      FlagA := a47[7:0][4];
-      FlagP := parity(a44[7:0]);
-      FlagCY := a39[16];
-      Shifter_HI := a26;
+      SP := a53;
+      HL := a42[15:0];
+      A := a35;
+      B := a47[7:0];
+      C := a44;
+      D := a27[15:8];
+      E := a27[7:0];
+      FlagS := a47[7:0][7];
+      FlagZ := is_zero(a47[7:0]);
+      FlagA := a50[7:0][4];
+      FlagP := parity(a47[7:0]);
+      FlagCY := a42[16];
+      Shifter_HI := a28;
       Shifter_LO := a11;
-      jump ((a51,a49));
+      jump ((a54,a52));
     }
 
 1474:
@@ -13032,40 +13038,42 @@
     advance (7)
     #149B
     #instruction: OUT  04
+    let:8 a12 = Shifter_HI in
     advance (10)
     #149D
     #instruction: IN   03
-    let:8 a12 = (Shifter_OFF & 07) in
-    let:8 a13 = (~Shifter_OFF & 07) in
-    let:8 a14 = ((a11 << a12) | ((Shifter_HI >> a13) >> 01)) in
+    let:8 a13 = Shifter_OFF in
+    let:8 a14 = (a13 & 07) in
+    let:8 a15 = (~a13 & 07) in
+    let:8 a16 = ((a11 << a14) | ((a12 >> a15) >> 01)) in
     advance (10)
     #149F
     #instruction: PUSH PSW
-    let:16 a15 = (-1 + a8) in
-    M[a15] := a14;
-    let:16 a16 = (-1 + a15) in
-    M[a16] := updateBit(updateBit(updateBit(updateBit(updateBit(02,7,FlagS),6,FlagZ),4,FlagA),2,FlagP),0,FlagCY);
+    let:16 a17 = (-1 + a8) in
+    M[a17] := a16;
+    let:16 a18 = (-1 + a17) in
+    M[a18] := updateBit(updateBit(updateBit(updateBit(updateBit(02,7,FlagS),6,FlagZ),4,FlagA),2,FlagP),0,FlagCY);
     advance (11)
     #14A0
     #instruction: AND  (HL)
-    let:16 a17 = HL in
-    let:8 a18 = M[a17] in
-    let:8 a19 = (a18 & a14) in
-    let:8 a20 = (a18 | a14) in
+    let:16 a19 = HL in
+    let:8 a20 = M[a19] in
+    let:8 a21 = (a20 & a16) in
+    let:8 a22 = (a20 | a16) in
     advance (7)
     #14A1
     #instruction: JP   Z,14A9
-    if (is_zero(a19)) {
+    if (is_zero(a21)) {
       advance (10)
-      SP := a16;
-      A := a19;
-      FlagS := a19[7];
-      FlagZ := is_zero(a19);
-      FlagA := a20[3];
-      FlagP := parity(a19);
+      SP := a18;
+      A := a21;
+      FlagS := a21[7];
+      FlagZ := is_zero(a21);
+      FlagA := a22[3];
+      FlagP := parity(a21);
       FlagCY := false;
       Shifter_HI := a11;
-      Shifter_LO := Shifter_HI;
+      Shifter_LO := a12;
       jump (14A9);
     } else {
       advance (10)
@@ -13076,15 +13084,15 @@
       #instruction: LD   (2061),A
       M[2061] := 01;
       advance (13)
-      SP := a16;
+      SP := a18;
       A := 01;
-      FlagS := a19[7];
-      FlagZ := is_zero(a19);
-      FlagA := a20[3];
-      FlagP := parity(a19);
+      FlagS := a21[7];
+      FlagZ := is_zero(a21);
+      FlagA := a22[3];
+      FlagP := parity(a21);
       FlagCY := false;
       Shifter_HI := a11;
-      Shifter_LO := Shifter_HI;
+      Shifter_LO := a12;
       jump (14A9);
     }
 
@@ -13126,42 +13134,44 @@
     advance (4)
     #14AF
     #instruction: OUT  04
+    let:8 a16 = Shifter_HI in
     advance (10)
     #14B1
     #instruction: IN   03
-    let:8 a16 = (Shifter_OFF & 07) in
-    let:8 a17 = (~Shifter_OFF & 07) in
-    let:8 a18 = ((a15 << a16) | ((Shifter_HI >> a17) >> 01)) in
+    let:8 a17 = Shifter_OFF in
+    let:8 a18 = (a17 & 07) in
+    let:8 a19 = (~a17 & 07) in
+    let:8 a20 = ((a15 << a18) | ((a16 >> a19) >> 01)) in
     advance (10)
     #14B3
     #instruction: PUSH PSW
-    let:16 a19 = (-1 + a4) in
-    M[a19] := a18;
-    let:16 a20 = (-1 + a19) in
-    M[a20] := updateBit(updateBit(updateBit(updateBit(updateBit(02,7,a15[7]),6,is_zero(a15)),4,false),2,parity(a15)),0,false);
+    let:16 a21 = (-1 + a4) in
+    M[a21] := a20;
+    let:16 a22 = (-1 + a21) in
+    M[a22] := updateBit(updateBit(updateBit(updateBit(updateBit(02,7,a15[7]),6,is_zero(a15)),4,false),2,parity(a15)),0,false);
     advance (11)
     #14B4
     #instruction: AND  (HL)
-    let:8 a21 = M[a11] in
-    let:8 a22 = (a21 & a18) in
-    let:8 a23 = (a21 | a18) in
+    let:8 a23 = M[a11] in
+    let:8 a24 = (a23 & a20) in
+    let:8 a25 = (a23 | a20) in
     advance (7)
     #14B5
     #instruction: JP   Z,14BD
-    if (is_zero(a22)) {
+    if (is_zero(a24)) {
       advance (10)
-      SP := a20;
+      SP := a22;
       HL := a11;
-      A := a22;
+      A := a24;
       D := a14[15:8];
       E := a14[7:0];
-      FlagS := a22[7];
-      FlagZ := is_zero(a22);
-      FlagA := a23[3];
-      FlagP := parity(a22);
+      FlagS := a24[7];
+      FlagZ := is_zero(a24);
+      FlagA := a25[3];
+      FlagP := parity(a24);
       FlagCY := false;
       Shifter_HI := a15;
-      Shifter_LO := Shifter_HI;
+      Shifter_LO := a16;
       jump (14BD);
     } else {
       advance (10)
@@ -13172,18 +13182,18 @@
       #instruction: LD   (2061),A
       M[2061] := 01;
       advance (13)
-      SP := a20;
+      SP := a22;
       HL := a11;
       A := 01;
       D := a14[15:8];
       E := a14[7:0];
-      FlagS := a22[7];
-      FlagZ := is_zero(a22);
-      FlagA := a23[3];
-      FlagP := parity(a22);
+      FlagS := a24[7];
+      FlagZ := is_zero(a24);
+      FlagA := a25[3];
+      FlagP := parity(a24);
       FlagCY := false;
       Shifter_HI := a15;
-      Shifter_LO := Shifter_HI;
+      Shifter_LO := a16;
       jump (14BD);
     }
 
@@ -14516,125 +14526,128 @@
     advance (7)
     #15DA
     #instruction: OUT  04
+    let:8 a12 = Shifter_HI in
     advance (10)
     #15DC
     #instruction: IN   03
-    let:8 a12 = (Shifter_OFF & 07) in
-    let:8 a13 = (~Shifter_OFF & 07) in
-    let:8 a14 = ((a11 << a12) | ((Shifter_HI >> a13) >> 01)) in
+    let:8 a13 = Shifter_OFF in
+    let:8 a14 = (a13 & 07) in
+    let:8 a15 = (~a13 & 07) in
+    let:8 a16 = ((a11 << a14) | ((a12 >> a15) >> 01)) in
     advance (10)
     #15DE
     #instruction: LD   (HL),A
-    let:16 a15 = HL in
-    M[a15] := a14;
+    let:16 a17 = HL in
+    M[a17] := a16;
     advance (7)
     #15DF
     #instruction: INC  HL
-    let:16 a16 = HL in
-    let:16 a17 = (1 + a16) in
+    let:16 a18 = HL in
+    let:16 a19 = (1 + a18) in
     advance (5)
     #15E0
     #instruction: INC  DE
-    let:8 a18 = D in
-    let:8 a19 = E in
-    let:16 a20 = (1 + (a18,a19)) in
+    let:8 a20 = D in
+    let:8 a21 = E in
+    let:16 a22 = (1 + (a20,a21)) in
     advance (5)
     #15E1
     #instruction: XOR  A
-    let:8 a21 = (a14 ^ a14) in
+    let:8 a23 = (a16 ^ a16) in
     advance (4)
     #15E2
     #instruction: OUT  04
     advance (10)
     #15E4
     #instruction: IN   03
-    let:8 a22 = (Shifter_OFF & 07) in
-    let:8 a23 = (~Shifter_OFF & 07) in
-    let:8 a24 = ((a21 << a22) | ((a11 >> a23) >> 01)) in
+    let:8 a24 = Shifter_OFF in
+    let:8 a25 = (a24 & 07) in
+    let:8 a26 = (~a24 & 07) in
+    let:8 a27 = ((a23 << a25) | ((a11 >> a26) >> 01)) in
     advance (10)
     #15E6
     #instruction: LD   (HL),A
-    M[a17] := a24;
+    M[a19] := a27;
     advance (7)
     #15E7
     #instruction: POP  HL
-    let:16 a25 = (1 + a8) in
-    let:8 a26 = M[a8] in
-    let:16 a27 = (1 + a25) in
-    let:8 a28 = M[a25] in
+    let:16 a28 = (1 + a8) in
+    let:8 a29 = M[a8] in
+    let:16 a30 = (1 + a28) in
+    let:8 a31 = M[a28] in
     advance (10)
     #15E8
     #instruction: LD   BC,0020
     advance (10)
     #15EB
     #instruction: ADD  HL,BC
-    let:16 a29 = (a28,a26) in
-    let:17 a30 = add17(0020,a29) in
+    let:16 a32 = (a31,a29) in
+    let:17 a33 = add17(0020,a32) in
     advance (10)
     #15EC
     #instruction: POP  BC
-    let:16 a31 = (1 + a27) in
-    let:8 a32 = M[a27] in
-    let:16 a33 = (1 + a31) in
-    let:8 a34 = M[a31] in
+    let:16 a34 = (1 + a30) in
+    let:8 a35 = M[a30] in
+    let:16 a36 = (1 + a34) in
+    let:8 a37 = M[a34] in
     advance (10)
     #15ED
     #instruction: DEC  B
-    let:16 a35 = addWithCarry(!true,a34,~00) in
-    let:8 a36 = (a34 & 0F) in
-    let:8 a37 = (~00 & 0F) in
-    let:16 a38 = addWithCarry(!true,a36,a37) in
+    let:16 a38 = addWithCarry(!true,a37,~00) in
+    let:8 a39 = (a37 & 0F) in
+    let:8 a40 = (~00 & 0F) in
+    let:16 a41 = addWithCarry(!true,a39,a40) in
     advance (5)
     #15EE
     #instruction: JP   NZ,15D7
-    if (!is_zero(a35[7:0])) {
+    if (!is_zero(a38[7:0])) {
       advance (10)
-      SP := a33;
-      HL := a30[15:0];
-      A := a24;
-      B := a35[7:0];
-      C := a32;
-      D := a20[15:8];
-      E := a20[7:0];
-      FlagS := a35[7:0][7];
-      FlagZ := is_zero(a35[7:0]);
-      FlagA := a38[7:0][4];
-      FlagP := parity(a35[7:0]);
-      FlagCY := a30[16];
-      Shifter_HI := a21;
+      SP := a36;
+      HL := a33[15:0];
+      A := a27;
+      B := a38[7:0];
+      C := a35;
+      D := a22[15:8];
+      E := a22[7:0];
+      FlagS := a38[7:0][7];
+      FlagZ := is_zero(a38[7:0]);
+      FlagA := a41[7:0][4];
+      FlagP := parity(a38[7:0]);
+      FlagCY := a33[16];
+      Shifter_HI := a23;
       Shifter_LO := a11;
       jump (15D7);
     } else {
       advance (10)
       #15F1
       #instruction: POP  HL
-      let:16 a39 = (1 + a33) in
-      let:8 a40 = M[a33] in
-      let:16 a41 = (1 + a39) in
-      let:8 a42 = M[a39] in
+      let:16 a42 = (1 + a36) in
+      let:8 a43 = M[a36] in
+      let:16 a44 = (1 + a42) in
+      let:8 a45 = M[a42] in
       advance (10)
       #15F2
       #instruction: RET
-      let:16 a43 = (1 + a41) in
-      let:8 a44 = M[a41] in
-      let:16 a45 = (1 + a43) in
-      let:8 a46 = M[a43] in
+      let:16 a46 = (1 + a44) in
+      let:8 a47 = M[a44] in
+      let:16 a48 = (1 + a46) in
+      let:8 a49 = M[a46] in
       advance (10)
-      SP := a45;
-      HL := (a42,a40);
-      A := a24;
-      B := a35[7:0];
-      C := a32;
-      D := a20[15:8];
-      E := a20[7:0];
-      FlagS := a35[7:0][7];
-      FlagZ := is_zero(a35[7:0]);
-      FlagA := a38[7:0][4];
-      FlagP := parity(a35[7:0]);
-      FlagCY := a30[16];
-      Shifter_HI := a21;
+      SP := a48;
+      HL := (a45,a43);
+      A := a27;
+      B := a38[7:0];
+      C := a35;
+      D := a22[15:8];
+      E := a22[7:0];
+      FlagS := a38[7:0][7];
+      FlagZ := is_zero(a38[7:0]);
+      FlagA := a41[7:0][4];
+      FlagP := parity(a38[7:0]);
+      FlagCY := a33[16];
+      Shifter_HI := a23;
       Shifter_LO := a11;
-      jump ((a46,a44));
+      jump ((a49,a47));
     }
 
 15F6:

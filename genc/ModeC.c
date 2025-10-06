@@ -8489,9 +8489,10 @@ Control op_D3 ()
       }
       case 4 :
       {
+          u8 a6 = Shifter_HI ;
           advance ( 10 );
           Shifter_HI = a5;
-          Shifter_LO = Shifter_HI;
+          Shifter_LO = a6;
           return jump16 ( a4 );
       }
       case 5 :
@@ -8677,11 +8678,14 @@ Control op_DB ()
       }
       case 3 :
       {
-          u8 a5 = ( Shifter_OFF & 0x07 ) ;
-          u8 a6 = ( ( ( u8 ) ( ~ Shifter_OFF ) ) & 0x07 ) ;
-          u8 a7 = ( ( Shifter_HI << a5 ) | ( ( Shifter_LO >> a6 ) >> 0x01 ) ) ;
+          u8 a5 = Shifter_HI ;
+          u8 a6 = Shifter_LO ;
+          u8 a7 = Shifter_OFF ;
+          u8 a8 = ( a7 & 0x07 ) ;
+          u8 a9 = ( ( ( u8 ) ( ~ a7 ) ) & 0x07 ) ;
+          u8 a10 = ( ( a5 << a8 ) | ( ( a6 >> a9 ) >> 0x01 ) ) ;
           advance ( 10 );
-          A = a7;
+          A = a10;
           return jump16 ( a4 );
       }
       default: { printf("unexpected switch value: %d\n",a3); die; }
@@ -28513,9 +28517,10 @@ Control slow_1408 ()
     // #at: 1408
     instruction1 ( 0x14,0x0A,A,B,C,D,E,SP,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"OUT  %02X",0x04 );
     u8 a1 = A ;
+    u8 a2 = Shifter_HI ;
     advance ( 10 );
     Shifter_HI = a1;
-    Shifter_LO = Shifter_HI;
+    Shifter_LO = a2;
     return jumpDirect ( 0x140A,slow_140A,0 );
 }
 
@@ -28523,11 +28528,14 @@ Control slow_140A ()
 {
     // #at: 140A
     instruction1 ( 0x14,0x0C,A,B,C,D,E,SP,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"IN   %02X",0x03 );
-    u8 a1 = ( Shifter_OFF & 0x07 ) ;
-    u8 a2 = ( ( ( u8 ) ( ~ Shifter_OFF ) ) & 0x07 ) ;
-    u8 a3 = ( ( Shifter_HI << a1 ) | ( ( Shifter_LO >> a2 ) >> 0x01 ) ) ;
+    u8 a1 = Shifter_HI ;
+    u8 a2 = Shifter_LO ;
+    u8 a3 = Shifter_OFF ;
+    u8 a4 = ( a3 & 0x07 ) ;
+    u8 a5 = ( ( ( u8 ) ( ~ a3 ) ) & 0x07 ) ;
+    u8 a6 = ( ( a1 << a4 ) | ( ( a2 >> a5 ) >> 0x01 ) ) ;
     advance ( 10 );
-    A = a3;
+    A = a6;
     return jumpDirect ( 0x140C,slow_140C,0 );
 }
 
@@ -28606,9 +28614,10 @@ Control slow_1411 ()
     // #at: 1411
     instruction1 ( 0x14,0x13,A,B,C,D,E,SP,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"OUT  %02X",0x04 );
     u8 a1 = A ;
+    u8 a2 = Shifter_HI ;
     advance ( 10 );
     Shifter_HI = a1;
-    Shifter_LO = Shifter_HI;
+    Shifter_LO = a2;
     return jumpDirect ( 0x1413,slow_1413,0 );
 }
 
@@ -28616,11 +28625,14 @@ Control slow_1413 ()
 {
     // #at: 1413
     instruction1 ( 0x14,0x15,A,B,C,D,E,SP,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"IN   %02X",0x03 );
-    u8 a1 = ( Shifter_OFF & 0x07 ) ;
-    u8 a2 = ( ( ( u8 ) ( ~ Shifter_OFF ) ) & 0x07 ) ;
-    u8 a3 = ( ( Shifter_HI << a1 ) | ( ( Shifter_LO >> a2 ) >> 0x01 ) ) ;
+    u8 a1 = Shifter_HI ;
+    u8 a2 = Shifter_LO ;
+    u8 a3 = Shifter_OFF ;
+    u8 a4 = ( a3 & 0x07 ) ;
+    u8 a5 = ( ( ( u8 ) ( ~ a3 ) ) & 0x07 ) ;
+    u8 a6 = ( ( a1 << a4 ) | ( ( a2 >> a5 ) >> 0x01 ) ) ;
     advance ( 10 );
-    A = a3;
+    A = a6;
     return jumpDirect ( 0x1415,slow_1415,0 );
 }
 
@@ -29169,9 +29181,10 @@ Control slow_1458 ()
     // #at: 1458
     instruction1 ( 0x14,0x5A,A,B,C,D,E,SP,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"OUT  %02X",0x04 );
     u8 a1 = A ;
+    u8 a2 = Shifter_HI ;
     advance ( 10 );
     Shifter_HI = a1;
-    Shifter_LO = Shifter_HI;
+    Shifter_LO = a2;
     return jumpDirect ( 0x145A,slow_145A,0 );
 }
 
@@ -29179,11 +29192,14 @@ Control slow_145A ()
 {
     // #at: 145A
     instruction1 ( 0x14,0x5C,A,B,C,D,E,SP,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"IN   %02X",0x03 );
-    u8 a1 = ( Shifter_OFF & 0x07 ) ;
-    u8 a2 = ( ( ( u8 ) ( ~ Shifter_OFF ) ) & 0x07 ) ;
-    u8 a3 = ( ( Shifter_HI << a1 ) | ( ( Shifter_LO >> a2 ) >> 0x01 ) ) ;
+    u8 a1 = Shifter_HI ;
+    u8 a2 = Shifter_LO ;
+    u8 a3 = Shifter_OFF ;
+    u8 a4 = ( a3 & 0x07 ) ;
+    u8 a5 = ( ( ( u8 ) ( ~ a3 ) ) & 0x07 ) ;
+    u8 a6 = ( ( a1 << a4 ) | ( ( a2 >> a5 ) >> 0x01 ) ) ;
     advance ( 10 );
-    A = a3;
+    A = a6;
     return jumpDirect ( 0x145C,slow_145C,0 );
 }
 
@@ -29273,9 +29289,10 @@ Control slow_1462 ()
     // #at: 1462
     instruction1 ( 0x14,0x64,A,B,C,D,E,SP,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"OUT  %02X",0x04 );
     u8 a1 = A ;
+    u8 a2 = Shifter_HI ;
     advance ( 10 );
     Shifter_HI = a1;
-    Shifter_LO = Shifter_HI;
+    Shifter_LO = a2;
     return jumpDirect ( 0x1464,slow_1464,0 );
 }
 
@@ -29283,11 +29300,14 @@ Control slow_1464 ()
 {
     // #at: 1464
     instruction1 ( 0x14,0x66,A,B,C,D,E,SP,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"IN   %02X",0x03 );
-    u8 a1 = ( Shifter_OFF & 0x07 ) ;
-    u8 a2 = ( ( ( u8 ) ( ~ Shifter_OFF ) ) & 0x07 ) ;
-    u8 a3 = ( ( Shifter_HI << a1 ) | ( ( Shifter_LO >> a2 ) >> 0x01 ) ) ;
+    u8 a1 = Shifter_HI ;
+    u8 a2 = Shifter_LO ;
+    u8 a3 = Shifter_OFF ;
+    u8 a4 = ( a3 & 0x07 ) ;
+    u8 a5 = ( ( ( u8 ) ( ~ a3 ) ) & 0x07 ) ;
+    u8 a6 = ( ( a1 << a4 ) | ( ( a2 >> a5 ) >> 0x01 ) ) ;
     advance ( 10 );
-    A = a3;
+    A = a6;
     return jumpDirect ( 0x1466,slow_1466,0 );
 }
 
@@ -29784,9 +29804,10 @@ Control slow_149B ()
     // #at: 149B
     instruction1 ( 0x14,0x9D,A,B,C,D,E,SP,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"OUT  %02X",0x04 );
     u8 a1 = A ;
+    u8 a2 = Shifter_HI ;
     advance ( 10 );
     Shifter_HI = a1;
-    Shifter_LO = Shifter_HI;
+    Shifter_LO = a2;
     return jumpDirect ( 0x149D,slow_149D,0 );
 }
 
@@ -29794,11 +29815,14 @@ Control slow_149D ()
 {
     // #at: 149D
     instruction1 ( 0x14,0x9F,A,B,C,D,E,SP,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"IN   %02X",0x03 );
-    u8 a1 = ( Shifter_OFF & 0x07 ) ;
-    u8 a2 = ( ( ( u8 ) ( ~ Shifter_OFF ) ) & 0x07 ) ;
-    u8 a3 = ( ( Shifter_HI << a1 ) | ( ( Shifter_LO >> a2 ) >> 0x01 ) ) ;
+    u8 a1 = Shifter_HI ;
+    u8 a2 = Shifter_LO ;
+    u8 a3 = Shifter_OFF ;
+    u8 a4 = ( a3 & 0x07 ) ;
+    u8 a5 = ( ( ( u8 ) ( ~ a3 ) ) & 0x07 ) ;
+    u8 a6 = ( ( a1 << a4 ) | ( ( a2 >> a5 ) >> 0x01 ) ) ;
     advance ( 10 );
-    A = a3;
+    A = a6;
     return jumpDirect ( 0x149F,slow_149F,0 );
 }
 
@@ -29966,9 +29990,10 @@ Control slow_14AF ()
     // #at: 14AF
     instruction1 ( 0x14,0xB1,A,B,C,D,E,SP,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"OUT  %02X",0x04 );
     u8 a1 = A ;
+    u8 a2 = Shifter_HI ;
     advance ( 10 );
     Shifter_HI = a1;
-    Shifter_LO = Shifter_HI;
+    Shifter_LO = a2;
     return jumpDirect ( 0x14B1,slow_14B1,0 );
 }
 
@@ -29976,11 +30001,14 @@ Control slow_14B1 ()
 {
     // #at: 14B1
     instruction1 ( 0x14,0xB3,A,B,C,D,E,SP,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"IN   %02X",0x03 );
-    u8 a1 = ( Shifter_OFF & 0x07 ) ;
-    u8 a2 = ( ( ( u8 ) ( ~ Shifter_OFF ) ) & 0x07 ) ;
-    u8 a3 = ( ( Shifter_HI << a1 ) | ( ( Shifter_LO >> a2 ) >> 0x01 ) ) ;
+    u8 a1 = Shifter_HI ;
+    u8 a2 = Shifter_LO ;
+    u8 a3 = Shifter_OFF ;
+    u8 a4 = ( a3 & 0x07 ) ;
+    u8 a5 = ( ( ( u8 ) ( ~ a3 ) ) & 0x07 ) ;
+    u8 a6 = ( ( a1 << a4 ) | ( ( a2 >> a5 ) >> 0x01 ) ) ;
     advance ( 10 );
-    A = a3;
+    A = a6;
     return jumpDirect ( 0x14B3,slow_14B3,0 );
 }
 
@@ -32146,9 +32174,10 @@ Control slow_15DA ()
     // #at: 15DA
     instruction1 ( 0x15,0xDC,A,B,C,D,E,SP,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"OUT  %02X",0x04 );
     u8 a1 = A ;
+    u8 a2 = Shifter_HI ;
     advance ( 10 );
     Shifter_HI = a1;
-    Shifter_LO = Shifter_HI;
+    Shifter_LO = a2;
     return jumpDirect ( 0x15DC,slow_15DC,0 );
 }
 
@@ -32156,11 +32185,14 @@ Control slow_15DC ()
 {
     // #at: 15DC
     instruction1 ( 0x15,0xDE,A,B,C,D,E,SP,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"IN   %02X",0x03 );
-    u8 a1 = ( Shifter_OFF & 0x07 ) ;
-    u8 a2 = ( ( ( u8 ) ( ~ Shifter_OFF ) ) & 0x07 ) ;
-    u8 a3 = ( ( Shifter_HI << a1 ) | ( ( Shifter_LO >> a2 ) >> 0x01 ) ) ;
+    u8 a1 = Shifter_HI ;
+    u8 a2 = Shifter_LO ;
+    u8 a3 = Shifter_OFF ;
+    u8 a4 = ( a3 & 0x07 ) ;
+    u8 a5 = ( ( ( u8 ) ( ~ a3 ) ) & 0x07 ) ;
+    u8 a6 = ( ( a1 << a4 ) | ( ( a2 >> a5 ) >> 0x01 ) ) ;
     advance ( 10 );
-    A = a3;
+    A = a6;
     return jumpDirect ( 0x15DE,slow_15DE,0 );
 }
 
@@ -32221,9 +32253,10 @@ Control slow_15E2 ()
     // #at: 15E2
     instruction1 ( 0x15,0xE4,A,B,C,D,E,SP,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"OUT  %02X",0x04 );
     u8 a1 = A ;
+    u8 a2 = Shifter_HI ;
     advance ( 10 );
     Shifter_HI = a1;
-    Shifter_LO = Shifter_HI;
+    Shifter_LO = a2;
     return jumpDirect ( 0x15E4,slow_15E4,0 );
 }
 
@@ -32231,11 +32264,14 @@ Control slow_15E4 ()
 {
     // #at: 15E4
     instruction1 ( 0x15,0xE6,A,B,C,D,E,SP,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"IN   %02X",0x03 );
-    u8 a1 = ( Shifter_OFF & 0x07 ) ;
-    u8 a2 = ( ( ( u8 ) ( ~ Shifter_OFF ) ) & 0x07 ) ;
-    u8 a3 = ( ( Shifter_HI << a1 ) | ( ( Shifter_LO >> a2 ) >> 0x01 ) ) ;
+    u8 a1 = Shifter_HI ;
+    u8 a2 = Shifter_LO ;
+    u8 a3 = Shifter_OFF ;
+    u8 a4 = ( a3 & 0x07 ) ;
+    u8 a5 = ( ( ( u8 ) ( ~ a3 ) ) & 0x07 ) ;
+    u8 a6 = ( ( a1 << a4 ) | ( ( a2 >> a5 ) >> 0x01 ) ) ;
     advance ( 10 );
-    A = a3;
+    A = a6;
     return jumpDirect ( 0x15E6,slow_15E6,0 );
 }
 
@@ -52575,104 +52611,107 @@ Control fast_1405 ()
     advance ( 7 );
     // #at: 1408
     instruction1 ( 0x14,0x0A,a11,B,C,D,E,a8,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"OUT  %02X",0x04 );
+    u8 a12 = Shifter_HI ;
     advance ( 10 );
     // #at: 140A
     instruction1 ( 0x14,0x0C,a11,B,C,D,E,a8,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"IN   %02X",0x03 );
-    u8 a12 = ( Shifter_OFF & 0x07 ) ;
-    u8 a13 = ( ( ( u8 ) ( ~ Shifter_OFF ) ) & 0x07 ) ;
-    u8 a14 = ( ( a11 << a12 ) | ( ( Shifter_HI >> a13 ) >> 0x01 ) ) ;
+    u8 a13 = Shifter_OFF ;
+    u8 a14 = ( a13 & 0x07 ) ;
+    u8 a15 = ( ( ( u8 ) ( ~ a13 ) ) & 0x07 ) ;
+    u8 a16 = ( ( a11 << a14 ) | ( ( a12 >> a15 ) >> 0x01 ) ) ;
     advance ( 10 );
     // #at: 140C
-    instruction0 ( 0x14,0x0D,a14,B,C,D,E,a8,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"OR   (HL)" );
-    u16 a15 = HL ;
-    u8 a16 = e8_read_mem ( a15 ) ;
-    u8 a17 = ( a16 | a14 ) ;
+    instruction0 ( 0x14,0x0D,a16,B,C,D,E,a8,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"OR   (HL)" );
+    u16 a17 = HL ;
+    u8 a18 = e8_read_mem ( a17 ) ;
+    u8 a19 = ( a18 | a16 ) ;
     advance ( 7 );
     // #at: 140D
-    instruction0 ( 0x14,0x0E,a17,B,C,D,E,a8,HL,( ( a17 >> 7 ) & 0x01 ),( 0 == a17 ),false,e1_parity ( a17 ),false,"LD   (HL),A" );
-    u16 a18 = HL ;
-    mem_write ( a18,a17 );
+    instruction0 ( 0x14,0x0E,a19,B,C,D,E,a8,HL,( ( a19 >> 7 ) & 0x01 ),( 0 == a19 ),false,e1_parity ( a19 ),false,"LD   (HL),A" );
+    u16 a20 = HL ;
+    mem_write ( a20,a19 );
     advance ( 7 );
     // #at: 140E
-    instruction0 ( 0x14,0x0F,a17,B,C,D,E,a8,HL,( ( a17 >> 7 ) & 0x01 ),( 0 == a17 ),false,e1_parity ( a17 ),false,"INC  HL" );
-    u16 a19 = HL ;
-    u16 a20 = ( a19 + 1 ) ;
+    instruction0 ( 0x14,0x0F,a19,B,C,D,E,a8,HL,( ( a19 >> 7 ) & 0x01 ),( 0 == a19 ),false,e1_parity ( a19 ),false,"INC  HL" );
+    u16 a21 = HL ;
+    u16 a22 = ( a21 + 1 ) ;
     advance ( 5 );
     // #at: 140F
-    instruction0 ( 0x14,0x10,a17,B,C,D,E,a8,a20,( ( a17 >> 7 ) & 0x01 ),( 0 == a17 ),false,e1_parity ( a17 ),false,"INC  DE" );
-    u8 a21 = D ;
-    u8 a22 = E ;
-    u16 a23 = ( ( ( a21 << 8 ) | a22 ) + 1 ) ;
+    instruction0 ( 0x14,0x10,a19,B,C,D,E,a8,a22,( ( a19 >> 7 ) & 0x01 ),( 0 == a19 ),false,e1_parity ( a19 ),false,"INC  DE" );
+    u8 a23 = D ;
+    u8 a24 = E ;
+    u16 a25 = ( ( ( a23 << 8 ) | a24 ) + 1 ) ;
     advance ( 5 );
     // #at: 1410
-    instruction0 ( 0x14,0x11,a17,B,C,( a23 >> 8 ),( a23 & 0xFF ),a8,a20,( ( a17 >> 7 ) & 0x01 ),( 0 == a17 ),false,e1_parity ( a17 ),false,"XOR  A" );
-    u8 a24 = ( a17 ^ a17 ) ;
+    instruction0 ( 0x14,0x11,a19,B,C,( a25 >> 8 ),( a25 & 0xFF ),a8,a22,( ( a19 >> 7 ) & 0x01 ),( 0 == a19 ),false,e1_parity ( a19 ),false,"XOR  A" );
+    u8 a26 = ( a19 ^ a19 ) ;
     advance ( 4 );
     // #at: 1411
-    instruction1 ( 0x14,0x13,a24,B,C,( a23 >> 8 ),( a23 & 0xFF ),a8,a20,( ( a24 >> 7 ) & 0x01 ),( 0 == a24 ),false,e1_parity ( a24 ),false,"OUT  %02X",0x04 );
+    instruction1 ( 0x14,0x13,a26,B,C,( a25 >> 8 ),( a25 & 0xFF ),a8,a22,( ( a26 >> 7 ) & 0x01 ),( 0 == a26 ),false,e1_parity ( a26 ),false,"OUT  %02X",0x04 );
     advance ( 10 );
     // #at: 1413
-    instruction1 ( 0x14,0x15,a24,B,C,( a23 >> 8 ),( a23 & 0xFF ),a8,a20,( ( a24 >> 7 ) & 0x01 ),( 0 == a24 ),false,e1_parity ( a24 ),false,"IN   %02X",0x03 );
-    u8 a25 = ( Shifter_OFF & 0x07 ) ;
-    u8 a26 = ( ( ( u8 ) ( ~ Shifter_OFF ) ) & 0x07 ) ;
-    u8 a27 = ( ( a24 << a25 ) | ( ( a11 >> a26 ) >> 0x01 ) ) ;
+    instruction1 ( 0x14,0x15,a26,B,C,( a25 >> 8 ),( a25 & 0xFF ),a8,a22,( ( a26 >> 7 ) & 0x01 ),( 0 == a26 ),false,e1_parity ( a26 ),false,"IN   %02X",0x03 );
+    u8 a27 = Shifter_OFF ;
+    u8 a28 = ( a27 & 0x07 ) ;
+    u8 a29 = ( ( ( u8 ) ( ~ a27 ) ) & 0x07 ) ;
+    u8 a30 = ( ( a26 << a28 ) | ( ( a11 >> a29 ) >> 0x01 ) ) ;
     advance ( 10 );
     // #at: 1415
-    instruction0 ( 0x14,0x16,a27,B,C,( a23 >> 8 ),( a23 & 0xFF ),a8,a20,( ( a24 >> 7 ) & 0x01 ),( 0 == a24 ),false,e1_parity ( a24 ),false,"OR   (HL)" );
-    u8 a28 = e8_read_mem ( a20 ) ;
-    u8 a29 = ( a28 | a27 ) ;
+    instruction0 ( 0x14,0x16,a30,B,C,( a25 >> 8 ),( a25 & 0xFF ),a8,a22,( ( a26 >> 7 ) & 0x01 ),( 0 == a26 ),false,e1_parity ( a26 ),false,"OR   (HL)" );
+    u8 a31 = e8_read_mem ( a22 ) ;
+    u8 a32 = ( a31 | a30 ) ;
     advance ( 7 );
     // #at: 1416
-    instruction0 ( 0x14,0x17,a29,B,C,( a23 >> 8 ),( a23 & 0xFF ),a8,a20,( ( a29 >> 7 ) & 0x01 ),( 0 == a29 ),false,e1_parity ( a29 ),false,"LD   (HL),A" );
-    mem_write ( a20,a29 );
+    instruction0 ( 0x14,0x17,a32,B,C,( a25 >> 8 ),( a25 & 0xFF ),a8,a22,( ( a32 >> 7 ) & 0x01 ),( 0 == a32 ),false,e1_parity ( a32 ),false,"LD   (HL),A" );
+    mem_write ( a22,a32 );
     advance ( 7 );
     // #at: 1417
-    instruction0 ( 0x14,0x18,a29,B,C,( a23 >> 8 ),( a23 & 0xFF ),a8,a20,( ( a29 >> 7 ) & 0x01 ),( 0 == a29 ),false,e1_parity ( a29 ),false,"POP  HL" );
-    u16 a30 = ( a8 + 1 ) ;
-    u8 a31 = e8_read_mem ( a8 ) ;
-    u16 a32 = ( a30 + 1 ) ;
-    u8 a33 = e8_read_mem ( a30 ) ;
+    instruction0 ( 0x14,0x18,a32,B,C,( a25 >> 8 ),( a25 & 0xFF ),a8,a22,( ( a32 >> 7 ) & 0x01 ),( 0 == a32 ),false,e1_parity ( a32 ),false,"POP  HL" );
+    u16 a33 = ( a8 + 1 ) ;
+    u8 a34 = e8_read_mem ( a8 ) ;
+    u16 a35 = ( a33 + 1 ) ;
+    u8 a36 = e8_read_mem ( a33 ) ;
     advance ( 10 );
     // #at: 1418
-    instruction2 ( 0x14,0x1B,a29,B,C,( a23 >> 8 ),( a23 & 0xFF ),a32,( ( a33 << 8 ) | a31 ),( ( a29 >> 7 ) & 0x01 ),( 0 == a29 ),false,e1_parity ( a29 ),false,"LD   BC,%02X%02X",0x00,0x20 );
+    instruction2 ( 0x14,0x1B,a32,B,C,( a25 >> 8 ),( a25 & 0xFF ),a35,( ( a36 << 8 ) | a34 ),( ( a32 >> 7 ) & 0x01 ),( 0 == a32 ),false,e1_parity ( a32 ),false,"LD   BC,%02X%02X",0x00,0x20 );
     advance ( 10 );
     // #at: 141B
-    instruction0 ( 0x14,0x1C,a29,0x00,0x20,( a23 >> 8 ),( a23 & 0xFF ),a32,( ( a33 << 8 ) | a31 ),( ( a29 >> 7 ) & 0x01 ),( 0 == a29 ),false,e1_parity ( a29 ),false,"ADD  HL,BC" );
-    u16 a34 = ( ( a33 << 8 ) | a31 ) ;
-    u17 a35 = ( 0x0020 + a34 ) ;
+    instruction0 ( 0x14,0x1C,a32,0x00,0x20,( a25 >> 8 ),( a25 & 0xFF ),a35,( ( a36 << 8 ) | a34 ),( ( a32 >> 7 ) & 0x01 ),( 0 == a32 ),false,e1_parity ( a32 ),false,"ADD  HL,BC" );
+    u16 a37 = ( ( a36 << 8 ) | a34 ) ;
+    u17 a38 = ( 0x0020 + a37 ) ;
     advance ( 10 );
     // #at: 141C
-    instruction0 ( 0x14,0x1D,a29,0x00,0x20,( a23 >> 8 ),( a23 & 0xFF ),a32,( a35 & 0xFFFF ),( ( a29 >> 7 ) & 0x01 ),( 0 == a29 ),false,e1_parity ( a29 ),( ( a35 >> 16 ) & 0x01 ),"POP  BC" );
-    u16 a36 = ( a32 + 1 ) ;
-    u8 a37 = e8_read_mem ( a32 ) ;
-    u16 a38 = ( a36 + 1 ) ;
-    u8 a39 = e8_read_mem ( a36 ) ;
+    instruction0 ( 0x14,0x1D,a32,0x00,0x20,( a25 >> 8 ),( a25 & 0xFF ),a35,( a38 & 0xFFFF ),( ( a32 >> 7 ) & 0x01 ),( 0 == a32 ),false,e1_parity ( a32 ),( ( a38 >> 16 ) & 0x01 ),"POP  BC" );
+    u16 a39 = ( a35 + 1 ) ;
+    u8 a40 = e8_read_mem ( a35 ) ;
+    u16 a41 = ( a39 + 1 ) ;
+    u8 a42 = e8_read_mem ( a39 ) ;
     advance ( 10 );
     // #at: 141D
-    instruction0 ( 0x14,0x1E,a29,a39,a37,( a23 >> 8 ),( a23 & 0xFF ),a38,( a35 & 0xFFFF ),( ( a29 >> 7 ) & 0x01 ),( 0 == a29 ),false,e1_parity ( a29 ),( ( a35 >> 16 ) & 0x01 ),"DEC  B" );
-    u16 a40 = ( ( a39 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
-    u8 a41 = ( a39 & 0x0F ) ;
-    u8 a42 = ( ( ( u8 ) ( ~ 0x00 ) ) & 0x0F ) ;
-    u16 a43 = ( ( a41 + a42 ) + ( ! true ) ) ;
+    instruction0 ( 0x14,0x1E,a32,a42,a40,( a25 >> 8 ),( a25 & 0xFF ),a41,( a38 & 0xFFFF ),( ( a32 >> 7 ) & 0x01 ),( 0 == a32 ),false,e1_parity ( a32 ),( ( a38 >> 16 ) & 0x01 ),"DEC  B" );
+    u16 a43 = ( ( a42 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
+    u8 a44 = ( a42 & 0x0F ) ;
+    u8 a45 = ( ( ( u8 ) ( ~ 0x00 ) ) & 0x0F ) ;
+    u16 a46 = ( ( a44 + a45 ) + ( ! true ) ) ;
     advance ( 5 );
     // #at: 141E
-    instruction2 ( 0x14,0x21,a29,( a40 & 0xFF ),a37,( a23 >> 8 ),( a23 & 0xFF ),a38,( a35 & 0xFFFF ),( ( ( a40 & 0xFF ) >> 7 ) & 0x01 ),( 0 == ( a40 & 0xFF ) ),( ( ( a43 & 0xFF ) >> 4 ) & 0x01 ),e1_parity ( ( a40 & 0xFF ) ),( ( a35 >> 16 ) & 0x01 ),"JP   NZ,%02X%02X",0x14,0x05 );
-    if (( ! ( 0 == ( a40 & 0xFF ) ) ))
+    instruction2 ( 0x14,0x21,a32,( a43 & 0xFF ),a40,( a25 >> 8 ),( a25 & 0xFF ),a41,( a38 & 0xFFFF ),( ( ( a43 & 0xFF ) >> 7 ) & 0x01 ),( 0 == ( a43 & 0xFF ) ),( ( ( a46 & 0xFF ) >> 4 ) & 0x01 ),e1_parity ( ( a43 & 0xFF ) ),( ( a38 >> 16 ) & 0x01 ),"JP   NZ,%02X%02X",0x14,0x05 );
+    if (( ! ( 0 == ( a43 & 0xFF ) ) ))
     {
         advance ( 10 );
-        SP = a38;
-        HL = ( a35 & 0xFFFF );
-        A = a29;
-        B = ( a40 & 0xFF );
-        C = a37;
-        D = ( a23 >> 8 );
-        E = ( a23 & 0xFF );
-        FlagS = ( ( ( a40 & 0xFF ) >> 7 ) & 0x01 );
-        FlagZ = ( 0 == ( a40 & 0xFF ) );
-        FlagA = ( ( ( a43 & 0xFF ) >> 4 ) & 0x01 );
-        FlagP = e1_parity ( ( a40 & 0xFF ) );
-        FlagCY = ( ( a35 >> 16 ) & 0x01 );
-        Shifter_HI = a24;
+        SP = a41;
+        HL = ( a38 & 0xFFFF );
+        A = a32;
+        B = ( a43 & 0xFF );
+        C = a40;
+        D = ( a25 >> 8 );
+        E = ( a25 & 0xFF );
+        FlagS = ( ( ( a43 & 0xFF ) >> 7 ) & 0x01 );
+        FlagZ = ( 0 == ( a43 & 0xFF ) );
+        FlagA = ( ( ( a46 & 0xFF ) >> 4 ) & 0x01 );
+        FlagP = e1_parity ( ( a43 & 0xFF ) );
+        FlagCY = ( ( a38 >> 16 ) & 0x01 );
+        Shifter_HI = a26;
         Shifter_LO = a11;
         return jumpDirect ( 0x1405,slow_1405,fast_1405 );
     }
@@ -52680,27 +52719,27 @@ Control fast_1405 ()
     {
         advance ( 10 );
         // #at: 1421
-        instruction0 ( 0x14,0x22,a29,( a40 & 0xFF ),a37,( a23 >> 8 ),( a23 & 0xFF ),a38,( a35 & 0xFFFF ),( ( ( a40 & 0xFF ) >> 7 ) & 0x01 ),( 0 == ( a40 & 0xFF ) ),( ( ( a43 & 0xFF ) >> 4 ) & 0x01 ),e1_parity ( ( a40 & 0xFF ) ),( ( a35 >> 16 ) & 0x01 ),"RET" );
-        u16 a44 = ( a38 + 1 ) ;
-        u8 a45 = e8_read_mem ( a38 ) ;
-        u16 a46 = ( a44 + 1 ) ;
-        u8 a47 = e8_read_mem ( a44 ) ;
+        instruction0 ( 0x14,0x22,a32,( a43 & 0xFF ),a40,( a25 >> 8 ),( a25 & 0xFF ),a41,( a38 & 0xFFFF ),( ( ( a43 & 0xFF ) >> 7 ) & 0x01 ),( 0 == ( a43 & 0xFF ) ),( ( ( a46 & 0xFF ) >> 4 ) & 0x01 ),e1_parity ( ( a43 & 0xFF ) ),( ( a38 >> 16 ) & 0x01 ),"RET" );
+        u16 a47 = ( a41 + 1 ) ;
+        u8 a48 = e8_read_mem ( a41 ) ;
+        u16 a49 = ( a47 + 1 ) ;
+        u8 a50 = e8_read_mem ( a47 ) ;
         advance ( 10 );
-        SP = a46;
-        HL = ( a35 & 0xFFFF );
-        A = a29;
-        B = ( a40 & 0xFF );
-        C = a37;
-        D = ( a23 >> 8 );
-        E = ( a23 & 0xFF );
-        FlagS = ( ( ( a40 & 0xFF ) >> 7 ) & 0x01 );
-        FlagZ = ( 0 == ( a40 & 0xFF ) );
-        FlagA = ( ( ( a43 & 0xFF ) >> 4 ) & 0x01 );
-        FlagP = e1_parity ( ( a40 & 0xFF ) );
-        FlagCY = ( ( a35 >> 16 ) & 0x01 );
-        Shifter_HI = a24;
+        SP = a49;
+        HL = ( a38 & 0xFFFF );
+        A = a32;
+        B = ( a43 & 0xFF );
+        C = a40;
+        D = ( a25 >> 8 );
+        E = ( a25 & 0xFF );
+        FlagS = ( ( ( a43 & 0xFF ) >> 7 ) & 0x01 );
+        FlagZ = ( 0 == ( a43 & 0xFF ) );
+        FlagA = ( ( ( a46 & 0xFF ) >> 4 ) & 0x01 );
+        FlagP = e1_parity ( ( a43 & 0xFF ) );
+        FlagCY = ( ( a38 >> 16 ) & 0x01 );
+        Shifter_HI = a26;
         Shifter_LO = a11;
-        return jump16 ( ( ( a47 << 8 ) | a45 ) );
+        return jump16 ( ( ( a50 << 8 ) | a48 ) );
     }
 }
 
@@ -52972,114 +53011,117 @@ Control fast_1455 ()
     advance ( 7 );
     // #at: 1458
     instruction1 ( 0x14,0x5A,a11,B,C,D,E,a8,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"OUT  %02X",0x04 );
+    u8 a12 = Shifter_HI ;
     advance ( 10 );
     // #at: 145A
     instruction1 ( 0x14,0x5C,a11,B,C,D,E,a8,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"IN   %02X",0x03 );
-    u8 a12 = ( Shifter_OFF & 0x07 ) ;
-    u8 a13 = ( ( ( u8 ) ( ~ Shifter_OFF ) ) & 0x07 ) ;
-    u8 a14 = ( ( a11 << a12 ) | ( ( Shifter_HI >> a13 ) >> 0x01 ) ) ;
+    u8 a13 = Shifter_OFF ;
+    u8 a14 = ( a13 & 0x07 ) ;
+    u8 a15 = ( ( ( u8 ) ( ~ a13 ) ) & 0x07 ) ;
+    u8 a16 = ( ( a11 << a14 ) | ( ( a12 >> a15 ) >> 0x01 ) ) ;
     advance ( 10 );
     // #at: 145C
-    instruction0 ( 0x14,0x5D,a14,B,C,D,E,a8,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"CPL" );
+    instruction0 ( 0x14,0x5D,a16,B,C,D,E,a8,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"CPL" );
     advance ( 4 );
     // #at: 145D
-    instruction0 ( 0x14,0x5E,( ( u8 ) ( ~ a14 ) ),B,C,D,E,a8,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"AND  (HL)" );
-    u16 a15 = HL ;
-    u8 a16 = e8_read_mem ( a15 ) ;
-    u8 a17 = ( ( u8 ) ( ~ a14 ) ) ;
-    u8 a18 = ( a16 & a17 ) ;
-    u8 a19 = ( a16 | a17 ) ;
+    instruction0 ( 0x14,0x5E,( ( u8 ) ( ~ a16 ) ),B,C,D,E,a8,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"AND  (HL)" );
+    u16 a17 = HL ;
+    u8 a18 = e8_read_mem ( a17 ) ;
+    u8 a19 = ( ( u8 ) ( ~ a16 ) ) ;
+    u8 a20 = ( a18 & a19 ) ;
+    u8 a21 = ( a18 | a19 ) ;
     advance ( 7 );
     // #at: 145E
-    instruction0 ( 0x14,0x5F,a18,B,C,D,E,a8,HL,( ( a18 >> 7 ) & 0x01 ),( 0 == a18 ),( ( a19 >> 3 ) & 0x01 ),e1_parity ( a18 ),false,"LD   (HL),A" );
-    u16 a20 = HL ;
-    mem_write ( a20,a18 );
+    instruction0 ( 0x14,0x5F,a20,B,C,D,E,a8,HL,( ( a20 >> 7 ) & 0x01 ),( 0 == a20 ),( ( a21 >> 3 ) & 0x01 ),e1_parity ( a20 ),false,"LD   (HL),A" );
+    u16 a22 = HL ;
+    mem_write ( a22,a20 );
     advance ( 7 );
     // #at: 145F
-    instruction0 ( 0x14,0x60,a18,B,C,D,E,a8,HL,( ( a18 >> 7 ) & 0x01 ),( 0 == a18 ),( ( a19 >> 3 ) & 0x01 ),e1_parity ( a18 ),false,"INC  HL" );
-    u16 a21 = HL ;
-    u16 a22 = ( a21 + 1 ) ;
+    instruction0 ( 0x14,0x60,a20,B,C,D,E,a8,HL,( ( a20 >> 7 ) & 0x01 ),( 0 == a20 ),( ( a21 >> 3 ) & 0x01 ),e1_parity ( a20 ),false,"INC  HL" );
+    u16 a23 = HL ;
+    u16 a24 = ( a23 + 1 ) ;
     advance ( 5 );
     // #at: 1460
-    instruction0 ( 0x14,0x61,a18,B,C,D,E,a8,a22,( ( a18 >> 7 ) & 0x01 ),( 0 == a18 ),( ( a19 >> 3 ) & 0x01 ),e1_parity ( a18 ),false,"INC  DE" );
-    u8 a23 = D ;
-    u8 a24 = E ;
-    u16 a25 = ( ( ( a23 << 8 ) | a24 ) + 1 ) ;
+    instruction0 ( 0x14,0x61,a20,B,C,D,E,a8,a24,( ( a20 >> 7 ) & 0x01 ),( 0 == a20 ),( ( a21 >> 3 ) & 0x01 ),e1_parity ( a20 ),false,"INC  DE" );
+    u8 a25 = D ;
+    u8 a26 = E ;
+    u16 a27 = ( ( ( a25 << 8 ) | a26 ) + 1 ) ;
     advance ( 5 );
     // #at: 1461
-    instruction0 ( 0x14,0x62,a18,B,C,( a25 >> 8 ),( a25 & 0xFF ),a8,a22,( ( a18 >> 7 ) & 0x01 ),( 0 == a18 ),( ( a19 >> 3 ) & 0x01 ),e1_parity ( a18 ),false,"XOR  A" );
-    u8 a26 = ( a18 ^ a18 ) ;
+    instruction0 ( 0x14,0x62,a20,B,C,( a27 >> 8 ),( a27 & 0xFF ),a8,a24,( ( a20 >> 7 ) & 0x01 ),( 0 == a20 ),( ( a21 >> 3 ) & 0x01 ),e1_parity ( a20 ),false,"XOR  A" );
+    u8 a28 = ( a20 ^ a20 ) ;
     advance ( 4 );
     // #at: 1462
-    instruction1 ( 0x14,0x64,a26,B,C,( a25 >> 8 ),( a25 & 0xFF ),a8,a22,( ( a26 >> 7 ) & 0x01 ),( 0 == a26 ),false,e1_parity ( a26 ),false,"OUT  %02X",0x04 );
+    instruction1 ( 0x14,0x64,a28,B,C,( a27 >> 8 ),( a27 & 0xFF ),a8,a24,( ( a28 >> 7 ) & 0x01 ),( 0 == a28 ),false,e1_parity ( a28 ),false,"OUT  %02X",0x04 );
     advance ( 10 );
     // #at: 1464
-    instruction1 ( 0x14,0x66,a26,B,C,( a25 >> 8 ),( a25 & 0xFF ),a8,a22,( ( a26 >> 7 ) & 0x01 ),( 0 == a26 ),false,e1_parity ( a26 ),false,"IN   %02X",0x03 );
-    u8 a27 = ( Shifter_OFF & 0x07 ) ;
-    u8 a28 = ( ( ( u8 ) ( ~ Shifter_OFF ) ) & 0x07 ) ;
-    u8 a29 = ( ( a26 << a27 ) | ( ( a11 >> a28 ) >> 0x01 ) ) ;
+    instruction1 ( 0x14,0x66,a28,B,C,( a27 >> 8 ),( a27 & 0xFF ),a8,a24,( ( a28 >> 7 ) & 0x01 ),( 0 == a28 ),false,e1_parity ( a28 ),false,"IN   %02X",0x03 );
+    u8 a29 = Shifter_OFF ;
+    u8 a30 = ( a29 & 0x07 ) ;
+    u8 a31 = ( ( ( u8 ) ( ~ a29 ) ) & 0x07 ) ;
+    u8 a32 = ( ( a28 << a30 ) | ( ( a11 >> a31 ) >> 0x01 ) ) ;
     advance ( 10 );
     // #at: 1466
-    instruction0 ( 0x14,0x67,a29,B,C,( a25 >> 8 ),( a25 & 0xFF ),a8,a22,( ( a26 >> 7 ) & 0x01 ),( 0 == a26 ),false,e1_parity ( a26 ),false,"CPL" );
+    instruction0 ( 0x14,0x67,a32,B,C,( a27 >> 8 ),( a27 & 0xFF ),a8,a24,( ( a28 >> 7 ) & 0x01 ),( 0 == a28 ),false,e1_parity ( a28 ),false,"CPL" );
     advance ( 4 );
     // #at: 1467
-    instruction0 ( 0x14,0x68,( ( u8 ) ( ~ a29 ) ),B,C,( a25 >> 8 ),( a25 & 0xFF ),a8,a22,( ( a26 >> 7 ) & 0x01 ),( 0 == a26 ),false,e1_parity ( a26 ),false,"AND  (HL)" );
-    u8 a30 = e8_read_mem ( a22 ) ;
-    u8 a31 = ( ( u8 ) ( ~ a29 ) ) ;
-    u8 a32 = ( a30 & a31 ) ;
-    u8 a33 = ( a30 | a31 ) ;
+    instruction0 ( 0x14,0x68,( ( u8 ) ( ~ a32 ) ),B,C,( a27 >> 8 ),( a27 & 0xFF ),a8,a24,( ( a28 >> 7 ) & 0x01 ),( 0 == a28 ),false,e1_parity ( a28 ),false,"AND  (HL)" );
+    u8 a33 = e8_read_mem ( a24 ) ;
+    u8 a34 = ( ( u8 ) ( ~ a32 ) ) ;
+    u8 a35 = ( a33 & a34 ) ;
+    u8 a36 = ( a33 | a34 ) ;
     advance ( 7 );
     // #at: 1468
-    instruction0 ( 0x14,0x69,a32,B,C,( a25 >> 8 ),( a25 & 0xFF ),a8,a22,( ( a32 >> 7 ) & 0x01 ),( 0 == a32 ),( ( a33 >> 3 ) & 0x01 ),e1_parity ( a32 ),false,"LD   (HL),A" );
-    mem_write ( a22,a32 );
+    instruction0 ( 0x14,0x69,a35,B,C,( a27 >> 8 ),( a27 & 0xFF ),a8,a24,( ( a35 >> 7 ) & 0x01 ),( 0 == a35 ),( ( a36 >> 3 ) & 0x01 ),e1_parity ( a35 ),false,"LD   (HL),A" );
+    mem_write ( a24,a35 );
     advance ( 7 );
     // #at: 1469
-    instruction0 ( 0x14,0x6A,a32,B,C,( a25 >> 8 ),( a25 & 0xFF ),a8,a22,( ( a32 >> 7 ) & 0x01 ),( 0 == a32 ),( ( a33 >> 3 ) & 0x01 ),e1_parity ( a32 ),false,"POP  HL" );
-    u16 a34 = ( a8 + 1 ) ;
-    u8 a35 = e8_read_mem ( a8 ) ;
-    u16 a36 = ( a34 + 1 ) ;
-    u8 a37 = e8_read_mem ( a34 ) ;
+    instruction0 ( 0x14,0x6A,a35,B,C,( a27 >> 8 ),( a27 & 0xFF ),a8,a24,( ( a35 >> 7 ) & 0x01 ),( 0 == a35 ),( ( a36 >> 3 ) & 0x01 ),e1_parity ( a35 ),false,"POP  HL" );
+    u16 a37 = ( a8 + 1 ) ;
+    u8 a38 = e8_read_mem ( a8 ) ;
+    u16 a39 = ( a37 + 1 ) ;
+    u8 a40 = e8_read_mem ( a37 ) ;
     advance ( 10 );
     // #at: 146A
-    instruction2 ( 0x14,0x6D,a32,B,C,( a25 >> 8 ),( a25 & 0xFF ),a36,( ( a37 << 8 ) | a35 ),( ( a32 >> 7 ) & 0x01 ),( 0 == a32 ),( ( a33 >> 3 ) & 0x01 ),e1_parity ( a32 ),false,"LD   BC,%02X%02X",0x00,0x20 );
+    instruction2 ( 0x14,0x6D,a35,B,C,( a27 >> 8 ),( a27 & 0xFF ),a39,( ( a40 << 8 ) | a38 ),( ( a35 >> 7 ) & 0x01 ),( 0 == a35 ),( ( a36 >> 3 ) & 0x01 ),e1_parity ( a35 ),false,"LD   BC,%02X%02X",0x00,0x20 );
     advance ( 10 );
     // #at: 146D
-    instruction0 ( 0x14,0x6E,a32,0x00,0x20,( a25 >> 8 ),( a25 & 0xFF ),a36,( ( a37 << 8 ) | a35 ),( ( a32 >> 7 ) & 0x01 ),( 0 == a32 ),( ( a33 >> 3 ) & 0x01 ),e1_parity ( a32 ),false,"ADD  HL,BC" );
-    u16 a38 = ( ( a37 << 8 ) | a35 ) ;
-    u17 a39 = ( 0x0020 + a38 ) ;
+    instruction0 ( 0x14,0x6E,a35,0x00,0x20,( a27 >> 8 ),( a27 & 0xFF ),a39,( ( a40 << 8 ) | a38 ),( ( a35 >> 7 ) & 0x01 ),( 0 == a35 ),( ( a36 >> 3 ) & 0x01 ),e1_parity ( a35 ),false,"ADD  HL,BC" );
+    u16 a41 = ( ( a40 << 8 ) | a38 ) ;
+    u17 a42 = ( 0x0020 + a41 ) ;
     advance ( 10 );
     // #at: 146E
-    instruction0 ( 0x14,0x6F,a32,0x00,0x20,( a25 >> 8 ),( a25 & 0xFF ),a36,( a39 & 0xFFFF ),( ( a32 >> 7 ) & 0x01 ),( 0 == a32 ),( ( a33 >> 3 ) & 0x01 ),e1_parity ( a32 ),( ( a39 >> 16 ) & 0x01 ),"POP  BC" );
-    u16 a40 = ( a36 + 1 ) ;
-    u8 a41 = e8_read_mem ( a36 ) ;
-    u16 a42 = ( a40 + 1 ) ;
-    u8 a43 = e8_read_mem ( a40 ) ;
+    instruction0 ( 0x14,0x6F,a35,0x00,0x20,( a27 >> 8 ),( a27 & 0xFF ),a39,( a42 & 0xFFFF ),( ( a35 >> 7 ) & 0x01 ),( 0 == a35 ),( ( a36 >> 3 ) & 0x01 ),e1_parity ( a35 ),( ( a42 >> 16 ) & 0x01 ),"POP  BC" );
+    u16 a43 = ( a39 + 1 ) ;
+    u8 a44 = e8_read_mem ( a39 ) ;
+    u16 a45 = ( a43 + 1 ) ;
+    u8 a46 = e8_read_mem ( a43 ) ;
     advance ( 10 );
     // #at: 146F
-    instruction0 ( 0x14,0x70,a32,a43,a41,( a25 >> 8 ),( a25 & 0xFF ),a42,( a39 & 0xFFFF ),( ( a32 >> 7 ) & 0x01 ),( 0 == a32 ),( ( a33 >> 3 ) & 0x01 ),e1_parity ( a32 ),( ( a39 >> 16 ) & 0x01 ),"DEC  B" );
-    u16 a44 = ( ( a43 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
-    u8 a45 = ( a43 & 0x0F ) ;
-    u8 a46 = ( ( ( u8 ) ( ~ 0x00 ) ) & 0x0F ) ;
-    u16 a47 = ( ( a45 + a46 ) + ( ! true ) ) ;
+    instruction0 ( 0x14,0x70,a35,a46,a44,( a27 >> 8 ),( a27 & 0xFF ),a45,( a42 & 0xFFFF ),( ( a35 >> 7 ) & 0x01 ),( 0 == a35 ),( ( a36 >> 3 ) & 0x01 ),e1_parity ( a35 ),( ( a42 >> 16 ) & 0x01 ),"DEC  B" );
+    u16 a47 = ( ( a46 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
+    u8 a48 = ( a46 & 0x0F ) ;
+    u8 a49 = ( ( ( u8 ) ( ~ 0x00 ) ) & 0x0F ) ;
+    u16 a50 = ( ( a48 + a49 ) + ( ! true ) ) ;
     advance ( 5 );
     // #at: 1470
-    instruction2 ( 0x14,0x73,a32,( a44 & 0xFF ),a41,( a25 >> 8 ),( a25 & 0xFF ),a42,( a39 & 0xFFFF ),( ( ( a44 & 0xFF ) >> 7 ) & 0x01 ),( 0 == ( a44 & 0xFF ) ),( ( ( a47 & 0xFF ) >> 4 ) & 0x01 ),e1_parity ( ( a44 & 0xFF ) ),( ( a39 >> 16 ) & 0x01 ),"JP   NZ,%02X%02X",0x14,0x55 );
-    if (( ! ( 0 == ( a44 & 0xFF ) ) ))
+    instruction2 ( 0x14,0x73,a35,( a47 & 0xFF ),a44,( a27 >> 8 ),( a27 & 0xFF ),a45,( a42 & 0xFFFF ),( ( ( a47 & 0xFF ) >> 7 ) & 0x01 ),( 0 == ( a47 & 0xFF ) ),( ( ( a50 & 0xFF ) >> 4 ) & 0x01 ),e1_parity ( ( a47 & 0xFF ) ),( ( a42 >> 16 ) & 0x01 ),"JP   NZ,%02X%02X",0x14,0x55 );
+    if (( ! ( 0 == ( a47 & 0xFF ) ) ))
     {
         advance ( 10 );
-        SP = a42;
-        HL = ( a39 & 0xFFFF );
-        A = a32;
-        B = ( a44 & 0xFF );
-        C = a41;
-        D = ( a25 >> 8 );
-        E = ( a25 & 0xFF );
-        FlagS = ( ( ( a44 & 0xFF ) >> 7 ) & 0x01 );
-        FlagZ = ( 0 == ( a44 & 0xFF ) );
-        FlagA = ( ( ( a47 & 0xFF ) >> 4 ) & 0x01 );
-        FlagP = e1_parity ( ( a44 & 0xFF ) );
-        FlagCY = ( ( a39 >> 16 ) & 0x01 );
-        Shifter_HI = a26;
+        SP = a45;
+        HL = ( a42 & 0xFFFF );
+        A = a35;
+        B = ( a47 & 0xFF );
+        C = a44;
+        D = ( a27 >> 8 );
+        E = ( a27 & 0xFF );
+        FlagS = ( ( ( a47 & 0xFF ) >> 7 ) & 0x01 );
+        FlagZ = ( 0 == ( a47 & 0xFF ) );
+        FlagA = ( ( ( a50 & 0xFF ) >> 4 ) & 0x01 );
+        FlagP = e1_parity ( ( a47 & 0xFF ) );
+        FlagCY = ( ( a42 >> 16 ) & 0x01 );
+        Shifter_HI = a28;
         Shifter_LO = a11;
         return jumpDirect ( 0x1455,slow_1455,fast_1455 );
     }
@@ -53087,27 +53129,27 @@ Control fast_1455 ()
     {
         advance ( 10 );
         // #at: 1473
-        instruction0 ( 0x14,0x74,a32,( a44 & 0xFF ),a41,( a25 >> 8 ),( a25 & 0xFF ),a42,( a39 & 0xFFFF ),( ( ( a44 & 0xFF ) >> 7 ) & 0x01 ),( 0 == ( a44 & 0xFF ) ),( ( ( a47 & 0xFF ) >> 4 ) & 0x01 ),e1_parity ( ( a44 & 0xFF ) ),( ( a39 >> 16 ) & 0x01 ),"RET" );
-        u16 a48 = ( a42 + 1 ) ;
-        u8 a49 = e8_read_mem ( a42 ) ;
-        u16 a50 = ( a48 + 1 ) ;
-        u8 a51 = e8_read_mem ( a48 ) ;
+        instruction0 ( 0x14,0x74,a35,( a47 & 0xFF ),a44,( a27 >> 8 ),( a27 & 0xFF ),a45,( a42 & 0xFFFF ),( ( ( a47 & 0xFF ) >> 7 ) & 0x01 ),( 0 == ( a47 & 0xFF ) ),( ( ( a50 & 0xFF ) >> 4 ) & 0x01 ),e1_parity ( ( a47 & 0xFF ) ),( ( a42 >> 16 ) & 0x01 ),"RET" );
+        u16 a51 = ( a45 + 1 ) ;
+        u8 a52 = e8_read_mem ( a45 ) ;
+        u16 a53 = ( a51 + 1 ) ;
+        u8 a54 = e8_read_mem ( a51 ) ;
         advance ( 10 );
-        SP = a50;
-        HL = ( a39 & 0xFFFF );
-        A = a32;
-        B = ( a44 & 0xFF );
-        C = a41;
-        D = ( a25 >> 8 );
-        E = ( a25 & 0xFF );
-        FlagS = ( ( ( a44 & 0xFF ) >> 7 ) & 0x01 );
-        FlagZ = ( 0 == ( a44 & 0xFF ) );
-        FlagA = ( ( ( a47 & 0xFF ) >> 4 ) & 0x01 );
-        FlagP = e1_parity ( ( a44 & 0xFF ) );
-        FlagCY = ( ( a39 >> 16 ) & 0x01 );
-        Shifter_HI = a26;
+        SP = a53;
+        HL = ( a42 & 0xFFFF );
+        A = a35;
+        B = ( a47 & 0xFF );
+        C = a44;
+        D = ( a27 >> 8 );
+        E = ( a27 & 0xFF );
+        FlagS = ( ( ( a47 & 0xFF ) >> 7 ) & 0x01 );
+        FlagZ = ( 0 == ( a47 & 0xFF ) );
+        FlagA = ( ( ( a50 & 0xFF ) >> 4 ) & 0x01 );
+        FlagP = e1_parity ( ( a47 & 0xFF ) );
+        FlagCY = ( ( a42 >> 16 ) & 0x01 );
+        Shifter_HI = a28;
         Shifter_LO = a11;
-        return jump16 ( ( ( a51 << 8 ) | a49 ) );
+        return jump16 ( ( ( a54 << 8 ) | a52 ) );
     }
 }
 
@@ -53354,62 +53396,64 @@ Control fast_1498 ()
     advance ( 7 );
     // #at: 149B
     instruction1 ( 0x14,0x9D,a11,B,C,D,E,a8,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"OUT  %02X",0x04 );
+    u8 a12 = Shifter_HI ;
     advance ( 10 );
     // #at: 149D
     instruction1 ( 0x14,0x9F,a11,B,C,D,E,a8,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"IN   %02X",0x03 );
-    u8 a12 = ( Shifter_OFF & 0x07 ) ;
-    u8 a13 = ( ( ( u8 ) ( ~ Shifter_OFF ) ) & 0x07 ) ;
-    u8 a14 = ( ( a11 << a12 ) | ( ( Shifter_HI >> a13 ) >> 0x01 ) ) ;
+    u8 a13 = Shifter_OFF ;
+    u8 a14 = ( a13 & 0x07 ) ;
+    u8 a15 = ( ( ( u8 ) ( ~ a13 ) ) & 0x07 ) ;
+    u8 a16 = ( ( a11 << a14 ) | ( ( a12 >> a15 ) >> 0x01 ) ) ;
     advance ( 10 );
     // #at: 149F
-    instruction0 ( 0x14,0xA0,a14,B,C,D,E,a8,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"PUSH PSW" );
-    u16 a15 = ( a8 + -1 ) ;
-    mem_write ( a15,a14 );
-    u16 a16 = ( a15 + -1 ) ;
-    mem_write ( a16,e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x02,7,FlagS ),6,FlagZ ),4,FlagA ),2,FlagP ),0,FlagCY ) );
+    instruction0 ( 0x14,0xA0,a16,B,C,D,E,a8,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"PUSH PSW" );
+    u16 a17 = ( a8 + -1 ) ;
+    mem_write ( a17,a16 );
+    u16 a18 = ( a17 + -1 ) ;
+    mem_write ( a18,e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x02,7,FlagS ),6,FlagZ ),4,FlagA ),2,FlagP ),0,FlagCY ) );
     advance ( 11 );
     // #at: 14A0
-    instruction0 ( 0x14,0xA1,a14,B,C,D,E,a16,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"AND  (HL)" );
-    u16 a17 = HL ;
-    u8 a18 = e8_read_mem ( a17 ) ;
-    u8 a19 = ( a18 & a14 ) ;
-    u8 a20 = ( a18 | a14 ) ;
+    instruction0 ( 0x14,0xA1,a16,B,C,D,E,a18,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"AND  (HL)" );
+    u16 a19 = HL ;
+    u8 a20 = e8_read_mem ( a19 ) ;
+    u8 a21 = ( a20 & a16 ) ;
+    u8 a22 = ( a20 | a16 ) ;
     advance ( 7 );
     // #at: 14A1
-    instruction2 ( 0x14,0xA4,a19,B,C,D,E,a16,HL,( ( a19 >> 7 ) & 0x01 ),( 0 == a19 ),( ( a20 >> 3 ) & 0x01 ),e1_parity ( a19 ),false,"JP   Z,%02X%02X",0x14,0xA9 );
-    if (( 0 == a19 ))
+    instruction2 ( 0x14,0xA4,a21,B,C,D,E,a18,HL,( ( a21 >> 7 ) & 0x01 ),( 0 == a21 ),( ( a22 >> 3 ) & 0x01 ),e1_parity ( a21 ),false,"JP   Z,%02X%02X",0x14,0xA9 );
+    if (( 0 == a21 ))
     {
         advance ( 10 );
-        SP = a16;
-        A = a19;
-        FlagS = ( ( a19 >> 7 ) & 0x01 );
-        FlagZ = ( 0 == a19 );
-        FlagA = ( ( a20 >> 3 ) & 0x01 );
-        FlagP = e1_parity ( a19 );
+        SP = a18;
+        A = a21;
+        FlagS = ( ( a21 >> 7 ) & 0x01 );
+        FlagZ = ( 0 == a21 );
+        FlagA = ( ( a22 >> 3 ) & 0x01 );
+        FlagP = e1_parity ( a21 );
         FlagCY = false;
         Shifter_HI = a11;
-        Shifter_LO = Shifter_HI;
+        Shifter_LO = a12;
         return jumpDirect ( 0x14A9,slow_14A9,fast_14A9 );
     }
     else
     {
         advance ( 10 );
         // #at: 14A4
-        instruction1 ( 0x14,0xA6,a19,B,C,D,E,a16,HL,( ( a19 >> 7 ) & 0x01 ),( 0 == a19 ),( ( a20 >> 3 ) & 0x01 ),e1_parity ( a19 ),false,"LD   A,%02X",0x01 );
+        instruction1 ( 0x14,0xA6,a21,B,C,D,E,a18,HL,( ( a21 >> 7 ) & 0x01 ),( 0 == a21 ),( ( a22 >> 3 ) & 0x01 ),e1_parity ( a21 ),false,"LD   A,%02X",0x01 );
         advance ( 7 );
         // #at: 14A6
-        instruction2 ( 0x14,0xA9,0x01,B,C,D,E,a16,HL,( ( a19 >> 7 ) & 0x01 ),( 0 == a19 ),( ( a20 >> 3 ) & 0x01 ),e1_parity ( a19 ),false,"LD   (%02X%02X),A",0x20,0x61 );
+        instruction2 ( 0x14,0xA9,0x01,B,C,D,E,a18,HL,( ( a21 >> 7 ) & 0x01 ),( 0 == a21 ),( ( a22 >> 3 ) & 0x01 ),e1_parity ( a21 ),false,"LD   (%02X%02X),A",0x20,0x61 );
         mem_write ( 0x2061,0x01 );
         advance ( 13 );
-        SP = a16;
+        SP = a18;
         A = 0x01;
-        FlagS = ( ( a19 >> 7 ) & 0x01 );
-        FlagZ = ( 0 == a19 );
-        FlagA = ( ( a20 >> 3 ) & 0x01 );
-        FlagP = e1_parity ( a19 );
+        FlagS = ( ( a21 >> 7 ) & 0x01 );
+        FlagZ = ( 0 == a21 );
+        FlagA = ( ( a22 >> 3 ) & 0x01 );
+        FlagP = e1_parity ( a21 );
         FlagCY = false;
         Shifter_HI = a11;
-        Shifter_LO = Shifter_HI;
+        Shifter_LO = a12;
         return jumpDirect ( 0x14A9,slow_14A9,fast_14A9 );
     }
 }
@@ -53452,67 +53496,69 @@ Control fast_14A9 ()
     advance ( 4 );
     // #at: 14AF
     instruction1 ( 0x14,0xB1,a15,B,C,( a14 >> 8 ),( a14 & 0xFF ),a4,a11,( ( a15 >> 7 ) & 0x01 ),( 0 == a15 ),false,e1_parity ( a15 ),false,"OUT  %02X",0x04 );
+    u8 a16 = Shifter_HI ;
     advance ( 10 );
     // #at: 14B1
     instruction1 ( 0x14,0xB3,a15,B,C,( a14 >> 8 ),( a14 & 0xFF ),a4,a11,( ( a15 >> 7 ) & 0x01 ),( 0 == a15 ),false,e1_parity ( a15 ),false,"IN   %02X",0x03 );
-    u8 a16 = ( Shifter_OFF & 0x07 ) ;
-    u8 a17 = ( ( ( u8 ) ( ~ Shifter_OFF ) ) & 0x07 ) ;
-    u8 a18 = ( ( a15 << a16 ) | ( ( Shifter_HI >> a17 ) >> 0x01 ) ) ;
+    u8 a17 = Shifter_OFF ;
+    u8 a18 = ( a17 & 0x07 ) ;
+    u8 a19 = ( ( ( u8 ) ( ~ a17 ) ) & 0x07 ) ;
+    u8 a20 = ( ( a15 << a18 ) | ( ( a16 >> a19 ) >> 0x01 ) ) ;
     advance ( 10 );
     // #at: 14B3
-    instruction0 ( 0x14,0xB4,a18,B,C,( a14 >> 8 ),( a14 & 0xFF ),a4,a11,( ( a15 >> 7 ) & 0x01 ),( 0 == a15 ),false,e1_parity ( a15 ),false,"PUSH PSW" );
-    u16 a19 = ( a4 + -1 ) ;
-    mem_write ( a19,a18 );
-    u16 a20 = ( a19 + -1 ) ;
-    mem_write ( a20,e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x02,7,( ( a15 >> 7 ) & 0x01 ) ),6,( 0 == a15 ) ),4,false ),2,e1_parity ( a15 ) ),0,false ) );
+    instruction0 ( 0x14,0xB4,a20,B,C,( a14 >> 8 ),( a14 & 0xFF ),a4,a11,( ( a15 >> 7 ) & 0x01 ),( 0 == a15 ),false,e1_parity ( a15 ),false,"PUSH PSW" );
+    u16 a21 = ( a4 + -1 ) ;
+    mem_write ( a21,a20 );
+    u16 a22 = ( a21 + -1 ) ;
+    mem_write ( a22,e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( e8_update_bit ( 0x02,7,( ( a15 >> 7 ) & 0x01 ) ),6,( 0 == a15 ) ),4,false ),2,e1_parity ( a15 ) ),0,false ) );
     advance ( 11 );
     // #at: 14B4
-    instruction0 ( 0x14,0xB5,a18,B,C,( a14 >> 8 ),( a14 & 0xFF ),a20,a11,( ( a15 >> 7 ) & 0x01 ),( 0 == a15 ),false,e1_parity ( a15 ),false,"AND  (HL)" );
-    u8 a21 = e8_read_mem ( a11 ) ;
-    u8 a22 = ( a21 & a18 ) ;
-    u8 a23 = ( a21 | a18 ) ;
+    instruction0 ( 0x14,0xB5,a20,B,C,( a14 >> 8 ),( a14 & 0xFF ),a22,a11,( ( a15 >> 7 ) & 0x01 ),( 0 == a15 ),false,e1_parity ( a15 ),false,"AND  (HL)" );
+    u8 a23 = e8_read_mem ( a11 ) ;
+    u8 a24 = ( a23 & a20 ) ;
+    u8 a25 = ( a23 | a20 ) ;
     advance ( 7 );
     // #at: 14B5
-    instruction2 ( 0x14,0xB8,a22,B,C,( a14 >> 8 ),( a14 & 0xFF ),a20,a11,( ( a22 >> 7 ) & 0x01 ),( 0 == a22 ),( ( a23 >> 3 ) & 0x01 ),e1_parity ( a22 ),false,"JP   Z,%02X%02X",0x14,0xBD );
-    if (( 0 == a22 ))
+    instruction2 ( 0x14,0xB8,a24,B,C,( a14 >> 8 ),( a14 & 0xFF ),a22,a11,( ( a24 >> 7 ) & 0x01 ),( 0 == a24 ),( ( a25 >> 3 ) & 0x01 ),e1_parity ( a24 ),false,"JP   Z,%02X%02X",0x14,0xBD );
+    if (( 0 == a24 ))
     {
         advance ( 10 );
-        SP = a20;
+        SP = a22;
         HL = a11;
-        A = a22;
+        A = a24;
         D = ( a14 >> 8 );
         E = ( a14 & 0xFF );
-        FlagS = ( ( a22 >> 7 ) & 0x01 );
-        FlagZ = ( 0 == a22 );
-        FlagA = ( ( a23 >> 3 ) & 0x01 );
-        FlagP = e1_parity ( a22 );
+        FlagS = ( ( a24 >> 7 ) & 0x01 );
+        FlagZ = ( 0 == a24 );
+        FlagA = ( ( a25 >> 3 ) & 0x01 );
+        FlagP = e1_parity ( a24 );
         FlagCY = false;
         Shifter_HI = a15;
-        Shifter_LO = Shifter_HI;
+        Shifter_LO = a16;
         return jumpDirect ( 0x14BD,slow_14BD,fast_14BD );
     }
     else
     {
         advance ( 10 );
         // #at: 14B8
-        instruction1 ( 0x14,0xBA,a22,B,C,( a14 >> 8 ),( a14 & 0xFF ),a20,a11,( ( a22 >> 7 ) & 0x01 ),( 0 == a22 ),( ( a23 >> 3 ) & 0x01 ),e1_parity ( a22 ),false,"LD   A,%02X",0x01 );
+        instruction1 ( 0x14,0xBA,a24,B,C,( a14 >> 8 ),( a14 & 0xFF ),a22,a11,( ( a24 >> 7 ) & 0x01 ),( 0 == a24 ),( ( a25 >> 3 ) & 0x01 ),e1_parity ( a24 ),false,"LD   A,%02X",0x01 );
         advance ( 7 );
         // #at: 14BA
-        instruction2 ( 0x14,0xBD,0x01,B,C,( a14 >> 8 ),( a14 & 0xFF ),a20,a11,( ( a22 >> 7 ) & 0x01 ),( 0 == a22 ),( ( a23 >> 3 ) & 0x01 ),e1_parity ( a22 ),false,"LD   (%02X%02X),A",0x20,0x61 );
+        instruction2 ( 0x14,0xBD,0x01,B,C,( a14 >> 8 ),( a14 & 0xFF ),a22,a11,( ( a24 >> 7 ) & 0x01 ),( 0 == a24 ),( ( a25 >> 3 ) & 0x01 ),e1_parity ( a24 ),false,"LD   (%02X%02X),A",0x20,0x61 );
         mem_write ( 0x2061,0x01 );
         advance ( 13 );
-        SP = a20;
+        SP = a22;
         HL = a11;
         A = 0x01;
         D = ( a14 >> 8 );
         E = ( a14 & 0xFF );
-        FlagS = ( ( a22 >> 7 ) & 0x01 );
-        FlagZ = ( 0 == a22 );
-        FlagA = ( ( a23 >> 3 ) & 0x01 );
-        FlagP = e1_parity ( a22 );
+        FlagS = ( ( a24 >> 7 ) & 0x01 );
+        FlagZ = ( 0 == a24 );
+        FlagA = ( ( a25 >> 3 ) & 0x01 );
+        FlagP = e1_parity ( a24 );
         FlagCY = false;
         Shifter_HI = a15;
-        Shifter_LO = Shifter_HI;
+        Shifter_LO = a16;
         return jumpDirect ( 0x14BD,slow_14BD,fast_14BD );
     }
 }
@@ -54931,93 +54977,96 @@ Control fast_15D7 ()
     advance ( 7 );
     // #at: 15DA
     instruction1 ( 0x15,0xDC,a11,B,C,D,E,a8,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"OUT  %02X",0x04 );
+    u8 a12 = Shifter_HI ;
     advance ( 10 );
     // #at: 15DC
     instruction1 ( 0x15,0xDE,a11,B,C,D,E,a8,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"IN   %02X",0x03 );
-    u8 a12 = ( Shifter_OFF & 0x07 ) ;
-    u8 a13 = ( ( ( u8 ) ( ~ Shifter_OFF ) ) & 0x07 ) ;
-    u8 a14 = ( ( a11 << a12 ) | ( ( Shifter_HI >> a13 ) >> 0x01 ) ) ;
+    u8 a13 = Shifter_OFF ;
+    u8 a14 = ( a13 & 0x07 ) ;
+    u8 a15 = ( ( ( u8 ) ( ~ a13 ) ) & 0x07 ) ;
+    u8 a16 = ( ( a11 << a14 ) | ( ( a12 >> a15 ) >> 0x01 ) ) ;
     advance ( 10 );
     // #at: 15DE
-    instruction0 ( 0x15,0xDF,a14,B,C,D,E,a8,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   (HL),A" );
-    u16 a15 = HL ;
-    mem_write ( a15,a14 );
+    instruction0 ( 0x15,0xDF,a16,B,C,D,E,a8,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"LD   (HL),A" );
+    u16 a17 = HL ;
+    mem_write ( a17,a16 );
     advance ( 7 );
     // #at: 15DF
-    instruction0 ( 0x15,0xE0,a14,B,C,D,E,a8,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"INC  HL" );
-    u16 a16 = HL ;
-    u16 a17 = ( a16 + 1 ) ;
+    instruction0 ( 0x15,0xE0,a16,B,C,D,E,a8,HL,FlagS,FlagZ,FlagA,FlagP,FlagCY,"INC  HL" );
+    u16 a18 = HL ;
+    u16 a19 = ( a18 + 1 ) ;
     advance ( 5 );
     // #at: 15E0
-    instruction0 ( 0x15,0xE1,a14,B,C,D,E,a8,a17,FlagS,FlagZ,FlagA,FlagP,FlagCY,"INC  DE" );
-    u8 a18 = D ;
-    u8 a19 = E ;
-    u16 a20 = ( ( ( a18 << 8 ) | a19 ) + 1 ) ;
+    instruction0 ( 0x15,0xE1,a16,B,C,D,E,a8,a19,FlagS,FlagZ,FlagA,FlagP,FlagCY,"INC  DE" );
+    u8 a20 = D ;
+    u8 a21 = E ;
+    u16 a22 = ( ( ( a20 << 8 ) | a21 ) + 1 ) ;
     advance ( 5 );
     // #at: 15E1
-    instruction0 ( 0x15,0xE2,a14,B,C,( a20 >> 8 ),( a20 & 0xFF ),a8,a17,FlagS,FlagZ,FlagA,FlagP,FlagCY,"XOR  A" );
-    u8 a21 = ( a14 ^ a14 ) ;
+    instruction0 ( 0x15,0xE2,a16,B,C,( a22 >> 8 ),( a22 & 0xFF ),a8,a19,FlagS,FlagZ,FlagA,FlagP,FlagCY,"XOR  A" );
+    u8 a23 = ( a16 ^ a16 ) ;
     advance ( 4 );
     // #at: 15E2
-    instruction1 ( 0x15,0xE4,a21,B,C,( a20 >> 8 ),( a20 & 0xFF ),a8,a17,( ( a21 >> 7 ) & 0x01 ),( 0 == a21 ),false,e1_parity ( a21 ),false,"OUT  %02X",0x04 );
+    instruction1 ( 0x15,0xE4,a23,B,C,( a22 >> 8 ),( a22 & 0xFF ),a8,a19,( ( a23 >> 7 ) & 0x01 ),( 0 == a23 ),false,e1_parity ( a23 ),false,"OUT  %02X",0x04 );
     advance ( 10 );
     // #at: 15E4
-    instruction1 ( 0x15,0xE6,a21,B,C,( a20 >> 8 ),( a20 & 0xFF ),a8,a17,( ( a21 >> 7 ) & 0x01 ),( 0 == a21 ),false,e1_parity ( a21 ),false,"IN   %02X",0x03 );
-    u8 a22 = ( Shifter_OFF & 0x07 ) ;
-    u8 a23 = ( ( ( u8 ) ( ~ Shifter_OFF ) ) & 0x07 ) ;
-    u8 a24 = ( ( a21 << a22 ) | ( ( a11 >> a23 ) >> 0x01 ) ) ;
+    instruction1 ( 0x15,0xE6,a23,B,C,( a22 >> 8 ),( a22 & 0xFF ),a8,a19,( ( a23 >> 7 ) & 0x01 ),( 0 == a23 ),false,e1_parity ( a23 ),false,"IN   %02X",0x03 );
+    u8 a24 = Shifter_OFF ;
+    u8 a25 = ( a24 & 0x07 ) ;
+    u8 a26 = ( ( ( u8 ) ( ~ a24 ) ) & 0x07 ) ;
+    u8 a27 = ( ( a23 << a25 ) | ( ( a11 >> a26 ) >> 0x01 ) ) ;
     advance ( 10 );
     // #at: 15E6
-    instruction0 ( 0x15,0xE7,a24,B,C,( a20 >> 8 ),( a20 & 0xFF ),a8,a17,( ( a21 >> 7 ) & 0x01 ),( 0 == a21 ),false,e1_parity ( a21 ),false,"LD   (HL),A" );
-    mem_write ( a17,a24 );
+    instruction0 ( 0x15,0xE7,a27,B,C,( a22 >> 8 ),( a22 & 0xFF ),a8,a19,( ( a23 >> 7 ) & 0x01 ),( 0 == a23 ),false,e1_parity ( a23 ),false,"LD   (HL),A" );
+    mem_write ( a19,a27 );
     advance ( 7 );
     // #at: 15E7
-    instruction0 ( 0x15,0xE8,a24,B,C,( a20 >> 8 ),( a20 & 0xFF ),a8,a17,( ( a21 >> 7 ) & 0x01 ),( 0 == a21 ),false,e1_parity ( a21 ),false,"POP  HL" );
-    u16 a25 = ( a8 + 1 ) ;
-    u8 a26 = e8_read_mem ( a8 ) ;
-    u16 a27 = ( a25 + 1 ) ;
-    u8 a28 = e8_read_mem ( a25 ) ;
+    instruction0 ( 0x15,0xE8,a27,B,C,( a22 >> 8 ),( a22 & 0xFF ),a8,a19,( ( a23 >> 7 ) & 0x01 ),( 0 == a23 ),false,e1_parity ( a23 ),false,"POP  HL" );
+    u16 a28 = ( a8 + 1 ) ;
+    u8 a29 = e8_read_mem ( a8 ) ;
+    u16 a30 = ( a28 + 1 ) ;
+    u8 a31 = e8_read_mem ( a28 ) ;
     advance ( 10 );
     // #at: 15E8
-    instruction2 ( 0x15,0xEB,a24,B,C,( a20 >> 8 ),( a20 & 0xFF ),a27,( ( a28 << 8 ) | a26 ),( ( a21 >> 7 ) & 0x01 ),( 0 == a21 ),false,e1_parity ( a21 ),false,"LD   BC,%02X%02X",0x00,0x20 );
+    instruction2 ( 0x15,0xEB,a27,B,C,( a22 >> 8 ),( a22 & 0xFF ),a30,( ( a31 << 8 ) | a29 ),( ( a23 >> 7 ) & 0x01 ),( 0 == a23 ),false,e1_parity ( a23 ),false,"LD   BC,%02X%02X",0x00,0x20 );
     advance ( 10 );
     // #at: 15EB
-    instruction0 ( 0x15,0xEC,a24,0x00,0x20,( a20 >> 8 ),( a20 & 0xFF ),a27,( ( a28 << 8 ) | a26 ),( ( a21 >> 7 ) & 0x01 ),( 0 == a21 ),false,e1_parity ( a21 ),false,"ADD  HL,BC" );
-    u16 a29 = ( ( a28 << 8 ) | a26 ) ;
-    u17 a30 = ( 0x0020 + a29 ) ;
+    instruction0 ( 0x15,0xEC,a27,0x00,0x20,( a22 >> 8 ),( a22 & 0xFF ),a30,( ( a31 << 8 ) | a29 ),( ( a23 >> 7 ) & 0x01 ),( 0 == a23 ),false,e1_parity ( a23 ),false,"ADD  HL,BC" );
+    u16 a32 = ( ( a31 << 8 ) | a29 ) ;
+    u17 a33 = ( 0x0020 + a32 ) ;
     advance ( 10 );
     // #at: 15EC
-    instruction0 ( 0x15,0xED,a24,0x00,0x20,( a20 >> 8 ),( a20 & 0xFF ),a27,( a30 & 0xFFFF ),( ( a21 >> 7 ) & 0x01 ),( 0 == a21 ),false,e1_parity ( a21 ),( ( a30 >> 16 ) & 0x01 ),"POP  BC" );
-    u16 a31 = ( a27 + 1 ) ;
-    u8 a32 = e8_read_mem ( a27 ) ;
-    u16 a33 = ( a31 + 1 ) ;
-    u8 a34 = e8_read_mem ( a31 ) ;
+    instruction0 ( 0x15,0xED,a27,0x00,0x20,( a22 >> 8 ),( a22 & 0xFF ),a30,( a33 & 0xFFFF ),( ( a23 >> 7 ) & 0x01 ),( 0 == a23 ),false,e1_parity ( a23 ),( ( a33 >> 16 ) & 0x01 ),"POP  BC" );
+    u16 a34 = ( a30 + 1 ) ;
+    u8 a35 = e8_read_mem ( a30 ) ;
+    u16 a36 = ( a34 + 1 ) ;
+    u8 a37 = e8_read_mem ( a34 ) ;
     advance ( 10 );
     // #at: 15ED
-    instruction0 ( 0x15,0xEE,a24,a34,a32,( a20 >> 8 ),( a20 & 0xFF ),a33,( a30 & 0xFFFF ),( ( a21 >> 7 ) & 0x01 ),( 0 == a21 ),false,e1_parity ( a21 ),( ( a30 >> 16 ) & 0x01 ),"DEC  B" );
-    u16 a35 = ( ( a34 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
-    u8 a36 = ( a34 & 0x0F ) ;
-    u8 a37 = ( ( ( u8 ) ( ~ 0x00 ) ) & 0x0F ) ;
-    u16 a38 = ( ( a36 + a37 ) + ( ! true ) ) ;
+    instruction0 ( 0x15,0xEE,a27,a37,a35,( a22 >> 8 ),( a22 & 0xFF ),a36,( a33 & 0xFFFF ),( ( a23 >> 7 ) & 0x01 ),( 0 == a23 ),false,e1_parity ( a23 ),( ( a33 >> 16 ) & 0x01 ),"DEC  B" );
+    u16 a38 = ( ( a37 + ( ( u8 ) ( ~ 0x00 ) ) ) + ( ! true ) ) ;
+    u8 a39 = ( a37 & 0x0F ) ;
+    u8 a40 = ( ( ( u8 ) ( ~ 0x00 ) ) & 0x0F ) ;
+    u16 a41 = ( ( a39 + a40 ) + ( ! true ) ) ;
     advance ( 5 );
     // #at: 15EE
-    instruction2 ( 0x15,0xF1,a24,( a35 & 0xFF ),a32,( a20 >> 8 ),( a20 & 0xFF ),a33,( a30 & 0xFFFF ),( ( ( a35 & 0xFF ) >> 7 ) & 0x01 ),( 0 == ( a35 & 0xFF ) ),( ( ( a38 & 0xFF ) >> 4 ) & 0x01 ),e1_parity ( ( a35 & 0xFF ) ),( ( a30 >> 16 ) & 0x01 ),"JP   NZ,%02X%02X",0x15,0xD7 );
-    if (( ! ( 0 == ( a35 & 0xFF ) ) ))
+    instruction2 ( 0x15,0xF1,a27,( a38 & 0xFF ),a35,( a22 >> 8 ),( a22 & 0xFF ),a36,( a33 & 0xFFFF ),( ( ( a38 & 0xFF ) >> 7 ) & 0x01 ),( 0 == ( a38 & 0xFF ) ),( ( ( a41 & 0xFF ) >> 4 ) & 0x01 ),e1_parity ( ( a38 & 0xFF ) ),( ( a33 >> 16 ) & 0x01 ),"JP   NZ,%02X%02X",0x15,0xD7 );
+    if (( ! ( 0 == ( a38 & 0xFF ) ) ))
     {
         advance ( 10 );
-        SP = a33;
-        HL = ( a30 & 0xFFFF );
-        A = a24;
-        B = ( a35 & 0xFF );
-        C = a32;
-        D = ( a20 >> 8 );
-        E = ( a20 & 0xFF );
-        FlagS = ( ( ( a35 & 0xFF ) >> 7 ) & 0x01 );
-        FlagZ = ( 0 == ( a35 & 0xFF ) );
-        FlagA = ( ( ( a38 & 0xFF ) >> 4 ) & 0x01 );
-        FlagP = e1_parity ( ( a35 & 0xFF ) );
-        FlagCY = ( ( a30 >> 16 ) & 0x01 );
-        Shifter_HI = a21;
+        SP = a36;
+        HL = ( a33 & 0xFFFF );
+        A = a27;
+        B = ( a38 & 0xFF );
+        C = a35;
+        D = ( a22 >> 8 );
+        E = ( a22 & 0xFF );
+        FlagS = ( ( ( a38 & 0xFF ) >> 7 ) & 0x01 );
+        FlagZ = ( 0 == ( a38 & 0xFF ) );
+        FlagA = ( ( ( a41 & 0xFF ) >> 4 ) & 0x01 );
+        FlagP = e1_parity ( ( a38 & 0xFF ) );
+        FlagCY = ( ( a33 >> 16 ) & 0x01 );
+        Shifter_HI = a23;
         Shifter_LO = a11;
         return jumpDirect ( 0x15D7,slow_15D7,fast_15D7 );
     }
@@ -55025,34 +55074,34 @@ Control fast_15D7 ()
     {
         advance ( 10 );
         // #at: 15F1
-        instruction0 ( 0x15,0xF2,a24,( a35 & 0xFF ),a32,( a20 >> 8 ),( a20 & 0xFF ),a33,( a30 & 0xFFFF ),( ( ( a35 & 0xFF ) >> 7 ) & 0x01 ),( 0 == ( a35 & 0xFF ) ),( ( ( a38 & 0xFF ) >> 4 ) & 0x01 ),e1_parity ( ( a35 & 0xFF ) ),( ( a30 >> 16 ) & 0x01 ),"POP  HL" );
-        u16 a39 = ( a33 + 1 ) ;
-        u8 a40 = e8_read_mem ( a33 ) ;
-        u16 a41 = ( a39 + 1 ) ;
-        u8 a42 = e8_read_mem ( a39 ) ;
+        instruction0 ( 0x15,0xF2,a27,( a38 & 0xFF ),a35,( a22 >> 8 ),( a22 & 0xFF ),a36,( a33 & 0xFFFF ),( ( ( a38 & 0xFF ) >> 7 ) & 0x01 ),( 0 == ( a38 & 0xFF ) ),( ( ( a41 & 0xFF ) >> 4 ) & 0x01 ),e1_parity ( ( a38 & 0xFF ) ),( ( a33 >> 16 ) & 0x01 ),"POP  HL" );
+        u16 a42 = ( a36 + 1 ) ;
+        u8 a43 = e8_read_mem ( a36 ) ;
+        u16 a44 = ( a42 + 1 ) ;
+        u8 a45 = e8_read_mem ( a42 ) ;
         advance ( 10 );
         // #at: 15F2
-        instruction0 ( 0x15,0xF3,a24,( a35 & 0xFF ),a32,( a20 >> 8 ),( a20 & 0xFF ),a41,( ( a42 << 8 ) | a40 ),( ( ( a35 & 0xFF ) >> 7 ) & 0x01 ),( 0 == ( a35 & 0xFF ) ),( ( ( a38 & 0xFF ) >> 4 ) & 0x01 ),e1_parity ( ( a35 & 0xFF ) ),( ( a30 >> 16 ) & 0x01 ),"RET" );
-        u16 a43 = ( a41 + 1 ) ;
-        u8 a44 = e8_read_mem ( a41 ) ;
-        u16 a45 = ( a43 + 1 ) ;
-        u8 a46 = e8_read_mem ( a43 ) ;
+        instruction0 ( 0x15,0xF3,a27,( a38 & 0xFF ),a35,( a22 >> 8 ),( a22 & 0xFF ),a44,( ( a45 << 8 ) | a43 ),( ( ( a38 & 0xFF ) >> 7 ) & 0x01 ),( 0 == ( a38 & 0xFF ) ),( ( ( a41 & 0xFF ) >> 4 ) & 0x01 ),e1_parity ( ( a38 & 0xFF ) ),( ( a33 >> 16 ) & 0x01 ),"RET" );
+        u16 a46 = ( a44 + 1 ) ;
+        u8 a47 = e8_read_mem ( a44 ) ;
+        u16 a48 = ( a46 + 1 ) ;
+        u8 a49 = e8_read_mem ( a46 ) ;
         advance ( 10 );
-        SP = a45;
-        HL = ( ( a42 << 8 ) | a40 );
-        A = a24;
-        B = ( a35 & 0xFF );
-        C = a32;
-        D = ( a20 >> 8 );
-        E = ( a20 & 0xFF );
-        FlagS = ( ( ( a35 & 0xFF ) >> 7 ) & 0x01 );
-        FlagZ = ( 0 == ( a35 & 0xFF ) );
-        FlagA = ( ( ( a38 & 0xFF ) >> 4 ) & 0x01 );
-        FlagP = e1_parity ( ( a35 & 0xFF ) );
-        FlagCY = ( ( a30 >> 16 ) & 0x01 );
-        Shifter_HI = a21;
+        SP = a48;
+        HL = ( ( a45 << 8 ) | a43 );
+        A = a27;
+        B = ( a38 & 0xFF );
+        C = a35;
+        D = ( a22 >> 8 );
+        E = ( a22 & 0xFF );
+        FlagS = ( ( ( a38 & 0xFF ) >> 7 ) & 0x01 );
+        FlagZ = ( 0 == ( a38 & 0xFF ) );
+        FlagA = ( ( ( a41 & 0xFF ) >> 4 ) & 0x01 );
+        FlagP = e1_parity ( ( a38 & 0xFF ) );
+        FlagCY = ( ( a33 >> 16 ) & 0x01 );
+        Shifter_HI = a23;
         Shifter_LO = a11;
-        return jump16 ( ( ( a46 << 8 ) | a44 ) );
+        return jump16 ( ( ( a49 << 8 ) | a47 ) );
     }
 }
 

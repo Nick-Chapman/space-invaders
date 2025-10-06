@@ -49519,9 +49519,10 @@
     #1408
     #instruction: OUT  04
     let:8 a1 = A in
+    let:8 a2 = Shifter_HI in
     advance (10)
     Shifter_HI := a1;
-    Shifter_LO := Shifter_HI;
+    Shifter_LO := a2;
     jump (140A);
 
 1409:
@@ -49545,11 +49546,14 @@
 
     #140A
     #instruction: IN   03
-    let:8 a1 = (Shifter_OFF & 07) in
-    let:8 a2 = (~Shifter_OFF & 07) in
-    let:8 a3 = ((Shifter_HI << a1) | ((Shifter_LO >> a2) >> 01)) in
+    let:8 a1 = Shifter_HI in
+    let:8 a2 = Shifter_LO in
+    let:8 a3 = Shifter_OFF in
+    let:8 a4 = (a3 & 07) in
+    let:8 a5 = (~a3 & 07) in
+    let:8 a6 = ((a1 << a4) | ((a2 >> a5) >> 01)) in
     advance (10)
-    A := a3;
+    A := a6;
     jump (140C);
 
 140B:
@@ -49634,9 +49638,10 @@
     #1411
     #instruction: OUT  04
     let:8 a1 = A in
+    let:8 a2 = Shifter_HI in
     advance (10)
     Shifter_HI := a1;
-    Shifter_LO := Shifter_HI;
+    Shifter_LO := a2;
     jump (1413);
 
 1412:
@@ -49660,11 +49665,14 @@
 
     #1413
     #instruction: IN   03
-    let:8 a1 = (Shifter_OFF & 07) in
-    let:8 a2 = (~Shifter_OFF & 07) in
-    let:8 a3 = ((Shifter_HI << a1) | ((Shifter_LO >> a2) >> 01)) in
+    let:8 a1 = Shifter_HI in
+    let:8 a2 = Shifter_LO in
+    let:8 a3 = Shifter_OFF in
+    let:8 a4 = (a3 & 07) in
+    let:8 a5 = (~a3 & 07) in
+    let:8 a6 = ((a1 << a4) | ((a2 >> a5) >> 01)) in
     advance (10)
-    A := a3;
+    A := a6;
     jump (1415);
 
 1414:
@@ -50464,9 +50472,10 @@
     #1458
     #instruction: OUT  04
     let:8 a1 = A in
+    let:8 a2 = Shifter_HI in
     advance (10)
     Shifter_HI := a1;
-    Shifter_LO := Shifter_HI;
+    Shifter_LO := a2;
     jump (145A);
 
 1459:
@@ -50490,11 +50499,14 @@
 
     #145A
     #instruction: IN   03
-    let:8 a1 = (Shifter_OFF & 07) in
-    let:8 a2 = (~Shifter_OFF & 07) in
-    let:8 a3 = ((Shifter_HI << a1) | ((Shifter_LO >> a2) >> 01)) in
+    let:8 a1 = Shifter_HI in
+    let:8 a2 = Shifter_LO in
+    let:8 a3 = Shifter_OFF in
+    let:8 a4 = (a3 & 07) in
+    let:8 a5 = (~a3 & 07) in
+    let:8 a6 = ((a1 << a4) | ((a2 >> a5) >> 01)) in
     advance (10)
-    A := a3;
+    A := a6;
     jump (145C);
 
 145B:
@@ -50589,9 +50601,10 @@
     #1462
     #instruction: OUT  04
     let:8 a1 = A in
+    let:8 a2 = Shifter_HI in
     advance (10)
     Shifter_HI := a1;
-    Shifter_LO := Shifter_HI;
+    Shifter_LO := a2;
     jump (1464);
 
 1463:
@@ -50615,11 +50628,14 @@
 
     #1464
     #instruction: IN   03
-    let:8 a1 = (Shifter_OFF & 07) in
-    let:8 a2 = (~Shifter_OFF & 07) in
-    let:8 a3 = ((Shifter_HI << a1) | ((Shifter_LO >> a2) >> 01)) in
+    let:8 a1 = Shifter_HI in
+    let:8 a2 = Shifter_LO in
+    let:8 a3 = Shifter_OFF in
+    let:8 a4 = (a3 & 07) in
+    let:8 a5 = (~a3 & 07) in
+    let:8 a6 = ((a1 << a4) | ((a2 >> a5) >> 01)) in
     advance (10)
-    A := a3;
+    A := a6;
     jump (1466);
 
 1465:
@@ -51275,9 +51291,10 @@
     #149B
     #instruction: OUT  04
     let:8 a1 = A in
+    let:8 a2 = Shifter_HI in
     advance (10)
     Shifter_HI := a1;
-    Shifter_LO := Shifter_HI;
+    Shifter_LO := a2;
     jump (149D);
 
 149C:
@@ -51301,11 +51318,14 @@
 
     #149D
     #instruction: IN   03
-    let:8 a1 = (Shifter_OFF & 07) in
-    let:8 a2 = (~Shifter_OFF & 07) in
-    let:8 a3 = ((Shifter_HI << a1) | ((Shifter_LO >> a2) >> 01)) in
+    let:8 a1 = Shifter_HI in
+    let:8 a2 = Shifter_LO in
+    let:8 a3 = Shifter_OFF in
+    let:8 a4 = (a3 & 07) in
+    let:8 a5 = (~a3 & 07) in
+    let:8 a6 = ((a1 << a4) | ((a2 >> a5) >> 01)) in
     advance (10)
-    A := a3;
+    A := a6;
     jump (149F);
 
 149E:
@@ -51529,9 +51549,10 @@
     #14AF
     #instruction: OUT  04
     let:8 a1 = A in
+    let:8 a2 = Shifter_HI in
     advance (10)
     Shifter_HI := a1;
-    Shifter_LO := Shifter_HI;
+    Shifter_LO := a2;
     jump (14B1);
 
 14B0:
@@ -51555,11 +51576,14 @@
 
     #14B1
     #instruction: IN   03
-    let:8 a1 = (Shifter_OFF & 07) in
-    let:8 a2 = (~Shifter_OFF & 07) in
-    let:8 a3 = ((Shifter_HI << a1) | ((Shifter_LO >> a2) >> 01)) in
+    let:8 a1 = Shifter_HI in
+    let:8 a2 = Shifter_LO in
+    let:8 a3 = Shifter_OFF in
+    let:8 a4 = (a3 & 07) in
+    let:8 a5 = (~a3 & 07) in
+    let:8 a6 = ((a1 << a4) | ((a2 >> a5) >> 01)) in
     advance (10)
-    A := a3;
+    A := a6;
     jump (14B3);
 
 14B2:
@@ -55239,9 +55263,10 @@
     #15DA
     #instruction: OUT  04
     let:8 a1 = A in
+    let:8 a2 = Shifter_HI in
     advance (10)
     Shifter_HI := a1;
-    Shifter_LO := Shifter_HI;
+    Shifter_LO := a2;
     jump (15DC);
 
 15DB:
@@ -55265,11 +55290,14 @@
 
     #15DC
     #instruction: IN   03
-    let:8 a1 = (Shifter_OFF & 07) in
-    let:8 a2 = (~Shifter_OFF & 07) in
-    let:8 a3 = ((Shifter_HI << a1) | ((Shifter_LO >> a2) >> 01)) in
+    let:8 a1 = Shifter_HI in
+    let:8 a2 = Shifter_LO in
+    let:8 a3 = Shifter_OFF in
+    let:8 a4 = (a3 & 07) in
+    let:8 a5 = (~a3 & 07) in
+    let:8 a6 = ((a1 << a4) | ((a2 >> a5) >> 01)) in
     advance (10)
-    A := a3;
+    A := a6;
     jump (15DE);
 
 15DD:
@@ -55337,9 +55365,10 @@
     #15E2
     #instruction: OUT  04
     let:8 a1 = A in
+    let:8 a2 = Shifter_HI in
     advance (10)
     Shifter_HI := a1;
-    Shifter_LO := Shifter_HI;
+    Shifter_LO := a2;
     jump (15E4);
 
 15E3:
@@ -55363,11 +55392,14 @@
 
     #15E4
     #instruction: IN   03
-    let:8 a1 = (Shifter_OFF & 07) in
-    let:8 a2 = (~Shifter_OFF & 07) in
-    let:8 a3 = ((Shifter_HI << a1) | ((Shifter_LO >> a2) >> 01)) in
+    let:8 a1 = Shifter_HI in
+    let:8 a2 = Shifter_LO in
+    let:8 a3 = Shifter_OFF in
+    let:8 a4 = (a3 & 07) in
+    let:8 a5 = (~a3 & 07) in
+    let:8 a6 = ((a1 << a4) | ((a2 >> a5) >> 01)) in
     advance (10)
-    A := a3;
+    A := a6;
     jump (15E6);
 
 15E5:

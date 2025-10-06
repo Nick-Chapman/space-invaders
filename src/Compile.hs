@@ -199,7 +199,7 @@ compileThen semantics state k =
           Nothing -> share8 (k s) (E8_ReadMem a)
       E.WriteMem a b -> S_MemWrite a b <$> k s ()
 
-      E.GetShifterReg r -> k s (Shifter.get shifter r)
+      E.GetShifterReg r -> share8 (k s) (Shifter.get shifter r)
       E.SetShifterReg r b -> k s { shifter = Shifter.set shifter r b } ()
 
       E.EnableInterrupts -> S_EnableInterrupts <$> k s ()

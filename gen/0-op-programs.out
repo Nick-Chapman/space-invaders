@@ -2772,9 +2772,10 @@ D3 --> Op1 OUT
         jump (a4);
       }
       case 4 : {
+        let:8 a6 = Shifter_HI in
         advance (10)
         Shifter_HI := a5;
-        Shifter_LO := Shifter_HI;
+        Shifter_LO := a6;
         jump (a4);
       }
       case 5 : {
@@ -2937,11 +2938,14 @@ DB --> Op1 IN
         jump (a4);
       }
       case 3 : {
-        let:8 a5 = (Shifter_OFF & 07) in
-        let:8 a6 = (~Shifter_OFF & 07) in
-        let:8 a7 = ((Shifter_HI << a5) | ((Shifter_LO >> a6) >> 01)) in
+        let:8 a5 = Shifter_HI in
+        let:8 a6 = Shifter_LO in
+        let:8 a7 = Shifter_OFF in
+        let:8 a8 = (a7 & 07) in
+        let:8 a9 = (~a7 & 07) in
+        let:8 a10 = ((a5 << a8) | ((a6 >> a9) >> 01)) in
         advance (10)
-        A := a7;
+        A := a10;
         jump (a4);
       }
     }

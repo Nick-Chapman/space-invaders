@@ -16,12 +16,13 @@ import qualified Rom (loadInvaders)
 
 data TraceConf = TraceConf
   { stopAfter :: Maybe Int
+  , iStart :: Int
   , iPeriod :: Int
   , showPixs :: Bool
   }
 
 traceEmulate :: Handle -> TraceConf -> IO ()
-traceEmulate handle TraceConf{stopAfter,iPeriod,showPixs} = do
+traceEmulate handle TraceConf{stopAfter,iStart,iPeriod,showPixs} = do
   rom <- Rom.loadInvaders
   state <- initState rom
   loop state
@@ -29,7 +30,7 @@ traceEmulate handle TraceConf{stopAfter,iPeriod,showPixs} = do
     traceI :: EmuState -> Instruction Byte -> IO ()
     traceI s instruction = do
       let EmuState{icount} = s
-      let onPeriod = icount `mod` iPeriod == 0
+      let onPeriod = icount >= iStart && icount `mod` iPeriod == 0
       let isStop = case stopAfter of Just i -> (icount > i); Nothing -> False
       when (onPeriod && not isStop) $
         hPutStrLn handle $ traceLine showPixs s instruction

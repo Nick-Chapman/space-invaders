@@ -74,13 +74,15 @@ conf0 = Conf
 traceConf :: TraceConf
 traceConf = TraceConf
   { stopAfter = Nothing
+  , iStart = 0
   , iPeriod = 500_000 -- ~ 2.25 emulated seconds.
   , showPixs = True
   }
 
 traceConfTest1 :: TraceConf
 traceConfTest1 = TraceConf
-  { stopAfter = Just 50000 -- ~1/5 emulated second. just long enough for interrupts to become enabled
+  { stopAfter = Just 50_000 -- ~1/5 emulated second. just long enough for interrupts to become enabled
+  , iStart = 0
   , iPeriod = 1
   , showPixs = False
   }
@@ -88,6 +90,7 @@ traceConfTest1 = TraceConf
 traceConfTest2 :: TraceConf
 traceConfTest2 = TraceConf
   { stopAfter = Just 10_000_000 -- 10mil instructions, aprox 44 emulated seconds
+  , iStart = 0
   , iPeriod = 10_000
   , showPixs = True
   }

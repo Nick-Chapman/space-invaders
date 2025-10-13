@@ -183,7 +183,7 @@ static void measure_fps() {
 
 static void render(SDL_Renderer* renderer) {
   measure_fps();
-  SDL_SetRenderDrawColor(renderer, 10, 10, 10, 255);
+  SDL_SetRenderDrawColor(renderer, 30, 30, 30, 255);
   SDL_RenderClear(renderer);
   SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
   const u8 *iter = mem + 0x2400;

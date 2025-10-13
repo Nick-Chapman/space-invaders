@@ -6,8 +6,8 @@ import Byte (Byte(..))
 import Cpu (Cpu(..),Reg(..),set)
 import Data.Bits (bit)
 import Data.List (intercalate)
-import Emulate (Bit(..),EmuState(..),initState,CB(..),emulate,Ticks(..),prettyPrefix)
-import InstructionSet (Instruction,prettyInstructionBytes)
+import Emulate (Bit(..),EmuState(..),initState,CB(..),emulate,prettyPrefix)
+import InstructionSet (Instruction) --,prettyInstructionBytes)
 import Prelude hiding (init)
 import Rom (Rom)
 import System.IO (Handle,hPutStrLn)
@@ -63,7 +63,7 @@ trace handle = loop
 seeState :: EmuState -> String
 seeState EmuState{cpu=Cpu{pch,pcl,hl,sp,regA,regB,regC,regD,regE
                          ,flagS,flagZ,flagA,flagP,flagCY
-                         },ticks} = do
+                         },ticks=_} = do
   intercalate ", "
     [ name <> ": " <> v
     | (name,v) <-
@@ -73,7 +73,7 @@ seeState EmuState{cpu=Cpu{pch,pcl,hl,sp,regA,regB,regC,regD,regE
       , ("DE", show regD <> show regE)
       , ("HL", show hl)
       , ("SP", show sp)
-      , ("CYC", show (unTicks ticks))
+--      , ("CYC", show (unTicks ticks))
       ]
     ]
     where
@@ -83,7 +83,8 @@ seeState EmuState{cpu=Cpu{pch,pcl,hl,sp,regA,regB,regC,regD,regE
 prettyStep :: EmuState -> Instruction Byte -> String
 prettyStep s i =
   prettyPrefix s $
-  unwords [ ljust 10 (prettyInstructionBytes i), show i ]
+  unwords [ -- ljust 10 (prettyInstructionBytes i),
+            show i ]
 
-ljust :: Int -> String -> String
-ljust n s = s <> take (max 0 (n - length s)) (repeat ' ')
+--ljust :: Int -> String -> String
+--ljust n s = s <> take (max 0 (n - length s)) (repeat ' ')

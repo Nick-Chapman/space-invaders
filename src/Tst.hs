@@ -50,7 +50,7 @@ trace handle = loop
     traceI :: EmuState -> Instruction Byte -> IO ()
     traceI s@EmuState{icount=i} instruction = do
       if (i>max) then return () else do
-        hPutStrLn handle (seeState s ++ prettyStep s instruction)
+        hPutStrLn handle (show s ++ prettyStep s instruction)
 
     cb = CB { traceI = Just traceI }
 
@@ -60,8 +60,8 @@ trace handle = loop
         emulate cb buttons0 s >>= loop
 
 
-seeState :: EmuState -> String
-seeState EmuState{cpu=Cpu{pch,pcl,hl,sp,regA,regB,regC,regD,regE
+_seeState :: EmuState -> String
+_seeState EmuState{cpu=Cpu{pch,pcl,hl,sp,regA,regB,regC,regD,regE
                          ,flagS,flagZ,flagA,flagP,flagCY
                          },ticks=_} = do
   intercalate ", "
